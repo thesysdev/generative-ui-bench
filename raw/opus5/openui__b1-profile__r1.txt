@@ -1,0 +1,38 @@
+root = Card([profileRow, tags, bio, divider, messageForm, followUps])
+
+profileRow = Card([avatar, identity], "sunk", "row", "m", "center")
+avatar = Avatar("https://picsum.photos/seed/priyanair/200/200", "Priya Nair", "PN")
+identity = Card([nameHeader, statusTag], "clear", "column", "xs")
+nameHeader = CardHeader("Priya Nair", "Staff Product Designer · Design Systems")
+statusTag = Tag("Available today", null, "sm", "success")
+
+tags = TagBlock(["San Francisco, CA", "PST (UTC−8)", "Joined 2019", "Design Org"])
+
+bio = MarkDownRenderer(bioText, "clear")
+bioText = "Priya leads the design systems practice, where she looks after the component library, accessibility standards, and the handoff tooling shared by twelve product teams. She started on the payments squad, moved into platform work in 2021, and now spends most of her week pairing with engineers on tokens and documentation. Outside of work she restores old film cameras and runs a small letterpress studio."
+
+divider = Separator("horizontal")
+
+messageForm = Form("message-priya", formButtons, [subjectField, topicField, bodyField, urgencyField])
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Quick question about the button tokens")
+topicField = FormControl("Topic", topicSelect, "Helps route your message to the right queue")
+topicSelect = Select("topic", [topicSystem, topicReview, topicIntro, topicOther], "Choose a topic")
+topicSystem = SelectItem("design-system", "Design system support")
+topicReview = SelectItem("review", "Request a design review")
+topicIntro = SelectItem("intro", "Intro / coffee chat")
+topicOther = SelectItem("other", "Something else")
+bodyField = FormControl("Message", bodyArea)
+bodyArea = TextArea("body", "Write your message to Priya…", 5)
+urgencyField = FormControl("How soon do you need a reply?", urgencyRadio)
+urgencyRadio = RadioGroup("urgency", [urgencyLow, urgencyNormal, urgencyHigh], "normal")
+urgencyLow = RadioItem("Whenever", "No deadline attached", "low")
+urgencyNormal = RadioItem("This week", "Typical turnaround is two days", "normal")
+urgencyHigh = RadioItem("Today", "Flags the message as urgent", "high")
+formButtons = Buttons([sendBtn, scheduleBtn])
+sendBtn = Button("Send message", null, "primary")
+scheduleBtn = Button("Book 15 min instead", null, "secondary")
+
+followUps = FollowUpBlock([followTeam, followProjects])
+followTeam = FollowUpItem("Who else is on the design systems team?")
+followProjects = FollowUpItem("What is Priya working on this quarter?")

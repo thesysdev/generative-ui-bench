@@ -1,0 +1,147 @@
+The user wants a comprehensive creator's cross-platform studio dashboard. Let me plan out all 11 items:
+
+1. Follower total and growth over the past month - Progress or Badge + LineChart for growth
+2. Engagement rate - Badge or Tag
+3. Best posts this month with reach - Table or ListBlock
+4. Audience split by platform - PieChart or HorizontalBarChart
+5. Posts scheduled this week - ListBlock
+6. Best hour to post based on history - BarChart or HorizontalBarChart
+7. Comments waiting for reply - ListBlock
+8. Earnings this month - Heading/TextContent with value
+9. Pending collaboration requests - ListBlock
+10. Schedule a post form - Form with caption and time
+11. Platform filter - Select or Tabs
+
+Let me structure this as a Card with multiple sections. I'll use Tabs for platform filtering (item 11), and organize the rest logically.
+
+Let me think about the layout:
+- CardHeader for the studio title
+- Tabs for platform filtering (All, YouTube, Instagram, TikTok, Twitter)
+- KPI section: followers, engagement, earnings
+- Charts: audience split, best hour to post, follower growth
+- Tables/lists: best posts, scheduled posts, pending comments, collaboration requests
+- Form: schedule a post
+
+Let me build this step by step.
+
+For the Tabs, each tab will show the same structure but with different data. Actually, the tabs should filter everything. Let me think...
+
+Actually, for simplicity and to show all data, I'll use a Select for platform filtering at the top, and show all metrics. The tabs approach would duplicate a lot of content. Let me use a Select dropdown for platform filtering.
+
+Wait, looking at the components available, I have Tabs, Select, etc. Let me use a Select for filtering since it's simpler and doesn't duplicate content.
+
+Let me structure:
+
+1. root = Card with all sections
+2. Header section with title and platform filter
+3. KPI cards (followers, engagement, earnings)
+
+
+4. Charts section (audience split, best hour, follower growth)
+5. Best posts table
+6. Scheduled posts list
+7. Pending comments list
+8. Collaboration requests
+9. Schedule post form
+
+I need to ensure every variable is referenced and reachable from root. Let me build this carefully with all 11 items covered.
+root = Card([header, platformFilter, kpiRow, chartsRow, bestPostsSection, scheduledSection, commentsSection, collabSection, scheduleForm])
+
+header = CardHeader("Creator Studio", "Cross-platform analytics & management")
+
+platformFilter = Form("platform-filter", filterButtons, [platformField])
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply")
+platformField = FormControl("Filter by platform", platformSelect)
+platformSelect = Select("platform", [allOpt, ytOpt, igOpt, ttOpt, twOpt], "Select platform", null, "all")
+allOpt = SelectItem("all", "All Platforms")
+ytOpt = SelectItem("youtube", "YouTube")
+igOpt = SelectItem("instagram", "Instagram")
+ttOpt = SelectItem("tiktok", "TikTok")
+twOpt = SelectItem("twitter", "X / Twitter")
+
+kpiRow = Card([followerCard, engagementCard, earningsCard], "card", "row", "m")
+
+followerCard = Card([followerLabel, followerValue, followerGrowth, followerChart], "sunk")
+followerLabel = Heading("Followers", "h4")
+followerValue = TextContent("284,392", "large-heavy")
+followerGrowth = Tag("+12.4%", null, "sm", "success")
+followerChart = LineChart(followerLabels, [followerSeries], "natural", "Week", "Followers")
+followerLabels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+followerSeries = Series("Growth", [248200, 256800, 271400, 284392])
+
+engagementCard = Card([engagementLabel, engagementValue, engagementBar], "sunk")
+engagementLabel = Heading("Engagement Rate", "h4")
+engagementValue = TextContent("4.82%", "large-heavy")
+engagementBar = Progress(48.2, "vs 4.1% last month")
+
+earningsCard = Card([earningsLabel, earningsValue, earningsGrowth], "sunk")
+earningsLabel = Heading("Earnings (This Month)", "h4")
+earningsValue = TextContent("$12,847.50", "large-heavy")
+earningsGrowth = Tag("+18.3%", null, "sm", "success")
+
+chartsRow = Card([audienceSection, bestHourSection], "card", "row", "m")
+
+audienceSection = Card([audienceHeading, audienceChart], "sunk")
+audienceHeading = Heading("Audience by Platform", "h4")
+audienceChart = PieChart(platformLabels, platformValues, "donut", "circular")
+platformLabels = ["YouTube", "Instagram", "TikTok", "X / Twitter"]
+platformValues = [42, 28, 18, 12]
+
+bestHourSection = Card([bestHourHeading, bestHourChart, bestHourNote], "sunk")
+bestHourHeading = Heading("Best Hour to Post", "h4")
+bestHourChart = BarChart(hourLabels, [hourSeries], "grouped", "Hour (Local)", "Avg Engagement %")
+hourLabels = ["6am", "8am", "10am", "12pm", "2pm", "4pm", "6pm", "8pm", "10pm"]
+hourSeries = Series("Engagement", [2.1, 3.4, 4.2, 5.8, 4.9, 3.7, 5.2, 6.1, 3.8])
+bestHourNote = TextCallout("info", "Peak Time", "8 PM local time yields the highest engagement based on 90-day history")
+
+bestPostsSection = Card([bestPostsHeading, bestPostsTable], "sunk")
+bestPostsHeading = Heading("Top Posts This Month", "h4")
+bestPostsTable = Table([postTitle, postPlatform, postReach, postEngagement])
+postTitle = Col("Post", ["Behind the Scenes: Studio Tour", "How I Edit in 30 Seconds", "My Morning Routine Changed Everything", "Reacting to Your Submissions", "5 Tips for Better Thumbnails"])
+postPlatform = Col("Platform", ["YouTube", "TikTok", "Instagram", "YouTube", "TikTok"])
+postReach = Col("Reach", ["1.2M", "890K", "654K", "521K", "487K"])
+postEngagement = Col("Engagement", ["8.2%", "7.9%", "6.4%", "5.8%", "5.3%"])
+
+scheduledSection = Card([scheduledHeading, scheduledList], "sunk")
+scheduledHeading = Heading("Posts Scheduled This Week", "h4")
+scheduledList = ListBlock([sched1, sched2, sched3, sched4, sched5], "number")
+sched1 = ListItem("Tutorial: Advanced Color Grading", "YouTube • Mon 6:00 PM", null, "View")
+sched2 = ListItem("Quick Tip: Lighting Hacks", "TikTok • Tue 8:00 PM", null, "View")
+sched3 = ListItem("Photo Dump: Week in Review", "Instagram • Wed 12:00 PM", null, "View")
+sched4 = ListItem("Live Q&A Announcement", "X / Twitter • Thu 10:00 AM", null, "View")
+sched5 = ListItem("Collab Teaser with @ArtistX", "YouTube • Fri 5:00 PM", null, "View")
+
+commentsSection = Card([commentsHeading, commentsList], "sunk")
+commentsHeading = Heading("Comments Awaiting Reply", "h4")
+commentsList = ListBlock([comment1, comment2, comment3, comment4], "number")
+comment1 = ListItem("@sarah_creates", "Can you do a tutorial on that transition? 🔥", null, "Reply")
+comment2 = ListItem("@mike.vlogs", "Love the setup! What mic are you using?", null, "Reply")
+comment3 = ListItem("@design_daily", "This is so helpful, been struggling with this for weeks", null, "Reply")
+comment4 = ListItem("@alex.photo", "Would love a collab sometime! DM me?", null, "Reply")
+
+collabSection = Card([collabHeading, collabList], "sunk")
+collabHeading = Heading("Pending Collaboration Requests", "h4")
+collabList = ListBlock([collab1, collab2, collab3], "number")
+collab1 = ListItem("@TechReviewPro", "1.2M followers • Cross-platform review series", null, "Review")
+collab2 = ListItem("@ArtByLuna", "890K followers • Design process video", null, "Review")
+collab3 = ListItem("@FitnessWithJake", "2.1M followers • Lifestyle crossover content", null, "Review")
+
+scheduleForm = Card([scheduleHeading, scheduleFormInner], "sunk")
+scheduleHeading = Heading("Schedule a New Post", "h4")
+scheduleFormInner = Form("schedule-post", scheduleButtons, [captionField, platformField2, timeField, dateField])
+scheduleButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+captionField = FormControl("Caption", captionInput, "Write your post caption")
+captionInput = TextArea("caption", "Write your caption here...", 4)
+platformField2 = FormControl("Platform", platformSelect2, "Choose where to publish")
+platformSelect2 = Select("post_platform", [ytOpt2, igOpt2, ttOpt2, twOpt2], "Select platform")
+ytOpt2 = SelectItem("youtube", "YouTube")
+igOpt2 = SelectItem("instagram", "Instagram")
+ttOpt2 = SelectItem("tiktok", "TikTok")
+twOpt2 = SelectItem("twitter", "X / Twitter")
+timeField = FormControl("Time", timeInput, "Best time: 8:00 PM")
+timeInput = Input("post_time", "20:00")
+dateField = FormControl("Date", dateInput)
+dateInput = DatePicker("post_date", "single")

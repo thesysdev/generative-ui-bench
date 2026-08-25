@@ -1,0 +1,1038 @@
+Here is the operations room control center dashboard covering all live telemetry, delivery performance, catalog management, subscriber flows, and content operations.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "globalAlert",
+          "regionSelectorCard",
+          "topKpiSection",
+          "mainTabs",
+          "quickActionsGroup"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "StreamOps Command Center",
+        "subtitle": "Real-time stream telemetry, infrastructure health & catalog operations"
+      },
+      {
+        "id": "globalAlert",
+        "component": "Alert",
+        "title": "Delivery Incident Resolved: EU-West Edge CDN",
+        "description": "Buffer rates normalized to 0.42% following cache-fill reroute.",
+        "variant": "info"
+      },
+      {
+        "id": "regionSelectorCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "regionControlForm"
+        ]
+      },
+      {
+        "id": "regionControlForm",
+        "component": "Form",
+        "name": "region-filter-form",
+        "buttons": "regionFilterBtns",
+        "fields": [
+          "regionField"
+        ]
+      },
+      {
+        "id": "regionField",
+        "component": "FormControl",
+        "label": "Focus Region Filter (Global Telemetry Scope)",
+        "hint": "Filter live metrics, CDN delivery nodes, and viewer demographics",
+        "input": "regionSelect"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "selected_region",
+        "placeholder": "Select operational region...",
+        "items": [
+          "regGlobal",
+          "regNA",
+          "regEU",
+          "regAPAC",
+          "regLATAM",
+          "regMEA"
+        ]
+      },
+      {
+        "id": "regGlobal",
+        "component": "SelectItem",
+        "value": "global",
+        "label": "Global (All Regions)"
+      },
+      {
+        "id": "regNA",
+        "component": "SelectItem",
+        "value": "na",
+        "label": "North America (US-East / US-West)"
+      },
+      {
+        "id": "regEU",
+        "component": "SelectItem",
+        "value": "eu",
+        "label": "Europe (EU-Central / EU-West)"
+      },
+      {
+        "id": "regAPAC",
+        "component": "SelectItem",
+        "value": "apac",
+        "label": "Asia-Pacific (AP-South / AP-East)"
+      },
+      {
+        "id": "regLATAM",
+        "component": "SelectItem",
+        "value": "latam",
+        "label": "Latin America (SA-East)"
+      },
+      {
+        "id": "regMEA",
+        "component": "SelectItem",
+        "value": "mea",
+        "label": "Middle East & Africa"
+      },
+      {
+        "id": "regionFilterBtns",
+        "component": "Buttons",
+        "buttons": [
+          "applyRegionBtn"
+        ]
+      },
+      {
+        "id": "applyRegionBtn",
+        "component": "Button",
+        "label": "Apply Region Focus",
+        "variant": "secondary",
+        "size": "small"
+      },
+      {
+        "id": "topKpiSection",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "kpiTitle",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiTitle",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Core Live Operations Telemetry"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiColMetric",
+          "kpiColCurrent",
+          "kpiColTarget",
+          "kpiColStatus"
+        ]
+      },
+      {
+        "id": "kpiColMetric",
+        "component": "Col",
+        "label": "Operational Metric",
+        "data": [
+          "Viewers Watching Right Now",
+          "Global Buffering Rate",
+          "Recommendation CTR (Click-Through)",
+          "Zero-Playback Searches (Drop-off Rate)",
+          "Net Subscriber Growth (30D)"
+        ]
+      },
+      {
+        "id": "kpiColCurrent",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "4,821,940 CCU",
+          "0.38%",
+          "24.6%",
+          "3.82%",
+          "+482,100 net"
+        ]
+      },
+      {
+        "id": "kpiColTarget",
+        "component": "Col",
+        "label": "SLA / Benchmark",
+        "data": [
+          "Capacity: 8.5M",
+          "< 0.50% SLA",
+          "> 20.0% Target",
+          "< 5.00% Tolerance",
+          "+350k Target"
+        ]
+      },
+      {
+        "id": "kpiColStatus",
+        "component": "Col",
+        "label": "Health State",
+        "data": [
+          "Optimal",
+          "Healthy",
+          "Strong",
+          "Normal",
+          "Above Plan"
+        ]
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "tabAudience",
+          "tabDelivery",
+          "tabCatalog",
+          "tabFlags"
+        ]
+      },
+      {
+        "id": "tabAudience",
+        "component": "TabItem",
+        "value": "audience",
+        "trigger": "Audience & Growth",
+        "content": [
+          "audienceCard"
+        ]
+      },
+      {
+        "id": "audienceCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "watchTimeHeading",
+          "watchTimeChart",
+          "subsHeading",
+          "subsChart",
+          "audienceBreakdownCard"
+        ]
+      },
+      {
+        "id": "watchTimeHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Monthly Watch Time Trend (Past 30 Days in Millions of Hours)"
+      },
+      {
+        "id": "watchTimeChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "xLabel": "Timeline (Past 4 Weeks)",
+        "yLabel": "Watch Time (M Hours)",
+        "labels": [
+          "Day 1-7",
+          "Day 8-14",
+          "Day 15-21",
+          "Day 22-28",
+          "Last 2 Days"
+        ],
+        "series": [
+          "watchTimeSeries"
+        ]
+      },
+      {
+        "id": "watchTimeSeries",
+        "component": "Series",
+        "category": "Watch Time (M Hours)",
+        "values": [
+          142.5,
+          158.2,
+          164.8,
+          181.4,
+          58.6
+        ]
+      },
+      {
+        "id": "subsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "New Subscribers vs Cancellations (Weekly Cohorts)"
+      },
+      {
+        "id": "subsChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "xLabel": "Cohort Week",
+        "yLabel": "Accounts (Thousands)",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4"
+        ],
+        "series": [
+          "newSubsSeries",
+          "churnSubsSeries"
+        ]
+      },
+      {
+        "id": "newSubsSeries",
+        "component": "Series",
+        "category": "New Sign-ups",
+        "values": [
+          185,
+          210,
+          195,
+          240
+        ]
+      },
+      {
+        "id": "churnSubsSeries",
+        "component": "Series",
+        "category": "Cancellations",
+        "values": [
+          78,
+          82,
+          91,
+          97
+        ]
+      },
+      {
+        "id": "audienceBreakdownCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "breakdownsHeading",
+          "genrePerformanceHeading",
+          "genreBarChart",
+          "revSplitHeading",
+          "revPieChart",
+          "deviceSplitHeading",
+          "devicePieChart"
+        ]
+      },
+      {
+        "id": "breakdownsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Demographic, Platform & Monetization Splits"
+      },
+      {
+        "id": "genrePerformanceHeading",
+        "component": "TextContent",
+        "text": "Genre Stream Volume Performance (Million Hours Streamed)",
+        "size": "small-heavy"
+      },
+      {
+        "id": "genreBarChart",
+        "component": "HorizontalBarChart",
+        "variant": "grouped",
+        "xLabel": "Streaming Hours (M)",
+        "yLabel": "Genre",
+        "labels": [
+          "Sci-Fi / Drama",
+          "Crime & Thriller",
+          "Comedy Series",
+          "Animation / Anime",
+          "Documentaries",
+          "Live Sports"
+        ],
+        "series": [
+          "genreSeries"
+        ]
+      },
+      {
+        "id": "genreSeries",
+        "component": "Series",
+        "category": "Streamed Hours",
+        "values": [
+          214.2,
+          178.6,
+          132.4,
+          119.8,
+          74.5,
+          56.1
+        ]
+      },
+      {
+        "id": "revSplitHeading",
+        "component": "TextContent",
+        "text": "Monthly Revenue Split by Subscription Tier",
+        "size": "small-heavy"
+      },
+      {
+        "id": "revPieChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Premium 4K ($19.99)",
+          "Standard HD ($14.99)",
+          "Standard with Ads ($7.99)",
+          "Mobile Only ($4.99)"
+        ],
+        "values": [
+          42,
+          31,
+          21,
+          6
+        ]
+      },
+      {
+        "id": "deviceSplitHeading",
+        "component": "TextContent",
+        "text": "Active Viewing Split by Playback Device",
+        "size": "small-heavy"
+      },
+      {
+        "id": "devicePieChart",
+        "component": "PieChart",
+        "variant": "pie",
+        "appearance": "circular",
+        "labels": [
+          "Connected Smart TV",
+          "Mobile iOS / Android",
+          "Desktop Web",
+          "Streaming Stick / Box",
+          "Gaming Consoles"
+        ],
+        "values": [
+          52,
+          23,
+          12,
+          8,
+          5
+        ]
+      },
+      {
+        "id": "tabDelivery",
+        "component": "TabItem",
+        "value": "delivery",
+        "trigger": "CDN & Delivery Health",
+        "content": [
+          "deliveryCard"
+        ]
+      },
+      {
+        "id": "deliveryCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "cdnHeading",
+          "cdnTable"
+        ]
+      },
+      {
+        "id": "cdnHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Delivery Health & Quality of Experience (QoE) by Region"
+      },
+      {
+        "id": "cdnTable",
+        "component": "Table",
+        "columns": [
+          "cdnRegionCol",
+          "cdnBufferingCol",
+          "cdnTtfbCol",
+          "cdnEdgeCol",
+          "cdnStatusCol"
+        ]
+      },
+      {
+        "id": "cdnRegionCol",
+        "component": "Col",
+        "label": "Edge Region",
+        "data": [
+          "North America East",
+          "North America West",
+          "Europe Central",
+          "Europe West",
+          "Asia-Pacific South",
+          "Latin America South"
+        ]
+      },
+      {
+        "id": "cdnBufferingCol",
+        "component": "Col",
+        "label": "Buffer Rate (%)",
+        "data": [
+          "0.24%",
+          "0.31%",
+          "0.35%",
+          "0.42%",
+          "0.58%",
+          "0.62%"
+        ]
+      },
+      {
+        "id": "cdnTtfbCol",
+        "component": "Col",
+        "label": "Avg TTFB",
+        "data": [
+          "42 ms",
+          "48 ms",
+          "53 ms",
+          "62 ms",
+          "88 ms",
+          "94 ms"
+        ]
+      },
+      {
+        "id": "cdnEdgeCol",
+        "component": "Col",
+        "label": "Edge Cache Hit Rate",
+        "data": [
+          "98.4%",
+          "97.9%",
+          "98.1%",
+          "96.8%",
+          "95.4%",
+          "94.2%"
+        ]
+      },
+      {
+        "id": "cdnStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Optimal",
+          "Optimal",
+          "Optimal",
+          "Monitoring",
+          "Stable",
+          "Stable"
+        ]
+      },
+      {
+        "id": "tabCatalog",
+        "component": "TabItem",
+        "value": "catalog",
+        "trigger": "Titles & Content Schedule",
+        "content": [
+          "catalogCard"
+        ]
+      },
+      {
+        "id": "catalogCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "mostWatchedHeading",
+          "mostWatchedTable",
+          "releasesHeading",
+          "releasesTable",
+          "expiringHeading",
+          "expiringTable"
+        ]
+      },
+      {
+        "id": "mostWatchedHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Most-Watched Titles (Past 7 Days)"
+      },
+      {
+        "id": "mostWatchedTable",
+        "component": "Table",
+        "columns": [
+          "watchRankCol",
+          "watchTitleCol",
+          "watchHoursCol",
+          "watchCompletionCol"
+        ]
+      },
+      {
+        "id": "watchRankCol",
+        "component": "Col",
+        "label": "Rank",
+        "data": [
+          "#1",
+          "#2",
+          "#3",
+          "#4",
+          "#5"
+        ]
+      },
+      {
+        "id": "watchTitleCol",
+        "component": "Col",
+        "label": "Title Name",
+        "data": [
+          "Cyber Horizon: Season 3",
+          "The Deep Archive",
+          "Midnight Protocol",
+          "Velocity Prime: Grand Prix",
+          "Echoes of Eternity"
+        ]
+      },
+      {
+        "id": "watchHoursCol",
+        "component": "Col",
+        "label": "Hours Watched",
+        "data": [
+          "48.2M hours",
+          "34.7M hours",
+          "28.1M hours",
+          "22.9M hours",
+          "17.4M hours"
+        ]
+      },
+      {
+        "id": "watchCompletionCol",
+        "component": "Col",
+        "label": "Completion Rate",
+        "data": [
+          "88.4%",
+          "79.2%",
+          "82.1%",
+          "91.0%",
+          "74.6%"
+        ]
+      },
+      {
+        "id": "releasesHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Releases Coming This Month"
+      },
+      {
+        "id": "releasesTable",
+        "component": "Table",
+        "columns": [
+          "relDateCol",
+          "relTitleCol",
+          "relTypeCol",
+          "relAudioCol"
+        ]
+      },
+      {
+        "id": "relDateCol",
+        "component": "Col",
+        "label": "Launch Date",
+        "data": [
+          "Oct 12",
+          "Oct 18",
+          "Oct 24",
+          "Oct 29",
+          "Oct 31"
+        ]
+      },
+      {
+        "id": "relTitleCol",
+        "component": "Col",
+        "label": "Upcoming Title",
+        "data": [
+          "Solaris Paradox (Original Movie)",
+          "Shadow Fleet: Season 2",
+          "Cooking with Masters: All-Stars",
+          "Champions Live Finals 2025",
+          "Halloween Nightfall"
+        ]
+      },
+      {
+        "id": "relTypeCol",
+        "component": "Col",
+        "label": "Format",
+        "data": [
+          "Feature Film (4K HDR)",
+          "Series (8 Episodes)",
+          "Docuseries (6 Episodes)",
+          "Live Ultra-HD Broadcast",
+          "Interactive Special"
+        ]
+      },
+      {
+        "id": "relAudioCol",
+        "component": "Col",
+        "label": "Localization",
+        "data": [
+          "32 Dubs / 48 Subs",
+          "24 Dubs / 40 Subs",
+          "12 Dubs / 28 Subs",
+          "Global Multicast",
+          "18 Dubs / 35 Subs"
+        ]
+      },
+      {
+        "id": "expiringHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Licenses Expiring Soon (Next 30 Days)"
+      },
+      {
+        "id": "expiringTable",
+        "component": "Table",
+        "columns": [
+          "expDaysCol",
+          "expTitleCol",
+          "expStudioCol",
+          "expActionCol"
+        ]
+      },
+      {
+        "id": "expDaysCol",
+        "component": "Col",
+        "label": "Days Left",
+        "data": [
+          "4 days",
+          "11 days",
+          "16 days",
+          "22 days"
+        ]
+      },
+      {
+        "id": "expTitleCol",
+        "component": "Col",
+        "label": "Expiring License Title",
+        "data": [
+          "Galactic Odyssey (1998)",
+          "Nordic Noir: Seasons 1-4",
+          "The Manhattan Case",
+          "Tokyo Driftwood"
+        ]
+      },
+      {
+        "id": "expStudioCol",
+        "component": "Col",
+        "label": "Licensor / Studio",
+        "data": [
+          "Apex Pictures",
+          "Nordic Media Corp",
+          "Criterion Global",
+          "Shibuya Digital"
+        ]
+      },
+      {
+        "id": "expActionCol",
+        "component": "Col",
+        "label": "Contract Status",
+        "data": [
+          "Non-Renewing",
+          "Extension in Negotiation",
+          "Renewal Approved",
+          "Pending Legal Review"
+        ]
+      },
+      {
+        "id": "tabFlags",
+        "component": "TabItem",
+        "value": "flags",
+        "trigger": "Feature Flags & Toggles",
+        "content": [
+          "flagsCard"
+        ]
+      },
+      {
+        "id": "flagsCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "flagsHeading",
+          "flagsTable"
+        ]
+      },
+      {
+        "id": "flagsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Runtime Feature Flags & Operational Switches"
+      },
+      {
+        "id": "flagsTable",
+        "component": "Table",
+        "columns": [
+          "flagKeyCol",
+          "flagDescCol",
+          "flagRolloutCol",
+          "flagStateCol"
+        ]
+      },
+      {
+        "id": "flagKeyCol",
+        "component": "Col",
+        "label": "Feature Flag Key",
+        "data": [
+          "player.av1-codec-default",
+          "home.ai-curated-rail-v3",
+          "ads.server-side-insertion-live",
+          "player.low-latency-cmaf",
+          "billing.instant-reactivation-flow"
+        ]
+      },
+      {
+        "id": "flagDescCol",
+        "component": "Col",
+        "label": "Description & Scope",
+        "data": [
+          "Serve AV1 codec on capable smart TVs and mobile apps",
+          "Neural personalization for top carousel recommendation rank",
+          "Dynamic SSAI for live tournament streams",
+          "Ultra-low latency chunked transfer mode for sports events",
+          "One-click rejoin billing modal with zero payment friction"
+        ]
+      },
+      {
+        "id": "flagRolloutCol",
+        "component": "Col",
+        "label": "Rollout",
+        "data": [
+          "100% Global",
+          "50% Split",
+          "25% Canary",
+          "100% Live",
+          "75% Global"
+        ]
+      },
+      {
+        "id": "flagStateCol",
+        "component": "Col",
+        "label": "State",
+        "data": [
+          "ENABLED",
+          "ACTIVE A/B",
+          "CANARY",
+          "ENABLED",
+          "ACTIVE ROLLOUT"
+        ]
+      },
+      {
+        "id": "quickActionsGroup",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "opsActionsHeading",
+          "promoteTitleDialog"
+        ]
+      },
+      {
+        "id": "opsActionsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Editorial & Live Hero Content Management"
+      },
+      {
+        "id": "promoteTitleDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Promote Title to Home Screen Hero Carousel",
+        "triggerVariant": "default",
+        "title": "Promote Title to Hero Slot",
+        "description": "Configure hero banner placement, override rules, target audience segments, and active duration.",
+        "content": [
+          "promoteForm"
+        ]
+      },
+      {
+        "id": "promoteForm",
+        "component": "Form",
+        "name": "promote-title-form",
+        "buttons": "promoteFormBtns",
+        "fields": [
+          "promoteTitleField",
+          "promoteSlotField",
+          "promoteDurationField",
+          "promoteSegmentField"
+        ]
+      },
+      {
+        "id": "promoteTitleField",
+        "component": "FormControl",
+        "label": "Title to Feature",
+        "hint": "Choose title from current catalog or scheduled releases",
+        "input": "promoteTitleSelect"
+      },
+      {
+        "id": "promoteTitleSelect",
+        "component": "Select",
+        "name": "promote_title_id",
+        "placeholder": "Select content title...",
+        "items": [
+          "titleCyber",
+          "titleSolaris",
+          "titleMidnight",
+          "titleVelocity"
+        ]
+      },
+      {
+        "id": "titleCyber",
+        "component": "SelectItem",
+        "value": "cyber_horizon_s3",
+        "label": "Cyber Horizon: Season 3 (New Season Premiere)"
+      },
+      {
+        "id": "titleSolaris",
+        "component": "SelectItem",
+        "value": "solaris_paradox",
+        "label": "Solaris Paradox (Original Film Release)"
+      },
+      {
+        "id": "titleMidnight",
+        "component": "SelectItem",
+        "value": "midnight_protocol",
+        "label": "Midnight Protocol (Trending Drama)"
+      },
+      {
+        "id": "titleVelocity",
+        "component": "SelectItem",
+        "value": "velocity_prime",
+        "label": "Velocity Prime: Grand Prix (Live Sports Highlight)"
+      },
+      {
+        "id": "promoteSlotField",
+        "component": "FormControl",
+        "label": "Hero Banner Position",
+        "input": "promoteSlotRadio"
+      },
+      {
+        "id": "promoteSlotRadio",
+        "component": "RadioGroup",
+        "name": "hero_slot_position",
+        "defaultValue": "slot_1",
+        "items": [
+          "slotRadio1",
+          "slotRadio2",
+          "slotRadio3"
+        ]
+      },
+      {
+        "id": "slotRadio1",
+        "component": "RadioItem",
+        "value": "slot_1",
+        "label": "Position #1 (Primary Spotlight)",
+        "description": "Main autoplay featured hero asset"
+      },
+      {
+        "id": "slotRadio2",
+        "component": "RadioItem",
+        "value": "slot_2",
+        "label": "Position #2 (Second Carousel Slide)",
+        "description": "Secondary top banner placement"
+      },
+      {
+        "id": "slotRadio3",
+        "component": "RadioItem",
+        "value": "slot_3",
+        "label": "Position #3 (Trending Placement)",
+        "description": "Third carousel rotating slot"
+      },
+      {
+        "id": "promoteDurationField",
+        "component": "FormControl",
+        "label": "Promotion Duration",
+        "hint": "Automatically unpins after the specified time frame",
+        "input": "promoteDurationSelect"
+      },
+      {
+        "id": "promoteDurationSelect",
+        "component": "Select",
+        "name": "promotion_duration",
+        "placeholder": "Select duration...",
+        "items": [
+          "dur24h",
+          "dur48h",
+          "dur7d",
+          "durCustom"
+        ]
+      },
+      {
+        "id": "dur24h",
+        "component": "SelectItem",
+        "value": "24h",
+        "label": "24 Hours (Event / Launch Flash)"
+      },
+      {
+        "id": "dur48h",
+        "component": "SelectItem",
+        "value": "48h",
+        "label": "48 Hours (Premiere Weekend)"
+      },
+      {
+        "id": "dur7d",
+        "component": "SelectItem",
+        "value": "7d",
+        "label": "7 Days (Standard Campaign)"
+      },
+      {
+        "id": "durCustom",
+        "component": "SelectItem",
+        "value": "custom",
+        "label": "Until Next Content Release Cycle"
+      },
+      {
+        "id": "promoteSegmentField",
+        "component": "FormControl",
+        "label": "Audience Targeting",
+        "input": "promoteSegmentRadio"
+      },
+      {
+        "id": "promoteSegmentRadio",
+        "component": "RadioGroup",
+        "name": "audience_target",
+        "defaultValue": "all_users",
+        "items": [
+          "segAll",
+          "segGenreFans",
+          "segReturning"
+        ]
+      },
+      {
+        "id": "segAll",
+        "component": "RadioItem",
+        "value": "all_users",
+        "label": "All Subscribers & Free Tiers",
+        "description": "Maximum reach across all user cohorts"
+      },
+      {
+        "id": "segGenreFans",
+        "component": "RadioItem",
+        "value": "genre_affinity",
+        "label": "High-Affinity Viewers",
+        "description": "Target users with matching genre viewing history"
+      },
+      {
+        "id": "segReturning",
+        "component": "RadioItem",
+        "value": "churn_risk",
+        "label": "Re-engagement & Retention Cohort",
+        "description": "Users with reduced watch frequency over 14 days"
+      },
+      {
+        "id": "promoteFormBtns",
+        "component": "Buttons",
+        "buttons": [
+          "publishPromotionBtn",
+          "cancelPromotionBtn"
+        ]
+      },
+      {
+        "id": "publishPromotionBtn",
+        "component": "Button",
+        "label": "Publish to Home Screen Hero",
+        "variant": "primary"
+      },
+      {
+        "id": "cancelPromotionBtn",
+        "component": "Button",
+        "label": "Discard Changes",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

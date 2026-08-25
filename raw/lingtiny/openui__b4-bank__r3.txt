@@ -1,0 +1,175 @@
+root = Card([
+  header,
+  balances,
+  recentTransactions,
+  spendingSplit,
+  billsDue,
+  vacationProgress,
+  creditScore,
+  transferSection,
+  freezeCredit,
+  statementPeriod,
+  alerts,
+  dispute,
+], "sunk")
+
+header = CardHeader("Personal Banking", "Home")
+
+balances = Card([
+  balanceHeading,
+  checkingBalance,
+  savingsBalance,
+  creditBalance,
+], "sunk")
+balanceHeading = Heading("Account Balances", "h3")
+checkingBalance = Card([
+  BalanceItem("Checking", "$2,450.32"),
+  BalanceItem("Savings", "$12,890.50"),
+  BalanceItem("Credit", "$15,200.00"),
+])
+savingsBalance = Card([
+  BalanceItem("Checking", "$2,450.32"),
+  BalanceItem("Savings", "$12,890.50"),
+  BalanceItem("Credit", "$15,200.00"),
+])
+creditBalance = Card([
+  BalanceItem("Checking", "$2,450.32"),
+  BalanceItem("Savings", "$12,890.50"),
+  BalanceItem("Credit", "$15,200.00"),
+])
+
+recentTransactions = Card([
+  transactionsHeading,
+  transactionList,
+], "sunk")
+transactionsHeading = Heading("Recent Transactions", "h3")
+transactionList = ListBlock([
+  ListItem("Amazon.com", "$89.99", null, "Purchase"),
+  ListItem("Starbucks Coffee", "$4.50", null, "Purchase"),
+  ListItem("Walmart", "$127.33", null, "Purchase"),
+  ListItem("Netflix", "$15.99", null, "Subscription"),
+  ListItem("Electric Company", "$142.67", null, "Bill"),
+  ListItem("Restaurant", "$62.00", null, "Purchase"),
+  ListItem("Gas Station", "$78.45", null, "Purchase"),
+  ListItem("Pharmacy", "$34.75", null, "Purchase"),
+], "image")
+
+spendingSplit = Card([
+  categoryHeading,
+  categoryChart,
+], "sunk")
+categoryHeading = Heading("Spending Breakdown", "h3")
+categoryChart = PieChart(
+  ["Food", "Transport", "Entertainment", "Shopping", "Bills", "Other"],
+  [2800, 1450, 1200, 3200, 1950, 1100]
+)
+
+billsDue = Card([
+  billsHeading,
+  billList,
+], "sunk")
+billsHeading = Heading("Bills Due Soon", "h3")
+billList = ListBlock([
+  ListItem("Electric Company", "Due in 5 days", "$142.67"),
+  ListItem("Streaming Services", "Due in 12 days", "$24.99"),
+  ListItem("Insurance", "Due in 18 days", "$120.00"),
+  ListItem("Loan Payment", "Due in 25 days", "$500.00"),
+], "image")
+
+vacationProgress = Card([
+  vacationHeading,
+  vacationProgressBar,
+  vacationGoal,
+], "sunk")
+vacationHeading = Heading("Vacation Savings", "h3")
+vacationProgressBar = Progress(68, "68% toward $5,000 goal")
+vacationGoal = TextCallout("neutral", "Target", "$5,000.00")
+
+creditScore = Card([
+  scoreHeading,
+  scoreBadge,
+  scoreDetails,
+], "sunk")
+scoreHeading = Heading("Credit Score", "h3")
+scoreBadge = Badge("Excellent", "success")
+scoreDetails = TextCallout("info", "FICO", "740 — Strong credit profile")
+
+transferSection = Card([
+  transferHeading,
+  transferControls,
+], "sunk")
+transferHeading = Heading("Transfer Between Accounts", "h3")
+transferControls = Form("transfer", [
+  FormControl("From Account", transferSelect, "Select account"),
+  FormControl("Amount", transferSlider, "Enter amount"),
+  FormControl("To Account", transferSelect2, "Select account"),
+], [
+  Buttons([transferBtn, resetBtn]),
+])
+transferSelect = Select("from", [
+  SelectItem("Checking", "Checking"),
+  SelectItem("Savings", "Savings"),
+  SelectItem("Credit", "Credit"),
+], "From account")
+transferSelect2 = Select("to", [
+  SelectItem("Checking", "Checking"),
+  SelectItem("Savings", "Savings"),
+  SelectItem("Credit", "Credit"),
+], "To account")
+transferSlider = Slider("amount", "continuous", 10, 5000, 100, "Amount", "Transfer amount")
+transferBtn = Button("Transfer", null, "primary")
+resetBtn = Button("Reset", null, "tertiary")
+
+freezeCredit = Card([
+  freezeHeading,
+  freezeStatus,
+], "sunk")
+freezeHeading = Heading("Credit Line Freeze", "h3")
+freezeStatus = TextCallout("warning", "Freeze", "Credit line temporarily frozen — no new charges")
+
+statementPeriod = Card([
+  periodHeading,
+  periodSelector,
+], "sunk")
+periodHeading = Heading("Statement Period", "h3")
+periodSelector = Select("period", [
+  SelectItem("This Month", "month"),
+  SelectItem("Last 3 Months", "3months"),
+  SelectItem("Last 12 Months", "12months"),
+  SelectItem("Custom", "custom"),
+], "Select period")
+
+alerts = Card([
+  alertsHeading,
+  alertList,
+], "sunk")
+alertsHeading = Heading("Alert Settings", "h3")
+alertList = ListBlock([
+  ListItem("Low Balance", "Alert when checking drops below $500", null),
+  ListItem("Large Transaction", "Alert on transfers over $1,000", null),
+  ListItem("Bill Due", "Alert 3 days before payment due", null),
+  ListItem("Credit Score Drop", "Alert if score falls below 680", null),
+  ListItem("Spending Spike", "Alert on category spending over $500", null),
+], "image")
+
+dispute = Card([
+  disputeHeading,
+  disputeControls,
+], "sunk")
+disputeHeading = Heading("Dispute a Transaction", "h3")
+disputeControls = Form("dispute", [
+  FormControl("Transaction ID", disputeInput, "Enter transaction ID"),
+  FormControl("Reason", disputeReason, "Select reason"),
+], [
+  Buttons([submitDisputeBtn, cancelDisputeBtn]),
+])
+disputeInput = Input("transaction-id", "Enter transaction ID", "text")
+disputeReason = Select("reason", [
+  SelectItem("Fraud", "Fraud or unauthorized"),
+  SelectItem("Error", "Incorrect charge"),
+  SelectItem("Duplicate", "Duplicate charge"),
+  SelectItem("Overcharge", "Overcharged"),
+  SelectItem("Other", "Other"),
+], "Select reason")
+submitDisputeBtn = Button("Submit Dispute", null, "primary")
+cancelDisputeBtn = Button("Cancel", null, "tertiary")

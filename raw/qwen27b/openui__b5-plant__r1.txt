@@ -1,0 +1,149 @@
+
+
+root = Card([header, andonAlerts, kpiRow, linesSection, chartsRow1, chartsRow2, midRow, tablesSection, formSection, exportSection], "card", "column", "l")
+
+header = CardHeader("Factory Floor Console", "Shift B · 14 Jun 2025 · 14:32")
+
+andonAlerts = Alert("ANDON · Line C — Hydraulic pressure below threshold", "Machining cell C-07 triggered at 14:28. Operator acknowledged. Target reset in 12 min.", "destructive")
+
+kpiRow = Card([oeeCard, unitsCard], "sunk", "row", "m")
+
+oeeCard = Card([oeeHeading, oeeChart], "card", "column", "s")
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeChart = RadialChart(["Availability", "Performance", "Quality", "OEE"], [92, 87, 96, 77])
+
+unitsCard = Card([unitsHeading, unitsProgress, unitsDetail], "card", "column", "s")
+unitsHeading = Heading("Units Produced vs Target", "h3")
+unitsProgress = Progress(78, "4,680 / 6,000 units")
+unitsDetail = TextContent("Pace on track. 1,320 units remaining at current rate of 420/hr.", "small")
+
+linesSection = Card([linesHeading, lineTabs], "sunk", "column", "s")
+linesHeading = Heading("Production Lines", "h2")
+lineTabs = Tabs([allLinesTab, lineATab, lineBTab, lineCTab, lineDTab])
+
+allLinesTab = TabItem("all", "All Lines", [allLinesTable])
+lineATab = TabItem("line-a", "Line A", [lineATable, lineAStatus])
+lineBTab = TabItem("line-b", "Line B", [lineBTable, lineBStatus])
+lineCTab = TabItem("line-c", "Line C", [lineCTable, lineCStatus])
+lineDTab = TabItem("line-d", "Line D", [lineDTable, lineDStatus])
+
+allLinesTable = Table([allLineCol, allRateCol, allStatusCol, allUptimeCol])
+allLineCol = Col("Line", ["A — Assembly", "B — Machining", "C — Welding", "D — Packaging"])
+allRateCol = Col("Rate (u/hr)", [420, 310, 185, 560])
+allStatusCol = Col("Status", ["Running", "Running", "Andon — Active", "Running"])
+allUptimeCol = Col("Uptime %", ["94.2", "91.8", "72.4", "96.1"])
+
+lineATable = Table([lineAName, lineARate, lineAStatus])
+lineAName = Col("Cell", ["A-01", "A-02", "A-03"])
+lineARate = Col("Rate (u/hr)", [145, 138, 137])
+lineAStatus = Col("Status", ["OK", "OK", "OK"])
+lineAStatus = TextContent("Line A running at 94% of target rate. No active alerts.", "small")
+
+lineBTable = Table([lineBName, lineBRate, lineBStatus])
+lineBName = Col("Cell", ["B-01", "B-02", "B-03", "B-04"])
+lineBRate = Col("Rate (u/hr)", [82, 78, 76, 74])
+lineBStatus = Col("Status", ["OK", "OK", "Degraded", "OK"])
+lineBStatus = TextContent("Cell B-03 showing 8% rate drift. Monitoring.", "small")
+
+lineCTable = Table([lineCName, lineCRate, lineCStatus])
+lineCName = Col("Cell", ["C-01", "C-02", "C-07", "C-08"])
+lineCRate = Col("Rate (u/hr)", [52, 48, 0, 44])
+lineCStatus = Col("Status", ["OK", "OK", "ANDON", "OK"])
+lineCStatus = TextContent("Cell C-07 stopped at 14:28. Hydraulic pressure fault. Maintenance dispatched.", "small")
+
+lineDTable = Table([lineDName, lineDRate, lineDStatus])
+lineDName = Col("Cell", ["D-01", "D-02", "D-03"])
+lineDRate = Col("Rate (u/hr)", [195, 188, 177])
+lineDStatus = Col("Status", ["OK", "OK", "OK"])
+lineDStatus = TextContent("Line D at peak efficiency. No issues.", "small")
+
+chartsRow1 = Card([defectCard, downtimeCard], "sunk", "row", "m")
+
+defectCard = Card([defectHeading, defectChart], "card", "column", "s")
+defectHeading = Heading("Defect Rate — Past 30 Days", "h3")
+defectChart = LineChart(["W1", "W2", "W3", "W4", "W5"], [defectSeries], "natural", "Week", "% Defect")
+defectSeries = Series("Defect %", [2.1, 1.8, 1.9, 1.4, 1.2])
+
+downtimeCard = Card([downtimeHeading, downtimeChart], "card", "column", "s")
+downtimeHeading = Heading("Downtime by Cause — This Month", "h3")
+downtimeChart = PieChart(["Mechanical", "Material Short", "Quality Hold", "Changeover", "Planned Maint"], [34, 22, 18, 14, 12], "donut")
+
+chartsRow2 = Card([stockCard, energyCard], "sunk", "row", "m")
+
+stockCard = Card([stockHeading, stockChart], "card", "column", "s")
+stockHeading = Heading("Raw Material Stock Levels", "h3")
+stockChart = HorizontalBarChart(["Steel (tonnes)", "Resin (kg)", "Packaging (units)"], [stockSeries], "grouped", "Material", "Units")
+stockSeries = Series("Current Stock", [12.4, 3400, 82000])
+
+energyCard = Card([energyHeading, energyChart], "card", "column", "s")
+energyHeading = Heading("Energy Use Today (kWh)", "h3")
+energyChart = AreaChart(["06:00", "08:00", "10:00", "12:00", "14:00", "16:00"], [energySeries], "linear", "Time", "kWh")
+energySeries = Series("Consumption", [182, 340, 410, 385, 425, 398])
+
+midRow = Card([shiftCard, safetyCard], "sunk", "row", "m")
+
+shiftCard = Card([shiftHeading, shiftChart], "card", "column", "s")
+shiftHeading = Heading("Shift Output Comparison", "h3")
+shiftChart = BarChart(["Shift A (06–14)", "Shift B (14–22)", "Shift C (22–06)"], [shiftSeries], "grouped", "Shift", "Units")
+shiftSeries = Series("Units Produced", [2980, 4680, 3120])
+
+safetyCard = Card([safetyHeading, safetyCallout, safetyDetail], "card", "column", "s")
+safetyHeading = Heading("Safety", "h3")
+safetyCallout = Callout("success", "4 incidents YTD", "Last incident: 19 days ago (25 May) — minor Laceration, Line B. No lost-time injuries this quarter.")
+safetyDetail = TextContent("Target: 0 lost-time injuries. Current LTI count: 0.", "small")
+
+tablesSection = Card([maintHeading, maintTable, deliveryHeading, deliveryTable, holdHeading, holdTable, woHeading, woTable], "sunk", "column", "m")
+
+maintHeading = Heading("Machines Due for Maintenance", "h3")
+maintTable = Table([maintMachine, maintType, maintDue, maintPriority])
+maintMachine = Col("Machine", ["C-07 Hydraulic Press", "A-02 Robot Arm", "D-01 Conveyor", "B-03 CNC Mill"])
+maintType = Col("Type", ["Corrective", "Preventive", "Preventive", "Predictive"])
+maintDue = Col("Due", ["Today 16:00", "16 Jun", "18 Jun", "21 Jun"])
+maintPriority = Col("Priority", ["Critical", "High", "Medium", "Low"])
+
+deliveryHeading = Heading("Supplier Deliveries Due This Week", "h3")
+deliveryTable = Table([delivSupplier, delivItem, delivQty, delivEta, delivStatus])
+delivSupplier = Col("Supplier", ["SteelCo Ltd", "PolyResin", "PackPro", "FastenerMax"])
+delivItem = Col("Item", ["Cold-rolled steel 2mm", "ABS resin pellets", "Corrugated boxes 400×300", "M8 hex bolts"])
+delivQty = Col("Qty", ["8 tonnes", "2,000 kg", "50,000 units", "12,000 pcs"])
+delivEta = Col("ETA", ["Wed 18:00", "Thu 09:00", "Fri 14:00", "Fri 11:00"])
+delivStatus = Col("Status", ["Confirmed", "Confirmed", "Delayed", "On time"])
+
+holdHeading = Heading("Batches on Quality Hold", "h3")
+holdTable = Table([holdBatch, holdLine, holdReason, holdSince, holdAction])
+holdBatch = Col("Batch #", ["B-2025-0412", "B-2025-0415", "B-2025-0418"])
+holdLine = Col("Line", ["A", "C", "B"])
+holdReason = Col("Reason", ["Surface finish variance", "Weld porosity", "Dimensional tolerance"])
+holdSince = Col("Held Since", ["12 Jun", "13 Jun", "14 Jun"])
+holdAction = Col("Action", ["Awaiting QC sign-off", "Rework scheduled", "Escalated to Eng."])
+
+woHeading = Heading("Open Work Orders", "h3")
+woTable = Table([woId, woDesc, woLine, woPriority, woAssignee])
+woId = Col("WO #", ["WO-1042", "WO-1044", "WO-1047", "WO-1051", "WO-1053"])
+woDesc = Col("Description", ["Replace hydraulic seal C-07", "Calibrate torque wrench A-02", "Clear conveyor jam D-01", "Update PLC firmware B-03", "Install guard rail Line D"])
+woLine = Col("Line", ["C", "A", "D", "B", "D"])
+woPriority = Col("Priority", ["P1 — Critical", "P2 — High", "P2 — High", "P3 — Medium", "P3 — Medium"])
+woAssignee = Col("Assignee", ["M. Torres", "K. Chen", "R. Patel", "J. Okafor", "S. Kim"])
+
+formSection = Card([formHeading, maintForm], "sunk", "column", "s")
+formHeading = Heading("Schedule Maintenance", "h3")
+maintForm = Form("schedule-maintenance", formButtons, [machineField, dateField, typeField])
+machineField = FormControl("Machine / Cell", machineSelect)
+machineSelect = Select("machine", [optC07, optA02, optD01, optB03, optA01], "Select machine")
+optC07 = SelectItem("C-07", "C-07 Hydraulic Press")
+optA02 = SelectItem("A-02", "A-02 Robot Arm")
+optD01 = SelectItem("D-01", "D-01 Conveyor")
+optB03 = SelectItem("B-03", "B-03 CNC Mill")
+optA01 = SelectItem("A-01", "A-01 Assembly Station")
+dateField = FormControl("Date & Time", dateInput, "Earliest slot 06:00")
+dateInput = DatePicker("maint_date", "single")
+typeField = FormControl("Maintenance Type", typeRadio)
+typeRadio = RadioGroup("maint_type", [optPreventive, optCorrective, optPredictive], null, null, "preventive")
+optPreventive = RadioItem("Preventive", "Scheduled routine service", "preventive")
+optCorrective = RadioItem("Corrective", "Fix a fault", "corrective")
+optPredictive = RadioItem("Predictive", "Based on sensor data", "predictive")
+formButtons = Buttons([submitMaintBtn])
+submitMaintBtn = Button("Schedule", null, "primary")
+
+exportSection = Card([exportBtn], "clear", "row", "s", "end")
+exportBtn = Button("Export Shift Report (PDF)", null, "secondary")

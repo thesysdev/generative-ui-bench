@@ -1,0 +1,111 @@
+
+
+root = Card([header, controls, kpiRow, revenueTrend, costTrend, budgetSection, headcountSection, riskSection, initiativeSection, boardSection, followUps], "card", "column", "l")
+
+header = CardHeader("CEO Quarterly Command View", "Q2 FY2025 · All Regions")
+
+controls = Card([quarterField, regionField, exportBtn], "clear", "row", "l")
+
+quarterField = FormControl("Quarter", quarterSelect, "Change reporting period")
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select quarter")
+q1 = SelectItem("Q1", "Q1 FY2025")
+q2 = SelectItem("Q2", "Q2 FY2025")
+q3 = SelectItem("Q3", "Q3 FY2025")
+q4 = SelectItem("Q4", "Q4 FY2025")
+
+regionField = FormControl("Region", regionSelect, "Focus on one region")
+regionSelect = Select("region", [allRegions, na, eu, apac, latam], "All regions")
+allRegions = SelectItem("all", "All Regions")
+na = SelectItem("na", "North America")
+eu = SelectItem("eu", "Europe")
+apac = SelectItem("apac", "APAC")
+latam = SelectItem("latam", "LATAM")
+
+exportBtn = Button("Export Pack", null, "primary")
+
+kpiRow = Card([revenueKpi, costKpi, profitKpi, runwayKpi, pipelineKpi, winRateKpi, customerKpi, npsKpi], "sunk", "row", "m")
+
+revenueKpi = Card([revenueLabel, revenueValue], "clear", "column", "none")
+revenueLabel = TextContent("Revenue", "small")
+revenueValue = TextContent("$48.2M", "large-heavy")
+
+costKpi = Card([costLabel, costValue], "clear", "column", "none")
+costLabel = TextContent("Costs", "small")
+costValue = TextContent("$31.7M", "large-heavy")
+
+profitKpi = Card([profitLabel, profitValue], "clear", "column", "none")
+profitLabel = TextContent("Profit", "small")
+profitValue = TextContent("$16.5M", "large-heavy")
+
+runwayKpi = Card([runwayLabel, runwayValue], "clear", "column", "none")
+runwayLabel = TextContent("Runway", "small")
+runwayValue = TextContent("23 months", "large-heavy")
+
+pipelineKpi = Card([pipelineLabel, pipelineValue], "clear", "column", "none")
+pipelineLabel = TextContent("Pipeline", "small")
+pipelineValue = TextContent("$72.4M", "large-heavy")
+
+winRateKpi = Card([winRateLabel, winRateValue], "clear", "column", "none")
+winRateLabel = TextContent("Win Rate", "small")
+winRateValue = TextContent("34%", "large-heavy")
+
+customerKpi = Card([customerLabel, customerValue], "clear", "column", "none")
+customerLabel = TextContent("Customers", "small")
+customerValue = TextContent("1,247 · 2.1% churn", "large-heavy")
+
+npsKpi = Card([npsLabel, npsValue], "clear", "column", "none")
+npsLabel = TextContent("NPS", "small")
+npsValue = TextContent("62", "large-heavy")
+
+revenueTrend = Card([revenueTrendHeading, revenueChart], "sunk", "column", "m")
+revenueTrendHeading = Heading("Revenue — Last 4 Quarters", "h3")
+revenueChart = LineChart(["Q3 FY24", "Q4 FY24", "Q1 FY25", "Q2 FY25"], [revSeries], "natural", "Quarter", "USD (M)")
+revSeries = Series("Revenue", [38.1, 42.5, 45.8, 48.2])
+
+costTrend = Card([costTrendHeading, costChart], "sunk", "column", "m")
+costTrendHeading = Heading("Costs — Last 4 Quarters", "h3")
+costChart = LineChart(["Q3 FY24", "Q4 FY24", "Q1 FY25", "Q2 FY25"], [costSeries], "natural", "Quarter", "USD (M)")
+costSeries = Series("Costs", [28.4, 30.1, 32.9, 31.7])
+
+budgetSection = Card([budgetHeading, budgetTable], "sunk", "column", "m")
+budgetHeading = Heading("Budget by Department vs Plan", "h3")
+budgetTable = Table([deptCol, planCol, actualCol, varianceCol])
+deptCol = Col("Department", ["Engineering", "Sales", "Marketing", "G&A", "Support"])
+planCol = Col("Plan ($M)", ["12.0", "9.5", "4.2", "5.8", "3.5"])
+actualCol = Col("Actual ($M)", ["11.4", "10.1", "3.9", "6.2", "3.1"])
+varianceCol = Col("Variance", ["-5.0%", "+6.3%", "-7.1%", "+7.2%", "-11.4%"])
+
+headcountSection = Card([headcountHeading, headcountChart], "sunk", "column", "m")
+headcountHeading = Heading("Headcount by Department", "h3")
+headcountChart = HorizontalBarChart(["Engineering", "Sales", "Marketing", "G&A", "Support"], [hcSeries], "grouped", "Department", "FTE")
+hcSeries = Series("Headcount", [84, 52, 28, 31, 22])
+
+riskSection = Card([riskHeading, riskTable], "sunk", "column", "m")
+riskHeading = Heading("Top Risks", "h3")
+riskTable = Table([riskCol, severityCol, ownerCol, mitigationCol])
+riskCol = Col("Risk", ["Key engineer departure", "EU regulatory delay", "Cloud cost overrun", "Competitor price cut", "Data center outage"])
+severityCol = Col("Severity", ["High", "High", "Medium", "Medium", "Low"])
+ownerCol = Col("Owner", ["VP Eng", "GC", "CFO", "VP Sales", "SRE Lead"])
+mitigationCol = Col("Mitigation", ["Retention bonus + succession plan", "Local counsel engaged", "Reserved capacity negotiated", "Value-based pricing pilot", "Multi-AZ failover tested"])
+
+initiativeSection = Card([initiativeHeading, initiativeTable], "sunk", "column", "m")
+initiativeHeading = Heading("Strategic Initiatives", "h3")
+initiativeTable = Table([initCol, statusCol, targetCol, progressCol])
+initCol = Col("Initiative", ["APAC expansion", "AI copilot launch", "Self-serve tier", "M&A integration", "Carbon neutral ops"])
+statusCol = Col("Status", ["On track", "At risk", "On track", "Delayed", "On track"])
+targetCol = Col("Target", "Q3 FY25", "Q4 FY25", "Q1 FY26", "Q2 FY26", "Q1 FY26")
+progressCol = Col("Progress", ["72%", "41%", "88%", "23%", "55%"])
+
+boardSection = Card([boardHeading, boardList], "sunk", "column", "m")
+boardHeading = Heading("Next Board Meeting — Agenda Items", "h3")
+boardList = ListBlock([boardItem1, boardItem2, boardItem3, boardItem4, boardItem5])
+boardItem1 = ListItem("Approve Series C bridge note", "$15M · 12-month term · 8% coupon")
+boardItem2 = ListItem("EU data residency compliance update", "GDPR Schrems II response · timeline revised")
+boardItem3 = ListItem("VP Engineering search decision", "Final 3 candidates · comp benchmark attached")
+boardItem4 = ListItem("Pricing model change — enterprise tier", "Move to usage-based · projected +12% ARPU")
+boardItem5 = ListItem("FY26 budget preliminary review", "Assumes 28% YoY growth · 340 FTE plan")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me Q3 FY25 forecast vs plan")
+fu2 = FollowUpItem("Deep dive on EU regulatory risk")
+fu3 = FollowUpItem("Compare win rate by region")

@@ -1,0 +1,96 @@
+```openui-lang
+root = Card([
+    header,
+    dateRangePicker,
+    visitorChart,
+    conversionRate,
+    trafficSources,
+    campaigns,
+    bestCampaign,
+    subscriberGrowth,
+    exportButton
+], "card", "column", "m")
+
+header = CardHeader("Weekly Marketing Dashboard", "Last 30 Days")
+
+dateRangePicker = Buttons([
+    Button("Last 7 days"),
+    Button("Last 30 days", [changeDateRange(30)]),
+    Button("Custom range", [openDateRangePicker()])
+], "column")
+
+visitorChart = LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7",
+     "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13",
+     "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19",
+     "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25",
+     "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
+    [visitorSeries],
+    "natural",
+    "Day",
+    "Visitors"
+)
+visitorSeries = Series("Visitors", [5200, 5400, 5600, 5800, 6000, 6200, 6400,
+                                   6600, 6800, 7000, 7200, 7400, 7600, 7800,
+                                   8000, 8200, 8400, 8600, 8800, 9000, 9200,
+                                   9400, 9600, 9800, 10000, 10200, 10400, 10600,
+                                   10800, 11000])
+
+conversionRate = TextContent("Conversion Rate: 3.2%", "large")
+
+trafficSources = Table([
+    srcLabel,
+    srcShare
+])
+srcLabel = Col("Source", [
+    "Organic Search",
+    "Paid Search",
+    "Social Media",
+    "Referral",
+    "Email"
+])
+srcShare = Col("Share (%)", [
+    "42.5",
+    "28.3",
+    "15.1",
+    "7.8",
+    "6.3"
+])
+
+campaigns = Table([
+    campLabel,
+    campSpend
+])
+campLabel = Col("Campaign", [
+    "Campaign A",
+    "Campaign B",
+    "Campaign C",
+    "Campaign D",
+    "Campaign E"
+])
+campSpend = Col("Spend ($)", [
+    "12,500",
+    "9,800",
+    "7,600",
+    "5,400",
+    "4,200"
+])
+
+bestCampaign = Callout(
+    "success",
+    "Best Performing Campaign",
+    "Campaign A: $12,500 spend with highest ROI"
+)
+
+subscriberGrowth = Card([
+    CardHeader("Email Subscriber Growth", "This Month"),
+    TextContent("Growth: +1,200 subscribers", "large")
+], "sunk")
+
+exportButton = Button("Export Report", [exportReport()], "secondary")
+
+# ---------- Hidden but referenced functions ----------
+changeDateRange = (days) => { /* implementation to set date range */ }
+openDateRangePicker = () => { /* implementation to open custom date picker */ }
+exportReport = () => { /* implementation to trigger report export */ }
+```

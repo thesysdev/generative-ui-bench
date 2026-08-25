@@ -1,0 +1,88 @@
+root = Card([header, controlsRow, metricsRow, signupsSection, planSection, topCustomersSection, riskSection, paymentsSection, adoptionSection, seatUtilSection])
+
+header = CardHeader("Admin Overview", "Account health, growth, and revenue at a glance")
+
+controlsRow = Card([periodForm, inviteDialog], "clear", "row", "m", "center", "between", true)
+
+periodForm = Form("reporting_period", periodButtons, [periodField])
+periodField = FormControl("Reporting period", periodSelect)
+periodSelect = Select("period", [p7, p30, p90, p365], "Select period", null, "30")
+p7 = SelectItem("7", "Last 7 days")
+p30 = SelectItem("30", "Last 30 days")
+p90 = SelectItem("90", "Last 90 days")
+p365 = SelectItem("365", "Last 12 months")
+periodButtons = Buttons([applyPeriodBtn])
+applyPeriodBtn = Button("Apply", null, "primary")
+
+inviteDialog = DialogBlock("Invite Admin", "Invite a new admin", "Send an invite to add a teammate as an admin.", [inviteForm], "default")
+inviteForm = Form("invite_admin", inviteButtons, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Email address", inviteEmailInput)
+inviteEmailInput = Input("email", "teammate@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("role", [roleAdmin, roleBilling, roleSupport], "Select role")
+roleAdmin = SelectItem("admin", "Admin")
+roleBilling = SelectItem("billing", "Billing Manager")
+roleSupport = SelectItem("support", "Support Admin")
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send invite", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")
+
+metricsRow = Card([mrrCard, arrCard, churnCard, npsCard], "sunk", "row", "m", "stretch", "between", true)
+mrrCard = Card([mrrLabel, mrrValue], "clear")
+mrrLabel = TextContent("Monthly Recurring Revenue", "small")
+mrrValue = TextContent("$482,300", "large-heavy")
+arrCard = Card([arrLabel, arrValue], "clear")
+arrLabel = TextContent("Annual Recurring Revenue", "small")
+arrValue = TextContent("$5,787,600", "large-heavy")
+churnCard = Card([churnLabel, churnValue], "clear")
+churnLabel = TextContent("Churn This Month", "small")
+churnValue = TextContent("2.4%", "large-heavy")
+npsCard = Card([npsLabel, npsValue], "clear")
+npsLabel = TextContent("Current NPS", "small")
+npsValue = TextContent("+48", "large-heavy")
+
+signupsSection = Card([signupsHeading, signupsChart], "sunk")
+signupsHeading = Heading("New Signups — Past 90 Days", "h3")
+signupsChart = AreaChart(signupWeeks, [signupSeries], "natural", "Week", "New Signups")
+signupWeeks = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"]
+signupSeries = Series("Signups", [42, 55, 61, 58, 70, 66, 78, 82, 91, 87, 95, 103])
+
+planSection = Card([planHeading, planChart], "sunk")
+planHeading = Heading("Customers by Plan", "h3")
+planChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Starter", "Pro", "Business", "Enterprise"]
+planValues = [312, 486, 210, 64]
+
+topCustomersSection = Card([topCustomersHeading, topCustomersTable], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h3")
+topCustomersTable = Table([custNameCol, custSeatsCol, custSpendCol])
+custNameCol = Col("Customer", ["Acme Corp", "Globex Inc", "Initech", "Umbrella Co", "Stark Industries", "Wayne Enterprises", "Hooli", "Soylent Corp", "Vandelay Industries", "Massive Dynamic"])
+custSeatsCol = Col("Seats", [1200, 950, 820, 780, 640, 590, 510, 470, 390, 340], "number")
+custSpendCol = Col("Monthly Spend", ["$48,000", "$38,500", "$32,000", "$29,400", "$24,800", "$21,900", "$19,200", "$17,500", "$14,300", "$12,600"])
+
+riskSection = Card([riskHeading, riskList], "sunk")
+riskHeading = Heading("Accounts At Risk", "h3")
+riskList = ListBlock([riskItem1, riskItem2, riskItem3, riskItem4])
+riskItem1 = ListItem("Umbrella Co", "Usage dropped 65% over 30 days")
+riskItem2 = ListItem("Hooli", "Primary contact left the company")
+riskItem3 = ListItem("Soylent Corp", "Two consecutive failed payments")
+riskItem4 = ListItem("Vandelay Industries", "Support ticket volume spiked, low CSAT")
+
+paymentsSection = Card([paymentsHeading, paymentsTable], "sunk")
+paymentsHeading = Heading("Failed Payments", "h3")
+paymentsTable = Table([payCustCol, payAmountCol, payDateCol, payActionCol])
+payCustCol = Col("Customer", ["Soylent Corp", "Massive Dynamic", "Initech", "Wayne Enterprises"])
+payAmountCol = Col("Amount", ["$17,500", "$12,600", "$32,000", "$21,900"])
+payDateCol = Col("Date", ["Apr 2", "Apr 4", "Apr 5", "Apr 6"])
+payActionCol = Col("Action", ["Retry", "Retry", "Retry", "Retry"], "action")
+
+adoptionSection = Card([adoptionHeading, adoptionChart], "sunk")
+adoptionHeading = Heading("Adoption of Newest Features", "h3")
+adoptionChart = BarChart(adoptionLabels, [adoptionSeries], "grouped", "Feature", "Adoption %")
+adoptionLabels = ["AI Assistant", "Bulk Export", "Custom Roles"]
+adoptionSeries = Series("Adoption %", [34, 58, 21])
+
+seatUtilSection = Card([seatUtilHeading, seatUtilProgress, seatUtilNote], "sunk")
+seatUtilHeading = Heading("Seat Utilization", "h3")
+seatUtilProgress = Progress(76, "76% of purchased seats are active")
+seatUtilNote = TextContent("5,412 of 7,120 total purchased seats are currently active across all customers.", "small")

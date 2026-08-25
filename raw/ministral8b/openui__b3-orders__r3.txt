@@ -1,0 +1,38 @@
+```openui-lang
+root = Card([header, statsRow, filters, recentOrders, analytics, actions])
+
+header = CardHeader("E-commerce Operations", "Track orders, revenue, and performance")
+
+statsRow = Card([todayOrders, todayRevenue, avgOrderValue], "sunk")
+todayOrders = TagBlock(["124 orders placed"])
+todayRevenue = TagBlock(["$24,876 revenue"])
+avgOrderValue = TagBlock(["$199.80 average order value"])
+
+filters = Card([statusFilter, searchField], "sunk", "row", "none", "center", "center")
+statusFilter = Select("status_filter", [statusAll, statusPending, statusProcessing, statusFulfilled, statusCancelled], "Filter by status", null, null, "medium")
+statusAll = SelectItem("all", "All")
+statusPending = SelectItem("pending", "Pending")
+statusProcessing = SelectItem("processing", "Processing")
+statusFulfilled = SelectItem("fulfilled", "Fulfilled")
+statusCancelled = SelectItem("cancelled", "Cancelled")
+searchField = Input("search_customer", "Search by customer name", "text")
+
+recentOrders = Card([ordersHeader, ordersTable], "sunk")
+ordersHeader = CardHeader("Recent Orders")
+ordersTable = Table([orderColId, orderColCustomer, orderColTotal, orderColStatus, orderColAction])
+orderColId = Col("Order ID", ["ORD-2023-0456", "ORD-2023-0457", "ORD-2023-0458", "ORD-2023-0459", "ORD-2023-0460"])
+orderColCustomer = Col("Customer", ["Alex Johnson", "Sarah Chen", "Michael Brown", "Emily Davis", "Robert Wilson"])
+orderColTotal = Col("Total", ["$199.99", "$249.99", "$149.99", "$399.99", "$99.99"])
+orderColStatus = Col("Status", ["Processing", "Fulfilled", "Pending", "Cancelled", "Processing"])
+orderColAction = Col("Action", ["", "", "", "", ""], "action")
+
+analytics = Card([refundRate, volumeChart], "sunk")
+refundRate = Card([refundRateLabel, refundRateValue], "sunk", "column")
+refundRateLabel = TextContent("Refund rate this month", "small")
+refundRateValue = TextContent("3.2%", "small-heavy", "danger")
+volumeChart = LineChart(["W1", "W2", "W3", "W4"], [volumeSeries], "natural", "Week", "Orders")
+volumeSeries = Series("Order Volume", [321, 387, 412, 456])
+
+actions = Card([markFulfilledBtn], "sunk", "row", "none", "center", "center")
+markFulfilledBtn = Button("Mark selected as fulfilled", null, "primary", "normal", "medium")
+```

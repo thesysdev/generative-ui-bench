@@ -1,0 +1,62 @@
+root = Card([header, kpiRow, slaNote, recentHeading, recentTable, filterButtons, newTicketDialog, followUps])
+
+header = CardHeader("Support Queue — Morning View", "Tuesday, 8:45 AM · Tier 1 & Tier 2 combined")
+
+kpiRow = Card([openCard, responseCard], "clear", "row", "m", "stretch")
+
+openCard = Card([openLabel, openValue, openTag], "sunk", "column", "xs")
+openLabel = TextContent("Open tickets", "small-heavy")
+openValue = Heading("47", "h1")
+openTag = Tag("12 unassigned", null, "sm", "warning")
+
+responseCard = Card([respLabel, respValue, respTag, respProgress], "sunk", "column", "xs")
+respLabel = TextContent("Avg. first-response time", "small-heavy")
+respValue = Heading("1h 24m", "h1")
+respTag = Tag("Target 2h", null, "sm", "success")
+respProgress = Progress(70, "70% of tickets answered within target")
+
+slaNote = TextCallout("info", "9 tickets aging past 24h", "Three high-priority tickets have no first response yet — start there.")
+
+recentHeading = Heading("Five most recent tickets", "h3")
+
+recentTable = Table([colId, colSubject, colRequester, colPriority, colOpened])
+colId = Col("Ticket", ["#4821", "#4820", "#4819", "#4818", "#4817"])
+colSubject = Col("Subject", ["Checkout returns 502 on payment step", "SSO login loop after password reset", "Invoice PDF missing line items", "Bulk export stuck at 40%", "How do I change billing email?"])
+colRequester = Col("Requester", ["Nordvik Retail", "Halcyon Labs", "Bright & Co.", "Meridian Health", "Juno Studio"])
+colPriority = Col("Priority", ["Urgent", "High", "Normal", "High", "Low"])
+colOpened = Col("Opened", ["08:31", "08:04", "07:42", "07:15", "06:58"])
+
+filterButtons = Buttons([highOnlyBtn, unassignedBtn, allBtn])
+highOnlyBtn = Button("Show high priority only", null, "primary")
+unassignedBtn = Button("Unassigned only", null, "secondary")
+allBtn = Button("Show all tickets", null, "tertiary")
+
+newTicketDialog = DialogBlock("Open a new ticket", "New ticket", "Log an issue on behalf of a customer.", [ticketForm], "default")
+
+ticketForm = Form("new-ticket", ticketFormButtons, [subjectField, requesterField, priorityField, channelField, detailsField])
+subjectField = FormControl("Subject", subjectInput, "One line summary the agent will see first")
+subjectInput = Input("subject", "Checkout fails at payment step")
+requesterField = FormControl("Requester email", requesterInput)
+requesterInput = Input("requester", "name@company.com", "email")
+priorityField = FormControl("Priority", priorityRadio)
+priorityRadio = RadioGroup("priority", [pUrgent, pHigh, pNormal, pLow], "normal")
+pUrgent = RadioItem("Urgent", "Production down, no workaround", "urgent")
+pHigh = RadioItem("High", "Major feature blocked", "high")
+pNormal = RadioItem("Normal", "Degraded but usable", "normal")
+pLow = RadioItem("Low", "Question or cosmetic issue", "low")
+channelField = FormControl("Source channel", channelSelect)
+channelSelect = Select("channel", [chEmail, chChat, chPhone, chPortal], "Where did this come from?")
+chEmail = SelectItem("email", "Email")
+chChat = SelectItem("chat", "Live chat")
+chPhone = SelectItem("phone", "Phone")
+chPortal = SelectItem("portal", "Customer portal")
+detailsField = FormControl("Details", detailsArea, "Include steps to reproduce and account ID")
+detailsArea = TextArea("details", "What happened, and what did the customer expect?", 5)
+ticketFormButtons = Buttons([createBtn, discardBtn])
+createBtn = Button("Create ticket", null, "primary")
+discardBtn = Button("Discard", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Who is on call for urgent tickets today?")
+fu2 = FollowUpItem("Show first-response time trend for the last 7 days")
+fu3 = FollowUpItem("List tickets breaching SLA in the next 2 hours")

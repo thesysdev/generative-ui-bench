@@ -1,0 +1,25 @@
+root = Card([header, kpiGrid, filterSection, ticketTable, footerActions], "clear", "column", "m")
+
+header = CardHeader("Support Command Center", "Good morning, Lead. Here is your current queue status.")
+
+kpiGrid = Card([openTickets, responseTime], "sunk", "row", "m")
+openTickets = TextCallout("info", "Open Tickets", "142 active tickets requiring attention")
+responseTime = TextCallout("success", "Avg First Response", "1.4 hours (Down 12% from yesterday)")
+
+filterSection = Card([filterLabel, filterButtons], "clear", "row", "s", "center", "between")
+filterLabel = TextContent("Queue Filters", "small-heavy")
+filterButtons = Buttons([highPriorityBtn, allTicketsBtn])
+highPriorityBtn = Button("High Priority Only", null, "primary", "normal", "small")
+allTicketsBtn = Button("Show All", null, "secondary", "normal", "small")
+
+ticketTable = Card([tableHeading, mainTable], "card", "column", "m")
+tableHeading = Heading("Recent Tickets", "h3")
+mainTable = Table([ticketId, customer, priority, status])
+
+ticketId = Col("Ticket ID", ["#8821", "#8820", "#8819", "#8818", "#8817"])
+customer = Col("Customer", ["Acme Corp", "Globex", "Soylent Inc", "Initech", "Hooli"])
+priority = Col("Priority", ["Critical", "High", "Medium", "Low", "High"], "string")
+status = Col("Status", ["Open", "In Progress", "Open", "Pending", "Open"])
+
+footerActions = Buttons([newTicketBtn])
+newTicketBtn = Button("Create New Ticket", null, "primary", "normal", "large")

@@ -1,0 +1,48 @@
+root = Card([pageHeader, kpiRow, filterButtons, ticketTable, newTicketDialog], "clear", "column", "l")
+
+pageHeader = CardHeader("Support Morning View", "Monday, July 14 2025 — Good morning 👋")
+
+kpiRow = Card([openTicketsCard, avgResponseCard], "sunk", "row", "l", "stretch")
+
+openTicketsCard = Card([openLabel, openValue, openSub], "card", "column", "xs", "center", "center")
+openLabel = TextContent("Open Tickets", "small")
+openValue = TextContent("142", "large-heavy")
+openSub = Badge("↑ 12 since yesterday", "secondary")
+
+avgResponseCard = Card([avgLabel, avgValue, avgSub], "card", "column", "xs", "center", "center")
+avgLabel = TextContent("Avg First-Response Time", "small")
+avgValue = TextContent("1h 24m", "large-heavy")
+avgSub = Badge("Target: < 2h", "outline")
+
+filterButtons = Buttons([allBtn, highBtn], "row")
+allBtn = Button("All Priorities", null, "secondary")
+highBtn = Button("High Priority Only", null, "primary")
+
+ticketTable = Table([colId, colSubject, colUser, colPriority, colStatus, colTime])
+colId = Col("Ticket #", ["#10482", "#10481", "#10480", "#10479", "#10478"])
+colSubject = Col("Subject", ["Login page throwing 500 error", "Cannot export to CSV", "Billing charge discrepancy", "App crashes on iOS 17", "SSO setup not working"])
+colUser = Col("Customer", ["Acme Corp", "Globex Inc", "Initech", "Umbrella Ltd", "Stark Industries"])
+colPriority = Col("Priority", ["High", "Medium", "High", "High", "Low"])
+colStatus = Col("Status", ["Open", "Open", "Open", "Open", "Open"])
+colTime = Col("Received", ["8:02 AM", "7:48 AM", "7:31 AM", "7:15 AM", "6:59 AM"])
+
+newTicketDialog = DialogBlock("+ New Ticket", "Open a New Support Ticket", "Fill in the details below to create a new ticket.", [newTicketForm], "default")
+
+newTicketForm = Form("new-ticket", newTicketButtons, [fieldName, fieldEmail, fieldSubject, fieldPriority, fieldDescription])
+fieldName = FormControl("Customer Name", nameInput)
+nameInput = Input("customer_name", "e.g. Acme Corp", "text")
+fieldEmail = FormControl("Contact Email", emailInput)
+emailInput = Input("contact_email", "support@company.com", "email")
+fieldSubject = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Brief description of the issue", "text")
+fieldPriority = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [priLow, priMedium, priHigh, priCritical], "Select priority")
+priLow = SelectItem("low", "Low")
+priMedium = SelectItem("medium", "Medium")
+priHigh = SelectItem("high", "High")
+priCritical = SelectItem("critical", "Critical")
+fieldDescription = FormControl("Description", descInput, "Please include steps to reproduce if applicable")
+descInput = TextArea("description", "Describe the issue in detail…", 4)
+newTicketButtons = Buttons([submitTicketBtn, cancelTicketBtn])
+submitTicketBtn = Button("Create Ticket", null, "primary")
+cancelTicketBtn = Button("Cancel", null, "tertiary")

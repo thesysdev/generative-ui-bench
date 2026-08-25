@@ -1,0 +1,115 @@
+```openui-lang
+root = Card([header, oeeSection, productionSection, defectsSection, downtimeSection, maintenanceSection,
+             inventorySection, deliveriesSection, shiftComparisonSection, safetySection,
+             qualityHoldSection, energySection, workOrdersSection, maintenanceFormSection,
+             focusSection, alertsSection, exportButton], "card", "column", "m", "start", "start")
+
+header = CardHeader("Factory Floor Supervisor Console", "Real-time production monitoring")
+
+oeeSection = Card([oeeTitle, oeeValue, oeeBreakdown], "sunk")
+oeeTitle = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = Card([oeePercent], "card", "row", "none", "center", "center")
+oeePercent = TextContent("92.7%", "large-heavy")
+oeeBreakdown = Table([availabilityCol, performanceCol, qualityCol])
+availabilityCol = Col("Availability", ["95.3%"], "number")
+performanceCol = Col("Performance", ["97.1%"], "number")
+qualityCol = Col("Quality", ["91.2%"], "number")
+
+productionSection = Card([productionTitle, productionChart, productionTarget], "sunk")
+productionTitle = Heading("Production vs Target", "h3")
+productionChart = Card([targetBar, actualBar], "card", "column", "none", "center", "center")
+targetBar = BarChart(["Today"], [targetSeries], "grouped", "Units", "Quantity")
+actualBar = BarChart(["Today"], [actualSeries], "grouped", "Units", "Quantity")
+targetSeries = Series("Target", [1250])
+actualSeries = Series("Actual", [1180])
+productionTarget = TextContent("Target: 1,250 units | Today: 1,180 units", "small")
+
+defectsSection = Card([defectsTitle, defectChart], "sunk")
+defectsTitle = Heading("Defect Rate (Past Month)", "h3")
+defectChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [defectSeries], "natural", "Week", "Defect Rate (%)")
+defectSeries = Series("Defect Rate", [3.2, 2.8, 4.1, 2.5])
+
+downtimeSection = Card([downtimeTitle, downtimePie], "sunk")
+downtimeTitle = Heading("Downtime by Cause", "h3")
+downtimePie = PieChart(["Mechanical", "Electrical", "Human Error", "Other"], [55, 20, 15, 10], "pie")
+
+maintenanceSection = Card([maintenanceTitle, maintenanceList], "sunk")
+maintenanceTitle = Heading("Machines Due for Maintenance", "h3")
+maintenanceList = ListBlock([machine1, machine2, machine3])
+machine1 = ListItem("Line A-01", "Scheduled: 2023-11-15", null, "View Details")
+machine2 = ListItem("Press B-03", "Scheduled: 2023-11-18", null, "View Details")
+machine3 = ListItem("Cooler C-05", "Scheduled: 2023-11-20", null, "View Details")
+
+inventorySection = Card([inventoryTitle, inventoryTable], "sunk")
+inventoryTitle = Heading("Inventory Levels", "h3")
+inventoryTable = Table([inventoryCol1, inventoryCol2, inventoryCol3])
+inventoryCol1 = Col("Material", ["Steel", "Resin", "Packaging"], "string")
+inventoryCol2 = Col("Stock", ["4,200 kg", "1,800 L", "350 boxes"], "string")
+inventoryCol3 = Col("Threshold", ["<5,000 kg", "<2,000 L", "<400 boxes"], "string")
+
+deliveriesSection = Card([deliveriesTitle, deliveriesList], "sunk")
+deliveriesTitle = Heading("Supplier Deliveries (This Week)", "h3")
+deliveriesList = ListBlock([delivery1, delivery2, delivery3])
+delivery1 = ListItem("Steel Supplier X", "10:00 AM", null, "Track")
+delivery2 = ListItem("Resin Supplier Y", "2:30 PM", null, "Track")
+delivery3 = ListItem("Packaging Supplier Z", "4:15 PM", null, "Track")
+
+shiftComparisonSection = Card([shiftTitle, shiftChart], "sunk")
+shiftTitle = Heading("Shift Output Comparison", "h3")
+shiftChart = BarChart(["Morning", "Afternoon", "Night"], [shiftSeries], "grouped", "Shift", "Units")
+shiftSeries = Series("Production", [420, 380, 450])
+
+safetySection = Card([safetyTitle, safetyStats], "sunk")
+safetyTitle = Heading("Safety Performance", "h3")
+safetyStats = Card([incidentsText, daysSinceLast], "card", "column", "none", "center", "center")
+incidentsText = TextContent("Incidents this year: 3", "small")
+daysSinceLast = TextContent("Days since last incident: 45", "small")
+
+qualityHoldSection = Card([qualityTitle, qualityHoldList], "sunk")
+qualityTitle = Heading("Batches on Quality Hold", "h3")
+qualityHoldList = ListBlock([hold1, hold2], "number")
+hold1 = ListItem("Batch #423", "Defect: Warping", null, "Release")
+hold2 = ListItem("Batch #425", "Defect: Scratches", null, "Release")
+
+energySection = Card([energyTitle, energyValue], "sunk")
+energyTitle = Heading("Energy Use Today", "h3")
+energyValue = TextContent("Total: 12,450 kWh | Cost: $1,245", "large")
+
+workOrdersSection = Card([workOrdersTitle, workOrdersTable], "sunk")
+workOrdersTitle = Heading("Open Work Orders", "h3")
+workOrdersTable = Table([workOrderCol1, workOrderCol2, workOrderCol3, workOrderCol4])
+workOrderCol1 = Col("Priority", ["High", "Medium", "Low", "High"], "string")
+workOrderCol2 = Col("Description", ["Line A-01 Maintenance", "Press B-03 Calibration", "Cooler C-05 Cleaning", "Safety Inspection"], "string")
+workOrderCol3 = Col("Assigned To", ["John Doe", "Jane Smith", "Mike Brown", "Sarah Lee"], "string")
+workOrderCol4 = Col("Status", ["Pending", "In Progress", "Pending", "Pending"], "string")
+
+maintenanceFormSection = Card([maintenanceFormTitle, maintenanceForm], "sunk")
+maintenanceFormTitle = Heading("Schedule Maintenance", "h3")
+maintenanceForm = Form("maintenance-schedule", maintenanceButtons, [machineField, dateField])
+machineField = FormControl("Select Machine", machineSelect)
+machineSelect = Select("machine", [machineOption1, machineOption2, machineOption3], "Select Machine")
+machineOption1 = SelectItem("Line A-01", "Line A-01")
+machineOption2 = SelectItem("Press B-03", "Press B-03")
+machineOption3 = SelectItem("Cooler C-05", "Cooler C-05")
+dateField = FormControl("Scheduled Date", dateInput)
+dateInput = DatePicker("date", "single")
+maintenanceButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+focusSection = Card([focusTitle, focusSelect], "sunk")
+focusTitle = Heading("Focus on Production Line", "h3")
+focusSelect = Select("focus_line", [lineOption1, lineOption2, lineOption3], "Select Line")
+lineOption1 = SelectItem("Line A", "Line A")
+lineOption2 = SelectItem("Line B", "Line B")
+lineOption3 = SelectItem("Line C", "Line C")
+
+alertsSection = Card([alertsTitle, alertList], "sunk")
+alertsTitle = Heading("Live Andon Alerts", "h3")
+alertList = ListBlock([alert1, alert2, alert3])
+alert1 = ListItem("Line A-01", "Mechanical failure detected", null, "Acknowledge")
+alert2 = ListItem("Press B-03", "Temperature anomaly", null, "Acknowledge")
+alert3 = ListItem("Cooler C-05", "Low resin level", null, "Acknowledge")
+
+exportButton = Button("Export Shift Report", null, "secondary", "normal")
+```

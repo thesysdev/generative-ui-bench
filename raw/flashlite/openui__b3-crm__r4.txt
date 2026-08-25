@@ -1,0 +1,47 @@
+root = Card([headerCard, statusRow, mainContent, noteSection, followUpSection, actions])
+
+headerCard = CardHeader("Acme Corporation", "Managed by Sarah Jenkins")
+
+statusRow = Card([dealValueBadge, dealStageBadge, renewalAlert], "clear", "row", "m", "start", "between")
+dealValueBadge = Badge("Deal Value: $450,000", "default")
+dealStageBadge = Badge("Stage: Proposal / Price Quote", "secondary")
+renewalAlert = Alert("Renewal Approaching", "Renewal due in 15 days (Nov 15, 2023)", "warning")
+
+mainContent = Card([activitySection, contactSection], "card", "row", "l")
+
+activitySection = Card([activityHeader, activityList], "sunk", "column", "m")
+activityHeader = Heading("Recent Activity", "h3")
+activityList = ListBlock([activity1, activity2, activity3], "number")
+activity1 = ListItem("Demo completed with VP of Engineering", "Oct 28, 2023 - 45 mins")
+activity2 = ListItem("Security review questionnaire submitted", "Oct 24, 2023")
+activity3 = ListItem("Initial discovery call with procurement", "Oct 15, 2023")
+
+contactSection = Card([contactHeader, contactTable], "sunk", "column", "m")
+contactHeader = Heading("Key Contacts", "h3")
+contactTable = Table([contactNameCol, contactRoleCol])
+contactNameCol = Col("Name", ["Alice Smith", "Bob Jones", "Carol White"])
+contactRoleCol = Col("Role", ["Decision Maker", "Technical Evaluator", "Procurement Lead"])
+
+followUpSection = Card([followUpHeader, followUpList], "sunk", "column", "m")
+followUpHeader = Heading("Open Follow-ups", "h3")
+followUpList = ListBlock([fu1, fu2], "number")
+fu1 = ListItem("Send updated pricing sheet with volume discounts", "Due: Nov 2, 2023")
+fu2 = ListItem("Schedule final contract review with legal team", "Due: Nov 5, 2023")
+
+noteSection = Card([noteHeader, noteForm], "sunk", "column", "m")
+noteHeader = Heading("Jot a Note", "h3")
+noteForm = Form("note-form", noteButtons, [noteField])
+noteField = FormControl("Note Details", noteInput, "Record a quick thought or observation")
+noteInput = TextArea("note_text", "Type notes about the account here...", 3)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+actions = Buttons([logCallDialog])
+logCallDialog = DialogBlock("Log a Call", "Log Call Details", "Record a recent phone conversation with the client.", [callForm], "default")
+callForm = Form("call-form", callFormButtons, [callSubjectField, callNotesField])
+callSubjectField = FormControl("Call Subject", callSubjectInput)
+callSubjectInput = Input("subject", "e.g., Pricing discussion")
+callNotesField = FormControl("Call Summary", callNotesInput)
+callNotesInput = TextArea("summary", "What was discussed during the call?", 4)
+callFormButtons = Buttons([submitCallBtn])
+submitCallBtn = Button("Save Call Log", null, "primary")

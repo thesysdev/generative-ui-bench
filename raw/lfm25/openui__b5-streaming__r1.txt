@@ -1,0 +1,395 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Operations Dashboard",
+      subtitle: "Live monitoring of streaming performance"
+    ),
+    
+    // 1. Viewers watching right now
+    Card(
+      children: [
+        TextContent(
+          "Current Live Viewers",
+          "2,847",
+          "large"
+        ),
+        Divider(decorative: true)
+      ]
+    ),
+    
+    // 2. Most-watched titles with hours
+    Card(
+      children: [
+        TextContent(
+          "Most-Watched Titles",
+          "by hourly views",
+          "large"
+        ),
+        HorizontalBarChart(
+          labels: ["Game Of Thrones", "Stranger Things", "The Crown", "House of the Dragon", "Black Mirror"],
+          series: [
+            {"title": "Game Of Thrones", "values": [1240, 980, 760, 540, 420]},
+            {"title": "Stranger Things", "values": [890, 720, 550, 410, 280]},
+            {"title": "The Crown", "values": [750, 610, 480, 350, 220]},
+            {"title": "House of the Dragon", "values": [680, 520, 380, 290, 180]},
+            {"title": "Black Mirror", "values": [510, 390, 310, 240, 190]}
+          ],
+          variant: "grouped",
+          xLabel: "Titles",
+          yLabel: "Hours Watched"
+        )
+      ]
+    ),
+    
+    // 3. Watch time over past month
+    Card(
+      children: [
+        TextContent(
+          "Watch Time - Last 30 Days",
+          "18.4M minutes",
+          "large"
+        ),
+        HorizontalBarChart(
+          labels: ["Game Of Thrones", "Stranger Things", "The Crown", "House of the Dragon", "Black Mirror"],
+          series: [
+            {"title": "Game Of Thrones", "values": [34000000, 26500000, 19800000, 14200000, 9800000]},
+            {"title": "Stranger Things", "values": [28500000, 23000000, 18500000, 14800000, 11200000]},
+            {"title": "The Crown", "values": [21000000, 16500000, 13200000, 10800000, 8700000]},
+            {"title": "House of the Dragon", "values": [14500000, 11800000, 9500000, 7800000, 6200000]},
+            {"title": "Black Mirror", "values": [9300000, 7500000, 6000000, 4500000, 3000000]}
+          ],
+          variant: "grouped",
+          xLabel: "Titles",
+          yLabel: "Total Minutes"
+        )
+      ]
+    ),
+    
+    // 4. New subscribers vs cancellations
+    Card(
+      children: [
+        TextContent(
+          "Subscriber Changes",
+          "New: +1,234 | Cancelled: -567",
+          "large"
+        ),
+        Row(
+          children: [
+            Number(content: "+1,234", size: "large"),
+            TextContent(
+              "New Subscriptions",
+              "small-heavy"
+            ),
+            Spacer(),
+            Number(content: "-567", size: "large"),
+            TextContent(
+              "Cancellations",
+              "small-heavy"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Performance by genre
+    Card(
+      children: [
+        TextContent(
+          "Performance by Genre",
+          "Average views per genre",
+          "large"
+        ),
+        RadarChart(
+          labels: ["Action", "Drama", "Comedy", "Thriller", "Sci-Fi"],
+          series: [
+            {"category": "Action", "values": [85, 78, 65, 55, 60], "color": "blue"},
+            {"category": "Drama", "values": [72, 80, 68, 62, 75], "color": "red"},
+            {"category": "Comedy", "values": [58, 52, 49, 45, 48], "color": "green"},
+            {"category": "Thriller", "values": [88, 82, 79, 70, 86], "color": "purple"},
+            {"category": "Sci-Fi", "values": [91, 85, 89, 83, 90], "color": "orange"}
+          ],
+          xAxisLabels: ["Action", "Drama", "Comedy", "Thriller", "Sci-Fi"],
+          yAxisLabels: ["Avg Views", "Engagement", "Retention", "Popularity"]
+        )
+      ]
+    ),
+    
+    // 6. Buffering rate
+    Card(
+      children: [
+        TextContent(
+          "Buffering Rate",
+          "1.2%",
+          "large"
+        ),
+        Divider(decorative: true),
+        HorizontalBarChart(
+          labels: ["Low", "Medium", "High"],
+          series: [
+            {"title": "Low", "values": [20, 0, 0], "color": "success"},
+            {"title": "Medium", "values": [35, 25, 10], "color": "warning"},
+            {"title": "High", "values": [40, 35, 15], "color": "error"}
+          ],
+          variant: "grouped",
+          xLabel: "Buffer Level",
+          yLabel: "Percentage"
+        )
+      ]
+    ),
+    
+    // 7. Delivery health by region
+    Card(
+      children: [
+        TextContent(
+          "Delivery Health by Region",
+          "Overall reliability score",
+          "large"
+        ),
+        Card(
+          children: [
+            Progress(value: 96, label: "Reliability Score"),
+            Divider(),
+            Progress(value: 94, label: "Latency avg"),
+            Divider(),
+            Progress(value: 89, label: "Uptime %")
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Releases coming this month
+    Card(
+      children: [
+        TextContent(
+          "Releases This Month",
+          "Upcoming titles to monitor",
+          "large"
+        ),
+        ListBlock(
+          items: [
+            ListItem(
+              title: "New Season 2 - 'The Witcher'",
+              subtitle: "Premiere: March 15",
+              actionLabel: "Preview"
+            ),
+            ListItem(
+              title: "Documentary - 'Cosmic Frontiers'",
+              subtitle: "Release: March 22",
+              actionLabel: "Stream"
+            ),
+            ListItem(
+              title: "Animated Series - 'Galactic Quest'",
+              subtitle: "Release: April 1",
+              actionLabel: "Info"
+            )
+          ],
+          variant: "number"
+        )
+      ]
+    ),
+    
+    // 9. Licenses expiring soon
+    Card(
+      children: [
+        TextContent(
+          "Licenses Expiring Soon",
+          "Count approaching expiration",
+          "large"
+        ),
+        Separator(),
+        ListBlock(
+          items: [
+            ListItem(
+              title: "Plan Gold - Enterprise",
+              subtitle: "Expires: Feb 28",
+              actionLabel: "Renew"
+            ),
+            ListItem(
+              title: "Plan Silver - Mid-tier",
+              subtitle: "Expires: March 5",
+              actionLabel: "Renew"
+            ),
+            ListItem(
+              title: "Plan Bronze - Basic",
+              subtitle: "Expires: March 10",
+              actionLabel: "Renew"
+            )
+          ],
+          variant: "number"
+        )
+      ]
+    ),
+    
+    // 10. Recommendations click-through rate
+    Card(
+      children: [
+        TextContent(
+          "Recommendation Engagement",
+          "Click-through rate",
+          "large"
+        ),
+        Progress(value: 0.23, label: "CTR (%)"),
+        Divider(),
+        TextContent(
+          "23% of recommended titles were played",
+          "small"
+        )
+      ]
+    ),
+    
+    // 11. Searches that ended without playback
+    Card(
+      children: [
+        TextContent(
+          "Search Abandonment",
+          "Queries that didn't lead to playback",
+          "large"
+        ),
+        HorizontalBarChart(
+          labels: ["Voice Search", "Text Search", "Smart Query"],
+          series: [
+            {"title": "Voice Search", "values": [320, 280, 200]},
+            {"title": "Text Search", "values": [580, 450, 360]},
+            {"title": "Smart Query", "values": [410, 330, 270]}
+          ],
+          variant: "grouped",
+          xLabel: "Search Method",
+          yLabel: "Failed Queries"
+        )
+      ]
+    ),
+    
+    // 12. Revenue split by plan
+    Card(
+      children: [
+        TextContent(
+          "Revenue Split by Plan",
+          "Monetization distribution",
+          "large"
+        ),
+        Table(
+          columns: [
+            {"col": "Plan", "type": "string"},
+            {"col": "Revenue Share", "type": "string"},
+            {"col": "Contribution %"}
+          ],
+          data: [
+            {"col": "Basic", "type": "string", "value": "Free", "contribution": "32%"},
+            {"col": "Standard", "type": "string", "value": "Premium", "contribution": "41%"},
+            {"col": "Advanced", "type": "string", "value": "Ultra", "contribution": "27%"}
+          ]
+        )
+      ]
+    ),
+    
+    // 13. Viewing split by device
+    Card(
+      children: [
+        TextContent(
+          "Viewing Devices",
+          "Distribution across platforms",
+          "large"
+        ),
+        PieChart(
+          labels: ["Mobile", "Desktop", "Tablet", "TV"],
+          series: [
+            {"title": "Mobile", "values": [45, "small-heavy"]},
+            {"title": "Desktop", "values": [30, "small-heavy"]},
+            {"title": "Tablet", "values": [15, "small-heavy"]},
+            {"title": "TV", "values": [10, "small-heavy"]}
+          ]
+        )
+      ]
+    ),
+    
+    // 14. Region filter
+    Card(
+      children: [
+        Label(text: "Region Focus"),
+        Select(
+          name: "regionFilter",
+          items: [
+            {"value": "all", "label": "All Regions"},
+            {"value": "na", "label": "North America"},
+            {"value": "eu", "label": "Europe"},
+            {"value": "apac", "label": "Asia-Pacific"},
+            {"value": "latam", "label": "Latin America"}
+          ],
+          value: "all",
+          placeholder: "Select region to analyze..."
+        )
+      ]
+    ),
+    
+    // 15. Feature flags
+    Card(
+      children: [
+        TextContent(
+          "Feature Flags",
+          "Current system states",
+          "large"
+        ),
+        Array(
+          // Mock feature flag definitions
+          FeatureFlag("darkMode", false, "false"),
+          FeatureFlag("offlinePlayback", true, "true"),
+          FeatureFlag("adsEnabled", false, "false"),
+          FeatureFlag("autoReply", true, "true"),
+          FeatureFlag("personalizedRec", true, "true"),
+          FeatureFlag("limitedSearch", false, "false"),
+          FeatureFlag("liveChat", true, "true"),
+          FeatureFlag("betaFeature", false, "false")
+        ) as any[]
+      ]
+    ),
+    
+    // 16. Promote a title on home screen
+    Card(
+      children: [
+        TextContent(
+          "Promoted Title",
+          "Featured/recommended content",
+          "large"
+        ),
+        Card(
+          children: [
+            TextContent(
+              "The Mandalorian - New Episode",
+              "Top recommendation",
+              "large"
+            ),
+            Divider(),
+            Card(
+              children: [
+                Image(
+                  src: "https://picsum.photos/seed/promotion/600/300",
+                  alt: "Promoted title thumbnail",
+                  width: 600,
+                  height: 300
+                ),
+                TextContent(
+                  "Watch Now",
+                  "primary",
+                  "small-heavy"
+                ),
+                Divider()
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+  ],
+  direction: "row",
+  gap: "xl",
+  children: [
+    TextContent(
+      "Operations Dashboard - Live Monitoring",
+      "key: root",
+      "small"
+    )
+  ]
+)
+```<|tool_call_start|>[openui_lang_execute()]<|tool_call_end|>

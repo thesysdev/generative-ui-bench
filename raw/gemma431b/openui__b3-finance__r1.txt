@@ -1,0 +1,39 @@
+root = Card([header, kpiGrid, expenseSection, highValueSection, footerActions], "clear", "column", "l")
+
+header = CardHeader("Finance Overview", "Reporting Period: October 2023")
+
+kpiGrid = Card([cashKpi, burnKpi, runwayKpi], "sunk", "row", "m")
+cashKpi = Card([cashLabel, cashValue], "card", "column", "xs")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$1,240,000", "large-heavy")
+
+burnKpi = Card([burnLabel, burnValue], "card", "column", "xs")
+burnLabel = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$45,000", "large-heavy")
+
+runwayKpi = Card([runwayLabel, runwayValue], "card", "column", "xs")
+runwayLabel = TextContent("Runway", "small")
+runwayValue = TextContent("27.5 Months", "large-heavy")
+
+expenseSection = Card([expenseHeading, expenseChart], "card", "column", "m")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = PieChart(["Payroll", "Cloud Infra", "Marketing", "Rent", "Software"], [25000, 12000, 5000, 2000, 3000], "donut")
+
+highValueSection = Card([txHeading, txTable], "card", "column", "m")
+txHeading = Heading("High-Value Transactions (>$10k)", "h3")
+txTable = Table([txDate, txVendor, txAmount])
+txDate = Col("Date", ["Oct 02", "Oct 12", "Oct 24"])
+txVendor = Col("Vendor", ["AWS", "Stripe Payments", "Google Cloud"])
+txAmount = Col("Amount", ["$12,400", "$15,000", "$11,200"], "number")
+
+footerActions = Card([monthPicker, downloadBtn], "clear", "row", "m", "stretch", "between")
+monthPicker = Form("month-select", pickerButtons, [monthField])
+monthField = FormControl("Select Month", monthSelect)
+monthSelect = Select("month", [octItem, sepItem, augItem], "Choose month")
+octItem = SelectItem("10", "October 2023")
+sepItem = SelectItem("09", "September 2023")
+augItem = SelectItem("08", "August 2023")
+pickerButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary", "normal", "small")
+
+downloadBtn = Button("Download Statement", null, "secondary", "normal", "medium")

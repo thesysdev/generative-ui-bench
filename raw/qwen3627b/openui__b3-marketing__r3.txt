@@ -1,0 +1,57 @@
+root = Card([header, dateRangeCard, kpiRow, visitorsCard, trafficCard, campaignsCard, bestCampaign, subscriberCard, exportBtn], "card", "column", "m")
+
+header = CardHeader("Weekly Marketing Dashboard", "Your performance at a glance")
+
+dateRangeCard = Card([dateRangeHeading, dateForm], "sunk")
+dateRangeHeading = Heading("Date Range", "h3")
+dateForm = Form("date-range", dateFormButtons, [dateField])
+dateField = FormControl("Select range", dateInput)
+dateInput = DatePicker("date_range", "range")
+dateFormButtons = Buttons([applyDateBtn, resetDateBtn])
+applyDateBtn = Button("Apply", null, "primary", "small")
+resetDateBtn = Button("Reset", null, "tertiary", "small")
+
+kpiRow = Card([conversionRate, totalVisitors, totalRevenue], "card", "row", "m")
+conversionRate = Card([convHeading, convValue, convBadge], "card")
+convHeading = TextContent("Conversion Rate", "small")
+convValue = Heading("3.24%", "h2")
+convBadge = Badge("↑ 0.4%", "default")
+totalVisitors = Card([visitorsHeading, visitorsValue, visitorsBadge], "card")
+visitorsHeading = TextContent("Total Visitors", "small")
+visitorsValue = Heading("48,291", "h2")
+visitorsBadge = Badge("↑ 12%", "default")
+totalRevenue = Card([revenueHeading, revenueValue, revenueBadge], "card")
+revenueHeading = TextContent("Revenue", "small")
+revenueValue = Heading("$12,840", "h2")
+revenueBadge = Badge("↑ 8%", "default")
+
+visitorsCard = Card([visitorsChartHeader, visitorsChart], "card")
+visitorsChartHeader = CardHeader("Site Visitors (30 Days)", "Daily unique visitors")
+visitorsChart = LineChart(dayLabels, [visitorsSeries], "natural", "Day", "Visitors")
+dayLabels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+visitorsSeries = Series("Visitors", [1200, 1350, 1100, 1450, 1600, 1550, 1700, 1300, 1400, 1250, 1500, 1650, 1580, 1720, 1400, 1550, 1300, 1450, 1600, 1750, 1680, 1800, 1500, 1650, 1400, 1550, 1700, 1850, 1780, 1900])
+
+trafficCard = Card([trafficHeader, trafficChart], "card")
+trafficHeader = CardHeader("Top Traffic Sources", "Share of total traffic")
+trafficChart = PieChart(trafficLabels, trafficValues)
+trafficLabels = ["Google Organic", "Direct", "Social Media", "Email", "Referral"]
+trafficValues = [35, 22, 18, 15, 10]
+
+campaignsCard = Card([campaignsHeader, campaignsTable], "card")
+campaignsHeader = CardHeader("Active Campaigns", "Spend and performance this period")
+campaignsTable = Table([campName, campSpend, campClicks, campConv, campRoas])
+campName = Col("Campaign", ["Summer Sale", "Brand Awareness", "Retargeting", "Newsletter Promo", "Holiday Preview"])
+campSpend = Col("Spend ($)", [2400, 1800, 1200, 900, 600])
+campClicks = Col("Clicks", [4800, 3200, 2100, 1500, 800])
+campConv = Col("Conversions", [154, 96, 105, 72, 24])
+campRoas = Col("ROAS", [5.3, 3.2, 11.4, 4.8, 2.1])
+
+bestCampaign = Callout("success", "🏆 Top Performer: Retargeting", "5.0% conversion rate with $11.40 ROAS — highest return of all active campaigns. Recommend increasing budget by 20%.")
+
+subscriberCard = Card([subscriberHeader, subscriberChart], "card")
+subscriberHeader = CardHeader("Email Subscriber Growth", "New subscribers this month")
+subscriberChart = BarChart(weekLabels, [subSeries], "grouped", "Week", "New Subscribers")
+weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+subSeries = Series("New Subscribers", [320, 480, 510, 390])
+
+exportBtn = Button("Export Report", null, "primary")

@@ -1,0 +1,76 @@
+```openui-lang
+root = Card([
+    header,
+    stepsSection,
+    caloriesSection,
+    workoutsSection,
+    logWorkoutForm,
+    actions
+], "card", "column", "m")
+
+header = CardHeader("Daily Fitness Summary", "Today's Progress")
+
+stepsSection = Card([
+    stepCount,
+    stepsProgress
+])
+stepCount = TextContent("10,245 steps", "large")
+stepsProgress = BarChart(["Goal", "Today"], [[10000, 10245]], "grouped", "Steps", "Count")
+
+caloriesSection = Card([
+    caloriesBurned
+])
+caloriesBurned = TextContent("Calories Burned: 1,845 kcal", "large")
+
+workoutsSection = Card([
+    workoutsOverview
+])
+workoutsOverview = Table([
+    workoutLabel,
+    workoutDetails
+])
+workoutLabel = Col("Workout", ["Day", "Type", "Duration", "Notes"])
+workoutDetails = Col("Details", [
+    ["Mon", "Yoga", "30 min", "Relaxed"],
+    ["Tue", "Running", "45 min", "Fast pace"],
+    ["Wed", "Swimming", "60 min", "Full body"],
+    ["Thu", "Strength", "50 min", "Upper body"],
+    ["Fri", "Cycling", "55 min", "Outdoor"],
+    ["Sat", "HIIT", "20 min", "Quick"],
+    ["Sun", "Rest", "N/A", "Recovery"]
+], "number")
+
+logWorkoutForm = Form("log_workout", formButtons, [
+    workoutTypeField,
+    durationField,
+    notesField
+])
+workoutTypeField = FormControl("Workout type", typeSelect, "Choose activity")
+typeSelect = Select("type", [
+    typeYoga,
+    typeRunning,
+    typeSwimming,
+    typeStrength,
+    typeCycling,
+    typeHIIT,
+    typeRest
+], "Select type")
+typeYoga = SelectItem("Yoga", "Yoga")
+typeRunning = SelectItem("Running", "Running")
+typeSwimming = SelectItem("Swimming", "Swimming")
+typeStrength = SelectItem("Strength", "Strength")
+typeCycling = SelectItem("Cycling", "Cycling")
+typeHIIT = SelectItem("HIIT", "HIIT")
+typeRest = SelectItem("Rest", "Rest")
+durationField = FormControl("Duration (min)", durationInput)
+durationInput = Input("duration", "number")
+notesField = FormControl("Notes", notesTextArea, "Optional details")
+notesTextArea = TextArea("notes", "e.g., weather, intensity", 3)
+
+formButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+actions = Buttons([shareBtn])
+shareBtn = Button("Share Summary", null, "secondary")
+```

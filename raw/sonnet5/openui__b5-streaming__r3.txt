@@ -1,0 +1,95 @@
+root = Card([header, statsRow, contentSection, engagementSection, deliverySection, releasesSection, licensesSection, revenueSection, adminSection])
+
+header = CardHeader("Streaming Operations Room", "Live platform health, content performance, and controls")
+
+statsRow = Card([viewersStat, bufferingStat, recCtrStat, searchDropoutStat], "clear", "row", "m", null, null, true)
+viewersStat = Card([viewersLabel, viewersValue], "sunk", "column", "xs")
+viewersLabel = TextContent("Viewers Right Now", "small")
+viewersValue = TextContent("1.84M", "large-heavy")
+bufferingStat = Card([bufferingProgress], "sunk", "column", "xs")
+bufferingProgress = Progress(2.3, "Buffering rate: 2.3%")
+recCtrStat = Card([recCtrProgress], "sunk", "column", "xs")
+recCtrProgress = Progress(34, "Recommendation click-through: 34%")
+searchDropoutStat = Card([searchDropoutProgress], "sunk", "column", "xs")
+searchDropoutProgress = Progress(18, "Searches ending without playback: 18%")
+
+contentSection = Card([contentHeader, topTitlesChart, watchTimeChart, genreChart], "sunk", "column", "l")
+contentHeader = CardHeader("Content Performance", "What's driving engagement")
+topTitlesChart = HorizontalBarChart(topTitleLabels, [topTitleSeries], "grouped", "Hours Watched (M)", "Title")
+topTitleLabels = ["The Last Signal", "Coastal Nights", "Quantum Bloom", "Kitchen Wars", "Silent Harbor"]
+topTitleSeries = Series("Hours Watched (M)", [42.6, 35.1, 29.8, 24.3, 21.7])
+watchTimeChart = AreaChart(watchTimeLabels, [watchTimeSeries], "natural", "Week", "Watch Hours (M)")
+watchTimeLabels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+watchTimeSeries = Series("Total Watch Hours (M)", [312, 298, 340, 365])
+genreChart = BarChart(genreLabels, [genreSeries], "grouped", "Genre", "Hours Watched (M)")
+genreLabels = ["Drama", "Comedy", "Action", "Documentary", "Reality"]
+genreSeries = Series("Hours Watched (M)", [128, 96, 142, 54, 71])
+
+engagementSection = Card([engagementHeader, subsChart, deviceChart, revenueChart], "sunk", "column", "l")
+engagementHeader = CardHeader("Audience & Revenue", "Subscriber trends and monetization mix")
+subsChart = BarChart(subsLabels, [newSubsSeries, cancelSeries], "grouped", "Month", "Users")
+subsLabels = ["Jun", "Jul", "Aug", "Sep", "Oct"]
+newSubsSeries = Series("New Subscribers", [48000, 52000, 61000, 55000, 67000])
+cancelSeries = Series("Cancellations", [21000, 24000, 26000, 23000, 28000])
+deviceChart = SingleStackedBarChart(deviceLabels, deviceValues)
+deviceLabels = ["Smart TV", "Mobile", "Web", "Console", "Tablet"]
+deviceValues = [46, 28, 14, 8, 4]
+revenueChart = PieChart(planLabels, planRevenue, "donut")
+planLabels = ["Premium", "Standard", "Basic", "Basic w/ Ads"]
+planRevenue = [4200000, 3100000, 1800000, 1400000]
+
+deliverySection = Card([deliveryHeader, deliveryTable], "sunk", "column", "m")
+deliveryHeader = CardHeader("Delivery Health by Region", "CDN latency and uptime")
+deliveryTable = Table([regionCol, latencyCol, uptimeCol, statusCol])
+regionCol = Col("Region", ["North America", "Europe", "APAC", "LATAM", "MEA"], "string")
+latencyCol = Col("Latency (ms)", [38, 45, 62, 71, 89], "number")
+uptimeCol = Col("Uptime (%)", [99.98, 99.95, 99.87, 99.82, 99.75], "number")
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Degraded", "Watch"], "string")
+
+releasesSection = Card([releasesHeader, releasesList], "sunk", "column", "m")
+releasesHeader = CardHeader("Releases Coming This Month", "New titles launching soon")
+releasesList = ListBlock([release1, release2, release3, release4], "number")
+release1 = ListItem("Ember & Ash", "Original series - launches Oct 12")
+release2 = ListItem("The Long Drive", "Feature film - launches Oct 18")
+release3 = ListItem("Northbound", "Documentary series - launches Oct 24")
+release4 = ListItem("Second Chances", "Original series - launches Oct 30")
+
+licensesSection = Card([licensesHeader, licensesTable], "sunk", "column", "m")
+licensesHeader = CardHeader("Licenses Expiring Soon", "Titles at risk of removal")
+licensesTable = Table([licenseTitleCol, expiryCol, daysLeftCol])
+licenseTitleCol = Col("Title", ["Midnight Runners", "Café Bleu", "Iron Coast", "Paper Moons"], "string")
+expiryCol = Col("Expires", ["2024-11-02", "2024-11-08", "2024-11-15", "2024-11-20"], "string")
+daysLeftCol = Col("Days Left", [12, 18, 25, 30], "number")
+
+revenueSection = Card([revenueHeader, revenueRecap], "sunk", "column", "m")
+revenueHeader = CardHeader("Revenue Recap", "Plan mix reference")
+revenueRecap = TextContent("Premium plan continues to lead revenue contribution at roughly 42%, followed by Standard at 31%, with Basic and Basic w/ Ads plans making up the remainder.", "default")
+
+adminSection = Card([adminHeader, regionFocusForm, featureFlagsGroup, promoteForm], "sunk", "column", "l")
+adminHeader = CardHeader("Controls", "Region focus, feature flags, and home screen promotion")
+regionFocusForm = Form("region-focus", regionFocusButtons, [regionField])
+regionField = FormControl("Select region", regionSelect)
+regionSelect = Select("region", [regNA, regEU, regAPAC, regLATAM, regMEA], "Choose a region")
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("apac", "APAC")
+regLATAM = SelectItem("latam", "LATAM")
+regMEA = SelectItem("mea", "MEA")
+regionFocusButtons = Buttons([viewRegionBtn])
+viewRegionBtn = Button("View region", null, "primary")
+
+featureFlagsGroup = SwitchGroup("feature-flags", [flagRecs, flagAutoplay, flagDownloads, flagAdsLite, flagKidsMode])
+flagRecs = SwitchItem("New Recommendation Engine", "ML-based ranking rollout", "flag_recs", true)
+flagAutoplay = SwitchItem("Autoplay Next Episode", "Auto-advance to next episode", "flag_autoplay", true)
+flagDownloads = SwitchItem("Offline Downloads v2", "Improved download manager", "flag_downloads", false)
+flagAdsLite = SwitchItem("Ads-Lite Experience", "Reduced ad load for Basic w/ Ads", "flag_adslite", true)
+flagKidsMode = SwitchItem("Redesigned Kids Mode", "New kids UI experiment", "flag_kidsmode", false)
+
+promoteForm = Form("promote-title", promoteButtons, [promoteField])
+promoteField = FormControl("Title to promote", promoteSelect)
+promoteSelect = Select("promote_title", [promoA, promoB, promoC], "Choose a title")
+promoA = SelectItem("ember_ash", "Ember & Ash")
+promoB = SelectItem("northbound", "Northbound")
+promoC = SelectItem("second_chances", "Second Chances")
+promoteButtons = Buttons([promoteBtn])
+promoteBtn = Button("Promote to home screen", null, "primary")

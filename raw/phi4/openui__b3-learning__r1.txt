@@ -1,0 +1,49 @@
+```openui
+root = Card([header, activeLearners, completionRate, avgQuizScore, rankedCourses, atRiskLearners, engagement, filterCohort, messageCohort])
+header = CardHeader("Training Platform Analytics", "Weekly Overview")
+
+activeLearners = Card([activeTitle, activeValue])
+activeTitle = Heading("Active Learners This Week", "h3")
+activeValue = Heading("356", "h4")
+
+completionRate = Card([completionTitle, completionBar])
+completionTitle = Heading("Course Completion Rate", "h3")
+completionBar = Progress(87, "87%")
+
+avgQuizScore = Card([quizScoreTitle, quizScoreValue])
+quizScoreTitle = Heading("Average Quiz Score", "h3")
+quizScoreValue = Heading("78%", "h4")
+
+rankedCourses = Card([rankedTitle, coursesTable])
+rankedTitle = Heading("Courses Ranked by Enrollment", "h3")
+coursesTable = Table([courseName, courseEnrollment])
+courseName = Col("Course", ["Intro to Python", "Advanced Java", "Web Design"])
+courseEnrollment = Col("Enrollment", ["254", "189", "312"])
+
+atRiskLearners = Card([riskTitle, riskList])
+riskTitle = Heading("Learners at Risk of Dropping Out", "h3")
+riskList = ListBlock([learner1, learner2, learner3])
+learner1 = ListItem("John Doe", "Course: Intro to Python", [])
+learner2 = ListItem("Jane Smith", "Course: Advanced Java", [])
+learner3 = ListItem("Alice Johnson", "Course: Web Design", [])
+
+engagement = Card([engagementTitle, engagementChart])
+engagementTitle = Heading("Engagement Across the Past Eight Weeks", "h3")
+engagementChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "linear", "Week", "Engagement Score")
+engagementSeries = Series("Engagement", [70, 75, 80, 85, 78, 82, 90, 88])
+
+filterCohort = Form("filter-cohort", filterButtons, [cohortSelect])
+cohortSelect = FormControl("Narrow to One Cohort", cohortDropdown)
+cohortDropdown = Select("cohort", [cohort1, cohort2, cohort3], "Choose a cohort")
+cohort1 = SelectItem("January 2023", "January 2023")
+cohort2 = SelectItem("February 2023", "February 2023")
+cohort3 = SelectItem("March 2023", "March 2023")
+filterButtons = Buttons([filterBtn])
+filterBtn = Button("Apply Filter", null, "primary")
+
+messageCohort = DialogBlock("Message Cohort", "Send a Message to a Cohort", null, [messageInput, messageBtns])
+messageInput = TextArea("message", "Enter your message here", 3)
+messageBtns = Buttons([sendMessageBtn, cancelMessageBtn])
+sendMessageBtn = Button("Send Message", null, "primary")
+cancelMessageBtn = Button("Cancel", null, "tertiary")
+```

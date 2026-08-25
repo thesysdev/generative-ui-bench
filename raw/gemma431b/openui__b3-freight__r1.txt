@@ -1,0 +1,38 @@
+root = Card([header, topKpis, alertSection, mainGrid, footer], "card", "column", "l")
+
+header = CardHeader("Logistics Coordination Board", "Real-time shipment monitoring and fleet performance")
+
+topKpis = Card([onTimeKpi, costKpi, searchBox], "sunk", "row", "m", "center", "between")
+onTimeKpi = Card([onTimeLabel, onTimeValue], "clear", "column", "none")
+onTimeLabel = TextContent("On-Time Percentage", "small")
+onTimeValue = TextContent("92.4%", "large-heavy")
+costKpi = Card([costLabel, costValue], "clear", "column", "none")
+costLabel = TextContent("Avg Cost / Shipment", "small")
+costValue = TextContent("$412.50", "large-heavy")
+searchBox = Form("route-search", searchButtons, [routeField])
+routeField = FormControl("Search Route", routeInput)
+routeInput = Input("route", "e.g. CHI -> NYC")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary", "normal", "small")
+
+alertSection = Callout("warning", "Delayed Shipments", "4 shipments are currently behind schedule and require immediate attention.")
+
+mainGrid = Card([shipmentsTable, volumeCharts], "clear", "row", "l")
+shipmentsTable = Card([tableHeader, shipmentData], "card", "column", "none")
+tableHeader = Heading("Shipments in Transit", "h3")
+shipmentData = Table([colOrigin, colDest, colEta, colStatus])
+colOrigin = Col("Origin", ["Chicago, IL", "Los Angeles, CA", "Houston, TX", "Seattle, WA", "Miami, FL"])
+colDest = Col("Destination", ["New York, NY", "Phoenix, AZ", "Atlanta, GA", "Denver, CO", "Charlotte, NC"])
+colEta = Col("ETA", ["Oct 24 14:00", "Oct 25 09:00", "Oct 24 18:00", "Oct 26 11:00", "Oct 25 15:00"])
+colStatus = Col("Status", ["In Transit", "Delayed", "In Transit", "Delayed", "In Transit"])
+
+volumeCharts = Card([chartHeader, carrierSplit, weeklyTrend], "card", "column", "m")
+chartHeader = Heading("Volume Analysis", "h3")
+carrierSplit = PieChart(["FedEx", "UPS", "DHL", "Regional"], [450, 320, 180, 110], "donut")
+weeklyTrend = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [trendSeries], "natural", "Week", "Shipments")
+trendSeries = Series("Weekly Volume", [1200, 1150, 1300, 1280, 1400, 1350, 1500, 1420])
+
+footer = Card([refreshText, actionButtons], "clear", "row", "m", "center", "between")
+refreshText = TextContent("Last refreshed: Today, 14:32 UTC", "small")
+actionButtons = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment", null, "secondary", "normal", "small")

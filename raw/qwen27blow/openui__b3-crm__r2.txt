@@ -1,0 +1,57 @@
+
+
+root = Card([header, metricsCard, renewalCallout, activitySection, contactsSection, followUpsSection, noteSection, callSection])
+
+header = CardHeader("Acme Corp", "Owned by Sarah Chen")
+
+metricsCard = Card([dealValue, dealStage], "sunk", "row", "l", "center")
+dealValue = Card([dealValueLabel, dealValueText], "clear")
+dealValueLabel = TextContent("Total Deal Value", "small")
+dealValueText = TextContent("$247,500", "large-heavy")
+dealStage = Card([dealStageLabel, dealStageTag], "clear")
+dealStageLabel = TextContent("Current Stage", "small")
+dealStageTag = Tag("Negotiation", null, null, "info")
+
+renewalCallout = Callout("warning", "Renewal approaching", "Contract renews in 12 days — July 15, 2025. Schedule a renewal conversation soon.")
+
+activitySection = Card([activityHeading, activityList], "sunk")
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([act1, act2, act3, act4])
+act1 = ListItem("Sent proposal v3", "2 days ago — Email sent to James at Acme")
+act2 = ListItem("Discovery call", "5 days ago — Discussed Q3 budget and timeline")
+act3 = ListItem("Demo completed", "12 days ago — Full platform demo for 8 stakeholders")
+act4 = ListItem("Lead created", "30 days ago — Inbound from webinar registration")
+
+contactsSection = Card([contactsHeading, contactsTable], "sunk")
+contactsHeading = Heading("Contacts", "h3")
+contactsTable = Table([colName, colRole, colEmail])
+colName = Col("Name", ["James Whitfield", "Maria Lopez", "David Park"])
+colRole = Col("Role", ["VP Engineering", "Head of Procurement", "IT Director"])
+colEmail = Col("Email", ["james@acme.com", "maria@acme.com", "david@acme.com"])
+
+followUpsSection = Card([followUpsHeading, followUpsTable], "sunk")
+followUpsHeading = Heading("Open Follow-ups", "h3")
+followUpsTable = Table([fuTask, fuOwner, fuDue])
+fuTask = Col("Task", ["Send revised pricing", "Schedule technical deep-dive", "Follow up on security questionnaire"])
+fuOwner = Col("Owner", ["Sarah Chen", "Sarah Chen", "Tom Rivera"])
+fuDue = Col("Due", ["Jul 10, 2025", "Jul 12, 2025", "Jul 18, 2025"])
+
+noteSection = Card([noteHeading, noteForm], "sunk")
+noteHeading = Heading("Jot a Note", "h3")
+noteForm = Form("jot-note", noteButtons, [noteField])
+noteField = FormControl("Note", noteInput, "Quick note for this account")
+noteInput = TextArea("note", "Type your note here...", 3)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+callSection = Card([callHeading, callForm], "sunk")
+callHeading = Heading("Log a Call", "h3")
+callForm = Form("log-call", callButtons, [callDateField, callDurationField, callSummaryField])
+callDateField = FormControl("Date & Time", callDateInput)
+callDateInput = DatePicker("call_date", "single")
+callDurationField = FormControl("Duration (min)", callDurationInput)
+callDurationInput = Input("duration", "e.g. 30", "number")
+callSummaryField = FormControl("Summary", callSummaryInput)
+callSummaryInput = TextArea("summary", "Key points discussed...", 2)
+callButtons = Buttons([logCallBtn])
+logCallBtn = Button("Log Call", null, "primary")

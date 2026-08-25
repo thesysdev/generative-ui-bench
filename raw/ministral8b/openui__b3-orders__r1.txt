@@ -1,0 +1,64 @@
+```openui-lang
+root = Card([header, statsSection, ordersSection, filters, recentOrders, chartsSection, footer])
+
+header = CardHeader("E-commerce Operations", "Manage orders, refunds, and customer inquiries")
+
+statsSection = Card([statsTitle, statsGrid], "sunk")
+statsTitle = Heading("Today's Performance", "h3")
+statsGrid = Table([statLabels, orderCount, revenue, avgOrderValue])
+statLabels = Col("Metric", ["Orders Placed", "Revenue", "Avg. Order Value"])
+orderCount = Col("Value", ["142", "$21,870", "$154.00"])
+revenue = Col("Value", ["$21,870"], "number")
+avgOrderValue = Col("Value", ["$154.00"], "number")
+
+ordersSection = Card([ordersTitle, orderFilters], "sunk")
+ordersTitle = Heading("Recent Orders", "h3")
+orderFilters = Buttons([searchBtn, statusFilterBtn], "row")
+searchBtn = Button("Search by customer", "search_customer", "secondary", "normal", "medium")
+statusFilterBtn = Button("Filter by status", null, "secondary", "normal", "medium")
+
+recentOrders = ListBlock(orderItems, "image")
+orderItems = [
+    ListItem("ORD-4567", "john.doe@example.com", ["https://picsum.photos/seed/ORD4567/100/80"], "Fulfilled"),
+    ListItem("ORD-4566", "sarah.smith@example.com", ["https://picsum.photos/seed/ORD4566/100/80"], "Processing"),
+    ListItem("ORD-4565", "alice.johnson@example.com", ["https://picsum.photos/seed/ORD4565/100/80"], "Shipped"),
+    ListItem("ORD-4564", "bob.wilson@example.com", ["https://picsum.photos/seed/ORD4564/100/80"], "Pending"),
+    ListItem("ORD-4563", "emily.davis@example.com", ["https://picsum.photos/seed/ORD4563/100/80"], "Refunded")
+]
+
+chartsSection = Card([refundRate, volumeChart], "sunk")
+refundRate = Card([refundTitle, refundRateValue], "sunk")
+refundTitle = Heading("Refund Rate", "h4")
+refundRateValue = Tag("7.2%", null, null, "danger")
+
+volumeChart = Card([chartTitle, orderVolume], "sunk")
+chartTitle = Heading("Order Volume (Past 4 Weeks)", "h4")
+orderVolume = LineChart(["W1", "W2", "W3", "W4"], [volumeSeries], "natural", "Week", "Orders")
+volumeSeries = Series("Volume", [128, 187, 214, 192])
+
+footer = Card([fulfillBtn], "sunk")
+fulfillBtn = Button("Mark order fulfilled", "fulfill_order", "primary", "normal", "medium")
+
+search_customer = DialogBlock("Search", "Customer Search", "Search by customer name", searchDialogContent, "primary")
+searchDialogContent = Form("customer-search", searchFormButtons, [searchField])
+searchField = FormControl("Customer email", searchInput)
+searchInput = Input("customer_email", "Enter customer email", "email")
+searchFormButtons = Buttons([searchSubmitBtn])
+searchSubmitBtn = Button("Search", null, "primary")
+
+filter_status = DialogBlock("Filter", "Filter by Status", "Select order status to filter", statusDialogContent, "secondary")
+statusDialogContent = Form("status-filter", statusFormButtons, [statusSelect])
+statusSelect = Select("status", [statusOptions], "Select a status")
+statusOptions = [
+    SelectItem("all", "All"),
+    SelectItem("pending", "Pending"),
+    SelectItem("processing", "Processing"),
+    SelectItem("shipped", "Shipped"),
+    SelectItem("fulfilled", "Fulfilled"),
+    SelectItem("refunded", "Refunded")
+]
+statusFormButtons = Buttons([statusSubmitBtn])
+statusSubmitBtn = Button("Apply filter", null, "primary")
+
+fulfill_order = AlertDialogBlock("Confirm", "Mark Order Fulfilled", "Are you sure you want to mark this order as fulfilled?", "Mark Fulfilled", "Cancel", "primary")
+```

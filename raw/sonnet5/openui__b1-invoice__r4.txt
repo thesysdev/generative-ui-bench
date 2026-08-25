@@ -1,0 +1,25 @@
+root = Card([header, statusRow, amountSection, dueSection, lineItemsSection, payAction])
+
+header = CardHeader("Invoice #INV-2049", "Billed to Acme Studios LLC")
+
+statusRow = TagBlock(["Unpaid"])
+
+amountSection = Card([amountLabel, amountValue], "sunk")
+amountLabel = TextContent("Amount Due", "small")
+amountValue = TextContent("$4,250.00 USD", "large-heavy")
+
+dueSection = Card([dueLabel, dueValue], "sunk", "row", "m", "center", "between")
+dueLabel = TextContent("Due Date", "small")
+dueValue = TextContent("June 30, 2025", "default")
+
+lineItemsSection = Card([lineItemsHeading, lineItemsTable], "clear")
+lineItemsHeading = Heading("Invoice Details", "h4")
+lineItemsTable = Table([itemCol, qtyCol, rateCol, totalCol])
+itemCol = Col("Description", ["Website redesign", "SEO consultation", "Monthly hosting"])
+qtyCol = Col("Qty", [1, 4, 1], "number")
+rateCol = Col("Rate", ["$3,000.00", "$200.00", "$450.00"])
+totalCol = Col("Total", ["$3,000.00", "$800.00", "$450.00"])
+
+payAction = Buttons([payBtn, downloadBtn])
+payBtn = Button("Pay Now", null, "primary", "normal", "large")
+downloadBtn = Button("Download PDF", null, "secondary")

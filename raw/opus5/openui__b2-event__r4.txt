@@ -1,0 +1,55 @@
+root = Card([header, meta, countdown, countdownBar, agendaHeading, agenda, speakersHeading, speakers, ticketsHeading, tickets, registerHeading, registerForm, followUps])
+
+header = CardHeader("FrontierConf 2025", "November 14–15, 2025 · Moscone Center West, San Francisco")
+
+meta = TagBlock(["2 days", "38 sessions", "1,200 attendees", "In person + livestream"])
+
+countdown = TextCallout("info", "42 days to go", "Early-bird pricing ends in 12 days. Doors open at 8:30 AM on November 14.")
+
+countdownBar = Progress(72, "Countdown to opening keynote — 42 of 150 days remaining")
+
+agendaHeading = Heading("Agenda", "h3")
+
+agenda = Table([agendaTime, agendaSession, agendaSpeaker, agendaRoom])
+agendaTime = Col("Time", ["08:30", "09:00", "10:15", "11:30", "13:00", "14:15", "15:45", "17:00"])
+agendaSession = Col("Session", ["Registration & coffee", "Opening keynote: The Frontier Ahead", "Scaling systems past 10M users", "Design systems that survive growth", "Lunch & expo floor", "Workshop: Shipping with agents", "Panel: Hiring in a lean market", "Closing remarks & reception"])
+agendaSpeaker = Col("Speaker", ["—", "Amara Okafor", "Diego Márquez", "Lena Fischer", "—", "Priya Raman", "All speakers", "Amara Okafor"])
+agendaRoom = Col("Room", ["Lobby", "Main Hall", "Main Hall", "Studio B", "Expo Hall", "Studio A", "Main Hall", "Terrace"])
+
+speakersHeading = Heading("Speakers", "h3")
+
+speakers = ListBlock([spk1, spk2, spk3, spk4, spk5])
+spk1 = ListItem("Amara Okafor", "CTO at Northwind Labs — building resilient infrastructure for a billion daily requests.")
+spk2 = ListItem("Diego Márquez", "Principal engineer at Kestrel — spent a decade making databases behave under load.")
+spk3 = ListItem("Lena Fischer", "Head of design at Foldpaper — turns sprawling product surfaces into coherent systems.")
+spk4 = ListItem("Priya Raman", "Founder of Loopwork — ships agent-assisted developer tooling used by 40k teams.")
+spk5 = ListItem("Tomas Lindqvist", "VP of people at Brightsound — hires and keeps engineers without burning budget.")
+
+ticketsHeading = Heading("Tickets", "h3")
+
+tickets = Table([tierName, tierPrice, tierIncludes])
+tierName = Col("Tier", ["Community", "Standard", "Pro", "Team (5 seats)"])
+tierPrice = Col("Price", ["$99", "$349", "$599", "$2,200"], "string")
+tierIncludes = Col("Includes", ["Livestream + recordings", "All talks, expo floor, lunch", "Standard + workshops + speaker dinner", "5 Pro passes + reserved seating"])
+
+registerHeading = Heading("Register", "h3")
+
+registerForm = Form("conference-registration", formButtons, [nameField, emailField, tierField])
+nameField = FormControl("Full name", nameInput)
+nameInput = Input("name", "Jane Smith")
+emailField = FormControl("Email", emailInput, "Your ticket and receipt are sent here.")
+emailInput = Input("email", "jane@company.com", "email")
+tierField = FormControl("Ticket tier", tierSelect)
+tierSelect = Select("tier", [optCommunity, optStandard, optPro, optTeam], "Choose a tier")
+optCommunity = SelectItem("community", "Community — $99")
+optStandard = SelectItem("standard", "Standard — $349")
+optPro = SelectItem("pro", "Pro — $599")
+optTeam = SelectItem("team", "Team, 5 seats — $2,200")
+formButtons = Buttons([submitBtn, inquireBtn])
+submitBtn = Button("Complete registration", null, "primary")
+inquireBtn = Button("Ask a question first", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me the full day-two agenda")
+fu2 = FollowUpItem("What does the Pro workshop cover?")
+fu3 = FollowUpItem("Are there group discounts beyond 5 seats?")

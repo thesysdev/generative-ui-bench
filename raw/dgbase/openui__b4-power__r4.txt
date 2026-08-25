@@ -1,0 +1,40 @@
+thought
+root = Card([header, statusBar, mainMetrics, generationChart, plantStatus, outageTable, forecastSection, actions, footer])
+header = CardHeader("GridOps Command Center", "Real-time Network Telemetry")
+statusBar = Card([statusBadge, priceBadge, emissionsBadge], "card", "row", "m")
+statusBadge = Badge("System Stable", null, null, "success")
+priceBadge = Badge("Price: $42.50/MWh", null, "default")
+emissionsBadge = Badge("Emissions: 12,400t CO2", null, "info")
+
+mainMetrics = Card([loadMetric, capacityMeter], "card", "row", "l")
+loadMetric = Card([Heading("Current Load", "h3"), TextContent("14,250 MW", "large-heavy")], "sunk")
+capacityMeter = Card([Heading("Network Capacity", "h3"), Progress(82, "82% Utilization"), "sunk")
+
+generationChart = Card([genChart, plantStatus], "card", "row", "l")
+genChart = Card([Heading("Generation Split", "h3"), PieChart(["Solar", "Wind", "Nuclear", "Gas", "Hydro"], [1200, 3500, 6000, 2000, 1550], "donut")])
+plantStatus = Card([Heading("Plants", "h3"), ListBlock([p1, p2, p3, p4])])
+p1 = ListItem("North Nuclear G1", "6,000 MW - Operational")
+p2 = ListItem("West Wind Farm", "3,500 MW - Low Efficiency")
+p3 = ListItem("South Gas Turbine", "2,000 MW - Maintenance")
+p4 = ListItem("East Hydro Dam", "1,550 MW - Operational")
+
+outageTable = Card([Heading("Active Outages", "h3"), Table([colRegion, colImpact, colStatus])])
+colRegion = Col("Region", ["Sector A", "Industrial Zone", "Coastal Hub"])
+colImpact = Col("Affected Load", ["45 MW", "120 MW", "15 MW"])
+colStatus = Col("Status", ["Investigating", "Repairing", "Resolved"])
+
+forecastSection = Card([Heading("24h Demand Forecast", "h3"), LineChart(forecastLabels, [forecastSeries], "natural", "Hour", "MW")])
+forecastLabels = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"]
+forecastSeries = Series("Demand", [11000, 9800, 13500, 14500, 15200, 13800])
+
+actions = Card([regionFilter, curtailmentBtn, maintenanceList], "card", "row", "m")
+regionFilter = FormControl("Focus Region", Select("region", [optAll, optA, optB], "All Regions"))
+optAll = SelectItem("all", "All Regions")
+optA = SelectItem("sector-a", "Sector A")
+optB = SelectItem("industrial", "Industrial Zone")
+curtailmentBtn = Button("Order Curtailment", null, "destructive", "normal", "large")
+maintenanceList = Card([Heading("Planned Maintenance", "h4"), ListBlock([m1, m2])])
+m1 = ListItem("Substation 44", "Oct 12-14")
+m2 = ListItem("Transmission Line X", "Oct 20")
+
+footer = Card([Alert("Grid Alert", "Frequency drop detected in Sector B. Spinning reserves activated.", "warning")])

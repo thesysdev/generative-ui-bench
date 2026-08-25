@@ -1,0 +1,26 @@
+root = Card([header, summaryCard, performanceSection, quickActions, followUps])
+
+header = CardHeader("Shop Morning Check-in", "Thursday, Oct 24 • 10:45 AM")
+
+summaryCard = Card([todayRev, comparison], "card", "row", "m", "center", "between")
+todayRev = TextContent("$1,240.50", "large-heavy")
+comparison = Badge("+12% vs Yesterday", "success")
+
+performanceSection = Card([perfHeading, revenueChart, revenueTable], "sunk", "column", "m")
+perfHeading = Heading("Revenue Velocity", "h3")
+revenueChart = AreaChart(["6AM", "7AM", "8AM", "9AM", "10AM", "11AM"], [todaySeries, yesterdaySeries], "natural", "Time", "USD")
+todaySeries = Series("Today", [120, 250, 410, 680, 950, 1240])
+yesterdaySeries = Series("Yesterday", [100, 200, 380, 600, 820, 1100])
+revenueTable = Table([timeCol, revenueCol, diffCol])
+timeCol = Col("Hour", ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM"])
+revenueCol = Col("Revenue", ["$120", "$250", "$410", "$680", "$950"], "number")
+diffCol = Col("vs Yesterday", ["+$20", "+$50", "+$30", "+$80", "+$130"], "string")
+
+quickActions = Buttons([inventoryBtn, staffBtn, promoBtn])
+inventoryBtn = Button("Check Inventory", null, "secondary")
+staffBtn = Button("Staff Schedule", null, "secondary")
+promoBtn = Button("Run Flash Sale", null, "primary")
+
+followUps = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Show top selling products today")
+f2 = FollowUpItem("Compare this morning to last week")

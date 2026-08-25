@@ -1,0 +1,99 @@
+```openui-lang
+root = Card([
+    header,
+    todayOrders,
+    todayRevenue,
+    avgOrderValue,
+    recentOrdersTable,
+    filters,
+    refundRate,
+    orderVolumeChart,
+    fulfillAction
+])
+
+header = CardHeader("E‑Commerce Operations Desk", "Operations Dashboard")
+
+todayOrders = TextContent(
+    "Orders placed today: 123",
+    "large"
+)
+
+todayRevenue = TextContent(
+    "Revenue today: $45,678",
+    "large"
+)
+
+avgOrderValue = TextContent(
+    "Average Order Value: $369",
+    "large"
+)
+
+recentOrdersTable = Table([
+    idCol,
+    customerCol,
+    totalCol,
+    statusCol
+])
+
+idCol = Col("Order ID", [101, 102, 103, 104, 105])
+customerCol = Col("Customer", ["Acme Corp", "Beta Ltd", "Gamma Inc", "Delta LLC", "Epsilon Co"])
+totalCol = Col("Total", ["$1,200", "$890", "$2,300", "$450", "$1,050"])
+statusCol = Col("Status", ["Shipped", "Pending", "Shipped", "Pending", "Shipped"])
+
+filters = Card([
+    statusFilter,
+    customerSearch,
+    "none"
+])
+
+statusFilter = Select(
+    "order_status",
+    [statusPending, statusShipped, statusCancelled],
+    "Select status",
+    size="small"
+)
+statusPending = SelectItem("Pending", "Pending")
+statusShipped = SelectItem("Shipped", "Shipped")
+statusCancelled = SelectItem("Cancelled", "Cancelled")
+
+customerSearch = Input(
+    "customer_name",
+    placeholder="Search customer name",
+    type="text"
+)
+
+refundRate = TextContent(
+    "Refund Rate this month: 4.2%",
+    "large"
+)
+
+orderVolumeChart = BarChart(
+    labels=["Week 1", "Week 2", "Week 3", "Week 4"],
+    series=[orderSeries],
+    variant="grouped",
+    xLabel="Week",
+    yLabel="Orders"
+)
+orderSeries = Series("Orders", [120, 135, 150, 142])
+
+fulfillAction = Button("Mark as Fulfilled", action=["fulfill"], variant="primary")
+
+# Define Card to hold filters and button together
+filtersCard = Card([
+    statusFilter,
+    customerSearch
+], "sunk")
+
+# Re‑use filtersCard in root
+root = Card([
+    header,
+    todayOrders,
+    todayRevenue,
+    avgOrderValue,
+    recentOrdersTable,
+    filtersCard,
+    refundRate,
+    orderVolumeChart,
+    fulfillAction
+])
+```

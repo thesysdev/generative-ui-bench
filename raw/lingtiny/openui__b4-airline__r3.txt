@@ -1,0 +1,90 @@
+root = Card([hubHeader, onTime, flightsTable, delayed, gateChanges, crews, weather, load, connections, rebook, differentHub, cancellations, turnaround], "sunk")
+
+hubHeader = CardHeader("Hub Operations Desk", "Central Operations — Real-time Status")
+
+onTime = Card([onTimeHeading, onTimeKpis, onTimeChart], "sunk")
+onTimeHeading = Heading("On-Time Performance — Today", "h3")
+onTimeKpis = Table([kpiName, kpiValue])
+kpiName = Col("Metric", ["On-Time Rate", "Delayed Flights", "On-Time Flights"])
+kpiValue = Col("Value", ["87.3%", "12", "1,078"])
+onTimeChart = LineChart(["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"], [onTimeSeries], "linear", "Time", "On-Time %")
+onTimeSeries = Series("On-Time", [92.1, 88.5, 91.3, 89.7, 86.2, 85.9])
+
+flightsTable = Card([flightsHeading, flightsTableBody], "sunk")
+flightsHeading = Heading("Flights — Gate, Route & Status", "h3")
+flightsTableBody = Table([flightColumns, flightData])
+flightColumns = Col("Flight #", ["Flight", "Route", "Gate", "Status"])
+flightData = Col("Flights", [
+  ["AA 100", "JFK → LAX", "B12", "On Time"],
+  ["DL 200", "LAX → SFO", "C03", "Delayed"],
+  ["UA 300", "SFO → ORD", "D07", "On Time"],
+  ["AA 400", "ORD → JFK", "E11", "Boarding"],
+  ["DL 150", "JFK → MIA", "F05", "Delayed"],
+  ["UA 800", "MIA → ATL", "G02", "On Time"],
+  ["AA 120", "ATL → JFK", "H09", "On Time"],
+  ["DL 300", "MCO → DFW", "I04", "Delayed"],
+  ["UA 600", "DFW → SEA", "J08", "On Time"],
+  ["AA 500", "SEA → SFO", "K01", "Boarding"],
+])
+
+delayed = Card([delayedHeading, delayedList], "sunk")
+delayedHeading = Heading("Delayed Flights", "h3")
+delayedList = ListBlock([delayedItem], "image")
+delayedItem = ListItem("DL 200 — LAX → SFO", "C03 — 45 min late", "icon: clock")
+
+gateChanges = Card([gateChangesHeading, gateChangesList], "sunk")
+gateChangesHeading = Heading("Recent Gate Changes", "h3")
+gateChangesList = ListBlock([gateChangeItem], "image")
+gateChangeItem = ListItem("B12 — AA 100", "Moved to Gate D04", "icon: arrow")
+
+crews = Card([crewsHeading, crewsList], "sunk")
+crewsHeading = Heading("Crews Available for Reassignment", "h3")
+crewsList = ListBlock([crewItem], "image")
+crewItem = ListItem("Gate A — Ground Crew", "Available", "icon: user")
+
+weather = Card([weatherHeading, weatherAdvisories], "sunk")
+weatherHeading = Heading("Weather Advisories", "h3")
+weatherAdvisories = ListBlock([weatherItem], "image")
+weatherItem = ListItem("Thunderstorm warning", "Severe weather expected at 18:00", "icon: cloud")
+
+load = Card([loadHeading, loadKpis, loadChart], "sunk")
+loadHeading = Heading("Average Passenger Load Today", "h3")
+loadKpis = Table([loadKpiName, loadKpiValue])
+loadKpiName = Col("Metric", ["Passengers", "Avg. Load %", "Capacity"])
+loadKpiValue = Col("Value", ["4,200", "82%", "5,120"])
+loadChart = SingleStackedBarChart(["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"], [loadSeries])
+loadSeries = Series("Load", [3800, 4200, 4100, 3900, 4300, 4100])
+
+connections = Card([connectionsHeading, connectionsList], "sunk")
+connectionsHeading = Heading("Connections at Risk of Being Missed", "h3")
+connectionsList = ListBlock([connItem], "image")
+connItem = ListItem("UA 800 — MIA → ATL", "15 min delay risk", "icon: warning")
+
+rebook = Card([rebookHeading, rebookContent], "sunk")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookContent = Card([rebookIntro, rebookButtons], "sunk")
+rebookIntro = TextContent("Select a delayed flight and rebook affected passengers.")
+rebookButtons = Buttons([rebookBtn, rebookCancelBtn])
+rebookBtn = Button("Rebook Passengers", null, "primary")
+rebookCancelBtn = Button("Cancel", null, "tertiary")
+
+differentHub = Card([differentHubHeading, differentHubContent], "sunk")
+differentHubHeading = Heading("Look at a Different Hub", "h3")
+differentHubContent = Card([differentHubHeader, differentHubButtons], "sunk")
+differentHubHeader = Heading("Select Hub", "h4")
+differentHubButtons = Buttons([hubSelectBtn, hubBackBtn])
+hubSelectBtn = Button("Chicago O'Hare", null, "primary")
+hubBackBtn = Button("Back to Hub", null, "tertiary")
+
+cancellations = Card([cancellationsHeading, cancellationsList], "sunk")
+cancellationsHeading = Heading("Cancellations Today", "h3")
+cancellationsList = ListBlock([cancelItem], "image")
+cancelItem = ListItem("AA 100 — JFK → LAX", "Cancelled due to weather", "icon: cancel")
+
+turnaround = Card([turnaroundHeading, turnaroundKpis, turnaroundChart], "sunk")
+turnaroundHeading = Heading("Average Turnaround Time", "h3")
+turnaroundKpis = Table([turnaroundKpiName, turnaroundKpiValue])
+turnaroundKpiName = Col("Metric", ["Avg. Turnaround", "On-Time", "Wait Time"])
+turnaroundKpiValue = Col("Value", ["42 min", "78%", "15 min"])
+turnaroundChart = HorizontalBarChart(["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"], [turnaroundSeries], "grouped", "Time", "Min")
+turnaroundSeries = Series("Turnaround", [35, 42, 48, 40, 38, 45])

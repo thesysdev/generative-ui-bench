@@ -1,0 +1,358 @@
+Here is the complete operations desk interface incorporating all real-time order KPIs, multi-week volume analytics, filtering and search tools, and order fulfillment controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "summaryTable",
+          "refundAlert",
+          "chartHeader",
+          "volumeChart",
+          "filterForm",
+          "ordersTable",
+          "fulfillHeader",
+          "fulfillForm"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "E-Commerce Operations Desk",
+        "subtitle": "Real-time fulfillment metrics, order stream, and operational controls"
+      },
+      {
+        "id": "summaryTable",
+        "component": "Table",
+        "columns": [
+          "kpiName",
+          "kpiValue",
+          "kpiTarget"
+        ]
+      },
+      {
+        "id": "kpiName",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Orders Placed Today",
+          "Revenue Today",
+          "Average Order Value (AOV)"
+        ]
+      },
+      {
+        "id": "kpiValue",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "342 orders",
+          "$28,450.00",
+          "$83.18"
+        ]
+      },
+      {
+        "id": "kpiTarget",
+        "component": "Col",
+        "label": "Status / Benchmark",
+        "data": [
+          "+14% vs yesterday",
+          "+8.5% vs daily target",
+          "Target: >$75.00"
+        ]
+      },
+      {
+        "id": "refundAlert",
+        "component": "Alert",
+        "title": "Refund Rate (This Month): 1.62%",
+        "description": "Operating comfortably within standard operational threshold (< 2.50%). Total refunds: 48 out of 2,960 monthly orders.",
+        "variant": "info"
+      },
+      {
+        "id": "chartHeader",
+        "component": "CardHeader",
+        "title": "Order Volume Trend",
+        "subtitle": "Weekly order counts across the past 4 weeks"
+      },
+      {
+        "id": "volumeChart",
+        "component": "BarChart",
+        "labels": [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4 (Current)"
+        ],
+        "series": [
+          "volumeSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Operational Period",
+        "yLabel": "Orders Placed"
+      },
+      {
+        "id": "volumeSeries",
+        "component": "Series",
+        "category": "Volume",
+        "values": [
+          1840,
+          2120,
+          2390,
+          2650
+        ]
+      },
+      {
+        "id": "filterForm",
+        "component": "Form",
+        "name": "orderFilters",
+        "buttons": "filterActionBtns",
+        "fields": [
+          "customerSearchField",
+          "statusFilterField"
+        ]
+      },
+      {
+        "id": "customerSearchField",
+        "component": "FormControl",
+        "label": "Search by Customer Name",
+        "hint": "Filter live order records by customer",
+        "input": "customerSearchInput"
+      },
+      {
+        "id": "customerSearchInput",
+        "component": "Input",
+        "name": "customer_name",
+        "placeholder": "e.g., Sarah Jenkins, Marcus Vance...",
+        "type": "text"
+      },
+      {
+        "id": "statusFilterField",
+        "component": "FormControl",
+        "label": "Narrow by Status",
+        "hint": "Show only orders matching this state",
+        "input": "statusSelect"
+      },
+      {
+        "id": "statusSelect",
+        "component": "Select",
+        "name": "order_status",
+        "placeholder": "Select a status filter",
+        "items": [
+          "statusAll",
+          "statusPending",
+          "statusProcessing",
+          "statusFulfilled",
+          "statusCancelled"
+        ]
+      },
+      {
+        "id": "statusAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Statuses"
+      },
+      {
+        "id": "statusPending",
+        "component": "SelectItem",
+        "value": "pending",
+        "label": "Pending"
+      },
+      {
+        "id": "statusProcessing",
+        "component": "SelectItem",
+        "value": "processing",
+        "label": "Processing"
+      },
+      {
+        "id": "statusFulfilled",
+        "component": "SelectItem",
+        "value": "fulfilled",
+        "label": "Fulfilled"
+      },
+      {
+        "id": "statusCancelled",
+        "component": "SelectItem",
+        "value": "cancelled",
+        "label": "Cancelled"
+      },
+      {
+        "id": "filterActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "applyFilterBtn",
+          "resetFilterBtn"
+        ]
+      },
+      {
+        "id": "applyFilterBtn",
+        "component": "Button",
+        "label": "Apply Filter",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFilterBtn",
+        "component": "Button",
+        "label": "Reset",
+        "variant": "tertiary"
+      },
+      {
+        "id": "ordersTable",
+        "component": "Table",
+        "columns": [
+          "colId",
+          "colCustomer",
+          "colTotal",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colId",
+        "component": "Col",
+        "label": "Order ID",
+        "data": [
+          "ORD-9821",
+          "ORD-9820",
+          "ORD-9819",
+          "ORD-9818",
+          "ORD-9817"
+        ]
+      },
+      {
+        "id": "colCustomer",
+        "component": "Col",
+        "label": "Customer",
+        "data": [
+          "Eleanor Vance",
+          "Liam Chen",
+          "Sophia Martinez",
+          "Noah Patel",
+          "Emma Watson"
+        ]
+      },
+      {
+        "id": "colTotal",
+        "component": "Col",
+        "label": "Total",
+        "data": [
+          "$142.50",
+          "$68.20",
+          "$215.00",
+          "$54.90",
+          "$189.00"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Processing",
+          "Pending",
+          "Processing",
+          "Fulfilled",
+          "Pending"
+        ]
+      },
+      {
+        "id": "fulfillHeader",
+        "component": "CardHeader",
+        "title": "Quick Fulfillment Desk",
+        "subtitle": "Select an order and assign shipping tracking to mark it fulfilled"
+      },
+      {
+        "id": "fulfillForm",
+        "component": "Form",
+        "name": "fulfillOrderForm",
+        "buttons": "fulfillButtons",
+        "fields": [
+          "orderSelectField",
+          "trackingField"
+        ]
+      },
+      {
+        "id": "orderSelectField",
+        "component": "FormControl",
+        "label": "Select Order to Fulfill",
+        "input": "orderToFulfillSelect"
+      },
+      {
+        "id": "orderToFulfillSelect",
+        "component": "Select",
+        "name": "target_order_id",
+        "placeholder": "Choose open order",
+        "items": [
+          "ordItem1",
+          "ordItem2",
+          "ordItem3",
+          "ordItem4"
+        ]
+      },
+      {
+        "id": "ordItem1",
+        "component": "SelectItem",
+        "value": "ORD-9821",
+        "label": "ORD-9821 — Eleanor Vance ($142.50)"
+      },
+      {
+        "id": "ordItem2",
+        "component": "SelectItem",
+        "value": "ORD-9820",
+        "label": "ORD-9820 — Liam Chen ($68.20)"
+      },
+      {
+        "id": "ordItem3",
+        "component": "SelectItem",
+        "value": "ORD-9819",
+        "label": "ORD-9819 — Sophia Martinez ($215.00)"
+      },
+      {
+        "id": "ordItem4",
+        "component": "SelectItem",
+        "value": "ORD-9817",
+        "label": "ORD-9817 — Emma Watson ($189.00)"
+      },
+      {
+        "id": "trackingField",
+        "component": "FormControl",
+        "label": "Carrier & Tracking Number",
+        "hint": "Optional: leave blank for local carrier pickup scan",
+        "input": "trackingInput"
+      },
+      {
+        "id": "trackingInput",
+        "component": "Input",
+        "name": "tracking_number",
+        "placeholder": "e.g., 1Z9999999999999999 (UPS / FedEx / DHL)"
+      },
+      {
+        "id": "fulfillButtons",
+        "component": "Buttons",
+        "buttons": [
+          "markFulfilledBtn"
+        ]
+      },
+      {
+        "id": "markFulfilledBtn",
+        "component": "Button",
+        "label": "Mark Order Fulfilled",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

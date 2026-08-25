@@ -1,0 +1,76 @@
+```openui-lang
+root = Card([
+    draftsSection,
+    publishedThisWeekSection,
+    mostReadArticleSection,
+    readershipChart,
+    categoryFilter,
+    schedulePieceForm,
+    commentsAwaitingSection,
+    startNewDraftButton
+], "clear", "row", "m", "center", "between")
+
+draftsSection = Card([
+    CardHeader("Drafts", "Status"),
+    Table([
+        Col("Title", [draft1Title, draft2Title, draft3Title]),
+        Col("Status", [draft1Status, draft2Status, draft3Status])
+    ])
+], "sunk")
+
+draft1Title = "New York City Guide"
+draft2Title = "Sustainable Living Tips"
+draft3Title = "Tech Trends 2024"
+draft1Status = "In Review"
+draft2Status = "Pending"
+draft3Status = "Draft"
+
+publishedThisWeekSection = Card([
+    CardHeader("Published This Week", null),
+    ListBlock([
+        ListItem("AI Ethics in Healthcare", "Published yesterday", null, "View Article"),
+        ListItem("Quantum Computing Basics", "Published 2 days ago", null, "View Article"),
+        ListItem("Renewable Energy Innovations", "Published 3 days ago", null, "View Article")
+    ], "number")
+], "clear")
+
+mostReadArticleSection = Card([
+    CardHeader("Most‑Read This Month", null),
+    TextContent("The AI Revolution: How Artificial Intelligence is Transforming Industries", "large")
+], "sunk")
+
+readershipChart = LineChart([
+    "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10",
+    "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20",
+    "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"
+], [
+    Series("Readership", [120, 150, 130, 160, 170, 180, 200, 210, 190, 220,
+                          230, 240, 250, 260, 270, 280, 290, 300, 310, 320,
+                          330, 340, 350, 360, 370, 380, 390, 400, 410, 420])
+], "natural", "Day", "Readers")
+
+categoryFilter = Select("filter_category", [
+    SelectItem("Technology", "Technology"),
+    SelectItem("Health", "Health"),
+    SelectItem("Environment", "Environment"),
+    SelectItem("Business", "Business")
+], "Select category", "medium")
+
+schedulePieceForm = Form("schedule_piece", Buttons([scheduleBtn]), [
+    FormControl("Title", Input("title_for_schedule", placeholder="Article title")),
+    FormControl("Publish Date", DatePicker("publish_date", "single", value="2024-09-15"))
+])
+scheduleBtn = Button("Schedule Piece", null, "primary")
+
+commentsAwaitingSection = Card([
+    CardHeader("Comments Awaiting Reply", null),
+    ListBlock([
+        ListItem("User123: Great article!", "Reply"),
+        ListItem("Reader456: Have more details on X?", "Reply"),
+        ListItem("CuriousUser: What about Y?", "Reply")
+    ], "image")
+], "sunk")
+
+startNewDraftButton = Button("Start New Draft", null, "secondary")
+
+```

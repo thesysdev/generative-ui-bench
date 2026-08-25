@@ -1,0 +1,419 @@
+Here is the receptionist's day view dashboard configured with appointment tracking, quick check-in actions, room occupancy, and key daily metrics.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "dateNavRow",
+          "nextPatientAlert",
+          "kpiCard",
+          "roomsCard",
+          "checkInDialog",
+          "appointmentsHeader",
+          "appointmentsTable"
+        ],
+        "gap": "m"
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Clinic Reception Desk",
+        "subtitle": "Daily overview, check-in station & room management"
+      },
+      {
+        "id": "dateNavRow",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "children": [
+          "currentDateBadge",
+          "datePickerControl"
+        ]
+      },
+      {
+        "id": "currentDateBadge",
+        "component": "Badge",
+        "text": "Today: Thursday, Oct 24, 2024",
+        "variant": "default"
+      },
+      {
+        "id": "datePickerControl",
+        "component": "DatePicker",
+        "name": "view_date",
+        "mode": "single"
+      },
+      {
+        "id": "nextPatientAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Next Patient Called: Marcus Vance (09:15 AM)",
+        "description": "Assigned to Exam Room 1 • Dr. Chen • Reason: Follow-up Consultation"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "kpiExpected",
+          "kpiNoShow"
+        ]
+      },
+      {
+        "id": "kpiExpected",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "expectedHeading",
+          "expectedCount",
+          "expectedSub"
+        ]
+      },
+      {
+        "id": "expectedHeading",
+        "component": "Heading",
+        "text": "Patients Expected Today",
+        "level": "h4"
+      },
+      {
+        "id": "expectedCount",
+        "component": "Heading",
+        "text": "24 Patients",
+        "level": "h2"
+      },
+      {
+        "id": "expectedSub",
+        "component": "TextContent",
+        "text": "6 Checked In • 2 In Progress • 16 Upcoming",
+        "size": "small"
+      },
+      {
+        "id": "kpiNoShow",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "noShowHeading",
+          "noShowRate",
+          "noShowProgress"
+        ]
+      },
+      {
+        "id": "noShowHeading",
+        "component": "Heading",
+        "text": "Monthly No-Show Rate",
+        "level": "h4"
+      },
+      {
+        "id": "noShowRate",
+        "component": "Heading",
+        "text": "4.2%",
+        "level": "h2"
+      },
+      {
+        "id": "noShowProgress",
+        "component": "Progress",
+        "value": 4.2,
+        "label": "Well below the 8.0% clinic threshold"
+      },
+      {
+        "id": "roomsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "roomsHeader",
+          "roomTags"
+        ]
+      },
+      {
+        "id": "roomsHeader",
+        "component": "Heading",
+        "text": "Exam Room Status (Live)",
+        "level": "h4"
+      },
+      {
+        "id": "roomTags",
+        "component": "TagBlock",
+        "tags": [
+          "Room 1: OCCUPIED (Dr. Chen)",
+          "Room 2: AVAILABLE",
+          "Room 3: AVAILABLE",
+          "Room 4: OCCUPIED (Dr. Patel)",
+          "Triage A: AVAILABLE",
+          "Procedure Rm: OCCUPIED (Dr. Smith)"
+        ]
+      },
+      {
+        "id": "checkInDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Quick Check-In Patient",
+        "triggerVariant": "default",
+        "title": "Patient Check-In",
+        "description": "Verify arrival and assign an available examination room.",
+        "content": [
+          "checkInForm"
+        ]
+      },
+      {
+        "id": "checkInForm",
+        "component": "Form",
+        "name": "patient_check_in",
+        "buttons": "formButtons",
+        "fields": [
+          "patientSelectField",
+          "roomSelectField",
+          "copayField"
+        ]
+      },
+      {
+        "id": "patientSelectField",
+        "component": "FormControl",
+        "label": "Select Arrived Patient",
+        "input": "patientSelect"
+      },
+      {
+        "id": "patientSelect",
+        "component": "Select",
+        "name": "patient_id",
+        "placeholder": "Choose patient...",
+        "items": [
+          "opt1",
+          "opt2",
+          "opt3"
+        ]
+      },
+      {
+        "id": "opt1",
+        "component": "SelectItem",
+        "value": "p1",
+        "label": "Marcus Vance — 09:15 AM (Dr. Chen)"
+      },
+      {
+        "id": "opt2",
+        "component": "SelectItem",
+        "value": "p2",
+        "label": "Elena Rostova — 09:30 AM (Dr. Patel)"
+      },
+      {
+        "id": "opt3",
+        "component": "SelectItem",
+        "value": "p3",
+        "label": "David Kim — 09:45 AM (Dr. Chen)"
+      },
+      {
+        "id": "roomSelectField",
+        "component": "FormControl",
+        "label": "Assign Free Room",
+        "input": "roomSelect"
+      },
+      {
+        "id": "roomSelect",
+        "component": "Select",
+        "name": "assigned_room",
+        "placeholder": "Select available room...",
+        "items": [
+          "roomOpt2",
+          "roomOpt3",
+          "roomOptTriage"
+        ]
+      },
+      {
+        "id": "roomOpt2",
+        "component": "SelectItem",
+        "value": "r2",
+        "label": "Room 2 (Clean & Ready)"
+      },
+      {
+        "id": "roomOpt3",
+        "component": "SelectItem",
+        "value": "r3",
+        "label": "Room 3 (Clean & Ready)"
+      },
+      {
+        "id": "roomOptTriage",
+        "component": "SelectItem",
+        "value": "rt",
+        "label": "Triage A (Clean & Ready)"
+      },
+      {
+        "id": "copayField",
+        "component": "FormControl",
+        "label": "Copay Collection Status",
+        "input": "copayRadio"
+      },
+      {
+        "id": "copayRadio",
+        "component": "RadioGroup",
+        "name": "copay_status",
+        "defaultValue": "collected",
+        "items": [
+          "copayDone",
+          "copayBilled",
+          "copayExempt"
+        ]
+      },
+      {
+        "id": "copayDone",
+        "component": "RadioItem",
+        "value": "collected",
+        "label": "Collected ($25.00)",
+        "description": "Card / Cash received at desk"
+      },
+      {
+        "id": "copayBilled",
+        "component": "RadioItem",
+        "value": "bill_later",
+        "label": "Bill Insurance / Later",
+        "description": "Add balance to patient ledger"
+      },
+      {
+        "id": "copayExempt",
+        "component": "RadioItem",
+        "value": "exempt",
+        "label": "Zero Copay / Exempt",
+        "description": "Preventative visit coverage"
+      },
+      {
+        "id": "formButtons",
+        "component": "Buttons",
+        "buttons": [
+          "confirmCheckInBtn"
+        ]
+      },
+      {
+        "id": "confirmCheckInBtn",
+        "component": "Button",
+        "label": "Complete Check-In",
+        "variant": "primary"
+      },
+      {
+        "id": "appointmentsHeader",
+        "component": "Heading",
+        "text": "Today's Appointment Schedule",
+        "level": "h3"
+      },
+      {
+        "id": "appointmentsTable",
+        "component": "Table",
+        "columns": [
+          "colTime",
+          "colPatient",
+          "colDoctor",
+          "colType",
+          "colRoom",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colTime",
+        "component": "Col",
+        "label": "Time",
+        "data": [
+          "08:30 AM",
+          "09:00 AM",
+          "09:15 AM",
+          "09:30 AM",
+          "09:45 AM",
+          "10:00 AM",
+          "10:15 AM",
+          "10:30 AM"
+        ]
+      },
+      {
+        "id": "colPatient",
+        "component": "Col",
+        "label": "Patient Name",
+        "data": [
+          "Arthur Pendelton",
+          "Sarah Jenkins",
+          "Marcus Vance",
+          "Elena Rostova",
+          "David Kim",
+          "Amara Okafor",
+          "Carlos Mendez",
+          "Rachel Green"
+        ]
+      },
+      {
+        "id": "colDoctor",
+        "component": "Col",
+        "label": "Provider",
+        "data": [
+          "Dr. Chen",
+          "Dr. Patel",
+          "Dr. Chen",
+          "Dr. Patel",
+          "Dr. Chen",
+          "Dr. Smith",
+          "Dr. Chen",
+          "Dr. Patel"
+        ]
+      },
+      {
+        "id": "colType",
+        "component": "Col",
+        "label": "Visit Type",
+        "data": [
+          "Annual Physical",
+          "Blood Pressure Check",
+          "Follow-up",
+          "Dermatology Consult",
+          "New Patient Exam",
+          "Minor Procedure",
+          "Prescription Refill",
+          "Lab Work Review"
+        ]
+      },
+      {
+        "id": "colRoom",
+        "component": "Col",
+        "label": "Room",
+        "data": [
+          "Room 1",
+          "Room 4",
+          "Room 1 (Next)",
+          "Waiting Rm",
+          "Waiting Rm",
+          "Procedure Rm",
+          "—",
+          "—"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Completed",
+          "With Doctor",
+          "Called",
+          "Checked In",
+          "Checked In",
+          "Preparing",
+          "Expected",
+          "Expected"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

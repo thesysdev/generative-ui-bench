@@ -1,0 +1,256 @@
+")
+deliveryHeading = Heading("Delivery Health by Region", "h3")
+deliveryTable = Table([regionCol, p95Col, uptimeCol, errorsCol, statusCol])
+regionCol = Col("Region", ["North America", "Europe", "Asia-Pacific", "Latin America", "Middle East & Africa"])
+p95Col = Col("P95 Latency (ms)", ["142", "158", "203", "287", "312"])
+uptimeCol = Col("Uptime (%)", ["99.97", "99.95", "99.91", "99.82", "99.78"])
+errorsCol = Col("5xx Errors / hr", ["12", "8", "34", "89", "112"])
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "At Risk", "Critical"])
+
+mostWatchedCard = Card([mostWatchedHeading, mostWatchedTable], "sunk")
+mostWatchedHeading = Heading("Most-Watched Titles (Today)", "h3")
+mostWatchedTable = Table([titleCol, titleHours, titleViewers, titleTrend])
+titleCol = Col("Title", ["The Last Meridian", "Crown of Ashes S3", "Neon Drift", "Paper Kingdoms", "The Silent Tide"])
+titleHours = Col("Hours Watched (K)", ["4,218", "3,847", "2,961", "2,403", "1,876"])
+titleViewers = Col("Current Viewers", ["184,220", "162,400", "121,300", "98,700", "74,100"])
+titleTrend = Col("Trend", ["▲ 23%", "▲ 8%", "▼ 4%", "▲ 31%", "▼ 12%"])
+
+releasesCard = Card([releasesHeading, releasesList], "sunk")
+releasesHeading = Heading("Releases – This Month", "h3")
+releasesList = ListBlock([rel1, rel2, rel3, rel4, rel5])
+rel1 = ListItem("Crown of Ashes – S4", "Premieres Mar 14 • 8 episodes")
+rel2 = ListItem("The Glass Orchard", "Premieres Mar 21 • Limited series")
+rel3 = ListItem("Neon Drift – S2", "Premieres Mar 28 • 10 episodes")
+rel4 = ListItem("Whisper Protocol", "Premieres Mar 31 • Documentary")
+rel5 = ListItem("Little Wonders – S5", "Premieres Mar 7 • Kids")
+
+licenseCard = Card([licenseHeading, licenseTable], "sunk")
+licenseHeading = Heading("Licenses Expiring Soon", "h3")
+licenseTable = Table([licTitle, licExpiry, licDays, licStatus])
+licTitle = Col("Title", ["Iron Circuit", "The Deep Below", "Starfall Chronicles", "Midnight Cartel S2"])
+licExpiry = Col("Expiry Date", ["2025-04-12", "2025-04-28", "2025-05-03", "2025-05-19"])
+licDays = Col("Days Left", ["28", "44", "49", "65"])
+licStatus = Col("Status", ["Renewal in progress", "Negotiating", "Auto-renew", "Under review"])
+
+searchCard = Card([searchHeading, searchTable], "sunk")
+searchHeading = Heading("Top Searches – No Playback", "h3")
+searchTable = Table([searchTerm, searchCount, searchReason])
+searchTerm = Col("Search Term", ["breaking bad", "stranger things s5", "the last of us", "game of thrones", "mandalorian"])
+searchCount = Col("No-Play Count", ["12,847", "9,203", "7,612", "6,891", "5,447"])
+searchReason = Col("Likely Reason", ["Not in catalog", "Upcoming", "Regional lock", "Not in catalog", "Upcoming"])
+
+revenueCard = Card([revenueHeading, revenueChart], "sunk")
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueChart = PieChart(["Premium 4K", "Standard", "Mobile", "Ad-Supported"], [42, 28, 18, 12], "donut")
+
+deviceCard = Card([deviceHeading, deviceChart], "sunk")
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = RadialChart(["Smart TV", "Mobile", "Laptop/Desktop", "Tablet", "Console"], [38, 31, 19, 8, 4])
+
+flagsCard = Card([flagsHeading, flagsSwitch], "sunk")
+flagsHeading = Heading("Feature Flags", "h3")
+flagsSwitch = SwitchGroup("feature-flags", [ff1, ff2, ff3, ff4, ff5])
+ff1 = SwitchItem("Personalized Home", "AI-driven layout per user", "personalized_home", true)
+ff2 = SwitchItem("Ad Breaks – Ad-Supported", "Mid-roll + pre-roll", "ad_breaks", true)
+ff3 = SwitchItem("Offline Downloads 2.0", "New download manager", "downloads_v2", true)
+ff4 = SwitchItem("Spatial Audio", "Dolby Atmos rendering", "spatial_audio", false)
+ff5 = SwitchItem("AI Recs v3", "New recommendation model", "ai_recs_v3", false)
+
+promoteCard = Card([promoteHeading, promoteForm], "sunk")
+promoteHeading = Heading("Promote Title on Home Screen", "h3")
+promoteForm = Form("promote-title", promoteButtons, [titleField, positionField, durationField])
+titleField = FormControl("Title", titleSelect)
+titleSelect = Select("title", [t1, t2, t3, t4], "Choose a title to feature")
+t1 = SelectItem("the_last_meridian", "The Last Meridian")
+t2 = SelectItem("crown_of_ashes", "Crown of Ashes S3")
+t3 = SelectItem("neon_drift", "Neon Drift")
+t4 = SelectItem("paper_kingdoms", "Paper Kingdoms")
+positionField = FormControl("Home Position", positionSelect)
+positionSelect = Select("position", [pos1, pos2, pos3], "Where on the home screen")
+pos1 = SelectItem("hero", "Hero Banner (top)")
+pos2 = SelectItem("row1", "Row 1 (below hero)")
+pos3 = SelectItem("spotlight", "Spotlight Card")
+durationField = FormControl("Duration", durationSelect)
+durationSelect = Select("duration", [d1, d2, d3], "How long to feature")
+d1 = SelectItem("24h", "24 hours")
+d2 = SelectItem("72h", "72 hours")
+d3 = SelectItem("7d", "7 days")
+promoteButtons = Buttons([promoteBtn, cancelPromoteBtn])
+promoteBtn = Button("Promote Now", null, "primary")
+cancelPromoteBtn = Button("Cancel", null, "tertiary")
+
+Now let me verify all references:
+- root references: header, kpiRow, regionFilter, watchTimeCard, subsCard, genreCard, deliveryCard, mostWatchedCard, releasesCard, licenseCard, searchCard, revenueCard, deviceCard, flagsCard, promoteCard ✓
+- header: standalone ✓
+- kpiRow references: viewersKpi, bufferingKpi, recKpi ✓
+- viewersKpi references: viewersLabel, viewersValue, viewersTag ✓
+- bufferingKpi references: bufferingLabel, bufferingProgress, bufferingTag ✓
+- recKpi references: recLabel, recValue, recTag ✓
+- regionFilter references: regionForm ✓
+- regionForm references: regionButtons, regionField ✓
+- regionField references: regionSelect ✓
+- regionSelect references: na, eu, apac, latam, mea ✓
+- regionButtons references: applyRegionBtn, resetRegionBtn ✓
+- watchTimeCard references: watchTimeHeading, watchTimeChart ✓
+- watchTimeChart references: watchSeries ✓
+- subsCard references: subsHeading, subsChart ✓
+- subsChart references: newSubs, cancels ✓
+- genreCard references: genreHeading, genreChart ✓
+- genreChart references: genreSeries ✓
+- deliveryCard references: deliveryHeading, deliveryTable ✓
+- deliveryTable references: regionCol, p95Col, uptimeCol, errorsCol, statusCol ✓
+- mostWatchedCard references: mostWatchedHeading, mostWatchedTable ✓
+- mostWatchedTable references: titleCol, titleHours, titleViewers, titleTrend ✓
+- releasesCard references: releasesHeading, releasesList ✓
+- releasesList references: rel1, rel2, rel3, rel4, rel5 ✓
+- licenseCard references: licenseHeading, licenseTable ✓
+- licenseTable references: licTitle, licExpiry, licDays, licStatus ✓
+- searchCard references: searchHeading, searchTable ✓
+- searchTable references: searchTerm, searchCount, searchReason ✓
+- revenueCard references: revenueHeading, revenueChart ✓
+- deviceCard references: deviceHeading, deviceChart ✓
+- flagsCard references: flagsHeading, flagsSwitch ✓
+- flagsSwitch references: ff1, ff2, ff3, ff4, ff5 ✓
+- promoteCard references: promoteHeading, promoteForm ✓
+- promoteForm references: promoteButtons, titleField, positionField, durationField ✓
+- titleField references: titleSelect ✓
+- titleSelect references: t1, t2, t3, t4 ✓
+- positionField references: positionSelect ✓
+- positionSelect references: pos1, pos2, pos3 ✓
+- durationField references: durationSelect ✓
+- durationSelect references: d1, d2, d3 ✓
+- promoteButtons references: promoteBtn, cancelPromoteBtn ✓
+
+All good! Let me write the final output.
+
+Wait, I need to double-check: the Form signature is Form(name: string, buttons: Buttons, fields: (FormControl)[]). So the second arg is Buttons, third is fields array. Let me make sure I have that right.
+
+regionForm = Form("region-focus", regionButtons, [regionField]) ✓
+promoteForm = Form("promote-title", promoteButtons, [titleField, positionField, durationField]) ✓
+
+Also checking SwitchGroup: SwitchGroup(name: string, items: (SwitchItem)[], variant?: "clear" | "card" | "sunk", value?: (string | number)[])
+flagsSwitch = SwitchGroup("feature-flags", [ff1, ff2, ff3, ff4, ff5]) ✓
+
+SwitchItem(label?: string, description?: string, name: string, defaultChecked?: boolean)
+ff1 = SwitchItem("Personalized Home", "AI-driven layout per user", "personalized_home", true) ✓
+
+Let me also check the Progress component: Progress(value: number, label?: string)
+bufferingProgress = Progress(3.2, "3.2% of sessions") ✓
+
+One issue: I have both "regionCol" for delivery table and "titleCol" for most-watched. Let me rename to avoid confusion. Actually they're different variables so it's fine.
+
+Let me write it all out now.
+
+
+root = Card([header, kpiRow, regionFilter, watchTimeCard, subsCard, genreCard, deliveryCard, mostWatchedCard, releasesCard, licenseCard, searchCard, revenueCard, deviceCard, flagsCard, promoteCard], "card", "column", "m")
+header = CardHeader("Streaming Operations Room", "Live dashboard · All regions · Updated 12s ago")
+kpiRow = Card([viewersKpi, bufferingKpi, recKpi], "sunk", "row", "m")
+viewersKpi = Card([viewersLabel, viewersValue, viewersTag], "card", "column", "xs")
+viewersLabel = TextContent("Viewers Watching Now", "small")
+viewersValue = TextContent("2,847,392", "large-heavy")
+viewersTag = Tag("▲ 12.4% vs last hour", null, null, "success")
+bufferingKpi = Card([bufferingLabel, bufferingProgress, bufferingTag], "card", "column", "xs")
+bufferingLabel = TextContent("Buffering Rate", "small")
+bufferingProgress = Progress(3.2, "3.2% of active sessions")
+bufferingTag = Tag("Within SLA (< 5%)", null, null, "success")
+recKpi = Card([recLabel, recValue, recTag], "card", "column", "xs")
+recLabel = TextContent("Rec Click-Through Rate", "small")
+recValue = TextContent("34.7%", "large-heavy")
+recTag = Tag("Above 30% target", null, null, "success")
+regionFilter = Card([regionForm], "sunk")
+regionForm = Form("region-focus", regionButtons, [regionField])
+regionField = FormControl("Focus Region", regionSelect, "Narrow all metrics to a single region")
+regionSelect = Select("region", [naItem, euItem, apacItem, latamItem, meaItem], "Choose a region")
+naItem = SelectItem("na", "North America")
+euItem = SelectItem("eu", "Europe")
+apacItem = SelectItem("apac", "Asia-Pacific")
+latamItem = SelectItem("latam", "Latin America")
+meaItem = SelectItem("mea", "Middle East & Africa")
+regionButtons = Buttons([applyRegionBtn, resetRegionBtn])
+applyRegionBtn = Button("Apply Filter", null, "primary")
+resetRegionBtn = Button("Reset to All", null, "tertiary")
+watchTimeCard = Card([watchTimeHeading, watchTimeChart], "sunk")
+watchTimeHeading = Heading("Watch Time – Past 30 Days", "h3")
+watchTimeChart = AreaChart(["W1", "W2", "W3", "W4"], [watchSeries], "natural", "Week", "Million Hours")
+watchSeries = Series("Total Watch (M hrs)", [42.1, 48.7, 51.3, 55.8])
+subsCard = Card([subsHeading, subsChart], "sunk")
+subsHeading = Heading("New Subscribers vs Cancellations", "h3")
+subsChart = BarChart(["W1", "W2", "W3", "W4"], [newSubsSeries, cancelSeries], "grouped", "Week", "Count (K)")
+newSubsSeries = Series("New Subscribers (K)", [184, 192, 178, 203])
+cancelSeries = Series("Cancellations (K)", [62, 58, 71, 64])
+genreCard = Card([genreHeading, genreChart], "sunk")
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart(["Drama", "Comedy", "Action", "Documentary", "Kids", "Horror", "Romance"], [genreSeries], "grouped", "Genre", "Million Hours")
+genreSeries = Series("Watch Hours (M)", [12.4, 8.7, 7.2, 6.1, 5.8, 3.4, 2.9])
+deliveryCard = Card([deliveryHeading, deliveryTable], "sunk")
+deliveryHeading = Heading("Delivery Health by Region", "h3")
+deliveryTable = Table([dRegionCol, p95Col, uptimeCol, errCol, dStatusCol])
+dRegionCol = Col("Region", ["North America", "Europe", "Asia-Pacific", "Latin America", "Middle East & Africa"])
+p95Col = Col("P95 Latency (ms)", ["142", "158", "203", "287", "312"])
+uptimeCol = Col("Uptime (%)", ["99.97", "99.95", "99.91", "99.82", "99.78"])
+errCol = Col("5xx Errors / hr", ["12", "8", "34", "89", "112"])
+dStatusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "At Risk", "Critical"])
+mostWatchedCard = Card([mwHeading, mwTable], "sunk")
+mwHeading = Heading("Most-Watched Titles (Today)", "h3")
+mwTable = Table([mwTitleCol, mwHoursCol, mwViewersCol, mwTrendCol])
+mwTitleCol = Col("Title", ["The Last Meridian", "Crown of Ashes S3", "Neon Drift", "Paper Kingdoms", "The Silent Tide"])
+mwHoursCol = Col("Hours Watched (K)", ["4,218", "3,847", "2,961", "2,403", "1,876"])
+mwViewersCol = Col("Current Viewers", ["184,220", "162,400", "121,300", "98,700", "74,100"])
+mwTrendCol = Col("Trend", ["▲ 23%", "▲ 8%", "▼ 4%", "▲ 31%", "▼ 12%"])
+releasesCard = Card([relHeading, relList], "sunk")
+relHeading = Heading("Releases – This Month", "h3")
+relList = ListBlock([rel1, rel2, rel3, rel4, rel5])
+rel1 = ListItem("Crown of Ashes – S4", "Premieres Mar 14 · 8 episodes")
+rel2 = ListItem("The Glass Orchard", "Premieres Mar 21 · Limited series")
+rel3 = ListItem("Neon Drift – S2", "Premieres Mar 28 · 10 episodes")
+rel4 = ListItem("Whisper Protocol", "Premieres Mar 31 · Documentary")
+rel5 = ListItem("Little Wonders – S5", "Premieres Mar 7 · Kids")
+licenseCard = Card([licHeading, licTable], "sunk")
+licHeading = Heading("Licenses Expiring Soon", "h3")
+licTable = Table([licTitleCol, licDateCol, licDaysCol, licStatusCol])
+licTitleCol = Col("Title", ["Iron Circuit", "The Deep Below", "Starfall Chronicles", "Midnight Cartel S2"])
+licDateCol = Col("Expiry Date", ["2025-04-12", "2025-04-28", "2025-05-03", "2025-05-19"])
+licDaysCol = Col("Days Left", ["28", "44", "49", "65"])
+licStatusCol = Col("Status", ["Renewal in progress", "Negotiating", "Auto-renew", "Under review"])
+searchCard = Card([srchHeading, srchTable], "sunk")
+srchHeading = Heading("Top Searches – No Playback", "h3")
+srchTable = Table([srchTermCol, srchCountCol, srchReasonCol])
+srchTermCol = Col("Search Term", ["breaking bad", "stranger things s5", "the last of us", "game of thrones", "the mandalorian"])
+srchCountCol = Col("No-Play Count", ["12,847", "9,203", "7,612", "6,891", "5,447"])
+srchReasonCol = Col("Likely Reason", ["Not in catalog", "Upcoming", "Regional lock", "Not in catalog", "Upcoming"])
+revenueCard = Card([revHeading, revChart], "sunk")
+revHeading = Heading("Revenue Split by Plan", "h3")
+revChart = PieChart(["Premium 4K", "Standard", "Mobile", "Ad-Supported"], [42, 28, 18, 12], "donut")
+deviceCard = Card([devHeading, devChart], "sunk")
+devHeading = Heading("Viewing Split by Device", "h3")
+devChart = RadialChart(["Smart TV", "Mobile", "Laptop / Desktop", "Tablet", "Console"], [38, 31, 19, 8, 4])
+flagsCard = Card([flagsHeading, flagsSwitch], "sunk")
+flagsHeading = Heading("Feature Flags", "h3")
+flagsSwitch = SwitchGroup("feature-flags", [ff1, ff2, ff3, ff4, ff5])
+ff1 = SwitchItem("Personalized Home", "AI-driven layout per user", "personalized_home", true)
+ff2 = SwitchItem("Ad Breaks – Ad-Supported", "Mid-roll + pre-roll ads", "ad_breaks", true)
+ff3 = SwitchItem("Offline Downloads 2.0", "New download manager", "downloads_v2", true)
+ff4 = SwitchItem("Spatial Audio", "Dolby Atmos rendering", "spatial_audio", false)
+ff5 = SwitchItem("AI Recs v3", "New recommendation model", "ai_recs_v3", false)
+promoteCard = Card([promoHeading, promoForm], "sunk")
+promoHeading = Heading("Promote Title on Home Screen", "h3")
+promoForm = Form("promote-title", promoButtons, [promoTitleField, promoPosField, promoDurField])
+promoTitleField = FormControl("Title", promoTitleSelect)
+promoTitleSelect = Select("title", [pt1, pt2, pt3, pt4], "Choose a title to feature")
+pt1 = SelectItem("the_last_meridian", "The Last Meridian")
+pt2 = SelectItem("crown_of_ashes", "Crown of Ashes S3")
+pt3 = SelectItem("neon_drift", "Neon Drift")
+pt4 = SelectItem("paper_kingdoms", "Paper Kingdoms")
+promoPosField = FormControl("Home Position", promoPosSelect)
+promoPosSelect = Select("position", [pp1, pp2, pp3], "Where on the home screen")
+pp1 = SelectItem("hero", "Hero Banner (top)")
+pp2 = SelectItem("row1", "Row 1 (below hero)")
+pp3 = SelectItem("spotlight", "Spotlight Card")
+promoDurField = FormControl("Duration", promoDurSelect)
+promoDurSelect = Select("duration", [pd1, pd2, pd3], "How long to feature")
+pd1 = SelectItem("24h", "24 hours")
+pd2 = SelectItem("72h", "72 hours")
+pd3 = SelectItem("7d", "7 days")
+promoButtons = Buttons([promoBtn, promoCancelBtn])
+promoBtn = Button("Promote Now", null, "primary")
+promoCancelBtn = Button("Cancel", null, "tertiary")

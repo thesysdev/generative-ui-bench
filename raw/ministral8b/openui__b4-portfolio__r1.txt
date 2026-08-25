@@ -1,0 +1,70 @@
+```openui-lang
+root = Card([portfolioHeader, healthSummary, activeProjects, overdueMilestones, budgetChart, teamUtilization, risksTable, upcomingDeadlines, paceChart, blockedItems, controls])
+
+portfolioHeader = CardHeader("Project Portfolio Review", "Q2 2024 • View Q1 2024")
+healthSummary = TextCallout("neutral", "Portfolio health: 85% on track, 1 critical risk", "Health score: 3.8/5 • 2 projects at risk")
+
+activeProjects = Card([activeProjectsHeader, projectsTable], "sunk")
+activeProjectsHeader = CardHeader("Active Projects", "Status overview")
+
+projectsTable = Table([projectCol, ownerCol, deadlineCol, healthCol])
+projectCol = Col("Project", ["E-commerce Redesign", "HR System Migration", "Marketing Automation", "Data Warehouse Upgrade"])
+ownerCol = Col("Owner", ["Sarah Chen", "Michael Lee", "Emily Park", "David Kim"])
+deadlineCol = Col("Deadline", ["2024-06-15", "2024-07-30", "2024-08-10", "2024-09-20"])
+healthCol = Col("Health", ["⚠️ 78%", "✅ 92%", "⚠️ 65%", "❌ 45%"])
+
+overdueMilestones = Card([overdueHeader, milestonesTable], "sunk")
+overdueHeader = CardHeader("Overdue Milestones", "12 milestones behind schedule")
+
+milestonesTable = Table([milestoneCol, projectCol, dueDateCol, daysLateCol])
+milestoneCol = Col("Milestone", ["API Integration", "Security Audit", "UI Mockups", "Database Schema"])
+projectCol = Col("Project", ["E-commerce Redesign", "HR System Migration", "Marketing Automation", "Data Warehouse Upgrade"])
+dueDateCol = Col("Due Date", ["2024-05-20", "2024-05-25", "2024-06-01", "2024-06-05"])
+daysLateCol = Col("Days Late", ["5", "7", "3", "10"])
+
+budgetChart = Card([budgetHeader, budgetChartContent], "sunk")
+budgetHeader = CardHeader("Budget vs. Spend")
+budgetChartContent = BarChart(["E-commerce", "HR Migration", "Marketing", "Data Warehouse"],
+    [Series("Allocated", [500000, 350000, 200000, 400000]),
+     Series("Spent", [380000, 280000, 140000, 320000])], "grouped", "Project", "USD")
+
+teamUtilization = Card([utilizationHeader, utilizationChart], "sunk")
+utilizationHeader = CardHeader("Team Utilization")
+utilizationChart = RadarChart(["Team A", "Team B", "Team C"],
+    [Series("Utilization", [85, 92, 78]),
+     Series("Capacity", [100, 100, 100])])
+
+risksTable = Card([risksHeader, risksContent], "sunk")
+risksHeader = CardHeader("Open Risks")
+risksContent = Table([riskCol, projectCol, severityCol, descriptionCol])
+riskCol = Col("Risk", ["Vendor Delay", "Regulatory Change", "Team Shortage", "Third-party API"])
+projectCol = Col("Project", ["Data Warehouse", "E-commerce", "HR Migration", "Marketing"])
+severityCol = Col("Severity", ["⚠️ High", "⚠️ High", "⚠️ Medium", "⚠️ Low"])
+descriptionCol = Col("Description", ["Vendor behind schedule", "New compliance rules", "Need 2 more devs", "API may not meet requirements"])
+
+upcomingDeadlines = Card([deadlinesHeader, deadlinesTable], "sunk")
+deadlinesHeader = CardHeader("Next 2 Weeks Deadlines")
+deadlinesTable = Table([deadlineCol, projectCol, dateCol])
+deadlineCol = Col("Deadline", ["UI Final Approval", "Security Review", "Database Migration", "Feature Freeze"])
+projectCol = Col("Project", ["Marketing", "E-commerce", "Data Warehouse", "HR Migration"])
+dateCol = Col("Date", ["2024-06-10", "2024-06-12", "2024-06-14", "2024-06-15"])
+
+paceChart = Card([paceHeader, paceContent], "sunk")
+paceHeader = CardHeader("Delivery Pace (Last 6 Sprints)")
+paceContent = LineChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"],
+    [Series("Sprints Completed", [8, 10, 9, 12, 7, 11])], "natural", "Sprint", "Sprints")
+
+blockedItems = Card([blockedHeader, blockedTable], "sunk")
+blockedHeader = CardHeader("Blocked Work Items", "5 items blocked")
+blockedTable = Table([itemCol, projectCol, blockerCol, daysCol])
+itemCol = Col("Work Item", ["API Integration", "Database Schema", "Security Audit", "UI Mockups", "Vendor Dependency"])
+projectCol = Col("Project", ["E-commerce", "Data Warehouse", "E-commerce", "Marketing", "HR Migration"])
+blockerCol = Col("Blocked By", ["Third-party API", "Vendor", "Compliance", "Design Team", "Vendor"])
+daysCol = Col("Days Blocked", ["3", "5", "2", "4", "7"])
+
+controls = Buttons([quarterBtn, addPeopleBtn, exportBtn, archiveBtn], "column")
+quarterBtn = Button("View Q1 2024", null, "secondary")
+addPeopleBtn = Button("Request More People", ["request_people", "E-commerce Redesign"], "primary")
+exportBtn = Button("Export Review", null, "primary")
+archiveBtn = Button("Archive Finished Project", ["archive_project", "Marketing Automation"], "destructive")
+```

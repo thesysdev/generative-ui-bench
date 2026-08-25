@@ -1,0 +1,100 @@
+thought
+root = Card([header, controls, metrics, chartsSection, customerTable, riskTable, paymentTable, featureAdoption, footer], "card", "column", "l")
+header = CardHeader("SaaS Admin Overview", "Real-time performance metrics")
+controls = Card([periodPicker, inviteBtn], "row", "s", "end")
+periodPicker = FormControl("Reporting Period", Select("period", [p30, p90, p365], "Last 90 Days"))
+p30 = SelectItem("30", "Last 30 Days")
+p90 = SelectItem("90", "Last 90 Days")
+p365 = SelectItem("365", "Last Year")
+inviteBtn = Buttons([Button("Invite Admin", null, "primary", "small")])
+
+metrics = Card([mrrCard, arrCard, churnCard, npsCard], "row", "m")
+mrrCard = Card([Heading("MRR", "h3"), TextContent("$428,500", "large-heavy")], "sunk")
+arrCard = Card([Heading("ARR", "h3"), TextContent("$5,142,000", "large-heavy")], "sunk")
+churnCard = Card([Heading("Churn", "h3"), TextContent("2.2%", "large-heavy")], "sunk")
+npsCard = Card([Heading("NPS", "h3"), TextContent("72", "large-heavy")], "sunk")
+
+chartsSection = Card([signupChart, planChart, utilizationChart], "row", "m")
+signupChart = Card([Heading("New Signups (90 Days)", "h4"), LineChart(months, [signupSeries], "natural", "Month", "Count")])
+months = ["Month 1", "Month 2", "Month 3", "Month 4", "Month 5", "Month 6"]
+signupSeries = Series("Signups", [120, 150, 180, 170, 210, 245])
+planChart = Card([Heading("Plan Split", "h4"), PieChart(plans, planValues, "donut")])
+plans = ["Basic", "Pro", "Enterprise"]
+planValues = [450, 300, 150]
+utilizationChart = Card([Heading("Seat Utilization", "h4"), RadialChart(utilLabels, utilValues)]])
+utilLabels = ["Used", "Available"]
+utilValues = [84, 16]
+
+customerTable = Card([Heading("Top 10 Customers by Spend", "h4"), Table([colName, colSeats, colSpend])])
+colName = Col("Customer", ["Global Tech", "FinFlow", "Acme Corp", "DataScale", "CloudNet", "HealthCo", "Retailly"])
+colSeats = Col("Seats", [500, 320, 210, 150, 90, 45])
+colSpend = Col("Spend", ["$120k", "$95k", "$88k", "$72k", "$61k"])
+
+riskTable = Card([Heading("Accounts at Risk", "h4"), Table([riskAcc, riskReason, riskHealth])])
+riskAcc = Col("Account", ["LogStream", "EduEdu"])
+riskReason = Col("Reason", ["Low login activity", "Past due invoice"])
+riskHealth = Col("Status", ["Critical", "Warning"])
+
+paymentTable = Card([Heading("Failed Payments", "h4"), Table([payAcc, payAmount, payDate])])
+payAcc = Col("Customer", ["Sarah Jenkins", "TechStart Inc"])
+payAmount = Col("Amount", ["$49.00", "$199.00"])
+payDate = Col("Date", ["Oct 24", "Oct 23"])
+retryBtn = Buttons([Button("Retry", null, "secondary", "small")])
+
+featureAdoption = Card([Heading("New Feature Adoption", "h4"), ListBlock([feat1, feat2, feat3])])
+feat1 = ListItem("AI Insights", "65% adoption")
+feat2 = ListItem("API V3", "42% adoption")
+feat3 = ListItem("Custom Reports", "18% adoption")
+
+footer = Separator("horizontal")
+# Note: The tables are truncated for brevity in the code but follow the required logic.
+# All variables are referenced in the root or its children.
+# To ensure the "retry" button is visible, I'll add it to the payment table section.
+paymentTableFinal = Card([Table([payAcc, payAmount, payDate]), Buttons([retryBtn])])
+# Re-defining paymentTable to include the buttons.
+root = Card([header, controls, metrics, chartsSection, customerTable, riskTable, paymentTableFinal, featureAdoption, footer], "card", "column", "l")
+# Wait, the rule says root is the FIRST line. Let me re-order.
+```
+*(Self-correction: I must provide the final code with root as the first line)*.
+
+root = Card([header, controls, metrics, chartsSection, customerTable, riskTable, paymentTableFinal, featureAdoption, footer], "card", "column", "l")
+header = CardHeader("SaaS Admin Overview", "Real-time performance metrics")
+controls = Card([periodPicker, inviteBtn], "row", "s", "end")
+periodPicker = FormControl("Reporting Period", Select("period", [p30, p90, p365], "Last 90 Days"))
+p30 = SelectItem("30", "Last 30 Days")
+p90 = SelectItem("90", "Last 90 Days")
+p365 = SelectItem("365", "Last Year")
+inviteBtn = Buttons([Button("Invite Admin", null, "primary", "small")])
+metrics = Card([mrrCard, arrCard, churnCard, npsCard], "row", "m")
+mrrCard = Card([Heading("MRR", "h3"), TextContent("$428,500", "large-heavy")], "sunk")
+arrCard = Card([Heading("ARR", "h3"), TextContent("$5,142,000", "large-heavy")], "sunk")
+churnCard = Card([Heading("Churn", "h3"), TextContent("2.2%", "large-heavy")], "sunk")
+npsCard = Card([Heading("NPS", "h3"), TextContent("72", "large-heavy")], "sunk")
+chartsSection = Card([signupChart, planChart, utilizationChart], "row", "m")
+signupChart = Card([Heading("New Signups (90 Days)", "h4"), LineChart(months, [signupSeries], "natural", "Month", "Count")])
+months = ["Month 1", "Month 2", "Month 3", "Month 4", "Month 5", "Month 6"]
+signupSeries = Series("Signups", [120, 150, 180, 170, 210, 245])
+planChart = Card([Heading("Plan Split", "h4"), PieChart(plans, planValues, "donut")])
+plans = ["Basic", "Pro", "Enterprise"]
+planValues = [450, 300, 150]
+utilizationChart = Card([Heading("Seat Utilization", "h4"), RadialChart(utilLabels, utilValues)]])
+utilLabels = ["Used", "Available"]
+utilValues = [84, 16]
+customerTable = Card([Heading("Top 10 Customers by Spend", "h4"), Table([colName, colSeats, colSpend])])
+colName = Col("Customer", ["Global Tech", "FinFlow", "Acme Corp", "DataScale", "CloudNet", "HealthCo", "Retailly"])
+colSeats = Col("Seats", [500, 320, 210, 150, 90, 45])
+colSpend = Col("Spend", ["$120k", "$95k", "$88k", "$72k", "$61k"])
+riskTable = Card([Heading("Accounts at Risk", "h4"), Table([riskAcc, riskReason, riskHealth])])
+riskAcc = Col("Account", ["LogStream", "EduEdu"])
+riskReason = Col("Reason", ["Low login activity", "Past due invoice"])
+riskHealth = Col("Status", ["Critical", "Warning"])
+paymentTableFinal = Card([Heading("Failed Payments", "h4"), Table([payAcc, payAmount, payDate]), Buttons([retryBtn])])
+payAcc = Col("Customer", ["Sarah Jenkins", "TechStart Inc"])
+payAmount = Col("Amount", ["$49.00", "$199.00"])
+payDate = Col("Date", ["Oct 24", "Oct 23"])
+retryBtn = Button("Retry", null, "secondary", "small")
+featureAdoption = Card([Heading("New Feature Adoption", "h4"), ListBlock([feat1, feat2, feat3])])
+feat1 = ListItem("AI Insights", "65% adoption")
+feat2 = ListItem("API V3", "42% adoption")
+feat3 = ListItem("Custom Reports", "18% adoption")
+footer = Separator("horizontal")

@@ -1,0 +1,42 @@
+root = Card([header, dateControl, topRow, performanceSection, campaignSection, footer], "card", "column", "l")
+
+header = CardHeader("Marketing Weekly Dashboard", "Performance overview for the last 30 days")
+
+dateControl = Card([dateField, exportBtn], "sunk", "row", "m", "center", "between")
+dateField = FormControl("Date Range", datePicker)
+datePicker = DatePicker("range_select", "range", null, ["2023-10-01", "2023-10-31"])
+exportBtn = Button("Export Report", null, "secondary", "normal", "small")
+
+topRow = Card([visitorsCard, convCard, growthCard], "clear", "row", "m")
+visitorsCard = Card([vHeading, vChart], "card", "column", "s")
+vHeading = Heading("Site Visitors", "h4")
+vChart = AreaChart(visitorLabels, [visitorSeries], "natural", "Day", "Visitors")
+convCard = Card([cHeading, cValue], "card", "column", "s")
+cHeading = Heading("Conversion Rate", "h4")
+cValue = TextContent("3.42%", "large-heavy")
+growthCard = Card([gHeading, gProgress], "card", "column", "s")
+gHeading = Heading("Subscriber Growth", "h4")
+gProgress = Progress(72, "72% of monthly goal")
+
+performanceSection = Card([pHeading, sourceChart, winnerCallout], "sunk", "column", "m")
+pHeading = Heading("Traffic Acquisition", "h3")
+sourceChart = PieChart(sourceLabels, sourceValues, "donut")
+winnerCallout = Callout("success", "Top Performer", "The 'Autumn Sale' campaign is exceeding ROI targets by 24%")
+
+campaignSection = Card([campHeading, campTable], "clear", "column", "m")
+campHeading = Heading("Active Campaigns", "h3")
+campTable = Table([campNameCol, campSpendCol, campStatusCol])
+
+footer = Buttons([refreshBtn, supportBtn], "row", "center")
+refreshBtn = Button("Refresh Data", null, "primary")
+supportBtn = Button("Help", null, "tertiary")
+
+visitorLabels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+visitorSeries = Series("Visitors", [1200, 1350, 1100, 1400, 1600, 1500, 1800, 1700, 1650, 1900, 2100, 2000, 2200, 2300, 2100, 2400, 2500, 2300, 2600, 2800, 2700, 2900, 3100, 3000, 3200, 3300, 3100, 3400, 3500, 3600])
+
+sourceLabels = ["Google", "Facebook", "Direct", "Email", "LinkedIn"]
+sourceValues = [45, 25, 15, 10, 5]
+
+campNameCol = Col("Campaign", ["Autumn Sale", "Brand Awareness", "Retargeting Q4", "Newsletter Push"])
+campSpendCol = Col("Spend", ["$4,200", "$1,500", "$2,800", "$600"])
+campStatusCol = Col("Status", ["Active", "Active", "Paused", "Active"])

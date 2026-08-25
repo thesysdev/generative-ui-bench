@@ -1,0 +1,36 @@
+root = Card([header, missingBadge, blockedSection, updatesSection, postUpdateForm, followUps], "card", "column", "l")
+
+header = CardHeader("Async Standup", todayDate)
+todayDate = TextContent("Monday, October 23rd, 2023", "small")
+
+missingBadge = Badge("3 updates missing", "warning")
+
+blockedSection = Card([blockedHeading, blockedList], "sunk", "column", "s")
+blockedHeading = Heading("Blocked 🛑", "h3")
+blockedList = ListBlock([block1, block2], "image")
+block1 = ListItem("Sarah Chen", "Waiting on API documentation from the backend team", "https://picsum.photos/seed/sarah/100/100")
+block2 = ListItem("Marcus Thorne", "Design sign-off needed for the new onboarding flow", "https://picsum.photos/seed/marcus/100/100")
+
+updatesSection = Card([updatesHeading, updatesTable], "clear", "column", "m")
+updatesHeading = Heading("Daily Updates", "h3")
+updatesTable = Table([colTeammate, colStatus, colMood])
+colTeammate = Col("Teammate", ["Sarah Chen", "Marcus Thorne", "Elena Rodriguez", "David Kim", "Priya Sharma"])
+colStatus = Col("Status", ["Working on Auth flow", "UI Polish for Dashboard", "Database migration", "Client meeting", "Bug fixes for v1.2"])
+colMood = Col("Mood", ["Blocked", "Blocked", "On Track", "On Track", "On Track"])
+
+postUpdateForm = Form("daily-update", formButtons, [statusField, blockerField, moodField])
+statusField = FormControl("What are you working on today?", statusInput)
+statusInput = TextArea("status", "I am working on...")
+blockerField = FormControl("Are you blocked by anything?", blockerInput, "Leave blank if no")
+blockerInput = TextArea("blocker", "I am blocked by...")
+moodField = FormControl("Current Status", moodSelect)
+moodSelect = Select("mood", [moodOnTrack, moodBlocked, moodDelayed], "Select status")
+moodOnTrack = SelectItem("ontrack", "On Track")
+moodBlocked = SelectItem("blocked", "Blocked")
+moodDelayed = SelectItem("delayed", "Delayed")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary")
+
+followUps = FollowUpBlock([follow1, follow2])
+follow1 = FollowUpItem("View yesterday's standup")
+follow2 = FollowUpItem("Ping blocked teammates")

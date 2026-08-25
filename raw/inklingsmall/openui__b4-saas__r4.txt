@@ -1,0 +1,86 @@
+root = Card([header, metricsRow, signupsSection, planSection, customersTable, atRiskSection, failedPaymentsSection, featuresSection, npsSection, periodSection, seatSection, inviteSection], "card", "column", "l")
+
+header = CardHeader("Admin Overview", "SaaS company metrics")
+
+metricsRow = Card([mrrBlock, arrBlock, churnBlock, signupsBlock], "clear", "row", "m", "stretch")
+
+mrrBlock = Card([mrrTitle, mrrNum], "sunk")
+mrrTitle = TextContent("Monthly Recurring Revenue", "small")
+mrrNum = TextContent("$128,400", "large-heavy")
+
+arrBlock = Card([arrTitle, arrNum], "sunk")
+arrTitle = TextContent("Annual Recurring Revenue", "small")
+arrNum = TextContent("$1,540,800", "large-heavy")
+
+churnBlock = Card([churnTitle, churnNum, churnSub], "sunk")
+churnTitle = TextContent("Churn This Month", "small")
+churnNum = TextContent("2.4%", "large-heavy")
+churnSub = TextContent("12 customers lost", "small")
+
+signupsBlock = Card([signupsTitle, signupsNum], "sunk")
+signupsTitle = TextContent("New Signups (90d)", "small")
+signupsNum = TextContent("342", "large-heavy")
+
+signupsSection = Card([signupsHeading, signupsChart], "clear", "column", "s")
+signupsHeading = Heading("New Signups Over Past 90 Days", "h3")
+signupsChart = BarChart(["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12","W13"], [sigSeries], "grouped", "Week", "Signups")
+sigSeries = Series("Signups", [18,24,31,28,35,42,38,45,51,48,55,62,58])
+
+planSection = Card([planHeading, planChart], "clear", "column", "s")
+planHeading = Heading("Customers by Plan", "h3")
+planChart = PieChart(["Starter","Growth","Enterprise"], [45,82,33], "donut", "circular")
+
+customersTable = Card([topHeading, topTable], "clear", "column", "s")
+topHeading = Heading("Top 10 Customers", "h3")
+topTable = Table([custName, custSeats, custSpend])
+custName = Col("Customer", ["Acme Corp","Beta LLC","Gamma Inc","Delta Ltd","Epsilon Co","Zeta Group","Eta Partners","Theta LLC","Iota Systems","Kappa LLC"])
+custSeats = Col("Seats", [450,320,280,210,195,170,145,130,115,98])
+custSpend = Col("Monthly Spend", ["$18,200","$12,800","$11,200","$8,400","$7,800","$6,800","$5,800","$5,200","$4,600","$3,900"])
+
+atRiskSection = Card([atRiskHeading, atRiskList], "clear", "column", "s")
+atRiskHeading = Heading("Accounts at Risk", "h3")
+atRiskList = ListBlock([atRisk1, atRisk2, atRisk3, atRisk4], "number")
+atRisk1 = ListItem("Acme Corp", "Usage dropped 60% in 30 days")
+atRisk2 = ListItem("Beta LLC", "Failed payment 3x; card expired")
+atRisk3 = ListItem("Gamma Inc", "Support ticket escalated to C-level")
+atRisk4 = ListItem("Delta Ltd", "No login in 14 days; contract ends soon")
+
+failedPaymentsSection = Card([paymentsHeading, payRow1, payRow2, payRow3], "clear", "column", "s")
+paymentsHeading = Heading("Failed Payments", "h3")
+payRow1 = Card([pay1Text, retryBtn1], "clear", "row", "m", "between")
+pay1Text = TextContent("Beta LLC — $12,800 • Card declined", "small")
+retryBtn1 = Button("Retry", null, "secondary")
+payRow2 = Card([pay2Text, retryBtn2], "clear", "row", "m", "between")
+pay2Text = TextContent("Gamma Inc — $11,200 • Expired card", "small")
+retryBtn2 = Button("Retry", null, "secondary")
+payRow3 = Card([pay3Text, retryBtn3], "clear", "row", "m", "between")
+pay3Text = TextContent("Delta Ltd — $8,400 • Insufficient funds", "small")
+retryBtn3 = Button("Retry", null, "secondary")
+
+featuresSection = Card([featuresHeading, featuresChart], "clear", "column", "s")
+featuresHeading = Heading("New Feature Adoption", "h3")
+featuresChart = BarChart(["Feature A","Feature B","Feature C"], [featSeries], "grouped", "Feature", "% Adopted")
+featSeries = Series("Adoption", [34,28,19])
+
+npsSection = Card([npsHeading, npsValue, npsContext], "clear", "column", "s")
+npsHeading = Heading("Current NPS", "h3")
+npsValue = TextContent("62", "large-heavy")
+npsContext = TextContent("Promoters: 68% • Detractors: 6%", "small")
+
+periodSection = Card([periodHeading, periodRow], "clear", "column", "s")
+periodHeading = Heading("Reporting Period", "h3")
+periodRow = Card([periodSelect, periodBtn], "clear", "row", "s")
+periodSelect = Select("report_period", [p30, p90, pYTD], "Select period")
+p30 = SelectItem("30d", "Last 30 days")
+p90 = SelectItem("90d", "Last 90 days")
+pYTD = SelectItem("ytd", "Year to date")
+periodBtn = Button("Update Report", null, "primary")
+
+seatSection = Card([seatHeading, seatChart], "clear", "column", "s")
+seatHeading = Heading("Seat Utilization", "h3")
+seatChart = HorizontalBarChart(["Engineering","Sales","Marketing","Support","Product"], [seatSeries], "grouped", "Department", "% Used")
+seatSeries = Series("Utilization", [92,78,65,88,74])
+
+inviteSection = Card([inviteHeading, inviteBtn], "clear", "column", "s")
+inviteHeading = Heading("Invite Admin", "h3")
+inviteBtn = Button("Send Invite", null, "primary")

@@ -1,0 +1,73 @@
+root = Card([header, kpiRow, mainDashboard, managementSection, followUps], "card", "column", "l")
+
+header = CardHeader("Live-Ops Command Center", "Real-time studio monitoring & intervention")
+
+kpiRow = Card([kpiCards], "sunk", "row", "m", "start", "stretch")
+kpiCards = [onlineNow, activeUsers, revenueToday, arpu]
+onlineNow = Card([TextContent("Players Online", "small"), Heading("14,205", "h2"), Badge("LIVE", "default", "success")], "card", "column", "m")
+activeUsers = Card([TextContent("Active Users", "small"), Heading("842k", "h2"), TextContent("DAU: 120k | MAU: 842k", "small")], "card", "column", "m")
+revenueToday = Card([TextContent("Revenue Today", "small"), Heading("$42,890", "h2"), Tag("↑ 12%", "info")], "card", "column", "m")
+arpu = Card([TextContent("Rev Per User", "small"), Heading("$2.98", "h2"), Tag("Stable", "neutral")], "card", "column", "m")
+
+mainDashboard = SectionBlock([metricsSection, economySection, stabilitySection, salesSection, eventSection, experimentSection], true)
+
+metricsSection = SectionItem("Player Trends", [sessionChart, regionHealth])
+sessionChart = Card([Heading("Avg Session Length (Last 14 Days)", "h4"), LineChart(["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "M13", "M14"], [sessionSeries], "natural", "Day", "Minutes")], "sunk")
+sessionSeries = Series("Minutes", [12, 14, 13, 15, 18, 22, 20, 19, 18, 17, 16, 15, 14, 15])
+regionHealth = Card([Heading("Server Region Health", "h4"), Table([regLabel, regStatus, regLatency])], "sunk")
+regLabel = Col("Region", ["NA-East", "EU-West", "Asia-Pacific", "LATAM"])
+regStatus = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy"])
+regLatency = Col("Latency (ms)", ["32", "45", "180", "65"])
+
+economySection = SectionItem("Economy & Sales", [inflationChart, topItems])
+inflationChart = Card([Heading("Currency Inflation Index", "h4"), RadialChart(["Gold", "Gems", "Shards"], [1.0, 1.4, 0.9])], "sunk")
+topItems = Card([Heading("Best Selling Items", "h4"), ListBlock([item1, item2, item3])], "sunk")
+item1 = ListItem("Dragon Slayer Pack", "1,200 units sold", ["https://picsum.photos/seed/item1/50/50"])
+item2 = ListItem("Starter Bundle", "8,500 units sold", ["https://picsum.photos/seed/item2/50/50"])
+item3 = ListItem("Season Pass: Autumn", "4,300 units sold", ["https://picsum.photos/seed/item3/50/50"])
+
+stabilitySection = SectionItem("Stability & Crashes", [crashChart])
+crashChart = Card([Heading("Crash Rate by App Version", "h4"), BarChart(["v1.2.0", "v1.2.1", "v1.2.2", "v1.2.3"], [crashSeries], "grouped", "Version", "%"),], "sunk")
+crashSeries = Series("Crash %", [0.05, 0.08, 0.45, 0.02])
+
+salesSection = SectionItem("Live Events", [eventList])
+eventList = ListBlock([event1, event2, event3])
+event1 = ListItem("Summer Solstice", "Running Now", ["https://picsum.photos/seed/event1/50/50"])
+event2 = ListItem("Midnight Raid", "Starts in 4h", ["https://picsum.photos/seed/event2/50/50"])
+event3 = ListItem("Halloween Spooktacular", "Upcoming", ["https://picsum.photos/seed/event3/50/50"])
+
+experimentSection = SectionItem("A/B Testing", [expTable])
+expTable = Card([Heading("Running Experiments", "h4"), Table([expCol, expResult])], "sunk")
+expCol = Col("Experiment", ["New UI Layout", "Battle Pass Pricing"])
+expResult = Col("Impact", ["+5% Retention", "-2% Conversion"])
+
+managementSection = SectionBlock([moderationSection, patchSection, operationsSection], true)
+
+moderationSection = SectionItem("Moderation Queue", [modList])
+modList = ListBlock([report1, appeal1, appeal2])
+report1 = ListItem("Player Report: Toxicity", "Awaiting Review", null, "Review")
+appeal1 = ListItem("Ban Appeal: User_442", "Awaiting Review", null, "Review")
+appeal2 = ListItem("Ban Appeal: ShadowPlayer", "Awaiting Review", null, "Review")
+
+patchSection = SectionItem("Content Management", [patchForm])
+patchForm = Form("patch-notes", patchButtons, [patchInput])
+patchInput = FormControl("Draft Patch Notes", textAreaInput)
+textAreaInput = TextArea("notes", "Enter changes here...", 5)
+patchButtons = Buttons([savePatch, previewPatch])
+savePatch = Button("Save Draft", null, "secondary")
+previewPatch = Button("Preview", null, "tertiary")
+
+operationsSection = SectionItem("System Operations", [opsControls])
+opsControls = Card([Heading("Emergency Controls", "h4"), opsList], "sunk")
+opsList = [regionFocus, hotfixBtn]
+regionFocus = FormControl("Focus View", regionSelect)
+regionSelect = Select("region_focus", [regNA, regEU, regAsia], "Select Region")
+regNA = SelectItem("NA", "North America")
+regEU = SelectItem("EU", "Europe")
+regAsia = SelectItem("ASIA", "Asia")
+hotfixBtn = Button("SHIP HOTFIX", ["hotfix_action"], "destructive", "large")
+
+followUps = FollowUpBlock([follow1, follow2, follow3])
+follow1 = FollowUpItem("Analyze crash spike in v1.2.2")
+follow2 = FollowUpItem("Generate revenue report for last week")
+follow3 = FollowUpItem("View all pending ban appeals")

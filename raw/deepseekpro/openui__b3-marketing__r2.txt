@@ -1,0 +1,47 @@
+root = Card([header, dateRangeForm, visitorsSection, conversionSection, trafficSection, campaignsSection, bestCampaignCallout, subscribersSection, exportActions])
+
+header = CardHeader("Marketing Manager Dashboard", "Weekly performance overview")
+
+dateRangeForm = Form("date-range-form", dateButtons, [dateRangeField])
+dateRangeField = FormControl("Date range", dateRangeSelect)
+dateRangeSelect = Select("date_range", [range7, range30, range90], "Select range")
+range7 = SelectItem("7", "Last 7 days")
+range30 = SelectItem("30", "Last 30 days")
+range90 = SelectItem("90", "Last 90 days")
+dateButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "sunk")
+visitorsHeading = Heading("Site visitors — last 30 days", "h3")
+visitorsChart = AreaChart(dates30, [visitorsSeries], "natural", "Date", "Visitors")
+dates30 = ["Sep 1", "Sep 2", "Sep 3", "Sep 4", "Sep 5", "Sep 6", "Sep 7", "Sep 8", "Sep 9", "Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16", "Sep 17", "Sep 18", "Sep 19", "Sep 20", "Sep 21", "Sep 22", "Sep 23", "Sep 24", "Sep 25", "Sep 26", "Sep 27", "Sep 28", "Sep 29", "Sep 30"]
+visitorsSeries = Series("Visitors", [1240, 1180, 1320, 1450, 1390, 1520, 1480, 1610, 1750, 1690, 1820, 1780, 1950, 1880, 2040, 1970, 2100, 2030, 1860, 1920, 1780, 1840, 1760, 1690, 1730, 1650, 1580, 1620, 1540, 1600])
+
+conversionSection = Card([conversionHeading, conversionValue, conversionTrend], "sunk")
+conversionHeading = Heading("Conversion rate", "h3")
+conversionValue = TextContent("3.2%", "large-heavy")
+conversionTrend = Tag("+0.4% vs last week", null, "md", "success")
+
+trafficSection = Card([trafficHeading, trafficChart], "sunk")
+trafficHeading = Heading("Top 5 traffic sources", "h3")
+trafficChart = PieChart(trafficSources, trafficShares, "donut")
+trafficSources = ["Organic Search", "Direct", "Paid Social", "Email", "Referral"]
+trafficShares = [38, 24, 18, 12, 8]
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "sunk")
+campaignsHeading = Heading("Running campaigns", "h3")
+campaignsTable = Table([campaignNameCol, campaignSpendCol, campaignStatusCol])
+campaignNameCol = Col("Campaign", ["Summer Sale", "Retargeting", "Brand Awareness", "Newsletter Promo"])
+campaignSpendCol = Col("Spend", ["$4,200", "$2,850", "$1,900", "$980"])
+campaignStatusCol = Col("Status", ["Active", "Active", "Active", "Paused"])
+
+bestCampaignCallout = Callout("success", "Best performer", "Summer Sale is driving the highest conversion at 4.8% with $4,200 spend.")
+
+subscribersSection = Card([subscribersHeading, subscribersChart], "sunk")
+subscribersHeading = Heading("Email subscriber growth this month", "h3")
+subscribersChart = AreaChart(subDates, [subscribersSeries], "natural", "Date", "New subscribers")
+subDates = ["Sep 1", "Sep 2", "Sep 3", "Sep 4", "Sep 5", "Sep 6", "Sep 7", "Sep 8", "Sep 9", "Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16", "Sep 17", "Sep 18", "Sep 19", "Sep 20", "Sep 21", "Sep 22", "Sep 23", "Sep 24", "Sep 25", "Sep 26", "Sep 27", "Sep 28", "Sep 29", "Sep 30"]
+subscribersSeries = Series("New subscribers", [18, 22, 19, 27, 24, 31, 28, 35, 32, 40, 37, 44, 41, 48, 45, 52, 49, 55, 58, 53, 61, 57, 64, 60, 68, 62, 70, 66, 73, 71])
+
+exportActions = Buttons([exportBtn])
+exportBtn = Button("Export report", null, "primary")

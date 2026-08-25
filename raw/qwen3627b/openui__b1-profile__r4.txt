@@ -1,0 +1,59 @@
+The user wants a company directory person profile page with:
+1. Name and role
+2. Short bio
+3. A way to send them a message
+
+Let me build this with:
+- CardHeader for name and role
+- TextContent for bio
+- A form or buttons for sending a message
+- Avatar for the person
+
+Let me design a clean profile card.
+
+Components I'll use:
+- Card (root)
+- CardHeader (name and role)
+- Avatar (profile picture)
+- TextContent (bio)
+- Form with a message input and send button
+
+Let me structure this:
+
+root = Card([profileHeader, bio, contactForm])
+profileHeader = Card([avatar, nameAndRole])
+nameAndRole = Card([name, role])
+bio = TextContent(...)
+contactForm = Form(...)
+
+Actually, let me think about this more carefully. A profile page should look nice.
+
+root = Card([profileSection, bioSection, contactSection])
+
+profileSection = Card([avatar, nameHeading, roleBadge], ...)
+bioSection = Card([bioHeading, bioText], ...)
+contactSection = Card([contactHeading, messageForm], ...)
+
+Let me build this out properly with all positional arguments.
+root = Card([profileCard, bioCard, contactCard], "card", "column", "m", "start", "start")
+
+profileCard = Card([avatar, nameHeading, roleBadge, departmentTag], "card", "row", "m", "center", "start")
+avatar = Avatar("https://picsum.photos/seed/profile123/200/200", "Sarah Chen", "SC")
+nameHeading = Heading("Sarah Chen", "h2")
+roleBadge = Badge("Senior Product Designer", "secondary")
+departmentTag = Tag("Design", null, "sm", "info")
+
+bioCard = Card([bioHeading, bioText], "sunk", "column", "s", "start", "start")
+bioHeading = Heading("About", "h3")
+bioText = TextContent("Sarah leads the design system team and has been with the company for 4 years. She previously worked at a leading fintech startup where she built design tools used by over 10,000 developers. Sarah is passionate about accessibility and inclusive design, and regularly speaks at industry conferences. When she's not designing, you'll find her hiking the Pacific Northwest trails or experimenting with watercolor painting.", "default")
+
+contactCard = Card([contactHeading, messageForm], "card", "column", "s", "start", "start")
+contactHeading = Heading("Send a Message", "h3")
+messageForm = Form("contact-form", formButtons, [subjectField, messageField])
+subjectField = FormControl("Subject", subjectInput, "Brief subject line")
+subjectInput = Input("subject", "What's this about?", "text")
+messageField = FormControl("Message", messageArea)
+messageArea = TextArea("message", "Write your message here...", 5)
+formButtons = Buttons([sendButton, clearButton], "row")
+sendButton = Button("Send Message", null, "primary", "normal", "medium")
+clearButton = Button("Clear", null, "tertiary", "normal", "medium")

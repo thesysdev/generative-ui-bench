@@ -1,0 +1,129 @@
+root = Card([header, balances, transactions, spendingSplit, billsDue, vacationProgress, creditScore, transferMoney, freezeCredit, statementPeriod, alertManagement, disputeTransaction], "clear")
+
+header = CardHeader("Personal Banking", "Your financial overview at a glance")
+
+balances = Card([checkingHeading, checking, savingsHeading, savings, creditHeading, credit])
+checkingHeading = Heading("Checking Account", "h3")
+checking = Card([checkingBalance, checkingSummary])
+checkingBalance = TextCallout("neutral", "Available Balance", "$2,430.50")
+checkingSummary = TextContent("Account: Checking | Account type: Checking | Account number: ****4829 | Opened: 2024-01-15")
+savingsHeading = Heading("Savings Account", "h3")
+savings = Card([savingsBalance, savingsSummary])
+savingsBalance = TextCallout("success", "Available Balance", "$12,840.00")
+savingsSummary = TextContent("Account: Savings | Account type: Savings | Account number: ****7132 | Opened: 2023-08-22")
+creditHeading = Heading("Credit Card", "h3")
+credit = Card([creditBalance, creditSummary])
+creditBalance = TextCallout("info", "Available Credit", "$15,600.00")
+creditSummary = TextContent("Account: Credit Card | Account type: Credit Card | Account number: ****9041 | Opened: 2022-11-05 | Credit limit: $20,000")
+
+transactions = Card([transactionsHeading, transactionsList])
+transactionsHeading = Heading("Recent Transactions", "h3")
+transactionsList = ListBlock([
+    ListItem("Starbucks Coffee", "— $4.75", null, "2024-12-18"),
+    ListItem("Amazon.com", "— $129.99", null, "2024-12-17"),
+    ListItem("Walmart", "— $84.30", null, "2024-12-16"),
+    ListItem("Gas Station", "— $67.25", null, "2024-12-15"),
+    ListItem("Netflix", "— $15.99", null, "2024-12-14"),
+    ListItem("Target", "— $62.50", null, "2024-12-13"),
+    ListItem("Uber Ride", "— $23.00", null, "2024-12-12"),
+    ListItem("Restaurant", "— $58.40", null, "2024-12-11"),
+], "image")
+
+spendingSplit = Card([spendingHeading, spendingCategories])
+spendingHeading = Heading("Spending Split — This Month", "h3")
+spendingCategories = HorizontalBarChart([
+    "Groceries", "Dining Out", "Transportation", "Utilities", "Entertainment", "Shopping", "Healthcare", "Other"
+], [
+    { category: "Groceries", values: [620, 480, 350, 280, 190, 160, 120, 80] },
+    { category: "Dining Out", values: [210, 180, 150, 120, 90, 70, 50, 30] },
+    { category: "Transportation", values: [180, 150, 120, 90, 60, 40, 20, 10] },
+    { category: "Utilities", values: [140, 120, 100, 80, 60, 40, 20, 10] },
+    { category: "Entertainment", values: [90, 80, 60, 40, 30, 20, 10, 5] },
+    { category: "Shopping", values: [50, 40, 30, 20, 10, 5, 2, 1] },
+    { category: "Healthcare", values: [30, 25, 20, 15, 10, 5, 2, 1] },
+    { category: "Other", values: [20, 15, 10, 5, 3, 2, 1, 1] },
+], "grouped", "Spending", "USD")
+
+billsDue = Card([billsHeading, billsList])
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock([
+    ListItem("Electricity Bill", "— $145.00", null, "2024-12-20"),
+    ListItem("Monthly Phone", "— $69.99", null, "2024-12-19"),
+    ListItem("Insurance Premium", "— $210.00", null, "2024-12-22"),
+    ListItem("Student Loan Payment", "— $340.00", null, "2024-12-25"),
+    ListItem("Streaming Service", "— $12.99", null, "2024-12-28"),
+], "image")
+
+vacationProgress = Card([vacationHeading, vacationProgressChart])
+vacationHeading = Heading("Vacation Savings Goal", "h3")
+vacationProgressChart = SingleStackedBarChart([
+    "Savings Goal", "Current Savings"
+], [
+    { category: "Vacation Goal", values: [12000] },
+    { category: "Current Savings", values: [7850] },
+])
+
+creditScore = Card([creditScoreHeading, creditScoreValue])
+creditScoreHeading = Heading("Credit Score", "h3")
+creditScoreValue = TextCallout("info", "Credit Score", "742")
+creditScoreValue = TextCallout("success", "Credit Score", "742")
+
+transferMoney = Card([transferHeading, transferForm])
+transferHeading = Heading("Move Money Between Accounts", "h3")
+transferForm = Form("transfer", [transferAmount, transferFrom, transferTo], [transferSubmit, transferCancel])
+transferAmount = FormControl("Amount", amountInput, "Enter amount to transfer")
+amountInput = Input("amount", "Enter amount", "number")
+transferFrom = FormControl("From Account", accountSelect, "Select source account")
+accountSelect = Select("account", [checkingAcc, savingsAcc], "Select account")
+checkingAcc = SelectItem("Checking", "Checking Account", "checking")
+savingsAcc = SelectItem("Savings", "Savings Account", "savings")
+transferTo = FormControl("To Account", accountSelect2, "Select destination account")
+accountSelect2 = Select("account2", [checkingAcc, savingsAcc], "Select destination account")
+transferSubmit = Button("Transfer", null, "primary")
+transferCancel = Button("Cancel", null, "tertiary")
+
+freezeCredit = Card([freezeHeading, freezeForm])
+freezeHeading = Heading("Freeze Credit Line", "h3")
+freezeForm = Form("freeze", [freezeReason], [freezeConfirm])
+freezeReason = FormControl("Reason", reasonSelect, "Select reason for freezing")
+reasonSelect = Select("reason", [reason1, reason2, reason3], "Select reason")
+reason1 = SelectItem("Travel", "Travel", "travel")
+reason2 = SelectItem("Emergency", "Emergency", "emergency")
+reason3 = SelectItem("Other", "Other", "other")
+freezeConfirm = Button("Confirm Freeze", null, "primary")
+
+statementPeriod = Card([statementHeading, statementPeriodForm])
+statementHeading = Heading("Select Statement Period", "h3")
+statementPeriodForm = Form("statement", [statementPeriod], [statementSubmit])
+statementPeriod = FormControl("Period", periodSelect, "Select statement period")
+periodSelect = Select("period", [period1, period2, period3], "Select period")
+period1 = SelectItem("This Month", "This Month", "month")
+period2 = SelectItem("Last Month", "Last Month", "month")
+period3 = SelectItem("Last 3 Months", "Last 3 Months", "quarter")
+statementSubmit = Button("View Statement", null, "primary")
+
+alertManagement = Card([alertHeading, alertForm])
+alertHeading = Heading("Alert Management", "h3")
+alertForm = Form("alert", [alertCategory, alertThreshold], [alertSave, alertReset])
+alertCategory = FormControl("Category", alertCategorySelect, "Select alert category")
+alertCategorySelect = Select("category", [alertCat1, alertCat2, alertCat3], "Select category")
+alertCat1 = SelectItem("Spending", "Spending", "spending")
+alertCat2 = SelectItem("Bills", "Bills", "bills")
+alertCat3 = SelectItem("Savings", "Savings", "savings")
+alertThreshold = FormControl("Threshold", thresholdSlider, "Set alert threshold")
+thresholdSlider = Slider("threshold", "continuous", 0, 100, 0.1, "Set threshold as %", 0, null, 0)
+alertSave = Button("Save Alert", null, "primary")
+alertReset = Button("Reset", null, "tertiary")
+
+disputeTransaction = Card([disputeHeading, disputeForm])
+disputeHeading = Heading("Dispute a Transaction", "h3")
+disputeForm = Form("dispute", [disputeTransaction, disputeReason], [disputeSubmit, disputeCancel])
+disputeTransaction = FormControl("Transaction ID", disputeIdInput, "Enter transaction ID to dispute")
+disputeIdInput = Input("transaction_id", "Enter transaction ID", "text")
+disputeReason = FormControl("Reason", disputeReasonSelect, "Select reason for dispute")
+disputeReasonSelect = Select("reason", [disputeReason1, disputeReason2, disputeReason3], "Select reason")
+disputeReason1 = SelectItem("Incorrect Amount", "Incorrect Amount", "incorrect")
+disputeReason2 = SelectItem("Fraudulent", "Fraudulent", "fraud")
+disputeReason3 = SelectItem("Not Received", "Not Received", "not_received")
+disputeSubmit = Button("Submit Dispute", null, "primary")
+disputeCancel = Button("Cancel", null, "tertiary")

@@ -1,0 +1,120 @@
+```openui-lang
+root = Card([
+  CardHeader("Marketing Weekly Dashboard", "Manager's overview of traffic, conversions, and campaigns"),
+  
+  // 1. Site visitors over the last 30 days
+  Card([LineChart(
+    labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
+    series: [{"visitors": [4200, 4800, 5100, 4900, 5200, 5500, 5800, 6000, 6100, 6300, 6500, 6700, 6900, 7100, 7300, 7500, 7700, 7900, 8100, 8300, 8500, 8700, 8900, 9050, 9200, 9400, 9600, 9800, 10000}]],
+    xLabel: "Day",
+    yLabel: "Visitors",
+    variant: "line",
+    gap: "s"
+  ]),
+  
+  // 2. Conversion rate
+  Card([
+    TextCallout(
+      variant: "success",
+      title: "Conversion Rate",
+      description: "Overall conversion rate for the period: 4.2%"
+    )
+  ]),
+  
+  // 3. Top 5 traffic sources with share
+  Card([
+    Table([
+      {label: "Organic Search", data: "32%", share: "32%"},
+      {label: "Social Media", data: "25%", share: "25%"},
+      {label: "Direct", data: "20%", share: "20%"},
+      {label: "Referral", data: "15%", share: "15%"},
+      {label: "Paid Ads", data: "8%", share: "8%"}
+    ])
+  ]),
+  
+  // 4. Running campaigns with spend
+  Card([
+    Card([
+      CardHeader("Campaign: Summer Sale", "Summer Sale Campaign"),
+      TextContent("Total Spend: $12,500"),
+      TextContent("Status: Active")
+    ], "sunk")
+  ], "sunk"),
+  
+  Card([
+    Card([
+      CardHeader("Campaign: Winter Promo", "Winter Promo"),
+      TextContent("Total Spend: $8,200"),
+      TextContent("Status: Running")
+    ], "sunk")
+  ], "sunk"),
+  
+  Card([
+    Card([
+      CardHeader("Campaign: Black Friday", "Black Friday"),
+      TextContent("Total Spend: $15,000"),
+      TextContent("Status: Completed")
+    ], "sunk")
+  ], "sunk"),
+  
+  Card([
+    Card([
+      CardHeader("Campaign: Back to School", "Back to School"),
+      TextContent("Total Spend: $9,300"),
+      TextContent("Status: Running")
+    ], "sunk")
+  ], "sunk")
+  ),
+  
+  // 5. Best performing campaign called out
+  Card([
+    CardHeader("Best Performing Campaign", "Top performer: Summer Sale"),
+    TextCallout(
+      variant: "success",
+      title: "Best Campaign",
+      description: "Summer Sale generated the highest ROI with $5,200 in revenue from $12,500 spend"
+    )
+  ], "sunk"),
+  
+  // 6. Date range selector
+  Card([
+    TextCallout(
+      variant: "neutral",
+      title: "Date Range",
+      description: "Select custom date range"
+    ),
+    Separator(),
+    Input({
+      placeholder: "Start date",
+      value: "2026-06-01",
+      rules: [],
+      valueType: "date"
+    }),
+    Input({
+      placeholder: "End date",
+      value: "2026-06-30",
+      rules: [],
+      valueType: "date"
+    })
+  ], "column"),
+  
+  // 7. Email subscriber growth this month
+  Card([
+    TextCallout(
+      variant: "success",
+      title: "Email Subscriber Growth",
+      description: "This month we gained 2,400 new subscribers (+150%) since last month"
+    )
+  ]),
+  
+  // 8. Export button
+  Card([
+    Button(
+      label: "Export Report",
+      action: "export_dashboard",
+      variant: "primary",
+      size: "medium"
+    )
+  ], "card")
+])
+```

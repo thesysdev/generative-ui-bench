@@ -1,0 +1,44 @@
+thought
+root = Card([header, status, categorySection, topExpense, navigation, addExpenseForm])
+header = CardHeader("Monthly Budget", "October 2023")
+status = Callout("info", "Budget Progress", "You have spent $2,450 of your $3,000 limit this month.")
+progress = Progress(85, "85% of Budget")
+categorySection = Card([Heading("Spending by Category", "h3"), chart], "sunk")
+chart = PieChart(["Rent", "Food", "Transport", "Entertainment", "Other"], [1200, 600, 300, 250, 100], "donut")
+topExpense = Card([Heading("Largest Expense", "h3"), expenseDetail], "sunk")
+expenseDetail = ListBlock([ListItem("MacBook Pro", "Electronics - Work Upgrade", null, "$2,400.00")])
+navigation = Buttons([prevMonth, nextMonth], "row") 
+prevMonth = Button("← Previous Month", null, "tertiary")
+nextMonth = Button("Next Month →", null, "tertiary")
+addExpenseForm = Card([Heading("Add New Expense", "h3"), form])
+form = Form("new-expense", formButtons, [nameField, amountField, categoryField])
+nameField = FormControl("Item Name", Input("name", "e.g. Groceries"))
+amountField = FormControl("Amount ($)", Input("amount", "number"))
+categoryField = FormControl("Category", Select("category", [catHousing, catFood, catTrans, catEnt, catMisc], "Select category"))
+catHousing = SelectItem("Housing", "Rent and utilities", "housing")
+catFood = SelectItem("Food", "Grocery and dining", "food")
+catTrans = SelectItem("Transport", "Fuel and transit", "trans")
+catEnt = SelectItem("Entertainment", "Movies and hobbies", "ent")
+catMisc = SelectItem("Other", "Miscellaneous costs", "misc")
+formButtons = Buttons([Button("Add Expense", null, "primary"), Button("Cancel", null, "tertiary")])
+# Wait, I need to include progress in the root or a section. Let's fix the root.
+root = Card([header, status, progress, categorySection, topExpense, navigation, addExpenseForm])
+# Re-checking references:
+# header: in root
+# status: in root
+# progress: in root
+# categorySection: in root
+# chart: in categorySection
+# topExpense: in root
+# expenseDetail: in topExpense
+# navigation: in root
+# prevMonth: in navigation
+# nextMonth: in navigation
+# addExpenseForm: in root
+# form: in addExpenseForm
+# nameField: in form
+# amountField: in form
+# categoryField: in form
+# catHousing, catFood, catTrans, catEnt, catMisc: in categoryField
+# formButtons: in form
+# All referenced.

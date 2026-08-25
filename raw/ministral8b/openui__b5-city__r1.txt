@@ -1,0 +1,175 @@
+```openui-lang
+root = Card([
+    header,
+    dashboardGrid,
+    alertsSection,
+    incidentMap,
+    districtFocus,
+    dispatchControls,
+    publicAlertForm
+])
+
+header = CardHeader("City Operations Center", "Real-time city monitoring dashboard")
+
+dashboardGrid = Card([
+    congestionSection,
+    punctualitySection,
+    airQualitySection,
+    energySection,
+    waterSection
+], "sunk")
+
+congestionSection = Card([
+    Heading("Current Congestion", "h3"),
+    Tag("High", null, null, "danger"),
+    BarChart(["Downtown", "North", "South", "East", "West"], [congestionSeries], "grouped", "District", "Traffic Level")
+], "card")
+congestionSeries = Series("Congestion", [95, 72, 68, 85, 55])
+
+punctualitySection = Card([
+    Heading("Transit Punctuality", "h3"),
+    Tag("78%", null, null, "success"),
+    RadarChart(["Buses", "Trains", "Subway", "Ferries"], [punctualitySeries])
+], "card")
+punctualitySeries = Series("Punctuality %", [82, 75, 90, 70])
+
+airQualitySection = Card([
+    Heading("Air Quality by District", "h3"),
+    HorizontalBarChart(["Downtown", "North", "South", "East", "West"], [airQualitySeries], "grouped", "District", "AQI Level")
+], "card")
+airQualitySeries = Series("AQI", [68, 45, 52, 39, 71])
+
+energySection = Card([
+    Heading("Energy Use (Past Week)", "h3"),
+    LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries], "natural", "Day", "kWh")
+], "card")
+energySeries = Series("Energy", [12500, 11800, 13200, 12000, 11500, 10800, 10200])
+
+waterSection = Card([
+    Heading("Water Use Today", "h3"),
+    RadialChart(["Residential", "Industrial", "Commercial"], [waterSeries])
+], "card")
+waterSeries = Series("Usage", [78, 12, 10])
+
+alertsSection = Card([
+    Heading("Open Incidents", "h3"),
+    ListBlock(incidents, "image"),
+    Separator()
+], "card")
+
+incidents = [
+    ListItem("Road closure on 5th Ave", "High severity", ["https://maps.example.com/road5th"], "Reported 2h ago"),
+    ListItem("Power outage Downtown", "Medium severity", ["https://maps.example.com/poweroutage"], "Reported 1h ago"),
+    ListItem("Flood warning in North", "Low severity", ["https://maps.example.com/flood"], "Reported 5m ago")
+]
+
+incidentMap = Card([
+    Heading("Emergency Vehicle Deployment", "h3"),
+    Image("Emergency vehicles map", "https://maps.example.com/emergency"),
+    Separator()
+], "card")
+
+districtFocus = Card([
+    Heading("Focus on District", "h3"),
+    Select("district", districts, "Select district", null, "Downtown"),
+    Separator()
+], "card")
+districts = [
+    SelectItem("Downtown", "Downtown"),
+    SelectItem("North", "North"),
+    SelectItem("South", "South"),
+    SelectItem("East", "East"),
+    SelectItem("West", "West")
+]
+
+dispatchControls = Card([
+    Heading("Dispatch Crew", "h3"),
+    Buttons([dispatchBtn]),
+    Separator()
+], "card")
+dispatchBtn = Button("Dispatch Crew", null, "primary")
+
+publicAlertForm = Card([
+    Heading("Send Public Alert", "h3"),
+    Form("public-alert", alertButtons, [alertMessageField]),
+    Separator()
+], "card")
+alertMessageField = FormControl("Alert Message", alertInput)
+alertInput = TextArea("alert_message", "Enter public alert message...", 3, null, "This alert will be broadcast to all citizens")
+alertButtons = Buttons([sendAlertBtn])
+sendAlertBtn = Button("Send Alert", null, "primary")
+
+roadworksSection = Card([
+    Heading("Roadworks This Month", "h3"),
+    Table(roadworkColumns)
+], "card")
+roadworkColumns = [
+    Col("Location", ["Downtown", "North", "South", "East", "West"], "string"),
+    Col("Start Date", ["2023-10-15", "2023-10-20", "2023-10-25", "2023-11-05", "2023-11-10"], "string"),
+    Col("Duration", ["3 days", "5 days", "2 days", "4 days", "3 days"], "string")
+]
+
+infrastructureSection = Card([
+    Heading("Infrastructure Jobs Due", "h3"),
+    ListBlock(infrastructureJobs, "number")
+], "card")
+infrastructureJobs = [
+    ListItem("Water main replacement", "Downtown", ["https://maps.example.com/water"], "Due in 3 days"),
+    ListItem("Bridge inspection", "North", ["https://maps.example.com/bridge"], "Due in 1 week"),
+    ListItem("Street lighting upgrade", "South", ["https://maps.example.com/lighting"], "Due in 2 weeks")
+]
+
+weatherSection = Card([
+    Heading("Current Weather", "h3"),
+    Image("Weather map", "https://weather.example.com/current"),
+    Tag("72°F", null, null, "neutral"),
+    Tag("Partly Cloudy", null, null, "neutral")
+], "card")
+
+eventsSection = Card([
+    Heading("Public Events This Weekend", "h3"),
+    ListBlock(events)
+], "card")
+events = [
+    ListItem("City Festival", "Downtown Park", ["https://maps.example.com/festival"], "This Saturday"),
+    ListItem("Food Truck Rally", "North Plaza", ["https://maps.example.com/rally"], "This Sunday"),
+    ListItem("Outdoor Concert", "East Riverfront", ["https://maps.example.com/concert"], "This Saturday")
+]
+
+citizenReports = Card([
+    Heading("Citizen Reports", "h3"),
+    ListBlock(reports)
+], "card")
+reports = [
+    ListItem("Pothole on Maple St", "Downtown", ["https://maps.example.com/pothole"], "Reported 1m ago"),
+    ListItem("Broken traffic light", "North", ["https://maps.example.com/light"], "Reported 3m ago"),
+    ListItem("Litter in park", "South", ["https://maps.example.com/litter"], "Reported 5m ago")
+]
+
+backlogSection = Card([
+    Heading("Service Request Backlog", "h3"),
+    Table(backlogColumns)
+], "card")
+backlogColumns = [
+    Col("Request", ["Tree trimming", "Sidewalk repair", "Street cleaning", "Park maintenance"], "string"),
+    Col("Priority", ["High", "Medium", "Low", "Medium"], "string"),
+    Col("Status", ["Pending", "In Progress", "Scheduled", "Completed"], "string")
+]
+
+parkingSection = Card([
+    Heading("Downtown Parking Availability", "h3"),
+    Tag("87%", null, null, "success"),
+    Progress(87, "Available")
+], "card")
+
+alertButtons = Buttons([confirmAlertBtn])
+confirmAlertBtn = Button("Send Alert", null, "primary")
+
+roadworksData = [
+    ["Downtown", "2023-10-15", "3 days"],
+    ["North", "2023-10-20", "5 days"],
+    ["South", "2023-10-25", "2 days"],
+    ["East", "2023-11-05", "4 days"],
+    ["West", "2023-11-10", "3 days"]
+]
+```

@@ -1,0 +1,136 @@
+```openui
+root = Card([
+    header, 
+    oeeBox, 
+    productionBox, 
+    productionLinesBox, 
+    defectRateBox, 
+    downtimeBox, 
+    maintenanceBox, 
+    stockBox, 
+    deliveriesBox, 
+    shiftComparisonBox, 
+    safetyBox, 
+    qualityHoldBox, 
+    energyUseBox, 
+    workOrdersBox, 
+    maintenanceScheduleBox, 
+    focusBox, 
+    alertsBox, 
+    exportButton
+])
+
+header = CardHeader("Factory Floor Supervisor Console", "Real-time Overview")
+
+oeBox = Card([
+    CardHeader("Overall Equipment Effectiveness", "OEE")
+], "sunk", "column", "l", "between", false)
+oeeValue = TextContent("OEE: 85.3%", "large-heavy")
+
+productionBox = Card([
+    CardHeader("Production Target", "Today's Goal")
+], "sunk", "column", "l", "between", false)
+unitsProduced = TextContent("Units Produced: 450", "large-heavy")
+targetUnits = TextContent("Target: 500", "large")
+
+productionLinesBox = Card([
+    CardHeader("Production Lines Overview", "Current Rates & Status")
+], "sunk", "column", "l", "between", false)
+line1 = TextContent("Line 1: 95% | Active", "small-heavy")
+line2 = TextContent("Line 2: 80% | Maintenance", "small-heavy")
+
+defectRateBox = Card([
+    CardHeader("Defect Rate", "Past Month")
+], "sunk", "column", "l", "between", false)
+defectRate = TextContent("Defect Rate: 2.1%", "large-heavy")
+
+downtimeBox = Card([
+    CardHeader("Downtime Analysis", "Split by Cause")
+], "sunk", "column", "l", "between", false)
+downtimeCause1 = TextContent("Mechanical Failure: 40%", "small-heavy")
+downtimeCause2 = TextContent("Human Error: 25%", "small-heavy")
+downtimeCause3 = TextContent("Software Issue: 15%", "small-heavy")
+downtimeCause4 = TextContent("Other: 20%", "small-heavy")
+
+maintenanceBox = Card([
+    CardHeader("Upcoming Maintenance", "Scheduled Checks")
+], "sunk", "column", "l", "between", false)
+machine1 = TextContent("Machine A: Due in 3 days", "small-heavy")
+machine2 = TextContent("Machine B: Due in 5 days", "small-heavy")
+
+stockBox = Card([
+    CardHeader("Material Stock", "Current Levels")
+], "sunk", "column", "l", "between", false)
+steelStock = TextContent("Steel: 200 tons", "small-heavy")
+resinStock = TextContent("Resin: 150 tons", "small-heavy")
+packagingStock = TextContent("Packaging: 300 units", "small-heavy")
+
+deliveriesBox = Card([
+    CardHeader("Supplier Deliveries", "This Week")
+], "sunk", "column", "l", "between", false)
+delivery1 = TextContent("Supplier X: 3rd", "small-heavy")
+delivery2 = TextContent("Supplier Y: 5th", "small-heavy")
+
+shiftComparisonBox = Card([
+    CardHeader("Shift Output Comparison", "Today")
+], "sunk", "column", "l", "between", false)
+morningShift = TextContent("Morning: 150 units", "small-heavy")
+afternoonShift = TextContent("Afternoon: 200 units", "small-heavy")
+nightShift = TextContent("Night: 100 units", "small-heavy")
+
+safetyBox = Card([
+    CardHeader("Safety Incidents", "Yearly Overview")
+], "sunk", "column", "l", "between", false)
+incidents = TextContent("Total: 5", "large-heavy")
+daysSinceLast = TextContent("Days since last: 35", "small-heavy")
+
+qualityHoldBox = Card([
+    CardHeader("Quality Hold Batches")
+], "sunk", "column", "l", "between", false)
+batchesOnHold = TextContent("Batches on Hold: 2", "small-heavy")
+
+energyUseBox = Card([
+    CardHeader("Energy Use", "Today")
+], "sunk", "column", "l", "between", false)
+energyConsumed = TextContent("Energy: 1500 kWh", "large-heavy")
+
+workOrdersBox = Card([
+    CardHeader("Open Work Orders")
+], "sunk", "column", "l", "between", false)
+order1 = TextContent("Order 1023: High Priority", "small-heavy")
+order2 = TextContent("Order 1045: Medium Priority", "small-heavy")
+
+maintenanceScheduleBox = Card([
+    CardHeader("Schedule Maintenance")
+], "sunk", "column", "l", "between", false)
+scheduleInput = Form("schedule-maintenance", scheduleButtons, [
+    machineInputField, dateInputField
+])
+machineInputField = FormControl("Machine", machineInput)
+machineInput = Input("machine")
+dateInputField = FormControl("Date", dateInput)
+dateInput = DatePicker("date")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule")
+
+focusBox = Card([
+    CardHeader("Focus on Line")
+], "sunk", "column", "l", "between", false)
+focusSelect = Form("focus-line", focusButtons, [
+    lineSelectField
+])
+lineSelectField = FormControl("Select Line", lineSelect)
+lineSelect = Select("line", [line1Item, line2Item], "Choose a line")
+line1Item = SelectItem("Line 1", "Line 1")
+line2Item = SelectItem("Line 2", "Line 2")
+focusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus")
+
+alertsBox = Card([
+    CardHeader("Live Alerts")
+], "sunk", "column", "l", "between", false)
+alert1 = TextContent("Alert: Line 2 - Sensor Failure", "small-heavy")
+alert2 = TextContent("Alert: Machine A - Overheat", "small-heavy")
+
+exportButton = Button("Export Shift Report", null, "secondary")
+```

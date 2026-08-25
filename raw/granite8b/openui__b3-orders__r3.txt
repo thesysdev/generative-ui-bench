@@ -1,0 +1,33 @@
+```openui-lang
+todayOrders = TextContent("Orders placed today: 124", "large")
+todayRevenue = TextContent("Revenue today: $45,678", "large")
+avgOrderValue = TextContent("Average Order Value: $367", "large")
+recentOrdersSection = Card([recentOrdersHeader, recentOrdersTable], "sunk")
+recentOrdersHeader = Heading("Recent Orders", "h3")
+recentOrdersTable = Table([orderIdCol, customerCol, totalCol, statusCol])
+orderIdCol = Col("Order ID", [])
+customerCol = Col("Customer", [])
+totalCol = Col("Total", [])
+statusCol = Col("Status", [])
+statusFilter = Select("status_filter", [statusAll, statusPending, statusShipped, statusDelivered], "Filter by Status")
+customerSearch = Input("customer_search", "Search by Customer Name")
+refundRate = TextContent("Refund Rate this month: 8%", "large")
+orderVolumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "grouped", "Week", "Orders")
+volumeSeries = Series("Orders", [120, 135, 140, 155])
+markAsFulfilledBtn = Button("Mark as Fulfilled", null, "primary")
+
+root = Card([
+    CardHeader("E‑Commerce Operations Dashboard", "Live Order Overview"),
+    todayOrders,
+    todayRevenue,
+    avgOrderValue,
+    recentOrdersSection,
+    Buttons([statusFilterBtn, customerSearchBtn]),
+    refundRate,
+    orderVolumeChart,
+    markAsFulfilledBtn
+], "card", "row", "l")
+
+statusFilterBtn = Button("Apply Status Filter", ["apply"], "tertiary")
+customerSearchBtn = Button("Search by Customer", ["search"], "tertiary")
+```

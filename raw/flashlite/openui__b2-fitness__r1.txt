@@ -1,0 +1,41 @@
+root = Card([header, metricsRow, workoutChart, workoutFormSection])
+
+header = CardHeader("Daily Fitness Summary", "Today's progress and weekly trends")
+
+metricsRow = Card([stepCard, calorieCard], "clear", "row", "m", "stretch", "between")
+
+stepCard = Card([stepHeader, stepProgress], "card", "column", "s", "stretch", "start")
+stepHeader = CardHeader("Step Count", "Goal: 10,000 steps")
+stepProgress = Progress(8450, "8,450 / 10,000 steps (84.5%)")
+
+calorieCard = Card([calorieHeader, calorieProgress], "card", "column", "s", "stretch", "start")
+calorieHeader = CardHeader("Calories Burned", "Goal: 2,500 kcal")
+calorieProgress = Progress(2150, "2,150 / 2,500 kcal (86%)")
+
+workoutChart = Card([workoutChartHeader, weeklyBarChart], "sunk", "column", "m", "stretch", "start")
+workoutChartHeader = CardHeader("Weekly Workouts", "Duration in minutes over the past 7 days")
+weeklyBarChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "grouped", "Day", "Minutes")
+workoutSeries = Series("Workout Duration", [45, 60, 30, 45, 90, 0, 75])
+
+workoutFormSection = Card([formHeader, workoutForm], "card", "column", "m", "stretch", "start")
+formHeader = CardHeader("Log New Workout", "Record your session for today")
+workoutForm = Form("workout-log", formButtons, [typeField, durationField, intensityField])
+
+typeField = FormControl("Workout Type", typeSelect)
+typeSelect = Select("workout_type", [typeRun, typeCycle, typeLift, typeSwim], "Select activity")
+typeRun = SelectItem("running", "Running")
+typeCycle = SelectItem("cycling", "Cycling")
+typeLift = SelectItem("strength", "Strength Training")
+typeSwim = SelectItem("swimming", "Swimming")
+
+durationField = FormControl("Duration (minutes)", durationSlider, "Slide to choose duration")
+durationSlider = Slider("duration", "discrete", 10, 120, 5, [30], "Minutes")
+
+intensityField = FormControl("Intensity", intensityRadio)
+intensityRadio = RadioGroup("intensity", [intLow, intMed, intHigh], "medium")
+intLow = RadioItem("Low", "Light pace, easy breathing", "low")
+intMed = RadioItem("Medium", "Moderate effort, steady sweat", "medium")
+intHigh = RadioItem("High", "Maximum effort, heavy breathing", "high")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Save Workout", null, "primary")

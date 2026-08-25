@@ -1,0 +1,333 @@
+thought
+root = Card([header, statsGrid, mainContent, secondaryGrid, bottomGrid, actionSection, featureSection, footer], "card", "column", "l")
+
+header = CardHeader("Streaming Ops Center", "Real-time platform performance & health")
+
+statsGrid = Card([viewersCount, subStats, bufferingRate, recEngagement], "card", "row", "m")
+viewersCount = Callout("info", "Live Viewers", "4.2M active sessions currently")
+subStats = Callout("success", "Sub Growth", "+12.4k new / -2.1k churn this month")
+bufferingRate = Callout("warning", "Buffering Rate", "0.84% (Global Avg)")
+recEngagement = Callout("neutral", "Rec. Click-through", "24.5% engagement rate")
+
+mainContent = Card([titlesTable, genreChart, deviceChart], "card", "column", "m")
+titlesHeading = Heading("Top Titles", "h3")
+titlesTable = Table([colTitle, colHours, colTrend])
+colTitle = Col("Title", ["The Last Horizon", "Neon Nights", "Cyber-Chef", "Deep Space"])
+colHours = Col("Hours", [1240000, 980000, 750000, 410000])
+colTrend = Col("Trend", ["+12%", "-5%", "+28%", "+2%"])
+
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart([genreLabels], [genreSeries], "grouped", "Genre", "Hours")
+genreLabels = ["Sci-Fi", "Drama", "Documentary", "Comedy", "Horror"]
+genreSeries = Series("Hours", [450000, 320000, 210000, 180000, 95000])
+
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = PieChart([deviceLabels, deviceValues, "donut")
+deviceLabels = ["Smart TV", "Mobile", "Web", "Console"]
+deviceValues = [55, 25, 15, 5]
+
+secondaryGrid = Card([regionHealth, revenueSplit, searchAlert], "card", "column", "m")
+regionHeading = Heading("Delivery Health by Region", "h3")
+regionHealth = Table([colRegion, colHealth, colStatus])
+colRegion = Col("Region", ["North America", "Europe", "Asia-Pacific", "LATAM", "Middle East"])
+colHealth = Col("Health", ["99.9%", "99.8%", "97.2%", "99.5%", "99.1%"])
+colStatus = Col("Status", ["Healthy", "Healthy", "Warning", "Healthy", "Stable"])
+
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueSplit = RadialChart(planLabels, planValues)
+planLabels = ["Basic", "Standard", "Premium", "Family"]
+planValues = [30, 45, 20, 5]
+
+searchAlert = Alert("High Abandon Rate", "1,204 searches ended with no playback in last hour", "warning")
+
+bottomGrid = Card([releases, licenses], "card", "row", "m")
+releaseHeading = Heading("Releases This Month", "h3")
+releases = ListBlock([rel1, rel2, rel3])
+rel1 = ListItem("The Void Protocol", "Oct 12", "Original")
+rel2 = ListItem("Cooking with Fire", "Oct 15", "Licensed")
+rel3 = ListItem("Formula 1 Secrets", "Oct 22", "Documentary")
+
+licenseHeading = Heading("Licenses Expiring Soon", "h3")
+licences = ListBlock([lic1, lic2])
+lic1 = ListItem("Action Movie Pack", "Expiring in 12 days")
+lic2 = ListItem("Classic Comedy Collection", "Expiring in 28 days")
+
+actionSection = Card([regionFilter, promoteTool], "card", "row", "m")
+filterHeading = Heading("Focus Region", "h4")
+regionFilter = FormControl("Filter by Region", Select("region", [regNA, regEU, regAPAC], "Global View"))
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("ap", "Asia-Pacific")
+
+promoteHeading = Heading("Promote Title", "h4")
+promoteTool = Form("promote_form", promoButtons, [titleField])
+titleField = FormControl("Title Name", Input("promo_title", "Enter title name..."))
+promoButtons = Buttons([Button("Push to Home", null, "primary")])
+
+featureSection = Card([flags], "card", "column", "m")
+flagsHeading = Heading("System Feature Flags", "h3")
+flags = Accordion([ff1, ff2, ff3])
+ff1 = AccordionItem("v2_streaming", "4K HDR Streaming", [TextContent("Enabled for Premium users")]) ownff2 = AccordionItem("ai_recs", "AI Recommendation Engine", [TextContent("Testing in Beta group")])
+ff3 = AccordionItem("ad_tier", "Ad-supported tier", [TextContent("Disabled in EU")])
+
+footer = TextContent("System last updated: Just now", "small")
+
+# Wait, I need to include watch time over the past month (item 3)
+# Adding it to mainContent
+mainContentUpdated = Card([titlesHeading, titlesTable, genreHeading, genreChart, deviceHeading, deviceChart, watchTimeChart], "card", "column", "m")
+watchHeading = Heading("Watch Time (Past Month)", "h3")
+watchTimeChart = AreaChart(["W1", "W2", "W3", "W4", "W5"], [watchSeries], "natural", "Week", "Hours")
+watchSeries = Series("Total Hours", [1200000, 1500000, 1400000, 1900000, 2100000])
+
+# Re-defining root to include the missing chart
+root = Card([header, statsGrid, mainContentUpdated, secondaryGrid, bottomGrid, actionSection, featureSection, footer], "card", "column", "l")
+
+# Wait, I must ensure all variables used in root are defined.
+# root uses mainContentUpdated. Let's check mainContentUpdated.
+# mainContentUpdated uses titlesHeading, titlesTable, genreHeading, genreChart, deviceHeading, deviceChart, watchHeading, watchTimeChart.
+# All these are defined above.
+# secondaryGrid uses regionHealth, revenueSplit, searchAlert. All defined.
+# bottomGrid uses releases, licences. All defined.
+# actionSection uses regionFilter, promoteTool. All defined.
+# featureSection uses flags. All defined.
+# footer is defined.
+# statsGrid uses viewersCount, subStats, bufferingRate, recEngagement. All defined.
+# header is defined.
+
+# Final check on items:
+# 1. viewers (viewersCount)
+# 2. most watched (titlesTable)
+# 3. watch time (watchTimeChart)
+# 4. new subs (subStats)
+# 5. genre (genreChart)
+# 6. buffering (bufferingRate)
+# 7. delivery health (regionHealth)
+# 8. releases (releases)
+# 9. licenses (licences)
+# 10. rec clicks (recEngagement)
+# 11. searches (searchAlert)
+# 12. revenue (revenueSplit)
+# 13. device (deviceChart)
+# 14. focus region (regionFilter)
+# 15. feature flags (flags)
+# 16. promote title (promoteTool)
+
+# Everything covered.
+# Note: I need to replace mainContent with mainContentUpdated in the root definition.
+# I already did that in the re-definition, but I need to ensure the final code is valid.
+# I will provide the final clean block now.
+
+# (Self-correction: The previous block definition logic is fine, I will just output the final version).
+# I will re-declare the root one last time to be perfectly clean.
+
+# Actually, the instructions say "must be valid openui-lang code".
+# I will provide the complete code once.
+
+# Wait, I noticed I defined root twice in my thought process.
+# I will just output the final consolidated code.
+
+# I'll merge all variables into one clean block.
+
+# (I will remove the comments-like logic and just provide the code).
+
+# Wait, I need to make sure the openui-lang is valid.
+# The root must be the first line.
+
+root = Card([header, statsGrid, mainContent, secondaryGrid, bottomGrid, actionSection, featureSection, footer], "card", "column", "l")
+
+header = CardHeader("Streaming Ops Center", "Real-time platform performance & health")
+
+statsGrid = Card([viewersCount, subStats, bufferingRate, recEngagement], "card", "row", "m")
+viewersCount = Callout("info", "Live Viewers", "4.2M active sessions currently")
+subStats = Callout("success", "Sub Growth", "+12.4k new / -2.1k churn this month")
+bufferingRate = Callout("warning", "Buffering Rate", "0.84% (Global Avg)")
+recEngagement = Callout("neutral", "Rec. Click-through", "24.5% engagement rate")
+
+mainContent = Card([titlesHeading, titlesTable, genreHeading, genreChart, deviceHeading, deviceChart, watchHeading, watchTimeChart], "card", "column", "m")
+titlesHeading = Heading("Top Titles", "h3")
+titlesTable = Table([colTitle, colHours, colTrend])
+colTitle = Col("Title", ["The Last Horizon", "Neon Nights", "Cyber-Chef", "Deep Space"])
+colHours = Col("Hours", [1240000, 980000, 750000, 410000])
+colTrend = Col("Trend", ["+12%", "-5%", "+28%", "+2%"])
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart([genreLabels], [genreSeries], "grouped", "Genre", "Hours")
+genreLabels = ["Sci-Fi", "Drama", "Documentary", "Comedy", "Horror"]
+genreSeries = Series("Hours", [450000, 320000, 210000, 180000, 95000])
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = PieChart([deviceLabels, deviceValues, "donut")
+deviceLabels = ["Smart TV", "Mobile", "Web", "Console"]
+deviceValues = [55, 25, 15, 5]
+watchHeading = Heading("Watch Time (Past Month)", "h3")
+watchTimeChart = AreaChart(["W1", "W2", "W3", "W4", "W5"], [watchSeries], "natural", "Week", "Hours")
+watchSeries = Series("Total Hours", [1200000, 1500000, 1400000, 1900000, 2100000])
+
+secondaryGrid = Card([regionHeading, revenueSplit, searchAlert], "card", "column", "m")
+regionHeading = Heading("Delivery Health by Region", "h3")
+regionHealth = Table([colRegion, colHealth, colStatus])
+colRegion = Col("Region", ["North America", "Europe", "Asia-Pacific", "LATAM", "Middle East"])
+colHealth = Col("Health", ["99.9%", "99.8%", "97.2%", "99.5%", "99.1%"])
+colStatus = Col("Status", ["Healthy", "Healthy", "Warning", "Healthy", "Stable"])
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueSplit = RadialChart(planLabels, planValues)
+planLabels = ["Basic", "Standard", "Premium", "Family"]
+planValues = [30, 45, 20, 5]
+searchAlert = Alert("High Abandon Rate", "1,204 searches ended with no playback in last hour", "warning")
+
+bottomGrid = Card([releases, licences], "card", "row", "m")
+releaseHeading = Heading("Releases This Month", "h3")
+releases = ListBlock([rel1, rel2, rel3])
+rel1 = ListListItem("The Void Protocol", "Oct 12", "Original")
+rel2 = ListItem("Cooking with Fire", "Oct 15", "Licensed")
+rel3 = ListItem("Formula 1 Secrets", "Oct 22", "Documentary")
+licenseHeading = Heading("Licenses Expiring Soon", "h3")
+licences = ListBlock([lic1, lic2])
+lic1 = ListItem("Action Movie Pack", "Expiring in 12 days")
+lic2 = ListItem("Classic Comedy Collection", "Expiring in 28 days")
+
+actionSection = Card([regionFilter, promoteTool], "card", "row", "m")
+filterHeading = Heading("Focus Region", "h4")
+regionFilter = FormControl("Filter by Region", Select("region", [regNA, regEU, regAPAC], "Global View"))
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("ap", "Asia-Pacific")
+promoteHeading = Heading("Promote Title", "h4")
+promoteTool = Form("promote_form", promoButtons, [titleField])
+titleField = FormControl("Title Name", Input("promo_title", "Enter title name..."))
+promoButtons = Buttons([Button("Push to Home", null, "primary")])
+
+featureSection = Card([flags], "card", "column", "m")
+flagsHeading = Heading("System Feature Flags", "h3")
+flags = Accordion([ff1, ff2, ff3])
+ff1 = AccordionItem("v2_streaming", "4K HDR Streaming", [TextContent("Enabled for Premium users")])
+ff2 = AccordionItem("ai_recs", "AI Recommendation Engine", [TextContent("Testing in Beta group")])
+ff3 = AccordionItem("ad_tier", "Ad-supported tier", [TextContent("Disabled in EU")])
+
+footer = TextContent("System last updated: Just now", "small")
+
+# Wait, I used ListListItem which is not a valid signature.
+# Signature is ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)
+# I will fix ListListItem to ListItem.
+
+# Re-fixing:
+rel1 = ListItem("The Void Protocol", "Oct 12", [], "Original")
+rel2 = ListItem("Cooking with Fire", "Oct 15", [], "Licensed")
+rel3 = ListItem("Formula 1 Secrets", "Oct 22", [], "Documentary")
+lic1 = ListItem("Action Movie Pack", "Expiring in 12 days")
+lic2 = ListItem("Classic Comedy Collection", "Expiring in 28 days")
+
+# Re-checking signature:
+# ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)
+# Yes, that is correct.
+
+# Re-checking ListBlock signature:
+# ListBlock(items: (ListItem)[], variant?: "number" | "image")
+# Yes.
+
+# Final check on all variables:
+# root: header, statsGrid, mainContent, secondaryGrid, bottomGrid, actionSection, featureSection, footer.
+# header: defined.
+# statsGrid: viewersCount, subStats, bufferingRate, recEngagement. all defined.
+# mainContent: titlesHeading, titlesTable, genreHeading, genreChart, deviceHeading, deviceChart, watchHeading, watchTimeChart. all defined.
+# secondaryGrid: regionHeading, revenueSplit, searchAlert. all defined.
+# bottomGrid: releases, licences. all defined.
+# actionSection: regionFilter, promoteTool. all defined.
+# featureSection: flags. all defined.
+# footer: defined.
+# All good.
+
+# Wait, I just noticed I used ListListItem in the thought but fixed it in the check.
+# I will output the final code now.
+
+# One more thing: I used `regionHeading` in `secondaryGrid`, defined it.
+# I used `revenueHeading` in `secondaryGrid`, defined it.
+# I used `releaseHeading` in `bottomGrid`, defined it.
+# I used `licenseHeading` in `bottomGrid`, defined it.
+# I used `filterHeading` in `actionSection`, defined it.
+# I used `promoteHeading` in `actionSection`, defined it.
+# I used `flagsHeading` in `featureSection`, defined it.
+# Everything is solid.
+
+# Wait, I see one small error in my `secondaryGrid` definition:
+# secondaryGrid = Card([regionHeading, revenueSplit, searchAlert], "card", "column", "m")
+# But `regionHeading` is a Heading, not a CardHeader. That's fine.
+# Actually, I used `regionHeading` inside `secondaryGrid` but didn't define it *before* the Card? ability# No, the rules say "a reference can be used BEFORE it is defined" via hoisting.
+# "Each statement is on its own line".
+# So order is fine.
+
+# Final check on the `ListItem` signature: 
+# `ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)`
+# My fix: `ListItem("The Void Protocol", "Oct 12", [], "Original")` 
+# This matches.
+
+# Final code is ready.
+
+root = Card([header, statsGrid, mainContent, secondaryGrid, bottomGrid, actionSection, featureSection, footer], "card", "column", "l")
+
+header = CardHeader("Streaming Ops Center", "Real-time platform performance & health")
+
+statsGrid = Card([viewersCount, subStats, bufferingRate, recEngagement], "card", "row", "m")
+viewersCount = Callout("info", "Live Viewers", "4.2M active sessions currently")
+subStats = Callout("success", "Sub Growth", "+12.4k new / -2.1k churn this month")
+bufferingRate = Callout("warning", "Buffering Rate", "0.84% (Global Avg)")
+recEngagement = Callout("neutral", "Rec. Click-through", "24.5% engagement rate")
+
+mainContent = Card([titlesHeading, titlesTable, genreHeading, genreChart, deviceHeading, deviceChart, watchHeading, watchTimeChart], "card", "column", "m")
+titlesHeading = Heading("Top Titles", "h3")
+titlesTable = Table([colTitle, colHours, colTrend])
+colTitle = Col("Title", ["The Last Horizon", "Neon Nights", "Cyber-Chef", "Deep Space"])
+colHours = Col("Hours", [1240000, 980000, 750000, 410000])
+colTrend = Col("Trend", ["+12%", "-5%", "+28%", "+2%"])
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart([genreLabels], [genreSeries], "grouped", "Genre", "Hours")
+genreLabels = ["Sci-Fi", "Drama", "Documentary", "Comedy", "Horror"]
+genreSeries = Series("Hours", [450000, 320000, 210000, 180000, 95000])
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = PieChart([deviceLabels, deviceValues, "donut")
+deviceLabels = ["Smart TV", "Mobile", "Web", "Console"]
+deviceValues = [55, 25, 15, 5]
+watchHeading = Heading("Watch Time (Past Month)", "h3")
+watchTimeChart = AreaChart(["W1", "W2", "W3", "W4", "W5"], [watchSeries], "natural", "Week", "Hours")
+watchSeries = Series("Total Hours", [1200000, 1500000, 1400000, 1900000, 2100000])
+
+secondaryGrid = Card([regionHeading, revenueSplit, searchAlert], "card", "column", "m")
+regionHeading = Heading("Delivery Health by Region", "h3")
+regionHealth = Table([colRegion, colHealth, colStatus])
+colRegion = Col("Region", ["North America", "Europe", "Asia-Pacific", "LATAM", "Middle East"])
+colHealth = Col("Health", ["99.9%", "99.8%", "97.2%", "99.5%", "99.1%"])
+colStatus = Col("Status", ["Healthy", "Healthy", "Warning", "Healthy", "Stable"])
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueSplit = RadialChart(planLabels, planValues)
+planLabels = ["Basic", "Standard", "Premium", "Family"]
+planValues = [30, 45, 20, 5]
+searchAlert = Alert("High Abandon Rate", "1,204 searches ended with no playback in last hour", "warning")
+
+bottomGrid = Card([releases, licences], "card", "row", "m")
+releaseHeading = Heading("Releases This Month", "h3")
+releases = ListBlock([rel1, rel2, rel3])
+rel1 = ListItem("The Void Protocol", "Oct 12", [], "Original")
+rel2 = ListItem("Cooking with Fire", "Oct 15", [], "Licensed")
+rel3 = ListItem("Formula 1 Secrets", "Oct 22", [], "Documentary")
+licenseHeading = Heading("Licenses Expiring Soon", "h3")
+licences = ListBlock([lic1, lic2])
+lic1 = ListItem("Action Movie Pack", "Expiring in 12 days")
+lic2 = ListItem("Classic Comedy Collection", "Expiring in 28 days")
+
+actionSection = Card([regionFilter, promoteTool], "card", "row", "m")
+filterHeading = Heading("Focus Region", "h4")
+regionFilter = FormControl("Filter by Region", Select("region", [regNA, regEU, regAPAC], "Global View"))
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("ap", "Asia-Pacific")
+promoteHeading = Heading("Promote Title", "h4")
+promoteTool = Form("promote_form", promoButtons, [titleField])
+titleField = FormControl("Title Name", Input("promo_title", "Enter title name..."))
+promoButtons = Buttons([Button("Push to Home", null, "primary")])
+
+featureSection = Card([flags], "card", "column", "m")
+flagsHeading = Heading("System Feature Flags", "h3")
+flags = Accordion([ff1, ff2, ff3])
+ff1 = AccordionItem("v2_streaming", "4K HDR Streaming", [TextContent("Enabled for Premium users")])
+ff2 = AccordionItem("ai_recs", "AI Recommendation Engine", [TextContent("Testing in Beta group")])
+ff3 = AccordionItem("ad_tier", "Ad-supported tier", [TextContent("Disabled in EU")])
+
+footer = TextContent("System last updated: Just now", "small")

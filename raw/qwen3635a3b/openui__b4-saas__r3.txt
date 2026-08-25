@@ -1,0 +1,86 @@
+```openui
+root = Card([header, kpiSection, planSection, topCustomersSection, atRiskSection, failedPaymentsSection, adoptionSection, npsSection, periodSelector, seatUtilSection, inviteSection])
+
+header = CardHeader("Admin Dashboard", "SaaS Company Overview — All Systems")
+
+// 1 & 2 & 3 & 4 — KPIs: MRR, ARR, Churn, New Signups
+kpiSection = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiLabel, kpiValue])
+kpiLabel = Col("Metric", ["MRR", "ARR", "Churn Rate", "New Signups (90d)"])
+kpiValue = Col("Value", ["$284,500", "$3.41M", "2.1%", "347"])
+
+// 5 — Customers split by plan
+planSection = Card([planHeading, planChart])
+planHeading = Heading("Customers by Plan", "h3")
+planChart = PieChart(["Starter", "Pro", "Enterprise"], [125, 89, 34], "donut")
+
+// 6 — Top 10 customers with seats and spend
+topCustomersSection = Card([topCustHeading, topCustTable])
+topCustHeading = Heading("Top 10 Customers", "h3")
+topCustTable = Table([custName, custSeats, custSpend])
+custName = Col("Customer", ["Acme Corp", "Globex Inc", "Initech", "Umbrella Corp", "Stark Industries", "Wayne Enterprises", "Cyberdyne", "Tyrell Corp", "Massive Dynamic", "Hooli"])
+custSeats = Col("Seats", [245, 189, 156, 134, 98, 87, 76, 65, 54, 43])
+custSpend = Col("Monthly Spend", ["$48,900", "$37,800", "$31,200", "$26,800", "$19,600", "$17,400", "$15,200", "$13,000", "$10,800", "$8,600"])
+
+// 7 — Accounts at risk with reason
+atRiskSection = Card([atRiskHeading, riskAlert1, riskAlert2, riskAlert3])
+atRiskHeading = Heading("Accounts at Risk", "h3")
+riskAlert1 = Alert("Acme Corp", "Usage dropped 45% — no login in 14 days", "warning")
+riskAlert2 = Alert("Globex Inc", "Contract expires in 30 days — no renewal discussion", "warning")
+riskAlert3 = Alert("Initech", "Support tickets increased 3× in 2 weeks", "danger")
+
+// 8 — Failed payments with retry
+failedPaymentsSection = Card([failedPayHeading, failedPayTable, retryButtons])
+failedPayHeading = Heading("Failed Payments", "h3")
+failedPayTable = Table([failCust, failAmount, failDate])
+failCust = Col("Customer", ["Cyberdyne", "Tyrell Corp", "Massive Dynamic"])
+failAmount = Col("Amount", ["$2,450", "$1,890", "$3,100"])
+failDate = Col("Date", ["2024-01-15", "2024-01-12", "2024-01-10"])
+retryButtons = Buttons([retryBtn1, retryBtn2, retryBtn3])
+retryBtn1 = Button("Retry Charge", null, "secondary")
+retryBtn2 = Button("Retry Charge", null, "secondary")
+retryBtn3 = Button("Retry Charge", null, "secondary")
+
+// 9 — Feature adoption for 3 newest features
+adoptionSection = Card([adoptionHeading, adoptionChart])
+adoptionHeading = Heading("New Feature Adoption", "h3")
+adoptionChart = HorizontalBarChart(["AI Assistant", "Advanced Analytics", "API Webhooks"], [adoptionSeries], "grouped", "Feature", "Adoption %")
+adoptionSeries = Series("Adoption Rate", [78, 62, 45])
+
+// 10 — Current NPS
+npsSection = Card([npsHeading, npsBadge])
+npsHeading = Heading("Net Promoter Score", "h3")
+npsBadge = Badge("NPS: 67", "success")
+
+// 11 — Change reporting period
+periodSelector = Card([periodHeading, periodForm])
+periodHeading = Heading("Reporting Period", "h3")
+periodForm = Form("period-select", periodButtons, [periodField])
+periodField = FormControl("Select Period", periodSelect)
+periodSelect = Select("period", [opt30, opt60, opt90, opt180, opt365], "Choose range")
+opt30 = SelectItem("30", "Last 30 days")
+opt60 = SelectItem("60", "Last 60 days")
+opt90 = SelectItem("90", "Last 90 days")
+opt180 = SelectItem("180", "Last 180 days")
+opt365 = SelectItem("365", "Last 365 days")
+periodButtons = Buttons([applyPeriodBtn])
+applyPeriodBtn = Button("Apply Period", null, "primary")
+
+// 12 — Seat utilization
+seatUtilSection = Card([seatHeading, seatProgress])
+seatHeading = Heading("Seat Utilization", "h3")
+seatProgress = Progress(82, "82% of 500 seats utilized")
+
+// 13 — Invite another admin
+inviteSection = Card([inviteHeading, inviteForm])
+inviteHeading = Heading("Invite Admin", "h3")
+inviteForm = Form("invite-admin", inviteButtons, [adminNameField, adminEmailField])
+adminNameField = FormControl("Full Name", adminNameInput)
+adminNameInput = Input("admin_name", "Enter name")
+adminEmailField = FormControl("Email Address", adminEmailInput, "Admin will receive an invitation email")
+adminEmailInput = Input("admin_email", "admin@company.com", "email")
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send Invitation", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")
+```

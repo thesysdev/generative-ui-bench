@@ -1,0 +1,47 @@
+```openui
+root = Card([shipmentsInTransit, delayedShipments, onTimePercentage, volumeSplit, searchByRoute, averageCost, weeklyVolume, flagShipment, lastRefreshedInfo])
+
+shipmentsInTransit = Card([heading, shipmentsList])
+heading = CardHeader("Shipments in Transit", "Current status and details")
+shipmentsList = Table([originCol, destinationCol, etaCol, statusCol])
+originCol = Col("Origin", ["New York", "Los Angeles", "Chicago"])
+destinationCol = Col("Destination", ["London", "Tokyo", "Sydney"])
+etaCol = Col("ETA", ["2023-10-15", "2023-10-18", "2023-10-20"])
+statusCol = Col("Status", ["In Transit", "In Transit", "Delayed"])
+
+delayedShipments = Card([heading, delayedList])
+heading = CardHeader("Delayed Shipments", "Shipments with status 'Delayed'")
+delayedList = ListBlock([item1, item2], "image")
+item1 = ListItem("Shipment ID: 1234", "Delayed", [image1], "View Details")
+item2 = ListItem("Shipment ID: 5678", "Delayed", [image2])
+image1 = "delayed1.jpg"
+image2 = "delayed2.jpg"
+
+onTimePercentage = Card([heading, percentage])
+heading = CardHeader("On-Time Performance", "This Month")
+percentage = MarkDownRenderer("On-time percentage this month: **92%**")
+
+volumeSplit = Card([heading, volumeChart])
+heading = CardHeader("Volume Split by Carrier", "Current Month")
+volumeChart = PieChart(["Carrier A", "Carrier B", "Carrier C"], [40, 35, 25])
+
+searchByRoute = Form("search-route", searchButtons, [searchField])
+searchField = FormControl("Search by Route", routeInput)
+routeInput = Input("route")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search")
+
+averageCost = Card([heading, costValue])
+heading = CardHeader("Average Cost per Shipment", "This Month")
+costValue = TextContent("Average cost per shipment: $250", "large")
+
+weeklyVolume = Card([heading, volumeChart])
+heading = CardHeader("Weekly Volume", "Past Two Months")
+volumeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries1, volumeSeries2], "natural", "Week", "Volume")
+volumeSeries1 = Series("Month 1", [500, 450, 520, 480])
+volumeSeries2 = Series("Month 2", [530, 490, 510, 500])
+
+flagShipment = Button("Flag a Shipment", ["flagShipment"])
+
+lastRefreshedInfo = CardHeader("Last Refreshed", "2023-10-12 10:00 AM")
+```

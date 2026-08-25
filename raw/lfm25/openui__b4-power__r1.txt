@@ -1,0 +1,236 @@
+```openui-lang
+root = Card([
+  // 1. Current electricity load
+  Heading("Power Network Console", "Real-time operational overview"),
+  
+  // 2. Capacity utilization
+  CardHeader(
+    "Current Load",
+    "Total network load vs capacity",
+    "kW / MW"
+  ),
+  LoadStat = TextContent("42.3%", size="large"),
+  LoadLabel = TextContent("Current Load", size="medium"),
+  
+  // 3. Generation split by source
+  Card([
+    CardHeader("Generation Mix", "Energy source distribution"),
+    Table([
+      {label: "Solar", data: ["28%"], type: "string"},
+      {label: "Wind", data: ["35%"], type: "string"},
+      {label: "Hydro", data: ["22%"], type: "string"},
+      {label: "Gas", data: ["15%"], type: "string"},
+      {label: "Other", data: ["0%"], type: "string"}
+    ]),
+    Divider(decorative=true),
+    Table([
+      {label: "Solar", data: [1250], type: "number"},
+      {label: "Wind", data: [980], type: "number"},
+      {label: "Hydro", data: [650], type: "number"},
+      {label: "Gas", data: [450], type: "number"},
+      {label: "Other", data: [0], type: "number"}
+    ], columns=[{label: "Source", data: ["Solar", "Wind", "Hydro", "Gas", "Other"]}, {label: "Output (MW)", data: ["1250", "980", "650", "450", "0"]]),
+  ]),
+  
+  // 4. Each plant with output and status
+  Card([
+    CardHeader("Plant Operations", "Individual plant performance"),
+    ListBlock([
+      {
+        title: "Plant Alpha",
+        subtitle: "High-capacity hydro plant",
+        PlantStatus = TextContent("Operational", size="medium"),
+        Output = TextContent("850 MW", size="large"),
+        Region = TextContent("Northern Sector", size="small"),
+        Emission = TextContent("185 tCO2e", size="small")
+      },
+      {
+        title: "Plant Beta",
+        subtitle: "Moderate gas-fired unit",
+        PlantStatus = TextContent("Normal", size="medium"),
+        Output = TextContent("420 MW", size="large"),
+        Region = TextContent("Eastern Sector", size="small"),
+        Emission = TextContent("320 tCO2e", size="small")
+      },
+      {
+        title: "Plant Gamma",
+        subtitle: "Emerging solar farm",
+        PlantStatus = TextContent("Partial", size="medium"),
+        Output = TextContent("210 MW", size="large"),
+        Region = TextContent("Southern Sector", size="small"),
+        Emission = TextContent("45 tCO2e", size="small")
+      },
+      {
+        title: "Plant Delta",
+        subtitle: "Backup gas reservoir",
+        PlantStatus = TextContent("Standby", size="medium"),
+        Output = TextContent("75 MW", size="large"),
+        Region = TextContent("Western Sector", size="small"),
+        Emission = TextContent("110 tCO2e", size="small")
+      }
+    ]),
+  ]),
+  
+  // 5. Outages with affected region
+  Card([
+    CardHeader("Active Outages", "Recent equipment failures"),
+    ListBlock([
+      {
+        title: "Transformer Failure",
+        description: "Region: Eastern Sector",
+        AffectedRegion = TextContent("Eastern Sector", size="small"),
+        Impact = TextContent("Line loss: 15 MW", size="small")
+      },
+      {
+        title: "Line Breakage",
+        description: "Region: Northern Sector",
+        AffectedRegion = TextContent("Northern Sector", size="small"),
+        Impact = TextContent("Capacity reduction: 40 MW", size="small")
+      },
+      {
+        title: "Cooling System Shutdown",
+        description: "Region: Southern Sector",
+        AffectedRegion = TextContent("Southern Sector", size="small"),
+        Impact = TextContent("Thermal efficiency drop: 18%", size="small")
+      }
+    ]),
+  ]),
+  
+  // 6. Demand forecast for next 24 hours
+  Card([
+    CardHeader("Demand Forecast", "Next 24-hour load projection"),
+    Chart(
+      type: "line",
+      labels: ["Hour 0", "Hour 6", "Hour 12", "Hour 18", "Hour 24"],
+      series: [
+        {category: "Forecast", values: ["52,000", "55,000", "58,000", "62,000", "65,000"]}
+      ],
+      xLabel: "Time (hours)",
+      yLabel: "Demand (MW)"
+    )
+  ]),
+  
+  // 7. Current price per MWh
+  Card([
+    CardHeader("Market Price", "Price signal"),
+    TextContent("$$68.50/MWh", size="large", weight="bold"),
+    TextContent("Base rate + 4.2% congestion premium", size="small")
+  ]),
+  
+  // 8. Maintenance planned this month
+  Card([
+    CardHeader("Monthly Maintenance", "Planned work"),
+    ListBlock([
+      {
+        title: "Generator X Overhaul",
+        date: "2026-06-15",
+        plant: "Plant Alpha",
+        status: "Scheduled",
+        durationHours: "48"
+      },
+      {
+        title: "Substation Y Repair",
+        date: "2026-06-20",
+        plant: "Plant Gamma",
+        status: "Scheduled",
+        durationHours: "72"
+      },
+      {
+        title: "Transformer Replacement",
+        date: "2026-06-25",
+        plant: "Plant Delta",
+        status: "Scheduled",
+        durationHours: "96"
+      }
+    ]),
+  ]),
+  
+  // 9. Live alerts
+  Card([
+    CardHeader("Live Alerts", "Real-time notifications"),
+    ListBlock([
+      {
+        title: "Overload Warning",
+        severity: "high",
+        description: "Node 3B approaching thermal limit",
+        timestamp: "2026-06-15T14:30:00Z",
+        resolution: "Under investigation"
+      },
+      {
+        title: "Frequency Deviation",
+        severity: "medium",
+        description: "Grid frequency dropping below 49.8 Hz",
+        timestamp: "2026-06-15T14:45:00Z",
+        resolution: "Automatic compensators engaged"
+      },
+      {
+        title: "Generating Equipment Alert",
+        severity: "low",
+        description: "Battery storage degradation detected",
+        timestamp: "2026-06-15T15:00:00Z",
+        resolution: "Monitoring"
+      }
+    ]),
+  ]),
+  
+  // 10. Focus on one region (filter/search)
+  Card([
+    CardHeader("Region Filter", "Focus on specific area"),
+    Label("All Regions: North, East, South, West"),
+    ControlsBlock([
+      {
+        label: "Region Filter",
+        options: ["North", "East", "South", "West", "All"],
+        selected: "All",
+        onChange: null
+      },
+      {
+        label: "Sort Curtailment",
+        sortType: "ascending",
+        active: true,
+        onChange: null
+      }
+    ]),
+  ]),
+  
+  // 11. Order curtailment (sorting capability)
+  Card([
+    CardHeader("Curtailment Management", "Prioritize load shedding"),
+    ListBlock([
+      {
+        title: "Load Shedding Priority",
+        criteria: "Highest priority",
+        sortedBy: "Impact",
+        count: 24,
+        items: [
+          {"region": "North Sector", "affect": "60 MW", "priority": 1},
+          {"region": "East Sector", "affect": "45 MW", "priority": 2},
+          {"region": "South Sector", "affect": "35 MW", "priority": 3},
+          {"region": "West Sector", "affect": "20 MW", "priority": 4},
+          {"region": "Central", "affect": "15 MW", "priority": 5}
+        ]
+      }
+    ]),
+  ]),
+  
+  // 12. Emissions today
+  Card([
+    CardHeader("Today's Emissions", "Carbon output"),
+    TextContent("420 tCO2e", size="large", weight="bold"),
+    TextContent("vs. 380 tCO2e yesterday (+10%)", size="small"),
+    Divider(decorative=true)
+  ]),
+  
+  // Global summary card
+  Card([
+    CardHeader("Network Summary", "Key metrics at a glance"),
+    Row([
+      {label: "Load", value: "42.3% of capacity", size: "small"},
+      {label: "Remaining Headroom", value: "57.7%", size: "small"},
+      {label: "Price", value: "$$68.50/MWh", size: "small"},
+      {label: "Emissions", value: "420 tCO2e", size: "small"},
+      {label: "Maintenance", value: "3 projects scheduled", size: "small"}
+    ])
+  ])
+])
+```

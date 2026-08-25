@@ -1,0 +1,31 @@
+root = Card([header, kpiRow, trendSection, productsSection, downloadSection])
+header = CardHeader("Monthly Sales Check", "October 2024 overview")
+
+kpiRow = Card([revenueCard, conversionCard], "clear", "row", "l")
+revenueCard = Card([revenueLabel, revenueValue, revenueTag], "sunk")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = TextContent("$184,200", "large-heavy")
+revenueTag = Tag("+12.4% vs last month", null, "md", "success")
+
+conversionCard = Card([conversionLabel, conversionValue, conversionProgress], "sunk")
+conversionLabel = TextContent("Conversion rate", "small")
+conversionValue = TextContent("4.8%", "large-heavy")
+conversionProgress = Progress(4.8, "of 10% target")
+
+trendSection = Card([trendHeading, trendChart], "sunk")
+trendHeading = Heading("Revenue, last 6 months", "h3")
+trendChart = LineChart(trendLabels, [trendSeries], "natural", "Month", "USD")
+trendLabels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]
+trendSeries = Series("Revenue", [138900, 145200, 156800, 162400, 163900, 184200])
+
+productsSection = Card([productsHeading, productsTable], "sunk")
+productsHeading = Heading("Top 3 best-selling products", "h3")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Aurora Desk Lamp", "Nimbus Backpack", "Fusion Water Bottle"])
+unitsCol = Col("Units sold", [1240, 980, 875], "number")
+
+downloadSection = Card([downloadLabel, downloadButtons], "clear", "row", "m", "center", "between")
+downloadLabel = TextContent("Export this month's numbers", "default")
+downloadButtons = Buttons([downloadCsvBtn, downloadPdfBtn])
+downloadCsvBtn = Button("Download CSV", null, "primary")
+downloadPdfBtn = Button("Download PDF", null, "secondary")

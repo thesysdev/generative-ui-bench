@@ -1,0 +1,159 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Event name, date, venue - Header section
+    CardHeader(
+      title: "Tech Innovate Conference 2024",
+      subtitle: "October 25-27, 2024 | San Francisco Convention Center"
+    ),
+    
+    // 2. Agenda with times
+    Card(
+      children: [
+        Div(
+          text: "Agenda",
+          style: { marginBottom: "1rem" }
+        ),
+        ListBlock(
+          items: [
+            { title: "09:00 AM - Opening Keynote: Future of AI", time: "9:00 AM" },
+            { title: "10:30 AM - Session 1: Machine Learning Trends", time: "10:30 AM" },
+            { title: "12:00 PM - Lunch Break", time: "12:00 PM" },
+            { title: "01:30 PM - Workshop: DevOps Best Practices", time: "1:30 PM" },
+            { title: "03:00 PM - Panel Discussion: Ethical Tech", time: "3:00 PM" },
+            { title: "05:30 PM - Closing Remarks", time: "5:30 PM" }
+          ]
+        )
+      ]
+    ),
+    
+    // 3. Speakers with one line each
+    Card(
+      children: [
+        CardHeader(
+          title: "Speakers",
+          subtitle: "Featured Presenters"
+        ),
+        ListItem(
+          value: "Dr. Sarah Chen - AI Research Director",
+          subtitle: "",
+          actionLabel: ""
+        ),
+        ListItem(
+          value: "Marcus Rivera - Senior Engineer",
+          subtitle: "",
+          actionLabel: ""
+        ),
+        ListItem(
+          value: "Priya Patel - Startup Founder",
+          subtitle: "",
+          actionLabel: ""
+        ),
+        ListItem(
+          value: "James Okafor - Cloud Architect",
+          subtitle: "",
+          actionLabel: ""
+        )
+      ]
+    ),
+    
+    // 4. Ticket tiers with prices
+    Card(
+      children: [
+        H3("Ticket Tiers"),
+        Table(
+          columns: [
+            { label: "Tier", data: ["General Admission", "VIP Pass", "Speaker Access"] },
+            { label: "Price", data: ["$149", "$299", "$499"] },
+            { label: "Benefits", data: [
+              "Standard access to all sessions",
+              "Priority networking + VIP lounge",
+              "Backstage access + speaker Q&A"
+            ]}
+          ],
+          headers: ["Tier", "Price", "Benefits"],
+          rows: [
+            { col1: "General Admission", col2: "$149", col3: "Standard access to all sessions" },
+            { col1: "VIP Pass", col2: "$299", col3: "Priority networking + VIP lounge" },
+            { col1: "Speaker Access", col2: "$499", col3: "Backstage access + speaker Q&A" }
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Registration form
+    Card(
+      children: [
+        CardHeader(
+          title: "Register Now",
+          subtitle: "Secure your spot today"
+        ),
+        Form(
+          name: "register-form",
+          fields: [
+            FormControl(
+              label: "Full Name",
+              input: Input("name", "John Doe", "Enter your full name"),
+              rule: (v) => v,
+              value: "John Doe"
+            ),
+            FormControl(
+              label: "Email Address",
+              input: Input("email", "john@example.com", "Enter your email"),
+              rule: (v) => v,
+              value: "john@example.com"
+            ),
+            Buttons(
+              buttons: [
+                Button(
+                  label: "Register",
+                  variant: "primary",
+                  action: "handleRegistration"
+                ),
+                Button(
+                  label: "Wait",
+                  variant: "secondary",
+                  action: "showThankYou"
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 6. Days remaining until the event
+    Card(
+      children: [
+        Div(
+          text: "Event Countdown",
+          style: { fontSize: "small", color: "gray450", marginTop: "0.5rem" }
+        ),
+        Span(
+          text: "Only ${daysRemaining} days left!",
+          style: {
+            backgroundColor: "#2563eb",
+            color: "white",
+            padding: "0.5rem",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            marginTop: "0.5rem"
+          }
+        ),
+        Card(
+          children: [
+            TextContent(
+              text: `The Tech Innovate Conference 2024 starts in ${daysRemaining} days. Don't miss out!`,
+              size: "small"
+            )
+          ]
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```

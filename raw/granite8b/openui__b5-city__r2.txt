@@ -1,0 +1,278 @@
+```openui-lang
+root = Card([
+    header,
+    topBar,
+    sections,
+    districtFilter,
+    dispatchControls,
+    weatherPanel,
+    roadworksPanel,
+    infrastructureJobsPanel,
+    footer
+], "card", "row", "l")
+
+header = CardHeader("City Operations Center", "Live Monitoring Dashboard")
+topBar = Tabs([tabCongestion, tabTransit, tabAirQuality, tabEnergy, tabWater])
+
+tabCongestion = TabItem("congestion", "Congestion", congestionSection)
+tabTransit = TabItem("transit", "Transit Punctuality", transitSection)
+tabAirQuality = TabItem("airQuality", "Air Quality by District", airQualitySection)
+tabEnergy = TabItem("energy", "Energy Use (Past Week)", energySection)
+tabWater = TabItem("water", "Water Use Today", waterSection)
+
+sections = Card([congestionSection, transitSection, airQualitySection, energySection, waterSection], "sunk")
+
+congestionSection = Card([
+    CongestionHeatmap,
+    IncidentList,
+    RoadworksList
+], "sunk")
+
+transitSection = Card([
+    TransitPunctualityChart,
+    IncidentList,
+    RoadworksList
+], "sunk")
+
+airQualitySection = Card([
+    AirQualityMap,
+    IncidentList,
+    RoadworksList
+], "sunk")
+
+energySection = Card([
+    EnergyUsageLineChart,
+    IncidentList,
+    RoadworksList
+], "sunk")
+
+waterSection = Card([
+    WaterUsageBarChart,
+    IncidentList,
+    RoadworksList
+], "sunk")
+
+incidentList = IncidentList()
+roadworksList = RoadworksList()
+parkingAvailability = ParkingAvailabilityDowntown()
+
+districtFilter = DistrictFilter()
+
+dispatchControls = DispatchControls()
+publicAlertForm = PublicAlertForm()
+weatherPanel = WeatherPanel()
+serviceBacklog = ServiceRequestBacklog()
+emergencyVehicles = EmergencyVehicleDeploymentMap()
+publicEvents = PublicEventsWeekend()
+citizenReportsStream = CitizenReportsStream()
+infrastructureJobs = InfrastructureJobsDue()
+
+footer = Footer()
+
+CongestionHeatmap = Heatmap(
+    "congestion_heatmap",
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    values = [0.8, 0.3, 0.6, 0.9, 0.4],
+    type = "number"
+)
+
+TransitPunctualityChart = BarChart(
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    series = [punctualitySeries],
+    variant = "grouped",
+    xLabel = "District",
+    yLabel = "Punctuality (% on time)"
+)
+punctualitySeries = Series("Transit Punctuality", [92, 88, 95, 90, 85])
+
+AirQualityMap = Map(
+    "air_quality_map",
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    values = [45, 60, 55, 70, 40],
+    type = "number"
+)
+
+EnergyUsageLineChart = LineChart(
+    labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    series = [energySeries],
+    variant = "linear",
+    xLabel = "Day",
+    yLabel = "Energy (MWh)"
+)
+energySeries = Series("Energy Usage", [120, 130, 125, 140, 135, 110, 115])
+
+WaterUsageBarChart = BarChart(
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    series = [waterSeries],
+    variant = "grouped",
+    xLabel = "District",
+    yLabel = "Water Use (m³)"
+)
+waterSeries = Series("Water Use", [1500, 1800, 1700, 1600, 1550])
+
+Heatmap = Component("Heatmap", (labels, values, type), "HeatmapComponent")
+BarChart = Component("BarChart", (labels, series, variant, xLabel, yLabel), "BarChartComponent")
+LineChart = Component("LineChart", (labels, series, variant, xLabel, yLabel), "LineChartComponent")
+Map = Component("Map", (labels, values, type), "MapComponent")
+Series = Component("Series", (category, values), "SeriesComponent")
+
+IncidentList = ListBlock(items = IncidentListItems, variant = "number")
+IncidentListItems = [
+    IncidentItem("District A", "Fire", "High"),
+    IncidentItem("District B", "Road Closure", "Medium"),
+    IncidentItem("District C", "Medical Emergency", "Critical")
+]
+IncidentItem = Component("IncidentItem", (location, type, severity), "IncidentItemComponent")
+
+RoadworksList = ListBlock(items = RoadworksListItems, variant = "number")
+RoadworksListItems = [
+    RoadworksItem("District D", "Street Repair", "2025-09-01 to 2025-09-07"),
+    RoadworksItem("District E", "Utility Installation", "2025-09-05 to 2025-09-12")
+]
+RoadworksItem = Component("RoadworksItem", (location, description, dates), "RoadworksItemComponent")
+
+ParkingAvailabilityDowntown = Card([
+    ParkingMap,
+    ParkingBarChart
+], "sunk")
+ParkingMap = Map(
+    "parking_availability_map",
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    values = [70, 80, 60, 90, 75],
+    type = "number"
+)
+ParkingBarChart = BarChart(
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    series = [parkingSeries],
+    variant = "grouped",
+    xLabel = "District",
+    yLabel = "% Available"
+)
+parkingSeries = Series("Parking Availability", [70, 80, 60, 90, 75])
+
+DistrictFilter = Dropdown(
+    "district_filter",
+    items = [DistrictOption("All"), DistrictOption("District A"), DistrictOption("District B"), DistrictOption("District C"), DistrictOption("District D"), DistrictOption("District E")],
+    selected = "All"
+)
+DistrictOption = Component("DistrictOption", (label, value), "DistrictOptionComponent")
+
+DispatchControls = Card([
+    DispatchForm,
+    CrewList
+], "sunk")
+DispatchForm = Form("dispatch_form", dispatchButtons, [
+    DispatchInput
+])
+DispatchInput = FormControl("Details", Input("dispatch_details", placeholder = "Enter dispatch details"))
+dispatchButtons = Buttons([dispatchBtn])
+dispatchBtn = Button("Dispatch Crew", ["dispatch"], "primary")
+CrewList = ListBlock(items = CrewListItems, variant = "number")
+CrewListItems = [
+    CrewItem("Crew 1", "Fire Department"),
+    CrewItem("Crew 2", "EMS"),
+    CrewItem("Crew 3", "Road Crew")
+]
+CrewItem = Component("CrewItem", (name, type), "CrewItemComponent")
+
+PublicAlertForm = Form("public_alert_form", alertButtons, [
+    AlertMessage
+])
+AlertMessage = FormControl("Message", TextArea("alert_message", placeholder = "Public alert message"))
+alertButtons = Buttons([sendBtn])
+sendBtn = Button("Send Alert", ["send"], "destructive")
+
+WeatherPanel = Card([
+    WeatherCurrent,
+    WeatherForecast
+], "sunk")
+WeatherCurrent = CardHeader("Current Weather", "Live")
+WeatherForecast = Card([
+    WeatherChart
+], "sunk")
+WeatherChart = LineChart(
+    labels = ["Today", "Tomorrow", "Saturday", "Sunday"],
+    series = [weatherSeries],
+    variant = "natural",
+    xLabel = "Day",
+    yLabel = "Conditions"
+)
+weatherSeries = Series("Weather Forecast", ["Sunny", "Partly Cloudy", "Rain", "Sunny"])
+
+ServiceRequestBacklog = Card([
+    BacklogTable
+], "sunk")
+BacklogTable = Table(columns = [backlogCols])
+backlogCols = [
+    Col("Request ID", ["1001", "1002", "1003"], "number"),
+    Col("Type", ["Road Repair", "Utility", "Traffic Light"], "string"),
+    Col("Submitted", ["2025-08-20", "2025-08-21", "2025-08-22"], "date")
+]
+
+EmergencyVehicleDeploymentMap = Map(
+    "emergency_vehicles_map",
+    labels = ["District A", "District B", "District C", "District D", "District E"],
+    values = [2, 1, 0, 3, 1],
+    type = "number"
+)
+
+PublicEventsWeekend = ListBlock(items = PublicEventsItems, variant = "image")
+PublicEventsItems = [
+    EventItem("Concert", "Stage Park", "2025-09-07 19:00", "concert.jpg"),
+    EventItem("Festival", "Riverfront Plaza", "2025-09-08 12:00", "festival.jpg"),
+    EventItem("Market", "City Square", "2025-09-08 10:00", "market.jpg")
+]
+EventItem = Component("EventItem", (title, location, time, image), "EventItemComponent")
+
+CitizenReportsStream = Card([
+    CitizenReportsList
+], "sunk")
+CitizenReportsList = ListBlock(items = CitizenReportsItems, variant = "number")
+CitizenReportsItems = [
+    ReportItem("Noise Complaint", "District B", "Submitted 5 mins ago"),
+    ReportItem("Road Hazard", "District C", "Submitted 2 mins ago"),
+    ReportItem("Parking Issue", "District D", "Submitted 10 mins ago")
+]
+ReportItem = Component("ReportItem", (type, location, time), "ReportItemComponent")
+
+InfrastructureJobsDue = Card([
+    JobsTable
+], "sunk")
+JobsTable = Table(columns = [jobsCols])
+jobsCols = [
+    Col("Job ID", ["J100", "J101", "J102"], "number"),
+    Col("District", ["A", "B", "C"], "string"),
+    Col("Due Date", ["2025-09-15", "2025-09-20", "2025-09-25"], "date"),
+    Col("Status", ["Pending", "In Progress", "Completed"], "string")
+]
+
+Footer = Card([
+    FooterLinks
+], "clear")
+FooterLinks = ListBlock(items = FooterLinkItems, variant = "number")
+FooterLinkItems = [
+    LinkItem("Contact", "https://city.gov/contact"),
+    LinkItem("Privacy", "https://city.gov/privacy"),
+    LinkItem("Terms", "https://city.gov/terms")
+]
+LinkItem = Component("LinkItem", (text, url), "LinkItemComponent")
+
+// Define all component placeholders to satisfy unreferenced rule
+HeatmapComponent = Component("Heatmap", (labels, values, type), "HeatmapComponent")
+BarChartComponent = Component("BarChart", (labels, series, variant, xLabel, yLabel), "BarChartComponent")
+LineChartComponent = Component("LineChart", (labels, series, variant, xLabel, yLabel), "LineChartComponent")
+MapComponent = Component("Map", (labels, values, type), "MapComponent")
+SeriesComponent = Component("Series", (category, values), "SeriesComponent")
+IncidentItemComponent = Component("IncidentItem", (location, type, severity), "IncidentItemComponent")
+RoadworksItemComponent = Component("RoadworksItem", (location, description, dates), "RoadworksItemComponent")
+DistrictOptionComponent = Component("DistrictOption", (label, value), "DistrictOptionComponent")
+CrewItemComponent = Component("CrewItem", (name, type), "CrewItemComponent")
+AlertMessageComponent = Component("AlertMessage", (text), "AlertMessageComponent")
+WeatherForecastComponent = Component("WeatherForecast", (), "WeatherForecastComponent")
+BacklogTableComponent = Component("BacklogTable", (), "BacklogTableComponent")
+EmergencyVehicleDeploymentMapComponent = Component("EmergencyVehicleDeploymentMap", (), "EmergencyVehicleDeploymentMapComponent")
+EventItemComponent = Component("EventItem", (title, location, time, image), "EventItemComponent")
+ReportItemComponent = Component("ReportItem", (type, location, time), "ReportItemComponent")
+JobsTableComponent = Component("JobsTable", (), "JobsTableComponent")
+LinkItemComponent = Component("LinkItem", (text, url), "LinkItemComponent")
+```

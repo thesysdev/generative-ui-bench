@@ -1,0 +1,24 @@
+root = Card([header, statsRow, filterRow, ticketSection, actionRow], "card", "column", "m")
+
+header = CardHeader("Support Lead Dashboard", "Morning Overview - Oct 24, 2023")
+
+statsRow = Card([openTickets, responseTime], "sunk", "row", "m")
+openTickets = TextCallout("info", "Open Tickets", "142 tickets currently awaiting assignment")
+responseTime = TextCallout("success", "Avg First Response", "1.4 hours (Down 12% from yesterday)")
+
+filterRow = Card([filterLabel, priorityFilter], "clear", "row", "s", "center", "between")
+filterLabel = TextContent("Filter View:", "small-heavy")
+priorityFilter = Buttons([highPriorityBtn])
+highPriorityBtn = Button("High Priority Only", null, "outline", "normal", "small")
+
+ticketSection = Card([sectionHeading, ticketsTable], "sunk", "column", "m")
+sectionHeading = Heading("Recent Tickets", "h3")
+ticketsTable = Table([ticketIdCol, customerCol, priorityCol, statusCol])
+
+ticketIdCol = Col("Ticket ID", ["#8842", "#8841", "#8840", "#8839", "#8838"])
+customerCol = Col("Customer", ["Acme Corp", "Global Logistics", "TechFlow", "Zenith Ltd", "Omni Retail"])
+priorityCol = Col("Priority", ["High", "Medium", "High", "Low", "Medium"], "string")
+statusCol = Col("Status", ["Unassigned", "In Progress", "Open", "Pending", "Open"])
+
+actionRow = Card([newTicketBtn], "clear", "row", "none", "end")
+newTicketBtn = Button("Create New Ticket", null, "primary", "normal", "large")

@@ -1,0 +1,84 @@
+```javascript
+root = Card(
+  children: [
+    // Header
+    CardHeader("Cafe Menu", "Daily offerings"),
+
+    // Drinks section with prices
+    Card([
+      CardHeader("Drinks", "Beverages"),
+      Table(
+        columns: [
+          { label: "Drink", data: ["Espresso", "Latte", "Cappuccino", "Iced Coffee", "Herbal Tea", "Matcha Latte"] },
+          { label: "Price", data: ["$3.50", "$4.25", "$4.75", "$3.95", "$5.00", "$4.50"] },
+          { label: "Vegetarian", data: ["yes", "yes", "no", "yes", "yes", "yes"] }
+        ],
+        type: "string"
+      )
+    ]),
+
+    // Food section with prices
+    Card([
+      CardHeader("Food", "Appetizers & Main Courses"),
+      Table(
+        columns: [
+          { label: "Dish", data: ["Veggie Burger", "Quinoa Salad", "Spaghetti Bolognese", "Margherita Pizza", "Tomato Soup", "Seasonal Fruit Bowl"] },
+          { label: "Price", data: ["$12.99", "$9.99", "$16.50", "$15.00", "$8.49", "$7.99"] },
+          { label: "Vegetarian", data: ["yes", "yes", "no", "yes", "yes", "yes"] }
+        ],
+        type: "string"
+      )
+    ]),
+
+    // Today's special called out
+    Card([
+      CardHeader("Today's Special", "Featured Item"),
+      Card([
+        TextCallout(
+          "Special of the Day",
+          "Grilled Chicken Caesar Salad – Features our fresh local ingredients and house-made croutons."
+        ),
+        { type: "text", text: "Try our seasonal specials during lunch and dinner." }
+      ])
+    ]),
+
+    // Opening hours
+    Card([
+      CardHeader("Opening Hours", "Our schedule"),
+      TextCallout(
+        "Monday–Friday: 7:00 AM – 2:00 PM\nSaturday: 8:00 AM – 6:00 PM\nSunday: 8:00 AM – 12:00 PM"
+      )
+    ]),
+
+    // Vegetarian items only filter
+    Card([
+      TextCallout(
+        "Vegetarian Only",
+        "Display only vegetarian-friendly options.",
+        "info"
+      ),
+      SwitchGroup(
+        name: "vegetarian_filter",
+        items: [
+          {
+            value: "all",
+            label: "All Items",
+            description: "Show all drinks and food items."
+          },
+          {
+            value: "vegetarian_only",
+            label: "Vegetarian Only",
+            description: "Show only vegetarian options.",
+            name: "vegetarian_mode"
+          }
+        ]
+      )
+    ])
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "center",
+  wrap: true
+)
+```

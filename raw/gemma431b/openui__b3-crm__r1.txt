@@ -1,0 +1,48 @@
+root = Card([header, kpiGrid, accountDetails, activitySection, contactSection, followUpSection, noteSection, actionButtons], "card", "column", "l")
+
+header = CardHeader("Acme Corp", "Account managed by Sarah Jenkins")
+
+kpiGrid = Card([dealValue, dealStage, renewalStatus], "sunk", "row", "m", "stretch", "between")
+dealValue = Card([valLabel, valAmount], "clear", "column", "none")
+valLabel = TextContent("Total Deal Value", "small")
+valAmount = TextContent("$450,000", "large-heavy")
+dealStage = Card([stageLabel, stageBadge], "clear", "column", "none")
+stageLabel = TextContent("Current Stage", "small")
+stageBadge = Badge("Negotiation", "default")
+renewalStatus = Card([renLabel, renWarning], "clear", "column", "none")
+renLabel = TextContent("Renewal Date", "small")
+renWarning = Alert("Renewal in 12 days", "Contract expires on Oct 15th", "warning")
+
+accountDetails = SectionBlock([detailsItem], true)
+detailsItem = SectionItem("Account Overview", "General Details", [accText])
+accText = MarkDownRenderer("Acme Corp is a global leader in sustainable packaging. They are currently scaling their operations into the EMEA market.")
+
+activitySection = Card([actHeading, activityList], "sunk", "column", "m")
+actHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([act1, act2, act3], "number")
+act1 = ListItem("Discovery Call", "Discussed Q4 expansion goals", null, "View Recording")
+act2 = ListItem("Email Sent", "Sent revised pricing proposal", null, "View Thread")
+act3 = ListItem("Meeting", "Quarterly Business Review completed", null, "View Notes")
+
+contactSection = Card([conHeading, contactTable], "sunk", "column", "m")
+conHeading = Heading("Key Contacts", "h3")
+contactTable = Table([conName, conRole, conEmail])
+conName = Col("Name", ["James Wilson", "Elena Rodriguez", "Marcus Chen"])
+conRole = Col("Role", ["CTO", "Procurement Lead", "Director of Ops"])
+conEmail = Col("Email", ["james@acme.com", "elena@acme.com", "marcus@acme.com"])
+
+followUpSection = Card([folHeading, followUpList], "sunk", "column", "m")
+folHeading = Heading("Open Follow-ups", "h3")
+followUpList = ListBlock([fol1, fol2], "image")
+fol1 = ListItem("Send Case Study", "Due: Oct 2nd", null, "Mark Complete")
+fol2 = ListItem("Confirm Sign-off", "Due: Oct 5th", null, "Mark Complete")
+
+noteSection = Form("quick-note", noteButtons, [noteField])
+noteField = FormControl("Quick Note", noteInput, "Add a temporary internal note")
+noteInput = TextArea("note_text", "Jot down a thought...")
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+actionButtons = Buttons([logCallBtn, emailBtn], "row")
+logCallBtn = Button("Log a Call", null, "primary")
+emailBtn = Button("Send Email", null, "secondary")

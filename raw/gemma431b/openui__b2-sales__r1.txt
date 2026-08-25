@@ -1,0 +1,29 @@
+root = Card([header, kpiGrid, trendSection, productSection, conversionSection, footer], "card", "column", "l")
+
+header = CardHeader("Monthly Sales Check", "Founder's Dashboard • October 2023")
+
+kpiGrid = Card([revCard, convCard], "sunk", "row", "m")
+revCard = Card([revLabel, revValue], "clear", "column", "none")
+revLabel = TextContent("Revenue This Month", "small")
+revValue = Heading("$42,850", "h2")
+convCard = Card([convLabel, convValue], "clear", "column", "none")
+convLabel = TextContent("Conversion Rate", "small")
+convValue = Heading("3.42%", "h2")
+
+trendSection = Card([trendHeading, revenueChart], "sunk", "column", "m")
+trendHeading = Heading("6-Month Revenue Trend", "h3")
+revenueChart = LineChart(["May", "Jun", "Jul", "Aug", "Sep", "Oct"], [revSeries], "natural", "Month", "USD")
+revSeries = Series("Monthly Revenue", [28000, 31000, 29500, 34000, 38000, 42850])
+
+productSection = Card([prodHeading, topProducts], "sunk", "column", "m")
+prodHeading = Heading("Top 3 Best-Sellers", "h3")
+topProducts = Table([prodCol, unitsCol])
+prodCol = Col("Product", ["Premium Subscription", "Enterprise Add-on", "Starter Kit"], "string")
+unitsCol = Col("Units Sold", [1240, 450, 890], "number")
+
+conversionSection = Card([convHeading, convProgress], "sunk", "column", "m")
+convHeading = Heading("Conversion Goal Progress", "h3")
+convProgress = Progress(85, "Target: 4.0% Conversion")
+
+footer = Buttons([downloadBtn], "row")
+downloadBtn = Button("Download CSV Report", null, "primary")

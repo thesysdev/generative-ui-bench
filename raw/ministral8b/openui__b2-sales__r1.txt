@@ -1,0 +1,41 @@
+```openui-lang
+root = Card([header, revenueCard, trendChart, topProducts, conversionMetric, downloadButton])
+
+header = CardHeader("Monthly Sales Dashboard", "Founder's revenue overview")
+
+revenueCard = Card([revenueHeading, revenueValue, revenueChange], "sunk")
+revenueHeading = Heading("This Month's Revenue", "h3")
+revenueValue = Card([revenueAmount, currencySymbol], "card", "row", "l", null, "center")
+currencySymbol = TextContent("$", "large-heavy")
+revenueAmount = TextContent("187,500", "large-heavy")
+
+revenueChange = Card([changeIndicator, changePercentage], "card", "row", "l", null, "center")
+changeIndicator = TextContent("▲", null, null, "large-heavy")
+changePercentage = TextContent("+12.3%", null, null, "large-heavy")
+
+trendChart = Card([trendHeading, sixMonthLineChart], "sunk")
+trendHeading = Heading("Revenue Trend (Last 6 Months)", "h3")
+sixMonthLineChart = LineChart(
+    ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    [revenueSeries],
+    "natural",
+    "Month",
+    "USD"
+)
+revenueSeries = Series("Revenue", [125000, 142000, 158000, 175000, 187500, 210000])
+
+topProducts = Card([topProductsHeading, productsTable], "sunk")
+topProductsHeading = Heading("Top 3 Products", "h3")
+productsTable = Table([productNameCol, unitsSoldCol])
+productNameCol = Col("Product", ["Wireless Earbuds Pro", "Smart Watch X", "Portable Charger"])
+unitsSoldCol = Col("Units Sold", [452, 310, 289])
+
+conversionMetric = Card([conversionHeading, conversionValue], "sunk")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionValue = Card([conversionPercentageText, conversionArrow], "card", "row", "l", null, "center")
+conversionPercentageText = TextContent("4.7%", null, null, "large-heavy")
+conversionArrow = TextContent("▲", null, null, "large-heavy")
+
+downloadButton = Buttons([downloadBtn])
+downloadBtn = Button("Download CSV", ["download_numbers"], "primary")
+```

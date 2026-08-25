@@ -1,0 +1,94 @@
+root = Card([networkStatus, generationSplit, plantDetails, outages, demandForecast, pricePerMWh, maintenance, alerts, regionFocus, curtailmentOrder, emissions], "sunk")
+
+networkStatus = CardHeader("Network Status", "Real-time power network overview")
+
+generationSplit = CardHeader("Generation Split by Source", "Current power generation mix")
+
+plantDetails = CardHeader("Plant Details", "Each plant with output and status")
+
+outages = CardHeader("Outages and Affected Regions", "Active outages with regional impact")
+
+demandForecast = CardHeader("Demand Forecast (Next 24 Hours)", "Predicted electricity demand")
+
+pricePerMWh = CardHeader("Current Price per MWh", "Electricity price")
+
+maintenance = CardHeader("Maintenance Planned This Month", "Scheduled maintenance activities")
+
+alerts = CardHeader("Live Alerts", "Incoming alerts in real-time")
+
+regionFocus = CardHeader("Region Focus", "Focus on a specific region")
+
+curtailmentOrder = CardHeader("Curtailment Order", "Order curtailment by priority")
+
+emissions = CardHeader("Emissions Today", "Today's emissions")
+
+networkStatus = Card([networkHeader, loadValue, capacityValue], "sunk")
+networkHeader = CardHeader("Network Status", "Real-time power network overview")
+loadValue = TextContent("Current load: 12,450 MW", "default")
+capacityValue = TextContent("Capacity: 13,200 MW (94.3%)", "default")
+
+generationSplit = Card([genHeader, genSeries], "sunk")
+genHeader = CardHeader("Generation Split by Source", "Current power generation mix")
+genSeries = Series("Generation", [4200, 3800, 2100, 1500, 800])
+
+plantDetails = Card([plantHeader, plantList], "sunk")
+plantHeader = CardHeader("Plant Details", "Each plant with output and status")
+plantList = ListBlock([
+  ListItem("Plant Alpha", "Output: 3,200 MW | Status: Online", null, "Normal"),
+  ListItem("Plant Beta", "Output: 2,800 MW | Status: Online", null, "Normal"),
+  ListItem("Plant Gamma", "Output: 2,100 MW | Status: Degraded", null, "Warning"),
+  ListItem("Plant Delta", "Output: 1,500 MW | Status: Online", null, "Normal"),
+  ListItem("Plant Epsilon", "Output: 800 MW | Status: Offline", null, "Emergency"),
+])
+
+outages = Card([outageHeader, outageList], "sunk")
+outageHeader = CardHeader("Outages and Affected Regions", "Active outages with regional impact")
+outageList = ListBlock([
+  ListItem("Outage A", "Region: North | Duration: 2h 15m", null, "Warning"),
+  ListItem("Outage B", "Region: South | Duration: 4h 30m", null, "Error"),
+  ListItem("Outage C", "Region: East | Duration: 1h 05m", null, "Normal"),
+])
+
+demandForecast = Card([forecastHeader, forecastSeries], "sunk")
+forecastHeader = CardHeader("Demand Forecast (Next 24 Hours)", "Predicted electricity demand")
+forecastSeries = Series("Demand", [12000, 11800, 11500, 11200, 11000, 10800, 10600, 10500, 10700, 11000, 11300, 11600, 11900, 12100, 12300, 12400, 12300, 12100, 11900, 11700, 11500, 11300, 11200, 11100])
+
+pricePerMWh = Card([priceHeader, priceValue], "sunk")
+priceHeader = CardHeader("Current Price per MWh", "Electricity price")
+priceValue = TextContent("Price: $45.20 / MWh", "default")
+
+maintenance = Card([maintenanceHeader, maintenanceList], "sunk")
+maintenanceHeader = CardHeader("Maintenance Planned This Month", "Scheduled maintenance activities")
+maintenanceList = ListBlock([
+  ListItem("Maintenance Alpha", "Plant Alpha | Scheduled: 10/15 | Duration: 8h", null, "Normal"),
+  ListItem("Maintenance Beta", "Plant Beta | Scheduled: 10/20 | Duration: 12h", null, "Normal"),
+  ListItem("Maintenance Gamma", "Plant Gamma | Scheduled: 10/25 | Duration: 6h", null, "Warning"),
+])
+
+alerts = Card([alertHeader, alertList], "sunk")
+alertHeader = CardHeader("Live Alerts", "Incoming alerts in real-time")
+alertList = ListBlock([
+  ListItem("Alert 1", "High voltage in North region", null, "Warning"),
+  ListItem("Alert 2", "Transformer failure in South region", null, "Error"),
+  ListItem("Alert 3", "Generator down in East region", null, "Error"),
+])
+
+regionFocus = Card([focusHeader, focusList], "sunk")
+focusHeader = CardHeader("Region Focus", "Focus on a specific region")
+focusList = ListBlock([
+  ListItem("North", "12,450 MW | 94.3% capacity", null, "Normal"),
+  ListItem("South", "11,800 MW | 90.2% capacity", null, "Normal"),
+  ListItem("East", "10,200 MW | 88.5% capacity", null, "Normal"),
+  ListItem("West", "9,500 MW | 82.1% capacity", null, "Normal"),
+])
+
+curtailmentOrder = Card([curtailmentHeader, curtailmentList], "sunk")
+curtailmentHeader = CardHeader("Curtailment Order", "Order curtailment by priority")
+curtailmentList = ListBlock([
+  ListItem("High Priority", "Curtailment of Plant Epsilon", null, "Error"),
+  ListItem("Medium Priority", "Curtailment of Plant Gamma", null, "Warning"),
+  ListItem("Low Priority", "Curtailment of Plant Delta", null, "Normal"),
+])
+
+emissions = CardHeader("Emissions Today", "Today's emissions")
+emissions = TextContent("CO2: 12,500 tons | NOx: 320 tons | SO2: 45 tons", "default")

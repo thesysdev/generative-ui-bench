@@ -1,0 +1,27 @@
+root = Card([header, statusCard, trackingSection, problemSection, followUps])
+
+header = CardHeader("Track Package", "Order #DEL-8829410")
+
+statusCard = Card([etaText, progress], "card", "column", "m", "center")
+etaText = TextContent("Estimated Delivery: **Thursday, Oct 24**", "large-heavy")
+progress = Progress(65, "In Transit")
+
+trackingSection = SectionBlock([step1, step2, step3], true)
+step1 = SectionItem("shipped", "Order Placed", [shippedText])
+shippedText = TextContent("Your order was processed and left the warehouse on Oct 20.")
+step2 = SectionItem("transit", "In Transit", [transitText, transitTable])
+transitText = TextContent("Your package is currently moving through our network.")
+transitTable = Table([locCol, timeCol])
+locCol = Col("Location", ["Chicago Hub", "Indianapolis Sort Facility", "Current Location: Louisville, KY"])
+timeCol = Col("Time", ["Oct 20, 10:15 AM", "Oct 21, 02:30 PM", "Oct 22, 09:00 AM"])
+step3 = SectionItem("delivered", "Out for Delivery", [deliveryText])
+deliveryText = TextContent("We will notify you when the driver is nearby.")
+
+problemSection = Card([problemHeading, reportBtn], "sunk", "column", "s")
+problemHeading = Heading("Need help with your delivery?", "h4")
+reportBtn = Buttons([issueBtn])
+issueBtn = Button("Report a Problem", null, "secondary", "normal", "medium")
+
+followUps = FollowUpBlock([up1, up2])
+up1 = FollowUpItem("Change delivery address")
+up2 = FollowUpItem("Contact carrier support")

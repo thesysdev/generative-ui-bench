@@ -1,0 +1,55 @@
+root = Card([header, periodForm, kpiTable, signupChart, planChart, customersHeading, customersTable, riskList, failedPayments, featureChart, npsCallout, utilizationChart, adminInviteForm], "card", "column", "l")
+header = CardHeader("SaaS Admin Overview", "Revenue, customers, payments, adoption, and account health")
+periodForm = Form("reporting-period", periodButtons, [periodField])
+periodField = FormControl("Reporting period", periodSelect)
+periodSelect = Select("period", [period30, period90, period365], "Choose reporting period")
+period30 = SelectItem("30d", "Last 30 days")
+period90 = SelectItem("90d", "Last 90 days")
+period365 = SelectItem("365d", "Last 12 months")
+periodButtons = Buttons([applyPeriodButton])
+applyPeriodButton = Button("Apply period", null, "primary")
+
+kpiTable = Table([kpiMetric, kpiValue, kpiChange])
+kpiMetric = Col("Metric", ["Monthly recurring revenue", "Annual recurring revenue", "Churn this month", "Current NPS"])
+kpiValue = Col("Current value", ["$482,600", "$5,791,200", "2.4%", "54"])
+kpiChange = Col("Change", ["+8.7% vs. prior month", "+8.7% vs. prior month", "-0.6 pts vs. prior month", "+6 vs. prior quarter"])
+
+signupChart = LineChart(["Jun 1", "Jun 15", "Jul 1", "Jul 15", "Aug 1", "Aug 15"], [signupSeries], "natural", "Date", "New signups")
+signupSeries = Series("New signups", [42, 68, 91, 117, 143, 176])
+
+planChart = PieChart(["Enterprise", "Business", "Starter"], [86, 214, 438], "donut", "circular")
+
+customersHeading = Heading("Ten largest customers", "h2")
+customersTable = Table([customerName, customerSeats, customerSpend])
+customerName = Col("Customer", ["Northstar Health", "Vertex Labs", "Pioneer Retail", "Atlas Finance", "Brightline Media", "Cedar Logistics", "Summit Education", "Harbor Energy", "Lumen Travel", "Orchid Systems"])
+customerSeats = Col("Seats", [420, 365, 318, 290, 244, 210, 186, 164, 142, 128], "number")
+customerSpend = Col("Monthly spend", ["$18,900", "$16,425", "$14,310", "$13,050", "$10,980", "$9,450", "$8,370", "$7,380", "$6,390", "$5,760"], "number")
+
+riskList = ListBlock([riskOne, riskTwo, riskThree], "number")
+riskOne = ListItem("Cobalt Security", "At risk — weekly active users down 42% in the last 30 days")
+riskTwo = ListItem("Maple Commerce", "At risk — renewal in 18 days and unresolved support escalation")
+riskThree = ListItem("Riverstone Legal", "At risk — seat utilization below 35% for two consecutive months")
+
+failedPayments = Table([failedCustomer, failedAmount, failedStatus])
+failedCustomer = Col("Account", ["Acme Robotics", "Willow Foods", "Granite Works"])
+failedAmount = Col("Amount", ["$2,400", "$1,250", "$890"], "number")
+failedStatus = Col("Payment status", ["Retry payment", "Retry payment", "Retry payment"], "action")
+
+featureChart = BarChart(["AI summaries", "Workflow builder", "Audit exports"], [featureAdoption], "grouped", "Feature", "Adoption rate (%)")
+featureAdoption = Series("Adoption rate", [61, 44, 28])
+
+npsCallout = Callout("success", "Current NPS: 54", "Up 6 points from the previous quarter; promoters represent 68% of surveyed accounts.")
+
+utilizationChart = BarChart(["Engineering", "Sales", "Operations", "Support", "Company total"], [seatUtilization], "grouped", "Team", "Seat utilization (%)")
+seatUtilization = Series("Utilization", [84, 76, 69, 81, 78])
+
+adminInviteForm = Form("invite-admin", inviteButtons, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Admin email", inviteEmailInput)
+inviteEmailInput = Input("email", "admin@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("role", [ownerRole, adminRole, analystRole], "Choose a role")
+ownerRole = SelectItem("owner", "Owner")
+adminRole = SelectItem("admin", "Administrator")
+analystRole = SelectItem("analyst", "Analyst")
+inviteButtons = Buttons([sendInviteButton])
+sendInviteButton = Button("Send admin invite", null, "primary")

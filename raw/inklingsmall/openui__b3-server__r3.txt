@@ -1,0 +1,53 @@
+root = Card([header, uptimeCard, usageSection, errorSection, regionFilter, incidentsSection, endpointsTable, alertForm, acknowledgeSection, footerNote], "card", "column", "l")
+
+header = CardHeader("Service Health — On-Call", "Live view for the engineer on duty")
+
+uptimeCard = Card([uptimeLabel, uptimeValue], "sunk")
+uptimeLabel = TextContent("Uptime this quarter", "small")
+uptimeValue = TextContent("99.97%", "large-heavy")
+
+usageSection = Card([usageHeading, usageChart], "card", "column", "m")
+usageHeading = Heading("CPU & Memory — Past 24h", "h3")
+usageChart = AreaChart(["00h","04h","08h","12h","16h","20h","24h"], [cpuSeries, memSeries], "linear", "Time", "%")
+cpuSeries = Series("CPU %", [12, 18, 45, 38, 22, 15, 10])
+memSeries = Series("Memory %", [55, 58, 62, 60, 56, 54, 52])
+
+errorSection = Card([errorHeading, errorCallout], "card", "column", "m")
+errorHeading = Heading("Error Rate — Right Now", "h3")
+errorCallout = Callout("warning", "Current error rate", "0.42% — above baseline")
+
+regionFilter = Card([regionLabel, regionSelect], "card", "column", "s")
+regionLabel = TextContent("Narrow to region", "small-heavy")
+regionSelect = Select("region", [usEast, euWest, apSouth, allRegions], "All regions")
+usEast = SelectItem("us-east-1", "US East")
+euWest = SelectItem("eu-west-1", "EU West")
+apSouth = SelectItem("ap-south-1", "AP South")
+allRegions = SelectItem("all", "All regions")
+
+incidentsSection = Card([incidentsHeading, incidentsList], "card", "column", "m")
+incidentsHeading = Heading("Open Incidents — Severity", "h3")
+incidentsList = ListBlock([inc1, inc2, inc3], "number")
+inc1 = ListItem("DB replication lag", "Severity: Critical • 12 min")
+inc2 = ListItem("Cache miss spike", "Severity: Warning • 45 min")
+inc3 = ListItem("SSL cert expiry", "Severity: Critical • 2 min")
+
+endpointsTable = Card([endpointsHeading, endpointsTableComp], "card", "column", "m")
+endpointsHeading = Heading("Five Slowest Endpoints — Latency", "h3")
+endpointsTableComp = Table([endpointCol, latencyCol])
+endpointCol = Col("Endpoint", ["/api/v2/orders", "/api/v1/search", "/graph/export", "/auth/token", "/reports/summary"])
+latencyCol = Col("Latency (ms)", [1240, 980, 890, 760, 640])
+
+alertForm = Card([alertHeading, alertFormComp], "card", "column", "m")
+alertHeading = Heading("Set Alert Threshold", "h3")
+alertFormComp = Form("threshold-form", alertButtons, [thresholdField])
+thresholdField = FormControl("Latency threshold (ms)", thresholdInput, "Trigger when above")
+thresholdInput = Slider("threshold", "continuous", 100, 2000, 100, [500], "Latency threshold (ms)")
+alertButtons = Buttons([saveBtn])
+saveBtn = Button("Save threshold", ["save"], "primary")
+
+acknowledgeSection = Card([ackHeading, ackBtn, ackNote], "card", "column", "s")
+ackHeading = Heading("Acknowledge Incident", "h3")
+ackBtn = Button("Acknowledge selected", ["ack"], "secondary")
+ackNote = TextContent("Select an incident above, then acknowledge to silence alerts.", "small")
+
+footerNote = TextContent("Last refreshed: now • Region: all • Engineer: on-call", "small")

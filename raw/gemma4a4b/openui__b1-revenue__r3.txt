@@ -1,0 +1,30 @@
+root = Card([header, summary, comparisonSection, hourlyChart, recentOrders, followUps], "card", "column", "l")
+
+header = CardHeader("Daily Shop Performance", "Mid-morning check-in")
+
+summary = Card([revenueDisplay, comparisonBadge], "sunk", "row", "m", "center", "between")
+revenueDisplay = TextContent("$1,420.50", "large-heavy")
+comparisonBadge = Tag("↑ 12.5% vs yesterday", null, "md", "success")
+
+comparisonSection = Card([compHeading, compStats], "clear", "column", "s")
+compHeading = Heading("Performance vs Yesterday", "h4")
+compStats = Table([labelCol, valueCol])
+labelCol = Col("Metric", ["Revenue", "Orders", "Avg. Ticket"])
+valueCol = Col("Value", ["$1,420.50", "42", "$33.82"])
+
+hourlyChart = Card([chartHeading, chartContainer], "card", "column", "m")
+chartHeading = Heading("Revenue Trend (Today)", "h4")
+chartContainer = LineChart(["6AM", "7AM", "8AM", "9AM", "10AM"], [revSeries], "natural", "Time", "USD")
+revSeries = Series("Revenue", [0, 150, 420, 890, 1420])
+
+recentOrders = Card([orderHeading, orderList], "card", "column", "m")
+orderHeading = Heading("Recent Orders", "h4")
+orderList = ListBlock([order1, order2, order3])
+order1 = ListItem("Order #8821", "$45.00", ["https://picsum.photos/seed/order1/50/50"], "View")
+order2 = ListItem("Order #8820", "$12.50", ["https://picsum.photos/seed/order2/50/50"], "View")
+order3 = ListItem("Order #8819", "$112.00", ["https://picsum.photos/seed/order3/50/50"], "View")
+
+followUps = FollowUpBlock([restockPrompt, staffPrompt, reportPrompt])
+restockPrompt = FollowUpItem("Check inventory levels")
+staffPrompt = FollowUpItem("Review morning shift handover")
+reportPrompt = FollowUpItem("Generate daily summary report")

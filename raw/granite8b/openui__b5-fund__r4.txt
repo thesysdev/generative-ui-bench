@@ -1,0 +1,126 @@
+```openui-lang
+root = Card([
+    banner,
+    sections
+])
+
+banner = CardHeader("Morning Trading Workspace", "Live Market Overview")
+
+sections = [
+    portfolioSection,
+    pnlSection,
+    positionsSection,
+    exposureSection,
+    varSection,
+    gainersLosersSection,
+    watchedInstrumentsSection,
+    ordersSection,
+    marginSection,
+    headlinesSection,
+    strategyReturnsSection,
+    drawdownSection,
+    riskLimitsSection,
+    rebalanceButton,
+    placeOrderSection,
+    timeframeSection
+]
+
+portfolioSection = Card([portfolioValue, profitLossToday], "sunk")
+portfolioValue = TextContent("Portfolio Value: $12.34M", "large")
+profitLossToday = TextContent("Profit/Loss Today: +$1.23M", "large")
+
+pnlSection = Card([pnlDetails], "sunk")
+pnlDetails = TextContent("Detailed P/L:", "small")
+pnlDetailsBody = TextContent("- Long AAPL: +$450k\n- Short TSLA: -$210k\n- Others: +$2.5M", "default")
+
+positionsSection = Card([positionsHeader, positionsTable], "sunk")
+positionsHeader = Heading("Positions", "h3")
+positionsTable = Table([
+    Col("Ticker", ["AAPL", "TSLA", "MSFT", "AMZN"]),
+    Col("Size (shares)", ["5,000", "2,000", "7,500", "3,000"]),
+    Col("Entry Price ($)", ["150.00", "720.00", "300.00", "3400.00"]),
+    Col("Current Price ($)", ["152.30", "725.50", "305.10", "3420.00"])
+], "number")
+
+exposureSection = Card([exposureHeader, exposureChart], "sunk")
+exposureHeader = Heading("Exposure by Sector", "h3")
+exposureChart = BarChart(
+    labels=["Technology", "Financials", "Healthcare", "Energy"],
+    series=[
+        Series("Long Exposure", [30, 25, 20, 15]),
+        Series("Short Exposure", [10, 5, 8, 7])
+    ],
+    variant="grouped",
+    xLabel="Sector",
+    yLabel="Exposure (%)"
+)
+
+varSection = Card([varHeader, varValue], "sunk")
+varHeader = Heading("Value at Risk (VaR)", "h3")
+varValue = TextContent("VaR 99% (24h): $2.1M", "large")
+
+gainersLosersSection = Card([gainersHeader, losersHeader], "sunk")
+gainersHeader = Heading("Today's Biggest Gainers", "h3")
+losersHeader = Heading("Today's Biggest Losers", "h3")
+gainersList = TextContent("- AAPL: +3.2%\n- TSLA: +2.7%", "default")
+losersList = TextContent("- AMZN: -1.9%\n- NFLX: -2.4%", "default")
+
+watchedInstrumentsSection = Card([watchedHeader, watchedList], "sunk")
+watchedHeader = Heading("Watched Instruments", "h3")
+watchedList = TextContent("- SPY: $415.20\n- VXX: $23.45\n- GLD: $165.80", "default")
+
+ordersSection = Card([openOrdersHeader, openOrdersTable], "sunk")
+openOrdersHeader = Heading("Working Orders", "h3")
+openOrdersTable = Table([
+    Col("Ticker", ["AAPL", "TSLA", "MSFT"]),
+    Col("Side", ["BUY", "SELL", "BUY"]),
+    Col("Quantity", ["1,000", "500", "2,000"]),
+    Col("Price ($)", ["152.30", "725.50", "305.10"])
+], "number")
+
+marginSection = Card([marginHeader, marginValue], "sunk")
+marginHeader = Heading("Margin in Use", "h3")
+marginValue = TextContent("Margin Used: $4.8M (38% of portfolio)", "large")
+
+headlinesSection = Card([headlinesHeader, headlinesList], "sunk")
+headlinesHeader = Heading("Market Headlines", "h3")
+headlinesList = TextContent("- Tech sector rallies on AI news (Sentiment: Positive)\n- Fed hints at rate hold (Sentiment: Neutral)\n- Oil prices surge on geopolitical tensions (Sentiment: Negative)", "default")
+
+strategyReturnsSection = Card([strategyHeader, strategyTable], "sunk")
+strategyHeader = Heading("Strategy Returns This Year", "h3")
+strategyTable = Table([
+    Col("Strategy", ["Alpha Fund", "Beta Fund", "Gamma Fund"]),
+    Col("Return (%)", ["12.5", "8.3", "15.0"])
+], "number")
+
+drawdownSection = Card([drawdownHeader, drawdownValue], "sunk")
+drawdownHeader = Heading("Drawdown (Past Year)", "h3")
+drawdownValue = TextContent("Max Drawdown: -7.3%", "large")
+
+riskLimitsSection = Card([limitsHeader, limitsList], "sunk")
+limitsHeader = Heading("Risk Limits Close to Breach", "h3")
+limitsList = TextContent("- Equity VaR: 95% of limit\n- Sector Concentration: 88% of limit", "default")
+
+rebalanceButton = Button("Rebalance Portfolio", null, "primary")
+
+placeOrderSection = Card([orderForm], "sunk")
+orderForm = Form("place-order", buttons=[placeOrderBtn], fields=[tickerField, sideField, qtyField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL")
+sideField = FormControl("Side", sideSelect)
+sideSelect = Select("side", [buyOption, sellOption], "Choose side")
+buyOption = SelectItem("BUY", "Buy")
+sellOption = SelectItem("SELL", "Sell")
+qtyField = FormControl("Quantity", qtyInput)
+qtyInput = Input("quantity", "1000", "number")
+
+timeframeSection = Card([timeframeHeader, timeframeSelector], "sunk")
+timeframeHeader = Heading("Timeframe", "h3")
+timeframeSelector = Select("timeframe", [
+    PeriodItem("1h", "1 hour"),
+    PeriodItem("4h", "4 hours"),
+    PeriodItem("Daily", "Daily"),
+    PeriodItem("Weekly", "Weekly")
+], "Choose timeframe")
+PeriodItem = (label, description) => SelectItem(label, description)  // pseudo for clarity; actual usage: SelectItem("1h", "1 hour")
+```

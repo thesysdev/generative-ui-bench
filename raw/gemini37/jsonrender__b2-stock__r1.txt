@@ -1,0 +1,35 @@
+{"op":"add","path":"/root","value":"mainCard"}
+{"op":"add","path":"/elements/mainCard","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["header","alertBanner","thresholdCard","searchSection","inventoryList"]}}
+{"op":"add","path":"/elements/header","value":{"type":"CardHeader","props":{"title":"Low Inventory Monitor","subtitle":"Track critical stock levels, reorder stock, and manage alert limits"}}}
+{"op":"add","path":"/elements/alertBanner","value":{"type":"Alert","props":{"title":"4 Items Below Threshold","description":"Stock is nearing depleted levels. Automated purchase orders are drafted and ready for review.","variant":"warning"}}}
+{"op":"add","path":"/elements/thresholdCard","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs"},"children":["thresholdTitle","thresholdRow"]}}
+{"op":"add","path":"/elements/thresholdTitle","value":{"type":"Heading","props":{"level":"h4","text":"Alert Trigger Rules"}}}
+{"op":"add","path":"/elements/thresholdRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["thresholdBadge","thresholdDesc"]}}
+{"op":"add","path":"/elements/thresholdBadge","value":{"type":"Badge","props":{"text":"Default Trigger: ≤ 15 Units","variant":"destructive"}}}
+{"op":"add","path":"/elements/thresholdDesc","value":{"type":"TextContent","props":{"text":"*Items flag as 'Low Stock' when units remaining drop to or below the designated reorder threshold.*","size":"small"}}}
+{"op":"add","path":"/elements/searchSection","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","align":"center"},"children":["searchInput"]}}
+{"op":"add","path":"/elements/searchInput","value":{"type":"Input","props":{"name":"search","placeholder":"Search low stock items by SKU or product name...","value":{"$bindState":"/searchQuery"}}}}
+{"op":"add","path":"/state/searchQuery","value":""}
+{"op":"add","path":"/elements/inventoryList","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"repeat":{"statePath":"/items","key":"id"},"children":["itemCard"]}}
+{"op":"add","path":"/elements/itemCard","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["itemHeaderRow","itemDetailsRow","itemActionsRow"]}}
+{"op":"add","path":"/elements/itemHeaderRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["itemTitleGroup","itemStatusBadge"]}}
+{"op":"add","path":"/elements/itemTitleGroup","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["itemName","itemSku"]}}
+{"op":"add","path":"/elements/itemName","value":{"type":"Heading","props":{"level":"h3","text":{"$item":"name"}}}}
+{"op":"add","path":"/elements/itemSku","value":{"type":"TextContent","props":{"text":{"$template":"SKU: ${sku} • Category: ${category}"},"size":"small"}}}
+{"op":"add","path":"/elements/itemStatusBadge","value":{"type":"Badge","props":{"text":{"$template":"${stock} units left"},"variant":"destructive"}}}
+{"op":"add","path":"/elements/itemDetailsRow","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m"},"children":["stockStatsGroup","progressCol"]}}
+{"op":"add","path":"/elements/stockStatsGroup","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"l","align":"center"},"children":["statRemaining","statThreshold"]}}
+{"op":"add","path":"/elements/statRemaining","value":{"type":"TextContent","props":{"text":{"$template":"**Remaining Units:** ${stock}"},"size":"default"}}}
+{"op":"add","path":"/elements/statThreshold","value":{"type":"Tag","props":{"text":{"$template":"Threshold: ≤ ${threshold} units"},"variant":"warning","size":"sm"}}}
+{"op":"add","path":"/elements/progressCol","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["stockProgress"]}}
+{"op":"add","path":"/elements/stockProgress","value":{"type":"Progress","props":{"value":{"$item":"stockPct"},"label":"Stock Level"}}}
+{"op":"add","path":"/elements/itemActionsRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["supplierInfo","reorderGroup"]}}
+{"op":"add","path":"/elements/supplierInfo","value":{"type":"TextContent","props":{"text":{"$template":"*Supplier: ${supplier} • Lead time: ${leadTime}*"},"size":"small"}}}
+{"op":"add","path":"/elements/reorderGroup","value":{"type":"Buttons","props":{"buttons":["reorderBtn","quickRestockBtn"]}}}
+{"op":"add","path":"/elements/reorderBtn","value":{"type":"Button","props":{"label":{"$template":"Reorder (+${reorderPack} units)"},"variant":"primary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/reorderSuccess","value":true}}}}}
+{"op":"add","path":"/elements/quickRestockBtn","value":{"type":"Button","props":{"label":"Supplier Details","variant":"secondary","size":"small"}}}}
+{"op":"add","path":"/state/items","value":[]}
+{"op":"add","path":"/state/items/0","value":{"id":"1","name":"Organic Fair-Trade Coffee Beans (1kg)","sku":"COF-ORG-001","category":"Beverages","stock":4,"threshold":15,"stockPct":20,"supplier":"Andean Roasters","leadTime":"2 days","reorderPack":50}}
+{"op":"add","path":"/state/items/1","value":{"id":"2","name":"Ceramic Drip Coffee Mug (12oz, Slate)","sku":"MUG-SLT-102","category":"Drinkware","stock":2,"threshold":10,"stockPct":12,"supplier":"Nordic Ceramics Ltd","leadTime":"5 days","reorderPack":24}}
+{"op":"add","path":"/state/items/2","value":{"id":"3","name":"Cold Brew Filter Packs (Pack of 6)","sku":"FLT-CB-088","category":"Accessories","stock":7,"threshold":20,"stockPct":28,"supplier":"EcoBrew Supply","leadTime":"3 days","reorderPack":100}}
+{"op":"add","path":"/state/items/3","value":{"id":"4","name":"Artisan Vanilla Syrup (750ml)","sku":"SYR-VAN-004","category":"Syrups & Flavorings","stock":3,"threshold":12,"stockPct":15,"supplier":"Sweetwater Provisions","leadTime":"4 days","reorderPack":36}}

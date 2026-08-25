@@ -1,0 +1,86 @@
+```openui
+root = Card([viewers, mostWatched, watchTime, subscriptions, performanceByGenre, bufferingRate, deliveryHealth, upcomingReleases, expiringLicenses, recommendationClicks, failedSearches, revenueSplit, viewingSplit, focusRegion, featureFlags, promoteTitle], "card", "column", "l", "stretch", "evenly", true)
+viewers = Card([viewersHeader, viewerCount], "card")
+viewersHeader = Heading("Current Viewers", "h3")
+viewerCount = TextContent("1,234 viewers watching now", "large")
+
+mostWatched = Card([mostWatchedHeader, mostWatchedTable], "card")
+mostWatchedHeader = Heading("Most-Watched Titles", "h3")
+mostWatchedTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["Show A", "Show B", "Show C"])
+hoursCol = Col("Hours Watched", ["1,200", "980", "860"])
+
+watchTime = Card([watchTimeHeader, watchTimeChart], "card")
+watchTimeHeader = Heading("Watch Time Last Month", "h3")
+watchTimeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [watchTimeSeries], "natural", "Week", "Hours")
+watchTimeSeries = Series("Watch Time", [3500, 4200, 3900, 4500])
+
+subscriptions = Card([subscriptionsHeader, subscriptionTable], "card")
+subscriptionsHeader = Heading("New Subs vs Cancellations", "h3")
+subscriptionTable = Table([subsCol, cancCol])
+subsCol = Col("New Subscriptions", ["1,500"])
+cancCol = Col("Cancellations", ["200"])
+
+performanceByGenre = Card([performanceHeader, performanceChart], "card")
+performanceHeader = Heading("Performance by Genre", "h3")
+performanceChart = PieChart(["Action", "Drama", "Comedy"], [300, 250, 450])
+
+bufferingRate = Card([bufferingHeader, bufferingContent], "card")
+bufferingHeader = Heading("Buffering Rate", "h3")
+bufferingContent = TextContent("Current Rate: 0.5%", "small")
+
+deliveryHealth = Card([deliveryHeader, deliveryChart], "card")
+deliveryHeader = Heading("Delivery Health by Region", "h3")
+deliveryChart = BarChart(["North America", "Europe", "Asia"], [deliveryNA, deliveryEU, deliveryAS], "stacked", "Region", "Health %")
+deliveryNA = Series("North America", [98, 97, 99])
+deliveryEU = Series("Europe", [95, 94, 96])
+deliveryAS = Series("Asia", [92, 93, 94])
+
+upcomingReleases = Card([releasesHeader, releasesList], "card")
+releasesHeader = Heading("Releases This Month", "h3")
+releasesList = ListBlock(["Title X", "Title Y", "Title Z"])
+
+expiringLicenses = Card([expiringHeader, expiringList], "card")
+expiringHeader = Heading("Licenses Expiring Soon", "h3")
+expiringList = ListBlock(["License A", "License B", "License C"])
+
+recommendationClicks = Card([recommendationsHeader, recommendationsContent], "card")
+recommendationsHeader = Heading("Recommendation Click Rate", "h3")
+recommendationsContent = TextContent("Click Rate: 12%", "small")
+
+failedSearches = Card([searchesHeader, searchesContent], "card")
+searchesHeader = Heading("Failed Searches", "h3")
+searchesContent = TextContent("Searches not leading to playback: 150", "small")
+
+revenueSplit = Card([revenueHeader, revenueTable], "card")
+revenueHeader = Heading("Revenue Split by Plan", "h3")
+revenueTable = Table([planCol, revenueCol])
+planCol = Col("Plan Type", ["Basic", "Premium", "Family"])
+revenueCol = Col("Revenue", ["$20,000", "$35,000", "$45,000"])
+
+viewingSplit = Card([viewingHeader, viewingChart], "card")
+viewingHeader = Heading("Viewing Split by Device", "h3")
+viewingChart = PieChart(["Mobile", "Tablet", "TV"], [40, 30, 30])
+
+focusRegion = Card([focusHeader, focusSelector], "card")
+focusHeader = Heading("Focus on Region", "h3")
+focusSelector = Select("region_focus", [naOption, euOption, asOption], "Focus on a region")
+naOption = SelectItem("North America", "North America")
+euOption = SelectItem("Europe", "Europe")
+asOption = SelectItem("Asia", "Asia")
+
+featureFlags = Card([featuresHeader, featuresTable], "card")
+featuresHeader = Heading("Feature Flags", "h3")
+featuresTable = Table([nameCol, stateCol])
+nameCol = Col("Feature", ["Flag A", "Flag B", "Flag C"])
+stateCol = Col("State", ["Enabled", "Disabled", "Enabled"])
+
+promoteTitle = Card([promoteHeader, promteForm], "card")
+promoteHeader = Heading("Promote a Title", "h3")
+promteForm = Form("promote-title", promoteButtons, [titleField])
+titleField = FormControl("Title", titleInput)
+titleInput = Input("title", placeholder="Enter title name")
+promoteButtons = Buttons([promoteBtn, cancelPromote])
+promoteBtn = Button("Promote", null, "primary")
+cancelPromote = Button("Cancel", null, "tertiary")
+```

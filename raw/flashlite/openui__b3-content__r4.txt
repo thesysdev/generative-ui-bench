@@ -1,0 +1,60 @@
+root = Card([header, metricsGrid, mainTabs, scheduleSection], "card", "column", "l")
+
+header = CardHeader("Editor's Content Studio", "Manage drafts, publications, analytics, and community")
+
+metricsGrid = Card([publishedCard, topArticleCard, commentsCard], "clear", "row", "m")
+publishedCard = Card([pubHeader, pubValue], "sunk", "column", "s")
+pubHeader = CardHeader("Published This Week", "12 new stories")
+pubValue = Heading("12", "h2")
+
+topArticleCard = Card([topHeader, topTitle, topMeta], "sunk", "column", "s")
+topHeader = CardHeader("Top Article This Month", "Most-read")
+topTitle = Heading("The Future of AI Design Systems", "h3")
+topMeta = TextContent("45,210 views • 8 min read", "small")
+
+commentsCard = Card([commHeader, commValue, commBtn], "sunk", "column", "s")
+commHeader = CardHeader("Pending Comments", "Requires attention")
+commValue = Heading("8", "h2")
+commBtn = Buttons([replyActionBtn])
+replyActionBtn = Button("Review Comments")
+
+mainTabs = Tabs([contentTabItem, analyticsTabItem, commentsTabItem])
+
+contentTabItem = TabItem("content", "Content & Drafts", [contentSubHeader, categoryFilter, draftsList, publishedList])
+contentSubHeader = Heading("Editorial Workflow", "h3")
+categoryFilter = Select("category_filter", [catAll, catDesign, catTech, catBusiness], "Narrow by category", null, null, "small")
+catAll = SelectItem("all", "All Categories")
+catDesign = SelectItem("design", "Design")
+catTech = SelectItem("Tech")
+catBusiness = SelectItem("Business")
+
+draftsList = ListBlock([draft1, draft2, draft3], "number")
+draft1 = ListItem("Redesigning the Mobile Experience", "Draft • Last edited 2h ago", null, "Edit")
+draft2 = ListItem("Understanding Quantum Computing Basics", "Review • Waiting for approval", null, "Review")
+draft3 = ListItem("Top 10 Productivity Tips for Remote Teams", "Draft • Started yesterday", null, "Edit")
+
+publishedList = ListBlock([pub1, pub2], "image")
+pub1 = ListItem("Building Scalable Design Systems", "Published Oct 12 • Tech", ["https://picsum.photos/seed/design/200/200"], "View")
+pub2 = ListItem("The Psychology of Color in Marketing", "Published Oct 10 • Business", ["https://picsum.photos/seed/color/200/200"], "View")
+
+analyticsTabItem = TabItem("analytics", "Audience Analytics", [analyticsHeader, readershipChart])
+analyticsHeader = Heading("Readership Over the Past 30 Days", "h3")
+readershipChart = LineChart(["Day 1", "Day 6", "Day 11", "Day 16", "Day 21", "Day 26", "Day 30"], [readershipSeries], "natural", "Days", "Views")
+readershipSeries = Series("Daily Views", [1200, 1900, 2400, 3100, 2800, 4200, 5100])
+
+commentsTabItem = TabItem("comments", "Comments Awaiting Reply", [commentsHeader, commentList])
+commentsHeader = Heading("Community Engagement", "h3")
+commentList = ListBlock([comm1, comm2], "number")
+comm1 = ListItem("Jane Doe on 'Building Scalable Design Systems'", "This is super insightful! Question about token naming...", null, "Reply")
+comm2 = ListItem("Alex Smith on 'The Future of AI Design Systems'", "Do you think Figma plugins will fully automate this?", null, "Reply")
+
+scheduleSection = Card([scheduleHeader, scheduleForm], "sunk", "column", "m")
+scheduleHeader = Heading("Schedule a New Piece", "h3")
+scheduleForm = Form("schedule_form", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Article Title", titleInput, "Enter the working title")
+titleInput = Input("title", "e.g., Advanced Typography in CSS")
+dateField = FormControl("Publish Date", datePickerInst, "Select target date")
+datePickerInst = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleSubmitBtn, newDraftBtn])
+scheduleSubmitBtn = Button("Schedule Piece", null, "primary")
+newDraftBtn = Button("Start New Draft", null, "secondary")

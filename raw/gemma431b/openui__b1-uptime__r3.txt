@@ -1,0 +1,21 @@
+root = Card([header, statusOverview, incidentSection, footer], "card", "column", "l")
+
+header = CardHeader("Platform Status", "Real-time system health and reliability")
+
+statusOverview = Card([uptimeMetric, uptimeProgress], "sunk", "row", "m", "center", "between")
+
+uptimeMetric = Card([uptimeLabel, uptimeValue], "clear", "column", "none", "center")
+uptimeLabel = TextContent("API Uptime (Current Month)", "small")
+uptimeValue = TextContent("99.98%", "large-heavy")
+
+uptimeProgress = Progress(99.98, "Overall Health")
+
+incidentSection = Card([incidentHeading, incidentDetails, incidentTags], "clear", "column", "s")
+incidentHeading = Heading("Recent Incident", "h3")
+incidentDetails = TextCallout("info", "Intermittent latency in US-East-1 region", "Resolved: Oct 24, 2023, 14:20 UTC. Issue was caused by a faulty routing table update. All services restored.")
+incidentTags = TagBlock(["Network", "Resolved", "US-East-1"])
+
+footer = FollowUpBlock([checkLogs, contactSRE, viewHistory])
+checkLogs = FollowUpItem("View detailed system logs")
+contactSRE = FollowUpItem("Contact SRE team")
+viewHistory = FollowUpItem("View historical uptime reports")

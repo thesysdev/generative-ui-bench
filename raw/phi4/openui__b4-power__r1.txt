@@ -1,0 +1,47 @@
+```openui
+root = Card([loadInfo, capacityStatus, generationSplit, plantStatus, outageInfo, demandForecast, priceInfo, maintenanceSchedule, alerts, regionFocus, curtailmentOrder, emissionsInfo])
+
+loadInfo = Card([loadTitle, loadValue])
+loadTitle = Heading("Current Load", "h3")
+loadValue = TextContent("Current load: 7450 MW")
+
+capacityStatus = TextCallout("info", "Capacity Utilization", "78% of capacity in use")
+
+generationSplit = Card([splitTitle, generationChart])
+splitTitle = Heading("Generation Split", "h3")
+generationChart = PieChart(["Coal", "Gas", "Nuclear", "Renewables"], [30, 25, 20, 25])
+
+plantStatus = Table([plantName, output, status])
+plantName = Col("Plant", ["Plant A", "Plant B", "Plant C"])
+output = Col("Output (MW)", [1500, 1200, 800])
+status = Col("Status", ["Online", "Maintenance", "Offline"])
+
+outageInfo = ListBlock([outageTitle, outages], "image")
+outageTitle = TextContent("Current Outages")
+outages = ListItem("North Region", "Power outage due to line fault", ["outage.png"], "View details")
+
+demandForecast = Card([forecastTitle, forecastChart])
+forecastTitle = Heading("Demand Forecast", "h3")
+forecastChart = LineChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"], [demandSeries], "linear")
+demandSeries = Series("Forecast", [6000, 6200, 5800, 6400, 6300, 6100])
+
+priceInfo = TextContent("Current Price: $50/MWh")
+
+maintenanceSchedule = TextContent("Maintenance Planned: Plant C - 15th March")
+
+alerts = Card([alertTitle, alertList])
+alertTitle = Heading("Live Alerts", "h3")
+alertList = ListBlock([], "number")
+alertList.items = []
+
+regionFocus = Buttons([focusRegionBtn])
+focusRegionBtn = Button("Focus on Region", ["focus(region)"])
+
+curtailmentOrder = Form("curtailmentOrderForm", formButtons, [curtailmentField])
+curtailmentField = FormControl("Enter Curtailment Amount", curtailmentInput)
+curtailmentInput = Input("curtailment", "", "number")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Order Curtailment", null, "primary")
+
+emissionsInfo = TextContent("Emissions Today: 1200 MT CO2")
+```

@@ -1,0 +1,41 @@
+root = Card([header, kpiRow, filtersRow, searchRow, ordersTable, fulfillActions, refundBlock, volumeChart], "card", "column", "l")
+
+header = CardHeader("Operations Desk", "Today's orders, revenue & fulfillment")
+kpiRow = Card([ordersKpi, revenueKpi, aovKpi], "clear", "row", "m")
+ordersKpi = Card([ordersLabel, ordersValue], "sunk")
+ordersLabel = TextContent("Orders placed today")
+ordersValue = TextContent("147", "large-heavy")
+revenueKpi = Card([revLabel, revValue], "sunk")
+revLabel = TextContent("Revenue today")
+revValue = TextContent("$12,840", "large-heavy")
+aovKpi = Card([aovLabel, aovValue], "sunk")
+aovLabel = TextContent("Average order value")
+aovValue = TextContent("$87.35", "large-heavy")
+
+filtersRow = Card([statusLabel, statusTags], "clear", "row", "s")
+statusLabel = TextContent("Narrow by status")
+statusTags = TagBlock(["All", "Pending", "Processing", "Shipped", "Fulfilled"])
+
+searchRow = Card([searchLabel, searchInput], "clear", "row", "s")
+searchLabel = TextContent("Search by customer")
+searchInput = Input("customer_search", "Customer name...")
+
+ordersTable = Card([ordersHeading, ordersData], "clear")
+ordersHeading = Heading("Recent orders", "h3")
+ordersData = Table([colId, colCustomer, colTotal, colStatus])
+colId = Col("Order ID", ["ORD-4821", "ORD-4822", "ORD-4823", "ORD-4824", "ORD-4825"])
+colCustomer = Col("Customer", ["Avery Chen", "Jordan Blake", "Sam Patel", "Taylor Kim", "Morgan Lee"])
+colTotal = Col("Total", ["$124.50", "$89.00", "$210.00", "$45.50", "$312.00"])
+colStatus = Col("Status", ["Pending", "Processing", "Shipped", "Fulfilled", "Pending"])
+
+fulfillActions = Card([fulfillBtn], "clear")
+fulfillBtn = Button("Mark selected fulfilled", ["fulfill"], "primary")
+
+refundBlock = Card([refundLabel, refundValue], "clear", "row", "s")
+refundLabel = TextContent("Refund rate this month")
+refundValue = TextContent("3.2%", "large-heavy")
+
+volumeChart = Card([volumeHeading, volumeLine], "clear")
+volumeHeading = Heading("Order volume — past 4 weeks", "h3")
+volumeLine = LineChart(["W1", "W2", "W3", "W4"], [volumeSeries], "linear", "Week", "Orders")
+volumeSeries = Series("Orders", [320, 410, 380, 475])

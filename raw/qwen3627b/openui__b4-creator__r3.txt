@@ -1,0 +1,134 @@
+Let me build a comprehensive creator's cross-platform studio dashboard. I need to cover all 11 items:
+
+1. Follower total and growth over the past month
+2. Engagement rate
+3. Best posts this month with reach for each
+4. Audience split by platform
+5. Posts scheduled this week
+6. Best hour to post based on history
+7. Comments waiting for a reply
+8. Earnings this month
+9. Pending collaboration requests
+10. A way to schedule a post with caption and time
+11. A way to narrow everything to one platform
+
+Let me plan the layout:
+- Platform filter at the top (item 11)
+- KPI cards: followers, engagement rate, earnings (items 1, 2, 8)
+- Best posts table (item 3)
+- Audience split pie chart (item 4)
+- Scheduled posts list (item 5)
+- Best hour chart (item 6)
+- Comments list (item 7)
+- Collaboration requests (item 9)
+- Schedule post form (item 10)
+
+Let me build this step by step with realistic data.
+
+I'll use:
+- Card for the main layout
+- TextCallout for KPIs
+- Table for best posts
+- PieChart for audience split
+- ListBlock for scheduled posts and comments
+- BarChart for best hour to post
+- Form for scheduling a post
+- ListBlock or Table for collaboration requests
+- Buttons for platform filter
+
+Let me make sure I follow all the syntax rules carefully - positional arguments, no colons, every variable referenced.
+root = Card([platformFilter, kpisRow, bestPostsSection, audienceSection, scheduleSection, bestHourSection, commentsSection, earningsSection, collabsSection, scheduleFormSection], "card", "column", "m")
+
+platformFilter = Card([platformHeading, platformButtons], "sunk")
+platformHeading = Heading("Filter by Platform", "h3")
+platformButtons = Buttons([allBtn, youtubeBtn, tiktokBtn, instagramBtn, twitterBtn])
+allBtn = Button("All Platforms", null, "primary")
+youtubeBtn = Button("YouTube", null, "secondary")
+tiktokBtn = Button("TikTok", null, "secondary")
+instagramBtn = Button("Instagram", null, "secondary")
+twitterBtn = Button("X", null, "secondary")
+
+kpisRow = Card([followersCard, engagementCard, earningsCard], "card", "row", "m")
+followersCard = Card([followerLabel, followerTotal, followerGrowth], "sunk")
+followerLabel = TextContent("Total Followers", "small-heavy")
+followerTotal = TextContent("248,392", "large-heavy")
+followerGrowth = Tag("+12.4%", null, "md", "success")
+
+engagementCard = Card([engagementLabel, engagementValue, engagementTag], "sunk")
+engagementLabel = TextContent("Engagement Rate", "small-heavy")
+engagementValue = TextContent("4.87%", "large-heavy")
+engagementTag = Tag("↑ 0.3%", null, "md", "info")
+
+earningsCard = Card([earningsLabel, earningsValue, earningsTag], "sunk")
+earningsLabel = TextContent("Earnings This Month", "small-heavy")
+earningsValue = TextContent("$6,428", "large-heavy")
+earningsTag = Tag("+18.2%", null, "md", "success")
+
+bestPostsSection = Card([bestPostsHeading, bestPostsTable], "card")
+bestPostsHeading = Heading("Best Posts This Month", "h2")
+bestPostsTable = Table([postTitle, postPlatform, postReach, postEngagement])
+postTitle = Col("Post", ["Summer Recipe Series", "Morning Routine Vlog", "Productivity Hacks", "Travel Day 1", "Q&A Livestream"])
+postPlatform = Col("Platform", ["YouTube", "Instagram", "TikTok", "YouTube", "X"])
+postReach = Col("Reach", ["342K", "289K", "256K", "198K", "174K"])
+postEngagement = Col("Engagement", ["5.2%", "4.9%", "6.1%", "4.3%", "3.8%"])
+
+audienceSection = Card([audienceHeading, audienceChart], "card")
+audienceHeading = Heading("Audience by Platform", "h2")
+audienceChart = PieChart(["YouTube", "Instagram", "TikTok", "X", "Pinterest"], [42, 28, 18, 8, 4], "donut")
+
+scheduleSection = Card([scheduleHeading, scheduleList], "card")
+scheduleHeading = Heading("Posts Scheduled This Week", "h2")
+scheduleList = ListBlock([sunPost, monPost, tuePost, wedPost, thuPost])
+sunPost = ListItem("Weekend Brunch Recipe", "YouTube • Today, 6:00 PM", null, "Edit")
+monPost = ListItem("Monday Motivation", "Instagram • Mon, 8:00 AM", null, "Edit")
+tuePost = ListItem("Quick Tips Reel", "TikTok • Tue, 12:00 PM", null, "Edit")
+wedPost = ListItem("Behind the Scenes", "YouTube • Wed, 4:00 PM", null, "Edit")
+thuPost = ListItem("Thread: Growth Hacks", "X • Thu, 10:00 AM", null, "Edit")
+
+bestHourSection = Card([bestHourHeading, bestHourChart, bestHourCallout], "card")
+bestHourHeading = Heading("Best Hour to Post", "h2")
+bestHourChart = BarChart(["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM"], [engagementSeries], "grouped", "Hour", "Avg. Engagement %")
+engagementSeries = Series("Engagement", [2.1, 2.8, 3.4, 4.1, 4.5, 4.8, 5.2, 5.0, 4.7, 4.3, 4.6, 5.1, 5.8, 6.2, 5.9, 5.3, 4.0])
+bestHourCallout = Callout("info", "Peak Time Detected", "Your audience is most active between 7 PM – 8 PM. Consider scheduling posts during this window for maximum reach.")
+
+commentsSection = Card([commentsHeading, commentsList], "card")
+commentsHeading = Heading("Comments Waiting for Reply", "h2")
+commentsList = ListBlock([comment1, comment2, comment3, comment4, comment5])
+comment1 = ListItem("@sarah_cooks", "Can you share the recipe for that glaze? 🙏", null, "Reply")
+comment2 = ListItem("@mikefitness", "This routine changed my mornings!", null, "Reply")
+comment3 = ListItem("@design_daily", "Love your editing style, any tutorial?", null, "Reply")
+comment4 = ListItem("@travel_jen", "Where was this filmed? Stunning views!", null, "Reply")
+comment5 = ListItem("@techbro_99", "What gear are you using for audio?", null, "Reply")
+
+earningsSection = Card([earningsHeading, earningsTable], "card")
+earningsHeading = Heading("Earnings Breakdown", "h2")
+earningsTable = Table([earningsSource, earningsAmount, earningsPercent])
+earningsSource = Col("Source", ["YouTube Ad Revenue", "Sponsorships", "Brand Deals", "Affiliate Links", "Memberships"])
+earningsAmount = Col("Amount", ["$2,140", "$1,850", "$1,200", "$878", "$360"])
+earningsPercent = Col("Share", ["33.3%", "28.8%", "18.7%", "13.7%", "5.6%"])
+
+collabsSection = Card([collabsHeading, collabsList], "card")
+collabsHeading = Heading("Pending Collaboration Requests", "h2")
+collabsList = ListBlock([collab1, collab2, collab3])
+collab1 = ListItem("@fitlife_coach", "Joint workout series — 50K followers", null, "Review")
+collab2 = ListItem("@brand_kitchen", "Paid recipe collab — $2,000 budget", null, "Review")
+collab3 = ListItem("@travel_diaries", "Travel vlog swap — 80K followers", null, "Review")
+
+scheduleFormSection = Card([scheduleFormHeading, scheduleForm], "card")
+scheduleFormHeading = Heading("Schedule a New Post", "h2")
+scheduleForm = Form("schedule-post", scheduleFormButtons, [captionField, platformField, dateField, timeField])
+captionField = FormControl("Caption", captionInput)
+captionInput = TextArea("caption", "Write your caption here...", 4)
+platformField = FormControl("Platform", platformSelect)
+platformSelect = Select("platform", [ytOpt, igOpt, ttOpt, xOpt], "Choose a platform")
+ytOpt = SelectItem("youtube", "YouTube")
+igOpt = SelectItem("instagram", "Instagram")
+ttOpt = SelectItem("tiktok", "TikTok")
+xOpt = SelectItem("x", "X")
+dateField = FormControl("Date", dateInput)
+dateInput = DatePicker("post_date", "single")
+timeField = FormControl("Time", timeInput)
+timeInput = Input("post_time", "e.g. 18:00", "text")
+scheduleFormButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

@@ -1,0 +1,157 @@
+```openui-lang
+root = Card([
+    portfolioValueHeader,
+    portfolioValue,
+    pnlTodayHeader,
+    pnlToday,
+    positionsHeader,
+    positionsTable,
+    exposureBySectorHeader,
+    exposureBySectorChart,
+    valueAtRiskHeader,
+    valueAtRisk,
+    biggestGainersLosersHeader,
+    biggestGainersLosers,
+    watchedInstrumentsHeader,
+    watchedInstrumentsList,
+    workingOrdersHeader,
+    workingOrders,
+    marginInUseHeader,
+    marginInUse,
+    marketHeadlinesHeader,
+    marketHeadlines,
+    economicReleasesHeader,
+    economicReleases,
+    strategyReturnsHeader,
+    strategyReturns,
+    drawdownHeader,
+    drawdown,
+    riskLimitsHeader,
+    riskLimits,
+    rebalanceButton,
+    placeOrderForm,
+    changeTimeframeButton
+], "card", "row", "l")
+
+portfolioValueHeader = CardHeader("Portfolio Value", "Current total value")
+portfolioValue = TextContent("$123,456,789", "large")
+
+pnlTodayHeader = CardHeader("Profit & Loss Today", "Gain/Loss for the current day")
+pnlToday = TextContent("+$2,345", "large")
+
+positionsHeader = CardHeader("Positions", "Ticker, Size, Entry, Current Price")
+positionsTable = Table([
+    tickerCol,
+    sizeCol,
+    entryPriceCol,
+    currentPriceCol
+])
+tickerCol = Col("Ticker", ["AAPL", "GOOGL", "TSLA"])
+sizeCol = Col("Size", [1200, 850, 500])
+entryPriceCol = Col("Entry Price", ["150.00", "2750.00", "720.00"])
+currentPriceCol = Col("Current Price", ["160.50", "2800.00", "735.00"])
+
+exposureBySectorHeader = CardHeader("Exposure by Sector", "Weighted exposure across sectors")
+exposureBySectorChart = BarChart(["Technology", "Healthcare", "Finance"], [
+    Series("Tech", [45, 55]),
+    Series("Health", [20, 30]),
+    Series("Finance", [35, 40])
+], "grouped", "Sector", "Exposure %")
+
+valueAtRiskHeader = CardHeader("Value at Risk (VaR)", "Potential loss under normal market conditions")
+valueAtRisk = TextContent("$1,200,000", "large", "1-day 95% VaR")
+
+biggestGainersLosersHeader = CardHeader("Biggest Gainers & Losers", "Top performers today")
+biggestGainersLosers = ListBlock([
+    GainerItem("AAPL", "+12.3%"),
+    GainerItem("AMZN", "+9.8%"),
+    LoserItem("TSLA", "-7.5%"),
+    LoserItem("NVDA", "-5.2%")
+], "number")
+GainerItem = ListItem
+LoserItem = ListItem
+
+watchedInstrumentsHeader = CardHeader("Watched Instruments", "Price snapshots")
+watchedInstrumentsList = ListBlock([
+    WatchedItem("SPY", "$423.10"),
+    WatchedItem("GLD", "$197.50"),
+    WatchedItem("BTC-USD", "$27,800")
+], "image")
+WatchedItem = ListItem
+
+workingOrdersHeader = CardHeader("Working Orders", "Open orders")
+workingOrders = Table([
+    orderTypeCol,
+    tickerCol2,
+    sideCol,
+    quantityCol,
+    priceCol
+])
+orderTypeCol = Col("Type", ["Limit", "Stop", "Market"])
+tickerCol2 = Col("Ticker", ["AAPL", "GOOGL", "TSLA"])
+sideCol = Col("Side", ["Buy", "Sell", "Buy"])
+quantityCol = Col("Quantity", [500, 300, 200])
+priceCol = Col("Price", ["155.00", "2790.00", "730.00"])
+
+marginInUseHeader = CardHeader("Margin in Use", "Current margin utilization")
+marginInUse = TextContent("45%", "large", "Utilization %")
+
+marketHeadlinesHeader = CardHeader("Market Headlines", "News with sentiment")
+marketHeadlines = Table([
+    headlineCol,
+    textCol,
+    sentimentCol
+])
+headlineCol = Col("Headline", ["Fed Raises Rates", "Earnings Surprise"])
+textCol = Col("Summary", ["Interest rate hike impacts bonds", "Tech earnings beat estimates"])
+sentimentCol = Col("Sentiment", ["Negative", "Positive"])
+
+economicReleasesHeader = CardHeader("Economic Releases This Week", "Key data events")
+economicReleases = ListBlock([
+    ReleaseItem("Nonfarm Payrolls", "Friday 8:30 AM EST"),
+    ReleaseItem("CPI Inflation", "Wednesday 8:30 AM EST"),
+    ReleaseItem("Retail Sales", "Thursday 10:00 AM EST")
+], "number")
+ReleaseItem = ListItem
+
+strategyReturnsHeader = CardHeader("Strategy Returns This Year", "Performance by strategy")
+strategyReturns = Table([
+    strategyCol,
+    returnCol
+])
+strategyCol = Col("Strategy", ["Alpha Momentum", "Mean Reversion", "Volatility Arbitrage"])
+returnCol = Col("Return", ["+18.5%", "+12.3%", "+8.7%"])
+
+drawdownHeader = CardHeader("Year‑to‑Date Drawdown", "Maximum peak‑to‑trough decline")
+drawdown = TextContent("-6.2%", "large", "Peak‑to‑trough decline")
+
+riskLimitsHeader = CardHeader("Risk Limits Close to Breach", "Metrics nearing thresholds")
+riskLimits = ListBlock([
+    LimitItem("VaR Threshold", "85% of limit, 3% away"),
+    LimitItem("Liquidity Ratio", "92% of limit, 8% away")
+], "number")
+LimitItem = ListItem
+
+rebalanceButton = Button("Rebalance Portfolio", null, "primary", "normal", "medium")
+
+placeOrderForm = Form("place-order-form", placeOrderButtons, [
+    OrderSelector,
+    OrderTicker,
+    OrderSide,
+    OrderQuantity
+])
+OrderSelector = FormControl("Strategy", Select(
+    "strategy", [SelectItem("Momentum", "Momentum"), SelectItem("MeanReversion", "Mean Reversion")], "Choose strategy"), null)
+OrderTicker = FormControl("Ticker", Input("ticker", "AAPL"), "Enter ticker")
+OrderSide = FormControl("Side", Select("side", [SelectItem("Buy", "Buy"), SelectItem("Sell", "Sell")], "Choose side"), null)
+OrderQuantity = FormControl("Quantity", Input("quantity", "100"), "Enter quantity")
+placeOrderButtons = Buttons([PlaceOrderBtn, CancelBtn])
+PlaceOrderBtn = Button("Place Order", null, "primary")
+CancelBtn = Button("Cancel", null, "tertiary")
+
+changeTimeframeButton = Button("Change Timeframe", null, "secondary", "normal", "medium")
+
+# Helper components for list blocks
+ListItem = (text, subtitle?) => TextContent(text, subtitle, "small")
+
+```

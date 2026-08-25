@@ -1,0 +1,78 @@
+
+
+root = Card([header, kpis, openRolesSection, pipelineSection, deptSplitSection, interviewsSection, attritionSection, actions])
+
+header = CardHeader("Hiring Overview", "HR Dashboard — Q4 2024")
+
+kpis = Card([headcountCard, timeToHireCard], "row", "m")
+headcountCard = Card([headcountLabel, headcountValue], "sunk", "column", "xs")
+headcountLabel = TextContent("Current Headcount", "small")
+headcountValue = TextContent("247", "large-heavy")
+timeToHireCard = Card([timeLabel, timeValue], "sunk", "column", "xs")
+timeLabel = TextContent("Avg Time to Hire", "small")
+timeValue = TextContent("32 days", "large-heavy")
+
+openRolesSection = Card([openRolesHeading, openRolesTable], "sunk")
+openRolesHeading = Heading("Open Roles", "h3")
+openRolesTable = Table([roleCol, deptCol])
+roleCol = Col("Role", ["Senior Software Engineer", "Product Manager", "Sales Development Rep", "UX Designer", "Data Analyst", "DevOps Engineer", "Marketing Manager", "HR Coordinator", "Finance Analyst", "Customer Success Lead", "QA Engineer", "Technical Writer"])
+deptCol = Col("Department", ["Engineering", "Product", "Sales", "Design", "Data", "Engineering", "Marketing", "HR", "Finance", "Support", "Engineering", "Engineering"])
+
+pipelineSection = Card([pipelineHeading, pipelineChart], "sunk")
+pipelineHeading = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = HorizontalBarChart(["Applied", "Screening", "Interview", "Offer", "Hired"], [pipelineSeries], "stacked")
+pipelineSeries = Series("Candidates", [142, 68, 34, 12, 8])
+
+deptSplitSection = Card([deptSplitHeading, deptChart], "sunk")
+deptSplitHeading = Heading("Headcount by Department", "h3")
+deptChart = PieChart(deptLabels, deptValues)
+deptLabels = ["Engineering", "Sales", "Marketing", "HR", "Finance", "Operations"]
+deptValues = [78, 52, 34, 18, 28, 37]
+
+interviewsSection = Card([interviewsHeading, interviewsList], "sunk")
+interviewsHeading = Heading("Interviews Scheduled This Week", "h3")
+interviewsList = ListBlock([int1, int2, int3, int4, int5, int6, int7, int8])
+int1 = ListItem("Sarah Chen — Senior SWE", "Phone screen with hiring manager · Mon 2:00 PM")
+int2 = ListItem("Marcus Johnson — PM", "Technical panel · Tue 10:00 AM")
+int3 = ListItem("Aisha Patel — SDR", "Behavioral interview · Tue 3:00 PM")
+int4 = ListItem("David Kim — UX Designer", "Portfolio review · Wed 11:00 AM")
+int5 = ListItem("Emily Torres — Data Analyst", "Take-home presentation · Wed 2:00 PM")
+int6 = ListItem("James Wright — DevOps", "System design interview · Thu 9:00 AM")
+int7 = ListItem("Olivia Brown — Marketing Manager", "Culture fit interview · Thu 1:00 PM")
+int8 = ListItem("Ryan Lee — QA Engineer", "Final round · Fri 10:00 AM")
+
+attritionSection = Card([attritionHeading, attritionChart], "sunk")
+attritionHeading = Heading("Attrition — Past 6 Months", "h3")
+attritionChart = LineChart(["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [attritionSeries], "natural", "Month", "Attritions")
+attritionSeries = Series("Attritions", [5, 3, 7, 4, 6, 2])
+
+actions = Buttons([newRoleBtn, exportBtn, refreshBtn])
+newRoleBtn = Button("+ Open New Role", ["open-new-role"])
+exportBtn = Button("Export Report", null, "secondary")
+refreshBtn = Button("Refresh", null, "tertiary")
+
+newRoleDialog = DialogBlock("Open New Role", "Create a new job requisition", [newRoleForm], "default")
+newRoleForm = Form("new-role", [newRoleSubmitBtn], [roleNameField, deptField, levelField, locationField])
+roleNameField = FormControl("Role Title", Input("role_name", "e.g. Senior Software Engineer"))
+deptField = FormControl("Department", Select("department", [engOpt, salesOpt, mktOpt, hrOpt, finOpt, opsOpt]))
+engOpt = SelectItem("engineering", "Engineering")
+salesOpt = SelectItem("sales", "Sales")
+mktOpt = SelectItem("marketing", "Marketing")
+hrOpt = SelectItem("hr", "HR")
+finOpt = SelectItem("finance", "Finance")
+opsOpt = SelectItem("operations", "Operations")
+levelField = FormControl("Level", Select("level", [juniorOpt, midOpt, seniorOpt, leadOpt]))
+juniorOpt = SelectItem("junior", "Junior")
+midOpt = SelectItem("mid", "Mid-Level")
+seniorOpt = SelectItem("senior", "Senior")
+leadOpt = SelectItem("lead", "Lead / Staff")
+locationField = FormControl("Location", Select("location", [remoteOpt, hybridOpt, onsiteOpt]))
+remoteOpt = SelectItem("remote", "Remote")
+hybridOpt = SelectItem("hybrid", "Hybrid")
+onsiteOpt = SelectItem("onsite", "On-site")
+newRoleSubmitBtn = Button("Submit Requisition", null, "primary")
+
+actions = Buttons([newRoleBtn, exportBtn, refreshBtn])
+newRoleBtn = Button("+ Open New Role", ["open-new-role"])
+exportBtn = Button("Export Report", null, "secondary")
+refreshBtn = Button("Refresh", null, "tertiary")

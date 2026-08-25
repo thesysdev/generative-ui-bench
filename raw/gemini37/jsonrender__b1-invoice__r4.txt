@@ -1,0 +1,33 @@
+{"op":"add","path":"/root","value":"invoice-root"}
+{"op":"add","path":"/elements/invoice-root","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["invoice-header","amount-summary-card","line-items-card","payment-methods-card","pay-action-card","success-callout"]}}
+{"op":"add","path":"/elements/invoice-header","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["header-info","status-badge"]}}
+{"op":"add","path":"/elements/header-info","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["invoice-title","invoice-meta"]}}
+{"op":"add","path":"/elements/invoice-title","value":{"type":"Heading","props":{"text":"Invoice #INV-2024-089","level":"h2"}}}
+{"op":"add","path":"/elements/invoice-meta","value":{"type":"TextContent","props":{"text":"**Issued by:** Alex Rivera (UX & UI Design) • **Client:** Acme Corp","size":"small"}}}
+{"op":"add","path":"/elements/status-badge","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/paymentCompleted"},"$then":"Paid in Full","$else":"Payment Due"},"variant":{"$cond":{"$state":"/paymentCompleted"},"$then":"secondary","$else":"destructive"}}}}
+{"op":"add","path":"/state/paymentCompleted","value":false}
+{"op":"add","path":"/elements/amount-summary-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["amount-due-box","due-date-box"]}}
+{"op":"add","path":"/elements/amount-due-box","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["amount-label","amount-val"]}}
+{"op":"add","path":"/elements/amount-label","value":{"type":"TextContent","props":{"text":"TOTAL AMOUNT DUE","size":"small-heavy"}}}
+{"op":"add","path":"/elements/amount-val","value":{"type":"Heading","props":{"text":{"$template":"${/invoice/currencySymbol}${/invoice/amount} ${/invoice/currency}"},"level":"h1"}}}
+{"op":"add","path":"/state/invoice","value":{"currency":"USD","currencySymbol":"$","amount":"3,450.00","dueDate":"October 28, 2024","issuedDate":"October 14, 2024"}}
+{"op":"add","path":"/elements/due-date-box","value":{"type":"Card","props":{"direction":"column","gap":"xs","align":"end","variant":"clear"},"children":["due-date-label","due-date-val"]}}
+{"op":"add","path":"/elements/due-date-label","value":{"type":"TextContent","props":{"text":"DUE DATE","size":"small-heavy"}}}
+{"op":"add","path":"/elements/due-date-val","value":{"type":"Heading","props":{"text":{"$template":"${/invoice/dueDate}"},"level":"h3"}}}
+{"op":"add","path":"/elements/line-items-card","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"sunk"},"children":["breakdown-title","items-table"]}}
+{"op":"add","path":"/elements/breakdown-title","value":{"type":"CardHeader","props":{"title":"Invoice Breakdown","subtitle":"Services delivered from Oct 1 to Oct 14, 2024"}}}
+{"op":"add","path":"/elements/items-table","value":{"type":"Table","props":{"columns":["col-service","col-hrs","col-rate","col-total"]}}}
+{"op":"add","path":"/elements/col-service","value":{"type":"Col","props":{"label":"Description","data":["Brand Identity & Design System","Mobile App UI Kit (Figma)","Usability Testing & Revisions"]}}}
+{"op":"add","path":"/elements/col-hrs","value":{"type":"Col","props":{"label":"Hours","data":["20 hrs","15 hrs","5 hrs"]}}}
+{"op":"add","path":"/elements/col-rate","value":{"type":"Col","props":{"label":"Rate","data":["$85.00/hr","$90.00/hr","$80.00/hr"]}}}
+{"op":"add","path":"/elements/col-total","value":{"type":"Col","props":{"label":"Total","data":["$1,700.00","$1,350.00","$400.00"]}}}
+{"op":"add","path":"/elements/payment-methods-card","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"card"},"visible":{"$state":"/paymentCompleted","not":true},"children":["payment-method-header","payment-radio-group"]}}
+{"op":"add","path":"/elements/payment-method-header","value":{"type":"CardHeader","props":{"title":"Select Payment Method","subtitle":"Secure, encrypted instant payout"}}}
+{"op":"add","path":"/elements/payment-radio-group","value":{"type":"RadioGroup","props":{"name":"paymentMethod","items":["opt-card","opt-bank","opt-apple"],"value":{"$bindState":"/selectedPaymentMethod"}}}}
+{"op":"add","path":"/elements/opt-card","value":{"type":"RadioItem","props":{"label":"Credit / Debit Card","description":"Instant • Visa, MasterCard, Amex (No fee)","value":"card"}}}
+{"op":"add","path":"/elements/opt-bank","value":{"type":"RadioItem","props":{"label":"ACH Bank Transfer","description":"1-2 business days • Direct wire / ACH","value":"ach"}}}
+{"op":"add","path":"/elements/opt-apple","value":{"type":"RadioItem","props":{"label":"Apple Pay / Google Pay","description":"1-click checkout from linked digital wallet","value":"wallet"}}}
+{"op":"add","path":"/state/selectedPaymentMethod","value":"card"}
+{"op":"add","path":"/elements/pay-action-card","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/paymentCompleted","not":true},"children":["pay-button"]}}
+{"op":"add","path":"/elements/pay-button","value":{"type":"Button","props":{"label":{"$template":"Pay ${/invoice/currencySymbol}${/invoice/amount} ${/invoice/currency} Now"},"variant":"primary","size":"large"},"on":{"press":{"action":"setState","params":{"statePath":"/paymentCompleted","value":true}}}}}
+{"op":"add","path":"/elements/success-callout","value":{"type":"Callout","props":{"variant":"success","title":"Payment Completed Successfully!","description":"Thank you for paying Invoice #INV-2024-089. A receipt has been sent to accounting@acme.com and Alex Rivera."},"visible":{"$state":"/paymentCompleted","eq":true}}}

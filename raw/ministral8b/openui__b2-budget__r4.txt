@@ -1,0 +1,56 @@
+```openui-lang
+root = Card([header, budgetSummary, spendingBreakdown, largestExpense, monthSelector, addExpenseBtn])
+
+header = CardHeader("Monthly Budget Check", "Track your spending against goals")
+
+budgetSummary = Card([budgetTitle, budgetValues, budgetChart], "sunk")
+budgetTitle = Heading("This Month's Budget", "h3")
+budgetValues = Table([budgetCol, actualCol, diffCol])
+budgetCol = Col("Budget", ["$3,500", "Monthly Limit"], "string")
+actualCol = Col("Actual", ["$2,890"], "number")
+diffCol = Col("Difference", ["$610 saved"], "string")
+
+budgetChart = SingleStackedBarChart(["Budget vs Actual"], [2890], "sunk")
+budgetChartTitle = TextContent("You're $610 under budget this month", "large-heavy")
+
+spendingBreakdown = Card([chartTitle, spendingChart], "sunk")
+chartTitle = Heading("Spending by Category", "h3")
+spendingChart = PieChart(["Food", "Transport", "Housing", "Entertainment", "Utilities", "Other"], [850, 600, 900, 350, 400, 290])
+
+largestExpense = Card([expenseTitle, expenseItem], "sunk")
+expenseTitle = Heading("Your Largest Expense", "h3")
+expenseItem = Card([expenseName, expenseAmount, expenseDate], "sunk")
+expenseName = TextContent("Rent Payment", "large-heavy")
+expenseAmount = TextContent("$900", "large-heavy")
+expenseDate = TextContent("Paid on June 15", "small")
+
+monthSelector = Card([monthTitle, monthPicker], "sunk")
+monthTitle = Heading("Select Month", "h3")
+monthPicker = CalendarBlock("single", "2023-06", 1)
+
+addExpenseBtn = DialogBlock("Add Expense", "New Expense", "Add a new expense to your budget", [expenseForm], "primary")
+expenseForm = Form("expense-form", formButtons, [categoryField, amountField, dateField, descriptionField])
+categoryField = FormControl("Category", categorySelect)
+categorySelect = Select("category", [catFood, catTransport, catHousing, catEntertainment, catUtilities, catOther])
+catFood = SelectItem("Food", "Food")
+catTransport = SelectItem("Transport", "Transport")
+catHousing = SelectItem("Housing", "Housing")
+catEntertainment = SelectItem("Entertainment", "Entertainment")
+catUtilities = SelectItem("Utilities", "Utilities")
+catOther = SelectItem("Other", "Other")
+
+amountField = FormControl("Amount", amountInput)
+amountInput = Input("amount", "0", "number", ["must be positive"], "100")
+
+dateField = FormControl("Date", datePicker)
+datePicker = DatePicker("date", "single", ["must be today or past"], "2023-06-20")
+
+descriptionField = FormControl("Description", descriptionInput)
+descriptionInput = Input("description", "Grocery shopping", "text")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Save Expense", null, "primary")
+
+formButtons = Buttons([cancelBtn])
+cancelBtn = Button("Cancel", null, "tertiary")
+```

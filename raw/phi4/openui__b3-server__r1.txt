@@ -1,0 +1,46 @@
+```openui
+root = Card([uptimeSection, usageSection, errorRateSection, incidentsSection, regionFilterSection, endpointsSection, alertThresholdSection, incidentActionSection])
+
+uptimeSection = Card([uptimeHeading, uptimeValue])
+uptimeHeading = Heading("Uptime This Quarter", "h3")
+uptimeValue = TextContent("99.97%")
+
+usageSection = Card([usageHeading, cpuChart, memoryChart])
+usageHeading = Heading("Resource Usage - Last 24 Hours", "h3")
+cpuChart = LineChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [cpuSeries], "linear", "Time", "CPU Utilization (%)")
+cpuSeries = Series("CPU", [45, 55, 65, 50, 60])
+memoryChart = LineChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [memorySeries], "linear", "Time", "Memory Utilization (%)")
+memorySeries = Series("Memory", [70, 75, 80, 65, 85])
+
+errorRateSection = Card([errorRateHeading, errorRateValue])
+errorRateHeading = Heading("Error Rate Now", "h3")
+errorRateValue = TextContent("2.5%")
+
+incidentsSection = Card([incidentsHeading, incidentsTable])
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsTable = Table([incidentIdCol, descriptionCol, severityCol])
+incidentIdCol = Col("Incident ID", ["INC-001", "INC-002", "INC-003"])
+descriptionCol = Col("Description", ["Database outage", "API Latency", "Service disruption"])
+severityCol = Col("Severity", ["Critical", "High", "Medium"])
+
+regionFilterSection = Card([regionHeading, regionSelect])
+regionHeading = Heading("Filter by Region", "h3")
+regionSelect = Select("region", [regionNA, regionEU, regionAS], "Select a region")
+regionNA = SelectItem("North America", "North America")
+regionEU = SelectItem("Europe", "Europe")
+regionAS = SelectItem("Asia", "Asia")
+
+endpointsSection = Card([endpointsHeading, endpointsTable])
+endpointsHeading = Heading("Slowest Endpoints", "h3")
+endpointsTable = Table([endpointNameCol, latencyCol])
+endpointNameCol = Col("Endpoint", ["/api/data", "/api/upload", "/api/download", "/api/status", "/api/query"])
+latencyCol = Col("Latency (ms)", [1200, 1100, 1500, 900, 1300])
+
+alertThresholdSection = Card([alertThresholdHeading, alertThresholdInput])
+alertThresholdHeading = Heading("Set Alert Threshold", "h3")
+alertThresholdInput = Input("threshold", "75", "number")
+
+incidentActionSection = Card([actionHeading, acknowledgeButton])
+actionHeading = Heading("Incident Actions", "h3")
+acknowledgeButton = Button("Acknowledge Incident", null, "primary")
+```

@@ -1,0 +1,91 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Personal Budget",
+      subtitle: "This Month's Spending Overview"
+    ),
+    
+    // Month selector
+    Select(
+      mode: "single",
+      defaultMonth: "2026-10",
+      numberOfMonths: 12,
+      captionLayout: "label",
+      value: "2026-10"
+    ),
+    
+    // Total spent vs budget
+    Card(
+      children: [
+        TextContent(
+          "Total Spent: $3,200 / $5,000 Budget",
+          size: "large"
+        ),
+        TextContent(
+          "Spent: 64% of budget",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // Spending split by category
+    Card(
+      children: [
+        TextContent(
+          "Spending by Category",
+          size: "large"
+        ),
+        Table(
+          columns: [
+            { label: "Category", data: ["Food", "Rent", "Transportation", "Entertainment", "Utilities"] },
+            { label: "Amount", data: ["$900", "$1,500", "$300", "$200", "$400"] }
+          ],
+          type: "string"
+        )
+      ]
+    ),
+    
+    // Largest expense highlighted
+    Card(
+      children: [
+        TextContent(
+          "Largest Expense: Rent",
+          size: "large"
+        ),
+        TextContent(
+          "Category: Rent\nAmount: $1,500\nDate: 2026-09-15",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // Add expense form
+    Form(
+      name: "add_expenses",
+      buttons: [
+        Button(label: "Add Expense", action: null, variant: "primary"),
+        Button(label: "Cancel", action: null, variant: "secondary")
+      ],
+      fields: [
+        FormControl(
+          label: "Amount",
+          input: NumberInput("amount", "1500", "100", "500"),
+          hint: "Enter expense amount"
+        ),
+        FormControl(
+          label: "Category",
+          input: Select("categories", ["Food", "Rent", "Transportation", "Entertainment", "Utilities"], null),
+          hint: "Select expense category"
+        ),
+        FormControl(
+          label: "Description",
+          input: TextArea("description", "Grocery shopping"),
+          hint: "What was bought?"
+        )
+      ]
+    )
+  ]
+)
+```

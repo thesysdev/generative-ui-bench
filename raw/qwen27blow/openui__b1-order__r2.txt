@@ -1,0 +1,36 @@
+
+
+root = Card([header, progressSection, etaSection, currentLocation, reportSection], "card", "column", "l")
+
+header = CardHeader("Package #PKG-2847-991", "Shipped from Shenzhen, CN")
+
+progressSection = Card([stepsLabel, deliverySteps], "sunk", "column", "s")
+stepsLabel = Heading("Delivery progress", "h3")
+deliverySteps = Steps([step1, step2, step3, step4])
+step1 = StepsItem("Picked up", "Collected by courier on Jun 12, 09:14 AM")
+step2 = StepsItem("In transit", "Arrived at regional hub, Chicago IL")
+step3 = StepsItem("Out for delivery", "Assigned to local driver")
+step4 = StepsItem("Delivered", "Awaiting final drop-off")
+
+etaSection = TextCallout("info", "Estimated delivery", "Friday, Jun 14, 2025 — between 8:00 AM and 1:00 PM")
+
+currentLocation = Card([locationHeading, locationDetail], "sunk", "column", "xs")
+locationHeading = Heading("Current location", "h3")
+locationDetail = TextContent("**Chicago Regional Distribution Hub**, 4500 S. Cicero Ave, Chicago, IL 60632\n\nLast scan: **Jun 13, 4:32 PM** — Package sorted for local route")
+
+reportSection = Card([reportHeading, reportBtn], "sunk", "column", "s")
+reportHeading = Heading("Need help?", "h3")
+reportBtn = DialogBlock("Report a problem", "Report a delivery issue", "Tell us what went wrong and we'll look into it right away.", [reportForm])
+
+reportForm = Form("delivery-issue", formButtons, [issueField, detailField])
+issueField = FormControl("What's the issue?", issueSelect)
+issueSelect = Select("issue_type", [issueLate, issueDamaged, issueMissing, issueWrong], "Select the closest match")
+issueLate = SelectItem("late", "Package is late")
+issueDamaged = SelectItem("damaged", "Package arrived damaged")
+issueMissing = SelectItem("missing", "Package never arrived")
+issueWrong = SelectItem("wrong", "Wrong item delivered")
+detailField = FormControl("Additional details", detailInput, "Anything else we should know?")
+detailInput = TextArea("details", "Describe the problem…", 4)
+formButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Submit report", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

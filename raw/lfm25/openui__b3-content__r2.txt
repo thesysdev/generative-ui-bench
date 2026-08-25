@@ -1,0 +1,206 @@
+```openui-lang
+root = Card(children: [
+  // 1. Drafts with status for each
+  Card([
+    "drafts",
+    {
+      "title": "Drafts",
+      "subtitle": "All pending and active drafts",
+      "items": [
+        { "type": "CardHeader", "value": "Active", "title": "Active Drafts", "content": [] },
+        {
+          "type": "CardHeader",
+          "value": "Completed",
+          "title": "Completed",
+          "content": []
+        },
+        {
+          "type": "CardHeader",
+          "value": "Scheduled",
+          "title": "Scheduled",
+          "content": []
+        }
+      ],
+      "variant": "card"
+    },
+    
+    // Sample drafts with status
+    DraftItem("q1_report_2026", "Q1 Report", "draft", "in progress"),
+    DraftItem("blog_new_york", "NY Times Coverage", "draft", "review"),
+    DraftItem("tech_trends_2026", "Tech Trends 2026", "draft", "pending"),
+    DraftItem("brand_story", "Brand Storytelling Guide", "draft", "completed"),
+    DraftItem("weekly_summary", "This Week Summary", "draft", "approved"),
+    DraftItem("annual_review", "Annual Review", "draft", "todo"),
+    
+    // 2. Pieces published this week
+    Card([
+      "weekly_pieces",
+      {
+        "title": "Pieces Published This Week",
+        "content": [
+          { "type": "CardHeader", "value": "This Week", "title": "Published This Week", "content": [] },
+          { "type": "CardHeader", "value": "Q1 Report", "title": "Q1 Report", "gap": "", "content": [
+            { "type": "TextContent", "text": "Detailed Q1 performance analysis with metrics and insights." }
+          ]},
+          { "type": "CardHeader", "value": "Tech Trends", "title": "Tech Trends", "gap": "", "content": [
+            { "type": "TextContent", "text": "Emerging technologies and industry trends." }
+          ]},
+          { "type": "CardHeader", "value": "NY Times Coverage", "title": "NY Times Coverage", "gap": "", "content": [
+            { "type": "TextContent", "text": "Feature story on latest market developments." }
+          ]},
+          { "type": "CardHeader", "value": "Brand Story", "title": "Brand Story", "gap": "", "content": [
+            { "type": "TextContent", "text": "Behind-the-scenes brand narrative." }
+          ]}
+        ]
+      }
+    ], "direction": "row"),
+    
+    // 3. Most-read article this month
+    Card([
+      "most_read_month",
+      {
+        "title": "Most-Read Article This Month",
+        "content": [
+          { 
+            "type": "CardHeader", 
+            "value": "Top Read", 
+            "title": "Most Read", 
+            "gap": "" 
+          },
+          { 
+            "type": "CardHeader", 
+            "value": "Digital Transformation", 
+            "title": "Digital Transformation", 
+            "gap": "" 
+          },
+          { "type": "TextContent", 
+            "text": "In-depth analysis of digital transformation strategies.", 
+            "size": "default" 
+          } 
+        ]
+      }
+    ], "direction": "row"),
+    
+    // 4. Readership over past 30 days (chart)
+    Card([
+      "readership_chart",
+      {
+        "title": "Readership (Past 30 Days)",
+        "content": [
+          { "type": "HorizonalBarChart", "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 
+            "series": [
+              { "category": "Blog", "values": [1500, 1800, 2200, 2800, 3200, 3500, 4100, 4500, 4800, 5200, 5600, 5900] },
+              { "category": "News", "values": [900, 1100, 1300, 1400, 1600, 1700, 1900, 2000, 2100, 2300, 2500, 2700] },
+              { "category": "Guide", "values": [700, 750, 800, 850, 900, 950, 1000, 1050, 1120, 1150, 1180, 1200] }
+            ]
+          }
+        ]
+      }
+    ],
+    
+    // 5. Category filter
+    Card([
+      "category_filter",
+      {
+        "title": "Filter by Category",
+        "content": [
+          { "type": "Separator", "decorative": true },
+          {
+            "type": "TabItem", 
+            "value": "all", 
+            "trigger": "all", 
+            "content": [
+              { "type": "CardHeader", "value": "All", "title": "All Categories", "gap": "" }
+            ]
+          },
+          {
+            "type": "TabItem", 
+            "value": "tech", 
+            "trigger": "tech", 
+            "content": [
+              { "type": "CardHeader", "value": "Technology", "title": "Technology", "gap": "" }
+            ]
+          },
+          {
+            "type": "TabItem", 
+            "value": "business", 
+            "trigger": "business", 
+            "content": [
+              { "type": "CardHeader", "value": "Business", "title": "Business", "gap": "" }
+            ]
+          },
+          {
+            "type": "TabItem", 
+            "value": "design", 
+            "trigger": "design", 
+            "content": [
+              { "type": "CardHeader", "value": "Design", "title": "Design", "gap": "" }
+            ]
+          },
+          {
+            "type": "TabItem", 
+            "value": "marketing", 
+            "trigger": "marketing", 
+            "content": [
+              { "type": "CardHeader", "value": "Marketing", "title": "Marketing", "gap": "" }
+            ]
+          }
+        ]
+      }
+    ],
+    
+    // 6. Schedule a piece with title and publish date
+    Card([
+      "schedule_piece_form",
+      {
+        "title": "Schedule New Piece",
+        "content": [
+          { "type": "CardHeader", "value": "Scheduled Piece", "title": "Create Scheduled Piece", "gap": "" },
+          { "type": "Button", "label": "Create", "action": null, "variant": "primary" },
+          { "type": "Form", "label": "Details", "fields": [
+            { "type": "Input", "label": "Title", "input": "title" },
+            { "type": "DatePicker", "label": "Publish Date", "mode": "date", "rules": [], "value": null },
+            { "type": "TextContent", "label": "Description", "text": "Brief summary of the piece." }
+          ]}
+        ]
+      }
+    ],
+    
+    // 7. Comments awaiting reply
+    Card([
+      "waiting_comments",
+      {
+        "title": "Comments Awaiting Reply",
+        "content": [
+          { "type": "CardHeader", "value": "Pending", "title": "Awaiting Response", "gap": "" },
+          { "type": "TextContent", "text": "No pending comments at the moment." },
+          { "type": "Button", "label": "Add Comment", "action": null, "variant": "secondary" }
+        ]
+      }
+    ],
+    
+    // 8. Start a new draft
+    Card([
+      "new_draft_form",
+      {
+        "title": "Start New Draft",
+        "content": [
+          { "type": "CardHeader", "value": "New Draft", "title": "Create Draft", "gap": "" },
+          { "type": "Button", "label": "Create Draft", "action": null, "variant": "primary" },
+          { "type": "Form", "label": "Draft Details", "fields": [
+            { "type": "Input", "label": "Title", "input": "title" },
+            { "type": "Dropdown", "label": "Category", "options": [
+              { "text": "technology", "value": "tech" },
+              { "text": "business", "value": "business" },
+              { "text": "design", "value": "design" },
+              { "text": "marketing", "value": "marketing" },
+              { "text": "news", "value": "news" }
+            ]},
+            { "type": "DatePicker", "label": "Publish Date", "mode": "date", "rules": [], "value": null }
+          ]}
+        ]
+      }
+    ])
+  ]
+])
+```

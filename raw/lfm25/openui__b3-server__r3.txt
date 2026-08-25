@@ -1,0 +1,180 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Uptime this quarter - Header stat
+    CardHeader(
+      title="Service Health Dashboard",
+      subtitle="Quarterly Overview"
+    ),
+    
+    // 2. CPU and memory usage over past 24 hours - Chart component
+    Card(
+      children: [
+        CardHeader(
+          title="CPU & Memory Usage (24h)",
+          subtitle="Resource Consumption"
+        ),
+        Chart(
+          labels: ["Hour 0", "Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7", "Hour 8", "Hour 9", "Hour 10", "Hour 11", "Hour 12"],
+          series: [
+            {category: "CPU %", values: [45, 52, 48, 61, 55, 68, 72, 65, 58, 42, 35, 28, 22]},
+            {category: "Memory %", values: [62, 70, 68, 75, 73, 80, 85, 78, 74, 60, 55, 50, 45]}
+          ],
+          xLabel: "Time",
+          yLabel: "Usage (%)",
+          variant: "grouped",
+          gap: "s"
+        )
+      ]
+    ),
+    
+    // 3. Error rate right now - Metric card
+    Card(
+      children: [
+        CardHeader(
+          title="Current Error Rate",
+          subtitle="Real-time Error Rate"
+        ),
+        TextContent(
+          text="Error rate: 2.3% (up from 1.8% last hour)",
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 4. Open incidents with severity - Table
+    Card(
+      children: [
+        CardHeader(
+          title="Open Incidents",
+          subtitle="Active Issues"
+        ),
+        Table(
+          columns: [
+            {"label": "Severity", "type": "string"},
+            {"label": "Status", "type": "string"},
+            {"label": "Description", "type": "string"},
+            {"label": "Created", "type": "string"}
+          ],
+          rows: [
+            {"title": "Critical", "subtitle": "Database connection failed", "value": "2026-03-01T08:15:00Z", "type": "critical"},
+            {"title": "High", "subtitle": "API timeout on /api/v2/users", "value": "2026-03-01T09:30:00Z", "type": "high"},
+            {"title": "Medium", "subtitle": "Slow query on orders table", "value": "2026-03-01T10:45:00Z", "type": "medium"},
+            {"title": "Low", "subtitle": "Cache miss rate above threshold", "value": "2026-03-01T11:20:00Z", "type": "low"},
+            {"title": "Critical", "subtitle": "Payment gateway unavailable", "value": "2026-03-01T13:00:00Z", "type": "critical"}
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Region filter - Dropdown
+    Card(
+      children: [
+        Divider(decorative: true),
+        Card(
+          children: [
+            Label("Region Filter"),
+            Dropdown(
+              items: [
+                {value: "us-east-1", label: "US East (N. Virginia)"},
+                {value: "eu-west-1", label: "EU West (Ireland)"},
+                {value: "ap-south-1", label: "AP South (Bangalore)"}
+              ],
+              selectedIndex: 0,
+              onChange: () => {}
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 6. Five slowest endpoints with latency - Table
+    Card(
+      children: [
+        CardHeader(
+          title="Slowest Endpoints (Top 5)",
+          subtitle="Latency Analysis"
+        ),
+        Table(
+          columns: [
+            {"label": "Endpoint", "type": "string"},
+            {"label": "Avg Latency", "type": "number"},
+            {"label": "95th Percentile", "type": "number"}
+          ],
+          rows: [
+            {"title": "get_user_profile", "value": "142ms", "type": "slowest"},
+            {"title": "process_order_validation", "value": "298ms", "type": "slowest"},
+            {"title": "send_notification_email", "value": "210ms", "type": "slowest"},
+            {"title": "calculate_dashboard_metrics", "value": "156ms", "type": "slowest"},
+            {"title": "authenticate_api_client", "value": "189ms", "type": "slowest"}
+          ]
+        )
+      ]
+    ),
+    
+    // 7. Alert threshold setting - Control panel
+    Card(
+      children: [
+        CardHeader(
+          title="Alert Thresholds",
+          subtitle="Configure Notifications"
+        ),
+        HStack(
+          spacing: 16,
+          items: [
+            Button(
+              label="Set CPU Alert (>=70%)",
+              action: () => {},
+              variant: "primary"
+            ),
+            Button(
+              label="Set Memory Alert (>=80%)",
+              action: () => {},
+              variant: "secondary"
+            ),
+            Button(
+              label="Set Error Rate Alert (>=5%)",
+              action: () => {},
+              variant: "primary"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Incident acknowledgment - Modal-like behavior via buttons
+    Card(
+      children: [
+        CardHeader(
+          title="Incident Management",
+          subtitle="Acknowledge Issues"
+        ),
+        Divider(),
+        Button(
+          label="Acknowledge Critical Incident",
+          action: () => {},
+          variant: "primary"
+        ),
+        Button(
+          label="Acknowledge High Priority Incident",
+          action: () => {},
+          variant: "secondary"
+        ),
+        Button(
+          label="Acknowledge Medium Priority Incident",
+          action: () => {},
+          variant: "tertiary"
+        ),
+        Button(
+          label="Acknowledge Low Priority Incident",
+          action: () => {},
+          variant: "ghost"
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  gap: "xl",
+  align: "stretch"
+)
+```

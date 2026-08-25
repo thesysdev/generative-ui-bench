@@ -1,0 +1,47 @@
+thought
+root = Card([header, filters, metricsRow, chartsRow, tableSection, riskSection, paymentSection, adoptionSection, footerActions])
+header = CardHeader("SaaS Admin Overview", "Real-time performance metrics")
+filters = Card([periodSelect, inviteBtn], "row", "m", "l")
+periodSelect = FormControl("Reporting Period", Select("period", [p30, p90, p365], "Last 90 Days"))
+p30 = SelectItem("30d", "Last 30 days")
+p90 = SelectItem("90d", "Last 90 days")
+p365 = SelectItem("365d", "Last year")
+inviteBtn = Button("Invite Admin", null, "secondary")
+
+metricsRow = Card([mrrMetric, arrMetric, churnMetric, npsMetric], "row", "m")
+mrrMetric = Card([Heading("MRR", "h4"), TextContent("$128,500", "large-heavy")])
+aarMetric = Card([Heading("ARR", "h4"), TextContent("$1.54M", "large-heavy")])
+churnMetric = Card([Heading("Churn", "h4"), TextContent("2.4%", "large-heavy")])
+npsMetric = Card([Heading("NPS", "h4"), TextContent("72", "large-heavy")])
+
+chartsRow = Card([signupChart, planChart, seatUtilization], "row", "m")
+signupChart = Card([Heading("New Signups (90D)", "h3"), LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"], [signupSeries], "natural")])
+signupSeries = Series("Signups", [45, 52, 48, 70, 95, 110])
+planChart = Card([Heading("Customers by Plan", "h3"), PieChart(["Basic", "Pro", "Enterprise"], [450, 200, 75], "donut")])
+seatUtilization = Card([Heading("Seat Utilization", "h3"), Progress(78, "78% of 1,200 seats used")])
+
+tableSection = Card([Heading("Top 10 Customers", "h3"), topCustomers])
+topCustomers = Table([colName, colSeats, colSpend])
+colName = Col("Customer", ["Acme Corp", "Globex", "Stark Ind", "Soyl", "Umbrella", "Hitech", "Wayne Ent", "Initech", "Cyberdyne", "Asan"])
+colSeats = Col("Seats", [150, 80, 200, 300, 45, 120, 90, 60, 500, 30])
+colSpend = Col("Monthly Spend", ["$12k", "$8.5k", "$24k", "$35k", "$4k", "$14k", "$9k", "$6k", "$55k", "$3k"])
+
+riskSection = Card([Heading("At Risk", "h3"), riskList])
+riskList = ListBlock([r1, r2, r3])
+r1 = ListItem("CloudScale", "Low login frequency last 14 days")
+r2 = ListItem("DataFlow", "Support ticket escalation")
+r3 = ListItem("Vortex Inc", "Contract renewal in 30 days")
+
+paymentSection = Card([Heading("Failed Payments", "h3"), paymentList])
+paymentList = ListBlock([p1, p2])
+p1 = ListItem("TechStart", "$199.00 - Card Expired", "Retry")
+p2 = ListItem("BioSoft", "$450.00 - Insufficient Funds", "Retry")
+
+adoptionSection = Card([Heading("Feature Adoption", "h3"), adoptionChart])
+adoptionChart = HorizontalBarChart(["AI Insights", "API Analytics", "SSO"], [f1, f2, f3])
+f1 = 85
+f2 = 40
+f3 = 92
+
+footerActions = Buttons([Separator(), refreshBtn], "row", "end")
+refreshBtn = Button("Refresh Data", null, "tertiary")

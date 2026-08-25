@@ -1,0 +1,72 @@
+```openui-lang
+root = Card([
+    livePlayers,
+    activePlayers,
+    revenueToday,
+    revenuePerUser,
+    sessionLength,
+    bestSellingItems,
+    serverHealth,
+    crashRate,
+    liveEvents,
+    playerReports,
+    banAppeals,
+    currencyInflation,
+    experimentResults,
+    patchNotes,
+    regionFocus,
+    hotfixRelease,
+    "footer"
+])
+
+livePlayers = CardHeader("Live Players", "Online now")
+activePlayers = Card([dailyMAU, monthlyMAU], "sunk")
+dailyMAU = TextContent("Daily Active Users: 125,000", "large")
+monthlyMAU = TextContent("Monthly Active Users: 3.2M", "large")
+
+revenueToday = CardHeader("Revenue Today", "USD")
+revenuePerUser = Card([revenueTotal, revenuePerUserCalc], "sunk")
+revenueTotal = TextContent("Revenue: $1,250,000", "large")
+revenuePerUserCalc = TextContent("Revenue per User: $9.80", "large")
+
+sessionLength = LineChart(["W1", "W2", "W3", "W4"], [sessionSeries], "natural", "Week", "Session Length (min)")
+sessionSeries = Series("Session Length", [45, 48, 50, 52])
+
+bestSellingItems = Table([itemLabel, itemUnits])
+itemLabel = Col("Item", ["Sword of Destiny", "Shield of Valor", "Health Potion"])
+itemUnits = Col("Units Sold", ["12,000", "9,500", "45,000"])
+
+serverHealth = Card([serverRegions, healthSummary], "sunk")
+serverRegions = Heading("Server Regions", "h3")
+healthSummary = ListBlock([euHealth, naHealth, apacHealth], "image")
+euHealth = ListItem("Europe", "Healthy", ["https://picsum.photos/seed/eu/80/80"])
+naHealth = ListItem("North America", "Degraded", ["https://picsum.photos/seed/na/80/80"])
+apacHealth = ListItem("APAC", "Normal", ["https://picsum.photos/seed/apac/80/80"])
+
+crashRate = CardHeader("Crash Rate by App Version", "Latest")
+crashRateChart = BarChart(["v1.2", "v1.3", "v1.4"], [crashSeries], "grouped", "App Version", "Crash Rate (%)")
+crashSeries = Series("Crash Rate", [2.1, 1.8, 0.9])
+
+liveEvents = CardHeader("Live Events", "Running & Upcoming")
+liveEventsContent = TextContent("Running: Battle Royale Week. Upcoming: Holiday Sale Starts Nov 1.", "large")
+
+playerReports = CardHeader("Player Reports Awaiting Review", "Pending")
+playerReportsCount = TextContent("Reports: 87", "large")
+
+banAppeals = CardHeader("Ban Appeals Awaiting Review", "Pending")
+banAppealsCount = TextContent("Appeals: 42", "large")
+
+currencyInflation = CardHeader("In-Game Currency Inflation", "USD")
+currencyInflationChart = LineChart(["Day 1", "Day 7", "Day 14"], [inflationSeries], "natural", "Days", "Inflation Rate (%)")
+inflationSeries = Series("Inflation", [1.2, 2.5, 3.1])
+
+experimentResults = CardHeader("Running Experiments", "Stats")
+experimentResultsContent = TextContent("Exp A: +7% retention (p=0.03). Exp B: -2% churn (p=0.08).", "large")
+
+patchNotes = Button("Draft Patch Notes", null, "secondary")
+regionFocus = Button("Focus on Region", null, "tertiary")
+hotfixRelease = Button("Ship Hotfix", null, "primary")
+
+footer = Separator(orientation: "horizontal", decorative: true)
+
+```

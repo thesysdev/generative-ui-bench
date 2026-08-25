@@ -1,0 +1,35 @@
+root = Card([teamSection, dateSection, postSection, missingSection], "clear", "column", "m")
+teamSection = CardHeader("Async Standup", "Remote team members with today's status")
+dateSection = CardHeader("Today's Date", "2025-07-11")
+postSection = CardHeader("Post Your Update", "Share what's on your mind")
+missingSection = CardHeader("Missing Updates", "0 of 3 team members have updated")
+teamMembers = [
+  {name: "Aisha", status: "On track", blocked: false, update: "Completed the API integration and passed all tests."},
+  {name: "Ben", status: "Blocked", blocked: true, update: "Waiting on the database migration to proceed."},
+  {name: "Carla", status: "On track", blocked: false, update: "Deployed the new feature to staging and verified it."},
+]
+teamList = ListBlock(teamMembers, "image")
+teamListItems = [
+  {title: "Aisha", subtitle: "On track", image: ["avatar", "on track"], update: "Completed the API integration and passed all tests."},
+  {title: "Ben", subtitle: "Blocked", image: ["avatar", "blocked"], update: "Waiting on the database migration to proceed."},
+  {title: "Carla", subtitle: "On track", image: ["avatar", "on track"], update: "Deployed the new feature to staging and verified it."},
+]
+avatarAisha = Avatar("https://picsum.photos/seed/aisha/80/80", "Aisha", "A")
+avatarBen = Avatar("https://picsum.photos/seed/ben/80/80", "Ben", "B")
+avatarCarla = Avatar("https://picsum.photos/seed/carla/80/80", "Carla", "C")
+statusOnTrack = Tag("On track", null, null, "success")
+statusBlocked = Tag("Blocked", null, null, "danger")
+statusIconOnTrack = Badge("✓", null, null, "success")
+statusIconBlocked = Badge("✗", null, null, "danger")
+blockedLabel = Tag("Blocked", null, null, "danger")
+updateText = TextContent("Completed the API integration and passed all tests.")
+updateTextBen = TextContent("Waiting on the database migration to proceed.")
+updateTextCarla = TextContent("Deployed the new feature to staging and verified it.")
+postSectionContent = CardHeader("Post Your Update", "Share what's on your mind")
+postInput = FormControl("What's on your mind?", postInput, "type": "text", placeholder: "Share your update...")
+postButton = Button("Post Update", null, "primary")
+missingCount = "0 of 3 team members have updated"
+missingSectionContent = CardHeader("Missing Updates", "0 of 3 team members have updated")
+missingCountBadge = Badge("0", null, null, "warning")
+missingCountLabel = TextContent("0 of 3 team members have updated")
+missingCountStatus = Tag("Still missing", null, null, "warning")

@@ -1,0 +1,48 @@
+root = Card([header, dateSection, conversionSection, visitorsSection, trafficSection, campaignsSection, bestCampaignSection, subscribersSection, exportSection], "card", "column", "l")
+
+header = CardHeader("Marketing Manager's Weekly Dashboard", "Weekly performance overview")
+dateSection = Card([dateHeading, rangeSelect], "clear", "row", "m")
+dateHeading = Heading("Date Range", "h3")
+rangeSelect = Select("date_range", [opt7, opt30, opt90], "Select range")
+opt7 = SelectItem("7d", "Last 7 days")
+opt30 = SelectItem("30d", "Last 30 days")
+opt90 = SelectItem("90d", "Last 90 days")
+
+conversionSection = Card([conversionHeading, conversionValue], "sunk")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("3.4%", "large-heavy")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "card", "column", "m")
+visitorsHeading = Heading("Site Visitors — Last 30 Days", "h3")
+visitorLabels = ["W1", "W2", "W3", "W4", "W5"]
+visitorSeries = Series("Visitors", [12400, 15800, 14200, 18900, 21500])
+visitorsChart = AreaChart(visitorLabels, [visitorSeries], "linear", "Week", "Visitors")
+
+trafficSection = Card([trafficHeading, trafficChart], "card", "column", "m")
+trafficHeading = Heading("Top Traffic Sources", "h3")
+trafficLabels = ["Organic Search", "Paid Social", "Direct", "Referral", "Email"]
+trafficValues = [42, 23, 18, 12, 5]
+trafficChart = PieChart(trafficLabels, trafficValues, "pie")
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "card", "column", "m")
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignNames = ["Brand Awareness", "Product Launch", "Retargeting", "Seasonal Promo", "Influencer"]
+campaignSpend = ["$12,400", "$28,900", "$8,200", "$15,600", "$22,100"]
+campaignStatus = ["Active", "Active", "Active", "Active", "Active"]
+campaignNameCol = Col("Campaign", campaignNames)
+campaignSpendCol = Col("Spend", campaignSpend)
+campaignStatusCol = Col("Status", campaignStatus)
+campaignsTable = Table([campaignNameCol, campaignSpendCol, campaignStatusCol])
+
+bestCampaignSection = Card([bestCampaign], "clear")
+bestCampaign = Callout("success", "Best Performing Campaign", "Retargeting — 4.2x ROAS with $8,200 spend")
+
+subscribersSection = Card([subscribersHeading, subscribersChart], "card", "column", "m")
+subscribersHeading = Heading("Email Subscriber Growth — This Month", "h3")
+subLabels = ["W1", "W2", "W3", "W4", "W5"]
+subSeries = Series("Subscribers", [3200, 3450, 3800, 4100, 4500])
+subscribersChart = LineChart(subLabels, [subSeries], "linear", "Week", "Subscribers")
+
+exportSection = Card([exportButtons], "clear")
+exportButtons = Buttons([exportBtn])
+exportBtn = Button("Export Report")

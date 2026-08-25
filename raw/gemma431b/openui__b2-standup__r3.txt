@@ -1,0 +1,44 @@
+root = Card([header, statusOverview, updateForm, updatesList, followUps], "card", "column", "l")
+
+header = CardHeader("Async Standup", dateText)
+dateText = TextContent("Tuesday, October 24, 2023", "small")
+
+statusOverview = Card([missingUpdates, blockedAlert], "sunk", "row", "m", "center", "between")
+missingUpdates = Badge("3 updates missing", "secondary")
+blockedAlert = Alert("Blockers Detected", "2 teammates are currently blocked", "warning")
+
+updateForm = Form("daily-update", formButtons, [statusField, blockerField])
+statusField = FormControl("What are you working on today?", statusInput)
+statusInput = TextArea("status", "I'm finishing the API integration...", 3)
+blockerField = FormControl("Any blockers?", blockerInput, "Leave blank if none")
+blockerInput = Input("blockers", "Waiting on design specs")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary")
+
+updatesList = SectionBlock([sarahUpdate, mikeUpdate, jessUpdate, alexUpdate], true)
+
+sarahUpdate = SectionItem("sarah", "Sarah Chen", [sarahContent])
+sarahContent = Card([sarahStatus, sarahTag], "clear", "column", "xs")
+sarahStatus = TextContent("Working on the new dashboard layouts and refining the CSS grid.")
+sarahTag = Tag("On Track", null, "md", "success")
+
+mikeUpdate = SectionItem("mike", "Mike Ross", [mikeContent])
+mikeContent = Card([mikeStatus, mikeTag, mikeBlocker], "clear", "column", "xs")
+mikeStatus = TextContent("Debugging the authentication middleware for OAuth2.")
+mikeTag = Tag("Blocked", null, "md", "danger")
+mikeBlocker = TextCallout("danger", "Blocker", "Waiting for client secret from the DevOps team.")
+
+jessUpdate = SectionItem("jess", "Jess Williams", [jessContent])
+jessContent = Card([jessStatus, jessTag], "clear", "column", "xs")
+jessStatus = TextContent("Writing documentation for the internal SDK.")
+jessTag = Tag("On Track", null, "md", "success")
+
+alexUpdate = SectionItem("alex", "Alex Rivera", [alexContent])
+alexContent = Card([alexStatus, alexTag, alexBlocker], "clear", "column", "xs")
+alexStatus = TextContent("Optimizing database queries for the reporting module.")
+alexTag = Tag("Blocked", null, "md", "danger")
+alexBlocker = TextCallout("danger", "Blocker", "Database migration script is failing in staging.")
+
+followUps = FollowUpBlock([remindBtn, viewArchiveBtn])
+remindBtn = FollowUpItem("Send reminder to missing teammates")
+viewArchiveBtn = FollowUpItem("View last week's standups")

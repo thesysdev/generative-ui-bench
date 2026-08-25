@@ -1,0 +1,146 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("Personal Budget", "This month's spending overview"),
+    
+    // Total spent vs budget
+    SectionBlock(
+      sections: [
+        SectionItem("Total Spent", "", [BudgetSummary()]),
+        SectionItem("Budget Limit", "", [BudgetInfo()])
+      ],
+      isFoldable: true
+    ),
+    
+    // Spending split by category
+    SectionBlock(
+      sections: [
+        SectionItem("By Category", "", [CategoryBreakdown()]),
+        SectionItem("Largest Expense", [], [LargestExpenseHighlight()])
+      ]
+    ),
+    
+    // Month selector
+    Separator(),
+    Tabs(items: [
+      TabItem("Current Month", "current-month"),
+      TabItem("Last Month", "last-month"),
+      TabItem("Previous Month", "previous-month")
+    ]),
+    
+    // Add expense form
+    SectionBlock(
+      sections: [
+        SectionItem("Add New Expense", "", [AddExpenseForm()])
+      ]
+    )
+  ]
+)
+
+// Budget Summary Component
+const BudgetSummary = Card([
+  TextContent(
+    "Total Spent This Month: $" + "${totalSpent}",
+    size: "large"
+  ),
+  TextContent(
+    "Budget Limit: $" + "${budgetLimit}",
+    size: "large"
+  ),
+  Divider(decorative: true),
+  TextContent(
+    "Remaining: $" + ((budgetLimit - totalSpent).toFixed(2)),
+    size: "large"
+  )
+])
+
+// Category Breakdown Component
+const CategoryBreakdown = Card([
+  CardHeader("Spending by Category", "How your money is distributed"),
+  Table([
+    {
+      label: "Category",
+      data: ["Food & Dining", "Transportation", "Housing", "Entertainment", "Shopping", "Utilities"],
+      dataArray: [
+        [1000.50, 350.25, 450.00, 200.75, 150.30, 300.00]
+      ]
+    }
+  ])
+])
+
+// Largest Expense Highlight
+const LargestExpenseHighlight = Card([
+  TextContent(
+    "🔥 **Largest Expense**",
+    size: "large"
+  ),
+  CardHeader("Amount:", "largest_single_expense"),
+  TextContent(
+    "💵 $" + largestExpense,
+    size: "large"
+  ),
+  CardHeader("Description:", "details"),
+  TextContent(
+    "• Food & Dining: $" + Math.round(Math.max(...categoryValues)) + 
+    " | Purchase: Grocery store run",
+    size: "medium"
+  )
+])
+
+// Month Selector (TabBased)
+const MonthSelector = Card([
+  CardHeader("Time Period", "Select month"),
+  Separator(),
+  TabItem("Current Month", "current-month"),
+  TabItem("Last Month", "last-month"),
+  TabItem("Previous Month", "previous-month")
+])
+
+// Add Expense Form
+const AddExpenseForm = Card([
+  TextCallout(
+    "Add New Expense",
+    variant: "neutral",
+    title: "New Expense",
+    description: "Record a new spending item",
+    visible: true
+  ),
+  Form([
+    FormControl("description", "Description", placeholder: "What was bought?"),
+    FormControl("amount", "Amount ($)", type: "number", required: true),
+    FormControl("category", "Category", options: ["Food & Dining", "Transportation", "Housing", "Entertainment", "Shopping", "Utilities"]),
+    Input(
+      "date",
+      "When did you spend?",
+      placeholder: "MM/DD/YYYY",
+      value: "01/15/2026"
+    ),
+    Button("Submit", variant: "primary", label: "Add Expense")
+  ])
+])
+
+// Helper: Calculate totals and find largest
+const calculateSummary = () => ({
+  totalSpent: totalSpent,
+  budgetLimit: budgetLimit,
+  remaining: budgetLimit - totalSpent,
+  largestExpense: Math.max(...categoryValues)
+})
+
+// For this stateless example, we'll predefine the values
+const totalSpent = 4523.60
+const budgetLimit = 5000.00
+const categoryValues = [1000.50, 350.25, 450.00, 200.75, 150.30, 300.00]
+const largestExpense = categoryValues.reduce((max, val) => Math.max(max, val), 0)
+
+// Full implementation
+root.children = [
+  { id: "header", content: [CardHeader("Personal Budget", "This month's spending overview")] },
+  { id: "summary", content: [BudgetSummary()] },
+  { id: "categories", content: [CategoryBreakdown()] },
+  { id: "largest", content: [LargestExpenseHighlight()] },
+  { id: "monthly_tabs", content: [MonthSelector()] },
+  { id: "add_expense", content: [AddExpenseForm()] }
+]
+```

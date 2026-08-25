@@ -1,0 +1,112 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        dealSummary,
+        activityLog,
+        contactsSection,
+        followUps,
+        noteSection,
+        renewalWarning,
+        callLogButton
+    ],
+    "card",
+    "column",
+    "stretch",
+    "center",
+    wrap = true
+)
+
+header = CardHeader("Account Dashboard", "Account Owner: Jane Doe")
+
+dealSummary = Card(
+    [
+        totalDealValue,
+        currentDealStage
+    ],
+    "sunk"
+)
+
+totalDealValue = TextContent("Total Deal Value: $1,250,000", "large")
+currentDealStage = TextContent("Current Stage: Closed Won", "large")
+
+activityLog = Card(
+    [
+        recentActivity
+    ],
+    "clear"
+)
+
+recentActivity = TextContent(
+    "Recent Activity:\n" +
+    "- 2024-09-01: Meeting with client\n" +
+    "- 2024-08-28: Proposal sent\n" +
+    "- 2024-08-25: Follow‑up call",
+    "default"
+)
+
+contactsSection = Card(
+    [
+        contactsTable
+    ],
+    "sunk"
+)
+
+contactsTable = Table([
+    labelCol,
+    roleCol
+])
+
+labelCol = Col("Contact", ["John Smith", "Emily Clark", "Michael Brown"], "string")
+roleCol = Col("Role", ["CEO", "CTO", "Finance Manager"], "string")
+
+followUps = Card(
+    [
+        openFollowUps
+    ],
+    "clear"
+)
+
+openFollowUps = TextContent(
+    "Open Follow‑Ups:\n" +
+    "- 2024-09-05: Call with Sales Manager (Due: 2024-09-03)\n" +
+    "- 2024-09-10: Email proposal update (Due: 2024-09-08)",
+    "default"
+)
+
+noteSection = Card(
+    [
+        noteInput
+    ],
+    "sunk"
+)
+
+noteInput = Form(
+    "account-note",
+    Buttons([saveNoteBtn]),
+    [
+        noteField
+    ]
+)
+
+noteField = FormControl("Note", textareaInput, "Enter a quick note about the account")
+textareaInput = TextArea("note", rows = 4, value = "")
+
+saveNoteBtn = Button("Save Note", "primary")
+
+renewalWarning = Card(
+    [
+        renewalInfo
+    ],
+    "sunk"
+)
+
+renewalInfo = TextContent(
+    "Renewal Date: 2025-01-15\n" +
+    "⚠️ Renewal is due in 3 months!",
+    "large"
+)
+
+callLogButton = Button("Log Call", "primary")
+
+```

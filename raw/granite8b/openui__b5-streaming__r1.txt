@@ -1,0 +1,129 @@
+```openui-lang
+root = Card([
+    liveViewers,
+    mostWatched,
+    watchTimeTrend,
+    subscriberActivity,
+    genrePerformance,
+    bufferingRate,
+    deliveryHealth,
+    upcomingReleases,
+    expiringLicenses,
+    recommendationClicks,
+    searchesWithoutPlayback,
+    revenueSplitByPlan,
+    deviceSplit,
+    regionFocusToggle,
+    featureFlags,
+    promotionBanner
+], "card", "column", "m", "center", "between", true)
+
+liveViewers = CardHeader("Live Viewers", "Current Watchers")
+liveViewersContent = TextContent("12,345 viewers watching right now", "large")
+
+mostWatched = Card([
+    CardHeader("Most-Watched Titles", "Hours Watched"),
+    Table([titleCol, hoursCol])
+], "sunk")
+titleCol = Col("Title", ["The Great Adventure", "Space Quest", "Mystery Manor"])
+hoursCol = Col("Hours", ["124.5", "98.2", "73.1"])
+
+watchTimeTrend = Card([
+    CardHeader("Watch Time Over Past Month", "Hours"),
+    LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [weekSeries], "natural", "Week", "Hours")
+], "clear")
+weekSeries = Series("Watch Time", [150, 180, 210, 190])
+
+subscriberActivity = Card([
+    CardHeader("New Subscribers vs Cancellations"),
+    Table([metricCol, valueCol])
+], "sunk")
+metricCol = Col("Metric", ["New Subscribers", "Cancellations"])
+valueCol = Col("Count", ["2,300", "450"])
+
+genrePerformance = Card([
+    CardHeader("Performance by Genre", "Hours Watched"),
+    BarChart(["Action", "Comedy", "Drama", "Sci-Fi"], [genreSeries], "grouped", "Genre", "Hours")
+], "clear")
+genreSeries = Series("Action", [120])
+genreSeries2 = Series("Comedy", [95])
+genreSeries3 = Series("Drama", [80])
+genreSeries4 = Series("Sci-Fi", [70])
+
+bufferingRate = Card([
+    CardHeader("Buffering Rate", "%"),
+    SingleStackedBarChart(["Low", "Medium", "High"], [rateValues])
+], "sunk")
+rateValues = [15, 5, 2]
+
+deliveryHealth = Card([
+    CardHeader("Delivery Health by Region", "%"),
+    HorizontalBarChart(["NA", "EU", "APAC", "LATAM"], [healthValues])
+], "clear")
+healthValues = [98, 95, 97, 94]
+
+upcomingReleases = Card([
+    CardHeader("Releases This Month", "Titles"),
+    ListBlock(items=[releaseItem1, releaseItem2], variant="image")
+], "sunk")
+releaseItem1 = ListItem("Galactic Odyssey", "Sci-Fi epic", [1], "Learn more")
+releaseItem2 = ListItem("Forest Whispers", "Drama thriller", [2], "Learn more")
+
+expiringLicenses = Card([
+    CardHeader("Licenses Expiring Soon", "Titles"),
+    Table([titleColExp, dateCol])
+], "sunk")
+titleColExp = Col("Title", ["Ancient Legends", "Wild Frontier"])
+dateCol = Col("Expires", ["2024-09-15", "2024-10-01"])
+
+recommendationClicks = Card([
+    CardHeader("Recommendation Clicks", "Rate"),
+    PieChart(["Clicks", "No Clicks"], [clickRate, noClickRate])
+], "clear")
+clickRate = 42
+noClickRate = 58
+
+searchesWithoutPlayback = Card([
+    CardHeader("Searches Without Playback", "Count"),
+    Table([searchCol, countCol])
+], "sunk")
+searchCol = Col("Search Term", ["Lost Treasure", "Space Exploration"])
+countCol = Col("Count", ["1,200", "950"])
+
+revenueSplitByPlan = Card([
+    CardHeader("Revenue Split by Plan", "$"),
+    PieChart(["Premium", "Basic", "Ad-Supported"], [premiumRev, basicRev, adRev])
+], "clear")
+premiumRev = 120000
+basicRev = 45000
+adRev = 30000
+
+deviceSplit = Card([
+    CardHeader("Viewing Split by Device", "%"),
+    HorizontalBarChart(["Smartphone", "Tablet", "Laptop", "TV"], [devicePerc])
+], "clear")
+devicePerc = [55, 20, 15, 10]
+
+regionFocusToggle = Card([
+    CardHeader("Focus Region", "Select Region"),
+    Select("region_focus", [regionNA, regionEU, regionAPAC, regionLATAM], "Choose region")
+], "sunk")
+regionNA = SelectItem("North America", "NA")
+regionEU = SelectItem("Europe", "EU")
+regionAPAC = SelectItem("APAC", "APAC")
+regionLATAM = SelectItem("Latin America", "LATAM")
+
+featureFlags = Card([
+    CardHeader("Feature Flags", "State"),
+    Table([flagCol, stateCol])
+], "clear")
+flagCol = Col("Flag", ["PersonalizedRecommendations", "DarkMode", "LiveChat"])
+stateCol = Col("State", ["Enabled", "Disabled", "Enabled"])
+
+promotionBanner = Card([
+    CardHeader("Featured Title Promotion", "Home Screen"),
+    Buttons([promoteBtn])
+], "sunk")
+promoteBtn = Button("Promote Title", null, "primary")
+
+```

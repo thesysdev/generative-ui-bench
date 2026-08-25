@@ -1,0 +1,72 @@
+```openui-lang
+root = Card([header, mainContent, alertsSection, footer], "card", "column", "l", "start", "center")
+
+header = CardHeader("Power Network Operations Console", "Real-time monitoring and control")
+
+mainContent = Card([loadSection, capacitySection, generationSection, plantsSection, outagesSection, forecastSection, priceSection, maintenanceSection], "sunk", "column", "l", "start", "center")
+
+loadSection = Card([loadHeading, loadValue, loadChart], "sunk", "column", "l", "start", "center")
+loadHeading = Heading("Current Load", "h3")
+loadValue = Card([loadText], "sunk", "row", "l", "center")
+loadText = TextContent("12,450 MW", "large-heavy")
+loadChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [loadSeries], "natural", "Time", "MW")
+loadSeries = Series("Load", [8500, 10200, 12450, 11800])
+
+capacitySection = Card([capacityHeading, capacityValue, capacityBar], "sunk", "column", "l", "start", "center")
+capacityHeading = Heading("Network Capacity", "h3")
+capacityValue = Card([capacityText], "sunk", "row", "l", "center")
+capacityText = TextContent("92.7% capacity used", "large-heavy")
+capacityBar = Progress(92.7, "Capacity Utilization")
+
+generationSection = Card([generationHeading, generationChart], "sunk", "column", "l", "start", "center")
+generationHeading = Heading("Generation Split", "h3")
+generationChart = PieChart(["Coal", "Gas", "Nuclear", "Renewables", "Hydro"], [4500, 3200, 2800, 2100, 1850], "pie", "circular")
+
+plantsSection = Card([plantsHeading, plantsTable], "sunk", "column", "l", "start", "center")
+plantsHeading = Heading("Power Plants", "h3")
+plantsTable = Table([plantNameCol, plantOutputCol, plantStatusCol])
+plantNameCol = Col("Plant", ["Blackwood", "Greenfield", "Riverdale", "Sunpeak", "Hydrodam"])
+plantOutputCol = Col("Output (MW)", [1850, 1200, 890, 1400, 960])
+plantStatusCol = Col("Status", ["Online", "Maintenance", "Online", "Online", "Online"])
+
+outagesSection = Card([outagesHeading, outagesTable], "sunk", "column", "l", "start", "center")
+outagesHeading = Heading("Current Outages", "h3")
+outagesTable = Table([outageRegionCol, outageCauseCol])
+outageRegionCol = Col("Region", ["Midwest", "Northeast", "Pacific Northwest"])
+outageCauseCol = Col("Cause", ["Transformer failure", "Storm damage", "Line fault"])
+
+forecastSection = Card([forecastHeading, forecastChart], "sunk", "column", "l", "start", "center")
+forecastHeading = Heading("24h Demand Forecast", "h3")
+forecastChart = AreaChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [forecastSeries], "natural", "Time", "MW")
+forecastSeries = Series("Forecast", [9800, 10500, 12300, 11900, 10700])
+
+priceSection = Card([priceHeading, priceValue], "sunk", "row", "l", "center")
+priceHeading = Heading("Current Price", "h3")
+priceValue = TextContent("$42.50/MWh", "large-heavy")
+
+maintenanceSection = Card([maintenanceHeading, maintenanceTable], "sunk", "column", "l", "start", "center")
+maintenanceHeading = Heading("Planned Maintenance", "h3")
+maintenanceTable = Table([maintenancePlantCol, maintenanceDatesCol])
+maintenancePlantCol = Col("Plant", ["Greenfield", "Riverdale", "Sunpeak"])
+maintenanceDatesCol = Col("Dates", ["June 15-17", "June 19-21", "June 22-24"])
+
+alertsSection = Card([alertsHeading, alertsList], "sunk", "column", "l", "start", "center")
+alertsHeading = Heading("Live Alerts", "h3")
+alertsList = ListBlock([alert1, alert2], "number")
+alert1 = ListItem("High load in Midwest", "Check transformer Blackwood-12", null, "View details")
+alert2 = ListItem("Renewable curtailment", "Sunpeak output reduced", null, "Adjust settings")
+
+footer = Card([regionFilter, curtailmentButton], "sunk", "row", "l", "center", "space-between")
+regionFilter = Select("region_filter", [region1, region2, region3, region4], "Filter by region", null, "All Regions", "medium")
+region1 = SelectItem("All", "All Regions")
+region2 = SelectItem("Midwest", "Midwest")
+region3 = SelectItem("Northeast", "Northeast")
+region4 = SelectItem("Pacific Northwest", "Pacific Northwest")
+curtailmentButton = Button("Order Curtailment", null, "primary", "normal", "medium")
+
+emissionsSection = Card([emissionsHeading, emissionsValue], "sunk", "row", "l", "center")
+emissionsHeading = Heading("Today's Emissions", "h3")
+emissionsValue = TextContent("4,280 tons CO₂", "large-heavy")
+
+alertsStream = AlertDialogBlock("New Alert", "Network Alert", "Check transformer Blackwood-12", null, null, "default")
+```

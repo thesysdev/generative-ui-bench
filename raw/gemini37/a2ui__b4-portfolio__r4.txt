@@ -1,0 +1,901 @@
+Here is the comprehensive PMO Project Portfolio Review dashboard designed to cover all 13 requirements in a clean, executive-ready interface.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "headerSection",
+          "healthSummaryAlert",
+          "quickActionsCard",
+          "portfolioTabs"
+        ]
+      },
+      {
+        "id": "headerSection",
+        "component": "CardHeader",
+        "title": "PMO Portfolio Performance & Health Review",
+        "subtitle": "Q3 2024 Executive Overview — 8 Active Programs"
+      },
+      {
+        "id": "healthSummaryAlert",
+        "component": "Alert",
+        "title": "Portfolio Health Summary (Requirement 9)",
+        "description": "Portfolio is at Moderate Health: 5 projects on track, 2 at risk, 1 critical blocker due to vendor API integration delays; budget utilization stands at 78% with average team utilization at 89%.",
+        "variant": "info"
+      },
+      {
+        "id": "quickActionsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "actionControlsTitle",
+          "actionControlsGroup"
+        ]
+      },
+      {
+        "id": "actionControlsTitle",
+        "component": "Heading",
+        "text": "Portfolio Governance & Quarter Controls",
+        "level": "h4"
+      },
+      {
+        "id": "actionControlsGroup",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "quarterPickerBtn",
+          "headcountModal",
+          "archiveProjectModal",
+          "exportBtn"
+        ]
+      },
+      {
+        "id": "quarterPickerBtn",
+        "component": "DialogBlock",
+        "triggerLabel": "Change Quarter (Current: Q3 2024)",
+        "triggerVariant": "outline",
+        "title": "Select Portfolio Quarter Review (Req 10)",
+        "description": "Switch fiscal quarter view to review historical or planned portfolio milestones.",
+        "content": [
+          "quarterSelectForm"
+        ]
+      },
+      {
+        "id": "quarterSelectForm",
+        "component": "Form",
+        "name": "quarter_select_form",
+        "buttons": "quarterSubmitButtons",
+        "fields": [
+          "quarterFormControl"
+        ]
+      },
+      {
+        "id": "quarterFormControl",
+        "component": "FormControl",
+        "label": "Fiscal Quarter",
+        "input": "quarterSelectInput",
+        "hint": "Loads historical baseline and metrics snapshot"
+      },
+      {
+        "id": "quarterSelectInput",
+        "component": "Select",
+        "name": "quarter",
+        "placeholder": "Choose a Quarter",
+        "items": [
+          "optQ1",
+          "optQ2",
+          "optQ3",
+          "optQ4"
+        ]
+      },
+      {
+        "id": "optQ1",
+        "component": "SelectItem",
+        "value": "q1-2024",
+        "label": "Q1 2024 (Archived)"
+      },
+      {
+        "id": "optQ2",
+        "component": "SelectItem",
+        "value": "q2-2024",
+        "label": "Q2 2024 (Archived)"
+      },
+      {
+        "id": "optQ3",
+        "component": "SelectItem",
+        "value": "q3-2024",
+        "label": "Q3 2024 (Current Active)"
+      },
+      {
+        "id": "optQ4",
+        "component": "SelectItem",
+        "value": "q4-2024",
+        "label": "Q4 2024 (Forecasted)"
+      },
+      {
+        "id": "quarterSubmitButtons",
+        "component": "Buttons",
+        "buttons": [
+          "applyQuarterBtn"
+        ]
+      },
+      {
+        "id": "applyQuarterBtn",
+        "component": "Button",
+        "label": "Load Quarter Snapshot",
+        "variant": "primary"
+      },
+      {
+        "id": "headcountModal",
+        "component": "DialogBlock",
+        "triggerLabel": "Request Staffing / People (Req 11)",
+        "triggerVariant": "default",
+        "title": "Project Staffing & Resource Allocation Request",
+        "description": "Submit a formal PMO headcount augmentation request for executive approval.",
+        "content": [
+          "staffingForm"
+        ]
+      },
+      {
+        "id": "staffingForm",
+        "component": "Form",
+        "name": "headcount_request_form",
+        "buttons": "staffingFormButtons",
+        "fields": [
+          "staffProjectField",
+          "staffRolesField",
+          "staffCountField",
+          "staffJustificationField"
+        ]
+      },
+      {
+        "id": "staffProjectField",
+        "component": "FormControl",
+        "label": "Target Project",
+        "input": "staffProjectSelect"
+      },
+      {
+        "id": "staffProjectSelect",
+        "component": "Select",
+        "name": "project_id",
+        "placeholder": "Select project needing support",
+        "items": [
+          "projOpt1",
+          "projOpt2",
+          "projOpt3",
+          "projOpt4"
+        ]
+      },
+      {
+        "id": "projOpt1",
+        "component": "SelectItem",
+        "value": "apollo",
+        "label": "Project Apollo (Cloud Migration)"
+      },
+      {
+        "id": "projOpt2",
+        "component": "SelectItem",
+        "value": "nexus",
+        "label": "Nexus Core ERP Overhaul"
+      },
+      {
+        "id": "projOpt3",
+        "component": "SelectItem",
+        "value": "cipher",
+        "label": "Cipher Zero-Trust Security"
+      },
+      {
+        "id": "projOpt4",
+        "component": "SelectItem",
+        "value": "pulse",
+        "label": "Pulse Mobile App v3.0"
+      },
+      {
+        "id": "staffRolesField",
+        "component": "FormControl",
+        "label": "Role Required",
+        "input": "staffRoleInput"
+      },
+      {
+        "id": "staffRoleInput",
+        "component": "Input",
+        "name": "role_type",
+        "placeholder": "e.g., Senior Backend Engineer, QA Automation, DevOps"
+      },
+      {
+        "id": "staffCountField",
+        "component": "FormControl",
+        "label": "Headcount Count (FTEs)",
+        "input": "staffCountInput"
+      },
+      {
+        "id": "staffCountInput",
+        "component": "Input",
+        "name": "headcount_count",
+        "type": "number",
+        "placeholder": "2"
+      },
+      {
+        "id": "staffJustificationField",
+        "component": "FormControl",
+        "label": "Business Case / Urgency Justification",
+        "input": "staffJustificationInput"
+      },
+      {
+        "id": "staffJustificationInput",
+        "component": "TextArea",
+        "name": "justification",
+        "placeholder": "Describe why extra resources are necessary to meet milestone commitments..."
+      },
+      {
+        "id": "staffingFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitHeadcountBtn"
+        ]
+      },
+      {
+        "id": "submitHeadcountBtn",
+        "component": "Button",
+        "label": "Submit Headcount Request",
+        "variant": "primary"
+      },
+      {
+        "id": "archiveProjectModal",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "Archive Project (Req 13)",
+        "triggerVariant": "outline",
+        "title": "Archive Completed Project?",
+        "description": "This will close all open work items, lock budget ledgers, and transition the project into the PMO historical archive.",
+        "confirmLabel": "Confirm Archive",
+        "cancelLabel": "Cancel"
+      },
+      {
+        "id": "exportBtn",
+        "component": "Button",
+        "label": "Export Portfolio Review (Req 12)",
+        "variant": "secondary"
+      },
+      {
+        "id": "portfolioTabs",
+        "component": "Tabs",
+        "items": [
+          "tabOverview",
+          "tabDeliveryRisks",
+          "tabFinancialsTeam"
+        ]
+      },
+      {
+        "id": "tabOverview",
+        "component": "TabItem",
+        "value": "tab-overview",
+        "trigger": "Active Projects & Deadlines",
+        "content": [
+          "activeProjectsSectionCard",
+          "twoWeeksDeadlinesCard"
+        ]
+      },
+      {
+        "id": "activeProjectsSectionCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "activeProjectsHeader",
+          "activeProjectsTable"
+        ]
+      },
+      {
+        "id": "activeProjectsHeader",
+        "component": "CardHeader",
+        "title": "1. Active Projects Health & Governance",
+        "subtitle": "Project Owners, Deadlines, and Overall Health Status"
+      },
+      {
+        "id": "activeProjectsTable",
+        "component": "Table",
+        "columns": [
+          "colProjName",
+          "colOwner",
+          "colDeadline",
+          "colHealth",
+          "colPhase"
+        ]
+      },
+      {
+        "id": "colProjName",
+        "component": "Col",
+        "label": "Project Name",
+        "data": [
+          "Project Apollo (Cloud Migration)",
+          "Nexus ERP Modernization",
+          "Cipher Security Zero-Trust",
+          "Pulse Mobile v3.0",
+          "Data Lakehouse Analytics"
+        ]
+      },
+      {
+        "id": "colOwner",
+        "component": "Col",
+        "label": "Project Owner",
+        "data": [
+          "Sarah Jenkins (VP Eng)",
+          "Michael Chang (IT Dir)",
+          "Elena Rostov (CISO Team)",
+          "David Kim (Product Lead)",
+          "Amira Patel (Data Arch)"
+        ]
+      },
+      {
+        "id": "colDeadline",
+        "component": "Col",
+        "label": "Project Deadline",
+        "data": [
+          "Oct 15, 2024",
+          "Nov 30, 2024",
+          "Sep 30, 2024",
+          "Dec 15, 2024",
+          "Jan 20, 2025"
+        ]
+      },
+      {
+        "id": "colHealth",
+        "component": "Col",
+        "label": "Health Status",
+        "data": [
+          "Critical (Delayed)",
+          "At Risk",
+          "On Track",
+          "On Track",
+          "On Track"
+        ]
+      },
+      {
+        "id": "colPhase",
+        "component": "Col",
+        "label": "Phase",
+        "data": [
+          "Testing / UAT",
+          "Development",
+          "Deployment",
+          "Sprint 4 Design",
+          "Data Ingestion"
+        ]
+      },
+      {
+        "id": "twoWeeksDeadlinesCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "twoWeeksDeadlinesHeader",
+          "twoWeeksDeadlinesList"
+        ]
+      },
+      {
+        "id": "twoWeeksDeadlinesHeader",
+        "component": "CardHeader",
+        "title": "6. Deadlines in the Next 2 Weeks",
+        "subtitle": "Upcoming critical path dates & cut-offs (next 14 days)"
+      },
+      {
+        "id": "twoWeeksDeadlinesList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "dlItem1",
+          "dlItem2",
+          "dlItem3"
+        ]
+      },
+      {
+        "id": "dlItem1",
+        "component": "ListItem",
+        "title": "Cipher Security: ISO 27001 Final Compliance Audit Sign-off",
+        "subtitle": "Due in 3 days (Sep 18) • Owner: Elena Rostov • Impact: High"
+      },
+      {
+        "id": "dlItem2",
+        "component": "ListItem",
+        "title": "Nexus ERP: Phase 2 Database Schema Freeze",
+        "subtitle": "Due in 6 days (Sep 21) • Owner: Michael Chang • Impact: Critical"
+      },
+      {
+        "id": "dlItem3",
+        "component": "ListItem",
+        "title": "Project Apollo: Kubernetes Production Cluster Cutover",
+        "subtitle": "Due in 11 days (Sep 26) • Owner: Sarah Jenkins • Impact: High"
+      },
+      {
+        "id": "tabDeliveryRisks",
+        "component": "TabItem",
+        "value": "tab-delivery-risks",
+        "trigger": "Pace, Milestones & Risks",
+        "content": [
+          "paceSectionCard",
+          "overdueMilestonesCard",
+          "blockedItemsCard",
+          "risksSectionCard"
+        ]
+      },
+      {
+        "id": "paceSectionCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "paceHeader",
+          "deliveryPaceChart"
+        ]
+      },
+      {
+        "id": "paceHeader",
+        "component": "CardHeader",
+        "title": "7. Delivery Pace Over Past 6 Sprints",
+        "subtitle": "Committed Story Points vs. Delivered Velocity"
+      },
+      {
+        "id": "deliveryPaceChart",
+        "component": "BarChart",
+        "labels": [
+          "Sprint 18",
+          "Sprint 19",
+          "Sprint 20",
+          "Sprint 21",
+          "Sprint 22",
+          "Sprint 23"
+        ],
+        "series": [
+          "seriesCommitted",
+          "seriesDelivered"
+        ],
+        "variant": "grouped",
+        "xLabel": "Sprint",
+        "yLabel": "Story Points"
+      },
+      {
+        "id": "seriesCommitted",
+        "component": "Series",
+        "category": "Committed Points",
+        "values": [
+          140,
+          155,
+          160,
+          150,
+          165,
+          170
+        ]
+      },
+      {
+        "id": "seriesDelivered",
+        "component": "Series",
+        "category": "Delivered Velocity",
+        "values": [
+          132,
+          148,
+          142,
+          138,
+          160,
+          164
+        ]
+      },
+      {
+        "id": "overdueMilestonesCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "overdueMilestonesHeader",
+          "overdueMilestonesTable"
+        ]
+      },
+      {
+        "id": "overdueMilestonesHeader",
+        "component": "CardHeader",
+        "title": "2. Overdue Milestones",
+        "subtitle": "Key project deliverables past their committed target dates"
+      },
+      {
+        "id": "overdueMilestonesTable",
+        "component": "Table",
+        "columns": [
+          "colMsProject",
+          "colMsName",
+          "colMsOriginalDate",
+          "colMsDaysOverdue",
+          "colMsEscalation"
+        ]
+      },
+      {
+        "id": "colMsProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Project Apollo",
+          "Nexus ERP",
+          "Pulse Mobile"
+        ]
+      },
+      {
+        "id": "colMsName",
+        "component": "Col",
+        "label": "Overdue Milestone",
+        "data": [
+          "Legacy AWS VPC Teardown & Migration",
+          "Supply Chain Module UAT Approval",
+          "Apple App Store Beta Submission"
+        ]
+      },
+      {
+        "id": "colMsOriginalDate",
+        "component": "Col",
+        "label": "Target Date",
+        "data": [
+          "Aug 28, 2024",
+          "Sep 05, 2024",
+          "Sep 10, 2024"
+        ]
+      },
+      {
+        "id": "colMsDaysOverdue",
+        "component": "Col",
+        "label": "Delay",
+        "data": [
+          "17 days overdue",
+          "9 days overdue",
+          "4 days overdue"
+        ]
+      },
+      {
+        "id": "colMsEscalation",
+        "component": "Col",
+        "label": "Resolution Plan",
+        "data": [
+          "Contractor onboarding approved",
+          "Vendor patch scheduled Sep 19",
+          "Certificate issue resolved, resubmitting"
+        ]
+      },
+      {
+        "id": "blockedItemsCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "blockedHeader",
+          "blockedAlert1",
+          "blockedAlert2"
+        ]
+      },
+      {
+        "id": "blockedHeader",
+        "component": "CardHeader",
+        "title": "8. Blocked Work Items",
+        "subtitle": "Unresolved blockers requiring PMO or executive unblocking"
+      },
+      {
+        "id": "blockedAlert1",
+        "component": "Alert",
+        "title": "[BLOCKED] Apollo: Third-Party Billing Gateway API Gateway Timeout",
+        "description": "Blocked for 5 days. Awaiting Vendor Level-3 Engineering fix for OAuth handshake rate limiting.",
+        "variant": "destructive"
+      },
+      {
+        "id": "blockedAlert2",
+        "component": "Alert",
+        "title": "[BLOCKED] Nexus ERP: Finance Department Sign-Off on Tax Engine Rules",
+        "description": "Blocked for 3 days. Pending final review from Corporate Tax Controller.",
+        "variant": "warning"
+      },
+      {
+        "id": "risksSectionCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "risksHeader",
+          "risksTable"
+        ]
+      },
+      {
+        "id": "risksHeader",
+        "component": "CardHeader",
+        "title": "5. Risks & Severity Registry",
+        "subtitle": "Identified delivery, technical, and operational threats"
+      },
+      {
+        "id": "risksTable",
+        "component": "Table",
+        "columns": [
+          "colRiskProject",
+          "colRiskDescription",
+          "colRiskSeverity",
+          "colRiskMitigation"
+        ]
+      },
+      {
+        "id": "colRiskProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Project Apollo",
+          "Nexus ERP",
+          "Cipher Security",
+          "Pulse Mobile"
+        ]
+      },
+      {
+        "id": "colRiskDescription",
+        "component": "Col",
+        "label": "Risk Description",
+        "data": [
+          "Data sync latency exceeds 500ms SLA during peak simulation",
+          "Legacy warehouse integration specs incomplete",
+          "Key security architect departure at end of month",
+          "Push notification provider SDK breaking changes"
+        ]
+      },
+      {
+        "id": "colRiskSeverity",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "High (Critical)",
+          "High",
+          "Medium",
+          "Low"
+        ]
+      },
+      {
+        "id": "colRiskMitigation",
+        "component": "Col",
+        "label": "Mitigation Strategy",
+        "data": [
+          "Redis caching cluster deployed to ingest tier",
+          "Daily syncs with supply chain SME team",
+          "Promoting senior infosec engineer to acting lead",
+          "Pinning SDK version until v3.1 release"
+        ]
+      },
+      {
+        "id": "tabFinancialsTeam",
+        "component": "TabItem",
+        "value": "tab-financials-team",
+        "trigger": "Budget & Team Utilization",
+        "content": [
+          "budgetSectionCard",
+          "utilizationSectionCard"
+        ]
+      },
+      {
+        "id": "budgetSectionCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "budgetHeader",
+          "budgetComparisonChart",
+          "budgetBreakdownTable"
+        ]
+      },
+      {
+        "id": "budgetHeader",
+        "component": "CardHeader",
+        "title": "3. Budget Spent vs. Allocation per Project",
+        "subtitle": "Financial tracking across active portfolio ($ in Thousands USD)"
+      },
+      {
+        "id": "budgetComparisonChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "Project Apollo",
+          "Nexus ERP",
+          "Cipher Security",
+          "Pulse Mobile",
+          "Data Lakehouse"
+        ],
+        "series": [
+          "seriesBudgetAllocated",
+          "seriesBudgetSpent"
+        ],
+        "variant": "grouped",
+        "xLabel": "Amount ($k)",
+        "yLabel": "Project"
+      },
+      {
+        "id": "seriesBudgetAllocated",
+        "component": "Series",
+        "category": "Allocated Budget ($k)",
+        "values": [
+          450,
+          620,
+          280,
+          190,
+          340
+        ]
+      },
+      {
+        "id": "seriesBudgetSpent",
+        "component": "Series",
+        "category": "Spent to Date ($k)",
+        "values": [
+          410,
+          490,
+          210,
+          135,
+          245
+        ]
+      },
+      {
+        "id": "budgetBreakdownTable",
+        "component": "Table",
+        "columns": [
+          "colBdgProj",
+          "colBdgAllocated",
+          "colBdgSpent",
+          "colBdgBurnRate",
+          "colBdgStatus"
+        ]
+      },
+      {
+        "id": "colBdgProj",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Project Apollo",
+          "Nexus ERP",
+          "Cipher Security",
+          "Pulse Mobile",
+          "Data Lakehouse"
+        ]
+      },
+      {
+        "id": "colBdgAllocated",
+        "component": "Col",
+        "label": "Allocated ($k)",
+        "data": [
+          "$450k",
+          "$620k",
+          "$280k",
+          "$190k",
+          "$340k"
+        ]
+      },
+      {
+        "id": "colBdgSpent",
+        "component": "Col",
+        "label": "Spent ($k)",
+        "data": [
+          "$410k (91%)",
+          "$490k (79%)",
+          "$210k (75%)",
+          "$135k (71%)",
+          "$245k (72%)"
+        ]
+      },
+      {
+        "id": "colBdgBurnRate",
+        "component": "Col",
+        "label": "Runway / Burn",
+        "data": [
+          "3 weeks left (Over budget risk)",
+          "11 weeks left",
+          "8 weeks left",
+          "14 weeks left",
+          "12 weeks left"
+        ]
+      },
+      {
+        "id": "colBdgStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Requires Review",
+          "On Budget",
+          "On Budget",
+          "On Budget",
+          "On Budget"
+        ]
+      },
+      {
+        "id": "utilizationSectionCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "utilizationHeader",
+          "teamUtilizationTable"
+        ]
+      },
+      {
+        "id": "utilizationHeader",
+        "component": "CardHeader",
+        "title": "4. Team Resource Utilization",
+        "subtitle": "Current capacity load & allocation across engineering and delivery teams"
+      },
+      {
+        "id": "teamUtilizationTable",
+        "component": "Table",
+        "columns": [
+          "colTeamName",
+          "colHeadcount",
+          "colUtilizationPct",
+          "colStatusRisk"
+        ]
+      },
+      {
+        "id": "colTeamName",
+        "component": "Col",
+        "label": "Functional Team / Squad",
+        "data": [
+          "Cloud Platform & DevOps",
+          "Core Backend Systems",
+          "Mobile iOS/Android Squad",
+          "Data Engineering & BI",
+          "QA & Test Automation",
+          "InfoSec & Compliance"
+        ]
+      },
+      {
+        "id": "colHeadcount",
+        "component": "Col",
+        "label": "Assigned FTEs",
+        "data": [
+          "8 FTEs",
+          "14 FTEs",
+          "6 FTEs",
+          "9 FTEs",
+          "5 FTEs",
+          "4 FTEs"
+        ]
+      },
+      {
+        "id": "colUtilizationPct",
+        "component": "Col",
+        "label": "Utilization Rate",
+        "data": [
+          "105% (Over-allocated)",
+          "92% (Optimal)",
+          "80% (Healthy)",
+          "88% (Healthy)",
+          "96% (Near capacity)",
+          "74% (Available capacity)"
+        ]
+      },
+      {
+        "id": "colStatusRisk",
+        "component": "Col",
+        "label": "Load Assessment",
+        "data": [
+          "Burnout Risk — Request support",
+          "Nominal",
+          "Nominal",
+          "Nominal",
+          "Monitor",
+          "Can absorb extra tasks"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

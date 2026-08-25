@@ -1,0 +1,108 @@
+```openui-lang
+drafts = ListBlock(items: draftItems, variant: "image")
+draftItems = [
+  ListItem(
+    title: "Feature on Renewable Energy",
+    subtitle: "Draft – Pending Review",
+    image: "draft-placeholder.png"
+  ),
+  ListItem(
+    title: "Guide to Cloud Migration",
+    subtitle: "Draft – In Progress",
+    image: "draft-placeholder.png"
+  )
+]
+
+publishedThisWeek = ListBlock(items: publishedItems)
+publishedItems = [
+  ListItem(
+    title: "AI Trends 2024",
+    subtitle: "Published – This Week",
+    image: "published.png"
+  ),
+  ListItem(
+    title: "5 Tips for Sustainable Living",
+    subtitle: "Published – This Week",
+    image: "published.png"
+  )
+]
+
+mostReadArticle = CardHeader(
+  title: "Most‑Read Article This Month",
+  subtitle: "Solar Power Innovations"
+)
+
+readershipChart = LineChart(
+  labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
+  series: [readershipSeries],
+  variant: "linear",
+  xLabel: "Day",
+  yLabel: "Readership"
+)
+readershipSeries = Series("Readers", [120, 150, 130, 170, 160, 180, 200, 190, 210, 230, 220, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420])
+
+categoryFilter = Select(
+  name: "category",
+  items: [catTech, catLifestyle, catFinance],
+  placeholder: "Select Category",
+  size: "medium"
+)
+catTech = SelectItem("Technology", "Technology")
+catLifestyle = SelectItem("Lifestyle", "Lifestyle")
+catFinance = SelectItem("Finance", "Finance")
+
+scheduleForm = Form(
+  name: "schedulePiece",
+  buttons: scheduleButtons,
+  fields: [
+    scheduleTitle,
+    scheduleDate,
+    scheduleSubmit
+  ]
+)
+scheduleTitle = FormControl(
+  label: "Title",
+  input: Input("title", placeholder: "Article Title")
+)
+scheduleDate = FormControl(
+  label: "Publish Date",
+  input: DatePicker("publish_date", mode: "single")
+)
+scheduleSubmit = Button("Schedule Article")
+
+commentsAwaiting = ListBlock(items: commentItems)
+commentItems = [
+  ListItem(
+    title: "User123: Great insights!",
+    subtitle: "Awaiting Reply"
+  ),
+  ListItem(
+    title: "EditorX: Need clarification on data source.",
+    subtitle: "Awaiting Reply"
+  )
+]
+
+newDraft = Button("Start New Draft", null, "primary")
+
+root = Card(
+  children: [
+    CardHeader("Editor's Content Studio", "Dashboard"),
+    Card(
+      children: [drafts, publishedThisWeek, mostReadArticle, readershipChart, categoryFilter, scheduleForm, commentsAwaiting, newDraft],
+      variant: "card",
+      direction: "row",
+      gap: "m",
+      align: "center",
+      justify: "space-between"
+    )
+  ],
+  variant: "card",
+  direction: "column",
+  gap: "xl"
+)
+
+scheduleButtons = Buttons(
+  buttons: [scheduleSubmit],
+  direction: "column"
+)
+```

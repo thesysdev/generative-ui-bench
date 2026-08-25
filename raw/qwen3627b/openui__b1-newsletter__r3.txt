@@ -1,0 +1,74 @@
+The user wants a signup page for a weekly product newsletter. I need to build a single screen that shows:
+1. One sentence on what subscribers get
+2. A way to enter an email address and subscribe
+
+Let me design this as a clean, simple signup page with:
+- A CardHeader for the title
+- A TextContent describing what subscribers get
+- A Form with an email input and a subscribe button
+
+Let me make sure I follow all the rules:
+- root = Card(...) first
+- All variables must be referenced
+- Positional arguments only
+- Every defined variable must be reachable from root
+
+Let me structure this:
+
+root = Card([header, description, form])
+header = CardHeader("Weekly Product Newsletter", null)
+description = TextContent("Get curated product insights, launches, and design trends delivered to your inbox every week.")
+form = Form("newsletter-signup", formButtons, [emailField])
+emailField = FormControl("Email address", emailInput)
+emailInput = Input("email", "Enter your email", "email")
+formButtons = Buttons([subscribeBtn])
+subscribeBtn = Button("Subscribe", null, "primary")
+
+Wait, let me check the Form signature:
+Form(name: string, buttons: Buttons, fields: (FormControl)[])
+
+So Form takes: name, buttons, fields - all positional.
+
+Let me also check Input signature:
+Input(name: string, placeholder?: string, type?: "text" | "email" | "password" | "number" | "url", rules?: (string | number)[], value?: string)
+
+So Input takes: name, placeholder, type, rules, value - all positional.
+
+For FormControl:
+FormControl(label: string, input: Input | TextArea | Select | DatePicker | Slider | CheckBoxGroup | RadioGroup, hint?: string)
+
+So FormControl takes: label, input, hint - all positional.
+
+Let me refine my design. I'll add a nice heading and make it more polished.
+
+root = Card([header, description, form])
+header = CardHeader("Weekly Product Newsletter", null)
+description = TextContent("Get curated product insights, launches, and design trends delivered to your inbox every week.")
+form = Form("newsletter-signup", formButtons, [emailField])
+emailField = FormControl("Email address", emailInput)
+emailInput = Input("email", "Enter your email", "email")
+formButtons = Buttons([subscribeBtn])
+subscribeBtn = Button("Subscribe", null, "primary")
+
+This looks correct. Let me verify:
+- root references header, description, form
+- header is defined
+- description is defined
+- form references formButtons, emailField
+- formButtons references subscribeBtn
+- subscribeBtn is defined
+- emailField references emailInput
+- emailInput is defined
+
+All variables are reachable from root. Good.
+
+Actually, let me make it a bit more polished with a CardHeader that has both title and subtitle, and maybe add a small note about no spam.
+root = Card([header, description, form, privacy])
+header = CardHeader("Weekly Product Newsletter", "Stay ahead of the curve")
+description = TextContent("Get curated product insights, launches, and design trends delivered to your inbox every week.")
+form = Form("newsletter-signup", formButtons, [emailField])
+emailField = FormControl("Email address", emailInput)
+emailInput = Input("email", "you@example.com", "email")
+formButtons = Buttons([subscribeBtn])
+subscribeBtn = Button("Subscribe", null, "primary")
+privacy = TextContent("No spam. Unsubscribe anytime.", "small")

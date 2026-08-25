@@ -1,0 +1,35 @@
+```openui-lang
+root = Card([header, statsRow, appointmentsSection, noShows, rooms, nextPatient, actions])
+
+header = CardHeader("Today's Schedule", "Clinic Reception Dashboard")
+
+statsRow = Card([patientsExpected, noShowRate], "sunk", "row", "l", "center", "between")
+patientsExpected = Card([Tag("Expected"), Tag(str(patientsExpected), null, null, "success")], "sunk", "row", "s", "center")
+noShowRate = Card([Tag("No-shows"), Tag(str(round(noShowRate * 100)) + "%", null, null, "danger")], "sunk", "row", "s", "center")
+
+appointmentsSection = Card([appointmentsHeading, appointmentsTable], "sunk")
+appointmentsHeading = Heading("Upcoming Appointments", "h3")
+appointmentsTable = Table([timeCol, nameCol, statusCol])
+timeCol = Col("Time", ["09:00", "10:15", "11:30", "14:00", "15:45"], "string")
+nameCol = Col("Patient", ["John Smith", "Maria Garcia", "Alex Johnson", "Emily Davis", "Robert Brown"], "string")
+statusCol = Col("Status", ["Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"], "string")
+
+noShows = Card([noShowsHeading, noShowsChart], "sunk")
+noShowsHeading = Heading("No-show Rate", "h3")
+noShowsChart = RadialChart(["Jan", "Feb", "Mar", "Apr", "May"], [0.05, 0.08, 0.12, 0.07, 0.10])
+
+rooms = Card([roomsHeading, roomsList], "sunk")
+roomsHeading = Heading("Available Rooms", "h3")
+roomsList = TagBlock(["Room 1", "Room 3"])
+
+nextPatient = Card([nextPatientHeading, nextPatientInfo], "sunk")
+nextPatientHeading = Heading("Next Patient", "h3")
+nextPatientInfo = Card([Image("Alex Johnson", "https://picsum.photos/seed/alex/80/80"), TextContent("Alex Johnson - 11:30")], "row", "s", "center")
+
+actions = Card([checkInBtn, moveDayBtn], "sunk", "row", "l", "center", "between")
+checkInBtn = Button("Check In", null, "primary")
+moveDayBtn = Button("Move to Tomorrow", null, "secondary")
+
+patientsExpected = 12
+noShowRate = 0.08
+```

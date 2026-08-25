@@ -1,0 +1,52 @@
+root = Card([header, alerts, stats, charts, shipments, followUp], "card", "column", "l")
+header = CardHeader("Logistics Command Center", "Operational Overview")
+refreshInfo = TextContent("Last refreshed: 2023-10-27 14:30:05", "small")
+headerWithRefresh = Card([header, refreshInfo], "card", "column", "s")
+
+alerts = Card([delayedAlert], "sunk")
+delayedAlert = Alert("Action Required: Delayed Shipments", "4 shipments have exceeded their ETA threshold.", "warning")
+
+stats = Card([kpis], "sunk", "row", "m", "stretch")
+kpis = [onTimeKpi, avgCostKpi, searchBar]
+onTimeKpi = Card([onTimeBadge, onTimeText], "clear", "column", "xs", "center")
+onTimeBadge = Badge("94%", "success")
+onTimeText = TextContent("On-time this month", "small")
+avgCostKpi = Card([avgCostBadge, avgCostText], "clear", "column", "xs", "center")
+avgCostBadge = Badge("$422.50", "secondary")
+avgCostText = TextContent("Avg Cost / Shipment", "small")
+searchBar = Card([searchForm], "clear", "column", "xs", "end")
+searchForm = Form("route-search", searchButtons, [routeInput])
+routeInput = FormControl("Search Route", routeInputComponent, "e.g. LAX -> JFK")
+routeInputComponent = Input("route", "Enter origin and destination", "text")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary", "normal", "small")
+
+charts = Card([volumeChart, carrierChart], "row", "m", "l")
+volumeChart = Card([volHeading, volChart], "sunk")
+volHeading = Heading("Weekly Volume (8 Weeks)", "h4")
+volChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "natural", "Week", "Shipments")
+volSeries = Series("Volume", [450, 480, 465, 510, 495, 530, 525, 550])
+carrierChart = Card([carHeading, carChart], "sunk")
+carHeading = Heading("Carrier Split", "h4")
+carChart = PieChart(["FedEx", "UPS", "DHL", "Maersk"], [40, 30, 20, 10], "donut")
+
+shipments = Card([shipHeading, shipmentTable], "card")
+shipHeading = CardHeader("Active Shipments in Transit")
+shipmentTable = Table([colID, colRoute, colETA, colStatus, colActions])
+colID = Col("ID", ["SHP-001", "SHP-002", "SHP-003", "SHP-004"])
+colRoute = Col("Route", ["LAX -> JFK", "SEA -> ORD", "SFO -> MIA", "DFW -> SEA"])
+colETA = Col("ETA", ["Oct 28", "Oct 29", "Oct 28", "Oct 30"])
+colStatus = Col("Status", ["On-Time", "Delayed", "On-Time", "On-Time"])
+colActions = Col("Actions", ["", "", "", ""])
+shipmentActions = Buttons([flagBtn])
+flagBtn = Button("Flag", null, "tertiary", "normal", "extra-small")
+# Note: In a real UI, the flag button would be mapped per row in the table
+
+followUp = FollowUpBlock([
+    FollowUpItem("Generate delay report"),
+    FollowUpItem("View carrier performance"),
+    FollowUpItem("Optimize route efficiency")
+])
+
+# Correcting root to use the combined header
+root = Card([headerWithRefresh, alerts, stats, charts, shipments, followUp], "card", "column", "l")

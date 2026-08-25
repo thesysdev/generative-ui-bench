@@ -1,0 +1,90 @@
+```openui
+root = Card([
+    header,
+    monthlyRevenue,
+    annualRevenue,
+    churnThisMonth,
+    newSignups,
+    customersByPlan,
+    topCustomers,
+    accountsAtRisk,
+    failedPayments,
+    featureAdoption,
+    currentNPS,
+    changePeriod,
+    seatUtilization,
+    inviteAdmin
+])
+
+header = CardHeader("Admin Overview", "Current Period")
+
+monthlyRevenue = Card([monthlyRevenueHeading, monthlyRevenueValue], "sunk")
+monthlyRevenueHeading = Heading("Monthly Recurring Revenue", "h4")
+monthlyRevenueValue = MarkDownRenderer("$128,400\n(Up 3% from last month)")
+
+annualRevenue = Card([annualRevenueHeading, annualRevenueValue], "sunk")
+annualRevenueHeading = Heading("Annual Recurring Revenue", "h4")
+annualRevenueValue = MarkDownRenderer("$1,545,600\n(Stable)")
+
+churnThisMonth = Card([churnHeading, churnValue], "sunk")
+churnHeading = Heading("Churn This Month", "h4")
+churnValue = MarkDownRenderer("2.5%")
+
+newSignups = Card([newSignupsHeading, newSignupsChart], "sunk")
+newSignupsHeading = Heading("New Signups (90 days)", "h4")
+newSignupsChart = LineChart(["Day 1", "Day 30", "Day 60", "Day 90"], [newSignupsSeries], "linear", "Days", "Signups")
+newSignupsSeries = Series("Signups", [150, 200, 175, 190])
+
+customersByPlan = Card([customersByPlanHeading, customersByPlanChart], "sunk")
+customersByPlanHeading = Heading("Customers by Plan", "h4")
+customersByPlanChart = PieChart(["Pro", "Enterprise", "Free"], [120, 30, 50])
+
+topCustomers = Card([topCustomersHeading, topCustomersTable], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h4")
+topCustomersTable = Table([nameCol, seatsCol, spendCol])
+nameCol = Col("Customer", ["Acme Corp", "Beta LLC", "Gamma Inc", "Delta Co", "Epsilon Ltd", "Zeta LLC", "Eta Corp", "Theta Inc", "Iota Ltd", "Kappa Co"])
+seatsCol = Col("Seats", [50, 75, 60, 45, 80, 55, 65, 70, 40, 30])
+spendCol = Col("Spend", ["$12,000", "$18,000", "$15,000", "$9,000", "$24,000", "$13,500", "$16,500", "$21,000", "$8,000", "$6,000"])
+
+accountsAtRisk = Card([accountsAtRiskHeading, accountsAtRiskList], "sunk")
+accountsAtRiskHeading = Heading("Accounts at Risk", "h4")
+accountsAtRiskList = ListBlock(accountsAtRiskItems)
+accountsAtRiskItems = [
+    ListItem("Acme Corp", "Contract renewal pending", null, "Review"),
+    ListItem("Beta LLC", "Low engagement", null, "Engage"),
+    ListItem("Gamma Inc", "Billing issue", null, "Resolve")
+]
+
+failedPayments = Card([failedPaymentsHeading, failedPaymentsList], "sunk")
+failedPaymentsHeading = Heading("Failed Payments", "h4")
+failedPaymentsList = ListBlock(failedPaymentItems, "image")
+failedPaymentItems = [
+    ListItem("Delta Co", "Card expired", ["image/delta.png"], "Retry"),
+    ListItem("Epsilon Ltd", "Insufficient funds", ["image/epsilon.png"], "Retry")
+]
+
+featureAdoption = Card([featureAdoptionHeading, featureAdoptionChart], "sunk")
+featureAdoptionHeading = Heading("Feature Adoption", "h4")
+featureAdoptionChart = BarChart(["Feature 1", "Feature 2", "Feature 3"], [feature1Series, feature2Series, feature3Series], "stacked")
+feature1Series = Series("Used", [70, 60, 50])
+feature2Series = Series("Unused", [30, 40, 50])
+
+currentNPS = Card([currentNPSHeading, currentNPSValue], "sunk")
+currentNPSHeading = Heading("Current NPS", "h4")
+currentNPSValue = MarkDownRenderer("45\n(Up 5 points)")
+
+changePeriod = Form("change-period-form", changePeriodButtons, [periodSelectField])
+periodSelectField = FormControl("Reporting Period", periodSelect)
+periodSelect = Select("reporting_period", [monthlyOption, quarterlyOption, annuallyOption], "Select a period")
+monthlyOption = SelectItem("Monthly", "Monthly")
+quarterlyOption = SelectItem("Quarterly", "Quarterly")
+annuallyOption = SelectItem("Annually", "Annually")
+changePeriodButtons = Buttons([submitPeriodBtn])
+submitPeriodBtn = Button("Update Period", null, "primary")
+
+seatUtilization = Card([seatUtilizationHeading, seatUtilizationChart], "sunk")
+seatUtilizationHeading = Heading("Seat Utilization", "h4")
+seatUtilizationChart = RadialChart(["Team A", "Team B", "Team C"], [40, 70, 90])
+
+inviteAdmin = Button("Invite Another Admin", "Invite", "secondary")
+```

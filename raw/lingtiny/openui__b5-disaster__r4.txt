@@ -1,0 +1,242 @@
+root = Card([incidentsSection, severitySummary, resourcesSection, sheltersSection, routesSection, weatherSection, rescuedCasualtiesSection, volunteersSection, donationsSection, aidRequestsSection, channelsSection, roadsSection, hospitalsSection, tasksSection, requestResources, broadcastUpdate, focusZone, reportSituation], "clear")
+
+incidentsSection = SectionItem("Active Incidents by Zone", "Show incidents with severity per zone")
+incidentsContent = Card([incidentList, incidentChart], "sunk")
+incidentList = ListBlock([
+  ListItem("Zone A - Chemical Spill", "Severity: Critical", null, "Response Team"),
+  ListItem("Zone B - Flooding", "Severity: High", null, "Rescue Team"),
+  ListItem("Zone C - Power Outage", "Severity: Medium", null, "Utility Team"),
+  ListItem("Zone D - Structural Damage", "Severity: Critical", null, "Engineering Team"),
+  ListItem("Zone E - Wildfire", "Severity: High", null, "Fire Team"),
+], "image")
+incidentChart = HorizontalBarChart(["Zone A", "Zone B", "Zone C", "Zone D", "Zone E"], [
+  {category: "Critical", values: [3, 0, 0, 2, 0]},
+  {category: "High", values: [0, 2, 0, 0, 1]},
+  {category: "Medium", values: [0, 0, 1, 0, 0]},
+], "grouped", "Zone", "Incidents")
+
+severitySummary = SectionItem("Overall Severity Summary", "Aggregate severity across all zones")
+severityContent = Card([severityBar, severityGauge], "sunk")
+severityBar = BarChart(["Critical", "High", "Medium", "Low"], [
+  {category: "Critical", values: [3]},
+  {category: "High", values: [3]},
+  {category: "Medium", values: [1]},
+  {category: "Low", values: [0]},
+], "grouped", "Severity", "Count")
+severityGauge = RadialChart(["Critical", "High", "Medium", "Low"], [3, 3, 1, 0])
+
+resourcesSection = SectionItem("Resources Available", "Vehicles, personnel and supplies")
+resourcesContent = Card([resourceList, resourceChart], "sunk")
+resourceList = ListBlock([
+  ListItem("Vehicles", "Total: 24", null, "Vehicle Unit"),
+  ListItem("Personnel", "Total: 142", null, "Staff"),
+  ListItem("Supplies", "Total: 340", null, "Kit"),
+  ListItem("Equipment", "Total: 18", null, "Gear"),
+], "image")
+resourceChart = HorizontalBarChart(["Vehicles", "Personnel", "Supplies", "Equipment"], [
+  {category: "Vehicles", values: [24]},
+  {category: "Personnel", values: [142]},
+  {category: "Supplies", values: [340]},
+  {category: "Equipment", values: [18]},
+], "grouped", "Resource", "Count")
+
+sheltersSection = SectionItem("Shelters", "Capacity and occupancy")
+sheltersContent = Card([shelterList, shelterChart], "sunk")
+shelterList = ListBlock([
+  ListItem("Shelter 1 - Community Center", "Capacity: 200, Occupancy: 160", null, "Shelter Team"),
+  ListItem("Shelter 2 - School", "Capacity: 150, Occupancy: 120", null, "Shelter Team"),
+  ListItem("Shelter 3 - Church", "Capacity: 100, Occupancy: 85", null, "Shelter Team"),
+  ListItem("Shelter 4 - Gym", "Capacity: 250, Occupancy: 180", null, "Shelter Team"),
+], "image")
+shelterChart = HorizontalBarChart(["Shelter 1", "Shelter 2", "Shelter 3", "Shelter 4"], [
+  {category: "Occupancy %", values: [80, 80, 85, 72]},
+], "grouped", "Shelter", "Capacity")
+
+routesSection = SectionItem("Evacuation Routes", "Status of each route")
+routesContent = Card([routeList, routeChart], "sunk")
+routeList = ListBlock([
+  ListItem("Route 1 - North", "Status: Clear", null, "Route Team"),
+  ListItem("Route 2 - South", "Status: Closed", null, "Route Team"),
+  ListItem("Route 3 - East", "Status: Open", null, "Route Team"),
+  ListItem("Route 4 - West", "Status: Delayed", null, "Route Team"),
+], "image")
+routeChart = HorizontalBarChart(["Route 1", "Route 2", "Route 3", "Route 4"], [
+  {category: "Status", values: [1, 0, 1, 0]},
+], "grouped", "Route", "Status")
+
+weatherSection = SectionItem("Weather Forecast", "Next 48 hours")
+weatherContent = Card([weatherChart, weatherTable], "sunk")
+weatherChart = HorizontalBarChart(["Now", "2h", "6h", "12h", "18h", "24h", "30h", "36h", "42h", "48h"], [
+  {category: "Temp", values: [18, 17, 16, 15, 14, 13, 12, 11, 10, 9]},
+  {category: "Precip", values: [0, 0, 10, 30, 50, 40, 20, 10, 5, 0]},
+], "grouped", "Time", "Precipitation")
+weatherTable = Table([
+  Col("Time", ["Now", "2h", "6h", "12h", "18h", "24h", "30h", "36h", "42h", "48h"]),
+  Col("Temperature", [18, 17, 16, 15, 14, 13, 12, 11, 10, 9]),
+  Col("Precipitation", ["0%", "0%", "10%", "30%", "50%", "40%", "20%", "10%", "5%", "0%"]),
+])
+
+rescuedCasualtiesSection = SectionItem("Rescued and Casualties", "People rescued and casualties so far")
+rescuedContent = Card([rescuedList, casualtyChart], "sunk")
+rescuedList = ListBlock([
+  ListItem("Rescued", "Total: 245", null, "Rescue Team"),
+  ListItem("Casualties", "Total: 38", null, "Medical Team"),
+  ListItem("Injured", "Total: 12", null, "Medical Team"),
+], "image")
+casualtyChart = HorizontalBarChart(["Rescued", "Casualties", "Injured"], [
+  {category: "Count", values: [245, 38, 12]},
+], "grouped", "Category", "Count")
+
+volunteersSection = SectionItem("Volunteers on Duty", "Assignment for each")
+volunteersContent = Card([volunteerList, volunteerChart], "sunk")
+volunteerList = ListBlock([
+  ListItem("Volunteer 1 - Fire Dept", "Assigned: Zone A, Route 1", null, "Fire Team"),
+  ListItem("Volunteer 2 - Medical", "Assigned: Zone B, Shelter 1", null, "Medical Team"),
+  ListItem("Volunteer 3 - Police", "Assigned: Zone C, Route 3", null, "Police Team"),
+  ListItem("Volunteer 4 - Engineering", "Assigned: Zone D, Route 4", null, "Engineering Team"),
+], "image")
+volunteerChart = HorizontalBarChart(["Fire Dept", "Medical", "Police", "Engineering"], [
+  {category: "Volunteers", values: [4]},
+], "grouped", "Unit", "Count")
+
+donationsSection = SectionItem("Donations Received", "Aid and support collected")
+donationsContent = Card([donationList, donationChart], "sunk")
+donationList = ListBlock([
+  ListItem("Food Supplies", "120 units", null, "Logistics"),
+  ListItem("Medical Kits", "45 kits", null, "Medical"),
+  ListItem("Water", "200 liters", null, "Logistics"),
+  ListItem("Shelter Materials", "80 units", null, "Construction"),
+], "image")
+donationChart = HorizontalBarChart(["Food", "Medical Kits", "Water", "Shelter Materials"], [
+  {category: "Count", values: [120, 45, 200, 80]},
+], "grouped", "Category", "Count")
+
+aidRequestsSection = SectionItem("Aid Requests Awaiting Action", "Current requests needing response")
+aidContent = Card([aidList, aidChart], "sunk")
+aidList = ListBlock([
+  ListItem("Request 1 - Water Distribution", "Priority: High", null, "Logistics"),
+  ListItem("Request 2 - Temporary Shelter", "Priority: Medium", null, "Shelter Team"),
+  ListItem("Request 3 - Medical Equipment", "Priority: Critical", null, "Medical"),
+  ListItem("Request 4 - Power Restoration", "Priority: High", null, "Utility Team"),
+], "image")
+aidChart = HorizontalBarChart(["Priority", "Count"], [
+  {category: "Critical", values: [1]},
+  {category: "High", values: [2]},
+  {category: "Medium", values: [1]},
+], "grouped", "Priority", "Count")
+
+channelsSection = SectionItem("Communication Channels", "Status of each channel")
+channelsContent = Card([channelList, channelChart], "sunk")
+channelList = ListBlock([
+  ListItem("Radio Channel 1", "Status: Active", null, "Comms"),
+  ListItem("Radio Channel 2", "Status: Active", null, "Comms"),
+  ListItem("Radio Channel 3", "Status: Offline", null, "Comms"),
+  ListItem("SMS Network", "Status: Active", null, "Comms"),
+  ListItem("Satellite Phone", "Status: Active", null, "Comms"),
+  ListItem("Email System", "Status: Active", null, "Comms"),
+], "image")
+channelChart = HorizontalBarChart(["Channel", "Status"], [
+  {category: "Active", values: [4]},
+  {category: "Offline", values: [1]},
+], "grouped", "Channel", "Count")
+
+roadsSection = SectionItem("Roads Closed", "Closed road sections")
+roadsContent = Card([roadList, roadChart], "sunk")
+roadList = ListBlock([
+  ListItem("Route 2 - South", "Closed", null, "Road Team"),
+  ListItem("Route 4 - West", "Delayed", null, "Road Team"),
+  ListItem("Route 5 - North", "Closed", null, "Road Team"),
+], "image")
+roadChart = HorizontalBarChart(["Route", "Status"], [
+  {category: "Closed", values: [2]},
+  {category: "Delayed", values: [1]},
+], "grouped", "Route", "Status")
+
+hospitalsSection = SectionItem("Nearby Hospitals", "Free beds available")
+hospitalsContent = Card([hospitalList, hospitalChart], "sunk")
+hospitalList = ListBlock([
+  ListItem("Hospital 1 - Central", "Free Beds: 25", null, "Medical Team"),
+  ListItem("Hospital 2 - East", "Free Beds: 18", null, "Medical Team"),
+  ListItem("Hospital 3 - West", "Free Beds: 30", null, "Medical Team"),
+  ListItem("Hospital 4 - North", "Free Beds: 12", null, "Medical Team"),
+], "image")
+hospitalChart = HorizontalBarChart(["Hospital", "Free Beds"], [
+  {category: "Free Beds", values: [25, 18, 30, 12]},
+], "grouped", "Hospital", "Count")
+
+tasksSection = SectionItem("Open Tasks", "Assignee for each task")
+tasksContent = Card([taskList, taskChart], "sunk")
+taskList = ListBlock([
+  ListItem("Task 1 - Clear Zone A", "Assignee: Volunteer 1", null, "Task Team"),
+  ListItem("Task 2 - Set up Shelter 2", "Assignee: Volunteer 2", null, "Task Team"),
+  ListItem("Task 3 - Distribute Water", "Assignee: Volunteer 3", null, "Task Team"),
+  ListItem("Task 4 - Repair Route 4", "Assignee: Volunteer 4", null, "Task Team"),
+], "image")
+taskChart = HorizontalBarChart(["Task", "Assignee"], [
+  {category: "Count", values: [4]},
+], "grouped", "Task", "Count")
+
+requestResources = Card([resourceForm], "sunk")
+resourceForm = Form("resource-request", [
+  FormControl("Resource Type", selectType, "Choose a type"),
+  FormControl("Quantity", sliderQuantity, "Enter quantity"),
+], [
+  Button("Submit Request", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+selectType = Select("resource_type", [
+  SelectItem("Water", "Water"),
+  SelectItem("Food", "Food"),
+  SelectItem("Medical", "Medical Supplies"),
+  SelectItem("Shelter", "Shelter Materials"),
+  SelectItem("Equipment", "Equipment"),
+], "Choose a type")
+sliderQuantity = Slider("quantity", "continuous", 1, 100, 1, "Quantity", "Enter amount")
+
+broadcastUpdate = Card([broadcastForm], "sunk")
+broadcastForm = Form("broadcast", [
+  FormControl("Message", inputMessage, "Enter your message"),
+], [
+  Button("Send Broadcast", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+inputMessage = Input("message", "Enter your update message", "text")
+
+focusZone = Card([focusForm], "sunk")
+focusForm = Form("zone-focus", [
+  FormControl("Zone", selectZone, "Select a zone"),
+], [
+  Button("Focus on Zone", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+selectZone = Select("zone", [
+  SelectItem("Zone A", "Zone A"),
+  SelectItem("Zone B", "Zone B"),
+  SelectItem("Zone C", "Zone C"),
+  SelectItem("Zone D", "Zone D"),
+  SelectItem("Zone E", "Zone E"),
+], "Choose a zone")
+
+reportSituation = Card([reportForm], "sunk")
+reportForm = Form("situation-report", [
+  FormControl("Incident", selectIncident, "Select incident"),
+  FormControl("Severity", selectSeverity, "Select severity"),
+  FormControl("Description", inputDesc, "Describe the situation"),
+], [
+  Button("File Report", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+selectIncident = Select("incident", [
+  SelectItem("Zone A - Chemical Spill", "Zone A"),
+  SelectItem("Zone B - Flooding", "Zone B"),
+  SelectItem("Zone C - Power Outage", "Zone C"),
+  SelectItem("Zone D - Structural Damage", "Zone D"),
+  SelectItem("Zone E - Wildfire", "Zone E"),
+], "Select incident")
+selectSeverity = Select("severity", [
+  SelectItem("Critical", "Critical"),
+  SelectItem("High", "High"),
+  SelectItem("Medium", "Medium"),
+  SelectItem("Low", "Low"),
+], "Select severity")
+inputDesc = Input("description", "Describe the situation", "text")

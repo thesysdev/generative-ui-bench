@@ -1,0 +1,40 @@
+{"op":"add","path":"/root","value":"mainCard"}
+{"op":"add","path":"/elements/mainCard","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"l"},"children":["invoiceHeader","statusBanner","summaryCard","lineItemsCard","paymentSection","paidSuccessAlert"]}}
+{"op":"add","path":"/elements/invoiceHeader","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["headerInfo","invoiceBadge"]}}
+{"op":"add","path":"/elements/headerInfo","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["invoiceTitle","invoiceSubtitle"]}}
+{"op":"add","path":"/elements/invoiceTitle","value":{"type":"Heading","props":{"text":"Invoice #INV-2024-089","level":"h2"}}}
+{"op":"add","path":"/elements/invoiceSubtitle","value":{"type":"TextContent","props":{"text":"Issued by **Alex Morgan** (Freelance Product Designer) • Client: **Acme Corp**","size":"small"}}}
+{"op":"add","path":"/elements/invoiceBadge","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/isPaid"},"$then":"PAID","$else":"PAYMENT DUE"},"variant":{"$cond":{"$state":"/isPaid"},"$then":"secondary","$else":"default"}}}}
+{"op":"add","path":"/state/isPaid","value":false}
+{"op":"add","path":"/elements/statusBanner","value":{"type":"Alert","props":{"title":"Payment Pending","description":"This invoice is due soon. Please review the item breakdown below and complete payment before the due date.","variant":"info"},"visible":{"$state":"/isPaid","not":true}}}
+{"op":"add","path":"/elements/paidSuccessAlert","value":{"type":"Alert","props":{"title":"Invoice Settled","description":"Thank you! Payment of $4,850.00 USD has been received and processed successfully.","variant":"success"},"visible":{"$state":"/isPaid"}}}
+{"op":"add","path":"/elements/summaryCard","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","wrap":true,"gap":"m"},"children":["amountBlock","dueDateBlock","issueDateBlock"]}}
+{"op":"add","path":"/elements/amountBlock","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["amountLabel","amountValue"]}}
+{"op":"add","path":"/elements/amountLabel","value":{"type":"Label","props":{"text":"Amount Due"}}}
+{"op":"add","path":"/elements/amountValue","value":{"type":"TextContent","props":{"text":{"$template":"**${/currency} $${/totalAmount}**"},"size":"large-heavy"}}}
+{"op":"add","path":"/elements/dueDateBlock","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["dueDateLabel","dueDateValue"]}}
+{"op":"add","path":"/elements/dueDateLabel","value":{"type":"Label","props":{"text":"Due Date"}}}
+{"op":"add","path":"/elements/dueDateValue","value":{"type":"TextContent","props":{"text":{"$template":"📅 **${/dueDate}**"},"size":"default"}}}
+{"op":"add","path":"/elements/issueDateBlock","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["issueDateLabel","issueDateValue"]}}
+{"op":"add","path":"/elements/issueDateLabel","value":{"type":"Label","props":{"text":"Issue Date"}}}
+{"op":"add","path":"/elements/issueDateValue","value":{"type":"TextContent","props":{"text":{"$template":"${/issueDate}"},"size":"default"}}}
+{"op":"add","path":"/state/currency","value":"USD"}
+{"op":"add","path":"/state/totalAmount","value":"4,850.00"}
+{"op":"add","path":"/state/dueDate","value":"November 30, 2024"}
+{"op":"add","path":"/state/issueDate","value":"November 15, 2024"}
+{"op":"add","path":"/elements/lineItemsCard","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"children":["itemsHeading","itemsTable"]}}
+{"op":"add","path":"/elements/itemsHeading","value":{"type":"Heading","props":{"text":"Services & Line Items","level":"h4"}}}
+{"op":"add","path":"/elements/itemsTable","value":{"type":"Table","props":{"columns":["colDesc","colHours","colRate","colTotal"]}}}
+{"op":"add","path":"/elements/colDesc","value":{"type":"Col","props":{"label":"Description","data":["Brand Identity & Design System","Web Application UX/UI Redesign","Design QA & Developer Handoff Support"],"type":"string"}}}
+{"op":"add","path":"/elements/colHours","value":{"type":"Col","props":{"label":"Hours / Qty","data":["20 hrs","30 hrs","5 hrs"],"type":"string"}}}
+{"op":"add","path":"/elements/colRate","value":{"type":"Col","props":{"label":"Rate","data":["$90.00 / hr","$95.00 / hr","$40.00 / hr"],"type":"string"}}}
+{"op":"add","path":"/elements/colTotal","value":{"type":"Col","props":{"label":"Total","data":["$1,800.00","$2,850.00","$200.00"],"type":"string"}}}
+{"op":"add","path":"/elements/paymentSection","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"m"},"visible":{"$state":"/isPaid","not":true},"children":["paymentHeader","paymentMethodGroup","payActionButtons"]}}
+{"op":"add","path":"/elements/paymentHeader","value":{"type":"CardHeader","props":{"title":"Pay Now","subtitle":"Select a payment method to complete settlement immediately"}}}
+{"op":"add","path":"/elements/paymentMethodGroup","value":{"type":"RadioGroup","props":{"name":"paymentMethod","items":["payCard","payBank","payApple"],"value":"card"}}}
+{"op":"add","path":"/elements/payCard","value":{"type":"RadioItem","props":{"label":"Credit / Debit Card","description":"Visa, MasterCard, Amex (Instant verification)","value":"card"}}}
+{"op":"add","path":"/elements/payBank","value":{"type":"RadioItem","props":{"label":"Bank Transfer (ACH / SEPA)","description":"Direct debit from your business bank account","value":"bank"}}}
+{"op":"add","path":"/elements/payApple","value":{"type":"RadioItem","props":{"label":"Apple Pay / Google Pay","description":"Fast checkout using authorized wallet","value":"wallet"}}}
+{"op":"add","path":"/elements/payActionButtons","value":{"type":"Buttons","props":{"buttons":["payNowBtn","downloadPdfBtn"],"direction":"row"}}}
+{"op":"add","path":"/elements/payNowBtn","value":{"type":"Button","props":{"label":"Pay $4,850.00 USD Now","variant":"primary","size":"large"},"on":{"press":{"action":"setState","params":{"statePath":"/isPaid","value":true}}}}}
+{"op":"add","path":"/elements/downloadPdfBtn","value":{"type":"Button","props":{"label":"Download PDF Invoice","variant":"secondary","size":"large"}}}

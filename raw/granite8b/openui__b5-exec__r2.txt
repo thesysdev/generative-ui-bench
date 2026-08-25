@@ -1,0 +1,197 @@
+```openui-lang
+root = Card([
+    overviewHeader,
+    revenueAndCostsSection,
+    quarterlyTrendsSection,
+    budgetAndHeadcountSection,
+    risksAndInitiativesSection,
+    financialHealthSection,
+    boardMeetingItems,
+    controls,
+], "card", "row", "l")
+
+overviewHeader = CardHeader("CEO Quarterly Command View", "Q3 2025 Overview")
+
+revenueAndCostsSection = Card([
+    revenueMetric,
+    costMetric,
+    profitMetric,
+], "sunk")
+
+revenueMetric = TextContent(
+    "Revenue: $128,400\nCosts: $95,200\nProfit: $33,200",
+    "large"
+)
+
+costMetric = TextContent(
+    "Quarterly Costs:\nQ1: $22,000\nQ2: $24,500\nQ3: $25,300\nQ4: $23,400",
+    "large"
+)
+
+profitMetric = TextContent(
+    "Quarterly Profit:\nQ1: $8,000\nQ2: $9,500\nQ3: $13,200\nQ4: $11,100",
+    "large"
+)
+
+quarterlyTrendsSection = Card([
+    revenueOverQuarters,
+    costsOverQuarters,
+], "clear")
+
+revenueOverQuarters = HorizontalBarChart(
+    labels = ["Q1", "Q2", "Q3", "Q4"],
+    series = [revSeries],
+    variant = "grouped",
+    xLabel = "Quarter",
+    yLabel = "Revenue (USD)",
+)
+revSeries = Series("Revenue", [24100, 30800, 34600, 38900])
+
+costsOverQuarters = HorizontalBarChart(
+    labels = ["Q1", "Q2", "Q3", "Q4"],
+    series = [costSeries],
+    variant = "grouped",
+    xLabel = "Quarter",
+    yLabel = "Costs (USD)",
+)
+costSeries = Series("Costs", [22000, 24500, 25300, 23400])
+
+budgetAndHeadcountSection = Card([
+    departmentBudget,
+    departmentHeadcount,
+], "sunk")
+
+departmentBudget = Table([
+    budgetCol,
+])
+budgetCol = Col(
+    "Department",
+    ["Finance", "Marketing", "Operations", "R&D"],
+    type = "string"
+)
+planCol = Col(
+    "Plan vs Budget",
+    ["$15K under", "$2K over", "$5K under", "$8K over"],
+    type = "string"
+)
+budgetCol = Col(
+    "Budget",
+    ["$100K", "$98K", "$105K", "$108K"],
+    type = "number"
+)
+budgetCol = Col(
+    "Plan",
+    ["$115K", "$100K", "$110K", "$116K"],
+    type = "number"
+)
+departmentBudget = Table([
+    budgetCol,
+    planCol,
+    actualCol,
+])
+actualCol = Col(
+    "Actual",
+    ["$105K", "$98K", "$110K", "$108K"],
+    type = "number"
+)
+
+departmentHeadcount = Table([
+    deptCol,
+    headcountCol,
+])
+deptCol = Col(
+    "Department",
+    ["Finance", "Marketing", "Operations", "R&D"],
+    type = "string"
+)
+headcountCol = Col(
+    "Headcount",
+    ["12", "15", "20", "18"],
+    type = "number"
+)
+
+risksAndInitiativesSection = Card([
+    topRisks,
+    strategicInitiatives,
+], "clear")
+
+topRisks = Table([
+    riskOwnerCol,
+])
+riskOwnerCol = Col(
+    "Top Risks",
+    ["Supply Chain Disruption (Owner: Ops)", "Regulatory Change (Owner: Legal)", "Market Competition (Owner: Marketing)"],
+    type = "string"
+)
+
+strategicInitiatives = Table([
+    statusCol,
+])
+statusCol = Col(
+    "Strategic Initiatives",
+    ["Launch New Product (Status: On Track)", "Expand International Market (Status: Planning)", "Sustainability Program (Status: Approved)"],
+    type = "string"
+)
+
+financialHealthSection = Card([
+    runway,
+    salesPipeline,
+    winRate,
+    customerChurn,
+    nps,
+], "sunk")
+
+runway = TextContent(
+    "Months of Runway: 6",
+    "large"
+)
+
+salesPipeline = TextContent(
+    "Sales Pipeline Value: $1.2M",
+    "large"
+)
+
+winRate = TextContent(
+    "Win Rate: 22%",
+    "large"
+)
+
+customerChurn = TextContent(
+    "Customer Count: 1,200\nChurn Rate: 3%",
+    "large"
+)
+
+nps = TextContent(
+    "NPS: 45",
+    "large"
+)
+
+boardMeetingItems = TextContent(
+    "Next Board Meeting Items:\n1️⃣ Review Q3 Performance\n2️⃣ Discuss Budget Adjustments\n3️⃣ Approve Strategic Initiative Funding\n4️⃣ Risk Management Update",
+    "large"
+)
+
+controls = Card([
+    quarterSelector,
+    regionSelector,
+    exportButton,
+], "sunk")
+
+quarterSelector = FormControl(
+    "Select Quarter",
+    DatePicker("quarter", mode = "single", rules = [], value = "Q3", label = "Quarter"),
+    "Choose a quarter to view"
+)
+
+regionSelector = FormControl(
+    "Focus Region",
+    Select("region", [regionUS, regionEU, regionAPAC], placeholder = "Select Region", size = "medium"),
+    "Filter data by region"
+)
+regionUS = SelectItem("US", "United States")
+regionEU = SelectItem("EU", "Europe")
+regionAPAC = SelectItem("APAC", "Asia-Pacific")
+
+exportButton = Button("Export Pack", null, "secondary", size = "large")
+
+```

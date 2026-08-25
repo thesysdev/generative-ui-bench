@@ -1,0 +1,182 @@
+```openui-lang
+root = Card([
+    header,
+    liveViewers,
+    mostWatched,
+    watchTimeMonth,
+    newSubsVsCancellations,
+    genrePerformance,
+    bufferingRate,
+    deliveryHealthRegion,
+    releasesThisMonth,
+    licensesExpiring,
+    recommendationsClickRate,
+    searchesWithoutPlayback,
+    revenueSplitByPlan,
+    deviceViewingSplit,
+    regionSelector,
+    featureFlags,
+    titlePromotion,
+    actions
+], "card", "row", "l")
+
+header = CardHeader("Operations Dashboard", "Streaming Analytics")
+
+liveViewers = Card([liveViewersTitle, liveViewersCount], "sunk")
+liveViewersTitle = Heading("Live Viewers", "h3")
+liveViewersCount = TextContent("12,345 viewers watching right now", "large")
+
+mostWatched = Card([mostWatchedTitle, mostWatchedTable], "sunk")
+mostWatchedTitle = Heading("Most‑Watched Titles", "h3")
+mostWatchedTable = Table([
+    titleCol,
+    hoursCol
+])
+titleCol = Col("Title", ["The Matrix", "Stranger Things", "Black Mirror"])
+hoursCol = Col("Hours", [124.5, 98.0, 73.2])
+
+watchTimeMonth = Card([watchTimeMonthTitle, watchTimeMonthChart], "sunk")
+watchTimeMonthTitle = Heading("Watch Time (Past 30 Days)", "h3")
+watchTimeMonthChart = LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
+    [42.0, 48.5, 55.3, 60.1, 62.8],
+    "natural",
+    "Day",
+    "Hours Watched"
+)
+
+newSubsVsCancellations = Card([newSubsVsCancellationsTitle, newSubsVsCancellationsChart], "sunk")
+newSubsVsCancellationsTitle = Heading("New Subscriptions vs Cancellations", "h3")
+newSubsVsCancellationsChart = BarChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [seriesNew, seriesCancel],
+    "grouped",
+    "Week",
+    "Count"
+)
+seriesNew = Series("New Subs", [120, 135, 150, 160])
+seriesCancel = Series("Cancellations", [30, 25, 35, 40])
+
+genrePerformance = Card([genrePerformanceTitle, genrePerformanceTable], "sunk")
+genrePerformanceTitle = Heading("Performance by Genre", "h3")
+genrePerformanceTable = Table([
+    genreCol,
+    avgHoursCol,
+    viewersCol
+])
+genreCol = Col("Genre", ["Action", "Comedy", "Drama", "Sci‑Fi"])
+avgHoursCol = Col("Avg Hours", [2.3, 1.8, 2.1, 2.6])
+viewersCol = Col("Viewers", [5000, 7200, 4800, 6100])
+
+bufferingRate = Card([bufferingRateTitle, bufferingRateGauge], "sunk")
+bufferingRateTitle = Heading("Buffering Rate", "h3")
+bufferingRateGauge = Progress(value=5.2, label="5.2% buffering rate")
+
+deliveryHealthRegion = Card([deliveryHealthRegionTitle, deliveryHealthRegionMap], "sunk")
+deliveryHealthRegionTitle = Heading("Delivery Health by Region", "h3")
+deliveryHealthRegionMap = ImageBlock(src="https://example.com/region-health.png", alt="Delivery health by region")
+
+releasesThisMonth = Card([releasesThisMonthTitle, releasesThisMonthList], "sunk")
+releasesThisMonthTitle = Heading("Releases This Month", "h3")
+releasesThisMonthList = ListBlock(
+    [
+        ListItem("The Great Escape", subtitle="Action", image=["https://example.com/escape-thumb.jpg"]),
+        ListItem("Comedy Night Live", subtitle="Comedy", image=["https://example.com/comedy-thumb.jpg"]),
+        ListItem("Sci‑Fi Odyssey", subtitle="Sci‑Fi", image=["https://example.com/sf-thumb.jpg"])
+    ],
+    "image"
+)
+
+licensesExpiring = Card([licensesExpiringTitle, licensesExpiringTable], "sunk")
+licensesExpiringTitle = Heading("Licenses Expiring Soon", "h3")
+licensesExpiringTable = Table([
+    titleCol,
+    expDateCol
+])
+titleCol = Col("Title", ["Old Classic", "Rare Drama"])
+expDateCol = Col("Expires", ["2025-09-15", "2025-10-02"])
+
+recommendationsClickRate = Card([recommendationsClickRateTitle, recommendationsClickRateBar], "sunk")
+recommendationsClickRateTitle = Heading("Recommendations Click Rate", "h3")
+recommendationsClickRateBar = BarChart(
+    ["Past Week", "Current Week", "Last Month"],
+    [seriesClick],
+    "grouped",
+    "Period",
+    "Click Rate (%)"
+)
+seriesClick = Series("Clicks", [12.3, 14.1, 10.8])
+
+searchesWithoutPlayback = Card([searchesWithoutPlaybackTitle, searchesWithoutPlaybackPie], "sunk")
+searchesWithoutPlaybackTitle = Heading("Searches Without Playback", "h3")
+searchesWithoutPlaybackPie = PieChart(
+    ["Searches", "No Playback"],
+    [85, 15],
+    "donut",
+    "circular"
+)
+
+revenueSplitByPlan = Card([revenueSplitByPlanTitle, revenueSplitByPlanPie], "sunk")
+revenueSplitByPlanTitle = Heading("Revenue Split by Plan", "h3")
+revenueSplitByPlanPie = PieChart(
+    ["Free", "Premium", "Family"],
+    [30, 55, 15],
+    "pie",
+    "circular"
+)
+
+deviceViewingSplit = Card([deviceViewingSplitTitle, deviceViewingSplitBar], "sunk")
+deviceViewingSplitTitle = Heading("Viewing Split by Device", "h3")
+deviceViewingSplitBar = BarChart(
+    ["Mobile", "Desktop", "TV", "Tablet"],
+    [40, 35, 20, 5],
+    "grouped",
+    "Device",
+    "Share (%)"
+)
+
+regionSelector = Card([regionSelectorTitle, regionSelectorDropdown], "sunk")
+regionSelectorTitle = Heading("Focus on Region", "h3")
+regionSelectorDropdown = Select(
+    "focus_region",
+    [
+        SelectItem("North America", "North America"),
+        SelectItem("Europe", "Europe"),
+        SelectItem("Asia", "Asia"),
+        SelectItem("South America", "South America"),
+        SelectItem("Africa", "Africa"),
+        SelectItem("Oceania", "Oceania")
+    ],
+    placeholder="Select region"
+)
+
+featureFlags = Card([featureFlagsTitle, featureFlagsToggleGroup], "sunk")
+featureFlagsTitle = Heading("Feature Flags", "h3")
+featureFlagsToggleGroup = FeatureFlagGroup([
+    FeatureFlagItem("dark_mode", "Dark Mode", true),
+    FeatureFlagItem("new_ui", "New UI", false),
+    FeatureFlagItem("offline_mode", "Offline Playback", true),
+    FeatureFlagItem("ads_overlay", "Ads Overlay", false)
+])
+
+titlePromotion = Card([titlePromotionTitle, titlePromotionForm], "sunk")
+titlePromotionTitle = Heading("Promote Title on Home Screen", "h3")
+titlePromotionForm = Form(
+    "promote_title",
+    Buttons([submitPromotion, cancelPromotion]),
+    [
+        FormControl("Title", Input("title", placeholder="Title name")),
+        FormControl("URL", Input("url", placeholder="Promotion URL")),
+        FormControl("Start Date", DatePicker("start_date", mode="single")),
+        FormControl("End Date", DatePicker("end_date", mode="single"))
+    ]
+)
+submitPromotion = Button("Promote", null, "primary")
+cancelPromotion = Button("Cancel", null, "tertiary")
+
+actions = Buttons([
+    Button("Export Dashboard", null, "secondary"),
+    Button("Refresh Data", null, "tertiary")
+])
+
+```

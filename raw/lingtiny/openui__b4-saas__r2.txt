@@ -1,0 +1,197 @@
+root = Card([
+  header,
+  statusBar,
+  alerts,
+  revenueSection,
+  arpSection,
+  churnSection,
+  signupsSection,
+  customersSection,
+  atRiskSection,
+  paymentsSection,
+  adoptionSection,
+  npsSection,
+  periodSection,
+  utilizationSection,
+  inviteSection
+])
+
+header = CardHeader("Admin Overview", "SaaS Platform Dashboard")
+statusBar = TagBlock([
+  Tag("Monthly Recurring Revenue", null, null, "info"),
+  Tag("Annual Recurring Revenue", null, null, "info"),
+  Tag("Churn This Month", null, null, "warning"),
+  Tag("New Signups (90d)", null, null, "success"),
+  Tag("NPS Score", null, null, "info")
+])
+alerts = CardHeader("Alerts", "Accounts at risk and failed payments")
+alertsContent = Card([
+  atRiskAlert,
+  failedPaymentsAlert
+])
+atRiskAlert = Alert("Accounts at risk", "5 accounts require attention", "warning")
+failedPaymentsAlert = Alert("Failed payments", "3 payments could not be processed", "error")
+
+revenueSection = Card([
+  revenueHeading,
+  kpiRow,
+  monthlyRecurringRevenue,
+  annualRecurringRevenue
+])
+revenueHeading = Heading("Monthly & Annual Recurring Revenue", "h3")
+kpis = Table([
+  Col("Metric", [1250000, 1200000]),
+  Col("Value", [1250000, 1200000])
+])
+monthlyRecurringRevenue = TextCallout("warning", "Monthly Recurring Revenue", "$1,250,000")
+annualRecurringRevenue = TextCallout("info", "Annual Recurring Revenue", "$12,000,000")
+
+arpSection = Card([
+  arpHeading,
+  arpTable
+])
+arpHeading = Heading("Annual Recurring Revenue by Plan", "h3")
+arpTable = Table([
+  Col("Plan", ["Enterprise", "Professional", "Standard", "Basic"]),
+  Col("ARPU", [12000, 3500, 1200, 400]),
+  Col("Customers", [120, 450, 1200, 3500])
+])
+
+churnSection = Card([
+  churnHeading,
+  churnBar
+])
+churnHeading = Heading("Churn This Month", "h3")
+churnBar = Progress(0.045, "4.5% churn rate")
+
+signupsSection = Card([
+  signupsHeading,
+  signupsBar
+])
+signupsHeading = Heading("New Signups (Past 90 Days)", "h3")
+signupsBar = Progress(187, "187 new signups")
+
+customersSection = Card([
+  customersHeading,
+  planCustomers
+])
+customersHeading = Heading("Customers by Plan", "h3")
+planCustomers = Table([
+  Col("Plan", ["Enterprise", "Professional", "Standard", "Basic"]),
+  Col("Customers", [120, 450, 1200, 3500]),
+  Col("Share", ["10%", "25%", "45%", "20%"])
+])
+
+atRiskSection = Card([
+  atRiskHeading,
+  atRiskList
+])
+atRiskHeading = Heading("Accounts at Risk", "h3")
+atRiskList = ListBlock([
+  ListItem("Acme Corp", "Down 3 seats, 1 week overdue", actionLabel = "Follow up"),
+  ListItem("DataFlow Inc", "Payment failed, 2 days overdue", actionLabel = "Retry payment"),
+  ListItem("TechNova", "Feature adoption below threshold", actionLabel = "Follow up")
+])
+
+failedPaymentsSection = Card([
+  failedPaymentsHeading,
+  retryButtons
+])
+failedPaymentsHeading = Heading("Failed Payments", "h3")
+retryButtons = Buttons([
+  Button("Retry Acme Corp payment", null, "primary"),
+  Button("Retry DataFlow Inc payment", null, "primary"),
+  Button("Retry TechNova payment", null, "primary")
+])
+
+adoptionSection = Card([
+  adoptionHeading,
+  adoptionChart
+])
+adoptionHeading = Heading("Feature Adoption (Newest 3)", "h3")
+adoptionChart = HorizontalBarChart([
+  "Dashboard",
+  "API Access",
+  "Data Export"
+], [
+  Series("Dashboard", [85, 72, 68]),
+  Series("API Access", [92, 88, 84]),
+  Series("Data Export", [45, 30, 25])
+], "natural", "Adoption %", "Users")
+
+npsSection = Card([
+  npsHeading,
+  npsGauge
+])
+npsHeading = Heading("Current NPS", "h3")
+npsGauge = Progress(72, "NPS: 72")
+
+periodSection = Card([
+  periodHeading,
+  periodSelect
+])
+periodHeading = Heading("Reporting Period", "h3")
+periodSelect = Select("month", [
+  SelectItem("January 2025", "January"),
+  SelectItem("February 2025", "February"),
+  SelectItem("March 2025", "March")
+], "Select period")
+
+utilizationSection = Card([
+  utilizationHeading,
+  utilizationChart
+])
+utilizationHeading = Heading("Seat Utilization", "h3")
+utilizationChart = SingleStackedBarChart([
+  "Team A",
+  "Team B",
+  "Team C",
+  "Team D",
+  "Team E"
+], [
+  85, 72, 91, 68, 78
+])
+
+inviteSection = Card([
+  inviteHeading,
+  inviteForm
+])
+inviteHeading = Heading("Invite Another Admin", "h3")
+inviteForm = Form("admin-invite", [
+  FormControl("Full name", nameInput),
+  FormControl("Work email", emailInput),
+  FormControl("Department", departmentSelect)
+], [
+  Buttons([
+    Button("Send Invite", null, "primary"),
+    Button("Cancel", null, "tertiary")
+  ])
+])
+
+nameInput = Input("Full name", "Jane Smith")
+emailInput = Input("Work email", "jane@company.com")
+departmentSelect = Select("department", [
+  SelectItem("Engineering", "Engineering"),
+  SelectItem("Sales", "Sales"),
+  SelectItem("Marketing", "Marketing"),
+  SelectItem("Product", "Product")
+], "Select department")
+
+root = Card([
+  header,
+  statusBar,
+  alerts,
+  alertsContent,
+  revenueSection,
+  arpSection,
+  churnSection,
+  signupsSection,
+  customersSection,
+  atRiskSection,
+  failedPaymentsSection,
+  adoptionSection,
+  npsSection,
+  periodSection,
+  utilizationSection,
+  inviteSection
+])

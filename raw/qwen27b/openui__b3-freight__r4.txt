@@ -1,0 +1,50 @@
+
+
+root = Card([header, lastRefresh, searchSection, kpiSection, delayedAlert, shipmentsSection, flagSection, carrierSection, volumeSection], "card", "column", "l")
+
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment tracking and performance")
+
+lastRefresh = TextContent("Last refreshed: **Jun 12, 2025 at 14:32 UTC**", "small")
+
+searchSection = Card([searchForm], "sunk", "column", "s")
+searchForm = Form("route-search", searchButtons, [routeField])
+routeField = FormControl("Search by route", routeInput, "e.g. Chicago → Denver")
+routeInput = Input("route", "Enter origin or destination…")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+
+kpiSection = Card([onTimeCard, costCard], "sunk", "row", "m")
+onTimeCard = Card([onTimeLabel, onTimeChart], "card", "column", "s")
+onTimeLabel = Heading("On-Time This Month", "h3")
+onTimeChart = RadialChart(["On-Time"], [94.2])
+costCard = Card([costLabel, costValue, costSub], "card", "column", "s")
+costLabel = Heading("Avg Cost / Shipment", "h3")
+costValue = TextContent("$1,247", "large-heavy")
+costSub = TextContent("↓ 3.1% vs last month", "small")
+
+delayedAlert = Alert("3 shipments delayed", "MEX-4412 (LAX → NYC), ATL-0091 (Atlanta → Miami), and SFO-7723 (SF → Seattle) are running 4–11 hours behind schedule.", "warning")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable], "sunk", "column", "s")
+shipmentsHeading = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([colId, colOrigin, colDest, colEta, colStatus])
+colId = Col("ID", ["MEX-4412", "ATL-0091", "SFO-7723", "CHI-2208", "NYC-5510", "DEN-3341", "HOU-1187"])
+colOrigin = Col("Origin", ["Los Angeles", "Atlanta", "San Francisco", "Chicago", "New York", "Denver", "Houston"])
+colDest = Col("Destination", ["New York", "Miami", "Seattle", "Denver", "Boston", "Chicago", "Dallas"])
+colEta = Col("ETA", ["Jun 13, 08:00", "Jun 13, 14:30", "Jun 14, 06:00", "Jun 13, 11:00", "Jun 15, 09:00", "Jun 14, 16:00", "Jun 15, 07:30"])
+colStatus = Col("Status", ["Delayed", "Delayed", "Delayed", "On Time", "On Time", "On Time", "On Time"])
+
+flagSection = Card([flagHeading, flagButtons], "sunk", "row", "m")
+flagHeading = TextContent("Flag a shipment for review:", "default")
+flagButtons = Buttons([flagBtn, flagDialog])
+flagBtn = Button("Flag Selected", null, "primary")
+flagDialog = Button("Flag with Notes", null, "secondary")
+
+carrierSection = Card([carrierHeading, carrierChart], "sunk", "column", "s")
+carrierHeading = Heading("Volume by Carrier", "h3")
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "Freightline", "Other"], [38, 27, 18, 11, 6], "donut")
+
+volumeSection = Card([volumeHeading, volumeChart], "sunk", "column", "s")
+volumeHeading = Heading("Weekly Volume — Past 8 Weeks", "h3")
+volumeChart = LineChart(["Apr 28", "May 5", "May 12", "May 19", "May 26", "Jun 2", "Jun 9"], [volSeries], "natural", "Week", "Shipments")
+volSeries = Series("Shipments", [142, 158, 171, 165, 183, 196, 204])

@@ -1,0 +1,59 @@
+```openui-lang
+root = Card([
+    header,
+    uptimeSection,
+    resourceChart,
+    errorRateSection,
+    incidentsTable,
+    regionFilter,
+    slowEndpointsTable,
+    alertThresholdControl,
+    acknowledgeIncidentBtn
+])
+
+header = CardHeader("On-Call Engineer Service Health", "Current Status & Insights")
+
+uptimeSection = Card([
+    TextContent("Uptime this quarter: 99.87%", "large"),
+    "Quarterly uptime is computed from the last 90 days of service logs."
+], "sunk")
+
+resourceChart = Card([
+    Heading("CPU & Memory Usage (Last 24h)", "h3"),
+    LineChart(["Time"], [cpuSeries, memSeries], "natural", "Time", "Utilization (%)")
+], "clear")
+cpuSeries = Series("CPU", [80, 75, 78, 82, 79, 77, 81, 83, 76, 74, 80, 82, 79, 77, 81, 83, 76, 74, 80, 82, 79, 77, 81, 83, 76, 74, 80, 82, 79, 77])
+memSeries = Series("Memory", [65, 70, 68, 72, 69, 67, 71, 73, 66, 64, 70, 72, 69, 67, 71, 73, 66, 64, 70, 72, 69, 67, 71, 73, 66, 64, 70, 72, 69, 67])
+
+errorRateSection = Card([
+    TextContent("Current Error Rate: 0.42%", "large"),
+    "Error rate is calculated as failed requests / total requests over the last minute."
+], "sunk")
+
+incidentsTable = Table([
+    Col("Severity", ["Critical", "High", "Medium", "Low"]),
+    Col("Open Incidents", [4, 2, 5, 3])
+])
+
+regionFilter = Card([
+    Heading("Filter by Region", "h4"),
+    Select("region", [SelectItem("US-East", "US-East"), SelectItem("EU-West", "EU-West"), SelectItem("APAC", "APAC")], placeholder: "Select Region")
+], "clear")
+
+slowEndpointsTable = Card([
+    Heading("Top 5 Slowest Endpoints (Last 1h)", "h4"),
+    Table([
+        Col("Endpoint", ["GET /api/users", "POST /api/orders", "GET /api/products", "PUT /api/settings", "DELETE /api/logs"]),
+        Col("Avg Latency (ms)", ["312", "298", "275", "340", "410"])
+    ])
+], "clear")
+
+alertThresholdControl = Card([
+    Heading("Set Alert Threshold", "h4"),
+    FormControl("Alert Threshold (% CPU)", inputThreshold, "Set the CPU usage that triggers an alert.")
+], "clear")
+inputThreshold = Slider("continuous", 0, 100, step: 1, defaultValue: 75, label: "CPU Threshold", value: 75)
+
+acknowledgeIncidentBtn = Button("Acknowledge Incident", null, "primary")
+
+```

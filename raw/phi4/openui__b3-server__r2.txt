@@ -1,0 +1,50 @@
+```openui
+root = Card([uptimeSection, usageSection, errorSection, incidentsSection, regionFilter, slowEndpointsSection, alertThresholdSection, acknowledgeSection])
+
+uptimeSection = Card([uptimeHeading, uptimeValue], "sunk")
+uptimeHeading = Heading("Uptime This Quarter", "h3")
+uptimeValue = TextContent("99.98%", "large")
+
+usageSection = Card([usageHeading, cpuChart, memoryChart], "sunk")
+usageHeading = Heading("CPU and Memory Usage (24h)", "h3")
+cpuChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [cpuSeries], "linear", "Time", "CPU %")
+memoryChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [memorySeries], "linear", "Time", "Memory %")
+cpuSeries = Series("CPU", [20, 35, 50, 40])
+memorySeries = Series("Memory", [50, 60, 55, 65])
+
+errorSection = Card([errorHeading, errorRate], "sunk")
+errorHeading = Heading("Error Rate Now", "h3")
+errorRate = TextContent("0.5%", "large")
+
+incidentsSection = Card([incidentsHeading, incidentsTable], "sunk")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsTable = Table([incidentName, severity, region])
+incidentName = Col("Incident", ["Incident A", "Incident B"])
+severity = Col("Severity", ["High", "Medium"])
+region = Col("Region", ["US East", "EU West"])
+
+regionFilter = Card([regionHeading, regionSelect], "sunk")
+regionHeading = Heading("Filter by Region", "h3")
+regionSelect = Select("region", [usEast, euWest, apSouth])
+usEast = SelectItem("US East", "US East")
+euWest = SelectItem("EU West", "EU West")
+apSouth = SelectItem("AP South", "AP South")
+
+slowEndpointsSection = Card([slowEndpointsHeading, slowEndpointsTable], "sunk")
+slowEndpointsHeading = Heading("Slowest Endpoints", "h3")
+slowEndpointsTable = Table([endpointName, latency])
+endpointName = Col("Endpoint", ["Endpoint 1", "Endpoint 2", "Endpoint 3", "Endpoint 4", "Endpoint 5"])
+latency = Col("Latency", ["450ms", "600ms", "750ms", "500ms", "800ms"])
+
+alertThresholdSection = Card([alertHeading, alertInput, alertButton], "sunk")
+alertHeading = Heading("Set Alert Threshold", "h3")
+alertInput = Input("threshold", "75")
+alertButton = Button("Set Alert", null, "primary")
+
+acknowledgeSection = Card([acknowledgeHeading, incidentsList, acknowledgeButton], "sunk")
+acknowledgeHeading = Heading("Acknowledge Incident", "h3")
+incidentsList = ListBlock([incidentA, incidentB])
+incidentA = ListItem("Acknowledge Incident A", "Severity: High", null, "Acknowledge")
+incidentB = ListItem("Acknowledge Incident B", "Severity: Medium", null, "Acknowledge")
+acknowledgeButton = Button("Acknowledge", null, "secondary")
+```

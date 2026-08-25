@@ -1,0 +1,55 @@
+```openui-lang
+root = Card([summaryHeader, progressCard, workoutChart, workoutForm])
+
+summaryHeader = CardHeader("Daily Fitness Summary", "Track your progress today")
+
+progressCard = Card([stepGoal, caloriesBurned], "sunk")
+stepGoal = Card([stepCount, goalIndicator], "clear")
+stepCount = Card([stepText, stepProgress], "clear")
+stepText = TextContent("Steps today: 8,450")
+stepProgress = Progress(8450, "vs goal")
+goalIndicator = TextContent("Goal: 10,000 steps", "small")
+
+caloriesBurned = Card([calorieText, calorieChart], "clear")
+calorieText = TextContent("Calories burned: 2,150", "large-heavy")
+calorieChart = SingleStackedBarChart(["Today"], [2150], "Calories")
+
+workoutChart = CardHeader("Weekly Workouts", "Last 7 days")
+workoutData = [
+    ["Monday", 30, 280],
+    ["Tuesday", 45, 320],
+    ["Wednesday", 35, 300],
+    ["Thursday", 0, 0],
+    ["Friday", 50, 350],
+    ["Saturday", 40, 330],
+    ["Sunday", 25, 270]
+]
+workoutLabels = pluck(workoutData, 0)
+workoutDurations = pluck(workoutData, 1)
+workoutCalories = pluck(workoutData, 2)
+workoutChartData = BarChart(workoutLabels, [
+    Series("Duration (min)", workoutDurations),
+    Series("Calories", workoutCalories)
+], "grouped", "Day", "Energy")
+
+workoutForm = Card([workoutFormHeader, workoutInput], "sunk")
+workoutFormHeader = CardHeader("Log a New Workout", "Add your latest session")
+workoutInput = Form("workout-log", formButtons, [
+    FormControl("Duration (min)", durationInput),
+    FormControl("Type", workoutTypeSelect),
+    FormControl("Calories burned", caloriesInput)
+])
+durationInput = Input("duration", "30", "number")
+workoutTypeSelect = Select("type", [
+    SelectItem("Running", "Running"),
+    SelectItem("Cycling", "Cycling"),
+    SelectItem("Swimming", "Swimming"),
+    SelectItem("Yoga", "Yoga"),
+    SelectItem("Strength", "Strength Training")
+], "Choose type")
+caloriesInput = Input("calories", "250", "number")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Log Workout", null, "primary")
+
+pluck = (data, index) => data.map(item => item[index])
+```

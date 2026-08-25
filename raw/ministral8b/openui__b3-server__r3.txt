@@ -1,0 +1,59 @@
+```openui-lang
+root = Card([healthHeader, regionFilter, uptimeSection, metricsSection, incidentSection, slowEndpoints, alertThreshold, acknowledgeIncident])
+
+healthHeader = CardHeader("Service Health Overview", "Monitoring all regions")
+
+regionFilter = Card([regionLabel, regionSelect], "sunk")
+regionLabel = TextContent("Filter by region: ", "small-heavy")
+regionSelect = Select("region", [regionItems], "Global", null, "medium", "default")
+regionItems = [regionItem("Global", "global"), regionItem("US East", "us-east"), regionItem("US West", "us-west"), regionItem("Europe", "eu"), regionItem("Asia", "asia")]
+
+uptimeSection = Card([uptimeHeading, uptimeChart, uptimeValue], "sunk")
+uptimeHeading = Heading("Quarterly Uptime", "h3")
+uptimeChart = RadarChart(["Jan", "Feb", "Mar", uptimeData], "default", "circular")
+uptimeData = [99.98, 99.99, 100.00]
+uptimeValue = TextContent("Current quarter: 99.99% uptime", "large")
+
+metricsSection = Card([cpuMemoryChart, errorRateCard], "sunk")
+cpuMemoryChart = Card([cpuLine, memoryLine], "card", "column", "l", "center")
+cpuLine = LineChart(["00:00", "06:00", "12:00", "18:00"], [cpuSeries], "natural", "Time (UTC)", "CPU Usage (%)")
+cpuSeries = Series("CPU", [32.5, 45.2, 50.1, 38.7])
+memoryLine = LineChart(["00:00", "06:00", "12:00", "18:00"], [memorySeries], "natural", "Time (UTC)", "Memory Usage (%)")
+memorySeries = Series("Memory", [65.3, 72.8, 78.1, 69.5])
+errorRateCard = Card([errorRateHeading, errorRateValue], "sunk")
+errorRateHeading = Heading("Current Error Rate", "h3")
+errorRateValue = TextContent("1.2% error rate (last 5m)", "large-heavy")
+
+incidentSection = Card([incidentHeading, incidentsTable], "sunk")
+incidentHeading = Heading("Open Incidents", "h3")
+incidentsTable = Table([incidentColumns])
+incidentColumns = [incidentCol("Region", ["US East", "Europe", "Asia"]),
+                   incidentCol("Severity", ["Critical", "High", "Medium"]),
+                   incidentCol("Status", ["Acknowledged", "Investigating", "Monitoring"]),
+                   incidentCol("Duration", ["3h", "12m", "45m"])]
+incidentCol = Col
+
+slowEndpoints = Card([slowEndpointsHeading, endpointsTable], "sunk")
+slowEndpointsHeading = Heading("Slowest Endpoints (Last 24h)", "h3")
+endpointsTable = Table([endpointColumns])
+endpointColumns = [endpointCol("Endpoint", ["/api/v1/users", "/api/v2/orders", "/api/v3/reports", "/api/v1/payments", "/api/v1/analytics"]),
+                   endpointCol("Latency", ["420ms", "387ms", "356ms", "321ms", "298ms"]),
+                   endpointCol("Region", ["US East", "US West", "Europe", "Asia", "US East"])]
+endpointCol = Col
+
+alertThreshold = Card([thresholdHeading, thresholdSlider], "sunk")
+thresholdHeading = Heading("Set Alert Threshold", "h3")
+thresholdSlider = FormControl("CPU Threshold (%)", cpuThresholdSlider)
+cpuThresholdSlider = Slider("cpu_threshold", "continuous", 0, 100, 5, 75, "CPU Usage Threshold", null, 75)
+
+acknowledgeIncident = Card([acknowledgeHeading, acknowledgeForm], "sunk")
+acknowledgeHeading = Heading("Acknowledge Incident", "h3")
+acknowledgeForm = Form("incident_ack", acknowledgeButtons, [acknowledgeInput])
+acknowledgeInput = FormControl("Incident ID", incidentInput)
+incidentInput = Input("incident_id", "Enter incident ID", "text")
+acknowledgeButtons = Buttons([acknowledgeBtn], "column")
+acknowledgeBtn = Button("Acknowledge", null, "primary")
+
+regionItem = SelectItem
+acknowledgeBtn = Button
+```

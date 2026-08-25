@@ -1,0 +1,29 @@
+root = Card([header, mainFocus, taskDetails, actionArea, followUps], "card", "column", "l", "center")
+
+header = CardHeader("Deep Work Session", "Single Task Focus")
+
+mainFocus = Card([taskTitle, taskDeadline], "sunk", "column", "s", "center")
+taskTitle = Heading("Finalize Q4 Project Proposal", "h2")
+taskDeadline = TextContent("Deadline: Today at 5:00 PM", "small-heavy")
+
+taskDetails = Card([statusSection, progressSection, breakdown], "clear", "column", "m")
+statusSection = Card([statusLabel, statusBadge], "clear", "row", "m", "center", "between")
+statusLabel = TextContent("Current Status", "default")
+statusBadge = Badge("In Progress", "secondary")
+
+progressSection = Card([progressLabel, progressBar], "clear", "column", "xs")
+progressLabel = TextContent("Completion: 65%", "small")
+progressBar = Progress(65, "Drafting Conclusion")
+
+breakdown = ListBlock([step1, step2, step3], "image")
+step1 = ListItem("Research Phase", "Completed", "https://picsum.photos/seed/check1/100/100")
+step2 = ListItem("Drafting Content", "In Progress", "https://picsum.photos/seed/check2/100/100")
+step3 = ListItem("Final Review", "Pending", "https://picsum.photos/seed/check3/100/100")
+
+actionArea = Buttons([completeBtn, snoozeBtn], "row")
+completeBtn = Button("Mark as Done", null, "primary", "normal", "large")
+snoozeBtn = Button("Snooze 15m", null, "secondary", "normal", "large")
+
+followUps = FollowUpBlock([nextTask, breakTime])
+nextTask = FollowUpItem("What is the next task on my list?")
+breakTime = FollowUpItem("Set a 5-minute break timer")

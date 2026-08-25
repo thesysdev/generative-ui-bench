@@ -1,0 +1,99 @@
+root = Card([header, storeSelector, topMetrics, salesVsTarget, trafficAndWeekSection, inventoryAndSellers, shiftAndRegisters, promotionSection, actions])
+
+header = CardHeader("Store Manager's Daily Console", "Branch #402 — Downtown Flagship")
+
+storeSelector = Buttons([store1Btn, store2Btn, store3Btn], "row")
+store1Btn = Button("Downtown Flagship", null, "primary")
+store2Btn = Button("Westside Mall", null, "secondary")
+store3Btn = Button("Airport Kiosk", null, "secondary")
+
+topMetrics = Card([basketMetric, returnsMetric], "clear", "row", "m", "between")
+basketMetric = Card([basketTitle, basketValue], "sunk", "column", "xs")
+basketTitle = Heading("Average Basket Size", "h4")
+basketValue = TextContent("### $48.50\n*+5.2% vs yesterday*")
+
+returnsMetric = Card([returnsTitle, returnsValue], "sunk", "column", "xs")
+returnsTitle = Heading("Returns This Week", "h4")
+returnsValue = TextContent("### 34 items\n*$1,420 total value*")
+
+salesVsTarget = Card([salesHeader, salesProgress, salesChart], "card", "column", "m")
+salesHeader = Heading("Sales Today vs Target ($12,000 Goal)", "h3")
+salesProgress = Progress(78, "$9,360 collected so far")
+salesChart = BarChart(["9 AM", "12 PM", "3 PM", "6 PM", "8 PM"], [salesSeries], "grouped", "Time", "Revenue ($)")
+salesSeries = Series("Hourly Sales", [1200, 2800, 2200, 2100, 1060])
+
+trafficAndWeekSection = Card([trafficCard, weekCard], "clear", "row", "m", "stretch")
+
+trafficCard = Card([trafficHeader, trafficChart], "card", "column", "m")
+trafficHeader = Heading("Foot Traffic Through the Day", "h3")
+trafficChart = LineChart(["9 AM", "11 AM", "1 PM", "3 PM", "5 PM", "7 PM"], [trafficSeries], "natural", "Time", "Visitors")
+trafficSeries = Series("Shoppers", [45, 120, 210, 180, 250, 95])
+
+weekCard = Card([weekHeader, weekChart], "card", "column", "m")
+weekHeader = Heading("This Week vs Last Week", "h3")
+weekChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [thisWeekSeries, lastWeekSeries], "natural", "Day", "Revenue ($)")
+thisWeekSeries = Series("This Week", [8500, 9100, 8800, 10200, 12500, 14000, 11000])
+lastWeekSeries = Series("Last Week", [7800, 8200, 8500, 9500, 11000, 13200, 10500])
+
+inventoryAndSellers = Card([bestSellersCard, outOfStockCard], "clear", "row", "m", "stretch")
+
+bestSellersCard = Card([bestHeader, bestTable], "card", "column", "m")
+bestHeader = Heading("Best Sellers Today", "h3")
+bestTable = Table([bestNameCol, bestUnitsCol])
+bestNameCol = Col("Product", ["Espresso Roast 12oz", "Oat Milk 32oz", "Cold Brew Bottle", "Almond Croissant", "Matcha Powder"])
+bestUnitsCol = Col("Units Sold", [142, 118, 95, 84, 62])
+
+outOfStockCard = Card([stockHeader, stockList], "card", "column", "m")
+stockHeader = Heading("Items Out of Stock", "h3")
+stockList = ListBlock([stock1, stock2, stock3])
+stock1 = ListItem("Vanilla Syrup 750ml", "Zero inventory — 3 pending reorders", null, "Reorder")
+stock2 = ListItem("Compostable Cups 12oz", "Low safety stock", null, "Reorder")
+stock3 = ListItem("Whole Milk Gallon", "Supplier delay", null, "Reorder")
+
+shiftAndRegisters = Card([shiftCard, registerCard], "clear", "row", "m", "stretch")
+
+shiftCard = Card([shiftHeader, shiftList], "card", "column", "m")
+shiftHeader = Heading("Who Is On Shift Today", "h3")
+shiftList = ListBlock([staff1, staff2, staff3, staff4])
+staff1 = ListItem("Sarah Jenkins", "Store Manager • 7:00 AM - 3:30 PM")
+staff2 = ListItem("Marcus Vance", "Shift Lead • 1:00 PM - 9:30 PM")
+staff3 = ListItem("Elena Rostova", "Barista • 7:00 AM - 1:30 PM")
+staff4 = ListItem("Devon Taylor", "Stock Associate • 9:00 AM - 5:30 PM")
+
+registerCard = Card([registerHeader, registerTable], "card", "column", "m")
+registerHeader = Heading("Register Status", "h3")
+registerTable = Table([regNameCol, regStatusCol, regCashCol])
+regNameCol = Col("Register", ["Register 1", "Register 2", "Register 3", "Register 4 (Drive-thru)"])
+regStatusCol = Col("Status", ["Open", "Open", "Closed (Maintenance)", "Open"])
+regCashCol = Col("Float", ["$300.00", "$300.00", "$0.00", "$250.00"])
+
+promotionSection = Card([promoHeader, promoTable], "card", "column", "m")
+promoHeader = Heading("Running Promotions Performance", "h3")
+promoTable = Table([promoNameCol, promoRedemptionsCol, promoImpactCol])
+promoNameCol = Col("Promotion", ["Morning Combo ($1 off pastry)", "Student 10% Discount", "Loyalty Double Points Day"])
+promoRedemptionsCol = Col("Redemptions", [215, 88, 340])
+promoImpactCol = Col("Revenue Lift", ["+$1,820", "+$650", "+$4,100"])
+
+actions = Card([actionHeader, actionButtons], "sunk", "column", "s")
+actionHeader = Heading("Quick Actions", "h4")
+actionButtons = Buttons([reorderBtn, auditBtn, reportBtn], "row")
+reorderBtn = DialogBlock("Reorder Stock", "Emergency Restock", "Select items to dispatch to the central warehouse immediately.", [reorderForm], "default")
+auditBtn = Button("Run Register Audit", null, "secondary")
+reportBtn = Button("Export End-of-Day PDF", null, "secondary")
+
+reorderForm = Form("reorder-form", reorderButtons, [itemField, qtyField])
+reorderField = FormControl("Item to Reorder", itemSelect)
+itemField = reorderField
+itemSelect = Select("item", [item1, item2, item3], "Select stock item")
+item1 = SelectItem("vanilla", "Vanilla Syrup 750ml")
+item2 = SelectItem("cups", "Compostable Cups 12oz")
+item3 = SelectItem("milk", "Whole Milk Gallon")
+qtyField = FormControl("Quantity", qtySlider, "Standard delivery pack size")
+qtySlider = Slider("qty", "discrete", 1, 50, 1, [10], "Cases")
+reorderButtons = Buttons([submitReorderBtn], "row")
+submitReorderBtn = Button("Confirm Order", null, "primary")
+
+followUp = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show hourly labor breakdown")
+fu2 = FollowUpItem("Review supplier delivery schedule")
+fu3 = FollowUpItem("Generate manager handover notes")

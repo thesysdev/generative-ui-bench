@@ -1,0 +1,39 @@
+root = Card([headerCard, kpiRow, mainContent], "clear", "column", "l")
+
+headerCard = Card([header, todayTag], "card", "row", "between", "center")
+header = CardHeader("Async Standup", "Remote Engineering Team — Daily Sync")
+todayTag = Badge("Friday, Oct 24", "outline")
+
+kpiRow = Card([missingCallout, blockedCallout, totalCard], "clear", "row", "l", "stretch")
+missingCallout = TextCallout("warning", "Updates Missing", "2 teammates haven't posted yet (Alex, Sarah)")
+blockedCallout = TextCallout("danger", "Active Blockers", "1 teammate is currently blocked")
+totalCard = Card([totalTitle, totalValue], "card", "column", "none", "center", "center")
+totalTitle = TextContent("Submitted", "small")
+totalValue = Heading("4 / 6", "h2")
+
+mainContent = Card([updatesSection, formCard], "clear", "row", "l", "stretch")
+
+updatesSection = Card([updatesHeading, standupList], "card", "column", "m")
+updatesHeading = Heading("Team Updates", "h3")
+standupList = ListBlock([item1, item2, item3, item4])
+
+item1 = ListItem("David Chen (Design)", "Yesterday: Finished mobile nav. Today: Working on design system tokens. Blocked: None.", ["https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces"])
+item2 = ListItem("Elena Rostova (Backend)", "Yesterday: Auth service migration. Today: Setting up rate limiting. Blocked: Waiting on DevOps AWS cert approval.", ["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces"])
+item3 = ListItem("Marcus Brody (Frontend)", "Yesterday: Dashboard charts. Today: Implementing responsive table view. Blocked: None.", ["https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces"])
+item4 = ListItem("Priya Patel (QA)", "Yesterday: Release candidate testing. Today: Automated regression suites. Blocked: None.", ["https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces"])
+
+formCard = Card([formHeading, standupForm], "card", "column", "m")
+formHeading = Heading("Post Your Update", "h3")
+standupForm = Form("standup", formButtons, [yesterdayField, todayField, blockedField])
+
+yesterdayField = FormControl("What did you do yesterday?", yesterdayInput)
+yesterdayInput = TextArea("yesterday", "Completed tasks...", 2)
+
+todayField = FormControl("What are you doing today?", todayInput)
+todayInput = TextArea("today", "Planned tasks...", 2)
+
+blockedField = FormControl("Are you blocked?", blockedInput)
+blockedInput = Input("blocked", "None, or describe blocker...")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Publish Standup", null, "primary")

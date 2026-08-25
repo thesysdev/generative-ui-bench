@@ -1,0 +1,958 @@
+Here is the comprehensive live-ops command center screen for your game studio, covering all 16 operational requirements.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "quickControlsCard",
+          "kpiOverviewCard",
+          "mainTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Live-Ops Command Center",
+        "subtitle": "Real-time telemetry, server telemetry, in-game economy, experiments & operations"
+      },
+      {
+        "id": "quickControlsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "regionFocusControl",
+          "actionButtonsGroup"
+        ]
+      },
+      {
+        "id": "regionFocusControl",
+        "component": "FormControl",
+        "label": "Focus Region Filter (15)",
+        "hint": "Filter live telemetry by server region",
+        "input": "regionSelect"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "focus_region",
+        "placeholder": "All Regions (Global)",
+        "items": [
+          "regAll",
+          "regNA",
+          "regEU",
+          "regAPAC",
+          "regLATAM"
+        ]
+      },
+      {
+        "id": "regAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "Global (All Regions)"
+      },
+      {
+        "id": "regNA",
+        "component": "SelectItem",
+        "value": "na",
+        "label": "NA-East / NA-West"
+      },
+      {
+        "id": "regEU",
+        "component": "SelectItem",
+        "value": "eu",
+        "label": "EU-Central (Frankfurt)"
+      },
+      {
+        "id": "regAPAC",
+        "component": "SelectItem",
+        "value": "apac",
+        "label": "APAC (Tokyo / Singapore)"
+      },
+      {
+        "id": "regLATAM",
+        "component": "SelectItem",
+        "value": "latam",
+        "label": "LATAM (São Paulo)"
+      },
+      {
+        "id": "actionButtonsGroup",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "hotfixModal",
+          "patchDraftModal"
+        ]
+      },
+      {
+        "id": "hotfixModal",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "🚀 Deploy Hotfix (16)",
+        "triggerVariant": "destructive",
+        "title": "Ship Emergency Hotfix to Production",
+        "description": "This will propagate a hotfix payload across all selected edge gateways and warm instances without full matchmaking teardown. Ensure telemetry channels are monitored.",
+        "confirmLabel": "Confirm & Ship Hotfix",
+        "cancelLabel": "Abort"
+      },
+      {
+        "id": "patchDraftModal",
+        "component": "DialogBlock",
+        "triggerLabel": "📝 Draft Patch Notes (14)",
+        "triggerVariant": "secondary",
+        "title": "Draft & Publish Patch Notes",
+        "description": "Compose release notes to be distributed to client launchers and community portals.",
+        "content": [
+          "patchNotesForm"
+        ]
+      },
+      {
+        "id": "patchNotesForm",
+        "component": "Form",
+        "name": "patch_draft_form",
+        "buttons": "patchFormActions",
+        "fields": [
+          "patchVerField",
+          "patchTargetField",
+          "patchTextField"
+        ]
+      },
+      {
+        "id": "patchVerField",
+        "component": "FormControl",
+        "label": "Patch Version Tag",
+        "input": "patchVerInput"
+      },
+      {
+        "id": "patchVerInput",
+        "component": "Input",
+        "name": "patch_version",
+        "placeholder": "v2.14.3-hotfix.1"
+      },
+      {
+        "id": "patchTargetField",
+        "component": "FormControl",
+        "label": "Target Client Platforms",
+        "input": "patchPlatformGroup"
+      },
+      {
+        "id": "patchPlatformGroup",
+        "component": "CheckBoxGroup",
+        "name": "platforms",
+        "items": [
+          "cbPC",
+          "cbConsole",
+          "cbMobile"
+        ]
+      },
+      {
+        "id": "cbPC",
+        "component": "CheckBoxItem",
+        "name": "pc",
+        "label": "PC (Steam / Epic)",
+        "description": "Client binary v2.14.3",
+        "defaultChecked": true
+      },
+      {
+        "id": "cbConsole",
+        "component": "CheckBoxItem",
+        "name": "console",
+        "label": "PlayStation / Xbox",
+        "description": "Fast-track cert manifest",
+        "defaultChecked": true
+      },
+      {
+        "id": "cbMobile",
+        "component": "CheckBoxItem",
+        "name": "mobile",
+        "label": "iOS / Android OTA",
+        "description": "In-app bundle update",
+        "defaultChecked": false
+      },
+      {
+        "id": "patchTextField",
+        "component": "FormControl",
+        "label": "Patch Notes Markdown",
+        "hint": "Supports markdown formatting for headlines, bug fixes, balance changes.",
+        "input": "patchTextarea"
+      },
+      {
+        "id": "patchTextarea",
+        "component": "TextArea",
+        "name": "patch_body",
+        "placeholder": "### Balance Changes\n- Reduced plasma rifle overheat duration by 15%\n\n### Bug Fixes\n- Resolved collision glitch on Map 4 Sector B",
+        "rows": 6
+      },
+      {
+        "id": "patchFormActions",
+        "component": "Buttons",
+        "buttons": [
+          "saveDraftBtn",
+          "publishPatchBtn"
+        ]
+      },
+      {
+        "id": "saveDraftBtn",
+        "component": "Button",
+        "label": "Save Draft",
+        "variant": "secondary"
+      },
+      {
+        "id": "publishPatchBtn",
+        "component": "Button",
+        "label": "Publish to CDN & Launchers",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "kpiHeader",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Core Studio Metrics",
+        "subtitle": "Real-time engagement, monetization and player activity telemetry"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiCurrentCol",
+          "kpiTargetCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Key Performance Indicator",
+        "data": [
+          "Players Online Right Now (1)",
+          "Daily Active Users (DAU) (2)",
+          "Monthly Active Users (MAU) (2)",
+          "Revenue Today (3)",
+          "Average Revenue Per User (ARPU / ARPPU) (4)",
+          "Pending Moderation Queue (10 & 11)"
+        ]
+      },
+      {
+        "id": "kpiCurrentCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "342,890 CCU",
+          "1,845,200 DAU",
+          "14,210,000 MAU",
+          "$248,650 USD",
+          "$4.82 ARPU ($28.40 ARPPU)",
+          "641 Reports / 148 Appeals"
+        ]
+      },
+      {
+        "id": "kpiTargetCol",
+        "component": "Col",
+        "label": "24h Delta / Target",
+        "data": [
+          "+8.4% vs last hour",
+          "+3.2% WoW",
+          "+6.8% MoM",
+          "104% of daily quota ($240k)",
+          "+$0.34 over baseline",
+          "< 2 hr resolution target"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "🟢 Peak Bandwidth Normal",
+          "🟢 Healthy Retention",
+          "🟢 Steady Growth",
+          "🟢 Ahead of Forecast",
+          "🟢 Strong Conversion",
+          "🟡 Attention Required"
+        ]
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "tabEngagement",
+          "tabInfra",
+          "tabEconomy",
+          "tabOps"
+        ]
+      },
+      {
+        "id": "tabEngagement",
+        "component": "TabItem",
+        "value": "engagement",
+        "trigger": "Engagement & Events",
+        "content": [
+          "sessionLengthCard",
+          "eventsCard"
+        ]
+      },
+      {
+        "id": "sessionLengthCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "sessionHeader",
+          "sessionChart"
+        ]
+      },
+      {
+        "id": "sessionHeader",
+        "component": "CardHeader",
+        "title": "Average Session Length - Past 2 Weeks (5)",
+        "subtitle": "Daily average session duration in minutes (D1 to D14)"
+      },
+      {
+        "id": "sessionChart",
+        "component": "LineChart",
+        "labels": [
+          "Day 1",
+          "Day 2",
+          "Day 3",
+          "Day 4",
+          "Day 5",
+          "Day 6",
+          "Day 7",
+          "Day 8",
+          "Day 9",
+          "Day 10",
+          "Day 11",
+          "Day 12",
+          "Day 13",
+          "Day 14"
+        ],
+        "series": [
+          "sessionSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Past 14 Days",
+        "yLabel": "Minutes"
+      },
+      {
+        "id": "sessionSeries",
+        "component": "Series",
+        "category": "Avg Session Duration (Mins)",
+        "values": [
+          38,
+          41,
+          39,
+          44,
+          56,
+          62,
+          58,
+          42,
+          40,
+          43,
+          48,
+          59,
+          65,
+          54
+        ]
+      },
+      {
+        "id": "eventsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "eventsHeader",
+          "eventsTable"
+        ]
+      },
+      {
+        "id": "eventsHeader",
+        "component": "CardHeader",
+        "title": "Live & Upcoming Game Events (9)",
+        "subtitle": "Scheduled dynamic world modifiers, tournament brackets, and seasonal passes"
+      },
+      {
+        "id": "eventsTable",
+        "component": "Table",
+        "columns": [
+          "eventNameCol",
+          "eventTypeCol",
+          "eventScheduleCol",
+          "eventStatusCol"
+        ]
+      },
+      {
+        "eventNameCol",
+        "component": "Col",
+        "label": "Event Name",
+        "data": [
+          "Bloodmoon Siege (2x XP)",
+          "Galactic Arena Qualifiers (Season 4)",
+          "Cyber Heist Weekend Drop",
+          "Solar Eclipse Raid Boss Cycle"
+        ]
+      },
+      {
+        "eventTypeCol",
+        "component": "Col",
+        "label": "Type",
+        "data": [
+          "Global Modifier",
+          "Ranked Competitive",
+          "Loot Booster",
+          "World Boss Encounter"
+        ]
+      },
+      {
+        "eventScheduleCol",
+        "component": "Col",
+        "label": "Duration / Timing",
+        "data": [
+          "Ends in 14h 22m",
+          "Active (Day 3 of 7)",
+          "Starts Friday 18:00 UTC",
+          "Starts in 5 days"
+        ]
+      },
+      {
+        "eventStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Running (Peak Engagement)",
+          "Running (48k Match Count)",
+          "Upcoming / Pre-staged",
+          "Upcoming / Staging Tested"
+        ]
+      },
+      {
+        "id": "tabInfra",
+        "component": "TabItem",
+        "value": "infra",
+        "trigger": "Infrastructure & Stability",
+        "content": [
+          "serversCard",
+          "crashCard"
+        ]
+      },
+      {
+        "id": "serversCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "serversHeader",
+          "serversTable"
+        ]
+      },
+      {
+        "id": "serversHeader",
+        "component": "CardHeader",
+        "title": "Server Regions & Health Matrix (7)",
+        "subtitle": "Real-time cluster capacity, latency averages, and tick rate performance"
+      },
+      {
+        "id": "serversTable",
+        "component": "Table",
+        "columns": [
+          "srvRegionCol",
+          "srvHealthCol",
+          "srvLatencyCol",
+          "srvLoadCol",
+          "srvTickCol"
+        ]
+      },
+      {
+        "id": "srvRegionCol",
+        "component": "Col",
+        "label": "Region",
+        "data": [
+          "NA-East (Virginia)",
+          "NA-West (Oregon)",
+          "EU-Central (Frankfurt)",
+          "APAC (Tokyo)",
+          "APAC (Singapore)",
+          "LATAM (São Paulo)"
+        ]
+      },
+      {
+        "id": "srvHealthCol",
+        "component": "Col",
+        "label": "Operational State",
+        "data": [
+          "🟢 Healthy (99.98%)",
+          "🟢 Healthy (99.99%)",
+          "🟢 Healthy (99.95%)",
+          "🟡 Degraded Routing",
+          "🟢 Healthy (99.94%)",
+          "🟢 Healthy (99.91%)"
+        ]
+      },
+      {
+        "id": "srvLatencyCol",
+        "component": "Col",
+        "label": "Avg Latency",
+        "data": [
+          "18ms",
+          "24ms",
+          "21ms",
+          "62ms",
+          "38ms",
+          "45ms"
+        ]
+      },
+      {
+        "id": "srvLoadCol",
+        "component": "Col",
+        "label": "Cluster Load",
+        "data": [
+          "74% (1,420 pods)",
+          "68% (980 pods)",
+          "88% (2,100 pods)",
+          "81% (1,120 pods)",
+          "52% (600 pods)",
+          "61% (540 pods)"
+        ]
+      },
+      {
+        "id": "srvTickCol",
+        "component": "Col",
+        "label": "Avg Tick Rate",
+        "data": [
+          "60.0 Hz",
+          "59.9 Hz",
+          "59.8 Hz",
+          "57.4 Hz",
+          "60.0 Hz",
+          "59.9 Hz"
+        ]
+      },
+      {
+        "id": "crashCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "crashHeader",
+          "crashChart"
+        ]
+      },
+      {
+        "id": "crashHeader",
+        "component": "CardHeader",
+        "title": "Crash Rate by App Version (8)",
+        "subtitle": "Percentage of crash-free sessions and crash rates per 1,000 matches"
+      },
+      {
+        "id": "crashChart",
+        "component": "BarChart",
+        "labels": [
+          "v2.14.2 (Latest)",
+          "v2.14.1 (Stable)",
+          "v2.14.0 (Legacy)",
+          "v2.13.9 (Old Client)"
+        ],
+        "series": [
+          "crashRateSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Client Version",
+        "yLabel": "Crash Rate (%)"
+      },
+      {
+        "id": "crashRateSeries",
+        "component": "Series",
+        "category": "Crash Rate %",
+        "values": [
+          0.12,
+          0.18,
+          0.64,
+          1.85
+        ]
+      },
+      {
+        "id": "tabEconomy",
+        "component": "TabItem",
+        "value": "economy",
+        "trigger": "Store & Currency Economy",
+        "content": [
+          "itemsCard",
+          "inflationCard"
+        ]
+      },
+      {
+        "id": "itemsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "itemsHeader",
+          "itemsChart",
+          "itemsTable"
+        ]
+      },
+      {
+        "id": "itemsHeader",
+        "component": "CardHeader",
+        "title": "Best-Selling Items & Units Sold Today (6)",
+        "subtitle": "Top in-game cosmetics, battle pass tier skips, and seasonal bundles"
+      },
+      {
+        "id": "itemsChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "Voidwalker Armor Skin",
+          "Season 4 Battle Pass",
+          "Tier Skip Bundle (x5)",
+          "Plasma Rifle Chroma Wrap",
+          "Astral Wings Glider"
+        ],
+        "series": [
+          "unitsSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Units Sold",
+        "yLabel": "Item"
+      },
+      {
+        "id": "unitsSeries",
+        "component": "Series",
+        "category": "Units Sold",
+        "values": [
+          14200,
+          28450,
+          9820,
+          11340,
+          7690
+        ]
+      },
+      {
+        "id": "itemsTable",
+        "component": "Table",
+        "columns": [
+          "itemNameCol",
+          "itemCategoryCol",
+          "itemUnitsCol",
+          "itemGrossRevCol"
+        ]
+      },
+      {
+        "id": "itemNameCol",
+        "component": "Col",
+        "label": "Item Name",
+        "data": [
+          "Season 4 Battle Pass",
+          "Voidwalker Armor Skin",
+          "Plasma Rifle Chroma Wrap",
+          "Tier Skip Bundle (x5)",
+          "Astral Wings Glider"
+        ]
+      },
+      {
+        "id": "itemCategoryCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Season Pass",
+          "Mythic Character Skin",
+          "Weapon Skin",
+          "Progression",
+          "Cosmetic Glider"
+        ]
+      },
+      {
+        "id": "itemUnitsCol",
+        "component": "Col",
+        "label": "Units Sold (24h)",
+        "data": [
+          "28,450 units",
+          "14,200 units",
+          "11,340 units",
+          "9,820 units",
+          "7,690 units"
+        ]
+      },
+      {
+        "id": "itemGrossRevCol",
+        "component": "Col",
+        "label": "Gross Revenue",
+        "data": [
+          "$113,800",
+          "$56,800",
+          "$34,020",
+          "$29,460",
+          "$15,380"
+        ]
+      },
+      {
+        "id": "inflationCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "inflationHeader",
+          "inflationAlert",
+          "inflationChart"
+        ]
+      },
+      {
+        "id": "inflationHeader",
+        "component": "CardHeader",
+        "title": "In-Game Currency Inflation Telemetry (12)",
+        "subtitle": "Gold & Astral Shards faucet vs sink ratio over the last 6 months"
+      },
+      {
+        "id": "inflationAlert",
+        "component": "Alert",
+        "title": "Economy Faucet Notice",
+        "description": "Gold tap exceeds burn rate by 14.2% following the weekend double XP raid event. Sink adjustments recommended for next patch cycle.",
+        "variant": "warning"
+      },
+      {
+        "id": "inflationChart",
+        "component": "LineChart",
+        "labels": [
+          "Month -5",
+          "Month -4",
+          "Month -3",
+          "Month -2",
+          "Last Month",
+          "Current Month"
+        ],
+        "series": [
+          "faucetSeries",
+          "sinkSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Month",
+        "yLabel": "Billion Gold"
+      },
+      {
+        "id": "faucetSeries",
+        "component": "Series",
+        "category": "Currency Faucet (Generated)",
+        "values": [
+          120,
+          134,
+          145,
+          162,
+          180,
+          210
+        ]
+      },
+      {
+        "id": "sinkSeries",
+        "component": "Series",
+        "category": "Currency Sink (Destroyed)",
+        "values": [
+          115,
+          128,
+          139,
+          150,
+          164,
+          184
+        ]
+      },
+      {
+        "id": "tabOps",
+        "component": "TabItem",
+        "value": "ops",
+        "trigger": "Moderation & A/B Experiments",
+        "content": [
+          "experimentsCard",
+          "moderationCard"
+        ]
+      },
+      {
+        "id": "experimentsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "expHeader",
+          "expTable"
+        ]
+      },
+      {
+        "id": "expHeader",
+        "component": "CardHeader",
+        "title": "Live A/B Experiments Results (13)",
+        "subtitle": "Statistical significance and impact metrics for active studio feature tests"
+      },
+      {
+        "id": "expTable",
+        "component": "Table",
+        "columns": [
+          "expNameCol",
+          "expSplitCol",
+          "expMetricCol",
+          "expResultCol",
+          "expConfidenceCol"
+        ]
+      },
+      {
+        "id": "expNameCol",
+        "component": "Col",
+        "label": "Experiment Name",
+        "data": [
+          "EXP-401: Dynamic Matchmaking Range (SBMM)",
+          "EXP-402: Personalized Store Item Recommendations"
+        ]
+      },
+      {
+        "id": "expSplitCol",
+        "component": "Col",
+        "label": "Cohort Split",
+        "data": [
+          "50% Control / 50% Test B",
+          "40% Control / 60% ML Store"
+        ]
+      },
+      {
+        "id": "expMetricCol",
+        "component": "Col",
+        "label": "Primary Metric",
+        "data": [
+          "D7 Retention & Match Queue Time",
+          "In-Game Store Conversion Rate"
+        ]
+      },
+      {
+        "id": "expResultCol",
+        "component": "Col",
+        "label": "Observed Lift",
+        "data": [
+          "+4.1% D7 Retention (-18s Queue Time)",
+          "+9.8% Checkout Conversion Rate"
+        ]
+      },
+      {
+        "id": "expConfidenceCol",
+        "component": "Col",
+        "label": "Significance",
+        "data": [
+          "99.4% (Statistically Significant)",
+          "98.7% (Statistically Significant)"
+        ]
+      },
+      {
+        "id": "moderationCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "modHeader",
+          "modQueueTable",
+          "modActions"
+        ]
+      },
+      {
+        "id": "modHeader",
+        "component": "CardHeader",
+        "title": "Moderation & Appeals Awaiting Review (10 & 11)",
+        "subtitle": "Player toxicity/cheating flags and suspended account ban appeals queue"
+      },
+      {
+        "id": "modQueueTable",
+        "component": "Table",
+        "columns": [
+          "queueCategoryCol",
+          "queuePendingCol",
+          "queueOldestCol",
+          "queuePriorityCol"
+        ]
+      },
+      {
+        "id": "queueCategoryCol",
+        "component": "Col",
+        "label": "Queue Classification",
+        "data": [
+          "Player Reports: Aimbot / Speedhack (10)",
+          "Player Reports: Harassment & Toxic Chat (10)",
+          "Player Reports: Match Griefing & AFK (10)",
+          "Ban Appeals: Hardware / Cheat Detection (11)",
+          "Ban Appeals: Economy Exploit / RMT (11)"
+        ]
+      },
+      {
+        "id": "queuePendingCol",
+        "component": "Col",
+        "label": "Awaiting Review",
+        "data": [
+          "312 reports",
+          "210 reports",
+          "119 reports",
+          "94 appeals",
+          "54 appeals"
+        ]
+      },
+      {
+        "id": "queueOldestCol",
+        "component": "Col",
+        "label": "Oldest in Queue",
+        "data": [
+          "44 mins ago",
+          "1 hr 12 mins ago",
+          "2 hrs 05 mins ago",
+          "3 hrs 40 mins ago",
+          "5 hrs 15 mins ago"
+        ]
+      },
+      {
+        "id": "queuePriorityCol",
+        "component": "Col",
+        "label": "Urgency",
+        "data": [
+          "🔴 High (Anti-Cheat Flagged)",
+          "🟡 Medium",
+          "🟢 Normal",
+          "🟡 Medium (Tier 2 Support)",
+          "🟢 Low (Security Review)"
+        ]
+      },
+      {
+        "id": "modActions",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "assignQueueBtn",
+          "autoTriageBtn"
+        ]
+      },
+      {
+        "id": "assignQueueBtn",
+        "component": "Button",
+        "label": "Assign Next 25 Reports to Me",
+        "variant": "primary"
+      },
+      {
+        "id": "autoTriageBtn",
+        "component": "Button",
+        "label": "Run AI Auto-Triage on Chat Reports",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

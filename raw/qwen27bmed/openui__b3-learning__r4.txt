@@ -1,0 +1,50 @@
+
+
+root = Card([header, cohortCard, kpiCard, coursesCard, atRiskCard, engagementCard, messageDialog], "card", "column", "l")
+
+header = CardHeader("Training Platform Analytics", "Learner performance and engagement overview")
+
+cohortCard = Card([cohortForm], "sunk")
+cohortForm = Form("cohort-filter", cohortFormBtns, [cohortField])
+cohortField = FormControl("Cohort", cohortSelect, "Narrow all metrics to a single cohort")
+cohortSelect = Select("cohort", [cohortAll, cohortA, cohortB, cohortC, cohortD], "All cohorts")
+cohortAll = SelectItem("all", "All cohorts")
+cohortA = SelectItem("alpha", "Cohort Alpha (Jan intake)")
+cohortB = SelectItem("beta", "Cohort Beta (Mar intake)")
+cohortC = SelectItem("gamma", "Cohort Gamma (May intake)")
+cohortD = SelectItem("delta", "Cohort Delta (Jul intake)")
+cohortFormBtns = Buttons([applyBtn])
+applyBtn = Button("Apply filter", null, "primary", "normal", "small")
+
+kpiCard = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics — This Week", "h3")
+kpiTable = Table([kpiMetricCol, kpiValueCol, kpiDeltaCol])
+kpiMetricCol = Col("Metric", ["Active learners", "Course completion rate", "Average quiz score"])
+kpiValueCol = Col("Value", ["1,247", "73.4%", "81.2%"])
+kpiDeltaCol = Col("vs last week", ["+12.3%", "+2.1 pp", "−1.4 pp"])
+
+coursesCard = Card([coursesHeading, coursesChart], "sunk")
+coursesHeading = Heading("Courses Ranked by Enrollment", "h3")
+coursesChart = HorizontalBarChart(["Python Fundamentals", "Data Analysis with SQL", "UX Design Basics", "Agile Project Management", "Cloud DevOps 101", "Machine Learning Intro"], [enrollSeries], "grouped", "Course", "Enrolled learners")
+enrollSeries = Series("Enrollment", [482, 415, 367, 334, 298, 261])
+
+atRiskCard = Card([atRiskHeading, atRiskTable], "sunk")
+atRiskHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskTable = Table([atRiskName, atRiskCourse, atRiskLastActive, atRiskRiskScore])
+atRiskName = Col("Learner", ["Maya Chen", "Jordan Ellis", "Priya Sharma", "Tomás Rivera", "Lena Kowalski"])
+atRiskCourse = Col("Course", ["UX Design Basics", "Cloud DevOps 101", "Python Fundamentals", "Machine Learning Intro", "Data Analysis with SQL"])
+atRiskLastActive = Col("Last active", ["14 days ago", "11 days ago", "10 days ago", "9 days ago", "8 days ago"])
+atRiskRiskScore = Col("Risk score", ["92", "87", "84", "79", "74"])
+
+engagementCard = Card([engagementHeading, engagementChart], "sunk")
+engagementHeading = Heading("Weekly Engagement — Past 8 Weeks", "h3")
+engagementChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [weeklySeries, quizSeries], "natural", "Week", "Score / count")
+weeklySeries = Series("Active learners", [980, 1040, 1105, 1080, 1150, 1190, 1210, 1247])
+quizSeries = Series("Avg quiz score (%)", [78, 79, 80, 82, 83, 82, 82, 81])
+
+messageDialog = DialogBlock("Message a cohort", "Send a cohort message", "Compose and broadcast a message to all learners in the selected cohort.", [msgForm])
+msgForm = Form("cohort-message", msgFormBtns, [msgField])
+msgField = FormControl("Message", msgInput, "This will be delivered to every learner in the selected cohort")
+msgInput = TextArea("message", "Hi team, your next module unlocks Monday. Let's keep the momentum going!", 4)
+msgFormBtns = Buttons([sendBtn])
+sendBtn = Button("Send message", null, "primary")

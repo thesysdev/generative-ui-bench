@@ -1,0 +1,37 @@
+root = Card([header, filterSection, kpiGrid, enrollmentSection, riskSection, engagementSection, messagingSection], "clear", "column", "l")
+
+header = CardHeader("Learning Analytics Dashboard", "Real-time training platform performance")
+
+filterSection = Card([cohortFilter], "sunk", "row", "m", "center", "between")
+cohortFilter = FormControl("Filter by Cohort", cohortSelect, "Select a group to refine all metrics")
+cohortSelect = Select("cohort_id", [c1, c2, c3], "All Cohorts")
+c1 = SelectItem("q1_2024", "Q1 Engineering Cohort")
+c2 = SelectItem("q2_2024", "Q2 Product Cohort")
+c3 = SelectItem("summer_2024", "Summer Leadership Cohort")
+
+kpiGrid = Card([activeLearners, completionRate, avgScore], "card", "row", "m")
+activeLearners = TextCallout("info", "Active Learners", "1,284 learners active this week")
+completionRate = TextCallout("success", "Completion Rate", "74.2% overall progress")
+avgScore = TextCallout("neutral", "Avg Quiz Score", "82/100 across all modules")
+
+enrollmentSection = Card([enrollmentHeading, enrollmentChart], "card", "column", "s")
+enrollmentHeading = Heading("Courses by Enrollment", "h3")
+enrollmentChart = HorizontalBarChart(["Python Basics", "Cloud Arch", "Leadership 101", "React Advanced", "SQL Deep Dive"], [enrollSeries], "grouped", "Enrollments", "Course")
+enrollSeries = Series("Learners", [850, 720, 610, 440, 390])
+
+riskSection = Card([riskHeading, riskTable], "card", "column", "s")
+riskHeading = Heading("Learners at Risk", "h3")
+riskTable = Table([riskName, riskProgress, riskLastActive])
+riskName = Col("Learner", ["Alex Rivera", "Jordan Smith", "Sam Chen", "Taylor Reed"], "string")
+riskProgress = Col("Completion %", ["12%", "24%", "18%", "31%"], "string")
+riskLastActive = Col("Last Active", ["14 days ago", "10 days ago", "21 days ago", "12 days ago"], "string")
+
+engagementSection = Card([engagementHeading, engagementChart], "card", "column", "s")
+engagementHeading = Heading("8-Week Engagement Trend", "h3")
+engagementChart = AreaChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engageSeries], "natural", "Week", "Active Hours")
+engageSeries = Series("Avg Weekly Hours", [12.4, 14.1, 13.8, 16.2, 15.1, 18.4, 17.9, 19.2])
+
+messagingSection = Card([msgText, msgButtons], "sunk", "row", "m", "center", "between")
+msgText = TextContent("Need to notify your learners about upcoming deadlines or course updates?", "default")
+msgButtons = Buttons([messageBtn])
+messageBtn = Button("Message Selected Cohort", null, "primary")

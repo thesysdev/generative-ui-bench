@@ -1,0 +1,26 @@
+root = Card([header, todayCard, compareCallout, hourlyChart, compareTable, actions])
+
+header = CardHeader("This morning at Fern & Filament", "Tuesday, 10:42 AM · doors open since 8:00")
+
+todayCard = Card([revenueLabel, revenueValue, revenueMeta, dayGoal], "sunk", "column", "s")
+revenueLabel = TextContent("Revenue so far today", "small-heavy")
+revenueValue = Heading("$1,284.50", "h1")
+revenueMeta = TextContent("47 orders · $27.33 average basket · last sale 6 minutes ago", "small")
+dayGoal = Progress(43, "43% of the $3,000 full-day target")
+
+compareCallout = TextCallout("success", "Ahead of yesterday by $172.30 (+15.5%)", "Same time yesterday (Mon 10:42 AM) you had taken $1,112.20 across 41 orders. Today is running ahead on both count and basket size.")
+
+hourlyChart = LineChart(hourLabels, [todaySeries, yesterdaySeries], "natural", "Hour", "Cumulative revenue (USD)")
+hourLabels = ["8 AM", "9 AM", "10 AM", "10:42"]
+todaySeries = Series("Today", [186.4, 552.8, 1024.1, 1284.5])
+yesterdaySeries = Series("Yesterday", [214.9, 498.6, 907.3, 1112.2])
+
+compareTable = Table([metricCol, todayCol, yestCol, deltaCol])
+metricCol = Col("Metric", ["Revenue", "Orders", "Average basket", "Busiest hour"])
+todayCol = Col("Today", ["$1,284.50", 47, "$27.33", "9–10 AM"])
+yestCol = Col("Yesterday, same time", ["$1,112.20", 41, "$27.13", "9–10 AM"])
+deltaCol = Col("Change", ["+$172.30 (+15.5%)", "+6 (+14.6%)", "+$0.20 (+0.7%)", "same"])
+
+actions = Buttons([breakdownBtn, weekBtn])
+breakdownBtn = Button("Show today's sales by product")
+weekBtn = Button("Compare with last Tuesday", null, "secondary")

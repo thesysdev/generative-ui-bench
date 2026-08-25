@@ -1,0 +1,165 @@
+```openui-lang
+root = Card([
+    uptimeSection,
+    resourceUsageSection,
+    errorRateSection,
+    incidentsSection,
+    regionFilter,
+    slowEndpointsSection,
+    alertThresholdSection,
+    acknowledgeIncidentSection
+], "card", "row", "l")
+
+uptimeSection = CardHeader("Uptime This Quarter", "96.5%")
+
+resourceUsageSection = Card([
+    cpuUsageChart,
+    memoryUsageChart
+], "sunk")
+
+cpuUsageChart = LineChart(
+    ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+    [seriesCpu],
+    "natural",
+    "Time (hour)",
+    "CPU (%)"
+)
+cpuSeries = Series("CPU Usage", [55, 62, 58, 65, 70, 68, 63, 59])
+cpuUsageChart.series = [cpuSeries]
+
+memoryUsageChart = LineChart(
+    ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+    [seriesMem],
+    "natural",
+    "Time (hour)",
+    "Memory (%)"
+)
+memSeries = Series("Memory Usage", [45, 38, 42, 35, 30, 32, 37, 41])
+memoryUsageChart.series = [memSeries]
+
+errorRateSection = Callout(
+    "error",
+    "Current Error Rate: 0.8%",
+    null,
+    "neutral"
+)
+
+incidentsSection = Card([
+    incidentsTable,
+    severityFilter
+], "sunk")
+
+incidentsTable = Table([
+    colIncidentId,
+    colTitle,
+    colSeverity,
+    colStatus
+])
+colIncidentId = Col("ID", ["INC-001", "INC-002", "INC-003", "INC-004", "INC-005"])
+colTitle = Col("Title", ["Database timeout", "API latency spike", "Auth failure", "Cache miss", "Worker crash"])
+colSeverity = Col("Severity", ["Critical", "High", "Medium", "Low", "Info"])
+colStatus = Col("Status", ["Open", "Open", "Open", "Open", "Open"])
+
+severityFilter = Select(
+    "severity_filter",
+    [itemCritical, itemHigh, itemMedium, itemLow, itemInfo],
+    "Filter by severity",
+    "all",
+    "medium"
+)
+itemCritical = SelectItem("Critical", "Critical")
+itemHigh = SelectItem("High", "High")
+itemMedium = SelectItem("Medium", "Medium")
+itemLow = SelectItem("Low", "Low")
+itemInfo = SelectItem("Info", "Info")
+
+regionFilter = Select(
+    "region_filter",
+    [itemAll, itemUS, itemEU, itemAPAC],
+    "Filter by region",
+    "All",
+    "medium"
+)
+itemAll = SelectItem("All", "All")
+itemUS = SelectItem("US", "US")
+itemEU = SelectItem("EU", "EU")
+itemAPAC = SelectItem("APAC", "APAC")
+
+slowEndpointsSection = Card([
+    slowEndpointsTable
+], "sunk")
+
+slowEndpointsTable = Table([
+    colEndpoint,
+    colLatency
+])
+colEndpoint = Col("Endpoint", ["/api/users", "/api/orders", "/api/products", "/api/auth", "/api/logs"])
+colLatency = Col("Latency (ms)", [245, 312, 198, 389, 156])
+
+alertThresholdSection = Form(
+    "alert_threshold",
+    alertThresholdButtons,
+    [
+        thresholdInput
+    ]
+)
+thresholdInput = FormControl(
+    "Alert Threshold (ms)",
+    thresholdSlider,
+    "Set the latency threshold for alerts"
+)
+thresholdSlider = Slider(
+    "continuous",
+    0,
+    500,
+    5,
+    value=200,
+    label="Latency Threshold (ms)"
+)
+alertThresholdButtons = Buttons([
+    saveThresholdBtn,
+    cancelThresholdBtn
+])
+saveThresholdBtn = Button("Save Threshold", null, "primary")
+cancelThresholdBtn = Button("Cancel", null, "tertiary")
+
+acknowledgeIncidentSection = DialogBlock(
+    "Acknowledge Incident",
+    "Acknowledge Incident",
+    "Are you ready to acknowledge the selected incident?",
+    content=[
+        acknowledgementForm
+    ],
+    triggerVariant="default"
+)
+acknowledgementForm = Form(
+    "acknowledge",
+    acknowledgeButtons,
+    [
+        incidentSelect
+    ]
+)
+incidentSelect = FormControl(
+    "Select Incident",
+    incidentDropdown,
+    "Choose the incident to acknowledge"
+)
+incidentDropdown = Select(
+    "incident_select",
+    [itemInc001, itemInc002, itemInc003, itemInc004, itemInc005],
+    "Select Incident",
+    null,
+    "medium"
+)
+itemInc001 = SelectItem("INC-001", "Database timeout")
+itemInc002 = SelectItem("INC-002", "API latency spike")
+itemInc003 = SelectItem("INC-003", "Auth failure")
+itemInc004 = SelectItem("INC-004", "Cache miss")
+itemInc005 = SelectItem("INC-005", "Worker crash")
+acknowledgeButtons = Buttons([
+    acknowledgeBtn,
+    dismissBtn
+])
+acknowledgeBtn = Button("Acknowledge", null, "primary")
+dismissBtn = Button("Dismiss", null, "tertiary")
+```

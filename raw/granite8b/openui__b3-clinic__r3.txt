@@ -1,0 +1,48 @@
+```openui-lang
+root = Card([
+    header,
+    appointmentsTable,
+    statsSection,
+    roomStatus,
+    nextPatientCall,
+    actionsButtons
+], "card", "column", "m")
+
+header = CardHeader("Clinic Receptionist Dashboard", "Today")
+
+appointmentsTable = Table([
+    colTime,
+    colPatient
+])
+colTime = Col("Time", ["08:00", "09:30", "11:00", "13:00", "15:30", "18:00"])
+colPatient = Col("Patient", ["Alice Johnson", "Bob Smith", "Carol Lee", "David Kim", "Eve Patel", "Frank Wu"])
+
+statsSection = Card([
+    expectedPatients,
+    noShowRate
+], "sunk")
+expectedPatients = TextContent("Expected patients: 6", "large")
+noShowRate = TextContent("No-show rate this month: 12%", "large")
+
+roomStatus = Card([
+    roomList
+], "sunk")
+roomList = ListBlock([
+    room1,
+    room2,
+    room3
+], "number")
+room1 = ListItem("Room 101", "Free", [Image("https://picsum.photos/seed/room101/200/200")], "View")
+room2 = ListItem("Room 102", "Occupied", [], "Dismiss")
+room3 = ListItem("Room 103", "Free", [Image("https://picsum.photos/seed/room103/200/200")], "View")
+
+nextPatientCall = TextCallout("neutral", "Next patient to call out:", "Alice Johnson")
+
+actionsButtons = Buttons([
+    checkInBtn,
+    nextDayBtn
+])
+checkInBtn = Button("Check in patient", ["check_in", "Alice Johnson"], "primary")
+nextDayBtn = Button("Go to next day", null, "tertiary")
+
+```

@@ -1,0 +1,66 @@
+```openui-lang
+root = Card([
+    header,
+    uptimeSection,
+    resourceUsageChart,
+    errorRateSection,
+    incidentsSection,
+    regionFilter,
+    slowEndpointsTable,
+    alertThresholdSlider,
+    acknowledgeButton
+], "card", "row", "l")
+
+header = CardHeader("Service Health Dashboard", "Current Quarter")
+
+uptimeSection = Card([
+    TextContent("Uptime this quarter: 99.87%", "large")
+], "sunk")
+
+resourceUsageChart = Card([
+    TextContent("CPU Usage (last 24h)", "default"),
+    LineChart(["Hour 0", "Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7", "Hour 8", "Hour 9", "Hour 10", "Hour 11", "Hour 12", "Hour 13", "Hour 14", "Hour 15", "Hour 16", "Hour 17", "Hour 18", "Hour 19", "Hour 20", "Hour 21", "Hour 22", "Hour 23"],
+        [cpuSeries]),
+    TextContent("Memory Usage (last 24h)", "default"),
+    LineChart(["Hour 0", "Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7", "Hour 8", "Hour 9", "Hour 10", "Hour 11", "Hour 12", "Hour 13", "Hour 14", "Hour 15", "Hour 16", "Hour 17", "Hour 18", "Hour 19", "Hour 20", "Hour 21", "Hour 22", "Hour 23"],
+        [memSeries])
+], "clear")
+
+errorRateSection = Card([
+    TextContent("Current Error Rate: 0.42%", "large")
+], "sunk")
+
+incidentsSection = Card([
+    Callout("info", "Open Incidents", "List of incidents with severity"),
+    Table([incidentLabel, incidentSeverity]),
+    incidentLabel = Col("Incident ID", ["INC001", "INC002", "INC003", "INC004", "INC005"]),
+    incidentSeverity = Col("Severity", ["Critical", "High", "Medium", "Low", "Info"])
+], "card")
+
+regionFilter = Card([
+    TextContent("Filter by Region:", "default"),
+    Select("region", [regionUS, regionEU, regionAPAC], "Select region", "All")
+], "sunk")
+regionUS = SelectItem("US", "United States")
+regionEU = SelectItem("EU", "Europe")
+regionAPAC = SelectItem("APAC", "Asia-Pacific")
+
+slowEndpointsTable = Card([
+    TextContent("5 Slowest Endpoints (Latency)", "large"),
+    Table([endpointLabel, endpointLatency]),
+    endpointLabel = Col("Endpoint", ["/api/users", "/api/orders", "/api/products", "/api/auth", "/api/logs"]),
+    endpointLatency = Col("Latency (ms)", [342, 215, 189, 310, 276])
+], "sunk")
+
+alertThresholdSlider = Card([
+    TextContent("Alert Threshold (ms):", "default"),
+    Slider("alert_threshold", "continuous", 100, 1000, 10, "100", "ms", value=300)
+], "sunk")
+
+acknowledgeButton = Card([
+    Button("Acknowledge Selected Incident", ["incidentID"], "primary")
+], "clear")
+
+cpuSeries = Series("CPU (%)", [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 35, 40])
+memSeries = Series("Memory (%)", [30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 46, 44, 42, 40, 38, 36, 34, 32, 30, 28, 26, 24, 26, 28])
+```

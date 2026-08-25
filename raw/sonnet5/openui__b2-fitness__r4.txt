@@ -1,0 +1,44 @@
+root = Card([header, statsRow, weekSection, logSection])
+header = CardHeader("Daily Summary", "Today's fitness overview")
+
+statsRow = Card([stepsCard, caloriesCard], "clear", "row", "l")
+
+stepsCard = Card([stepsHeading, stepsProgress, stepsText], "sunk")
+stepsHeading = Heading("Steps", "h3")
+stepsProgress = Progress(72, "7,200 / 10,000 steps")
+stepsText = TextContent("You're 2,800 steps away from your daily goal.")
+
+caloriesCard = Card([caloriesHeading, caloriesValue, caloriesText], "sunk")
+caloriesHeading = Heading("Calories Burned", "h3")
+caloriesValue = TextContent("540 kcal", "large-heavy")
+caloriesText = TextContent("Goal: 600 kcal")
+
+weekSection = Card([weekHeading, weekChart], "sunk")
+weekHeading = Heading("Past 7 Days — Workouts", "h3")
+weekChart = BarChart(days, [durationSeries], "grouped", "Day", "Minutes")
+days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+durationSeries = Series("Duration (min)", [30, 45, 0, 60, 25, 50, 40])
+
+logSection = Card([logHeading, logForm], "sunk")
+logHeading = Heading("Log New Workout", "h3")
+logForm = Form("log_workout", logButtons, [typeField, durationField, caloriesField, notesField])
+
+typeField = FormControl("Workout Type", typeSelect)
+typeSelect = Select("workout_type", [typeRun, typeCycle, typeStrength, typeYoga], "Select type")
+typeRun = SelectItem("run", "Running")
+typeCycle = SelectItem("cycle", "Cycling")
+typeStrength = SelectItem("strength", "Strength Training")
+typeYoga = SelectItem("yoga", "Yoga")
+
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", "e.g. 30", "number")
+
+caloriesField = FormControl("Calories Burned", caloriesInput)
+caloriesInput = Input("calories", "e.g. 250", "number")
+
+notesField = FormControl("Notes", notesArea, "Optional")
+notesArea = TextArea("notes", "How did it feel?")
+
+logButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

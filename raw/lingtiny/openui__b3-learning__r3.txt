@@ -1,0 +1,109 @@
+root = Card([
+  Header,
+  CohortFilter,
+  KPIs,
+  Rankings,
+  AtRisk,
+  Engagement,
+  MessageCohort,
+], "clear", "column", "m")
+
+Header = CardHeader("Training Analytics Dashboard", "Active learners, completion, quiz scores, and cohort insights")
+
+CohortFilter = Card([
+  Label("Cohort"),
+  Select("cohort", [c1, c2, c3], "All cohorts"),
+])
+
+c1 = SelectItem("Q1 2024", "Q1 2024")
+c2 = SelectItem("Q2 2024", "Q2 2024")
+c3 = SelectItem("Q3 2024", "Q3 2024")
+
+KPIs = Card([
+  kpiActive, kpiCompletion, kpiAverageScore, kpiAtRisk,
+], "sunk")
+
+kpiActive = CardHeader("Active Learners (This Week)", "1,247 learners currently enrolled")
+kpiCompletion = CardHeader("Course Completion Rate", "82.3% of learners have completed at least one course")
+kpiAverageScore = CardHeader("Average Quiz Score", "78.6 out of 100")
+kpiAtRisk = CardHeader("Learners at Risk of Dropping Out", "156 learners flagged for attention")
+
+Rankings = Card([
+  heading, rankingTable,
+], "sunk")
+
+heading = Heading("Courses Ranked by Enrollment", "h3")
+rankingTable = Table([
+  Col("Course", [c1, c2, c3, c4, c5]),
+  Col("Enrolled", [1240, 980, 870, 760, 650]),
+  Col("Completion Rate", [88, 82, 79, 75, 71]),
+])
+
+c1 = "Data Science Fundamentals"
+c2 = "Machine Learning Essentials"
+c3 = "Cloud Architecture"
+c4 = "Python Programming"
+c5 = "Database Design"
+
+AtRisk = Card([
+  heading, atRiskTable,
+], "sunk")
+
+heading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskTable = Table([
+  Col("Learner", [l1, l2, l3, l4, l5]),
+  Col("Course", [cr1, cr2, cr3, cr4, cr5]),
+  Col("Risk Level", [high, medium, low, high, medium]),
+])
+
+l1 = "Alex Chen"
+l2 = "Maria Santos"
+l3 = "James Williams"
+l4 = "Priya Patel"
+l5 = "David Kim"
+cr1 = "Data Science Fundamentals"
+cr2 = "Machine Learning Essentials"
+cr3 = "Cloud Architecture"
+cr4 = "Python Programming"
+cr5 = "Database Design"
+
+Engagement = Card([
+  heading, engagementChart,
+], "sunk")
+
+heading = Heading("Engagement Across the Past Eight Weeks", "h3")
+engagementChart = BarChart([
+  "W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"
+], [
+  Series("Logins", [340, 380, 360, 420, 400, 450, 480, 500]),
+  Series("Quizzes", [120, 140, 130, 160, 150, 170, 180, 190]),
+  Series("Assignments", [80, 90, 85, 100, 95, 110, 115, 120]),
+], "grouped", "Week", "Sessions")
+
+MessageCohort = Card([
+  heading, messageForm,
+], "sunk")
+
+heading = Heading("Message a Cohort", "h3")
+messageForm = Form("cohort-message", [msgBtn], [
+  FormControl("Select cohort", cohortSelect, "Choose a cohort to message"),
+  FormControl("Message content", contentText, "Enter your message"),
+])
+
+cohortSelect = Select("cohort", [c1, c2, c3], "All cohorts")
+contentText = TextArea("Message", "Type your message here...", rows=4)
+
+msgBtn = Buttons([
+  Button("Send Message", null, "primary"),
+  Button("Clear", null, "tertiary"),
+])
+
+root = Card([
+  Header,
+  CohortFilter,
+  KPIs,
+  Rankings,
+  AtRisk,
+  Engagement,
+  MessageCohort,
+], "clear", "column", "m")

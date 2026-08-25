@@ -1,0 +1,62 @@
+```openui-lang
+root = Card([accountHeader, accountStats, recentActivity, contactsSection, followUps, notesSection, renewalWarning, callLogButton])
+
+accountHeader = CardHeader("Acme Corp", "Owned by: Sarah Johnson")
+
+accountStats = Card([totalValue, dealStage], "sunk")
+totalValue = Card([valueLabel, valueAmount])
+valueLabel = TextContent("Total Deal Value:", "small-heavy")
+valueAmount = TextContent("$1,250,000", "large-heavy")
+
+dealStage = Card([stageLabel, stageProgress])
+stageLabel = TextContent("Current Stage:", "small-heavy")
+stageProgress = Progress(75, "Negotiation")
+
+recentActivity = CardHeader("Recent Activity", "Last 7 days")
+activityItems = [
+    ListItem("Initial Contact", "Sarah Johnson", null, null, "neutral"),
+    ListItem("Proposal Sent", "System", null, null, "info"),
+    ListItem("Client Meeting", "Sarah Johnson", null, null, "success")
+]
+recentActivityList = ListBlock(activityItems, "number")
+
+contactsSection = CardHeader("Contacts", "3 total")
+contacts = [
+    ListItem("John Doe", "CEO", ["https://picsum.photos/seed/CEO/80/80"], null, "neutral"),
+    ListItem("Emily Smith", "CTO", ["https://picsum.photos/seed/CTO/80/80"], null, "neutral"),
+    ListItem("Michael Brown", "Finance Director", ["https://picsum.photos/seed/FD/80/80"], null, "neutral")
+]
+contactsList = ListBlock(contacts, "image")
+
+followUps = CardHeader("Open Follow-ups", "3 items")
+followUpItems = [
+    FollowUpItem("Follow up on proposal feedback - Due: 2023-11-15"),
+    FollowUpItem("Schedule renewal discussion - Due: 2023-12-10"),
+    FollowUpItem("Request final contract - Due: 2023-11-25")
+]
+followUpsList = FollowUpBlock(followUpItems)
+
+notesSection = CardHeader("Notes")
+notesInput = Form("account-notes", notesButtons, [notesField])
+notesField = FormControl("Quick Note", notesTextArea)
+notesTextArea = TextArea("notes", "Add a note about this account...", 3)
+notesButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+renewalDate = TextContent("Renewal Date: 2024-03-15", "small-heavy")
+renewalWarning = Callout("warning", "Renewal Approaching", "Renewal is in 4 months. Schedule a review meeting.")
+
+callLogButton = DialogBlock("Log Call", "Call Notes", "Record details of your call with Acme Corp", [callForm])
+callForm = Form("call-log", callButtons, [callNotesField, callDurationField])
+callNotesField = FormControl("Call Notes", callNotesTextArea)
+callNotesTextArea = TextArea("call_notes", "Briefly summarize key points...")
+callDurationField = FormControl("Duration", callDurationSelect)
+callDurationSelect = Select("call_duration", [
+    SelectItem("15", "15 min"),
+    SelectItem("30", "30 min"),
+    SelectItem("45", "45 min"),
+    SelectItem("60", "60 min")
+], "Select duration")
+callButtons = Buttons([logCallBtn])
+logCallBtn = Button("Log Call", null, "primary")
+```

@@ -1,0 +1,41 @@
+```openui-lang
+root = Card([header, overview, openRoles, pipeline, metrics, chartSection, interviews, attrition, newRoleButton])
+
+header = CardHeader("Hiring Overview", "Q3 2024")
+overview = Card([currentHeadcount, avgTimeToHire], "sunk")
+currentHeadcount = Card([headcountTitle, headcountValue, headcountChart], "sunk")
+headcountTitle = TextContent("Current Headcount", "large")
+headcountValue = TextContent("142 employees", "large-heavy")
+headcountChart = RadialChart(["Engineering", "Product", "Design", "Marketing", "Sales", "Support"], [45, 38, 15, 22, 12, 10])
+
+openRoles = Card([openRolesTitle, openRolesTable], "sunk")
+openRolesTitle = TextContent("Open Roles by Department", "large")
+openRolesTable = Table([deptCol, roleCol, priorityCol])
+deptCol = Col("Department", ["Engineering", "Product", "Design", "Marketing", "Sales"], "string")
+roleCol = Col("Role", ["Senior Backend", "Product Manager", "UX Designer", "Marketing Specialist", "Sales Rep"], "string")
+priorityCol = Col("Priority", ["High", "Medium", "Low", "Medium", "High"], "string")
+
+pipeline = Card([pipelineTitle, pipelineChart], "sunk")
+pipelineTitle = TextContent("Candidate Pipeline", "large")
+pipelineChart = SingleStackedBarChart(["Applied", "Screened", "Interviewing", "Offered", "Hired"], [42, 28, 15, 6, 3])
+
+metrics = Card([avgTimeTitle, avgTimeValue], "sunk")
+avgTimeTitle = TextContent("Avg Time to Hire", "large")
+avgTimeValue = TextContent("18 days", "large-heavy")
+
+chartSection = Card([deptSplitTitle, deptSplitChart], "sunk")
+deptSplitTitle = TextContent("Headcount by Department", "large")
+deptSplitChart = PieChart(["Engineering", "Product", "Design", "Marketing", "Sales", "Support"], [45, 38, 15, 22, 12, 10])
+
+interviews = Card([interviewsTitle, interviewsCount], "sunk")
+interviewsTitle = TextContent("Interviews Scheduled This Week", "large")
+interviewsCount = TextContent("18 interviews", "large-heavy")
+
+attrition = Card([attritionTitle, attritionChart], "sunk")
+attritionTitle = TextContent("Attrition (Past 6 Months)", "large")
+attritionChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionData], "natural", "Month", "Employees")
+attritionData = Series("Attrition Rate", [2, 3, 1, 4, 2, 3])
+
+newRoleButton = Button("Open New Role", null, "primary")
+
+```

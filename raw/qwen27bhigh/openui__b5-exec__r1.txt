@@ -1,0 +1,157 @@
+")
+
+Wait, I need to be careful. Let me just write it cleanly.
+
+Actually, I realize I should also consider: can I put a Form inside a Card? Yes, Form is in the Card children list. Good.
+
+Let me now write the full thing:
+
+root = Card([header, filterForm, kpiSection, trendSection, budgetSection, headcountSection, riskSection, initiativeSection, boardSection])
+
+Let me make sure I have all 18 items covered:
+1. Revenue ✓ (KPI table)
+2. Costs ✓ (KPI table)
+3. Profit ✓ (KPI table)
+4. Revenue over four quarters ✓ (LineChart)
+5. Costs over four quarters ✓ (LineChart)
+6. Budget by department against plan ✓ (Table)
+7. Headcount by department ✓ (HorizontalBarChart)
+8. Top risks with owner ✓ (Table)
+9. Strategic initiatives with status ✓ (Table)
+10. Months of runway ✓ (KPI table)
+11. Sales pipeline value ✓ (KPI table)
+12. Win rate ✓ (KPI table)
+13. Customer count and churn ✓ (KPI table)
+14. NPS ✓ (KPI table)
+15. Items for next board meeting ✓ (ListBlock)
+16. Change quarter ✓ (Select in form)
+17. Focus on region ✓ (Select in form)
+18. Export pack ✓ (Button in form)
+
+Good. Let me write it all out now.
+
+For the trend charts, I'll use a combined approach - maybe one LineChart with two series (revenue and costs) for each. Or two separate charts. The requirement says "revenue over four quarters" and "costs over four quarters" as separate items, so I'll do two separate charts.
+
+Actually, for a CEO view, having them side by side or as separate charts makes sense. Let me put them in a row within the trend section.
+
+Wait, Card children are in a column by default. I can nest Cards for side-by-side layout.
+
+Let me structure the trend section:
+trendSection = Card([trendHeader, trendRow], "sunk")
+trendRow = Card([revenueChart, costChart], "clear", "row", "m")
+revenueChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [revSeries], "natural", "Quarter", "USD (M)")
+costChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [costSeries], "natural", "Quarter", "USD (M)")
+
+OK let me write the full thing now. I need to be very careful with positional arguments.
+
+Let me double-check LineChart:
+LineChart(labels: (string | number)[], series: (Series)[], variant?: "linear" | "natural" | "step", xLabel?: string, yLabel?: string)
+
+Series(category: string, values: (string | number)[])
+
+Table:
+Table(columns: (Col)[])
+Col(label: string, data: (string | number)[], type?: "string" | "number" | "action")
+
+HorizontalBarChart:
+HorizontalBarChart(labels: (string | number)[], series: (Series)[], variant?: "grouped" | "stacked", xLabel?: string, yLabel?: string)
+
+ListBlock:
+ListBlock(items: (ListItem)[], variant?: "number" | "image")
+ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)
+
+OK, I think I have everything. Let me write it out.
+
+One more thing - for the KPI table, I want to show metric, value, and maybe a change indicator. Let me do:
+- Metric | Value | QoQ Change
+
+Revenue: $12.4M | +8.2%
+Costs: $8.7M | +3.1%
+Profit: $3.7M | +18.4%
+Runway: 22 months | +2
+Pipeline: $48.2M | +12.6%
+Win Rate: 34% | +2pp
+Customers: 1,247 | +3.4%
+Churn: 2.1% | -0.3pp
+NPS: 42 | +4
+
+That's 9 rows. Good.
+
+Let me write the final code now.
+
+
+root = Card([header, filterForm, kpiSection, trendSection, budgetSection, headcountSection, riskSection, initiativeSection, boardSection])
+
+header = CardHeader("CEO Quarterly Command View", "Q3 2024 · All Regions · Updated 14 Oct 2024")
+
+filterForm = Form("view-filters", exportButtons, [quarterField, regionField])
+quarterField = FormControl("Quarter", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select quarter", null, "q3-2024", "small")
+q1 = SelectItem("q1-2024", "Q1 2024")
+q2 = SelectItem("q2-2024", "Q2 2024")
+q3 = SelectItem("q3-2024", "Q3 2024")
+q4 = SelectItem("q4-2024", "Q4 2024")
+regionField = FormControl("Region focus", regionSelect)
+regionSelect = Select("region", [allR, na, emea, apac, latam], "All regions", null, "all", "small")
+allR = SelectItem("all", "All Regions")
+na = SelectItem("na", "North America")
+emea = SelectItem("emea", "EMEA")
+apac = SelectItem("apac", "APAC")
+latam = SelectItem("latam", "LATAM")
+exportButtons = Buttons([exportBtn])
+exportBtn = Button("Export Board Pack (PDF)", null, "primary")
+
+kpiSection = Card([kpiHeader, kpiTable], "sunk")
+kpiHeader = Heading("Key Metrics — Q3 2024", "h3")
+kpiTable = Table([kpiMetric, kpiValue, kpiChange])
+kpiMetric = Col("Metric", ["Revenue", "Costs", "Profit", "Runway", "Sales Pipeline", "Win Rate", "Customer Count", "Churn Rate", "NPS"])
+kpiValue = Col("Value", ["$12.4M", "$8.7M", "$3.7M", "22 months", "$48.2M", "34%", "1,247", "2.1%", "42"])
+kpiChange = Col("QoQ Change", ["+8.2%", "+3.1%", "+18.4%", "+2 mo", "+12.6%", "+2 pp", "+3.4%", "−0.3 pp", "+4"])
+
+trendSection = Card([trendHeader, trendRow], "sunk")
+trendHeader = Heading("Revenue & Cost Trajectory", "h3")
+trendRow = Card([revenueChart, costChart], "clear", "row", "m")
+revenueChart = LineChart(["Q1 24", "Q2 24", "Q3 24", "Q4 24E"], [revSeries], "natural", "Quarter", "USD M")
+costChart = LineChart(["Q1 24", "Q2 24", "Q3 24", "Q4 24E"], [costSeries], "natural", "Quarter", "USD M")
+revSeries = Series("Revenue", [9.8, 11.0, 12.4, 14.1])
+costSeries = Series("Costs", [7.6, 8.2, 8.7, 9.3])
+
+budgetSection = Card([budgetHeader, budgetTable], "sunk")
+budgetHeader = Heading("Budget by Department vs Plan", "h3")
+budgetTable = Table([bDept, bPlan, bActual, bVariance, bStatus])
+bDept = Col("Department", ["Engineering", "Sales", "Marketing", "G&A", "R&D", "Customer Success"])
+bPlan = Col("Plan ($K)", ["3,200", "2,800", "1,400", "900", "1,100", "700"])
+bActual = Col("Actual ($K)", ["3,450", "2,620", "1,510", "870", "1,050", "740"])
+bVariance = Col("Variance", ["+7.8%", "−6.4%", "+7.9%", "−3.3%", "−4.5%", "+5.7%"])
+bStatus = Col("Status", ["Over", "Under", "Over", "Under", "Under", "Over"])
+
+headcountSection = Card([headcountHeader, headcountChart], "sunk")
+headcountHeader = Heading("Headcount by Department", "h3")
+headcountChart = HorizontalBarChart(["Engineering", "Sales", "Marketing", "G&A", "R&D", "Customer Success"], [hcSeries], "grouped", "FTE", "Headcount")
+hcSeries = Series("Q3 2024", [84, 62, 28, 19, 34, 41])
+
+riskSection = Card([riskHeader, riskTable], "sunk")
+riskHeader = Heading("Top Risks & Owners", "h3")
+riskTable = Table([rName, rSeverity, rOwner, rMitigation])
+rName = Col("Risk", ["Key engineer attrition (3 departures in 60 d)", "EMEA regulatory delay on data-residency", "Cloud cost overrun in prod infra", "Competitor price war in SMB segment", "Single-vendor dependency on payment gateway"])
+rSeverity = Col("Severity", ["High", "High", "Medium", "Medium", "Low"])
+rOwner = Col("Owner", ["VP Eng — Sarah Chen", "GC — Marcus Webb", "CFO — Dana Liu", "CSO — Priya Patel", "CTO — James Okafor"])
+rMitigation = Col("Mitigation", ["Retention package + backfill by Nov", "Legal counsel engaged; fallback DC in Dublin", "Spot-instances + reserved capacity review", "Bundle value-adds; lock 12-mo contracts", "Qualify secondary PSP; dual-path by Q4"])
+
+initiativeSection = Card([initHeader, initTable], "sunk")
+initHeader = Heading("Strategic Initiatives", "h3")
+initTable = Table([iName, iStatus, iProgress, iOwner, iTarget])
+iName = Col("Initiative", ["Enterprise tier launch", "APAC go-to-market", "AI copilot for CS", "Series C prep", "Carbon-neutral data centre"])
+iStatus = Col("Status", ["On Track", "At Risk", "On Track", "On Track", "Delayed"])
+iProgress = Col("Progress", ["72%", "45%", "81%", "60%", "30%"])
+iOwner = Col("Owner", ["CPO — Elena Ruiz", "CEO — You", "VP CS — Tom Hardy", "CFO — Dana Liu", "COO — Felix Braun"])
+iTarget = Col("Target", "Q4 2024", "Q1 2025", "Q4 2024", "Q2 2025", "Q3 2025")
+
+boardSection = Card([boardHeader, boardList], "sunk")
+boardHeader = Heading("Next Board Meeting — 28 Nov 2024", "h3")
+boardList = ListBlock([bItem1, bItem2, bItem3, bItem4, bItem5])
+bItem1 = ListItem("Approve Series C term sheet ($60M @ $480M post)", "Lead: CFO Dana Liu · Deck due 22 Nov")
+bItem2 = ListItem("Hiring plan Q1 2025 (+42 FTE)", "Focus: Engineering & APAC · Budget $4.2M")
+bItem3 = ListItem("EMEA data-residency compliance update", "Regulatory timeline risk · Legal briefing attached")
+bItem4 = ListItem("Competitive response: SMB pricing reposition", "CSO Priya Patel · Margin impact model in appendix")
+bItem5 = ListItem("Board composition: add 1 APAC director", "Search firm engaged · 3 candidates shortlisted")

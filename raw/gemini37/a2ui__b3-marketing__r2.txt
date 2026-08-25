@@ -1,0 +1,347 @@
+Here is the marketing manager's weekly performance dashboard designed with all required metrics, traffic share breakdown, active campaign tracking, best-performer highlight, and export controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "topControls",
+          "kpiOverview",
+          "bestCampaignCallout",
+          "visitorChartCard",
+          "trafficAndSubscribersCard",
+          "campaignsCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Marketing Performance Dashboard",
+        "subtitle": "Weekly executive summary and campaign ROI tracking"
+      },
+      {
+        "id": "topControls",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "datePickerControl",
+          "headerActions"
+        ]
+      },
+      {
+        "id": "datePickerControl",
+        "component": "DatePicker",
+        "name": "dateRange",
+        "mode": "range",
+        "value": [
+          "2025-05-01",
+          "2025-05-30"
+        ]
+      },
+      {
+        "id": "headerActions",
+        "component": "Buttons",
+        "buttons": [
+          "exportBtn"
+        ]
+      },
+      {
+        "id": "exportBtn",
+        "component": "Button",
+        "label": "Export Report (PDF / CSV)",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiOverview",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiCurrentCol",
+          "kpiChangeCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Key Metric",
+        "data": [
+          "Total Visitors (Last 30 Days)",
+          "Overall Conversion Rate",
+          "Email Subscribers (This Month)",
+          "Total Active Campaign Spend"
+        ]
+      },
+      {
+        "id": "kpiCurrentCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "142,850",
+          "3.84%",
+          "+4,620 new (+18.4%)",
+          "$26,750"
+        ]
+      },
+      {
+        "id": "kpiChangeCol",
+        "component": "Col",
+        "label": "MoM Growth",
+        "data": [
+          "+12.6%",
+          "+0.42%",
+          "+18.4%",
+          "+8.2%"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Target Status",
+        "data": [
+          "Above Target",
+          "On Target",
+          "Above Target",
+          "Within Budget"
+        ]
+      },
+      {
+        "id": "bestCampaignCallout",
+        "component": "Callout",
+        "variant": "success",
+        "title": "Best Performing Campaign: Q2 Product Launch (Paid Search)",
+        "description": "Generated 4,120 conversions at a CPA of $2.14, outperforming target ROAS by +34% with $8,800 spent."
+      },
+      {
+        "id": "visitorChartCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "visitorChartHeader",
+          "visitorTrendChart"
+        ]
+      },
+      {
+        "id": "visitorChartHeader",
+        "component": "CardHeader",
+        "title": "Site Visitors (Last 30 Days)",
+        "subtitle": "Daily unique visitor volume over the past 30 days"
+      },
+      {
+        "id": "visitorTrendChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "xLabel": "Timeline",
+        "yLabel": "Unique Visitors",
+        "labels": [
+          "Day 1-5",
+          "Day 6-10",
+          "Day 11-15",
+          "Day 16-20",
+          "Day 21-25",
+          "Day 26-30"
+        ],
+        "series": [
+          "visitorSeries"
+        ]
+      },
+      {
+        "id": "visitorSeries",
+        "component": "Series",
+        "category": "Site Visitors",
+        "values": [
+          21400,
+          23100,
+          22800,
+          26400,
+          24150,
+          25000
+        ]
+      },
+      {
+        "id": "trafficAndSubscribersCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "trafficShareHeader",
+          "trafficSharePie",
+          "trafficSeparator",
+          "subscriberGrowthHeader",
+          "subscriberGrowthChart"
+        ]
+      },
+      {
+        "id": "trafficShareHeader",
+        "component": "CardHeader",
+        "title": "Top 5 Traffic Sources & Share",
+        "subtitle": "Distribution of incoming web traffic"
+      },
+      {
+        "id": "trafficSharePie",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Organic Search (38%)",
+          "Paid Search (24%)",
+          "Direct Traffic (18%)",
+          "Social Media (12%)",
+          "Email Referrals (8%)"
+        ],
+        "values": [
+          38,
+          24,
+          18,
+          12,
+          8
+        ]
+      },
+      {
+        "id": "trafficSeparator",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "subscriberGrowthHeader",
+        "component": "CardHeader",
+        "title": "Email Subscriber Growth (This Month)",
+        "subtitle": "Weekly cumulative new newsletter and product subscribers"
+      },
+      {
+        "id": "subscriberGrowthChart",
+        "component": "AreaChart",
+        "variant": "natural",
+        "xLabel": "Month Progress",
+        "yLabel": "Subscribers",
+        "labels": [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4"
+        ],
+        "series": [
+          "subscribersSeries"
+        ]
+      },
+      {
+        "id": "subscribersSeries",
+        "component": "Series",
+        "category": "Net New Subscribers",
+        "values": [
+          920,
+          2040,
+          3290,
+          4620
+        ]
+      },
+      {
+        "id": "campaignsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "campaignsHeader",
+          "campaignsTable"
+        ]
+      },
+      {
+        "id": "campaignsHeader",
+        "component": "CardHeader",
+        "title": "Running Campaigns & Spend Breakdown",
+        "subtitle": "Active paid and organic initiatives with attributed conversion rates"
+      },
+      {
+        "id": "campaignsTable",
+        "component": "Table",
+        "columns": [
+          "campNameCol",
+          "campChannelCol",
+          "campSpendCol",
+          "campConvRateCol",
+          "campStatusCol"
+        ]
+      },
+      {
+        "id": "campNameCol",
+        "component": "Col",
+        "label": "Campaign Name",
+        "data": [
+          "Q2 Product Launch",
+          "Spring Retargeting Push",
+          "Brand Awareness Video",
+          "B2B LinkedIn Lead Gen",
+          "Affiliate Influencer Wave"
+        ]
+      },
+      {
+        "id": "campChannelCol",
+        "component": "Col",
+        "label": "Channel",
+        "data": [
+          "Google Ads",
+          "Meta Ads",
+          "YouTube",
+          "LinkedIn",
+          "Affiliates"
+        ]
+      },
+      {
+        "id": "campSpendCol",
+        "component": "Col",
+        "label": "Spend",
+        "data": [
+          "$8,800",
+          "$6,200",
+          "$5,100",
+          "$4,400",
+          "$2,250"
+        ]
+      },
+      {
+        "id": "campConvRateCol",
+        "component": "Col",
+        "label": "Conversion Rate",
+        "data": [
+          "5.82%",
+          "3.95%",
+          "1.45%",
+          "4.10%",
+          "3.20%"
+        ]
+      },
+      {
+        "id": "campStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Top Performer",
+          "Active",
+          "Active",
+          "Active",
+          "Active"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

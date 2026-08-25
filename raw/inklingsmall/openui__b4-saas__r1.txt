@@ -1,0 +1,78 @@
+root = Card([header, kpiRow, planSection, topCustomersSection, atRiskSection, failedPaymentsSection, featureAdoptionSection, npsSection, reportingSection, seatUtilSection, inviteSection], "card", "column", "l")
+
+header = CardHeader("Admin Overview", "SaaS company overview")
+
+kpiRow = Card([mrrCard, arrCard, churnCard, signupsCard], "sunk", "row", "m", "stretch")
+
+mrrCard = Card([mrrLabel, mrrValue], "clear", "column")
+mrrLabel = TextContent("Monthly Recurring Revenue", "small")
+mrrValue = TextContent("$142,800", "large-heavy")
+
+arrCard = Card([arrLabel, arrValue], "clear", "column")
+arrLabel = TextContent("Annual Recurring Revenue", "small")
+arrValue = TextContent("$1,713,600", "large-heavy")
+
+churnCard = Card([churnLabel, churnValue], "clear", "column")
+churnLabel = TextContent("Churn This Month", "small")
+churnValue = TextContent("2.4%", "large-heavy")
+
+signupsCard = Card([signupsLabel, signupsValue], "clear", "column")
+signupsLabel = TextContent("New Signups (90d)", "small")
+signupsValue = TextContent("342", "large-heavy")
+
+planSection = Card([planHeading, planChart], "clear", "column")
+planHeading = Heading("Customers by Plan", "h3")
+planLabels = ["Starter", "Growth", "Enterprise"]
+planValues = [45, 38, 17]
+planChart = PieChart(planLabels, planValues, "donut")
+
+topCustomersSection = Card([topHeading, topTable], "clear", "column")
+topHeading = Heading("Top 10 Customers", "h3")
+topCustName = Col("Customer", ["Acme Corp", "Beta LLC", "Gamma Inc", "Delta Co", "Epsilon Ltd", "Zeta Group", "Eta Partners", "Theta LLC", "Iota Inc", "Kappa Co"])
+topCustSeats = Col("Seats", [250, 180, 145, 120, 95, 80, 75, 60, 55, 50])
+topCustSpend = Col("Spend", ["$12,400", "$8,900", "$7,200", "$6,100", "$4,800", "$4,200", "$3,900", "$3,100", "$2,800", "$2,500"])
+topTable = Table([topCustName, topCustSeats, topCustSpend])
+
+atRiskSection = Card([atRiskHeading, atRiskList], "clear", "column")
+atRiskHeading = Heading("Accounts at Risk", "h3")
+risk1 = ListItem("Acme Corp", "Payment overdue 14 days", null, "Review")
+risk2 = ListItem("Beta LLC", "Usage dropped 60%", null, "Contact")
+risk3 = ListItem("Gamma Inc", "Failed renewal attempt", null, "Review")
+risk4 = ListItem("Delta Co", "Support ticket escalated", null, "Contact")
+atRiskList = ListBlock([risk1, risk2, risk3, risk4], "number")
+
+failedPaymentsSection = Card([fpHeading, fpList], "clear", "column")
+fpHeading = Heading("Failed Payments", "h3")
+fp1 = ListItem("Epsilon Ltd", "Card declined", null, "Retry")
+fp2 = ListItem("Zeta Group", "Bank account frozen", null, "Retry")
+fp3 = ListItem("Eta Partners", "Insufficient funds", null, "Retry")
+fpList = ListBlock([fp1, fp2, fp3], "number")
+
+featureAdoptionSection = Card([faHeading, faChart], "clear", "column")
+faHeading = Heading("New Feature Adoption", "h3")
+faLabels = ["AI Assistant", "Advanced Reporting", "SSO"]
+faSeries = Series("Adoption %", [34, 56, 21])
+faChart = BarChart(faLabels, [faSeries], "grouped")
+
+npsSection = Card([npsHeading, npsValue], "clear", "column")
+npsHeading = Heading("Current NPS", "h3")
+npsValue = TextContent("72", "large-heavy")
+
+reportingSection = Card([rpHeading, rpSelect], "clear", "column")
+rpHeading = Heading("Reporting Period", "h3")
+rp30 = SelectItem("30d", "Last 30 days")
+rp90 = SelectItem("90d", "Last 90 days")
+rpYTD = SelectItem("ytd", "Year to date")
+rpSelect = Select("period", [rp30, rp90, rpYTD], "Select period")
+
+seatUtilSection = Card([suHeading, suProgress], "clear", "column")
+suHeading = Heading("Seat Utilization", "h3")
+suProgress = Progress(78, "78% of seats used")
+
+inviteSection = Card([inviteHeading, inviteForm], "clear", "column")
+inviteHeading = Heading("Invite Admin", "h3")
+inviteInput = Input("email", "admin@company.com", "email")
+inviteField = FormControl("Email", inviteInput)
+inviteBtn = Button("Send invite", null, "primary")
+inviteButtons = Buttons([inviteBtn])
+inviteForm = Form("invite", inviteButtons, [inviteField])

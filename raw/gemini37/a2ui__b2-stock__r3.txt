@@ -1,0 +1,300 @@
+Here is the low-inventory warning dashboard designed to track depleted stock, view threshold criteria, search items, and trigger reorders immediately.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "thresholdAlert",
+          "searchSection",
+          "inventoryTable",
+          "reorderFormCard",
+          "actions"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Low Inventory Alert",
+        "subtitle": "Real-time stock monitor & automated restock manager"
+      },
+      {
+        "id": "thresholdAlert",
+        "component": "Alert",
+        "title": "Warning Trigger Rule: Low Stock (< 15 units)",
+        "description": "Items appear here when remaining quantity drops below the default reorder threshold of 15 units or custom safety level.",
+        "variant": "warning"
+      },
+      {
+        "id": "searchSection",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "searchControl"
+        ]
+      },
+      {
+        "id": "searchControl",
+        "component": "FormControl",
+        "label": "Search Items",
+        "input": "searchInput",
+        "hint": "Filter by item name, SKU, or category"
+      },
+      {
+        "id": "searchInput",
+        "component": "Input",
+        "name": "searchQuery",
+        "placeholder": "e.g., Organic Whole Milk, SKU-409...",
+        "type": "text"
+      },
+      {
+        "id": "inventoryTable",
+        "component": "Table",
+        "columns": [
+          "colItem",
+          "colSku",
+          "colStock",
+          "colThreshold",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colItem",
+        "component": "Col",
+        "label": "Item Name",
+        "data": [
+          "Organic Whole Milk 1L",
+          "Artisan Sourdough Loaf",
+          "Almond Butter (16oz)",
+          "Espresso Roast Beans (1kg)",
+          "Cold Pressed Olive Oil"
+        ]
+      },
+      {
+        "id": "colSku",
+        "component": "Col",
+        "label": "SKU",
+        "data": [
+          "DAIRY-009",
+          "BAKE-142",
+          "NUTS-231",
+          "BEV-784",
+          "OIL-055"
+        ]
+      },
+      {
+        "id": "colStock",
+        "component": "Col",
+        "label": "Remaining Units",
+        "data": [
+          "3 units",
+          "4 units",
+          "6 units",
+          "8 units",
+          "11 units"
+        ]
+      },
+      {
+        "id": "colThreshold",
+        "component": "Col",
+        "label": "Threshold Limit",
+        "data": [
+          "15 units",
+          "15 units",
+          "15 units",
+          "20 units",
+          "15 units"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Urgency",
+        "data": [
+          "Critical (3 left)",
+          "Critical (4 left)",
+          "High (6 left)",
+          "Warning (8 left)",
+          "Moderate (11 left)"
+        ]
+      },
+      {
+        "id": "reorderFormCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "reorderHeader",
+          "quickReorderForm"
+        ]
+      },
+      {
+        "id": "reorderHeader",
+        "component": "CardHeader",
+        "title": "Quick Reorder Item",
+        "subtitle": "Select an item and quantity to submit a supplier purchase order"
+      },
+      {
+        "id": "quickReorderForm",
+        "component": "Form",
+        "name": "reorder-form",
+        "buttons": "formButtons",
+        "fields": [
+          "itemSelectField",
+          "qtyField",
+          "supplierField"
+        ]
+      },
+      {
+        "id": "itemSelectField",
+        "component": "FormControl",
+        "label": "Select Item to Reorder",
+        "input": "itemSelect",
+        "hint": "Only items below threshold are listed"
+      },
+      {
+        "id": "itemSelect",
+        "component": "Select",
+        "name": "reorder_item",
+        "placeholder": "Choose item to reorder...",
+        "items": [
+          "itemOpt1",
+          "itemOpt2",
+          "itemOpt3",
+          "itemOpt4",
+          "itemOpt5"
+        ]
+      },
+      {
+        "id": "itemOpt1",
+        "component": "SelectItem",
+        "value": "DAIRY-009",
+        "label": "Organic Whole Milk 1L (3 units left)"
+      },
+      {
+        "id": "itemOpt2",
+        "component": "SelectItem",
+        "value": "BAKE-142",
+        "label": "Artisan Sourdough Loaf (4 units left)"
+      },
+      {
+        "id": "itemOpt3",
+        "component": "SelectItem",
+        "value": "NUTS-231",
+        "label": "Almond Butter 16oz (6 units left)"
+      },
+      {
+        "id": "itemOpt4",
+        "component": "SelectItem",
+        "value": "BEV-784",
+        "label": "Espresso Roast Beans 1kg (8 units left)"
+      },
+      {
+        "id": "itemOpt5",
+        "component": "SelectItem",
+        "value": "OIL-055",
+        "label": "Cold Pressed Olive Oil (11 units left)"
+      },
+      {
+        "id": "qtyField",
+        "component": "FormControl",
+        "label": "Order Quantity",
+        "input": "qtyInput",
+        "hint": "Standard batch order size is 50 units"
+      },
+      {
+        "id": "qtyInput",
+        "component": "Input",
+        "name": "quantity",
+        "placeholder": "50",
+        "type": "number"
+      },
+      {
+        "id": "supplierField",
+        "component": "FormControl",
+        "label": "Fulfillment Speed",
+        "input": "priorityRadio"
+      },
+      {
+        "id": "priorityRadio",
+        "component": "RadioGroup",
+        "name": "speed",
+        "defaultValue": "standard",
+        "items": [
+          "speedExpress",
+          "speedStandard"
+        ]
+      },
+      {
+        "id": "speedExpress",
+        "component": "RadioItem",
+        "value": "express",
+        "label": "Rush Delivery (Next Day)",
+        "description": "Recommended for items with < 5 units remaining"
+      },
+      {
+        "id": "speedStandard",
+        "component": "RadioItem",
+        "value": "standard",
+        "label": "Standard Delivery (3-5 Business Days)",
+        "description": "Standard supplier replenishment order"
+      },
+      {
+        "id": "formButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitOrderBtn",
+          "bulkOrderBtn"
+        ]
+      },
+      {
+        "id": "submitOrderBtn",
+        "component": "Button",
+        "label": "Place Reorder",
+        "variant": "primary"
+      },
+      {
+        "id": "bulkOrderBtn",
+        "component": "Button",
+        "label": "Reorder All Low Items",
+        "variant": "secondary"
+      },
+      {
+        "id": "actions",
+        "component": "Buttons",
+        "buttons": [
+          "refreshBtn",
+          "exportBtn"
+        ]
+      },
+      {
+        "id": "refreshBtn",
+        "component": "Button",
+        "label": "Refresh Inventory",
+        "variant": "secondary"
+      },
+      {
+        "id": "exportBtn",
+        "component": "Button",
+        "label": "Export Warning Report",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

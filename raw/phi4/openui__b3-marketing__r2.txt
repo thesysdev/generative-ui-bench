@@ -1,0 +1,91 @@
+```openui
+root = Card(
+    [
+        visitorsSection,
+        conversionRateSection,
+        trafficSourcesSection,
+        campaignsSection,
+        bestCampaignSection,
+        dateRangeSection,
+        subscriberGrowthSection,
+        actions
+    ]
+)
+
+visitorsSection = Card(
+    [
+        CardHeader("Site Visitors", "Last 30 Days"),
+        LineChart(
+            ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10"],
+            [visitorsSeries],
+            "linear",
+            "Day",
+            "Visitors"
+        )
+    ],
+    "card"
+)
+visitorsSeries = Series("Visitors", [1200, 1500, 1300, 1700, 1600, 1800, 1750, 1900, 2000, 2100])
+
+conversionRateSection = Card(
+    [
+        CardHeader("Conversion Rate", "Last 30 Days"),
+        Progress(42, "42%")
+    ],
+    "card"
+)
+
+trafficSourcesSection = Card(
+    [
+        CardHeader("Top Traffic Sources", "Last 30 Days"),
+        PieChart(trafficSourcesLabels, trafficSourcesValues, "donut", "circular")
+    ],
+    "card"
+)
+trafficSourcesLabels = ["Organic Search", "Direct", "Social Media", "Referral", "Email"]
+trafficSourcesValues = [45, 25, 15, 10, 5]
+
+campaignsSection = Card(
+    [
+        CardHeader("Running Campaigns", "Spend Overview"),
+        Table([campaignName, campaignSpend])
+    ],
+    "card"
+)
+campaignName = Col("Campaign", ["Spring Sale", "Summer Blast", "Winter Wonder", "Back to School"])
+campaignSpend = Col("Spend", ["$5,000", "$7,200", "$3,800", "$4,500"])
+
+bestCampaignSection = Card(
+    [
+        CardHeader("Best Performing Campaign"),
+        Callout("success", "Campaign: Spring Sale", "Highest conversion rate this month.")
+    ],
+    "card"
+)
+
+dateRangeSection = Card(
+    [
+        CardHeader("Date Range"),
+        DatePicker("date_range", "range")
+    ],
+    "card"
+)
+
+subscriberGrowthSection = Card(
+    [
+        CardHeader("Subscriber Growth", "This Month"),
+        Progress(15, "15% Growth")
+    ],
+    "card"
+)
+
+actions = Card(
+    [
+        Buttons(actionsButtons)
+    ],
+    "card"
+)
+actionsButtons = [
+    Button("Export CSV", null, "primary")
+]
+```

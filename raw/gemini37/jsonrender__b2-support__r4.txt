@@ -1,0 +1,63 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"l"},"children":["header-card","kpi-row","actions-bar","new-ticket-dialog","tickets-card"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","gap":"m"},"children":["header-info","header-status"]}}
+{"op":"add","path":"/elements/header-info","value":{"type":"CardHeader","props":{"title":"Support Operations Command","subtitle":"Morning Standup & Shift Handover Dashboard"}}}
+{"op":"add","path":"/elements/header-status","value":{"type":"Tag","props":{"text":"Queue Status: Operational","variant":"success","size":"md"}}}
+{"op":"add","path":"/elements/kpi-row","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","wrap":true},"children":["kpi-open-card","kpi-sla-card","kpi-breach-card"]}}
+{"op":"add","path":"/elements/kpi-open-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["kpi-open-header","kpi-open-count","kpi-open-note"]}}
+{"op":"add","path":"/elements/kpi-open-header","value":{"type":"TextContent","props":{"text":"**Open Tickets**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-open-count","value":{"type":"Heading","props":{"text":{"$template":"${/kpi/openTickets} active"},"level":"h2"}}}
+{"op":"add","path":"/elements/kpi-open-note","value":{"type":"TextContent","props":{"text":"↑ 4 new incoming from overnight shift","size":"small"}}}
+{"op":"add","path":"/elements/kpi-sla-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["kpi-sla-header","kpi-sla-time","kpi-sla-progress"]}}
+{"op":"add","path":"/elements/kpi-sla-header","value":{"type":"TextContent","props":{"text":"**Avg First Response Time**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-sla-time","value":{"type":"Heading","props":{"text":{"$template":"${/kpi/avgResponseTime} (Target: <20m)"},"level":"h2"}}}
+{"op":"add","path":"/elements/kpi-sla-progress","value":{"type":"Progress","props":{"value":86,"label":"86% within target SLA"}}}
+{"op":"add","path":"/elements/kpi-breach-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["kpi-breach-header","kpi-breach-count","kpi-breach-badge"]}}
+{"op":"add","path":"/elements/kpi-breach-header","value":{"type":"TextContent","props":{"text":"**High Priority Backlog**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-breach-count","value":{"type":"Heading","props":{"text":{"$template":"${/kpi/highPriorityCount} urgent"},"level":"h2"}}}
+{"op":"add","path":"/elements/kpi-breach-badge","value":{"type":"Badge","props":{"text":"Requires Immediate Assignment","variant":"destructive"}}}
+{"op":"add","path":"/state/kpi","value":{"openTickets":34,"avgResponseTime":"14.2 min","highPriorityCount":3}}
+{"op":"add","path":"/elements/actions-bar","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m","wrap":true},"children":["filter-group","action-buttons"]}}
+{"op":"add","path":"/elements/filter-group","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["filter-label","btn-filter-all","btn-filter-high"]}}
+{"op":"add","path":"/elements/filter-label","value":{"type":"TextContent","props":{"text":"**Queue Filter:**","size":"small-heavy"}}}
+{"op":"add","path":"/elements/btn-filter-all","value":{"type":"Button","props":{"label":"All Recent (5)","variant":{"$cond":{"$state":"/filterHighOnly","eq":true},"$then":"secondary","$else":"primary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":false}}}}}
+{"op":"add","path":"/elements/btn-filter-high","value":{"type":"Button","props":{"label":"⚡ High Priority Only","variant":{"$cond":{"$state":"/filterHighOnly","eq":true},"$then":"primary","$else":"secondary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":true}}}}}
+{"op":"add","path":"/elements/action-buttons","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["dialog-trigger-card"]}}
+{"op":"add","path":"/elements/dialog-trigger-card","value":{"type":"DialogBlock","props":{"triggerLabel":"+ Open New Ticket","triggerVariant":"default","title":"Create Support Ticket","description":"Log a new customer issue directly into the shift queue","content":["new-ticket-form"]}}}
+{"op":"add","path":"/state/filterHighOnly","value":false}
+{"op":"add","path":"/elements/new-ticket-dialog","value":{"type":"Card","props":{"variant":"clear"},"children":[]}}
+{"op":"add","path":"/elements/new-ticket-form","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"m"},"children":["form-subject-ctrl","form-customer-ctrl","form-priority-ctrl","form-desc-ctrl","form-submit-btn"]}}
+{"op":"add","path":"/elements/form-subject-ctrl","value":{"type":"FormControl","props":{"label":"Issue Subject","input":"form-subject-in"}}}
+{"op":"add","path":"/elements/form-subject-in","value":{"type":"Input","props":{"name":"subject","placeholder":"e.g. SSO Login loop for Acme Corp","value":{"$bindState":"/newTicket/subject"}}}}
+{"op":"add","path":"/elements/form-customer-ctrl","value":{"type":"FormControl","props":{"label":"Customer Organization / Contact","input":"form-customer-in"}}}
+{"op":"add","path":"/elements/form-customer-in","value":{"type":"Input","props":{"name":"customer","placeholder":"e.g. Acme Corp (admin@acme.com)","value":{"$bindState":"/newTicket/customer"}}}}
+{"op":"add","path":"/elements/form-priority-ctrl","value":{"type":"FormControl","props":{"label":"Priority Level","input":"form-priority-select"}}}
+{"op":"add","path":"/elements/form-priority-select","value":{"type":"Select","props":{"name":"priority","placeholder":"Select priority","items":["p-high","p-med","p-low"],"value":{"$bindState":"/newTicket/priority"}}}}
+{"op":"add","path":"/elements/p-high","value":{"type":"SelectItem","props":{"value":"High","label":"High - SLA 1h"}}}
+{"op":"add","path":"/elements/p-med","value":{"type":"SelectItem","props":{"value":"Medium","label":"Medium - SLA 4h"}}}
+{"op":"add","path":"/elements/p-low","value":{"type":"SelectItem","props":{"value":"Low","label":"Low - SLA 24h"}}}
+{"op":"add","path":"/elements/form-desc-ctrl","value":{"type":"FormControl","props":{"label":"Details","input":"form-desc-in"}}}
+{"op":"add","path":"/elements/form-desc-in","value":{"type":"TextArea","props":{"name":"description","placeholder":"Provide relevant error logs, account IDs, and user impact...","rows":3,"value":{"$bindState":"/newTicket/description"}}}}
+{"op":"add","path":"/elements/form-submit-btn","value":{"type":"Button","props":{"label":"Create and Dispatch Ticket","variant":"primary"},"on":{"press":{"action":"pushState","params":{"statePath":"/allTickets","value":{"id":"$id","ticketNumber":"#T-9182","subject":{"$state":"/newTicket/subject"},"customer":{"$state":"/newTicket/customer"},"priority":{"$state":"/newTicket/priority"},"timeAgo":"Just now","status":"Unassigned"},"clearStatePath":"/newTicket"}}}}}
+{"op":"add","path":"/state/newTicket","value":{"subject":"","customer":"","priority":"High","description":""}}
+{"op":"add","path":"/elements/tickets-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["tickets-header-section","all-tickets-list","high-tickets-list"]}}
+{"op":"add","path":"/elements/tickets-header-section","value":{"type":"CardHeader","props":{"title":"Recent Incoming Tickets (5 Most Recent)","subtitle":"Real-time queue triage and priority tags"}}}
+{"op":"add","path":"/elements/all-tickets-list","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"visible":{"$state":"/filterHighOnly","neq":true},"repeat":{"statePath":"/allTickets","key":"id"},"children":["ticket-item-row"]}}
+{"op":"add","path":"/elements/high-tickets-list","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"visible":{"$state":"/filterHighOnly","eq":true},"repeat":{"statePath":"/highTickets","key":"id"},"children":["ticket-item-row"]}}
+{"op":"add","path":"/elements/ticket-item-row","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m"},"children":["ticket-col-main","ticket-col-meta"]}}
+{"op":"add","path":"/elements/ticket-col-main","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["ticket-row-title","ticket-customer-sub"]}}
+{"op":"add","path":"/elements/ticket-row-title","value":{"type":"TextContent","props":{"text":{"$template":"**${ticketNumber}** — ${subject}"},"size":"default"}}}
+{"op":"add","path":"/elements/ticket-customer-sub","value":{"type":"TextContent","props":{"text":{"$template":"Customer: *${customer}* • Reported ${timeAgo}"},"size":"small"}}}
+{"op":"add","path":"/elements/ticket-col-meta","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["ticket-priority-tag","ticket-status-badge"]}}
+{"op":"add","path":"/elements/ticket-priority-tag","value":{"type":"Tag","props":{"text":{"$template":"${priority} Priority"},"variant":{"$cond":{"$item":"priority","eq":"High"},"$then":"danger","$else":{"$cond":{"$item":"priority","eq":"Medium"},"$then":"warning","$else":"neutral"}},"size":"sm"}}}
+{"op":"add","path":"/elements/ticket-status-badge","value":{"type":"Badge","props":{"text":{"$item":"status"},"variant":"outline"}}}
+{"op":"add","path":"/state/allTickets","value":[]}
+{"op":"add","path":"/state/allTickets/0","value":{"id":"t-101","ticketNumber":"#T-4401","subject":"Production payment gateway 502 error during checkout","customer":"Stripe Checkout / Bolt Retail","priority":"High","timeAgo":"4m ago","status":"Unassigned"}}
+{"op":"add","path":"/state/allTickets/1","value":{"id":"t-102","ticketNumber":"#T-4400","subject":"SAML Single Sign-On certificate expired on Okta integration","customer":"FinTech Global Enterprise","priority":"High","timeAgo":"12m ago","status":"In Review"}}
+{"op":"add","path":"/state/allTickets/2","value":{"id":"t-103","ticketNumber":"#T-4399","subject":"Exporting analytics reports fails with CSV parsing error","customer":"CloudScale Analytics","priority":"Medium","timeAgo":"25m ago","status":"Investigating"}}
+{"op":"add","path":"/state/allTickets/3","value":{"id":"t-104","ticketNumber":"#T-4398","subject":"Webhook payload delivery delayed by >300 seconds","customer":"HyperPay Tech","priority":"High","timeAgo":"38m ago","status":"Escalated Tier 2"}}
+{"op":"add","path":"/state/allTickets/4","value":{"id":"t-105","ticketNumber":"#T-4397","subject":"Billing invoice recipient address update request","customer":"Acme Labs","priority":"Low","timeAgo":"45m ago","status":"Pending Agent"}}
+{"op":"add","path":"/state/highTickets","value":[]}
+{"op":"add","path":"/state/highTickets/0","value":{"id":"t-101","ticketNumber":"#T-4401","subject":"Production payment gateway 502 error during checkout","customer":"Stripe Checkout / Bolt Retail","priority":"High","timeAgo":"4m ago","status":"Unassigned"}}
+{"op":"add","path":"/state/highTickets/1","value":{"id":"t-102","ticketNumber":"#T-4400","subject":"SAML Single Sign-On certificate expired on Okta integration","customer":"FinTech Global Enterprise","priority":"High","timeAgo":"12m ago","status":"In Review"}}
+{"op":"add","path":"/state/highTickets/2","value":{"id":"t-104","ticketNumber":"#T-4398","subject":"Webhook payload delivery delayed by >300 seconds","customer":"HyperPay Tech","priority":"High","timeAgo":"38m ago","status":"Escalated Tier 2"}}

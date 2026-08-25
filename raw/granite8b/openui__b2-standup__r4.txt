@@ -1,0 +1,50 @@
+```openui-lang
+root = Card([
+    dateHeader,
+    standupSection,
+    missingCount,
+    postUpdateForm
+])
+
+dateHeader = CardHeader("Daily Standup", "2025-08-27")
+standupSection = Card([
+    teammateUpdates,
+    blockedMembers,
+    statusCounts
+])
+teammateUpdates = Table([
+    Col("Team Member", ["Alice", "Bob", "Charlie", "Dana"]),
+    Col("Status Update", [
+        "Working on feature X, completed 80%.",
+        "Finalizing API docs, awaiting feedback.",
+        "Blocked on UI library compatibility issue.",
+        "Prepared test cases for module Y."
+    ]),
+    Col("Blocked?", [
+        "No",
+        "No",
+        "Yes",
+        "No"
+    ])
+])
+blockedMembers = Callout(
+    "warning",
+    "Team Members Blocked:",
+    "Charlie – UI library compatibility issue"
+)
+statusCounts = TextContent(
+    "Updates Missing: 1",
+    "large"
+)
+postUpdateForm = Form("post-update", postButtons, [
+    myUpdateField
+])
+myUpdateField = FormControl("Your status update", inputText)
+inputText = TextArea("my_update", placeholder="Enter your status update", rows=3)
+postButtons = Buttons([
+    submitBtn,
+    cancelBtn
+])
+submitBtn = Button("Post Update", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

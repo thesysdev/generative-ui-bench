@@ -1,0 +1,55 @@
+thought
+root = Card([header, balances, transactionSection, spendingSection, billsSection, goalSection, creditSection, actionsSection])
+header = CardHeader("Personal Banking", "Welcome back, Alex")
+
+balances = Card([checkingBal, savingsBal, creditBal], "row", "m")
+checkingBal = Card([CardHeader("Checking"), TextContent("$4,250.50", "large-heavy")], "sunk")
+savingsBal = Card([CardHeader("Savings"), TextContent("$12,800.00", "large-heavy")], "sunk")
+creditBal = Card([CardHeader("Credit Card"), TextContent("-$1,240.15", "large-heavy")], "sunk")
+
+transactionSection = Card([Heading("Recent Transactions", "h3"), transactionTable])
+transactionTable = Table([merchantCol, amountCol, actionCol])
+merchantCol = Col("Merchant", ["Amazon Prime", "Whole Foods", "Shell Oil", "Starbucks"])
+amountCol = Col("Amount", ["-$84.99", "-$120.50", "-$55.00", "-$6.75"], "string")
+actionCol = Col("Action", ["Dispute", "Dispute", "Dispute", "Dispute"], "action")
+
+spendingSection = Card([Heading("Spending Split", "h3"), spendingChart])
+spendingChart = PieChart(["Food", "Rent", "Transport", "Entertainment"], [450, 1200, 200, 150], "donut")
+
+billsSection = Card([Heading("Bills Due Soon", "h3"), billsList])
+billsList = ListBlock([
+    ListItem("Electric Bill", "Due in 3 days - $142.00"),
+    ListItem("Netflix", "Due in 5 days - $15.99"),
+    ListItem("Rent", "Due in 12 days - $1,800.00")
+])
+
+goalSection = Card([Heading("Vacation Goal", "h3"), Progress(65, "Japan Trip - $3,250 / $5,000")])
+
+creditSection = Card([Heading("Credit Health", "h3"), scoreBadge, freezeBtn])
+scoreBadge = Badge("785 - Very Good", "success")
+freezeBtn = Button("Freeze Credit Line", null, "destructive", "small")
+
+actionsSection = Card([Heading("Manage Accounts", "h3"), transferForm, statementForm, alertSettings])
+transferForm = Form("transfer", transferButtons, [fromAcc, toAcc, amountField])
+fromAcc = FormControl("From", Select("from", [sChecking, sSavings, sCredit], "Checking"))
+sChecking = SelectItem("checking", "Checking Account")
+sSavings = SelectItem("savings", "Savings Account")
+sCredit = SelectItem("credit", "Credit Card")
+toAcc = FormControl("To", Select("to", [sChecking, sSavings, sCredit], "Savings"))
+amountField = FormControl("Amount", Input("amount", "0.00", "number"))
+transferButtons = Buttons([Button("Transfer Money", null, "primary")])
+
+statementForm = Form("statement", Buttons([Button("View Statement")]), [periodSelect])
+periodSelect = FormControl("Statement Period", Select("period", [pMonth, q1, q2], "Last Month"))
+pMonth = SelectItem("last_month", "Last Month")
+q1 = SelectItem("q1", "Quarter 1")
+q2 = SelectItem("q2", "Quarter 2")
+
+alertSettings = Form("alerts", Buttons([Button("Save Settings")]), [emailAlert, smsAlert, pushAlert])
+emailAlert = FormControl("Email Alerts", CheckBoxGroup("email", [e1, e2]))
+e1 = CheckBoxItem("Large Purchases", ">$500", "e1")
+e2 = CheckBoxItem("Low Balance", "Notify when...", "e2")
+smsAlert = FormControl("SMS", CheckBoxGroup("sms", [s1]))
+s1 = CheckBoxItem("Security", "Instant SMS", "s1")
+pushAlert = FormControl("Push Notifications", CheckBoxGroup("push", [p1]))
+p1 = CheckBoxItem("App Alerts", "Push alerts", "p1")

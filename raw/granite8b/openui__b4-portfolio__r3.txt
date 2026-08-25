@@ -1,0 +1,124 @@
+```openui-lang
+root = Card([
+    activeProjects,
+    overdueMilestones,
+    budgetVsAllocation,
+    teamUtilization,
+    risks,
+    nextTwoWeekDeadlines,
+    deliveryPace,
+    blockedWorkItems,
+    healthSummary,
+    quarterSelector,
+    requestMorePeople,
+    exportReview,
+    archiveProject,
+    footer,
+], "card", "row", "l")
+
+activeProjects = Card([
+    CardHeader("Active Projects", "Current Portfolio"),
+    Table([projectName, owner, deadline, health])
+], "sunk")
+
+projectName = Col("Project", ["Alpha", "Beta", "Gamma"])
+owner = Col("Owner", ["Alice", "Bob", "Charlie"])
+deadline = Col("Deadline", ["2024-09-15", "2024-10-01", "2024-10-20"])
+health = Col("Health", ["Green", "Yellow", "Red"])
+
+overdueMilestones = Card([
+    CardHeader("Overdue Milestones", "Critical Issues"),
+    ListBlock(items=[OverdueItem("Milestone A - Alpha", "2024-09-10")])
+], "clear")
+
+overdueItem = ListItem(title="Milestone A - Alpha", subtitle="2024-09-10", image=["warning"], actionLabel="View")
+
+budgetVsAllocation = Card([
+    CardHeader("Budget vs Allocation", "Financial Overview"),
+    Table([projectNameBudget, allocatedBudget, spentBudget])
+], "clear")
+
+projectNameBudget = Col("Project", ["Alpha", "Beta", "Gamma"])
+allocatedBudget = Col("Allocated", ["$200k", "$150k", "$100k"])
+spentBudget = Col("Spent", ["$180k", "$140k", "$95k"])
+
+teamUtilization = Card([
+    CardHeader("Team Utilization", "Capacity Planning"),
+    BarChart(labels=["Team A", "Team B", "Team C"], series=[UtilizationSeries("Utilization", [85, 78, 92])])
+], "card")
+
+utilizationSeries = Series("Utilization", [85, 78, 92])
+
+risks = Card([
+    CardHeader("Risks", "Risk Register"),
+    Table([riskName, severity])
+], "clear")
+
+riskName = Col("Risk", ["Network Outage", "Resource Shortage", "Regulatory Change"])
+severity = Col("Severity", ["High", "Medium", "Low"])
+
+nextTwoWeekDeadlines = Card([
+    CardHeader("Deadlines Next Two Weeks", "Upcoming Milestones"),
+    ListBlock(items=[DeadlineItem("Launch Beta", "2024-09-25")])
+], "card")
+
+deadlineItem = ListItem(title="Launch Beta", subtitle="2024-09-25", image=["date"], actionLabel="Track")
+
+deliveryPace = Card([
+    CardHeader("Delivery Pace (Last 6 sprints)", "Velocity Trend"),
+    LineChart(labels=["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"], series=[PaceSeries("Velocity", [12, 14, 13, 15, 16, 14])])
+], "card")
+
+paceSeries = Series("Velocity", [12, 14, 13, 15, 16, 14])
+
+blockedWorkItems = Card([
+    CardHeader("Blocked Work Items", "Stalled Tasks"),
+    ListBlock(items=[BlockedItem("Task X - Alpha", "Blocked by API")])
+], "card")
+
+blockedItem = ListItem(title="Task X - Alpha", subtitle="Blocked by API", image=["blocked"], actionLabel="Resolve")
+
+healthSummary = Card([
+    TextContent("Portfolio Health: ⚠️ Moderately Concerned - 2 red projects, 1 yellow, 1 green.", "large")
+], "clear")
+
+quarterSelector = Card([
+    CardHeader("Select Quarter", "Time Period Selector"),
+    Buttons([QuarterBtn("Q3 2024"), QuarterBtn("Q4 2024")])
+], "clear")
+
+quarterBtn = Button("Q3 2024", ["toggleQuarter", "Q3 2024"], "secondary")
+quarterBtnAlt = Button("Q4 2024", ["toggleQuarter", "Q4 2024"], "secondary")
+
+requestMorePeople = Card([
+    CardHeader("Request More Resources", "Team Expansion"),
+    Form("resourceRequest", requestButtons, [resourceForm])
+], "card")
+
+resourceForm = FormControl("Project", resourceInput)
+resourceInput = Input("project", "Alpha")
+
+requestButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Submit Request", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+exportReview = Card([
+    CardHeader("Export Review", "Data Export"),
+    Buttons([ExportBtn("CSV"), ExportBtn("PDF")])
+], "clear")
+
+exportBtn = Button("Export CSV", ["exportData", "csv"], "secondary")
+exportBtnAlt = Button("Export PDF", ["exportData", "pdf"], "secondary")
+
+archiveProject = Card([
+    CardHeader("Archive Finished Project", "Project Lifecycle"),
+    Buttons([ArchiveBtn("Alpha"), ArchiveBtn("Beta")])
+], "clear")
+
+archiveBtn = Button("Archive Alpha", ["archiveProject", "Alpha"], "tertiary")
+archiveBtnAlt = Button("Archive Beta", ["archiveProject", "Beta"], "tertiary")
+
+footer = Card([
+    TextContent("© 2024 PMO Dashboard", "small")
+], "clear")
+```

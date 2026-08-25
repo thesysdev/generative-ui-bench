@@ -1,0 +1,143 @@
+```openui-lang
+root = Card(children: [
+  // 1. Total enrollment and 5-year trend
+  CardHeader("Total Enrollment (5-Year Trend)", "Academic Overview"),
+  
+  // 1 continued: Enrollment chart
+  Card(children: [
+    Label("5-Year Enrollment Growth"),
+    BarChart(labels: ["2019", "2020", "2021", "2022", "2023"], 
+             series: [124000, 130000, 138000, 142000, 145000],
+             xLabel: "Year", yLabel: "Students",
+             variant: "grouped")
+  ]),
+  
+  // 2. Applications by program
+  Card(children: [
+    Heading("Applications by Program"),
+    Table(cols: [{label: "Program", data: ["Engineering", "Computer Science", "Business", "Arts", "Education"]}, {label: "Applications", data: ["3200", "2800", "2100", "1800", "1500"])])
+  ]),
+  
+  // 3. Acceptance rate
+  Card(children: [
+    Metric("Overall Acceptance Rate", 78.5, size: "large"),
+    Label("78.5%", variant: "success")
+  ]),
+  
+  // 4. Tuition revenue this year
+  Card(children: [
+    Heading("Tuition Revenue - Current Year"),
+    PieChart(labels: ["Undergraduate", "Graduate", "Professional", "Other"], 
+             values: [42, 35, 18, 5]),
+    Text("$48.2M")
+  ]),
+  
+  // 5. How full each course offering is
+  Card(children: [
+    Heading("Course Offerings Capacity"),
+    BarChart(labels: ["CS101", "MATH200", "BIOL150", "HIST300", "ENG202", "PHYS101"], 
+             series: [95, 88, 72, 65, 58, 43],
+             xLabel: "Course", yLabel: "Capacity (students)",
+             variant: "grouped")
+  ]),
+  
+  // 6. Teaching load by faculty member
+  Card(children: [
+    Heading("Teaching Load by Faculty"),
+    BarChart(labels: ["Dr. Smith", "Prof. Lee", "Dr. Chen", "Prof. Wang", "Dr. Patel"], 
+             series: [28, 24, 22, 20, 19],
+             xLabel: "Faculty Member", yLabel: "Students Taught")
+  ]),
+  
+  // 7. Students at academic risk
+  Card(children: [
+    Heading("Students at Academic Risk"),
+    BarChart(labels: ["First-Year", "Sophomore", "Junior", "Senior"], 
+             series: [340, 520, 680, 890],
+             xLabel: "Year", yLabel: "At-Risk Students")
+  ]),
+  
+  // 8. Scholarship budget used vs total
+  Card(children: [
+    Heading("Scholarship Budget"),
+    Table(cols: [{label: "Budget Item", data: ["General Aid", "Merit Awards", "Need-Based", "Athletic"], 
+                                         data: ["$5.2M", "$3.1M", "$1.8M", "$0.9M"]}],
+         type: "number"),
+    Text("$11.2M Used / $11.5M Total")
+  ]),
+  
+  // 9. Housing occupancy
+  Card(children: [
+    Heading("Housing Occupancy"),
+    BarChart(labels: ["Dorm A", "Dorm B", "Dorm C", "Dorm D"], 
+             series: [92, 87, 85, 78],
+             xLabel: "Dormitory", yLabel: "Occupancy %",
+             variant: "grouped")
+  ]),
+  
+  // 10. Campus events this month
+  Card(children: [
+    Heading("Events This Month"),
+    ListBlock(items: [
+      {"title": "Career Fair", "date": "May 15-17", "location": "Main Hall"},
+      {"title": "Tech Symposium", "date": "May 18", "location": "Science Center"},
+      {"title": "Dean's Lecture", "date": "May 22", "location": "Auditorium"},
+      {"title": "Freshman Orientation", "date": "May 25", "location": "Student Center"}
+    ])
+  ]),
+  
+  // 11. Alumni giving over past four years
+  Card(children: [
+    Heading("Alumni Giving (Past 4 Years)"),
+    Table(cols: [{label: "Year", data: ["2023", "2022", "2021", "2020"]}, 
+               data: ["$850K", "$920K", "$760K", "$680K"]],
+         type: "number")
+  ]),
+  
+  // 12. Way to focus on one department (filter dropdown)
+  Card(children: [
+    Heading("Focus on Department"),
+    Dropdown(items: [
+      {"value": "Engineering", "label": "Engineering"},
+      {"value": "Computer Science", "label": "Computer Science"},
+      {"value": "Business", "label": "Business"},
+      {"value": "Arts", "label": "Arts"},
+      {"value": "Education", "label": "Education"},
+      {"value": "Health Sciences", "label": "Health Sciences"}
+    ], selected: "all", onChange: "handleDepartmentFilter")
+  ]),
+  
+  // 13. This semester vs last
+  Card(children: [
+    Heading("This Semester vs Last"),
+    BarChart(labels: ["Fall 2024", "Spring 2024"], 
+             series: [18500, 17200],
+             xLabel: "Term", yLabel: "Students Enrolled",
+             variant: "grouped")
+  ]),
+  
+  // 14. Waitlisted students per program
+  Card(children: [
+    Heading("Waitlist by Program"),
+    Table(cols: [{label: "Program", data: ["Engineering", "Computer Science", "Business", "Arts"], 
+                   data: ["45", "38", "32", "27"]]],
+         type: "number")
+  ]),
+  
+  // 15. Way to approve a new course
+  Card(children: [
+    Heading("Approve New Course"),
+    Button(label: "Submit for Approval", 
+           action: "approveNewCourse", 
+           variant: "primary")
+  ]),
+  
+  // 16. Way to send a message to a student group
+  Card(children: [
+    Heading("Message Student Group"),
+    Button(label: "Send Group Message", 
+           action: "sendGroupMessage", 
+           variant: "secondary")
+  ])
+])
+```

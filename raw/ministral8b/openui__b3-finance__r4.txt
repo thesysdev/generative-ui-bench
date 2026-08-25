@@ -1,0 +1,45 @@
+```openui-lang
+root = Card([financeHeader, cashStatus, burnRunway, expensesChart, transactionsTable, monthSelector, downloadBtn], "card", "column", "m")
+
+financeHeader = CardHeader("Finance Overview", "Month-end report")
+
+cashStatus = Card([cashValue, cashTag], "sunk")
+cashValue = TextContent("Cash on hand: $1,284,500", "large-heavy")
+cashTag = Tag("↗ 12.5%", null, null, "success")
+
+burnRunway = Card([burnRow, runwayRow], "sunk")
+burnRow = Card([burnText, burnValue], "row", "row", "m", "center")
+burnText = TextContent("Monthly burn: ", "small")
+burnValue = TextContent("$245,000", "large-heavy")
+runwayRow = Card([runwayText, runwayValue], "row", "row", "m", "center")
+runwayText = TextContent("Months of runway: ", "small")
+runwayValue = TextContent("5.3", "large-heavy")
+
+expensesChart = Card([expensesHeading, expensesBreakdown], "sunk")
+expensesHeading = Heading("Monthly expenses", "h3")
+expensesBreakdown = PieChart(expenseCategories, expenseValues, "pie", "circular")
+
+expenseCategories = ["Salaries", "Rent", "Marketing", "Software", "Other"]
+expenseValues = [450000, 180000, 120000, 90000, 60000]
+
+transactionsTable = Card([transactionsHeading, transactions], "sunk")
+transactionsHeading = Heading("Transactions > $10,000", "h3")
+transactions = Table([transactionCol1, transactionCol2, transactionCol3])
+transactionCol1 = Col("Date", ["2023-10-01", "2023-10-15", "2023-10-22", "2023-10-28"])
+transactionCol2 = Col("Description", ["Salary Run", "Office Rent", "Marketing Spend", "Software License"])
+transactionCol3 = Col("Amount", ["$450,000", "$180,000", "$120,000", "$95,000"])
+
+monthSelector = Card([monthLabel, monthDropdown], "sunk")
+monthLabel = TextContent("View month: ", "small")
+monthDropdown = Select("month", [monthOptions], "Select month", null, "2023-10")
+
+monthOptions = [
+    SelectItem("2023-09", "September 2023"),
+    SelectItem("2023-10", "October 2023"),
+    SelectItem("2023-11", "November 2023"),
+    SelectItem("2023-12", "December 2023")
+]
+
+downloadBtn = Card([downloadBtnComponent], "sunk", "row", "m", "center")
+downloadBtnComponent = Button("Download statement", null, "primary", "normal")
+```

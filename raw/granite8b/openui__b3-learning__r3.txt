@@ -1,0 +1,58 @@
+```openui-lang
+root = Card([
+    header,
+    weeklyStats,
+    cohortSelector,
+    engagementChart,
+    messageCohortBtn,
+], "card", "row", "l")
+
+header = CardHeader("Training Platform Analytics", "Weekly Overview")
+
+weeklyStats = Card([
+    activeLearners,
+    courseCompletion,
+    avgQuizScore,
+    enrollmentRanking,
+    atRiskLearners,
+], "sunk")
+
+activeLearners = Callout("info", "Active Learners This Week", "12,345 learners engaged")
+courseCompletion = Callout("success", "Course Completion Rate", "78% of learners completed core modules")
+avgQuizScore = Callout("neutral", "Average Quiz Score", "4.3 / 5")
+enrollmentRanking = Card([
+    RankingTitle,
+    EnrollmentTable,
+], "clear")
+RankingTitle = Heading("Top Courses by Enrollment", "h3")
+EnrollmentTable = Table([
+    colCourses,
+    colEnrollment,
+])
+colCourses = Col("Course", ["Introduction to AI", "Data Science Fundamentals", "Cybersecurity Essentials"])
+colEnrollment = Col("Enrolled", ["1,200", "950", "700"])
+
+atRiskLearners = Callout("warning", "Learners at Risk of Dropping Out", "215 learners flagged")
+
+cohortSelector = Card([
+    CohortLabel,
+    CohortSelect,
+], "clear")
+CohortLabel = TextContent("Select Cohort:", "small")
+CohortSelect = Select("cohort", [cohortAll, cohortAlpha, cohortBeta], "All Cohorts", "Choose cohort")
+cohortAll = SelectItem("All", "All")
+cohortAlpha = SelectItem("Alpha Cohort", "Alpha")
+cohortBeta = SelectItem("Beta Cohort", "Beta")
+
+engagementChart = Card([
+    EngagementTitle,
+    WeeklyEngagementChart,
+], "sunk")
+EngagementTitle = Heading("Engagement Across Past 8 Weeks", "h3")
+WeeklyEngagementChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "linear", "Week", "Engagement Score")
+engagementSeries = Series("Engagement", [78, 82, 85, 90, 88, 92, 95, 98])
+
+messageCohortBtn = Button("Message Cohort", null, "secondary")
+
+root
+```

@@ -1,0 +1,37 @@
+root = Card([globalHeader, storeControls, kpiGrid, trafficSection, inventorySection, staffSection, promoSection, registerSection, reorderForm, followUps], "clear", "column", "l")
+
+globalHeader = CardHeader("Store Manager Console", "Store #402 - Downtown Branch")
+
+storeControls = Card([storeSelector, dateRange], "sunk", "row", "m", "center", "between")
+storeSelector = DialogBlock("Switch Store", "Select Branch", "Choose which store location you wish to manage", [storeList])
+storeList = ListBlock([s1, s2, s3], "image")
+s1 = ListItem("Downtown Branch", "Current", "https://picsum.photos/seed/store1/50/50")
+s2 = ListItem("Uptown Mall", "Active", "https://picsum.photos/seed/store2/50/50")
+s3 = ListItem("Eastside Plaza", "Active", "https://picsum.photos/seed/store3/50/50")
+dateRange = TextContent("Today: Oct 24, 2023", "small-heavy")
+
+kpiGrid = Card([salesKpi, basketKpi, returnsKpi, comparisonKpi], "card", "row", "m", "stretch", "around", true)
+salesKpi = Card([salesHeading, salesProgress], "clear", "column", "none", "center")
+salesHeading = TextContent("Sales vs Target", "small")
+salesProgress = Progress(72, "72% of $5,000 goal")
+basketKpi = Card([basketHeading, basketValue], "clear", "column", "none", "center")
+basketHeading = TextContent("Avg Basket Size", "small")
+basketValue = TextContent("$42.50", "large-heavy")
+returnsKpi = Card([returnsHeading, returnsValue], "clear", "column", "none", "center")
+returnsHeading = TextContent("Returns (This Week)", "small")
+returnsValue = TextContent("14 items", "large-heavy")
+comparisonKpi = Card([compHeading, compBadge], "clear", "column", "none", "center")
+compHeading = TextContent("vs Last Week", "small")
+compBadge = Badge("+12% Growth", "success")
+
+trafficSection = Card([trafficHeading, trafficChart], "card", "column", "s")
+trafficHeading = Heading("Hourly Foot Traffic", "h3")
+trafficChart = LineChart(["08am", "10am", "12pm", "02pm", "04pm", "06pm", "08pm"], [trafficSeries], "natural", "Time", "Visitors")
+trafficSeries = Series("Visitors", [45, 120, 310, 280, 410, 520, 180])
+
+inventorySection = Card([invHeading, bestSellers, outOfStock], "card", "column", "m")
+invHeading = Heading("Inventory Status", "h3")
+bestSellers = Table([prodName, prodUnits], "card")
+prodName = Col("Best Seller", ["Organic Coffee", "Silk Scarf", "Leather Wallet", "Scented Candle"])
+prodUnits = Col("Units Sold", ["142", "88", "64", "51"])
+outOfStock = Card([oosHeading, oos

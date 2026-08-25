@@ -1,0 +1,60 @@
+{"op":"add","path":"/root","value":"mainContainer"}
+{"op":"add","path":"/elements/mainContainer","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"l"},"children":["headerSection","statsSection","blockerAlert","postUpdateSection","standupListSection"]}}
+{"op":"add","path":"/elements/headerSection","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center"},"children":["headerInfo","dateBadge"]}}
+{"op":"add","path":"/elements/headerInfo","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["titleHeading","subtitleText"]}}
+{"op":"add","path":"/elements/titleHeading","value":{"type":"Heading","props":{"text":"🚀 Engineering Daily Async Standup","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/subtitleText","value":{"type":"TextContent","props":{"text":"Share progress, flag impediments, and stay aligned across timezones.","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/dateBadge","value":{"type":"Badge","props":{"text":{"$state":"/todayDate"},"variant":"secondary"},"children":[]}}
+{"op":"add","path":"/state/todayDate","value":"Wednesday, Oct 24, 2024"}
+{"op":"add","path":"/elements/statsSection","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"around","align":"center","gap":"m"},"children":["submittedStat","missingStat","blockedStat"]}}
+{"op":"add","path":"/elements/submittedStat","value":{"type":"Card","props":{"variant":"clear","direction":"column","align":"center","gap":"xs"},"children":["submittedLabel","submittedValue"]}}
+{"op":"add","path":"/elements/submittedLabel","value":{"type":"TextContent","props":{"text":"Submitted Updates","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/submittedValue","value":{"type":"Tag","props":{"text":{"$template":"${/stats/submitted} / ${/stats/totalMembers}"},"variant":"success"},"children":[]}}
+{"op":"add","path":"/elements/missingStat","value":{"type":"Card","props":{"variant":"clear","direction":"column","align":"center","gap":"xs"},"children":["missingLabel","missingValue"]}}
+{"op":"add","path":"/elements/missingLabel","value":{"type":"TextContent","props":{"text":"Updates Missing","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/missingValue","value":{"type":"Tag","props":{"text":{"$template":"${/stats/missing} remaining"},"variant":"warning"},"children":[]}}
+{"op":"add","path":"/elements/blockedStat","value":{"type":"Card","props":{"variant":"clear","direction":"column","align":"center","gap":"xs"},"children":["blockedLabel","blockedValue"]}}
+{"op":"add","path":"/elements/blockedLabel","value":{"type":"TextContent","props":{"text":"Blocked Members","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/blockedValue","value":{"type":"Tag","props":{"text":{"$template":"${/stats/blockedCount} Blocked"},"variant":"danger"},"children":[]}}
+{"op":"add","path":"/state/stats","value":{"submitted":4,"totalMembers":6,"missing":2,"blockedCount":1}}
+{"op":"add","path":"/elements/blockerAlert","value":{"type":"Alert","props":{"title":"⚠️ Attention: 1 Teammate Blocked","description":"Marcus Vance is currently blocked on OAuth credentials for SSO integration. Help needed!","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/postUpdateSection","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["postHeader","myAvatarRow","formFields","postActions"]}}
+{"op":"add","path":"/elements/postHeader","value":{"type":"CardHeader","props":{"title":"Post Your Update","subtitle":"Quick check-in for the sprint"}}}
+{"op":"add","path":"/elements/myAvatarRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["myAvatar","myInfo"]}}
+{"op":"add","path":"/elements/myAvatar","value":{"type":"Avatar","props":{"fallback":"ME","src":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"},"children":[]}}
+{"op":"add","path":"/elements/myInfo","value":{"type":"TextContent","props":{"text":"**Posting as:** Alex Chen *(Frontend Lead)*","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/formFields","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"children":["yesterdayCtrl","todayCtrl","blockerCtrl"]}}
+{"op":"add","path":"/elements/yesterdayCtrl","value":{"type":"FormControl","props":{"label":"What did you accomplish yesterday?","input":"yesterdayInput"},"children":[]}}
+{"op":"add","path":"/elements/yesterdayInput","value":{"type":"Input","props":{"name":"yesterday","placeholder":"e.g., Shipped payment modal redesign, reviewed PR #412","value":{"$bindState":"/newUpdate/yesterday"}},"children":[]}}
+{"op":"add","path":"/elements/todayCtrl","value":{"type":"FormControl","props":{"label":"What are you focusing on today?","input":"todayInput"},"children":[]}}
+{"op":"add","path":"/elements/todayInput","value":{"type":"Input","props":{"name":"today","placeholder":"e.g., Implementing Webhooks API endpoints and writing test suites","value":{"$bindState":"/newUpdate/today"}},"children":[]}}
+{"op":"add","path":"/elements/blockerCtrl","value":{"type":"FormControl","props":{"label":"Any blockers? (Leave blank if none)","input":"blockerInput","hint":"Mention if you need reviews, permissions, or support."},"children":[]}}
+{"op":"add","path":"/elements/blockerInput","value":{"type":"Input","props":{"name":"blocker","placeholder":"e.g., Blocked on staging DB migration permissions","value":{"$bindState":"/newUpdate/blocker"}},"children":[]}}
+{"op":"add","path":"/elements/postActions","value":{"type":"Buttons","props":{"buttons":["submitUpdateBtn","clearBtn"]},"children":[]}}
+{"op":"add","path":"/elements/submitUpdateBtn","value":{"type":"Button","props":{"label":"Publish Standup Update","variant":"primary","size":"medium"},"on":{"press":{"action":"pushState","params":{"statePath":"/updates","value":{"id":"$id","name":"Alex Chen","role":"Frontend Lead","avatar":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150","initials":"AC","time":"Just now","yesterday":{"$state":"/newUpdate/yesterday"},"today":{"$state":"/newUpdate/today"},"blocker":{"$state":"/newUpdate/blocker"},"isBlocked":{"$cond":{"$state":"/newUpdate/blocker","neq":""},"$then":true,"$else":false}},"clearStatePath":"/newUpdate"}}},"children":[]}}
+{"op":"add","path":"/elements/clearBtn","value":{"type":"Button","props":{"label":"Reset","variant":"tertiary","size":"medium"},"on":{"press":{"action":"setState","params":{"statePath":"/newUpdate","value":{"yesterday":"","today":"","blocker":""}}}},"children":[]}}
+{"op":"add","path":"/state/newUpdate","value":{"yesterday":"","today":"","blocker":""}}
+{"op":"add","path":"/elements/standupListSection","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"m"},"children":["standupListHeader","updatesContainer"]}}
+{"op":"add","path":"/elements/standupListHeader","value":{"type":"CardHeader","props":{"title":"Today's Team Updates","subtitle":"Real-time updates from everyone on the squad"}}}
+{"op":"add","path":"/elements/updatesContainer","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"m"},"repeat":{"statePath":"/updates","key":"id"},"children":["updateCard"]}}
+{"op":"add","path":"/elements/updateCard","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["cardHeaderRow","separator","statusDetails","cardBlockerAlert"]}}
+{"op":"add","path":"/elements/cardHeaderRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["memberProfile","timeAndStatus"]}}
+{"op":"add","path":"/elements/memberProfile","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["memberAvatar","memberMeta"]}}
+{"op":"add","path":"/elements/memberAvatar","value":{"type":"Avatar","props":{"fallback":{"$item":"initials"},"src":{"$item":"avatar"}},"children":[]}}
+{"op":"add","path":"/elements/memberMeta","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["memberName","memberRole"]}}
+{"op":"add","path":"/elements/memberName","value":{"type":"TextContent","props":{"text":{"$item":"name"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/memberRole","value":{"type":"TextContent","props":{"text":{"$item":"role"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/timeAndStatus","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"xs"},"children":["updateTimeTag","blockedBadge","activeBadge"]}}
+{"op":"add","path":"/elements/updateTimeTag","value":{"type":"Tag","props":{"text":{"$item":"time"},"size":"sm","variant":"neutral"},"children":[]}}
+{"op":"add","path":"/elements/blockedBadge","value":{"type":"Badge","props":{"text":"Blocked","variant":"destructive"},"visible":{"$item":"isBlocked","eq":true},"children":[]}}
+{"op":"add","path":"/elements/activeBadge","value":{"type":"Badge","props":{"text":"On Track","variant":"secondary"},"visible":{"$item":"isBlocked","eq":false},"children":[]}}
+{"op":"add","path":"/elements/separator","value":{"type":"Separator","props":{"orientation":"horizontal"},"children":[]}}
+{"op":"add","path":"/elements/statusDetails","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["yesterdayRow","todayRow"]}}
+{"op":"add","path":"/elements/yesterdayRow","value":{"type":"TextContent","props":{"text":{"$template":"**Yesterday:** ${yesterday}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/todayRow","value":{"type":"TextContent","props":{"text":{"$template":"**Today:** ${today}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/cardBlockerAlert","value":{"type":"Alert","props":{"title":"Impediment / Blocker","description":{"$item":"blocker"},"variant":"destructive"},"visible":{"$item":"isBlocked","eq":true},"children":[]}}
+{"op":"add","path":"/state/updates","value":[]}
+{"op":"add","path":"/state/updates/0","value":{"id":"u1","name":"Marcus Vance","role":"Backend Engineer","avatar":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150","initials":"MV","time":"8:45 AM","yesterday":"Finalized user auth schema and drafted migration scripts.","today":"Integrate Okta SSO endpoints into core gateway.","blocker":"Awaiting enterprise OAuth sandbox client secrets from DevOps.","isBlocked":true}}
+{"op":"add","path":"/state/updates/1","value":{"id":"u2","name":"Sarah Jenkins","role":"Product Designer","avatar":"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150","initials":"SJ","time":"9:10 AM","yesterday":"Completed interactive prototypes for analytics filtering.","today":"Running 3 user testing sessions and synthesizing feedback.","blocker":"","isBlocked":false}}
+{"op":"add","path":"/state/updates/2","value":{"id":"u3","name":"Devon Miller","role":"QA Engineer","avatar":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150","initials":"DM","time":"9:15 AM","yesterday":"Automated regression test runs on release candidate v2.4.","today":"Writing performance stress test cases for billing endpoints.","blocker":"","isBlocked":false}}
+{"op":"add","path":"/state/updates/3","value":{"id":"u4","name":"Elena Rostova","role":"Fullstack Developer","avatar":"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150","initials":"ER","time":"9:30 AM","yesterday":"Resolved memory leak in WebSocket connection pool.","today":"Implementing live presence indicators for collaborative canvases.","blocker":"","isBlocked":false}}

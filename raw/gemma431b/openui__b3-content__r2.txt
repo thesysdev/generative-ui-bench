@@ -1,0 +1,58 @@
+root = Card([studioHeader, filterBar, mainGrid, schedulingSection, commentSection, followUps])
+
+studioHeader = CardHeader("Content Studio", "Editorial Dashboard")
+
+filterBar = Card([categoryFilter, startDraftBtn], "clear", "row", "m", "start", "start", false)
+categoryFilter = Select("cat_filter", [catTech, catCulture, catPolitics, catLife], "Filter by Category", null, null, "small")
+catTech = SelectItem("tech", "Technology")
+catCulture = SelectItem("culture", "Culture")
+catPolitics = SelectItem("politics", "Politics")
+catLife = SelectItem("life", "Lifestyle")
+startDraftBtn = Button("New Draft", null, "primary", "normal", "small")
+
+mainGrid = Card([draftsSection, publishedSection, topArticleSection, readershipSection], "clear", "column", "l")
+
+draftsSection = Card([draftsHeading, draftsTable], "sunk", "column", "s")
+draftsHeading = Heading("Current Drafts", "h3")
+draftsTable = Table([draftTitle, draftStatus, draftProgress])
+draftTitle = Col("Article", ["The Future of AI", "Climate Shift 2024", "Urban Gardening", "Remote Work Trends"])
+draftStatus = Col("Status", ["Review", "Writing", "Outline", "Review"])
+draftProgress = Col("Completion", ["80%", "40%", "20%", "90%"])
+
+publishedSection = Card([pubHeading, pubList], "sunk", "column", "s")
+pubHeading = Heading("Published This Week", "h3")
+pubList = ListBlock([pub1, pub2, pub3], "image")
+pub1 = ListItem("Quantum Computing 101", "Published 2 days ago", ["https://picsum.photos/seed/quantum/100/100"])
+pub2 = ListItem("The Minimalist Home", "Published 3 days ago", ["https://picsum.photos/seed/home/100/100"])
+pub3 = ListItem("Global Trade Wars", "Published 5 days ago", ["https://picsum.photos/seed/trade/100/100"])
+
+topArticleSection = Card([topHeading, topArticleCard], "sunk", "column", "s")
+topHeading = Heading("Monthly Top Performer", "h3")
+topArticleCard = Card([topBadge, topText], "card", "column", "xs")
+topBadge = Badge("Most Read", "secondary")
+topText = TextContent("The Psychology of Productivity: Why we procrastinate and how to stop.", "large-heavy")
+
+readershipSection = Card([readHeading, readChart], "sunk", "column", "s")
+readHeading = Heading("Readership Trend (30 Days)", "h3")
+readChart = AreaChart(["Day 1", "Day 7", "Day 14", "Day 21", "Day 30"], [viewSeries], "natural", "Day", "Views")
+viewSeries = Series("Page Views", [12000, 15000, 11000, 18000, 22000])
+
+schedulingSection = Card([schedHeading, schedForm], "card", "column", "m")
+schedHeading = Heading("Schedule Publication", "h3")
+schedForm = Form("sched-form", schedButtons, [titleField, dateField])
+titleField = FormControl("Article Title", titleInput, "Enter the final headline")
+titleInput = Input("title", "Enter title...")
+dateField = FormControl("Publish Date", dateInput)
+dateInput = DatePicker("pub_date", "single")
+schedButtons = Buttons([schedSubmit])
+schedSubmit = Button("Schedule Piece", null, "primary")
+
+commentSection = Card([commHeading, commList], "sunk", "column", "s")
+commHeading = Heading("Awaiting Reply", "h3")
+commList = ListBlock([comm1, comm2], "number")
+comm1 = ListItem("User @techie99", "Question about the API implementation", null, "Reply")
+comm2 = ListItem("User @readmore", "Typo in the third paragraph", null, "Reply")
+
+followUps = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("View detailed analytics for top article")
+fu2 = FollowUpItem("Review editorial calendar for next month")

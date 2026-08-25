@@ -1,0 +1,96 @@
+```openui-lang
+root = Card([
+    header,
+    onTimePerformance,
+    flightsTable,
+    delayedFlights,
+    recentGateChanges,
+    crewsAvailable,
+    weatherAdvisories,
+    avgPassengerLoad,
+    connectionsAtRisk,
+    rebookPassengers,
+    viewOtherHub,
+    cancellations,
+    avgTurnaroundTime
+], "card", "column", "m")
+
+header = CardHeader("Airline Hub Operations Desk", "Current Hub: JFK")
+
+onTimePerformance = Callout(
+    "info",
+    "On‑Time Performance",
+    "Today: 87% of flights are on schedule."
+)
+
+flightsTable = Table([
+    routeCol,
+    gateCol,
+    statusCol
+])
+routeCol = Col("Route", flightRoutes, "string")
+gateCol = Col("Gate", flightGates, "string")
+statusCol = Col("Status", flightStatuses, "string")
+flightRoutes = ["JFK-LAX", "JFK-SFO", "JFK-ORD", "JFK-ATL", "JFK-IAH"]
+flightGates = ["A12", "B5", "C3", "D9", "E7"]
+flightStatuses = ["On Time", "Departing", "Delayed", "On Time", "Delayed"]
+
+delayedFlights = Callout(
+    "warning",
+    "Delayed Flights",
+    "Flights delayed: JFK‑LAX (15 min), JFK‑SFO (30 min)."
+)
+
+recentGateChanges = Callout(
+    "info",
+    "Recent Gate Changes",
+    "JFK‑LAX moved from A12 to B5 (15 min ago)."
+)
+
+crewsAvailable = Callout(
+    "success",
+    "Crews Available for Reassignment",
+    "Crews on standby: 4 pilots, 6 flight attendants."
+)
+
+weatherAdvisories = Callout(
+    "danger",
+    "Weather Advisories",
+    "Heavy rain advisory affecting runway 2R/2L."
+)
+
+avgPassengerLoad = Callout(
+    "info",
+    "Average Passenger Load",
+    "Today: 78% of seats filled on average."
+)
+
+connectionsAtRisk = Callout(
+    "warning",
+    "Connections at Risk",
+    "12 connections at risk of being missed due to delays."
+)
+
+rebookPassengers = Buttons([
+    rebookBtn
+])
+rebookBtn = Button("Rebook Affected Passengers", "rebook", "primary")
+
+viewOtherHub = Buttons([
+    otherHubBtn
+])
+otherHubBtn = Button("View Other Hub", "other_hub", "secondary")
+
+cancellations = Callout(
+    "error",
+    "Cancellations Today",
+    "1 cancellation reported: JFK‑ATL."
+)
+
+avgTurnaroundTime = Callout(
+    "info",
+    "Average Turnaround Time",
+    "Today: 45 minutes."
+)
+
+```

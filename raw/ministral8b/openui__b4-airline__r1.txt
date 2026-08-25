@@ -1,0 +1,84 @@
+```openui-lang
+root = Card([hubHeader, performanceDashboard, flightList, delayedAlerts, gateChanges, crewsSection, weatherAlerts, loadMetrics, connectionsRisk, rebookSection, hubSelector, cancellations, turnaroundTime])
+
+hubHeader = CardHeader("Airline Hub Operations", "Central Operations Dashboard")
+
+performanceDashboard = Card([onTimeStatus, avgLoad, avgTurnaround], "sunk")
+onTimeStatus = Card([statusTitle, onTimeChart], "sunk")
+statusTitle = Heading("On-Time Performance Today", "h3")
+onTimeChart = PieChart(["On Time", "Delayed", "Cancelled"], [85, 12, 3], "pie", "circular")
+
+avgLoad = Card([loadTitle, loadValue], "sunk")
+loadTitle = Heading("Average Passenger Load", "h3")
+loadValue = TextContent("82%", "large-heavy")
+
+avgTurnaround = Card([turnTitle, turnValue], "sunk")
+turnTitle = Heading("Average Turnaround Time", "h3")
+turnValue = TextContent("42 minutes", "large-heavy")
+
+flightList = Card([flightHeader, flightsTable], "sunk")
+flightHeader = CardHeader("Current Flights")
+flightsTable = Table([flightCol, routeCol, gateCol, statusCol])
+flightCol = Col("Flight", ["AA123", "DL456", "UA789", "BA321", "FJ900"])
+routeCol = Col("Route", ["NYC-LAX", "LAX-ORD", "ORD-SFO", "SFO-JFK", "JFK-LHR"])
+gateCol = Col("Gate", ["A12", "B24", "C15", "D8", "E22"])
+statusCol = Col("Status", ["On Time", "Delayed (30m)", "On Time", "Delayed (60m)", "Cancelled"])
+
+delayedAlerts = Callout("Delayed Flights", "3 flights delayed today", "warning")
+delayedAlerts.content = Card([delayedFlights], "sunk")
+delayedFlights = Table([delayedFlightCol, delayedRouteCol, delayedGateCol, delayedDelayCol])
+delayedFlightCol = Col("Flight", ["DL456", "BA321"])
+delayedRouteCol = Col("Route", ["LAX-ORD", "SFO-JFK"])
+delayedGateCol = Col("Gate", ["B24", "D8"])
+delayedDelayCol = Col("Delay", ["30m", "60m"])
+
+gateChanges = Card([gateHeader, gateChangesTable], "sunk")
+gateHeader = CardHeader("Recent Gate Changes")
+gateChangesTable = Table([changeTimeCol, flightCol2, oldGateCol, newGateCol])
+changeTimeCol = Col("Time", ["10:15", "11:30", "13:45"])
+flightCol2 = Col("Flight", ["AA123", "DL456", "UA789"])
+oldGateCol = Col("Old Gate", ["A12", "B24", "C15"])
+newGateCol = Col("New Gate", ["B18", "A22", "D5"])
+
+crewsSection = Card([crewsHeader, crewsTable], "sunk")
+crewsHeader = CardHeader("Available Crews")
+crewsTable = Table([crewNameCol, roleCol, statusCol2])
+crewNameCol = Col("Crew Member", ["John Smith", "Maria Garcia", "David Lee"])
+roleCol = Col("Role", ["Pilot", "Flight Attendant", "Pilot"])
+statusCol2 = Col("Status", ["Available", "Available", "Available"])
+
+weatherAlerts = Callout("Weather Alerts", "Moderate rain expected at 15:00", "warning")
+weatherAlerts.content = Card([weatherDetails], "sunk")
+weatherDetails = TextContent("Wind gusts up to 25mph. Check flight plans accordingly.")
+
+connectionsRisk = Card([connectionsHeader, connectionsTable], "sunk")
+connectionsHeader = CardHeader("Connections at Risk")
+connectionsTable = Table([connectionCol, flightCol3, gateCol2, timeCol])
+connectionCol = Col("Connection", ["ORD-SFO → SFO-LAX", "LAX-JFK → JFK-NYC"])
+flightCol3 = Col("Flight", ["UA789 → FJ900", "DL456 → AA123"])
+gateCol2 = Col("Gate", ["C15 → E22", "B24 → A12"])
+timeCol = Col("Risk Time", ["14:10", "15:45"])
+
+rebookSection = Card([rebookHeader, rebookBtn], "sunk")
+rebookHeader = CardHeader("Rebook Affected Passengers")
+rebookBtn = Button("Rebook Passengers", ["rebook_passengers"], "primary")
+
+hubSelector = Card([hubHeader2, hubList], "sunk")
+hubHeader2 = CardHeader("Select Hub")
+hubList = Buttons([hubBtn1, hubBtn2, hubBtn3])
+hubBtn1 = Button("New York (JFK)", null, "secondary")
+hubBtn2 = Button("Los Angeles (LAX)", null, "secondary")
+hubBtn3 = Button("Chicago (ORD)", null, "secondary")
+
+cancellations = Card([cancellationsHeader, cancellationsTable], "sunk")
+cancellationsHeader = CardHeader("Cancellations Today")
+cancellationsTable = Table([flightCol4, routeCol2, reasonCol])
+flightCol4 = Col("Flight", ["BA321", "FJ900"])
+routeCol2 = Col("Route", ["SFO-JFK", "JFK-LHR"])
+reasonCol = Col("Reason", ["Weather", "Mechanical"])
+
+turnaroundTime = Card([turnHeader, turnChart], "sunk")
+turnHeader = CardHeader("Turnaround Time Analysis")
+turnChart = HorizontalBarChart(["Gate A12", "Gate B24", "Gate C15", "Gate D8", "Gate E22"], [turnSeries], "grouped", "Gate", "Minutes")
+turnSeries = Series("Average", [42, 45, 38, 48, 50])
+```

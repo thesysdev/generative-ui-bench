@@ -1,0 +1,509 @@
+Here is the complete analytics dashboard tailored for your training platform.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "cohortFilterCard",
+          "kpiSection",
+          "riskAlert",
+          "engagementCard",
+          "rankedCoursesCard",
+          "atRiskLearnersCard",
+          "messageCohortDrawer"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Training Analytics & Performance",
+        "subtitle": "Track real-time engagement, learner progress, and at-risk cohorts"
+      },
+      {
+        "id": "cohortFilterCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "gap": "m",
+        "children": [
+          "cohortSelectControl",
+          "cohortBadge"
+        ]
+      },
+      {
+        "id": "cohortSelectControl",
+        "component": "FormControl",
+        "label": "Filter by Cohort",
+        "hint": "Narrow metrics across all views",
+        "input": "cohortSelect"
+      },
+      {
+        "id": "cohortSelect",
+        "component": "Select",
+        "name": "selectedCohort",
+        "placeholder": "All Cohorts (Spring 2024)",
+        "items": [
+          "cohortAll",
+          "cohortQ1",
+          "cohortQ2",
+          "cohortEng",
+          "cohortDesign"
+        ]
+      },
+      {
+        "id": "cohortAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Cohorts (Active: 1,420)"
+      },
+      {
+        "id": "cohortQ1",
+        "component": "SelectItem",
+        "value": "q1_2024",
+        "label": "Cohort 2024-Q1 (Full Stack)"
+      },
+      {
+        "id": "cohortQ2",
+        "component": "SelectItem",
+        "value": "q2_2024",
+        "label": "Cohort 2024-Q2 (Data Science)"
+      },
+      {
+        "id": "cohortEng",
+        "component": "SelectItem",
+        "value": "eng_lead",
+        "label": "Engineering Leadership Fast-Track"
+      },
+      {
+        "id": "cohortDesign",
+        "component": "SelectItem",
+        "value": "ux_fund",
+        "label": "UX Fundamentals Spring"
+      },
+      {
+        "id": "cohortBadge",
+        "component": "Badge",
+        "text": "Cohort Status: In Progress",
+        "variant": "secondary"
+      },
+      {
+        "id": "kpiSection",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiTrendCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Core KPI",
+        "data": [
+          "Active Learners This Week",
+          "Course Completion Rate",
+          "Average Quiz Score"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "1,420 learners",
+          "78.4%",
+          "84.2%"
+        ]
+      },
+      {
+        "id": "kpiTrendCol",
+        "component": "Col",
+        "label": "Target / Change",
+        "data": [
+          "+12% vs last week",
+          "+4.1% MoM (Target: 75%)",
+          "+2.3 pts (Benchmark: 80%)"
+        ]
+      },
+      {
+        "id": "riskAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Learner Intervention Needed",
+        "description": "24 learners flagged at high risk of dropping out due to >10 days of inactivity and sub-60% quiz scores."
+      },
+      {
+        "id": "engagementCard",
+        "component": "Card",
+        "children": [
+          "engagementHeader",
+          "engagementChart"
+        ]
+      },
+      {
+        "id": "engagementHeader",
+        "component": "CardHeader",
+        "title": "Engagement Across Past 8 Weeks",
+        "subtitle": "Weekly active learners and lesson completions"
+      },
+      {
+        "id": "engagementChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4",
+          "W5",
+          "W6",
+          "W7",
+          "W8"
+        ],
+        "xLabel": "Week",
+        "yLabel": "Activity Count",
+        "series": [
+          "activeLearnersSeries",
+          "lessonCompletionsSeries"
+        ]
+      },
+      {
+        "id": "activeLearnersSeries",
+        "component": "Series",
+        "category": "Active Learners",
+        "values": [
+          980,
+          1050,
+          1120,
+          1190,
+          1250,
+          1310,
+          1380,
+          1420
+        ]
+      },
+      {
+        "id": "lessonCompletionsSeries",
+        "component": "Series",
+        "category": "Lesson Completions",
+        "values": [
+          2400,
+          2650,
+          2900,
+          2800,
+          3150,
+          3400,
+          3620,
+          3890
+        ]
+      },
+      {
+        "id": "rankedCoursesCard",
+        "component": "Card",
+        "children": [
+          "rankedCoursesHeader",
+          "rankedCoursesChart"
+        ]
+      },
+      {
+        "id": "rankedCoursesHeader",
+        "component": "CardHeader",
+        "title": "Courses Ranked by Enrollment",
+        "subtitle": "Total student enrollments per course"
+      },
+      {
+        "id": "rankedCoursesChart",
+        "component": "HorizontalBarChart",
+        "variant": "grouped",
+        "labels": [
+          "Full-Stack Web Dev",
+          "Applied Machine Learning",
+          "Cloud Architecture (AWS)",
+          "Product Management 101",
+          "Data Analysis with Python"
+        ],
+        "xLabel": "Total Enrollments",
+        "yLabel": "Course",
+        "series": [
+          "enrollmentSeries"
+        ]
+      },
+      {
+        "id": "enrollmentSeries",
+        "component": "Series",
+        "category": "Enrollments",
+        "values": [
+          620,
+          540,
+          430,
+          380,
+          295
+        ]
+      },
+      {
+        "id": "atRiskLearnersCard",
+        "component": "Card",
+        "children": [
+          "atRiskHeader",
+          "atRiskTable"
+        ]
+      },
+      {
+        "id": "atRiskHeader",
+        "component": "CardHeader",
+        "title": "Learners at Risk of Dropping Out",
+        "subtitle": "Identified by inactivity, missing assignments, and declining quiz averages"
+      },
+      {
+        "id": "atRiskTable",
+        "component": "Table",
+        "columns": [
+          "colLearner",
+          "colCourse",
+          "colInactivity",
+          "colQuizAvg",
+          "colRiskStatus"
+        ]
+      },
+      {
+        "id": "colLearner",
+        "component": "Col",
+        "label": "Learner",
+        "data": [
+          "Alex Rivera",
+          "Jordan Patel",
+          "Morgan Chen",
+          "Taylor Brooks",
+          "Samira Khan"
+        ]
+      },
+      {
+        "id": "colCourse",
+        "component": "Col",
+        "label": "Enrolled Course",
+        "data": [
+          "Full-Stack Web Dev",
+          "Applied ML",
+          "Cloud Architecture",
+          "Full-Stack Web Dev",
+          "Data Analysis"
+        ]
+      },
+      {
+        "id": "colInactivity",
+        "component": "Col",
+        "label": "Last Active",
+        "data": [
+          "12 days ago",
+          "14 days ago",
+          "9 days ago",
+          "11 days ago",
+          "15 days ago"
+        ]
+      },
+      {
+        "id": "colQuizAvg",
+        "component": "Col",
+        "label": "Quiz Score",
+        "data": [
+          "52%",
+          "48%",
+          "58%",
+          "50%",
+          "45%"
+        ]
+      },
+      {
+        "id": "colRiskStatus",
+        "component": "Col",
+        "label": "Risk Level",
+        "data": [
+          "High",
+          "Critical",
+          "Medium",
+          "High",
+          "Critical"
+        ]
+      },
+      {
+        "id": "messageCohortDrawer",
+        "component": "DrawerBlock",
+        "triggerLabel": "Message Cohort",
+        "title": "Send Cohort Broadcast",
+        "description": "Send an announcement, reminder, or nudge to members of the selected cohort.",
+        "content": [
+          "messageForm"
+        ]
+      },
+      {
+        "id": "messageForm",
+        "component": "Form",
+        "name": "cohortMessageForm",
+        "buttons": "formActionButtons",
+        "fields": [
+          "targetAudienceField",
+          "subjectField",
+          "messageBodyField",
+          "channelOptionField"
+        ]
+      },
+      {
+        "id": "targetAudienceField",
+        "component": "FormControl",
+        "label": "Recipient Cohort",
+        "hint": "Broadcast will go to all enrolled students in this group",
+        "input": "recipientSelect"
+      },
+      {
+        "id": "recipientSelect",
+        "component": "Select",
+        "name": "targetRecipient",
+        "placeholder": "Select recipient group",
+        "items": [
+          "recipAll",
+          "recipAtRisk",
+          "recipQ1",
+          "recipQ2"
+        ]
+      },
+      {
+        "id": "recipAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "Entire Cohort (All Active Learners)"
+      },
+      {
+        "id": "recipAtRisk",
+        "component": "SelectItem",
+        "value": "at_risk_only",
+        "label": "At-Risk Learners Only (24 learners)"
+      },
+      {
+        "id": "recipQ1",
+        "component": "SelectItem",
+        "value": "q1",
+        "label": "Cohort 2024-Q1 (Full Stack)"
+      },
+      {
+        "id": "recipQ2",
+        "component": "SelectItem",
+        "value": "q2",
+        "label": "Cohort 2024-Q2 (Data Science)"
+      },
+      {
+        "id": "subjectField",
+        "component": "FormControl",
+        "label": "Subject Line",
+        "input": "subjectInput"
+      },
+      {
+        "id": "subjectInput",
+        "component": "Input",
+        "name": "subject",
+        "placeholder": "e.g., Weekly Check-in & Office Hours Reminder"
+      },
+      {
+        "id": "messageBodyField",
+        "component": "FormControl",
+        "label": "Message Content",
+        "hint": "Markdown and formatting are supported",
+        "input": "messageTextArea"
+      },
+      {
+        "id": "messageTextArea",
+        "component": "TextArea",
+        "name": "messageBody",
+        "placeholder": "Type your message or encouragement here...",
+        "rows": 4
+      },
+      {
+        "id": "channelOptionField",
+        "component": "FormControl",
+        "label": "Delivery Channels",
+        "input": "channelRadios"
+      },
+      {
+        "id": "channelRadios",
+        "component": "RadioGroup",
+        "name": "deliveryChannel",
+        "defaultValue": "both",
+        "items": [
+          "radioBoth",
+          "radioEmail",
+          "radioInApp"
+        ]
+      },
+      {
+        "id": "radioBoth",
+        "component": "RadioItem",
+        "value": "both",
+        "label": "In-App Notification + Email",
+        "description": "Recommended for critical deadline reminders"
+      },
+      {
+        "id": "radioEmail",
+        "component": "RadioItem",
+        "value": "email",
+        "label": "Email Only",
+        "description": "Delivered to learners' registered addresses"
+      },
+      {
+        "id": "radioInApp",
+        "component": "RadioItem",
+        "value": "inapp",
+        "label": "In-App Banner Only",
+        "description": "Visible upon their next login"
+      },
+      {
+        "id": "formActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "sendMsgBtn",
+          "cancelMsgBtn"
+        ]
+      },
+      {
+        "id": "sendMsgBtn",
+        "component": "Button",
+        "label": "Send Message",
+        "variant": "primary"
+      },
+      {
+        "id": "cancelMsgBtn",
+        "component": "Button",
+        "label": "Discard Draft",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

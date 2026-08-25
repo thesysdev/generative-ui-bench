@@ -1,0 +1,52 @@
+thought
+root = Card([header, statusBar, kpiGrid, productionLines, qualitySection, inventorySection, maintenanceSection, actions], "card", "column", "l")
+
+header = CardHeader("Factory Floor Command", "Shift A - Plant 4")
+
+statusBar = Card([safetyBadge, daysSince, andon, energyUsage], "card", "row", "m")
+safetyBadge = Badge("0 Incidents YTD", null, null, "success")
+daysSince = Badge("142 Days since last incident", null, null, "info")
+andon = Callout("warning", "ANDON", "Line 3: Motor Overheat")
+energyUsage = Callout("neutral", "Energy Use", "422 kWh (+5% vs)")
+
+kpiGrid = Card([eeffCard, targetCard, shiftComp], "card", "row", "m")
+eeffCard = Card([Heading("OEE", "h3"), TextContent("87.4%", "large-heavy")], "sunk")
+targetCard = Card([Heading("Production", "h3"), TextContent("1,240 / 1,500 units", "default")], "sunk")
+shiftComp = Chart(["Shift 1", "Shift 2", "Shift 3"], [shiftSeries], "bar", "Shift", "Units")
+shiftSeries = Series("Output", [450, 420, 370])
+
+productionLines = Card([Heading("Production Lines", "h2"), lineTable, focusBtn], "card", "column", "s")
+lineTable = Table([colLine, colRate, colStatus, colAction])
+colLine = Col("Line", ["Line 1", "Line 2", "Line 3", "Line 4"])
+colRate = Col("Rate", ["95u/m", "82u/m", "40u/m", "98u/m"])
+colStatus = Col("Status", ["Running", "Running", "Warning", "Idle"])
+colAction = Col("Action", ["View", "View", "View", "View"])
+focusBtn = Button("Focus on Line", null, "secondary")
+
+qualitySection = Card([qualityHeading, defectChart, holdList], "card", "row", "m")
+qualityHeading = Heading("Quality & Defects", "h3")
+defectChart = Chart(["W1", "W2", "W3", "W4", "W5"], [defectSeries], "line", "Week", "%")
+defectSeries = Series("Defect Rate", [1.2, 1.5, 2.1, 1.8, 1.4])
+holdList = ListBlock([ListItem("Batch-992", "Tensile test failure"), ListItem("Batch-998", "Surface scratch")])
+
+inventorySection = Card([Heading("Inventory & Deliveries", "h2"), stockTable, deliveryList], "card", "column", "s")
+stockTable = Table([colMat, colStock, colStatus], "card", "sunk")
+colMat = Col("Material", ["Steel", "Resin", "Packaging"])
+colStock = Col("Stock", ["45 Tons", "120kg", "800 Pallets"])
+colStatus = Col("Status", ["Optimal", "Low", "Optimal"])
+deliveryList = ListBlock([ListItem("Steel-Co", "Due Tuesday"), ListItem("Global-Res", "Due Friday")])
+
+maintenanceSection = Card([Heading("Maintenance & Orders", "h2"), downtimeChart, maintList, orderList], "card", "column", "s")
+downtimeChart = Chart(["Mechanical", "Electrical", "Setup", "Other"], [downtimeSeries], "pie", null, "donut")
+downtimeSeries = Series("Hours", [12, 8, 24, 10])
+maintList = ListBlock([ListItem("M-102", "Filter Change - Due"), ListItem("M-205", "Oil Check - Tomorrow")])
+orderList = ListBlock([ListItem("WO-441", "High Priority - Conveyor Repair"), ListItem("WO-439", "Med Priority - Waiting for parts")])
+
+actions = Card([scheduleBtn, exportBtn], "card", "row", "m")
+scheduleBtn = DialogBlock("Schedule Maintenance", "New Task", "Select machine and date", [maintenanceForm])
+exportBtn = Button("Export Shift Report", null, "primary")
+
+maintenanceForm = Form("maint-sched", maintButtons, [machineField, dateField])
+machineField = FormControl("Machine ID", Input("m_id", "e.g. M-102"))
+dateField = FormControl("Date", DatePicker("m_date", "single"))
+maintButtons = Buttons([Button("Save Schedule", null, "primary"), Button("Cancel", null, "tertiary")])

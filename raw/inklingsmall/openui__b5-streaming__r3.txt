@@ -1,0 +1,107 @@
+root = Card([header, viewersCard, mostWatched, watchTime, subCard, genreCard, bufferCard, deliveryCard, releasesCard, licensesCard, recCard, searchCard, revCard, deviceCard, regionCard, flagsCard, promoteCard], "card", "column", "l")
+
+header = CardHeader("Operations Room", "Real-time streaming service dashboard")
+
+viewersCard = Card([viewersHeading, viewersStat, viewersSub], "sunk")
+viewersHeading = Heading("Viewers Watching Right Now", "h2")
+viewersStat = TextContent("142,893", "large-heavy")
+viewersSub = TextContent("Active streams • +4.2% vs 1h ago • All regions")
+
+mostWatched = Card([mwHeading, mwChart, mwTable], "card")
+mwHeading = Heading("Most-Watched Titles", "h3")
+mwSeries = Series("Hours", [842, 756, 612, 498, 410])
+mwChart = HorizontalBarChart(["The Midnight", "Crimson Peak", "Solar Drift", "Echoes", "Nightfall"], [mwSeries], "grouped", "Hours watched")
+mwTable = Table([mwNameCol, mwHoursCol])
+mwNameCol = Col("Title", ["The Midnight", "Crimson Peak", "Solar Drift", "Echoes", "Nightfall"])
+mwHoursCol = Col("Hours", [842, 756, 612, 498, 410])
+
+watchTime = Card([wtHeading, wtChart], "sunk")
+wtHeading = Heading("Watch Time — Past Month", "h3")
+wtLabels = ["W1", "W2", "W3", "W4", "W5"]
+wtSeries = Series("Hours", [12400, 13800, 15200, 16800, 18100])
+wtChart = AreaChart(wtLabels, [wtSeries], "linear", "Week", "Hours")
+
+subCard = Card([subHeading, subChart], "card")
+subHeading = Heading("New Subscribers vs Cancellations", "h3")
+subLabels = ["W1", "W2", "W3", "W4"]
+subNew = Series("New", [3200, 4100, 3800, 4500])
+subCancel = Series("Canceled", [1200, 1400, 1100, 1300])
+subChart = BarChart(subLabels, [subNew, subCancel], "grouped", "Week", "Count")
+
+genreCard = Card([genreHeading, genreChart], "card")
+genreHeading = Heading("Performance by Genre", "h3")
+genreLabels = ["Drama", "Comedy", "Action", "Sci-Fi", "Doc", "Horror"]
+genreSeries = Series("Avg Rating", [4.2, 4.0, 3.9, 4.3, 4.5, 3.7])
+genreChart = RadarChart(genreLabels, [genreSeries])
+
+bufferCard = Card([bufferHeading, bufferStat, bufferProgress], "sunk")
+bufferHeading = Heading("Buffering Rate", "h3")
+bufferStat = TextContent("0.41%", "large-heavy")
+bufferProgress = Progress(0.41, "Target < 1%")
+
+deliveryCard = Card([deliveryHeading, deliveryTable], "card")
+deliveryHeading = Heading("Delivery Health by Region", "h3")
+deliveryTable = Table([delRegion, delStatus, delLatency])
+delRegion = Col("Region", ["US East", "US West", "EU Central", "APAC", "LATAM"])
+delStatus = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy"])
+delLatency = Col("Latency ms", [42, 38, 112, 55, 67])
+
+releasesCard = Card([relHeading, relList], "card")
+relHeading = Heading("Releases Coming This Month", "h3")
+relList = ListBlock([rel1, rel2, rel3])
+rel1 = ListItem("Crimson Peak — Season 2", "Drama • 8 episodes • Jun 15")
+rel2 = ListItem("Solar Drift — Movie", "Sci-Fi • 2h 14m • Jun 22")
+rel3 = ListItem("Echoes — Limited Series", "Thriller • 6 episodes • Jun 28")
+
+licensesCard = Card([licHeading, licList], "sunk")
+licHeading = Heading("Licenses Expiring Soon", "h3")
+licList = ListBlock([lic1, lic2])
+lic1 = ListItem("Nightfall — Studio A", "Expires Jul 12 • 14 days left")
+lic2 = ListItem("Midnight Archive — Studio B", "Expires Jul 18 • 20 days left")
+
+recCard = Card([recHeading, recStat, recProgress], "card")
+recHeading = Heading("Recommendation Click Rate", "h3")
+recStat = TextContent("18.7%", "large-heavy")
+recProgress = Progress(18.7, "Click-through rate")
+
+searchCard = Card([searchHeading, searchChart], "card")
+searchHeading = Heading("Searches Ending Without Playback", "h3")
+searchLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+searchSeries = Series("Dead Searches", [340, 290, 310, 280, 410, 390, 300])
+searchChart = LineChart(searchLabels, [searchSeries], "linear", "Day", "Count")
+
+revCard = Card([revHeading, revChart], "sunk")
+revHeading = Heading("Revenue Split by Plan", "h3")
+revLabels = ["Basic", "Standard", "Premium", "Annual"]
+revValues = [320000, 580000, 290000, 210000]
+revChart = PieChart(revLabels, revValues, "pie", "circular")
+
+deviceCard = Card([devHeading, devChart], "card")
+devHeading = Heading("Viewing Split by Device", "h3")
+devLabels = ["Mobile", "TV", "Desktop", "Tablet"]
+devValues = [42, 38, 15, 5]
+devChart = PieChart(devLabels, devValues, "donut", "circular")
+
+regionCard = Card([regionHeading, regionSelect, regionDisplay], "sunk")
+regionHeading = Heading("Focus on One Region", "h3")
+regionSelect = Select("region_focus", [regUS, regEU, regAPAC], "Select region")
+regUS = SelectItem("us", "US")
+regEU = SelectItem("eu", "EU")
+regAPAC = SelectItem("apac", "APAC")
+regionDisplay = Card([regionName, regionStat], "clear")
+regionName = TextContent("US", "default")
+regionStat = TextContent("Live: 89,432 • Buffering: 0.3% • Healthy", "small")
+
+flagsCard = Card([flagsHeading, flagsTable], "card")
+flagsHeading = Heading("Feature Flags", "h3")
+flagsTable = Table([flagName, flagState])
+flagName = Col("Flag", ["New UI", "Dark Mode", "Live Chat", "Auto-Play", "Downloads"])
+flagState = Col("State", ["On", "Off", "On", "On", "Off"])
+
+promoteCard = Card([promoteHeading, promoteForm], "sunk")
+promoteHeading = Heading("Promote Title on Home Screen", "h3")
+promoteForm = Form("promote_title", promoteButtons, [promoteField])
+promoteField = FormControl("Title to promote", promoteInput)
+promoteInput = Input("promo_title", "Crimson Peak")
+promoteButtons = Buttons([promoteBtn])
+promoteBtn = Button("Promote", null, "primary")

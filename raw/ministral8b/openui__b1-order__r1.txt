@@ -1,0 +1,36 @@
+```openui-lang
+root = Card([deliveryStatus, trackingInfo, deliveryDate, reportIssue], "card")
+
+deliveryStatus = Card([trackingHeader, locationCard, statusTag], "sunk")
+trackingHeader = CardHeader("Your Package", "Tracking #123456789")
+
+locationCard = Card([locationImage, locationText], "card", "column", "m")
+locationImage = Image("Package in transit", "https://picsum.photos/seed/transit/300/200")
+locationText = TextContent("Your package is currently in transit from our Chicago hub.")
+
+statusTag = Tag("In Transit", null, null, "info")
+
+trackingInfo = Card([trackingTitle, trackingDetails], "sunk")
+trackingTitle = Heading("Tracking Details", "h3")
+trackingDetails = Card([trackingSteps], "card", "column", "xs")
+trackingSteps = Steps([step1, step2, step3])
+step1 = StepsItem("Shipped from Chicago", "Left the hub at 9:15 AM")
+step2 = StepsItem("In Transit", "Expected to arrive at the next hub by 12:00 PM")
+step3 = StepsItem("Out for Delivery", "Driver assigned to your area")
+
+deliveryDate = Card([dateHeader, dateInfo], "sunk")
+dateHeader = Heading("Estimated Delivery", "h3")
+dateInfo = Card([deliveryDateText, dateRange], "card", "column", "xs")
+deliveryDateText = TextContent("Your package is estimated to arrive between:")
+dateRange = TextContent("Monday, June 10, 2024 - Wednesday, June 12, 2024")
+
+reportIssue = Card([reportHeader, issueForm], "sunk")
+reportHeader = Heading("Report an Issue", "h3")
+issueForm = Form("delivery-issue", issueButtons, [issueDescription])
+issueDescription = FormControl("Issue Description", issueInput, "Please describe the problem in detail")
+issueInput = TextArea("issue", "Problem with my delivery", 4, null, null)
+
+issueButtons = Buttons([reportBtn, cancelBtn])
+reportBtn = Button("Report Issue", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

@@ -1,0 +1,32 @@
+root = Card([header, dateText, summaryCard, blockedCallout, teamList, updateForm])
+
+header = CardHeader("Async Standup", "Remote team daily check-in")
+dateText = TextContent("Monday, July 7, 2025")
+
+summaryCard = Card([summaryHeading, summaryStats], "sunk")
+summaryHeading = Heading("Quick Summary", "h3")
+summaryStats = Card([postedText, missingText], "clear", "row", "m", "start", "start")
+postedText = TextContent("4 updates posted")
+missingText = TextContent("3 updates still missing", "small")
+
+blockedCallout = Callout("warning", "Blockers", "2 teammates are blocked and need help")
+
+teamList = ListBlock([alice, bob, carol, david, emma, frank, grace], "image")
+alice = ListItem("Alice Chen", "Shipped user onboarding flow. Working on analytics dashboard today.", null, null)
+bob = ListItem("Bob Martinez", "Blocked — waiting on API credentials from DevOps. Can't proceed with integration tests.", null, "Need help")
+carol = ListItem("Carol Zhang", "Completed design review for mobile app. Starting sprint planning tomorrow.", null, null)
+david = ListItem("David Kim", "Blocked — stuck on database migration. Need senior review on schema changes.", null, "Need help")
+emma = ListItem("Emma Wilson", "No update yet", null, "Post update")
+frank = ListItem("Frank Torres", "No update yet", null, "Post update")
+grace = ListItem("Grace Lee", "No update yet", null, "Post update")
+
+updateForm = Form("standup-update", formButtons, [updateField, statusField])
+updateField = FormControl("Your update", updateInput)
+updateInput = TextArea("update_text", "What did you accomplish? What's next? Any blockers?", 4)
+statusField = FormControl("Status", statusSelect)
+statusSelect = Select("status", [onTrack, blocked, offTrack], "How's it going?")
+onTrack = SelectItem("on-track", "On track")
+blocked = SelectItem("blocked", "Blocked")
+offTrack = SelectItem("off-track", "Off track")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary", "normal", "medium")

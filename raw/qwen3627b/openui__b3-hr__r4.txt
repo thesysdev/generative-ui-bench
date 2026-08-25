@@ -1,0 +1,78 @@
+root = Card([header, kpiRow, rolesAndPipeline, deptAndAttrition, interviews, openRoleDialog], "card", "column", "m")
+
+header = CardHeader("Hiring Overview", "HR Lead Dashboard — Updated today")
+
+kpiRow = Card([headcountBadge, timeToHireBadge], "card", "row", "m", "center", "start")
+
+headcountBadge = Tag("Current Headcount: 247", null, "lg", "info")
+timeToHireBadge = Tag("Avg Time to Hire: 32 days", null, "lg", "success")
+
+rolesAndPipeline = Card([rolesCard, pipelineCard], "card", "row", "m")
+
+rolesCard = Card([rolesHeader, rolesTable], "sunk", "column", "s")
+rolesHeader = Heading("Open Roles", "h3")
+rolesTable = Table([roleCol, deptCol, statusCol])
+roleCol = Col("Role", ["Senior Frontend Engineer", "Product Designer", "Sales Manager", "HR Business Partner", "Data Analyst", "DevOps Engineer", "Marketing Coordinator", "Customer Success Lead"])
+deptCol = Col("Department", ["Engineering", "Design", "Sales", "Human Resources", "Engineering", "Engineering", "Marketing", "Customer Success"])
+statusCol = Col("Status", ["Urgent", "Active", "Active", "Active", "Active", "Urgent", "Active", "On Hold"])
+
+pipelineCard = Card([pipelineHeader, pipelineChart], "sunk", "column", "s")
+pipelineHeader = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = HorizontalBarChart(stages, [pipelineSeries], "grouped", null, "Candidates")
+stages = ["Applied", "Screening", "Interview", "Offer", "Hired"]
+pipelineSeries = Series("Candidates", [142, 68, 34, 12, 8])
+
+deptAndAttrition = Card([deptCard, attritionCard], "card", "row", "m")
+
+deptCard = Card([deptHeader, deptChart], "sunk", "column", "s")
+deptHeader = Heading("Headcount by Department", "h3")
+deptChart = PieChart(deptLabels, deptValues, "donut", "circular")
+deptLabels = ["Engineering", "Sales", "Marketing", "Human Resources", "Operations", "Finance", "Product", "Design"]
+deptValues = [78, 45, 28, 18, 35, 20, 15, 8]
+
+attritionCard = Card([attritionHeader, attritionChart], "sunk", "column", "s")
+attritionHeader = Heading("Attrition (Last 6 Months)", "h3")
+attritionChart = LineChart(months, [voluntarySeries, involuntarySeries], "natural", "Month", "Departures")
+months = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+voluntarySeries = Series("Voluntary", [4, 6, 5, 7, 3, 5])
+involuntarySeries = Series("Involuntary", [1, 2, 1, 1, 2, 1])
+
+interviews = Card([interviewsHeader, interviewsList], "sunk", "column", "s")
+interviewsHeader = Heading("Interviews Scheduled This Week", "h3")
+interviewsList = ListBlock([int1, int2, int3, int4, int5, int6, int7, int8], "number")
+int1 = ListItem("Senior Frontend Engineer — Panel Interview", "Mon 10:00 AM · Room 301 · 45 min", null, "Reschedule")
+int2 = ListItem("Product Designer — Portfolio Review", "Mon 2:00 PM · Room 205 · 60 min", null, "Reschedule")
+int3 = ListItem("Sales Manager — Final Round", "Tue 11:00 AM · Room 401 · 60 min", null, "Reschedule")
+int4 = ListItem("Data Analyst — Technical Screen", "Tue 3:00 PM · Virtual · 45 min", null, "Reschedule")
+int5 = ListItem("DevOps Engineer — Takehome Review", "Wed 10:00 AM · Room 301 · 45 min", null, "Reschedule")
+int6 = ListItem("HR Business Partner — Culture Fit", "Wed 1:00 PM · Room 205 · 30 min", null, "Reschedule")
+int7 = ListItem("Marketing Coordinator — Phone Screen", "Thu 9:00 AM · Phone · 30 min", null, "Reschedule")
+int8 = ListItem("Customer Success Lead — Case Study", "Thu 2:30 PM · Room 401 · 60 min", null, "Reschedule")
+
+openRoleDialog = DialogBlock("Open New Role", "Create a New Position", "Fill in the details for the new open role.", [newRoleForm], "primary")
+
+newRoleForm = Form("new-role-form", formButtons, [titleField, deptField, headcountField, priorityField, descField])
+titleField = FormControl("Job Title", titleInput)
+titleInput = Input("job_title", "e.g. Senior Backend Engineer")
+deptField = FormControl("Department", deptSelect, "Select the hiring department")
+deptSelect = Select("department", [engOpt, salesOpt, mktOpt, hrOpt, opsOpt, finOpt, prodOpt, desOpt], "Choose department")
+engOpt = SelectItem("engineering", "Engineering")
+salesOpt = SelectItem("sales", "Sales")
+mktOpt = SelectItem("marketing", "Marketing")
+hrOpt = SelectItem("hr", "Human Resources")
+opsOpt = SelectItem("operations", "Operations")
+finOpt = SelectItem("finance", "Finance")
+prodOpt = SelectItem("product", "Product")
+desOpt = SelectItem("design", "Design")
+headcountField = FormControl("Headcount Needed", headcountInput)
+headcountInput = Input("headcount", "1", "number")
+priorityField = FormControl("Priority", priorityRadio)
+priorityRadio = RadioGroup("priority", [urgentOpt, normalOpt, backlogOpt], "normal")
+urgentOpt = RadioItem("Urgent", "Fill within 30 days", "urgent")
+normalOpt = RadioItem("Normal", "Standard hiring timeline", "normal")
+backlogOpt = RadioItem("Backlog", "No immediate urgency", "backlog")
+descField = FormControl("Description", descArea)
+descArea = TextArea("description", "Brief role description and requirements...", 4)
+formButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Submit", null, "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")

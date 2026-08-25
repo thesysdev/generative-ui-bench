@@ -1,0 +1,84 @@
+```json
+root = Card(
+  children: [
+    // Header
+    CardHeader("Support Dashboard - Morning View"),
+    
+    // Key metrics
+    TextContent("Open Tickets:", "42"),
+    TextContent("Average First-Response Time:", "12 hours"),
+    TextContent("Most Recent (5):", "Showing top 5"),
+    
+    // Recent tickets with priority (using TextContent for flexible formatting)
+    ListBlock([
+      {
+        text: "🔴 CRITICAL: Production API Down\nPriority: Critical | Duration: 8 hours"
+      },
+      {
+        text: "🟠 HIGH: Login Authentication Issues\nPriority: High | Duration: 6 hours"
+      },
+      {
+        text: "🟡 MEDIUM: Feature Request Backlog\nPriority: Medium | Duration: 24 hours"
+      },
+      {
+        text: "⚪ LOW: Documentation Update\nPriority: Low | Duration: 72 hours"
+      },
+      {
+        text: "🔵 URGENT: Security Patch Required\nPriority: Critical | Duration: 4 hours"
+      }
+    ]),
+    
+    // Filter - tabs for different priority views
+    Tabs([
+      {
+        items: [
+          {
+            value: "all",
+            trigger: "all",
+            content: [
+              Card({
+                variant: "card",
+                children: [
+                  {text: "Summary", size: "default"},
+                  {text: "42 open tickets | 12h avg response | 5 most recent"}
+                ]
+              }),
+              Card({
+                variant: "card",
+                children: [
+                  {text: "Top 5 Recent", size: "default"},
+                  {text: "View all recent tickets", size: "default"}
+                ]
+              })
+            ]
+          }
+        ]
+      },
+      {
+        items: [
+          {
+            value: "high",
+            trigger: "high",
+            content: [
+              Card({
+                variant: "card",
+                children: [
+                  {text: "High Priority Only", size: "default"},
+                  {text: "Critical & urgent issues only", size: "default"}
+                ]
+              })
+            ]
+          }
+        ]
+      }
+    ]),
+    
+    // New ticket button
+    Button(
+      "Create New Ticket",
+      "New Support Ticket",
+      "primary"
+    )
+  ]
+)
+```

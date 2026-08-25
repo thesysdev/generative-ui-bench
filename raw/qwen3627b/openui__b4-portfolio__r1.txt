@@ -1,0 +1,73 @@
+root = Card([header, healthSummary, quarterSelector, activeProjectsSection, overdueSection, budgetSection, utilizationSection, risksSection, deadlinesSection, deliverySection, blockedSection, actions], "card", "column", "m")
+
+header = CardHeader("Project Portfolio Review", "PMO Dashboard — Q3 2024")
+
+healthSummary = Callout("warning", "Portfolio Health: At Risk", "3 of 7 projects off-track. Budget utilization at 78% with 2 overdue milestones. Immediate attention needed on Phoenix and Atlas.")
+
+quarterSelector = Buttons([quarterBtn])
+quarterBtn = Button("Switch Quarter", null, "secondary", "medium")
+
+activeProjectsSection = Card([activeProjectsHeader, activeProjectsTable], "sunk")
+activeProjectsHeader = Heading("Active Projects", "h3")
+activeProjectsTable = Table([projNameCol, projOwnerCol, projDeadlineCol, projHealthCol])
+projNameCol = Col("Project", ["Phoenix", "Atlas", "Nova", "Orion", "Helios", "Vega", "Cipher"])
+projOwnerCol = Col("Owner", ["Sarah Chen", "Marcus Webb", "Priya Patel", "James Liu", "Elena Rodriguez", "David Kim", "Aisha Foster"])
+projDeadlineCol = Col("Deadline", ["Oct 15", "Sep 30", "Nov 20", "Oct 30", "Sep 20", "Dec 15", "Oct 10"])
+projHealthCol = Col("Health", ["At Risk", "Critical", "On Track", "On Track", "At Risk", "On Track", "On Track"])
+
+overdueSection = Card([overdueHeader, overdueList], "sunk")
+overdueHeader = Heading("Overdue Milestones", "h3")
+overdueList = ListBlock([overdue1, overdue2, overdue3], "number")
+overdue1 = ListItem("Atlas — Security Audit Complete", "Was due Sep 15 | Owner: Marcus Webb | 15 days overdue", null, "Escalate")
+overdue2 = ListItem("Helios — UAT Sign-off", "Was due Sep 18 | Owner: Elena Rodriguez | 12 days overdue", null, "Escalate")
+overdue3 = ListItem("Phoenix — Phase 2 Review", "Was due Sep 22 | Owner: Sarah Chen | 8 days overdue", null, "Escalate")
+
+budgetSection = Card([budgetHeader, budgetChart], "sunk")
+budgetHeader = Heading("Budget: Spent vs Allocated", "h3")
+budgetChart = BarChart(projectLabels, [allocatedSeries, spentSeries], "grouped", "Project", "Budget ($K)")
+projectLabels = ["Phoenix", "Atlas", "Nova", "Orion", "Helios", "Vega", "Cipher"]
+allocatedSeries = Series("Allocated", [450, 380, 290, 520, 310, 410, 200])
+spentSeries = Series("Spent", [395, 365, 180, 340, 290, 195, 110])
+
+utilizationSection = Card([utilHeader, utilChart], "sunk")
+utilHeader = Heading("Team Utilization", "h3")
+utilChart = HorizontalBarChart(teamLabels, [utilSeries], "grouped", "Team Member", "Utilization %")
+teamLabels = ["Sarah Chen", "Marcus Webb", "Priya Patel", "James Liu", "Elena Rodriguez", "David Kim", "Aisha Foster", "Tom Baker", "Lisa Wong", "Raj Mehta"]
+utilSeries = Series("Utilization", [92, 105, 78, 85, 110, 88, 72, 95, 65, 80])
+
+risksSection = Card([risksHeader, risksTable], "sunk")
+risksHeader = Heading("Top Risks", "h3")
+risksTable = Table([riskDescCol, riskSeverityCol, riskImpactCol, riskMitigationCol])
+riskDescCol = Col("Risk", ["Key developer attrition on Atlas", "Vendor delay for Nova infrastructure", "Scope creep on Phoenix Phase 3", "Compliance change affecting Helios", "Budget overrun on Orion", "Integration failure on Vega API"])
+riskSeverityCol = Col("Severity", ["High", "Medium", "High", "Critical", "Medium", "Low"])
+riskImpactCol = Col("Impact", ["Schedule +3 weeks", "Schedule +2 weeks", "Budget +$45K", "Rework +$80K", "Budget +$30K", "Schedule +1 week"])
+riskMitigationCol = Col("Mitigation", ["Hiring 2 contractors", "Escalated to vendor PM", "Change control board", "Legal review initiated", "Weekly budget review", "Fallback integration plan"])
+
+deadlinesSection = Card([deadlinesHeader, deadlinesList], "sunk")
+deadlinesHeader = Heading("Deadlines — Next 2 Weeks", "h3")
+deadlinesList = ListBlock([dl1, dl2, dl3, dl4, dl5], "number")
+dl1 = ListItem("Cipher — Final Code Review", "Sep 30 | Owner: Aisha Foster", null, null)
+dl2 = ListItem("Phoenix — Stakeholder Demo", "Oct 2 | Owner: Sarah Chen", null, null)
+dl3 = ListItem("Helios — Production Readiness", "Oct 5 | Owner: Elena Rodriguez", null, null)
+dl4 = ListItem("Atlas — Penetration Testing", "Oct 8 | Owner: Marcus Webb", null, null)
+dl5 = ListItem("Nova — Design Sign-off", "Oct 10 | Owner: Priya Patel", null, null)
+
+deliverySection = Card([deliveryHeader, deliveryChart], "sunk")
+deliveryHeader = Heading("Delivery Pace (Last 6 Sprints)", "h3")
+deliveryChart = LineChart(sprintLabels, [storyPointsSeries, completedSeries], "linear", "Sprint", "Story Points")
+sprintLabels = ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"]
+storyPointsSeries = Series("Committed", [120, 115, 130, 125, 118, 122])
+completedSeries = Series("Completed", [95, 108, 112, 120, 98, 115])
+
+blockedSection = Card([blockedHeader, blockedList], "sunk")
+blockedHeader = Heading("Blocked Work Items", "h3")
+blockedList = ListBlock([block1, block2, block3, block4], "number")
+block1 = ListItem("Atlas — Auth Module Integration", "Blocked: Pending security team review (3 days)", null, "Unblock")
+block2 = ListItem("Helios — Database Migration", "Blocked: Waiting for AWS quota approval (5 days)", null, "Unblock")
+block3 = ListItem("Phoenix — Payment Gateway", "Blocked: Third-party API rate limit (2 days)", null, "Unblock")
+block4 = ListItem("Nova — Load Testing", "Blocked: Test environment provisioning (4 days)", null, "Unblock")
+
+actions = Buttons([exportBtn, requestPeopleBtn, archiveBtn])
+exportBtn = Button("Export Review", null, "secondary", "medium")
+requestPeopleBtn = Button("Request Resources", null, "primary", "medium")
+archiveBtn = Button("Archive Completed", null, "tertiary", "medium")

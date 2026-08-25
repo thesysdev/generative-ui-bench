@@ -1,0 +1,42 @@
+root = Card([header, budgetOverview, spendingAnalysis, topExpense, monthSelector, addExpenseAction, followUps], "card", "column", "l")
+
+header = CardHeader("Monthly Budget Check", "October 2023")
+
+budgetOverview = Card([progressText, budgetProgress], "sunk", "column", "s")
+progressText = TextContent("Spent **$2,450** of **$3,000** monthly budget", "large-heavy")
+budgetProgress = Progress(81, "81% of budget used")
+
+spendingAnalysis = Card([analysisHeading, categoryChart], "clear", "column", "m")
+analysisHeading = Heading("Spending by Category", "h3")
+categoryChart = PieChart(catLabels, catValues, "donut")
+catLabels = ["Housing", "Food", "Transport", "Entertainment", "Utilities"]
+catValues = [1200, 450, 300, 250, 250]
+
+topExpense = Callout("warning", "Largest Expense", "Your highest spend this month was **Rent ($1,200)**, accounting for 49% of your total budget.")
+
+monthSelector = Card([monthLabel, monthButtons], "clear", "row", "m", "center", "between")
+monthLabel = TextContent("Change View:", "small-heavy")
+monthButtons = Buttons([prevMonth, nextMonth])
+prevMonth = Button("September", null, "secondary", "normal", "small")
+nextMonth = Button("November", null, "secondary", "normal", "small")
+
+addExpenseAction = DialogBlock("Add Expense", "Log a new transaction", "Enter the details of your purchase below.", [expenseForm], "primary")
+
+expenseForm = Form("add-expense", formButtons, [amountField, categoryField, dateField])
+amountField = FormControl("Amount", amountInput)
+amountInput = Input("amount", "0.00", "number")
+categoryField = FormControl("Category", catSelect)
+catSelect = Select("category", [optHousing, optFood, optTrans, optEnt, optUtil], "Select category")
+optHousing = SelectItem("housing", "Housing")
+optFood = SelectItem("food", "Food")
+optTrans = SelectItem("trans", "Transport")
+optEnt = SelectItem("ent", "Entertainment")
+optUtil = SelectItem("util", "Utilities")
+dateField = FormControl("Date", datePicker)
+datePicker = DatePicker("date")
+formButtons = Buttons([saveBtn])
+saveBtn = Button("Save Expense", null, "primary")
+
+followUps = FollowUpBlock([suggest1, suggest2])
+suggest1 = FollowUpItem("Show me a breakdown of food spending")
+suggest2 = FollowUpItem("Set a new budget limit for November")

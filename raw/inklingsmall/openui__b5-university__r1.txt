@@ -1,0 +1,105 @@
+root = Card([header, deptTabs, enrollmentChart, appsRow, rateCallout, revenueText, compareSection, courseRow, facultyTable, riskList, scholarshipBar, housingProgress, eventsList, givingChart, waitChart, actionsRow], "card", "column", "l")
+
+header = CardHeader("University Administrator Overview", "2025 Academic Year • All Departments")
+
+deptTabs = Tabs([artsTab, sciTab, engTab])
+artsTab = TabItem("arts", "Arts & Humanities", [deptArts])
+sciTab = TabItem("sciences", "Sciences", [deptSci])
+engTab = TabItem("engineering", "Engineering", [deptEng])
+deptArts = Card([deptArtsHeader, deptArtsStats], "clear")
+deptArtsHeader = CardHeader("Arts & Humanities")
+deptArtsStats = TextContent("Enrollment: 3,420 • Applications: 3,200 • Acceptance: 38%", "default")
+deptSci = Card([deptSciHeader, deptSciStats], "clear")
+deptSciHeader = CardHeader("Sciences")
+deptSciStats = TextContent("Enrollment: 5,100 • Applications: 4,100 • Acceptance: 31%", "default")
+deptEng = Card([deptEngHeader, deptEngStats], "clear")
+deptEngHeader = CardHeader("Engineering")
+deptEngStats = TextContent("Enrollment: 3,680 • Applications: 2,800 • Acceptance: 29%", "default")
+
+enrollLabels = ["2020", "2021", "2022", "2023", "2024"]
+enrollSeries = Series("Enrollment", [12400, 12800, 13100, 13500, 14200])
+enrollmentChart = LineChart(enrollLabels, [enrollSeries], "linear", "Year", "Students")
+
+appLabels = ["Arts", "Sciences", "Engineering", "Business"]
+appSeries = Series("Applications", [3200, 4100, 2800, 3900])
+appsRow = Card([appChart, waitChart], "card", "row", "m")
+appChart = BarChart(appLabels, [appSeries], "grouped", "Program", "Applications")
+
+rateCallout = TextCallout("info", "Acceptance Rate", "34.2% admitted overall • 38% Arts • 31% Sciences • 29% Engineering")
+
+revenueText = TextContent("Tuition Revenue This Year: $42.8M", "large-heavy")
+
+compareSection = Card([compareHeading, compareRow], "sunk")
+compareHeading = Heading("This Semester vs Last", "h3")
+compareRow = Card([thisSem, lastSem], "clear", "row")
+thisSem = Card([thisTitle, thisStats], "card")
+thisTitle = Heading("This Semester", "h4")
+thisStats = TextContent("14,200 students • 3,100 applications • $42.8M tuition • 91% housing", "default")
+lastSem = Card([lastTitle, lastStats], "card")
+lastTitle = Heading("Last Semester", "h4")
+lastStats = TextContent("13,500 students • 2,950 applications • $40.1M tuition • 86% housing", "default")
+
+courseLabels = ["Intro Bio", "Calc I", "Modern Hist", "Data Sci", "Lit Crit"]
+courseSeries = Series("Capacity %", [92, 78, 65, 88, 54])
+courseRow = Card([courseChart, facultyTable], "card", "row", "l")
+courseChart = HorizontalBarChart(courseLabels, [courseSeries], "grouped", "Course", "% Full")
+
+facultyNameCol = Col("Faculty", ["Dr. Alvarez", "Dr. Brooks", "Dr. Chen", "Dr. Davis"])
+facultyLoadCol = Col("Courses", [3, 2, 4, 2])
+facultyStudentsCol = Col("Students", [120, 85, 210, 95])
+facultyTable = Table([facultyNameCol, facultyLoadCol, facultyStudentsCol])
+
+risk1 = ListItem("Jordan M.", "GPA 1.8 • 2 absences")
+risk2 = ListItem("Sam K.", "GPA 2.1 • 3 absences")
+risk3 = ListItem("Avery L.", "GPA 1.9 • 1 absence")
+riskList = ListBlock([risk1, risk2, risk3], "number")
+
+scholarshipLabels = ["Used", "Remaining"]
+scholarshipValues = [4.2, 1.8]
+scholarshipBar = SingleStackedBarChart(scholarshipLabels, scholarshipValues)
+
+housingProgress = Progress(91, "Housing Occupancy")
+
+event1 = ListItem("Career Fair", "Oct 14 • Student Center")
+event2 = ListItem("Homecoming", "Oct 22 • Stadium")
+event3 = ListItem("Alumni Mixer", "Oct 28 • Library")
+eventsList = ListBlock([event1, event2, event3], "image")
+
+givingLabels = ["2021", "2022", "2023", "2024"]
+givingSeries = Series("Giving ($M)", [1.2, 1.5, 1.8, 2.3])
+givingChart = BarChart(givingLabels, [givingSeries], "grouped", "Year", "$ Millions")
+
+waitLabels = ["Arts", "Sciences", "Engineering", "Business"]
+waitSeries = Series("Waitlisted", [45, 120, 78, 62])
+waitChart = BarChart(waitLabels, [waitSeries], "grouped", "Program", "Waitlisted")
+
+approveCourse = DialogBlock("Approve New Course", "New Course Approval", "Review and approve proposed offerings.", [approveForm], "default")
+approveForm = Form("approve-course", approveButtons, [courseNameField, deptField, creditsField])
+courseNameField = FormControl("Course Name", courseNameInput)
+courseNameInput = Input("course_name", "Introduction to Data Ethics")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("dept", [artsItem, sciItem, engItem, busItem], "Select department")
+artsItem = SelectItem("arts", "Arts & Humanities")
+sciItem = SelectItem("sciences", "Sciences")
+engItem = SelectItem("engineering", "Engineering")
+busItem = SelectItem("business", "Business")
+creditsField = FormControl("Credits", creditsInput)
+creditsInput = Input("credits", "3", "number")
+approveButtons = Buttons([approveBtn, cancelBtn])
+approveBtn = Button("Approve", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+sendMsg = DialogBlock("Send Message", "Message Student Group", "Broadcast to a selected student group.", [msgForm], "default")
+msgForm = Form("message-group", msgButtons, [groupSelect, msgText])
+groupSelect = FormControl("Student Group", groupDropdown)
+groupDropdown = Select("group", [group1, group2, group3], "Choose group")
+group1 = SelectItem("first-year", "First-Year Cohort")
+group2 = SelectItem("at-risk", "At-Risk Students")
+group3 = SelectItem("honors", "Honors Program")
+msgText = FormControl("Message", msgArea)
+msgArea = TextArea("message", "Enter message...", 3)
+msgButtons = Buttons([sendBtn, cancelMsgBtn])
+sendBtn = Button("Send", null, "primary")
+cancelMsgBtn = Button("Cancel", null, "tertiary")
+
+actionsRow = Card([approveCourse, sendMsg], "clear", "row")

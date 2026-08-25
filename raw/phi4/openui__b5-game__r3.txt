@@ -1,0 +1,130 @@
+```openui
+root = Card([
+    playerStatus,
+    revenueOverview,
+    sessionLengthChart,
+    bestSellingItems,
+    serverHealth,
+    crashRateChart,
+    liveEvents,
+    playerReports,
+    banAppeals,
+    currencyInflation,
+    experimentResults,
+    patchNotesForm,
+    regionFocusButtons,
+    hotfixButton
+])
+
+playerStatus = Card([
+    CardHeader("Player Status"),
+    Card([onlinePlayers, dailyActive, monthlyActive], "sunk")
+])
+
+onlinePlayers = Heading("Players Online", "h4")
+dailyActive = Badge("Daily Active: 12,345", "info")
+monthlyActive = Badge("Monthly Active: 98,765", "info")
+
+revenueOverview = Card([
+    CardHeader("Revenue Overview"),
+    Card([todaysRevenue, revenuePerUser], "sunk")
+])
+
+todaysRevenue = Heading("Revenue Today", "h4")
+todaysRevenueValue = TextContent("$15,340.45")
+revenuePerUser = Heading("Revenue Per User", "h4")
+revenuePerUserValue = TextContent("$1.25")
+
+sessionLengthChart = Card([
+    CardHeader("Session Length"),
+    LineChart(["Day 1", "Day 2", ..., "Day 14"], [sessionLengthSeries], "linear", "Date", "Minutes")
+])
+
+sessionLengthSeries = Series("Average Session Length", [30, 32, 29, 35, ..., 34])
+
+bestSellingItems = Card([
+    CardHeader("Best-Selling Items"),
+    Table([
+        itemIdCol, 
+        itemNameCol, 
+        itemUnitsCol
+    ])
+])
+
+itemIdCol = Col("Item ID", ["001", "002", "003"])
+itemNameCol = Col("Item Name", ["Sword of Destiny", "Mystic Shield", "Elixir of Life"])
+itemUnitsCol = Col("Units Sold", [1200, 950, 875])
+
+serverHealth = Card([
+    CardHeader("Server Health"),
+    Table([
+        regionCol, 
+        healthCol
+    ])
+])
+
+regionCol = Col("Region", ["NA", "EU", "ASIA", "SA"])
+healthCol = Col("Health", ["Good", "Moderate", "Critical", "Good"])
+
+crashRateChart = Card([
+    CardHeader("Crash Rate by Version"),
+    BarChart(["v1.0", "v1.1", "v1.2", "v1.3"], [crashRateSeries], "stacked", "Version", "Crashes")
+])
+
+crashRateSeries = Series("Crash Count", [120, 80, 50, 30])
+
+liveEvents = Card([
+    CardHeader("Live Events"),
+    ListBlock([
+        ListItem("Event A: Active", "Starts 3 PM", icon: "🎈"),
+        ListItem("Event B: Upcoming", "Starts 6 PM", icon: "🚀")
+    ], variant: "image")
+])
+
+playerReports = Card([
+    CardHeader("Player Reports"),
+    ListBlock([
+        ListItem("Report 1: Spamming", actionLabel: "Review"),
+        ListItem("Report 2: Harassment", actionLabel: "Review")
+    ])
+])
+
+banAppeals = Card([
+    CardHeader("Ban Appeals"),
+    ListBlock([
+        ListItem("Appeal 1: Wrongful Ban", actionLabel: "Review"),
+        ListItem("Appeal 2: Account Loss", actionLabel: "Review")
+    ])
+])
+
+currencyInflation = Card([
+    CardHeader("Currency Inflation"),
+    TextContent("Inflation Rate: 2.3% over the past month", size: "large-heavy")
+])
+
+experimentResults = Card([
+    CardHeader("Experiment Results"),
+    Heading("Experiment 1: New Loot System", "h5"),
+    TextContent("Success: 75% increase in player engagement", size: "medium"),
+    Heading("Experiment 2: Social Features", "h5"),
+    TextContent("Pending results", size: "medium")
+])
+
+patchNotesForm = Form("patch-notes", formButtons, [
+    FormControl("Patch Notes", patchNotesTextArea)
+])
+
+patchNotesTextArea = TextArea("notes", placeholder: "Draft your patch notes here", rows: 10)
+formButtons = Buttons([submitPatchNotes])
+
+submitPatchNotes = Button("Submit Notes", null, "primary")
+
+regionFocusButtons = Buttons([
+    Button("Focus NA", null, "secondary"),
+    Button("Focus EU", null, "secondary"),
+    Button("Focus ASIA", null, "secondary"),
+    Button("Focus SA", null, "secondary")
+])
+
+hotfixButton = Button("Ship Hotfix", null, "destructive")
+```

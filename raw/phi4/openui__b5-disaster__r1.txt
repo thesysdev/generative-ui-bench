@@ -1,0 +1,223 @@
+```openui
+root = Card([
+    activeIncidents,
+    overallSeveritySummary,
+    resourcesAvailable,
+    shelterStatus,
+    evacuationRoutesStatus,
+    weatherForecast,
+    rescueCasualtiesSummary,
+    volunteerAssignments,
+    donationsReceived,
+    aidRequests,
+    communicationChannelsStatus,
+    roadsClosed,
+    hospitalsStatus,
+    openTasks,
+    requestResources,
+    broadcastUpdate,
+    focusOnZone,
+    fileSituationReport
+])
+
+activeIncidents = Card([
+    incidentsHeading,
+    incidentsTable
+], "sunk", "column", "m")
+incidentsHeading = Heading("Active Incidents by Zone", "h3")
+incidentsTable = Table([
+    zoneCol,
+    severityCol
+])
+zoneCol = Col("Zone", ["North", "South", "East", "West"])
+severityCol = Col("Severity", ["High", "Medium", "Low", "Critical"])
+
+overallSeveritySummary = Card([
+    severityHeading,
+    severityChart
+], "sunk", "column", "m")
+severityHeading = Heading("Overall Severity Summary", "h3")
+severityChart = PieChart(["Low", "Medium", "High", "Critical"], [10, 20, 5, 2], "donut")
+
+resourcesAvailable = Card([
+    resourcesHeading,
+    vehiclesCol,
+    personnelCol,
+    suppliesCol
+], "sunk", "column", "m")
+resourcesHeading = Heading("Resources Available", "h3")
+vehiclesCol = Col("Vehicles", ["10", "8", "5", "7"])
+personnelCol = Col("Personnel", ["50", "40", "30", "45"])
+suppliesCol = Col("Supplies", ["1000", "800", "500", "700"])
+
+shelterStatus = Card([
+    shelterHeading,
+    shelterTable
+], "sunk", "column", "m")
+shelterHeading = Heading("Shelter Status", "h3")
+shelterTable = Table([
+    shelterNameCol,
+    capacityCol,
+    occupancyCol
+])
+shelterNameCol = Col("Shelter", ["A", "B", "C", "D"])
+capacityCol = Col("Capacity", ["100", "150", "120", "130"])
+occupancyCol = Col("Occupancy", ["75", "100", "90", "110"])
+
+evacuationRoutesStatus = Card([
+    routesHeading,
+    routesTable
+], "sunk", "column", "m")
+routesHeading = Heading("Evacuation Routes Status", "h3")
+routesTable = Table([
+    routeNameCol,
+    statusCol
+])
+routeNameCol = Col("Route", ["1", "2", "3", "4"])
+statusCol = Col("Status", ["Clear", "Congested", "Closed", "Clear"])
+
+weatherForecast = Card([
+    weatherHeading,
+    weatherChart
+], "sunk", "column", "m")
+weatherHeading = Heading("Weather Forecast (Next 48 hours)", "h3")
+weatherChart = LineChart(["Hour 1", "Hour 24", "Hour 48"], [weatherSeries], "linear", "Time", "Weather")
+weatherSeries = Series("Forecast", [20, 25, 22])
+
+rescueCasualtiesSummary = Card([
+    rescueHeading,
+    rescueTable
+], "sunk", "column", "m")
+rescueHeading = Heading("Rescue and Casualties Summary", "h3")
+rescueTable = Table([
+    rescuedCol,
+    casualtiesCol
+])
+rescuedCol = Col("Rescued", ["200", "180", "150", "220"])
+casualtiesCol = Col("Casualties", ["5", "2", "3", "4"])
+
+volunteerAssignments = Card([
+    volunteersHeading,
+    volunteersTable
+], "sunk", "column", "m")
+volunteersHeading = Heading("Volunteers on Duty", "h3")
+volunteersTable = Table([
+    volunteerNameCol,
+    assignmentCol
+])
+volunteerNameCol = Col("Name", ["Alice", "Bob", "Charlie", "Diana"])
+assignmentCol = Col("Assignment", ["Zone A", "Zone B", "Zone C", "Zone D"])
+
+donationsReceived = Card([
+    donationsHeading,
+    donationsTable
+], "sunk", "column", "m")
+donationsHeading = Heading("Donations Received", "h3")
+donationsTable = Table([
+    donationTypeCol,
+    amountCol
+])
+donationTypeCol = Col("Donation Type", ["Food", "Clothing", "Medicine", "Water"])
+amountCol = Col("Amount", ["$5000", "$3000", "$4000", "$4500"])
+
+aidRequests = Card([
+    aidHeading,
+    aidTable
+], "sunk", "column", "m")
+aidHeading = Heading("Aid Requests Awaiting Action", "h3")
+aidTable = Table([
+    requestTypeCol,
+    quantityCol
+])
+requestTypeCol = Col("Request Type", ["Food", "Tents", "Medicine"])
+quantityCol = Col("Quantity", ["1000", "50", "200"])
+
+communicationChannelsStatus = Card([
+    communicationHeading,
+    communicationTable
+], "sunk", "column", "m")
+communicationHeading = Heading("Communication Channels", "h3")
+communicationTable = Table([
+    channelNameCol,
+    statusCol
+])
+channelNameCol = Col("Channel", ["Radio", "Internet", "Cellular"])
+statusCol = Col("Status", ["Up", "Down", "Up"])
+
+roadsClosed = Card([
+    roadsHeading,
+    roadsTable
+], "sunk", "column", "m")
+roadsHeading = Heading("Roads Closed", "h3")
+roadsTable = Table([
+    roadNameCol,
+    reasonCol
+])
+roadNameCol = Col("Road", ["Main St", "2nd Ave", "3rd Lane"])
+reasonCol = Col("Reason", ["Flooding", "Debris", "Landslip"])
+
+hospitalsStatus = Card([
+    hospitalsHeading,
+    hospitalsTable
+], "sunk", "column", "m")
+hospitalsHeading = Heading("Nearby Hospitals", "h3")
+hospitalsTable = Table([
+    hospitalNameCol,
+    freeBedsCol
+])
+hospitalNameCol = Col("Hospital", ["City Hospital", "Westside Clinic", "Eastside Medical"])
+freeBedsCol = Col("Free Beds", ["50", "20", "30"])
+
+openTasks = Card([
+    tasksHeading,
+    tasksTable
+], "sunk", "column", "m")
+tasksHeading = Heading("Open Tasks", "h3")
+tasksTable = Table([
+    taskNameCol,
+    assigneeCol
+])
+taskNameCol = Col("Task", ["Deliver Supplies", "Evacuate Zone A", "Setup Shelter B"])
+assigneeCol = Col("Assignee", ["Team A", "Team B", "Team C"])
+
+requestResources = Form("request-resource", resourceButtons, [
+    resourceTypeField,
+    quantityField
+])
+resourceTypeField = FormControl("Resource Type", resourceTypeInput)
+resourceTypeInput = Input("resource_type", null, "text")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", null, "number")
+resourceButtons = Buttons([requestButton])
+requestButton = Button("Request Resources", null, "primary")
+
+broadcastUpdate = Form("broadcast-update", updateButtons, [
+    messageField
+])
+messageField = FormControl("Message", messageInput)
+messageInput = TextArea("message", null, 3)
+updateButtons = Buttons([broadcastButton])
+broadcastButton = Button("Broadcast Update", null, "primary")
+
+focusOnZone = Form("focus-zone", zoneButtons, [
+    zoneField
+])
+zoneField = FormControl("Zone", zoneSelect)
+zoneSelect = Select("zone", [zoneOptions], "Select Zone")
+zoneOptions = [
+    SelectItem("North", "North"),
+    SelectItem("South", "South"),
+    SelectItem("East", "East"),
+    SelectItem("West", "West")
+]
+zoneButtons = Buttons([focusButton])
+focusButton = Button("Focus on Zone", null, "primary")
+
+fileSituationReport = Form("file-report", reportButtons, [
+    reportField
+])
+reportField = FormControl("Report", reportTextArea)
+reportTextArea = TextArea("report", null, 5)
+reportButtons = Buttons([fileButton])
+fileButton = Button("File Report", null, "primary")
+```

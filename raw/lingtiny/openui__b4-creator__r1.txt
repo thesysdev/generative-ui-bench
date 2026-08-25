@@ -1,0 +1,180 @@
+root = Card([
+  header,
+  overview,
+  metrics,
+  bestPosts,
+  audienceSplit,
+  schedule,
+  bestHour,
+  comments,
+  earnings,
+  collaborations,
+  schedulePost,
+  platformFilter,
+])
+
+header = CardHeader("Creator Studio", "Cross-platform content dashboard")
+
+overview = Card([
+  CardHeader("Overview", "Monthly summary"),
+  TextContent("Your creator studio tracks all key metrics across platforms. This dashboard gives you a real-time view of growth, engagement, and performance."),
+])
+
+metrics = Card([
+  CardHeader("Key Metrics", "This month"),
+  kpiRow,
+  engagementRate,
+  platformSplit,
+])
+
+kpiRow = Table([
+  Col("Metric", ["Followers", "Growth", "Engagement Rate"]),
+  Col("Value", ["24,500", "+12.4%", "6.8%"]),
+])
+
+engagementRate = Card([
+  CardHeader("Engagement Rate", "6.8%"),
+  TextContent("Your average engagement rate is above the industry standard. Top-performing content continues to drive higher interaction."),
+])
+
+platformSplit = Card([
+  CardHeader("Audience by Platform", "Platform distribution"),
+  audienceBars,
+])
+
+audienceBars = HorizontalBarChart(
+  labels,
+  [
+    Series("TikTok", [45]),
+    Series("Instagram", [30]),
+    Series("YouTube", [15]),
+    Series("Twitter", [10]),
+  ],
+  "grouped",
+  "Platform",
+  "Audience %",
+)
+
+labels = ["TikTok", "Instagram", "YouTube", "Twitter"]
+
+bestPosts = Card([
+  CardHeader("Best Posts This Month", "Highest reach"),
+  bestPostTable,
+])
+
+bestPostTable = Table([
+  Col("Post", ["Reach", "Views", "Likes"]),
+  Col("Post 1", [45000, 32000, 8900]),
+  Col("Post 2", [38000, 27000, 7200]),
+  Col("Post 3", [29000, 21000, 5800]),
+])
+
+schedule = Card([
+  CardHeader("Scheduled Posts", "This week"),
+  scheduledPosts,
+])
+
+scheduledPosts = Table([
+  Col("Post", ["Date", "Platform", "Status"]),
+  Col("Post A", ["Mon 10 AM", "Instagram", "Scheduled"]),
+  Col("Post B", ["Tue 2 PM", "TikTok", "Scheduled"]),
+  Col("Post C", ["Wed 9 AM", "YouTube", "Scheduled"]),
+])
+
+bestHour = Card([
+  CardHeader("Best Posting Time", "Based on history"),
+  TextContent("The optimal time to post is 10:00 AM local time. This is when your audience is most active and engagement peaks."),
+])
+
+comments = Card([
+  CardHeader("Comments Waiting", "Awaiting reply"),
+  commentList,
+])
+
+commentList = ListBlock([
+  ListItem("Someone liked your latest post on TikTok", "Engaged with your content"),
+  ListItem("A follower asked about your workflow", "Pending response"),
+  ListItem("Comment on YouTube video", "Awaiting reply"),
+], "image")
+
+earnings = Card([
+  CardHeader("Earnings This Month", "Revenue"),
+  earningsTable,
+])
+
+earningsTable = Table([
+  Col("Source", ["Ad Revenue", "Sponsorships", "Merch"]),
+  Col("Amount", ["$1,200", "$850", "$320"]),
+])
+
+collaborations = Card([
+  CardHeader("Pending Collaboration Requests", "Active"),
+  collabList,
+])
+
+collabList = ListBlock([
+  ListItem("Brand partnership with EcoWear", "Potential collab"),
+  ListItem("Guest appearance on Podcast", "Pending reply"),
+  ListItem("Co-branded product line", "Awaiting approval"),
+])
+
+schedulePost = Card([
+  CardHeader("Schedule a Post", "Create and schedule content"),
+  schedulePostForm,
+])
+
+schedulePostForm = Form("schedule-post", [
+  FormControl("Caption", captionInput, "What will your audience see?"),
+  FormControl("Time", timeSelect, "When should it go live?"),
+  FormControl("Platform", platformSelect, "Which platform?"),
+], [
+  Buttons([
+    Button("Schedule Post", null, "primary"),
+    Button("Cancel", null, "tertiary"),
+  ]),
+])
+
+captionInput = Input("caption", "Enter your caption here...")
+timeSelect = Select("time", [
+  SelectItem("10:00 AM", "10:00 AM"),
+  SelectItem("12:00 PM", "12:00 PM"),
+  SelectItem("3:00 PM", "3:00 PM"),
+  SelectItem("6:00 PM", "6:00 PM"),
+], "Choose time")
+
+platformFilter = Card([
+  CardHeader("Platform Filter", "Narrow by platform"),
+  platformFilterForm,
+])
+
+platformFilterForm = Form("platform-filter", [
+  FormControl("Platform", platformSelect, "Filter by platform"),
+], [
+  Buttons([
+    Button("Apply Filter", null, "primary"),
+    Button("Clear", null, "tertiary"),
+  ]),
+])
+
+platformSelect = Select("platform", [
+  SelectItem("All Platforms", "All"),
+  SelectItem("TikTok", "TikTok"),
+  SelectItem("Instagram", "Instagram"),
+  SelectItem("YouTube", "YouTube"),
+  SelectItem("Twitter", "Twitter"),
+], "Select platform")
+
+root = Card([
+  header,
+  overview,
+  metrics,
+  bestPosts,
+  audienceSplit,
+  schedule,
+  bestHour,
+  comments,
+  earnings,
+  collaborations,
+  schedulePost,
+  platformFilter,
+], "clear", "column", "l")

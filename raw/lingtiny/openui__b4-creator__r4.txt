@@ -1,0 +1,78 @@
+root = Card([topSection, platformFilter, bottomSection], "card", "row", "m")
+
+topSection = CardHeader("Creator Studio", "Cross-platform content creation dashboard")
+
+platformFilter = Select("platformFilter", [platformS, platformM, platformL], "Filter by platform")
+
+platformS = SelectItem("All Platforms", "All Platforms")
+platformM = SelectItem("Instagram", "Instagram")
+platformL = SelectItem("LinkedIn", "LinkedIn")
+
+followerTotal = Progress(87, "Followers")
+followerGrowth = Progress(12, "Growth")
+followerGrowth = TextCallout("info", "Growth", "+12% vs last month")
+
+engagementRate = Progress(4.7, "Engagement Rate")
+engagementRate = TextCallout("success", "Engagement Rate", "4.7% average")
+
+bestPosts = Card([bestPostsHeading, bestPostsChart], "sunk")
+bestPostsHeading = Heading("Best Posts This Month", "h3")
+bestPostsChart = HorizontalBarChart(["Post 1", "Post 2", "Post 3", "Post 4"], [reach1, reach2, reach3, reach4], "grouped", "Post", "Reach")
+reach1 = 12500; reach2 = 9800; reach3 = 7600; reach4 = 5400
+
+audienceSplit = Card([audienceSplitHeading, audienceSplitChart], "sunk")
+audienceSplitHeading = Heading("Audience Split by Platform", "h3")
+audienceSplitChart = PieChart(["Instagram", "LinkedIn"], [58, 42], "pie")
+
+scheduledPosts = Card([scheduledPostsHeading, scheduledPostsList], "sunk")
+scheduledPostsHeading = Heading("Posts Scheduled This Week", "h3")
+scheduledPostsList = ListBlock([
+  ListItem("Instagram Reels", "Saturday 2PM", "Scheduled"),
+  ListItem("LinkedIn Article", "Monday 9AM", "Scheduled"),
+  ListItem("Instagram Carousel", "Wednesday 11AM", "Scheduled"),
+], "image")
+
+bestHour = Card([bestHourHeading, bestHourBadge], "sunk")
+bestHourHeading = Heading("Best Hour to Post", "h3")
+bestHourBadge = Badge("Tuesday 10AM", "success")
+bestHourBadge = TextCallout("success", "Best Hour", "Tuesday 10AM has highest reach")
+
+commentsWaiting = Card([commentsWaitingHeading, commentsWaitingList], "sunk")
+commentsWaitingHeading = Heading("Comments Waiting for Reply", "h3")
+commentsWaitingList = ListBlock([
+  ListItem("New comment on Post 3", "2 min ago", null, "Reply"),
+  ListItem("Comment on Post 7", "15 min ago", null, "Reply"),
+  ListItem("Question on Post 12", "1 hour ago", null, "Reply"),
+], "image")
+
+earnings = Card([earningsHeading, earningsChart], "sunk")
+earningsHeading = Heading("Earnings This Month", "h3")
+earningsChart = HorizontalBarChart(["Revenue", "Sponsorships", "Merch", "Tips"], [3200, 1200, 450, 180], "grouped", "Income", "USD")
+
+pendingCollabs = Card([pendingCollabsHeading, pendingCollabsList], "sunk")
+pendingCollabsHeading = Heading("Pending Collaboration Requests", "h3")
+pendingCollabsList = ListBlock([
+  ListItem("Brand partnership - EcoStyle", "2 days ago", null, "Accept"),
+  ListItem("Product collab - TechGadgets", "5 days ago", null, "Accept"),
+  ListItem("Sponsored post - FitnessApp", "1 week ago", null, "Review"),
+], "image")
+
+schedulePost = Card([schedulePostHeading, schedulePostForm], "sunk")
+schedulePostHeading = Heading("Schedule a Post", "h3")
+schedulePostForm = Form("schedulePost", [scheduleCaption, scheduleTime], [captionInput, timeSelect])
+scheduleCaption = FormControl("Caption", captionInput, "Enter your caption")
+scheduleTime = FormControl("Time", timeSelect, "Choose a posting time")
+captionInput = Input("caption", "Enter your caption here", "text")
+timeSelect = Select("time", [timeMorning, timeAfternoon, timeEvening], "Choose time")
+timeMorning = SelectItem("Morning (9-12PM)", "Morning")
+timeAfternoon = SelectItem("Afternoon (1-5PM)", "Afternoon")
+timeEvening = SelectItem("Evening (6-10PM)", "Evening")
+
+root = Card([topSection, platformFilter, followerSection, engagementSection, bestPosts, audienceSplit, scheduledPosts, bestHour, commentsWaiting, earnings, pendingCollabs, schedulePost], "card", "row", "m")
+
+followerSection = Card([followerTotal, followerGrowth], "sunk")
+followerTotal = TextCallout("neutral", "Followers", "8,700 total")
+followerGrowth = TextCallout("success", "Growth", "+12% vs last month")
+
+engagementSection = Card([engagementRate], "sunk")
+engagementRate = TextCallout("success", "Engagement Rate", "4.7% average")

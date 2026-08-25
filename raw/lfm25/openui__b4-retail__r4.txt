@@ -1,0 +1,260 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Store Manager Dashboard",
+      subtitle: "Daily Operations Overview"
+    ),
+    
+    // 1. Sales today vs target
+    Card(
+      children: [
+        CardHeader(
+          title: "Sales Today vs Target",
+          subtitle: "Revenue Performance"
+        ),
+        TextContent(
+          text: `Current Sales: $12,450\nTarget: $15,000\nStatus: ${"Meeting" if 12450 > 15000 else "Below" if 12450 > 10000 else "On Track"}`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 2. Foot traffic
+    Card(
+      children: [
+        CardHeader(
+          title: "Foot Traffic Today",
+          subtitle: "Customers Served"
+        ),
+        TextContent(
+          text: `Total Visitors: 847\nPeak Hour: 2:00 PM ($210)\nAverage per hour: 189`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 3. Best sellers
+    Card(
+      children: [
+        CardHeader(
+          title: "Top Sellers",
+          subtitle: "Best Selling Products"
+        ),
+        Table(
+          columns: [
+            { label: "Product", data: "Wireless Headphones Pro" },
+            { label: "Units Sold", data: "284" },
+            { label: "Revenue", data: "$3,920" }
+          ],
+          data: [
+            { product: "Wireless Headphones Pro", units: 284, revenue: 3920 },
+            { product: "Bluetooth Speaker", units: 198, revenue: 2560 },
+            { product: "Smart Watch Plus", units: 165, revenue: 2220 },
+            { product: "USB-C Hub 3-in-1", units: 142, revenue: 1680 },
+            { product: "Noise Cancelling Earbuds", units: 118, revenue: 1536 }
+          ]
+        )
+      ]
+    ),
+    
+    // 4. Items out of stock
+    Card(
+      children: [
+        CardHeader(
+          title: "Out of Stock Items",
+          subtitle: "Items Needed Restock"
+        ),
+        Table(
+          columns: [
+            { label: "SKU", data: "SW-001" },
+            { label: "Product", data: "Wireless Keyboard" },
+            { label: "Units Remaining", data: "0" },
+            { label: "Status", data: "Critical" }
+          ],
+          data: [
+            { sku: "SW-001", product: "Wireless Keyboard", units: 0, status: "Critical" },
+            { sku: "SW-015", product: "Gaming Mouse Pro", units: 0, status: "High" },
+            { sku: "SW-022", product: "Mobile Charger", units: 5, status: "Low" }
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Staff on shift
+    Card(
+      children: [
+        CardHeader(
+          title: "Staff On Shift",
+          subtitle: "Today's Schedule"
+        ),
+        ListBlock(
+          items: [
+            { title: "Alice Johnson", role: "Manager", shift: "08:00-16:00" },
+            { title: "Bob Martinez", role: "Cashier", shift: "09:00-14:00" },
+            { title: "Carla Silva", role: "Stock", shift: "10:00-18:00" },
+            { title: "David Kim", role: "Cashier", shift: "13:00-20:00" },
+            { title: "Eva Chen", role: "Manager", shift: "07:00-15:00" }
+          ],
+          variant: "card"
+        )
+      ]
+    ),
+    
+    // 6. Average basket size
+    Card(
+      children: [
+        CardHeader(
+          title: "Average Basket Size",
+          subtitle: "Customer Spending"
+        ),
+        TextContent(
+          text: `Average Basket: $28.50\nTotal Transactions: 432\nTotal Revenue: $12,450`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 7. Returns this week
+    Card(
+      children: [
+        CardHeader(
+          title: "Returns This Week",
+          subtitle: "Quality Control"
+        ),
+        TextContent(
+          text: `Return Rate: 4.2%\nTotal Returns: 56\nMerchandise Returned: 38\nAccessories Returned: 18`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 8. Running promotions
+    Card(
+      children: [
+        CardHeader(
+          title: "Running Promotions",
+          subtitle: "Active Offers"
+        ),
+        Table(
+          columns: [
+            { label: "Promotion", data: "Summer Sale" },
+            { label: "Discount", data: "25%" },
+            { label: "Status", data: "Active" },
+            { label: "Eligible Items", data: "45 products" }
+          ],
+          data: [
+            { promo: "Summer Sale", discount: "25%", status: "Active", eligible: 45 },
+            { promo: "Back to Basics", discount: "15%", status: "Active", eligible: 32 },
+            { promo: "Free Shipping", discount: "Free", status: "Paused", eligible: 78 },
+            { promo: "Bundle Deal", discount: "20%", status: "Active", eligible: 27 }
+          ]
+        )
+      ]
+    ),
+    
+    // 9. Registers and open status
+    Card(
+      children: [
+        CardHeader(
+          title: "Register Status",
+          subtitle: "Checkout Tickets"
+        ),
+        ListBlock(
+          items: [
+            { title: "Register #101 - $1,240", open: true, transactionCount: 24 },
+            { title: "Register #102 - $890", open: false, transactionCount: 18 },
+            { title: "Register #103 - $1,750", open: true, transactionCount: 31 },
+            { title: "Register #104 - $1,120", open: true, transactionCount: 22 },
+            { title: "Register #105 - $950", open: false, transactionCount: 15 }
+          ],
+          variant: "card"
+        )
+      ]
+    ),
+    
+    // 10. Reorder item (interactive)
+    Card(
+      children: [
+        CardHeader(
+          title: "Reorder Item",
+          subtitle: "Select Product to Reorder"
+        ),
+        TextContent(
+          text: "Drag or click a product below to move to top of list.",
+          size: "small"
+        ),
+        Divider(decorative: true),
+        ListBlock(
+          items: [
+            { title: "Wireless Headphones Pro", sku: "SW-001", units: 0, reorder: true },
+            { title: "Bluetooth Speaker", sku: "BT-007", units: 42, reorder: false },
+            { title: "Smart Watch Plus", sku: "SW-003", units: 156, reorder: true },
+            { title: "USB-C Hub 3-in-1", sku: "UCH-012", units: 89, reorder: true },
+            { title: "Noise Cancelling Earbuds", sku: "NC-014", units: 98, reorder: false }
+          ]
+        )
+      ]
+    ),
+    
+    // 11. View different store (store selector)
+    Card(
+      children: [
+        CardHeader(
+          title: "Store Selection",
+          subtitle: "View Another Location"
+        ),
+        Tabs(
+          items: [
+            { value: "Main Store", label: "Main Store" },
+            { value: "West Branch", label: "West Branch" },
+            { value: "East Mall", label: "East Mall" }
+          ]
+        )
+      ]
+    ),
+    
+    // 12. This week vs last week comparison
+    Card(
+      children: [
+        CardHeader(
+          title: "This Week vs Last Week",
+          subtitle: "Comparative Metrics"
+        ),
+        Table(
+          columns: [
+            { label: "Metric", data: "Unit Sales" },
+            { label: "This Week", data: "1,245" },
+            { label: "Last Week", data: "1,089" },
+            { label: "Change", data: "+14.8%" }
+          ],
+          data: [
+            { metric: "Unit Sales", this_week: 1245, last_week: 1089, change: "+14.8%" },
+            { metric: "Total Revenue", this_week: 12450, last_week: 10980, change: "+13.6%" },
+            { metric: "Foot Traffic", this_week: 847, last_week: 780, change: "+8.3%" },
+            { metric: "Average Basket", this_week: 28.50, last_week: 26.40, change: "+8.3%" }
+          ]
+        ),
+        Card(
+          children: [
+            CardHeader(
+              title: "Weekly Comparison Summary",
+              subtitle: "At a Glance"
+            ),
+            TextContent(
+              text: `↑ 14.8% unit sales\nThis week's revenue is up 13.6%\n→ Strong performance indicates successful promotions`,
+              size: "medium"
+            )
+          ]
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "stretch",
+  wrap: true
+)
+```

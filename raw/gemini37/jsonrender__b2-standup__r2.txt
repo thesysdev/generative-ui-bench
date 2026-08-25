@@ -1,0 +1,54 @@
+{"op":"add","path":"/root","value":"standup-root"}
+{"op":"add","path":"/elements/standup-root","value":{"type":"Card","props":{"variant":"clear","gap":"l"},"children":["standup-header","missing-updates-banner","blocked-callout","submit-modal-card","feed-section"]}}
+{"op":"add","path":"/elements/standup-header","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","gap":"m"},"children":["header-text-group","header-meta-group"]}}
+{"op":"add","path":"/elements/header-text-group","value":{"type":"Card","props":{"variant":"clear","gap":"xs"},"children":["title-text","subtitle-date"]}}
+{"op":"add","path":"/elements/title-text","value":{"type":"Heading","props":{"text":"🚀 Engineering Daily Standup","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/subtitle-date","value":{"type":"TextContent","props":{"text":{"$template":"Today is **${/currentDate}** • Async check-in window ends at 11:00 AM UTC"},"size":"default"},"children":[]}}
+{"op":"add","path":"/state/currentDate","value":"Thursday, October 24, 2024"}
+{"op":"add","path":"/elements/header-meta-group","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["team-badge","timezone-badge"]}}
+{"op":"add","path":"/elements/team-badge","value":{"type":"Badge","props":{"text":"Core Platform Team (8 Members)","variant":"secondary"},"children":[]}}
+{"op":"add","path":"/elements/timezone-badge","value":{"type":"Tag","props":{"text":"UTC-8 to UTC+2","variant":"neutral","size":"sm"},"children":[]}}
+{"op":"add","path":"/elements/missing-updates-banner","value":{"type":"Card","props":{"variant":"sunk","gap":"m"},"children":["progress-stats-row","standup-progress-bar"]}}
+{"op":"add","path":"/elements/progress-stats-row","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["stats-summary","missing-badge"]}}
+{"op":"add","path":"/elements/stats-summary","value":{"type":"TextContent","props":{"text":{"$template":"**5 of 8 updates submitted** (62.5% participation)"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/missing-badge","value":{"type":"Badge","props":{"text":{"$template":"⚠️ ${/missingCount} updates still missing"},"variant":"destructive"},"children":[]}}
+{"op":"add","path":"/state/missingCount","value":3}
+{"op":"add","path":"/elements/standup-progress-bar","value":{"type":"Progress","props":{"value":63,"label":"Today's Submissions"},"children":[]}}
+{"op":"add","path":"/elements/blocked-callout","value":{"type":"Alert","props":{"title":"⚠️ Attention Needed: 1 Teammate Blocked","description":"Sarah Chen is blocked on 'OAuth 2.0 PKCE flow in iOS SDK' (waiting on Backend API contract review).","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/submit-modal-card","value":{"type":"Card","props":{"variant":"card","gap":"m"},"children":["submit-header","submit-form"]}}
+{"op":"add","path":"/elements/submit-header","value":{"type":"CardHeader","props":{"title":"Post Your Update","subtitle":"Share what you accomplished, what's on deck, and any blockers"}}}
+{"op":"add","path":"/elements/submit-form","value":{"type":"Form","props":{"name":"standupForm","buttons":"form-actions","fields":["field-name","field-role","field-yesterday","field-today","field-blocker"]},"children":[]}}
+{"op":"add","path":"/elements/field-name","value":{"type":"FormControl","props":{"label":"Your Name","input":"input-name"},"children":[]}}
+{"op":"add","path":"/elements/input-name","value":{"type":"Input","props":{"name":"author","placeholder":"e.g. Alex Miller","value":{"$bindState":"/newPost/name"}},"children":[]}}
+{"op":"add","path":"/elements/field-role","value":{"type":"FormControl","props":{"label":"Role / Area","input":"input-role"},"children":[]}}
+{"op":"add","path":"/elements/input-role","value":{"type":"Input","props":{"name":"role","placeholder":"e.g. Frontend Engineer","value":{"$bindState":"/newPost/role"}},"children":[]}}
+{"op":"add","path":"/elements/field-yesterday","value":{"type":"FormControl","props":{"label":"What did you complete yesterday?","input":"input-yesterday"},"children":[]}}
+{"op":"add","path":"/elements/input-yesterday","value":{"type":"TextArea","props":{"name":"yesterday","placeholder":"- Merged PR #402 for telemetry\n- Fixed race condition in auth cache","rows":2,"value":{"$bindState":"/newPost/yesterday"}},"children":[]}}
+{"op":"add","path":"/elements/field-today","value":{"type":"FormControl","props":{"label":"What are you working on today?","input":"input-today"},"children":[]}}
+{"op":"add","path":"/elements/input-today","value":{"type":"TextArea","props":{"name":"today","placeholder":"- Finish query batching refactor\n- Pair review with Sarah at 2 PM","rows":2,"value":{"$bindState":"/newPost/today"}},"children":[]}}
+{"op":"add","path":"/elements/field-blocker","value":{"type":"FormControl","props":{"label":"Any blockers? (Leave blank if none)","input":"input-blocker","hint":"If blocked, your update will be highlighted for the team"},"children":[]}}
+{"op":"add","path":"/elements/input-blocker","value":{"type":"Input","props":{"name":"blocker","placeholder":"e.g. None / Waiting on cloud staging access","value":{"$bindState":"/newPost/blocker"}},"children":[]}}
+{"op":"add","path":"/elements/form-actions","value":{"type":"Buttons","props":{"buttons":["submit-btn"]},"children":[]}}
+{"op":"add","path":"/elements/submit-btn","value":{"type":"Button","props":{"label":"Publish Update","variant":"primary"},"on":{"press":{"action":"pushState","params":{"statePath":"/standups","value":{"id":"$id","name":{"$state":"/newPost/name"},"role":{"$state":"/newPost/role"},"initials":"ME","time":"Just now","yesterday":{"$state":"/newPost/yesterday"},"today":{"$state":"/newPost/today"},"blocker":{"$state":"/newPost/blocker"},"isBlocked":true},"clearStatePath":"/newPost"}}},"children":[]}}
+{"op":"add","path":"/state/newPost","value":{"name":"","role":"","yesterday":"","today":"","blocker":""}}
+{"op":"add","path":"/elements/feed-section","value":{"type":"Card","props":{"variant":"clear","gap":"m"},"children":["feed-heading","updates-list"]}}
+{"op":"add","path":"/elements/feed-heading","value":{"type":"Heading","props":{"text":"Team Standup Feed","level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/updates-list","value":{"type":"Card","props":{"variant":"clear","gap":"m"},"repeat":{"statePath":"/standups","key":"id"},"children":["standup-item-card"]}}
+{"op":"add","path":"/elements/standup-item-card","value":{"type":"Card","props":{"variant":"card","gap":"m"},"children":["member-header-row","tasks-breakdown","blocker-box"]}}
+{"op":"add","path":"/elements/member-header-row","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["member-left-info","member-status-tag"]}}
+{"op":"add","path":"/elements/member-left-info","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["member-avatar","member-meta"]}}
+{"op":"add","path":"/elements/member-avatar","value":{"type":"Avatar","props":{"fallback":{"$item":"initials"}},"children":[]}}
+{"op":"add","path":"/elements/member-meta","value":{"type":"Card","props":{"variant":"clear","gap":"none"},"children":["member-name","member-time"]}}
+{"op":"add","path":"/elements/member-name","value":{"type":"TextContent","props":{"text":{"$template":"**${name}** • ${role}"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/member-time","value":{"type":"TextContent","props":{"text":{"$template":"Posted ${time}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/member-status-tag","value":{"type":"Tag","props":{"text":{"$cond":{"$item":"blocker"},"$then":"⛔ Blocked","$else":"✅ On Track"},"variant":{"$cond":{"$item":"blocker"},"$then":"danger","$else":"success"},"size":"sm"},"children":[]}}
+{"op":"add","path":"/elements/tasks-breakdown","value":{"type":"Card","props":{"variant":"sunk","gap":"s"},"children":["yesterday-text","today-text"]}}
+{"op":"add","path":"/elements/yesterday-text","value":{"type":"TextContent","props":{"text":{"$template":"**Yesterday:**\n${yesterday}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/today-text","value":{"type":"TextContent","props":{"text":{"$template":"**Today:**\n${today}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/blocker-box","value":{"type":"Alert","props":{"title":"Blocker","description":{"$item":"blocker"},"variant":"destructive"},"visible":{"$item":"blocker"},"children":[]}}
+{"op":"add","path":"/state/standups","value":[]}
+{"op":"add","path":"/state/standups/0","value":{"id":"standup-1","name":"Sarah Chen","role":"Mobile Tech Lead","initials":"SC","time":"8:42 AM","yesterday":"- Closed PR #108 (Biometrics login)\n- Refactored native Keychain bridge","today":"- Implementing OAuth 2.0 PKCE flow\n- Review PRs from iOS squad","blocker":"Waiting on backend team to deploy endpoint schemas for OAuth refresh tokens","isBlocked":true}}
+{"op":"add","path":"/state/standups/1","value":{"id":"standup-2","name":"Marcus Vance","role":"Senior Backend Engineer","initials":"MV","time":"9:05 AM","yesterday":"- Deployed rate limiting middleware v2\n- Optimized database indexes on user sessions","today":"- Deploying OAuth refresh token schema updates (unblocking Sarah)\n- Postgres replication health checks","blocker":"","isBlocked":false}}
+{"op":"add","path":"/state/standups/2","value":{"id":"standup-3","name":"Elena Rostova","role":"Staff Frontend Engineer","initials":"ER","time":"9:15 AM","yesterday":"- Released workspace analytics widget\n- Cleaned up unstyled system theme tokens","today":"- Redesigning Async Standup view\n- Sync with Design on DS 3.0 icons","blocker":"","isBlocked":false}}
+{"op":"add","path":"/state/standups/3","value":{"id":"standup-4","name":"David Kim","role":"DevOps / SRE","initials":"DK","time":"9:22 AM","yesterday":"- Upgraded EKS cluster to v1.30\n- Configured Prometheus alerts for ingress latencies","today":"- Tuning Datadog APM tracing for payment worker\n- Clean up orphaned EBS volumes","blocker":"","isBlocked":false}}
+{"op":"add","path":"/state/standups/4","value":{"id":"standup-5","name":"Priya Patel","role":"Product Designer","initials":"PP","time":"9:30 AM","yesterday":"- Finished high-fidelity mockups for Settings modal\n- Usability testing summary for team sync","today":"- User flows for multi-organization switcher\n- Design QA on staging build","blocker":"","isBlocked":false}}

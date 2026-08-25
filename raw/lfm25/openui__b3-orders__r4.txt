@@ -1,0 +1,75 @@
+```openui-lang
+root = Card([HeaderInfo(), MetricsSection(), RecentOrders(), StatusNarrower(), SearchBar(), VolumeChart(), ActionBar()])
+
+HeaderInfo = CardHeader("Operations Dashboard", "E-commerce Operations Desk")
+
+MetricsSection = Card([SummaryTitle(), OrdersToday(), RevenueToday(), AvgOrderValue(), RefundRate(), OrderVolume()])
+
+SummaryTitle = Heading("Today Summary", "h3")
+OrdersToday = TextContent("34 orders", "small")
+RevenueToday = TextContent("$128,450", "small")
+AvgOrderValue = TextContent("$3,775", "small")
+RefundRate = TextContent("3.2%", "small")
+OrderVolume = TextContent("187 orders", "small")
+
+RecentOrders = ListBlock([OrderRow()]*10)
+
+OrderRow = Card([OrderId(), OrderCustomer(), OrderTotal(), OrderStatus()])
+
+StatusNarrower = TagBlock([
+  Tag("Active", "active", "info"),
+  Tag("Shipped", "shipped", "info"),
+  Tag("Pending", "pending", "warning"),
+  Tag("Cancelled", "cancelled", "danger")
+])
+
+SearchBar = Card([SearchInput()])
+
+SearchInput = Card([TextInput("customer_name", "Enter customer name to filter...")])
+
+VolumeChart = HorizontalBarChart(
+  labels=["Week 1", "Week 2", "Week 3", "Week 4"],
+  series=[DataSeries("weekly_volume")]
+)
+
+ActionBar = Button([MarkFulfilledButton()])
+
+OrderId = TextContent("ORD-2026-0310", "small")
+OrderCustomer = TextContent("Acme Corp", "small")
+OrderTotal = TextContent("$2,340.00", "small")
+OrderStatus = TextContent("Shipped", "small")
+
+MarkFulfilledButton = Button("Mark Order Fulfilled", null, "primary")
+
+// Data sources (simulated)
+OrdersToday = [{id:"ORD-2026-0310", customer:"Acme Corp", total:"$2,340.00", status:"Shipped"},
+               {id:"ORD-2026-0311", customer:"Beta Ltd", total:"$1,890.50", status:"Pending"},
+               {id:"ORD-2026-0312", customer:"Gamma Inc", total:"$3,120.00", status:"Completed"},
+               {id:"ORD-2026-0313", customer:"Delta Co", total:"$1,560.75", status:"Cancelled"},
+               {id:"ORD-2026-0314", customer:"Epsilon LLC", total:"$2,780.00", status:"Shipped"}]
+
+RecentOrders = [
+  {id:"ORD-2026-0308", customer:"Acme Corp", total:"$2,340.00", status:"Shipped"},
+  {id:"ORD-2026-0309", customer:"Beta Ltd", total:"$1,890.50", status:"Pending"},
+  {id:"ORD-2026-0310", customer:"Gamma Inc", total:"$3,120.00", status:"Completed"},
+  {id:"ORD-2026-0311", customer:"Delta Co", total:"$1,560.75", status:"Cancelled"},
+  {id:"ORD-2026-0312", customer:"Epsilon LLC", total:"$2,780.00", status:"Shipped"},
+  {id:"ORD-2026-0313", customer:"Zeta Corp", total:"$4,120.50", status:"Pending"},
+  {id:"ORD-2026-0314", customer:"Alpha Inc", total:"$2,150.00", status:"Completed"},
+  {id:"ORD-2026-0315", customer:"Theta Ltd", total:"$1,920.00", status:"Shipped"}
+]
+
+StatusNarrowerItems = StatusNarrower.items()
+
+SearchInput = TextInput("customer_name", "Enter customer name...", placeholder="Search customers...")
+
+MarkFulfilledButton = Button("Mark Order Fulfilled", null, "primary")
+
+// Support referencing without naming conflicts
+def OrderId = OrderId()
+def OrderCustomer = OrderCustomer()
+def OrderTotal = OrderTotal()
+def OrderStatus = OrderStatus()
+
+def StatusNarrowerItems = StatusNarrower.tags
+```

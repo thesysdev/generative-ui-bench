@@ -1,0 +1,511 @@
+Here is a comprehensive single-screen CRM account page for the sales representative, covering all key account metrics, renewal warnings, activities, contacts, follow-ups, note-taking, and call logging.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "accountHeader",
+          "renewalAlert",
+          "kpiTable",
+          "stageProgress",
+          "tabNavigation"
+        ]
+      },
+      {
+        "id": "accountHeader",
+        "component": "CardHeader",
+        "title": "Acme Corp (Global Enterprise)",
+        "subtitle": "Account Owner: Sarah Jenkins • Account Tier: Tier 1 Strategic"
+      },
+      {
+        "id": "renewalAlert",
+        "component": "Alert",
+        "title": "Renewal Approaching (14 Days Remaining)",
+        "description": "Contract renewal date is October 24, 2024. Health score is strong, but procurement review is pending.",
+        "variant": "warning"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colValue",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Total Deal Value",
+          "Current Stage",
+          "Contract Renewal",
+          "Open Follow-ups"
+        ]
+      },
+      {
+        "id": "colValue",
+        "component": "Col",
+        "label": "Details",
+        "data": [
+          "$340,000 ARR",
+          "Proposal / Negotiation",
+          "Oct 24, 2024",
+          "2 pending tasks"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status / Health",
+        "data": [
+          "+15% vs last year",
+          "75% Probability",
+          "Expiring Soon",
+          "Action Required"
+        ]
+      },
+      {
+        "id": "stageProgress",
+        "component": "Progress",
+        "value": 75,
+        "label": "Deal Pipeline Progress: Proposal & Legal Review (75%)"
+      },
+      {
+        "id": "tabNavigation",
+        "component": "Tabs",
+        "items": [
+          "tabOverview",
+          "tabContacts",
+          "tabQuickActions"
+        ]
+      },
+      {
+        "id": "tabOverview",
+        "component": "TabItem",
+        "value": "overview",
+        "trigger": "Activity & Follow-ups",
+        "content": [
+          "activityHeading",
+          "activityList",
+          "tasksHeading",
+          "followUpList"
+        ]
+      },
+      {
+        "id": "activityHeading",
+        "component": "Heading",
+        "text": "Recent Activity Timeline",
+        "level": "h3"
+      },
+      {
+        "id": "activityList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "act1",
+          "act2",
+          "act3",
+          "act4"
+        ]
+      },
+      {
+        "id": "act1",
+        "component": "ListItem",
+        "title": "Oct 10: Executive Alignment Call with CTO",
+        "subtitle": "Discussed security certifications and enterprise SSO add-on pricing."
+      },
+      {
+        "id": "act2",
+        "component": "ListItem",
+        "title": "Oct 08: Redlined MSA Received from Legal",
+        "subtitle": "Indemnity clause updated and returned to Acme legal team."
+      },
+      {
+        "id": "act3",
+        "component": "ListItem",
+        "title": "Oct 03: Product Demo for Engineering Leads",
+        "subtitle": "Deep-dive into API latency and data residency capabilities."
+      },
+      {
+        "id": "act4",
+        "component": "ListItem",
+        "title": "Sep 28: Initial Renewal & Upsell Discovery Call",
+        "subtitle": "Identified expansion into EMEA regional division (additional 200 seats)."
+      },
+      {
+        "id": "tasksHeading",
+        "component": "Heading",
+        "text": "Open Follow-ups & Due Dates",
+        "level": "h3"
+      },
+      {
+        "id": "followUpList",
+        "component": "Table",
+        "columns": [
+          "colTask",
+          "colDue",
+          "colAssignee",
+          "colPriority"
+        ]
+      },
+      {
+        "id": "colTask",
+        "component": "Col",
+        "label": "Follow-up Action",
+        "data": [
+          "Send revised SOC2 Type II compliance pack",
+          "Schedule final pricing review with VP Finance",
+          "Confirm sandbox test environment credentials"
+        ]
+      },
+      {
+        "id": "colDue",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Tomorrow (Oct 12)",
+          "Oct 15, 2024",
+          "Oct 18, 2024"
+        ]
+      },
+      {
+        "id": "colAssignee",
+        "component": "Col",
+        "label": "Assignee",
+        "data": [
+          "Sarah Jenkins",
+          "Sarah Jenkins",
+          "Dave Miller (SE)"
+        ]
+      },
+      {
+        "id": "colPriority",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "High",
+          "Critical",
+          "Medium"
+        ]
+      },
+      {
+        "id": "tabContacts",
+        "component": "TabItem",
+        "value": "contacts",
+        "trigger": "Account Contacts",
+        "content": [
+          "contactsHeading",
+          "contactsTable"
+        ]
+      },
+      {
+        "id": "contactsHeading",
+        "component": "Heading",
+        "text": "Key Stakeholders & Decision Makers",
+        "level": "h3"
+      },
+      {
+        "id": "contactsTable",
+        "component": "Table",
+        "columns": [
+          "colContactName",
+          "colContactRole",
+          "colContactEmail",
+          "colContactSentiment"
+        ]
+      },
+      {
+        "id": "colContactName",
+        "component": "Col",
+        "label": "Name",
+        "data": [
+          "Marcus Vance",
+          "Elena Rostova",
+          "David Kim",
+          "Rachel Adams"
+        ]
+      },
+      {
+        "id": "colContactRole",
+        "component": "Col",
+        "label": "Role / Department",
+        "data": [
+          "Chief Technology Officer (Economic Buyer)",
+          "VP of Procurement (Decision Maker)",
+          "Lead Cloud Architect (Technical Champion)",
+          "Legal Counsel (Contract Signer)"
+        ]
+      },
+      {
+        "id": "colContactEmail",
+        "component": "Col",
+        "label": "Email",
+        "data": [
+          "mvance@acmecorp.com",
+          "erostova@acmecorp.com",
+          "dkim@acmecorp.com",
+          "radams@acmecorp.com"
+        ]
+      },
+      {
+        "id": "colContactSentiment",
+        "component": "Col",
+        "label": "Sentiment",
+        "data": [
+          "Strong Champion",
+          "Neutral (Price Sensitive)",
+          "Very Positive",
+          "Pending Review"
+        ]
+      },
+      {
+        "id": "tabQuickActions",
+        "component": "TabItem",
+        "value": "actions",
+        "trigger": "Quick Log & Notes",
+        "content": [
+          "noteFormCard",
+          "callFormCard"
+        ]
+      },
+      {
+        "id": "noteFormCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "noteFormHeader",
+          "jotNoteForm"
+        ]
+      },
+      {
+        "id": "noteFormHeader",
+        "component": "CardHeader",
+        "title": "Jot a Quick Note",
+        "subtitle": "Add meeting takeaways or internal thoughts to this account"
+      },
+      {
+        "id": "jotNoteForm",
+        "component": "Form",
+        "name": "quick-note-form",
+        "buttons": "noteButtons",
+        "fields": [
+          "noteCategoryControl",
+          "noteBodyControl"
+        ]
+      },
+      {
+        "id": "noteCategoryControl",
+        "component": "FormControl",
+        "label": "Note Category",
+        "input": "noteCategorySelect"
+      },
+      {
+        "id": "noteCategorySelect",
+        "component": "Select",
+        "name": "note_category",
+        "placeholder": "Select category",
+        "items": [
+          "optInternal",
+          "optDealRisk",
+          "optProductFeedback"
+        ]
+      },
+      {
+        "id": "optInternal",
+        "component": "SelectItem",
+        "value": "internal",
+        "label": "Internal Strategy"
+      },
+      {
+        "id": "optDealRisk",
+        "component": "SelectItem",
+        "value": "deal_risk",
+        "label": "Risk & Competition"
+      },
+      {
+        "id": "optProductFeedback",
+        "component": "SelectItem",
+        "value": "product_feedback",
+        "label": "Product Feature Request"
+      },
+      {
+        "id": "noteBodyControl",
+        "component": "FormControl",
+        "label": "Note Content",
+        "input": "noteBodyInput",
+        "hint": "Markdown formatting supported"
+      },
+      {
+        "id": "noteBodyInput",
+        "component": "TextArea",
+        "name": "note_content",
+        "placeholder": "Type your notes here...",
+        "rows": 3
+      },
+      {
+        "id": "noteButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveNoteBtn"
+        ]
+      },
+      {
+        "id": "saveNoteBtn",
+        "component": "Button",
+        "label": "Save Note",
+        "variant": "primary"
+      },
+      {
+        "id": "callFormCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "callFormHeader",
+          "logCallForm"
+        ]
+      },
+      {
+        "id": "callFormHeader",
+        "component": "CardHeader",
+        "title": "Log a Call",
+        "subtitle": "Record call outcomes and next steps"
+      },
+      {
+        "id": "logCallForm",
+        "component": "Form",
+        "name": "log-call-form",
+        "buttons": "callButtons",
+        "fields": [
+          "callContactControl",
+          "callOutcomeControl",
+          "callNotesControl"
+        ]
+      },
+      {
+        "id": "callContactControl",
+        "component": "FormControl",
+        "label": "Contact Person",
+        "input": "callContactSelect"
+      },
+      {
+        "id": "callContactSelect",
+        "component": "Select",
+        "name": "call_contact",
+        "placeholder": "Choose stakeholder",
+        "items": [
+          "optMarcus",
+          "optElena",
+          "optDavid"
+        ]
+      },
+      {
+        "id": "optMarcus",
+        "component": "SelectItem",
+        "value": "marcus_vance",
+        "label": "Marcus Vance (CTO)"
+      },
+      {
+        "id": "optElena",
+        "component": "SelectItem",
+        "value": "elena_rostova",
+        "label": "Elena Rostova (VP Procurement)"
+      },
+      {
+        "id": "optDavid",
+        "component": "SelectItem",
+        "value": "david_kim",
+        "label": "David Kim (Lead Architect)"
+      },
+      {
+        "id": "callOutcomeControl",
+        "component": "FormControl",
+        "label": "Call Outcome",
+        "input": "callOutcomeRadio"
+      },
+      {
+        "id": "callOutcomeRadio",
+        "component": "RadioGroup",
+        "name": "call_outcome",
+        "defaultValue": "connected",
+        "items": [
+          "radConnected",
+          "radLeftVoicemail",
+          "radFollowUpNeeded"
+        ]
+      },
+      {
+        "id": "radConnected",
+        "component": "RadioItem",
+        "value": "connected",
+        "label": "Connected",
+        "description": "Spoke directly with stakeholder"
+      },
+      {
+        "id": "radLeftVoicemail",
+        "component": "RadioItem",
+        "value": "left_voicemail",
+        "label": "Left Voicemail",
+        "description": "Follow-up email dispatched"
+      },
+      {
+        "id": "radFollowUpNeeded",
+        "component": "RadioItem",
+        "value": "action_required",
+        "label": "Follow-up Required",
+        "description": "Action items generated"
+      },
+      {
+        "id": "callNotesControl",
+        "component": "FormControl",
+        "label": "Call Summary & Commitments",
+        "input": "callNotesInput"
+      },
+      {
+        "id": "callNotesInput",
+        "component": "TextArea",
+        "name": "call_notes",
+        "placeholder": "Summary of discussion, objections handled, next meeting scheduled...",
+        "rows": 2
+      },
+      {
+        "id": "callButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitCallBtn",
+          "clearCallBtn"
+        ]
+      },
+      {
+        "id": "submitCallBtn",
+        "component": "Button",
+        "label": "Log Call Activity",
+        "variant": "primary"
+      },
+      {
+        "id": "clearCallBtn",
+        "component": "Button",
+        "label": "Clear",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

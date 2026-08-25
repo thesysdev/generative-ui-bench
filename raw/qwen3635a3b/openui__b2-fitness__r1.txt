@@ -1,0 +1,42 @@
+
+
+```openui-lang
+root = Card([header, stepsCard, caloriesCard, weeklyChartCard, logCard], "sunk", "column", "l")
+
+header = CardHeader("Daily Summary", "Today's fitness overview")
+
+stepsCard = Card([stepsHeading, stepsProgress, stepsDetail], "card")
+stepsHeading = Heading("Steps", "h3")
+stepsProgress = Progress(75, "7,500 of 10,000 steps")
+stepsDetail = TextContent("2,500 steps remaining to reach your daily goal", "small")
+
+caloriesCard = Card([caloriesHeading, caloriesValue, caloriesSub], "card")
+caloriesHeading = Heading("Calories Burned", "h3")
+caloriesValue = TextContent("342 kcal", "large-heavy")
+caloriesSub = TextContent("Estimated from steps and heart rate", "small")
+
+weeklyChartCard = Card([chartHeading, weeklyBar], "card")
+chartHeading = Heading("Weekly Workouts", "h3")
+weeklyBar = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "stacked", "Day", "Minutes")
+workoutSeries = Series("Workout (min)", [30, 45, 0, 60, 25, 0, 40])
+
+logCard = Card([logHeading, logForm], "card")
+logHeading = Heading("Log a Workout", "h3")
+logForm = Form("log-workout", logButtons, [typeField, durationField, intensityField])
+typeField = FormControl("Workout type", typeSelect)
+typeSelect = Select("workout_type", [runOpt, walkOpt, strengthOpt, yogaOpt], "Select type")
+runOpt = SelectItem("running", "Running")
+walkOpt = SelectItem("walking", "Walking")
+strengthOpt = SelectItem("strength", "Strength Training")
+yogaOpt = SelectItem("yoga", "Yoga")
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", "30", "number")
+intensityField = FormControl("Intensity", intensityRadio)
+intensityRadio = RadioGroup("intensity", [lowOpt, medOpt, highOpt], "medium")
+lowOpt = RadioItem("Low", "Easy pace", "low")
+medOpt = RadioItem("Medium", "Moderate effort", "medium")
+highOpt = RadioItem("High", "Hard effort", "high")
+logButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

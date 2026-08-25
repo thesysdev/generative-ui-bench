@@ -1,0 +1,49 @@
+root = Card([eventHeader, agenda, speakers, tickets, register, daysLeft], "sunk")
+eventHeader = CardHeader("Future Frontiers 2025", "March 15-17, 2025 | Grand Convention Center")
+agenda = Card([agendaHeading, timeSlots])
+agendaHeading = Heading("Agenda", "h3")
+timeSlots = Card([
+    Card([
+        TimeBlock("09:00 - 10:00", "Opening Remarks & Welcome"),
+        TimeBlock("10:00 - 11:00", "Keynote: The Future of AI"),
+    ]),
+    Card([
+        TimeBlock("11:00 - 12:00", "Breakout: Track A"),
+        TimeBlock("12:00 - 13:00", "Lunch & Networking"),
+    ]),
+    Card([
+        TimeBlock("13:00 - 14:30", "Panel: Ethical AI"),
+        TimeBlock("14:30 - 15:30", "Workshop: Building Systems"),
+    ]),
+    Card([
+        TimeBlock("16:00 - 17:00", "Closing Remarks"),
+    ]),
+], "card", "row", "m")
+speakers = Card([speakersHeading, speakerList])
+speakersHeading = Heading("Speakers", "h3")
+speakerList = Card([
+    SpeakerRow("Dr. Elena Torres", "Chief AI Officer, FutureTech"),
+    SpeakerRow("Prof. James Liu", "Lead Researcher, Neural Labs"),
+    SpeakerRow("Sarah Chen", "Product Designer, VisionAI"),
+    SpeakerRow("Mark Reynolds", "Security Lead, CyberShield"),
+])
+tickets = Card([ticketsHeading, tierList])
+ticketsHeading = Heading("Ticket Tiers", "h3")
+tierList = Card([
+    TierRow("Early Bird", "$199", "Register by March 1"),
+    TierRow("Standard", "$299", "Register by March 15"),
+    TierRow("VIP", "$499", "Early bird only"),
+])
+register = Card([registerHeading, registerForm])
+registerHeading = Heading("Register", "h3")
+registerForm = Form("register", [nameField, emailField], null)
+nameField = FormControl("Full Name", nameInput)
+nameInput = Input("name", "Your Name")
+emailField = FormControl("Work Email", emailInput)
+emailInput = Input("email", "your@email.com", "email")
+daysLeft = Card([daysHeading, daysContent])
+daysHeading = Heading("Days Remaining", "h3")
+daysContent = TextContent("12 days until the event starts")
+TimeBlock = Card([timeLabel, timeDesc], "card", "row", "m")
+SpeakerRow = Card([speakerName, speakerRole], "card", "row", "m")
+TierRow = Card([tierName, tierPrice, tierDeadline], "card", "row", "m")

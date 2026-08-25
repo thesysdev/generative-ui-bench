@@ -1,0 +1,78 @@
+root = Card([header, bedOccupancy, erWait, admissions, deptPatients, staffShift, criticalPatients, dischargeReady, orBookings, suppliesLow, actions], "card", "column", "l")
+
+header = CardHeader("Hospital Operations Command", "Live command view")
+
+bedOccupancy = Card([bedTitle, bedProgress], "sunk")
+bedTitle = Heading("Bed Occupancy", "h3")
+bedProgress = Progress(87, "87% occupied")
+
+erWait = TextCallout("warning", "ER Wait", "Current wait: 42 min")
+
+admissions = Card([admTitle, admChart], "sunk")
+admTitle = Heading("Admissions — Past 2 Weeks", "h3")
+admChart = BarChart(["W1","W2","W3","W4","W5","W6","W7","W8"], [admSeries])
+admSeries = Series("Admissions", [12,15,18,14,22,19,25,21])
+
+deptPatients = Card([deptTitle, deptTable], "sunk")
+deptTitle = Heading("Patients per Department", "h3")
+deptTable = Table([deptColName, deptColCount])
+deptColName = Col("Department", ["ICU","ER","Cardiology","Orthopedics","Neurology","General"])
+deptColCount = Col("Patients", [24,18,31,22,15,42])
+
+staffShift = Card([staffTitle, staffTable], "sunk")
+staffTitle = Heading("Staff on Shift", "h3")
+staffTable = Table([staffName, staffRole])
+staffName = Col("Name", ["Dr. Alvarez","Nurse Chen","Dr. Patel","Tech Rivera","Nurse Osei"])
+staffRole = Col("Role", ["Attending","Charge Nurse","Resident","Lab Tech","RN"])
+
+criticalPatients = Card([critTitle, critList], "sunk")
+critTitle = Heading("Critical Patients", "h3")
+critList = ListBlock([crit1, crit2, crit3])
+crit1 = ListItem("ICU-04 — Sepsis", "BP unstable, lactate rising")
+crit2 = ListItem("ER-11 — Trauma", "Head injury, GCS 9")
+crit3 = ListItem("CCU-02 — MI", "ST elevation, awaiting cath")
+
+dischargeReady = Card([dischTitle, dischList], "sunk")
+dischTitle = Heading("Ready for Discharge", "h3")
+dischList = ListBlock([disch1, disch2])
+disch1 = ListItem("Room 312 — Smith, J.", "Discharge orders signed")
+disch2 = ListItem("Room 205 — Doe, M.", "Transport arranged")
+
+orBookings = Card([orTitle, orTable], "sunk")
+orTitle = Heading("OR Bookings — Today", "h3")
+orTable = Table([orTime, orCase])
+orTime = Col("Time", ["07:30","09:15","11:00","13:30","15:45"])
+orCase = Col("Case", ["Appendectomy","C-Section","Knee Arthroscopy","Cholecystectomy","Spinal Fusion"])
+
+suppliesLow = Card([supTitle, supTags], "sunk")
+supTitle = Heading("Supplies Running Low", "h3")
+supTags = TagBlock(["IV Sets — 12 left","O2 Nasal Cannula — 8","Surgical Gowns — 5","Blood Type O — critical"])
+
+actions = Card([actionsTitle, actionButtons], "sunk")
+actionsTitle = Heading("Actions", "h3")
+actionButtons = Buttons([incidentDialog, dayDialog, transferDialog])
+
+incidentDialog = DialogBlock("File Incident", "File Incident", "Report an event to operations.", [incidentContent])
+incidentContent = Form("incident-form", incidentFormButtons, [incidentField])
+incidentField = FormControl("Details", incidentInput)
+incidentInput = TextArea("incident_details", "What happened?")
+incidentFormButtons = Buttons([incidentSubmit])
+incidentSubmit = Button("Submit Report")
+
+dayDialog = DialogBlock("Look at Another Day", "View Another Day", "Select a date to review.", [dayContent])
+dayContent = Form("day-form", dayFormButtons, [dayField])
+dayField = FormControl("Date", dayPicker)
+dayPicker = DatePicker("review_date", "single")
+dayFormButtons = Buttons([daySubmit])
+daySubmit = Button("Load Day")
+
+transferDialog = DialogBlock("Request Transfer", "Request Patient Transfer", "Initiate a transfer request.", [transferContent])
+transferContent = Form("transfer-form", transferFormButtons, [transferPatField, transferDestField])
+transferPatField = FormControl("Patient", transferPatInput)
+transferPatInput = Input("transfer_patient", "Room 312")
+transferDestField = FormControl("Destination", transferDestSelect, "Choose unit")
+transferDestSelect = Select("transfer_dest", [destICU, destER], "Choose")
+destICU = SelectItem("icu", "ICU")
+destER = SelectItem("er", "ER")
+transferFormButtons = Buttons([transferSubmit])
+transferSubmit = Button("Send Request")

@@ -1,0 +1,27 @@
+
+
+root = Card([header, thresholdAlert, searchField, inventoryTable, reorderSection], "card", "column", "m")
+
+header = CardHeader("Low Inventory Warning", "Items below the reorder threshold need attention")
+
+thresholdAlert = Callout("warning", "Reorder threshold: 10 units", "Any item with fewer than 10 units remaining triggers this warning. 6 items are currently below threshold.")
+
+searchField = FormControl("Search items", searchInput, "Filter by product name")
+searchInput = Input("search", "e.g. almond milk", "text")
+
+inventoryTable = Table([colItem, colRemaining, colThreshold, colStatus])
+colItem = Col("Item", ["Organic Almond Milk", "Cold Brew Concentrate", "Sourdough Bread", "Greek Yogurt (Plain)", "Fresh Basil", "Oat Milk"])
+colRemaining = Col("Remaining", [4, 7, 3, 6, 2, 8])
+colThreshold = Col("Threshold", [10, 10, 10, 10, 10, 10])
+colStatus = Col("Status", ["Critical", "Low", "Critical", "Low", "Critical", "Low"])
+
+reorderSection = Card([reorderHeading, reorderButtons], "sunk", "column", "s")
+reorderHeading = Heading("Reorder items", "h3")
+reorderButtons = Buttons([reorderAlmond, reorderColdBrew, reorderSourdough, reorderYogurt, reorderBasil, reorderOat, reorderAll])
+reorderAlmond = Button("Reorder: Almond Milk (4 left)", null, "secondary", "normal", "small")
+reorderColdBrew = Button("Reorder: Cold Brew (7 left)", null, "secondary", "normal", "small")
+reorderSourdough = Button("Reorder: Sourdough (3 left)", null, "secondary", "normal", "small")
+reorderYogurt = Button("Reorder: Greek Yogurt (6 left)", null, "secondary", "normal", "small")
+reorderBasil = Button("Reorder: Fresh Basil (2 left)", null, "secondary", "normal", "small")
+reorderOat = Button("Reorder: Oat Milk (8 left)", null, "secondary", "normal", "small")
+reorderAll = Button("Reorder all 6 items", null, "primary", "normal", "medium")

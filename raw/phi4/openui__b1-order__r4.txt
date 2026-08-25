@@ -1,0 +1,19 @@
+```openui
+root = Card([locationSection, deliveryDateSection, reportIssueSection])
+
+locationSection = Card([locationHeader, locationStatus])
+locationHeader = CardHeader("Current Location")
+locationStatus = TextContent("Your package is currently at the local distribution center.")
+
+deliveryDateSection = Card([deliveryDateHeader, estimatedDate])
+deliveryDateHeader = CardHeader("Estimated Delivery Date")
+estimatedDate = TextContent("Estimated delivery by tomorrow, October 10th.")
+
+reportIssueSection = DialogBlock("Report an Issue", "Delivery Problem", "If you have a problem with your delivery, please fill out this form.", [problemForm])
+problemForm = Form("issue-report", problemButtons, [descriptionField])
+descriptionField = FormControl("Description", problemInput)
+problemInput = TextArea("description", "Describe the issue with your delivery", 3)
+problemButtons = Buttons([submitIssue, cancelIssue])
+submitIssue = Button("Submit Issue", null, "primary")
+cancelIssue = Button("Cancel", null, "tertiary")
+```

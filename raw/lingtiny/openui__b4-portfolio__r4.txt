@@ -1,0 +1,117 @@
+root = Card([header, overview, statusCards, healthSummary, timeline, team, budget, risks, milestones, delivery, blocked, actions], "sunk")
+
+header = CardHeader("Project Portfolio Review", "Q3 2025 | PMO Dashboard")
+
+overview = Card([overviewHeading, overviewSummary], "sunk")
+overviewHeading = Heading("Portfolio Overview", "h2")
+overviewSummary = TextContent("12 active projects | 3 overdue milestones | $2.4M spent of $3.8M allocated | 84% team utilization | 6 risks at medium severity | 2 projects 2 weeks from deadline")
+
+statusCards = Card([statusHeading, statusCardsContent], "sunk")
+statusHeading = Heading("Project Status", "h2")
+statusCardsContent = Card([activeProjectsCard, overdueMilestonesCard, budgetCard, teamUtilizationCard, risksCard], "column", "m")
+
+activeProjectsCard = Card([activeProjectsHeading, activeProjectsList], "sunk")
+activeProjectsHeading = Heading("Active Projects", "h3")
+activeProjectsList = ListBlock([
+  ListItem("Project Alpha", "Owner: Sarah Chen | Deadline: 2025-09-15 | Health: On Track", actionLabel="View details"),
+  ListItem("Project Beta", "Owner: Marcus Webb | Deadline: 2025-09-22 | Health: At Risk", actionLabel="View details"),
+  ListItem("Project Gamma", "Owner: Elena Rodriguez | Deadline: 2025-09-28 | Health: At Risk", actionLabel="View details"),
+], "image")
+
+overdueMilestonesCard = Card([overdueMilestonesHeading, overdueMilestonesList], "sunk")
+overdueMilestonesHeading = Heading("Overdue Milestones", "h3")
+overdueMilestonesList = ListBlock([
+  ListItem("Milestone 3.1", "Project Alpha", "Overdue by 5 days"),
+  ListItem("Milestone 2.4", "Project Beta", "Overdue by 3 days"),
+], "image")
+
+budgetCard = Card([budgetHeading, budgetList], "sunk")
+budgetHeading = Heading("Budget Spent vs Allocation", "h3")
+budgetList = ListBlock([
+  ListItem("Project Alpha", "Budget: $500K | Spent: $380K | Status: On Track", "image"),
+  ListItem("Project Beta", "Budget: $350K | Spent: $290K | Status: At Risk", "image"),
+  ListItem("Project Gamma", "Budget: $400K | Spent: $310K | Status: At Risk", "image"),
+], "image")
+
+teamUtilizationCard = Card([teamUtilizationHeading, teamUtilizationList], "sunk")
+teamUtilizationHeading = Heading("Team Utilization", "h3")
+teamUtilizationList = ListBlock([
+  ListItem("Engineering", "84% utilization", "image"),
+  ListItem("Design", "91% utilization", "image"),
+  ListItem("QA", "78% utilization", "image"),
+  ListItem("PMO", "88% utilization", "image"),
+], "image")
+
+risksCard = Card([risksHeading, risksList], "sunk")
+risksHeading = Heading("Risks", "h3")
+risksList = ListBlock([
+  ListItem("Scope creep", "Medium severity", "image"),
+  ListItem("Resource contention", "High severity", "image"),
+  ListItem("Vendor delay", "Medium severity", "image"),
+], "image")
+
+healthSummary = Card([healthSummaryHeading, healthSummaryContent], "sunk")
+healthSummaryHeading = Heading("Portfolio Health Summary", "h2")
+healthSummaryContent = TextCallout("neutral", "Overall health: Caution", "Portfolio is stable but 3 projects are at risk. Recommend monitoring resource allocation and milestone deadlines closely.")
+
+timeline = Card([timelineHeading, timelineList], "sunk")
+timelineHeading = Heading("Deadlines (Next 2 Weeks)", "h2")
+timelineList = ListBlock([
+  ListItem("Project Alpha review", "2025-09-15", "image"),
+  ListItem("Project Beta review", "2025-09-22", "image"),
+  ListItem("Project Gamma review", "2025-09-28", "image"),
+], "image")
+
+team = Card([teamHeading, teamContent], "sunk")
+teamHeading = Heading("Team Utilization", "h2")
+teamContent = TextContent("84% average utilization across 4 teams. Engineering and PMO are the most utilized teams.")
+
+budget = Card([budgetHeading, budgetContent], "sunk")
+budgetHeading = Heading("Budget Spent vs Allocation", "h2")
+budgetContent = TextCallout("warning", "Budget Status", "Total spent: $2.4M of $3.8M allocated. 63% of budget consumed. Project Beta is trending over budget.")
+
+risks = Card([risksHeading, risksContent], "sunk")
+risksHeading = Heading("Risks", "h2")
+risksContent = TextCallout("danger", "Risk Alert", "3 medium-severity risks identified. 1 high-severity risk requires immediate attention. Resource contention is the most critical.")
+
+milestones = Card([milestonesHeading, milestonesList], "sunk")
+milestonesHeading = Heading("Overdue Milestones", "h2")
+milestonesList = ListBlock([
+  ListItem("Milestone 3.1", "Project Alpha", "Overdue by 5 days"),
+  ListItem("Milestone 2.4", "Project Beta", "Overdue by 3 days"),
+], "image")
+
+delivery = Card([deliveryHeading, deliveryContent], "sunk")
+deliveryHeading = Heading("Delivery Pace", "h2")
+deliveryContent = TextContent("Average delivery pace over past 6 sprints: 12 sprints completed. Velocity trend is stable with a slight downward trend in the last 3 sprints.")
+
+blocked = Card([blockedHeading, blockedContent], "sunk")
+blockedHeading = Heading("Blocked Work Items", "h2")
+blockedContent = ListBlock([
+  ListItem("Resource unavailable", "Engineering team member unavailable for 2 weeks"),
+  ListItem("Dependency blocked", "External vendor delayed by 5 days"),
+], "image")
+
+actions = Card([actionsHeading, actionsContent], "sunk")
+actionsHeading = Heading("Actions", "h2")
+actionsContent = Card([quarterSelector, requestPeopleBtn, exportBtn, archiveBtn], "column", "m")
+
+quarterSelector = Card([quarterHeading, quarterList], "sunk")
+quarterHeading = Heading("View Different Quarter", "h3")
+quarterList = ListBlock([
+  ListItem("Q3 2025", "Current quarter", "image"),
+  ListItem("Q2 2025", "Previous quarter", "image"),
+  ListItem("Q4 2025", "Next quarter", "image"),
+], "image")
+
+requestPeopleBtn = Button("Request More People for a Project", null, "primary", "medium")
+exportBtn = Button("Export Review", null, "secondary", "medium")
+archiveBtn = Button("Archive Finished Project", null, "tertiary", "medium")
+
+quarterSelector = Card([quarterHeading, quarterList], "sunk")
+quarterHeading = Heading("View Different Quarter", "h3")
+quarterList = ListBlock([
+  ListItem("Q3 2025", "Current quarter", "image"),
+  ListItem("Q2 2025", "Previous quarter", "image"),
+  ListItem("Q4 2025", "Next quarter", "image"),
+], "image")

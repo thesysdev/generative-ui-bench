@@ -1,0 +1,127 @@
+root = Card([
+  header,
+  statusRow,
+  statsGrid,
+  chartsSection,
+  categoryNav,
+  scheduleSection,
+  commentsSection,
+  newDraftSection,
+])
+
+header = CardHeader("Content Studio", "Editor's dashboard")
+
+statusRow = Card([draftStatus, publishedThisWeek, mostRead])
+
+draftStatus = Card([
+  CardHeader("Drafts", "Pending review"),
+  draftTable,
+])
+draftTable = Table([
+  Col("Title", ["The Future of AI", "Design Systems", "Content Strategy", "Community Growth"]),
+  Col("Status", ["In Review", "Ready", "Draft", "In Review"]),
+  Col("Category", ["Technology", "Design", "Strategy", "Community"]),
+])
+
+publishedThisWeek = Card([
+  CardHeader("Published This Week", "6 pieces this week"),
+  publishedTable,
+])
+publishedTable = Table([
+  Col("Title", ["AI Ethics Update", "New UI Patterns", "Mobile UX Trends", "Content Strategy", "Community Growth", "Data Insights"]),
+  Col("Status", ["Published", "Published", "Published", "Published", "Published", "Published"]),
+])
+
+mostRead = Card([
+  CardHeader("Most-Read This Month", "Top article by views"),
+  mostReadItem,
+])
+mostReadItem = Card([
+  Heading("The Future of AI", "h3"),
+  TextContent("2,840 views — 12% above the weekly average"),
+])
+
+chartsSection = Card([
+  CardHeader("Readership", "Last 30 days"),
+  readershipChart,
+])
+readershipChart = LineChart(
+  ["Week 1", "Week 2", "Week 3", "Week 4"],
+  [readershipSeries],
+  "linear",
+  "Day",
+  "Views"
+)
+readershipSeries = Series("Readership", [1200, 1800, 2400, 3100])
+
+categoryNav = Card([
+  CardHeader("Filter by Category"),
+  categoryFilter,
+])
+categoryFilter = Tabs([
+  TabItem("All", "All Categories", [overview]),
+  TabItem("Technology", "Technology", [tech]),
+  TabItem("Design", "Design", [design]),
+  TabItem("Strategy", "Strategy", [strategy]),
+  TabItem("Community", "Community", [community]),
+])
+overview = Card([
+  Heading("Overview", "h3"),
+  TextContent("Total pieces: 14. 6 published this week. 1 most-read article this month."),
+])
+tech = Card([
+  Heading("Technology", "h3"),
+  TextContent("4 pieces. 2 published this week."),
+])
+design = Card([
+  Heading("Design", "h3"),
+  TextContent("3 pieces. 1 published this week."),
+])
+strategy = Card([
+  Heading("Strategy", "h3"),
+  TextContent("3 pieces. 1 published this week."),
+])
+community = Card([
+  Heading("Community", "h3"),
+  TextContent("4 pieces. 2 published this week."),
+])
+
+scheduleSection = Card([
+  CardHeader("Schedule a Piece", "Title and publish date"),
+  scheduleForm,
+])
+scheduleForm = Form("schedule", [submitScheduleBtn], [
+  FormControl("Title", titleInput),
+  FormControl("Publish Date", datePicker),
+])
+titleInput = Input("title", "Enter article title", rules: ["Required"])
+datePicker = DatePicker("publish_date", mode: "single")
+
+submitScheduleBtn = Button("Schedule", null, "primary")
+
+commentsSection = Card([
+  CardHeader("Comments Awaiting Reply", "3 comments"),
+  commentsList,
+])
+commentsList = ListBlock([
+  ListItem("Jane Doe — 'How to structure content strategy' — 2 days ago", null, null, "Reply"),
+  ListItem("Mark Chen — 'AI ethics update needs more depth' — 3 days ago", null, null, "Reply"),
+  ListItem("Sara Kim — 'New UI patterns are promising' — 5 days ago", null, null, "Reply"),
+])
+
+newDraftSection = Card([
+  CardHeader("New Draft", "Start writing"),
+  newDraftForm,
+])
+newDraftForm = Form("new-draft", [submitNewDraftBtn], [
+  FormControl("Title", titleInput),
+  FormControl("Category", categorySelect),
+])
+categorySelect = Select("category", [
+  SelectItem("Technology", "Technology"),
+  SelectItem("Design", "Design"),
+  SelectItem("Strategy", "Strategy"),
+  SelectItem("Community", "Community"),
+], "Choose a category")
+submitNewDraftBtn = Button("Create Draft", null, "primary")
+)

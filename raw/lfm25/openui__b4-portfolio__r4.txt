@@ -1,0 +1,708 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Project Portfolio Review",
+      subtitle: "PMO Dashboard"
+    ),
+    
+    // Active Projects
+    SectionBlock(
+      sections: [
+        {
+          value: "active-projects",
+          trigger: "active-projects",
+          content: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Project: Alpha",
+                  subtitle: "Tech Platform Redesign"
+                ),
+                ListItem(
+                  title: "Alpha",
+                  subtitle: "Active",
+                  image: "https://picsum.photos/seed/project-alpha/80/40",
+                  actionLabel: "View Details"
+                )
+              ]
+            ),
+            Card(
+              children: [
+                CardHeader(
+                  title: "Project: Beta",
+                  subtitle: "Data Analytics Engine"
+                ),
+                ListItem(
+                  title: "Beta",
+                  subtitle: "Active",
+                  image: "https://picsum.photos/seed/project-beta/80/40",
+                  actionLabel: "View Details"
+                )
+              ]
+            ),
+            Card(
+              children: [
+                CardHeader(
+                  title: "Project: Gamma",
+                  subtitle: "AI Infrastructure"
+                ),
+                ListItem(
+                  title: "Gamma",
+                  subtitle: "Active",
+                  image: "https://picsum.photos/seed/project-gamma/80/40",
+                  actionLabel: "View Details"
+                )
+              ]
+            ),
+            Card(
+              children: [
+                CardHeader(
+                  title: "Project: Delta",
+                  subtitle: "Mobile App v2"
+                ),
+                ListItem(
+                  title: "Delta",
+                  subtitle: "Active",
+                  image: "https://picsum.photos/seed/project-delta/80/40",
+                  actionLabel: "View Details"
+                )
+              ]
+            ),
+          ],
+          isFoldable: true
+        },
+        {
+          value: "overdue-milestones",
+          trigger: "overdue-milestones",
+          content: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Overdue Milestones",
+                  subtitle: "Missed Deadlines"
+                ),
+                ListBlock(
+                  items: [
+                    {
+                      children: [
+                        ListItem(
+                          title: "Alpha - Sprint 5 Delivery",
+                          subtitle: "Due: 2026-04-05",
+                          image: null,
+                          actionLabel: "Update"
+                        ),
+                        ListItem(
+                          title: "Beta - API Integration",
+                          subtitle: "Due: 2026-03-28",
+                          image: null,
+                          actionLabel: "Update"
+                        ),
+                        ListItem(
+                          title: "Gamma - ML Model Training",
+                          subtitle: "Due: 2026-03-20",
+                          image: null,
+                          actionLabel: "Update"
+                        ),
+                        ListItem(
+                          title: "Delta - iOS Beta",
+                          subtitle: "Due: 2026-03-15",
+                          image: null,
+                          actionLabel: "Update"
+                        )
+                      ]
+                    }
+                  ]
+                )
+              ]
+            )
+          ],
+          isFoldable: true
+        },
+        {
+          value: "budget-vs-allocation",
+          trigger: "budget-vs-allocation",
+          content: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Budget vs Allocation",
+                  subtitle: "Cost Tracking"
+                ),
+                Table(
+                  columns: [
+                    { label: "Project", data: ["Alpha", "Beta", "Gamma", "Delta"] },
+                    { label: "Allocated Budget", data: ["$250K", "$180K", "$320K", "$190K"] },
+                    { label: "Spent", data: ["$210K", "$160K", "$280K", "$170K"] },
+                    { label: "Remaining", data: ["$40K", "$20K", "$40K", "$20K"] }
+                  ],
+                  type: "string"
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "team-utilization",
+          trigger: "team-utilization",
+          content: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Team Utilization",
+                  subtitle: "Capacity Metrics"
+                ),
+                Table(
+                  columns: [
+                    { label: "Team Member", data: ["Alice Chen", "Bob Kim", "Carol Wu", "Dan Lee"] },
+                    { label: "Utilization %", data: ["85%", "78%", "92%", "65%"] },
+                    { label: "Available Capacity", data: ["60%", "45%", "8%", "35%"] }
+                  ],
+                  type: "string"
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "risks",
+          trigger: "risks",
+          content: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Risks & Severity",
+                  subtitle: "Potential Issues"
+                ),
+                ListBlock(
+                  items: [
+                    {
+                      children: [
+                        Card(
+                          onClick: "project-risk-alpha",
+                          children: [
+                            ListItem(
+                              title: "Alpha - Technical Debt",
+                              subtitle: "High",
+                              image: null,
+                              actionLabel: "Mitigate"
+                            )
+                          ]
+                        ),
+                        Card(
+                          onClick: "project-risk-beta",
+                          children: [
+                            ListItem(
+                              title: "Beta - Vendor Delays",
+                              subtitle: "Medium",
+                              image: null,
+                              actionLabel: "Mitigate"
+                            )
+                          ]
+                        ),
+                        Card(
+                          onClick: "project-risk-gamma",
+                          children: [
+                            ListItem(
+                              title: "Gamma - Talent Shortage",
+                              subtitle: "High",
+                              image: null,
+                              actionLabel: "Add Resources"
+                            )
+                          ]
+                        ),
+                        Card(
+                          onClick: "project-risk-delta",
+                          children: [
+                            ListItem(
+                              title: "Delta - Scope Creep",
+                              subtitle: "Medium",
+                              image: null,
+                              actionLabel: "Scope Review"
+                            )
+                          ]
+                        )
+                      ]
+                    }
+                  ]
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "upcoming-deadlines",
+          trigger: "upcoming-deadlines",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Deadlines (Next 2 Weeks)",
+                  subtitle: "Imminent Dates"
+                ),
+                HorizontalBarChart(
+                  labels: ["Alpha", "Beta", "Gamma", "Delta"],
+                  series: [
+                    { category: "Alpha", values: [42] },
+                    { category: "Beta", values: [18] },
+                    { category: "Gamma", values: [33] },
+                    { category: "Delta", values: [27] }
+                  ],
+                  xLabel: "Project",
+                  yLabel: "Days until deadline"
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "delivery-pace",
+          trigger: "delivery-pace",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Delivery Pace (Last 6 Sprints)",
+                  subtitle: "Velocity Trends"
+                ),
+                Divider(orientation: "vertical", decorative: true),
+                Table(
+                  columns: [
+                    { label: "Sprint", data: ["S1", "S2", "S3", "S4", "S5", "S6"] },
+                    { label: "Completed", data: ["4/5", "5/5", "4/4", "5/5", "3/5", "5/5"] },
+                    { label: "Planned", data: ["3/4", "4/5", "3/4", "5/5", "4/4", "5/5"] },
+                    { label: "Actual", data: ["4/5", "5/5", "4/4", "5/5", "3/5", "5/5"] }
+                  ],
+                  type: "string"
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "blocked-work",
+          trigger: "blocked-work",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Blocked Work Items",
+                  subtitle: "Impediments"
+                ),
+                ListBlock(
+                  items: [
+                    {
+                      children: [
+                        ListItem(
+                          title: "Alpha - Payment Gateway",
+                          subtitle: "Blocked by vendor integration",
+                          image: null,
+                          actionLabel: "Unblock"
+                        ),
+                        ListItem(
+                          title: "Beta - Data Pipeline",
+                          subtitle: "Waiting on schema approval",
+                          image: null,
+                          actionLabel: "Unblock"
+                        ),
+                        ListItem(
+                          title: "Gamma - ML Training",
+                          subtitle: "Depends on additional data source",
+                          image: null,
+                          actionLabel: "Unblock"
+                        ),
+                        ListItem(
+                          title: "Delta - Mobile UI",
+                          subtitle: "API endpoint not ready",
+                          image: null,
+                          actionLabel: "Unblock"
+                        )
+                      ]
+                    }
+                  ]
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "health-summary",
+          trigger: "health-summary",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Portfolio Health Summary",
+                  subtitle: "One-Line Snapshot"
+                ),
+                TextCallout(
+                  variant: "neutral",
+                  title: "Health Score",
+                  description: "Overall portfolio performance indicator",
+                  visible: true
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "quarter-selector",
+          trigger: "quarter-selector",
+          children: [
+            Card(
+              children: [
+                HStack(
+                  spacing: 12,
+                  items: [
+                    Label("Q1 2026"),
+                    Label("Q2 2026"),
+                    Label("Q3 2026"),
+                    Label("Q4 2026")
+                  ]
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "request-people",
+          trigger: "request-people",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Request Additional Resources",
+                  subtitle: "Scale Team Capacity"
+                ),
+                Form(
+                  name: "resource-request",
+                  buttons: [
+                    Button(label: "Submit Request", action: "request-resources", variant: "primary", size: "medium"),
+                    Button(label: "Cancel", action: null, variant: "tertiary")
+                  ],
+                  fields: [
+                    FormControl(label: "project-name", input: "Project ID", hint: "Specify project"),
+                    FormControl(label: "additional-headcount", input: "Number", hint: "How many extra people?", type: "number"),
+                    FormControl(label: "reason", input: "Description", hint: "Why do you need more resources?", type: "text"),
+                  ]
+                )
+              ]
+            )
+          ]
+        },
+        {
+          value: "export-review",
+          trigger: "export-review",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Export Portfolio Review",
+                  subtitle: "Download as Report"
+                ),
+                Button(label: "Export PDF", action: "export-report", variant: "primary", size: "large"),
+                Button(label: "Export CSV", action: "export-csv", variant: "secondary", size: "medium"),
+                Button(label: "Skip", action: null, variant: "tertiary")
+              ]
+            )
+          ]
+        },
+        {
+          value: "archive-project",
+          trigger: "archive-project",
+          children: [
+            Card(
+              children: [
+                CardHeader(
+                  title: "Archive Finished Project",
+                  subtitle: "Close Out Completed Work"
+                ),
+                ListBlock(
+                  items: [
+                    {
+                      children: [
+                        ListItem(
+                          title: "Alpha",
+                          subtitle: "Architecture complete",
+                          image: null,
+                          actionLabel: "Archive"
+                        )
+                      ]
+                    },
+                    {
+                      children: [
+                        ListItem(
+                          title: "Beta",
+                          subtitle: "Design phase complete",
+                          image: null,
+                          actionLabel: "Archive"
+                        )
+                      ]
+                    },
+                    {
+                      children: [
+                        ListItem(
+                          title: "Gamma",
+                          subtitle: "MVP delivered",
+                          image: null,
+                          actionLabel: "Archive"
+                        )
+                      ]
+                    },
+                    {
+                      children: [
+                        ListItem(
+                          title: "Delta",
+                          subtitle: "Ready for production",
+                          image: null,
+                          actionLabel: "Archive"
+                        )
+                      ]
+                    }
+                  ]
+                )
+              ]
+            )
+          ]
+        }
+      ],
+      isFoldable: true
+    ),
+    
+    // Quarter selector at bottom (always visible)
+    Separator(),
+    Card(
+      children: [
+        CardHeader(
+          title: "Quarter View",
+          subtitle: "Filter by Time Period"
+        ),
+        HStack(spacing: 16, orientation: "row", size: "2xl")(
+          CardBlock(
+            sections: [
+              {
+                value: "q1-2026",
+                trigger: "q1-2026",
+                content: [
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Q1 2026 - Project Overview",
+                        subtitle: "Summary view for Q1"
+                      ),
+                      TextCallout(
+                        variant: "success",
+                        title: "Total Projects",
+                        description: "12 active projects across the organization",
+                        visible: true
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Top 3 Priorities",
+                        subtitle: "Focus Areas"
+                      ),
+                      Divider(),
+                      Table(
+                        columns: [
+                          { label: "Priority", data: ["Performance Optimization", "Security Hardening", "User Experience Upgrade"] },
+                          { label: "Owner", data: ["Alice Chen", "Bob Kim", "Carol Wu"] },
+                          { label: "Target Date", data: ["2026-05-01", "2026-06-15", "2026-07-30"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Budget Highlights",
+                        subtitle: "Spending vs Allocation"
+                      ),
+                      Table(
+                        columns: [
+                          { label: "Project", data: ["Alpha", "Beta", "Gamma", "Delta"] },
+                          { label: "Spent", data: ["$210K", "$160K", "$280K", "$170K"] },
+                          { label: "Allocate", data: ["$250K", "$180K", "$320K", "$190K"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  )
+                ]
+              },
+              {
+                value: "q2-2026",
+                trigger: "q2-2026",
+                content: [
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Q2 2026 - Project Overview",
+                        subtitle: "Summary view for Q2"
+                      ),
+                      TextCallout(
+                        variant: "success",
+                        title: "Total Projects",
+                        description: "10 active projects across the organization",
+                        visible: true
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Top 3 Priorities",
+                        subtitle: "Focus Areas"
+                      ),
+                      Divider(),
+                      Table(
+                        columns: [
+                          { label: "Priority", data: ["Release Preparation", "Compliance Audit", "Tech Debt Reduction"] },
+                          { label: "Owner", data: ["Dan Lee", "Eve Park", "Frank Liu"] },
+                          { label: "Target Date", data: ["2026-08-31", "2026-09-15", "2026-10-01"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Budget Highlights",
+                        subtitle: "Spending vs Allocation"
+                      ),
+                      Table(
+                        columns: [
+                          { label: "Project", data: ["Alpha", "Beta", "Gamma", "Delta", "Epsilon"] },
+                          { label: "Spent", data: ["$210K", "$160K", "$280K", "$170K", "$140K"] },
+                          { label: "Allocate", data: ["$250K", "$180K", "$320K", "$190K", "$200K"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  )
+                ]
+              },
+              {
+                value: "q3-2026",
+                trigger: "q3-2026",
+                content: [
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Q3 2026 - Project Overview",
+                        subtitle: "Summary view for Q3"
+                      ),
+                      TextCallout(
+                        variant: "success",
+                        title: "Total Projects",
+                        description: "8 active projects across the organization",
+                        visible: true
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Top 3 Priorities",
+                        subtitle: "Focus Areas"
+                      ),
+                      Divider(),
+                      Table(
+                        columns: [
+                          { label: "Priority", data: ["AI Feature Expansion", "Migration to Cloud", "Quality Assurance"] },
+                          { label: "Owner", data: ["Carol Wu", "Bob Kim", "Dan Lee"] },
+                          { label: "Target Date", data: ["2026-11-30", "2026-12-15", "2026-10-25"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Budget Highlights",
+                        subtitle: "Spending vs Allocation"
+                      ),
+                      Table(
+                        columns: [
+                          { label: "Project", data: ["Alpha", "Beta", "Gamma", "Delta", "Zeta"] },
+                          { label: "Spent", data: ["$210K", "$160K", "$280K", "$170K", "$150K"] },
+                          { label: "Allocate", data: ["$250K", "$180K", "$320K", "$190K", "$220K"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  )
+                ]
+              },
+              {
+                value: "q4-2026",
+                trigger: "q4-2026",
+                content: [
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Q4 2026 - Project Overview",
+                        subtitle: "Summary view for Q4"
+                      ),
+                      TextCallout(
+                        variant: "success",
+                        title: "Total Projects",
+                        description: "6 active projects approaching year-end",
+                        visible: true
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Top 3 Priorities",
+                        subtitle: "Focus Areas"
+                      ),
+                      Divider(),
+                      Table(
+                        columns: [
+                          { label: "Priority", data: ["Final Release", "Scalability Improvements", "Vendor Consolidation"] },
+                          { label: "Owner", data: ["Alice Chen", "Eve Park", "Frank Liu"] },
+                          { label: "Target Date", data: ["2026-12-20", "2026-12-10", "2026-11-30"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  ),
+                  Card(
+                    children: [
+                      CardHeader(
+                        title: "Budget Highlights",
+                        subtitle: "Spending vs Allocation"
+                      ),
+                      Table(
+                        columns: [
+                          { label: "Project", data: ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta"] },
+                          { label: "Spent", data: ["$210K", "$160K", "$280K", "$170K", "$140K", "$130K"] },
+                          { label: "Allocate", data: ["$250K", "$180K", "$320K", "$190K", "$200K", "$240K"] }
+                        ],
+                        type: "string"
+                      )
+                    ]
+                  )
+                ]
+              }
+            ),
+            Separator()
+          ]
+        )
+      ],
+      isFoldable: true
+    )
+  ],
+  variant: "card",
+  direction: "column",
+  gap: "m"
+]
+```

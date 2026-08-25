@@ -1,0 +1,40 @@
+root = Card([header, statsRow, blockedAlerts, updatesList, postSection], "card", "column", "m")
+
+header = CardHeader("Async Standup", "Tuesday, December 17, 2024")
+
+statsRow = Card([postedBadge, missingBadge], "clear", "row", "s", "start")
+postedBadge = Badge("5 / 8 posted", "default")
+missingBadge = Badge("3 missing", "destructive")
+
+blockedAlerts = Card([blockedHeader, blockedList], "sunk", "column", "s")
+blockedHeader = Heading("Blocked", "h3")
+blockedList = Card([marcusBlock, alexBlock], "column", "s")
+marcusBlock = Alert("Marcus Johnson", "Database migration dependency — waiting on infra team to approve schema changes. ETA: tomorrow.", "warning")
+alexBlock = Alert("Alex Rivera", "Staging environment down — deployment pipeline halted. Incident #4521 created.", "warning")
+
+updatesList = Card([updatesHeader, updatesItems], "column", "s")
+updatesHeader = Heading("Today's Updates", "h3")
+updatesItems = ListBlock([sarahItem, priyaItem, emmaItem, jamesItem, ninaItem])
+
+sarahItem = ListItem("Sarah Chen — Frontend", "Completed navigation component. Starting dashboard widget integration. PR #234 open for review.", null, "View")
+priyaItem = ListItem("Priya Patel — Design", "Finalized mobile wireframes for checkout flow. Shared Figma link with team. Handoff to frontend tomorrow.", null, "View")
+emmaItem = ListItem("Emma Wilson — Product", "Prepped sprint planning doc. Updated roadmap with Q1 priorities. Sync with stakeholders at 2pm.", null, "View")
+jamesItem = ListItem("James Kim — QA", "Automated 12 new test cases. Regression suite passing at 94%. Investigating flaky auth tests.", null, "View")
+ninaItem = ListItem("Nina Rodriguez — PM", "Standup written but not yet posted. Catching up on backlog grooming after morning meetings.", null, "View")
+
+postSection = Card([postHeader, updateForm], "sunk", "column", "m")
+postHeader = Heading("Post Your Update", "h3")
+
+updateForm = Form("standup-form", formButtons, [todayField, progressField, blockField])
+todayField = FormControl("What did you do yesterday?", yesterdayInput, "Keep it brief — 1-3 bullet points")
+yesterdayInput = TextArea("yesterday", "- Completed...\n- Started...")
+
+progressField = FormControl("What are you doing today?", todayInput, "Focus areas and priorities")
+todayInput = TextArea("today", "- Working on...\n- Reviewing...")
+
+blockField = FormControl("Any blockers?", blockerInput, "Leave blank if none")
+blockerInput = TextArea("blockers", "None")
+
+formButtons = Buttons([submitBtn, draftBtn], "row")
+submitBtn = Button("Post Update", null, "primary", "normal", "medium")
+draftBtn = Button("Save Draft", null, "secondary", "normal", "medium")

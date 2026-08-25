@@ -1,0 +1,60 @@
+The user wants a job posting page for a design role. Let me break down what I need:
+
+1. Role title and team - CardHeader or Heading
+2. Short role description - TextContent or MarkDownRenderer
+3. Main qualifications sought - ListBlock or SectionBlock
+4. Salary range - TextContent or Badge
+5. Way to apply with name, email, and resume link - Form with Input fields
+6. Way to share the posting - Buttons with share button
+
+Let me build this as a clean, professional job posting page.
+
+I need to make sure:
+- root = Card(...) is first
+- All variables are defined and referenced
+- All arguments are positional
+- Everything is reachable from root
+
+Let me plan the structure:
+- root = Card([header, description, qualifications, salary, applyForm, shareActions])
+- header = CardHeader with title and team
+- description = TextContent
+- qualifications = SectionBlock or ListBlock
+- salary = TextContent or Badge
+- applyForm = Form with name, email, resume link fields
+- shareActions = Buttons
+
+Let me write this out carefully.
+root = Card([header, description, qualifications, salarySection, applyForm, shareActions], "card", "column", "m")
+
+header = CardHeader("Senior Product Designer", "Design Team · San Francisco, CA · Full-time")
+
+description = MarkDownRenderer("We're looking for a Senior Product Designer to join our growing design team. You'll shape the end-to-end experience for millions of users, working closely with product managers and engineers to turn ambitious ideas into polished, intuitive interfaces. This role offers the opportunity to lead design initiatives, mentor junior designers, and make a lasting impact on our product direction.", "clear")
+
+qualifications = SectionBlock([qualItem], false)
+qualItem = SectionItem("qualifications", "Qualifications", [qualList])
+qualList = ListBlock([q1, q2, q3, q4, q5, q6], "number")
+q1 = ListItem("5+ years of product design experience", "Proficiency with Figma and modern design systems")
+q2 = ListItem("Strong portfolio", "Demonstrating end-to-end product thinking and user research")
+q3 = ListItem("Experience with design systems", "Building and maintaining scalable component libraries")
+q4 = ListItem("Collaborative mindset", "Comfortable working cross-functionally with PMs and engineers")
+q5 = ListItem("Data-informed approach", "Ability to validate design decisions with user testing and metrics")
+q6 = ListItem("Bachelor's degree or equivalent", "In design, HCI, or a related field")
+
+salarySection = Card([salaryHeading, salaryValue], "sunk")
+salaryHeading = Heading("Compensation", "h3")
+salaryValue = TextContent("$145,000 – $185,000 per year, plus equity and benefits", "default")
+
+applyForm = Form("apply-form", formButtons, [nameField, emailField, resumeField])
+nameField = FormControl("Full name", nameInput, null)
+nameInput = Input("name", "Jane Smith", "text")
+emailField = FormControl("Email address", emailInput, "We'll only use this for application purposes")
+emailInput = Input("email", "jane@example.com", "email")
+resumeField = FormControl("Portfolio or resume link", resumeInput, "Share a link to your portfolio, resume, or LinkedIn")
+resumeInput = Input("resume", "https://yourportfolio.com", "url")
+formButtons = Buttons([applyBtn], "row")
+applyBtn = Button("Submit Application", null, "primary")
+
+shareActions = Buttons([shareBtn, copyBtn], "row")
+shareBtn = Button("Share this posting", null, "secondary")
+copyBtn = Button("Copy link", null, "tertiary")

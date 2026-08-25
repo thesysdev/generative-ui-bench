@@ -1,0 +1,138 @@
+root = Card([header, mainTabs])
+header = CardHeader("University Administration Overview", "Fall 2025 — Live Dashboard")
+mainTabs = Tabs([overviewTab, academicsTab, financeTab, actionsTab])
+
+overviewTab = TabItem("overview", "Overview", [enrollmentSection, applicationsSection, acceptanceSection, semesterCompareSection])
+enrollmentSection = Card([enrollmentHeading, enrollmentChart], "sunk")
+enrollmentHeading = Heading("Total Enrollment — 5 Year Trend", "h3")
+enrollmentChart = LineChart([2021, 2022, 2023, 2024, 2025], [enrollSeries], "natural", "Academic Year", "Students")
+enrollSeries = Series("Total Enrollment", [18200, 18650, 19100, 19800, 20450])
+
+applicationsSection = Card([applicationsHeading, applicationsChart], "sunk")
+applicationsHeading = Heading("Applications by Program", "h3")
+applicationsChart = HorizontalBarChart([programCS, programBio, programEcon, programBiz, programNursing, programPsy], [appSeries])
+appSeries = Series("Applications", [4200, 2100, 1800, 3600, 2900, 2400])
+
+acceptanceSection = Card([acceptanceHeading, acceptanceProgress], "sunk")
+acceptanceHeading = Heading("Acceptance Rate", "h3")
+acceptanceProgress = Progress(34, "Acceptance rate: 34% (7,140 of 21,000 applicants)")
+
+semesterCompareSection = Card([semesterHeading, semesterTable], "sunk")
+semesterHeading = Heading("This Semester vs Last Semester", "h3")
+semesterTable = Table([metricCol, thisSemCol, lastSemCol])
+metricCol = Col("Metric", ["Enrollment", "New Students", "Avg. Class Size", "Retention Rate", "Tuition Revenue"])
+thisSemCol = Col("Fall 2025", ["20,450", "3,120", "27.4", "93.2%", "$91.8M"])
+lastSemCol = Col("Spring 2025", ["19,800", "2,860", "28.1", "92.5%", "$88.6M"])
+
+academicsTab = TabItem("academics", "Academics", [courseFillSection, teachingLoadSection, riskSection, waitlistSection])
+
+courseFillSection = Card([courseFillHeading, courseFillTable], "sunk")
+courseFillHeading = Heading("Course Offering Capacity", "h3")
+courseFillTable = Table([courseCol, capacityCol, enrolledCol, fillCol])
+courseCol = Col("Course", ["CS101", "BIO210", "ECON150", "ART305", "MATH220", "PSY101"])
+capacityCol = Col("Capacity", [120, 80, 150, 40, 100, 200], "number")
+enrolledCol = Col("Enrolled", [118, 76, 149, 32, 95, 198], "number")
+fillCol = Col("Fill %", ["98%", "95%", "99%", "80%", "95%", "99%"])
+
+teachingLoadSection = Card([teachingHeading, teachingTable], "sunk")
+teachingHeading = Heading("Teaching Load by Faculty", "h3")
+teachingTable = Table([facultyCol, coursesCol, studentsCol, hoursCol])
+facultyCol = Col("Faculty", ["Dr. Chen", "Dr. Patel", "Prof. Rivera", "Dr. Novak", "Prof. Adams"])
+coursesCol = Col("Courses", [3, 4, 2, 3, 5], "number")
+studentsCol = Col("Total Students", [280, 410, 150, 265, 520], "number")
+hoursCol = Col("Credit Hours", [9, 12, 6, 9, 15], "number")
+
+riskSection = Card([riskHeading, riskList], "sunk")
+riskHeading = Heading("Students at Academic Risk", "h3")
+riskList = ListBlock([riskItem1, riskItem2, riskItem3, riskItem4])
+riskItem1 = ListItem("Marcus Lee", "GPA 1.8 — Academic probation, missed 3 assignments")
+riskItem2 = ListItem("Sofia Ramirez", "GPA 1.9 — Attendance below 60%")
+riskItem3 = ListItem("Tyler Brooks", "GPA 2.0 — Failing 2 core courses")
+riskItem4 = ListItem("Aisha Khan", "GPA 1.7 — Financial hold, at risk of withdrawal")
+
+waitlistSection = Card([waitlistHeading, waitlistChart], "sunk")
+waitlistHeading = Heading("Waitlisted Students per Program", "h3")
+waitlistChart = HorizontalBarChart([programCS, programBio, programEcon, programBiz, programNursing, programPsy], [waitlistSeries])
+waitlistSeries = Series("Waitlisted", [85, 22, 14, 60, 95, 30])
+
+programCS = "Computer Science"
+programBio = "Biology"
+programEcon = "Economics"
+programBiz = "Business"
+programNursing = "Nursing"
+programPsy = "Psychology"
+
+financeTab = TabItem("finance", "Finance & Campus", [tuitionSection, scholarshipSection, housingSection, eventsSection, alumniSection])
+
+tuitionSection = Card([tuitionHeading, tuitionCallout], "sunk")
+tuitionHeading = Heading("Tuition Revenue — FY2025", "h3")
+tuitionCallout = TextCallout("success", "$182.4M Collected", "Up 6% year over year, on pace against the $185M annual target")
+
+scholarshipSection = Card([scholarshipHeading, scholarshipProgress], "sunk")
+scholarshipHeading = Heading("Scholarship Budget Utilization", "h3")
+scholarshipProgress = Progress(72, "Scholarship budget used: $14.4M of $20M")
+
+housingSection = Card([housingHeading, housingProgress], "sunk")
+housingHeading = Heading("Housing Occupancy", "h3")
+housingProgress = Progress(91, "Housing occupancy: 91% (4,550 of 5,000 beds)")
+
+eventsSection = Card([eventsHeading, eventsList], "sunk")
+eventsHeading = Heading("Campus Events This Month", "h3")
+eventsList = ListBlock([eventItem1, eventItem2, eventItem3, eventItem4])
+eventItem1 = ListItem("Homecoming Weekend", "Oct 10-12 — Stadium & Quad")
+eventItem2 = ListItem("Career Fair", "Oct 15 — Student Union Ballroom")
+eventItem3 = ListItem("Guest Lecture: AI Ethics", "Oct 21 — Science Hall Auditorium")
+eventItem4 = ListItem("Alumni Networking Night", "Oct 28 — Alumni Center")
+
+alumniSection = Card([alumniHeading, alumniChart], "sunk")
+alumniHeading = Heading("Alumni Giving — Past 4 Years", "h3")
+alumniChart = BarChart([2022, 2023, 2024, 2025], [alumniSeries], "grouped", "Fiscal Year", "USD (Millions)")
+alumniSeries = Series("Alumni Giving ($M)", [8.2, 9.6, 11.3, 13.1])
+
+actionsTab = TabItem("actions", "Actions", [deptFocusCard, approveCourseCard, messageGroupCard])
+
+deptFocusCard = Card([deptFocusHeading, deptForm], "sunk")
+deptFocusHeading = Heading("Focus on a Department", "h3")
+deptForm = Form("dept_focus", deptFormButtons, [deptField])
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [deptCS, deptBio, deptEcon, deptArt, deptMath, deptPsy], "Choose a department")
+deptCS = SelectItem("cs", "Computer Science")
+deptBio = SelectItem("bio", "Biology")
+deptEcon = SelectItem("econ", "Economics")
+deptArt = SelectItem("art", "Art")
+deptMath = SelectItem("math", "Mathematics")
+deptPsy = SelectItem("psy", "Psychology")
+deptFormButtons = Buttons([deptFocusBtn])
+deptFocusBtn = Button("View Department", null, "primary")
+
+approveCourseCard = Card([approveHeading, approveForm], "sunk")
+approveHeading = Heading("Approve a New Course", "h3")
+approveForm = Form("approve_course", approveButtons, [courseNameField, courseDeptField, creditsField, descField])
+courseNameField = FormControl("Course Name", courseNameInput)
+courseNameInput = Input("course_name", "e.g. Introduction to Data Ethics")
+courseDeptField = FormControl("Department", courseDeptSelect)
+courseDeptSelect = Select("course_department", [deptCS, deptBio, deptEcon, deptArt, deptMath, deptPsy], "Choose a department")
+creditsField = FormControl("Credits", creditsSlider)
+creditsSlider = Slider("credits", "discrete", 1, 6, 1, [3])
+descField = FormControl("Description", descTextArea)
+descTextArea = TextArea("description", "Brief course description", 4)
+approveButtons = Buttons([submitCourseBtn, cancelCourseBtn])
+submitCourseBtn = Button("Submit for Approval", null, "primary")
+cancelCourseBtn = Button("Cancel", null, "tertiary")
+
+messageGroupCard = Card([messageHeading, messageForm], "sunk")
+messageHeading = Heading("Send Message to Student Group", "h3")
+messageForm = Form("message_group", messageButtons, [groupField, subjectField, bodyField])
+groupField = FormControl("Recipient Group", groupSelect)
+groupSelect = Select("group", [groupFreshman, groupSenior, groupAtRisk, groupAll], "Select a group")
+groupFreshman = SelectItem("freshman", "Freshman Class")
+groupSenior = SelectItem("senior", "Senior Class")
+groupAtRisk = SelectItem("atrisk", "Academic Risk List")
+groupAll = SelectItem("all", "All Students")
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Message subject")
+bodyField = FormControl("Message", bodyTextArea)
+bodyTextArea = TextArea("message", "Type your message here", 5)
+messageButtons = Buttons([sendBtn, saveDraftBtn])
+sendBtn = Button("Send Message", null, "primary")
+saveDraftBtn = Button("Save Draft", null, "secondary")

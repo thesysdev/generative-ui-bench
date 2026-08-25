@@ -1,0 +1,75 @@
+```openui-lang
+root = Card([
+    hiringOverviewHeader,
+    currentHeadcount,
+    openRoles,
+    pipelineCandidates,
+    avgTimeToHire,
+    headcountByDept,
+    interviewsThisWeek,
+    attritionLast6Months,
+    openNewRoleButton
+], "card", "row", "l")
+
+hiringOverviewHeader = CardHeader("Hiring Overview", "Current snapshot & insights")
+
+currentHeadcount = Card([
+    TextContent("Current Headcount: 452 employees", "large"),
+    Tag("452", null, null, "success")
+], "sunk")
+
+openRoles = Card([
+    Heading("Open Roles", "h3"),
+    Table([deptCol, roleCol])
+], "sunk")
+
+deptCol = Col("Department", ["Engineering", "Marketing", "Sales", "HR", "Operations"])
+roleCol = Col("Open Roles", ["3", "2", "1", "4", "2"])
+
+pipelineCandidates = Card([
+    Heading("Candidates by Pipeline Stage", "h3"),
+    BarChart(["Interview", "Offer", "Rejection"], [stageSeries], "grouped", "Stage", "Candidates")
+], "sunk")
+
+stageSeries = Series("Interview", [45])
+stageSeries = Series("Offer", [20])
+stageSeries = Series("Rejection", [30])
+
+avgTimeToHire = Card([
+    TextContent("Average Time to Hire: 42 days", "large"),
+    Tag("42 days", null, null, "info")
+], "sunk")
+
+headcountByDept = Card([
+    Heading("Headcount by Department", "h3"),
+    BarChart(["Engineering", "Marketing", "Sales", "HR", "Operations"], [deptSeries], "grouped", "Department", "Headcount")
+], "sunk")
+
+deptSeries = Series("Engineering", 150)
+deptSeries = Series("Marketing", 80)
+deptSeries = Series("Sales", 120)
+deptSeries = Series("HR", 90)
+deptSeries = Series("Operations", 62)
+
+interviewsThisWeek = Card([
+    Heading("Interviews Scheduled This Week", "h3"),
+    TextContent("5 interviews scheduled", "large"),
+    Tag("5", null, null, "success")
+], "sunk")
+
+attritionLast6Months = Card([
+    Heading("Attrition Over Past 6 Months", "h3"),
+    PieChart(["Departments", "Engineering", "Marketing", "Sales", "HR", "Operations"], [attritionPct], "donut")
+], "sunk")
+
+attritionPct = Series("Engineering", 5)
+attritionPct = Series("Marketing", 3)
+attritionPct = Series("Sales", 4)
+attritionPct = Series("HR", 2)
+attritionPct = Series("Operations", 1)
+
+openNewRoleButton = Buttons([
+    Button("Open New Role", "open_new_role", "primary")
+], "column")
+
+```

@@ -1,0 +1,243 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header section
+    CardHeader(
+      title: "Logistics Board",
+      subtitle: "Shipment Tracking Dashboard"
+    ),
+    
+    // Shipments in transit
+    Segment(
+      id: "transit-shipments",
+      children: [
+        CardHeader(
+          title: "Shipments in Transit",
+          subtitle: "Current active shipments"
+        ),
+        ShipmentsTable(),
+      ]
+    ),
+    
+    // Delayed shipments section
+    Segment(
+      id: "delayed-shipments",
+      children: [
+        CardHeader(
+          title: "Delayed Shipments",
+          subtitle: "Shipments beyond expected ETA"
+        ),
+        DelayedShipmentsList(),
+      ]
+    ),
+    
+    // On-time percentage
+    StatsRow(
+      title: "Performance Metrics",
+      subtitle: "Key Indicators",
+      children: [
+        StatCard(
+          title: "On-Time Delivery",
+          value: onTimePercentage,
+          unit: "%",
+          color: "success"
+        ),
+        StatCard(
+          title: "Average Cost per Shipment",
+          value: avgCost,
+          unit: "USD",
+          color: "secondary"
+        ),
+        StatCard(
+          title: "Weekly Volume (Last 2 Months)",
+          value: weeklyVolume,
+          unit: "shipments",
+          color: "info"
+        ),
+        StatCard(
+          title: "Last Updated",
+          value: lastRefresh,
+          unit: null,
+          color: "warning"
+        )
+      ]
+    ),
+    
+    // Volume split by carrier
+    StatsRow(
+      title: "Volume by Carrier",
+      subtitle: "Shipping Distribution",
+      children: [
+        CardColumnBreakdown(carriers: carrierVolumes)
+      ]
+    ),
+    
+    // Search functionality
+    SearchPanel(),
+    
+    // Flag shipment feature
+    FlagControls(),
+    
+    // Footer with summary
+    SummaryFooter()
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "mid"
+)
+
+// Shipments in transit - card header and table
+ShipmentsTable = Card(
+  children: [
+    CardHeader(
+      title: "Active Shipments",
+      subtitle: "All shipments currently en route"
+    ),
+    Table(
+      columns: [
+        { label: "ID", type: "string" },
+        { label: "Origin", type: "string" },
+        { label: "Destination", type: "string" },
+        { label: "ETA", type: "string" },
+        { label: "Status", type: "string" }
+      ],
+      data: shipmentsData
+    )
+  ]
+)
+
+// Delayed shipments list
+DelayedShipmentsList = Card(
+  children: [
+    CardHeader(
+      title: "Delayed Shipments",
+      subtitle: "Shipments beyond ETA threshold"
+    ),
+    FilterableList(
+      items: delayedShipments,
+      sortBy: "eta",
+      filter: searchQuery
+    )
+  ]
+)
+
+// Stat card for on-time percentage
+StatCard = Card(
+  children: [
+    TextContent(text: `${onTimePercentage}%`, size: "large"),
+    TextContent(text: `This month`, style: "subtitle")
+  ]
+)
+
+// Carrier volume breakdown
+CardColumnBreakdown = Card(
+  children: [
+    Divider(decorative: true),
+    Column(
+      id: "carrier-col1",
+      title: "Carrier A",
+      value: carrierAVolume,
+      icon: "truck"
+    ),
+    Divider(decorative: true),
+    Column(
+      id: "carrier-col2",
+      title: "Carrier B",
+      value: carrierBVolume,
+      icon: "truck"
+    ),
+    Divider(decorative: true),
+    Column(
+      id: "carrier-col3",
+      title: "Carrier C",
+      value: carrierCVolume,
+      icon: "truck"
+    )
+  ]
+)
+
+// Search panel
+SearchPanel = Card(
+  children: [
+    TextInput(
+      placeholder: "Search by route, origin, or destination...",
+      value: searchQuery,
+      onChange: updateSearch
+    ),
+    Button(
+      label: "Apply Search",
+      action: runSearch,
+      variant: "primary"
+    )
+  ]
+)
+
+// Flag controls
+FlagControls = Card(
+  children: [
+    Button(
+      label: "Flag Shipment",
+      action: flagShipment,
+      variant: "tertiary"
+    ),
+    Divider(decorative: true),
+    Button(
+      label: "Add New Shipment",
+      action: addShipment,
+      variant: "secondary"
+    )
+  ]
+)
+
+// Summary footer
+SummaryFooter = Card(
+  children: [
+    TextContent(text: "Dashboard last updated", style: "small"),
+    TextContent(text: "12:34 PM UTC", style: "small")
+  ]
+)
+
+// Helper functions (defined for completeness)
+function getOnTimePercentage() {
+  return 87.5;
+}
+
+function getAvgCost() {
+  return 245.80;
+}
+
+function getWeeklyVolume() {
+  return 42;
+}
+
+function getCarrierVolumes() {
+  return [3200, 2800, 1500];
+}
+
+function getDelayedShipments() {
+  return [
+    { id: "SHIP-001", origin: "London", destination: "New York", eta: "2026-06-15", status: "Delayed" },
+    { id: "SHIP-002", origin: "Berlin", destination: "Tokyo", eta: "2026-06-20", status: "Delayed" },
+    { id: "SHIP-003", origin: "Sydney", destination: "Singapore", eta: "2026-06-18", status: "Delayed" }
+  ];
+}
+
+function getShipmentsData() {
+  return [
+    { id: "SHIP-1001", origin: "Los Angeles", destination: "Chicago", eta: "2026-06-10", status: "In Transit" },
+    { id: "SHIP-1002", origin: "Miami", destination: "Houston", eta: "2026-06-12", status: "In Transit" },
+    { id: "SHIP-1003", origin: "New York", destination: "Philadelphia", eta: "2026-06-11", status: "In Transit" },
+    { id: "SHIP-1004", origin: "Chicago", destination: "Denver", eta: "2026-06-09", status: "In Transit" },
+    { id: "SHIP-1005", origin: "Seattle", destination: "Portland", eta: "2026-06-08", status: "In Transit" }
+  ];
+}
+
+function getLastRefresh() {
+  return "2026-06-10T14:30:00Z";
+}
+
+function flagShipment(shipId) {
+  // Logic to mark shipment as flagged
+  console.log(`Flagging shipment ${shipId}`);
+}
+```

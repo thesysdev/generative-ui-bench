@@ -1,0 +1,71 @@
+root = Card([
+  header,
+  dateRange,
+  visitorStats,
+  conversionRate,
+  trafficSources,
+  campaigns,
+  bestPerforming,
+  subscriberGrowth,
+  exportButton,
+])
+
+header = CardHeader("Marketing Dashboard", "Weekly Performance Overview")
+dateRange = Card([
+  Label("Date Range"),
+  Select("date_range", [
+    SelectItem("Last 7 days", "Last 7 days"),
+    SelectItem("Last 14 days", "Last 14 days"),
+    SelectItem("Last 30 days", "Last 30 days"),
+    SelectItem("Custom range", "Custom range"),
+  ], "Last 30 days"),
+])
+visitorStats = Card([
+  Heading("Site Visitors (30 Days)", "h3"),
+  BarChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [
+      Series("Visitors", [12400, 14200, 13800, 15600]),
+      Series("New Visitors", [8200, 9400, 9100, 10500]),
+    ],
+    "grouped",
+    "Visitors",
+    "Count"
+  ),
+])
+conversionRate = Card([
+  Heading("Conversion Rate", "h3"),
+  Progress(72.5, "72.5% of visitors converted"),
+])
+trafficSources = Card([
+  Heading("Top Traffic Sources", "h3"),
+  Table([
+    Col("Source", ["Organic Search", "Direct", "Social Media", "Referral", "Email"]),
+    Col("Share", [32, 24, 18, 15, 11]),
+  ]),
+])
+campaigns = Card([
+  Heading("Running Campaigns", "h3"),
+  Table([
+    Col("Campaign", ["Summer Sale", "Brand Awareness", "Lead Nurture", "Product Launch", "Email Blast"]),
+    Col("Spend", [25000, 18000, 12000, 32000, 8000]),
+  ]),
+])
+bestPerforming = Card([
+  Heading("Best Performing Campaign", "h3"),
+  Callout(
+    "success",
+    "Summer Sale",
+    "Highest conversion rate at 12.4% and 18% share of total traffic"
+  ),
+])
+subscriberGrowth = Card([
+  Heading("Email Subscriber Growth", "h3"),
+  SingleStackedBar(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [450, 520, 480, 600]
+  ),
+])
+exportButton = Button("Export Report", null, "primary")
+
+Note: All variables are defined and referenced. The root Card contains all required sections with complete data, and the export button is included as a final action.

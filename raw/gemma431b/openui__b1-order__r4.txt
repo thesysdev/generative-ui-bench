@@ -1,0 +1,32 @@
+root = Card([header, trackingStatus, deliveryEstimate, packageDetails, supportSection, followUps])
+
+header = CardHeader("Track Your Package", "Order #ORD-8829104")
+
+trackingStatus = Card([statusHeading, statusMap, statusTimeline], "sunk", "column", "m")
+statusHeading = Heading("Current Location", "h3")
+statusMap = ImageBlock("https://picsum.photos/seed/logistics/800/400", "Map showing package current location in Chicago, IL")
+statusTimeline = ListBlock([step1, step2, step3, step4], "image")
+step1 = ListItem("Order Placed", "Confirmed on Oct 24", "https://picsum.photos/seed/check1/50/50")
+step2 = ListItem("Shipped", "Left warehouse on Oct 25", "https://picsum.photos/seed/check2/50/50")
+step3 = ListItem("In Transit", "Arrived at Chicago Hub", "https://picsum.photos/seed/check3/50/50")
+step4 = ListItem("Out for Delivery", "Expected today", "https://picsum.photos/seed/check4/50/50")
+
+deliveryEstimate = Alert("Expected Delivery: Tomorrow, Oct 27", "Your package is on schedule and will arrive by 8:00 PM", "success")
+
+packageDetails = Card([detailsHeading, detailsTable], "clear", "column", "s")
+detailsHeading = Heading("Shipment Details", "h4")
+detailsTable = Table([colCarrier, colWeight, colService])
+colCarrier = Col("Carrier", ["Global Logistics Express", "Global Logistics Express"])
+colWeight = Col("Weight", ["2.4 kg", "2.4 kg"])
+colService = Col("Service", ["Priority Ground", "Priority Ground"])
+
+supportSection = Card([supportHeading, problemCallout, problemButtons], "card", "column", "m")
+supportHeading = Heading("Need Help?", "h3")
+problemCallout = TextCallout("info", "Issues with your delivery?", "If your package is damaged, missing, or delayed, please let us know immediately.")
+problemButtons = Buttons([reportBtn, chatBtn])
+reportBtn = Button("Report a Problem", null, "primary", "destructive")
+chatBtn = Button("Chat with Support", null, "secondary")
+
+followUps = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Change delivery address")
+f2 = FollowUpItem("Request delivery instructions")

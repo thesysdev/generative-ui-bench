@@ -1,0 +1,829 @@
+Here is a comprehensive personal banking home dashboard that satisfies all 11 requirements.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "quickSummaryAlert",
+          "navTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Horizon Bank • Premier Online",
+        "subtitle": "Welcome back, Alex Morgan | Member #4892-01"
+      },
+      {
+        "id": "quickSummaryAlert",
+        "component": "Alert",
+        "title": "Account Status Normal",
+        "description": "Your October e-Statement is ready and no unusual activity has been detected.",
+        "variant": "info"
+      },
+      {
+        "id": "navTabs",
+        "component": "Tabs",
+        "items": [
+          "tabOverview",
+          "tabTransfers",
+          "tabTransactions",
+          "tabSecurityAlerts"
+        ]
+      },
+      {
+        "id": "tabOverview",
+        "component": "TabItem",
+        "trigger": "Overview & Goals",
+        "value": "overview",
+        "content": [
+          "cardBalances",
+          "cardCreditScore",
+          "cardSavingsGoal",
+          "cardSpendingSplit",
+          "cardUpcomingBills"
+        ]
+      },
+      {
+        "id": "tabTransfers",
+        "component": "TabItem",
+        "trigger": "Move Money",
+        "value": "transfers",
+        "content": [
+          "cardTransferForm"
+        ]
+      },
+      {
+        "id": "tabTransactions",
+        "component": "TabItem",
+        "trigger": "Activity & Disputes",
+        "value": "transactions",
+        "content": [
+          "cardStatementFilter",
+          "cardTransactionList",
+          "disputeDialog"
+        ]
+      },
+      {
+        "id": "tabSecurityAlerts",
+        "component": "TabItem",
+        "trigger": "Cards & Alert Controls",
+        "value": "security",
+        "content": [
+          "cardCreditFreeze",
+          "cardAlertTriggers"
+        ]
+      },
+      {
+        "id": "cardBalances",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "balancesHeader",
+          "balancesTable"
+        ]
+      },
+      {
+        "id": "balancesHeader",
+        "component": "CardHeader",
+        "title": "Account Balances",
+        "subtitle": "Real-time ledger updates"
+      },
+      {
+        "id": "balancesTable",
+        "component": "Table",
+        "columns": [
+          "colAccType",
+          "colAccNumber",
+          "colAvailableBalance",
+          "colAccStatus"
+        ]
+      },
+      {
+        "id": "colAccType",
+        "component": "Col",
+        "label": "Account",
+        "data": [
+          "Primary Checking",
+          "High-Yield Savings",
+          "Horizon Elite Credit Card"
+        ]
+      },
+      {
+        "id": "colAccNumber",
+        "component": "Col",
+        "label": "Account Number",
+        "data": [
+          "•••• 4102",
+          "•••• 8831",
+          "•••• 9024"
+        ]
+      },
+      {
+        "id": "colAvailableBalance",
+        "component": "Col",
+        "label": "Available Balance / Current Balance",
+        "data": [
+          "$8,450.20",
+          "$24,800.00",
+          "$1,240.50 ($15,000 Limit)"
+        ]
+      },
+      {
+        "id": "colAccStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Active",
+          "Active (4.65% APY)",
+          "Active • Autopay ON"
+        ]
+      },
+      {
+        "id": "cardCreditScore",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "creditScoreHeader",
+          "creditScoreTag",
+          "creditScoreDetails"
+        ]
+      },
+      {
+        "id": "creditScoreHeader",
+        "component": "CardHeader",
+        "title": "FICO® Credit Score",
+        "subtitle": "Updated 3 days ago via Experian"
+      },
+      {
+        "id": "creditScoreTag",
+        "component": "Tag",
+        "text": "785 — Excellent",
+        "variant": "success",
+        "size": "lg"
+      },
+      {
+        "id": "creditScoreDetails",
+        "component": "TextContent",
+        "text": "Your score is in the top 20% of Horizon Bank cardholders. Credit utilization is healthy at 8.2%."
+      },
+      {
+        "id": "cardSavingsGoal",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "savingsGoalHeader",
+          "vacationGoalProgress",
+          "vacationGoalDetails"
+        ]
+      },
+      {
+        "id": "savingsGoalHeader",
+        "component": "CardHeader",
+        "title": "Vacation Savings Goal",
+        "subtitle": "Target: $8,000 for Summer 2025 Trip"
+      },
+      {
+        "id": "vacationGoalProgress",
+        "component": "Progress",
+        "value": 77.5,
+        "label": "77.5% Complete"
+      },
+      {
+        "id": "vacationGoalDetails",
+        "component": "TextContent",
+        "text": "**$6,200.00 saved** of $8,000.00 goal. Auto-deposit of $350.00 scheduled for next Friday."
+      },
+      {
+        "id": "cardSpendingSplit",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "spendingChartHeader",
+          "spendingPieChart"
+        ]
+      },
+      {
+        "id": "spendingChartHeader",
+        "component": "CardHeader",
+        "title": "Spending Split This Month",
+        "subtitle": "Total outflow: $3,420.00"
+      },
+      {
+        "id": "spendingPieChart",
+        "component": "PieChart",
+        "labels": [
+          "Housing & Utilities",
+          "Food & Dining",
+          "Transportation",
+          "Travel & Leisure",
+          "Shopping"
+        ],
+        "values": [
+          1450,
+          720,
+          310,
+          540,
+          400
+        ],
+        "variant": "donut",
+        "appearance": "circular"
+      },
+      {
+        "id": "cardUpcomingBills",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "billsHeader",
+          "billsTable"
+        ]
+      },
+      {
+        "id": "billsHeader",
+        "component": "CardHeader",
+        "title": "Bills Due Soon",
+        "subtitle": "Next 14 days"
+      },
+      {
+        "id": "billsTable",
+        "component": "Table",
+        "columns": [
+          "colBillPayee",
+          "colBillDueDate",
+          "colBillAmount",
+          "colBillAction"
+        ]
+      },
+      {
+        "id": "colBillPayee",
+        "component": "Col",
+        "label": "Biller / Merchant",
+        "data": [
+          "Metropolitan Energy Co.",
+          "Highland Fiber Internet",
+          "Horizon Elite Credit Card"
+        ]
+      },
+      {
+        "id": "colBillDueDate",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Nov 02 (in 2 days)",
+          "Nov 07 (in 7 days)",
+          "Nov 12 (in 12 days)"
+        ]
+      },
+      {
+        "id": "colBillAmount",
+        "component": "Col",
+        "label": "Amount Due",
+        "data": [
+          "$138.45",
+          "$79.99",
+          "$1,240.50"
+        ]
+      },
+      {
+        "id": "colBillAction",
+        "component": "Col",
+        "label": "Payment Mode",
+        "data": [
+          "Autopay Enabled",
+          "Autopay Enabled",
+          "Scheduled"
+        ]
+      },
+      {
+        "id": "cardTransferForm",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "transferHeader",
+          "transferForm"
+        ]
+      },
+      {
+        "id": "transferHeader",
+        "component": "CardHeader",
+        "title": "Transfer Money",
+        "subtitle": "Instant transfers between your Horizon Bank accounts"
+      },
+      {
+        "id": "transferForm",
+        "component": "Form",
+        "name": "moneyTransferForm",
+        "buttons": "transferButtons",
+        "fields": [
+          "fromAccountField",
+          "toAccountField",
+          "amountField",
+          "memoField"
+        ]
+      },
+      {
+        "id": "fromAccountField",
+        "component": "FormControl",
+        "label": "From Account",
+        "input": "fromAccountSelect",
+        "hint": "Checking balance: $8,450.20 available"
+      },
+      {
+        "id": "fromAccountSelect",
+        "component": "Select",
+        "name": "from_account",
+        "placeholder": "Select funding source",
+        "items": [
+          "optCheckingFrom",
+          "optSavingsFrom"
+        ]
+      },
+      {
+        "id": "optCheckingFrom",
+        "component": "SelectItem",
+        "label": "Primary Checking (•••• 4102) - $8,450.20",
+        "value": "checking"
+      },
+      {
+        "id": "optSavingsFrom",
+        "component": "SelectItem",
+        "label": "High-Yield Savings (•••• 8831) - $24,800.00",
+        "value": "savings"
+      },
+      {
+        "id": "toAccountField",
+        "component": "FormControl",
+        "label": "To Account",
+        "input": "toAccountSelect"
+      },
+      {
+        "id": "toAccountSelect",
+        "component": "Select",
+        "name": "to_account",
+        "placeholder": "Select destination account",
+        "items": [
+          "optSavingsTo",
+          "optCheckingTo",
+          "optCreditTo"
+        ]
+      },
+      {
+        "id": "optSavingsTo",
+        "component": "SelectItem",
+        "label": "High-Yield Savings (•••• 8831) [Vacation Fund]",
+        "value": "savings"
+      },
+      {
+        "id": "optCheckingTo",
+        "component": "SelectItem",
+        "label": "Primary Checking (•••• 4102)",
+        "value": "checking"
+      },
+      {
+        "id": "optCreditTo",
+        "component": "SelectItem",
+        "label": "Pay Horizon Elite Card (•••• 9024)",
+        "value": "credit"
+      },
+      {
+        "id": "amountField",
+        "component": "FormControl",
+        "label": "Transfer Amount ($)",
+        "input": "amountInput",
+        "hint": "No fee for standard internal transfers"
+      },
+      {
+        "id": "amountInput",
+        "component": "Input",
+        "name": "transfer_amount",
+        "placeholder": "0.00",
+        "type": "number"
+      },
+      {
+        "id": "memoField",
+        "component": "FormControl",
+        "label": "Memo / Note",
+        "input": "memoInput"
+      },
+      {
+        "id": "memoInput",
+        "component": "Input",
+        "name": "memo",
+        "placeholder": "e.g., Vacation Savings boost",
+        "type": "text"
+      },
+      {
+        "id": "transferButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnSubmitTransfer",
+          "btnCancelTransfer"
+        ]
+      },
+      {
+        "id": "btnSubmitTransfer",
+        "component": "Button",
+        "label": "Complete Transfer",
+        "variant": "primary"
+      },
+      {
+        "id": "btnCancelTransfer",
+        "component": "Button",
+        "label": "Reset Form",
+        "variant": "tertiary"
+      },
+      {
+        "id": "cardStatementFilter",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "statementFilterHeader",
+          "statementFilterSelect"
+        ]
+      },
+      {
+        "id": "statementFilterHeader",
+        "component": "CardHeader",
+        "title": "Select Statement Period",
+        "subtitle": "Filter transactions and historical billing statements"
+      },
+      {
+        "id": "statementFilterSelect",
+        "component": "Select",
+        "name": "statement_period",
+        "placeholder": "Select statement billing cycle",
+        "items": [
+          "periodCurrent",
+          "periodSep2024",
+          "periodAug2024",
+          "periodJul2024"
+        ]
+      },
+      {
+        "id": "periodCurrent",
+        "component": "SelectItem",
+        "label": "Current Period (Oct 01, 2024 – Present)",
+        "value": "current"
+      },
+      {
+        "id": "periodSep2024",
+        "component": "SelectItem",
+        "label": "September 2024 (Sep 01 – Sep 30, 2024)",
+        "value": "sep_2024"
+      },
+      {
+        "id": "periodAug2024",
+        "component": "SelectItem",
+        "label": "August 2024 (Aug 01 – Aug 31, 2024)",
+        "value": "aug_2024"
+      },
+      {
+        "id": "periodJul2024",
+        "component": "SelectItem",
+        "label": "July 2024 (Jul 01 – Jul 31, 2024)",
+        "value": "jul_2024"
+      },
+      {
+        "id": "cardTransactionList",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "transactionsHeader",
+          "transactionsTable"
+        ]
+      },
+      {
+        "id": "transactionsHeader",
+        "component": "CardHeader",
+        "title": "Recent Transactions",
+        "subtitle": "Showing posted & pending charges with merchant names"
+      },
+      {
+        "id": "transactionsTable",
+        "component": "Table",
+        "columns": [
+          "colTxDate",
+          "colTxMerchant",
+          "colTxCategory",
+          "colTxAmount",
+          "colTxAccount"
+        ]
+      },
+      {
+        "id": "colTxDate",
+        "component": "Col",
+        "label": "Date",
+        "data": [
+          "Oct 30, 2024",
+          "Oct 29, 2024",
+          "Oct 28, 2024",
+          "Oct 27, 2024",
+          "Oct 25, 2024"
+        ]
+      },
+      {
+        "id": "colTxMerchant",
+        "component": "Col",
+        "label": "Merchant",
+        "data": [
+          "Whole Foods Market #1042",
+          "Shell Oil 57291",
+          "Delta Air Lines Inc",
+          "Blue Bottle Coffee",
+          "Amazon.com Digital Svcs"
+        ]
+      },
+      {
+        "id": "colTxCategory",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Groceries",
+          "Transportation",
+          "Travel",
+          "Dining",
+          "Shopping"
+        ]
+      },
+      {
+        "id": "colTxAmount",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "-$124.80",
+          "-$48.50",
+          "-$482.00",
+          "-$7.25",
+          "-$39.99"
+        ]
+      },
+      {
+        "id": "colTxAccount",
+        "component": "Col",
+        "label": "Card / Account",
+        "data": [
+          "Checking (•••• 4102)",
+          "Credit (•••• 9024)",
+          "Credit (•••• 9024)",
+          "Checking (•••• 4102)",
+          "Credit (•••• 9024)"
+        ]
+      },
+      {
+        "id": "disputeDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Dispute a Transaction",
+        "triggerVariant": "outline",
+        "title": "Dispute Center",
+        "description": "Select the suspicious or unrecognized charge and provide details for our fraud protection team.",
+        "content": [
+          "disputeForm"
+        ]
+      },
+      {
+        "id": "disputeForm",
+        "component": "Form",
+        "name": "transactionDisputeForm",
+        "buttons": "disputeButtons",
+        "fields": [
+          "disputeTxSelectField",
+          "disputeReasonField",
+          "disputeNotesField"
+        ]
+      },
+      {
+        "id": "disputeTxSelectField",
+        "component": "FormControl",
+        "label": "Select Transaction to Dispute",
+        "input": "disputeTxSelect"
+      },
+      {
+        "id": "disputeTxSelect",
+        "component": "Select",
+        "name": "disputed_transaction_id",
+        "placeholder": "Choose transaction",
+        "items": [
+          "optDisp1",
+          "optDisp2",
+          "optDisp3"
+        ]
+      },
+      {
+        "id": "optDisp1",
+        "component": "SelectItem",
+        "label": "Oct 28: Delta Air Lines Inc (-$482.00)",
+        "value": "tx_delta"
+      },
+      {
+        "id": "optDisp2",
+        "component": "SelectItem",
+        "label": "Oct 25: Amazon.com Digital Svcs (-$39.99)",
+        "value": "tx_amazon"
+      },
+      {
+        "id": "optDisp3",
+        "component": "SelectItem",
+        "label": "Oct 29: Shell Oil 57291 (-$48.50)",
+        "value": "tx_shell"
+      },
+      {
+        "id": "disputeReasonField",
+        "component": "FormControl",
+        "label": "Reason for Dispute",
+        "input": "disputeReasonSelect"
+      },
+      {
+        "id": "disputeReasonSelect",
+        "component": "Select",
+        "name": "dispute_reason",
+        "placeholder": "Choose reason",
+        "items": [
+          "optReasonUnauth",
+          "optReasonDuplicate",
+          "optReasonIncorrectAmount",
+          "optReasonNeverReceived"
+        ]
+      },
+      {
+        "id": "optReasonUnauth",
+        "component": "SelectItem",
+        "label": "Fraudulent / Unauthorized charge",
+        "value": "unauthorized"
+      },
+      {
+        "id": "optReasonDuplicate",
+        "component": "SelectItem",
+        "label": "Charged twice for same item",
+        "value": "duplicate"
+      },
+      {
+        "id": "optReasonIncorrectAmount",
+        "component": "SelectItem",
+        "label": "Incorrect transaction amount",
+        "value": "incorrect_amount"
+      },
+      {
+        "id": "optReasonNeverReceived",
+        "component": "SelectItem",
+        "label": "Goods / services not received",
+        "value": "not_received"
+      },
+      {
+        "id": "disputeNotesField",
+        "component": "FormControl",
+        "label": "Additional Details / Evidence",
+        "input": "disputeNotesInput",
+        "hint": "Include dates, merchant contact notes, or receipt details"
+      },
+      {
+        "id": "disputeNotesInput",
+        "component": "TextArea",
+        "name": "dispute_details",
+        "placeholder": "Describe what occurred...",
+        "rows": 3
+      },
+      {
+        "id": "disputeButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnSubmitDispute"
+        ]
+      },
+      {
+        "id": "btnSubmitDispute",
+        "component": "Button",
+        "label": "Submit Dispute Claim",
+        "variant": "primary"
+      },
+      {
+        "id": "cardCreditFreeze",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "freezeHeader",
+          "freezeSwitchGroup",
+          "freezeDialogConfirm"
+        ]
+      },
+      {
+        "id": "freezeHeader",
+        "component": "CardHeader",
+        "title": "Credit Line Security & Lock",
+        "subtitle": "Instantly freeze or unfreeze credit card purchases"
+      },
+      {
+        "id": "freezeSwitchGroup",
+        "component": "SwitchGroup",
+        "name": "credit_freeze_controls",
+        "variant": "card",
+        "items": [
+          "switchCreditFreeze"
+        ]
+      },
+      {
+        "id": "switchCreditFreeze",
+        "component": "SwitchItem",
+        "name": "freeze_credit_line",
+        "label": "Freeze Horizon Elite Credit Card (•••• 9024)",
+        "description": "Block all new authorizations, in-store, and online purchases immediately while keeping recurring bills active.",
+        "defaultChecked": false
+      },
+      {
+        "id": "freezeDialogConfirm",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "Emergency Lock All Credit Lines",
+        "triggerVariant": "destructive",
+        "title": "Emergency Credit Freeze",
+        "description": "This will instantly freeze all credit card accounts linked to Alex Morgan. Recurring subscription charges will continue unless explicitly cancelled.",
+        "confirmLabel": "Confirm Freeze",
+        "cancelLabel": "Cancel"
+      },
+      {
+        "id": "cardAlertTriggers",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "alertTriggersHeader",
+          "alertTriggersSwitches"
+        ]
+      },
+      {
+        "id": "alertTriggersHeader",
+        "component": "CardHeader",
+        "title": "Custom Alert Triggers",
+        "subtitle": "Choose which events notify your mobile device and email"
+      },
+      {
+        "id": "alertTriggersSwitches",
+        "component": "SwitchGroup",
+        "name": "notification_preferences",
+        "variant": "sunk",
+        "items": [
+          "switchLargePurchase",
+          "switchLowBalance",
+          "switchBillReminder",
+          "switchForeignTx",
+          "switchCreditScoreChange"
+        ]
+      },
+      {
+        "id": "switchLargePurchase",
+        "component": "SwitchItem",
+        "name": "alert_large_purchase",
+        "label": "Transactions over $250.00",
+        "description": "Receive instant push notification for any charge exceeding $250",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchLowBalance",
+        "component": "SwitchItem",
+        "name": "alert_low_balance",
+        "label": "Low Checking Balance Alert (< $500.00)",
+        "description": "Notifies you when your checking account falls below safe threshold",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchBillReminder",
+        "component": "SwitchItem",
+        "name": "alert_bill_due",
+        "label": "Upcoming Bill Reminders (48h prior)",
+        "description": "Alerts before scheduled automated drafts or payment due dates",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchForeignTx",
+        "component": "SwitchItem",
+        "name": "alert_intl_transaction",
+        "label": "International & Online Card-Not-Present charges",
+        "description": "Alerts on any cross-border transactions or virtual card entries",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchCreditScoreChange",
+        "component": "SwitchItem",
+        "name": "alert_credit_score",
+        "label": "Credit Score & Report Changes",
+        "description": "Alerts when your score shifts by more than 5 points or new inquiries occur",
+        "defaultChecked": false
+      }
+    ]
+  }
+}
+</a2ui-json>

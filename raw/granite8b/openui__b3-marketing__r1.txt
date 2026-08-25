@@ -1,0 +1,58 @@
+```openui-lang
+dateRangePicker = DatePicker("date_range", mode="range", defaultMonth="2025-08", numberOfMonths=1, captionLayout="label")
+emailGrowth = TextContent("Email subscribers grew by 12% this month", size="large")
+exportBtn = Button("Export Report", action=["export"], variant="secondary", type="normal", size="medium")
+
+root = Card(
+    [
+        CardHeader("Weekly Marketing Dashboard", "Last 30 Days"),
+        dateRangePicker,
+        visitorsChart,
+        conversionRate,
+        trafficSources,
+        campaignsTable,
+        bestCampaignHighlight,
+        emailGrowth,
+        exportBtn
+    ],
+    variant="card",
+    direction="row",
+    gap="m",
+    align="center",
+    justify="between",
+    wrap=false
+)
+
+visitorsChart = LineChart(
+    labels=["Day 1", "Day 2", "...", "Day 30"],
+    series=[visitorsSeries],
+    variant="natural",
+    xLabel="Day",
+    yLabel="Visitors"
+)
+visitorsSeries = Series("Visitors", [1200, 1350, 1400, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000, 2050, 2100, 2150, 2200, 2250, 2300, 2350, 2400, 2450, 2500, 2550, 2600, 2650, 2700, 2750, 2800, 2850])
+conversionRate = Tag("Conversion Rate: 3.2%", null, null, "info")
+
+trafficSources = Table(
+    columns=[
+        Col("Source", ["Organic", "Paid", "Referral", "Social", "Email"], type="string"),
+        Col("Share (%)", [25, 40, 15, 10, 10], type="number")
+    ]
+)
+
+campaignsTable = Table(
+    columns=[
+        Col("Campaign", ["Campaign A", "Campaign B", "Campaign C", "Campaign D", "Campaign E"], type="string"),
+        Col("Spend ($)", [5000, 7500, 3000, 12000, 8000], type="number"),
+        Col("Status", ["Running", "Running", "Paused", "Running", "Running"], type="string")
+    ]
+)
+
+bestCampaignHighlight = Callout(
+    variant="success",
+    title="Best Performing Campaign",
+    description="Campaign D drove the highest spend at $12,000"
+)
+
+root
+```

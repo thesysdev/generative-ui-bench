@@ -1,0 +1,103 @@
+root = Card([header, districtFocus, congestion, transit, airQuality, energy, water, incidents, emergency, parking, events, reports, backlog, weather, dispatch, alert, roadworks, infra], "card", "column", "l")
+
+header = CardHeader("City Operations Center", "Live status — all districts")
+
+districtHeading = Heading("Focus on One District", "h3")
+districtAll = SelectItem("all", "All Districts")
+districtNorth = SelectItem("north", "North")
+districtSouth = SelectItem("south", "South")
+districtEast = SelectItem("east", "East")
+districtWest = SelectItem("west", "West")
+districtSelect = Select("focus_district", [districtAll, districtNorth, districtSouth, districtEast, districtWest], "Select district")
+districtFocus = Card([districtHeading, districtSelect], "sunk")
+
+congestionHeading = Heading("Congestion — Right Now", "h3")
+congestionText = TextContent("Heavy congestion on I-95 and downtown arterials. Average speed 18 mph.")
+congestionProgress = Progress(85, "Congestion index")
+congestion = Card([congestionHeading, congestionText, congestionProgress], "sunk")
+
+transitLabels = ["Bus", "Rail", "Ferry"]
+transitActual = Series("Actual %", [94, 89, 91])
+transitTarget = Series("Target %", [95, 95, 95])
+transitChart = BarChart(transitLabels, [transitActual, transitTarget], "grouped", "Mode", "%")
+transitHeading = Heading("Transit Punctuality", "h3")
+transitText = TextContent("92% on-time across bus and rail. Delays concentrated on Line 4.")
+transit = Card([transitHeading, transitText, transitChart], "sunk")
+
+airDistrictCol = Col("District", ["North", "South", "East", "West", "Downtown"])
+airAqiCol = Col("AQI", [42, 58, 67, 55, 89])
+airTable = Table([airDistrictCol, airAqiCol])
+airHeading = Heading("Air Quality by District", "h3")
+airQuality = Card([airHeading, airTable], "sunk")
+
+energyLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+energySeries = Series("Usage (MWh)", [320, 310, 340, 335, 360, 280, 290])
+energyChart = LineChart(energyLabels, [energySeries], "linear", "Day", "MWh")
+energyHeading = Heading("Energy Use — Past Week", "h3")
+energy = Card([energyHeading, energyChart], "sunk")
+
+waterHeading = Heading("Water Use Today", "h3")
+waterProgress = Progress(72, "72% of daily target")
+water = Card([waterHeading, waterProgress], "sunk")
+
+incident1 = ListItem("Water main break — 3rd Ave", "Severity: Critical | 14:32")
+incident2 = ListItem("Traffic signal failure — Main St", "Severity: High | 13:45")
+incident3 = ListItem("Pothole cluster — Park Rd", "Severity: Medium | 12:10")
+incidentsList = ListBlock([incident1, incident2, incident3])
+incidentsHeading = Heading("Open Incidents", "h3")
+incidents = Card([incidentsHeading, incidentsList], "sunk")
+
+emergencyTags = TagBlock(["Engine 4 — North", "Ambulance 2 — East", "Unit 7 — Downtown"])
+emergencyHeading = Heading("Emergency Vehicles Deployed", "h3")
+emergency = Card([emergencyHeading, emergencyTags], "sunk")
+
+parkingHeading = Heading("Parking Availability — Downtown", "h3")
+parkingProgress = Progress(34, "34% spaces available")
+parking = Card([parkingHeading, parkingProgress], "sunk")
+
+event1 = ListItem("Farmers Market", "Sat 8am–2pm — Central Plaza")
+event2 = ListItem("Jazz in the Park", "Sun 6pm–9pm — Riverside Park")
+eventsList = ListBlock([event1, event2])
+eventsHeading = Heading("Public Events — This Weekend", "h3")
+events = Card([eventsHeading, eventsList], "sunk")
+
+report1 = ListItem("Graffiti on bridge", "Submitted 10 min ago — North")
+report2 = ListItem("Leaking hydrant", "Submitted 22 min ago — South")
+report3 = ListItem("Noise complaint", "Submitted 35 min ago — Downtown")
+reportsList = ListBlock([report1, report2, report3])
+reportsHeading = Heading("Citizen Reports", "h3")
+reports = Card([reportsHeading, reportsList], "sunk")
+
+backlogHeading = Heading("Service Request Backlog", "h3")
+backlogText = TextContent("312 open requests — 48 overdue.")
+backlogProgress = Progress(65, "Clearance rate")
+backlog = Card([backlogHeading, backlogText, backlogProgress], "sunk")
+
+weatherHeading = Heading("Current Weather", "h3")
+weatherText = TextContent("72°F, partly cloudy, 12 mph NW wind. UV index 6.")
+weather = Card([weatherHeading, weatherText], "sunk")
+
+dispatchHeading = Heading("Dispatch a Crew", "h3")
+dispatchBtn = Button("Dispatch Crew", ["dispatch_crew"], "primary")
+dispatch = Card([dispatchHeading, dispatchBtn], "sunk")
+
+alertInput = Input("alert_text", "Road closure on Main St — detour via Oak Ave")
+alertField = FormControl("Public alert message", alertInput)
+alertSendBtn = Button("Send Public Alert", ["send_alert"], "primary")
+alertButtons = Buttons([alertSendBtn])
+alertForm = Form("public-alert", alertButtons, [alertField])
+alertHeading = Heading("Send Public Alert", "h3")
+alert = Card([alertHeading, alertForm], "sunk")
+
+roadwork1 = ListItem("Main St repaving", "May 15–22 — North")
+roadwork2 = ListItem("Bridge inspection", "May 28–30 — East")
+roadworksList = ListBlock([roadwork1, roadwork2])
+roadworksHeading = Heading("Roadworks — This Month", "h3")
+roadworks = Card([roadworksHeading, roadworksList], "sunk")
+
+infra1 = ListItem("Pump station service", "Due May 10 — South")
+infra2 = ListItem("Streetlight upgrade", "Due May 12 — Downtown")
+infra3 = ListItem("Sewer line cleaning", "Due May 14 — West")
+infraList = ListBlock([infra1, infra2, infra3])
+infraHeading = Heading("Infrastructure Maintenance Due", "h3")
+infra = Card([infraHeading, infraList], "sunk")

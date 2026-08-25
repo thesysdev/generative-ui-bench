@@ -1,0 +1,225 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header section
+    CardHeader(
+      title: "Today's Schedule",
+      subtitle: "Clinic Reception Dashboard"
+    ),
+    
+    // Appointments table
+    TabItem(
+      value: "appointments",
+      trigger: "appointments",
+      content: Card([
+      CardHeader(
+        title: "Today's Appointments",
+        subtitle: "Upcoming Patients"
+      ),[ 
+        Card(
+          title: "Appointment List",
+          subtitle: "Schedule for Today",
+          children: [
+            // Appointments Table
+            Table(
+              columns: [
+                { label: "Time", type: "string" },
+                { label: "Patient", type: "string" },
+                { label: "Status", type: "string" }
+              ],
+              data: [
+                {
+                  "Time": "9:00 AM",
+                  "Patient": "Mr. Johnson",
+                  "Status": "Checked In"
+                },
+                {
+                  "Time": "9:30 AM",
+                  "Patient": "Sarah Chen",
+                  "Status": "Pending"
+                },
+                {
+                  "Time": "10:15 AM",
+                  "Patient": "Dr. Patel",
+                  "Status": "Checked In"
+                },
+                {
+                  "Time": "11:00 AM",
+                  "Patient": "Lisa Wang",
+                  "Status": "Pending"
+                },
+                {
+                  "Time": "12:30 PM",
+                  "Patient": "Michael Torres",
+                  "Status": "Pending"
+                },
+                {
+                  "Time": "1:00 PM",
+                  "Patient": "Emily Davis",
+                  "Status": "Checked In"
+                },
+                {
+                  "Time": "2:45 PM",
+                  "Patient": "Robert Kim",
+                  "Status": "Pending"
+                },
+                {
+                  "Time": "3:30 PM",
+                  "Patient": "Nina Petrova",
+                  "Status": "Pending"
+                }
+              ]
+            ),
+            
+            // Expected patients count
+            Tag(
+              text: "Expected Patients",
+              variant: "success",
+              size: "md"
+            ),
+            Tag(
+              text: "8",
+              variant: "primary",
+              size: "sm"
+            ),
+            
+            // No-show rate
+            Card(
+              children: [
+                CardHeader(
+                  title: "No-Show Rate",
+                  subtitle: "This Month"
+                ),
+                Progress(
+                  value: 15,
+                  label: "15%",
+                  color: "red"
+                )
+              ]
+            ),
+            
+            // Rooms availability
+            Card(
+              children: [
+                CardHeader(
+                  title: "Available Rooms",
+                  subtitle: "Free Right Now"
+                ),
+                ListBlock(
+                  items: [
+                    ListItem(
+                      title: "Room 101",
+                      subtitle: "Available",
+                      image: "https://picsum.photos/seed/room101/100/30"
+                    ),
+                    ListItem(
+                      title: "Room 102",
+                      subtitle: "Available",
+                      image: "https://picsum.photos/seed/room102/100/30"
+                    ),
+                    ListItem(
+                      title: "Room 103",
+                      subtitle: "Partially Booked",
+                      image: "https://picsum.photos/seed/room103/100/30"
+                    ),
+                    ListItem(
+                      title: "Room 104",
+                      subtitle: "Available",
+                      image: "https://picsum.photos/seed/room104/100/30"
+                    )
+                  ],
+                  variant: "number"
+                )
+              ]
+            ),
+            
+            // Next patient called out
+            Card(
+              children: [
+                CardHeader(
+                  title: "Next Patient",
+                  subtitle: "Ready for Call"
+                ),
+                Callout(
+                  variant: "info",
+                  title: "Up Next",
+                  description: "Dr. Patel (10:15 AM) - Cardiology consultation"
+                )
+              ]
+            ),
+            
+            // Check-in button
+            Button(
+              label: "Check in Patient",
+              variant: "primary",
+              action: "check_in"
+            ),
+            
+            // Navigate to another day
+            Card(
+              children: [
+                CardHeader(
+                  title: "Other Days",
+                  subtitle: "Daily Schedules"
+                ),
+                Button(
+                  label: "View Tomorrow",
+                  variant: "secondary",
+                  action: "navigate_date"
+                ),
+                Button(
+                  label: "View Yesterday",
+                  variant: "secondary",
+                  action: "navigate_date"
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // Bottom summary section
+    CardHeader(
+      title: "Quick Summary",
+      subtitle: "At-A-Glance Metrics"
+    ),
+    VStack(
+      children: [
+        Text(
+          "Total Appointments: 8",
+          size: "small",
+          weight: "default"
+        ),
+        Text(
+          "Patients Expected: 8",
+          size: "small",
+          weight: "default"
+        ),
+        Text(
+          "No-Shows This Month: 15%",
+          size: "small",
+          weight: "default",
+          color: "secondary"
+        ),
+        Text(
+          "Available Rooms: 4",
+          size: "small",
+          weight: "default"
+        ),
+        Text(
+          "Next Up: Dr. Patel at 10:15 AM",
+          size: "small",
+          weight: "default"
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "start",
+  justify: "stretch",
+  wrap: true
+)
+```

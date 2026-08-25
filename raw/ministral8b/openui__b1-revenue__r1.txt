@@ -1,0 +1,28 @@
+```openui-lang
+root = Card([morningCheckinHeader, todayRevenueCard, comparisonCard, quickActions])
+
+morningCheckinHeader = CardHeader("Morning Check-In", "Mid-Morning Update")
+
+todayRevenueCard = Card([revenueHeading, currentRevenue, revenueChart], "sunk")
+revenueHeading = Heading("Today's Revenue", "h3")
+currentRevenue = Card([revenueValue, revenueCurrency], "card", "row", "m", "center", "center")
+revenueValue = TextContent("1,285.78")
+revenueCurrency = InlineCode("$")
+
+revenueChart = SingleStackedBarChart(["07:00", "09:00", "11:00", "13:00"], [125.34, 456.72, 389.56, 314.16])
+
+comparisonCard = Card([comparisonHeading, yesterdayRevenue, comparisonChart], "sunk")
+comparisonHeading = Heading("Yesterday Comparison", "h3")
+yesterdayRevenue = Card([yesterdayValue, comparisonText], "card", "row", "m", "center", "center")
+yesterdayValue = TextContent("987.42")
+comparisonText = TextContent("▲ 30.1% higher", "small", "success")
+
+comparisonChart = HorizontalBarChart(["Today", "Yesterday"], [todaySeries, yesterdaySeries], "grouped", "Time", "Revenue")
+todaySeries = Series("Today", [1285.78])
+yesterdaySeries = Series("Yesterday", [987.42])
+
+quickActions = Buttons([syncInventoryBtn, checkOrdersBtn, restockBtn])
+syncInventoryBtn = Button("Sync Inventory", null, "primary")
+checkOrdersBtn = Button("Check Orders", null, "secondary")
+restockBtn = Button("Restock Low Items", null, "tertiary")
+```

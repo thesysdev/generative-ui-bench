@@ -1,0 +1,207 @@
+This is a comprehensive live-ops dashboard for a game studio. Let me plan out all 16 items:
+
+1. Players online right now - KPI/metric
+2. Daily and monthly active players - KPI metrics
+3. Revenue today - KPI metric
+4. Revenue per user - KPI metric
+5. Session length over past two weeks - Line chart
+6. Best-selling items with units - Table
+7. Server regions and health - Table with status
+8. Crash rate by app version - Bar chart or table
+9. Live events running and upcoming - List or table
+10. Player reports awaiting review - KPI + maybe list
+11. Ban appeals awaiting review - KPI + maybe list
+12. In-game currency inflation - Metric or chart
+13. Results of two running experiments - Table or cards
+14. Draft patch notes - Form with textarea
+15. Focus on one region - Select/dropdown
+16. Ship a hotfix - Button/dialog
+
+Let me structure this as a comprehensive dashboard with multiple sections. I'll use Card as root with multiple sub-cards for organization.
+
+Let me plan the layout:
+- Top row: Key metrics (players online, DAU, MAU, revenue today, RPU)
+- Second row: Session length chart + crash rate chart
+- Third row: Best-selling items table + server regions table
+- Fourth row: Live events + player reports + ban appeals
+- Fifth row: Currency inflation + experiment results
+- Bottom: Region selector + patch notes form + hotfix button
+
+Let me build this step by step, making sure every variable is referenced.
+
+I need to be careful about:
+- Positional arguments only
+- Every defined variable must be reachable from root
+- Proper component signatures
+
+Let me structure this carefully.
+
+```
+root = Card([...])
+```
+
+I'll organize into sections:
+1. KPI row - players online, DAU, MAU, revenue, RPU
+2. Charts row - session length, crash rate
+3. Data tables - best sellers, server regions
+4. Operations - events, reports, appeals, inflation
+5. Experiments
+6. Actions - region focus, patch notes, hotfix
+
+Let me write this out carefully.
+root = Card([kpiSection, chartsSection, tablesSection, opsSection, experimentsSection, actionsSection], "card", "column", "m")
+
+kpiSection = Card([kpiHeader, kpiGrid], "sunk")
+kpiHeader = CardHeader("Live Metrics", "Real-time studio performance")
+kpiGrid = Card([playersOnline, dauMetric, mauMetric, revenueToday, rpuMetric], "clear", "row", "m", "start", "between", false)
+
+playersOnline = Card([poLabel, poValue, poBadge], "clear", "column", "none", "center", "center")
+poLabel = TextContent("Players Online", "small-heavy")
+poValue = TextContent("14,832", "large-heavy")
+poBadge = Badge("LIVE", "success")
+
+dauMetric = Card([dauLabel, dauValue, dauChange], "clear", "column", "none", "center", "center")
+dauLabel = TextContent("Daily Active", "small-heavy")
+dauValue = TextContent("52,410", "large-heavy")
+dauChange = TextContent("↑ 3.2%", "small")
+
+mauMetric = Card([mauLabel, mauValue, mauChange], "clear", "column", "none", "center", "center")
+mauLabel = TextContent("Monthly Active", "small-heavy")
+mauValue = TextContent("184,200", "large-heavy")
+mauChange = TextContent("↑ 1.8%", "small")
+
+revenueToday = Card([revLabel, revValue, revChange], "clear", "column", "none", "center", "center")
+revLabel = TextContent("Revenue Today", "small-heavy")
+revValue = TextContent("$48,291", "large-heavy")
+revChange = TextContent("↑ 12.4%", "small")
+
+rpuMetric = Card([rpuLabel, rpuValue, rpuChange], "clear", "column", "none", "center", "center")
+rpuLabel = TextContent("Revenue / User", "small-heavy")
+rpuValue = TextContent("$0.92", "large-heavy")
+rpuChange = TextContent("↑ 8.1%", "small")
+
+chartsSection = Card([sessionChart, crashChart], "card", "row", "m", "stretch", "start", false)
+sessionChart = Card([sessionHeader, sessionLineChart], "sunk")
+sessionHeader = CardHeader("Session Length", "Past 14 days (minutes)")
+sessionLineChart = LineChart(["D-14","D-13","D-12","D-11","D-10","D-9","D-8","D-7","D-6","D-5","D-4","D-3","D-2","D-1","Today"], [sessionSeries], "natural", "Day", "Minutes")
+sessionSeries = Series("Avg Session", [32,33,31,34,35,33,36,37,35,38,39,37,40,41,42])
+
+crashChart = Card([crashHeader, crashBarChart], "sunk")
+crashHeader = CardHeader("Crash Rate by Version", "Percentage of sessions with crash")
+crashBarChart = BarChart(["v2.1.0","v2.1.1","v2.2.0","v2.2.1","v2.3.0","v2.3.1"], [crashSeries], "grouped", "App Version", "Crash %")
+crashSeries = Series("Crash Rate", [0.8,0.6,1.2,0.4,0.9,0.3])
+
+tablesSection = Card([sellersTable, regionsTable], "card", "row", "m", "stretch", "start", false)
+sellersTable = Card([sellersHeader, sellersData], "sunk")
+sellersHeader = CardHeader("Best-Selling Items", "Last 24 hours")
+sellersData = Table([itemNameCol, itemUnitsCol, itemRevenueCol])
+itemNameCol = Col("Item", ["Dragon Blade Skin","Phoenix Mount","Starter Pack","Gem Crate x5","Battle Pass","Legendary Chest"])
+itemUnitsCol = Col("Units Sold", ["4,210","2,890","8,540","6,120","3,750","1,980"])
+itemRevenueCol = Col("Revenue ($)", ["12,630","14,450","4,270","18,360","11,250","9,900"])
+
+regionsTable = Card([regionsHeader, regionsData], "sunk")
+regionsHeader = CardHeader("Server Regions", "Health status and latency")
+regionsData = Table([regionNameCol, regionStatusCol, regionLatencyCol, regionUptimeCol])
+regionNameCol = Col("Region", ["NA East","NA West","EU West","EU Central","Asia Pacific","Brazil"])
+regionStatusCol = Col("Health", ["Healthy","Healthy","Degraded","Healthy","Healthy","Warning"])
+regionLatencyCol = Col("Avg Latency (ms)", ["42","68","85","72","120","156"])
+regionUptimeCol = Col("Uptime (%)", ["99.99","99.97","99.85","99.98","99.96","99.72"])
+
+opsSection = Card([eventsCard, reportsCard, appealsCard, inflationCard], "card", "column", "m")
+eventsCard = Card([eventsHeader, eventsList], "sunk")
+eventsHeader = CardHeader("Live Events", "Running and upcoming")
+eventsList = ListBlock([event1, event2, event3, event4], "image")
+event1 = ListItem("Dragon Hunt Weekend", "Running until Dec 24 • 2,400 participants", null, "View Details")
+event2 = ListItem("Holiday Sale", "Running until Jan 1 • 15,600 participants", null, "View Details")
+event3 = ListItem("Championship Tournament", "Starts Dec 28 • Registration open", null, "Manage")
+event4 = ListItem("New Map Launch", "Starts Jan 5 • In preparation", null, "Configure")
+
+reportsCard = Card([reportsHeader, reportsContent], "sunk")
+reportsHeader = CardHeader("Player Reports", "Awaiting moderation review")
+reportsContent = Card([reportCount, reportBreakdown], "clear", "row", "m", "start", "between", false)
+reportCount = Card([reportNumLabel, reportNumValue], "clear", "column", "none", "center", "center")
+reportNumLabel = TextContent("Total Pending", "small-heavy")
+reportNumValue = TextContent("127", "large-heavy")
+reportBreakdown = Card([cheatReports, toxicReports, exploitReports], "clear", "column", "s")
+cheatReports = TextContent("Cheating: 43 reports", "default")
+toxicReports = TextContent("Toxicity: 52 reports", "default")
+exploitReports = TextContent("Exploits: 32 reports", "default")
+
+appealsCard = Card([appealsHeader, appealsContent], "sunk")
+appealsHeader = CardHeader("Ban Appeals", "Awaiting review")
+appealsContent = Card([appealCount, appealBreakdown], "clear", "row", "m", "start", "between", false)
+appealCount = Card([appealNumLabel, appealNumValue], "clear", "column", "none", "center", "center")
+appealNumLabel = TextContent("Total Pending", "small-heavy")
+appealNumValue = TextContent("38", "large-heavy")
+appealBreakdown = Card([permAppeals, tempAppeals], "clear", "column", "s")
+permAppeals = TextContent("Permanent bans: 14 appeals", "default")
+tempAppeals = TextContent("Temporary bans: 24 appeals", "default")
+
+inflationCard = Card([inflationHeader, inflationContent], "sunk")
+inflationHeader = CardHeader("Currency Inflation", "Gold-to-item ratio tracking")
+inflationContent = Card([inflationMetric, inflationAlert], "clear", "column", "m")
+inflationMetric = Card([infLabel, infValue, infTrend], "clear", "column", "none", "center", "center")
+infLabel = TextContent("Inflation Rate", "small-heavy")
+infValue = TextContent("4.7%", "large-heavy")
+infTrend = TextContent("↑ from 3.2% last week", "small")
+inflationAlert = Alert("Moderate Inflation", "Gold sinks may need adjustment. Recommend increasing vendor prices by 5-8%.", "warning")
+
+experimentsSection = Card([expHeader, expGrid], "card")
+expHeader = CardHeader("Live Experiments", "A/B test results")
+expGrid = Card([expA, expB], "clear", "row", "m", "stretch", "start", false)
+
+expA = Card([expAHeader, expATable], "sunk")
+expAHeader = CardHeader("Experiment A: New Onboarding Flow", "Day 7 of 14 • 50/50 split")
+expATable = Table([expAMetricCol, expACtrlCol, expAExpCol, expALiftCol])
+expAMetricCol = Col("Metric", ["Day 1 Retention","Day 7 Retention","First Purchase Rate","Avg Session Min"])
+expACtrlCol = Col("Control", ["42.1%","18.3%","12.5%","34.2"])
+expAExpCol = Col("Variant", ["45.8%","21.7%","15.9%","38.6"])
+expALiftCol = Col("Lift", ["+8.8%","+18.6%","+27.2%","+12.9%"])
+
+expB = Card([expBHeader, expBTable], "sunk")
+expBHeader = CardHeader("Experiment B: Battle Pass Pricing", "Day 5 of 14 • 50/50 split")
+expBTable = Table([expBMetricCol, expBCtrlCol, expBExpCol, expBLiftCol])
+expBMetricCol = Col("Metric", ["Purchase Rate","ARPU","Completion Rate","Churn Rate"])
+expBCtrlCol = Col("Control", ["8.2%","$4.50","34%","2.1%"])
+expBExpCol = Col("Variant", ["9.8%","$5.10","38%","1.8%"])
+expBLiftCol = Col("Lift", ["+19.5%","+13.3%","+11.8%","-14.3%"])
+
+actionsSection = Card([regionSelector, patchNotesForm, hotfixBlock], "card", "column", "m")
+regionSelector = Card([regionHeader, regionSelect], "sunk")
+regionHeader = CardHeader("Focus Region", "Filter dashboard data by region")
+regionSelect = Form("region-focus", regionFormButtons, [regionField])
+regionField = FormControl("Select Region", regionDropdown)
+regionDropdown = Select("region", [naEastOpt, naWestOpt, euWestOpt, euCentralOpt, asiaOpt, brazilOpt], "Choose a region to focus on", null, "all")
+naEastOpt = SelectItem("na-east", "NA East")
+naWestOpt = SelectItem("na-west", "NA West")
+euWestOpt = SelectItem("eu-west", "EU West")
+euCentralOpt = SelectItem("eu-central", "EU Central")
+asiaOpt = SelectItem("asia-pacific", "Asia Pacific")
+brazilOpt = SelectItem("brazil", "Brazil")
+regionFormButtons = Buttons([applyRegionBtn, resetRegionBtn])
+applyRegionBtn = Button("Apply Filter", null, "primary")
+resetRegionBtn = Button("Reset", null, "tertiary")
+
+patchNotesForm = Card([patchHeader, patchForm], "sunk")
+patchHeader = CardHeader("Draft Patch Notes", "Compose and review before publishing")
+patchForm = Form("patch-notes", patchButtons, [patchTitleField, patchVersionField, patchBodyField, patchPriorityField])
+patchTitleField = FormControl("Patch Title", patchTitleInput)
+patchTitleInput = Input("patch_title", "v2.4.0 - Holiday Update", null, null, null)
+patchVersionField = FormControl("Version", patchVersionInput)
+patchVersionInput = Input("patch_version", "2.4.0", null, null, null)
+patchBodyField = FormControl("Patch Notes Body", patchBodyInput)
+patchBodyInput = TextArea("patch_body", "• New holiday event: Dragon Hunt Weekend\n• Bug fixes for mount collision\n• Balanced Phoenix Mount stats\n• Added 5 new cosmetic items", 8, null, null)
+patchPriorityField = FormControl("Priority Level", patchPrioritySelect)
+patchPrioritySelect = Select("priority", [lowOpt, medOpt, highOpt], "Select priority", null, "medium")
+lowOpt = SelectItem("low", "Low - Minor fixes")
+medOpt = SelectItem("medium", "Medium - Standard update")
+highOpt = SelectItem("high", "High - Critical hotfix")
+patchButtons = Buttons([publishBtn, saveDraftBtn])
+publishBtn = Button("Publish Patch Notes", null, "primary")
+saveDraftBtn = Button("Save Draft", null, "secondary")
+
+hotfixBlock = Card([hotfixHeader, hotfixContent], "sunk")
+hotfixHeader = CardHeader("Ship Hotfix", "Deploy emergency patch to production")
+hotfixContent = Card([hotfixWarning, hotfixDialog], "clear", "column", "m")
+hotfixWarning = Alert("⚠️ High Risk Action", "Shipping a hotfix will immediately deploy to all regions. Ensure all tests have passed.", "destructive")
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix Deployment", "This will deploy the latest build to all production servers. This action cannot be undone.", "Ship Now", "Cancel", "destructive")

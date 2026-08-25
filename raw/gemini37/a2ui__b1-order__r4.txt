@@ -1,0 +1,273 @@
+Here is a package delivery tracking screen providing the current status/location, estimated delivery timeline, tracking history, and an option to report any issues.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "currentStatusBanner",
+          "deliveryInfoCard",
+          "trackingProgress",
+          "trackingHistorySection",
+          "reportProblemSection"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Package Tracking",
+        "subtitle": "Tracking Number: TRK-984201854US"
+      },
+      {
+        "id": "currentStatusBanner",
+        "component": "Alert",
+        "title": "Out for Delivery — In Transit",
+        "description": "Package is currently located at the Local Distribution Hub (Austin, TX) and loaded on the delivery vehicle.",
+        "variant": "info"
+      },
+      {
+        "id": "deliveryInfoCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "etaTitle",
+          "etaProgress",
+          "etaSubtext"
+        ]
+      },
+      {
+        "id": "etaTitle",
+        "component": "Heading",
+        "text": "Estimated Delivery: Today, Oct 24 by 6:00 PM",
+        "level": "h3"
+      },
+      {
+        "id": "etaProgress",
+        "component": "Progress",
+        "value": 75,
+        "label": "Delivery progress: 3 of 4 stages complete"
+      },
+      {
+        "id": "etaSubtext",
+        "component": "TextContent",
+        "text": "Carrier: **Express Logistics** • Destination: **1420 Oakridge Dr, Austin, TX**",
+        "size": "small"
+      },
+      {
+        "id": "trackingProgress",
+        "component": "Steps",
+        "items": [
+          "stepOrderPlaced",
+          "stepShipped",
+          "stepOutForDelivery",
+          "stepDelivered"
+        ]
+      },
+      {
+        "id": "stepOrderPlaced",
+        "component": "StepsItem",
+        "title": "Order Processed",
+        "details": "Oct 22, 9:15 AM — Fulfillment Center (Dallas, TX)"
+      },
+      {
+        "id": "stepShipped",
+        "component": "StepsItem",
+        "title": "In Transit",
+        "details": "Oct 23, 8:40 PM — Regional Sorting Facility"
+      },
+      {
+        "id": "stepOutForDelivery",
+        "component": "StepsItem",
+        "title": "Out for Delivery (Current)",
+        "details": "Oct 24, 7:15 AM — Austin Local Distribution Hub"
+      },
+      {
+        "id": "stepDelivered",
+        "component": "StepsItem",
+        "title": "Delivered",
+        "details": "Pending drop-off at front door"
+      },
+      {
+        "id": "trackingHistorySection",
+        "component": "SectionBlock",
+        "sections": [
+          "historySectionItem"
+        ],
+        "isFoldable": true
+      },
+      {
+        "id": "historySectionItem",
+        "component": "SectionItem",
+        "value": "history",
+        "trigger": "View detailed scan history",
+        "content": [
+          "historyTable"
+        ]
+      },
+      {
+        "id": "historyTable",
+        "component": "Table",
+        "columns": [
+          "colTimestamp",
+          "colLocation",
+          "colActivity"
+        ]
+      },
+      {
+        "id": "colTimestamp",
+        "component": "Col",
+        "label": "Date & Time",
+        "data": [
+          "Oct 24, 07:15 AM",
+          "Oct 23, 08:40 PM",
+          "Oct 23, 02:10 PM",
+          "Oct 22, 09:15 AM"
+        ]
+      },
+      {
+        "id": "colLocation",
+        "component": "Col",
+        "label": "Location",
+        "data": [
+          "Austin, TX",
+          "San Marcos, TX",
+          "Dallas, TX",
+          "Dallas, TX"
+        ]
+      },
+      {
+        "id": "colActivity",
+        "component": "Col",
+        "label": "Activity",
+        "data": [
+          "Out for delivery on courier vehicle",
+          "Arrived at regional sort facility",
+          "Package departed origin facility",
+          "Shipping label created & packed"
+        ]
+      },
+      {
+        "id": "reportProblemSection",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "reportProblemModal"
+        ]
+      },
+      {
+        "id": "reportProblemModal",
+        "component": "DialogBlock",
+        "triggerLabel": "Report a problem with this delivery",
+        "triggerVariant": "destructive",
+        "title": "Report Delivery Issue",
+        "description": "Select the issue you're experiencing with tracking ID TRK-984201854US.",
+        "content": [
+          "reportForm"
+        ]
+      },
+      {
+        "id": "reportForm",
+        "component": "Form",
+        "name": "report_issue_form",
+        "buttons": "reportFormActions",
+        "fields": [
+          "issueReasonField",
+          "issueDetailsField"
+        ]
+      },
+      {
+        "id": "issueReasonField",
+        "component": "FormControl",
+        "label": "Reason for issue",
+        "input": "issueReasonSelect"
+      },
+      {
+        "id": "issueReasonSelect",
+        "component": "Select",
+        "name": "reason",
+        "placeholder": "Choose an issue type",
+        "items": [
+          "optDelayed",
+          "optWrongAddress",
+          "optMarkedDelivered",
+          "optDamaged",
+          "optOther"
+        ]
+      },
+      {
+        "id": "optDelayed",
+        "component": "SelectItem",
+        "value": "delayed",
+        "label": "Delivery is delayed past expected window"
+      },
+      {
+        "id": "optWrongAddress",
+        "component": "SelectItem",
+        "value": "wrong_address",
+        "label": "Incorrect delivery address listed"
+      },
+      {
+        "id": "optMarkedDelivered",
+        "component": "SelectItem",
+        "value": "missing",
+        "label": "Marked delivered but not received"
+      },
+      {
+        "id": "optDamaged",
+        "component": "SelectItem",
+        "value": "damaged",
+        "label": "Package or contents damaged"
+      },
+      {
+        "id": "optOther",
+        "component": "SelectItem",
+        "value": "other",
+        "label": "Other issue / Special instruction"
+      },
+      {
+        "id": "issueDetailsField",
+        "component": "FormControl",
+        "label": "Additional comments",
+        "hint": "Provide any relevant details to help our support team resolve this quickly.",
+        "input": "issueDetailsInput"
+      },
+      {
+        "id": "issueDetailsInput",
+        "component": "TextArea",
+        "name": "details",
+        "placeholder": "Describe what went wrong...",
+        "rows": 4
+      },
+      {
+        "id": "reportFormActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitReportBtn"
+        ]
+      },
+      {
+        "id": "submitReportBtn",
+        "component": "Button",
+        "label": "Submit Report",
+        "type": "destructive"
+      }
+    ]
+  }
+}
+</a2ui-json>

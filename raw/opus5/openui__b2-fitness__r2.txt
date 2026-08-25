@@ -1,0 +1,65 @@
+root = Card([header, todayStats, stepsProgress, stepsNote, divider1, caloriesCallout, calorieTable, divider2, weekHeading, weekChart, weekList, divider3, logForm, followUps])
+
+header = CardHeader("Daily Summary", "Tuesday, March 12")
+
+todayStats = Card([stepsTag, caloriesTag, activeTag], "sunk", "row", "s", "center", "start", true)
+stepsTag = Tag("8,432 steps", null, "md", "info")
+caloriesTag = Tag("612 kcal burned", null, "md", "success")
+activeTag = Tag("47 active minutes", null, "md", "neutral")
+
+stepsProgress = Progress(84, "Steps: 8,432 of 10,000 daily goal")
+stepsNote = TextContent("**1,568 steps to go** — about a 15 minute walk. You are ahead of your 7-day average of 7,910 steps.", "small")
+
+divider1 = Separator("horizontal")
+
+caloriesCallout = TextCallout("success", "612 calories burned", "102 kcal above your 510 kcal daily burn target, driven by this morning's strength session.")
+
+calorieTable = Table([calSource, calAmount, calShare])
+calSource = Col("Source", ["Resting burn", "Steps & walking", "Strength workout", "Total"])
+calAmount = Col("Calories", [1420, 244, 368, 2032])
+calShare = Col("Of active burn", ["—", "40%", "60%", "100%"])
+
+divider2 = Separator("horizontal")
+
+weekHeading = Heading("Workouts this week", "h3")
+weekChart = BarChart(["Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue"], [minutesSeries, calSeries], "grouped", "Day", "Minutes / kcal ÷ 10")
+minutesSeries = Series("Active minutes", [42, 0, 55, 68, 30, 0, 47])
+calSeries = Series("Calories (÷10)", [38, 0, 51, 74, 26, 0, 37])
+
+weekList = ListBlock([w1, w2, w3, w4, w5], "number")
+w1 = ListItem("Upper body strength", "Today · 47 min · 368 kcal · avg HR 128")
+w2 = ListItem("Rest day", "Monday · recovery walk only · 3,120 steps")
+w3 = ListItem("Easy run 4.2 km", "Sunday · 30 min · 262 kcal · avg HR 141")
+w4 = ListItem("Trail hike", "Saturday · 68 min · 742 kcal · best session of the week")
+w5 = ListItem("Cycling intervals", "Friday · 55 min · 508 kcal · avg HR 152")
+
+divider3 = Separator("horizontal")
+
+logForm = Form("log-workout", formButtons, [typeField, durationField, intensityField, dateField, notesField])
+typeField = FormControl("Workout type", typeSelect)
+typeSelect = Select("type", [tRun, tStrength, tCycle, tYoga, tHike], "Choose an activity")
+tRun = SelectItem("run", "Running")
+tStrength = SelectItem("strength", "Strength training")
+tCycle = SelectItem("cycle", "Cycling")
+tYoga = SelectItem("yoga", "Yoga & mobility")
+tHike = SelectItem("hike", "Hiking")
+durationField = FormControl("Duration", durationSlider, "Drag to set total minutes")
+durationSlider = Slider("duration", "discrete", 5, 180, 5, [45], "Minutes")
+intensityField = FormControl("Intensity", intensityRadio)
+intensityRadio = RadioGroup("intensity", [iLow, iMed, iHigh], "medium")
+iLow = RadioItem("Easy", "Conversational pace, HR under 120", "low")
+iMed = RadioItem("Moderate", "Working but sustainable, HR 120-150", "medium")
+iHigh = RadioItem("Hard", "Intervals or heavy lifting, HR above 150", "high")
+dateField = FormControl("Date", datePick)
+datePick = DatePicker("date", "single")
+notesField = FormControl("Notes", notesArea, "Optional — how did it feel?")
+notesArea = TextArea("notes", "Felt strong, added 5 kg on bench press", 3)
+formButtons = Buttons([saveBtn, quickBtn, cancelBtn])
+saveBtn = Button("Save workout", null, "primary")
+quickBtn = Button("Start live tracking", null, "secondary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("How do I hit 10,000 steps before bed?")
+f2 = FollowUpItem("Compare this week to last week")
+f3 = FollowUpItem("Suggest a recovery plan for tomorrow")

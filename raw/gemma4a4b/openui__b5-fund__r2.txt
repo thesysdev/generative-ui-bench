@@ -1,0 +1,78 @@
+root = Card([header, summaryRow, riskAlert, mainDashboard, orderForm, watchlist, newsSection, economicCalendar, followUps], "card", "column", "m")
+
+header = CardHeader("Global Macro Desk", "Market Open - 09:30 EST")
+timeframeSelector = FormControl("Timeframe", timeframeSelect, "View historical context")
+timeframeSelect = Select("timeframe", [tf1, tf5, tf15, tf60, tfD], "Select interval")
+headerWithTF = Card([header, timeframeSelector], "card", "row", "m")
+
+summaryRow = Card([kpis, marginInfo, riskLimits], "sunk", "row", "m")
+kpis = Card([portfolioVal, pnlToday], "card", "row", "m")
+portfolioVal = Card([TextContent("Total Portfolio Value", "small"), TextContent("$4,280,550.12", "large-heavy")], "sunk", "column")
+pnlToday = Card([TextContent("P&L Today", "small"), TextContent("+$42,105.00", "large-heavy")], "sunk", "column")
+marginInfo = Card([TextContent("Margin Used", "small"), Progress(72, "72%"), TextContent("72% of Limit", "small")], "sunk", "column")
+riskLimits = Card([TextContent("Risk Limits", "small"), Tag("Concentration: 88%", null, "md", "warning"), Tag("VaR: 92%", null, "md", "warning")], "sunk", "column")
+
+riskAlert = Alert("Margin Warning", "Margin utilization is approaching 75% threshold.", "warning")
+
+mainDashboard = SectionBlock([positionsSection, exposureSection, strategySection, drawdownSection])
+positionsSection = SectionItem("pos_val", "Current Positions", [positionsTable])
+positionsTable = Table([colTicker, colSize, colEntry, colPrice])
+colTicker = Col("Ticker", ["AAPL", "TSLA", "BTC/USD", "XAU/USD", "EUR/USD"])
+colSize = Col("Size", ["500", "120", "2.5", "10", "1000000"])
+colEntry = Col("Entry", ["185.20", "240.50", "62000", "2350", "1.0850"])
+colPrice = Col("Price", ["190.10", "235.00", "64200", "2385", "1.0890"])
+
+exposureSection = SectionItem("exp_val", "Exposure by Sector", [sectorChart])
+sectorChart = RadialChart(["Tech", "Energy", "Finance", "Consumer", "Health"], [45, 15, 20, 10, 10])
+
+strategySection = SectionItem("strat_val", "Strategy Returns (YTD)", [strategyTable])
+strategyTable = Table([colStrat, colReturn])
+colStrat = Col("Strategy", ["Trend Follow", "Mean Reversion", "Arbitrage", "Macro"])
+colReturn = Col("YTD Return", ["+12.4%", "+4.2%", "-1.5%", "+8.9%"])
+
+drawdownSection = SectionItem("dd_val", "Drawdown (1Y)", [drawdownChart])
+drawdownChart = AreaChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [seriesDD], "natural", "Month", "%")
+seriesDD = Series("Drawdown", [0, -2, -5, -3, -8, -4])
+
+orderForm = Card([Heading("Quick Order", "h3"), orderFields, orderButtons], "sunk")
+orderFields = Card([tickerField, sideField, qtyField], "clear", "row", "s")
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL")
+sideField = FormControl("Side", sideSelect)
+sideSelect = Select("side", [sideBuy, sideSell])
+sideBuy = SelectItem("BUY", "Long position")
+sideSell = SelectItem("SELL", "Short position")
+qtyField = FormControl("Quantity", qtyInput)
+qtyInput = Input("qty", "100", "number")
+orderButtons = Buttons([placeOrderBtn, rebalanceBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+rebalanceBtn = Button("Rebalance Portfolio", null, "secondary")
+
+watchlist = Card([Heading("Watchlist", "h3"), watchTable], "sunk")
+watchTable = Table([watchTicker, watchPrice, watchChange])
+watchTicker = Col("Instrument", ["NVDA", "MSFT", "ETH/USD", "OIL"])
+watchPrice = Col("Price", ["890.20", "415.50", "3500", "82.40"])
+watchChange = Col("Change", ["+2.4%", "-0.5%", "+4.1%", "-1.2%"])
+
+gainersLosers = Card([Heading("Daily Movers", "h3"), moversList], "sunk")
+moversList = ListBlock([gainer1, loser1])
+gainer1 = ListItem("NVDA", "+5.2%", ["https://picsum.photos/seed/nvda/50/50"], "Buy")
+loser1 = ListItem("INTC", "-4.8%", ["https://picsum.photos/seed/intc/50/50"], "Sell")
+
+newsSection = Card([Heading("Market Intelligence", "h3"), newsList], "sunk")
+newsList = ListBlock([news1, news2])
+news1 = ListItem("Fed Signals Rate Pause", "Neutral Sentiment", null)
+news2 = ListItem("Oil Supply Tightens", "Bullish Sentiment", null)
+
+economicCalendar = Card([Heading("Economic Releases", "h3"), econTable], "sunk")
+econTable = Table([econDate, econEvent, econImpact])
+econDate = Col("Date", ["Tue", "Wed", "Thu"])
+econEvent = Col("Event", ["CPI Data", "FOMC Minutes", "Jobless Claims"])
+econImpact = Col("Impact", ["High", "High", "Medium"])
+
+followUps = FollowUpBlock([follow1, follow2, follow3])
+follow1 = FollowUpItem("Show detailed VaR report")
+follow2 = FollowUpItem("Analyze sector exposure deeper")
+follow3 = FollowUpItem("List all open orders")
+
+root = Card([headerWithTF, riskAlert, summaryRow, mainDashboard, Card([watchlist, gainersLosers], "row"), Card([orderForm, newsSection], "row"), Card([economicCalendar], "sunk"), followUps])

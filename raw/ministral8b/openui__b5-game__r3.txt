@@ -1,0 +1,102 @@
+```openui-lang
+root = Card([header, dashboardTabs, playersSection, revenueSection, sessionsSection, salesSection, regionsSection, crashesSection, eventsSection, reportsSection, economySection, experimentsSection, patchNotesSection, hotfixSection], "card", "column", "m")
+
+header = CardHeader("Live Ops Dashboard", "Real-time game metrics and operations")
+
+dashboardTabs = Tabs([playersTab, revenueTab, salesTab, regionsTab, eventsTab, reportsTab, economyTab, experimentsTab])
+playersTab = TabItem("players", "Players", [playersSection])
+revenueTab = TabItem("revenue", "Revenue", [revenueSection])
+salesTab = TabItem("sales", "Sales", [salesSection])
+regionsTab = TabItem("regions", "Regions", [regionsSection])
+eventsTab = TabItem("events", "Events", [eventsSection])
+reportsTab = TabItem("reports", "Reports", [reportsSection])
+economyTab = TabItem("economy", "Economy", [economySection])
+experimentsTab = TabItem("experiments", "Experiments", [experimentsSection])
+
+playersSection = Card([onlinePlayers, activePlayers], "sunk")
+onlinePlayers = Card([onlinePlayersCount, onlinePlayersGraph], "sunk")
+onlinePlayersCount = Card([Tag("12,456 players online", null, null, "success"), Tag("Peak: 15,234", null, null, "neutral")])
+onlinePlayersGraph = AreaChart(["00:00", "06:00", "12:00", "18:00"], [onlineSeries], "linear", "Time of Day", "Players Online")
+onlineSeries = Series("Live", [1200, 2500, 9800, 11000])
+
+activePlayers = Card([dailyActive, monthlyActive], "sunk")
+dailyActive = Card([Tag("Daily Active: 47,231", null, null, "success")])
+monthlyActive = Card([Tag("Monthly Active: 189,456", null, null, "success")])
+
+revenueSection = Card([revenueToday, revenuePerUser], "sunk")
+revenueToday = Card([Tag("$128,400 today", null, null, "success")])
+revenuePerUser = Card([Tag("Avg. $2.75/user", null, null, "success")])
+
+sessionsSection = Card([sessionLengthChart], "sunk")
+sessionLengthChart = LineChart(["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"], [sessionSeries], "natural", "Day", "Avg. Session Length (min)")
+sessionSeries = Series("Last 14 Days", [32.5, 34.1, 35.8, 36.2, 37.1, 38.3, 39.5, 39.8, 40.2, 41.5, 42.1, 43.0, 44.2, 45.3])
+
+salesSection = Card([bestSellersTable], "sunk")
+bestSellersTable = Table([itemCol, unitsCol])
+itemCol = Col("Item", ["Epic Sword", "Dragon Armor", "Ancient Shield", "Royal Crown", "Legendary Axe"])
+unitsCol = Col("Units Sold", ["12,456", "8,765", "5,432", "4,123", "3,876"], "number")
+
+regionsSection = Card([regionHealth], "sunk")
+regionHealth = Table([regionCol, healthCol, statusCol])
+regionCol = Col("Region", ["NA", "EU", "APAC", "LATAM", "MEA"])
+healthCol = Col("Health", ["98%", "92%", "100%", "89%", "95%"], "string")
+statusCol = Col("Status", ["✅", "⚠️", "✅", "⚠️", "✅"], "string")
+
+crashesSection = Card([crashRateChart], "sunk")
+crashRateChart = BarChart(["v1.2.3", "v1.2.4", "v1.2.5", "v1.2.6", "v1.2.7"], [crashSeries], "grouped", "App Version", "Crash Rate (%)")
+crashSeries = Series("Crash Rate", [1.2, 0.8, 2.1, 1.5, 0.6])
+
+eventsSection = Card([liveEvents, upcomingEvents], "sunk")
+liveEvents = Card([Tag("Live Events: 2", null, null, "success"), liveEvent1, liveEvent2])
+liveEvent1 = Card([Tag("Epic Battle Royale", null, null, "neutral"), Tag("Ends: 12:00 UTC", null, null, "neutral")])
+liveEvent2 = Card([Tag("Cosmetic Sale", null, null, "neutral"), Tag("Ends: 23:59 UTC", null, null, "neutral")])
+upcomingEvents = Card([Tag("Upcoming Events: 3", null, null, "neutral"), upcomingEvent1, upcomingEvent2, upcomingEvent3])
+upcomingEvent1 = Tag("New Dungeon", "12:00 UTC tomorrow", null, "neutral")
+upcomingEvent2 = Tag("Character Update", "15:00 UTC tomorrow", null, "neutral")
+upcomingEvent3 = Tag("Weekly Quest", "08:00 UTC next Monday", null, "neutral")
+
+reportsSection = Card([playerReports, banAppeals], "sunk")
+playerReports = Card([Tag("Player Reports: 45", null, null, "warning")])
+banAppeals = Card([Tag("Ban Appeals: 12", null, null, "warning")])
+
+economySection = Card([currencyInflation], "sunk")
+currencyInflation = Card([Tag("Inflation Rate: 1.8%", null, null, "warning"), Tag("Last Week: 1.2%", null, null, "neutral")])
+
+experimentsSection = Card([experiment1, experiment2], "sunk")
+experiment1 = Card([Tag("A/B Test: UI Changes", null, null, "neutral"), Tag("Conversion: +12.5%", null, null, "success")])
+experiment2 = Card([Tag("Feature Test: New Quest", null, null, "neutral"), Tag("Completion: +8.2%", null, null, "success")])
+
+patchNotesSection = Card([patchNotesForm], "sunk")
+patchNotesForm = Form("patch-notes", patchNotesButtons, [patchNotesTextArea])
+patchNotesTextArea = FormControl("Patch Notes", patchNotesInput)
+patchNotesInput = TextArea("notes", "Enter your patch notes here...", 10)
+patchNotesButtons = Buttons([draftBtn])
+draftBtn = Button("Draft Patch Notes", null, "primary")
+
+hotfixSection = Card([hotfixForm], "sunk")
+hotfixForm = Form("hotfix", hotfixButtons, [hotfixTitle, hotfixDescription, hotfixSeverity])
+hotfixTitle = FormControl("Title", hotfixTitleInput)
+hotfixTitleInput = Input("title", "Enter hotfix title")
+hotfixDescription = FormControl("Description", hotfixDescriptionInput)
+hotfixDescriptionInput = TextArea("description", "Enter hotfix details")
+hotfixSeverity = FormControl("Severity", hotfixSeveritySelect)
+hotfixSeveritySelect = Select("severity", [severityCritical, severityHigh, severityMedium, severityLow], "Select severity")
+severityCritical = SelectItem("critical", "Critical")
+severityHigh = SelectItem("high", "High")
+severityMedium = SelectItem("medium", "Medium")
+severityLow = SelectItem("low", "Low")
+hotfixButtons = Buttons([shipHotfixBtn])
+shipHotfixBtn = Button("Ship Hotfix", null, "primary")
+
+focusRegionForm = Form("focus-region", focusRegionButtons, [focusRegionSelect])
+focusRegionSelect = FormControl("Focus Region", focusRegionInput)
+focusRegionInput = Select("region", [regionNA, regionEU, regionAPAC, regionLATAM, regionMEA], "Select region to focus")
+regionNA = SelectItem("na", "North America")
+regionEU = SelectItem("eu", "Europe")
+regionAPAC = SelectItem("apac", "Asia Pacific")
+regionLATAM = SelectItem("latam", "Latin America")
+regionMEA = SelectItem("mea", "Middle East & Africa")
+focusRegionButtons = Buttons([focusBtn])
+focusBtn = Button("Focus on Region", null, "primary")
+
+```

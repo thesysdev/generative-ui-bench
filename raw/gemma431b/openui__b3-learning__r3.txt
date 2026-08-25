@@ -1,0 +1,40 @@
+root = Card([header, filterSection, kpiGrid, enrollmentSection, riskSection, engagementSection, communicationSection], "clear", "column", "l")
+
+header = CardHeader("Training Platform Analytics", "Real-time learner performance and engagement")
+
+filterSection = Card([cohortFilter], "sunk", "row", "m")
+cohortFilter = FormControl("Select Cohort", cohortSelect, "Filter all dashboard metrics by a specific group")
+cohortSelect = Select("cohort_id", [c1, c2, c3], "All Cohorts")
+c1 = SelectItem("cohort_2024_a", "Q1 Engineering Cohort")
+c2 = SelectItem("cohort_2024_b", "Q1 Sales Enablement")
+c3 = SelectItem("cohort_2024_c", "Executive Leadership")
+
+kpiGrid = Card([activeLearners, completionRate, avgQuizScore], "card", "row", "m", "center", "between")
+activeLearners = TextCallout("info", "Active Learners", "1,248 users active this week")
+completionRate = TextCallout("success", "Completion Rate", "74.2% overall progress")
+avgQuizScore = TextCallout("neutral", "Avg Quiz Score", "82/100 across all modules")
+
+enrollmentSection = Card([enrollHeading, enrollmentChart], "card", "column", "m")
+enrollHeading = Heading("Courses by Enrollment", "h3")
+enrollmentChart = HorizontalBarChart(["Python Basics", "Cloud Arch", "Leadership 101", "Cyber Security", "Project Mgmt"], [enrollSeries], "grouped", "Course", "Students")
+enrollSeries = Series("Students", [850, 720, 610, 440, 310])
+
+riskSection = Card([riskHeading, riskTable], "card", "column", "m")
+riskHeading = Heading("Learners at Risk", "h3")
+riskTable = Table([riskName, riskProgress, riskLastActive])
+riskName = Col("Learner", ["Alex Rivera", "Sam Chen", "Jordan Lee", "Maria Garcia", "Chris Smith"])
+riskProgress = Col("Completion", ["12%", "24%", "18%", "31%", "15%"])
+riskLastActive = Col("Last Active", ["14 days ago", "11 days ago", "19 days ago", "10 days ago", "22 days ago"])
+
+engagementSection = Card([engHeading, engagementChart], "card", "column", "m")
+engHeading = Heading("8-Week Engagement Trend", "h3")
+engagementChart = AreaChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engSeries], "natural", "Week", "Active Hours")
+engSeries = Series("Engagement", [4200, 4500, 3800, 5100, 4900, 5600, 5200, 6100])
+
+communicationSection = Card([commHeading, commForm], "sunk", "column", "m")
+commHeading = Heading("Message Cohort", "h4")
+commForm = Form("cohort-msg", commButtons, [msgField])
+msgField = FormControl("Message", msgInput, "Send a nudge or announcement to the selected cohort")
+msgInput = TextArea("message", "Enter your message here...", 4)
+commButtons = Buttons([sendBtn])
+sendBtn = Button("Send Announcement", null, "primary")

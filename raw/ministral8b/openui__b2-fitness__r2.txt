@@ -1,0 +1,40 @@
+```openui-lang
+root = Card([summaryHeader, stepProgress, calorieInfo, workoutSummary, newWorkoutForm], "card", "column", "m", "start")
+
+summaryHeader = CardHeader("Daily Fitness Summary", "Track your progress today")
+
+stepProgress = Card([
+    Heading("Steps Today", "h3"),
+    Progress(stepCountToday, "Steps"),
+    TextContent("Goal: " + stepGoal + " steps")
+], "sunk")
+
+calorieInfo = Card([
+    Heading("Calories Burned", "h3"),
+    TextContent(caloriesBurned + " kcal"),
+    Tag("Active", null, null, "success")
+], "sunk")
+
+workoutSummary = Card([
+    CardHeader("Weekly Workouts"),
+    LineChart(workoutDays, workoutSeries, "natural", "Day", "Duration (min)"),
+    Buttons([viewDetailsBtn])
+], "sunk")
+workoutDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+workoutSeries = [Series("Workouts", [30, 45, 0, 20, 60, 0, 15])]
+
+newWorkoutForm = Card([
+    CardHeader("Log New Workout"),
+    Form("workout-log", workoutButtons, [workoutField]),
+    TextContent("Track your activity for better insights", "small")
+], "sunk")
+workoutField = FormControl("Workout Duration", workoutInput)
+workoutInput = Input("duration", "Enter minutes", "number", ["min:1", "max:120"], "30")
+workoutButtons = Buttons([logBtn, cancelBtn])
+logBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+stepCountToday = 7500
+stepGoal = 10000
+caloriesBurned = 2850
+```

@@ -1,0 +1,493 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "gap": "m",
+        "children": [
+          "header",
+          "actionRow",
+          "kpiOverview",
+          "dashboardTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Talent & Headcount Overview",
+        "subtitle": "Real-time hiring pipelines, staffing metrics, and workforce analytics"
+      },
+      {
+        "id": "actionRow",
+        "component": "Card",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "variant": "clear",
+        "children": [
+          "statusBadge",
+          "openRoleModal"
+        ]
+      },
+      {
+        "id": "statusBadge",
+        "component": "Badge",
+        "text": "Q1 Hiring Plan: 84% On Track",
+        "variant": "secondary"
+      },
+      {
+        "id": "openRoleModal",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Open New Role",
+        "triggerVariant": "default",
+        "title": "Create Requisition",
+        "description": "Submit a new job opening for approval and talent sourcing.",
+        "content": [
+          "newRoleForm"
+        ]
+      },
+      {
+        "id": "newRoleForm",
+        "component": "Form",
+        "name": "createRoleForm",
+        "buttons": "formActionButtons",
+        "fields": [
+          "roleTitleCtrl",
+          "deptSelectCtrl",
+          "targetDateCtrl",
+          "notesCtrl"
+        ]
+      },
+      {
+        "id": "roleTitleCtrl",
+        "component": "FormControl",
+        "label": "Job Title",
+        "input": "roleTitleInput"
+      },
+      {
+        "id": "roleTitleInput",
+        "component": "Input",
+        "name": "title",
+        "placeholder": "e.g., Staff Backend Engineer"
+      },
+      {
+        "id": "deptSelectCtrl",
+        "component": "FormControl",
+        "label": "Department",
+        "input": "deptSelect"
+      },
+      {
+        "id": "deptSelect",
+        "component": "Select",
+        "name": "department",
+        "placeholder": "Select department",
+        "items": [
+          "deptEng",
+          "deptProd",
+          "deptSales",
+          "deptMktg",
+          "deptOps",
+          "deptGA"
+        ]
+      },
+      {
+        "id": "deptEng",
+        "component": "SelectItem",
+        "value": "engineering",
+        "label": "Engineering"
+      },
+      {
+        "id": "deptProd",
+        "component": "SelectItem",
+        "value": "product",
+        "label": "Product & Design"
+      },
+      {
+        "id": "deptSales",
+        "component": "SelectItem",
+        "value": "sales",
+        "label": "Sales & Revenue"
+      },
+      {
+        "id": "deptMktg",
+        "component": "SelectItem",
+        "value": "marketing",
+        "label": "Marketing"
+      },
+      {
+        "id": "deptOps",
+        "component": "SelectItem",
+        "value": "operations",
+        "label": "Operations"
+      },
+      {
+        "id": "deptGA",
+        "component": "SelectItem",
+        "value": "ga",
+        "label": "General & Admin"
+      },
+      {
+        "id": "targetDateCtrl",
+        "component": "FormControl",
+        "label": "Target Start Date",
+        "input": "targetDatePicker"
+      },
+      {
+        "id": "targetDatePicker",
+        "component": "DatePicker",
+        "name": "target_date",
+        "mode": "single"
+      },
+      {
+        "id": "notesCtrl",
+        "component": "FormControl",
+        "label": "Requirements & Job Notes",
+        "input": "notesInput"
+      },
+      {
+        "id": "notesInput",
+        "component": "TextArea",
+        "name": "notes",
+        "placeholder": "Key responsibilities, level, and salary band details..."
+      },
+      {
+        "id": "formActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitRoleBtn"
+        ]
+      },
+      {
+        "id": "submitRoleBtn",
+        "component": "Button",
+        "label": "Publish Requisition",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiOverview",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "valCol",
+          "benchmarkCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Primary Metric",
+        "data": [
+          "Total Headcount",
+          "Active Open Roles",
+          "Average Time to Hire",
+          "Scheduled Interviews (This Week)",
+          "Trailing 6M Attrition"
+        ]
+      },
+      {
+        "id": "valCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "482 employees",
+          "18 positions",
+          "31 days",
+          "26 sessions",
+          "2.8%"
+        ]
+      },
+      {
+        "id": "benchmarkCol",
+        "component": "Col",
+        "label": "Status vs Target",
+        "data": [
+          "+14 this quarter",
+          "4 high priority",
+          "-4 days vs industry avg (35d)",
+          "12 final rounds",
+          "Well below 5% threshold"
+        ]
+      },
+      {
+        "id": "dashboardTabs",
+        "component": "Tabs",
+        "items": [
+          "tabPipeline",
+          "tabWorkforce"
+        ]
+      },
+      {
+        "id": "tabPipeline",
+        "component": "TabItem",
+        "value": "pipeline",
+        "trigger": "Open Roles & Active Pipeline",
+        "content": [
+          "pipelineSectionHeader",
+          "pipelineChart",
+          "openRolesHeader",
+          "openRolesTable",
+          "interviewsHeader",
+          "interviewsList"
+        ]
+      },
+      {
+        "id": "pipelineSectionHeader",
+        "component": "Heading",
+        "text": "Candidates by Pipeline Stage",
+        "level": "h3"
+      },
+      {
+        "id": "pipelineChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "Screening / Review",
+          "Technical / Skills Assessment",
+          "On-site / Final Panel",
+          "Offer Extended",
+          "Offer Accepted"
+        ],
+        "series": [
+          "pipelineSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Number of Candidates",
+        "yLabel": "Stage"
+      },
+      {
+        "id": "pipelineSeries",
+        "component": "Series",
+        "category": "Active Candidates",
+        "values": [
+          142,
+          58,
+          24,
+          7,
+          5
+        ]
+      },
+      {
+        "id": "openRolesHeader",
+        "component": "Heading",
+        "text": "Open Positions by Department",
+        "level": "h3"
+      },
+      {
+        "id": "openRolesTable",
+        "component": "Table",
+        "columns": [
+          "roleCol",
+          "deptCol",
+          "leadStageCol",
+          "ageCol"
+        ]
+      },
+      {
+        "id": "roleCol",
+        "component": "Col",
+        "label": "Role Title",
+        "data": [
+          "Senior Frontend Engineer",
+          "Staff Data Platform Engineer",
+          "Lead Product Designer",
+          "Enterprise Account Executive",
+          "Growth Marketing Manager",
+          "Senior DevOps Engineer",
+          "People Operations Specialist"
+        ]
+      },
+      {
+        "id": "deptCol",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Engineering",
+          "Engineering",
+          "Product & Design",
+          "Sales & Revenue",
+          "Marketing",
+          "Engineering",
+          "General & Admin"
+        ]
+      },
+      {
+        "id": "leadStageCol",
+        "component": "Col",
+        "label": "Current Pipeline Stage",
+        "data": [
+          "Final Panel (3 candidates)",
+          "Technical Assessment (8 candidates)",
+          "Offer Extended (1 candidate)",
+          "Screening (14 candidates)",
+          "Final Panel (2 candidates)",
+          "Screening (6 candidates)",
+          "Offer Accepted"
+        ]
+      },
+      {
+        "id": "ageCol",
+        "component": "Col",
+        "label": "Time Open",
+        "data": [
+          "21 days",
+          "38 days",
+          "19 days",
+          "12 days",
+          "27 days",
+          "15 days",
+          "33 days"
+        ]
+      },
+      {
+        "id": "interviewsHeader",
+        "component": "Heading",
+        "text": "Interviews Scheduled This Week (26 Total)",
+        "level": "h3"
+      },
+      {
+        "id": "interviewsList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "intItem1",
+          "intItem2",
+          "intItem3",
+          "intItem4"
+        ]
+      },
+      {
+        "id": "intItem1",
+        "component": "ListItem",
+        "title": "Elena Vance — Staff Data Platform Engineer",
+        "subtitle": "Technical System Design • Today, 2:00 PM • Interviewers: Marcus T. & Priya N.",
+        "actionLabel": "View Dossier"
+      },
+      {
+        "id": "intItem2",
+        "component": "ListItem",
+        "title": "David Chen — Lead Product Designer",
+        "subtitle": "Portfolio Presentation • Tomorrow, 10:30 AM • Interviewers: Sarah K. & Alex R.",
+        "actionLabel": "View Dossier"
+      },
+      {
+        "id": "intItem3",
+        "component": "ListItem",
+        "title": "Maya Johnson — Enterprise Account Executive",
+        "subtitle": "Executive Final Round • Thursday, 1:00 PM • Interviewer: VP Sales",
+        "actionLabel": "View Dossier"
+      },
+      {
+        "id": "intItem4",
+        "component": "ListItem",
+        "title": "Lucas Miller — Senior DevOps Engineer",
+        "subtitle": "Architecture Deep-Dive • Friday, 11:00 AM • Interviewer: Infrastructure Team",
+        "actionLabel": "View Dossier"
+      },
+      {
+        "id": "tabWorkforce",
+        "component": "TabItem",
+        "value": "workforce",
+        "trigger": "Headcount Split & Attrition",
+        "content": [
+          "deptSplitHeading",
+          "deptPieChart",
+          "attritionHeading",
+          "attritionLineChart"
+        ]
+      },
+      {
+        "id": "deptSplitHeading",
+        "component": "Heading",
+        "text": "Headcount Distribution by Department (482 Total)",
+        "level": "h3"
+      },
+      {
+        "id": "deptPieChart",
+        "component": "PieChart",
+        "labels": [
+          "Engineering (214)",
+          "Sales & Revenue (102)",
+          "Product & Design (48)",
+          "Marketing (42)",
+          "Operations (44)",
+          "General & Admin (32)"
+        ],
+        "values": [
+          214,
+          102,
+          48,
+          42,
+          44,
+          32
+        ],
+        "variant": "donut",
+        "appearance": "circular"
+      },
+      {
+        "id": "attritionHeading",
+        "component": "Heading",
+        "text": "Attrition Trend Over Past 6 Months (%)",
+        "level": "h3"
+      },
+      {
+        "id": "attritionLineChart",
+        "component": "LineChart",
+        "labels": [
+          "October",
+          "November",
+          "December",
+          "January",
+          "February",
+          "March"
+        ],
+        "series": [
+          "attritionSeries",
+          "benchmarkSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Month",
+        "yLabel": "Monthly Voluntary Turnover Rate (%)"
+      },
+      {
+        "id": "attritionSeries",
+        "component": "Series",
+        "category": "Company Attrition Rate (%)",
+        "values": [
+          0.6,
+          0.4,
+          0.3,
+          0.7,
+          0.5,
+          0.3
+        ]
+      },
+      {
+        "id": "benchmarkSeries",
+        "component": "Series",
+        "category": "Industry Benchmark (Avg %)",
+        "values": [
+          0.9,
+          0.8,
+          0.7,
+          1.1,
+          0.9,
+          0.8
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

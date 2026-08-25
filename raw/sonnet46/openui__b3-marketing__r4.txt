@@ -1,0 +1,56 @@
+root = Card([pageHeader, dateRow, kpiRow, midRow, bottomRow], "clear", "column", "l")
+
+pageHeader = CardHeader("Marketing Dashboard", "Weekly performance overview")
+
+dateRow = Card([dateLabel, datePicker, exportBtn], "sunk", "row", "m", "center", "between")
+dateLabel = TextContent("Date Range", "small-heavy")
+datePicker = DatePicker("date_range", "range")
+exportBtn = Button("Export Report", null, "secondary")
+
+kpiRow = Card([visitorsTile, convTile, subGrowthTile], "clear", "row", "m")
+
+visitorsTile = Card([visitorsLabel, visitorsVal, visitorsChart], "card", "column", "s")
+visitorsLabel = TextContent("Site Visitors — Last 30 Days", "small-heavy")
+visitorsVal = TextContent("84,320", "large-heavy")
+visitorsChart = AreaChart(["Jun 1","Jun 4","Jun 7","Jun 10","Jun 13","Jun 16","Jun 19","Jun 22","Jun 25","Jun 28","Jul 1"], [visitorsSeries], "natural", "Date", "Visitors")
+visitorsSeries = Series("Visitors", [1820, 2100, 2450, 3100, 2900, 3400, 3750, 4100, 3800, 4600, 5200])
+
+convTile = Card([convLabel, convVal, convBar, convNote], "card", "column", "s")
+convLabel = TextContent("Conversion Rate", "small-heavy")
+convVal = TextContent("3.84%", "large-heavy")
+convBar = Progress(38, "3.84% of visitors converted")
+convNote = TextContent("↑ 0.4 pp vs. last week", "small")
+
+subGrowthTile = Card([subLabel, subVal, subChart, subNote], "card", "column", "s")
+subLabel = TextContent("Email Subscriber Growth — This Month", "small-heavy")
+subVal = TextContent("+6,142 new subscribers", "large-heavy")
+subChart = BarChart(["Week 1","Week 2","Week 3","Week 4"], [subSeries], "grouped", "Week", "New Subscribers")
+subSeries = Series("Subscribers", [1240, 1580, 1890, 1432])
+subNote = TextContent("Total list size: 142,680", "small")
+
+midRow = Card([trafficCol, campaignsCol], "clear", "row", "m")
+
+trafficCol = Card([trafficHeader, trafficChart, trafficTable], "card", "column", "s")
+trafficHeader = Heading("Top 5 Traffic Sources", "h3")
+trafficChart = PieChart(["Organic Search","Paid Social","Direct","Email","Referral"], [31200, 18400, 14700, 11300, 8720], "donut")
+trafficTable = Table([sourceCol, visitCol, shareCol])
+sourceCol = Col("Source", ["Organic Search","Paid Social","Direct","Email","Referral"])
+visitCol = Col("Visits", [31200, 18400, 14700, 11300, 8720])
+shareCol = Col("Share", ["37.0%","21.8%","17.4%","13.4%","10.4%"])
+
+campaignsCol = Card([campHeader, bestAlert, campTable], "card", "column", "s")
+campHeader = Heading("Running Campaigns", "h3")
+bestAlert = Alert("Best Performing Campaign", "\"Summer Splash\" is leading with the lowest CPA ($12.40) and highest ROAS (4.8×). Consider increasing its budget.", "success")
+campTable = Table([campNameCol, campStatusCol, campSpendCol, campRoasCol, campCpaCol])
+campNameCol = Col("Campaign", ["Summer Splash","Back to School","Brand Awareness","Retargeting Blitz","Influencer Push"])
+campStatusCol = Col("Status", ["Active","Active","Active","Active","Active"])
+campSpendCol = Col("Spend", ["$18,400","$12,750","$9,200","$7,600","$5,300"])
+campRoasCol = Col("ROAS", ["4.8×","3.2×","1.9×","3.7×","2.5×"])
+campCpaCol = Col("CPA", ["$12.40","$19.80","$41.20","$15.60","$28.90"])
+
+bottomRow = Card([followUps], "clear", "column", "none")
+followUps = FollowUpBlock([fu1, fu2, fu3, fu4])
+fu1 = FollowUpItem("Show me a breakdown of Paid Social performance this week")
+fu2 = FollowUpItem("Which campaign should I pause to reduce spend?")
+fu3 = FollowUpItem("Forecast email subscriber growth for next month")
+fu4 = FollowUpItem("Compare conversion rate with last month")

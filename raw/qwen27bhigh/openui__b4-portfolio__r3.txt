@@ -1,0 +1,97 @@
+
+
+root = Card([header, healthSummary, quarterBtns, projectsSection, milestonesSection, budgetSection, utilizationSection, risksSection, deadlinesSection, deliverySection, blockedSection, actionsCard], "card", "column", "l")
+
+header = CardHeader("Project Portfolio Review", "PMO Quarterly Review — Q2 2025")
+healthSummary = Callout("neutral", "Portfolio Health", "6 of 8 projects on track; 2 at risk due to resource constraints and scope creep. Overall delivery pace is stable at 92% of target velocity.")
+
+q1Btn = Button("Q1 2025", null, "tertiary")
+q2Btn = Button("Q2 2025", null, "primary")
+q3Btn = Button("Q3 2025", null, "tertiary")
+q4Btn = Button("Q4 2025", null, "tertiary")
+quarterBtns = Buttons([q1Btn, q2Btn, q3Btn, q4Btn])
+
+projectsHeading = Heading("Active Projects", "h2")
+projCol = Col("Project", ["Atlas Platform", "Borealis Migration", "Crestline API", "Driftwood Mobile", "Everline Data", "Fjord Analytics"])
+ownerCol = Col("Owner", ["S. Nakamura", "L. Okafor", "J. Petrov", "M. Chen", "A. Rivera", "K. Lindström"])
+deadlineCol = Col("Deadline", ["Jul 18, 2025", "Jun 30, 2025", "Aug 02, 2025", "Jul 25, 2025", "Sep 10, 2025", "Aug 15, 2025"])
+healthCol = Col("Health", ["On Track", "At Risk", "On Track", "At Risk", "On Track", "On Track"])
+projectsTable = Table([projCol, ownerCol, deadlineCol, healthCol])
+projectsSection = Card([projectsHeading, projectsTable], "sunk")
+
+milestonesHeading = Heading("Overdue Milestones", "h2")
+msNameCol = Col("Milestone", ["Borealis – UAT Sign-off", "Atlas – Security Audit", "Driftwood – Beta Release", "Fjord – Data Pipeline v2"])
+msProjCol = Col("Project", ["Borealis Migration", "Atlas Platform", "Driftwood Mobile", "Fjord Analytics"])
+msDueCol = Col("Due Date", ["Jun 12, 2025", "Jun 20, 2025", "Jun 25, 2025", "Jul 01, 2025"])
+msOverdueCol = Col("Days Overdue", [9, 2, 1, 0])
+milestonesTable = Table([msNameCol, msProjCol, msDueCol, msOverdueCol])
+milestonesSection = Card([milestonesHeading, milestonesTable], "sunk")
+
+budgetHeading = Heading("Budget: Spent vs Allocated", "h2")
+budgetLabels = ["Atlas", "Borealis", "Crestline", "Driftwood", "Everline", "Fjord"]
+allocSeries = Series("Allocated (K$)", [420, 310, 275, 190, 350, 240])
+spentSeries = Series("Spent (K$)", [365, 298, 180, 195, 210, 150])
+budgetChart = BarChart(budgetLabels, [allocSeries, spentSeries], "grouped", "Project", "USD (K)")
+budgetSection = Card([budgetHeading, budgetChart], "sunk")
+
+utilHeading = Heading("Team Utilization", "h2")
+utilLabels = ["Platform", "Data Eng", "Mobile", "Analytics", "QA", "DevOps"]
+utilValues = [88, 94, 76, 82, 91, 67]
+utilChart = RadialChart(utilLabels, utilValues)
+utilizationSection = Card([utilHeading, utilChart], "sunk")
+
+risksHeading = Heading("Risks & Severity", "h2")
+riskCol = Col("Risk", ["Key engineer departure", "Third-party API deprecation", "Scope creep in mobile app", "Data migration downtime", "Vendor license expiry"])
+riskProjCol = Col("Project", ["Atlas Platform", "Crestline API", "Driftwood Mobile", "Borealis Migration", "Fjord Analytics"])
+riskSevCol = Col("Severity", ["High", "High", "Medium", "Critical", "Low"])
+riskMitCol = Col("Mitigation", ["Knowledge transfer plan", "Build adapter layer", "Freeze scope until beta", ["Rollback script ready"], "Renewal in progress"])
+risksTable = Table([riskCol, riskProjCol, riskSevCol, riskMitCol])
+risksSection = Card([risksHeading, risksTable], "sunk")
+
+deadlinesHeading = Heading("Deadlines — Next 14 Days", "h2")
+dl1 = ListItem("Atlas Platform – Security Audit remediation", "Due Jul 08 · Owner: S. Nakamura")
+dl2 = ListItem("Borealis Migration – Final UAT sign-off", "Due Jul 10 · Owner: L. Okafor")
+dl3 = ListItem("Driftwood Mobile – App Store submission", "Due Jul 12 · Owner: M. Chen")
+dl4 = ListItem("Crestline API – v3.2 release", "Due Jul 14 · Owner: J. Petrov")
+dl5 = ListItem("Everline Data – ETL cutover window", "Due Jul 16 · Owner: A. Rivera")
+deadlinesList = ListBlock([dl1, dl2, dl3, dl4, dl5], "number")
+deadlinesSection = Card([deadlinesHeading, deadlinesList], "sunk")
+
+deliveryHeading = Heading("Delivery Pace (Last 6 Sprints)", "h2")
+sprintLabels = ["S1", "S2", "S3", "S4", "S5", "S6"]
+velocitySeries = Series("Story Points Delivered", [42, 48, 45, 51, 49, 53])
+targetSeries = Series("Target", [45, 45, 45, 45, 45, 45])
+deliveryChart = LineChart(sprintLabels, [velocitySeries, targetSeries], "natural", "Sprint", "Story Points")
+deliverySection = Card([deliveryHeading, deliveryChart], "sunk")
+
+blockedHeading = Heading("Blocked Work Items", "h2")
+bl1 = ListItem("Borealis – UAT environment provisioning", "Blocked by: Infra team · 5 days")
+bl2 = ListItem("Atlas – Pen-test report review", "Blocked by: Security vendor · 3 days")
+bl3 = ListItem("Driftwood – Push notification cert", "Blocked by: Apple review · 7 days")
+bl4 = ListItem("Fjord – Warehouse access grant", "Blocked by: Data governance · 2 days")
+blockedList = ListBlock([bl1, bl2, bl3, bl4], "number")
+blockedSection = Card([blockedHeading, blockedList], "sunk")
+
+exportBtn = Button("Export Review (PDF)", null, "secondary")
+requestPeopleDialog = DialogBlock("Request More People", "Request Additional Headcount", "Submit a staffing request for a project in the current portfolio.", [requestForm])
+archiveDialog = AlertDialogBlock("Archive Finished Project", "Archive Project", "This will move the project to the archive and remove it from active reporting. This action cannot be undone.", "Archive", "Cancel", "destructive")
+actionsCard = Card([exportBtn, requestPeopleDialog, archiveDialog], "sunk", "row", "m", "center")
+
+requestForm = Form("headcount-request", formBtns, [projSelectField, roleField, countField, reasonField])
+projSelectField = FormControl("Project", projSelect)
+projSelect = Select("project", [atlasOpt, borealisOpt, crestlineOpt, driftwoodOpt, everlineOpt, fjordOpt], "Select project")
+atlasOpt = SelectItem("atlas", "Atlas Platform")
+borealisOpt = SelectItem("borealis", "Borealis Migration")
+crestlineOpt = SelectItem("crestline", "Crestline API")
+driftwoodOpt = SelectItem("driftwood", "Driftwood Mobile")
+everlineOpt = SelectItem("everline", "Everline Data")
+fjordOpt = SelectItem("fjord", "Fjord Analytics")
+roleField = FormControl("Role needed", roleInput)
+roleInput = Input("role", "e.g. Senior Backend Engineer")
+countField = FormControl("Headcount", countInput)
+countInput = Input("count", "Number of people", "number")
+reasonField = FormControl("Justification", reasonArea, "Brief business rationale")
+reasonArea = TextArea("reason", "Why is this additional capacity needed?", 3)
+formBtns = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Submit Request", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

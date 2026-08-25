@@ -1,0 +1,823 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "gap": "m",
+        "children": [
+          "header",
+          "healthSummaryAlert",
+          "topControlsCard",
+          "mainTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "PMO Executive Portfolio Review",
+        "subtitle": "Comprehensive multi-project performance, resource utilization, risks, and milestone tracking"
+      },
+      {
+        "id": "healthSummaryAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Portfolio Health: Moderate Risk (72% On-Track)",
+        "description": "5 of 7 active projects are on schedule; 2 projects face critical path delays and staffing deficits requiring immediate PMO remediation."
+      },
+      {
+        "id": "topControlsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "children": [
+          "quarterSelectorGroup",
+          "quickActionsButtons"
+        ]
+      },
+      {
+        "id": "quarterSelectorGroup",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "align": "center",
+        "gap": "s",
+        "children": [
+          "quarterLabel",
+          "quarterSelect"
+        ]
+      },
+      {
+        "id": "quarterLabel",
+        "component": "Label",
+        "text": "Review Period:"
+      },
+      {
+        "id": "quarterSelect",
+        "component": "Select",
+        "name": "selected_quarter",
+        "placeholder": "Select Quarter",
+        "value": "q3_2024",
+        "items": [
+          "q1_item",
+          "q2_item",
+          "q3_item",
+          "q4_item"
+        ]
+      },
+      {
+        "id": "q1_item",
+        "component": "SelectItem",
+        "label": "Q1 2024",
+        "value": "q1_2024"
+      },
+      {
+        "id": "q2_item",
+        "component": "SelectItem",
+        "label": "Q2 2024",
+        "value": "q2_2024"
+      },
+      {
+        "id": "q3_item",
+        "component": "SelectItem",
+        "label": "Q3 2024 (Active)",
+        "value": "q3_2024"
+      },
+      {
+        "id": "q4_item",
+        "component": "SelectItem",
+        "label": "Q4 2024 (Planning)",
+        "value": "q4_2024"
+      },
+      {
+        "id": "quickActionsButtons",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "requestStaffingDialog",
+          "archiveProjectDialog",
+          "exportReportBtn"
+        ]
+      },
+      {
+        "id": "requestStaffingDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Request Staffing",
+        "triggerVariant": "secondary",
+        "title": "Resource Allocation Request",
+        "description": "Submit a formal staffing requisition to the PMO and Resource Management board.",
+        "content": [
+          "staffingForm"
+        ]
+      },
+      {
+        "id": "staffingForm",
+        "component": "Form",
+        "name": "staffing_request_form",
+        "buttons": "staffingFormActions",
+        "fields": [
+          "staffProjectField",
+          "staffRoleField",
+          "staffCountField",
+          "staffJustificationField"
+        ]
+      },
+      {
+        "id": "staffProjectField",
+        "component": "FormControl",
+        "label": "Target Project",
+        "input": "staffProjectSelect"
+      },
+      {
+        "id": "staffProjectSelect",
+        "component": "Select",
+        "name": "project_id",
+        "items": [
+          "projOpt1",
+          "projOpt2",
+          "projOpt3"
+        ]
+      },
+      {
+        "id": "projOpt1",
+        "component": "SelectItem",
+        "label": "Cloud Core Migration (CCM)",
+        "value": "ccm"
+      },
+      {
+        "id": "projOpt2",
+        "component": "SelectItem",
+        "label": "Payment Gateway 2.0 (PG2)",
+        "value": "pg2"
+      },
+      {
+        "id": "projOpt3",
+        "component": "SelectItem",
+        "label": "Mobile App Redesign (MAR)",
+        "value": "mar"
+      },
+      {
+        "id": "staffRoleField",
+        "component": "FormControl",
+        "label": "Required Discipline",
+        "input": "staffRoleSelect"
+      },
+      {
+        "id": "staffRoleSelect",
+        "component": "Select",
+        "name": "role_type",
+        "items": [
+          "roleBackend",
+          "roleDevOps",
+          "roleFrontend",
+          "roleQA"
+        ]
+      },
+      {
+        "id": "roleBackend",
+        "component": "SelectItem",
+        "label": "Senior Backend Engineer",
+        "value": "backend"
+      },
+      {
+        "id": "roleDevOps",
+        "component": "SelectItem",
+        "label": "DevOps / Infrastructure Specialist",
+        "value": "devops"
+      },
+      {
+        "id": "roleFrontend",
+        "component": "SelectItem",
+        "label": "Frontend Engineer",
+        "value": "frontend"
+      },
+      {
+        "id": "roleQA",
+        "component": "SelectItem",
+        "label": "SDET / QA Automation",
+        "value": "qa"
+      },
+      {
+        "id": "staffCountField",
+        "component": "FormControl",
+        "label": "Headcount Needed (FTE)",
+        "input": "staffCountInput"
+      },
+      {
+        "id": "staffCountInput",
+        "component": "Input",
+        "name": "headcount",
+        "type": "number",
+        "placeholder": "e.g. 2"
+      },
+      {
+        "id": "staffJustificationField",
+        "component": "FormControl",
+        "label": "Business Justification & Timeline",
+        "input": "staffJustificationInput"
+      },
+      {
+        "id": "staffJustificationInput",
+        "component": "TextArea",
+        "name": "justification",
+        "placeholder": "Detail the blocked deliverables and duration needed..."
+      },
+      {
+        "id": "staffingFormActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitStaffingBtn"
+        ]
+      },
+      {
+        "id": "submitStaffingBtn",
+        "component": "Button",
+        "label": "Submit Staffing Requisition",
+        "variant": "primary"
+      },
+      {
+        "id": "archiveProjectDialog",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "Archive Project",
+        "triggerVariant": "outline",
+        "title": "Archive Completed Project",
+        "description": "Are you sure you want to archive completed project 'Legacy ERP Sunset (LES)'? All deliverables are signed off and budgets reconciled. Historical data will remain read-only.",
+        "confirmLabel": "Confirm Archival",
+        "cancelLabel": "Keep Active"
+      },
+      {
+        "id": "exportReportBtn",
+        "component": "Button",
+        "label": "Export Portfolio (PDF/CSV)",
+        "variant": "primary"
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "tabOverview",
+          "tabScheduleMilestones",
+          "tabFinanceVelocity",
+          "tabRisksResources"
+        ]
+      },
+      {
+        "id": "tabOverview",
+        "component": "TabItem",
+        "value": "overview",
+        "trigger": "Active Projects & Deadlines",
+        "content": [
+          "activeProjectsCard",
+          "upcomingDeadlinesCard"
+        ]
+      },
+      {
+        "id": "activeProjectsCard",
+        "component": "Card",
+        "children": [
+          "activeProjectsHeader",
+          "activeProjectsTable"
+        ]
+      },
+      {
+        "id": "activeProjectsHeader",
+        "component": "CardHeader",
+        "title": "Active Portfolio Projects",
+        "subtitle": "Live tracking of ownership, delivery targets, and aggregate health"
+      },
+      {
+        "id": "activeProjectsTable",
+        "component": "Table",
+        "columns": [
+          "colProjName",
+          "colProjOwner",
+          "colProjDeadline",
+          "colProjHealth",
+          "colProjStatus"
+        ]
+      },
+      {
+        "id": "colProjName",
+        "component": "Col",
+        "label": "Project Name",
+        "data": [
+          "Cloud Core Migration",
+          "Payment Gateway 2.0",
+          "Mobile App Redesign",
+          "Data Warehouse Lakehouse",
+          "SSO & IAM Zero Trust"
+        ]
+      },
+      {
+        "id": "colProjOwner",
+        "component": "Col",
+        "label": "PMO Owner",
+        "data": [
+          "Elena Vance",
+          "Marcus Thorne",
+          "Sophia Lin",
+          "David Kalu",
+          "Rachel Adams"
+        ]
+      },
+      {
+        "id": "colProjDeadline",
+        "component": "Col",
+        "label": "Target Deadline",
+        "data": [
+          "Oct 15, 2024",
+          "Nov 30, 2024",
+          "Oct 08, 2024",
+          "Dec 15, 2024",
+          "Oct 02, 2024"
+        ]
+      },
+      {
+        "id": "colProjHealth",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "Critical Delay",
+          "On Track",
+          "At Risk",
+          "On Track",
+          "On Track"
+        ]
+      },
+      {
+        "id": "colProjStatus",
+        "component": "Col",
+        "label": "Phase",
+        "data": [
+          "Integration Testing",
+          "Development",
+          "UAT Review",
+          "Architecture",
+          "Staging Deployment"
+        ]
+      },
+      {
+        "id": "upcomingDeadlinesCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "upcomingDeadlinesHeader",
+          "upcomingDeadlinesTable"
+        ]
+      },
+      {
+        "id": "upcomingDeadlinesHeader",
+        "component": "CardHeader",
+        "title": "Next 14 Days Deliverable & Milestone Deadlines",
+        "subtitle": "Upcoming critical path commitments requiring monitoring"
+      },
+      {
+        "id": "upcomingDeadlinesTable",
+        "component": "Table",
+        "columns": [
+          "colUpDate",
+          "colUpProject",
+          "colUpItem",
+          "colUpOwner"
+        ]
+      },
+      {
+        "id": "colUpDate",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Oct 02, 2024",
+          "Oct 05, 2024",
+          "Oct 08, 2024",
+          "Oct 12, 2024"
+        ]
+      },
+      {
+        "id": "colUpProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "SSO & IAM Zero Trust",
+          "Payment Gateway 2.0",
+          "Mobile App Redesign",
+          "Cloud Core Migration"
+        ]
+      },
+      {
+        "id": "colUpItem",
+        "component": "Col",
+        "label": "Deliverable",
+        "data": [
+          "Okta IdP Staging Signoff",
+          "PCI-DSS Audit Pre-check",
+          "iOS Build v4.0 Release Candidate",
+          "Database Sharding Validation"
+        ]
+      },
+      {
+        "id": "colUpOwner",
+        "component": "Col",
+        "label": "Lead Assignee",
+        "data": [
+          "Rachel Adams",
+          "Marcus Thorne",
+          "Sophia Lin",
+          "Elena Vance"
+        ]
+      },
+      {
+        "id": "tabScheduleMilestones",
+        "component": "TabItem",
+        "value": "milestones",
+        "trigger": "Overdue & Blocked Work",
+        "content": [
+          "overdueMilestonesCard",
+          "blockedItemsCard"
+        ]
+      },
+      {
+        "id": "overdueMilestonesCard",
+        "component": "Card",
+        "children": [
+          "overdueHeader",
+          "overdueTable"
+        ]
+      },
+      {
+        "id": "overdueHeader",
+        "component": "CardHeader",
+        "title": "Overdue Milestones",
+        "subtitle": "Milestones that have missed SLA baseline and require escalation"
+      },
+      {
+        "id": "overdueTable",
+        "component": "Table",
+        "columns": [
+          "colOverdueMilestone",
+          "colOverdueProject",
+          "colOverdueDate",
+          "colOverdueDays",
+          "colOverdueAction"
+        ]
+      },
+      {
+        "id": "colOverdueMilestone",
+        "component": "Col",
+        "label": "Milestone",
+        "data": [
+          "Multi-Region DB Failover Test",
+          "Biometric Authentication Flow",
+          "Legacy Data Deprecation Signoff"
+        ]
+      },
+      {
+        "id": "colOverdueProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Cloud Core Migration",
+          "Mobile App Redesign",
+          "Cloud Core Migration"
+        ]
+      },
+      {
+        "id": "colOverdueDate",
+        "component": "Col",
+        "label": "Target Date",
+        "data": [
+          "Sep 18, 2024",
+          "Sep 22, 2024",
+          "Sep 25, 2024"
+        ]
+      },
+      {
+        "id": "colOverdueDays",
+        "component": "Col",
+        "label": "Days Overdue",
+        "data": [
+          "12 days",
+          "8 days",
+          "5 days"
+        ]
+      },
+      {
+        "id": "colOverdueAction",
+        "component": "Col",
+        "label": "Remediation",
+        "data": [
+          "Infra team reassigned",
+          "UI refactor underway",
+          "Legal review pending"
+        ]
+      },
+      {
+        "id": "blockedItemsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "blockedHeader",
+          "blockedList"
+        ]
+      },
+      {
+        "id": "blockedHeader",
+        "component": "CardHeader",
+        "title": "Blocked Work Items (Impediments)",
+        "subtitle": "Active blockers halting team execution"
+      },
+      {
+        "id": "blockedList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "blockItem1",
+          "blockItem2",
+          "blockItem3"
+        ]
+      },
+      {
+        "id": "blockItem1",
+        "component": "ListItem",
+        "title": "[CCM-402] CloudHSM Key Rotation Failure",
+        "subtitle": "Blocked on AWS Enterprise Support response. Impedes production data migration pipeline. Owner: SecOps.",
+        "actionLabel": "P0 Blocker"
+      },
+      {
+        "id": "blockItem2",
+        "component": "ListItem",
+        "title": "[PG2-118] Merchant Sandbox Webhook Timeout",
+        "subtitle": "Blocked on third-party banking partner API gateway maintenance. Owner: Integrations Team.",
+        "actionLabel": "P1 Blocker"
+      },
+      {
+        "id": "blockItem3",
+        "component": "ListItem",
+        "title": "[MAR-89] App Store Deep-Linking Entitlements",
+        "subtitle": "Blocked on Apple Developer team certificate provisioning by Enterprise IT. Owner: Release PM.",
+        "actionLabel": "P1 Blocker"
+      },
+      {
+        "id": "tabFinanceVelocity",
+        "component": "TabItem",
+        "value": "financials_velocity",
+        "trigger": "Budget & Delivery Pace",
+        "content": [
+          "budgetCard",
+          "paceCard"
+        ]
+      },
+      {
+        "id": "budgetCard",
+        "component": "Card",
+        "children": [
+          "budgetHeader",
+          "budgetChart"
+        ]
+      },
+      {
+        "id": "budgetHeader",
+        "component": "CardHeader",
+        "title": "Budget Spent vs. Total Allocation ($k)",
+        "subtitle": "Expenditure tracking against approved fiscal baseline per active initiative"
+      },
+      {
+        "id": "budgetChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "labels": [
+          "Cloud Migration",
+          "Payment Gateway",
+          "Mobile Redesign",
+          "Data Warehouse",
+          "Zero Trust IAM"
+        ],
+        "series": [
+          "budgetAllocatedSeries",
+          "budgetSpentSeries"
+        ],
+        "xLabel": "Active Project",
+        "yLabel": "USD (in Thousands)"
+      },
+      {
+        "id": "budgetAllocatedSeries",
+        "component": "Series",
+        "category": "Allocated Budget ($k)",
+        "values": [
+          450,
+          320,
+          280,
+          500,
+          190
+        ]
+      },
+      {
+        "id": "budgetSpentSeries",
+        "component": "Series",
+        "category": "Spent to Date ($k)",
+        "values": [
+          415,
+          180,
+          265,
+          195,
+          120
+        ]
+      },
+      {
+        "id": "paceCard",
+        "component": "Card",
+        "children": [
+          "paceHeader",
+          "paceChart"
+        ]
+      },
+      {
+        "id": "paceHeader",
+        "component": "CardHeader",
+        "title": "Delivery Pace Over Past 6 Sprints",
+        "subtitle": "Portfolio story point throughput vs. planned commitments (Sprint 19 - 24)"
+      },
+      {
+        "id": "paceChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "labels": [
+          "Sprint 19",
+          "Sprint 20",
+          "Sprint 21",
+          "Sprint 22",
+          "Sprint 23",
+          "Sprint 24"
+        ],
+        "series": [
+          "paceCommittedSeries",
+          "paceCompletedSeries"
+        ],
+        "xLabel": "Sprint Number",
+        "yLabel": "Story Points"
+      },
+      {
+        "id": "paceCommittedSeries",
+        "component": "Series",
+        "category": "Committed Velocity",
+        "values": [
+          140,
+          155,
+          160,
+          150,
+          165,
+          170
+        ]
+      },
+      {
+        "id": "paceCompletedSeries",
+        "component": "Series",
+        "category": "Delivered Velocity",
+        "values": [
+          132,
+          148,
+          138,
+          142,
+          158,
+          164
+        ]
+      },
+      {
+        "id": "tabRisksResources",
+        "component": "TabItem",
+        "value": "resources_risks",
+        "trigger": "Utilization & Risk Matrix",
+        "content": [
+          "utilizationCard",
+          "risksCard"
+        ]
+      },
+      {
+        "id": "utilizationCard",
+        "component": "Card",
+        "children": [
+          "utilizationHeader",
+          "utilizationChart"
+        ]
+      },
+      {
+        "id": "utilizationHeader",
+        "component": "CardHeader",
+        "title": "Team Utilization & Capacity (%)",
+        "subtitle": "Allocated workload against target baseline (100% = full sustainable capacity)"
+      },
+      {
+        "id": "utilizationChart",
+        "component": "HorizontalBarChart",
+        "variant": "grouped",
+        "labels": [
+          "Backend Eng",
+          "Frontend Eng",
+          "DevOps & SRE",
+          "Product Design",
+          "QA & Automation"
+        ],
+        "series": [
+          "utilizationSeries"
+        ],
+        "xLabel": "% Capacity Allocated",
+        "yLabel": "Functional Discipline"
+      },
+      {
+        "id": "utilizationSeries",
+        "component": "Series",
+        "category": "Current Utilization (%)",
+        "values": [
+          118,
+          94,
+          125,
+          82,
+          108
+        ]
+      },
+      {
+        "id": "risksCard",
+        "component": "Card",
+        "children": [
+          "risksHeader",
+          "risksTable"
+        ]
+      },
+      {
+        "id": "risksHeader",
+        "component": "CardHeader",
+        "title": "Active Risk Register",
+        "subtitle": "Identified portfolio vulnerabilities, severity scoring, and mitigation strategies"
+      },
+      {
+        "id": "risksTable",
+        "component": "Table",
+        "columns": [
+          "colRiskTitle",
+          "colRiskProject",
+          "colRiskSeverity",
+          "colRiskMitigation"
+        ]
+      },
+      {
+        "id": "colRiskTitle",
+        "component": "Col",
+        "label": "Risk Description",
+        "data": [
+          "DevOps bandwidth bottleneck causing pipeline delays",
+          "Database migration throughput slower than estimated",
+          "Payment gateway PCI-DSS auditor compliance delay",
+          "Mobile iOS design token desynchronization"
+        ]
+      },
+      {
+        "id": "colRiskProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Cloud Core Migration",
+          "Cloud Core Migration",
+          "Payment Gateway 2.0",
+          "Mobile App Redesign"
+        ]
+      },
+      {
+        "id": "colRiskSeverity",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "High",
+          "High",
+          "Medium",
+          "Low"
+        ]
+      },
+      {
+        "id": "colRiskMitigation",
+        "component": "Col",
+        "label": "Mitigation Strategy",
+        "data": [
+          "Staff requisition submitted for 2 contractor SREs",
+          "Sharding dataset into 4 concurrent migration streams",
+          "Engaged third-party pre-audit compliance vendor",
+          "Automated Figma to Swift token sync integration"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

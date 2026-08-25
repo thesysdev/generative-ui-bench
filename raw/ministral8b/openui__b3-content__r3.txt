@@ -1,0 +1,60 @@
+```openui-lang
+root = Card([studioHeader, draftsSection, publishedSection, readershipChart, categoryFilter, schedulingForm, commentsAlert, newDraftButton])
+
+studioHeader = CardHeader("Content Studio", "Manage your editorial workflow")
+
+draftsSection = Card([draftsHeading, draftsTable], "sunk")
+draftsHeading = Heading("Drafts", "h3")
+draftsTable = Table([draftColTitle, draftColStatus, draftColCategory])
+draftColTitle = Col("Title", ["The Future of AI", "2024 Tech Trends", "AI in Education", "Sustainable Cities"], "string")
+draftColStatus = Col("Status", ["In Progress", "Needs Review", "Ready to Publish", "Needs Edits"], "string")
+draftColCategory = Col("Category", ["Technology", "Business", "Education", "Urban Planning"], "string")
+
+publishedSection = Card([publishedHeading, publishedTable], "sunk")
+publishedHeading = Heading("Published This Week", "h3")
+publishedTable = Table([publishedColTitle, publishedColDate, publishedColViews])
+publishedColTitle = Col("Title", ["AI Ethics Guidelines", "New Smartphone Releases", "Climate Policy Updates"], "string")
+publishedColDate = Col("Published", ["2023-11-01", "2023-11-05", "2023-11-07"], "string")
+publishedColViews = Col("Views", ["1,245", "892", "1,563"], "number")
+
+mostReadArticle = Card([mostReadHeading, mostReadCard], "sunk")
+mostReadHeading = Heading("Most-Read Article This Month", "h3")
+mostReadCard = Card([mostReadTitle, mostReadViews, mostReadDate])
+mostReadTitle = Heading("The Impact of Quantum Computing", "h4")
+mostReadViews = TextContent("12,456 views", "large")
+mostReadDate = TextContent("Published: 2023-11-15", "small")
+
+readershipChart = Card([chartHeading, readershipLineChart], "sunk")
+chartHeading = Heading("Readership Over Past 30 Days", "h3")
+readershipLineChart = LineChart(
+    ["Nov 1", "Nov 8", "Nov 15", "Nov 22"],
+    [readershipSeries],
+    "natural",
+    "Date",
+    "Daily Visitors"
+)
+readershipSeries = Series("Readership", [450, 620, 910, 1200])
+
+categoryFilter = Card([filterHeading, categorySelect], "sunk")
+filterHeading = Heading("Filter by Category", "h3")
+categorySelect = Select("categoryFilter", [categoryOption1, categoryOption2, categoryOption3, categoryOption4], "All Categories")
+categoryOption1 = SelectItem("tech", "Technology")
+categoryOption2 = SelectItem("business", "Business")
+categoryOption3 = SelectItem("education", "Education")
+categoryOption4 = SelectItem("urban", "Urban Planning")
+
+schedulingForm = Card([schedulingHeading, scheduleForm], "sunk")
+schedulingHeading = Heading("Schedule a Piece", "h3")
+scheduleForm = Form("schedule-piece", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Article Title", titleInput)
+titleInput = Input("articleTitle", "Enter article title here")
+dateField = FormControl("Publish Date", publishDatePicker)
+publishDatePicker = DatePicker("publishDate", "single", null, "2023-11-25")
+scheduleButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Article", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+commentsAlert = Alert("Comments Awaiting Reply", "You have 8 unread comments across 3 articles", "warning")
+
+newDraftButton = Button("Start New Draft", null, "primary")
+```

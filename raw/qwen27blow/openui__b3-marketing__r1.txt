@@ -1,0 +1,60 @@
+
+
+root = Card([header, controls, kpiRow, visitorsSection, sourcesSection, campaignsSection, bestCampaign, subscriberSection, exportSection], "card", "column", "m")
+
+header = CardHeader("Marketing Dashboard", "Weekly overview — last 30 days")
+
+controls = Card([dateRangeField, exportBtn], "clear", "row", "m", "center", "between")
+dateRangeField = FormControl("Date range", dateSelect)
+dateSelect = Select("date_range", [last7, last30, last90, custom], "Change range")
+last7 = SelectItem("7d", "Last 7 days")
+last30 = SelectItem("30d", "Last 30 days")
+last90 = SelectItem("90d", "Last 90 days")
+custom = SelectItem("custom", "Custom range")
+exportBtn = Button("Export Report", null, "primary")
+
+kpiRow = Card([convKpi, visitorsKpi, revenueKpi], "clear", "row", "m", "stretch", "between")
+convKpi = Card([convLabel, convValue, convDelta], "sunk", "column", "xs")
+convLabel = TextContent("Conversion Rate", "small")
+convValue = TextContent("4.2%", "large-heavy")
+convDelta = Tag("+0.8%", null, "sm", "success")
+visitorsKpi = Card([visitorsLabel, visitorsValue, visitorsDelta], "sunk", "column", "xs")
+visitorsLabel = TextContent("Total Visitors", "small")
+visitorsValue = TextContent("128,450", "large-heavy")
+visitorsDelta = Tag("+12.3%", null, "sm", "success")
+revenueKpi = Card([revLabel, revValue, revDelta], "sunk", "column", "xs")
+revLabel = TextContent("Attributed Revenue", "small")
+revValue = TextContent("$84,200", "large-heavy")
+revDelta = Tag("+6.1%", null, "sm", "success")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "sunk", "column", "s")
+visitorsHeading = Heading("Site Visitors", "h3")
+visitorsChart = LineChart(["May 1","May 3","May 5","May 7","May 9","May 11","May 13","May 15","May 17","May 19","May 21","May 23","May 25","May 27","May 29"], [visitorsSeries], "natural", "Date", "Visitors")
+visitorsSeries = Series("Visitors", [3820, 4100, 3950, 4300, 4550, 4200, 4600, 4800, 4450, 5100, 5300, 4900, 5500, 5800, 6200])
+
+sourcesSection = Card([sourcesHeading, sourcesChart], "sunk", "column", "s")
+sourcesHeading = Heading("Top 5 Traffic Sources", "h3")
+sourcesChart = HorizontalBarChart(["Organic Search", "Paid Search", "Social Media", "Email", "Referral"], [sourceSeries], "grouped", "Source", "Share %")
+sourceSeries = Series("Share", [38, 24, 18, 12, 8])
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "sunk", "column", "s")
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campName, campChannel, campSpend, campROAS, campStatus])
+campName = Col("Campaign", ["Summer Sale Push", "Brand Awareness Q2", "Retargeting — Cart", "Product Launch — X", "Lookalike Audiences"])
+campChannel = Col("Channel", ["Paid Search", "Social", "Paid Social", "Paid Search", "Paid Social"])
+campSpend = Col("Spend", ["$12,400", "$8,900", "$5,200", "$14,800", "$3,600"])
+campROAS = Col("ROAS", ["4.2x", "2.8x", "5.1x", "3.4x", "2.1x"])
+campStatus = Col("Status", ["Active", "Active", "Active", "Active", "Active"])
+
+bestCampaign = Callout("success", "Best Performing Campaign", "Retargeting — Cart is leading with a 5.1x ROAS on $5,200 spend. Consider scaling budget by 20-30% for next week.")
+
+subscriberSection = Card([subHeading, subChart], "sunk", "column", "s")
+subHeading = Heading("Email Subscriber Growth", "h3")
+subChart = AreaChart(["W1", "W2", "W3", "W4"], [subSeries], "natural", "Week", "New Subscribers")
+subSeries = Series("New Subscribers", [1240, 1580, 1890, 2340])
+
+exportSection = Card([exportNote, exportActions], "clear", "row", "s", "center", "between")
+exportNote = TextContent("Report covers May 1 – May 30, 2025", "small")
+exportActions = Buttons([exportPdf, exportCsv])
+exportPdf = Button("Export PDF", null, "secondary")
+exportCsv = Button("Export CSV", null, "tertiary")

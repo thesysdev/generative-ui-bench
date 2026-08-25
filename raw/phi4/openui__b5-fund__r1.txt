@@ -1,0 +1,79 @@
+```openui
+root = Card([portfolioValue, pnlToday, positions, exposureBySector, valueAtRisk, biggestGainersLosers, instrumentsWatched, workingOrders, marginInUse, marketHeadlines, economicReleases, strategyReturns, drawdown, riskLimits, rebalance, placeOrder, changeTimeframe])
+
+portfolioValue = CardHeader("Portfolio Value", "$1,234,567")
+pnlToday = Tag("P&L Today", "+$4,500", null, "success")
+
+positions = Card([positionsHeading, positionsTable])
+positionsHeading = Heading("Positions", "h3")
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentPriceCol])
+tickerCol = Col("Ticker", ["AAPL", "GOOGL", "AMZN"])
+sizeCol = Col("Size", [100, 200, 50])
+entryCol = Col("Entry", ["$150", "$2,800", "$3,300"])
+currentPriceCol = Col("Current Price", ["$155", "$2,850", "$3,350"])
+
+exposureBySector = PieChart(["Tech", "Retail", "Healthcare"], [10000, 5000, 2500], "pie")
+valueAtRisk = CardHeader("Value at Risk", "$12,000")
+
+biggestGainersLosers = Card([gainersHeading, gainersList, losersHeading, losersList])
+gainersHeading = Heading("Biggest Gainers", "h3")
+gainersList = ListBlock([gainer1, gainer2], "image")
+gainer1 = ListItem("AAPL", "+$5", ["AAPL.png"])
+gainer2 = ListItem("GOOGL", "+$3", ["GOOGL.png"])
+losersHeading = Heading("Biggest Losers", "h3")
+losersList = ListBlock([loser1, loser2], "image")
+loser1 = ListItem("AMZN", "-$4", ["AMZN.png"])
+loser2 = ListItem("BABA", "-$3", ["BABA.png"])
+
+instrumentsWatched = Heading("Instruments Watched", "h3")
+instrumentsWatchedTable = Table([tickerColWatched, priceCol])
+tickerColWatched = Col("Ticker", ["TSLA", "NFLX", "MSFT"])
+priceCol = Col("Price", ["$700", "$500", "$300"])
+
+workingOrders = Card([workingOrdersHeading, ordersList])
+workingOrdersHeading = Heading("Working Orders", "h3")
+ordersList = ListBlock([order1, order2])
+order1 = ListItem("AAPL", "Buy 100 @ $155")
+order2 = ListItem("AMZN", "Sell 50 @ $3,350")
+
+marginInUse = CardHeader("Margin in Use", "75%")
+
+marketHeadlines = Card([marketHeadlinesHeading, headlinesList])
+marketHeadlinesHeading = Heading("Market Headlines", "h3")
+headlinesList = ListBlock([headline1, headline2], "number")
+headline1 = ListItem("Market surges on tech rally", "Positive")
+headline2 = ListItem("Retail stocks slump after earnings", "Negative")
+
+economicReleases = CardHeader("Economic Releases This Week", ["Inflation Report", "Employment Data", "GDP Forecast"])
+
+strategyReturns = Card([strategyReturnsHeading, returnsTable])
+strategyReturnsHeading = Heading("Strategy Returns This Year", "h3")
+returnsTable = Table([strategyCol, returnCol])
+strategyCol = Col("Strategy", ["Alpha", "Beta", "Gamma"])
+returnCol = Col("Return", ["+10%", "+5%", "-2%"])
+
+drawdown = CardHeader("Drawdown Over the Past Year", "-7%")
+
+riskLimits = Card([riskLimitsHeading, limitsList])
+riskLimitsHeading = Heading("Risk Limits Close to Breach", "h3")
+limitsList = ListBlock([limit1, limit2])
+limit1 = ListItem("Max Drawdown", "5% - 6%")
+limit2 = ListItem("Max Exposure", "80% - 85%")
+
+rebalance = Button("Rebalance")
+placeOrder = Form("place-order", orderButtons, [tickerField, sideField, quantityField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL")
+sideField = FormControl("Side", sideSelect)
+sideSelect = Select("side", [buyOption, sellOption], "Buy or sell")
+buyOption = SelectItem("buy", "Buy")
+sellOption = SelectItem("sell", "Sell")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", "100", "number")
+orderButtons = Buttons([placeOrderBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+
+changeTimeframe = Buttons([changeTimeframeBtn])
+changeTimeframeBtn = Button("Change Timeframe", null, "secondary")
+
+```

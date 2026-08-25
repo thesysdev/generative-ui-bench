@@ -1,0 +1,58 @@
+```openui-lang
+date = "2025-08-14"
+statusUpdates = [
+    { name: "Alice", status: "On track", blocked: false },
+    { name: "Bob", status: "Waiting on API response", blocked: true },
+    { name: "Charlie", status: "Completed tasks", blocked: false },
+    { name: "Dana", status: null, blocked: false }  // missing update
+]
+totalMembers = 4
+missingUpdates = 1
+
+dateLabel = TextContent(date, "large")
+statusList = ListBlock(items=teamItems, variant="image")
+teamItems = [
+    ListItem(title=name, subtitle=status, image=["https://picsum.photos/seed/" + nameHash, "https://picsum.photos/seed/" + nameHash], actionLabel="View details")
+    for { name, status, blocked } in statusUpdates
+]
+blockedMembers = [member.name for member in statusUpdates if member.blocked]
+blockedCallout = Callout(
+    "warning",
+    "Blocked teammates:",
+    blockedMembers.join(", ")
+)
+postUpdateForm = Form(
+    "post-update",
+    Buttons([postBtn]),
+    [updateField]
+)
+updateField = FormControl(
+    "Your status:",
+    input=TextArea(
+        "update",
+        placeholder="Write your update here...",
+        rows=3
+    )
+)
+postBtn = Button("Post update", ["Submit", "Your update"], "primary")
+
+root = Card(
+    [
+        CardHeader("Async Standup", "Today's updates"),
+        dateLabel,
+        statusList,
+        blockedCallout,
+        TextContent(
+            "Missing updates: " + missingUpdates,
+            "small"
+        ),
+        postUpdateForm
+    ],
+    "card",
+    "column",
+    "m",
+    "center",
+    "between",
+    true
+)
+```

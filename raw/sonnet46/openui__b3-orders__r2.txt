@@ -1,0 +1,71 @@
+root = Card([pageHeader, kpiRow, chartsRow, ordersSection, actionSection], "clear", "column", "m")
+
+pageHeader = CardHeader("Operations Desk", "Live dashboard · Today")
+
+kpiRow = Card([kpi1, kpi2, kpi3, kpi4], "sunk", "row", "m", "stretch")
+
+kpi1 = Card([kpi1Label, kpi1Value, kpi1Sub], "card", "column", "xs", "center")
+kpi1Label = TextContent("Orders Today", "small")
+kpi1Value = TextContent("247", "large-heavy")
+kpi1Sub = Badge("+12% vs yesterday", "secondary")
+
+kpi2 = Card([kpi2Label, kpi2Value, kpi2Sub], "card", "column", "xs", "center")
+kpi2Label = TextContent("Revenue Today", "small")
+kpi2Value = TextContent("$18,432", "large-heavy")
+kpi2Sub = Badge("+8% vs yesterday", "secondary")
+
+kpi3 = Card([kpi3Label, kpi3Value, kpi3Sub], "card", "column", "xs", "center")
+kpi3Label = TextContent("Avg Order Value", "small")
+kpi3Value = TextContent("$74.62", "large-heavy")
+kpi3Sub = Badge("−3% vs yesterday", "outline")
+
+kpi4 = Card([kpi4Label, kpi4Value, kpi4Sub], "card", "column", "xs", "center")
+kpi4Label = TextContent("Refund Rate (Month)", "small")
+kpi4Value = TextContent("2.4%", "large-heavy")
+kpi4Sub = Badge("Target < 3%", "secondary")
+
+chartsRow = Card([volumeCard, refundCard], "clear", "row", "m")
+
+volumeCard = Card([volumeHeading, volumeChart], "card", "column", "s")
+volumeHeading = Heading("Order Volume — Last 4 Weeks", "h3")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "grouped", "Week", "Orders")
+volumeSeries = Series("Orders", [198, 221, 237, 247])
+
+refundCard = Card([refundHeading, refundChart], "card", "column", "s")
+refundHeading = Heading("Refund Rate vs Target", "h3")
+refundChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [refundActual, refundTarget], "grouped", "Week", "Rate (%)")
+refundActual = Series("Actual %", [3.1, 2.8, 2.6, 2.4])
+refundTarget = Series("Target %", [3.0, 3.0, 3.0, 3.0])
+
+ordersSection = Card([ordersHeading, filterRow, ordersTable], "card", "column", "m")
+ordersHeading = Heading("Recent Orders", "h2")
+
+filterRow = Card([searchField, statusField], "clear", "row", "m", "end")
+searchField = FormControl("Search by Customer", searchInput)
+searchInput = Input("customer_search", "e.g. Jane Smith", "text")
+statusField = FormControl("Filter by Status", statusSelect)
+statusSelect = Select("status_filter", [statusAll, statusPending, statusProcessing, statusFulfilled, statusRefunded], "All Statuses")
+
+statusAll = SelectItem("all", "All Statuses")
+statusPending = SelectItem("pending", "Pending")
+statusProcessing = SelectItem("processing", "Processing")
+statusFulfilled = SelectItem("fulfilled", "Fulfilled")
+statusRefunded = SelectItem("refunded", "Refunded")
+
+ordersTable = Table([colId, colCustomer, colTotal, colStatus, colAction])
+colId = Col("Order ID", ["#ORD-8821", "#ORD-8820", "#ORD-8819", "#ORD-8818", "#ORD-8817", "#ORD-8816", "#ORD-8815", "#ORD-8814"])
+colCustomer = Col("Customer", ["Sarah Mitchell", "James Okafor", "Priya Nair", "Tom Brennan", "Liu Wei", "Anna Kowalski", "Marcus Bell", "Fatima Al-Hassan"])
+colTotal = Col("Total", ["$124.00", "$89.50", "$210.75", "$55.20", "$340.00", "$77.90", "$163.40", "$98.15"])
+colStatus = Col("Status", ["Processing", "Pending", "Fulfilled", "Pending", "Processing", "Fulfilled", "Refunded", "Processing"])
+colAction = Col("Action", ["Mark Fulfilled", "Mark Fulfilled", "Fulfilled ✓", "Mark Fulfilled", "Mark Fulfilled", "Fulfilled ✓", "Refunded", "Mark Fulfilled"], "action")
+
+actionSection = Card([actionHeading, fulfillForm], "card", "column", "s")
+actionHeading = Heading("Mark Order as Fulfilled", "h3")
+fulfillForm = Form("fulfill_order", fulfillButtons, [fulfillIdField, fulfillNoteField])
+fulfillIdField = FormControl("Order ID", fulfillIdInput, "Enter the order ID to mark as fulfilled")
+fulfillIdInput = Input("order_id", "#ORD-XXXX", "text")
+fulfillNoteField = FormControl("Internal Note (optional)", fulfillNoteArea)
+fulfillNoteArea = TextArea("note", "e.g. Shipped via FedEx, tracking #...", 3)
+fulfillButtons = Buttons([fulfillSubmit, fulfillCancel])
+fulfillSubmit = Button("Mark as Fulfilled", null, "primary")
+fulfillCancel = Button("Cancel", null, "secondary")

@@ -1,0 +1,48 @@
+```openui-lang
+root = Card([dashboardHeader, dateRangeSelector, visitorChart, conversionMetrics, trafficSources, campaignPerformance, emailGrowth, exportButton])
+
+dashboardHeader = CardHeader("Marketing Dashboard", "Weekly performance overview")
+
+dateRangeSelector = Card([dateLabel, datePicker], "sunk")
+dateLabel = TextContent("Date range:", "small-heavy")
+datePicker = CalendarBlock("range", "2023-11-01", 2)
+
+visitorChart = Card([chartHeader, visitorLineChart], "sunk")
+chartHeader = CardHeader("Site Visitors")
+visitorLineChart = LineChart(visitorDays, [visitorSeries], "natural", "Day", "Visitors")
+
+visitorDays = ["Nov 1", "Nov 2", "Nov 3", "Nov 4", "Nov 5", "Nov 6", "Nov 7", "Nov 8", "Nov 9", "Nov 10", "Nov 11", "Nov 12", "Nov 13", "Nov 14", "Nov 15", "Nov 16", "Nov 17", "Nov 18", "Nov 19", "Nov 20", "Nov 21", "Nov 22", "Nov 23", "Nov 24", "Nov 25", "Nov 26", "Nov 27", "Nov 28", "Nov 29", "Nov 30"]
+visitorSeries = Series("Visitors", [1250, 1480, 1320, 1560, 1720, 1850, 2010, 2230, 2180, 2350, 2480, 2610, 2750, 2980, 3120, 3350, 3580, 3720, 3850, 4020, 4250, 4480, 4610, 4850, 5020, 5280, 5450, 5620, 5800, 6050])
+
+conversionMetrics = Card([conversionHeader, conversionRate, avgSession], "sunk")
+conversionHeader = CardHeader("Conversion Metrics")
+conversionRate = Card([rateLabel, rateValue, rateTrend], "sunk")
+rateLabel = TextContent("Conversion rate", "small")
+rateValue = TextContent("3.8%", "large-heavy")
+rateTrend = TextContent("▲ 2.1% from last week", "small", "success")
+avgSession = Card([sessionLabel, sessionValue], "sunk")
+sessionLabel = TextContent("Avg. session duration", "small")
+sessionValue = TextContent("3m 45s", "large-heavy")
+
+trafficSources = Card([sourcesHeader, sourcesTable], "sunk")
+sourcesHeader = CardHeader("Top Traffic Sources")
+sourcesTable = Table([sourceCol, shareCol])
+sourceCol = Col("Source", ["Google Search", "Direct", "Facebook", "LinkedIn", "YouTube"])
+shareCol = Col("Share", ["42%", "28%", "15%", "8%", "7%"], "number")
+
+campaignPerformance = Card([campaignHeader, campaignTable, bestPerformer], "sunk")
+campaignHeader = CardHeader("Running Campaigns")
+campaignTable = Table([campaignCol, spendCol, ctrCol])
+campaignCol = Col("Campaign", ["Summer Sale", "New Product Launch", "Referral Program", "Email Campaign", "Social Boost"])
+spendCol = Col("Spend", ["$12,500", "$8,900", "$6,300", "$4,200", "$3,100"], "number")
+ctrCol = Col("CTR", ["2.1%", "1.8%", "1.5%", "0.9%", "0.7%"], "number")
+bestPerformer = Callout("best_campaign", "Highest performing", "Summer Sale with 2.1% CTR and $12.5k spend")
+best_campaign = Image("Summer Sale banner", "https://picsum.photos/seed/summer-sale/300/150")
+
+emailGrowth = Card([growthHeader, growthChart], "sunk")
+growthHeader = CardHeader("Email Subscribers")
+growthChart = RadialChart(["Jan", "Feb", "Mar", "Apr", "May"], [1200, 1500, 1800, 2200, 2600])
+
+exportButton = Card([exportBtn], "sunk")
+exportBtn = Button("Export Report", null, "primary", "normal")
+```

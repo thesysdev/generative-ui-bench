@@ -1,0 +1,50 @@
+```openui
+root = Card([accountInfo, totalDeals, currentStage, recentActivity, contacts, followUps, noteSection, renewalSection, callLogSection])
+
+accountInfo = CardHeader("Account Name", "Owner Name")
+
+totalDeals = Table([dealName, dealValue])
+dealName = Col("Deals", ["Deal 1", "Deal 2", "Deal 3"])
+dealValue = Col("Total Value", ["$120,000", "$80,000", "$150,000"])
+
+currentStage = Tag("Current Stage", "Negotiation", "info")
+
+recentActivity = Card([activityHeader, activityList])
+activityHeader = Heading("Recent Activity", "h4")
+activityList = ListBlock([
+  ListItem("Email sent", "2023-10-01", [activityImage], "View details"),
+  ListItem("Meeting scheduled", "2023-10-03", [activityImage], "View details")
+])
+activityImage = Image("activity-icon", "https://picsum.photos/seed/activity/40/40")
+
+contacts = Card([contactsHeader, contactsList])
+contactsHeader = Heading("Contacts", "h4")
+contactsList = ListBlock([
+  ListItem("John Doe", "Sales Manager", [contactImage], "Edit contact"),
+  ListItem("Jane Smith", "Marketing Lead", [contactImage], "Edit contact")
+])
+contactImage = Image("contact-icon", "https://picsum.photos/seed/contact/40/40")
+
+followUps = Card([followUpsHeader, followUpsList])
+followUpsHeader = Heading("Open Follow-Ups", "h4")
+followUpsList = ListBlock([
+  ListItem("Follow-up 1", "Due: 2023-11-01", [], "Reschedule"),
+  ListItem("Follow-up 2", "Due: 2023-11-15", [], "Reschedule")
+])
+
+noteSection = Form("note-form", noteButtons, [noteField])
+noteField = FormControl("Note", noteInput)
+noteInput = TextArea("note", "Jot down your note here", 3)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+renewalSection = Card([renewalHeader, renewalDate])
+renewalHeader = Heading("Renewal Date", "h4")
+renewalDate = TextContent("Renewal Date: 2024-01-01", "small-heavy")
+if (renewalDate <= "3 months from today") {
+  show Callout("warning", "Renewal upcoming", "Your renewal date is coming up in 3 months.")
+}
+
+callLogSection = Buttons([logCallBtn])
+logCallBtn = Button("Log a Call", null, "primary")
+```

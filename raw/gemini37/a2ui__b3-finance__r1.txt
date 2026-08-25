@@ -1,0 +1,281 @@
+Here is the month-end finance overview screen for your startup.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "topControls",
+          "kpiCard",
+          "separator1",
+          "breakdownHeader",
+          "expenseChart",
+          "separator2",
+          "txHeader",
+          "txTable"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Month-End Financial Summary",
+        "subtitle": "Financial health, runway projections, and large disbursements"
+      },
+      {
+        "id": "topControls",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "wrap": true,
+        "children": [
+          "monthPickerControl",
+          "actionButtons"
+        ]
+      },
+      {
+        "id": "monthPickerControl",
+        "component": "FormControl",
+        "label": "Select Period",
+        "input": "monthSelect",
+        "hint": "Switch statement cycle"
+      },
+      {
+        "id": "monthSelect",
+        "component": "Select",
+        "name": "statement_month",
+        "placeholder": "May 2024",
+        "items": [
+          "month1",
+          "month2",
+          "month3",
+          "month4"
+        ]
+      },
+      {
+        "id": "month1",
+        "component": "SelectItem",
+        "value": "2024-05",
+        "label": "May 2024 (Current)"
+      },
+      {
+        "id": "month2",
+        "component": "SelectItem",
+        "value": "2024-04",
+        "label": "April 2024"
+      },
+      {
+        "id": "month3",
+        "component": "SelectItem",
+        "value": "2024-03",
+        "label": "March 2024"
+      },
+      {
+        "id": "month4",
+        "component": "SelectItem",
+        "value": "2024-02",
+        "label": "February 2024"
+      },
+      {
+        "id": "actionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "downloadPdfBtn",
+          "downloadCsvBtn"
+        ]
+      },
+      {
+        "id": "downloadPdfBtn",
+        "component": "Button",
+        "label": "Download Statement (PDF)",
+        "variant": "primary"
+      },
+      {
+        "id": "downloadCsvBtn",
+        "component": "Button",
+        "label": "Export CSV",
+        "variant": "secondary"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "kpiTable",
+          "runwayProgress"
+        ]
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiColMetric",
+          "kpiColAmount",
+          "kpiColChange"
+        ]
+      },
+      {
+        "id": "kpiColMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "1. Cash on Hand",
+          "2. Net Monthly Burn",
+          "3. Runway Remaining"
+        ]
+      },
+      {
+        "id": "kpiColAmount",
+        "component": "Col",
+        "label": "Value",
+        "data": [
+          "$2,845,000",
+          "$165,000",
+          "17.2 Months"
+        ]
+      },
+      {
+        "id": "kpiColChange",
+        "component": "Col",
+        "label": "Status / MoM",
+        "data": [
+          "-$165k vs last month",
+          "+4.2% vs budget",
+          "Target: > 12 months"
+        ]
+      },
+      {
+        "id": "runwayProgress",
+        "component": "Progress",
+        "value": 72,
+        "label": "Runway Target Buffer (17.2 / 24 months optimal target)"
+      },
+      {
+        "id": "separator1",
+        "component": "Separator"
+      },
+      {
+        "id": "breakdownHeader",
+        "component": "CardHeader",
+        "title": "4. Expense Breakdown by Category",
+        "subtitle": "Total expenses for the selected period: $192,400"
+      },
+      {
+        "id": "expenseChart",
+        "component": "PieChart",
+        "labels": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Marketing & Growth",
+          "Software & SaaS Tools",
+          "Office & Facilities",
+          "Legal & Professional"
+        ],
+        "values": [
+          118000,
+          28500,
+          22400,
+          11200,
+          7500,
+          4800
+        ],
+        "variant": "donut",
+        "appearance": "circular"
+      },
+      {
+        "id": "separator2",
+        "component": "Separator"
+      },
+      {
+        "id": "txHeader",
+        "component": "CardHeader",
+        "title": "5. Transactions Above $10,000",
+        "subtitle": "Material disbursements requiring review this month"
+      },
+      {
+        "id": "txTable",
+        "component": "Table",
+        "columns": [
+          "txDate",
+          "txVendor",
+          "txCategory",
+          "txAmount",
+          "txStatus"
+        ]
+      },
+      {
+        "id": "txDate",
+        "component": "Col",
+        "label": "Date",
+        "data": [
+          "May 31, 2024",
+          "May 24, 2024",
+          "May 15, 2024",
+          "May 03, 2024"
+        ]
+      },
+      {
+        "id": "txVendor",
+        "component": "Col",
+        "label": "Vendor / Payee",
+        "data": [
+          "Rippling PEO (Monthly Payroll)",
+          "Amazon Web Services (AWS)",
+          "Google Ads Enterprise",
+          "Silicon Valley Legal LLP"
+        ]
+      },
+      {
+        "id": "txCategory",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Payroll",
+          "Cloud Hosting",
+          "Marketing",
+          "Legal Services"
+        ]
+      },
+      {
+        "id": "txAmount",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "$118,000.00",
+          "$28,500.00",
+          "$18,200.00",
+          "$12,500.00"
+        ]
+      },
+      {
+        "id": "txStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Cleared",
+          "Cleared",
+          "Cleared",
+          "Cleared"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

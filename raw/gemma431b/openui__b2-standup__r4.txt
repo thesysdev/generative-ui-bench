@@ -1,0 +1,45 @@
+root = Card([header, statusOverview, updatesSection, postUpdateSection, followUps], "card", "column", "l")
+
+header = CardHeader("Async Standup", dateText)
+dateText = TextContent("Tuesday, October 24th, 2023", "small-heavy")
+
+statusOverview = Card([missingBadge, blockersAlert], "sunk", "row", "m", "center", "between")
+missingBadge = Badge("3 updates missing", "secondary")
+blockersAlert = Alert("Blockers Detected", "2 teammates are currently blocked", "warning")
+
+updatesSection = SectionBlock([teamMember1, teamMember2, teamMember3, teamMember4], true)
+teamMember1 = SectionItem("m1", "Sarah Chen (Frontend)", [sarahStatus, sarahTags])
+sarahStatus = TextContent("Finished the landing page hero section. Moving to the contact form today. No blockers.")
+sarahTags = TagBlock(["UI/UX", "Completed"])
+
+teamMember2 = SectionItem("m2", "Marcus Thorne (Backend)", [marcusStatus, marcusTags, marcusCallout])
+marcusStatus = TextContent("Optimized the API response times for the dashboard. Currently stuck on the Redis cache sync issue.")
+marcusTags = TagBlock(["API", "Performance"])
+marcusCallout = Callout("error", "Blocked", "Waiting on DevOps for the Redis config update.")
+
+teamMember3 = SectionItem("m3", "Elena Rodriguez (Product)", [elenaStatus, elenaTags])
+elenaStatus = TextContent("Reviewing Q4 roadmap and syncing with stakeholders. Will post the updated specs by EOD.")
+elenaTags = TagBlock(["Product", "Planning"])
+
+teamMember4 = SectionItem("m4", "David Kim (QA)", [davidStatus, davidTags, davidCallout])
+davidStatus = TextContent("Regression testing for v2.1. Found a critical bug in the payment flow.")
+davidTags = TagBlock(["Testing", "Critical"])
+davidCallout = Callout("warning", "Blocked", "Cannot verify fix until Backend deploys the hotfix.")
+
+postUpdateSection = Card([postHeading, updateForm], "sunk", "column", "m")
+postHeading = Heading("Post Your Update", "h3")
+updateForm = Form("standup-form", formButtons, [statusField, blockerField, tagField])
+statusField = FormControl("What are you working on?", statusInput)
+statusInput = TextArea("status", "I am working on...", 3)
+blockerField = FormControl("Are you blocked?", blockerSelect)
+blockerSelect = Select("blocked", [optNo, optYes], "Select status")
+optNo = SelectItem("no", "No, I'm all clear")
+optYes = SelectItem("yes", "Yes, I'm blocked")
+tagField = FormControl("Category", tagInput)
+tagInput = Input("category", "e.g. Backend, Design")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary")
+
+followUps = FollowUpBlock([follow1, follow2])
+follow1 = FollowUpItem("View yesterday's standup")
+follow2 = FollowUpItem("Ping DevOps regarding Redis")

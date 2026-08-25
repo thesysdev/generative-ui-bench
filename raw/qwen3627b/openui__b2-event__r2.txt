@@ -1,0 +1,101 @@
+The user wants a conference landing screen with 6 specific items. Let me plan this out:
+
+1. Event name, date and venue - CardHeader + TextContent or Badge/Tag
+2. Agenda with times - Table or ListBlock
+3. Speakers with one line each - ListBlock or Table
+4. Ticket tiers with prices - Table
+5. Registration form with name and email - Form with Input fields
+6. Days remaining - Callout or Badge or TextContent
+
+Let me design this as a cohesive conference landing page. I'll use realistic conference data.
+
+Let me plan the structure:
+- root = Card with all sections
+- CardHeader for event name
+- Info section with date, venue, days remaining
+- Agenda section (ListBlock or Table)
+- Speakers section (ListBlock)
+- Ticket tiers section (Table)
+- Registration form (Form)
+- FollowUpBlock at the end
+
+Let me build this step by step.
+
+Event: "TechSummit 2025"
+Date: October 15-17, 2025
+Venue: Moscone Center, San Francisco
+Days remaining: Let's say 42 days
+
+Agenda:
+- 9:00 AM - Opening Keynote
+- 10:30 AM - AI in Practice Panel
+- 12:00 PM - Lunch & Networking
+- 1:30 PM - Workshop: Cloud Architecture
+- 3:00 PM - Startup Pitch Competition
+- 5:00 PM - Closing Remarks & Mixer
+
+Speakers:
+- Dr. Sarah Chen - AI Research Lead at DeepMind
+- Marcus Rodriguez - CTO at CloudScale
+- Aisha Patel - VP Engineering at Stripe
+- James O'Brien - Founder of DataFlow
+- Dr. Yuki Tanaka - Head of ML at Toyota Research
+
+Ticket tiers:
+- General: $299
+- VIP: $599
+- Student: $99
+- Group (5+): $199/person
+
+Let me code this up now.
+root = Card([eventHeader, eventInfo, daysRemaining, agendaSection, speakersSection, ticketsSection, registerSection, followUp], "card", "column", "m", "start", "start", false)
+
+eventHeader = CardHeader("TechSummit 2025", "Where builders shape the future")
+
+eventInfo = Card([venueBadge, dateBadge, locationText], "sunk", "column", "xs", "start", "start", false)
+venueBadge = Badge("Moscone Center, San Francisco", "secondary")
+dateBadge = Badge("October 15–17, 2025", "secondary")
+locationText = TextContent("Join 2,000+ developers, engineers, and founders for three days of talks, workshops, and networking.", "default")
+
+daysRemaining = Callout("info", "⏳ 42 days to go", "Registration closes October 1, 2025. Secure your spot before early-bird pricing ends.")
+
+agendaSection = Card([agendaHeading, agendaList], "card", "column", "s", "start", "start", false)
+agendaHeading = Heading("Agenda", "h2")
+agendaList = ListBlock([agenda1, agenda2, agenda3, agenda4, agenda5, agenda6], "number")
+agenda1 = ListItem("9:00 AM — Opening Keynote", "Dr. Sarah Chen kicks off the event with the state of AI in 2025")
+agenda2 = ListItem("10:30 AM — AI in Practice Panel", "Industry leaders discuss real-world AI deployments")
+agenda3 = ListItem("12:00 PM — Lunch & Networking", "Catered lunch in the main hall with sponsor booths")
+agenda4 = ListItem("1:30 PM — Workshop: Cloud Architecture", "Hands-on session led by Marcus Rodriguez")
+agenda5 = ListItem("3:00 PM — Startup Pitch Competition", "10 startups pitch to a panel of VCs and industry experts")
+agenda6 = ListItem("5:00 PM — Closing Remarks & Mixer", "Wrap-up talk followed by drinks and networking")
+
+speakersSection = Card([speakersHeading, speakersList], "card", "column", "s", "start", "start", false)
+speakersHeading = Heading("Speakers", "h2")
+speakersList = ListBlock([speaker1, speaker2, speaker3, speaker4, speaker5], "image")
+speaker1 = ListItem("Dr. Sarah Chen", "AI Research Lead at DeepMind — pioneering multimodal learning systems")
+speaker2 = ListItem("Marcus Rodriguez", "CTO at CloudScale — scaling infrastructure for billions of requests")
+speaker3 = ListItem("Aisha Patel", "VP Engineering at Stripe — building the future of payments")
+speaker4 = ListItem("James O'Brien", "Founder of DataFlow — open-source data pipeline tooling")
+speaker5 = ListItem("Dr. Yuki Tanaka", "Head of ML at Toyota Research — autonomous driving at scale")
+
+ticketsSection = Card([ticketsHeading, ticketsTable], "card", "column", "s", "start", "start", false)
+ticketsHeading = Heading("Ticket Tiers", "h2")
+ticketsTable = Table([tierCol, priceCol, perksCol])
+tierCol = Col("Tier", ["General", "VIP", "Student", "Group (5+)"])
+priceCol = Col("Price", ["$299", "$599", "$99", "$199/person"])
+perksCol = Col("Includes", ["All talks & workshops", "All talks + VIP lounge & dinner", "All talks + swag bag", "All talks + group discount"])
+
+registerSection = Card([registerHeading, registerForm], "card", "column", "s", "start", "start", false)
+registerHeading = Heading("Register Now", "h2")
+registerForm = Form("registration", regButtons, [regName, regEmail])
+regName = FormControl("Full name", regNameInput)
+regNameInput = Input("name", "Jane Smith")
+regEmail = FormControl("Email address", regEmailInput, "We'll send your ticket confirmation here")
+regEmailInput = Input("email", "jane@example.com", "email")
+regButtons = Buttons([submitBtn], "row")
+submitBtn = Button("Register", null, "primary", "normal", "large")
+
+followUp = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Tell me more about the VIP experience")
+fu2 = FollowUpItem("What's the cancellation policy?")
+fu3 = FollowUpItem("Show me past TechSummit highlights")

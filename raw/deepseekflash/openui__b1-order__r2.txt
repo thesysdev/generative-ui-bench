@@ -1,0 +1,28 @@
+root = Card([header, currentLoc, estDelivery, reportSection])
+
+header = CardHeader("Delivery Status", "Order #ORD-20341")
+
+currentLoc = Card([locHeading, locText, locMap], "sunk", "column")
+locHeading = Heading("Current location", "h3")
+locText = TextContent("**In transit** — At the Memphis regional sort facility, heading to your local depot.", "default")
+locMap = ImageBlock("https://picsum.photos/seed/package-map/800/300", "Map showing package at Memphis sort facility")
+
+estDelivery = Card([estHeading, estTag, estDetails], "card", "column")
+estHeading = Heading("Estimated delivery", "h3")
+estTag = Tag("Arriving Thu, Jun 27", null, "lg", "success")
+estDetails = TextContent("Between **9:00 AM – 1:00 PM**. You’ll get a live tracking link on the morning of delivery.", "small")
+
+reportSection = Card([reportHeading, reportIntro, reportForm], "sunk", "column")
+reportHeading = Heading("Report a problem", "h3")
+reportIntro = TextContent("Something off with this delivery? Let us know and we’ll get back to you within 24 hours.", "small")
+reportForm = Form("report-delivery", reportButtons, [reasonField, detailsField], "column")
+reasonField = FormControl("Issue type", reasonSelect)
+reasonSelect = Select("issue_type", [opt1, opt2, opt3], "Choose a problem")
+opt1 = SelectItem("delayed", "Package is delayed")
+opt2 = SelectItem("damaged", "Package is damaged")
+opt3 = SelectItem("wrong-item", "Wrong item or missing")
+detailsField = FormControl("Describe the issue", detailsArea, "Include any helpful details")
+detailsArea = TextArea("issue_details", "e.g. tracking hasn't updated in 2 days…", 4)
+reportButtons = Buttons([submitBtn, cancelBtn], "row")
+submitBtn = Button("Submit report", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

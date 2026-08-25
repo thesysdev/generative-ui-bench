@@ -1,0 +1,76 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        threshold,
+        search,
+        lowInventoryList,
+        reorderButtons
+    ],
+    "sunk"
+)
+
+header = CardHeader("Low Inventory Warning", "Items below reorder threshold")
+
+threshold = TextContent(
+    "Reorder threshold: 5 units",
+    "small"
+)
+
+search = Input(
+    "search",
+    placeholder: "Search items...",
+    type: "text"
+)
+
+lowInventoryList = Card(
+    [
+        lowInventoryItems
+    ],
+    "clear"
+)
+
+lowInventoryItems = ListBlock(
+    items: lowInventoryItemsRefs,
+    variant: "image"
+)
+
+lowInventoryItemsRefs = [
+    lowItem1,
+    lowItem2
+]
+
+lowItem1 = ListItem(
+    title: "Widget A",
+    subtitle: "Remaining: 2 units",
+    image: "https://picsum.photos/seed/widget-a/80/80",
+    actionLabel: "Reorder"
+)
+
+lowItem2 = ListItem(
+    title: "Gadget B",
+    subtitle: "Remaining: 1 unit",
+    image: "https://picsum.photos/seed/gadget-b/80/80",
+    actionLabel: "Reorder"
+)
+
+reorderButtons = Buttons(
+    buttons: reorderButtonsRefs,
+    direction: "row"
+)
+
+reorderButtonsRefs = [
+    reorderWidgetA,
+    reorderGadgetB
+]
+
+reorderWidgetA = Button(
+    "Reorder Widget A",
+    action: ["reorder", "widget-a"]
+)
+
+reorderGadgetB = Button(
+    "Reorder Gadget B",
+    action: ["reorder", "gadget-b"]
+)
+```

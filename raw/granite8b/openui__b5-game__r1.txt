@@ -1,0 +1,163 @@
+```openui-lang
+root = Card(
+    [
+        onlineHeader,
+        onlineStatus,
+        dailyMonthly,
+        revenueSection,
+        ruSection,
+        sessionChart,
+        bestSelling,
+        regionHealth,
+        crashRate,
+        liveEvents,
+        reports,
+        banAppeals,
+        currencyInflation,
+        experiments,
+        patchNotes,
+        focusRegion,
+        shipHotfix,
+    ],
+    "card",
+    "row",
+    "l",
+    align = "center",
+    justify = "between",
+    wrap = false
+)
+
+onlineHeader = CardHeader("Live‑Ops Dashboard", "Current Status")
+
+onlineStatus = Tag("Players Online: 12,345", null, null, "success")
+
+dailyMonthly = Table([dailyCol, monthlyCol])
+dailyCol = Col("Daily Active Players", ["45,200"])
+monthlyCol = Col("Monthly Active Players", ["212,000"])
+
+revenueSection = Card(
+    [
+        revHeading,
+        revenueValue,
+        ruValue,
+    ],
+    "sunk"
+)
+revHeading = Heading("Revenue", "h3")
+revenueValue = TextContent("Revenue Today: $123,450", "large")
+ruValue = TextContent("Revenue per User: $12.34", "large")
+
+sessionChart = LineChart(
+    ["W1", "W2", "W3", "W4", "W5", "W6"],
+    [sessionSeries],
+    "natural",
+    "Week",
+    "Session Length (min)"
+)
+sessionSeries = Series("Session Length", [45, 48, 50, 47, 52, 49])
+
+bestSelling = Table([itemCol, unitsCol])
+itemCol = Col("Best‑Selling Item", ["Legendary Sword"])
+unitsCol = Col("Units Sold", ["2,310"])
+
+regionHealth = Table([regionCol, healthCol])
+regionCol = Col("Server Region", ["NA", "EU", "APAC"])
+healthCol = Col("Health", ["Green", "Yellow", "Green"])
+
+crashRate = BarChart(
+    ["v1.2", "v1.3", "v1.4"],
+    [crashSeries],
+    variant = "grouped",
+    xLabel = "App Version",
+    yLabel = "Crash Rate (%)"
+)
+crashSeries = Series("Crash Rate", [1.2, 0.8, 0.5])
+
+liveEvents = Card(
+    [
+        eventsHeader,
+        runningEvents,
+        upcomingEvents,
+    ],
+    "clear"
+)
+eventsHeader = Heading("Live Events", "h3")
+runningEvents = TextContent("Running: Battle Royale Week", "large")
+upcomingEvents = TextContent("Upcoming: Holiday Festivities", "large")
+
+reports = Card(
+    [
+        reportsHeader,
+        awaitingReports,
+    ],
+    "sunk"
+)
+reportsHeader = Heading("Player Reports", "h3")
+awaitingReports = TextContent("Reports Awaiting Review: 87", "large")
+
+banAppeals = Card(
+    [
+        banHeader,
+        awaitingAppeals,
+    ],
+    "sunk"
+)
+banHeader = Heading("Ban Appeals", "h3")
+awaitingAppeals = TextContent("Appeals Awaiting Review: 42", "large")
+
+currencyInflation = LineChart(
+    ["Month 1", "Month 2", "Month 3", "Month 4"],
+    [inflationSeries],
+    "natural",
+    "Month",
+    "Inflation Rate (%)"
+)
+inflationSeries = Series("Inflation", [0.5, 1.2, 0.9, 1.5])
+
+experiments = Table([expCol, resultCol])
+expCol = Col("Running Experiments", ["UI Refresh", "XP Boost"])
+resultCol = Col("Result", ["Positive", "Neutral"])
+
+patchNotes = Card(
+    [
+        patchHeader,
+        draftArea,
+    ],
+    "clear"
+)
+patchHeader = Heading("Draft Patch Notes", "h3")
+draftArea = TextContent(
+    "## Patch Notes (Draft)\n\n- New feature X\n- Bugfix Y\n- Balance change Z",
+    "large"
+)
+
+focusRegion = Card(
+    [
+        focusHeader,
+        regionDropdown,
+    ],
+    "sunk"
+)
+focusHeader = Heading("Focus on Region", "h3")
+regionDropdown = Select(
+    "focus_region",
+    [
+        SelectItem("North America", "NA"),
+        SelectItem("Europe", "EU"),
+        SelectItem("Asia Pacific", "APAC"),
+    ],
+    "Select region",
+    value = "NA"
+)
+
+shipHotfix = Card(
+    [
+        hotfixHeader,
+        shipButton,
+    ],
+    "sunk"
+)
+hotfixHeader = Heading("Ship Hotfix", "h3")
+shipButton = Button("Deploy Hotfix", null, "primary")
+
+```

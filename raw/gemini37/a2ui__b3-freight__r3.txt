@@ -1,0 +1,569 @@
+Here is the logistics coordinator dashboard configured with real-time shipment monitoring, route filtering, performance metrics, and exception handling.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "delayedAlert",
+          "kpiCard",
+          "searchCard",
+          "shipmentsCard",
+          "analyticsCard",
+          "quickActionsCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Logistics Dispatch & Operations Board",
+        "subtitle": "Active fleet monitoring • Last refreshed: Today at 14:32 EST"
+      },
+      {
+        "id": "delayedAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Delayed Shipments Alert (3 Active)",
+        "description": "Severe weather on I-80 corridor impacting TRK-9042 (+5h) & TRK-9049 (+8h). Mechanical hold on TRK-8812 at Chicago terminal."
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpiTitle",
+          "kpiProgress",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiTitle",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Monthly Performance & Cost Metrics"
+      },
+      {
+        "id": "kpiProgress",
+        "component": "Progress",
+        "label": "Monthly On-Time Delivery Rate: 94.2% (Target: 95.0%)",
+        "value": 94.2
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValCol",
+          "kpiTargetCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "On-Time Percentage (MTD)",
+          "Average Cost per Shipment",
+          "Active In-Transit Units",
+          "Flagged for Expedited Review"
+        ]
+      },
+      {
+        "id": "kpiValCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "94.2%",
+          "$1,428.50",
+          "142 loads",
+          "4 units"
+        ]
+      },
+      {
+        "id": "kpiTargetCol",
+        "component": "Col",
+        "label": "Benchmark / Status",
+        "data": [
+          "Target ≥ 95.0%",
+          "Budget: $1,500.00 / load",
+          "Capacity: 88%",
+          "Action required"
+        ]
+      },
+      {
+        "id": "searchCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "searchHeader",
+          "searchForm"
+        ]
+      },
+      {
+        "id": "searchHeader",
+        "component": "CardHeader",
+        "title": "Route Lookup & Filter",
+        "subtitle": "Search shipments across active corridors and hubs"
+      },
+      {
+        "id": "searchForm",
+        "component": "Form",
+        "name": "routeFilterForm",
+        "buttons": "searchFormButtons",
+        "fields": [
+          "originField",
+          "destinationField",
+          "statusFilterField"
+        ]
+      },
+      {
+        "id": "originField",
+        "component": "FormControl",
+        "label": "Origin Hub / City",
+        "input": "originInput"
+      },
+      {
+        "id": "originInput",
+        "component": "Input",
+        "name": "origin",
+        "placeholder": "e.g. Chicago, IL or LAX-01"
+      },
+      {
+        "id": "destinationField",
+        "component": "FormControl",
+        "label": "Destination Hub / City",
+        "input": "destinationInput"
+      },
+      {
+        "id": "destinationInput",
+        "component": "Input",
+        "name": "destination",
+        "placeholder": "e.g. Atlanta, GA or JFK-04"
+      },
+      {
+        "id": "statusFilterField",
+        "component": "FormControl",
+        "label": "Transit Status",
+        "input": "statusSelect"
+      },
+      {
+        "id": "statusSelect",
+        "component": "Select",
+        "name": "status",
+        "placeholder": "All Statuses",
+        "items": [
+          "statusOptAll",
+          "statusOptOnTime",
+          "statusOptDelayed",
+          "statusOptFlagged"
+        ]
+      },
+      {
+        "id": "statusOptAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Shipments"
+      },
+      {
+        "id": "statusOptOnTime",
+        "component": "SelectItem",
+        "value": "ontime",
+        "label": "On Time"
+      },
+      {
+        "id": "statusOptDelayed",
+        "component": "SelectItem",
+        "value": "delayed",
+        "label": "Delayed"
+      },
+      {
+        "id": "statusOptFlagged",
+        "component": "SelectItem",
+        "value": "flagged",
+        "label": "Flagged / Critical"
+      },
+      {
+        "id": "searchFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "applyFilterBtn",
+          "resetFilterBtn"
+        ]
+      },
+      {
+        "id": "applyFilterBtn",
+        "component": "Button",
+        "label": "Search Route",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFilterBtn",
+        "component": "Button",
+        "label": "Clear",
+        "variant": "secondary"
+      },
+      {
+        "id": "shipmentsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "shipmentsHeader",
+          "shipmentsTable"
+        ]
+      },
+      {
+        "id": "shipmentsHeader",
+        "component": "CardHeader",
+        "title": "Shipments in Transit",
+        "subtitle": "Live status, destination ETA, and carrier assignments"
+      },
+      {
+        "id": "shipmentsTable",
+        "component": "Table",
+        "columns": [
+          "colTrackingId",
+          "colOrigin",
+          "colDest",
+          "colEta",
+          "colCarrier",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colTrackingId",
+        "component": "Col",
+        "label": "Tracking #",
+        "data": [
+          "TRK-9042",
+          "TRK-9043",
+          "TRK-9045",
+          "TRK-9048",
+          "TRK-9049",
+          "TRK-9051"
+        ]
+      },
+      {
+        "id": "colOrigin",
+        "component": "Col",
+        "label": "Origin",
+        "data": [
+          "Seattle, WA",
+          "Dallas, TX",
+          "Los Angeles, CA",
+          "Memphis, TN",
+          "Denver, CO",
+          "Atlanta, GA"
+        ]
+      },
+      {
+        "id": "colDest",
+        "component": "Col",
+        "label": "Destination",
+        "data": [
+          "Chicago, IL",
+          "Atlanta, GA",
+          "Phoenix, AZ",
+          "Charlotte, NC",
+          "Detroit, MI",
+          "Miami, FL"
+        ]
+      },
+      {
+        "id": "colEta",
+        "component": "Col",
+        "label": "ETA",
+        "data": [
+          "Today, 21:30 (Delayed)",
+          "Tomorrow, 08:00",
+          "Today, 18:15",
+          "Tomorrow, 11:45",
+          "Tomorrow, 19:00 (Delayed)",
+          "Today, 23:00"
+        ]
+      },
+      {
+        "id": "colCarrier",
+        "component": "Col",
+        "label": "Carrier",
+        "data": [
+          "Swift Transport",
+          "Freightline Co",
+          "Apex Logistics",
+          "Swift Transport",
+          "Apex Logistics",
+          "Vanguard Logistics"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "⚠️ Delayed (+5h)",
+          "✅ On Schedule",
+          "✅ On Schedule",
+          "✅ On Schedule",
+          "⚠️ Delayed (+8h)",
+          "✅ On Schedule"
+        ]
+      },
+      {
+        "id": "analyticsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "carrierVolHeader",
+          "carrierVolChart",
+          "sep1",
+          "weeklyVolHeader",
+          "weeklyVolChart"
+        ]
+      },
+      {
+        "id": "carrierVolHeader",
+        "component": "CardHeader",
+        "title": "Volume Split by Carrier (Active Loads)",
+        "subtitle": "Current load distribution across certified carrier partners"
+      },
+      {
+        "id": "carrierVolChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Apex Logistics",
+          "Swift Transport",
+          "Freightline Co",
+          "Vanguard Logistics",
+          "Regional Carriers"
+        ],
+        "values": [
+          46,
+          38,
+          28,
+          20,
+          10
+        ]
+      },
+      {
+        "id": "sep1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "weeklyVolHeader",
+        "component": "CardHeader",
+        "title": "Weekly Volume (Past 8 Weeks / 2 Months)",
+        "subtitle": "Total completed shipments handled per week"
+      },
+      {
+        "id": "weeklyVolChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "xLabel": "Week",
+        "yLabel": "Shipment Volume",
+        "labels": [
+          "Wk 1",
+          "Wk 2",
+          "Wk 3",
+          "Wk 4",
+          "Wk 5",
+          "Wk 6",
+          "Wk 7",
+          "Wk 8"
+        ],
+        "series": [
+          "weeklyVolSeries"
+        ]
+      },
+      {
+        "id": "weeklyVolSeries",
+        "component": "Series",
+        "category": "Volume",
+        "values": [
+          320,
+          345,
+          360,
+          390,
+          410,
+          385,
+          425,
+          450
+        ]
+      },
+      {
+        "id": "quickActionsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "flagHeader",
+          "flagForm"
+        ]
+      },
+      {
+        "id": "flagHeader",
+        "component": "CardHeader",
+        "title": "Flag Shipment for Incident or Priority Escalation",
+        "subtitle": "Notify dispatch, terminal manager, and trigger customer status alert"
+      },
+      {
+        "id": "flagForm",
+        "component": "Form",
+        "name": "flagShipmentForm",
+        "buttons": "flagFormButtons",
+        "fields": [
+          "flagTrackingField",
+          "flagReasonField",
+          "flagSeverityField",
+          "flagNotesField"
+        ]
+      },
+      {
+        "id": "flagTrackingField",
+        "component": "FormControl",
+        "label": "Shipment Tracking ID",
+        "input": "flagTrackingInput",
+        "hint": "Select or type the active tracking number"
+      },
+      {
+        "id": "flagTrackingInput",
+        "component": "Input",
+        "name": "tracking_id",
+        "placeholder": "e.g. TRK-9042"
+      },
+      {
+        "id": "flagReasonField",
+        "component": "FormControl",
+        "label": "Flag Reason",
+        "input": "flagReasonSelect"
+      },
+      {
+        "id": "flagReasonSelect",
+        "component": "Select",
+        "name": "reason",
+        "placeholder": "Select reason",
+        "items": [
+          "reasonWeather",
+          "reasonMech",
+          "reasonHOS",
+          "reasonTemp",
+          "reasonCustoms"
+        ]
+      },
+      {
+        "id": "reasonWeather",
+        "component": "SelectItem",
+        "value": "weather_delay",
+        "label": "Severe Weather / Road Closure"
+      },
+      {
+        "id": "reasonMech",
+        "component": "SelectItem",
+        "value": "mechanical",
+        "label": "Vehicle Breakdown / Mechanical"
+      },
+      {
+        "id": "reasonHOS",
+        "component": "SelectItem",
+        "value": "driver_hos",
+        "label": "Driver Hours of Service (HOS)"
+      },
+      {
+        "id": "reasonTemp",
+        "component": "SelectItem",
+        "value": "reefer_alarm",
+        "label": "Reefer / Temperature Alert"
+      },
+      {
+        "id": "reasonCustoms",
+        "component": "SelectItem",
+        "value": "customs_hold",
+        "label": "Customs or Terminal Hold"
+      },
+      {
+        "id": "flagSeverityField",
+        "component": "FormControl",
+        "label": "Escalation Level",
+        "input": "flagSeverityRadio"
+      },
+      {
+        "id": "flagSeverityRadio",
+        "component": "RadioGroup",
+        "name": "severity",
+        "defaultValue": "warning",
+        "items": [
+          "sevWatch",
+          "sevCritical"
+        ]
+      },
+      {
+        "id": "sevWatch",
+        "component": "RadioItem",
+        "label": "Watch / Advisory",
+        "description": "Log internal alert; notify coordinator on next sync",
+        "value": "warning"
+      },
+      {
+        "id": "sevCritical",
+        "component": "RadioItem",
+        "label": "Critical / Re-route",
+        "description": "Immediate dispatch intervention and customer notification",
+        "value": "critical"
+      },
+      {
+        "id": "flagNotesField",
+        "component": "FormControl",
+        "label": "Coordinator Notes",
+        "input": "flagNotesInput"
+      },
+      {
+        "id": "flagNotesInput",
+        "component": "TextArea",
+        "name": "notes",
+        "placeholder": "Enter specific instructions, detour details, or carrier contact log..."
+      },
+      {
+        "id": "flagFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitFlagBtn",
+          "clearFlagBtn"
+        ]
+      },
+      {
+        "id": "submitFlagBtn",
+        "component": "Button",
+        "label": "Flag & Escalate Shipment",
+        "variant": "primary",
+        "type": "destructive"
+      },
+      {
+        "id": "clearFlagBtn",
+        "component": "Button",
+        "label": "Reset",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

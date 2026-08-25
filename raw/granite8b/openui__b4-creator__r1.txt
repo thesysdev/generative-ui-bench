@@ -1,0 +1,300 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        metricsSection,
+        postsSection,
+        audienceSection,
+        scheduleSection,
+        pendingSection,
+        scheduleForm,
+    ],
+    "card",
+    "column",
+    "stretch",
+    "center",
+    wrap = true
+)
+
+header = CardHeader("Creator Studio Dashboard", "All Platforms")
+
+metricsSection = Card(
+    [
+        followerGrowth,
+        engagementRate,
+        earnings,
+        pendingCollabs,
+    ],
+    "clear",
+    "column",
+    "m",
+    "center",
+    wrap = true
+)
+
+followerGrowth = Card(
+    [
+        TextContent(
+            "Followers: 12,345\nGrowth (30d): +845",
+            "large"
+        ),
+        Callout(
+            "info",
+            "Follower growth",
+            "Growth over the past month"
+        ),
+    ],
+    "sunk"
+)
+
+engagementRate = Card(
+    [
+        TextContent(
+            "Engagement Rate: 3.2%",
+            "large"
+        ),
+        Callout(
+            "success",
+            "Engagement",
+            "Average engagement rate across platforms"
+        ),
+    ],
+    "sunk"
+)
+
+earnings = Card(
+    [
+        TextContent(
+            "Earnings this month: $4,750",
+            "large"
+        ),
+        Callout(
+            "success",
+            "Earnings",
+            "Total earnings from all platforms"
+        ),
+    ],
+    "sunk"
+)
+
+pendingCollabs = Card(
+    [
+        TextContent(
+            "Pending Collaboration Requests: 7",
+            "large"
+        ),
+        Callout(
+            "info",
+            "Collaborations",
+            "Requests awaiting response"
+        ),
+    ],
+    "sunk"
+)
+
+postsSection = Card(
+    [
+        bestPosts,
+        scheduledPosts,
+        bestHour,
+        commentsWaiting,
+    ],
+    "clear",
+    "column",
+    "m",
+    "center",
+    wrap = true
+)
+
+bestPosts = Card(
+    [
+        Table(
+            [
+                colPlatform,
+                colReach,
+            ]
+        ),
+        Callout(
+            "success",
+            "Best Posts",
+            "Top performing posts this month by reach"
+        ),
+    ],
+    "sunk"
+)
+
+colPlatform = Col("Platform", ["Instagram", "TikTok", "YouTube"])
+colReach = Col("Reach", ["250k", "180k", "95k"])
+
+scheduledPosts = Card(
+    [
+        TextContent(
+            "Posts Scheduled This Week:\n- Monday: \"Launch Week\" (12:00 PM)\n- Wednesday: \"Behind the Scenes\" (3:00 PM)\n- Friday: \"Q&A Session\" (9:00 AM)",
+            "default"
+        ),
+        Callout(
+            "info",
+            "Schedules",
+            "Upcoming posts for the week"
+        ),
+    ],
+    "sunk"
+)
+
+bestHour = Card(
+    [
+        TextContent(
+            "Best Hour to Post: 7:00 PM (based on historical engagement)",
+            "large"
+        ),
+        Callout(
+            "success",
+            "Timing",
+            "Optimal posting time for maximum reach"
+        ),
+    ],
+    "sunk"
+)
+
+commentsWaiting = Card(
+    [
+        TextContent(
+            "Comments Waiting for Reply: 23",
+            "large"
+        ),
+        Callout(
+            "warning",
+            "Comments",
+            "Engagement opportunities awaiting response"
+        ),
+    ],
+    "sunk"
+)
+
+audienceSection = Card(
+    [
+        audienceSplit,
+    ],
+    "clear",
+    "column",
+    "m",
+    "center",
+    wrap = true
+)
+
+audienceSplit = Card(
+    [
+        Table(
+            [
+                colPlatform,
+                colPercentage,
+            ]
+        ),
+        Callout(
+            "info",
+            "Audience Split",
+            "Distribution of followers across platforms"
+        ),
+    ],
+    "sunk"
+)
+
+colPercentage = Col("Percentage", ["45%", "30%", "20%", "5%"])
+
+scheduleSection = Card(
+    [
+        scheduleButton,
+    ],
+    "clear",
+    "column",
+    "m",
+    "center",
+    wrap = true
+)
+
+scheduleButton = Button(
+    "Schedule New Post",
+    "schedule",
+    "primary"
+)
+
+pendingSection = Card(
+    [
+        pendingRequests,
+    ],
+    "clear",
+    "column",
+    "m",
+    "center",
+    wrap = true
+)
+
+pendingRequests = Card(
+    [
+        TextContent(
+            "Pending Collaboration Requests: 7",
+            "large"
+        ),
+        Callout(
+            "info",
+            "Collaborations",
+            "Requests awaiting response"
+        ),
+    ],
+    "sunk"
+)
+
+scheduleForm = Form(
+    "post-scheduler",
+    Buttons([scheduleSubmit, platformToggle]),
+    [
+        captionField,
+        timeField,
+        platformSelector,
+    ]
+)
+
+captionField = FormControl(
+    "Caption:",
+    Input(
+        "post_caption",
+        placeholder = "Write your post caption here"
+    )
+)
+
+timeField = FormControl(
+    "Schedule Time:",
+    DatePicker(
+        "post_time",
+        mode = "single",
+        value = ["2025-08-15 10:00"]
+    )
+)
+
+platformSelector = FormControl(
+    "Platform:",
+    Select(
+        "post_platform",
+        [
+            SelectItem("All", "All Platforms"),
+            SelectItem("Instagram", "Instagram"),
+            SelectItem("TikTok", "TikTok"),
+            SelectItem("YouTube", "YouTube"),
+        ],
+        value = "All"
+    )
+)
+
+scheduleSubmit = Button(
+    "Schedule Post",
+    "schedule",
+    "primary"
+)
+
+platformToggle = Button(
+    "Show Only Selected Platform",
+    "toggle",
+    "tertiary"
+)
+
+```

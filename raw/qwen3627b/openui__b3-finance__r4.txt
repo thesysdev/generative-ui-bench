@@ -1,0 +1,236 @@
+The user wants a startup finance dashboard with:
+1. Cash on hand
+2. Monthly burn
+3. Months of runway
+4. Expenses split by category
+5. Transactions above $10,000 this month
+6. A way to look at a different month
+7. A way to download the statement
+
+Let me plan the layout:
+- CardHeader for the title
+- KPI cards for cash on hand, monthly burn, months of runway (using Table or individual components)
+- Expenses by category chart (PieChart or HorizontalBarChart)
+- Large transactions table
+- Month selector (Select or DatePicker)
+- Download button
+
+Let me build this out with realistic startup finance data.
+
+Layout structure:
+- root = Card([header, kpiSection, expenseSection, transactionsSection, controls])
+- header = CardHeader("Finance Overview", "Month-end summary")
+- kpiSection = Card with cash, burn, runway
+- expenseSection = Card with expense breakdown chart
+- transactionsSection = Card with large transactions table
+- controls = Card with month selector and download button
+
+For KPIs, I can use a Table or individual badges/callouts. Let me use a Table for the three KPIs.
+
+For expenses by category, a HorizontalBarChart or PieChart would work well.
+
+For large transactions, a Table.
+
+For month selection, a Select or DatePicker.
+
+For download, a Button.
+
+Let me write this out:
+
+```
+root = Card([header, kpiSection, expenseSection, transactionsSection, controls])
+```
+
+KPI section - I'll use a Card with gap, containing three items. Actually, let me use a Table for the KPIs since they're structured data.
+
+Actually, for KPIs like "Cash on Hand: $2.4M", "Monthly Burn: $180K", "Runway: 13.3 months" - these are more like status indicators. Let me use a combination approach. I could use a Table or individual components.
+
+Let me use a Table for KPIs and a HorizontalBarChart for expenses, a Table for transactions.
+
+Month selector: Select with months of the current year.
+
+Let me draft:
+
+```
+root = Card([header, kpiCard, expenseCard, transactionCard, controlCard])
+
+header = CardHeader("Month-End Finance", "Startup financial overview")
+
+kpiCard = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiLabel, kpiValue])
+kpiLabel = Col("Metric", ["Cash on Hand", "Monthly Burn", "Months of Runway"])
+kpiValue = Col("Value", ["$2,380,000", "$180,000", "13.2 months"])
+
+expenseCard = Card([expenseHeading, expenseChart], "sunk")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = HorizontalBarChart([...], [...])
+
+transactionCard = Card([txnHeading, txnTable], "sunk")
+txnHeading = Heading("Transactions Above $10,000", "h3")
+txnTable = Table([...])
+
+controlCard = Card([monthSelect, downloadBtn])
+monthSelect = FormControl("Select Month", monthSelectInput)
+monthSelectInput = Select("month", [...], "Choose a month")
+downloadBtn = Button("Download Statement", null, "primary")
+```
+
+Wait, I need to be careful. FormControl is for forms. For just a selector, I should use a Form or just a Select directly. Let me check - Form requires buttons. If I just want a select and a button, I could use a Form.
+
+Actually, let me use a Form for the controls section since it has a Select and Buttons.
+
+Let me also add some status indicators - maybe a Badge or Tag for runway status.
+
+Let me refine:
+
+For the KPI section, I'll add Tags/Badges for visual status.
+
+Let me think about the expense categories:
+- Salaries & Benefits: $85,000
+- Office & Rent: $12,000
+- Marketing & Ads: $28,000
+- Software & Tools: $15,000
+- Legal & Accounting: $8,000
+- Travel: $5,000
+- Misc: $27,000
+Total: $180,000
+
+For transactions above $10,000:
+- AWS Infrastructure: $14,500
+- Salesforce License: $12,000
+- Google Ads: $11,200
+- Office Rent: $12,000
+- Payroll Processing: $85,000
+- Legal Retainer: $10,500
+
+Let me build this properly now.
+
+For the controls, I'll use a Form with a Select for month and Buttons for download.
+
+Actually, I realize I should keep it simpler. Let me use:
+- A Select component inside a Form for month selection
+- A Buttons component for the download action
+
+Let me write the full code now.
+
+For the expense chart, HorizontalBarChart is good since category names can be long.
+
+Let me finalize:
+
+```
+root = Card([header, kpiCard, expenseCard, transactionCard, controlCard])
+
+header = CardHeader("Month-End Finance", "Startup financial overview — December 2024")
+
+kpiCard = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiLabel, kpiValue])
+kpiLabel = Col("Metric", ["Cash on Hand", "Monthly Burn", "Months of Runway"])
+kpiValue = Col("Value", ["$2,380,000", "$180,000", "13.2 months"])
+
+expenseCard = Card([expenseHeading, expenseChart], "sunk")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = HorizontalBarChart(labels, series, "grouped", null, "USD")
+labels = ["Salaries & Benefits", "Marketing & Ads", "Software & Tools", "Office & Rent", "Misc", "Legal & Accounting", "Travel"]
+series = [salariesSeries]
+salariesSeries = Series("Expenses", [85000, 28000, 15000, 12000, 27000, 8000, 5000])
+
+transactionCard = Card([txnHeading, txnTable], "sunk")
+txnHeading = Heading("Transactions Above $10,000", "h3")
+txnTable = Table([txnDate, txnVendor, txnCategory, txnAmount])
+txnDate = Col("Date", ["Dec 1", "Dec 2", "Dec 5", "Dec 10", "Dec 15", "Dec 20"])
+txnVendor = Col("Vendor", ["ADP Payroll", "Google Ads", "AWS", "Salesforce", "WeWork", "LegalShield"])
+txnCategory = Col("Category", ["Payroll", "Marketing", "Infrastructure", "Software", "Office", "Legal"])
+txnAmount = Col("Amount", ["$85,000", "$11,200", "$14,500", "$12,000", "$12,000", "$10,500"])
+
+controlCard = Card([monthForm], "sunk")
+monthForm = Form("month-selector", formButtons, [monthField])
+monthField = FormControl("Select Month", monthSelect)
+monthSelect = Select("month", [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec], "Choose a month")
+jan = SelectItem("jan", "January 2024")
+feb = SelectItem("feb", "February 2024")
+mar = SelectItem("mar", "March 2024")
+apr = SelectItem("apr", "April 2024")
+may = SelectItem("may", "May 2024")
+jun = SelectItem("jun", "June 2024")
+jul = SelectItem("jul", "July 2024")
+aug = SelectItem("aug", "August 2024")
+sep = SelectItem("sep", "September 2024")
+oct = SelectItem("oct", "October 2024")
+nov = SelectItem("nov", "November 2024")
+dec = SelectItem("dec", "December 2024")
+formButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")
+```
+
+Wait, I need to double-check: the Select signature is:
+Select(name: string, items: (SelectItem)[], placeholder?: string, rules?: (string | number)[], value?: string, size?: "small" | "medium" | "large")
+
+So Select("month", [jan, feb, ...], "Choose a month") is correct - name, items, placeholder.
+
+Let me also add a Tag or Badge to show runway status. Let me add a Tag to the KPI section.
+
+Actually, let me add a TextCallout or Callout for the runway status to make it more informative.
+
+Let me also make sure the subtitle in CardHeader reflects the selected month.
+
+Let me refine the layout to be more polished. I'll add:
+- A Callout for runway status
+- Better formatting
+
+Let me also add a Badge next to the runway.
+
+Actually, let me keep it clean and use the Table for KPIs but add a Tag or Badge in a separate line.
+
+Hmm, let me reconsider. The KPI table is clean. But I could add a Callout about the runway being healthy.
+
+Let me add:
+runwayAlert = Callout("success", "Runway Healthy", "At 13.2 months, you have comfortable runway. Consider planning for next funding round.")
+
+And include it in kpiCard.
+
+Let me finalize the code now.
+root = Card([header, kpiCard, expenseCard, transactionCard, controlCard])
+
+header = CardHeader("Month-End Finance", "Startup financial overview — December 2024")
+
+kpiCard = Card([kpiHeading, kpiTable, runwayAlert], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiLabel, kpiValue])
+kpiLabel = Col("Metric", ["Cash on Hand", "Monthly Burn", "Months of Runway"])
+kpiValue = Col("Value", ["$2,380,000", "$180,000", "13.2 months"])
+runwayAlert = Callout("success", "Runway Healthy", "At 13.2 months, runway is comfortable. Consider planning for your next funding round in Q2.")
+
+expenseCard = Card([expenseHeading, expenseChart], "sunk")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = HorizontalBarChart(expenseLabels, [expenseSeries], "grouped", null, "USD")
+expenseLabels = ["Salaries & Benefits", "Marketing & Ads", "Misc", "Software & Tools", "Office & Rent", "Legal & Accounting", "Travel"]
+expenseSeries = Series("Expenses", [85000, 28000, 27000, 15000, 12000, 8000, 5000])
+
+transactionCard = Card([txnHeading, txnTable], "sunk")
+txnHeading = Heading("Transactions Above $10,000", "h3")
+txnTable = Table([txnDate, txnVendor, txnCategory, txnAmount])
+txnDate = Col("Date", ["Dec 1", "Dec 2", "Dec 5", "Dec 10", "Dec 15", "Dec 20"])
+txnVendor = Col("Vendor", ["ADP Payroll", "Google Ads", "AWS", "Salesforce", "WeWork", "LegalShield"])
+txnCategory = Col("Category", ["Payroll", "Marketing", "Infrastructure", "Software", "Office", "Legal"])
+txnAmount = Col("Amount", ["$85,000", "$11,200", "$14,500", "$12,000", "$12,000", "$10,500"])
+
+controlCard = Card([monthForm], "sunk")
+monthForm = Form("month-selector", formButtons, [monthField])
+monthField = FormControl("Select Month", monthSelect)
+monthSelect = Select("month", [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec], "Choose a month", null, "dec")
+jan = SelectItem("jan", "January 2024")
+feb = SelectItem("feb", "February 2024")
+mar = SelectItem("mar", "March 2024")
+apr = SelectItem("apr", "April 2024")
+may = SelectItem("may", "May 2024")
+jun = SelectItem("jun", "June 2024")
+jul = SelectItem("jul", "July 2024")
+aug = SelectItem("aug", "August 2024")
+sep = SelectItem("sep", "September 2024")
+oct = SelectItem("oct", "October 2024")
+nov = SelectItem("nov", "November 2024")
+dec = SelectItem("dec", "December 2024")
+formButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")

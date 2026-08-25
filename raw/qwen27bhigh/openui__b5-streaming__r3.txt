@@ -1,0 +1,132 @@
+
+
+root = Card([header, kpiRow, regionFocus, row1, row2, row3, row4, row5, featureFlagsSection, promoteSection], "card", "column", "xl")
+
+header = CardHeader("Streaming Operations Room", "Live dashboard — all times UTC")
+
+kpiRow = Card([viewersStat, bufferingStat], "sunk", "row", "l", "stretch", "between")
+
+viewersStat = Card([viewersLabel, viewersValue], "clear", "column", "xs")
+viewersLabel = TextContent("Viewers watching right now", "small")
+viewersValue = TextContent("**1,247,832**", "large-heavy")
+
+bufferingStat = Card([bufferingLabel, bufferingBar, bufferingNote], "clear", "column", "xs")
+bufferingLabel = TextContent("Buffering rate (global)", "small")
+bufferingBar = Progress(2.4, "2.4% of sessions")
+bufferingNote = TextContent("Target < 3.0% — within threshold", "small")
+
+regionFocus = Card([regionLabel, regionSelect], "sunk", "row", "m", "baseline")
+regionLabel = TextContent("Focus region", "default")
+regionSelect = Select("region_focus", [regionGlobal, regionNA, regionEU, regionAPAC, regionLATAM], "All regions", null, null, "medium")
+regionGlobal = SelectItem("global", "Global (all regions)")
+regionNA = SelectItem("na", "North America")
+regionEU = SelectItem("eu", "Europe")
+regionAPAC = SelectItem("apac", "Asia-Pacific")
+regionLATAM = SelectItem("latam", "Latin America")
+
+row1 = Card([topWatchedCard, watchTimeCard], "clear", "row", "l", "stretch")
+
+topWatchedCard = Card([twHeading, twTable], "sunk", "column", "s")
+twHeading = Heading("Most-Watched Titles (24 h)", "h3")
+twTable = Table([twTitle, twHours, twDelta])
+twTitle = Col("Title", ["Crown of Ashes S2E5", "Neon Drift", "The Last Signal S1E12", "Midnight Cartographers", "Iron Tide S3E8"])
+twHours = Col("Hours watched", ["4.2M", "3.1M", "2.8M", "2.4M", "2.2M"])
+twDelta = Col("Δ vs prior 24 h", ["+18%", "+7%", "+31%", "-4%", "+12%"])
+
+watchTimeCard = Card([wtHeading, wtChart], "sunk", "column", "s")
+wtHeading = Heading("Watch Time — Past 30 Days", "h3")
+wtChart = AreaChart(["W1", "W2", "W3", "W4"], [wtSeries], "natural", "Week", "Billions min")
+wtSeries = Series("Watch time", [8.4, 9.1, 8.9, 10.3])
+
+row2 = Card([subsCard, genreCard], "clear", "row", "l", "stretch")
+
+subsCard = Card([subsHeading, subsChart], "sunk", "column", "s")
+subsHeading = Heading("New Subscribers vs Cancellations", "h3")
+subsChart = BarChart(["W1", "W2", "W3", "W4"], [newSubs, cancels], "grouped", "Week", "Count (K)")
+newSubs = Series("New subscribers", [142, 158, 149, 171])
+cancels = Series("Cancellations", [98, 104, 112, 109])
+
+genreCard = Card([genreHeading, genreChart], "sunk", "column", "s")
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart(["Sci-Fi", "Drama", "Comedy", "Documentary", "Thriller", "Animation"], [genreSeries], "grouped", "Genre", "Hours (M)")
+genreSeries = Series("Hours watched", [48, 41, 33, 27, 24, 19])
+
+row3 = Card([deliveryCard, releasesCard], "clear", "row", "l", "stretch")
+
+deliveryCard = Card([delHeading, delTable], "sunk", "column", "s")
+delHeading = Heading("Delivery Health by Region", "h3")
+delTable = Table([delRegion, delP95, delError, delStatus])
+delRegion = Col("Region", ["North America", "Europe", "Asia-Pacific", "Latin America", "MEA"])
+delP95 = Col("P95 latency (ms)", ["412", "538", "791", "624", "847"])
+delError = Col("Error rate %", ["0.3", "0.5", "1.2", "0.8", "1.9"])
+delStatus = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Critical"])
+
+releasesCard = Card([relHeading, relList], "sunk", "column", "s")
+relHeading = Heading("Releases This Month", "h3")
+relList = ListBlock([rel1, rel2, rel3, rel4, rel5])
+rel1 = ListItem("Crown of Ashes — S2E6", "Fri 14 Jun · Fantasy")
+rel2 = ListItem("Neon Drift — S1E4", "Wed 19 Jun · Action")
+rel3 = ListItem("The Last Signal — S1E13", "Fri 21 Jun · Sci-Fi")
+rel4 = ListItem("Midnight Cartographers — S1E2", "Thu 27 Jun · Adventure")
+rel5 = ListItem("Iron Tide — S3E9", "Fri 28 Jun · Drama")
+
+row4 = Card([licCard, recCard, deadSearchCard], "clear", "row", "l", "stretch")
+
+licCard = Card([licHeading, licTable], "sunk", "column", "s")
+licHeading = Heading("Licenses Expiring Soon", "h3")
+licTable = Table([licTitle, licHolder, licDate, licAction])
+licTitle = Col("Title", ["Starfall Protocol", "The Velvet Room", "Circuit Breaker"])
+licHolder = Col("Licensing partner", ["Meridian Films", "Atlas Studios", "Orbit Media"])
+licDate = Col("Expires", ["12 Jul", "29 Jul", "04 Aug"])
+licAction = Col("Action", ["Renewal in progress", "Decision pending", "Renewal in progress"])
+
+recCard = Card([recHeading, recChart, recNote], "sunk", "column", "s")
+recHeading = Heading("Recommendation CTR", "h3")
+recChart = RadialChart(["Home", "Continue", "Similar", "New for you"], [14, 38, 9, 22])
+recNote = TextContent("Overall 14.2% — up 1.1 pp WoW", "small")
+
+deadSearchCard = Card([dsHeading, dsTable], "sunk", "column", "s")
+dsHeading = Heading("Searches → No Playback", "h3")
+dsTable = Table([dsQuery, dsCount, dsShare])
+dsQuery = Col("Top query", ["\"crown of ashes final episode\"", "\"neon drift season 2\"", "\"the last signal cast\""])
+dsCount = Col("Sessions", ["8,412", "6,203", "4,871"])
+dsShare = Col("% of total", ["12.1%", "9.0%", "7.1%"])
+
+row5 = Card([revenueCard, deviceCard], "clear", "row", "l", "stretch")
+
+revenueCard = Card([revHeading, revChart], "sunk", "column", "s")
+revHeading = Heading("Revenue by Plan", "h3")
+revChart = PieChart(["Premium 4K", "Standard", "Mobile-only", "Free (ad-supported)"], [44, 31, 15, 10], "donut")
+
+deviceCard = Card([devHeading, devChart], "sunk", "column", "s")
+devHeading = Heading("Viewing by Device", "h3")
+devChart = PieChart(["Smart TV", "Mobile", "Laptop/Desktop", "Tablet", "Gaming console"], [42, 31, 14, 8, 5], "pie")
+
+featureFlagsSection = Card([ffHeading, ffGroup], "sunk", "column", "s")
+ffHeading = Heading("Feature Flags", "h3")
+ffGroup = SwitchGroup("feature_flags", [ff1, ff2, ff3, ff4, ff5])
+ff1 = SwitchItem("Adaptive bitrate v3", "Rolls out new ABR algorithm", "abr_v3", true)
+ff2 = SwitchItem("Personalised recs v2", "New ranking model in production", "recs_v2", true)
+ff3 = SwitchItem("Offline downloads", "Allow offline on all plans", "offline_dl", false)
+ff4 = SwitchItem("Spatial audio", "Dolby Atmos / 360 audio", "spatial_audio", true)
+ff5 = SwitchItem("Social watch-party", "Synchronised group viewing", "watch_party", false)
+
+promoteSection = Card([promoHeading, promoForm], "sunk", "column", "s")
+promoHeading = Heading("Promote a Title on Home Screen", "h3")
+promoForm = Form("promote-title", promoButtons, [promoTitleField, promoSlotField, promoDurationField])
+promoTitleField = FormControl("Title to promote", promoTitleSelect, "Pick from top-20 or search")
+promoTitleSelect = Select("title", [pt1, pt2, pt3, pt4], "Choose a title")
+pt1 = SelectItem("crown_of_ashes", "Crown of Ashes S2")
+pt2 = SelectItem("neon_drift", "Neon Drift S1")
+pt3 = SelectItem("last_signal", "The Last Signal S1")
+pt4 = SelectItem("midnight_carto", "Midnight Cartographers S1")
+promoSlotField = FormControl("Home-screen slot", promoSlotSelect)
+promoSlotSelect = Select("slot", [slot1, slot2, slot3], "Position on home")
+slot1 = SelectItem("hero", "Hero banner (top)")
+slot2 = SelectItem("row1", "Row 1 carousel")
+slot3 = SelectItem("row2", "Row 2 carousel")
+promoDurationField = FormControl("Duration (days)", promoSlider, "How long the promotion runs")
+promoSlider = Slider("duration", "discrete", 1, 30, 1, [7])
+promoButtons = Buttons([promoSubmit, promoCancel])
+promoSubmit = Button("Publish promotion", null, "primary")
+promoCancel = Button("Cancel", null, "tertiary")

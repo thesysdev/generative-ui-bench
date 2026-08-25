@@ -1,0 +1,85 @@
+Let me build a comprehensive airline hub operations desk screen. I need to cover all 12 items:
+
+1. On-time performance today - KPI/metric
+2. Flights with number, route, gate and status - Table
+3. Delayed flights called out - Callout/Alert
+4. Recent gate changes - List or Table
+5. Crews available for reassignment - List
+6. Weather advisories at the hub - Callout/Alert
+7. Average passenger load today - KPI/metric
+8. Connections at risk of being missed - List/Callout
+9. A way to rebook affected passengers - Button/Dialog
+10. A way to look at a different hub - Select/Dialog
+11. Cancellations today - KPI/metric
+12. Average turnaround time - KPI/metric
+
+Let me design this carefully with all components properly referenced.
+
+I'll structure it as:
+- CardHeader for the hub name
+- KPI row with on-time performance, cancellations, avg passenger load, avg turnaround time
+- Weather advisory callout
+- Flights table
+- Delayed flights alert
+- Gate changes list
+- Connections at risk
+- Crews available
+- Action buttons (rebook, switch hub)
+
+Let me make sure every variable is defined and referenced properly.
+root = Card([header, kpis, weatherAdvisory, flightsSection, delayedAlert, gateChanges, connectionsAtRisk, crewsSection, actions])
+header = CardHeader("Hub Operations Desk — ATL (Hartsfield-Jackson)", "Today, Dec 19 · Last updated 08:42 EST")
+kpis = Card([otpKpi, cancelKpi, loadKpi, turnaroundKpi], "sunk", "row", "m")
+otpKpi = Card([otpLabel, otpValue, otpBadge], "clear", "column", "none")
+otpLabel = TextContent("On-Time Performance", "small")
+otpValue = TextContent("78.4%", "large-heavy")
+otpBadge = Badge("Target: 85%", "secondary")
+cancelKpi = Card([cancelLabel, cancelValue, cancelBadge], "clear", "column", "none")
+cancelLabel = TextContent("Cancellations Today", "small")
+cancelValue = TextContent("14", "large-heavy")
+cancelBadge = Badge("↑ 4 vs avg", "destructive")
+loadKpi = Card([loadLabel, loadValue, loadBadge], "clear", "column", "none")
+loadLabel = TextContent("Avg Passenger Load", "small")
+loadValue = TextContent("87.2%", "large-heavy")
+loadBadge = Badge("Above capacity", "outline")
+turnaroundKpi = Card([turnLabel, turnValue, turnBadge], "clear", "column", "none")
+turnLabel = TextContent("Avg Turnaround Time", "small")
+turnValue = TextContent("38 min", "large-heavy")
+turnBadge = Badge("Target: 35 min", "secondary")
+weatherAdvisory = Callout("warning", "Weather Advisory", "Heavy rain and thunderstorms expected between 14:00–20:00 EST. Visibility may drop below 1 mile. De-icing operations may be required. Impact on 12 outbound flights projected.")
+flightsSection = Card([flightsHeading, flightsTable], "sunk")
+flightsHeading = Heading("All Flights", "h3")
+flightsTable = Table([flightCol, routeCol, gateCol, depCol, statusCol])
+flightCol = Col("Flight", ["DL1042", "AA2187", "UA938", "DL415", "SW3321", "AA1094", "DL2801", "UA1742", "DL608", "AA737", "SW5589", "DL1190", "UA881", "AA2456", "DL3052", "UA493"])
+routeCol = Col("Route", ["ATL→LAX", "ATL→DFW", "ATL→ORD", "ATL→JFK", "ATL→MIA", "ATL→BOS", "ATL→SFO", "ATL→DEN", "ATL→SEA", "ATL→PHX", "ATL→RDU", "ATL→DTW", "ATL→LGA", "ATL→CLT", "ATL→MSP", "ATL→PDX"])
+gateCol = Col("Gate", ["A12", "B24", "C8", "A3", "D15", "B7", "C22", "A19", "D4", "B31", "C14", "A27", "D11", "B18", "C6", "A8"])
+depCol = Col("Scheduled", ["09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45"])
+statusCol = Col("Status", ["On Time", "Delayed 25m", "On Time", "Delayed 45m", "On Time", "On Time", "Delayed 15m", "Cancelled", "On Time", "Delayed 60m", "On Time", "On Time", "Delayed 10m", "On Time", "On Time", "Delayed 30m"])
+delayedAlert = Callout("error", "Delayed Flights — 6 Active Delays", "DL2187 (ATL→DFW) delayed 25m · DL415 (ATL→JFK) delayed 45m · DL2801 (ATL→SFO) delayed 15m · AA737 (ATL→PHX) delayed 60m · UA881 (ATL→LGA) delayed 10m · DL1190 (ATL→PDX) delayed 30m. Total passengers affected: ~412.")
+gateChanges = Card([gateHeading, gateList], "sunk")
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateList = ListBlock([gc1, gc2, gc3, gc4, gc5], "number")
+gc1 = ListItem("DL1042 → Gate A12 (was A15)", "Changed at 08:15 · Reason: Aircraft swap", null, null)
+gc2 = ListItem("UA938 → Gate C8 (was C11)", "Changed at 07:50 · Reason: Ground delay program", null, null)
+gc3 = ListItem("SW3321 → Gate D15 (was D9)", "Changed at 07:30 · Reason: Late arrival inbound", null, null)
+gc4 = ListItem("AA1094 → Gate B7 (was B12)", "Changed at 07:10 · Reason: Maintenance issue at B12", null, null)
+gc5 = ListItem("DL3052 → Gate C6 (was C19)", "Changed at 06:45 · Reason: Operational priority", null, null)
+connectionsAtRisk = Card([riskHeading, riskCallout, riskList], "sunk")
+riskHeading = Heading("Connections at Risk", "h3")
+riskCallout = Alert("18 passengers at risk of missing connections", "Passengers on delayed inbound flights with tight transfer windows. Immediate action recommended.", "warning")
+riskList = ListBlock([risk1, risk2, risk3, risk4], "number")
+risk1 = ListItem("DL415 → AA2187 (ATL→DFW)", "3 passengers · 22 min connection · Gate A3→B24", null, null)
+risk2 = ListItem("UA938 → UA1742 (ATL→DEN)", "5 passengers · 18 min connection · Gate C8→A19", null, null)
+risk3 = ListItem("DL2801 → DL608 (ATL→SEA)", "7 passengers · 15 min connection · Gate C22→D4", null, null)
+risk4 = ListItem("AA737 → SW5589 (ATL→RDU)", "3 passengers · 28 min connection · Gate B31→C14", null, null)
+crewsSection = Card([crewHeading, crewTable], "sunk")
+crewHeading = Heading("Crews Available for Reassignment", "h3")
+crewTable = Table([crewIdCol, crewTypeCol, crewSizeCol, crewStatusCol, crewDutyCol])
+crewIdCol = Col("Crew ID", ["CRW-4421", "CRW-4489", "CRW-4512", "CRW-4556", "CRW-4603"])
+crewTypeCol = Col("Type", ["Flight Crew", "Flight Crew", "Cabin Crew", "Flight Crew", "Cabin Crew"])
+crewSizeCol = Col("Size", ["4", "4", "6", "4", "5"])
+crewStatusCol = Col("Status", ["Available", "Available", "Available", "Standby", "Available"])
+crewDutyCol = Col("Duty End", ["23:00", "22:30", "23:30", "21:00", "23:00"])
+actions = Buttons([rebookBtn, switchHubBtn], "row")
+rebookBtn = Button("Rebook Affected Passengers", null, "primary", "normal", "large")
+switchHubBtn = Button("Switch Hub", null, "secondary", "normal", "large")

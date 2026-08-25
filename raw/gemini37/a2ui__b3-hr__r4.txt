@@ -1,0 +1,531 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "topKpisTable",
+          "quickActionsCard",
+          "departmentAndPipelineSection",
+          "interviewsAndAttritionSection",
+          "openRolesCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "HR Hiring & Workforce Overview",
+        "subtitle": "Real-time hiring metrics, headcount analytics, pipeline stages, and requisition management"
+      },
+      {
+        "id": "topKpisTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colValue",
+          "colBenchmark"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Key Metric",
+        "data": [
+          "Current Total Headcount",
+          "Average Time to Hire",
+          "Interviews Scheduled (This Week)",
+          "Active Open Roles"
+        ]
+      },
+      {
+        "id": "colValue",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "542 employees",
+          "34 days",
+          "28 interviews",
+          "16 open positions"
+        ]
+      },
+      {
+        "id": "colBenchmark",
+        "component": "Col",
+        "label": "Status / Target",
+        "data": [
+          "+12% YoY",
+          "Target: ≤ 35 days",
+          "Across 6 departments",
+          "4 high priority"
+        ]
+      },
+      {
+        "id": "quickActionsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "openRoleDialog"
+        ]
+      },
+      {
+        "id": "openRoleDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Open New Requisition / Role",
+        "title": "Create New Open Role",
+        "description": "Submit a new job opening for approval and recruitment activation.",
+        "triggerVariant": "default",
+        "content": [
+          "newRoleForm"
+        ]
+      },
+      {
+        "id": "newRoleForm",
+        "component": "Form",
+        "name": "createRoleForm",
+        "buttons": "formActionBtns",
+        "fields": [
+          "fieldTitle",
+          "fieldDept",
+          "fieldHeadcount",
+          "fieldLocation"
+        ]
+      },
+      {
+        "id": "fieldTitle",
+        "component": "FormControl",
+        "label": "Job Title",
+        "input": "inputTitle"
+      },
+      {
+        "id": "inputTitle",
+        "component": "Input",
+        "name": "jobTitle",
+        "placeholder": "e.g., Senior Full Stack Engineer"
+      },
+      {
+        "id": "fieldDept",
+        "component": "FormControl",
+        "label": "Department",
+        "input": "selectDept"
+      },
+      {
+        "id": "selectDept",
+        "component": "Select",
+        "name": "department",
+        "placeholder": "Select department",
+        "items": [
+          "optEng",
+          "optProd",
+          "optSales",
+          "optMktg",
+          "optPeople",
+          "optOps"
+        ]
+      },
+      {
+        "id": "optEng",
+        "component": "SelectItem",
+        "value": "engineering",
+        "label": "Engineering"
+      },
+      {
+        "id": "optProd",
+        "component": "SelectItem",
+        "value": "product",
+        "label": "Product & Design"
+      },
+      {
+        "id": "optSales",
+        "component": "SelectItem",
+        "value": "sales",
+        "label": "Sales & Revenue"
+      },
+      {
+        "id": "optMktg",
+        "component": "SelectItem",
+        "value": "marketing",
+        "label": "Marketing"
+      },
+      {
+        "id": "optPeople",
+        "component": "SelectItem",
+        "value": "people",
+        "label": "People & HR"
+      },
+      {
+        "id": "optOps",
+        "component": "SelectItem",
+        "value": "ops",
+        "label": "Finance & Operations"
+      },
+      {
+        "id": "fieldHeadcount",
+        "component": "FormControl",
+        "label": "Open Slots",
+        "input": "inputHeadcount"
+      },
+      {
+        "id": "inputHeadcount",
+        "component": "Input",
+        "name": "openSlots",
+        "type": "number",
+        "placeholder": "1"
+      },
+      {
+        "id": "fieldLocation",
+        "component": "FormControl",
+        "label": "Work Location / Policy",
+        "input": "radioLocation"
+      },
+      {
+        "id": "radioLocation",
+        "component": "RadioGroup",
+        "name": "locationType",
+        "defaultValue": "remote",
+        "items": [
+          "locRemote",
+          "locHybrid",
+          "locOnsite"
+        ]
+      },
+      {
+        "id": "locRemote",
+        "component": "RadioItem",
+        "label": "Remote",
+        "description": "Anywhere within authorized regions",
+        "value": "remote"
+      },
+      {
+        "id": "locHybrid",
+        "component": "RadioItem",
+        "label": "Hybrid",
+        "description": "2-3 days in office per week",
+        "value": "hybrid"
+      },
+      {
+        "id": "locOnsite",
+        "component": "RadioItem",
+        "label": "On-site",
+        "description": "Full-time office based",
+        "value": "onsite"
+      },
+      {
+        "id": "formActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "submitNewRoleBtn"
+        ]
+      },
+      {
+        "id": "submitNewRoleBtn",
+        "component": "Button",
+        "label": "Create & Publish Requisition",
+        "variant": "primary"
+      },
+      {
+        "id": "departmentAndPipelineSection",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "deptAndPipelineHeader",
+          "deptPieChart",
+          "pipelineBarChart"
+        ]
+      },
+      {
+        "id": "deptAndPipelineHeader",
+        "component": "CardHeader",
+        "title": "Headcount Distribution & Pipeline Stages",
+        "subtitle": "Breakdown of 542 total employees and 192 active candidates in pipeline"
+      },
+      {
+        "id": "deptPieChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Engineering (220)",
+          "Sales & Rev (135)",
+          "Product & Design (65)",
+          "Marketing (48)",
+          "Operations & Finance (44)",
+          "People & HR (30)"
+        ],
+        "values": [
+          220,
+          135,
+          65,
+          48,
+          44,
+          30
+        ]
+      },
+      {
+        "id": "pipelineBarChart",
+        "component": "HorizontalBarChart",
+        "xLabel": "Candidates",
+        "yLabel": "Hiring Stage",
+        "labels": [
+          "1. Applied / Sourced",
+          "2. Recruiter Screen",
+          "3. Hiring Mgr Review",
+          "4. Technical / Panel",
+          "5. Final Executive",
+          "6. Offer Extended"
+        ],
+        "series": [
+          "pipelineCountSeries"
+        ]
+      },
+      {
+        "id": "pipelineCountSeries",
+        "component": "Series",
+        "category": "Active Candidates",
+        "values": [
+          82,
+          46,
+          28,
+          21,
+          10,
+          5
+        ]
+      },
+      {
+        "id": "interviewsAndAttritionSection",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "analyticsSectionHeader",
+          "interviewScheduleTable",
+          "attritionLineChart"
+        ]
+      },
+      {
+        "id": "analyticsSectionHeader",
+        "component": "CardHeader",
+        "title": "Weekly Interviews & 6-Month Attrition",
+        "subtitle": "28 sessions this week and monthly departures tracking"
+      },
+      {
+        "id": "interviewScheduleTable",
+        "component": "Table",
+        "columns": [
+          "colDay",
+          "colInterviewsCount",
+          "colLeadInterviewer",
+          "colStageBreakdown"
+        ]
+      },
+      {
+        "id": "colDay",
+        "component": "Col",
+        "label": "Day",
+        "data": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ]
+      },
+      {
+        "id": "colInterviewsCount",
+        "component": "Col",
+        "label": "Sessions",
+        "data": [
+          "5 scheduled",
+          "7 scheduled",
+          "8 scheduled",
+          "5 scheduled",
+          "3 scheduled"
+        ]
+      },
+      {
+        "id": "colLeadInterviewer",
+        "component": "Col",
+        "label": "Primary Teams",
+        "data": [
+          "Product & Design",
+          "Engineering Core",
+          "Sales & Engineering",
+          "Executive Leadership",
+          "People Operations"
+        ]
+      },
+      {
+        "id": "colStageBreakdown",
+        "component": "Col",
+        "label": "Stage Types",
+        "data": [
+          "2 Screen, 3 Panel",
+          "4 Technical, 3 Screen",
+          "5 Technical, 3 Final",
+          "3 Final, 2 Manager",
+          "2 Offer Sync, 1 Screen"
+        ]
+      },
+      {
+        "id": "attritionLineChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "xLabel": "Month",
+        "yLabel": "Departures (Count)",
+        "labels": [
+          "Nov",
+          "Dec",
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr"
+        ],
+        "series": [
+          "voluntaryAttritionSeries",
+          "involuntaryAttritionSeries"
+        ]
+      },
+      {
+        "id": "voluntaryAttritionSeries",
+        "component": "Series",
+        "category": "Voluntary",
+        "values": [
+          3,
+          2,
+          4,
+          2,
+          3,
+          1
+        ]
+      },
+      {
+        "id": "involuntaryAttritionSeries",
+        "component": "Series",
+        "category": "Involuntary",
+        "values": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "openRolesCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "rolesCardHeader",
+          "openRolesTable"
+        ]
+      },
+      {
+        "id": "rolesCardHeader",
+        "component": "CardHeader",
+        "title": "Current Open Roles by Department",
+        "subtitle": "Detailed list of active requisitions, stages, and days open"
+      },
+      {
+        "id": "openRolesTable",
+        "component": "Table",
+        "columns": [
+          "colRoleTitle",
+          "colRoleDept",
+          "colRolePriority",
+          "colRoleDaysOpen",
+          "colRoleCandidates"
+        ]
+      },
+      {
+        "id": "colRoleTitle",
+        "component": "Col",
+        "label": "Role Title",
+        "data": [
+          "Staff Backend Engineer",
+          "Lead Product Designer",
+          "Enterprise Account Executive",
+          "Senior Data Engineer",
+          "DevOps & Security Specialist",
+          "Growth Marketing Manager",
+          "Technical Recruiter",
+          "Financial Analyst"
+        ]
+      },
+      {
+        "id": "colRoleDept",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Engineering",
+          "Product & Design",
+          "Sales & Revenue",
+          "Engineering",
+          "Engineering",
+          "Marketing",
+          "People & HR",
+          "Finance & Operations"
+        ]
+      },
+      {
+        "id": "colRolePriority",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "Critical",
+          "High",
+          "High",
+          "Medium",
+          "Medium",
+          "Low",
+          "Medium",
+          "Low"
+        ]
+      },
+      {
+        "id": "colRoleDaysOpen",
+        "component": "Col",
+        "label": "Days Open",
+        "data": [
+          "18 days",
+          "24 days",
+          "12 days",
+          "31 days",
+          "42 days",
+          "9 days",
+          "15 days",
+          "27 days"
+        ]
+      },
+      {
+        "id": "colRoleCandidates",
+        "component": "Col",
+        "label": "In Pipeline",
+        "data": [
+          "14 candidates (1 final)",
+          "9 candidates (2 final)",
+          "22 candidates (1 offer)",
+          "11 candidates (3 panel)",
+          "6 candidates (1 panel)",
+          "18 candidates (4 screen)",
+          "8 candidates (2 manager)",
+          "7 candidates (1 panel)"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

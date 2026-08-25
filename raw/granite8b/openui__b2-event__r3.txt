@@ -1,0 +1,81 @@
+```openui-lang
+daysRemaining = 12
+root = Card([
+    header,
+    agenda,
+    speakers,
+    ticketTiers,
+    registrationForm,
+    daysInfo
+], "card", "column", "m")
+
+header = CardHeader(
+    "Global Tech Summit 2025",
+    "October 15‑17, 2025 • Convention Center, San Francisco"
+)
+
+agenda = Card([
+    Table([labelCol, timeCol]),
+    separator,
+    TextContent(
+        "Agenda:\n" +
+        "• 9:00 AM – Welcome & Keynote\n" +
+        "• 10:30 AM – Breakout Sessions\n" +
+        "• 12:00 PM – Lunch\n" +
+        "• 2:00 PM – Panel Discussion\n" +
+        "• 4:00 PM – Closing Remarks"
+    )
+], "sunk")
+
+labelCol = Col("Session", ["Keynote", "Breakout", "Lunch", "Panel", "Closing"])
+timeCol = Col("Time", ["09:00", "10:30", "12:00", "14:00", "16:00"])
+
+speakers = ListBlock(items=[
+    ListItem(title="Alice Chen", subtitle="CEO, Tech Innovators"),
+    ListItem(title="Bob Patel", subtitle="Chief Architect, Data Solutions"),
+    ListItem(title="Catherine Liu", subtitle="Product Lead, AI Labs")
+], variant="image")
+
+ticketTiers = Table([labelCol2, priceCol])
+labelCol2 = Col("Tier", ["Early Bird", "Standard", "VIP"])
+priceCol = Col("Price", ["$299", "$399", "$599"])
+
+registrationForm = Form(
+    "event_registration",
+    formButtons,
+    [
+        nameField,
+        emailField,
+        submitBtn
+    ]
+)
+
+nameField = FormControl(
+    "Full name",
+    nameInput,
+    "Please provide your full name"
+)
+nameInput = Input("name", placeholder="Jane Doe")
+
+emailField = FormControl(
+    "Work email",
+    emailInput,
+    "We’ll use this to send you the agenda and reminders"
+)
+emailInput = Input("email", placeholder="jane@example.com", type="email")
+
+submitBtn = Button("Register", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+formButtons = Buttons([submitBtn, cancelBtn], "row")
+
+daysInfo = Card([
+    TextContent(
+        "Days remaining: " + daysRemaining.toString() + " days"
+    ),
+    Badge("Limited spots", "outline", "info")
+], "clear", null, "center", "stretch")
+
+separator = Separator(orientation="horizontal", decorative=true)
+
+```

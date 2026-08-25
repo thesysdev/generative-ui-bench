@@ -1,0 +1,19 @@
+root = Card([header, searchSection, warningBanner, inventoryTable, footerActions], "card", "column", "m")
+
+header = CardHeader("Low Inventory Alert", "Restock critical items to avoid outages")
+
+searchSection = Card([searchField], "clear", "row", "none")
+searchField = FormControl("Search Inventory", searchInput, "Filter by item name or SKU")
+searchInput = Input("search_inventory", "Search items...")
+
+warningBanner = Callout("warning", "Inventory Threshold", "Items are flagged when stock falls below 15 units.")
+
+inventoryTable = Table([skuCol, itemCol, stockCol, statusCol])
+skuCol = Col("SKU", ["SKU-102", "SKU-441", "SKU-908", "SKU-212"], "string")
+itemCol = Col("Item Name", ["Organic Almond Milk", "Avocado Toast Bread", "Greek Yogurt (Plain)", "Cold Brew Coffee"], "string")
+stockCol = Col("Units Left", ["4", "8", "11", "2"], "number")
+statusCol = Col("Action", ["Reorder", "Reorder", "Reorder", "Reorder"], "action")
+
+footerActions = Buttons([globalRestockBtn, exportBtn], "row")
+globalRestockBtn = Button("Bulk Reorder All", null, "primary")
+exportBtn = Button("Export Low Stock Report", null, "secondary")

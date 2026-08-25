@@ -1,0 +1,44 @@
+root = Card([header, globalStatus, regionFilter, healthMetrics, incidentSection, performanceSection, alertConfig, followUps], "clear", "column", "l")
+
+header = CardHeader("Service Health Dashboard", "On-Call Engineer View")
+
+globalStatus = Card([uptime, errorRate], "card", "row", "m")
+uptime = TextCallout("success", "Quarterly Uptime", "99.98% - Within SLA")
+errorRate = TextCallout("danger", "Current Error Rate", "1.2% - Spiking")
+
+regionFilter = Buttons([usEast, usWest, euWest, apSouth], "row")
+usEast = Button("US-East-1", null, "secondary", "normal", "small")
+usWest = Button("US-West-2", null, "secondary", "normal", "small")
+euWest = Button("EU-West-1", null, "secondary", "normal", "small")
+apSouth = Button("AP-South-1", null, "secondary", "normal", "small")
+
+healthMetrics = Card([metricsHeading, resourceChart], "sunk", "column", "s")
+metricsHeading = Heading("Resource Utilization (24h)", "h3")
+resourceChart = LineChart(["00h", "04h", "08h", "12h", "16h", "20h"], [cpuSeries, memSeries], "natural", "Time", "Usage %")
+cpuSeries = Series("CPU Usage", [45, 42, 88, 72, 50, 55])
+memSeries = Series("Memory Usage", [60, 62, 65, 68, 64, 63])
+
+incidentSection = Card([incHeading, incidentTable, ackButtons], "card", "column", "m")
+incHeading = Heading("Open Incidents", "h3")
+incidentTable = Table([incId, incSev, incStatus])
+incId = Col("Incident ID", ["INC-402", "INC-405", "INC-409"])
+incSev = Col("Severity", ["Critical", "High", "Medium"])
+incStatus = Col("Status", ["Investigating", "Identified", "Monitoring"])
+ackButtons = Buttons([ackBtn])
+ackBtn = Button("Acknowledge Incident", null, "primary", "normal", "medium")
+
+performanceSection = Card([perfHeading, latencyTable], "sunk", "column", "s")
+perfHeading = Heading("Slowest Endpoints", "h3")
+latencyTable = Table([endPoint, latency])
+endPoint = Col("Endpoint", ["/api/v1/search", "/api/v1/checkout", "/api/v1/user/profile", "/api/v1/auth/login", "/api/v1/upload"])
+latency = Col("P99 Latency", ["1.2s", "850ms", "620ms", "410ms", "380ms"])
+
+alertConfig = Form("alert-settings", alertButtons, [thresholdField])
+thresholdField = FormControl("Error Rate Threshold", thresholdInput, "Trigger alert when error rate exceeds this %")
+thresholdInput = Input("threshold", "0.5", "number")
+alertButtons = Buttons([saveAlertBtn])
+saveAlertBtn = Button("Update Threshold", null, "primary")
+
+followUps = FollowUpBlock([follow1, follow2])
+follow1 = FollowUpItem("View detailed logs for INC-402")
+follow2 = FollowUpItem("Check regional traffic distribution")

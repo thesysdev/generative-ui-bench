@@ -1,0 +1,60 @@
+root = Card([header, filterTabs])
+header = CardHeader("Cross-Platform Studio", "Creator analytics, scheduling & collaborations")
+
+filterTabs = Tabs([tabAll, tabIG, tabTT, tabYT])
+tabAll = TabItem("all", "All Platforms", [followerCard, engagementCard, postsTable, audienceChart, scheduledSteps, bestHour, commentsBlock, earningsCard, collabBlock, scheduleForm])
+tabIG = TabItem("instagram", "Instagram", [followerCard, engagementCard, postsTable, audienceChart, scheduledSteps, bestHour, commentsBlock, earningsCard, collabBlock, scheduleForm])
+tabTT = TabItem("tiktok", "TikTok", [followerCard, engagementCard, postsTable, audienceChart, scheduledSteps, bestHour, commentsBlock, earningsCard, collabBlock, scheduleForm])
+tabYT = TabItem("youtube", "YouTube", [followerCard, engagementCard, postsTable, audienceChart, scheduledSteps, bestHour, commentsBlock, earningsCard, collabBlock, scheduleForm])
+
+followerCard = Card([followerHeader, followerStats, followerChart])
+followerHeader = CardHeader("Followers", "Growth over past month")
+followerStats = TextContent("42,500 total  (+12% vs last month)", "large")
+followerChart = LineChart(["W1", "W2", "W3", "W4"], [growthSeries], "natural", "Week", "Count")
+growthSeries = Series("Followers", [38000, 39500, 41000, 42500])
+
+engagementCard = Card([engagementHeader, engagementValue, engagementNote])
+engagementHeader = Heading("Engagement Rate", "h3")
+engagementValue = Badge("8.4%", "success")
+engagementNote = TextContent("Average across all platforms this month")
+
+postsTable = Table([postCol, reachCol])
+postCol = Col("Best Post", ["Sunset Reel", "Tutorial Thread", "Behind Scenes", "Collab Clip"])
+reachCol = Col("Reach", [125000, 98000, 87000, 112000])
+
+audienceChart = PieChart(["Instagram", "TikTok", "YouTube"], [45, 30, 25], "donut")
+
+scheduledSteps = Steps([stepMon, stepTue, stepWed, stepThu, stepFri])
+stepMon = StepsItem("Monday", "Product launch teaser — Instagram")
+stepTue = StepsItem("Tuesday", "Tutorial thread — TikTok")
+stepWed = StepsItem("Wednesday", "Behind-the-scenes — YouTube")
+stepThu = StepsItem("Thursday", "Collab clip — Instagram")
+stepFri = StepsItem("Friday", "Weekly recap — All platforms")
+
+bestHour = Card([hourHeading, hourValue])
+hourHeading = Heading("Best Hour to Post", "h3")
+hourValue = TextContent("2:00 PM — 4:00 PM EST  (highest historical engagement)")
+
+commentsBlock = ListBlock([comment1, comment2, comment3], "number")
+comment1 = ListItem("Great content! When is the next drop?", "Instagram Reel")
+comment2 = ListItem("Can you share the link to this tool?", "TikTok Video")
+comment3 = ListItem("Love the new series!", "YouTube Short")
+
+earningsCard = Card([earningsHeader, earningsValue])
+earningsHeader = Heading("Earnings This Month", "h3")
+earningsValue = TextContent("$8,420", "large-heavy")
+
+collabBlock = ListBlock([collab1, collab2], "number")
+collab1 = ListItem("Brand X — Summer Campaign", "Pending review")
+collab2 = ListItem("Creator Y — Joint Video", "Awaiting response")
+
+scheduleForm = Form("schedule-post", scheduleButtons, [captionField, timeField])
+captionField = FormControl("Caption", captionInput)
+captionInput = TextArea("caption", "Write your caption...")
+timeField = FormControl("Post Time", timeSelect)
+timeSelect = Select("post_time", [timeMorning, timeAfternoon, timeEvening], "Select a time")
+timeMorning = SelectItem("9:00 AM", "9:00 AM")
+timeAfternoon = SelectItem("2:00 PM", "2:00 PM")
+timeEvening = SelectItem("6:00 PM", "6:00 PM")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")

@@ -1,0 +1,180 @@
+Let me build a cafe menu screen with all the required elements:
+
+1. Drinks with prices
+2. Food with prices
+3. Today's special called out
+4. A way to show vegetarian items only
+5. Opening hours
+
+I'll use:
+- Card as root
+- CardHeader for the cafe name
+- Callout or TextCallout for today's special
+- Tabs or SectionBlock for drinks and food categories
+- Tables for menu items with prices
+- A SwitchGroup or Buttons for vegetarian filter
+- TextContent or MarkDownRenderer for opening hours
+
+Let me think about the layout:
+- Header with cafe name
+- Today's special as a callout
+- Tabs for Drinks / Food
+- A vegetarian filter toggle
+- Opening hours at the bottom
+
+Let me design this carefully with proper openui-lang syntax.
+
+I'll use:
+- Tabs to switch between Drinks and Food
+- Tables for menu items (item name, price, vegetarian badge)
+- Callout for today's special
+- SwitchGroup or a Button for vegetarian filter
+- TextContent for opening hours
+
+Let me structure it:
+
+root = Card([header, special, veggieFilter, tabs, hours])
+header = CardHeader("The Daily Grind Café", "Fresh brewed happiness")
+special = Callout("info", "Today's Special", "Avocado Toast with poached eggs - $12.99")
+veggieFilter = SwitchGroup or Buttons for vegetarian toggle
+tabs = Tabs([drinksTab, foodTab])
+drinksTab = TabItem("drinks", "Drinks", [drinksTable])
+foodTab = TabItem("food", "Food", [foodTable])
+hours = TextContent("Opening Hours...")
+
+Let me make sure I follow all the rules:
+- Positional arguments only
+- Every variable must be referenced
+- Root first
+
+Let me build this out properly.
+
+For the vegetarian filter, I could use a SwitchGroup or just a Button. Let me use a Button that says "Show Vegetarian Only" - when clicked it sends a message back. Or I could use a SwitchGroup.
+
+Actually, let me use a Buttons component with a toggle-like button.
+
+Let me write it out:
+
+```
+root = Card([header, special, veggieFilter, tabs, hoursSection], "card", "column", "m")
+header = CardHeader("The Daily Grind Café", "Fresh brewed happiness since 2019")
+special = Callout("info", "Today's Special", "🥑 Avocado Toast with poached eggs & microgreens — $12.99")
+veggieFilter = Buttons([veggieBtn])
+veggieBtn = Button("🌱 Show Vegetarian Only", null, "secondary")
+tabs = Tabs([drinksTab, foodTab])
+drinksTab = TabItem("drinks", "Drinks", [drinksHeading, drinksTable])
+drinksHeading = Heading("Our Drinks", "h3")
+drinksTable = Table([drinkName, drinkPrice, drinkVeg])
+drinkName = Col("Item", ["Espresso", "Cappuccino", "Latte", "Matcha Latte", "Chai Tea", "Fresh Orange Juice", "Smoothie Bowl", "Iced Americano", "Hot Chocolate", "Mango Lassi"])
+drinkPrice = Col("Price", ["$3.50", "$4.50", "$4.75", "$5.25", "$4.25", "$5.50", "$7.99", "$4.00", "$4.50", "$5.75"])
+drinkVeg = Col("Dietary", ["✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓"])
+foodTab = TabItem("food", "Food", [foodHeading, foodTable])
+foodHeading = Heading("Our Food", "h3")
+foodTable = Table([foodName, foodPrice, foodVeg])
+foodName = Col("Item", ["Avocado Toast", "Croissant", "Banana Pancakes", "Chicken Burger", "Caesar Salad", "Veggie Wrap", "Grilled Cheese", "Fish & Chips", "Mushroom Risotto", "Berry Muffin"])
+foodPrice = Col("Price", ["$11.99", "$4.50", "$9.99", "$13.50", "$10.99", "$9.50", "$8.50", "$14.99", "$12.50", "$4.25"])
+foodVeg = Col("Dietary", ["✓", "✓", "✓", "✗", "✓", "✓", "✓", "✗", "✓", "✓"])
+hoursSection = Card([hoursHeading, hoursText], "sunk")
+hoursHeading = Heading("Opening Hours", "h3")
+hoursText = TextContent("**Monday - Friday:** 7:00 AM - 8:00 PM\n**Saturday:** 8:00 AM - 9:00 PM\n**Sunday:** 8:00 AM - 6:00 PM")
+```
+
+Wait, I need to double-check the TabItem signature:
+TabItem(value: string, trigger: string, content: (component)[])
+
+So TabItem("drinks", "Drinks", [drinksHeading, drinksTable]) - that's correct.
+
+And Tabs(items: (TabItem)[]) - so Tabs([drinksTab, foodTab]) is correct.
+
+Let me also verify the Table signature:
+Table(columns: (Col)[])
+Col(label: string, data: (string | number)[], type?: "string" | "number" | "action")
+
+So Table([drinkName, drinkPrice, drinkVeg]) is correct.
+
+Let me also verify SwitchGroup:
+SwitchGroup(name: string, items: (SwitchItem)[], variant?: "clear" | "card" | "sunk", value?: (string | number)[])
+
+Actually, a SwitchGroup might be better for the vegetarian filter since it's a toggle. Let me use that instead.
+
+Actually, looking at it more carefully, a Button that sends a message back might be more appropriate since this is a menu display, not a form. Let me keep the Button approach.
+
+Let me also make sure I'm not missing any required items:
+1. ✅ Drinks with prices - drinksTable
+2. ✅ Food with prices - foodTable
+3. ✅ Today's special called out - special Callout
+4. ✅ A way to show vegetarian items only - veggieBtn
+5. ✅ Opening hours - hoursSection
+
+Let me refine the layout and make sure everything is properly connected.
+
+One thing - the TabItem content can include: TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps
+
+So Heading is NOT in the TabItem content list. Let me use TextContent instead or just put the table directly.
+
+Actually wait, let me re-read... TabItem content includes: TextContent, MarkDownRenderer, CardHeader, Callout, TextCallout, CodeBlock, Image, ImageBlock, ImageGallery, Separator, charts, Table, TagBlock, Form, Buttons, Steps
+
+No Heading. So I should use CardHeader or TextContent for the heading within tabs, or just use the table directly.
+
+Let me use CardHeader within each tab instead of Heading.
+
+Actually, let me just put the table directly in the tab content without a heading, since the tab label already says "Drinks" and "Food".
+
+Let me also add a Badge or Tag for vegetarian items in the table. But Col only accepts string or number data, so I'll use checkmarks.
+
+Let me finalize:
+
+```
+root = Card([header, special, veggieFilter, tabs, hoursSection], "card", "column", "m")
+header = CardHeader("The Daily Grind Café", "Fresh brewed happiness since 2019")
+special = Callout("info", "Today's Special", "🥑 Avocado Toast with poached eggs & microgreens — $12.99")
+veggieFilter = Buttons([veggieBtn])
+veggieBtn = Button("🌱 Show Vegetarian Only", null, "secondary")
+tabs = Tabs([drinksTab, foodTab])
+drinksTab = TabItem("drinks", "Drinks", [drinksTable])
+drinksTable = Table([drinkName, drinkPrice, drinkVeg])
+drinkName = Col("Item", ["Espresso", "Cappuccino", "Latte", "Matcha Latte", "Chai Tea", "Fresh Orange Juice", "Smoothie Bowl", "Iced Americano", "Hot Chocolate", "Mango Lassi"])
+drinkPrice = Col("Price", ["$3.50", "$4.50", "$4.75", "$5.25", "$4.25", "$5.50", "$7.99", "$4.00", "$4.50", "$5.75"])
+drinkVeg = Col("Vegetarian", ["✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓"])
+foodTab = TabItem("food", "Food", [foodTable])
+foodTable = Table([foodName, foodPrice, foodVeg])
+foodName = Col("Item", ["Avocado Toast", "Butter Croissant", "Banana Pancakes", "Chicken Burger", "Caesar Salad", "Veggie Wrap", "Grilled Cheese", "Fish & Chips", "Mushroom Risotto", "Blueberry Muffin"])
+foodPrice = Col("Price", ["$11.99", "$4.50", "$9.99", "$13.50", "$10.99", "$9.50", "$8.50", "$14.99", "$12.50", "$4.25"])
+foodVeg = Col("Vegetarian", ["✓", "✓", "✓", "✗", "✓", "✓", "✓", "✗", "✓", "✓"])
+hoursSection = Card([hoursHeading, hoursText], "sunk")
+hoursHeading = Heading("Opening Hours", "h3")
+hoursText = TextContent("**Monday - Friday:** 7:00 AM - 8:00 PM\n\n**Saturday:** 8:00 AM - 9:00 PM\n\n**Sunday:** 8:00 AM - 6:00 PM")
+```
+
+Wait, Heading is not in Card's children list either. Let me check...
+
+Card(children: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps | Tabs | Carousel | SectionBlock | DialogBlock | DrawerBlock | AlertDialogBlock | Heading | Blockquote | InlineCode | Alert | Badge | Avatar | Progress | PaginationBlock | CalendarBlock | ListBlock | FollowUpBlock)[])
+
+OK, Heading IS in Card's children list. So I can use Heading inside Card.
+
+But Heading is NOT in TabItem's content list. So I need to use something else for the tab content heading.
+
+Let me just remove the heading from inside tabs and rely on the tab labels.
+
+Let me also check if HoursSection Card can contain Heading - yes, Heading is in Card's children.
+
+Let me finalize the code now. I think it's good. Let me write it out cleanly.
+root = Card([header, special, veggieFilter, tabs, hoursSection], "card", "column", "m")
+header = CardHeader("The Daily Grind Café", "Fresh brewed happiness since 2019")
+special = Callout("info", "Today's Special", "🥑 Avocado Toast with poached eggs & microgreens — $12.99")
+veggieFilter = Buttons([veggieBtn])
+veggieBtn = Button("🌱 Show Vegetarian Only", null, "secondary")
+tabs = Tabs([drinksTab, foodTab])
+drinksTab = TabItem("drinks", "Drinks", [drinksTable])
+drinksTable = Table([drinkName, drinkPrice, drinkVeg])
+drinkName = Col("Item", ["Espresso", "Cappuccino", "Latte", "Matcha Latte", "Chai Tea", "Fresh Orange Juice", "Smoothie Bowl", "Iced Americano", "Hot Chocolate", "Mango Lassi"])
+drinkPrice = Col("Price", ["$3.50", "$4.50", "$4.75", "$5.25", "$4.25", "$5.50", "$7.99", "$4.00", "$4.50", "$5.75"])
+drinkVeg = Col("Vegetarian", ["✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓", "✓"])
+foodTab = TabItem("food", "Food", [foodTable])
+foodTable = Table([foodName, foodPrice, foodVeg])
+foodName = Col("Item", ["Avocado Toast", "Butter Croissant", "Banana Pancakes", "Chicken Burger", "Caesar Salad", "Veggie Wrap", "Grilled Cheese", "Fish & Chips", "Mushroom Risotto", "Blueberry Muffin"])
+foodPrice = Col("Price", ["$11.99", "$4.50", "$9.99", "$13.50", "$10.99", "$9.50", "$8.50", "$14.99", "$12.50", "$4.25"])
+foodVeg = Col("Vegetarian", ["✓", "✓", "✓", "✗", "✓", "✓", "✓", "✗", "✓", "✓"])
+hoursSection = Card([hoursHeading, hoursText], "sunk")
+hoursHeading = Heading("Opening Hours", "h3")
+hoursText = TextContent("**Monday – Friday:** 7:00 AM – 8:00 PM\n\n**Saturday:** 8:00 AM – 9:00 PM\n\n**Sunday:** 8:00 AM – 6:00 PM")

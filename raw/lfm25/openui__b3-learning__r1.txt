@@ -1,0 +1,148 @@
+```openui-lang
+root = Card(
+  children: [
+    // Overall header
+    CardHeader(
+      title="Training Platform Analytics",
+      subtitle="Weekly Insights & Performance Metrics"
+    ),
+    
+    // 1. Active learners this week
+    TextContent(
+      text="Active Learners This Week: 142",
+      size="large"
+    ),
+    
+    // 2. Course completion rate
+    TextContent(
+      text="Course Completion Rate: 78%",
+      size="large"
+    ),
+    
+    // 3. Average quiz score
+    TextContent(
+      text="Average Quiz Score: 87.5",
+      size="large"
+    ),
+    
+    // 4. Courses ranked by enrollment
+    Card(
+      children: [
+        CardHeader(
+          title="Courses Ranked by Enrollment",
+          subtitle="Top Performing Courses"
+        ),
+        Table(
+          columns: [
+            {label: "Course Name", type: "string"},
+            {label: "Enrollments", type: "number"},
+            {label: "Progress %", type: "number"}
+          ],
+          data: [
+            {"course": "Advanced Python Programming", "enrollments": 150, "progress": "95%"},
+            {"course": "Data Science Fundamentals", "enrollments": 132, "progress": "88%"},
+            {"course": "Web Development Bootcamp", "enrollments": 118, "progress": "92%"},
+            {"course": "Machine Learning Basics", "enrollments": 95, "progress": "76%"},
+            {"course": "UI/UX Design Masterclass", "enrollments": 89, "progress": "81%"}
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Learners at risk of dropping out
+    Card(
+      children: [
+        CardHeader(
+          title="At-Risk Learners",
+          subtitle="Learners Showing High Drop-off Risk"
+        ),
+        TextContent(
+          text="12 learners identified as at-risk this week",
+          size="large"
+        ),
+        ListItem(
+          value="High drop-off risk",
+          subtitle="Early warning alerts",
+          actionLabel="View Details"
+        )
+      ]
+    ),
+    
+    // 6. Way to narrow to one cohort
+    Card(
+      children: [
+        CardHeader(
+          title="Filter by Cohort",
+          subtitle="Narrow Analytics to Specific Group"
+        ),
+        Select(
+          label="Cohort",
+          items: [
+            {value: "all", label: "All Cohorts"},
+            {value: "spring2024", label: "Spring 2024"},
+            {value: "summer2024", label: "Summer 2024"},
+            {value: "fall2024", label: "Fall 2024"}
+          ],
+          selected: "all",
+          value: "all"
+        ),
+        TextContent(
+          text="Selected: Spring 2024 Cohort",
+          size="small"
+        )
+      ]
+    ),
+    
+    // 7. Engagement across the past eight weeks
+    Card(
+      children: [
+        CardHeader(
+          title="Engagement - Last 8 Weeks",
+          subtitle="Participation Trends"
+        ),
+        HorizontalBarChart(
+          labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+          series: [
+            {
+              category: "Weekly Active Users",
+              values: [45, 52, 48, 55, 60, 58, 62, 65]
+            },
+            {
+              category: "Total Completions",
+              values: [120, 135, 140, 148, 155, 160, 165, 170]
+            },
+            {
+              category: "Avg Session Duration",
+              values: [32, 35, 38, 40, 42, 44, 46, 48]
+            }
+          ],
+          xLabel: "Time Period",
+          yLabel: "Engagement Metric",
+          variant: "grouped",
+          gap: "s"
+        )
+      ]
+    ),
+    
+    // 8. Way to message a cohort
+    Card(
+      children: [
+        CardHeader(
+          title="Message a Cohort",
+          subtitle="Direct communication for targeted support"
+        ),
+        TextContent(
+          text="Click below to send a message to the selected cohort",
+          size="small"
+        ),
+        Button(
+          label="Send Message",
+          action: null,
+          variant: "primary",
+          size: "medium"
+        )
+      ]
+    )
+  ]
+)
+```

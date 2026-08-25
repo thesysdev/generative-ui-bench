@@ -1,0 +1,99 @@
+The user wants a learner's course home screen with:
+1. Course title and instructor
+2. Overall progress percentage
+3. Modules with completion status for each
+4. The next lesson called out
+5. The average learner rating
+6. A way to continue learning
+
+Let me plan the components:
+- CardHeader for course title and instructor
+- Progress for overall progress percentage
+- ListBlock or SectionBlock for modules with completion status
+- Callout or TextCallout for the next lesson
+- Badge or TextContent for average learner rating
+- Buttons for continue learning
+
+Let me design this out:
+
+root = Card([header, progressSection, nextLesson, modulesSection, ratingSection, continueButton])
+
+header = CardHeader("Course Title", "Instructor Name")
+progressSection = Card([progressHeading, progressBar], "sunk")
+progressHeading = Heading("Your Progress", "h3")
+progressBar = Progress(65, "65% complete")
+
+nextLesson = TextCallout("info", "Next Lesson", "Introduction to Neural Networks - 25 min")
+
+modulesSection = Card([modulesHeading, moduleList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+moduleList = ListBlock([...])
+
+For modules, I need ListItem with title, subtitle showing completion status.
+
+ratingSection = Card([ratingHeading, ratingValue], "sunk")
+ratingHeading = Heading("Learner Rating", "h3")
+ratingValue = Badge("4.8 / 5.0", "default") or TextContent
+
+continueButton = Buttons([continueBtn])
+continueBtn = Button("Continue Learning", null, "primary")
+
+Let me refine this. I need to make sure every variable is referenced.
+
+Let me build it out properly:
+
+root = Card([header, progressSection, nextLesson, modulesSection, ratingSection, continueActions], "card", "column", "m")
+
+header = CardHeader("Machine Learning Fundamentals", "Dr. Sarah Chen")
+
+progressSection = Card([progressHeading, progressBar], "sunk")
+progressHeading = Heading("Your Progress", "h3")
+progressBar = Progress(65, "65% complete")
+
+nextLesson = Callout("info", "Up Next", "Lesson 4: Introduction to Neural Networks — 25 minutes")
+
+modulesSection = Card([modulesHeading, moduleList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+moduleList = ListBlock([mod1, mod2, mod3, mod4, mod5, mod6])
+
+mod1 = ListItem("Module 1: Python Basics", "✓ Completed", null, null)
+mod2 = ListItem("Module 2: Data Structures", "✓ Completed", null, null)
+mod3 = ListItem("Module 3: Statistics & Probability", "✓ Completed", null, null)
+mod4 = ListItem("Module 4: Neural Networks", "In Progress — 3 of 5 lessons", null, null)
+mod5 = ListItem("Module 5: Deep Learning", "Locked", null, null)
+mod6 = ListItem("Module 6: Final Project", "Locked", null, null)
+
+ratingSection = Card([ratingHeading, ratingBadge], "sunk")
+ratingHeading = Heading("Learner Rating", "h3")
+ratingBadge = Badge("4.8 ★ / 5.0", "default")
+
+continueActions = Buttons([continueBtn])
+continueBtn = Button("Continue Learning", null, "primary")
+
+Wait, I need to check - ListBlock takes variant "number" or "image". Let me use "number" for numbered modules.
+
+Actually, let me reconsider the structure. I want a clean, well-organized course home screen. Let me think about what looks best.
+
+Let me also make sure the next lesson callout is prominent - maybe a Callout with "info" variant.
+
+Let me finalize:
+root = Card([header, progressSection, nextLesson, modulesSection, ratingSection, continueActions], "card", "column", "m")
+header = CardHeader("Machine Learning Fundamentals", "Dr. Sarah Chen — Stanford University")
+progressSection = Card([progressHeading, progressBar], "sunk")
+progressHeading = Heading("Your Progress", "h3")
+progressBar = Progress(65, "65% complete")
+nextLesson = Callout("info", "Up Next", "Lesson 4: Introduction to Neural Networks — 25 minutes, 3 quizzes")
+modulesSection = Card([modulesHeading, moduleList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+moduleList = ListBlock([mod1, mod2, mod3, mod4, mod5, mod6], "number")
+mod1 = ListItem("Module 1: Python Basics", "✓ Completed — 5/5 lessons", null, null)
+mod2 = ListItem("Module 2: Data Structures", "✓ Completed — 5/5 lessons", null, null)
+mod3 = ListItem("Module 3: Statistics & Probability", "✓ Completed — 4/5 lessons", null, null)
+mod4 = ListItem("Module 4: Neural Networks", "In Progress — 3 of 5 lessons", null, null)
+mod5 = ListItem("Module 5: Deep Learning", "Locked — complete Module 4 to unlock", null, null)
+mod6 = ListItem("Module 6: Final Project", "Locked — complete Module 5 to unlock", null, null)
+ratingSection = Card([ratingHeading, ratingBadge], "sunk")
+ratingHeading = Heading("Learner Rating", "h3")
+ratingBadge = Badge("4.8 ★ / 5.0", "default")
+continueActions = Buttons([continueBtn])
+continueBtn = Button("Continue Learning", null, "primary")

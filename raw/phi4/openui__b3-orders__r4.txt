@@ -1,0 +1,64 @@
+```openui
+root = Card([
+    CardHeader("E-commerce Operations Dashboard", "Today's Overview"),
+    ordersSection,
+    revenueSection,
+    aovSection,
+    recentOrdersSection,
+    filterSection,
+    refundRateSection,
+    volumeTrendSection,
+    actionsSection
+])
+
+header = CardHeader("E-commerce Operations Dashboard", "Today's Overview")
+
+ordersSection = Card([ordersHeader, ordersCount])
+ordersHeader = Heading("Orders Placed Today", "h3")
+ordersCount = TextContent("Orders Today: 45")
+
+revenueSection = Card([revenueHeader, revenueToday])
+revenueHeader = Heading("Revenue Today", "h3")
+revenueToday = TextContent("Revenue Today: $12,345")
+
+aovSection = Card([aovHeader, avgOrderValue])
+aovHeader = Heading("Average Order Value", "h3")
+avgOrderValue = TextContent("Average Order Value: $273.33")
+
+recentOrdersSection = Card([recentOrdersHeader, recentOrdersTable])
+recentOrdersHeader = Heading("Recent Orders", "h3")
+recentOrdersTable = Table([orderIdCol, customerCol, totalCol, statusCol], "card")
+orderIdCol = Col("Order ID", ["1234", "1235", "1236"])
+customerCol = Col("Customer", ["Alice Johnson", "Bob Smith", "Charlie Brown"])
+totalCol = Col("Total", ["$150.00", "$200.00", "$100.00"])
+statusCol = Col("Status", ["Pending", "Shipped", "Delivered"])
+
+filterSection = Form("orderFilter", filterButtons, [
+    statusFilterField,
+    customerSearchField
+])
+statusFilterField = FormControl("Filter by Status", statusSelect, "Narrow by order status")
+statusSelect = Select("status", [allStatus, pendingStatus, shippedStatus, deliveredStatus], "Choose status")
+allStatus = SelectItem("All", "All Orders")
+pendingStatus = SelectItem("Pending", "Pending")
+shippedStatus = SelectItem("Shipped", "Shipped")
+deliveredStatus = SelectItem("Delivered", "Delivered")
+customerSearchField = FormControl("Search by Customer", customerSearchInput, "Enter customer name")
+customerSearchInput = Input("customer_name", null, "text")
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply Filter", null, "primary")
+
+refundRateSection = Card([refundRateHeader, refundRateValue])
+refundRateHeader = Heading("Refund Rate This Month", "h3")
+refundRateValue = TextContent("Refund Rate: 2.5%")
+
+volumeTrendSection = Card([volumeTrendHeader, volumeTrendChart])
+volumeTrendHeader = Heading("Order Volume Trend", "h3")
+volumeTrendChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "linear", "Week", "Orders")
+volumeSeries = Series("Orders", [150, 175, 200, 225])
+
+actionsSection = Card([actionsHeader, orderActions])
+actionsHeader = Heading("Order Actions", "h3")
+orderActions = Buttons([markFulfilledBtn])
+markFulfilledBtn = Button("Mark Order Fulfilled", null, "secondary")
+```

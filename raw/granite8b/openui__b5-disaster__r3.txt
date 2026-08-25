@@ -1,0 +1,144 @@
+```openui-lang
+root = Card([
+    incidentZoneCard,
+    overallSeverityCard,
+    resourceAvailabilityCard,
+    sheltersCard,
+    evacuationRoutesCard,
+    weatherForecastCard,
+    rescueStatsCard,
+    volunteersCard,
+    donationsCard,
+    aidRequestsCard,
+    communicationChannelsCard,
+    closedRoadsCard,
+    hospitalBedsCard,
+    openTasksCard,
+    resourceRequestForm,
+    broadcastUpdateForm,
+    zoneFocusButton,
+    situationReportForm
+], "card", "column", "m")
+
+incidentZoneCard = Card([
+    CardHeader("Active Incidents by Zone"),
+    Table([
+        Col("Zone", ["North", "South", "East", "West"]),
+        Col("Severity", ["Critical", "High", "Moderate", "Low"])
+    ])
+], "sunk")
+
+overallSeverityCard = Card([
+    CardHeader("Overall Severity Summary"),
+    TextContent("The current overall severity level is **Critical** due to multiple overlapping incidents.", "large")
+], "clear")
+
+resourceAvailabilityCard = Card([
+    CardHeader("Available Resources"),
+    TextContent([
+        "**Vehicles:** 12 on standby\n**Personnel:** 450 responders available\n**Supplies:** 10,000 units of emergency kits on hand"
+    ], "large")
+], "sunk")
+
+sheltersCard = Card([
+    CardHeader("Shelters"),
+    Table([
+        Col("Shelter", ["Central", "North", "South", "East"]),
+        Col("Capacity", ["200", "150", "180", "220"]),
+        Col("Occupancy", ["120", "90", "110", "150"])
+    ])
+], "card")
+
+evacuationRoutesCard = Card([
+    CardHeader("Evacuation Routes Status"),
+    Table([
+        Col("Route", ["A1", "B2", "C3", "D4"]),
+        Col("Status", ["Open", "Closed", "Open", "Open"])
+    ])
+], "sunk")
+
+weatherForecastCard = Card([
+    CardHeader("Weather Forecast (Next 48 hours)"),
+    MarkDownRenderer("**12h:** Light rain, 15°C\n**24h:** Overcast, 18°C\n**36h:** Clear, 20°C\n**48h:** Sunny, 22°C", "card")
+], "clear")
+
+rescueStatsCard = Card([
+    CardHeader("Rescue Statistics"),
+    TextContent("Rescued: 1,250 | Casualties: 35", "large")
+], "sunk")
+
+volunteersCard = Card([
+    CardHeader("Volunteers on Duty"),
+    Table([
+        Col("Volunteer", ["Alice", "Bob", "Charlie"]),
+        Col("Assignment", ["Zone North", "Zone South", "Logistics Coordination"])
+    ])
+], "card")
+
+donationsCard = Card([
+    CardHeader("Donations Received"),
+    TextContent("Total donations: $45,000", "large")
+], "clear")
+
+aidRequestsCard = Card([
+    CardHeader("Aid Requests Awaiting Action"),
+    Table([
+        Col("Request ID", ["REQ-001", "REQ-002", "REQ-003"]),
+        Col("Type", ["Medical Supplies", "Food", "Transport"])
+    ])
+], "sunk")
+
+communicationChannelsCard = Card([
+    CardHeader("Communication Channels"),
+    Table([
+        Col("Channel", ["Radio", "Satellite", "SMS", "Email"]),
+        Col("Status", ["Up", "Down", "Up", "Up"])
+    ])
+], "card")
+
+closedRoadsCard = Card([
+    CardHeader("Roads Closed"),
+    TextContent("Roads: Main St, Oak Ave, River Rd", "large")
+], "clear")
+
+hospitalBedsCard = Card([
+    CardHeader("Nearby Hospitals Free Beds"),
+    Table([
+        Col("Hospital", ["St. Mary’s", "East General", "West Health"]),
+        Col("Free Beds", ["30", "45", "20"])
+    ])
+], "sunk")
+
+openTasksCard = Card([
+    CardHeader("Open Tasks"),
+    Table([
+        Col("Task", ["Secure Zone East", "Deploy Medical Team to South", "Update Weather Model"]),
+        Col("Assignee", ["Commander Lee", "Dr. Patel", "Meteorologist Gomez"])
+    ])
+], "card")
+
+resourceRequestForm = Form("resource-request", resourceButtons, [
+    FormControl("Resource Type", inputResourceType, "What type of resource is needed?"),
+    FormControl("Quantity", inputQuantity, "How many units?")
+])
+inputResourceType = Input("resource_type")
+inputQuantity = Input("quantity")
+resourceButtons = Buttons([submitResourceBtn], "column")
+submitResourceBtn = Button("Request Resources", "resource", "primary")
+
+broadcastUpdateForm = Form("broadcast-update", broadcastButtons, [
+    FormControl("Message", inputBroadcastMsg, "Enter the update message.")
+])
+inputBroadcastMsg = TextArea("broadcast_message", rows=4)
+broadcastButtons = Buttons([submitBroadcastBtn], "column")
+submitBroadcastBtn = Button("Broadcast Update", "broadcast", "primary")
+
+zoneFocusButton = Button("Focus on Zone", "focus_zone", "secondary")
+
+situationReportForm = Form("situation-report", reportButtons, [
+    FormControl("Report", inputReport, "Detailed situation report.")
+])
+inputReport = TextArea("situation_report", rows=6)
+reportButtons = Buttons([submitReportBtn], "column")
+submitReportBtn = Button("File Report", "report", "primary")
+```

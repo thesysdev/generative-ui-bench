@@ -1,0 +1,42 @@
+root = Card([header, healthRow, regionFilter, chartsRow, incidentsTable, endpointsTable, alertForm, actions], "card", "column", "l")
+
+header = CardHeader("On-Call Service Health", "Real-time operational view")
+
+uptimeQuarter = Callout("success", "Uptime this quarter", "99.97% — 2h 14m downtime")
+
+healthRow = Card([cpuChart, memChart, errorRate], "clear", "row", "m")
+cpuChart = LineChart(["00:00","04:00","08:00","12:00","16:00","20:00","24:00"], [cpuSeries], "natural", "Hour", "CPU %")
+cpuSeries = Series("CPU", [42, 55, 68, 74, 61, 49, 38])
+memChart = LineChart(["00:00","04:00","08:00","12:00","16:00","20:00","24:00"], [memSeries], "natural", "Hour", "Memory %")
+memSeries = Series("Memory", [58, 62, 71, 78, 69, 64, 60])
+errorRate = Callout("error", "Error rate now", "4.2% — 847 errors/min")
+
+regionFilter = Form("region-filter", regionButtons, [regionField])
+regionField = FormControl("Region", regionSelect)
+regionSelect = Select("region", [usEast, usWest, euWest, apSouth], "Select region")
+usEast = SelectItem("us-east-1", "US East")
+usWest = SelectItem("us-west-2", "US West")
+euWest = SelectItem("eu-west-1", "EU West")
+apSouth = SelectItem("ap-south-1", "AP South")
+regionButtons = Buttons([applyBtn])
+applyBtn = Button("Apply filter")
+
+chartsRow = Card([cpuChart, memChart], "clear", "row", "m")
+
+incidentsTable = Table([incCol, sevCol, statusCol])
+incCol = Col("Incident", ["DB replication lag", "Cache eviction storm", "Auth service timeout", "Payment webhook delay"])
+sevCol = Col("Severity", ["Critical", "High", "Medium", "Low"])
+statusCol = Col("Status", ["Open", "Open", "Open", "Open"])
+
+endpointsTable = Table([epCol, latCol])
+epCol = Col("Endpoint", ["/api/v1/search", "/api/v1/reports", "/api/v1/auth", "/api/v2/export", "/api/v1/checkout"])
+latCol = Col("Latency (ms)", [1240, 980, 890, 760, 720])
+
+alertForm = Form("threshold-set", alertButtons, [thresholdField])
+thresholdField = FormControl("Alert threshold", thresholdInput, "Set CPU % alert threshold")
+thresholdInput = Input("threshold", "75")
+alertButtons = Buttons([setBtn])
+setBtn = Button("Set threshold")
+
+actions = Card([ackBtn], "clear", "row", "m")
+ackBtn = Button("Acknowledge incident", null, "primary")

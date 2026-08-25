@@ -1,0 +1,278 @@
+root = Card([
+  CardHeader("Factory Floor Console", "Supervisor Dashboard", "v2.0"),
+  
+  // 1. Overall Equipment Effectiveness
+  OEECard = Card([
+    TextCallout("OEE", "Overall Equipment Effectiveness"),
+    CardHeader("OEE", "Overall Equipment Effectiveness", "key-performance"), 
+    Divider("OEE Summary"),
+    PieceOfPaper("OEE Value", "$94.2%", "current", "card"),
+    Spacer(), // Need a spacer to avoid issues
+    TextCallout("Target", "Target OEE: 92%"),
+    TextCallout("Actual", "Actual: 94.2%"),
+    TextCallout("Change", "+0.8ppt", "vs target", "success"),
+  ]),
+  
+  // 2. Units produced vs today's target
+  UnitProdCard = Card([
+    Heading("Units Produced vs Target", "summary", "h4"),
+    Table("Production Metrics", {
+      columns: [
+        { label: "Metric", data: "Total Units", type: "string" },
+        { label: "Today", data: "18,420", type: "number" },
+        { label: "Target", data: "20,000", type: "number" },
+        { label: "YTD", data: "142,300", type: "number" }
+      ],
+      data: [
+        { label: "Total Units Produced", data: "18,420", type: "string" },
+        { label: "Daily Target", data: "20,000", type: "number" },
+        { label: "Year-to-Date Total", data: "142,300", type: "number" }
+      ]
+    }),
+    TextCallout("Status", "On Track", "brief", "success"),
+  ]),
+  
+  // 3. Each production line with rate and status
+  ProductionLinesCard = Card([
+    CardHeader("Production Lines", "Line Performance", "overview"),
+    HorizontalBarChart(
+      labels: ["Line A", "Line B", "Line C", "Line D"],
+      series: [
+        { category: "Line A", values: [95, 88, 92, 90] },
+        { category: "Line B", values: [89, 84, 87, 86] },
+        { category: "Line C", values: [91, 93, 89, 91] },
+        { category: "Line D", values: [76, 79, 78, 80] }
+      ],
+      xLabel: "Line",
+      yLabel: "Output Rate (%)",
+      variant: "grouped"
+    ),
+    CardHeader("Line Status", "Line Status", "table"),
+    Table("Line Details", {
+      columns: [
+        { label: "Line", data: "Line A", type: "string" },
+        { label: "Current Rate", data: "95%", type: "number" },
+        { label: "Status", data: "Operational", type: "string" },
+        { label: "Capacity", data: "100%", type: "number" }
+      ],
+      data: [
+        { line: "Line A", rate: 95, status: "Operational", capacity: 100 },
+        { line: "Line B", rate: 88, status: "Operational", capacity: 100 },
+        { line: "Line C", rate: 91, status: "Operational", capacity: 100 },
+        { line: "Line D", rate: 76, status: "Maintenance", capacity: 100 }
+      ]
+    })
+  ]),
+  
+  // 4. Defect rate over past month
+  DefectRateCard = Card([
+    Heading("Defect Rate", "quality", "h3"),
+    Divider(),
+    CardHeader("Past Month", "Defect Analysis", "statistical"),
+    Table("Defect Metrics", {
+      columns: [
+        { label: "Metric", data: "Defect Rate", type: "string" },
+        { label: "Value", data: "3.2%", type: "number" },
+        { label: "Trend", data: "↑ 12% vs last month", type: "string" }
+      ],
+      data: [
+        { metric: "Defect Rate", value: "3.2%", type: "string" },
+        { metric: "Overall Defects", value: "1,240", type: "number" },
+        { metric: "Acceptable Threshold", value: "5%", type: "number" }
+      ]
+    }),
+    TextCallout("Impact", "Below acceptable threshold", "warn", "text"},
+  ]),
+  
+  // 5. Downtime split by cause
+  DowntimeCard = Card([
+    Heading("Downtime", "operations", "h3"),
+    Divider(),
+    Table("Downtime by Cause", {
+      columns: [
+        { label: "Cause", data: "Machine Breakdown", type: "string" },
+        { label: "Duration", data: "4 hours", type: "string" },
+        { label: "Cost", data: "$12,400", type: "number" }
+      ],
+      data: [
+        { cause: "Machine Breakdown", duration: "4 hours", cost: 12400 },
+        { cause: "Material Delay", duration: "2 hours", cost: 4800 },
+        { cause: "Calibration", duration: "1 hour", cost: 2300 }
+      ]
+    }),
+    TextCallout("Total Hours", "6.4 hrs", "total", "success"),
+  ]),
+  
+  // 6. Machines due for maintenance
+  MaintenanceCard = Card([
+    Heading("Machines Due for Maintenance", "fleet", "list"),
+    ListBlock(
+      items: [
+        { id: "M-01", name: "Press 1", due: "2026-03-28", status: "High Priority" },
+        { id: "M-02", name: "Extruder A", due: "2026-03-27", status: "Medium Priority" },
+        { id: "M-03", name: "Blender 2", due: "2026-03-29", status: "Low Priority" }
+      ]
+    )
+  ]),
+  
+  // 7. Stock of steel, resin and packaging
+  InventoryCard = Card([
+    Heading("Inventory Levels", "supply", "table"),
+    Table("Stock Status", {
+      columns: [
+        { label: "Material", data: "Steel", type: "string" },
+        { label: "Resin", data: "42 kg", type: "number" },
+        { label: "Packaging", data: "1,200 units", type: "number" }
+      ],
+      data: [
+        { material: "Steel", value: "45 kg", type: "string" },
+        { material: "Resin", value: "42 kg", type: "number" },
+        { material: "Packaging", value: "1,200 units", type: "number" }
+      ]
+    }),
+    TextCallout("Action Required", "Order more resin", "urgent", "text"),
+  ]),
+  
+  // 8. Supplier deliveries due this week
+  DeliveryCard = Card([
+    Heading("Supplier Deliveries", "procurement", "list"),
+    ListBlock(
+      items: [
+        { id: "S-101", vendor: "MetalWorks", product: "Steel Coils", due: "2026-03-25", qty: "500 kg" },
+        { id: "S-102", vendor: "PolyTech", product: "Resin B", due: "2026-03-26", qty: "200 L" },
+        { id: "S-103", vendor: "PackCo", product: "Boxes", due: "2026-03-24", qty: "850 pcs" }
+      ]
+    )
+  ]),
+  
+  // 9. Each shift's output compared
+  ShiftCard = Card([
+    Heading("Shift Outputs", "production", "comparison"),
+    Table("Shift Comparison", {
+      columns: [
+        { label: "Shift", data: "Night", type: "string" },
+        { label: "Units", data: "2,450", type: "number" },
+        { label: "Target", data: "2,600", type: "number" },
+        { label: "Diff", data: "-150", type: "number" }
+      ],
+      data: [
+        { shift: "Night", units: 2450, target: 2600, diff: -150 },
+        { shift: "Day", units: 2680, target: 2700, diff: +40 },
+        { shift: "Morning", units: 2150, target: 2200, diff: -50 }
+      ]
+    }),
+    TextCallout("Peak Hour", "22:00-06:00", "peak", "success")
+  ]),
+  
+  // 10. Safety incidents this year and days since last
+  SafetyCard = Card([
+    Heading("Safety Incidents", "health", "summary"),
+    Divider(),
+    Table("Incident Log", {
+      columns: [
+        { label: "Date", data: "2026-02-15", type: "string" },
+        { label: "Location", data: "Conveyor 3", type: "string" },
+        { label: "Type", data: "Slip/Trip", type: "string" },
+        { label: "Severity", data: "Minor", type: "string" }
+      ],
+      data: [
+        { date: "2026-02-15", location: "Conveyor 3", type: "Slip/Trip", severity: "Minor" },
+        { date: "2026-01-08", location: "Press A", type: "Mechanical Failure", severity: "Minor" },
+        { date: "2026-01-22", location: "Quality Lab", type: "Chemical Exposure", severity: "Major" }
+      ]
+    }),
+    TextCallout("This Year", "5", "incidents", "warning"),
+    TextCallout("Since Last", "14 days", "since", "text")
+  ]),
+  
+  // 11. Batches on quality hold
+  QualityHoldCard = Card([
+    Heading("Quality Hold Batches", "quality", "list"),
+    ListBlock(
+      items: [
+        { id: "Q-001", batch: "B-4521", reason: "Surface defects", priority: "High" },
+        { id: "Q-002", batch: "B-4530", reason: "Color variation", priority: "Medium" },
+        { id: "Q-003", batch: "B-4545", reason: "Dimensional out of spec", priority: "High" }
+      ]
+    )
+  ]),
+  
+  // 12. Energy use today
+  EnergyCard = Card([
+    Heading("Energy Consumption", "utilities", "statistical"),
+    TextCallout("Today", "1,840 kWh", "usage", "primary"),
+    TextCallout("Peak", "2,100 kW", "at peak", "note"),
+    Spacer()
+  ]),
+  
+  // 13. Open work orders with priority
+  WorkOrdersCard = Card([
+    Heading("Open Work Orders", "maintenance", "table"),
+    Table("Work Orders", {
+      columns: [
+        { label: "ID", data: "WO-089", type: "string" },
+        { label: "Task", data: "Line calibration", type: "string" },
+        { label: "Priority", data: "High", type: "string" },
+        { label: "Due Date", data: "2026-03-27", type: "date" }
+      ],
+      data: [
+        { id: "WO-089", task: "Line calibration", priority: "High", due: "2026-03-27" },
+        { id: "WO-090", task: "Sensor replacement", priority: "Medium", due: "2026-03-28" },
+        { id: "WO-091", task: "Motor bearing inspection", priority: "Low", due: "2026-04-02" }
+      ]
+    })
+  ]),
+  
+  // 14. Schedule maintenance with machine and date
+  MaintenanceScheduleCard = Card([
+    Heading("Maintenance Scheduler", "planning", "form"),
+    Form(
+      name: "Maintenance Plan",
+      buttons: [
+        Buttons([
+          Button("Add New", "primary"),
+          Button("Save Selection", "secondary")
+        ])
+      ],
+      fields: [
+        FormControl("Machine ID", "machine_id", "Select machine"),
+        FormControl("Due Date", "due_date", "YYYY-MM-DD", "Select date"),
+        FormControl("Priority", "priority", "low|medium|high", "Set priority"),
+        FormControl("Description", "description", "Free text")
+      ]
+    )
+  ]),
+  
+  // 15. Focus on one line
+  FocusSelectorCard = Card([
+    Heading("Focus Mode", "triage", "context"),
+    Divider(),
+    ListBlock(
+      items: [
+        { id: "L-01", name: "Line A", selected: false, active: true },
+        { id: "L-02", name: "Line B", selected: false, active: false },
+        { id: "L-03", name: "Line C", selected: false, active: false },
+        { id: "L-04", name: "Line D", selected: false, active: false }
+      ]
+    )
+  ]),
+  
+  // 16. Live andon alerts
+  AndonCard = Card([
+    Heading("Live Andon Alerts", "notifications", "real-time"),
+    ListBlock(
+      items: [
+        { id: "A-001", message: "Machine M-01 stalled", priority: "Critical", color: "red" },
+        { id: "A-002", message: "Temperature exceed limit on Press B", priority: "Warning", color: "orange" },
+        { id: "A-003", message: "Safety gate opened at Station 3", priority: "Critical", color: "red" }
+      ]
+    )
+  ]),
+  
+  // 17. Export shift report
+  ExportReportCard = Card([
+    Heading("Export Shift Report", "export", "button"),
+    Button("Export PDF", "primary", "Download report"),
+    TextCallout("Format", "PDF", "download", "info")
+  ]),
+])

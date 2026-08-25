@@ -1,0 +1,39 @@
+root = Card([header, kpiRow, splitRow, largeTxRow, monthNav, actions], "card", "column", "l")
+
+header = CardHeader("Month-End Finance", "Startup overview — June 2025")
+
+kpiRow = Card([cashCard, burnCard, runwayCard], "clear", "row", "l", "stretch", "between")
+
+cashCard = Card([cashTitle, cashVal], "sunk")
+cashTitle = Heading("Cash on hand", "h3")
+cashVal = TextContent("$847,320", "large-heavy")
+
+burnCard = Card([burnTitle, burnVal], "sunk")
+burnTitle = Heading("Monthly burn", "h3")
+burnVal = TextContent("$142,500", "large-heavy")
+
+runwayCard = Card([runwayTitle, runwayVal], "sunk")
+runwayTitle = Heading("Months of runway", "h3")
+runwayVal = TextContent("5.9 months", "large-heavy")
+
+splitRow = Card([expenseHeading, expensePie], "clear")
+expenseHeading = Heading("Expenses by category", "h3")
+expensePie = PieChart(["Payroll", "Cloud / Infra", "Marketing", "Ops", "Legal"], [52000, 31000, 28000, 18500, 12000], "donut")
+
+largeTxRow = Card([txHeading, txTable], "clear")
+txHeading = Heading("Transactions above $10,000", "h3")
+txTable = Table([txDate, txDesc, txAmt])
+txDate = Col("Date", ["Jun 2", "Jun 5", "Jun 12", "Jun 18", "Jun 25"])
+txDesc = Col("Description", ["AWS Reserve", "Payroll — Jun", "Legal retainer", "Office lease", "Marketing agency"])
+txAmt = Col("Amount", ["$18,400", "$42,000", "$12,500", "$14,200", "$11,800"])
+
+monthNav = Card([monthLabel, monthTabs], "clear")
+monthLabel = TextContent("Select a month to compare", "small")
+monthTabs = Tabs([junTab, julTab, mayTab])
+junTab = TabItem("jun", "June 2025", [monthSummary])
+julTab = TabItem("jul", "July 2025", [monthSummary])
+mayTab = TabItem("may", "May 2025", [monthSummary])
+monthSummary = TextContent("Switch tabs to view cash, burn and runway for that period.", "small")
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download statement", null, "primary")

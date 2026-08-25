@@ -1,0 +1,337 @@
+Here is the async daily standup dashboard featuring team status updates, blocker callouts, completion tracking, and a form to submit your own update.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "standupHeader",
+          "missingUpdatesAlert",
+          "blockerAlert",
+          "teamTabs",
+          "submitCard"
+        ]
+      },
+      {
+        "id": "standupHeader",
+        "component": "CardHeader",
+        "title": "Daily Async Standup",
+        "subtitle": "Wednesday, October 24, 2024 • Core Product & Engineering"
+      },
+      {
+        "id": "missingUpdatesAlert",
+        "component": "Alert",
+        "title": "2 of 6 updates missing",
+        "description": "Waiting on updates from Elena Rostova and Marcus Chen for today's digest.",
+        "variant": "info"
+      },
+      {
+        "id": "blockerAlert",
+        "component": "Callout",
+        "variant": "error",
+        "title": "🚨 Active Blocker: David Kim",
+        "description": "Blocked on Auth0 staging tenant rate limits for the SSO rollout test suite. Needs DevOps/Infra assist."
+      },
+      {
+        "id": "teamTabs",
+        "component": "Tabs",
+        "items": [
+          "tabUpdates",
+          "tabTable"
+        ]
+      },
+      {
+        "id": "tabUpdates",
+        "component": "TabItem",
+        "trigger": "Member Cards",
+        "value": "cards",
+        "content": [
+          "updatesAccordion"
+        ]
+      },
+      {
+        "id": "tabTable",
+        "component": "TabItem",
+        "trigger": "Summary Table",
+        "value": "table",
+        "content": [
+          "standupTable"
+        ]
+      },
+      {
+        "id": "updatesAccordion",
+        "component": "Accordion",
+        "items": [
+          "accSarah",
+          "accDavid",
+          "accPriya",
+          "accLeo"
+        ]
+      },
+      {
+        "id": "accSarah",
+        "component": "AccordionItem",
+        "trigger": "Sarah Connor — Tech Lead (Status: On Track)",
+        "value": "sarah",
+        "content": [
+          "sarahContent"
+        ]
+      },
+      {
+        "id": "sarahContent",
+        "component": "MarkDownRenderer",
+        "textMarkdown": "**Yesterday:** Completed code review for billing migration v2.\n\n**Today:** Finalizing PR reviews and pairing on database sharding design.\n\n**Blockers:** None.",
+        "variant": "sunk"
+      },
+      {
+        "id": "accDavid",
+        "component": "AccordionItem",
+        "trigger": "David Kim — Backend Eng (Status: BLOCKED)",
+        "value": "david",
+        "content": [
+          "davidContent"
+        ]
+      },
+      {
+        "id": "davidContent",
+        "component": "MarkDownRenderer",
+        "textMarkdown": "**Yesterday:** Finished JWT verification middleware.\n\n**Today:** Integrating enterprise SSO into staging environment.\n\n**Blocker:** ⚠️ Hitting 429 rate limit on Auth0 test tenant. Need Infra to increase tier.",
+        "variant": "sunk"
+      },
+      {
+        "id": "accPriya",
+        "component": "AccordionItem",
+        "trigger": "Priya Patel — Product Designer (Status: On Track)",
+        "value": "priya",
+        "content": [
+          "priyaContent"
+        ]
+      },
+      {
+        "id": "priyaContent",
+        "component": "MarkDownRenderer",
+        "textMarkdown": "**Yesterday:** User interviews for analytics dashboard export feature.\n\n**Today:** Synthesizing survey insights and preparing Figma prototypes for Thursday demo.\n\n**Blockers:** None.",
+        "variant": "sunk"
+      },
+      {
+        "id": "accLeo",
+        "component": "AccordionItem",
+        "trigger": "Leo Vance — Frontend Eng (Status: On Track)",
+        "value": "leo",
+        "content": [
+          "leoContent"
+        ]
+      },
+      {
+        "id": "leoContent",
+        "component": "MarkDownRenderer",
+        "textMarkdown": "**Yesterday:** Shipped pagination and infinite scroll for audit log.\n\n**Today:** Polishing mobile responsive layouts for the customer portal.\n\n**Blockers:** None.",
+        "variant": "sunk"
+      },
+      {
+        "id": "standupTable",
+        "component": "Table",
+        "columns": [
+          "colMember",
+          "colRole",
+          "colStatus",
+          "colFocus"
+        ]
+      },
+      {
+        "id": "colMember",
+        "component": "Col",
+        "label": "Teammate",
+        "data": [
+          "Sarah Connor",
+          "David Kim",
+          "Priya Patel",
+          "Leo Vance",
+          "Elena Rostova",
+          "Marcus Chen"
+        ]
+      },
+      {
+        "id": "colRole",
+        "component": "Col",
+        "label": "Role",
+        "data": [
+          "Tech Lead",
+          "Backend Eng",
+          "Product Designer",
+          "Frontend Eng",
+          "Data Analyst",
+          "QA Lead"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Submitted",
+          "Blocked",
+          "Submitted",
+          "Submitted",
+          "Pending",
+          "Pending"
+        ]
+      },
+      {
+        "id": "colFocus",
+        "component": "Col",
+        "label": "Today's Focus",
+        "data": [
+          "DB sharding design & reviews",
+          "Enterprise SSO integration",
+          "Figma prototypes & UX feedback",
+          "Mobile responsive layouts",
+          "—",
+          "—"
+        ]
+      },
+      {
+        "id": "submitCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "postHeader",
+          "standupForm"
+        ]
+      },
+      {
+        "id": "postHeader",
+        "component": "CardHeader",
+        "title": "Post Your Update",
+        "subtitle": "Share your progress, plans for today, and flag any blockers"
+      },
+      {
+        "id": "standupForm",
+        "component": "Form",
+        "name": "dailyStandupForm",
+        "buttons": "formActions",
+        "fields": [
+          "statusSelectField",
+          "yesterdayField",
+          "todayField",
+          "blockersField"
+        ]
+      },
+      {
+        "id": "statusSelectField",
+        "component": "FormControl",
+        "label": "Your Status",
+        "input": "statusSelect"
+      },
+      {
+        "id": "statusSelect",
+        "component": "Select",
+        "name": "current_status",
+        "placeholder": "Select your status",
+        "items": [
+          "statusOnTrack",
+          "statusBlocked",
+          "statusOoo"
+        ]
+      },
+      {
+        "id": "statusOnTrack",
+        "component": "SelectItem",
+        "label": "🟢 On Track",
+        "value": "on_track"
+      },
+      {
+        "id": "statusBlocked",
+        "component": "SelectItem",
+        "label": "🔴 Blocked",
+        "value": "blocked"
+      },
+      {
+        "id": "statusOoo",
+        "component": "SelectItem",
+        "label": "🟡 Out of Office / Partial",
+        "value": "ooo"
+      },
+      {
+        "id": "yesterdayField",
+        "component": "FormControl",
+        "label": "What did you accomplish yesterday?",
+        "input": "yesterdayInput"
+      },
+      {
+        "id": "yesterdayInput",
+        "component": "TextArea",
+        "name": "yesterday",
+        "placeholder": "Key PRs merged, documents finalized, discussions concluded...",
+        "rows": 2
+      },
+      {
+        "id": "todayField",
+        "component": "FormControl",
+        "label": "What are you working on today?",
+        "input": "todayInput"
+      },
+      {
+        "id": "todayInput",
+        "component": "TextArea",
+        "name": "today",
+        "placeholder": "Primary tasks, pair programming sessions, design deliverables...",
+        "rows": 2
+      },
+      {
+        "id": "blockersField",
+        "component": "FormControl",
+        "label": "Any blockers or dependencies?",
+        "hint": "Leave blank if nothing is impeding your progress",
+        "input": "blockersInput"
+      },
+      {
+        "id": "blockersInput",
+        "component": "Input",
+        "name": "blockers",
+        "placeholder": "e.g., Waiting on API credentials from Team Infra",
+        "type": "text"
+      },
+      {
+        "id": "formActions",
+        "component": "Buttons",
+        "buttons": [
+          "btnSubmit",
+          "btnDraft"
+        ]
+      },
+      {
+        "id": "btnSubmit",
+        "component": "Button",
+        "label": "Publish Update",
+        "variant": "primary"
+      },
+      {
+        "id": "btnDraft",
+        "component": "Button",
+        "label": "Save Draft",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

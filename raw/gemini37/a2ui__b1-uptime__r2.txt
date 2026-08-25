@@ -1,0 +1,189 @@
+Here is the status page interface for the platform team, showing the monthly API uptime, system status, and recent incident resolution details.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "systemStatusBadge",
+          "uptimeSection",
+          "servicesTable",
+          "separator1",
+          "incidentHeader",
+          "recentIncidentAlert",
+          "incidentHistory",
+          "actions"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Platform System Status",
+        "subtitle": "Real-time health monitoring & incident reports"
+      },
+      {
+        "id": "systemStatusBadge",
+        "component": "Tag",
+        "text": "All Core Systems Operational",
+        "variant": "success",
+        "size": "md"
+      },
+      {
+        "id": "uptimeSection",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "uptimeHeader",
+          "uptimeProgressBar",
+          "uptimeTrend"
+        ]
+      },
+      {
+        "id": "uptimeHeader",
+        "component": "CardHeader",
+        "title": "99.94% API Uptime",
+        "subtitle": "Current uptime percentage across all public endpoints (Month-to-Date: October)"
+      },
+      {
+        "id": "uptimeProgressBar",
+        "component": "Progress",
+        "value": 99.94,
+        "label": "Monthly Target: 99.90% SLA Met"
+      },
+      {
+        "id": "uptimeTrend",
+        "component": "LineChart",
+        "labels": ["Oct 1-7", "Oct 8-14", "Oct 15-21", "Oct 22-28", "Oct 29-Present"],
+        "series": ["uptimeSeries"],
+        "variant": "natural",
+        "xLabel": "Timeline (Weeks)",
+        "yLabel": "Uptime (%)"
+      },
+      {
+        "id": "uptimeSeries",
+        "component": "Series",
+        "category": "API Uptime %",
+        "values": [99.98, 99.92, 99.85, 99.97, 99.99]
+      },
+      {
+        "id": "servicesTable",
+        "component": "Table",
+        "columns": [
+          "colService",
+          "colUptime",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colService",
+        "component": "Col",
+        "label": "Service",
+        "data": [
+          "REST API Gateway",
+          "Authentication Service (Auth0/OAuth)",
+          "Core Database Cluster",
+          "Webhook Dispatcher"
+        ]
+      },
+      {
+        "id": "colUptime",
+        "component": "Col",
+        "label": "30-Day Uptime",
+        "data": [
+          "99.94%",
+          "99.99%",
+          "100.00%",
+          "99.89%"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Operational",
+          "Operational",
+          "Operational",
+          "Operational"
+        ]
+      },
+      {
+        "id": "separator1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "incidentHeader",
+        "component": "Heading",
+        "text": "Recent Incidents",
+        "level": "h3"
+      },
+      {
+        "id": "recentIncidentAlert",
+        "component": "Alert",
+        "title": "Resolved: Elevated Latency on REST API Gateway",
+        "description": "Resolved on Oct 19, 2024 at 16:45 UTC (Duration: 28 mins). Root cause was identified as connection pooling exhaustion during automated traffic rebalancing. Mitigation deployed and traffic normalized.",
+        "variant": "info"
+      },
+      {
+        "id": "incidentHistory",
+        "component": "SectionBlock",
+        "isFoldable": true,
+        "sections": [
+          "secPostmortem"
+        ]
+      },
+      {
+        "id": "secPostmortem",
+        "component": "SectionItem",
+        "value": "oct19_details",
+        "trigger": "View Resolution Timeline & Mitigation Notes",
+        "content": [
+          "incidentTimelineText"
+        ]
+      },
+      {
+        "id": "incidentTimelineText",
+        "component": "TextContent",
+        "text": "• **16:17 UTC**: Automated alerts triggered for response times > 500ms.\n• **16:24 UTC**: Traffic temporarily shifted to secondary availability zone.\n• **16:38 UTC**: Database pool configuration adjusted and rolled out to edge nodes.\n• **16:45 UTC**: Error rates dropped to 0.00% and latency returned to normal (resolved)."
+      },
+      {
+        "id": "actions",
+        "component": "Buttons",
+        "buttons": [
+          "btnSubscribe",
+          "btnIncidentLog"
+        ]
+      },
+      {
+        "id": "btnSubscribe",
+        "component": "Button",
+        "label": "Subscribe to Updates",
+        "variant": "primary"
+      },
+      {
+        "id": "btnIncidentLog",
+        "component": "Button",
+        "label": "Incident History Archive",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

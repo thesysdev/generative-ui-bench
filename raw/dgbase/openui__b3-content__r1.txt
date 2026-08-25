@@ -1,0 +1,46 @@
+thought
+root = Card([header, filters, draftsSection, publishedSection, topArticle, analyticsSection, commentsSection, actionSection])
+header = CardHeader("Content Studio", "Editorial management and analytics")
+filters = Card([categoryFilter], "clear", "row", "m")
+categoryFilter = FormControl("Filter by Category", Select("category", [catAll, catTech, catPol, catLife, catBiz], "All Categories"), "")
+catAll = SelectItem("all", "All Categories")
+catTech = SelectItem("tech", "Technology")
+catPol = SelectItem("pol", "Politics")
+catLife = SelectItem("life", "Lifestyle")
+catBiz = SelectItem("biz", "Business")
+
+draftsSection = SectionBlock([SectionItem("drafts", "Drafts", [draftsTable])])
+draftsTable = Table([draftTitle, draftStatus, draftDate])
+draftTitle = Col("Title", ["The Future of AI", "Remote Work Trends", "Market Analysis Q", "Sustainable Living"])
+draftStatus = Col("Status", ["In Progress", "Review", "Draft", "Draft"])
+draftDate = Col("Last Edited", ["2h ago", "5h ago", "Yesterday", "3d ago"])
+
+publishedSection = SectionBlock([SectionItem("published", "Published This Week", [publishedList])])
+publishedList = ListBlock([pub1, pub2, pub3], "image")
+pub1 = ListItem("Climate Change Deep Dive", "Global warming report", ["https://picsum.photos/seed/1/100/100"], "View")
+pub2 = ListItem("Tech Startup Funding 2024", "Investment landscape", ["https://picsum.photos/seed/2/100/100"], "View")
+pub3 = ListItem("The Art of Coffee", "Culinary guide", ["https://picsum.photos/seed/3/100/100"], "View")
+
+topArticle = Card([topHeading, topStats], "sunk", "row", "m")
+topHeading = Heading("Top Piece (Month)", "h3")
+topImg = Image("https://picsum.photos/seed/top/400/200", "Top Article")
+topStats = Card([TextContent("1,240,500 views", "large-heavy"), Badge("Trending", null, null, "success")], "clear")
+# Redefining topArticle to include image
+topArticle = Card([topHeading, topImg, topStats], "sunk", "column", "m")
+
+analyticsSection = SectionBlock([SectionItem("analytics", "Readership (30 Days)", [readChart])])
+readChart = LineChart(["W1", "W2", "W3", "W4"], [readSeries], "natural", "Week", "Visitors")
+readSeries = Series("Visitors", [4500, 5200, 4800, 7100])
+
+commentsSection = SectionBlock([SectionItem("comments", "Pending Comments", [commentList])])
+commentList = ListBlock([com1, com2])
+com1 = ListItem("John Doe", "Great article, but did you consider the source?")
+com2 = ListItem("Jane Smith", "Can we get more data on this section?")
+
+actionSection = Card([newDraftBtn, scheduleBtn], "card", "row", "m")
+newDraftBtn = Button("+ New Draft", null, "primary")
+scheduleBtn = DialogBlock("Schedule Piece", "Schedule Content", "Enter details for scheduling", [scheduleForm])
+scheduleForm = Form("schedule_form", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Article Title", Input("title", "Enter title..."))
+dateField = FormControl("Publish Date", DatePicker("date", "single"))
+scheduleButtons = Buttons([Button("Schedule", null, "primary"), Button("Cancel", null, "tertiary")])

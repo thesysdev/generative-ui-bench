@@ -1,0 +1,62 @@
+{"op":"add","path":"/root","value":"main-container"}
+{"op":"add","path":"/elements/main-container","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-section","metrics-row","action-bar","tickets-all","tickets-high","new-ticket-dialog"]}}
+{"op":"add","path":"/elements/header-section","value":{"type":"CardHeader","props":{"title":"Support Command Center","subtitle":"Morning Briefing & Shift Handoff"}}}
+{"op":"add","path":"/elements/metrics-row","value":{"type":"Card","props":{"direction":"row","gap":"m","variant":"sunk"},"children":["metric-open-card","metric-response-card","metric-sla-card"]}}
+{"op":"add","path":"/elements/metric-open-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["metric-open-label","metric-open-val"]}}
+{"op":"add","path":"/elements/metric-open-label","value":{"type":"TextContent","props":{"text":"Open Tickets","size":"small"}}}
+{"op":"add","path":"/elements/metric-open-val","value":{"type":"TextContent","props":{"text":"42","size":"large-heavy"}}}
+{"op":"add","path":"/elements/metric-response-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["metric-response-label","metric-response-val"]}}
+{"op":"add","path":"/elements/metric-response-label","value":{"type":"TextContent","props":{"text":"Avg First Response","size":"small"}}}
+{"op":"add","path":"/elements/metric-response-val","value":{"type":"TextContent","props":{"text":"18 mins","size":"large-heavy"}}}
+{"op":"add","path":"/elements/metric-sla-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["metric-sla-label","metric-sla-val"]}}
+{"op":"add","path":"/elements/metric-sla-label","value":{"type":"TextContent","props":{"text":"SLA Target Met","size":"small"}}}
+{"op":"add","path":"/elements/metric-sla-val","value":{"type":"TextContent","props":{"text":"97.4%","size":"large-heavy"}}}
+{"op":"add","path":"/elements/action-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["filter-controls","create-btn-wrapper"]}}
+{"op":"add","path":"/elements/filter-controls","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["filter-all-btn","filter-high-btn"]}}
+{"op":"add","path":"/elements/filter-all-btn","value":{"type":"Button","props":{"label":"All Tickets (5)","variant":{"$cond":{"$state":"/filterHighOnly"},"$then":"secondary","$else":"primary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":false}}}}}
+{"op":"add","path":"/elements/filter-high-btn","value":{"type":"Button","props":{"label":"High Priority Only","variant":{"$cond":{"$state":"/filterHighOnly"},"$then":"primary","$else":"secondary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":true}}}}}
+{"op":"add","path":"/state/filterHighOnly","value":false}
+{"op":"add","path":"/elements/create-btn-wrapper","value":{"type":"Card","props":{"variant":"clear"},"children":["new-ticket-trigger"]}}
+{"op":"add","path":"/elements/new-ticket-trigger","value":{"type":"Button","props":{"label":"+ Open New Ticket","variant":"primary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/showCreateDialog","value":true}}}}}
+{"op":"add","path":"/state/showCreateDialog","value":false}
+{"op":"add","path":"/elements/tickets-all","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly","not":true},"children":["tickets-all-title","ticket-list-all"]}}
+{"op":"add","path":"/elements/tickets-all-title","value":{"type":"Heading","props":{"text":"Recent Tickets","level":"h3"}}}
+{"op":"add","path":"/elements/ticket-list-all","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/recentTickets","key":"id"},"children":["ticket-row-card"]}}
+{"op":"add","path":"/elements/tickets-high","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly"},"children":["tickets-high-title","ticket-list-high"]}}
+{"op":"add","path":"/elements/tickets-high-title","value":{"type":"Heading","props":{"text":"Recent High-Priority Tickets","level":"h3"}}}
+{"op":"add","path":"/elements/ticket-list-high","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/highPriorityTickets","key":"id"},"children":["ticket-row-card"]}}
+{"op":"add","path":"/elements/ticket-row-card","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center"},"children":["ticket-info-group","ticket-meta-group"]}}
+{"op":"add","path":"/elements/ticket-info-group","value":{"type":"Card","props":{"direction":"column","gap":"none","variant":"clear"},"children":["ticket-code-title","ticket-customer-preview"]}}
+{"op":"add","path":"/elements/ticket-code-title","value":{"type":"TextContent","props":{"text":{"$template":"**${id}**: ${title}"},"size":"default"}}}
+{"op":"add","path":"/elements/ticket-customer-preview","value":{"type":"TextContent","props":{"text":{"$template":"Customer: ${customer} · Created: ${timeAgo}"},"size":"small"}}}
+{"op":"add","path":"/elements/ticket-meta-group","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["ticket-badge","ticket-status-badge"]}}
+{"op":"add","path":"/elements/ticket-badge","value":{"type":"Badge","props":{"text":{"$item":"priority"},"variant":{"$cond":{"$item":"isHigh"},"$then":"destructive","$else":"secondary"}}}}
+{"op":"add","path":"/elements/ticket-status-badge","value":{"type":"Badge","props":{"text":{"$item":"status"},"variant":"outline"}}}
+{"op":"add","path":"/state/recentTickets","value":[]}
+{"op":"add","path":"/state/recentTickets/0","value":{"id":"TCK-9401","title":"Production API rate limiting failure","customer":"FinTech Global","priority":"High","isHigh":true,"status":"Investigating","timeAgo":"12m ago"}}
+{"op":"add","path":"/state/recentTickets/1","value":{"id":"TCK-9400","title":"SSO login redirect loop on Azure AD","customer":"CloudScale Labs","priority":"High","isHigh":true,"status":"New","timeAgo":"28m ago"}}
+{"op":"add","path":"/state/recentTickets/2","value":{"id":"TCK-9399","title":"Invoice export to CSV missing tax column","customer":"Vertex Media","priority":"Medium","isHigh":false,"status":"Queued","timeAgo":"45m ago"}}
+{"op":"add","path":"/state/recentTickets/3","value":{"id":"TCK-9398","title":"Payment gateway timeout during checkout","customer":"Apex Retail","priority":"High","isHigh":true,"status":"Investigating","timeAgo":"1h ago"}}
+{"op":"add","path":"/state/recentTickets/4","value":{"id":"TCK-9397","title":"Feature request: Dark mode export toggle","customer":"Studio Sync","priority":"Low","isHigh":false,"status":"Queued","timeAgo":"1h 15m ago"}}
+{"op":"add","path":"/state/highPriorityTickets","value":[]}
+{"op":"add","path":"/state/highPriorityTickets/0","value":{"id":"TCK-9401","title":"Production API rate limiting failure","customer":"FinTech Global","priority":"High","isHigh":true,"status":"Investigating","timeAgo":"12m ago"}}
+{"op":"add","path":"/state/highPriorityTickets/1","value":{"id":"TCK-9400","title":"SSO login redirect loop on Azure AD","customer":"CloudScale Labs","priority":"High","isHigh":true,"status":"New","timeAgo":"28m ago"}}
+{"op":"add","path":"/state/highPriorityTickets/2","value":{"id":"TCK-9398","title":"Payment gateway timeout during checkout","customer":"Apex Retail","priority":"High","isHigh":true,"status":"Investigating","timeAgo":"1h ago"}}
+{"op":"add","path":"/elements/new-ticket-dialog","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"visible":{"$state":"/showCreateDialog"},"children":["modal-header","new-ticket-form"]}}
+{"op":"add","path":"/elements/modal-header","value":{"type":"CardHeader","props":{"title":"Open New Ticket","subtitle":"Log an escalation or inbound customer issue"}}}
+{"op":"add","path":"/elements/new-ticket-form","value":{"type":"Form","props":{"name":"newTicketForm","buttons":"form-actions","fields":["subject-control","customer-control","priority-control","details-control"]}}}
+{"op":"add","path":"/elements/subject-control","value":{"type":"FormControl","props":{"label":"Subject / Issue Title","input":"subject-input"}}}
+{"op":"add","path":"/elements/subject-input","value":{"type":"Input","props":{"name":"subject","placeholder":"e.g. Ingest pipeline lag","value":{"$bindState":"/form/subject"}}}}
+{"op":"add","path":"/elements/customer-control","value":{"type":"FormControl","props":{"label":"Customer Name / Org","input":"customer-input"}}}
+{"op":"add","path":"/elements/customer-input","value":{"type":"Input","props":{"name":"customer","placeholder":"e.g. Acme Corp","value":{"$bindState":"/form/customer"}}}}
+{"op":"add","path":"/elements/priority-control","value":{"type":"FormControl","props":{"label":"Priority Level","input":"priority-select"}}}
+{"op":"add","path":"/elements/priority-select","value":{"type":"Select","props":{"name":"priority","placeholder":"Select priority","value":{"$bindState":"/form/priority"},"items":["opt-high","opt-med","opt-low"]}}}
+{"op":"add","path":"/elements/opt-high","value":{"type":"SelectItem","props":{"value":"High","label":"High - Urgent Impact"}}}
+{"op":"add","path":"/elements/opt-med","value":{"type":"SelectItem","props":{"value":"Medium","label":"Medium - Moderate Impact"}}}
+{"op":"add","path":"/elements/opt-low","value":{"type":"SelectItem","props":{"value":"Low","label":"Low - General Inquiry"}}}
+{"op":"add","path":"/elements/details-control","value":{"type":"FormControl","props":{"label":"Ticket Description","input":"details-input"}}}
+{"op":"add","path":"/elements/details-input","value":{"type":"TextArea","props":{"name":"details","placeholder":"Add relevant logs, customer context, and reproduction steps...","rows":3,"value":{"$bindState":"/form/details"}}}}
+{"op":"add","path":"/elements/form-actions","value":{"type":"Buttons","props":{"buttons":["submit-ticket-btn","cancel-ticket-btn"]}}}
+{"op":"add","path":"/elements/submit-ticket-btn","value":{"type":"Button","props":{"label":"Create Ticket","variant":"primary"},"on":{"press":{"action":"setState","params":{"statePath":"/showCreateDialog","value":false}}}}}
+{"op":"add","path":"/elements/cancel-ticket-btn","value":{"type":"Button","props":{"label":"Cancel","variant":"tertiary"},"on":{"press":{"action":"setState","params":{"statePath":"/showCreateDialog","value":false}}}}}
+{"op":"add","path":"/state/form","value":{"subject":"","customer":"","priority":"High","details":""}}

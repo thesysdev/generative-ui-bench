@@ -1,0 +1,42 @@
+root = Card([header, kpiGrid, burnSection, expenseSection, transactionSection, footer], "clear", "column", "l")
+
+header = CardHeader("Financial Overview", "Month Ending October 2023")
+
+kpiGrid = Card([cashKpi, burnKpi, runwayKpi], "card", "row", "m", "center", "between")
+cashKpi = Card([cashLabel, cashValue], "clear", "column", "none", "center")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$1,240,000", "large-heavy")
+burnKpi = Card([burnLabel, burnValue], "clear", "column", "none", "center")
+burnLabel = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$42,000", "large-heavy")
+runwayKpi = Card([runwayLabel, runwayValue], "clear", "column", "none", "center")
+runwayLabel = TextContent("Runway", "small")
+runwayValue = TextContent("29.5 Months", "large-heavy")
+
+burnSection = Card([burnHeading, burnChart], "sunk", "column", "s")
+burnHeading = Heading("Burn Trend", "h3")
+burnChart = LineChart(["Jun", "Jul", "Aug", "Sep", "Oct"], [burnSeries], "natural", "Month", "USD")
+burnSeries = Series("Monthly Burn", [35000, 38000, 41000, 39000, 42000])
+
+expenseSection = Card([expenseHeading, expenseChart], "sunk", "column", "s")
+expenseHeading = Heading("Expense Split", "h3")
+expenseChart = PieChart(expLabels, expValues, "donut")
+expLabels = ["Payroll", "Cloud Infra", "Marketing", "Rent", "Legal"]
+expValues = [25000, 8000, 5000, 3000, 1000]
+
+transactionSection = Card([transHeading, transTable], "sunk", "column", "s")
+transHeading = Heading("High Value Transactions (>$10k)", "h3")
+transTable = Table([colVendor, colAmount, colDate])
+colVendor = Col("Vendor", ["AWS Cloud Services", "Stripe Payouts", "Health Insurance Co", "Office Lease LLC"])
+colAmount = Col("Amount", ["$12,400", "$15,000", "$11,200", "$10,500"])
+colDate = Col("Date", ["Oct 12", "Oct 15", "Oct 18", "Oct 01"])
+
+footer = Card([dateControl, actionButtons], "clear", "row", "l", "stretch", "between")
+dateControl = Form("month-picker", null, [monthField])
+monthField = FormControl("Select Month", monthSelect, "Change the reporting period")
+monthSelect = Select("month", [mOct, mSep, mAug], "October 2023")
+mOct = SelectItem("oct", "October 2023")
+mSep = SelectItem("sep", "September 2023")
+mAug = SelectItem("aug", "August 2023")
+actionButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")

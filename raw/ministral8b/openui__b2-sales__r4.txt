@@ -1,0 +1,38 @@
+```openui-lang
+root = Card([header, revenueCard, chartSection, topProducts, conversionSection, downloadBtn])
+
+header = CardHeader("Monthly Sales Dashboard", "Track your monthly performance")
+
+revenueCard = Card([revenueValue, revenueChange], "sunk")
+revenueValue = Card([monthLabel, revenueNumber], "sunk")
+monthLabel = TextContent("This Month's Revenue:", "large-heavy")
+revenueNumber = TextContent("$187,245", "large-heavy")
+
+revenueChange = Card([changeLabel, changeValue], "sunk")
+changeLabel = TextContent("vs Last Month:", "small-heavy")
+changeValue = TextContent("↑ 12.3%", "large-heavy", "success")
+
+chartSection = Card([chartTitle, monthlyTrend], "sunk")
+chartTitle = Heading("6-Month Revenue Trend", "h3")
+monthlyTrend = LineChart(
+    ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
+    [revenueSeries],
+    "natural",
+    "Month",
+    "Revenue ($)"
+)
+revenueSeries = Series("Revenue", [125000, 150000, 168000, 187245, 172000, 195000])
+
+topProducts = Card([productsTitle, productsTable], "sunk")
+productsTitle = Heading("Top 3 Selling Products", "h3")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Premium Widget", "Pro Kit", "Basic Bundle"])
+unitsCol = Col("Units Sold", [42, 38, 31])
+
+conversionSection = Card([conversionTitle, conversionValue], "sunk")
+conversionTitle = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("4.7%", "large-heavy")
+
+downloadBtn = Buttons([downloadButton])
+downloadButton = Button("Download Numbers", ["download-sales-data"], "primary")
+```

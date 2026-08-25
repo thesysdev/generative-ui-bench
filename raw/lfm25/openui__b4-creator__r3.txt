@@ -1,0 +1,236 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Follower total and growth over the past month
+    CardHeader(
+      title: "Creator Studio Dashboard",
+      subtitle: "Overview of performance metrics"
+    ),
+    
+    // Followers total and growth
+    Card([
+      CardHeader(
+        title: "Follower Count",
+        subtitle: "Total Followers",
+        size: "large"
+      ),
+      TextContent(
+        text: `Total: ${followersTotal} | Growth (last 30 days): ${growthPastMonth}%`,
+        size: "large"
+      )
+    ], direction: "column", gap: "xl"),
+    
+    // 2. Engagement rate
+    Card([
+      CardHeader(
+        title: "Engagement Rate",
+        subtitle: "Average interactions per post",
+        size: "large"
+      ),
+      TextContent(
+        text: `${engagementRate}% avg. engagement`,
+        size: "large"
+      )
+    ], direction: "column", gap: "xl"),
+    
+    // 3. Best posts this month with reach
+    Card([
+      CardHeader(
+        title: "Top Performing Posts This Month",
+        subtitle: "Best posts by reach",
+        size: "large"
+      ),
+      Table({
+        columns: [
+          { label: "Post Title", data: "Post 1", type: "string" },
+          { label: "Reach", data: "15,200", type: "number" },
+          { label: "Likes", data: "320", type: "number" },
+          { label: "Shares", data: "45", type: "number" }
+        ],
+        data: [
+          { title: "Viral Reel 2026", data: "18,450", type: "string" },
+          { title: "Behind the Scenes", data: "12,300", type: "string" },
+          { title: "Live Q&A Session", data: "9,850", type: "string" },
+          { title: "New Feature Launch", data: "11,600", type: "string" },
+          { title: "Community Spotlight", data: "14,100", type: "string" }
+        ]
+      }),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 4. Audience split by platform
+    Card([
+      CardHeader(
+        title: "Audience Split by Platform",
+        subtitle: "Where your followers are",
+        size: "large"
+      ),
+      Table({
+        columns: [
+          { label: "Platform", data: "Instagram", type: "string" },
+          { label: "Twitter", data: "Twitter", type: "string" },
+          { label: "LinkedIn", data: "LinkedIn", type: "string" },
+          { label: "TikTok", data: "TikTok", type: "string" },
+          { label: "YouTube", data: "YouTube", type: "string" }
+        ],
+        data: [
+          { platform: "Instagram", value: "45%" },
+          { platform: "Twitter", value: "25%" },
+          { platform: "LinkedIn", value: "20%" },
+          { platform: "TikTok", value: "8%" },
+          { platform: "YouTube", value: "2%" }
+        ]
+      }),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 5. Posts scheduled this week
+    Card([
+      CardHeader(
+        title: "Scheduled Posts (This Week)",
+        subtitle: "Planned content",
+        size: "large"
+      ),
+      ListBlock({
+        items: [
+          {
+            title: "Intro video launch",
+            subtitle: "Monday 10 AM",
+            actionLabel: "View"
+          },
+          {
+            title: "Thoughtful thread series",
+            subtitle: "Wednesday 2 PM",
+            actionLabel: "View"
+          },
+          {
+            title: "Product showcase reel",
+            subtitle: "Friday 3 PM",
+            actionLabel: "View"
+          },
+          {
+            title: "User-generated content roundup",
+            subtitle: "Next Monday 11 AM",
+            actionLabel: "View"
+          }
+        ]
+      }),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 6. Best hour to post based on history
+    Card([
+      CardHeader(
+        title: "Best Time to Post",
+        subtitle: "Optimal posting hours",
+        size: "large"
+      ),
+      TextContent(
+        text: `🚀 Best hour: 6-8 PM (peak engagement)`,
+        size: "large"
+      )
+    ], direction: "column", gap: "xl"),
+    
+    // 7. Comments waiting for a reply
+    Card([
+      CardHeader(
+        title: "Comments Waiting for Reply",
+        subtitle: "Pending responses",
+        size: "large"
+      ),
+      TextContent(
+        text: `3 comments awaiting your response`,
+        size: "large"
+      ),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 8. Earnings this month
+    Card([
+      CardHeader(
+        title: "Monthly Earnings",
+        subtitle: "Revenue summary",
+        size: "large"
+      ),
+      TextContent(
+        text: `$4,820 this month`,
+        size: "large"
+      ),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 9. Pending collaboration requests
+    Card([
+      CardHeader(
+        title: "Pending Collaboration Requests",
+        subtitle: "New partnership opportunities",
+        size: "large"
+      ),
+      ListBlock({
+        items: [
+          { text: "Design co-create session - Design Team", variant: "neutral" },
+          { text: "Feature review - Product Partners", variant: "neutral" },
+          { text: "Guest blog arrangement - Media Outlet", variant: "neutral" }
+        ]
+      }),
+      direction: "column", gap: "xl"
+    ]),
+    
+    // 10. Way to schedule a post with caption and time
+    Card([
+      CardHeader(
+        title: "Schedule New Post",
+        subtitle: "Create and plan your next post",
+        size: "large"
+      ),
+      Container([
+        Button(label: "Create Post", action: "schedule_post", variant: "primary"),
+        Button(label: "Cancel", variant: "secondary"),
+        Divider()
+      ]),
+      
+      Card([
+        TextContent(
+          text: "📝 Caption field",
+          size: "small"
+        ),
+        Divider(),
+        
+        TextContent(
+          text: "⏰ Time slot field",
+          size: "small"
+        ),
+        Divider()
+      ]),
+      
+      // Placeholder for actual input components would go here
+      // For now showing the scheduling interface structure
+    ], direction: "column", gap: "xl"),
+    
+    // 11. Way to narrow everything to one platform
+    Card([
+      CardHeader(
+        title: "Filter by Platform",
+        subtitle: "Narrow dashboard to specific channel",
+        size: "large"
+      ),
+      Select({
+        name: "platform_filter",
+        options: [
+          { value: "all", label: "All Platforms" },
+          { value: "instagram", label: "Instagram" },
+          { value: "twitter", label: "Twitter" },
+          { value: "linkedin", label: "LinkedIn" },
+          { value: "tiktok", label: "TikTok" },
+          { value: "youtube", label: "YouTube" }
+        ],
+        selectedIndex: 0,
+        onChange: "handle_platform_filter"
+      })
+    ], direction: "column", gap: "xl")
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl"
+)
+```

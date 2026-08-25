@@ -1,0 +1,26 @@
+root = Card([
+  // 1. Where the package is right now - real-time tracking map
+  MapView(position: "center", alt: "Package Location"),
+  
+  // 2. Estimated delivery date - shown via line chart timeline
+  Card([
+    Heading("Estimated Delivery Timeline"),
+    LineChart(
+      labels: ["Today", "Tomorrow", "Day 3", "Day 7"],
+      series: [
+        {
+          name: "Expected Arrival",
+          values: [2, 1, 0, -1]
+        }
+      ],
+      xLabel: "Days until delivery",
+      yLabel: "Days remaining"
+    )
+  ]),
+  
+  // 3. Way to report a problem - direct button to file a complaint
+  Card([
+    CardHeader("Report Issue", "We've detected a problem with your delivery"),
+    Button("File Complaint", "Report Problem")
+  ])
+])

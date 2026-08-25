@@ -1,0 +1,27 @@
+root = Card([header, statusCard, trackingSection, actionSection, followUps])
+
+header = CardHeader("Track Your Package", "Order #ORD-8829104")
+
+statusCard = Card([statusInfo, deliveryDate], "card", "row", "m", "center", "between")
+statusInfo = TextContent("Package is currently in transit", "large-heavy")
+deliveryDate = Badge("Estimated: Oct 24", "secondary")
+
+trackingSection = Card([trackingHeading, trackingSteps, trackingMap], "sunk", "column", "m")
+trackingHeading = Heading("Delivery Progress", "h3")
+trackingSteps = Steps([step1, step2, step3, step4])
+step1 = StepsItem("Order Placed", "Your order was received and processed.")
+step2 = StepsItem("Shipped", "Package left the warehouse in Chicago.")
+step3 = StepsItem("In Transit", "Arrived at regional sorting facility in Denver.")
+step4 = StepsItem("Out for Delivery", "Local courier is bringing your package.")
+trackingMap = Image("Current location map", "https://picsum.photos/seed/logistics/800/400")
+
+actionSection = Card([problemHeading, problemCallout, problemButtons], "clear", "column", "s")
+problemHeading = Heading("Need help with your delivery?", "h4")
+problemCallout = TextCallout("info", "If your package is delayed or damaged, please let us know immediately.", null)
+problemButtons = Buttons([reportBtn, contactBtn])
+reportBtn = Button("Report a Problem", null, "primary", "destructive")
+contactBtn = Button("Contact Support", null, "secondary")
+
+followUps = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("Change delivery address")
+fu2 = FollowUpItem("Request delivery instructions")

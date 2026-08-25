@@ -1,0 +1,62 @@
+thought
+root = Card([header, statsGrid, riskAlert, mainContent, bottomGrid, watchlistSection, ordersSection, newsSection, economicSection, actionSection], "card", "column", "l")
+
+header = CardHeader("Alpha Trading Desk", "Market Open • Global Equity Strategy")
+
+statsGrid = Card([portfolioVal, pnlToday, varValue, marginUse], "card", "row", "m")
+portfolioVal = TextContent("Portfolio Value\n$2,482,900.00", "large-heavy")
+pnlToday = TextContent("P&L Today\n+$42,150.50 (+1.74%)", "large")
+varValue = TextContent("Value at Risk (95%)\n-$18,400", "default")
+marginUse = TextContent("Margin in Use\n62%", "default")
+riskAlert = Alert("Risk Limit Warning", "Sector exposure to 'Technology' is at 92% of the limit. Consider rebalancing.", "warning")
+
+mainContent = Card([positionsTable, sectorChart, strategyPerformance], "card", "row", "m")
+positionsTable = Card([Heading("Active Positions", "h3"), Table([colTicker, colSize, colEntry, colPrice, colPnl])], "sunk")
+colTicker = Col("Ticker", ["AAPL", "TSLA", "NVDA", "MSFT", "AMD"])
+colSize = Col("Size", [1500, 500, 800, 1200, 600])
+colEntry = Col("Entry", ["175.20", "180.10", "720.50", "390.00", "165.00"])
+colPrice = Col("Current", ["189.45", "172.30", "$824.10", "$405.15", "$172.10"])
+colPnl = Col("P&L", ["+8.1%", "-4.2%", "+14%", "+3.8%", "+7.5%"])
+
+sectorChart = Card([Heading("Exposure by Sector", "h3"), PieChart([sectorLabels, sectorValues], "donut")], "sunk")
+sectorLabels = ["Tech", "Energy", "Finance", "Health", "Consumer"]
+sectorValues = [45, 20, 15, 10, 10]
+
+strategyPerformance = Card([Heading("Strategy Returns YTD", "h3"), LineChart([months], [stratSeries, drawdownSeries], "natural")], "sunk")
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+stratSeries = Series("Return", [2.1, 3.5, 3.2, 4.8, 6.2, 7.8])
+drawdownSeries = Series("Drawdown", [0, -1.2, -0.5, -2.1, -0.8, -1.4])
+
+bottomGrid = Card([gainersLosers, watchlistSection], "card", "row", "m")
+gainersLosers = Card([Heading("Top Gainers/Losers", "h3"), ListBlock([g1, g2])], "sunk")
+g1 = ListItem("NVDA", "+5.2% today", null, "Buy")
+g2 = ListItem("TSLA", "-3.1% today", null, "Sell")
+
+watchlistSection = Card([Heading("Watchlist", "h3"), ListBlock([w1, w2, w3])], "sunk")
+w1 = ListItem("BTC/USD", "$64,210.00")
+w2 = ListItem("ETH/USD", "$3,450.12")
+w3 = ListItem("SPY", "$512.40")
+
+ordersSection = Card([Heading("Working Orders", "h3"), ListBlock([o1, o2])], "card", "column", "s")
+o1 = ListItem("AAPL", " @ 185.00", "Pending", "Cancel")
+o2 = ListItem("MSFT", "Market Sell 100", "Filled", "View")
+
+newsSection = Card([Heading("Market Headlines", "h3"), ListBlock([n1, n2])], "card", "column", "s")
+n1 = ListItem("Fed signals potential rate pause in Q3", "Positive")
+n2 = ListItem("Tech earnings beat expectations globally", "Neutral")
+
+economicSection = Card([Heading("Economic Releases", "h3"), ListBlock([e1, e2])], "card", "column", "s")
+e1 = ListItem("Non-Farm Payrolls", "Thursday, 08:30 AM")
+e2 = ListItem("CPI Inflation Data", "Wednesday, 08:30 AM")
+
+actionSection = Card([timeframeSelect, rebalanceBtn, orderForm], "card", "row", "m")
+timeframeSelect = Select("timeframe", [tf1, tf2, tf3], "1D")
+tf1 = SelectItem("1D", "1 Day")
+tf2 = SelectItem("1W", "1 Week")
+tf3 = SelectItem("1M", "1 Month")
+rebalanceBtn = Button("Rebalance Portfolio", null, "secondary")
+
+orderForm = Form("place_order", orderButtons, [fTicker, fSide, fQty])
+fTicker = FormControl("Ticker", Input("ticker", "AAPL"))
+fSide = FormControl("Side", Select("side", [sBuy, sSell], "Buy")) ownsBuy = SelectItem("Buy", "Buy") ownsSell = SelectItem("Sell", "Sell") ownfQty = FormControl("Quantity", Input("qty", "100", "number"))
+orderButtons = Buttons([Button("Place Order", null, "primary")])

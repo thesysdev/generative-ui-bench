@@ -1,0 +1,91 @@
+root = Card([header, kpis, analytics, economy, liveOps, moderation, tools], "card", "column", "xl")
+
+header = CardHeader("Game Studio Live-Ops Command Center", "Real-time monitoring and operational control")
+
+kpis = Card([kpiGrid, playerHealth], "sunk", "row")
+kpiGrid = Card([kpiLabels, kpiValues], "row", "none", "l")
+kpiLabels = Card([labelOnline, labelDAU, labelMAU, labelRevToday, labelARPU], "column", "none", "xs")
+kpiValues = Card([valOnline, valDAU, valMAU, valRevToday, valARPU], "row", "none", "xs")
+labelOnline = TextContent("Players Online", "small")
+labelDAU = TextContent("Daily Active", "small")
+labelMAU = TextContent("Monthly Active", "small")
+labelRevToday = TextContent("Revenue Today", "small")
+labelARPU = TextContent("Rev Per User", "small")
+valOnline = Badge("42,892", "default")
+valDAU = Badge("154,201", "default")
+valMAU = Badge("1,240,550", "default")
+valRevToday = Badge("$84,290", "success")
+valARPU = Badge("$0.54", "default")
+
+playerHealth = Card([regionTable], "sunk", "column")
+regionTable = Table([colRegion, colStatus, colLatency, colFocus])
+colRegion = Col("Region", ["NA-East", "EU-West", "ASIA-South", "LATAM-1"])
+colStatus = Col("Health", ["Healthy", "Warning", "Healthy", "Healthy"])
+colLatency = Col("Latency (ms)", ["42", "115", "280", "55"])
+colFocus = Col("Action", ["Focus", "Focus", "Focus", "Focus"])
+
+analytics = Card([sessionTrend, crashChart, salesList], "row")
+sessionTrend = Card([sessionHeading, sessionChart], "sunk", "column")
+sessionHeading = Heading("Avg Session Length (2w)", "h3")
+sessionChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [seriesSession], "natural", "Day", "Minutes")
+seriesSession = Series("Minutes", [12, 14, 13, 15, 18, 22, 21, 19, 17, 16, 15, 18, 20, 22])
+
+crashChart = Card([crashHeading, crashTable], "sunk", "column")
+crashHeading = Heading("Crashes by Version", "h3")
+crashTable = Table([colVer, colRate])
+colVer = Col("App Version", ["v2.4.1", "v2.4.0", "v2.3.9"])
+colRate = Col("Crash Rate", ["0.02%", "0.15%", "0.42%"])
+
+salesList = Card([salesHeading, salesListItems], "sunk", "column")
+salesHeading = Heading("Top Selling Items", "h3")
+salesListItems = ListBlock([
+    ListItem("Dragon Sword Skin", "4,200 units", null, "View"),
+    ListItem("Starter Pack Bundle", "1,850 units", null, "View"),
+    ListItem("Premium Currency Pack", "920 units", null, "View")
+])
+
+economy = Card([inflationChart, experimentTabs], "row")
+inflationChart = Card([inflationHeading, inflationChartData], "sunk", "column")
+inflationHeading = Heading("Currency Inflation", "h3")
+inflationChartData = RadialChart(["Gold", "Gems", "Tokens"], [85, 12, 5])
+
+experimentTabs = Tabs([expTab1, expTab2])
+expTab1 = TabItem("exp1", "Exp: XP Boost", [expDesc1])
+expDesc1 = TextContent("Current: +20% XP for 24h. Conversion: +4.2% Retention.")
+expTab2 = TabItem("exp2", "Exp: Loot Box", [expDesc2])
+expDesc2 = TextContent("Current: New drop rates. Conversion: -2.1% Spend.")
+
+liveOps = Card([eventHeading, eventList, reportAlerts], "column")
+eventHeading = Heading("Live Events", "h3")
+eventList = ListBlock([
+    ListItem("Summer Festival", "Active - Ends in 3d", null, "Manage"),
+    ListItem("Midnight Raid", "Upcoming - Starts Tomorrow", null, "Schedule")
+])
+reportAlerts = Card([reportHeading, reportList], "sunk", "column")
+reportHeading = Heading("User Reports & Appeals", "h4")
+reportList = ListBlock([
+    ListItem("Toxic Behavior", "12 awaiting review", null, "Review"),
+    ListItem("Ban Appeal: User_99", "1 awaiting review", null, "Review"),
+    ListItem("Exploit Report", "4 awaiting review", null, "Review")
+])
+
+tools = Card([patchHeading, patchForm, hotfixBtn], "column")
+patchHeading = Heading("Ops Tools", "h3")
+patchForm = Form("patch-draft", patchButtons, [patchInput])
+patchInput = TextArea("patch_content", "Enter patch notes here...", 5)
+patchButtons = Buttons([patchSave])
+patchSave = Button("Save Draft", null, "secondary")
+
+hotfixBtn = DialogBlock("Ship Hotfix", "Critical Deployment", "Are you sure you want to push the hotfix to all production servers?", [confirmHotfix], "destructive")
+confirmHotfix = Buttons([confirmBtn, cancelBtn])
+confirmBtn = Button("Confirm Push", null, "primary", "destructive")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+followups = FollowUpBlock([
+    FollowUpItem("View detailed server logs"),
+    FollowUpItem("Generate weekly revenue report"),
+    FollowUpItem("Open moderation dashboard")
+])
+
+root = Card([header, kpis, analytics, economy, liveOps, moderation, tools, followups], "card", "column", "xl")
+moderation = Card([reportAlerts], "sunk", "column")

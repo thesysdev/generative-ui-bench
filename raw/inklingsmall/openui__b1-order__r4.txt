@@ -1,0 +1,22 @@
+root = Card([header, locationCard, deliveryCard, reportCard], "card", "column", "l")
+
+header = CardHeader("Delivery Status", "Order #4829")
+
+locationCard = Card([locHeading, locDetail], "sunk")
+locHeading = Heading("Where is your package?", "h3")
+locDetail = TextContent("**Current location:** Austin Regional Hub — Austin, TX\n**Status:** In transit — arrived 10:42 AM today")
+
+deliveryCard = Card([delHeading, delDetail], "sunk")
+delHeading = Heading("Estimated delivery", "h3")
+delDetail = TextContent("**Date:** Thursday, June 12\n**Window:** 2:00 PM – 6:00 PM")
+
+reportCard = Card([repHeading, repText, reportDialog], "sunk")
+repHeading = Heading("Something wrong?", "h3")
+repText = TextContent("If your package is missing, damaged, or late, let us know.")
+reportDialog = DialogBlock("Report a problem", "Report delivery issue", "What went wrong with your delivery?", [problemForm])
+
+problemForm = Form("delivery-report", reportButtons, [issueField])
+issueField = FormControl("Describe the issue", issueInput)
+issueInput = TextArea("issue", "Package was damaged / Missing / Wrong item")
+reportButtons = Buttons([submitBtn])
+submitBtn = Button("Submit report", null, "primary")

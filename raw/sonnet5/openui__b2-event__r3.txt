@@ -1,0 +1,44 @@
+root = Card([header, daysCallout, agendaSection, speakersSection, ticketsSection, registerSection, followUp])
+
+header = CardHeader("TechForward Summit 2025", "March 18, 2025 · Moscone Center, San Francisco")
+daysCallout = TextCallout("info", "42 days to go", "Mark your calendar — early bird ticket pricing ends soon")
+
+agendaSection = Card([agendaHeading, agendaTable], "sunk")
+agendaHeading = Heading("Agenda", "h3")
+agendaTable = Table([agendaTime, agendaSession, agendaSpeaker])
+agendaTime = Col("Time", ["9:00 AM", "10:00 AM", "11:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"])
+agendaSession = Col("Session", ["Registration & Breakfast", "Opening Keynote", "AI in Production", "Lunch Break", "Panel: Future of Cloud", "Closing Remarks"])
+agendaSpeaker = Col("Speaker", ["-", "Dr. Elena Ross", "Marcus Chen", "-", "Panel", "Sarah Kim"])
+
+speakersSection = Card([speakersHeading, speakersList], "sunk")
+speakersHeading = Heading("Speakers", "h3")
+speakersList = ListBlock([speaker1, speaker2, speaker3, speaker4], "image")
+speaker1 = ListItem("Dr. Elena Ross", "Chief AI Scientist at Nexora, pioneering large-scale ML systems", [img1])
+speaker2 = ListItem("Marcus Chen", "VP of Engineering at CloudScale, expert in distributed systems", [img2])
+speaker3 = ListItem("Sarah Kim", "Founder of DevOps Collective and advocate for platform engineering", [img3])
+speaker4 = ListItem("James Patel", "Head of Product at DataForge, building next-gen analytics tools", [img4])
+img1 = "https://picsum.photos/seed/elenaross/200/200"
+img2 = "https://picsum.photos/seed/marcuschen/200/200"
+img3 = "https://picsum.photos/seed/sarahkim/200/200"
+img4 = "https://picsum.photos/seed/jamespatel/200/200"
+
+ticketsSection = Card([ticketsHeading, ticketsTable], "sunk")
+ticketsHeading = Heading("Ticket Tiers", "h3")
+ticketsTable = Table([tierCol, priceCol, perksCol])
+tierCol = Col("Tier", ["Early Bird", "Standard", "VIP"])
+priceCol = Col("Price", ["$299", "$449", "$799"])
+perksCol = Col("Includes", ["Access to all sessions", "Sessions + workshops", "Sessions + workshops + VIP lounge"])
+
+registerSection = Card([registerHeading, registerForm], "sunk")
+registerHeading = Heading("Register Now", "h3")
+registerForm = Form("register", registerButtons, [nameField, emailField])
+nameField = FormControl("Full name", nameInput)
+nameInput = Input("name", "Jane Doe")
+emailField = FormControl("Email", emailInput, "We'll send your confirmation here")
+emailInput = Input("email", "jane@company.com", "email")
+registerButtons = Buttons([submitBtn])
+submitBtn = Button("Register", null, "primary")
+
+followUp = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Show me the full speaker bios")
+f2 = FollowUpItem("What's included in the VIP tier?")

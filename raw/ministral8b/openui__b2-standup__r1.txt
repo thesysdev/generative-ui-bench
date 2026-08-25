@@ -1,0 +1,74 @@
+```openui-lang
+root = Card([dateHeader, missingUpdates, updatesList, newUpdateForm], "card", "column", "m", "center")
+
+dateHeader = Card([dateText, heading], "sunk", "column", "none", "center")
+dateText = TextContent("Today's updates", "large-heavy")
+dateHeading = Heading(todayDate, "h2")
+
+todayDate = "$todayDate"  # Will be replaced with actual date
+
+missingUpdates = Card([missingCount, missingText], "sunk", "row", "none", "center")
+missingCount = TextContent("Missing updates: ", "large-heavy")
+missingCountValue = TextContent(missingCountNumber, "large-heavy")
+missingText = TextContent("from your team", "small")
+
+missingCountNumber = "$missingCount"  # Will be replaced with actual number
+
+updatesList = CardHeader("Team updates")
+updatesSection = Card([blockedAlert, teammateUpdates], "sunk", "column", "m")
+blockedAlert = Callout("blocked", "Blocked", "Someone is blocked. Check their update for details.")
+blocked = "$blocked"  # Will be replaced with actual blocked status
+
+teammateUpdates = SectionBlock(teammateUpdatesItems, true)
+teammateUpdatesItems = [
+    teammateUpdate1,
+    teammateUpdate2,
+    teammateUpdate3,
+    teammateUpdate4
+]
+
+teammateUpdate1 = SectionItem("jane_doe", "Jane", [updateCard1])
+teammateUpdate2 = SectionItem("mike_smith", "Mike", [updateCard2])
+teammateUpdate3 = SectionItem("sarah_johnson", "Sarah", [updateCard3])
+teammateUpdate4 = SectionItem("alex_wong", "Alex", [updateCard4])
+
+updateCard1 = Card([updateHeading1, updateText1, updateAction1])
+updateHeading1 = TextContent("Jane's update", "small-heavy")
+updateText1 = TextContent("Working on API integration. Blocked on auth team's response. Need to follow up tomorrow.", "default")
+updateAction1 = Button("Mark as resolved", null, "secondary")
+
+updateCard2 = Card([updateHeading2, updateText2])
+updateHeading2 = TextContent("Mike's update", "small-heavy")
+updateText2 = TextContent("Finished frontend component. Ready for review.", "default")
+
+updateCard3 = Card([updateHeading3, updateText3])
+updateHeading3 = TextContent("Sarah's update", "small-heavy")
+updateText3 = TextContent("Debugging deployment issue. Will share details later.", "default")
+
+updateCard4 = Card([updateHeading4, updateText4])
+updateHeading4 = TextContent("Alex's update", "small-heavy")
+updateText4 = TextContent("Reviewing design mockups. Feedback due tomorrow.", "default")
+
+newUpdateForm = Card([formHeader, formContent], "sunk", "column", "m")
+formHeader = CardHeader("Your update")
+formContent = Form("standup-update", updateButtons, [statusField, detailsField])
+
+statusField = FormControl("Status", statusSelect)
+statusSelect = Select("status", [statusOptions], "Select your status", null, "default")
+statusOptions = [
+    SelectItem("blocked", "Blocked"),
+    SelectItem("on-track", "On track"),
+    SelectItem("ahead", "Ahead of schedule"),
+    SelectItem("delayed", "Delayed")
+]
+
+detailsField = FormControl("Details", detailsTextArea)
+detailsTextArea = TextArea("details", "Share your update...", 4, null, null)
+
+updateButtons = Buttons([submitButton])
+submitButton = Button("Post update", null, "primary")
+
+blocked = false  # Will be updated if anyone is blocked
+missingCount = 2  # Will be updated with actual missing count
+todayDate = "June 15, 2024"  # Will be replaced with actual date
+```

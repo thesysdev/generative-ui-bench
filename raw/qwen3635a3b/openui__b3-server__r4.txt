@@ -1,0 +1,51 @@
+root = Card([header, regionSelector, uptimeSection, metricsSection, incidentsSection, endpointsSection, alertThresholdSection, acknowledgeSection])
+
+header = CardHeader("Service Health", "On-call dashboard — Q4 2024")
+
+regionSelector = Card([regionLabel, regionSelect])
+regionLabel = Heading("Region", "h3")
+regionSelect = Select("region", [usEast, usWest, euCentral, apSouth], "Select region")
+usEast = SelectItem("us-east-1", "US East (N. Virginia)")
+usWest = SelectItem("us-west-2", "US West (Oregon)")
+euCentral = SelectItem("eu-central-1", "EU Central (Frankfurt)")
+apSouth = SelectItem("ap-south-1", "AP South (Mumbai)")
+
+uptimeSection = Card([uptimeHeading, uptimeDisplay, uptimeBadge])
+uptimeHeading = Heading("Uptime This Quarter", "h3")
+uptimeDisplay = TextContent("99.97%", "large-heavy")
+uptimeBadge = Badge("2 incidents missed SLA", "secondary")
+
+metricsSection = Card([metricsHeading, cpuMemoryChart])
+metricsHeading = Heading("CPU & Memory — Past 24 Hours", "h3")
+cpuMemoryChart = LineChart(labels24h, [cpuSeries, memSeries], "natural", "Hours ago", "% Utilization")
+labels24h = ["24h", "20h", "16h", "12h", "8h", "4h", "2h", "Now"]
+cpuSeries = Series("CPU %", [32, 35, 41, 58, 72, 65, 48, 42])
+memSeries = Series("Memory %", [61, 63, 65, 68, 71, 70, 69, 67])
+
+errorRateSection = Card([errorRateHeading, errorRateBadge])
+errorRateHeading = Heading("Error Rate — Current", "h3")
+errorRateBadge = Badge("0.12% — Normal", "default")
+
+incidentsSection = Card([incidentsHeading, incidentsList])
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsList = ListBlock([incident1, incident2, incident3])
+incident1 = ListItem("Database connection pool exhaustion", "us-east-1 · Open 1h 23m", null, "Acknowledge")
+incident2 = ListItem("Elevated 5xx responses on /api/v2/search", "eu-central-1 · Open 45m", null, "Acknowledge")
+incident3 = ListItem("CDN cache miss rate spike", "ap-south-1 · Open 12m", null, "Acknowledge")
+
+endpointsSection = Card([endpointsHeading, slowEndpointsTable])
+endpointsHeading = Heading("Five Slowest Endpoints", "h3")
+slowEndpointsTable = Table([endpointPath, endpointLatency, endpointP99])
+endpointPath = Col("Endpoint", ["/api/v2/search", "/api/v2/reports/generate", "/api/v1/users/export", "/graphql", "/api/v2/analytics/batch"])
+endpointLatency = Col("Avg Latency (ms)", [1240, 980, 875, 650, 520])
+endpointP99 = Col("P99 Latency (ms)", [3400, 4200, 2800, 1900, 1500])
+
+alertThresholdSection = Card([thresholdHeading, thresholdSlider])
+thresholdHeading = Heading("Set Alert Threshold", "h3")
+thresholdSlider = Slider("error_rate_threshold", "discrete", 0, 10, 0.5, [0.5], "Error Rate %")
+
+acknowledgeSection = Card([ackHeading, ackButtons])
+ackHeading = Heading("Acknowledge Incident", "h3")
+ackButtons = Buttons([ackBtn, dismissBtn])
+ackBtn = Button("Acknowledge Selected", null, "primary")
+dismissBtn = Button("Dismiss Notification", null, "secondary")

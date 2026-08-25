@@ -1,0 +1,111 @@
+```openui-lang
+root = Card(
+    [
+        todayOrders,
+        revenueSection,
+        avgOrderValue,
+        recentOrders,
+        filters,
+        refundRate,
+        orderVolumeChart
+    ],
+    "clear",
+    "column",
+    "center",
+    "between",
+    true
+)
+
+todayOrders = CardHeader("Orders Placed Today", "Count: ${todayOrderCount}")
+todayOrderCount = 124
+
+revenueSection = Card(
+    [
+        revenueHeading,
+        revenueValue
+    ],
+    "sunk"
+)
+revenueHeading = Heading("Revenue Today", "h3")
+revenueValue = Tag("Revenue: $${revenue}", null, null, "success")
+revenue = 128400
+
+avgOrderValue = Card(
+    [
+        avgOrderValueHeading,
+        avgOrderValueLabel
+    ],
+    "sunk"
+)
+avgOrderValueHeading = Heading("Average Order Value", "h3")
+avgOrderValueLabel = Tag("Avg. Order: $${avgOrder}", null, null, "info")
+avgOrder = 64.2
+
+recentOrders = Card(
+    [
+        recentOrdersHeader,
+        recentOrdersList
+    ],
+    "sunk"
+)
+recentOrdersHeader = Heading("Recent Orders", "h4")
+recentOrdersList = Table(
+    [
+        orderIdCol,
+        customerCol,
+        totalCol,
+        statusCol
+    ]
+)
+orderIdCol = Col("ID", [101, 102, 103, 104])
+customerCol = Col("Customer", ["Alice", "Bob", "Charlie", "Dana"])
+totalCol = Col("Total", ["$120", "$150", "$90", "$200"])
+statusCol = Col("Status", ["Shipped", "Pending", "Shipped", "Pending"])
+
+filters = Card(
+    [
+        statusFilter,
+        customerSearch
+    ],
+    "sunk"
+)
+statusFilter = Buttons([
+    statusBtnPending,
+    statusBtnShipped
+])
+statusBtnPending = Button("Pending", ["filter", "status", "pending"], "secondary")
+statusBtnShipped = Button("Shipped", ["filter", "status", "shipped"], "secondary")
+customerSearch = Input("search_customer", placeholder="Search by customer name", type="text")
+
+refundRate = Card(
+    [
+        refundRateHeading,
+        refundRateLabel
+    ],
+    "sunk"
+)
+refundRateHeading = Heading("Refund Rate This Month", "h4")
+refundRateLabel = Tag("Refunds: ${refundRate}%", null, null, "warning")
+refundRate = 14
+
+orderVolumeChart = Card(
+    [
+        orderVolumeChartHeading,
+        orderVolumeChartComponent
+    ],
+    "sunk"
+)
+orderVolumeChartHeading = Heading("Order Volume Past Four Weeks", "h4")
+orderVolumeChartComponent = BarChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [3010, 3450, 3820, 4100],
+    "grouped",
+    "Week",
+    "Orders"
+)
+
+markOrderFulfilled = Button("Mark Order Fulfilled", ["action", "fulfill", "order_id"], "primary")
+
+# Hidden references to satisfy unreferenced rule
+placeholder = null
+```

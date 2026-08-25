@@ -1,0 +1,59 @@
+
+
+root = Card([header, regionForm, kpiHeading, kpiTable, capacityProgress, alertsHeading, alert1, alert2, alert3, genHeading, genChart, forecastHeading, forecastChart, plantsHeading, plantsTable, outagesHeading, outagesTable, maintHeading, maintTable, curtailmentBtn])
+
+header = CardHeader("Power Network Console", "Real-time grid operations — 14 Jun 2025, 14:32 UTC")
+
+regionForm = Form("region-filter", regionFormButtons, [regionField])
+regionField = FormControl("Focus region", regionSelect, "Filter all metrics to a specific region")
+regionSelect = Select("region", [regNational, regNorth, regSouth, regEast, regWest], "Select a region")
+regNational = SelectItem("national", "National (all regions)")
+regNorth = SelectItem("north", "North")
+regSouth = SelectItem("south", "South")
+regEast = SelectItem("east", "East")
+regWest = SelectItem("west", "West")
+regionFormButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Apply", null, "primary", "normal", "small")
+
+kpiHeading = Heading("Key Metrics", "h2")
+kpiTable = Table([kpiMetric, kpiValue, kpiStatus])
+kpiMetric = Col("Metric", ["Current Load", "Price / MWh", "Emissions Today"])
+kpiValue = Col("Value", ["42,380 MW", "$142.50", "18,240 tCO₂"])
+kpiStatus = Col("Status", ["Normal", "Elevated", "Tracking"])
+
+capacityProgress = Progress(87, "Network capacity utilization — 42,380 MW of 48,700 MW max")
+
+alertsHeading = Heading("Live Alerts", "h2")
+alert1 = Alert("Lakeview Gas Unit 1 offline", "Fault detected at 06:22 UTC. Region South losing 2,080 MW. Backup gas dispatched from Northwind.", "destructive")
+alert2 = Alert("Eastside Coal Unit 2 degraded", "Output reduced to 6,800 MW (nameplate 9,400 MW). Vibration threshold exceeded on turbine bearing.", "warning")
+alert3 = Alert("Price spike in East region", "Spot price exceeded $180/MWh for 12 minutes. Demand response contracts triggered.", "info")
+
+genHeading = Heading("Generation by Source", "h2")
+genChart = PieChart(["Gas", "Nuclear", "Coal", "Wind", "Solar", "Hydro"], [10280, 12400, 6800, 5200, 4100, 3600], "donut")
+
+forecastHeading = Heading("Demand Forecast — Next 24 Hours", "h2")
+forecastChart = LineChart(["14:00", "16:00", "18:00", "20:00", "22:00", "00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00"], [forecastSeries], "natural", "Time (UTC)", "MW")
+forecastSeries = Series("Forecast load", [42380, 44200, 45800, 44500, 41200, 38400, 36800, 35200, 36100, 39800, 42600, 44100])
+
+plantsHeading = Heading("Generation Plants", "h2")
+plantsTable = Table([plantName, plantRegion, plantOutput, plantStatus])
+plantName = Col("Plant", ["Northwind Gas", "Southport Nuclear", "Eastside Coal", "Westwind Solar", "Riverbend Hydro", "Central Wind Farm", "Lakeview Gas"])
+plantRegion = Col("Region", ["North", "South", "East", "West", "North", "National", "South"])
+plantOutput = Col("Output (MW)", [8200, 12400, 6800, 4100, 3600, 5200, 0])
+plantStatus = Col("Status", ["Online", "Online", "Degraded", "Online", "Online", "Online", "Offline"])
+
+outagesHeading = Heading("Active Outages", "h2")
+outagesTable = Table([outagePlant, outageRegion, outageType, outageTime])
+outagePlant = Col("Asset", ["Lakeview Gas Unit 1", "Eastside Coal Unit 2", "Riverbend Transformer T3"])
+outageRegion = Col("Affected Region", ["South", "East", "North"])
+outageType = Col("Type", ["Fault — turbine trip", "Planned maintenance", "Inspection"])
+outageTime = Col("Since / Scheduled", ["14 Jun 06:22", "14 Jun 08:00", "15 Jun 02:00"])
+
+maintHeading = Heading("Planned Maintenance — June 2025", "h2")
+maintTable = Table([maintPlant, maintTask, maintDate, maintRegion])
+maintPlant = Col("Plant", ["Northwind Gas", "Eastside Coal", "Riverbend Hydro", "Central Wind Farm"])
+maintTask = Col("Task", ["Turbine overhaul — Unit 3", "Boiler inspection — Unit 1", "Spillway structural check", "Gearbox replacement — Turbine 14"])
+maintDate = Col("Date", ["18 Jun", "22 Jun", "25 Jun", "28 Jun"])
+maintRegion = Col("Region", ["North", "East", "North", "National"])
+
+curtailmentBtn = AlertDialogBlock("Order Curtailment", "Confirm curtailment order", "This will dispatch a curtailment signal to contracted demand-side resources in the selected region. Estimated reduction: 1,500–3,000 MW over 15 minutes.", "Confirm curtailment", "Cancel", "destructive")

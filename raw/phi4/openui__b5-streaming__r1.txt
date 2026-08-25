@@ -1,0 +1,96 @@
+```openui
+root = Card([viewersSection, mostWatchedTitles, watchTime, newSubsVsCancellations, performanceByGenre, bufferingRate, deliveryHealth, upcomingReleases, expiringLicenses, recommendationClicks, searchFailures, revenueSplit, viewingSplit, regionFocus, featureFlags, promoteTitle])
+
+viewersSection = Card([viewersHeading, viewersCount], "card")
+viewersHeading = Heading("Current Viewers", "h3")
+viewersCount = TextContent("5000 viewers watching right now", "large")
+
+mostWatchedTitles = Card([mostWatchedHeading, mostWatchedTable])
+mostWatchedHeading = Heading("Most-Watched Titles", "h3")
+mostWatchedTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["The Great Adventure", "Mystery of the Night", "Comedy of Errors"])
+hoursCol = Col("Hours Watched", [1500, 1200, 900])
+
+watchTime = Card([watchTimeHeading, watchTimeChart])
+watchTimeHeading = Heading("Watch Time Over the Past Month", "h3")
+watchTimeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [watchTimeSeries], "linear", "Week", "Hours")
+watchTimeSeries = Series("Total Watch Time", [3500, 4000, 4200, 3800])
+
+newSubsVsCancellations = Card([subsVsCancellationsHeading, subsVsCancellationsChart])
+subsVsCancellationsHeading = Heading("New Subscribers vs Cancellations", "h3")
+subsVsCancellationsChart = BarChart(["Jan", "Feb", "Mar", "Apr"], [newSubsSeries, cancellationsSeries], "stacked", "Month", "Count")
+newSubsSeries = Series("New Subscribers", [300, 350, 400, 450])
+cancellationsSeries = Series("Cancellations", [50, 70, 60, 80])
+
+performanceByGenre = Card([performanceHeading, performanceChart])
+performanceHeading = Heading("Performance by Genre", "h3")
+performanceChart = RadarChart(["Action", "Comedy", "Drama", "Horror", "Sci-Fi"], [actionSeries, comedySeries, dramaSeries, horrorSeries, sciFiSeries])
+actionSeries = Series("Action", [80, 70, 60, 50, 90])
+comedySeries = Series("Comedy", [60, 80, 70, 65, 55])
+dramaSeries = Series("Drama", [70, 75, 80, 60, 65])
+horrorSeries = Series("Horror", [40, 50, 45, 60, 55])
+sciFiSeries = Series("Sci-Fi", [85, 90, 80, 75, 95])
+
+bufferingRate = Card([bufferingHeading, bufferingChart])
+bufferingHeading = Heading("Buffering Rate", "h3")
+bufferingChart = PieChart(["<1%", "1-5%", ">5%"], [20, 70, 10], "donut")
+
+deliveryHealth = Card([deliveryHealthHeading, deliveryHealthChart])
+deliveryHealthHeading = Heading("Delivery Health by Region", "h3")
+deliveryHealthChart = RadialChart(["North America", "Europe", "Asia", "South America", "Africa"], [95, 90, 85, 80, 75])
+
+upcomingReleases = Card([upcomingReleasesHeading, upcomingReleasesList])
+upcomingReleasesHeading = Heading("Releases Coming This Month", "h3")
+upcomingReleasesList = ListBlock([release1, release2, release3])
+release1 = ListItem("Epic Adventure", "A thrilling journey", null, "Watch Trailer")
+release2 = ListItem("Mystery of the Sea", "Solve the enigma", null, "Read Synopsis")
+release3 = ListItem("Comedy of Life", "Laughter guaranteed", null, "Meet the Cast")
+
+expiringLicenses = Card([expiringLicensesHeading, expiringLicensesList])
+expiringLicensesHeading = Heading("Licenses Expiring Soon", "h3")
+expiringLicensesList = ListBlock([license1, license2, license3])
+license1 = ListItem("License 123", "Expires in 10 days", null)
+license2 = ListItem("License 456", "Expires in 15 days", null)
+license3 = ListItem("License 789", "Expires in 20 days", null)
+
+recommendationClicks = Card([recommendationHeading, recommendationRate])
+recommendationHeading = Heading("Recommendation Clicks", "h3")
+recommendationRate = TextContent("Click-through rate: 35%", "large")
+
+searchFailures = Card([searchFailuresHeading, searchFailuresChart])
+searchFailuresHeading = Heading("Searches Ending Without Playback", "h3")
+searchFailuresChart = BarChart(["Jan", "Feb", "Mar", "Apr"], [searchFailuresSeries], "grouped", "Month", "Count")
+searchFailuresSeries = Series("Search Failures", [50, 45, 60, 55])
+
+revenueSplit = Card([revenueHeading, revenueChart])
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueChart = PieChart(["Basic", "Standard", "Premium"], [30, 50, 20], "pie")
+
+viewingSplit = Card([viewingHeading, viewingChart])
+viewingHeading = Heading("Viewing Split by Device", "h3")
+viewingChart = PieChart(["Mobile", "Tablet", "Desktop"], [40, 30, 30], "donut")
+
+regionFocus = Card([regionFocusHeading, regionSelect])
+regionFocusHeading = Heading("Focus on One Region", "h3")
+regionSelect = Select("region_focus", [na, eu, asia, sa, af], "Select a region", "medium")
+na = SelectItem("North America", "North America")
+eu = SelectItem("Europe", "Europe")
+asia = SelectItem("Asia", "Asia")
+sa = SelectItem("South America", "South America")
+af = SelectItem("Africa", "Africa")
+
+featureFlags = Card([featureFlagsHeading, featureFlagsList])
+featureFlagsHeading = Heading("Feature Flags", "h3")
+featureFlagsList = ListBlock([flag1, flag2, flag3])
+flag1 = ListItem("Dark Mode", "Enabled", ["🔵"])
+flag2 = ListItem("New UI", "Beta", ["🟢"])
+flag3 = ListItem("Offline Mode", "Disabled", ["🔴"])
+
+promoteTitle = Card([promoteHeading, promoteForm])
+promoteHeading = Heading("Promote a Title on the Home Screen", "h3")
+promoteForm = Form("promote-title", promoteButtons, [titleField])
+titleField = FormControl("Title ID", titleInput)
+titleInput = Input("title_id", null, null, ["Must be valid"])
+promoteButtons = Buttons([submitPromote])
+submitPromote = Button("Promote")
+```

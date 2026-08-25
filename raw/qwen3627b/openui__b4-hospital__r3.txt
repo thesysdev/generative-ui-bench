@@ -1,0 +1,75 @@
+```openui-lang
+root = Card([header, statusRow, admissionsCard, deptCard, criticalAlert, staffCard, dischargeCard, orCard, suppliesCard, actionsCard], "card", "column", "m")
+
+header = CardHeader("Hospital Operations Command", "Real-time monitoring dashboard")
+
+statusRow = Card([bedCard, erCard, dateField], "sunk", "row", "m")
+
+bedCard = Card([bedHeading, bedProgress, bedTag], "card", "column", "s")
+bedHeading = Heading("Bed Occupancy", "h3")
+bedProgress = Progress(87, null)
+bedTag = Badge("87% — 276 / 317 beds", "secondary")
+
+erCard = Card([erHeading, erWait, erBadge], "card", "column", "s")
+erHeading = Heading("ER Wait Time", "h3")
+erWait = TextContent("Current average wait:", "default")
+erBadge = Badge("42 min", "destructive")
+
+dateField = Card([dateHeading, dateControl], "clear", "column", "s")
+dateHeading = Heading("View Date", "h3")
+dateControl = DatePicker("view-date", "single", null, ["2025-01-15"])
+
+admissionsCard = Card([admissionsHeading, admissionsChart], "sunk", "column", "s")
+admissionsHeading = Heading("Admissions — Past 14 Days", "h3")
+admissionsChart = LineChart(dayLabels, [admissionsSeries], "linear", "Day", "Patients")
+dayLabels = ["Jan 2", "Jan 3", "Jan 4", "Jan 5", "Jan 6", "Jan 7", "Jan 8", "Jan 9", "Jan 10", "Jan 11", "Jan 12", "Jan 13", "Jan 14", "Jan 15"]
+admissionsSeries = Series("Admissions", [18, 22, 19, 25, 31, 28, 20, 17, 23, 27, 24, 21, 26, 29])
+
+deptCard = Card([deptHeading, deptChart], "sunk", "column", "s")
+deptHeading = Heading("Patients Per Department", "h3")
+deptChart = HorizontalBarChart(deptLabels, [deptSeries], "grouped", "Patients", "Department")
+deptLabels = ["Medicine", "Surgery", "Pediatrics", "OB/GYN", "Psychiatry", "Neurology", "Orthopedics"]
+deptSeries = Series("Patients", [78, 54, 32, 28, 19, 22, 31])
+
+criticalAlert = Callout("danger", "Critical Patients — Immediate Attention Required", "3 patients in critical condition: Room 412 (Cardiac arrest — Dr. Nguyen), Room 308 (Sepsis — Dr. Patel), ICU Bed 7 (Respiratory failure — Dr. Okonkwo). All requiring continuous monitoring.")
+
+staffCard = Card([staffHeading, staffTable], "sunk", "column", "s")
+staffHeading = Heading("Staff On Shift", "h3")
+staffTable = Table([staffName, staffRole, staffDept, staffShift])
+staffName = Col("Name", ["Dr. Sarah Chen", "Dr. James Nguyen", "RN Maria Lopez", "RN David Kim", "Dr. Aisha Patel", "RT Brian Okafor", "Dr. Fatima Okonkwo", "RN Lisa Tran", "Dr. Michael Ross", "RT Carlos Mendez"])
+staffRole = Col("Role", ["Attending Physician", "Attending Physician", "Registered Nurse", "Registered Nurse", "Attending Physician", "Respiratory Therapist", "Attending Physician", "Registered Nurse", "Attending Physician", "Respiratory Therapist"])
+staffDept = Col("Department", ["Medicine", "Surgery", "Medicine", "Surgery", "ICU", "ICU", "ICU", "Pediatrics", "Orthopedics", "Medicine"])
+staffShift = Col("Shift", ["Day 07-19", "Day 07-19", "Night 19-07", "Night 19-07", "Day 07-19", "Night 19-07", "Day 07-19", "Day 07-19", "Night 19-07", "Day 07-19"])
+
+dischargeCard = Card([dischargeHeading, dischargeList], "sunk", "column", "s")
+dischargeHeading = Heading("Patients Ready for Discharge", "h3")
+dischargeList = ListBlock([discharge1, discharge2, discharge3, discharge4, discharge5], "number")
+discharge1 = ListItem("Eleanor Vance — Room 214", "Appendectomy recovery, stable vitals", null, "Process discharge")
+discharge2 = ListItem("Robert Kim — Room 305", "Pneumonia, completed antibiotics", null, "Process discharge")
+discharge3 = ListItem("Grace Okafor — Room 118", "Observation — cleared by Dr. Chen", null, "Process discharge")
+discharge4 = ListItem("Thomas Wright — Room 422", "Fracture cast change, pain controlled", null, "Process discharge")
+discharge5 = ListItem("Sunita Rao — Room 209", "Post-partum day 2,母婴stable", null, "Process discharge")
+
+orCard = Card([orHeading, orTable], "sunk", "column", "s")
+orHeading = Heading("Today's Operating Room Bookings", "h3")
+orTable = Table([orRoom, orSurgeon, orProcedure, orTime, orStatus])
+orRoom = Col("OR Room", ["OR 1", "OR 2", "OR 3", "OR 1", "OR 4", "OR 2", "OR 3"])
+orSurgeon = Col("Surgeon", ["Dr. Nguyen", "Dr. Ross", "Dr. Chen", "Dr. Nguyen", "Dr. Patel", "Dr. Ross", "Dr. Chen"])
+orProcedure = Col("Procedure", ["Total Knee Replacement", "Appendectomy", "Hip Arthroscopy", "Spinal Fusion", "Hernia Repair", "Cholecystectomy", "C-Section"])
+orTime = Col("Time Slot", ["08:00-10:00", "08:30-10:30", "09:00-11:00", "10:30-14:00", "11:00-12:30", "13:00-15:00", "14:00-15:30"])
+orStatus = Col("Status", ["In Progress", "In Progress", "In Progress", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+suppliesCard = Card([suppliesHeading, suppliesList], "sunk", "column", "s")
+suppliesHeading = Heading("Supplies Running Low", "h3")
+suppliesList = ListBlock([supply1, supply2, supply3, supply4], "number")
+supply1 = ListItem("Surgical Gloves (Medium)", "12 boxes remaining — reorder threshold: 20", null, "Reorder")
+supply2 = ListItem("N95 Masks", "85 units remaining — reorder threshold: 150", null, "Reorder")
+supply3 = ListItem("IV Fluid Bags (0.9% NaCl)", "40 bags remaining — reorder threshold: 60", null, "Reorder")
+supply4 = ListItem("Epinephrine 1:1000", "6 vials remaining — reorder threshold: 10", null, "Reorder")
+
+actionsCard = Card([actionsHeading, actionButtons], "sunk", "column", "s")
+actionsHeading = Heading("Quick Actions", "h3")
+actionButtons = Buttons([incidentBtn, transferBtn], "row")
+incidentBtn = Button("File Incident Report", null, "destructive")
+transferBtn = Button("Request Patient Transfer", null, "primary")
+```

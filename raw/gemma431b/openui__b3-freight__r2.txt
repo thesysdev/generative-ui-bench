@@ -1,0 +1,45 @@
+root = Card([header, topMetrics, alerts, mainGrid, footer], "clear", "column", "l")
+
+header = CardHeader("Logistics Command Center", "Global Freight & Distribution")
+
+topMetrics = Card([onTimeMetric, costMetric, refreshTag], "sunk", "row", "m", "center", "between")
+onTimeMetric = Card([otmLabel, otmValue], "clear", "column", "none")
+otmLabel = TextContent("On-Time Delivery", "small")
+otmValue = TextContent("94.2%", "large-heavy")
+costMetric = Card([costLabel, costValue], "clear", "column", "none")
+costLabel = TextContent("Avg Cost / Shipment", "small")
+costValue = TextContent("$412.50", "large-heavy")
+refreshTag = Badge("Updated 2m ago", "secondary")
+
+alerts = Callout("warning", "Delayed Shipments", "4 shipments are currently behind schedule and require immediate attention.")
+
+mainGrid = Card([searchBar, dataTabs], "clear", "column", "m")
+searchBar = Form("route-search", searchButtons, [routeField])
+routeField = FormControl("Search Route", routeInput, "Enter origin or destination city")
+routeInput = Input("route", "e.g. Chicago to New York")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary", "normal", "small")
+
+dataTabs = Tabs([transitTab, analyticsTab])
+
+transitTab = TabItem("transit", "Active Shipments", [shipmentTable, actionButtons])
+shipmentTable = Table([colOrigin, colDest, colEta, colStatus])
+colOrigin = Col("Origin", ["Shanghai", "Rotterdam", "Austin", "Tokyo", "Berlin"])
+colDest = Col("Destination", ["Los Angeles", "New Jersey", "Chicago", "Seattle", "London"])
+colEta = Col("ETA", ["Oct 24", "Oct 25", "Oct 23", "Oct 26", "Oct 24"])
+colStatus = Col("Status", ["In Transit", "Delayed", "In Transit", "Customs", "In Transit"])
+actionButtons = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment for Review", null, "secondary", "destructive", "small")
+
+analyticsTab = TabItem("analytics", "Performance", [volumeSection, carrierSection])
+volumeSection = Card([volHeading, volChart], "sunk", "column", "s")
+volHeading = Heading("Weekly Volume (8 Weeks)", "h3")
+volChart = BarChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "grouped", "Week", "Units")
+volSeries = Series("Shipments", [120, 145, 130, 160, 155, 170, 140, 165])
+carrierSection = Card([carrierHeading, carrierChart], "sunk", "column", "s")
+carrierHeading = Heading("Carrier Volume Split", "h3")
+carrierChart = PieChart(["Maersk", "FedEx", "DHL", "Kuehne+Nagel"], [40, 25, 20, 15], "donut")
+
+footer = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("View detailed delay reports")
+fu2 = FollowUpItem("Export monthly volume CSV")

@@ -1,0 +1,52 @@
+root = Card([pageHeader, dateRow, summaryRow, blockerCallout, updatesHeading, updatesList, missingHeading, missingList, separator, postHeading, postForm], "clear", "column", "m")
+
+pageHeader = CardHeader("Async Standup", "Team daily check-in — post your update anytime")
+
+dateRow = Card([dateBadge, dateText], "sunk", "row", "s", "center")
+dateBadge = Badge("Today", "secondary")
+dateText = TextContent("**Thursday, July 17, 2025**", "default")
+
+summaryRow = Card([updatesTag, missingTag, blockedTag], "card", "row", "m", "center")
+updatesTag = Tag("5 Updates Posted", null, "md", "success")
+missingTag = Tag("3 Still Missing", null, "md", "warning")
+blockedTag = Tag("2 Blocked", null, "md", "danger")
+
+blockerCallout = Callout("warning", "🚧 Blockers Need Attention", "Maya Chen is blocked on API rate limit issue. James Park is blocked waiting for design sign-off on the checkout flow.")
+
+updatesHeading = Heading("Today's Updates", "h3")
+
+updatesList = ListBlock([u1, u2, u3, u4, u5], "image")
+u1 = ListItem("Priya Sharma · ✅ Clear", "Yesterday: Finished auth refactor. Today: Starting unit tests for auth module. Blockers: None.", ["https://picsum.photos/seed/priya/64/64"])
+u2 = ListItem("Maya Chen · 🚧 Blocked", "Yesterday: Integrated third-party payment API. Today: Investigating rate limit errors. Blockers: API rate limit — needs DevOps help.", ["https://picsum.photos/seed/maya/64/64"])
+u3 = ListItem("James Park · 🚧 Blocked", "Yesterday: Completed checkout UI prototype. Today: Waiting on design approval. Blockers: Design sign-off pending from Ana.", ["https://picsum.photos/seed/james/64/64"])
+u4 = ListItem("Sofia Torres · ✅ Clear", "Yesterday: Deployed analytics dashboard to staging. Today: Fixing tooltip rendering bug. Blockers: None.", ["https://picsum.photos/seed/sofia/64/64"])
+u5 = ListItem("Daniel Kim · ✅ Clear", "Yesterday: Wrote release notes for v2.4. Today: QA pass on mobile layout. Blockers: None.", ["https://picsum.photos/seed/daniel/64/64"])
+
+missingHeading = Heading("Missing Updates (3)", "h3")
+
+missingList = Card([missingText, missingBadges], "sunk", "column", "s")
+missingText = TextContent("The following teammates haven't posted yet today:", "small")
+missingBadges = Card([mb1, mb2, mb3], "clear", "row", "s", "center", "start", true)
+mb1 = Badge("Alex Rivera", "outline")
+mb2 = Badge("Tomoko Ito", "outline")
+mb3 = Badge("Chris Oduya", "outline")
+
+separator = Separator("horizontal", true)
+
+postHeading = Heading("Post Your Update", "h3")
+
+postForm = Form("standup-post", postButtons, [yesterdayField, todayField, blockerField, statusField])
+yesterdayField = FormControl("What did you do yesterday?", yesterdayInput, "Summarise completed tasks")
+yesterdayInput = TextArea("yesterday", "e.g. Reviewed pull requests, fixed login bug…", 3)
+todayField = FormControl("What will you do today?", todayInput, "Your focus for the day")
+todayInput = TextArea("today", "e.g. Start working on notification service…", 3)
+blockerField = FormControl("Any blockers?", blockerInput, "Leave blank if you're all clear")
+blockerInput = TextArea("blockers", "e.g. Waiting on credentials from IT…", 2)
+statusField = FormControl("Status", statusSelect, "How is your day looking?")
+statusSelect = Select("status", [s1, s2, s3], "Choose your status")
+s1 = SelectItem("clear", "✅ Clear — no blockers")
+s2 = SelectItem("blocked", "🚧 Blocked — need help")
+s3 = SelectItem("at-risk", "⚠️ At risk — might be delayed")
+postButtons = Buttons([submitBtn, clearBtn])
+submitBtn = Button("Post Update", null, "primary")
+clearBtn = Button("Clear", null, "secondary")

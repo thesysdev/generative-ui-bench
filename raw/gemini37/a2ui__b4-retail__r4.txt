@@ -1,0 +1,775 @@
+Here is the comprehensive Store Manager Daily Console designed to give an immediate operational overview and fast in-store actions.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "headerRow",
+          "kpiOverviewCard",
+          "trafficAndCompareTabs",
+          "operationsAndInventoryCard",
+          "shiftAndRegistersCard",
+          "promotionsCard",
+          "reorderActionDialog"
+        ]
+      },
+      {
+        "id": "headerRow",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "storeHeaderInfo",
+          "storeSelectorForm"
+        ]
+      },
+      {
+        "id": "storeHeaderInfo",
+        "component": "CardHeader",
+        "title": "Store Manager Console",
+        "subtitle": "Daily live operations & performance snapshot"
+      },
+      {
+        "id": "storeSelectorForm",
+        "component": "Form",
+        "name": "switch_store_form",
+        "buttons": "storeSelectBtnGroup",
+        "fields": [
+          "storeSelectField"
+        ]
+      },
+      {
+        "id": "storeSelectField",
+        "component": "FormControl",
+        "label": "Active Store Location",
+        "input": "storeSelect"
+      },
+      {
+        "id": "storeSelect",
+        "component": "Select",
+        "name": "selected_store",
+        "placeholder": "Select Store",
+        "items": [
+          "storeDowntown",
+          "storeWestfield",
+          "storeNorthside",
+          "storeAirport"
+        ]
+      },
+      {
+        "id": "storeDowntown",
+        "component": "SelectItem",
+        "value": "store_101",
+        "label": "Store #101 - Downtown Flagship (Current)"
+      },
+      {
+        "id": "storeWestfield",
+        "component": "SelectItem",
+        "value": "store_102",
+        "label": "Store #102 - Westfield Mall"
+      },
+      {
+        "id": "storeNorthside",
+        "component": "SelectItem",
+        "value": "store_103",
+        "label": "Store #103 - Northside Galleria"
+      },
+      {
+        "id": "storeAirport",
+        "component": "SelectItem",
+        "value": "store_104",
+        "label": "Store #104 - Terminal 2 Express"
+      },
+      {
+        "id": "storeSelectBtnGroup",
+        "component": "Buttons",
+        "buttons": [
+          "switchStoreBtn"
+        ]
+      },
+      {
+        "id": "switchStoreBtn",
+        "component": "Button",
+        "label": "Switch Store",
+        "variant": "secondary"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpiHeader",
+          "salesProgressBar",
+          "kpiMetricsTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Sales Today vs. Target",
+        "subtitle": "Target: $18,000 | Current: $14,850 (82.5% achieved at 3:30 PM)"
+      },
+      {
+        "id": "salesProgressBar",
+        "component": "Progress",
+        "value": 82.5,
+        "label": "Daily Revenue Progress: $14,850 / $18,000"
+      },
+      {
+        "id": "kpiMetricsTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colCurrentVal",
+          "colTargetRef",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Key Metric",
+        "data": [
+          "Today's Sales",
+          "Average Basket Size",
+          "Returns This Week (Cumulative)",
+          "Customer Foot Traffic Today"
+        ]
+      },
+      {
+        "id": "colCurrentVal",
+        "component": "Col",
+        "label": "Value",
+        "data": [
+          "$14,850.00",
+          "$54.20 (2.8 items)",
+          "48 units ($2,140 total)",
+          "1,240 visitors"
+        ]
+      },
+      {
+        "id": "colTargetRef",
+        "component": "Col",
+        "label": "Target / Benchmark",
+        "data": [
+          "$18,000.00 daily goal",
+          "$48.00 target avg",
+          "< 3.0% of gross sales",
+          "1,500 expected daily"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Pacing Status",
+        "data": [
+          "On Track (+6.2%)",
+          "Exceeding (+12.9%)",
+          "Healthy (1.8% rate)",
+          "Peak hours active"
+        ]
+      },
+      {
+        "id": "trafficAndCompareTabs",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "analyticsTabs"
+        ]
+      },
+      {
+        "id": "analyticsTabs",
+        "component": "Tabs",
+        "items": [
+          "trafficTabItem",
+          "weeklyCompareTabItem"
+        ]
+      },
+      {
+        "id": "trafficTabItem",
+        "component": "TabItem",
+        "value": "traffic_tab",
+        "trigger": "Foot Traffic Through The Day",
+        "content": [
+          "trafficChart"
+        ]
+      },
+      {
+        "id": "trafficChart",
+        "component": "AreaChart",
+        "variant": "natural",
+        "xLabel": "Hour of Day",
+        "yLabel": "Visitor Count",
+        "labels": [
+          "09:00",
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00",
+          "14:00",
+          "15:00",
+          "16:00 (Est)",
+          "17:00 (Est)",
+          "18:00 (Est)"
+        ],
+        "series": [
+          "trafficSeries"
+        ]
+      },
+      {
+        "id": "trafficSeries",
+        "component": "Series",
+        "category": "In-Store Visitors",
+        "values": [
+          45,
+          110,
+          180,
+          265,
+          230,
+          195,
+          215,
+          280,
+          310,
+          220
+        ]
+      },
+      {
+        "id": "weeklyCompareTabItem",
+        "component": "TabItem",
+        "value": "compare_tab",
+        "trigger": "This Week vs. Last Week",
+        "content": [
+          "weeklyComparisonChart"
+        ]
+      },
+      {
+        "id": "weeklyComparisonChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "xLabel": "Day of Week",
+        "yLabel": "Sales ($ in Thousands)",
+        "labels": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun"
+        ],
+        "series": [
+          "thisWeekSeries",
+          "lastWeekSeries"
+        ]
+      },
+      {
+        "id": "thisWeekSeries",
+        "component": "Series",
+        "category": "This Week ($k)",
+        "values": [
+          14.2,
+          15.8,
+          16.1,
+          14.8,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "lastWeekSeries",
+        "component": "Series",
+        "category": "Last Week ($k)",
+        "values": [
+          13.1,
+          14.2,
+          15.0,
+          13.9,
+          19.5,
+          24.8,
+          18.2
+        ]
+      },
+      {
+        "id": "operationsAndInventoryCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "inventoryHeader",
+          "stockAlertBanner",
+          "inventoryTable"
+        ]
+      },
+      {
+        "id": "inventoryHeader",
+        "component": "CardHeader",
+        "title": "Inventory: Best Sellers & Out of Stock Alert",
+        "subtitle": "Top moving items today alongside replenishment priorities"
+      },
+      {
+        "id": "stockAlertBanner",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "3 Products Out of Stock",
+        "description": "Stock exhausted today. Fast replenishment recommended to prevent lost weekend volume."
+      },
+      {
+        "id": "inventoryTable",
+        "component": "Table",
+        "columns": [
+          "colItemSku",
+          "colItemName",
+          "colUnitsSoldToday",
+          "colStockStatus",
+          "colItemAction"
+        ]
+      },
+      {
+        "id": "colItemSku",
+        "component": "Col",
+        "label": "SKU",
+        "data": [
+          "SKU-4819",
+          "SKU-9021",
+          "SKU-1123",
+          "SKU-7734",
+          "SKU-3320",
+          "SKU-6652"
+        ]
+      },
+      {
+        "id": "colItemName",
+        "component": "Col",
+        "label": "Product",
+        "data": [
+          "Organic Oat Milk 1L (Best Seller #1)",
+          "Artisan Sourdough Loaf (Best Seller #2)",
+          "Cold Brew Concentrate 32oz (Best Seller #3)",
+          "Sparkling Water Lemon 12pk",
+          "Almond Butter Creamy 16oz",
+          "Dark Roast Whole Bean 1lb"
+        ]
+      },
+      {
+        "id": "colUnitsSoldToday",
+        "component": "Col",
+        "label": "Units Sold Today",
+        "data": [
+          "84 units",
+          "62 units",
+          "51 units",
+          "38 units",
+          "29 units",
+          "24 units"
+        ]
+      },
+      {
+        "id": "colStockStatus",
+        "component": "Col",
+        "label": "Current Status",
+        "data": [
+          "Low Stock (4 left)",
+          "OUT OF STOCK (0 left)",
+          "In Stock (28 left)",
+          "OUT OF STOCK (0 left)",
+          "OUT OF STOCK (0 left)",
+          "In Stock (19 left)"
+        ]
+      },
+      {
+        "id": "colItemAction",
+        "component": "Col",
+        "label": "Action Needed",
+        "data": [
+          "Monitor",
+          "Urgent Reorder",
+          "Sufficient",
+          "Urgent Reorder",
+          "Urgent Reorder",
+          "Sufficient"
+        ]
+      },
+      {
+        "id": "shiftAndRegistersCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "shiftHeader",
+          "registerTable",
+          "staffShiftTable"
+        ]
+      },
+      {
+        "id": "shiftHeader",
+        "component": "CardHeader",
+        "title": "Floor Operations: Registers & Staff On Shift",
+        "subtitle": "Live staffing allocations and checkout lane statuses"
+      },
+      {
+        "id": "registerTable",
+        "component": "Table",
+        "columns": [
+          "colRegId",
+          "colRegStatus",
+          "colRegOperator",
+          "colRegVolume"
+        ]
+      },
+      {
+        "id": "colRegId",
+        "component": "Col",
+        "label": "Register Station",
+        "data": [
+          "Register 1 (Main Front)",
+          "Register 2 (Main Front)",
+          "Register 3 (Express Lane)",
+          "Register 4 (Returns & Service)",
+          "Self-Checkout 1-4 (Bay A)"
+        ]
+      },
+      {
+        "id": "colRegStatus",
+        "component": "Col",
+        "label": "Lane Status",
+        "data": [
+          "OPEN - Active",
+          "OPEN - Active",
+          "CLOSED - Standby",
+          "OPEN - Active",
+          "OPEN - Active (4/4 Online)"
+        ]
+      },
+      {
+        "id": "colRegOperator",
+        "component": "Col",
+        "label": "Assigned Cashier",
+        "data": [
+          "Sarah Jenkins",
+          "Carlos Mendoza",
+          "Unassigned",
+          "Maya Patel",
+          "David Kim (Supervisor)"
+        ]
+      },
+      {
+        "id": "colRegVolume",
+        "component": "Col",
+        "label": "Transactions Handled",
+        "data": [
+          "142 txns",
+          "128 txns",
+          "0 txns",
+          "46 txns",
+          "219 txns"
+        ]
+      },
+      {
+        "id": "staffShiftTable",
+        "component": "Table",
+        "columns": [
+          "colStaffName",
+          "colStaffRole",
+          "colStaffShiftHours",
+          "colStaffStatus"
+        ]
+      },
+      {
+        "id": "colStaffName",
+        "component": "Col",
+        "label": "Staff Member On Shift",
+        "data": [
+          "Sarah Jenkins",
+          "Carlos Mendoza",
+          "Maya Patel",
+          "David Kim",
+          "Elena Rostov",
+          "Marcus Vance"
+        ]
+      },
+      {
+        "id": "colStaffRole",
+        "component": "Col",
+        "label": "Role",
+        "data": [
+          "Lead Cashier",
+          "Cashier / Front",
+          "Customer Service Lead",
+          "Floor Supervisor",
+          "Inventory / Stocking",
+          "Merchandising Specialist"
+        ]
+      },
+      {
+        "id": "colStaffShiftHours",
+        "component": "Col",
+        "label": "Scheduled Hours",
+        "data": [
+          "08:00 - 16:30",
+          "09:00 - 17:30",
+          "10:00 - 18:30",
+          "07:30 - 16:00",
+          "06:00 - 14:30 (Overtime)",
+          "12:00 - 20:30"
+        ]
+      },
+      {
+        "id": "colStaffStatus",
+        "component": "Col",
+        "label": "Shift Status",
+        "data": [
+          "Clocked In (Station 1)",
+          "Clocked In (Station 2)",
+          "Clocked In (Service Desk)",
+          "Clocked In (Floor Roam)",
+          "Clocked In (Backroom)",
+          "Clocked In (Aisles 4-8)"
+        ]
+      },
+      {
+        "id": "promotionsCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "promoHeader",
+          "promoTable"
+        ]
+      },
+      {
+        "id": "promoHeader",
+        "component": "CardHeader",
+        "title": "Active Promotions Performance",
+        "subtitle": "Current marketing campaigns and discount redemptions"
+      },
+      {
+        "id": "promoTable",
+        "component": "Table",
+        "columns": [
+          "colPromoName",
+          "colPromoDiscount",
+          "colPromoRedemptions",
+          "colPromoRevenue",
+          "colPromoPace"
+        ]
+      },
+      {
+        "id": "colPromoName",
+        "component": "Col",
+        "label": "Promotion Campaign",
+        "data": [
+          "Buy 2 Oat Milks, Get $1.50 Off",
+          "Morning Pastry & Drip Bundle ($5.00)",
+          "Weekend Prepared Meals 20% Off",
+          "Loyalty Member 10% Spend Booster ($50+)"
+        ]
+      },
+      {
+        "id": "colPromoDiscount",
+        "component": "Col",
+        "label": "Discount Type",
+        "data": [
+          "Item Multi-Buy",
+          "Combo Special",
+          "Category % Discount",
+          "Cart Threshold %"
+        ]
+      },
+      {
+        "id": "colPromoRedemptions",
+        "component": "Col",
+        "label": "Redemptions Today",
+        "data": [
+          "38 times",
+          "74 times",
+          "19 times",
+          "52 times"
+        ]
+      },
+      {
+        "id": "colPromoRevenue",
+        "component": "Col",
+        "label": "Generated Revenue",
+        "data": [
+          "$342.00",
+          "$370.00",
+          "$418.00",
+          "$3,640.00"
+        ]
+      },
+      {
+        "id": "colPromoPace",
+        "component": "Col",
+        "label": "Performance vs Goal",
+        "data": [
+          "126% (Very High)",
+          "98% (On Target)",
+          "65% (Slow Pace)",
+          "140% (Exceeding)"
+        ]
+      },
+      {
+        "id": "reorderActionDialog",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "reorderQuickHeader",
+          "reorderForm"
+        ]
+      },
+      {
+        "id": "reorderQuickHeader",
+        "component": "CardHeader",
+        "title": "Quick Stock Replenishment & Emergency Purchase Order",
+        "subtitle": "Submit restock orders directly to the Central Distribution Center"
+      },
+      {
+        "id": "reorderForm",
+        "component": "Form",
+        "name": "quick_reorder_form",
+        "buttons": "reorderBtnGroup",
+        "fields": [
+          "reorderItemControl",
+          "reorderQtyControl",
+          "reorderPriorityControl"
+        ]
+      },
+      {
+        "id": "reorderItemControl",
+        "component": "FormControl",
+        "label": "Select Out of Stock / Low Stock Item",
+        "input": "reorderItemSelect",
+        "hint": "Select item needing immediate warehouse replenishment"
+      },
+      {
+        "id": "reorderItemSelect",
+        "component": "Select",
+        "name": "reorder_item",
+        "placeholder": "Choose product to reorder",
+        "items": [
+          "reorderOptSourdough",
+          "reorderOptSparkling",
+          "reorderOptAlmondButter",
+          "reorderOptOatMilk"
+        ]
+      },
+      {
+        "id": "reorderOptSourdough",
+        "component": "SelectItem",
+        "value": "SKU-9021",
+        "label": "SKU-9021 - Artisan Sourdough Loaf (Out of Stock)"
+      },
+      {
+        "id": "reorderOptSparkling",
+        "component": "SelectItem",
+        "value": "SKU-7734",
+        "label": "SKU-7734 - Sparkling Water Lemon 12pk (Out of Stock)"
+      },
+      {
+        "id": "reorderOptAlmondButter",
+        "component": "SelectItem",
+        "value": "SKU-3320",
+        "label": "SKU-3320 - Almond Butter Creamy 16oz (Out of Stock)"
+      },
+      {
+        "id": "reorderOptOatMilk",
+        "component": "SelectItem",
+        "value": "SKU-4819",
+        "label": "SKU-4819 - Organic Oat Milk 1L (Low Stock - 4 left)"
+      },
+      {
+        "id": "reorderQtyControl",
+        "component": "FormControl",
+        "label": "Reorder Quantity (Cases)",
+        "input": "reorderQtyInput",
+        "hint": "Standard case pack size is 12 units"
+      },
+      {
+        "id": "reorderQtyInput",
+        "component": "Input",
+        "name": "reorder_quantity",
+        "placeholder": "e.g., 5",
+        "type": "number"
+      },
+      {
+        "id": "reorderPriorityControl",
+        "component": "FormControl",
+        "label": "Delivery Priority",
+        "input": "reorderPriorityRadio"
+      },
+      {
+        "id": "reorderPriorityRadio",
+        "component": "RadioGroup",
+        "name": "delivery_priority",
+        "defaultValue": "urgent_overnight",
+        "items": [
+          "priorityOvernight",
+          "priorityStandard"
+        ]
+      },
+      {
+        "id": "priorityOvernight",
+        "component": "RadioItem",
+        "value": "urgent_overnight",
+        "label": "Urgent Overnight Dispatch",
+        "description": "Next morning arrival before 07:00 AM opening"
+      },
+      {
+        "id": "priorityStandard",
+        "component": "RadioItem",
+        "value": "standard_delivery",
+        "label": "Standard Delivery Cycle",
+        "description": "Regular distribution schedule (48 hours)"
+      },
+      {
+        "id": "reorderBtnGroup",
+        "component": "Buttons",
+        "buttons": [
+          "submitReorderBtn",
+          "resetReorderBtn"
+        ]
+      },
+      {
+        "id": "submitReorderBtn",
+        "component": "Button",
+        "label": "Transmit Purchase Order",
+        "variant": "primary"
+      },
+      {
+        "id": "resetReorderBtn",
+        "component": "Button",
+        "label": "Clear Form",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

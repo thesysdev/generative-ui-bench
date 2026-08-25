@@ -1,0 +1,892 @@
+Here is the complete Store Manager's Daily Console covering all 12 operational metrics and control workflows.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "storeSelectorCard",
+          "kpiOverviewCard",
+          "mainTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Store Operations Console",
+        "subtitle": "Real-time floor performance, inventory management, and staffing"
+      },
+      {
+        "id": "storeSelectorCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "storeSelectControl",
+          "storeStatusBadge"
+        ]
+      },
+      {
+        "id": "storeSelectControl",
+        "component": "FormControl",
+        "label": "Active Location",
+        "input": "storeSelectInput",
+        "hint": "Switch view to monitor another retail branch"
+      },
+      {
+        "id": "storeSelectInput",
+        "component": "Select",
+        "name": "store_location",
+        "placeholder": "Select Store Location",
+        "items": [
+          "store1",
+          "store2",
+          "store3",
+          "store4"
+        ]
+      },
+      {
+        "id": "store1",
+        "component": "SelectItem",
+        "value": "store_104",
+        "label": "Store #104 - Downtown Flagship (Current)"
+      },
+      {
+        "id": "store2",
+        "component": "SelectItem",
+        "value": "store_208",
+        "label": "Store #208 - Metro West Mall"
+      },
+      {
+        "id": "store3",
+        "component": "SelectItem",
+        "value": "store_315",
+        "label": "Store #315 - Northside Plaza"
+      },
+      {
+        "id": "store4",
+        "component": "SelectItem",
+        "value": "store_402",
+        "label": "Store #402 - Eastgate Pavilion"
+      },
+      {
+        "id": "storeStatusBadge",
+        "component": "Badge",
+        "text": "Live • System Synced",
+        "variant": "default"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpiTitle",
+          "salesProgress",
+          "coreMetricsTable"
+        ]
+      },
+      {
+        "id": "kpiTitle",
+        "component": "Heading",
+        "text": "Today's Core Performance & Targets",
+        "level": "h3"
+      },
+      {
+        "id": "salesProgress",
+        "component": "Progress",
+        "value": 82,
+        "label": "Sales Today: $16,420 / $20,000 Target (82.1%)"
+      },
+      {
+        "id": "coreMetricsTable",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "currentValCol",
+          "targetBenchmarkCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Key Metric",
+        "data": [
+          "Today's Revenue vs Target",
+          "Average Basket Size",
+          "Returns This Week",
+          "Weekly WoW Revenue Pace"
+        ]
+      },
+      {
+        "id": "currentValCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "$16,420",
+          "$48.50 / basket",
+          "$1,840 (38 units)",
+          "$88,400 (WTD)"
+        ]
+      },
+      {
+        "id": "targetBenchmarkCol",
+        "component": "Col",
+        "label": "Target / Benchmark",
+        "data": [
+          "$20,000 Daily Goal",
+          "$42.00 Target",
+          "< $2,500 Threshold",
+          "$79,200 Last Week Same Time"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Variance",
+        "data": [
+          "-$3,580 to goal",
+          "+15.5% vs avg",
+          "-26.4% (Healthy)",
+          "+11.6% vs Last Week"
+        ]
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "trafficSalesTab",
+          "inventoryTab",
+          "operationsTab",
+          "promoWoWTab"
+        ]
+      },
+      {
+        "id": "trafficSalesTab",
+        "component": "TabItem",
+        "value": "traffic_sales",
+        "trigger": "Traffic & Products",
+        "content": [
+          "trafficCard",
+          "bestSellersCard"
+        ]
+      },
+      {
+        "id": "trafficCard",
+        "component": "Card",
+        "children": [
+          "trafficHeader",
+          "trafficLineChart"
+        ]
+      },
+      {
+        "id": "trafficHeader",
+        "component": "CardHeader",
+        "title": "Hourly Foot Traffic Today",
+        "subtitle": "Customer entry sensor counts from 8:00 AM to 8:00 PM"
+      },
+      {
+        "id": "trafficLineChart",
+        "component": "LineChart",
+        "labels": [
+          "8 AM",
+          "10 AM",
+          "12 PM",
+          "2 PM",
+          "4 PM",
+          "6 PM",
+          "8 PM"
+        ],
+        "series": [
+          "trafficSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Hour of Day",
+        "yLabel": "Visitors"
+      },
+      {
+        "id": "trafficSeries",
+        "component": "Series",
+        "category": "Foot Traffic",
+        "values": [
+          45,
+          130,
+          310,
+          245,
+          290,
+          380,
+          160
+        ]
+      },
+      {
+        "id": "bestSellersCard",
+        "component": "Card",
+        "children": [
+          "bestSellersHeader",
+          "bestSellersTable"
+        ]
+      },
+      {
+        "id": "bestSellersHeader",
+        "component": "CardHeader",
+        "title": "Top Selling Products Today",
+        "subtitle": "Ranked by units sold through POS registers"
+      },
+      {
+        "id": "bestSellersTable",
+        "component": "Table",
+        "columns": [
+          "rankCol",
+          "itemCol",
+          "categoryCol",
+          "unitsSoldCol",
+          "itemRevenueCol"
+        ]
+      },
+      {
+        "id": "rankCol",
+        "component": "Col",
+        "label": "Rank",
+        "data": [
+          "#1",
+          "#2",
+          "#3",
+          "#4",
+          "#5"
+        ]
+      },
+      {
+        "id": "itemCol",
+        "component": "Col",
+        "label": "Product",
+        "data": [
+          "Organic Fairtrade Coffee (12oz)",
+          "Cold-Pressed Orange Juice (16oz)",
+          "Artisan Sourdough Loaf",
+          "Eco Reusable Tote Bag",
+          "Gluten-Free Granola Bar"
+        ]
+      },
+      {
+        "id": "categoryCol",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Beverages",
+          "Chilled",
+          "Bakery",
+          "Merchandise",
+          "Snacks"
+        ]
+      },
+      {
+        "id": "unitsSoldCol",
+        "component": "Col",
+        "label": "Units Sold",
+        "data": [
+          "142 units",
+          "98 units",
+          "76 units",
+          "64 units",
+          "59 units"
+        ]
+      },
+      {
+        "id": "itemRevenueCol",
+        "component": "Col",
+        "label": "Gross Sales",
+        "data": [
+          "$1,846.00",
+          "$588.00",
+          "$494.00",
+          "$320.00",
+          "$177.00"
+        ]
+      },
+      {
+        "id": "inventoryTab",
+        "component": "TabItem",
+        "value": "inventory",
+        "trigger": "Inventory & Stock Replenishment",
+        "content": [
+          "stockAlertBanner",
+          "stockoutCard",
+          "quickReorderFormCard"
+        ]
+      },
+      {
+        "id": "stockAlertBanner",
+        "component": "Alert",
+        "variant": "destructive",
+        "title": "4 Items Currently Out of Stock",
+        "description": "Immediate supplier replenishment recommended to prevent daily loss of sales."
+      },
+      {
+        "id": "stockoutCard",
+        "component": "Card",
+        "children": [
+          "stockoutHeader",
+          "stockoutTable"
+        ]
+      },
+      {
+        "id": "stockoutHeader",
+        "component": "CardHeader",
+        "title": "Out of Stock Log",
+        "subtitle": "Items with 0 floor/backroom quantity"
+      },
+      {
+        "id": "stockoutTable",
+        "component": "Table",
+        "columns": [
+          "skuCol",
+          "skuNameCol",
+          "lastSoldCol",
+          "avgDailyVelocityCol",
+          "supplierCol"
+        ]
+      },
+      {
+        "id": "skuCol",
+        "component": "Col",
+        "label": "SKU",
+        "data": [
+          "SKU-4912",
+          "SKU-8831",
+          "SKU-1029",
+          "SKU-7720"
+        ]
+      },
+      {
+        "id": "skuNameCol",
+        "component": "Col",
+        "label": "Item Name",
+        "data": [
+          "Almond Oat Milk 1L",
+          "Sparkling Water Lemon 12pk",
+          "Avocado Oil Spray 8oz",
+          "Organic Dark Chocolate 85%"
+        ]
+      },
+      {
+        "id": "lastSoldCol",
+        "component": "Col",
+        "label": "Out Since",
+        "data": [
+          "Today 09:15 AM",
+          "Today 11:40 AM",
+          "Yesterday",
+          "Today 01:20 PM"
+        ]
+      },
+      {
+        "id": "avgDailyVelocityCol",
+        "component": "Col",
+        "label": "Daily Velocity",
+        "data": [
+          "35 units/day",
+          "24 units/day",
+          "18 units/day",
+          "30 units/day"
+        ]
+      },
+      {
+        "id": "supplierCol",
+        "component": "Col",
+        "label": "Default Supplier",
+        "data": [
+          "Pacific Direct",
+          "PureBev Wholesale",
+          "Natura Logistics",
+          "SweetCraft Co."
+        ]
+      },
+      {
+        "id": "quickReorderFormCard",
+        "component": "Card",
+        "children": [
+          "reorderFormHeader",
+          "reorderForm"
+        ]
+      },
+      {
+        "id": "reorderFormHeader",
+        "component": "CardHeader",
+        "title": "Item Replenishment Order",
+        "subtitle": "Issue an express warehouse or supplier purchase order"
+      },
+      {
+        "id": "reorderForm",
+        "component": "Form",
+        "name": "quick-reorder",
+        "buttons": "reorderActionButtons",
+        "fields": [
+          "reorderSkuField",
+          "reorderQuantityField",
+          "reorderPriorityField"
+        ]
+      },
+      {
+        "id": "reorderSkuField",
+        "component": "FormControl",
+        "label": "Select Out-of-Stock / Low Item",
+        "input": "reorderSkuSelect"
+      },
+      {
+        "id": "reorderSkuSelect",
+        "component": "Select",
+        "name": "selected_sku",
+        "placeholder": "Choose SKU to reorder...",
+        "items": [
+          "optSku1",
+          "optSku2",
+          "optSku3",
+          "optSku4"
+        ]
+      },
+      {
+        "id": "optSku1",
+        "component": "SelectItem",
+        "value": "SKU-4912",
+        "label": "SKU-4912: Almond Oat Milk 1L (Est. Lead: 1 day)"
+      },
+      {
+        "id": "optSku2",
+        "component": "SelectItem",
+        "value": "SKU-8831",
+        "label": "SKU-8831: Sparkling Water Lemon 12pk (Est. Lead: 2 days)"
+      },
+      {
+        "id": "optSku3",
+        "component": "SelectItem",
+        "value": "SKU-1029",
+        "label": "SKU-1029: Avocado Oil Spray 8oz (Est. Lead: 1 day)"
+      },
+      {
+        "id": "optSku4",
+        "component": "SelectItem",
+        "value": "SKU-7720",
+        "label": "SKU-7720: Organic Dark Chocolate 85% (Est. Lead: 3 days)"
+      },
+      {
+        "id": "reorderQuantityField",
+        "component": "FormControl",
+        "label": "Order Quantity (Cases / Units)",
+        "input": "reorderQuantityInput",
+        "hint": "Default pallet MOQ is 50 units"
+      },
+      {
+        "id": "reorderQuantityInput",
+        "component": "Input",
+        "name": "quantity",
+        "placeholder": "e.g., 100",
+        "type": "number"
+      },
+      {
+        "id": "reorderPriorityField",
+        "component": "FormControl",
+        "label": "Shipping Priority",
+        "input": "priorityRadio"
+      },
+      {
+        "id": "priorityRadio",
+        "component": "RadioGroup",
+        "name": "priority",
+        "items": [
+          "prioStandard",
+          "prioExpress"
+        ]
+      },
+      {
+        "id": "prioStandard",
+        "component": "RadioItem",
+        "label": "Standard Delivery",
+        "description": "Regular stock transfer route",
+        "value": "standard"
+      },
+      {
+        "id": "prioExpress",
+        "component": "RadioItem",
+        "label": "Express Next-Morning Delivery",
+        "description": "Direct distributor courier",
+        "value": "express"
+      },
+      {
+        "id": "reorderActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitOrderBtn",
+          "saveDraftBtn"
+        ]
+      },
+      {
+        "id": "submitOrderBtn",
+        "component": "Button",
+        "label": "Submit Purchase Order",
+        "variant": "primary"
+      },
+      {
+        "id": "saveDraftBtn",
+        "component": "Button",
+        "label": "Save to Review",
+        "variant": "secondary"
+      },
+      {
+        "id": "operationsTab",
+        "component": "TabItem",
+        "value": "operations",
+        "trigger": "Registers & Shift Staff",
+        "content": [
+          "registersCard",
+          "staffCard"
+        ]
+      },
+      {
+        "id": "registersCard",
+        "component": "Card",
+        "children": [
+          "registersHeader",
+          "registersTable"
+        ]
+      },
+      {
+        "id": "registersHeader",
+        "component": "CardHeader",
+        "title": "Register Status & Checkout Lanes",
+        "subtitle": "Point of sale operational status and assigned cashier"
+      },
+      {
+        "id": "registersTable",
+        "component": "Table",
+        "columns": [
+          "regNumberCol",
+          "regTypeCol",
+          "regStatusCol",
+          "regCashierCol",
+          "regHourlySalesCol"
+        ]
+      },
+      {
+        "id": "regNumberCol",
+        "component": "Col",
+        "label": "Register",
+        "data": [
+          "POS #01",
+          "POS #02",
+          "POS #03",
+          "POS #04",
+          "SCO #01 (Self-Checkout)",
+          "SCO #02 (Self-Checkout)"
+        ]
+      },
+      {
+        "id": "regTypeCol",
+        "component": "Col",
+        "label": "Type",
+        "data": [
+          "Standard Lane",
+          "Standard Lane",
+          "Express (10 items)",
+          "Standard Lane",
+          "Self-Service Bank",
+          "Self-Service Bank"
+        ]
+      },
+      {
+        "id": "regStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "OPEN",
+          "OPEN",
+          "OPEN",
+          "CLOSED",
+          "OPEN",
+          "OPEN"
+        ]
+      },
+      {
+        "id": "regCashierCol",
+        "component": "Col",
+        "label": "Assigned Operator",
+        "data": [
+          "Elena Rostova",
+          "Marcus Vance",
+          "Sarah Jenkins",
+          "Unassigned (Standby)",
+          "David Kim (Monitor)",
+          "David Kim (Monitor)"
+        ]
+      },
+      {
+        "id": "regHourlySalesCol",
+        "component": "Col",
+        "label": "Throughput / Hr",
+        "data": [
+          "42 tx/hr",
+          "38 tx/hr",
+          "51 tx/hr",
+          "0 tx/hr",
+          "62 tx/hr",
+          "58 tx/hr"
+        ]
+      },
+      {
+        "id": "staffCard",
+        "component": "Card",
+        "children": [
+          "staffHeader",
+          "staffTable"
+        ]
+      },
+      {
+        "id": "staffHeader",
+        "component": "CardHeader",
+        "title": "Active Shift Roster (Today)",
+        "subtitle": "Team members currently checked in or scheduled"
+      },
+      {
+        "id": "staffTable",
+        "component": "Table",
+        "columns": [
+          "staffNameCol",
+          "staffRoleCol",
+          "staffHoursCol",
+          "staffAttendanceCol"
+        ]
+      },
+      {
+        "id": "staffNameCol",
+        "component": "Col",
+        "label": "Team Member",
+        "data": [
+          "Alex Chen",
+          "Elena Rostova",
+          "Marcus Vance",
+          "Sarah Jenkins",
+          "David Kim",
+          "Maya Lin",
+          "Carlos Gomez"
+        ]
+      },
+      {
+        "id": "staffRoleCol",
+        "component": "Col",
+        "label": "Role / Department",
+        "data": [
+          "Duty Manager",
+          "Head Cashier",
+          "Cashier / Front End",
+          "Cashier / Customer Help",
+          "Self-Checkout Attendant",
+          "Inventory & Restock Lead",
+          "Floor Associate"
+        ]
+      },
+      {
+        "id": "staffHoursCol",
+        "component": "Col",
+        "label": "Shift Schedule",
+        "data": [
+          "07:30 AM - 04:30 PM",
+          "08:00 AM - 04:00 PM",
+          "09:00 AM - 05:00 PM",
+          "11:00 AM - 07:00 PM",
+          "10:00 AM - 06:00 PM",
+          "07:00 AM - 03:30 PM",
+          "01:00 PM - 09:30 PM"
+        ]
+      },
+      {
+        "id": "staffAttendanceCol",
+        "component": "Col",
+        "label": "Current State",
+        "data": [
+          "On Floor",
+          "At Register 1",
+          "At Register 2",
+          "At Register 3",
+          "Monitoring SCO",
+          "Stockroom Inbound",
+          "Clocked In (Floor)"
+        ]
+      },
+      {
+        "id": "promoWoWTab",
+        "component": "TabItem",
+        "value": "promotions_and_wow",
+        "trigger": "Promotions & WoW Comparison",
+        "content": [
+          "promoCard",
+          "wowComparisonCard"
+        ]
+      },
+      {
+        "id": "promoCard",
+        "component": "Card",
+        "children": [
+          "promoHeader",
+          "promoTable"
+        ]
+      },
+      {
+        "id": "promoHeader",
+        "component": "CardHeader",
+        "title": "Active Running Promotions",
+        "subtitle": "Campaign uptake and incremental sales performance"
+      },
+      {
+        "id": "promoTable",
+        "component": "Table",
+        "columns": [
+          "promoNameCol",
+          "promoTypeCol",
+          "promoRedemptionsCol",
+          "promoRevCol",
+          "promoLiftCol"
+        ]
+      },
+      {
+        "id": "promoNameCol",
+        "component": "Col",
+        "label": "Campaign Name",
+        "data": [
+          "Summer Beverage BOGO 50%",
+          "Bakery Combo (Coffee + Croissant)",
+          "Spend $50 Get $10 Voucher",
+          "Organic Produce 20% Off"
+        ]
+      },
+      {
+        "id": "promoTypeCol",
+        "component": "Col",
+        "label": "Discount Type",
+        "data": [
+          "Multi-buy",
+          "Bundle Special",
+          "Basket Threshold",
+          "Category Markdown"
+        ]
+      },
+      {
+        "id": "promoRedemptionsCol",
+        "component": "Col",
+        "label": "Redemptions Today",
+        "data": [
+          "184 uses",
+          "112 uses",
+          "67 uses",
+          "143 uses"
+        ]
+      },
+      {
+        "id": "promoRevCol",
+        "component": "Col",
+        "label": "Attributed Sales",
+        "data": [
+          "$2,480",
+          "$985",
+          "$4,120",
+          "$1,860"
+        ]
+      },
+      {
+        "id": "promoLiftCol",
+        "component": "Col",
+        "label": "Sales Lift",
+        "data": [
+          "+28.4%",
+          "+19.1%",
+          "+34.0%",
+          "+14.2%"
+        ]
+      },
+      {
+        "id": "wowComparisonCard",
+        "component": "Card",
+        "children": [
+          "wowHeader",
+          "wowBarChart"
+        ]
+      },
+      {
+        "id": "wowHeader",
+        "component": "CardHeader",
+        "title": "This Week vs. Last Week Daily Revenue",
+        "subtitle": "Day-over-day performance comparison in USD ($)"
+      },
+      {
+        "id": "wowBarChart",
+        "component": "BarChart",
+        "labels": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat (Est)",
+          "Sun (Est)"
+        ],
+        "series": [
+          "lastWeekSeries",
+          "thisWeekSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Day of Week",
+        "yLabel": "Gross Sales ($)"
+      },
+      {
+        "id": "lastWeekSeries",
+        "component": "Series",
+        "category": "Last Week",
+        "values": [
+          14200,
+          15100,
+          14800,
+          16300,
+          18800,
+          23400,
+          21000
+        ]
+      },
+      {
+        "id": "thisWeekSeries",
+        "component": "Series",
+        "category": "This Week",
+        "values": [
+          15800,
+          16900,
+          16200,
+          16420,
+          20500,
+          25200,
+          22800
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

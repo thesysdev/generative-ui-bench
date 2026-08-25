@@ -1,0 +1,83 @@
+root = Card([header, oeeSection, productionSection, lineTable, defectChart, downtimePie, maintList, stockTable, supplierList, shiftChart, safetySection, qualityHold, energyStat, workOrdersTable, maintForm, focusLine, andonAlerts, exportBtn], "card", "column", "l")
+
+header = CardHeader("Factory Floor Supervisor Console", "Live operations — Shift 2")
+
+oeeSection = Card([oeeHeading, oeeValue], "sunk", "column", "m")
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = TextContent("87.4%", "large-heavy")
+
+productionSection = Card([prodHeading, prodStats], "clear", "column", "m")
+prodHeading = Heading("Units Produced vs Target", "h3")
+prodStats = Card([produced, target], "clear", "row", "m")
+produced = TextContent("4,820 / 5,000", "default")
+target = TextContent("96.4%", "default")
+
+lineTable = Table([lineCol, rateCol, statusCol])
+lineCol = Col("Line", ["L1 — Stamping", "L2 — Welding", "L3 — Assembly", "L4 — Paint"])
+rateCol = Col("Rate / hr", [420, 380, 510, 295])
+statusCol = Col("Status", ["Running", "Running", "Slow — jam", "Stopped — fault"])
+
+defectChart = LineChart(["W1","W2","W3","W4","W5","W6","W7","W8"], [defectSeries], "linear", "Week", "% Defect")
+defectSeries = Series("Defect Rate", [1.2, 1.4, 1.1, 0.9, 1.3, 1.5, 1.0, 0.8])
+
+downtimePie = PieChart(["Mechanical", "Material", "Changeover", "Quality"], [35, 25, 20, 20], "donut")
+
+maintList = ListBlock([m1, m2, m3])
+m1 = ListItem("Press #4 — Hydraulic pump", "Due: Tomorrow")
+m2 = ListItem("Weld robot #2 — Torch tip", "Due: 3 days")
+m3 = ListItem("Conveyor belt — Motor", "Due: 5 days")
+
+stockTable = Table([stockName, stockQty])
+stockName = Col("Material", ["Steel coil", "Resin pellets", "Packaging film"])
+stockQty = Col("Qty / Units", [120, 850, 3200])
+
+supplierList = ListBlock([s1, s2, s3])
+s1 = ListItem("Steel Supply Co.", "Delivery: Wed")
+s2 = ListItem("PolyResin Ltd.", "Delivery: Thu")
+s3 = ListItem("PackPro Inc.", "Delivery: Fri")
+
+shiftChart = BarChart(["Shift A", "Shift B", "Shift C"], [shiftSeries], "grouped", "Shift", "Units")
+shiftSeries = Series("Output", [4820, 5100, 3780])
+
+safetySection = Card([safetyHeading, safetyStats], "clear", "row", "m")
+safetyHeading = Heading("Safety", "h3")
+safetyStats = Card([incidents, daysSince], "clear", "row", "m")
+incidents = TextContent("3 this year", "default")
+daysSince = TextContent("18 days since last", "default")
+
+qualityHold = ListBlock([q1, q2])
+q1 = ListItem("Batch #4421 — Paint adhesion", "Hold since 2 days ago")
+q2 = ListItem("Batch #4428 — Weld seam", "Hold since 5 days ago")
+
+energyStat = TextContent("1,240 kWh today", "large-heavy")
+
+workOrdersTable = Table([woId, woPriority, woStatus])
+woId = Col("Order", ["WO-301", "WO-302", "WO-303", "WO-304"])
+woPriority = Col("Priority", ["High", "Medium", "Critical", "Low"])
+woStatus = Col("Status", ["Open", "Open", "Open", "Open"])
+
+maintForm = Form("maint-schedule", formButtons, [machineField, dateField])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [mOpt1, mOpt2, mOpt3], "Select machine")
+mOpt1 = SelectItem("Press #4", "Press #4")
+mOpt2 = SelectItem("Weld robot #2", "Weld robot #2")
+mOpt3 = SelectItem("Conveyor belt", "Conveyor belt")
+dateField = FormControl("Date", datePicker)
+datePicker = DatePicker("date", "single")
+formButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule")
+
+focusLine = Card([focusHeading, focusBtns], "clear", "column", "m")
+focusHeading = Heading("Focus Line", "h3")
+focusBtns = Buttons([f1, f2, f3, f4])
+f1 = Button("L1")
+f2 = Button("L2")
+f3 = Button("L3")
+f4 = Button("L4")
+
+andonAlerts = Card([alert1, alert2, alert3], "clear", "column", "s")
+alert1 = Callout("warning", "Andon — L3 Jam", "Assembly line jam detected at 14:32")
+alert2 = Callout("error", "Andon — L4 Fault", "Paint booth temperature out of range")
+alert3 = Callout("info", "Andon — Material", "Resin feed low on L2")
+
+exportBtn = Button("Export Shift Report", null, "primary")

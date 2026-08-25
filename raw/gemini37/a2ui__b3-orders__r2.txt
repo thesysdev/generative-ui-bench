@@ -1,0 +1,389 @@
+Here is an operations desk UI tailored for managing daily e-commerce activities, metrics, order fulfillment, and trends.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "kpiTable",
+          "volumeChart",
+          "separator1",
+          "filterForm",
+          "recentOrdersTable",
+          "quickFulfillDialog"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "E-Commerce Operations Desk",
+        "subtitle": "Real-time daily metrics, order tracking, and fulfillment control"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiContextCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Orders Placed Today",
+          "Revenue Today",
+          "Average Order Value (AOV)",
+          "Refund Rate (This Month)"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Value",
+        "data": [
+          "342 orders",
+          "$28,450.00",
+          "$83.18",
+          "1.85%"
+        ]
+      },
+      {
+        "id": "kpiContextCol",
+        "component": "Col",
+        "label": "Benchmark / Status",
+        "data": [
+          "+12% vs yesterday",
+          "+8.4% vs daily target ($26.2k)",
+          "Target: >$80.00",
+          "Within healthy threshold (<2.5%)"
+        ]
+      },
+      {
+        "id": "volumeChart",
+        "component": "BarChart",
+        "xLabel": "Timeline",
+        "yLabel": "Total Orders Placed",
+        "labels": [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4 (Current)"
+        ],
+        "series": [
+          "volumeSeries"
+        ]
+      },
+      {
+        "id": "volumeSeries",
+        "component": "Series",
+        "category": "Order Volume",
+        "values": [
+          1820,
+          2140,
+          2090,
+          2380
+        ]
+      },
+      {
+        "id": "separator1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "filterForm",
+        "component": "Form",
+        "name": "orderSearchFilter",
+        "buttons": "filterButtons",
+        "fields": [
+          "customerSearchField",
+          "statusFilterField"
+        ]
+      },
+      {
+        "id": "customerSearchField",
+        "component": "FormControl",
+        "label": "Search by Customer Name",
+        "hint": "Filter orders by customer name",
+        "input": "customerSearchInput"
+      },
+      {
+        "id": "customerSearchInput",
+        "component": "Input",
+        "name": "customer_query",
+        "placeholder": "e.g. Eleanor Vance, Liam Chen..."
+      },
+      {
+        "id": "statusFilterField",
+        "component": "FormControl",
+        "label": "Narrow by Status",
+        "hint": "Show only specific order statuses",
+        "input": "statusSelect"
+      },
+      {
+        "id": "statusSelect",
+        "component": "Select",
+        "name": "status_filter",
+        "placeholder": "All Statuses",
+        "items": [
+          "statusAll",
+          "statusPending",
+          "statusProcessing",
+          "statusFulfilled",
+          "statusRefunded"
+        ]
+      },
+      {
+        "id": "statusAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Statuses"
+      },
+      {
+        "id": "statusPending",
+        "component": "SelectItem",
+        "value": "pending",
+        "label": "Pending"
+      },
+      {
+        "id": "statusProcessing",
+        "component": "SelectItem",
+        "value": "processing",
+        "label": "Processing"
+      },
+      {
+        "id": "statusFulfilled",
+        "component": "SelectItem",
+        "value": "fulfilled",
+        "label": "Fulfilled"
+      },
+      {
+        "id": "statusRefunded",
+        "component": "SelectItem",
+        "value": "refunded",
+        "label": "Refunded"
+      },
+      {
+        "id": "filterButtons",
+        "component": "Buttons",
+        "buttons": [
+          "applyFiltersBtn",
+          "resetFiltersBtn"
+        ]
+      },
+      {
+        "id": "applyFiltersBtn",
+        "component": "Button",
+        "label": "Apply Filters",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFiltersBtn",
+        "component": "Button",
+        "label": "Reset",
+        "variant": "secondary"
+      },
+      {
+        "id": "recentOrdersTable",
+        "component": "Table",
+        "columns": [
+          "orderIdCol",
+          "customerCol",
+          "totalCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "orderIdCol",
+        "component": "Col",
+        "label": "Order ID",
+        "data": [
+          "#ORD-9421",
+          "#ORD-9420",
+          "#ORD-9419",
+          "#ORD-9418",
+          "#ORD-9417"
+        ]
+      },
+      {
+        "id": "customerCol",
+        "component": "Col",
+        "label": "Customer",
+        "data": [
+          "Eleanor Vance",
+          "Liam Chen",
+          "Sophia Martinez",
+          "Marcus Sterling",
+          "Amina Idris"
+        ]
+      },
+      {
+        "id": "totalCol",
+        "component": "Col",
+        "label": "Total",
+        "data": [
+          "$142.50",
+          "$68.20",
+          "$215.00",
+          "$44.90",
+          "$118.75"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Processing",
+          "Pending",
+          "Fulfilled",
+          "Processing",
+          "Fulfilled"
+        ]
+      },
+      {
+        "id": "quickFulfillDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Mark Order Fulfilled",
+        "triggerVariant": "default",
+        "title": "Fulfill Order",
+        "description": "Select an order ID and provide dispatch details to mark it as fulfilled.",
+        "content": [
+          "fulfillForm"
+        ]
+      },
+      {
+        "id": "fulfillForm",
+        "component": "Form",
+        "name": "fulfillOrderForm",
+        "buttons": "fulfillButtons",
+        "fields": [
+          "fulfillOrderIdField",
+          "carrierField",
+          "trackingField"
+        ]
+      },
+      {
+        "id": "fulfillOrderIdField",
+        "component": "FormControl",
+        "label": "Order to Fulfill",
+        "input": "fulfillOrderSelect"
+      },
+      {
+        "id": "fulfillOrderSelect",
+        "component": "Select",
+        "name": "order_id",
+        "placeholder": "Choose order...",
+        "items": [
+          "opt9421",
+          "opt9420",
+          "opt9418"
+        ]
+      },
+      {
+        "id": "opt9421",
+        "component": "SelectItem",
+        "value": "ORD-9421",
+        "label": "#ORD-9421 - Eleanor Vance ($142.50)"
+      },
+      {
+        "id": "opt9420",
+        "component": "SelectItem",
+        "value": "ORD-9420",
+        "label": "#ORD-9420 - Liam Chen ($68.20)"
+      },
+      {
+        "id": "opt9418",
+        "component": "SelectItem",
+        "value": "ORD-9418",
+        "label": "#ORD-9418 - Marcus Sterling ($44.90)"
+      },
+      {
+        "id": "carrierField",
+        "component": "FormControl",
+        "label": "Shipping Carrier",
+        "input": "carrierSelect"
+      },
+      {
+        "id": "carrierSelect",
+        "component": "Select",
+        "name": "carrier",
+        "placeholder": "Select carrier",
+        "items": [
+          "carrierFedEx",
+          "carrierUPS",
+          "carrierUSPS",
+          "carrierDHL"
+        ]
+      },
+      {
+        "id": "carrierFedEx",
+        "component": "SelectItem",
+        "value": "fedex",
+        "label": "FedEx Express"
+      },
+      {
+        "id": "carrierUPS",
+        "component": "SelectItem",
+        "value": "ups",
+        "label": "UPS Ground"
+      },
+      {
+        "id": "carrierUSPS",
+        "component": "SelectItem",
+        "value": "usps",
+        "label": "USPS Priority"
+      },
+      {
+        "id": "carrierDHL",
+        "component": "SelectItem",
+        "value": "dhl",
+        "label": "DHL Express"
+      },
+      {
+        "id": "trackingField",
+        "component": "FormControl",
+        "label": "Tracking Number",
+        "input": "trackingInput"
+      },
+      {
+        "id": "trackingInput",
+        "component": "Input",
+        "name": "tracking_number",
+        "placeholder": "TRK-XXXX-XXXX-XXXX"
+      },
+      {
+        "id": "fulfillButtons",
+        "component": "Buttons",
+        "buttons": [
+          "confirmFulfillBtn"
+        ]
+      },
+      {
+        "id": "confirmFulfillBtn",
+        "component": "Button",
+        "label": "Confirm Fulfillment",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

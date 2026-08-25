@@ -1,0 +1,66 @@
+root = Card([header, filterRow, mainGrid], "card", "column", "l")
+
+header = CardHeader("Content Studio", "Editor dashboard")
+
+filterRow = Card([filterLabel, categorySelect], "clear", "row", "m")
+filterLabel = TextContent("Narrow by category", "small")
+categorySelect = Select("category", [catNews, catFeatures, catOpinion, catCulture], "All categories")
+catNews = SelectItem("news", "News")
+catFeatures = SelectItem("features", "Features")
+catOpinion = SelectItem("opinion", "Opinion")
+catCulture = SelectItem("culture", "Culture")
+
+mainGrid = Card([topRow, bottomRow], "clear", "column", "l")
+
+topRow = Card([draftsCol, midCol], "clear", "row", "l")
+
+draftsCol = Card([draftsHeading, draftsList], "sunk", "column", "m")
+draftsHeading = Heading("Drafts", "h3")
+draftsList = ListBlock([draft1, draft2, draft3, draft4], "number")
+draft1 = ListItem("Election analysis", "Status: In progress", null, "Continue")
+draft2 = ListItem("City budget deep dive", "Status: Awaiting edit", null, "Review")
+draft3 = ListItem("Profile: local chef", "Status: Ready to publish", null, "Publish")
+draft4 = ListItem("Climate roundup", "Status: Blocked", null, "Edit")
+
+midCol = Card([publishedSection, topArticle, readershipChart], "clear", "column", "l")
+
+publishedSection = Card([publishedHeading, publishedList], "card", "column", "m")
+publishedHeading = Heading("Published this week", "h3")
+publishedList = ListBlock([pub1, pub2, pub3])
+pub1 = ListItem("Council votes on zoning", "Tuesday")
+pub2 = ListItem("Summer festival guide", "Wednesday")
+pub3 = ListItem("Interview with mayor", "Thursday")
+
+topArticle = Card([topHeading, topText, topStat], "clear", "column", "s")
+topHeading = Heading("Most-read this month", "h3")
+topText = TextContent("The hidden cost of fast fashion: a local supply chain investigation")
+topStat = TextContent("42,831 reads • 8 min read")
+
+readershipChart = Card([chartHeading, chart], "clear", "column", "m")
+chartHeading = Heading("Readership — past 30 days", "h3")
+chart = LineChart(["Day 1","Day 7","Day 14","Day 21","Day 30"], [readSeries], "natural", "Day", "Readers")
+readSeries = Series("Readers", [1200, 1800, 950, 2100, 1650])
+
+bottomRow = Card([scheduleSection, commentsSection, newDraftSection], "clear", "row", "l")
+
+scheduleSection = Card([scheduleHeading, scheduleForm], "card", "column", "m")
+scheduleHeading = Heading("Schedule a piece", "h3")
+scheduleForm = Form("schedule", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Title", titleInput)
+titleInput = Input("title", "Enter headline")
+dateField = FormControl("Publish date", datePicker)
+datePicker = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+
+commentsSection = Card([commentsHeading, commentsList], "sunk", "column", "m")
+commentsHeading = Heading("Comments awaiting reply", "h3")
+commentsList = ListBlock([c1, c2, c3])
+c1 = ListItem("On 'Election analysis'", "2h ago — \"Can you clarify the source?\"", null, "Reply")
+c2 = ListItem("On 'Council votes'", "5h ago — \"What is the timeline?\"", null, "Reply")
+c3 = ListItem("On 'Profile: chef'", "Yesterday — \"Great detail on sourcing\"", null, "Reply")
+
+newDraftSection = Card([newHeading, newText, newDraftBtn], "clear", "column", "m")
+newHeading = Heading("New draft", "h3")
+newText = TextContent("Start a blank piece or pick a template.")
+newDraftBtn = Button("Start new draft", null, "primary")

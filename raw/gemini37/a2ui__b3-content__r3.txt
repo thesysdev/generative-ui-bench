@@ -1,0 +1,609 @@
+Here is the Editorial Studio workspace screen covering your editorial workflow, scheduling, metrics, and reader engagement.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "topActionsBar",
+          "categoryFilterControl",
+          "mostReadBanner",
+          "readershipCard",
+          "studioTabs",
+          "scheduleFormCard"
+        ],
+        "gap": "l",
+        "direction": "column"
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Editorial Content Studio",
+        "subtitle": "Manage publishing pipelines, draft revisions, reader analytics, and community feedback"
+      },
+      {
+        "id": "topActionsBar",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "children": [
+          "quickStatsTag",
+          "newDraftDialog"
+        ]
+      },
+      {
+        "id": "quickStatsTag",
+        "component": "Tag",
+        "text": "Studio Live • 4 Drafts Pending • 2 Scheduled",
+        "variant": "info",
+        "size": "md"
+      },
+      {
+        "id": "newDraftDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Start New Draft",
+        "triggerVariant": "default",
+        "title": "Create New Editorial Draft",
+        "description": "Initialize a blank canvas with slug, target category, and working title.",
+        "content": [
+          "newDraftForm"
+        ]
+      },
+      {
+        "id": "newDraftForm",
+        "component": "Form",
+        "name": "new_draft_form",
+        "buttons": "newDraftButtons",
+        "fields": [
+          "newDraftTitleField",
+          "newDraftCategoryField",
+          "newDraftSummaryField"
+        ]
+      },
+      {
+        "id": "newDraftTitleField",
+        "component": "FormControl",
+        "label": "Working Title",
+        "input": "newDraftTitleInput"
+      },
+      {
+        "id": "newDraftTitleInput",
+        "component": "Input",
+        "name": "draft_title",
+        "placeholder": "e.g. Deep Dive: Next-Gen AI Workflows"
+      },
+      {
+        "id": "newDraftCategoryField",
+        "component": "FormControl",
+        "label": "Primary Category",
+        "input": "newDraftCategorySelect"
+      },
+      {
+        "id": "newDraftCategorySelect",
+        "component": "Select",
+        "name": "draft_category",
+        "placeholder": "Select section",
+        "items": [
+          "catTech",
+          "catDesign",
+          "catCulture",
+          "catOpinion"
+        ]
+      },
+      {
+        "id": "catTech",
+        "component": "SelectItem",
+        "value": "tech",
+        "label": "Technology & AI"
+      },
+      {
+        "id": "catDesign",
+        "component": "SelectItem",
+        "value": "design",
+        "label": "Product & Design"
+      },
+      {
+        "id": "catCulture",
+        "component": "SelectItem",
+        "value": "culture",
+        "label": "Culture & Media"
+      },
+      {
+        "id": "catOpinion",
+        "component": "SelectItem",
+        "value": "opinion",
+        "label": "Opinion & Essays"
+      },
+      {
+        "id": "newDraftSummaryField",
+        "component": "FormControl",
+        "label": "Pitch / Abstract",
+        "input": "newDraftSummaryInput"
+      },
+      {
+        "id": "newDraftSummaryInput",
+        "component": "TextArea",
+        "name": "draft_pitch",
+        "placeholder": "Brief outline and target audience...",
+        "rows": 3
+      },
+      {
+        "id": "newDraftButtons",
+        "component": "Buttons",
+        "buttons": [
+          "createDraftBtn"
+        ]
+      },
+      {
+        "id": "createDraftBtn",
+        "component": "Button",
+        "label": "Initialize Draft Canvas",
+        "variant": "primary"
+      },
+      {
+        "id": "categoryFilterControl",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "filterLabel",
+          "categorySelectInput"
+        ]
+      },
+      {
+        "id": "filterLabel",
+        "component": "Label",
+        "text": "Filter Studio Views by Category:"
+      },
+      {
+        "id": "categorySelectInput",
+        "component": "Select",
+        "name": "studio_category_filter",
+        "placeholder": "All Categories",
+        "items": [
+          "filterAll",
+          "filterTech",
+          "filterDesign",
+          "filterCulture",
+          "filterOpinion"
+        ]
+      },
+      {
+        "id": "filterAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Categories (Global)"
+      },
+      {
+        "id": "filterTech",
+        "component": "SelectItem",
+        "value": "tech",
+        "label": "Technology & AI"
+      },
+      {
+        "id": "filterDesign",
+        "component": "SelectItem",
+        "value": "design",
+        "label": "Product & Design"
+      },
+      {
+        "id": "filterCulture",
+        "component": "SelectItem",
+        "value": "culture",
+        "label": "Culture & Media"
+      },
+      {
+        "id": "filterOpinion",
+        "component": "SelectItem",
+        "value": "opinion",
+        "label": "Opinion & Essays"
+      },
+      {
+        "id": "mostReadBanner",
+        "component": "Alert",
+        "variant": "info",
+        "title": "🏆 Top Performer This Month: \"The Architecture of Agentic Interfaces\"",
+        "description": "148,200 unique readers • 6.4 min avg read time • 89% scroll completion rate"
+      },
+      {
+        "id": "readershipCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "readershipHeader",
+          "readershipChart"
+        ]
+      },
+      {
+        "id": "readershipHeader",
+        "component": "CardHeader",
+        "title": "Readership Trend (Past 30 Days)",
+        "subtitle": "Daily active reader sessions across all digital editions"
+      },
+      {
+        "id": "readershipChart",
+        "component": "LineChart",
+        "labels": [
+          "Day 1-5",
+          "Day 6-10",
+          "Day 11-15",
+          "Day 16-20",
+          "Day 21-25",
+          "Day 26-30"
+        ],
+        "series": [
+          "readsSeries",
+          "subscribersSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Rolling Period (30 Days)",
+        "yLabel": "Total Views / Readers"
+      },
+      {
+        "id": "readsSeries",
+        "component": "Series",
+        "category": "Page Views",
+        "values": [
+          32000,
+          41200,
+          38500,
+          56400,
+          64800,
+          72100
+        ]
+      },
+      {
+        "id": "subscribersSeries",
+        "component": "Series",
+        "category": "Subscriber Reads",
+        "values": [
+          18400,
+          24100,
+          22000,
+          34800,
+          41200,
+          49000
+        ]
+      },
+      {
+        "id": "studioTabs",
+        "component": "Tabs",
+        "items": [
+          "tabDrafts",
+          "tabPublished",
+          "tabComments"
+        ]
+      },
+      {
+        "id": "tabDrafts",
+        "component": "TabItem",
+        "value": "drafts",
+        "trigger": "Drafts & Revisions",
+        "content": [
+          "draftsTable"
+        ]
+      },
+      {
+        "id": "draftsTable",
+        "component": "Table",
+        "columns": [
+          "colDraftTitle",
+          "colDraftAuthor",
+          "colDraftCategory",
+          "colDraftStatus"
+        ]
+      },
+      {
+        "id": "colDraftTitle",
+        "component": "Col",
+        "label": "Draft Title",
+        "data": [
+          "Demystifying Autonomous Code Review",
+          "Typography in Spatial Computing",
+          "The Creator Economy's Second Wave",
+          "The Ethics of Synthetic Voice Clones"
+        ]
+      },
+      {
+        "id": "colDraftAuthor",
+        "component": "Col",
+        "label": "Lead Author",
+        "data": [
+          "Marcus Vance",
+          "Elena Rostova",
+          "Priya Patel",
+          "Kofi Mensah"
+        ]
+      },
+      {
+        "id": "colDraftCategory",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Technology",
+          "Design",
+          "Culture",
+          "Opinion"
+        ]
+      },
+      {
+        "id": "colDraftStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "In Review (Peer)",
+          "Copyediting",
+          "Ready for Layout",
+          "First Draft"
+        ]
+      },
+      {
+        "id": "tabPublished",
+        "component": "TabItem",
+        "value": "published",
+        "trigger": "Published This Week",
+        "content": [
+          "publishedList"
+        ]
+      },
+      {
+        "id": "publishedList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "pubItem1",
+          "pubItem2",
+          "pubItem3",
+          "pubItem4"
+        ]
+      },
+      {
+        "id": "pubItem1",
+        "component": "ListItem",
+        "title": "The State of Generative UI Systems in 2025",
+        "subtitle": "Published Oct 24 • Tech & Design • 28.4k reads • 42 comments",
+        "actionLabel": "View Analytics"
+      },
+      {
+        "id": "pubItem2",
+        "component": "ListItem",
+        "title": "Inside the Micro-Studio Boom",
+        "subtitle": "Published Oct 23 • Culture • 19.1k reads • 18 comments",
+        "actionLabel": "View Analytics"
+      },
+      {
+        "id": "pubItem3",
+        "component": "ListItem",
+        "title": "Why Fast Feedback Loops Beat Perfect Specifications",
+        "subtitle": "Published Oct 22 • Opinion • 34.8k reads • 65 comments",
+        "actionLabel": "View Analytics"
+      },
+      {
+        "id": "pubItem4",
+        "component": "ListItem",
+        "title": "Design Systems for Multimodal Inputs",
+        "subtitle": "Published Oct 21 • Design • 14.6k reads • 11 comments",
+        "actionLabel": "View Analytics"
+      },
+      {
+        "id": "tabComments",
+        "component": "TabItem",
+        "value": "comments",
+        "trigger": "Comments Awaiting Reply (3)",
+        "content": [
+          "commentsAccordion"
+        ]
+      },
+      {
+        "id": "commentsAccordion",
+        "component": "Accordion",
+        "items": [
+          "commentItem1",
+          "commentItem2",
+          "commentItem3"
+        ]
+      },
+      {
+        "id": "commentItem1",
+        "component": "AccordionItem",
+        "value": "c1",
+        "trigger": "\"Can you elaborate on fallback strategies when latency spikes?\" — Sarah Jenkins (on Generative UI)",
+        "content": [
+          "commentText1",
+          "commentReplyBtn1"
+        ]
+      },
+      {
+        "id": "commentText1",
+        "component": "TextContent",
+        "text": "**Reader:** Sarah Jenkins (Verified Pro)\n**Article:** The State of Generative UI Systems in 2025\n**Received:** 2 hours ago\n\n*\"Great piece! In Section 3 you mention optimistic parsing, but how do you handle progressive schema validation failures without disrupting active input state?\"*"
+      },
+      {
+        "id": "commentReplyBtn1",
+        "component": "Button",
+        "label": "Post Editorial Reply",
+        "variant": "primary",
+        "size": "small"
+      },
+      {
+        "id": "commentItem2",
+        "component": "AccordionItem",
+        "value": "c2",
+        "trigger": "\"Do these cost numbers factor in human-in-the-loop validation?\" — David Chen (on Micro-Studios)",
+        "content": [
+          "commentText2",
+          "commentReplyBtn2"
+        ]
+      },
+      {
+        "id": "commentText2",
+        "component": "TextContent",
+        "text": "**Reader:** David Chen (Senior Editor)\n**Article:** Inside the Micro-Studio Boom\n**Received:** 5 hours ago\n\n*\"The margin breakdown in Figure 2 seems optimistic if 2 reviewers are required per package. What's the average hourly assumption used?\"*"
+      },
+      {
+        "id": "commentReplyBtn2",
+        "component": "Button",
+        "label": "Post Editorial Reply",
+        "variant": "primary",
+        "size": "small"
+      },
+      {
+        "id": "commentItem3",
+        "component": "AccordionItem",
+        "value": "c3",
+        "trigger": "\"Would love a follow-up piece examining team velocity metrics\" — Maya Lindqvist",
+        "content": [
+          "commentText3",
+          "commentReplyBtn3"
+        ]
+      },
+      {
+        "id": "commentText3",
+        "component": "TextContent",
+        "text": "**Reader:** Maya Lindqvist\n**Article:** Why Fast Feedback Loops Beat Perfect Specifications\n**Received:** Yesterday\n\n*\"Spot on analysis. Are there standardized sprint metrics you recommend tracking across cross-functional squads?\"*"
+      },
+      {
+        "id": "commentReplyBtn3",
+        "component": "Button",
+        "label": "Post Editorial Reply",
+        "variant": "primary",
+        "size": "small"
+      },
+      {
+        "id": "scheduleFormCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "scheduleHeader",
+          "scheduleForm"
+        ]
+      },
+      {
+        "id": "scheduleHeader",
+        "component": "CardHeader",
+        "title": "Schedule a Publication",
+        "subtitle": "Queue an approved piece with target publishing timestamp and channel distribution"
+      },
+      {
+        "id": "scheduleForm",
+        "component": "Form",
+        "name": "schedule_form",
+        "buttons": "scheduleButtons",
+        "fields": [
+          "scheduleTitleField",
+          "scheduleDateField",
+          "scheduleCategoryField"
+        ]
+      },
+      {
+        "id": "scheduleTitleField",
+        "component": "FormControl",
+        "label": "Piece Title",
+        "input": "scheduleTitleInput",
+        "hint": "Select or enter the final approved headline"
+      },
+      {
+        "id": "scheduleTitleInput",
+        "component": "Input",
+        "name": "schedule_title",
+        "placeholder": "e.g. Demystifying Autonomous Code Review"
+      },
+      {
+        "id": "scheduleDateField",
+        "component": "FormControl",
+        "label": "Publish Date & Slot",
+        "input": "scheduleDateInput",
+        "hint": "Select target go-live date"
+      },
+      {
+        "id": "scheduleDateInput",
+        "component": "DatePicker",
+        "name": "publish_date",
+        "mode": "single"
+      },
+      {
+        "id": "scheduleCategoryField",
+        "component": "FormControl",
+        "label": "Section / Edition",
+        "input": "scheduleCategorySelect"
+      },
+      {
+        "id": "scheduleCategorySelect",
+        "component": "Select",
+        "name": "schedule_category",
+        "placeholder": "Select publication desk",
+        "items": [
+          "deskTech",
+          "deskDesign",
+          "deskCulture",
+          "deskOpinion"
+        ]
+      },
+      {
+        "id": "deskTech",
+        "component": "SelectItem",
+        "value": "tech",
+        "label": "Tech Desk (Morning Slot - 08:00 EST)"
+      },
+      {
+        "id": "deskDesign",
+        "component": "SelectItem",
+        "value": "design",
+        "label": "Design Desk (Midday Slot - 12:00 EST)"
+      },
+      {
+        "id": "deskCulture",
+        "component": "SelectItem",
+        "value": "culture",
+        "label": "Culture Desk (Afternoon Slot - 15:00 EST)"
+      },
+      {
+        "id": "deskOpinion",
+        "component": "SelectItem",
+        "value": "opinion",
+        "label": "Opinion Desk (Sunday Feature - 09:00 EST)"
+      },
+      {
+        "id": "scheduleButtons",
+        "component": "Buttons",
+        "buttons": [
+          "confirmScheduleBtn",
+          "saveDraftScheduleBtn"
+        ]
+      },
+      {
+        "id": "confirmScheduleBtn",
+        "component": "Button",
+        "label": "Confirm & Schedule Publication",
+        "variant": "primary"
+      },
+      {
+        "id": "saveDraftScheduleBtn",
+        "component": "Button",
+        "label": "Save as Unassigned Queue",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

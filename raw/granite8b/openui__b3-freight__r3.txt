@@ -1,0 +1,58 @@
+```openui-lang
+refreshTime = "Data refreshed at 2025-08-14 10:30 UTC"
+
+searchInput = Input("route", placeholder: "Search route...", rules: ["required"], value: "")
+
+shipmentsInTransit = [
+  { origin: "Los Angeles", destination: "New York", eta: "2025-08-15 14:00", status: "On Time" },
+  { origin: "Chicago", destination: "Miami", eta: "2025-08-16 09:30", status: "Delayed" },
+  { origin: "Seattle", destination: "Dallas", eta: "2025-08-15 12:45", status: "On Time" },
+  { origin: "Boston", destination: "San Francisco", eta: "2025-08-17 18:20", status: "Delayed" },
+  { origin: "Denver", destination: "Portland", eta: "2025-08-15 11:15", status: "On Time" }
+]
+
+delayedShipments = [shipmentsInTransit[1], shipmentsInTransit[3]] // Chicago->Miami, Boston->San Francisco
+
+onTimePercentage = 60 // percent
+
+carrierVolume = {
+  UPS: 45,
+  FedEx: 30,
+  DHL: 20,
+  USPS: 5
+}
+
+averageCostPerShipment = 12.75
+
+weeklyVolumeLastTwoMonths = [
+  { week: "2025-W33", volume: 120 },
+  { week: "2025-W34", volume: 135 },
+  { week: "2025-W35", volume: 110 },
+  { week: "2025-W36", volume: 130 },
+  { week: "2025-W37", volume: 125 },
+  { week: "2025-W38", volume: 140 },
+  { week: "2025-W39", volume: 115 },
+  { week: "2025-W40", volume: 130 },
+  { week: "2025-W41", volume: 125 },
+  { week: "2025-W42", volume: 135 },
+  { week: "2025-W43", volume: 110 },
+  { week: "2025-W44", volume: 130 }
+]
+
+flagShipmentButton = Button("Flag Shipment", null, "destructive", size: "small")
+
+root = Card([
+  CardHeader("Logistics Coordinator Dashboard"),
+  TextContent(onTimePercentage, "large", "On‑time shipments this month: " + onTimePercentage + "%"),
+  Card([searchInput, flagShipmentButton], "sunk", direction: "row", gap: "l"),
+  Callout("Delayed Shipments", delayedShipments.map(s => `${s.origin} → ${s.destination} (ETA: ${s.eta}, ${s.status})`).join("; ")),
+  Table([carrierLabel, carrierVolumeLabel]),
+    carrierLabel = Col("Carrier", Object.keys(carrierVolume)),
+    carrierVolumeLabel = Col("Volume (%)", Object.values(carrierVolume).map(v => `${v}%`).join(", ")),
+  LineChart([weekLabel, weeklyVolumeLabel], "natural", "Week", "Volume"),
+    weekLabel = Col("Week", weeklyVolumeLastTwoMonths.map(w => w.week)),
+    weeklyVolumeLabel = Col("Volume", weeklyVolumeLastTwoMonths.map(w => w.volume)),
+  TextContent("Average cost per shipment: $" + averageCostPerShipment, "large"),
+  TextContent(refreshTime, "small", "Last refreshed: ")
+], "card", direction: "column", gap: "m")
+```

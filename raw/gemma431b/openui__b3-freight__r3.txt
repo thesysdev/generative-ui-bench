@@ -1,0 +1,35 @@
+root = Card([header, topStats, alerts, mainContent, footer], "card", "column", "l")
+
+header = CardHeader("Logistics Coordination Board", "Real-time Fleet & Shipment Monitoring")
+
+topStats = Card([onTimeStat, costStat, refreshStat], "sunk", "row", "m", "center", "between")
+onTimeStat = Card([onTimeValue], "clear", "column", "none")
+onTimeValue = TextContent("92.4% On-Time Rate", "large-heavy")
+costStat = Card([costValue], "clear", "column", "none")
+costValue = TextContent("$1,240 Avg Cost/Shipment", "large-heavy")
+refreshStat = TextContent("Last refreshed: 2 mins ago", "small")
+
+alerts = Callout("warning", "Delayed Shipments", "3 shipments are currently experiencing delays due to weather in the Midwest region.")
+
+mainContent = Card([searchSection, chartsSection, shipmentTable], "clear", "column", "l")
+
+searchSection = Card([searchLabel, searchInput], "clear", "row", "m", "center", "start")
+searchLabel = TextContent("Search Route:", "default")
+searchInput = Input("route-search", "e.g. CHI -> NYC", "text")
+
+chartsSection = Card([volHeading, volChart, carrierChart], "sunk", "column", "m")
+volHeading = Heading("Volume Analytics", "h3")
+volChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "linear", "Week", "Shipments")
+volSeries = Series("Weekly Volume", [420, 380, 450, 510, 480, 430, 490, 520])
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "Regional"], [40, 30, 20, 10], "donut")
+
+shipmentTable = Table([originCol, destCol, etaCol, statusCol, actionCol])
+originCol = Col("Origin", ["Chicago, IL", "Los Angeles, CA", "Houston, TX", "Seattle, WA", "Miami, FL"])
+destCol = Col("Destination", ["New York, NY", "Denver, CO", "Atlanta, GA", "Phoenix, AZ", "Boston, MA"])
+etaCol = Col("ETA", ["Oct 24, 14:00", "Oct 25, 09:00", "Oct 24, 18:00", "Oct 26, 11:00", "Oct 25, 15:00"])
+statusCol = Col("Status", ["In Transit", "Delayed", "In Transit", "In Transit", "Delayed"])
+actionCol = Col("Action", ["Flag", "Flag", "Flag", "Flag", "Flag"], "action")
+
+footer = FollowUpBlock([refreshFollow, reportFollow])
+refreshFollow = FollowUpItem("Force refresh data")
+reportFollow = FollowUpItem("Generate monthly carrier report")

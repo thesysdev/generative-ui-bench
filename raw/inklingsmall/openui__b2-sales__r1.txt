@@ -1,0 +1,26 @@
+root = Card([header, revenueCard, trendCard, topProducts, conversionCard, actions], "card", "column", "l")
+
+header = CardHeader("Founder's Monthly Sales Check", "Monthly review")
+revenueCard = Card([revTitle, revValue, revSub], "sunk", "column", "s")
+revTitle = Heading("Revenue this month", "h3")
+revValue = TextContent("$84,320", "large-heavy")
+revSub = TextContent("+12% vs last month", "small")
+
+trendCard = Card([trendTitle, trendChart], "clear", "column", "m")
+trendTitle = Heading("Revenue over the last 6 months", "h3")
+trendChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [revSeries], "natural", "Month", "USD")
+revSeries = Series("Revenue", [42000, 51000, 38000, 67000, 74000, 84320])
+
+topProducts = Card([productsTitle, productsTable], "clear", "column", "m")
+productsTitle = Heading("Top 3 best-selling products", "h3")
+productsTable = Table([prodName, prodUnits])
+prodName = Col("Product", ["Atlas Pro", "Vertex Kit", "Nova Lens"])
+prodUnits = Col("Units sold", [1240, 980, 756])
+
+conversionCard = Card([convTitle, convValue, convDetail], "sunk", "column", "s")
+convTitle = Heading("Conversion rate", "h3")
+convValue = TextContent("3.8%", "large-heavy")
+convDetail = TextContent("Visitors to paid orders", "small")
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download numbers")

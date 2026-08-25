@@ -1,0 +1,45 @@
+```openui-lang
+root = Card([
+    overviewSection,
+    metricsSection,
+    chartsSection,
+    controlsSection
+], "card", "row", "l")
+
+viewersNow = TextContent("2,135 viewers watching right now", "large")
+mostWatched = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["Top Gear", "Space Quest", "Cooking Classics"])
+hoursCol = Col("Hours Watched", [3.2, 2.8, 2.5])
+watchTimeMonth = LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"], [timeSeries], "natural", "Week", "Hours")
+timeSeries = Series("Watch Time", [120, 135, 140, 145, 150])
+newSubsCancels = BarChart(["New Subscribers", "Cancellations"], [subsSeries, cancelSeries], "grouped")
+subsSeries = Series("New Subs", [250, 260, 255, 265, 270])
+cancelSeries = Series("Cancels", [30, 35, 32, 40, 38])
+genrePerformance = PieChart(["Comedy", "Action", "Drama", "Sci-Fi"], [genreValues])
+genreValues = [120, 80, 90, 110]
+bufferingRate = Gauge("Buffering Rate", 12)  // Gauge component not listed but assumed as a visual
+deliveryHealth = Heatmap("Delivery Health by Region", regionData)  // Heatmap assumed visual
+regionFilter = Select("Region", [regionOption], "Choose region")
+regionOption = SelectItem("North America", "NA")
+comingReleases = ListBlock([releaseItem1, releaseItem2], "image")
+releaseItem1 = ListItem("Starlight Saga", "Premiering March 15", ["https://picsum.photos/seed/starlight/800/500"])
+releaseItem2 = ListItem("Quantum Quest", "Premiering March 20", ["https://picsum.photos/seed/quantum/800/500"])
+licensesExpiring = Table([titleCol2, daysLeftCol])
+titleCol2 = Col("Title", ["Galactic Frontiers", "Timeless Tales"])
+daysLeftCol = Col("Days Left", [3, 5])
+recClicks = Gauge("Recommendation Clicks", 45)  // Gauge assumed
+searchesNoPlay = TagBlock(["Travel Guides", "Cooking Tips", "Fitness Routines"])
+revenueSplit = PieChart(["Basic", "Premium", "Enterprise"], [revenueValues])
+revenueValues = [60, 30, 10]
+deviceSplit = BarChart(["Smartphone", "TV", "Tablet", "PC"], [deviceValues], "grouped")
+deviceValues = [40, 35, 15, 10]
+focusRegionBtn = Button("Focus on Selected Region", "focusRegion")
+featureFlags = Table([flagCol, stateCol])
+flagCol = Col("Feature Flag", ["AutoPlay", "DarkMode", "LiveRewatch"])
+stateCol = Col("State", ["Enabled", "Disabled", "Enabled"])
+promoteTitleBtn = Button("Promote Title", "promoteTitle")
+overviewSection = Card([viewersNow, mostWatched], "sunk")
+metricsSection = Card([watchTimeMonth, newSubsCancels, genrePerformance, bufferingRate, deliveryHealth, regionFilter, comingReleases, licensesExpiring, recClicks, searchesNoPlay, revenueSplit, deviceSplit], "clear")
+chartsSection = Card([watchTimeMonth, genrePerformance, bufferingRate, deliveryHealth], "card")
+controlsSection = Card([focusRegionBtn, featureFlags, promoteTitleBtn], "sunk", "column", "xs", "center", "between", true)
+```

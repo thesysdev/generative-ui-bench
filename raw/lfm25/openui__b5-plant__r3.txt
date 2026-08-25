@@ -1,0 +1,398 @@
+```openui-lang
+root = Card(
+  children: [
+    // Item 1: Overall Equipment Effectiveness
+    CardHeader(
+      title="Factory Performance Overview",
+      subtitle="Real-time equipment metrics"
+    ),
+    StatCard(
+      title="Overall Equipment Effectiveness (OEE)",
+      value="92%",
+      unit="%", 
+      change="+1.2% vs yesterday"
+    ),
+    
+    // Item 2: Units produced vs target
+    Card(
+      children: [
+        CardHeader(
+          title="Units Produced vs Target",
+          subtitle="Today's throughput comparison"
+        ),
+        Table(
+          columns: [
+            {label: "Metric", type: "string"},
+            {label: "Value", type: "number"},
+            {label: "Target", type: "number"},
+            {label: "Status", type: "string"}
+          ],
+          data: [
+            {"Metric": "Total Units Produced", "Value": 12450, "Target": 13000, "Status": "Above"},
+            {"Metric": "Defective Units", "Value": 315, "Target": 200, "Status": "Below"},
+            {"Metric": "Efficiency Rate", "Value": 87, "Target": 90, "Status": "At Risk"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 3: Production lines with rate and status
+    Card(
+      children: [
+        CardHeader(
+          title="Production Lines",
+          subtitle="Rate and operational status"
+        ),
+        Table(
+          columns: [
+            {label: "Line ID", type: "string"},
+            {label: "Current Rate", type: "number"},
+            {label: "Status", type: "string"},
+            {label: "Capacity Utilization", type: "percentage"}
+          ],
+          data: [
+            {"Line ID": "L01", "Current Rate": 78, "Status": "High", "Capacity Utilization": "85%"},
+            {"Line ID": "L02", "Current Rate": 65, "Status": "Medium", "Capacity Utilization": "72%"},
+            {"Line ID": "L03", "Current Rate": 82, "Status": "Critical", "Capacity Utilization": "88%"},
+            {"Line ID": "L04", "Current Rate": 55, "Status": "Low", "Capacity Utilization": "60%"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 4: Defect rate over past month
+    Card(
+      children: [
+        CardHeader(
+          title="Defect Rate (Last 30 Days)",
+          subtitle="Quality compliance overview"
+        ),
+        BarChart(
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          series: [
+            {
+              label: "Defect Rate %",
+              values: [3.2, 4.1, 2.8, 3.5, 4.0, 3.9]
+            }
+          ],
+          xLabel="Month",
+          yLabel="Defect Rate (%)",
+          variant="grouped",
+          tooltip=["Shows monthly defect percentage trends"]
+        )
+      ]
+    ),
+    
+    // Item 5: Downtime split by cause
+    Card(
+      children: [
+        CardHeader(
+          title="Downtime Analysis",
+          subtitle="Causes breakdown"
+        ),
+        BarChart(
+          labels: ["Mechanical Failure", "Calibration", "Material Issue", "Human Error", "Other"],
+          series: [
+            {label: "Mechanical Failure", values: 45},
+            {label: "Calibration", values: 18},
+            {label: "Material Issue", values: 22},
+            {label: "Human Error", values: 8},
+            {label: "Other", values: 7}
+          ],
+          xLabel="Downtime Cause",
+          yLabel="Hours",
+          variant="grouped",
+          tooltip=["Past month downtime distribution by cause"]
+        )
+      ]
+    ),
+    
+    // Item 6: Machines due for maintenance
+    Card(
+      children: [
+        CardHeader(
+          title="Machines Due for Maintenance",
+          subtitle="Upcoming service schedule"
+        ),
+        Table(
+          columns: [
+            {label: "Machine ID", type: "string"},
+            {label: "Next Service", type: "date"},
+            {label: "Issue", type: "string"},
+            {label: "Priority", type: "string"}
+          ],
+          data: [
+            {"Machine ID": "M101", "Next Service": "2026-05-20", "Issue": "Bearing wear", "Priority": "High"},
+            {"Machine ID": "M105", "Next Service": "2026-05-25", "Issue": "Hydraulic leak", "Priority": "Medium"},
+            {"Machine ID": "M110", "Next Service": "2026-05-28", "Issue": "Electrical fault", "Priority": "High"},
+            {"Machine ID": "M115", "Next Service": "2026-06-02", "Issue": "Sensor misalignment", "Priority": "Low"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 7: Stock of steel, resin and packaging
+    Card(
+      children: [
+        CardHeader(
+          title="Inventory Levels",
+          subtitle="Raw materials and consumables"
+        ),
+        Table(
+          columns: [
+            {label: "Material", type: "string"},
+            {label: "Current Stock", type: "number"},
+            {label: "Target Stock", type: "number"},
+            {label: "Status", type: "string"}
+          ],
+          data: [
+            {"Material": "Steel", "Current Stock": 1450, "Target Stock": 1800, "Status": "Low"},
+            {"Material": "Resin", "Current Stock": 3200, "Target Stock": 3500, "Status": "OK"},
+            {"Material": "Packaging", "Current Stock": 890, "Target Stock": 1100, "Status": "Low"}
+          ]
+        )
+      ]
+    },
+    
+    // Item 8: Supplier deliveries due this week
+    Card(
+      children: [
+        CardHeader(
+          title="Supplier Deliveries (This Week)",
+          subtitle="Upcoming shipments"
+        ),
+        Table(
+          columns: [
+            {label: "Supplier", type: "string"},
+            {label: "Delivery Date", type: "date"},
+            {label: "Item", type: "string"},
+            {label: "Qty", type: "number"}
+          ],
+          data: [
+            {"Supplier": "MetalCo", "Delivery Date": "2026-05-21", "Item": "Steel coils", "Qty": 500},
+            {"Supplier": "ChemCorp", "Delivery Date": "2026-05-22", "Item": "Resin batch", "Qty": 3000},
+            {"Supplier": "PackLogix", "Delivery Date": "2026-05-23", "Item": "Packaging boxes", "Qty": 750},
+            {"Supplier": "TechParts", "Delivery Date": "2026-05-24", "Item": "Sensors", "Qty": 200}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 9: Shift outputs comparison
+    Card(
+      children: [
+        CardHeader(
+          title="Shift Output Comparison",
+          subtitle="Daily performance by shift"
+        ),
+        Table(
+          columns: [
+            {label: "Shift", type: "string"},
+            {label: "Units", type: "number"},
+            {label: "Rate (units/hr)", type: "number"},
+            {label: "Deviation", type: "string"}
+          ],
+          data: [
+            {"Shift": "Day Shift (06:00-14:00)", "Units": 4200, "Rate (units/hr)": 35, "Deviation": "+2%"},
+            {"Shift": "Evening Shift (14:00-22:00)", "Units": 3800, "Rate (units/hr)": 33, "-3%"},
+            {"Shift": "Night Shift (22:00-06:00)", "Units": 3100, "Rate (units/hr)": 27, "-10%"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 10: Safety incidents this year and days since last
+    Card(
+      children: [
+        CardHeader(
+          title="Safety Incidents",
+          subtitle="Incident history and prevention"
+        ),
+        TabItem(
+          value="15",
+          trigger="incidents-year",
+          content=[
+            Card([
+              {"Type": "Labor Strike", "Date": "2026-04-12", "Severity": "High", "Location": "Line L03"},
+              {"Type": "Equipment Crash", "Date": "2026-04-07", "Severity": "Medium", "Location": "Main Hall"},
+              {"Type": "Fire Alert", "Date": "2026-03-28", "Severity": "High", "Location": "Control Room"},
+              {"Type": "Slip/Trip", "Date": "2026-03-15", "Severity": "Low", "Location": "Loading Bay"}
+            ])
+          ]
+        ),
+        Card([
+          {
+            title="Days Since Last Incident",
+            value="156",
+            unit="days",
+            description="Longest interval since previous incident"
+          }
+        ])
+      ]
+    ),
+    
+    // Item 11: Batches on quality hold
+    Card(
+      children: [
+        CardHeader(
+          title="Batches on Hold",
+          subtitle="Quality issues requiring review"
+        ),
+        Table(
+          columns: [
+            {label: "Batch ID", type: "string"},
+            {label: "Reason", type: "string"},
+            {label: "Status", type: "string"},
+            {label: "Due Date", type: "date"}
+          ],
+          data: [
+            {"Batch ID": "B-4821", "Reason": "Exceeds tolerance on surface finish", "Status": "Pending Review", "Due Date": "2026-05-26"},
+            {"Batch ID": "B-4913", "Reason": "Automated QC failure - cracks detected", "Status": "Quarantined", "Due Date": "2026-05-22"},
+            {"Batch ID": "B-5027", "Reason": "Color deviation in paint coating", "Status": "Under Investigation", "Due Date": "2026-05-25"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 12: Energy use today
+    Card(
+      children: [
+        CardHeader(
+          title="Energy Consumption (Today)",
+          subtitle="Power usage summary"
+        ),
+        StatCard(
+          title="Total Energy Used",
+          value="125,430 kWh",
+          unit="kWh",
+          change="+8.5% vs yesterday"
+        ),
+        StatCard(
+          title="Peak Demand",
+          value="142 MW",
+          unit="MW",
+          change="+12%"
+        )
+      ]
+    ),
+    
+    // Item 13: Open work orders with priority
+    Card(
+      children: [
+        CardHeader(
+          title="Open Work Orders",
+          subtitle="Priority queue management"
+        ),
+        Table(
+          columns: [
+            {label: "Order ID", type: "string"},
+            {label: "Priority", type: "string"},
+            {label: "Description", type: "string"},
+            {label: "Assignee", type: "string"},
+            {label: "Status", type: "string"}
+          ],
+          data: [
+            {"Order ID": "WO-001", "Priority": "Critical", "Description": "Replace motor bearing on L01", "Assignee": "Tech Team A", "Status": "In Progress"},
+            {"Order ID": "WO-002", "Priority": "High", "Description": "Calibrate vision sensors on L03", "Assignee": "Mechanic B", "Status": "Pending"},
+            {"Order ID": "WO-003", "Priority": "Medium", "Description": "Inspect conveyor belts", "Assignee": "Maintenance Lead", "Status": "Open"},
+            {"Order ID": "WO-004", "Priority": "Low", "Description": "Update firmware on M110", "Assignee": "IT Support", "Status": "Not Started"}
+          ]
+        )
+      ]
+    ),
+    
+    // Item 14: Schedule maintenance with machine and date
+    Card(
+      children: [
+        CardHeader(
+          title="Schedule Maintenance",
+          subtitle="Plan upcoming machine servicing"
+        ),
+        Form(
+          name="maintenance-schedule",
+          fields: [
+            FormControl(label="Machine ID", input="M101"),
+            FormControl(label="Service Date", input="2026-05-25"),
+            FormControl(label="Technician", input="Tech Team A")
+          ],
+          buttons: Buttons([
+            Button(label="Create Schedule", variant="primary", size="medium"),
+            Button(label="Cancel", variant="secondary", size="small")
+          ])
+        )
+      ]
+    ),
+    
+    // Item 15: Focus on one line
+    Card(
+      children: [
+        CardHeader(
+          title="Focus Mode",
+          subtitle="Toggle production line view"
+        ),
+        Dropdown(
+          options: [
+            {value: "L01", label: "Line L01 (High Priority)"},
+            {value: "L02", label: "Line L02 (Medium)"},
+            {value: "L03", label: "Line L03 (Critical)"},
+            {value: "L04", label: "Line L04 (Low)"}
+          ],
+          selectedValue="L01",
+          onChange: (value) => { /* focus logic */ }
+        )
+      ]
+    ),
+    
+    // Item 16: Live andon alerts
+    Card(
+      children: [
+        CardHeader(
+          title="Live Andon Alerts",
+          subtitle="Real-time operational warnings"
+        ),
+        ListBlock(
+          children: [
+            {
+              title="Line L01 Speed Stop",
+              description="Motor overload detected - manual intervention required",
+              severity="high",
+              timestamp="2026-05-20T14:30:00Z"
+            },
+            {
+              title="L03 Quality Hold",
+              description="Batch B-4821 holding for surface finish rework",
+              severity="medium",
+              timestamp="2026-05-20T09:15:00Z"
+            },
+            {
+              title="M101 Unusual Vibration",
+              description="Bearing temperature exceeding threshold",
+              severity="high",
+              timestamp="2026-05-20T16:45:00Z"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // Item 17: Export shift report
+    Card(
+      children: [
+        CardHeader(
+          title="Export Shift Report",
+          subtitle="Download detailed analytics"
+        ),
+        Button(label="Export to PDF", variant="primary", size="large"),
+        Button(label="Export to CSV", variant="secondary", size="medium"),
+        Button(label="Print", variant="tertiary", size="small")
+      ]
+    )
+  ],
+  // Layout configuration
+  direction: "column",
+  gap: "xl",
+  align: "start",
+  justify: "stretch",
+  wrap: true
+)
+```

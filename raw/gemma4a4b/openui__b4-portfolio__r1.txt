@@ -1,0 +1,74 @@
+root = Card([header, summary, filterSection, mainGrid, actions, followUps])
+
+header = CardHeader("PMO Portfolio Review", "Q3 2024 - Global Operations")
+
+summary = TextCallout("success", "Portfolio Health", "Overall portfolio is healthy with 85% on-track status. Minor budget pressure in Cloud Migration.")
+
+filterSection = Card([quarterSelector, exportBtn], "sunk", "row", "m")
+quarterSelector = FormControl("Review Period", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select Quarter")
+q1 = SelectItem("Q1", "First Quarter")
+q2 = SelectItem("Q2", "Second Quarter")
+q3 = SelectItem("Q3", "Third Quarter")
+q4 = SelectItem("Q4", "Fourth Quarter")
+exportBtn = Button("Export Review", null, "secondary")
+
+mainGrid = SectionBlock([projectTable, milestoneAlerts, budgetChart, utilizationChart, riskTable, upcomingDeadlines, deliveryPace, blockedItems])
+
+projectTable = SectionItem("active_projects", "Active Projects", [projectList])
+projectList = Table([colProject, colOwner, colDeadline, colHealth])
+colProject = Col("Project", ["Cloud Migration", "Mobile App Redesign", "Data Warehouse", "Security Audit"])
+colOwner = Col("Owner", ["Sarah J.", "Mike R.", "Elena K.", "David W."])
+colDeadline = Col("Deadline", ["2024-10-15", "2024-11-02", "2024-09-30", "2024-12-20"])
+colHealth = Col("Health", ["On Track", "At Risk", "On Track", "Delayed"])
+
+milestoneAlerts = SectionItem("overdue_milestones", "Overdue Milestones", [overdueList])
+overdueList = ListBlock([m1, m2])
+m1 = ListItem("API Schema Finalization", "Cloud Migration", null, "View Details")
+m2 = ListItem("UAT Sign-off", "Mobile App Redesign", null, "View Details")
+
+budgetChart = SectionItem("budget_status", "Budget vs Allocation", [budgetBar])
+budgetBar = HorizontalBarChart(["Cloud Migration", "Mobile App", "Data Whse", "Security"], [budgetSeries], "stacked", "Project", "USD")
+budgetSeries = Series("Spent", [75000, 45000, 90000, 12000])
+budgetSeries2 = Series("Allocated", [100000, 60000, 100000, 25000])
+
+utilizationChart = SectionItem("utilization", "Team Utilization", [utilizationPie])
+utilizationPie = PieChart(["Dev", "Design", "QA", "PM", "DevOps"], [45, 15, 20, 10, 10], "donut")
+
+riskTable = SectionItem("risks", "Risk Register", [riskList])
+riskList = Table([colRisk, colSeverity])
+colRisk = Col("Risk Description", ["Resource shortage", "Vendor delay", "Scope creep", "Tech debt"])
+colSeverity = Col("Severity", ["High", "Medium", "Low", "High"])
+
+upcomingDeadlines = SectionItem("deadlines", "Upcoming Deadlines (2 Weeks)", [deadlineList])
+deadlineList = ListBlock([d1, d2])
+d1 = ListItem("Milestone: Beta Release", "Mobile App", null, "View")
+d2 = ListItem("Client Review", "Cloud Migration", null, "View")
+
+deliveryPace = SectionItem("pace", "Delivery Pace (Last 6 Sprints)", [paceLine])
+paceLine = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [paceSeries], "natural", "Sprint", "Velocity")
+paceSeries = Series("Story Points", [120, 135, 130, 145, 155, 150])
+
+blockedItems = SectionItem("blocked", "Blocked Work Items", [blockedList])
+blockedList = ListBlock([b1, b2])
+b1 = ListItem("Database Migration", "Blocked by infra access", null, "Escalate")
+b2 = ListItem("UI Component Library", "Waiting on Design assets", null, "Escalate")
+
+actions = Card([resourceRequest, archiveBtn], "sunk", "row", "m")
+resourceRequest = DialogBlock("Request Resources", "Staffing Request Form", "Submit a request for additional headcount to a specific project.", [resourceForm])
+resourceForm = Form("staffing", resourceButtons, [projSelect, headcountInput])
+projSelect = FormControl("Project", projSelectInput)
+projSelectInput = Select("project_id", [p1, p2], "Select Project")
+p1 = SelectItem("cloud", "Cloud Migration")
+p2 = SelectItem("mobile", "Mobile App Redesign")
+headcountInput = FormControl("Headcount Needed", headcountSlider)
+headcountSlider = Slider("headcount", "discrete", 1, 5, 1, ["1"], "Number of people")
+resourceButtons = Buttons([submitStaffing])
+submitStaffing = Button("Submit Request", null, "primary")
+
+archiveBtn = AlertDialogBlock("Archive Project", "Are you sure you want to archive this project? This action cannot be undone.", "Confirm", "Cancel", "destructive")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Show detailed budget breakdown")
+f2 = FollowUpItem("List all high-severity risks")
+f3 = FollowUpItem("Generate monthly PMO report")

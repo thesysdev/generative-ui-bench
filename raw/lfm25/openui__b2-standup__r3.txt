@@ -1,0 +1,48 @@
+root = Card([
+    # Item 3: Today's date
+    Heading("Async Standup - 2026-04-10"),
+    
+    # Items 1, 2, 4, 5
+    [
+        # Item 1: Alex Chen - status update
+        Card([
+            CardHeader("Alex Chen", subtitle="Online"),
+            TextContent("✅ Completed API integration, reviewing PR #123"),
+            CardHeader("status", "on_track"),
+            TextContent("On schedule with sprint deliverables")
+        ]),
+        
+        # Item 1: Maria Rodriguez - status update
+        Card([
+            CardHeader("Maria Rodriguez", subtitle="Available"),
+            TextContent("🔄 Working on dashboard redesign, waiting on stakeholder feedback"),
+            CardHeader("status", "in_progress"),
+            TextContent("Blocked until Friday for approval")
+        ]),
+        
+        # Item 2: Sam Park - blocked (also serves as item 2)
+        Card([
+            CardHeader("Sam Park", subtitle="Blocked"),
+            TextContent("❌ Blocked: awaiting design assets from graphics team"),
+            CardHeader("status", "blocked"),
+            TextContent("Cannot proceed without design files")
+        ]),
+        
+        # Item 4: Self-update form
+        Form(
+            "My Update",
+            Buttons([
+                Button("Post Update", null, "primary"),
+                Button("Cancel", null, "secondary")
+            ]),
+            Fields=[
+                FormControl("title", "What you'd like to share?"),
+                FormControl("description", "Brief description of your progress or blockers?")
+            ]
+        ),
+        
+        # Item 5: Missing updates count
+        TextContent(f"Pending updates: {pending_updates}")
+    ],
+    Divider()
+])

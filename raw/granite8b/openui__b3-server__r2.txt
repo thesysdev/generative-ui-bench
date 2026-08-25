@@ -1,0 +1,69 @@
+```openui
+root = Card([
+    header,
+    uptimeSection,
+    resourceUsageChart,
+    errorRateDisplay,
+    incidentsTable,
+    regionFilter,
+    slowEndpointsList,
+    alertThresholdSetter,
+    acknowledgeButton
+], "card", "row", "l")
+
+header = CardHeader("Service Health", "Current Quarter Overview")
+
+uptimeSection = Card([
+    TextContent("Uptime this quarter: 99.87%", "large")
+], "sunk")
+
+resourceUsageChart = Card([
+    Heading("CPU & Memory Usage (Last 24h)", "h3"),
+    LineChart(["1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h", "24h"], [
+        Series("CPU", [55, 60, 58, 62, 65, 63, 61, 59, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42]),
+        Series("Memory", [30, 35, 33, 36, 38, 37, 36, 34, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17])
+    ], "natural", "Hour", "Utilization (%)")
+], "clear")
+
+errorRateDisplay = Card([
+    TextContent("Error Rate: 0.12% (real‑time)", "large")
+], "sunk")
+
+incidentsTable = Card([
+    Heading("Open Incidents", "h3"),
+    Table([
+        Col("Severity", ["Critical", "High", "Medium", "Low"]),
+        Col("Incident", ["Auth Timeout", "DB Connection", "Cache Miss", "Rate Limit"])
+    ])
+], "clear")
+
+regionFilter = Card([
+    Heading("Filter by Region", "h3"),
+    Select("region", [
+        SelectItem("All", "All"),
+        SelectItem("US‑East", "US East"),
+        SelectItem("EU‑West", "EU West"),
+        SelectItem("APAC‑South", "APAC South")
+    ], "Choose region")
+], "sunk")
+
+slowEndpointsList = Card([
+    Heading("5 Slowest Endpoints (Latency)", "h3"),
+    ListBlock([
+        ListItem("POST /api/orders", "1250ms", []),
+        ListItem("GET /api/users", "980ms", []),
+        ListItem("PUT /api/profile", "1120ms", []),
+        ListItem("DELETE /api/logs", "1340ms", []),
+        ListItem("PATCH /api/settings", "1080ms", [])
+    ], "number")
+], "clear")
+
+alertThresholdSetter = Card([
+    Heading("Alert Threshold", "h3"),
+    Slider("threshold", "discrete", 0, 100, 5, "Alert Threshold (%)", null, null, 30)
+], "sunk")
+
+acknowledgeButton = Card([
+    Button("Acknowledge Incident", null, "primary")
+], "clear")
+```

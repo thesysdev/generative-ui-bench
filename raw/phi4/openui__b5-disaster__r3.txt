@@ -1,0 +1,93 @@
+```openui-lang
+root = Card([activeIncidents, severitySummary, resourcesStatus, sheltersStatus, evacuationRoutes, weatherForecast, rescueStats, volunteerAssignments, donations, aidRequests, communicationChannels, closedRoads, hospitalsStatus, openTasks, requestResources, broadcastUpdate, focusZone, fileReport])
+
+activeIncidents = Card([zone1, zone2, zone3], "sunk")
+zone1 = Card([incident1, incident2], "card", "column")
+incident1 = CardHeader("Zone 1", "Fire - High")
+incident2 = CardHeader("Zone 1", "Flood - Medium")
+zone2 = Card([incident3], "card", "column")
+incident3 = CardHeader("Zone 2", "Earthquake - Critical")
+zone3 = Card([], "card", "column")
+
+severitySummary = Card([summaryText], "card")
+summaryText = MarkDownRenderer("Overall: High severity incidents detected in multiple zones.")
+
+vehiclesPersonnelSupplies = Card([vehicles, personnel, supplies])
+vehicles = CardHeader("Vehicles", "Available: 15")
+personnel = CardHeader("Personnel", "Available: 50")
+supplies = CardHeader("Supplies", "Available: 1000 units")
+
+sheltersStatus = Card([shelter1, shelter2])
+shelter1 = Card([capacity1, occupancy1], "sunk", "row")
+capacity1 = Tag("Capacity: 200", null, null, "info")
+occupancy1 = Tag("Occupancy: 150", null, null, "warning")
+shelter2 = Card([capacity2, occupancy2], "sunk", "row")
+capacity2 = Tag("Capacity: 300", null, null, "info")
+occupancy2 = Tag("Occupancy: 250", null, null, "warning")
+
+evacuationRoutes = Card([route1, route2])
+route1 = Badge("Route 1 - Clear", "success")
+route2 = Badge("Route 2 - Congested", "warning")
+
+weatherForecast = Card([forecastText])
+forecastText = MarkDownRenderer("### 48-Hour Forecast\n- **Next 12 hours:** Heavy Rain\n- **Next 24 hours:** Thunderstorms\n- **Next 36-48 hours:** Clearing skies")
+
+rescueStats = Card([rescued, casualties], "sunk")
+rescued = Badge("Rescued: 120", "success")
+casualties = Badge("Casualties: 5", "danger")
+
+volunteerAssignments = Table([volunteerName, assignment])
+volunteerName = Col("Name", ["Alice", "Bob", "Charlie"])
+assignment = Col("Assignment", ["Zone 1", "Zone 2", "Zone 3"])
+
+donations = CardHeader("Donations", "Received: $10,000, Supplies: 500 units")
+
+aidRequests = ListBlock([request1, request2, request3])
+request1 = ListItem("Medical Aid", "Zone 1", null, "Awaiting")
+request2 = ListItem("Food Supplies", "Zone 2", null, "Pending")
+request3 = ListItem("Shelter Materials", "Zone 3", null, "In Progress")
+
+communicationChannels = ListBlock([channel1, channel2])
+channel1 = ListItem("Radio", "Available")
+channel2 = ListItem("Satellite", "Down")
+
+closedRoads = ListBlock([road1, road2])
+road1 = ListItem("Highway 1", "Closed")
+road2 = ListItem("Main St", "Closed")
+
+hospitalsStatus = Card([hospital1, hospital2])
+hospital1 = Card([capacity3, beds3], "sunk", "row")
+capacity3 = Tag("Capacity: 500", null, null, "info")
+beds3 = Tag("Free Beds: 50", null, null, "success")
+hospital2 = Card([capacity4, beds4], "sunk", "row")
+capacity4 = Tag("Capacity: 600", null, null, "info")
+beds4 = Tag("Free Beds: 75", null, null, "success")
+
+openTasks = Table([taskName, assignee])
+taskName = Col("Task", ["Supply Drop", "Medical Check", "Evacuation"])
+assignee = Col("Assignee", ["Team A", "Nurse B", "Rescue C"])
+
+requestResources = Form("resource-request", formButtons, [resourceType, quantity])
+resourceType = FormControl("Resource Type", resourceSelect)
+resourceSelect = Select("resource_type", [type1, type2], "Select resource")
+type1 = SelectItem("Medical Supplies", "Medical Supplies")
+type2 = SelectItem("Food", "Food Supplies")
+quantity = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", "100", "number")
+formButtons = Buttons([submitResourceBtn])
+submitResourceBtn = Button("Request Resources", null, "primary")
+
+broadcastUpdate = Form("broadcast-message", broadcastButtons, [messageField])
+messageField = FormControl("Message", messageInput)
+messageInput = TextArea("message", "Broadcast message", 3)
+broadcastButtons = Buttons([sendUpdateBtn])
+sendUpdateBtn = Button("Broadcast Update", null, "primary")
+
+focusZone = Select("focus_zone", [zone1Select, zone2Select, zone3Select], "Focus on Zone")
+zone1Select = SelectItem("Zone 1", "Zone 1")
+zone2Select = SelectItem("Zone 2", "Zone 2")
+zone3Select = SelectItem("Zone 3", "Zone 3")
+
+fileReport = Button("File Situation Report", ["report"])
+
+```

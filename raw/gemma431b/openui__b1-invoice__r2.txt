@@ -1,0 +1,25 @@
+root = Card([header, paymentStatus, invoiceDetails, paymentSection, footer], "card", "column", "l")
+
+header = CardHeader("Invoice #INV-2024-08", "Project: Brand Identity Refresh")
+
+paymentStatus = Card([amountDue, dueDate], "sunk", "row", "m", "between")
+amountDue = TextContent("$4,250.00 USD", "large-heavy")
+dueDate = TextContent("Due: Oct 24, 2024", "small")
+
+invoiceDetails = Card([detailsHeading, itemsTable, totalRow], "clear", "column", "m")
+detailsHeading = Heading("Billable Items", "h3")
+itemsTable = Table([colDesc, colRate, colTotal])
+colDesc = Col("Description", ["Logo Design & Iterations", "Brand Style Guide", "Social Media Templates", "Consultation Hours"])
+colRate = Col("Rate", ["$2,000", "$1,500", "$500", "$250/hr"])
+colTotal = Col("Total", ["$2,000", "$1,500", "$500", "$250"])
+totalRow = TextContent("Total Amount Due: $4,250.00", "small-heavy")
+
+paymentSection = Card([payHeading, payButtons], "card", "column", "s")
+payHeading = Heading("Payment", "h4")
+payButtons = Buttons([payNowBtn, payLaterBtn])
+payNowBtn = Button("Pay Now", null, "primary", "normal", "large")
+payLaterBtn = Button("Request Extension", null, "secondary", "normal", "medium")
+
+footer = FollowUpBlock([downloadPdf, emailClient])
+downloadPdf = FollowUpItem("Download PDF Invoice")
+emailClient = FollowUpItem("Email to Client")

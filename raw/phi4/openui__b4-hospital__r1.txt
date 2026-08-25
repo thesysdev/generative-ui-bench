@@ -1,0 +1,142 @@
+```openui
+root = Card([
+    bedOccupancySection,
+    erWaitSection,
+    admissionsSection,
+    patientsPerDeptSection,
+    staffOnShiftSection,
+    criticalPatientsCallout,
+    dischargeReadySection,
+    orBookingsSection,
+    suppliesStatusSection,
+    incidentFileSection,
+    viewAnotherDaySection,
+    transferRequestSection
+])
+
+bedOccupancySection = Card([
+    CardHeader("Bed Occupancy"),
+    bedOccupancyChart
+])
+bedOccupancyChart = PieChart(["Occupied", "Available"], [70, 30], "pie")
+
+erWaitSection = Card([
+    CardHeader("ER Wait Time"),
+    TextContent("Current wait time: 45 minutes")
+])
+
+admissionsSection = Card([
+    CardHeader("Admissions Over Two Weeks"),
+    admissionsLineChart
+])
+admissionsLineChart = LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"],
+    [admissionsSeries],
+    "linear",
+    "Day",
+    "Admissions"
+)
+admissionsSeries = Series("Admissions", [12, 15, 14, 18, 20, 22, 19, 17, 21, 23, 25, 24, 20, 18])
+
+patientsPerDeptSection = Card([
+    CardHeader("Patients Per Department"),
+    departmentTable
+])
+departmentTable = Table([
+    departmentNameCol,
+    patientCountCol
+])
+departmentNameCol = Col("Department", ["ER", "Cardiology", "Oncology", "Surgery"])
+patientCountCol = Col("Patients", [35, 20, 15, 10])
+
+staffOnShiftSection = Card([
+    CardHeader("Staff On Shift"),
+    staffListBlock
+])
+staffListBlock = ListBlock([
+    staffListItem("Nurse John", "ER", "Shift A"),
+    staffListItem("Doctor Smith", "Cardiology", "Shift B"),
+    staffListItem("Nurse Lisa", "Oncology", "Shift A"),
+    staffListItem("Doctor Brown", "Surgery", "Shift B")
+])
+staffListItem = ListItem
+
+criticalPatientsCallout = Card([
+    CardHeader("Critical Patients"),
+    criticalPatientsListBlock
+])
+criticalPatientsListBlock = ListBlock([
+    ListItem("Patient A", "Critical", "Oncology"),
+    ListItem("Patient B", "Critical", "Surgery")
+])
+
+dischargeReadySection = Card([
+    CardHeader("Patients Ready for Discharge"),
+    dischargeListBlock
+])
+dischargeListBlock = ListBlock([
+    ListItem("Patient C", "Discharge Ready", "Cardiology"),
+    ListItem("Patient D", "Discharge Ready", "ER")
+])
+
+orBookingsSection = Card([
+    CardHeader("OR Bookings Today"),
+    orBookingListBlock
+])
+orBookingListBlock = ListBlock([
+    ListItem("Surgery 1", "09:00 AM"),
+    ListItem("Surgery 2", "11:00 AM"),
+    ListItem("Surgery 3", "02:00 PM")
+])
+
+suppliesStatusSection = Card([
+    CardHeader("Supplies Running Low"),
+    suppliesListBlock
+])
+suppliesListBlock = ListBlock([
+    ListItem("Surgical Gloves", "Low Stock"),
+    ListItem("Sutures", "Low Stock")
+])
+
+incidentFileSection = Card([
+    CardHeader("File Incident"),
+    incidentForm
+])
+incidentForm = Form("incident-report", incidentFormButtons, [
+    incidentDescriptionField
+])
+incidentDescriptionField = FormControl("Description", textarea)
+textarea = TextArea("description", "Describe the incident", 3)
+incidentFormButtons = Buttons([
+    submitIncidentBtn
+])
+submitIncidentBtn = Button("File Incident", null, "primary")
+
+viewAnotherDaySection = Card([
+    CardHeader("View Another Day"),
+    datePicker
+])
+datePicker = DatePicker("date", "single")
+
+transferRequestSection = Card([
+    CardHeader("Request Patient Transfer"),
+    transferForm
+])
+transferForm = Form("transfer-request", transferFormButtons, [
+    patientIdField,
+    destinationDeptField,
+    reasonField
+])
+patientIdField = FormControl("Patient ID", patientIdInput)
+patientIdInput = Input("patient_id")
+destinationDeptField = FormControl("Destination Department", destinationSelect)
+destinationSelect = Select("destination", [deptOrtho, deptPediatrics])
+deptOrtho = SelectItem("Orthopedics", "Orthopedics")
+deptPediatrics = SelectItem("Pediatrics", "Pediatrics")
+reasonField = FormControl("Reason for Transfer", transferTextArea)
+transferTextArea = TextArea("reason", "Reason for transfer", 2)
+transferFormButtons = Buttons([
+    submitTransferBtn
+])
+submitTransferBtn = Button("Request Transfer", null, "primary")
+```

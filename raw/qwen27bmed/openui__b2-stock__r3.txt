@@ -1,0 +1,18 @@
+
+
+root = Card([header, thresholdCallout, searchForm, inventoryTable, summaryText], "card", "column", "l")
+header = CardHeader("Low Inventory Warning", "Items currently below their reorder threshold")
+thresholdCallout = Callout("warning", "Reorder Threshold", "This warning triggers when any item's stock falls below its individual reorder threshold. The store-wide default threshold is 10 units; per-item overrides are shown in the table below.")
+searchForm = Form("inventory-search", searchButtons, [searchField])
+searchField = FormControl("Search items", searchInput, "Filter by product name, SKU, or category")
+searchInput = Input("search", "e.g. almond milk, CB-1042, Dairy")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+inventoryTable = Table([itemCol, categoryCol, remainingCol, thresholdCol, reorderCol])
+itemCol = Col("Item", ["Organic Almond Milk 1L", "Cold Brew Coffee 12oz", "Sourdough Bread Loaf", "Free-Range Eggs (dozen)", "Greek Yogurt 32oz", "Dark Chocolate 70% 100g"])
+categoryCol = Col("Category", ["Dairy", "Beverages", "Bakery", "Dairy", "Dairy", "Snacks"])
+remainingCol = Col("Remaining", [4, 7, 3, 6, 9, 5])
+thresholdCol = Col("Threshold", [10, 15, 8, 12, 10, 10])
+reorderCol = Col("Reorder", ["Reorder", "Reorder", "Reorder", "Reorder", "Reorder", "Reorder"], "action")
+summaryText = TextContent("**6 items** are below their reorder threshold. **3 items** are critically low (fewer than 5 units remaining). Reorder as soon as possible to avoid stock-outs.", "default")

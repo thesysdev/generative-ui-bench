@@ -1,0 +1,105 @@
+root = Card([header, summary, incidents, resources, shelters, routes, weather, casualties, volunteers, donations, aidRequests, communications, roads, hospitals, tasks, resourceRequestForm, broadcastUpdate, zoneFilter, situationReportForm])
+
+header = CardHeader("Emergency Response Center", "Coordinating relief operations")
+summary = Card([text("Total Active Incidents: 23", "h3"), text("Overall Severity: High", "h3"), text("Available Vehicles: 12", "h3"), text("Personnel Online: 34", "h3")])
+incidents = Container([
+  CardHeader("Active Incidents by Zone", "Current operational status"),
+  List([[
+    {zone: "North", severity: "Critical", count: 5},
+    {zone: "South", severity: "High", count: 8},
+    {zone: "East", severity: "Medium", count: 3},
+    {zone: "West", severity: "Low", count: 2}
+  ]])
+])
+resources = Container([
+  CardHeader("Available Resources", "Vehicles, personnel and supplies"),
+  List([{
+    type: "Vehicle",
+    model: "SUV-XT4",
+    capacity: "6 pax"
+  }],
+  List([{
+    type: "Personnel",
+    name: "Corporal M. Chen",
+    role: "Logistics Coordinator"
+  }]),
+  List([{
+    type: "Supply",
+    item: "Water Bladders",
+    quantity: 1500,
+    unit: "bottles"
+  }]))
+])
+shelters = Table([col("Shelter", "Capacity", "Occupancy", "Remaining"), col("Name", "Capacity", "Occupied", "Free")], [
+  {name: "Oakwood Shelter", capacity: 200, occupied: 140, free: 60},
+  {name: "Riverside Haven", capacity: 350, occupied: 280, free: 70},
+  {name: "Central Relief Hub", capacity: 500, occupied: 420, free: 80}
+])
+routes = List([{
+  route: "Route 1 (North to South)",
+  status: "Active",
+  progress: "75%"
+}], [
+  {route: "Route 2 (East to West)", status: "Delayed", progress: "40%"},
+  {route: "Route 3 (Northwest corridor)", status: "Open", progress: "100%"},
+  {route: "Route 4 (South-East bypass)", status: "Blocked", progress: "0%"}
+])
+weather = MarkDownRenderer("", "Weather Forecast (Next 48 Hours):\n\n- Today: Partly cloudy, 22°C, light winds\n- Tomorrow: Showers expected, 25°C, chance of thunderstorms\n- Day 3: Clear skies, 28°C\n- Day 4: Rain likely, 24°C, high humidity\n- 48-hour outlook remains moderate risk of flooding in low-lying areas."),
+casualties = Container([CardHeader("Casualties", "People Rescued & Casualties"), text("Rescued: 127 | Casualties: 23")]),
+volunteers = List([{
+  name: "Dr. Aisha Patel",
+  role: "Medical Lead",
+  assignedTask: "Coordinate medical triage"
+}"],
+{name: "Corporal James Wu",
+  role: "Logistics Officer",
+  assignedTask: "Manage vehicle dispatch"
+}]),
+donations = List([{
+  source: "International Red Cross",
+  amount: "$45,000",
+  currency: "USD"
+}]),
+aidRequests = List([{
+  id: "AR-001",
+  type: "Medical Supplies",
+  status: "Pending",
+  priority: "High"
+}]),
+communications = List([{
+  channel: "Satellite Phone",
+  status: "Online",
+  lastCheck: "2026-07-14 02:30"
+}], [
+  {channel: "Radio Channel 7", status: "Online"},
+  {channel: "Social Media Feed", status: "Offline"},
+  {channel: "Email System", status: "Online"},
+  {channel: "Community WhatsApp", status: "Online"}
+]),
+roads = List([{
+  road: "Main Highway 5",
+  closureReason: "Landslide damage",
+  opened: false
+}]),
+hospitals = Table([col("Hospital", "Beds", "Free", "Location")], [
+  {name: "St. Mary's Hospital", capacity: 120, free: 35, location: "Central City"},
+  {name: "Riverwood Medical Center", capacity: 85, free: 20, location: "Eastern District"},
+  {name: "Northside General", capacity: 90, free: 55, location: "North Region"}
+]),
+tasks = List([{
+  name: "Secure North Corridor",
+  assignee: "Corporal Chen",
+  status: "In Progress"
+}]),
+resourceRequestForm = Form([{
+  label: "Request Additional Resources",
+  type: "free-text",
+  placeholder: "Specify resource type (vehicle, supply, personnel) and quantity"
+}]),
+broadcastUpdate = Button(label="Broadcast Update", action="send_notification"),
+zoneFilter = Dropdown(options=[["North", "South", "East", "West"]], value="North"),
+situationReportForm = Form([{
+  label: "File Situation Report",
+  text: "Describe the current situation and required actions.",
+  submit: "Submit Report"
+}]))

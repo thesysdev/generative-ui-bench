@@ -1,0 +1,86 @@
+```openui-lang
+root = Card([workspaceHeader, mainDashboard, portfolioSummary, positionsTable, exposureChart, riskMetrics, marketActivity, strategiesPerformance, rebalanceSection, orderPlacement, timeframeSelector])
+
+workspaceHeader = CardHeader("Trading Desk Dashboard", "Morning Workspace Overview")
+
+mainDashboard = Card([portfolioValue, pnlChart, marginStatus], "sunk")
+
+portfolioValue = Card([portfolioValueCard, pnlToday], "sunk")
+portfolioValueCard = CardHeader("Portfolio Value", "$12,456,789.23 USD")
+pnlToday = TextCallout("Today's PnL", "+$187,456.32", "success")
+
+positionsTable = Card([positionsHeader, positionsData], "sunk")
+positionsHeader = CardHeader("Current Positions", "12 active positions")
+positionsData = Table([tickerCol, sizeCol, entryPriceCol, currentPriceCol, pnlCol])
+tickerCol = Col("Ticker", ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "JPM", "V", "QQQ", "SPY", "XOM", "DIS", "META"])
+sizeCol = Col("Size", [1250, 890, 675, 1420, 380, 950, 2100, 780, 1500, 420, 1100, 550])
+entryPriceCol = Col("Entry Price", ["$182.45", "$315.23", "$135.67", "$342.10", "$180.50", "$138.90", "$302.50", "$356.70", "$445.20", "$98.70", "$123.40", "$300.00"])
+currentPriceCol = Col("Current Price", ["$190.32", "$318.90", "$140.12", "$345.60", "$185.20", "$139.50", "$305.00", "$359.10", "$447.80", "$99.20", "$125.30", "$302.50"])
+pnlCol = Col("PnL", ["+$9,876.25", "+$3,456.78", "+$2,876.54", "+$4,567.89", "+$1,987.50", "+$1,234.56", "+$6,789.00", "+$2,345.67", "+$3,456.78", "+$678.90", "+$1,987.65", "-$1,234.56"])
+
+exposureChart = Card([sectorHeader, exposureChartData], "sunk")
+sectorHeader = CardHeader("Sector Exposure", "Weighted by portfolio value")
+exposureChartData = PieChart(["Tech", "Finance", "Energy", "Consumer", "Healthcare"], [65, 15, 10, 8, 12], "pie")
+
+riskMetrics = Card([varHeader, limitsHeader], "sunk")
+varHeader = CardHeader("Value at Risk", "$215,678.90 (95% confidence)")
+limitsHeader = Card([riskLimitsHeader, riskAlerts])
+riskLimitsHeader = CardHeader("Risk Limits", "Remaining margin: 78%")
+riskAlerts = Alert("Margin Limit", "Margin usage at 82% - 8% over limit", "warning")
+
+marketActivity = Card([topGainersHeader, topLosersHeader, watchlistHeader], "sunk")
+topGainersHeader = CardHeader("Today's Gainers", "Top 5")
+topGainersData = Table([tickerCol2, gainCol])
+tickerCol2 = Col("Ticker", ["NVDA", "TSLA", "AMD", "META", "GOOGL"])
+gainCol = Col("Gain", ["+5.2%", "+3.8%", "+4.5%", "+2.9%", "+1.7%"])
+topLosersHeader = CardHeader("Today's Losers", "Top 5")
+topLosersData = Table([tickerCol3, lossCol])
+tickerCol3 = Col("Ticker", ["JPM", "V", "XOM", "DIS", "SPY"])
+lossCol = Col("Loss", ["-3.1%", "-2.5%", "-1.8%", "-1.2%", "-0.9%"])
+watchlistHeader = CardHeader("Watched Instruments", "Current prices")
+watchlistData = Table([tickerCol4, priceCol])
+tickerCol4 = Col("Ticker", ["NFLX", "CRWD", "LIN", "COST", "PYPL"])
+priceCol = Col("Price", ["$389.20", "$142.50", "$210.70", "$198.30", "$135.60"])
+
+strategiesPerformance = Card([strategyHeader, drawdownChart], "sunk")
+strategyHeader = CardHeader("Strategy Returns", "Year-to-date")
+strategyData = Table([strategyCol, returnCol])
+strategyCol = Col("Strategy", ["Core Equity", "Fixed Income", "Multi-Asset", "Alternative", "Volatility"])
+returnCol = Col("Return", ["+18.5%", "+9.2%", "+12.3%", "+7.8%", "+14.6%"])
+drawdownChart = RadialChart(["Q1", "Q2", "Q3", "Q4"], ["-12%", "-8%", "-5%", "-3%"])
+
+rebalanceSection = Card([rebalanceBtn], "sunk")
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary")
+
+orderPlacement = Card([orderForm], "sunk")
+orderForm = Form("order-placement", orderButtons, [tickerField, sideField, quantityField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL")
+sideField = FormControl("Side", sideRadio)
+sideRadio = RadioGroup("side", [buyOption, sellOption])
+buyOption = RadioItem("Buy", "Buy position", "buy")
+sellOption = RadioItem("Sell", "Sell position", "sell")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", "100", "number")
+orderButtons = Buttons([placeOrderBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+
+timeframeSelector = Card([timeframeBtn], "sunk")
+timeframeBtn = Button("Change Timeframe", null, "secondary")
+
+economicReleases = Card([releasesHeader, releasesData], "sunk")
+releasesHeader = CardHeader("Economic Releases", "This week")
+releasesData = Table([dateCol, eventCol, impactCol])
+dateCol = Col("Date", ["Oct 10", "Oct 11", "Oct 12", "Oct 13", "Oct 14"])
+eventCol = Col("Event", ["CPI Report", "Jobless Claims", "Fed Meeting", "Retail Sales", "Manufacturing PMI"])
+impactCol = Col("Impact", ["High", "Medium", "High", "Medium", "Low"])
+
+marketHeadlines = Card([headlinesHeader, headlinesData], "sunk")
+headlinesHeader = CardHeader("Market Headlines", "Sentiment Analysis")
+headlinesData = Table([headlineCol, sentimentCol])
+headlineCol = Col("Headline", ["Tech Stocks Surge on AI Hopes", "Fed Signals Rate Cut in December", "Oil Prices Dip on OPEC+ Meeting", "Consumer Confidence Falls", "Gold Hits New Record High"])
+sentimentCol = Col("Sentiment", ["Positive", "Neutral", "Negative", "Negative", "Positive"])
+
+marginInUse = Card([marginStatusCard], "sunk")
+marginStatusCard = CardHeader("Margin in Use", "82% of available margin")
+```

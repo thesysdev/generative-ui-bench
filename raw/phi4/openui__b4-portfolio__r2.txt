@@ -1,0 +1,49 @@
+```openui
+root = Card([portfolioHeader, activeProjects, overdueMilestones, budgetUtilization, teamUtilization, risks, upcomingDeadlines, deliveryPace, blockedItems, healthSummary, controls])
+portfolioHeader = CardHeader("PMO Project Portfolio Review", "Current Quarter")
+
+activeProjects = Table([projectName, projectOwner, projectDeadline, projectHealth])
+projectName = Col("Project", ["Project Alpha", "Project Beta", "Project Gamma"])
+projectOwner = Col("Owner", ["Alice", "Bob", "Charlie"])
+projectDeadline = Col("Deadline", ["2023-12-15", "2023-11-20", "2023-12-01"])
+projectHealth = Col("Health", ["Good", "Critical", "At Risk"])
+
+overdueMilestones = ListBlock([
+    ListItem("Alpha Milestone 3", "Due 2023-10-15"),
+    ListItem("Beta Milestone 2", "Due 2023-10-20")
+])
+
+budgetUtilization = Table([projectName, budgetSpent, budgetAllocated])
+budgetSpent = Col("Spent", ["$50,000", "$75,000", "$40,000"])
+budgetAllocated = Col("Allocated", ["$100,000", "$100,000", "$80,000"])
+
+teamUtilization = Card([
+    Heading("Team Utilization", "h3"),
+    TextContent("Team utilization is at 85% across all projects", "large")
+])
+
+risks = Table([riskDescription, riskSeverity])
+riskDescription = Col("Risk", ["Dependency delay in Alpha", "Budget overrun in Beta"])
+riskSeverity = Col("Severity", ["High", "Medium"])
+
+upcomingDeadlines = ListBlock([
+    ListItem("Project Alpha - Final Review", "2023-11-30"),
+    ListItem("Project Beta - Beta Testing", "2023-11-25")
+])
+
+deliveryPace = LineChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"], [deliverySeries], "linear", "Sprint", "Deliverables")
+deliverySeries = Series("Deliverables", [10, 12, 9, 15, 11, 13])
+
+blockedItems = ListBlock([
+    ListItem("Gamma - API Integration", "Awaiting external vendor"),
+    ListItem("Alpha - UI Design", "Pending design review")
+])
+
+healthSummary = Heading("Portfolio Health: Mostly Good", "h4")
+
+controls = Buttons([changeQuarterBtn, requestPeopleBtn, exportReviewBtn, archiveProjectBtn])
+changeQuarterBtn = Button("Change Quarter", null, "secondary")
+requestPeopleBtn = Button("Request More People", null, "primary")
+exportReviewBtn = Button("Export Review", null, "tertiary")
+archiveProjectBtn = Button("Archive Project", null, "destructive")
+```

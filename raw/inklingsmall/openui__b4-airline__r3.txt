@@ -1,0 +1,72 @@
+root = Card([header, otpSection, flightsTable, delayedCallout, gateChanges, crews, weather, loadSection, connectionsRisk, rebookCard, hubCard, cancellations, turnaround], "card", "column", "l")
+
+header = CardHeader("Hub Operations Desk", "Terminal 4 • Live")
+
+otpSection = Card([otpHeading, otpValue, otpBar], "sunk")
+otpHeading = Heading("On-Time Performance Today", "h3")
+otpValue = TextContent("87.3%", "large-heavy")
+otpBar = Progress(87, "On-time %")
+
+flightsTable = Table([flightNum, routeCol, gateCol, statusCol])
+flightNum = Col("Flight", ["AA224", "DL881", "UA102", "BA117", "NK432", "WN330"])
+routeCol = Col("Route", ["JFK→LAX", "ATL→ORD", "SFO→LHR", "DFW→MIA", "LAS→DEN", "PHX→SEA"])
+gateCol = Col("Gate", ["B12", "C4", "A2", "D8", "E1", "F3"])
+statusCol = Col("Status", ["On time", "Delayed 45m", "Boarding", "Canceled", "On time", "On time"])
+
+delayedCallout = Callout("warning", "Delayed Flights", "AA224 (45m) • DL881 (20m) • NK432 (15m) • WN330 (10m)")
+
+gateChanges = Card([gateHeading, gateList], "clear")
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateList = ListBlock([gc1, gc2, gc3])
+gc1 = ListItem("AA224 → B12", "Moved from B10")
+gc2 = ListItem("UA102 → A2", "Moved from A5")
+gc3 = ListItem("BA117 → D8", "Moved from D3")
+
+crews = Card([crewHeading, crewList], "clear")
+crewHeading = Heading("Crews Available for Reassignment", "h3")
+crewList = ListBlock([cr1, cr2, cr3])
+cr1 = ListItem("Capt. Morales", "Boeing 737 • 4h available")
+cr2 = ListItem("First Off. Chen", "Airbus A320 • 3h available")
+cr3 = ListItem("Capt. Reed", "Boeing 777 • 6h available")
+
+weather = Callout("warning", "Weather Advisory", "Thunderstorms within 20nm • Crosswinds 28kt on Rwy 17L • Visibility 3/4 mi • Icing above 10,000 ft")
+
+loadSection = Card([loadHeading, loadValue, loadBar], "sunk")
+loadHeading = Heading("Average Passenger Load Today", "h3")
+loadValue = TextContent("92%", "large-heavy")
+loadBar = Progress(92, "Load factor")
+
+connectionsRisk = Card([connHeading, connList], "clear")
+connHeading = Heading("Connections at Risk of Being Missed", "h3")
+connList = ListBlock([cx1, cx2])
+cx1 = ListItem("AA224 → BA117", "Connection window 18 min — missed")
+cx2 = ListItem("DL881 → UA102", "Connection window 22 min — at risk")
+
+rebookCard = Card([rebookHeading, rebookForm], "clear")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookForm = Form("rebook", rebookButtons, [rebookField])
+rebookField = FormControl("Flight / passenger count", rebookInput)
+rebookInput = Input("rebook", "e.g. AA224, 42 pax")
+rebookButtons = Buttons([rebookBtn])
+rebookBtn = Button("Rebook Passengers", null, "primary")
+
+hubCard = Card([hubHeading, hubForm], "clear")
+hubHeading = Heading("Look at a Different Hub", "h3")
+hubForm = Form("hub-switch", hubButtons, [hubField])
+hubField = FormControl("Select hub", hubSelect)
+hubSelect = Select("hub", [hubLAX, hubORD, hubDFW])
+hubLAX = SelectItem("lax", "Los Angeles (LAX)")
+hubORD = SelectItem("ord", "Chicago (ORD)")
+hubDFW = SelectItem("dfw", "Dallas (DFW)")
+hubButtons = Buttons([switchBtn])
+switchBtn = Button("Switch Hub", null, "primary")
+
+cancellations = Card([cancelHeading, cancelValue, cancelTags], "sunk")
+cancelHeading = Heading("Cancellations Today", "h3")
+cancelValue = TextContent("4 flights", "large-heavy")
+cancelTags = TagBlock(["NK432", "AA881", "DL204", "BA301"])
+
+turnaround = Card([turnHeading, turnValue, turnNote], "sunk")
+turnHeading = Heading("Average Turnaround Time", "h3")
+turnValue = TextContent("42 min", "large-heavy")
+turnNote = TextContent("Target: 55 min • 6 of 12 flights under target", "small")

@@ -1,0 +1,146 @@
+ (p=0.041)"])
+expStatusCol = Col("Status", ["Significant · Ship", "Significant · Ship"])
+
+Actions:
+actionsSection = Card([actionsHeading, regionFocus, patchNotes, hotfix], "sunk")
+actionsHeading = Heading("Quick Actions", "h3")
+regionFocus = FormControl... wait, FormControl is for forms. Let me use a Select or just Buttons.
+
+Actually for "a way to focus on one region" - I could use a Select or a set of buttons. Let me use a Select inside a form? No, that's overkill. Let me use Buttons with region names, or a Select. Actually, let me just use a Select component directly... but Select is a form input. Let me use Buttons for regions.
+
+Wait, actually I can just use a Select as a standalone component? No, Select needs to be inside a FormControl which needs to be in a Form. Let me just use Buttons for region focus.
+
+regionFocus = Buttons([naEastBtn, naWestBtn, euWestBtn, euNorthBtn, apacBtn, oceaniaBtn])
+naEastBtn = Button("NA-East", null, "secondary", "small")
+naWestBtn = Button("NA-West", null, "secondary", "small")
+euWestBtn = Button("EU-West", null, "secondary", "small")
+euNorthBtn = Button("EU-North", null, "secondary", "small")
+apacBtn = Button("Asia-Pacific", null, "secondary", "small")
+oceaniaBtn = Button("Oceania", null, "secondary", "small")
+
+patchNotes = DrawerBlock("Draft Patch Notes", "Patch Notes Editor", "Compose and review patch notes for the next release", [patchForm])
+patchForm = Form("patch-notes", patchFormButtons, [patchTitleField, patchBodyField, patchTagsField])
+patchTitleField = FormControl("Patch title", patchTitleInput)
+patchTitleInput = Input("patch_title", "v3.3.0 – Dragon's Descent Update")
+patchBodyField = FormControl("Notes", patchBodyInput, "Markdown supported")
+patchBodyInput = TextArea("patch_body", "## New Content\n- Dragon's Descent raid...\n\n## Fixes\n- Fixed crash on...", 8)
+patchTagsField = FormControl("Tags", patchTagsSelect)
+patchTagsSelect = Select("tags", [tagContent, tagFix, tagBalance], "Select tags")
+tagContent = SelectItem("content", "New Content")
+tagFix = SelectItem("fix", "Bug Fix")
+tagBalance = SelectItem("balance", "Balance Change")
+patchFormButtons = Buttons([savePatchBtn, cancelPatchBtn])
+savePatchBtn = Button("Save Draft", null, "primary")
+cancelPatchBtn = Button("Cancel", null, "tertiary")
+
+hotfix = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix Deployment", "This will push a hotfix to all regions immediately. Players will see a brief reconnect.", "Deploy Hotfix", "Cancel", "destructive")
+
+Now let me verify all references are reachable from root:
+- root children: header, kpiRow, sessionSection, bestSellersSection, serverSection, crashSection, eventsSection, moderationSection, inflationSection, experimentsSection, actionsSection ✓
+- header: standalone ✓
+- kpiRow → kpiTable → kpiLabel, kpiValue ✓
+- sessionSection → sessionHeading, sessionChart → sessionSeries ✓
+- bestSellersSection → bestSellersHeading, bestSellersTable → itemCol, priceCol, unitsCol, revCol ✓
+- serverSection → serverHeading, serverTable → regionCol, playersCol, pingCol, statusCol ✓
+- crashSection → crashHeading, crashChart → crashSeries ✓
+- eventsSection → eventsHeading, eventsList → ev1, ev2, ev3, ev4 ✓
+- moderationSection → modHeading, modReports, modAppeals ✓
+- inflationSection → inflationHeading, inflationProgress, inflationNote ✓
+- experimentsSection → expHeading, expTable → expNameCol, expMetricCol, expResultCol, expStatusCol ✓
+- actionsSection → actionsHeading, regionFocus, patchNotes, hotfix
+  - regionFocus → naEastBtn, naWestBtn, euWestBtn, euNorthBtn, apacBtn, oceaniaBtn ✓
+  - patchNotes → patchForm → patchTitleField, patchBodyField, patchTagsField, patchFormButtons
+    - patchTitleField → patchTitleInput ✓
+    - patchBodyField → patchBodyInput ✓
+    - patchTagsField → patchTagsSelect → tagContent, tagFix, tagBalance ✓
+    - patchFormButtons → savePatchBtn, cancelPatchBtn ✓
+  - hotfix: standalone ✓
+
+All good. Let me write it out now.
+
+Wait, I need to double-check: ListBlock items - the signature is ListItem(title, subtitle?, image?, actionLabel?). So ev1 = ListItem("Dragon's Descent Raid", "LIVE · 4,200 players participating", null, "View") - that's 4 positional args. Good.
+
+Let me also make sure I'm not using any named arguments. All positional. Good.
+
+One more check: the DrawerBlock signature is DrawerBlock(triggerLabel, title, description?, content?, ...). So patchNotes = DrawerBlock("Draft Patch Notes", "Patch Notes Editor", "Compose and review...", [patchForm]). Good.
+
+AlertDialogBlock(triggerLabel, title, description, confirmLabel?, cancelLabel?, triggerVariant?). So hotfix = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix Deployment", "This will push...", "Deploy Hotfix", "Cancel", "destructive"). Good.
+
+Let me write the final output now.
+
+
+root = Card([header, kpiRow, sessionSection, bestSellersSection, serverSection, crashSection, eventsSection, moderationSection, inflationSection, experimentsSection, actionsSection], "card", "column", "l")
+header = CardHeader("Live-Ops Room", "Real-time game operations dashboard · Last updated 12 s ago")
+kpiRow = Card([kpiTable], "sunk")
+kpiTable = Table([kpiLabelCol, kpiValueCol])
+kpiLabelCol = Col("Metric", ["Players Online Now", "Daily Active (DAU)", "Monthly Active (MAU)", "Revenue Today", "Revenue / User (ARPU)"])
+kpiValueCol = Col("Value", ["48,217", "182,450", "1,240,300", "$342,800", "$1.88"])
+sessionSection = Card([sessionHeading, sessionChart], "sunk")
+sessionHeading = Heading("Average Session Length – Past 14 Days", "h3")
+sessionChart = LineChart(["Jun 2", "Jun 3", "Jun 4", "Jun 5", "Jun 6", "Jun 7", "Jun 8", "Jun 9", "Jun 10", "Jun 11", "Jun 12", "Jun 13", "Jun 14", "Jun 15"], [sessionSeries], "natural", "Date", "Minutes")
+sessionSeries = Series("Avg Session (min)", [42, 44, 43, 47, 51, 49, 46, 44, 48, 52, 55, 53, 50, 49])
+bestSellersSection = Card([bestSellersHeading, bestSellersTable], "sunk")
+bestSellersHeading = Heading("Best-Selling Items (Today)", "h3")
+bestSellersTable = Table([itemCol, priceCol, unitsCol, itemRevCol])
+itemCol = Col("Item", ["Dragon Blade", "Phoenix Wings", "Mythic Skin Pack", "Season 7 Pass", "Cosmetic Chest"])
+priceCol = Col("Price ($)", ["9.99", "14.99", "24.99", "19.99", "4.99"])
+unitsCol = Col("Units Sold", ["3,240", "1,876", "1,102", "2,450", "8,930"])
+itemRevCol = Col("Revenue ($)", ["32,368", "28,121", "27,559", "48,976", "44,561"])
+serverSection = Card([serverHeading, serverTable], "sunk")
+serverHeading = Heading("Server Regions & Health", "h3")
+serverTable = Table([regionCol, srvPlayersCol, pingCol, healthCol])
+regionCol = Col("Region", ["NA-East", "NA-West", "EU-West", "EU-North", "Asia-Pacific", "Oceania"])
+srvPlayersCol = Col("Players", ["14,200", "9,800", "12,400", "5,100", "6,200", "417"])
+pingCol = Col("Avg Ping (ms)", ["24", "31", "28", "42", "68", "89"])
+healthCol = Col("Health", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy", "Healthy"])
+crashSection = Card([crashHeading, crashChart], "sunk")
+crashHeading = Heading("Crash Rate by App Version", "h3")
+crashChart = BarChart(["v3.2.1", "v3.2.0", "v3.1.9", "v3.1.8", "v3.0.5"], [crashSeries], "grouped", "Version", "Crash %")
+crashSeries = Series("Crash Rate (%)", [1.2, 2.8, 0.9, 1.5, 3.4])
+eventsSection = Card([eventsHeading, eventsList], "sunk")
+eventsHeading = Heading("Live & Upcoming Events", "h3")
+eventsList = ListBlock([ev1, ev2, ev3, ev4])
+ev1 = ListItem("Dragon's Descent Raid", "LIVE · 4,200 players participating", null, "View")
+ev2 = ListItem("Summer Fest", "LIVE · 12,800 players participating", null, "View")
+ev3 = ListItem("Ranked Season 7 Launch", "Starts Jun 18 · 00:00 UTC", null, "Configure")
+ev4 = ListItem("Double XP Weekend", "Starts Jun 21 · 16:00 UTC", null, "Configure")
+moderationSection = Card([modHeading, modReports, modAppeals], "sunk")
+modHeading = Heading("Moderation Queue", "h3")
+modReports = Callout("warning", "Player Reports Awaiting Review", "37 reports in queue: 12 toxic chat · 15 exploit · 10 other. Median wait 4 h 12 min.")
+modAppeals = Callout("info", "Ban Appeals Awaiting Review", "14 appeals in queue: 9 permanent bans · 5 temporary. Median wait 1 d 6 h.")
+inflationSection = Card([inflationHeading, inflationProgress, inflationNote], "sunk")
+inflationHeading = Heading("In-Game Currency Inflation", "h3")
+inflationProgress = Progress(72, "Inflation index: 72% of safe threshold")
+inflationNote = TextContent("Gold supply grew 4.2% this week. Drop rates from the Dragon's Descent Raid are the primary driver. Consider adjusting loot tables before the next patch to stay under the 80% ceiling.", "small")
+experimentsSection = Card([expHeading, expTable], "sunk")
+expHeading = Heading("Running Experiments", "h3")
+expTable = Table([expNameCol, expMetricCol, expResultCol, expStatusCol])
+expNameCol = Col("Experiment", ["New matchmaking algorithm", "Rewarded-ad placement in lobby"])
+expMetricCol = Col("Primary Metric", ["Match wait time", "Session length"])
+expResultCol = Col("Treatment vs Control", ["-18% wait (p = 0.003)", "+6.2% session (p = 0.041)"])
+expStatusCol = Col("Status", ["Significant – ready to ship", "Significant – ready to ship"])
+actionsSection = Card([actionsHeading, regionFocusLabel, regionFocusBtns, patchNotesDrawer, hotfixDialog], "sunk")
+actionsHeading = Heading("Quick Actions", "h3")
+regionFocusLabel = TextContent("Focus dashboard on a single region:", "small")
+regionFocusBtns = Buttons([naEastBtn, naWestBtn, euWestBtn, euNorthBtn, apacBtn, oceaniaBtn])
+naEastBtn = Button("NA-East", null, "secondary", "small")
+naWestBtn = Button("NA-West", null, "secondary", "small")
+euWestBtn = Button("EU-West", null, "secondary", "small")
+euNorthBtn = Button("EU-North", null, "secondary", "small")
+apacBtn = Button("Asia-Pacific", null, "secondary", "small")
+oceaniaBtn = Button("Oceania", null, "secondary", "small")
+patchNotesDrawer = DrawerBlock("Draft Patch Notes", "Patch Notes Editor", "Compose, tag and save a draft for the next release.", [patchForm])
+patchForm = Form("patch-notes", patchFormBtns, [patchTitleField, patchBodyField, patchTagsField])
+patchTitleField = FormControl("Patch title", patchTitleInput)
+patchTitleInput = Input("patch_title", "v3.3.0 – Dragon's Descent Update")
+patchBodyField = FormControl("Notes", patchBodyInput, "Markdown supported")
+patchBodyInput = TextArea("patch_body", "## New Content\n- Dragon's Descent raid (4-player co-op)\n- 3 new cosmetic sets\n\n## Fixes\n- Resolved crash on EU-West (v3.2.0)\n- Fixed gold duplication in raid loot", 8)
+patchTagsField = FormControl("Tags", patchTagsSelect)
+patchTagsSelect = Select("tags", [tagContent, tagFix, tagBalance], "Select one or more")
+tagContent = SelectItem("content", "New Content")
+tagFix = SelectItem("fix", "Bug Fix")
+tagBalance = SelectItem("balance", "Balance Change")
+patchFormBtns = Buttons([savePatchBtn, cancelPatchBtn])
+savePatchBtn = Button("Save Draft", null, "primary")
+cancelPatchBtn = Button("Cancel", null, "tertiary")
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix Deployment", "This will push a hotfix to all regions immediately. Players will experience a brief reconnect (≈ 30 s). This action cannot be undone.", "Deploy Hotfix", "Cancel", "destructive")

@@ -1,0 +1,43 @@
+root = Card([header, kpiRow, cohortFilter, coursesRank, atRisk, engagementChart, messageAction], "card", "column", "l")
+
+header = CardHeader("Training Analytics", "Weekly insights and cohort actions")
+
+kpiRow = Card([kpiActive, kpiCompletion, kpiQuiz], "clear", "row", "m", "stretch")
+kpiActive = Card([activeLabel, activeValue], "sunk", "column", "m")
+activeLabel = TextContent("Active learners this week", "small")
+activeValue = Heading("342", "h2")
+kpiCompletion = Card([completionLabel, completionValue], "sunk", "column", "m")
+completionLabel = TextContent("Course completion rate", "small")
+completionValue = Heading("78%", "h2")
+kpiQuiz = Card([quizLabel, quizValue], "sunk", "column", "m")
+quizLabel = TextContent("Average quiz score", "small")
+quizValue = Heading("84.2", "h2")
+
+cohortFilter = Card([cohortLabel, cohortSelect], "clear", "column", "s")
+cohortLabel = Heading("Narrow to cohort", "h3")
+cohortSelect = Select("cohort", [c1, c2, c3], "Select cohort")
+c1 = SelectItem("Q3-2024", "Q3-2024 Cohort")
+c2 = SelectItem("Q4-2024", "Q4-2024 Cohort")
+c3 = SelectItem("Q1-2025", "Q1-2025 Cohort")
+
+coursesRank = Card([coursesHeading, coursesChart], "sunk", "column", "m")
+coursesHeading = Heading("Courses by enrollment", "h3")
+coursesChart = HorizontalBarChart(["Leadership", "Data Skills", "Sales", "Compliance"], [seriesEnroll])
+seriesEnroll = Series("Enrolled", [840, 620, 510, 390])
+
+atRisk = Card([atRiskHeading, atRiskList], "sunk", "column", "m")
+atRiskHeading = Heading("Learners at risk of dropping out", "h3")
+atRiskList = ListBlock([learner1, learner2, learner3], "number")
+learner1 = ListItem("Jordan M.", "Last active 9 days ago • 2 modules behind")
+learner2 = ListItem("Casey T.", "Last active 11 days ago • Quiz missed")
+learner3 = ListItem("Riley S.", "Last active 7 days ago • No progress this week")
+
+engagementChart = Card([engagementHeading, engagementArea], "clear", "column", "m")
+engagementHeading = Heading("Engagement across the past eight weeks", "h3")
+engagementArea = AreaChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engSeries], "linear", "Week", "Active sessions")
+engSeries = Series("Active sessions", [120, 145, 132, 178, 210, 195, 240, 260])
+
+messageAction = Card([messageHeading, messageButtons], "clear", "column", "m")
+messageHeading = Heading("Message a cohort", "h3")
+messageButtons = Buttons([msgBtn])
+msgBtn = Button("Send message to selected cohort", null, "primary")

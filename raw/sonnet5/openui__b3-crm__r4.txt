@@ -1,0 +1,43 @@
+root = Card([header, overview, activityHeading, activityList, contactsHeading, contactsTable, followUpsHeading, followUpsTable, renewalCallout, noteHeading, noteForm, logCallDialog])
+
+header = CardHeader("Acme Corp", "Account Owner: Sarah Chen")
+
+overview = Card([dealValue, dealStage], "sunk", "row", "l")
+dealValue = TextCallout("info", "Total Deal Value", "$284,500")
+dealStage = TextCallout("success", "Current Stage", "Negotiation")
+
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([act1, act2, act3, act4])
+act1 = ListItem("Sent revised proposal (v2)", "2 days ago")
+act2 = ListItem("Call with CFO re: budget approval", "5 days ago")
+act3 = ListItem("Product demo completed", "1 week ago")
+act4 = ListItem("Initial outreach email sent", "3 weeks ago")
+
+contactsHeading = Heading("Contacts", "h3")
+contactsTable = Table([contactName, contactRole, contactEmail])
+contactName = Col("Name", ["Michael Reyes", "Dana Kim", "Priya Nair"], "string")
+contactRole = Col("Role", ["VP of Sales (Champion)", "CFO (Decision Maker)", "IT Lead (Technical Evaluator)"], "string")
+contactEmail = Col("Email", ["mreyes@acmecorp.com", "dkim@acmecorp.com", "pnair@acmecorp.com"], "string")
+
+followUpsHeading = Heading("Open Follow-ups", "h3")
+followUpsTable = Table([followUpTask, followUpDue])
+followUpTask = Col("Task", ["Send updated pricing sheet", "Schedule technical deep-dive", "Confirm legal review timeline"], "string")
+followUpDue = Col("Due Date", ["Oct 30, 2025", "Nov 4, 2025", "Nov 8, 2025"], "string")
+
+renewalCallout = Callout("warning", "Renewal Approaching", "Contract renews on Nov 15, 2025 — only 18 days remaining")
+
+noteHeading = Heading("Add a Note", "h3")
+noteForm = Form("add-note", noteButtons, [noteField])
+noteField = FormControl("Note", noteTextArea, "Visible to your team")
+noteTextArea = TextArea("note", "Type a note about this account...", 4)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+logCallDialog = DialogBlock("Log a Call", "Log Call Details", "Record details of a call with this account", [logCallForm])
+logCallForm = Form("log-call", logCallButtons, [callDateField, callNotesField])
+callDateField = FormControl("Call Date", callDatePicker)
+callDatePicker = DatePicker("call_date", "single")
+callNotesField = FormControl("Call Notes", callNotesArea)
+callNotesArea = TextArea("call_notes", "Summary of what was discussed...", 4)
+logCallButtons = Buttons([submitCallBtn])
+submitCallBtn = Button("Log Call", null, "primary")

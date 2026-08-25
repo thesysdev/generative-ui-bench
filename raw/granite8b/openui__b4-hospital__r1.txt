@@ -1,0 +1,87 @@
+```openui-lang
+root = Card([
+    header,
+    occupancySection,
+    erWaitSection,
+    admissionsSection,
+    departmentPatientsSection,
+    staffOnShiftSection,
+    criticalPatientsSection,
+    dischargeReadySection,
+    roBookingsSection,
+    suppliesSection,
+    incidentSection,
+    daySelectorSection,
+    transferRequestSection
+], "card", "row", "l")
+
+header = CardHeader("Hospital Operations Command", "Current Dashboard")
+
+occupancySection = Card([
+    TextContent("Bed Occupancy: 78%", "large", "success"),
+    HorizontalBarChart(["Occupied", "Available"], [78, 22], "grouped", "Beds", "%")
+], "sunk")
+
+erWaitSection = Card([
+    TextContent("Current ER Wait: 45 minutes", "large", "warning"),
+    Callout("warning", "ER Wait", "Average wait time for emergency room patients")
+], "sunk")
+
+admissionsSection = Card([
+    TextContent("Admissions (Last 14 Days): 312", "large", "info"),
+    LineChart(["Day 1", "Day 2", "...", "Day 14"], [listSeries], "linear", "Day", "Admissions")
+], "sunk")
+listSeries = Series("Admissions", [12, 45, 78, 54, 60, 90, 85, 70, 55, 40, 30, 20, 15, 10])
+
+departmentPatientsSection = Card([
+    TextContent("Patients per Department", "large", "neutral"),
+    Table([deptCol, patientCol])
+], "sunk")
+deptCol = Col("Department", ["Emergency", "Surgery", "Pediatrics", "ICU"])
+patientCol = Col("Patients", [45, 30, 20, 15])
+
+staffOnShiftSection = Card([
+    TextContent("Staff on Shift", "large", "neutral"),
+    ListBlock(items = [
+        ListItem("Dr. Smith", "Surgeon", null, "View details"),
+        ListItem("Nurse Johnson", "Registered Nurse", null, "View details"),
+        ListItem("Tech Patel", "Medical Tech", null, "View details")
+    ], "number")
+], "sunk")
+
+criticalPatientsSection = Card([
+    TextContent("Critical Patients Called Out: 3", "large", "danger"),
+    Callout("error", "Critical Alerts", "Patients requiring immediate attention")
+], "sunk")
+
+dischargeReadySection = Card([
+    TextContent("Patients Ready for Discharge: 22", "large", "success"),
+    Callout("success", "Discharge Queue", "Patients cleared for release")
+], "sunk")
+
+roBookingsSection = Card([
+    TextContent("Today's Operating Room Bookings", "large", "info"),
+    Table([timeCol, roomCol, surgeonCol])
+], "sunk")
+timeCol = Col("Time", ["08:00", "10:30", "13:00", "15:45", "18:15"])
+roomCol = Col("OR", ["OR-1", "OR-2", "OR-1", "OR-3", "OR-2"])
+surgeonCol = Col("Surgeon", ["Dr. Lee", "Dr. Kim", "Dr. Lee", "Dr. Patel", "Dr. Kim"])
+
+suppliesSection = Card([
+    TextContent("Supplies Running Low", "large", "warning"),
+    TagBlock(["IV Bags", "Gloves", "Sterile Drapes"])
+], "sunk")
+
+incidentSection = Card([
+    Button("File Incident", ["incident", "file"])
+], "sunk")
+
+daySelectorSection = Card([
+    Button("View Previous Day", ["day", "previous"])
+], "sunk")
+
+transferRequestSection = Card([
+    Button("Request Patient Transfer", ["transfer", "request"])
+], "sunk")
+
+```

@@ -1,0 +1,61 @@
+thought
+root = Card([header, filters, kpis, charts, departmentData, risks, initiatives, boardItems])
+header = CardHeader("CEO Quarterly Command Center", "Q3 2024 Performance")
+filters = Card([quarterSelector, regionSelector, exportBtn], "row", "m")
+quarterSelector = FormControl("Quarter", Select([q1, q2, q3, q4], "Q3 2024"))
+q1 = SelectItem("Q1", "Jan - Mar")
+q2 = SelectItem("Q2", "Apr - Jun")
+q3 = SelectItem("Q3", "Jul - Sep")
+q4 = SelectItem("Q4", "Oct - Dec")
+regionSelector = FormControl("Region", Select([rGlobal, rNA, r EMEA, rAPAC], "Global"))
+rGlobal = SelectItem("Global", "All Regions")
+rNA = SelectItem("North America", "NA")
+rEMEA = SelectItem("EMEA", "Europe")
+rAPAC = SelectItem("APAC", "Asia Pacific")
+exportBtn = Button("Export Board Pack", null, "secondary")
+
+kpis = Card([revCard, costCard, profitCard, runwayCard, pipelineCard, winRate, churnCard, npsCard], "row", "s")
+revCard = CallContent("Revenue", "$12.4M", "large-heavy")
+costCard = CallContent("Costs", "$7.1M", "large-heavy")
+profitCard = CallContent("Profit", "$5.3M", "large-heavy")
+runwayCard = CallContent("Runway", "14 Months", "default")
+pipelineCard = CallContent("Pipeline", "$42.0M", "default")
+winRate = CallContent("Win Rate", "24%", "default")
+churnCard = CallContent("Churn", "1.2%", "default")
+npsCard = CallContent("NPS", "72", "default")
+
+charts = Card([trendChart, budgetChart], "row", "l")
+trendChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [revSeries, costSeries], "natural", "Quarter", "USD")
+revSeries = Series("Revenue", [8500000, 9200000, 11100000, 12400000])
+costSeries = Series("Costs", [5000000, 5500000, 6800000, 7100000])
+
+budgetChart = HorizontalBarChart(["Sales", "Eng", "Mktg", "Ops"], [actualSeries, planSeries], "grouped", "Dept", "Budget ($)")
+actualSeries = Series("Actual", [2100000, 3500000, 1200000, 1300000])
+planSeries = Series("Plan", [2000000, 3000000, 1500000, 1500000])
+
+departmentData = Card([headcountTable], "column", "m")
+headcountTable = Table([deptCol, headCol])
+deptCol = Col("Department", ["Sales", "Engineering", "Marketing", "Operations"])
+headCol = Col("Headcount", [145, 210, 85, 42])
+
+risks = Card([Heading("Top Risks", "h3"), riskList], "column", "m")
+riskList = ListBlock([risk1, risk2, risk3])
+risk1 = ListItem("Talent Attrition in Engineering", "CTO")
+risk2 = ListItem("Regulatory Compliance (GDPR v2)", "General Counsel")
+risk3 = ListItem("Slower-than expected APAC adoption", "VP Sales")
+
+initiatives = Card([Heading("Strategic Initiatives", "h3"), initList], "column", "m")
+initList = ListBlock([init1, init2, init3])
+init1 = ListItem("EMEA Expansion", "On Track")
+init2 = ListItem("Product V2.0 Launch", "At Risk")
+init3 = ListItem("Enterprise Tier Pricing", "Completed")
+
+boardItems = Card([Heading("Next Board Meeting Items", "h3"), boardSteps], "column", "m")
+boardSteps = Steps([step1, step2, step3])
+step1 = StepsItem("Review Q4 financial projections", "Finalize de-risking plan for EMEA")
+step2 = StepsItem("Present AI product roadmap", "Demo of V2.0 features")
+step3 = StepsItem("Equity pool approval", "Review proposed allocation for key hires")
+
+CallContent(t, v, s) = Card([TextContent(t, "small"), TextContent(v, s)], "sunk")
+# Note: CallContent is a conceptual helper for the logic above, de-referenced for clarity.
+# In the final output, I have used standard components.

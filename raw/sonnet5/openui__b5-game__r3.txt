@@ -1,0 +1,88 @@
+root = Card([header, kpiSection, sessionSection, itemsSection, regionSection, crashSection, eventsSection, moderationSection, economySection, experimentsSection, actionsSection])
+
+header = CardHeader("Live-Ops Command Center", "Real-time game health & operations overview")
+
+kpiSection = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiMetric, kpiValue])
+kpiMetric = Col("Metric", ["Players Online Now", "Daily Active Players", "Monthly Active Players", "Revenue Today", "Revenue Per User"])
+kpiValue = Col("Value", ["48,231", "612,400", "8,940,000", "$182,450", "$0.30"])
+
+sessionSection = Card([sessionHeading, sessionChart], "sunk")
+sessionHeading = Heading("Average Session Length — Past 14 Days", "h3")
+sessionChart = LineChart(sessionDays, [sessionSeries], "natural", "Day", "Minutes")
+sessionDays = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"]
+sessionSeries = Series("Avg Session (min)", [24, 26, 25, 27, 29, 31, 30, 28, 27, 26, 28, 30, 32, 31])
+
+itemsSection = Card([itemsHeading, itemsTable], "sunk")
+itemsHeading = Heading("Best-Selling Items", "h3")
+itemsTable = Table([itemName, itemUnits])
+itemName = Col("Item", ["Battle Pass", "Legendary Skin Bundle", "Gem Pack (Large)", "Starter Pack", "Emote Pack"])
+itemUnits = Col("Units Sold", [15230, 9840, 8720, 7210, 6100], "number")
+
+regionSection = Card([regionHeading, regionTable], "sunk")
+regionHeading = Heading("Server Regions & Health", "h3")
+regionTable = Table([regionName, regionPlayers, regionLatency, regionStatus])
+regionName = Col("Region", ["NA-East", "NA-West", "EU", "Asia", "SA", "Oceania"])
+regionPlayers = Col("Players", [12400, 8300, 15200, 9800, 1900, 631], "number")
+regionLatency = Col("Latency (ms)", [32, 41, 28, 55, 88, 102], "number")
+regionStatus = Col("Status", ["Healthy", "Healthy", "Healthy", "Degraded", "Healthy", "Down"])
+
+crashSection = Card([crashHeading, crashChart], "sunk")
+crashHeading = Heading("Crash Rate by App Version", "h3")
+crashChart = BarChart(versions, [crashSeries], "grouped", "Version", "Crash Rate (%)")
+versions = ["4.8.2", "4.8.3", "4.8.4", "4.9.0", "4.9.1"]
+crashSeries = Series("Crash Rate", [1.2, 0.9, 2.4, 0.6, 0.4])
+
+eventsSection = Card([eventsHeading, eventsList], "sunk")
+eventsHeading = Heading("Live Events — Running & Upcoming", "h3")
+eventsList = ListBlock([eventRunning1, eventRunning2, eventUpcoming1, eventUpcoming2])
+eventRunning1 = ListItem("Summer Festival — Running", "Ends in 3 days — double XP weekend")
+eventRunning2 = ListItem("Clan Wars Season 5 — Running", "Ends in 6 hours — leaderboard finals")
+eventUpcoming1 = ListItem("Halloween Preview — Upcoming", "Starts in 5 days")
+eventUpcoming2 = ListItem("New Hero Launch — Upcoming", "Starts in 9 days")
+
+moderationSection = Card([modHeading, reportsCallout, appealsCallout], "sunk")
+modHeading = Heading("Moderation Queue", "h3")
+reportsCallout = TextCallout("warning", "Player Reports", "1,284 reports awaiting review")
+appealsCallout = TextCallout("info", "Ban Appeals", "342 ban appeals awaiting review")
+
+economySection = Card([economyHeading, inflationChart], "sunk")
+economyHeading = Heading("In-Game Currency Inflation", "h3")
+inflationChart = LineChart(economyWeeks, [inflationSeries], "linear", "Week", "Avg Gold per Player")
+economyWeeks = ["W1", "W2", "W3", "W4", "W5", "W6"]
+inflationSeries = Series("Avg Gold Balance", [12000, 12800, 13900, 15200, 17100, 19800])
+
+experimentsSection = Card([expHeading, expTable], "sunk")
+expHeading = Heading("Running Experiments", "h3")
+expTable = Table([expName, expMetric, expControl, expVariant, expStatus])
+expName = Col("Experiment", ["Onboarding Flow V2", "Dynamic Pricing"])
+expMetric = Col("Primary Metric", ["D1 Retention", "ARPU"])
+expControl = Col("Control", ["38.2%", "$0.28"])
+expVariant = Col("Variant", ["41.5%", "$0.33"])
+expStatus = Col("Result", ["Significant +3.3pp", "Significant +$0.05"])
+
+actionsSection = Card([actionsHeading, patchNotesForm, regionFocusForm, hotfixDialog], "sunk")
+actionsHeading = Heading("Operations Actions", "h3")
+
+patchNotesForm = Form("patch_notes", patchNotesButtons, [patchTitleField, patchNotesField])
+patchTitleField = FormControl("Patch Title", patchTitleInput)
+patchTitleInput = Input("patch_title", "e.g. Version 4.9.2 Hotfix")
+patchNotesField = FormControl("Patch Notes", patchNotesArea, "Markdown supported")
+patchNotesArea = TextArea("patch_notes_body", "Describe the changes in this patch...", 6)
+patchNotesButtons = Buttons([draftBtn, previewBtn])
+draftBtn = Button("Save Draft", null, "primary")
+previewBtn = Button("Preview", null, "secondary")
+
+regionFocusForm = Form("region_focus", regionFocusButtons, [regionFocusField])
+regionFocusField = FormControl("Region to Focus", regionSelect)
+regionSelect = Select("region", [regNA, regEU, regAsia, regSA, regOceania], "Choose a region")
+regNA = SelectItem("na", "NA-East / NA-West")
+regEU = SelectItem("eu", "EU")
+regAsia = SelectItem("asia", "Asia")
+regSA = SelectItem("sa", "SA")
+regOceania = SelectItem("oceania", "Oceania")
+regionFocusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus Region", null, "primary")
+
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix Deployment", "This will push the current hotfix build to all regions immediately. This action cannot be undone.", "Ship Now", "Cancel", "destructive")

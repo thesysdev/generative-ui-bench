@@ -1,0 +1,36 @@
+root = Card([header, currentStatus, progressSteps, etaSection, mapImage, reportSection])
+header = CardHeader("Track Your Delivery", "Order #TX-882913")
+
+currentStatus = TextCallout("info", "Current Location", "Your package is at the Denver Regional Distribution Center, in transit to your local facility.")
+
+progressSteps = Steps([stepOrdered, stepShipped, stepInTransit, stepOutForDelivery, stepDelivered])
+stepOrdered = StepsItem("Order Confirmed", "Oct 8, 9:12 AM - Package prepared at origin warehouse")
+stepShipped = StepsItem("Shipped", "Oct 9, 6:40 AM - Departed origin facility")
+stepInTransit = StepsItem("In Transit", "Oct 10, 2:15 PM - Arrived at Denver Regional Distribution Center")
+stepOutForDelivery = StepsItem("Out for Delivery", "Pending - Expected to leave local facility soon")
+stepDelivered = StepsItem("Delivered", "Pending")
+
+etaSection = Card([etaHeading, etaCallout], "sunk")
+etaHeading = Heading("Estimated Delivery", "h4")
+etaCallout = Callout("success", "Arriving Friday, Oct 13", "Estimated delivery window: 9:00 AM - 6:00 PM")
+
+mapImage = ImageBlock("https://picsum.photos/seed/deliverymap/800/400", "Map showing current package location near Denver, CO")
+
+reportSection = Card([reportHeading, reportText, reportDialog], "sunk")
+reportHeading = Heading("Need Help?", "h4")
+reportText = TextContent("If your delivery seems delayed, damaged, or incorrect, let us know and our support team will follow up.")
+reportDialog = DialogBlock("Report a Problem", "Report a Delivery Problem", "Tell us what's wrong with order #TX-882913", [issueForm], "destructive")
+
+issueForm = Form("report-issue", issueButtons, [issueTypeField, issueDetailsField])
+issueTypeField = FormControl("Issue Type", issueTypeSelect)
+issueTypeSelect = Select("issue_type", [issuePackageDamaged, issueMissingItems, issueLateDelivery, issueWrongAddress, issueOther], "Select an issue")
+issuePackageDamaged = SelectItem("damaged", "Package damaged")
+issueMissingItems = SelectItem("missing", "Missing items")
+issueLateDelivery = SelectItem("late", "Delivery is late")
+issueWrongAddress = SelectItem("address", "Wrong address")
+issueOther = SelectItem("other", "Other")
+issueDetailsField = FormControl("Details", issueDetailsInput, "Please provide as much detail as possible")
+issueDetailsInput = TextArea("details", "Describe the issue...", 4)
+issueButtons = Buttons([submitIssueBtn, cancelIssueBtn])
+submitIssueBtn = Button("Submit Report", null, "primary")
+cancelIssueBtn = Button("Cancel", null, "tertiary")

@@ -1,0 +1,29 @@
+root = Card([header, kpiRow, revenueTrend, productSection, conversionSection, actionRow], "card", "column", "l")
+
+header = CardHeader("Monthly Sales Check", "Performance snapshot for the current period")
+
+kpiRow = Card([revKpi, convKpi], "sunk", "row", "m")
+revKpi = Card([revLabel, revValue], "clear", "column", "none")
+revLabel = TextContent("Monthly Revenue", "small")
+revValue = TextContent("$42,500", "large-heavy")
+convKpi = Card([convLabel, convValue], "clear", "column", "none")
+convLabel = TextContent("Conversion Rate", "small")
+convValue = TextContent("3.2%", "large-heavy")
+
+revenueTrend = Card([trendHeading, trendChart], "clear", "column", "s")
+trendHeading = Heading("6-Month Revenue Trend", "h3")
+trendChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [revSeries], "natural", "Month", "USD")
+revSeries = Series("Revenue", [28000, 31000, 29500, 35000, 38000, 42500])
+
+productSection = Card([prodHeading, prodTable], "clear", "column", "s")
+prodHeading = Heading("Top 3 Products", "h3")
+prodTable = Table([prodNameCol, prodUnitsCol])
+prodNameCol = Col("Product", ["Quantum Watch", "Nebula Earbuds", "Solar Powerbank"], "string")
+prodUnitsCol = Col("Units Sold", ["1,240", "980", "850"], "number")
+
+conversionSection = Card([convHeading, convProgress], "clear", "column", "s")
+convHeading = Heading("Conversion Progress", "h3")
+convProgress = Progress(32, "Target: 5.0%")
+
+actionRow = Buttons([downloadBtn])
+downloadBtn = Button("Download Full Report", null, "primary")

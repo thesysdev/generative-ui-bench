@@ -1,0 +1,102 @@
+```openui-lang
+root = Card([
+    header,
+    activeProjectsGrid,
+    overdueMilestonesList,
+    budgetVsAllocationTable,
+    teamUtilizationChart,
+    risksList,
+    upcomingDeadlinesList,
+    deliveryPaceChart,
+    blockedWorkItemsList,
+    healthSummary,
+    controls,
+], "card", "row", "l")
+
+header = CardHeader("Project Portfolio Review", "Current Quarter")
+
+activeProjectsGrid = Card([
+    activeProjectsTitle,
+    activeProjectsTable,
+], "sunk")
+
+activeProjectsTitle = Heading("Active Projects", "h3")
+activeProjectsTable = Table([
+    projectOwnerCol,
+    projectDeadlineCol,
+    projectHealthCol,
+])
+projectOwnerCol = Col("Owner", ["Alice", "Bob", "Charlie"])
+projectDeadlineCol = Col("Deadline", ["2024-09-15", "2024-09-20", "2024-09-25"])
+projectHealthCol = Col("Health", ["Green", "Yellow", "Red"])
+
+overdueMilestonesList = ListBlock(items=[
+    OverdueListItem("Milestone A", "2024-09-10", "Feature complete"),
+    OverdueListItem("Milestone B", "2024-09-12", "Integration testing"),
+], variant="image")
+
+budgetVsAllocationTable = Table([
+    budgetSpentCol,
+    allocationCol,
+    varianceCol,
+])
+budgetSpentCol = Col("Budget Spent", ["$120,000", "$95,000", "$130,000"])
+allocationCol = Col("Allocation", ["$150,000", "$110,000", "$140,000"])
+varianceCol = Col("Variance", ["-20%", "+8%", "+10%"])
+
+teamUtilizationChart = GaugeChart(
+    utilizationData = [
+        UtilizationEntry("Engineering", 85),
+        UtilizationEntry("Design", 78),
+        UtilizationEntry("Product", 92)
+    ],
+    title = "Team Utilization"
+)
+
+risksList = ListBlock(items=[
+    RiskListItem("Data breach", "High"),
+    RiskListItem("Resource shortage", "Medium"),
+    RiskListItem("Scope creep", "Low")
+], variant="number")
+
+upcomingDeadlinesList = ListBlock(items=[
+    UpcomingDeadlineItem("Project X", "2024-09-18", "Feature freeze"),
+    UpcomingDeadlineItem("Project Y", "2024-09-22", "Beta release"),
+    UpcomingDeadlineItem("Project Z", "2024-09-25", "Go-live")
+], variant="image")
+
+deliveryPaceChart = LineChart(labels=["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"],
+    series=[
+        Series("Delivered", [80, 85, 90, 95, 100, 105])
+    ],
+    variant="natural",
+    xLabel="Sprint",
+    yLabel="Delivered %"
+)
+
+blockedWorkItemsList = ListBlock(items=[
+    BlockedItem("Bug in payment gateway", "Critical"),
+    BlockedItem("Missing API spec", "High"),
+    BlockedItem("UI design pending", "Medium")
+], variant="number")
+
+healthSummary = Tag("Portfolio Health: Mixed", null, null, "neutral")
+
+controls = Card([
+    quarterSelector,
+    requestMorePeopleBtn,
+    exportReviewBtn,
+    archiveProjectBtn,
+], "clear", "column", "s")
+
+quarterSelector = Select("quarter", [
+    SelectItem("Q1", "Q1"),
+    SelectItem("Q2", "Q2"),
+    SelectItem("Q3", "Q3"),
+    SelectItem("Q4", "Q4"),
+], placeholder="Select Quarter", value="Q2")
+
+requestMorePeopleBtn = Button("Request More People", null, "secondary")
+exportReviewBtn = Button("Export Review", null, "primary")
+archiveProjectBtn = Button("Archive Finished Project", null, "destructive")
+```

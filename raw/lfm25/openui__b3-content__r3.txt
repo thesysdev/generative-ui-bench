@@ -1,0 +1,83 @@
+root = Card([
+  CardHeader("Content Studio", "All tools for publishing"),
+  Separator(),
+  
+  // Category filter tabs
+  TabItem("All", "all", []),
+  TabItem("Technology", "tech", []),
+  TabItem("Design", "design", []),
+  TabItem("Writing", "writing", []),
+  
+  // 1. Drafts with status for each
+  Card([
+    CardHeader("Drafts", "Active drafts"),
+    Table([
+      { title: "Q3 Report", status: "draft", author: "Alex", created: "2026-06-15" },
+      { title: "Product Launch", status: "in review", author: "Sam", created: "2026-06-18" },
+      { title: "AI Trends Analysis", status: "pending", author: "Priya", created: "2026-06-20" }
+    ])
+  ]),
+  
+  // 2. Pieces published this week
+  Card([
+    CardHeader("This Week's Pieces", "Published articles"),
+    ListBlock([
+      { title: "Deep Learning Advances", subtitle: "Understanding transformers", image: "https://picsum.photos/600/300?t1", link: "https://example.com/deep-learning" },
+      { title: "Minimalist Design Principles", subtitle: "Less is more in UX", image: "https://picsum.photos/600/300?t2", link: "https://example.com/minimalist-design" },
+      { title: "SEO Best Practices 2026", subtitle: "Complete guide", image: "https://picsum.photos/600/300?t3", link: "https://example.com/seo-best-practices" }
+    ])
+  ]),
+  
+  // 3. Most-read article this month
+  Card([
+    CardHeader("Most Read - This Month", "Top article"),
+    TextContent("**Featured:** Quantum Computing Breakthrough\n\nThis comprehensive article explores the latest breakthroughs in quantum computing and their implications for the future of technology.\n\nRead the full story here → [Quantum Computing Breakthrough](https://example.com/quantum-breakthrough)"),
+    Callout(variant: "success", title: "Trending Now", description: "Readers have been engaged with this piece extensively this month."),
+    // Additional element to ensure coverage of art/detail area
+    TextContent("Top article view · 12,450 reads · 3,210 likes")
+  ]),
+  
+  // 4. Readership over the past 30 days
+  Card([
+    CardHeader("Readership - Last 30 Days", "Audience metrics"),
+    LineChart({
+      labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+      series: [{ name: "Total Views", values: [12500, 14200, 16800, 20300, 24500, 31200, 34500] }]
+    })
+  ]),
+  
+  // 5. Way to narrow by category
+  Card([
+    CardHeader("Category Filters", "Narrow by topic"),
+    ListBlock([
+      { text: "Technology", variant: "smile" },
+      { text: "Design", variant: "heart" },
+      { text: "Writing", variant: "bookmark" }
+    ])
+  ]),
+  
+  // 6. Way to schedule a piece with title and publish date
+  Card([
+    CardHeader("New Draft", "Create publication"),
+    Button(label: "New Draft", variant: "primary"),
+    Button(label: "Schedule Publication", variant: "secondary"),
+    TextContent("Set title and choose publish date to schedule your piece.")
+  ]),
+  
+  // 7. Comments awaiting reply
+  Card([
+    CardHeader("Comments Awaiting Reply", "Pending responses"),
+    ListBlock([
+      { text: "Reader Q&A about API integration" },
+      { text: "Discussion thread on design system updates" },
+      { text: "Feedback on latest feature release" }
+    ])
+  ]),
+  
+  // 8. Start a new draft (button focus)
+  Card([
+    CardHeader("Start New Draft", "Create publication"),
+    Button(label: "New Draft", variant: "primary"),
+    Button(label: "Schedule Publication", variant: "secondary")
+  ])
+])

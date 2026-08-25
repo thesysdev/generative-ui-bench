@@ -1,0 +1,94 @@
+root = Card([header, tabs])
+
+header = CardHeader("Streaming Ops Room", "Live platform performance and controls")
+
+tabs = Tabs([overviewTab, contentTab, audienceTab, controlsTab])
+
+overviewTab = TabItem("overview", "Overview", [viewersNowCallout, topTitlesHeading, topTitlesTable, watchTimeHeading, watchTimeChart, subsHeading, subsChart])
+contentTab = TabItem("content", "Content & Delivery", [genreHeading, genreChart, bufferingHeading, bufferingProgress, deliveryHeading, deliveryTable, releasesHeading, releasesList, licensesHeading, licensesTable])
+audienceTab = TabItem("audience", "Audience & Revenue", [recoHeading, recoProgress, searchHeading, searchProgress, revenueHeading, revenueChart, deviceHeading, deviceChart])
+controlsTab = TabItem("controls", "Ops Controls", [regionFocusForm, flagsHeading, flagsTable, promoteForm])
+
+viewersNowCallout = Callout("info", "1,284,600 viewers watching right now", "Live concurrent stream count, updated every 30 seconds")
+
+topTitlesHeading = Heading("Most-Watched Titles", "h3")
+topTitlesTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["Nebula Drift", "The Last Signal", "Coastline", "Quiet Hours", "Ember & Ash"])
+hoursCol = Col("Hours Watched (M)", [42.6, 38.1, 29.4, 24.8, 21.2])
+
+watchTimeHeading = Heading("Watch Time — Past 30 Days", "h3")
+watchTimeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [watchSeries], "natural", "Week", "Hours (M)")
+watchSeries = Series("Total Watch Hours", [312, 335, 298, 361])
+
+subsHeading = Heading("New Subscribers vs Cancellations", "h3")
+subsChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [newSubsSeries, cancelSeries], "grouped", "Week", "Accounts")
+newSubsSeries = Series("New Subscribers", [18400, 21200, 19800, 24600])
+cancelSeries = Series("Cancellations", [9200, 10100, 8700, 11300])
+
+genreHeading = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart(["Drama", "Comedy", "Sci-Fi", "Documentary", "Thriller", "Kids"], [genreSeries], "grouped", "Watch Hours (M)", "Genre")
+genreSeries = Series("Watch Hours (M)", [58, 44, 51, 27, 39, 33])
+
+bufferingHeading = Heading("Buffering Rate", "h3")
+bufferingProgress = Progress(2.3, "Current global buffering rate (target < 3%)")
+
+deliveryHeading = Heading("Delivery Health by Region", "h3")
+deliveryTable = Table([regionCol, statusCol, latencyCol, uptimeCol])
+regionCol = Col("Region", ["North America", "Europe", "Latin America", "Asia Pacific", "Middle East"])
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy"])
+latencyCol = Col("Avg Latency (ms)", [42, 51, 118, 63, 74])
+uptimeCol = Col("Uptime %", ["99.98", "99.95", "99.61", "99.92", "99.89"])
+
+releasesHeading = Heading("Releases Coming This Month", "h3")
+releasesList = ListBlock([release1, release2, release3])
+release1 = ListItem("Horizon Line", "Original series — premieres Jun 12")
+release2 = ListItem("Midnight Freight", "Feature film — premieres Jun 19")
+release3 = ListItem("Salt & Static", "Documentary — premieres Jun 27")
+
+licensesHeading = Heading("Licenses Expiring Soon", "h3")
+licensesTable = Table([licTitleCol, expiryCol, daysLeftCol])
+licTitleCol = Col("Title", ["Old Harbor", "Static City", "The Wren Files", "Backroad Blues"])
+expiryCol = Col("Expiry Date", ["2024-06-15", "2024-06-22", "2024-06-30", "2024-07-05"])
+daysLeftCol = Col("Days Left", [9, 16, 24, 29])
+
+recoHeading = Heading("Recommendation Click-Through Rate", "h3")
+recoProgress = Progress(34, "Percentage of shown recommendations that get clicked")
+
+searchHeading = Heading("Searches Ending Without Playback", "h3")
+searchProgress = Progress(17, "Percentage of searches that end without a title being played")
+
+revenueHeading = Heading("Revenue Split by Plan", "h3")
+revenueChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Basic", "Standard", "Premium", "Family"]
+planValues = [18, 34, 29, 19]
+
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = PieChart(deviceLabels, deviceValues, "pie")
+deviceLabels = ["Smart TV", "Mobile", "Web", "Tablet", "Console"]
+deviceValues = [47, 24, 15, 9, 5]
+
+regionFocusForm = Form("region-focus", regionFocusButtons, [regionFocusField])
+regionFocusField = FormControl("Focus Region", regionFocusSelect, "Filter dashboards to a single region")
+regionFocusSelect = Select("region", [regionNA, regionEU, regionLATAM, regionAPAC, regionME], "Select a region")
+regionNA = SelectItem("na", "North America")
+regionEU = SelectItem("eu", "Europe")
+regionLATAM = SelectItem("latam", "Latin America")
+regionAPAC = SelectItem("apac", "Asia Pacific")
+regionME = SelectItem("me", "Middle East")
+regionFocusButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Apply Region Focus", null, "primary")
+
+flagsHeading = Heading("Feature Flags", "h3")
+flagsTable = Table([flagNameCol, flagStateCol])
+flagNameCol = Col("Feature Flag", ["Auto-Play Previews", "AV1 Codec Rollout", "Kids Profile Lock", "Dynamic Bitrate v2", "Social Watch Party"])
+flagStateCol = Col("State", ["Enabled", "Enabled (50% rollout)", "Enabled", "Disabled", "Enabled"])
+
+promoteForm = Form("promote-title", promoteButtons, [promoteField])
+promoteField = FormControl("Title to Promote on Home Screen", promoteSelect)
+promoteSelect = Select("promoted_title", [promo1, promo2, promo3, promo4], "Choose a title")
+promo1 = SelectItem("nebula-drift", "Nebula Drift")
+promo2 = SelectItem("horizon-line", "Horizon Line")
+promo3 = SelectItem("coastline", "Coastline")
+promo4 = SelectItem("midnight-freight", "Midnight Freight")
+promoteButtons = Buttons([promoteBtn])
+promoteBtn = Button("Promote Title", null, "primary")

@@ -1,0 +1,25 @@
+root = Card([header, revenueCard, trendSection, productsSection, conversionCard, downloadActions])
+header = CardHeader("Monthly Sales Check", "September 2024")
+
+revenueCard = Card([revenueLabel, revenueValue], "sunk", "column", "xs")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = TextContent("$84,250", "large-heavy")
+
+trendSection = Card([trendHeading, trendChart], "clear")
+trendHeading = Heading("Revenue trend — last 6 months", "h3")
+trendChart = LineChart(months, [revenueSeries], "natural", "Month", "Revenue ($)")
+months = ["Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+revenueSeries = Series("Revenue", [61200, 65800, 70400, 76100, 79900, 84250])
+
+productsSection = Card([productsHeading, productsTable], "clear")
+productsHeading = Heading("Top 3 best-selling products", "h3")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Wireless Earbuds Pro", "Smart Fitness Band", "Portable Charger 10K"], "string")
+unitsCol = Col("Units Sold", [1240, 980, 875], "number")
+
+conversionCard = Card([conversionLabel, conversionBar], "sunk", "column", "xs")
+conversionLabel = TextContent("Conversion rate", "small")
+conversionBar = Progress(3.8, "3.8% of visitors converted")
+
+downloadActions = Buttons([downloadBtn])
+downloadBtn = Button("Download numbers (CSV)", null, "primary")

@@ -1,0 +1,51 @@
+```openui-lang
+root = Card([header, metricsRow, cohortFilter, riskSection, enrollmentChart, engagementChart, messageButton])
+
+header = CardHeader("Training Analytics", "Weekly Overview")
+
+metricsRow = Card([activeLearnersCard, completionRateCard, quizScoreCard], "row", "m", "center", "center")
+activeLearnersCard = Card([activeLearnersHeading, activeLearnersValue, activeLearnersDescription], "sunk")
+activeLearnersHeading = Heading("Active Learners", "h3")
+activeLearnersValue = Heading("1,248", "large-heavy")
+activeLearnersDescription = TextContent("New: +18.2% vs last week")
+
+completionRateCard = Card([completionRateHeading, completionRateValue, completionRateDescription], "sunk")
+completionRateHeading = Heading("Completion Rate", "h3")
+completionRateValue = Heading("78.3%", "large-heavy")
+completionRateDescription = TextContent("Goal: 85%")
+
+quizScoreCard = Card([quizScoreHeading, quizScoreValue, quizScoreDescription], "sunk")
+quizScoreHeading = Heading("Avg. Quiz Score", "h3")
+quizScoreValue = Heading("82.7", "large-heavy")
+quizScoreDescription = TextContent("Goal: 85")
+
+cohortFilter = Card([cohortSelect, cohortMessageButton], "sunk")
+cohortSelect = FormControl("Filter Cohort", cohortDropdown)
+cohortDropdown = Select("cohort", [cohortOption1, cohortOption2, cohortOption3, cohortOption4], "All Cohorts")
+cohortOption1 = SelectItem("all", "All Learners")
+cohortOption2 = SelectItem("spring2024", "Spring 2024")
+cohortOption3 = SelectItem("onboarding", "Onboarding")
+cohortOption4 = SelectItem("techstack", "Tech Stack Refresh")
+
+cohortMessageButton = Button("Message Cohort", null, "secondary")
+
+riskSection = Card([riskHeading, riskTable], "sunk")
+riskHeading = Heading("Learners at Risk", "h3")
+riskTable = Table([riskColumns])
+riskColumns = Col("Learner", ["Emma Johnson", "Carlos Rodriguez", "Priya Patel", "Michael Chen"], "string")
+riskData = Col("Days Active", ["1", "3", "5", "7"], "string")
+riskReason = Col("Reason", ["No quiz", "Missed 2", "Low score", "No login"], "string")
+riskTable = Table([riskColumns, riskData, riskReason])
+
+enrollmentChart = Card([enrollmentHeading, enrollmentChartGraph], "sunk")
+enrollmentHeading = Heading("Courses by Enrollment", "h3")
+enrollmentChartGraph = HorizontalBarChart(["Data Science", "Python Basics", "Project Management", "Cybersecurity", "Cloud Foundations"], [enrollmentSeries], "grouped", "Course", "Learners")
+enrollmentSeries = Series("Enrollment", [124, 89, 67, 45, 32])
+
+engagementChart = Card([engagementHeading, engagementChartGraph], "sunk")
+engagementHeading = Heading("Engagement Trend", "h3")
+engagementChartGraph = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "natural", "Week", "Engagement Score")
+engagementSeries = Series("Engagement", [45, 52, 68, 72, 75, 80, 78, 85])
+
+messageButton = Button("Send Message", null, "primary")
+```

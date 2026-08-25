@@ -1,0 +1,153 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader("E-commerce Operations Dashboard", "Today's performance metrics overview"),
+    Divider(),
+    MetricsSection,
+    Divider(),
+    RecentOrdersSection,
+    Divider(),
+    FiltersSection,
+    Divider(),
+    OrderVolumeChart,
+    Divider(),
+    UploadFulfillmentButton
+  ],
+  direction: "row",
+  gap: "s",
+  variant: "card"
+)
+
+// Metrics section showing today's key metrics
+MetricsSection = Card([
+  Card([
+    TextCallout(
+      title: "Orders Today",
+      description: "Total number of orders placed today",
+      variant: "info"
+    ),
+    Card([
+      TextCallout(
+        title: "Revenue Today",
+        description: "Total revenue generated from orders placed today",
+        variant: "success"
+      ),
+      Card({
+        Text: "${120,450} USD",
+        fontSize: "large",
+        color: "white",
+        borderRadius: "8px",
+        padding: "12px",
+        marginBottom: "8px"
+      })
+    ])
+  ]),
+  Card([
+    TextCallout(
+      title: "Average Order Value",
+      description: "Mean transaction value per order today",
+      variant: "success"
+    ),
+    Card([
+      Text:
+        "(${85.20} USD)",
+        fontSize: "large",
+        color: "white",
+        borderRadius: "4px",
+        padding: "10px",
+        backgroundColor: "#f0f8ff"
+      )
+    ])
+  ]),
+  Card([
+    TextCallout(
+      title: "Refund Rate (This Month)",
+      description: "Percentage of orders processed as refunds this month",
+      variant: "warning"
+    ),
+    Card([
+      Text: "3.2%",
+      fontSize: "large",
+      color: "red",
+      borderRadius: "4px",
+      padding: "10px",
+      marginBottom: "8px"
+    ])
+  ])
+])
+
+// Recent orders list with id, customer, total, status
+RecentOrdersSection = Card([
+  Card([
+    TextCallout(
+      title: "Recent Orders",
+      description: "Latest orders with key details",
+      variant: "info"
+    ),
+    HoverOver([
+      ListItem("ORD-2026-0612-001", "Alice Johnson", "${245.99}", "Completed"),
+      ListItem("ORD-2026-0612-002", "Bob Smith", "${189.50}", "Processing"),
+      ListItem("ORD-2026-0612-003", "Carol Davis", "${320.75}", "Shipped"),
+      ListItem("ORD-2026-0612-004", "David Lee", "${175.30", "Pending"},
+      ListItem("ORD-2026-0612-005", "Eva Martinez", "${410.00", "Completed"),
+    ], "table")
+  ], "table")
+])
+
+// Filters section - status filter and customer search
+FiltersSection = Card([
+  Card([
+    TextCallout(
+      title: "Filter by Status",
+      description: "Narrow results by order status",
+      variant: "info"
+    ),
+    Dropdown(filterType: "status", label: "Order Status"):
+      {
+        StatusOption("pending", "Pending"),
+        StatusOption("processing", "Processing"),
+        StatusOption("shipped", "Shipped"),
+        StatusOption("completed", "Completed"),
+        StatusOption("cancelled", "Cancelled")
+      }
+  ]),
+  Card([
+    TextCallout(
+      title: "Search by Customer",
+      description: "Find orders by customer name",
+      variant: "info"
+    ),
+    Input(searchQuery: "Customer name", label: "Search Customers"),
+    Text("Enter customer name to filter..."),
+    HoverOver([
+      Input("John Doe", "search_customers_input"),
+    ], "text_input")
+  ], "text_input")
+])
+
+// Order volume chart for past four weeks
+OrderVolumeChart = Card([
+  HorizontalBarChart(
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    series: [{
+      category: "Week 1",
+      values: [45, 38, 52, 47, 41, 39, 35]
+    }, {
+      category: "Week 2",
+      values: [58, 42, 55, 60, 53, 49, 46]
+    }],
+    xLabel: "Past 4 Weeks",
+    yLabel: "Order Count",
+    variant: "grouped",
+    showLegend: true
+  )
+])
+
+// Button to mark an order as fulfilled
+UploadFulfillmentButton = Button(
+  label: "Mark Order as Fulfilled",
+  action: "mark_fulfillment",
+  variant: "primary",
+  size: "medium"
+)
+```

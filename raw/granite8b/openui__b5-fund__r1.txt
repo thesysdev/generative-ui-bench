@@ -1,0 +1,91 @@
+```openui-lang
+root = Card([
+    header,
+    portfolioValue,
+    pnlToday,
+    positionsTable,
+    exposureBySector,
+    valueAtRisk,
+    biggestGainersLosers,
+    watchedInstruments,
+    workingOrders,
+    marginInUse,
+    marketHeadlines,
+    strategyReturns,
+    drawdown,
+    riskLimits,
+    rebalanceButton,
+    placeOrderForm,
+    changeTimeframeButton
+], "card", "row", "l")
+
+header = CardHeader("Morning Trading Workspace", "Live dashboard")
+
+portfolioValue = Card([TextContent("$123,456,789.00", "large")], "clear", null, null, "center")
+
+pnlToday = Card([
+    Callout("neutral", "Profit & Loss Today", "$12,345 gain")
+])
+
+positionsTable = Table([
+    Col("Ticker", ["AAPL", "GOOG", "TSLA", "MSFT"]),
+    Col("Size (Shares)", ["1,000", "500", "2,000", "1,500"]),
+    Col("Entry Price", ["150.00", "1800.00", "720.00", "300.00"]),
+    Col("Current Price", ["155.50", "1850.00", "730.00", "305.00"])
+])
+
+exposureBySector = BarChart(["Technology", "Healthcare", "Finance", "Energy"], [
+    Series("Long Exposure", [120, 80, 50, 30])
+], "grouped", "Sector", "Exposure ($M)")
+
+valueAtRisk = Card([TextContent("Value at Risk: $2,500,000 (99% confidence)", "large")], "clear")
+
+biggestGainersLosers = Card([
+    Callout("success", "Top Gainers", "AAPL +4.3%, TSLA +3.1%"),
+    Callout("danger", "Top Losers", "MSFT -2.8%, GOOG -1.5%")
+])
+
+watchedInstruments = ListBlock([
+    ListItem("AAPL", "Apple Inc.", ["AAPL.png"], "View"),
+    ListItem("GOOG", "Alphabet Inc.", ["GOOG.png"], "View"),
+    ListItem("TSLA", "Tesla Inc.", ["TSLA.png"], "View")
+], "image")
+
+workingOrders = Table([
+    Col("Order ID", ["ORD001", "ORD002", "ORD003"]),
+    Col("Ticker", ["AAPL", "TSLA", "MSFT"]),
+    Col("Side", ["Buy", "Sell", "Buy"]),
+    Col("Quantity", ["500", "1,000", "750"])
+])
+
+marginInUse = Card([TextContent("Margin in Use: $45,000,000", "large")], "clear")
+
+marketHeadlines = Table([
+    Col("Headline", ["Tech Stocks Surge After AI Breakthrough", "Economic Data Release Tomorrow"]),
+    Col("Sentiment", ["Positive", "Neutral"])
+])
+
+strategyReturns = Table([
+    Col("Strategy", ["Alpha Fund", "Beta Fund", "Gamma Fund"]),
+    Col("Return YTD", ["12.5%", "8.3%", "5.9%"])
+])
+
+drawdown = Card([TextContent("Drawdown (12mo): -3.2%", "large")], "clear")
+
+riskLimits = Card([
+    Callout("warning", "Risk Limits Close to Breach", "Sector X limit at 98% of threshold")
+])
+
+rebalanceButton = Button("Rebalance Portfolio", null, "primary")
+
+placeOrderForm = Form("place_order", Buttons([orderSubmitBtn, orderCancelBtn]), [
+    FormControl("Ticker", Input("ticker", "Symbol")),
+    FormControl("Side", Select("side", [SelectItem("Buy", "Buy"), SelectItem("Sell", "Sell")], "Choose side")),
+    FormControl("Quantity", Input("quantity", "Number"))
+])
+orderSubmitBtn = Button("Place Order", null, "primary")
+orderCancelBtn = Button("Cancel", null, "tertiary")
+
+changeTimeframeButton = Button("Change Timeframe", null, "secondary")
+
+```

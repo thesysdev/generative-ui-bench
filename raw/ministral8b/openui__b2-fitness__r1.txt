@@ -1,0 +1,30 @@
+```openui-lang
+root = Card([summaryHeader, progressCard, workoutChart, newWorkoutForm])
+
+summaryHeader = CardHeader("Daily Fitness Summary", "Track your progress today")
+
+progressCard = Card([stepGoal, calories, workoutSummary], "sunk")
+stepGoal = Card([stepCount, goalIndicator], "row", "column", "m")
+stepCount = Card([TextContent("12,450 steps"), Progress(52)], "sunk")
+goalIndicator = TextContent("Goal: 20,000 steps", "small")
+calories = Card([TextContent("Calories burned"), TextContent("2,180 kcal"), Tag("Good", null, null, "success")], "row", "column", "m")
+workoutSummary = TextContent("Workouts this week: 5/7 days completed")
+
+workoutChart = Card([CardHeader("Weekly Workout Progress"), radarChart], "sunk")
+radarChart = RadarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries])
+workoutSeries = Series("Duration", [60, 45, 0, 90, 0, 75, 120])
+
+newWorkoutForm = Card([CardHeader("Log New Workout"), workoutForm], "sunk")
+workoutForm = Form("workout-log", workoutButtons, [workoutTypeField, durationField, intensityField])
+workoutTypeField = FormControl("Workout type", workoutSelect)
+workoutSelect = Select("workout_type", [workoutItems], "Select type", null, "medium")
+workoutItems = [SelectItem("Running", "Running"), SelectItem("Cycling", "Cycling"), SelectItem("Strength", "Strength"), SelectItem("Yoga", "Yoga")]
+durationField = FormControl("Duration (min)", durationInput)
+durationInput = Input("duration", "30", "number", null, "30")
+intensityField = FormControl("Intensity", intensitySelect)
+intensitySelect = Select("intensity", [intensityItems], "Select intensity", null, "medium")
+intensityItems = [SelectItem("Low", "Low"), SelectItem("Medium", "Medium"), SelectItem("High", "High")]
+workoutButtons = Buttons([submitBtn, cancelBtn], "row")
+submitBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

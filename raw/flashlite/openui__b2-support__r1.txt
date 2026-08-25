@@ -1,0 +1,43 @@
+root = Card([header, metricsRow, recentSection, filterButtons, newTicketDialog])
+
+header = CardHeader("Support Operations", "Morning overview & queue")
+
+metricsRow = Card([openCountCard, responseTimeCard], "sunk", "row", "l", "center", "around")
+
+openCountCard = Card([openTitle, openValue, openBadge], "card", "column", "xs", "center", "center")
+openTitle = Heading("Open Tickets", "h4")
+openValue = Heading("142", "h1")
+openBadge = Badge("+12% from yesterday", "secondary")
+
+responseTimeCard = Card([respTitle, respValue, respBadge], "card", "column", "xs", "center", "center")
+respTitle = Heading("Avg. First-Response Time", "h4")
+respValue = Heading("14m", "h1")
+respBadge = Badge("-3m improvement", "secondary")
+
+recentSection = Card([recentHeading, ticketTable], "clear", "column", "m")
+recentHeading = Heading("Recent Tickets", "h2")
+ticketTable = Table([idCol, subjectCol, customerCol, priorityCol])
+idCol = Col("ID", ["#TK-9481", "#TK-9480", "#TK-9479", "#TK-9478", "#TK-9477"])
+subjectCol = Col("Subject", ["Login failure on SSO", "Billing invoice missing", "API rate limit error", "Password reset loop", "Export data timeout"])
+customerCol = Col("Customer", ["Acme Corp", "Globex", "Initech", "Stark Ind", "Wayne Ent"])
+priorityCol = Col("Priority", ["High", "Medium", "High", "Low", "Medium"])
+
+filterButtons = Buttons([filterAllBtn, filterHighBtn], "row")
+filterAllBtn = Button("All Tickets", null, "secondary")
+filterHighBtn = Button("Narrow to High-Priority Only", null, "primary")
+
+newTicketDialog = DialogBlock("Open New Ticket", "Create Support Ticket", "Fill in the details to log a new customer issue.", [ticketForm])
+ticketForm = Form("new-ticket", formButtons, [subjField, customerField, priorityField, descField])
+subjField = FormControl("Subject", subjInput)
+subjInput = Input("subject", "Brief summary of the issue")
+customerField = FormControl("Customer Name", customerInput)
+customerInput = Input("customer", "Company or contact name")
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [pLow, pMed, pHigh], "Select priority level")
+pLow = SelectItem("low", "Low")
+pMed = SelectItem("medium", "Medium")
+pHigh = SelectItem("high", "High")
+descField = FormControl("Description", descArea)
+descArea = TextArea("description", "Detailed description of the problem...", 4)
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Submit Ticket", null, "primary")

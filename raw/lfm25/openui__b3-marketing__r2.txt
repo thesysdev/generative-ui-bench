@@ -1,0 +1,102 @@
+```openui-lang
+root = Card(children: [
+    // Header
+    CardHeader("Weekly Marketing Dashboard", "Marketing Performance Report"),
+    
+    // 1. Site visitors over last 30 days - Line Chart
+    LineChart(
+        labels=["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", 
+                 "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"],
+        series=[Series("Visitors", [1240, 1380, 1420, 1280, 1650, 1780, 1620, 
+                                   1850, 1990, 2130, 2250, 2480, 2340, 2600, 2750])],
+        xLabel="Day",
+        yLabel="Visitors",
+        variant="card",
+        gap="s"
+    ),
+    
+    // 2. Conversion rate - Metric display
+    Card([
+        CardHeader("Conversion Rate", "Overall Conversion"),
+        TextContent("3.2%", size="large", align="center"),
+        Badge("Healthy", variant="success", icon="green_check")
+    ]),
+    
+    // 3. Top 5 traffic sources with share - Table
+    Card([
+        CardHeader("Traffic Sources (Top 5)", "Most Visited Channels"),
+        Table({
+            columns: [
+                {label: "Source", type: "string"},
+                {label: "Share", type: "number"},
+                {label: "Traffic", type: "number"}
+            ],
+            data: [
+                {"source": "Organic Search", "share": 35, "traffic": 35200},
+                {"source": "Social Media", "share": 25, "traffic": 25200},
+                {"source": "Email Campaigns", "share": 20, "traffic": 20800},
+                {"source": "Direct", "share": 15, "traffic": 15600},
+                {"source": "Referrals", "share": 5, "traffic": 5030}
+            ]
+        }
+    ]),
+    
+    // 4. Running campaigns with spend - Table
+    Card([
+        CardHeader("Running Campaigns", "Active Campaigns"),
+        Table({
+            columns: [
+                {label: "Campaign", type: "string"},
+                {label: "Spend ($)", type: "number"},
+                {label: "Status", type: "string"}
+            ],
+            data: [
+                {"campaign": "Summer Sale", "spend": 5200, "status": "active"},
+                {"campaign": "Winter Push", "spend": 3100, "status": "active"},
+                {"campaign": "New Year Blitz", "spend": 4400, "status": "paused"},
+                {"campaign": "Back to School", "spend": 2900, "status": "active"}
+            ]
+        })
+    ]),
+    
+    // 5. Best performing campaign called out - Highlighted card
+    Card([
+        CardHeader("Best Performer", "Top Campaign"),
+        TextContent("Summer Sale - Highest ROI", size="large", align="center"),
+        MetricCard(
+            title="ROI",
+            value="18.5%",
+            unit="ROI",
+            color="#2196D2"
+        ),
+        Badge("BEST", variant="success", icon="star")
+    ]),
+    
+    // 6. Date range selector - Horizontal bar chart for periods
+    Card([
+        CardHeader("Date Range", "Filter Period"),
+        HorizontalBarChart(
+            labels=["Last 7 days", "Last 30 days", "Last 60 days", "Custom"],
+            xLabel="Time Period",
+            yLabel="Visitors",
+            variant="card",
+            gap="l"
+        )
+    ]),
+    
+    // 7. Email subscriber growth this month - Metric display
+    Card([
+        CardHeader("Email Subscribers", "This Month Growth"),
+        TextContent("12.5%", size="large", align="center"),
+        Badge("Growing", variant="success", icon="arrow_up_right")
+    ]),
+    
+    // 8. Export report button
+    Button(
+        label="Export Report",
+        action="download_dashboard",
+        variant="primary",
+        size="medium"
+    )
+], "card")
+```

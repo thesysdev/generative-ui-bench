@@ -1,0 +1,64 @@
+```javascript
+root = Card([
+  // 1. Step count today against the daily goal
+  Card([
+    CardHeader("Today's Activity"),
+    TextContent("Steps:", "8,450"),
+    TextContent("Daily Goal:", "10,000"),
+    TextContent("Progress:", "12% above target")
+  ]),
+  
+  // 2. Calories burned
+  Card([
+    CardHeader("Calories Burned"),
+    TextContent("Total:", "$420"),
+    TextContent("Unit:", "kcal"),
+    TextContent("Activities:", "Running, cycling, strength training")
+  ]),
+  
+  // 3. How workouts went over the past week
+  Card([
+    CardHeader("Workout Progress - Last Week"),
+    Table([
+      {
+        label: "Day",
+        data: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        type: "string"
+      },
+      {
+        label: "Workout Done",
+        data: ["Yes", "Yes", "No", "Yes", "Yes", "Yes", "No"],
+        type: "string"
+      },
+      {
+        label: "Calories Burned",
+        data: [350, 320, 400, 290, 380, 220, 180],
+        type: "number"
+      },
+      {
+        label: "Duration (minutes)",
+        data: [90, 60, 55, 75, 50, 30, 20],
+        type: "number"
+      }
+    ])
+  ]),
+  
+  // 4. A way to log a new workout
+  Card([
+    CardHeader("Log New Workout"),
+    Form({
+      name: "log_workout",
+      buttons: Buttons([
+        Button("Record", null, "primary"),
+        Button("Cancel", null, "secondary")
+      ]),
+      fields: [
+        FormControl("workout_type", input: "select", label: "Workout Type"),
+        FormControl("duration", input: "number", label: "Duration (minutes)"),
+        FormControl("calories", input: "number", label: "Calories Burned"),
+        FormControl("notes", input: "text", label: "Additional Notes")
+      ]
+    })
+  ])
+])
+```

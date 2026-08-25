@@ -1,0 +1,71 @@
+thought
+root = Card([header, statsRow, riskAlert, positionsTable, exposureChart, marketData, watchlist, ordersTable, newsSection, strategySection, actionPanel], "card", "column", "m")
+
+header = CardHeader("Trading Desk Terminal", "Market Open • Global Equities")
+statsRow = Card([portfolioVal, pnlToday, varValue, marginUse], "card", "row", "m")
+portfolioVal = Card([TextContent("Portfolio Value"), TextContent("$2,480,500", "large-heavy")])
+pnlToday = Card([TextContent("P&L Today"), Tag("+$42,150 (1.74%)", "success")])
+varValue = Card([TextContent("Value at Risk (95%)"), TextContent("$112,000", "default")])
+marginUse = Card([TextContent("Margin in Use"), Progress(65, "65%")])
+riskAlert = Alert("Risk Limit Warning", "Technology sector exposure is at 92% of maximum limit.", "warning")
+
+positionsTable = Card([Heading("Active Positions", "h3"), Table([colTicker, colSize, colEntry, colPrice])], "card")
+colTicker = Col("Ticker", ["AAPL", "TSLA", "NVDA", "MSFT", "XOM"])
+colSize = Col("Size", [1200, -500, 450, 800, 2000])
+colEntry = Col("Entry", [175.20, 240.50", "820.10", "390.20", 105.40])
+colPrice = Col("Current", [189.45, "172.10", "915.30", "402.15", "108.90"])
+
+exposureChart = Card([Heading("Sector Exposure", "h3"), HorizontalBarChart(sectors, [sectorData], "grouped", "Sector", "USD")], "card")
+sectors = ["Tech", "Finance", "Energy", "Healthcare", "Consumer"]
+sectorData = Series("Exposure", [1200000, 450000, 300000, 250000, 280000])
+
+marketData = Card([Heading("Market Movers", "h3"), Table([colMover, colChange, colSentiment])], "card")
+colMover = Col("Instrument", ["NVDA", "AMD", "JPM", "CVX"])
+colChange = Col("% Change", ["+4.2%", "-3.1%", "+0.8%", "-1.5%"])
+colSentiment = Col("Sentiment", ["Bullish", "Bearish", "Neutral", "Neutral"])
+
+watchlist = Card([Heading("Watchlist", "h3"), ListBlock([watch1, watch2, watch3])], "card")
+watch1 = ListItem("BTC/USD", "$64,231.00")
+watch2 = ListItem("ETH/USD", "$3,450.12")
+watch3 = ListItem("SPY", "$512.10")
+
+ordersTable = Card([Heading("Working Orders", "h3"), Table([colTicker, colSide, colQty, colStatus])], "card")
+colTicker = Col("Order", ["AAPL", "TSLA"])
+colSide = Col("Side", ["BUY", "SELL"])
+colQty = Col("Qty", [500, 100])
+colStatus = Col("Status", ["Pending", "Filled"])
+
+newsSection = Card([Heading("Market Headlines", "h3"), ListBlock([news1, news2])], "card")
+news1 = ListItem("Fed signals potential rate pause in Q3")
+news2 = ListItem("Tech earnings beat expectations across board")
+
+economic = ListBlock([eco1, eco2])
+eco1 = ListItem("Thu: FOMC Minutes", "14:00 EST")
+eco2 = ListItem("Fri: CPI Data", "08:30 EST")
+
+strategySection = Card([Heading("Strategy Performance", "h3"), Tabs([tab1, tab2])], "card")
+tab1 = TabItem("Returns", "YTD Performance", Table([colStratName, colYTD, colDrawdown]))
+tab2
+colStratName = Col("Strategy", ["Growth", "Value", "Hedge"])
+colYTD = Col("YTD Return", ["+12%", "+4%", "-2%"])
+colDrawdown = Col("1Y Drawdown", ["-8%", "-2%", "-1%"])
+
+actionPanel = Card([Heading("Quick Actions", "h3"), Form("order_form", orderButtons, [timeField, tickerField, sideField, qtyField])], "card")
+timeField = FormControl("Timeframe", Select("tf", [t1, t2, t3], "1D"))
+t1 = SelectItem("1D", "1 Day")
+t2 = SelectItem("1W", "1 Week")
+t3 = SelectItem("1M", "1 Month")
+tickerField = FormControl("Ticker", Input("ticker", "AAPL"))
+sideField = FormControl("Side", RadioGroup("side", [sBuy, sSell], "buy"))
+sBuy = RadioItem("Buy", "", "buy")
+sSell = RadioItem("Sell", "", "sell")
+qtyField = FormControl("Quantity", Input("qty", "100", "number"))
+orderButtons = Buttons([Button("Place Order", null, "primary"), Button("Rebalance", null, "tertiary")])
+
+// Re-linking missing variables for completeness
+tab2 = TabItem("Risk", "Drawdown", TextContent("The maximum drawdown over the past year was 12.4% during the October volatility."))
+// Note: tab2 was used in strategySection but needed to be defined. 
+// Fixed by defining strategySection to include tab2.
+// Wait, I need to define tab2 in the list. Let's fix that.
+strategySection = Card([Heading("Strategy Performance", "h3"), Tabs([tab1, tab2])], "card")
+// This is now correct.

@@ -1,0 +1,123 @@
+```openui-lang
+root = Card([
+    header,
+    balances,
+    recentTransactions,
+    spendingByCategory,
+    billsDue,
+    vacationGoalProgress,
+    creditScore,
+    transferMoney,
+    freezeCreditLine,
+    statementPeriodPicker,
+    alertTriggersManager,
+    disputeTransaction
+], variant: "card", direction: "column", gap: "m")
+
+header = CardHeader("Personal Banking Dashboard", "Welcome")
+
+balances = Card([
+    CardHeader("Account Balances", null),
+    Table([
+        Col("Account", ["Checking", "Savings", "Credit"]),
+        Col("Balance", ["$4,567.89", "$12,345.67", "$3,000.00"])
+    ])
+], variant: "clear")
+
+recentTransactions = Card([
+    CardHeader("Recent Transactions", null),
+    ListBlock([
+        ListItem("Starbucks", "$5.49", ["icon: coffee"]),
+        ListItem("Grocery Store", "-$120.00", ["icon: shopping-cart"]),
+        ListItem("Utility Bill", "-$85.50", ["icon: lightbulb"]),
+        ListItem("Online Purchase", "-$23.75", ["icon: shopping"])
+    ], variant: "image")
+])
+
+spendingByCategory = Card([
+    CardHeader("Spending This Month", null),
+    PieChart([
+        labels: ["Food", "Transportation", "Entertainment", "Utilities", "Shopping"],
+        values: [250, 120, 80, 150, 90]
+    ], variant: "donut")
+])
+
+billsDue = Card([
+    CardHeader("Bills Due Soon", null),
+    Table([
+        Col("Due Date", ["2025-08-15", "2025-08-20"]),
+        Col("Bill", ["Rent", "Phone Bill"]),
+        Col("Amount", ["$1,200", "$45"])
+    ])
+])
+
+vacationGoalProgress = Card([
+    CardHeader("Vacation Savings Goal", null),
+    Progress(value: 0.62, label: "62% toward $2,000 goal"),
+    Tag("On track", null, null, "success")
+])
+
+creditScore = Card([
+    CardHeader("Credit Score", null),
+    TextContent("Your current credit score is 785", size: "large")
+])
+
+transferMoney = Form("transferForm", transferButtons, [
+    amountField,
+    fromAccountField,
+    toAccountField
+])
+
+amountField = FormControl("Transfer Amount", amountInput)
+amountInput = Input("amount", type: "number", placeholder: "$0.00", rules: [0, 1000000], value: "0")
+
+fromAccountField = FormControl("From Account", fromSelect)
+fromSelect = Select("from_account", [checking, savings, credit], placeholder: "Select source")
+checking = SelectItem("Checking", "Checking")
+savings = SelectItem("Savings", "Savings")
+credit = SelectItem("Credit", "Credit")
+
+toAccountField = FormControl("To Account", toSelect)
+toSelect = Select("to_account", [checking, savings, credit], placeholder: "Select destination")
+checking = SelectItem("Checking", "Checking")
+savings = SelectItem("Savings", "Savings")
+credit = SelectItem("Credit", "Credit")
+
+transferButtons = Buttons([
+    submitTransfer,
+    cancelTransfer
+])
+submitTransfer = Button("Transfer", null, "primary")
+cancelTransfer = Button("Cancel", null, "tertiary")
+
+freezeCreditLine = Button("Freeze Credit Line", null, "destructive")
+
+statementPeriodPicker = Card([
+    CardHeader("Statement Period", null),
+    DatePicker("period", mode: "single", value: "2025-08")
+])
+
+alertTriggersManager = Card([
+    CardHeader("Alert Triggers", null),
+    Table([
+        Col("Trigger", ["Low Balance", "Large Withdrawal", "Foreign Transaction"]),
+        Col("Active?", [true, false, true])
+    ])
+])
+
+disputeTransaction = Card([
+    CardHeader("Dispute a Transaction", null),
+    TextContent("Select a recent transaction to dispute:", size: "small"),
+    FollowUpBlock([
+        FollowUpItem("Coffee Shop - $5.49 (2025-08-01)"),
+        FollowUpItem("Online Purchase - $23.75 (2025-07-28)")
+    ])
+])
+
+transferButtons = Buttons([
+    submitTransfer,
+    cancelTransfer
+])
+submitTransfer = Button("Transfer", null, "primary")
+cancelTransfer = Button("Cancel", null, "tertiary")
+```

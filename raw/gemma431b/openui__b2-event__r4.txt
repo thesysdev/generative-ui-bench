@@ -1,0 +1,57 @@
+root = Card([header, countdown, eventDetails, agendaSection, speakersSection, pricingSection, registrationSection, footer], "card", "column", "l")
+
+header = CardHeader("Global Tech Summit 2024", "Innovating the Future of AI and Robotics")
+
+countdown = Callout("info", "Event Countdown", "Only 12 days remaining until we kick off in San Francisco!")
+
+eventDetails = Card([dateText, venueText, locationImg], "sunk", "row", "m", "center")
+dateText = TextContent("**Date:** November 15-17, 2024", "default")
+venueText = TextContent("**Venue:** Moscone Center, San Francisco", "default")
+locationImg = Image("Conference Venue", "https://picsum.photos/seed/conference/400/200")
+
+agendaSection = SectionBlock([day1, day2], true)
+day1 = SectionItem("day1", "Day 1: Foundations", [agendaTable])
+day2 = SectionItem("day2", "Day 2: Advanced Applications", [agendaTableAdv])
+
+agendaTable = Table([timeCol, sessionCol, speakerCol])
+timeCol = Col("Time", ["09:00 AM", "11:00 AM", "02:00 PM"], "string")
+sessionCol = Col("Session", ["Opening Keynote", "The State of LLMs", "Robotics Workshop"], "string")
+speakerCol = Col("Speaker", ["Dr. Sarah Chen", "Marcus Thorne", "Elena Rodriguez"], "string")
+
+agendaTableAdv = Table([timeColAdv, sessionColAdv, speakerColAdv])
+timeColAdv = Col("Time", ["10:00 AM", "01:00 PM", "04:00 PM"], "string")
+sessionColAdv = Col("Session", ["Edge Computing", "Quantum Leap", "Closing Panel"], "string")
+speakerColAdv = Col("Speaker", ["Kevin Lee", "Dr. Amit Shah", "All Speakers"], "string")
+
+speakersSection = Card([speakersHeading, speakersList], "clear", "column", "m")
+speakersHeading = Heading("Featured Speakers", "h3")
+speakersList = ListBlock([s1, s2, s3], "image")
+s1 = ListItem("Dr. Sarah Chen", "Chief AI Scientist at NeuralCore", ["https://picsum.photos/seed/sarah/100/100"])
+s2 = ListItem("Marcus Thorne", "Author of 'The Silicon Mind'", ["https://picsum.photos/seed/marcus/100/100"])
+s3 = ListItem("Elena Rodriguez", "Lead Engineer at BotWorks", ["https://picsum.photos/seed/elena/100/100"])
+
+pricingSection = Card([pricingHeading, pricingTable], "sunk", "column", "m")
+pricingHeading = Heading("Ticket Tiers", "h3")
+pricingTable = Table([tierCol, priceCol, featureCol])
+tierCol = Col("Tier", ["Early Bird", "Standard", "VIP"], "string")
+priceCol = Col("Price", ["$299", "$499", "$899"], "string")
+featureCol = Col("Includes", ["General Access", "General Access", "All Access + Dinner"], "string")
+
+registrationSection = Card([regHeading, regForm], "card", "column", "m")
+regHeading = Heading("Secure Your Spot", "h3")
+regForm = Form("registration", regButtons, [nameField, emailField, ticketField])
+nameField = FormControl("Full Name", nameInput)
+nameInput = Input("full_name", "Enter your name")
+emailField = FormControl("Email Address", emailInput)
+emailInput = Input("email", "Enter your email", "email")
+ticketField = FormControl("Select Tier", ticketSelect)
+ticketSelect = Select("tier", [t1, t2, t3], "Choose a ticket")
+t1 = SelectItem("early", "Early Bird - $299")
+t2 = SelectItem("std", "Standard - $499")
+t3 = SelectItem("vip", "VIP - $899")
+regButtons = Buttons([submitBtn])
+submitBtn = Button("Register Now", null, "primary")
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("View detailed speaker bios")
+f2 = FollowUpItem("Download the event brochure")

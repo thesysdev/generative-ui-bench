@@ -1,0 +1,182 @@
+root = Card([
+  header,
+  balances,
+  transactions,
+  spending,
+  bills,
+  vacation,
+  creditScore,
+  moveMoney,
+  freezeCredit,
+  statementPeriod,
+  alerts,
+  dispute,
+], "clear", "row", "m")
+
+header = CardHeader("Personal Banking Home", "Your financial overview at a glance")
+
+balances = Card([
+  balanceHeading,
+  checkingRow,
+  savingsRow,
+  creditRow,
+], "sunk")
+
+balanceHeading = Heading("Account Balances", "h3")
+checkingRow = Card([
+  checkingLabel,
+  checkingValue,
+], "sunk")
+savingsRow = Card([
+  savingsLabel,
+  savingsValue,
+], "sunk")
+creditRow = Card([
+  creditLabel,
+  creditValue,
+], "sunk")
+checkingLabel = TextCallout("Checking", "Available balance", "primary")
+checkingValue = TextCallout("Balance", "$4,287.35", "primary")
+savingsLabel = TextCallout("Savings", "Available balance", "success")
+savingsValue = TextCallout("Balance", "$12,540.00", "success")
+creditLabel = TextCallout("Credit", "Available credit", "danger")
+creditValue = TextCallout("Limit", "$25,000.00", "danger")
+
+transactions = Card([
+  transactionsHeading,
+  recentTxList,
+], "sunk")
+
+transactionsHeading = Heading("Recent Transactions", "h3")
+recentTxList = ListBlock([
+  ListItem("Amazon.com — Online Shopping", "$89.99", actionLabel="View details"),
+  ListItem("Starbucks Coffee", "$4.50", actionLabel="View details"),
+  ListItem("Walmart — Grocery Run", "$127.33", actionLabel="View details"),
+  ListItem("Electric Company Bill", "$142.00", actionLabel="View details"),
+  ListItem("Netflix Subscription", "$15.99", actionLabel="View details"),
+], "image")
+
+spending = Card([
+  spendingHeading,
+  spendingChart,
+  spendingList,
+], "sunk")
+
+spendingHeading = Heading("Spending Split — This Month", "h3")
+spendingChart = HorizontalBarChart(
+  ["Groceries", "Dining", "Transportation", "Entertainment", "Shopping", "Utilities", "Other"],
+  [
+    { category: "Groceries", values: [420, 280, 150, 90, 120, 60, 40] },
+    { category: "Dining", values: [300, 200, 100, 70, 80, 30, 20] },
+    { category: "Transportation", values: [180, 120, 200, 50, 30, 20, 10] },
+    { category: "Entertainment", values: [100, 80, 40, 150, 60, 20, 10] },
+    { category: "Shopping", values: [200, 150, 60, 90, 180, 40, 30] },
+    { category: "Utilities", values: [150, 200, 120, 40, 50, 80, 20] },
+    { category: "Other", values: [80, 60, 30, 20, 40, 10, 5] },
+  ],
+  "grouped",
+  "Category",
+  "Amount ($)"
+)
+spendingList = ListBlock([
+  ListItem("Groceries", "57%", "420 / $735"),
+  ListItem("Dining", "35%", "300 / $735"),
+  ListItem("Transportation", "25%", "180 / $735"),
+  ListItem("Entertainment", "15%", "100 / $735"),
+  ListItem("Shopping", "13%", "200 / $735"),
+], "image")
+
+bills = Card([
+  billsHeading,
+  billsList,
+], "sunk")
+
+billsHeading = Heading("Bills Due This Week", "h3")
+billsList = ListBlock([
+  ListItem("Electric Company", "$142.00", "Due in 3 days"),
+  ListItem("Streaming Services", "$35.99", "Due in 7 days"),
+  ListItem("Insurance Premium", "$280.00", "Due in 12 days"),
+], "image")
+
+vacation = Card([
+  vacationHeading,
+  vacationProgress,
+  vacationGoal,
+], "sunk")
+
+vacationHeading = Heading("Vacation Savings Goal", "h3")
+vacationProgress = Progress(68, "68% of $5,000 goal")
+vacationGoal = TextCallout("Goal", "$5,000.00", "info")
+
+creditScore = Card([
+  creditScoreHeading,
+  creditScoreValue,
+  creditScoreStatus,
+], "sunk")
+
+creditScoreHeading = Heading("Credit Score", "h3")
+creditScoreValue = TextCallout("Score", "742", "success")
+creditScoreStatus = TextCallout("Status", "Excellent", "success")
+
+moveMoney = Card([
+  moveMoneyHeading,
+  moveMoneyForm,
+  moveMoneySummary,
+], "sunk")
+
+moveMoneyHeading = Heading("Move Money Between Accounts", "h3")
+moveMoneyForm = Form("move-money", [transferBtn, cancelMoveBtn], [fromSelect, toSelect, amountSlider, noteField])
+fromSelect = Select("From Account", [checkingSelectItem, savingsSelectItem, creditSelectItem], "Select source account")
+toSelect = Select("To Account", [checkingSelectItem, savingsSelectItem, creditSelectItem], "Select destination account")
+amountSlider = Slider("Amount", "continuous", 10, 2000, 50, "Transfer amount", "$10 - $2,000", 500)
+noteField = TextArea("Note", "Optional reference", 3, null, "")
+transferBtn = Button("Transfer", null, "primary")
+cancelMoveBtn = Button("Cancel", null, "tertiary")
+moveMoneySummary = Card([
+  TextCallout("From", "Checking"),
+  TextCallout("To", "Savings"),
+  TextCallout("Amount", "$500.00"),
+  TextCallout("Status", "Pending"),
+], "sunk")
+
+freezeCredit = Card([
+  freezeCreditHeading,
+  freezeCreditStatus,
+], "sunk")
+
+freezeCreditHeading = Heading("Freeze Credit Line", "h3")
+freezeCreditStatus = TextCallout("Status", "Line frozen — $25,000.00", "danger")
+
+statementPeriod = Card([
+  statementPeriodHeading,
+  statementPeriodSelect,
+], "sunk")
+
+statementPeriodHeading = Heading("Statement Period", "h3")
+statementPeriodSelect = Select("Select Period", ["All 2024", "Last 3 Months", "Last 6 Months", "Last 12 Months"], "Choose a period")
+
+alerts = Card([
+  alertsHeading,
+  alertsList,
+], "sunk")
+
+alertsHeading = Heading("Alert Triggers", "h3")
+alertsList = ListBlock([
+  ListItem("Balance below $500", "Low balance alert", "warning"),
+  ListItem("Transaction > $500", "Large transaction alert", "danger"),
+  ListItem("Multiple payments", "Overdue payments alert", "warning"),
+  ListItem("Credit score drop", "Score below 700", "danger"),
+], "image")
+
+dispute = Card([
+  disputeHeading,
+  disputeForm,
+], "sunk")
+
+disputeHeading = Heading("Dispute a Transaction", "h3")
+disputeForm = Form("dispute", [disputeSubmitBtn, disputeCancelBtn], [disputeReason, disputeAmount, disputeDate])
+disputeReason = TextArea("Reason for Dispute", "Describe the transaction you want to dispute", 4, null, "")
+disputeAmount = Input("Amount", "Enter the transaction amount", "number", null, "")
+disputeDate = DatePicker("Transaction Date", "single", null, "")
+disputeSubmitBtn = Button("Submit Dispute", null, "primary")
+disputeCancelBtn = Button("Cancel", null, "tertiary")

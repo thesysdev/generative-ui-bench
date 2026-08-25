@@ -1,0 +1,277 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title="Hub Operations Dashboard",
+      subtitle="Real-time operations monitoring for JFK Hub"
+    ),
+    Div(
+      width: "100%",
+      height: "auto",
+      children: [
+        // 1. On-time performance today
+        Card(
+          children: [
+            CardHeader(
+              title="On-Time Performance (Today)",
+              subtitle="94.2% on-time rate"
+            ),
+            Progress(
+              value: 94.2,
+              label: "On-Time %"
+            )
+          ]
+        ),
+        
+        // 2. Flights with number, route, gate, status
+        Card(
+          children: [
+            CardHeader(
+              title="Active Flights",
+              subtitle: "Current flight schedule"
+            ),
+            Table(
+              columns: [
+                {"label": "Flight #", "type": "string"},
+                {"label": "Route", "type": "string"},
+                {"label": "Gate", "type": "string"},
+                {"label": "Status", "type": "string"}
+              ],
+              data: [
+                {"Flight #": "FF1234", "Route": "JFK→BOS", "Gate": "B01", "Status": "Departed"},
+                {"Flight #": "FF5678", "Route": "JFK→ORD", "Gate": "B02", "Status": "Arriving"},
+                {"Flight #": "FF9012", "Route": "JFK→LAX", "Gate": "B03", "Status": "Delayed"},
+                {"Flight #": "FF3456", "Route": "JFK→DFW", "Gate": "B04", "Status": "On Time"},
+                {"Flight #": "FF7890", "Route": "JFK→ATL", "Gate": "B05", "Status": "Delayed"},
+                {"Flight #": "FF1122", "Route": "JFK→DEN", "Gate": "B06", "Status": "Cancelled"}
+              ]
+            )
+          ]
+        ),
+        
+        // 3. Delayed flights called out
+        Card(
+          children: [
+            CardHeader(
+              title="Delayed Flights",
+              subtitle: "Flights experiencing delays"
+            ),
+            ListBlock(
+              items: [
+                {title: "FF9012 - JFK→ORD (Gate B03)", desc: "Expected delay: 45 mins", status: "Delayed"},
+                {title: "FF7890 - JFK→ATL (Gate B05)", desc: "Expected delay: 30 mins", status: "Delayed"},
+                {title: "FF3456 - JFK→DFW (Gate B04)", desc: "De-briefed - now on time", status: "Resolved"}
+              ],
+              variant: "card"
+            )
+          ]
+        ),
+        
+        // 4. Recent gate changes
+        Card(
+          children: [
+            CardHeader(
+              title="Recent Gate Changes",
+              subtitle: "Last 24 hours"
+            ),
+            ListBlock(
+              items: [
+                {title: "Gate B01 → B02", change: "Opened for FF1234", time: "2 hours ago"},
+                {title: "Gate B03 → B04", change: "Closed for maintenance", time: "4 hours ago"},
+                {title: "Gate B05 → B05", change: "Reset assignment (delayed FF7890)", time: "6 hours ago"},
+                {title: "Gate B07 → B08", change: "New opening for FF9999", time: "8 hours ago"}
+              ],
+              variant: "card"
+            )
+          ]
+        ),
+        
+        // 5. Crews available for reassignment
+        Card(
+          children: [
+            CardHeader(
+              title="Available Crews",
+              subtitle: "Staff ready for reassignment"
+            ),
+            Table(
+              columns: [
+                {"label": "Crew ID", "type": "string"},
+                {"label": "Flight", "type": "string"},
+                {"label": "Location", "type": "string"},
+                {"label": "Status", "type": "string"}
+              ],
+              data: [
+                {"Crew ID": "CC-101", "Flight": "FF9012", "Location": "JFK", "Status": "Available"},
+                {"Crew ID": "CC-102", "Flight": "FF3456", "Location": "JFK", "Status": "Available"},
+                {"Crew ID": "CC-103", "Flight": "FF5678", "Location": "BOS", "Status": "Assigned"},
+                {"Crew ID": "CC-104", "Flight": "FF9999", "Location": "Atlanta", "Status": "Available"}
+              ]
+            )
+          ]
+        ),
+        
+        // 6. Weather advisories at the hub
+        Card(
+          children: [
+            CardHeader(
+              title="Weather Advisories",
+              subtitle: "Current conditions affecting operations"
+            ),
+            Table(
+              columns: [
+                {"label": "Advisory", "type": "string"},
+                {"label": "Impact", "type": "string"},
+                {"label": "Severity", "type": "string"}
+              ],
+              data: [
+                {"Advisory": "Light snow", "Impact": "Reduced visibility", "Severity": "High"},
+                {"Advisory": "Wind gusts 40 knots", "Impact": "Ground handling delays", "Severity": "Medium"},
+                {"Advisory": "Thunderstorms in Northeast", "Impact": "Potential diversions", "Severity": "High"},
+                {"Advisory": "Clear skies", "Impact": "Normal operations", "Severity": "Low"}
+              ]
+            )
+          ]
+        ),
+        
+        // 7. Average passenger load today
+        Card(
+          children: [
+            CardHeader(
+              title="Average Passenger Load",
+              subtitle: "Today's capacity utilization"
+            ),
+            Progress(
+              value: 87.5,
+              label: "Passengers / Seat"
+            )
+          ]
+        ),
+        
+        // 8. Connections at risk of being missed
+        Card(
+          children: [
+            CardHeader(
+              title="Connections at Risk",
+              subtitle: "Flights potentially missed due to delays"
+            ),
+            ListBlock(
+              items: [
+                {title: "FF9012 - JFK→ORD", risk: "High - Departure delayed", affected: true},
+                {title: "FF5678 - JFK→LAX", risk: "Medium - Arrival delayed", affected: false},
+                {title: "FF2345 - JFK→DC", risk: "High - Departure delayed", affected: true}
+              ],
+              variant: "card"
+            )
+          ]
+        ),
+        
+        // 9. Way to rebook affected passengers
+        Card(
+          children: [
+            CardHeader(
+              title="Rebook Affected Passengers",
+              subtitle: "Manage rebooking from cancellation/delay"
+            ),
+            Button(
+              label="Rebook Flights",
+              action: null,
+              variant: "primary",
+              size: "medium"
+            ),
+            TextCallout(
+              variant: "neutral",
+              title: "Rebooking System",
+              description: "Click to access passenger rebooking interface and modify itineraries"
+            )
+          ]
+        ),
+        
+        // 10. Way to look at a different hub
+        Card(
+          children: [
+            TabItems([
+              {
+                items: [
+                  {value: "JFK Hub", trigger: "jfk", content: Card([
+                    CardHeader("JFK Hub Operations", "Operations overview for JFK"),
+                    Div(
+                      width: "100%",
+                      children: [
+                        CardHeader("On-Time %", "94.2%", "card"),
+                        CardHeader("Active Flights", "12 active", "card"),
+                        CardHeader("Avg Load", "87.5%", "card"),
+                        CardHeader("Turnaround", "35 mins", "card")
+                      ]
+                    )}
+                  ]),
+                  {
+                    items: [
+                      {value: "ORD Hub", trigger: "ord", content: Card([
+                        CardHeader("ORD Hub Operations", "Operations overview for ORD"),
+                        Div(
+                          width: "100%",
+                          children: [
+                            CardHeader("On-Time %", "91.5%", "card"),
+                            CardHeader("Active Flights", "15 active", "card"),
+                            CardHeader("Avg Load", "82.3%", "card"),
+                            CardHeader("Turnaround", "28 mins", "card")
+                          ]
+                        )}
+                      ])}
+                    ]
+                  },
+                  {
+                    items: [
+                      {value: "LAX Hub", trigger: "lax", content: Card([
+                        CardHeader("LAX Hub Operations", "Operations overview for LAX"),
+                        Div(
+                          width: "100%",
+                          children: [
+                            CardHeader("On-Time %", "88.0%", "card"),
+                            CardHeader("Active Flights", "9 active", "card"),
+                            CardHeader("Avg Load", "75.1%", "card"),
+                            CardHeader("Turnaround", "42 mins", "card")
+                          ]
+                        )}
+                      ])}
+                    ]
+                  }
+                ],
+                isFoldable: true
+              }
+            ])
+          ]
+        ),
+        
+        // 11. Cancellations today
+        Card(
+          children: [
+            CardHeader(
+              title="Cancellations Today",
+              subtitle: "Flights cancelled since previous period"
+            ),
+            Progress(
+              value: 3,
+              label: "Cancellations Count"
+            )
+          ]
+        ),
+        
+        // 12. Average turnaround time
+        Card(
+          children: [
+            CardHeader(
+              title="Average Turnaround Time",
+              subtitle: "Time between arrival and departure"
+            ),
+            Progress(
+              value: 32,
+              label: "Minutes"
+            )
+          ]
+        )
+      ]
+    )
+  ]
+)
+```

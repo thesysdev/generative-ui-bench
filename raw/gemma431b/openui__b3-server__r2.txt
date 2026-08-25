@@ -1,0 +1,45 @@
+root = Card([header, globalStatus, regionFilter, metricsSection, incidentsSection, performanceSection, alertConfig, followUps], "card", "column", "l")
+
+header = CardHeader("Service Health Dashboard", "On-call Engineer View")
+
+globalStatus = Card([uptimeMetric, errorMetric], "sunk", "row", "m")
+uptimeMetric = TextCallout("success", "Quarterly Uptime", "99.98% - Within SLA")
+errorMetric = TextCallout("danger", "Current Error Rate", "1.2% - Spiking")
+
+regionFilter = Buttons([usEast, usWest, euWest, apSouth], "row")
+usEast = Button("us-east-1")
+usWest = Button("us-west-2")
+euWest = Button("eu-west-1")
+apSouth = Button("ap-south-1")
+
+metricsSection = Card([metricsHeading, resourceChart], "card", "column", "s")
+metricsHeading = Heading("Resource Utilization (24h)", "h3")
+resourceChart = LineChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"], [cpuSeries, memSeries], "linear", "Time", "Usage %")
+cpuSeries = Series("CPU Usage", [42, 45, 88, 72, 50, 48])
+memSeries = Series("Memory Usage", [60, 62, 65, 64, 68, 70])
+
+incidentsSection = Card([incidentsHeading, incidentTable], "card", "column", "s")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentTable = Table([incIdCol, incSevCol, incActionCol])
+incIdCol = Col("Incident", ["INC-402: DB Connection Timeout", "INC-405: Cache Miss Spike", "INC-409: Auth Latency"], "string")
+incSevCol = Col("Severity", ["Critical", "High", "Medium"], "string")
+incActionCol = Col("Action", ["Acknowledge", "Acknowledge", "Acknowledge"], "action")
+
+performanceSection = Card([perfHeading, latencyChart], "card", "column", "s")
+perfHeading = Heading("Slowest Endpoints (P99)", "h3")
+latencyChart = HorizontalBarChart(["/api/v1/search", "/api/v1/checkout", "/api/v1/user/profile", "/api/v1/upload", "/api/v1/auth/login"], [latencySeries], "grouped", "Endpoint", "ms")
+latencySeries = Series("Latency", [1200, 850, 620, 410, 380])
+
+alertConfig = Card([configHeading, thresholdForm], "sunk", "column", "m")
+configHeading = Heading("Alert Configuration", "h3")
+thresholdForm = Form("alert-settings", configButtons, [cpuThreshold, memThreshold])
+cpuThreshold = FormControl("CPU Alert Threshold (%)", cpuInput, "Trigger page when exceeded")
+cpuInput = Input("cpu_limit", "80", "number")
+memThreshold = FormControl("Memory Alert Threshold (%)", memInput, "Trigger page when exceeded")
+memInput = Input("mem_limit", "90", "number")
+configButtons = Buttons([saveBtn])
+saveBtn = Button("Update Thresholds", null, "primary")
+
+followUps = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("View detailed logs for INC-402")
+f2 = FollowUpItem("Scale up cluster in us-east-1")

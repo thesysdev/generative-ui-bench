@@ -1,0 +1,30 @@
+thought
+root = Card([header, alert, metricsRow, chartsRow, shipmentTable, actionRow])
+header = CardHeader("Logistics Command Center", "Real-time fleet operations monitoring")
+status = Callout("info", "Last Refreshed", "Updated 2 minutes ago via Global Tracking API")
+alert = Alert("12 Delayed Shipments", "Critical delays detected due to severe weather in the Mid-Atlantic region.", "warning")
+metricsRow = Card([onTimeMetric, avgCostMetric, searchBar], "row", "m")
+onTimeMetric = Progress(94, "On-time Performance (Month)")
+avgCostMetric = TextContent("Avg Cost: $412.50 / shipment", "large-heavy")
+searchBar = FormControl("Search Route", Input("search", "e.g. LAX to JFK", "text"))
+
+chartsRow = Card([carrierChart, volumeTrend], "row", "l")
+carrierChart = Heading("Volume Split by Carrier", "h4")
+carrierLabels = ["FedEx", "DHL", "Maersk", "Local"]
+carrierValues = [450, 320, 210, 180]
+pieChart = PieChart(carrierLabels, carrierValues, "donut")
+volumeTrend = Heading("Weekly Volume (2 Months)", "h4")
+trendLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+trendSeries = Series("Shipments", [1200, 1350, 1100, 1400, 1550, 1400, 1600, 1750])
+lineChart = LineChart(trendLabels, [trendSeries], "natural", "Week", "Volume")
+
+shipmentTable = Card([Heading("Active Shipments", "h3"), Table([colOrigin, colDest, colETA, colStatus, colActions])])
+colOrigin = Col("Origin", ["Shanghai", "Rotterdam", "Singapore", "Hamburg", "Los Angeles"])
+colDest = Col("Destination", ["New York", "London", "Singapore", "Dubai", "Long Beach", "Chicago"])
+colETA = Col("ETA", ["Oct 24", "Oct 26", "Oct 22", "Oct 29", "Oct 21"])
+colStatus = Col("Status", ["In Transit", "Delayed", "In Transit", "In Transit", "Delayed"])
+colActions = Col("Actions", ["Flag", "Flag", "Flag", "Flag", "Flag"])
+
+actionRow = Buttons([refreshBtn, exportBtn], "row")
+refreshBtn = Button("Refresh Data", null, "primary")
+exportBtn = Button("Export Report", null, "secondary")

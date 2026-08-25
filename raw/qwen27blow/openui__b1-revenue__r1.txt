@@ -1,0 +1,20 @@
+
+
+root = Card([header, revenueBlock, comparisonRow, chart, insight], "card", "column", "m")
+
+header = CardHeader("Good Morning ☀️", "Saturday, June 14 · 10:30 AM")
+
+revenueBlock = Card([revenueLabel, revenueAmount], "sunk", "column", "xs")
+revenueLabel = TextContent("Revenue so far today", "small")
+revenueAmount = TextContent("$2,847", "large-heavy")
+
+comparisonRow = Card([yesterdayLabel, yesterdayAmount, deltaTag], "sunk", "row", "m", "center", "between")
+yesterdayLabel = TextContent("Same time yesterday", "small")
+yesterdayAmount = TextContent("$2,312", "default")
+deltaTag = Tag("+23.1%", null, "md", "success")
+
+chart = LineChart(["8:00", "9:00", "10:00", "10:30"], [todaySeries, yesterdaySeries], "natural", "Hour", "Cumulative revenue ($)")
+todaySeries = Series("Today", [310, 1280, 2150, 2847])
+yesterdaySeries = Series("Yesterday", [245, 980, 1720, 2312])
+
+insight = Callout("success", "On pace for a strong day", "You're $535 ahead of yesterday at this hour. If the trend holds, you'll close around $6,200.")

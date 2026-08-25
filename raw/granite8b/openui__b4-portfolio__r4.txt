@@ -1,0 +1,212 @@
+```openui-lang
+root = Card(
+    direction = "column",
+    gap = "xl",
+    children = [
+        portfolioHeader,
+        activeProjects,
+        overdueMilestones,
+        budgetSection,
+        teamUtilization,
+        risks,
+        upcomingDeadlines,
+        deliveryPace,
+        blockedItems,
+        healthSummary,
+        controls,
+    ],
+)
+
+portfolioHeader = CardHeader(
+    title = "Project Portfolio Review",
+    subtitle = "All Projects | Q2 2025",
+)
+
+activeProjects = Table(
+    columns = [
+        Col("Owner", projectOwners, type = "string"),
+        Col("Deadline", projectDeadlines, type = "date"),
+        Col("Health", projectHealths, type = "string"),
+    ],
+    variant = "clear",
+)
+
+overdueMilestones = Card(
+    variant = "sunk",
+    children = [TextContent("Overdue Milestones: 3 items")],
+)
+
+budgetSection = Card(
+    children = [
+        TextContent(
+            "Budget Spent vs Allocation",
+            size = "large",
+        ),
+        BarChart(
+            labels = ["Project A", "Project B", "Project C"],
+            series = [
+                Series("Allocation", [120000, 150000, 100000]),
+                Series("Spent", [110000, 145000, 95000]),
+            ],
+            variant = "grouped",
+            xLabel = "Project",
+            yLabel = "USD",
+        ),
+    ],
+)
+
+teamUtilization = Card(
+    children = [
+        TextContent(
+            "Team Utilization (%)",
+            size = "large",
+        ),
+        Gauge(
+            value = 78,
+            label = "Utilization",
+            max = 100,
+            color = "info",
+        ),
+    ],
+)
+
+risks = Card(
+    children = [
+        TextContent(
+            "Top Risks",
+            size = "large",
+        ),
+        ListBlock(
+            items = [
+                ListItem(
+                    title = "High Severity",
+                    subtitle = "Data migration delay",
+                    image = ["danger"],
+                    actionLabel = "View",
+                ),
+                ListItem(
+                    title = "Medium Severity",
+                    subtitle = "Resource shortage",
+                    image = ["warning"],
+                    actionLabel = "View",
+                ),
+                ListItem(
+                    title = "Low Severity",
+                    subtitle = "UI polish",
+                    image = ["info"],
+                    actionLabel = "View",
+                ),
+            ],
+            variant = "image",
+        ),
+    ],
+)
+
+upcomingDeadlines = Card(
+    children = [
+        TextContent(
+            "Deadlines in Next 2 Weeks",
+            size = "large",
+        ),
+        ListBlock(
+            items = [
+                ListItem(
+                    title = "Project A",
+                    subtitle = "Feature freeze - 2025-08-15",
+                ),
+                ListItem(
+                    title = "Project B",
+                    subtitle = "Beta launch - 2025-08-20",
+                ),
+                ListItem(
+                    title = "Project C",
+                    subtitle = "Release - 2025-08-25",
+                ),
+            ],
+            variant = "number",
+        ),
+    ],
+)
+
+deliveryPace = Card(
+    children = [
+        TextContent(
+            "Delivery Pace Over Last 6 Sprints",
+            size = "large",
+        ),
+        LineChart(
+            labels = ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"],
+            series = [Series("Delivered", [85, 90, 88, 92, 95, 97])],
+            variant = "natural",
+            xLabel = "Sprint",
+            yLabel = "Velocity (%)",
+        ),
+    ],
+)
+
+blockedItems = Card(
+    children = [
+        TextContent(
+            "Blocked Work Items",
+            size = "large",
+        ),
+        ListBlock(
+            items = [
+                ListItem(
+                    title = "Item #1",
+                    subtitle = "Waiting on API response",
+                    image = ["warning"],
+                    actionLabel = "Resolve",
+                ),
+                ListItem(
+                    title = "Item #2",
+                    subtitle = "Licensing issue",
+                    image = ["danger"],
+                    actionLabel = "Resolve",
+                ),
+            ],
+            variant = "image",
+        ),
+    ],
+)
+
+healthSummary = TextContent(
+    "Portfolio Health: On track (78% utilization, 2 risks critical)",
+    size = "large-heavy",
+)
+
+controls = Card(
+    direction = "row",
+    gap = "m",
+    children = [
+        quarterSelector,
+        requestTeamBtn,
+        exportBtn,
+        archiveBtn,
+    ],
+)
+
+quarterSelector = Button(
+    label = "Switch Quarter",
+    action = ["quarter", "select"],
+    variant = "secondary",
+)
+
+requestTeamBtn = Button(
+    label = "Request More People",
+    action = ["team", "request"],
+    variant = "primary",
+)
+
+exportBtn = Button(
+    label = "Export Review",
+    action = ["export", "csv"],
+    variant = "tertiary",
+)
+
+archiveBtn = Button(
+    label = "Archive Finished Project",
+    action = ["archive", "project"],
+    variant = "destructive",
+)
+```

@@ -1,0 +1,43 @@
+```openui-lang
+root = Card([header, filters, statsSection, ordersTable, chartsSection, actions])
+
+header = CardHeader("E-commerce Operations", "Track orders, revenue and performance")
+
+filters = Card([statusFilter, searchInput], "sunk", "row", "l")
+statusFilter = FormControl("Order status", statusSelect, "Filter by status")
+statusSelect = Select("status_filter", [statusAll, statusPending, statusFulfilled, statusCancelled], "All statuses")
+statusAll = SelectItem("all", "All")
+statusPending = SelectItem("pending", "Pending")
+statusFulfilled = SelectItem("fulfilled", "Fulfilled")
+statusCancelled = SelectItem("cancelled", "Cancelled")
+searchInput = FormControl("Customer name", customerSearch, "Search by customer name")
+customerSearch = Input("customer_search", "Search...", "text")
+
+statsSection = Card([statsHeading, statsGrid], "sunk")
+statsHeading = Heading("Today's performance", "h3")
+statsGrid = Card([todayOrders, todayRevenue, avgOrderValue], "sunk", "column", "s")
+todayOrders = Card([Tag("124", null, null, "large"), TextContent("Orders placed today")], "sunk")
+todayRevenue = Card([Tag("$18,742", null, null, "large"), TextContent("Revenue today")], "sunk")
+avgOrderValue = Card([Tag("$151.95", null, null, "large"), TextContent("Average order value")], "sunk")
+
+recentOrders = Table([orderColID, orderColCustomer, orderColTotal, orderColStatus, orderColAction])
+orderColID = Col("Order #", ["#ORD-4521", "#ORD-4522", "#ORD-4523", "#ORD-4524", "#ORD-4525", "#ORD-4526"])
+orderColCustomer = Col("Customer", ["Alex Johnson", "Maria Rodriguez", "David Kim", "Sophia Lee", "James Wilson", "Olivia Brown"])
+orderColTotal = Col("Total", ["$129.99", "$189.50", "$99.99", "$249.99", "$79.99", "$159.99"])
+orderColStatus = Col("Status", ["Pending", "Fulfilled", "Pending", "Cancelled", "Pending", "Fulfilled"])
+orderColAction = Col("Action", ["", "", "", "", "", ""], "action")
+ordersTable = Card([CardHeader("Recent orders", "View last 10 orders"), recentOrders], "sunk")
+
+chartsSection = Card([refundRate, volumeChart], "sunk")
+refundRate = Card([Tag("2.1%", null, null, "success"), TextContent("Refund rate this month")], "sunk")
+volumeChart = Card([Heading("Order volume", "h4"), weeklyVolume], "sunk")
+weeklyVolume = BarChart(["W1", "W2", "W3", "W4"], [volumeSeries], "grouped", "Week", "Orders")
+volumeSeries = Series("Volume", [89, 124, 108, 95])
+
+actions = Buttons([fulfillBtn], "column")
+fulfillBtn = Button("Mark order fulfilled", ["mark_fulfilled"], "primary", "normal")
+
+markFulfilled = DialogBlock("Mark fulfilled", "Confirm fulfillment", "Select an order to mark as fulfilled", [fulfillConfirmBtn, fulfillCancelBtn])
+fulfillConfirmBtn = Button("Confirm", null, "primary", "normal")
+fulfillCancelBtn = Button("Cancel", null, "tertiary", "normal")
+```

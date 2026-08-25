@@ -1,0 +1,48 @@
+root = Card([header, catSelect, draftsCard, publishedCard, mostReadCard, readershipCard, scheduleForm, commentsCard, newDraftBtn], "card", "column", "l")
+
+header = CardHeader("Content Studio", "Editorial dashboard")
+
+catSelect = Select("category", [catAll, catPol, catTech, catCult, catSci], "Filter by category")
+catAll = SelectItem("all", "All")
+catPol = SelectItem("politics", "Politics")
+catTech = SelectItem("tech", "Tech")
+catCult = SelectItem("culture", "Culture")
+catSci = SelectItem("science", "Science")
+
+draftsCard = Card([draftHeading, draftsTable], "sunk")
+draftHeading = Heading("Drafts", "h3")
+draftsTable = Table([draftTitle, draftStatus])
+draftTitle = Col("Draft", ["Climate bill draft", "AI interview", "Local election profile"])
+draftStatus = Col("Status", ["In review", "Editing", "Drafting"])
+
+publishedCard = Card([pubHeading, pubList], "clear")
+pubHeading = Heading("Published this week", "h3")
+pubList = ListBlock([pub1, pub2, pub3])
+pub1 = ListItem("The new grid", "Tech • 2 days ago")
+pub2 = ListItem("Inside the lab", "Science • 3 days ago")
+pub3 = ListItem("Weekend culture", "Culture • 5 days ago")
+
+mostReadCard = Card([mostReadHeading, mostReadText], "card")
+mostReadHeading = Heading("Most-read this month", "h3")
+mostReadText = TextContent("**The hidden cost of fast fashion** — 42,300 reads. Published in Culture.")
+
+readershipCard = Card([readershipHeading, readershipChart], "sunk")
+readershipHeading = Heading("Readership — past 30 days", "h3")
+readershipChart = LineChart(["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10"], [readSeries], "natural", "Week", "Readers")
+readSeries = Series("Readers", [12000, 14500, 13200, 16800, 15400, 18900, 21000, 19500, 23000, 24500])
+
+scheduleForm = Form("schedule", scheduleButtons, [scheduleTitleField, scheduleDateField])
+scheduleTitleField = FormControl("Title", scheduleTitleInput)
+scheduleTitleInput = Input("title", "New piece title")
+scheduleDateField = FormControl("Publish date", scheduleDatePicker)
+scheduleDatePicker = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+
+commentsCard = Card([commentsHeading, commentsList], "clear")
+commentsHeading = Heading("Comments awaiting reply", "h3")
+commentsList = ListBlock([comment1, comment2])
+comment1 = ListItem("How does this affect rural towns?", "Politics • 2h ago")
+comment2 = ListItem("Can you clarify the source?", "Tech • 5h ago")
+
+newDraftBtn = Button("Start new draft", null, "primary")

@@ -1,0 +1,96 @@
+```openui-lang
+root = Card([header, performanceCard, flightsSection, delayedFlights, gateChanges, crewAvailability, weatherAdvisories, loadStats, connectionsRisk, rebookingForm, hubSelector, cancellations, turnaroundStats])
+
+header = CardHeader("Hub Operations Dashboard", "Real-time flight operations overview")
+
+performanceCard = Card([performanceTitle, performanceValue, performanceTrend], "sunk")
+performanceTitle = Heading("On-Time Performance", "h3")
+performanceValue = TextContent("92.7%", "large-heavy")
+performanceTrend = Card([trendChart, trendLabel], "card", "row", "m", "center", "center")
+trendChart = SingleStackedBarChart(["Today", "Yesterday"], [92.7, 89.3])
+trendLabel = TextContent("vs Yesterday", "small")
+
+flightsSection = Card([flightsHeader, flightsTable], "sunk")
+flightsHeader = Heading("Active Flights", "h3")
+flightsTable = Table([flightColumns])
+flightColumns = [
+    Col("Flight", ["AA123", "DL456", "UA789", "B6012", "WN345"], "string"),
+    Col("Route", ["NYC→LAX", "LAX→NYC", "LAX→DFW", "DFW→NYC", "NYC→ATL"], "string"),
+    Col("Gate", ["A12", "B15", "C8", "D20", null], "string"),
+    Col("Status", ["On Time", "Delayed", "Boarding", "Cancelled", "Delayed"], "string")
+]
+
+delayedFlights = Card([delayedHeader, delayedList], "warning")
+delayedHeader = Heading("Delayed Flights", "h3")
+delayedList = ListBlock([delayedFlight1, delayedFlight2])
+delayedFlight1 = ListItem("DL456", "LAX→NYC", ["https://picsum.photos/seed/delayed/100/60"], "Gate Change")
+delayedFlight2 = ListItem("WN345", "NYC→ATL", ["https://picsum.photos/seed/delayed/100/60"], "Weather")
+
+gateChanges = Card([changesHeader, changesList], "sunk")
+changesHeader = Heading("Recent Gate Changes", "h3")
+changesList = ListBlock([change1, change2, change3])
+change1 = ListItem("AA123", "Gate changed from A12 to A14", ["https://picsum.photos/seed/gate/100/60"])
+change2 = ListItem("UA789", "Gate changed from C8 to C12", ["https://picsum.photos/seed/gate/100/60"])
+change3 = ListItem("B6012", "Gate changed from D20 to D18", ["https://picsum.photos/seed/gate/100/60"])
+
+crewAvailability = Card([crewHeader, crewTable], "sunk")
+crewHeader = Heading("Available Crew", "h3")
+crewTable = Table([crewColumns])
+crewColumns = [
+    Col("Pilot", ["Captain Smith", "First Officer Lee", "Captain Chen"], "string"),
+    Col("Crew Type", ["A320", "B737", "A321"], "string"),
+    Col("Hours Available", ["12", "8", "15"], "number"),
+    Col("Assigned To", ["None", "DL456", "AA123"], "string")
+]
+
+weatherAdvisories = Card([weatherHeader, weatherCard], "card")
+weatherHeader = Heading("Weather Advisories", "h3")
+weatherCard = Callout("warning", "Severe Thunderstorms", "Expect delays on all departures from gates C1-C20. Arriving flights may experience turbulence.")
+
+loadStats = Card([loadHeader, loadChart], "sunk")
+loadHeader = Heading("Average Passenger Load", "h3")
+loadChart = SingleStackedBarChart(["Today", "Week Avg"], [85.2, 82.1])
+
+connectionsRisk = Card([riskHeader, riskList], "warning")
+riskHeader = Heading("Connections At Risk", "h3")
+riskList = ListBlock([risk1, risk2])
+risk1 = ListItem("Passenger: John Doe", "Missed connection on DL456→B6012", ["https://picsum.photos/seed/risk/100/60"], "Rebook")
+risk2 = ListItem("Passenger: Jane Smith", "Missed connection on UA789→B6012", ["https://picsum.photos/seed/risk/100/60"], "Rebook")
+
+rebookingForm = Card([rebookingHeader, rebookingFormSection], "sunk")
+rebookingHeader = Heading("Rebook Affected Passengers", "h3")
+rebookingFormSection = Form("rebooking", rebookingButtons, [passengerNameField, newFlightField, contactField])
+passengerNameField = FormControl("Passenger Name", passengerInput)
+passengerInput = Input("passenger_name", "John Doe")
+newFlightField = FormControl("New Flight", newFlightSelect)
+newFlightSelect = Select("new_flight", [flightOption1, flightOption2, flightOption3], "Select new flight")
+flightOption1 = SelectItem("DL456+1", "DL456 to LAX+1")
+flightOption2 = SelectItem("WN345+1", "WN345 to ATL+1")
+flightOption3 = SelectItem("AA123+1", "AA123 to NYC+1")
+contactField = FormControl("Contact Email", contactInput)
+contactInput = Input("contact_email", "john.doe@email.com", "email")
+rebookingButtons = Buttons([rebookBtn, cancelBtn])
+rebookBtn = Button("Rebook Passenger", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+hubSelector = Card([hubHeader, hubSelect], "sunk")
+hubHeader = Heading("Select Hub", "h3")
+hubSelect = Select("hub_location", [hubOption1, hubOption2, hubOption3], "Current: LAX")
+hubOption1 = SelectItem("LAX", "Los Angeles International")
+hubOption2 = SelectItem("JFK", "John F. Kennedy")
+hubOption3 = SelectItem("DFW", "Dallas/Fort Worth")
+
+cancellations = Card([cancellationsHeader, cancellationsTable], "warning")
+cancellationsHeader = Heading("Today's Cancellations", "h3")
+cancellationsTable = Table([cancellationColumns])
+cancellationColumns = [
+    Col("Flight", ["B6012", "DL456+1"], "string"),
+    Col("Reason", ["Weather", "Mechanical"], "string"),
+    Col("Passengers Impacted", ["42", "18"], "number")
+]
+
+turnaroundStats = Card([turnaroundHeader, turnaroundChart], "sunk")
+turnaroundHeader = Heading("Average Turnaround Time", "h3")
+turnaroundChart = SingleStackedBarChart(["Today", "Week Avg"], [58.3, 62.1])
+
+```

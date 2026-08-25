@@ -1,0 +1,78 @@
+```openui-lang
+root = Card([header, metricsRow, signupsSection, plansSection, topCustomers, riskAccounts, payments, features, nps, periodSelector, utilization, adminInvite])
+
+header = CardHeader("Admin Overview", "All metrics in USD")
+
+metricsRow = Card([mrr, arpu, churn, npsValue], "row", "none", "center")
+mrr = Card([mrrLabel, mrrValue], "row", "none", "center")
+mrrLabel = TextContent("Monthly Recurring Revenue")
+mrrValue = TextContent("$1,245,800", "large-heavy")
+
+arpu = Card([arpuLabel, arpuValue], "row", "none", "center")
+arpuLabel = TextContent("Annual Recurring Revenue")
+arpuValue = TextContent("$14.9M", "large-heavy")
+
+churn = Card([churnLabel, churnValue], "row", "none", "center")
+churnLabel = TextContent("Monthly Churn")
+churnValue = TextContent("2.3%", "large-heavy")
+
+npsValue = Card([npsLabel, npsValue], "row", "none", "center")
+npsLabel = TextContent("Current NPS")
+npsValue = TextContent("48", "large-heavy")
+
+signupsSection = Card([signupsHeading, signupsChart], "sunk")
+signupsHeading = Heading("New Signups (90 days)", "h3")
+signupsChart = BarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [signupSeries], "grouped", "Month", "Users")
+signupSeries = Series("New Signups", [42, 58, 71, 89, 103, 125])
+
+plansSection = Card([plansHeading, plansTable], "sunk")
+plansHeading = Heading("Customers by Plan", "h3")
+plansTable = Table([planCol, countCol])
+planCol = Col("Plan", ["Starter", "Pro", "Enterprise", "Custom"])
+countCol = Col("Count", [42, 187, 39, 12])
+
+topCustomers = Card([topCustomersHeading, topCustomersTable], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h3")
+topCustomersTable = Table([customerCol, seatsCol, spendCol])
+customerCol = Col("Customer", ["Acme Corp", "Globex Inc", "Tech Solutions", "Nova Labs", "Initech", "Umbrella", "Wayne Enterprises", "Stark Industries", "Pymetrics", "Oscorp"])
+seatsCol = Col("Seats", [450, 312, 289, 245, 203, 187, 176, 154, 132, 118])
+spendCol = Col("Monthly Spend", ["$12,450", "$9,870", "$8,230", "$7,120", "$6,540", "$5,980", "$5,230", "$4,760", "$4,120", "$3,870"])
+
+riskAccounts = Card([riskHeading, riskTable], "sunk")
+riskHeading = Heading("Accounts at Risk", "h3")
+riskTable = Table([accountCol, reasonCol])
+accountCol = Col("Account", ["Globex Inc", "Tech Solutions", "Nova Labs", "Initech", "Umbrella"])
+reasonCol = Col("Reason", ["Payment failure", "Feature request unmet", "Contract renewal pending", "Competitor switch", "No longer using core feature"])
+
+payments = Card([paymentsHeading, paymentTable, retryButton], "sunk")
+paymentsHeading = Heading("Failed Payments", "h3")
+paymentTable = Table([accountCol, amountCol, dateCol])
+accountCol = Col("Account", ["Acme Corp", "Globex Inc", "Wayne Enterprises", "Stark Industries"])
+amountCol = Col("Amount", ["$1,245", "$987", "$523", "$476"])
+dateCol = Col("Date", ["2023-05-15", "2023-05-12", "2023-05-08", "2023-05-05"])
+retryButton = Button("Retry All Payments", null, "primary")
+
+features = Card([featuresHeading, featureChart], "sunk")
+featuresHeading = Heading("New Feature Adoption", "h3")
+featureChart = RadarChart(["Acme Corp", "Globex Inc", "Tech Solutions", "Nova Labs", "Initech"], [adoptionSeries])
+adoptionSeries = Series("Adoption %", [89, 76, 92, 68, 81])
+
+utilization = Card([utilizationHeading, utilizationChart], "sunk")
+utilizationHeading = Heading("Seat Utilization", "h3")
+utilizationChart = SingleStackedBarChart(["Team A", "Team B", "Team C", "Team D", "Team E"], [utilizationValues])
+utilizationValues = [68, 72, 55, 81, 63]
+
+periodSelector = Card([periodLabel, periodSelect], "sunk")
+periodLabel = TextContent("Reporting Period")
+periodSelect = Select("period", [periodOptions], "Last 30 days")
+periodOptions = [SelectItem("Last 7 days", "7"), SelectItem("Last 30 days", "30"), SelectItem("Last 90 days", "90"), SelectItem("Last year", "year")]
+
+adminInvite = Card([inviteHeading, inviteForm], "sunk")
+inviteHeading = Heading("Invite Admin", "h3")
+inviteForm = Form("invite-admin", inviteButtons, [emailField])
+emailField = FormControl("Admin Email", emailInput, "Invite a new admin user")
+emailInput = Input("email", "admin@example.com", "email")
+inviteButtons = Buttons([inviteBtn, cancelBtn])
+inviteBtn = Button("Invite Admin", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

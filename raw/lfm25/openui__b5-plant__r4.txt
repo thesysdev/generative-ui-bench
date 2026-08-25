@@ -1,0 +1,196 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Overall Equipment Effectiveness
+    OeeCard = CardHeader("Overall Equipment Effectiveness", "Factory Floor KPIs"),
+    oeeMetric = TextContent("96.2%", size="large"),
+    oeeSubtitle = TextContent("Effective capacity vs ideal performance"),
+    
+    // 2. Units produced vs target
+    ProductionKpi = Card([
+      CardHeader("Units Produced vs Target", "Daily Output"),
+      MetricRow("Produced", "$45,230", "units"),
+      MetricRow("Target", "$48,000", "units"),
+      MetricRow("Variance", "+1.3%", "vs target"),
+      Divider()
+    ]),
+    
+    // 3. Production lines with rate and status
+    LinesOverview = Card([
+      CardItem("Line 1 - Assembly", 
+        status="Green",
+        rate="142 units/hour",
+        oee="89%",
+        color="#4CAF50"),
+      
+      CardItem("Line 2 - Packaging",
+        status="Yellow",
+        rate="118 units/hour",
+        oee="76%",
+        color="#FF9800"),
+      
+      CardItem("Line 3 - Finishing",
+        status="Red",
+        rate="95 units/hour",
+        oee="63%",
+        color="#F44336"),
+      
+      CardItem("Line 4 - Quality Control",
+        status="Blue",
+        rate="130 units/hour",
+        oee="91%",
+        color="#2196F3"),
+    ], direction="column"),
+    
+    // 4. Defect rate over past month
+    DefectRate = Chart(
+      labels=["Jan", "Feb", "Mar", "Apr", "May"],
+      series=[{"label": "Defect Rate (%)", "data": [1.2, 1.8, 2.1, 2.4, 2.7]}, {"label": "Total Defects", "data": [450, 520, 580, 620, 650]}],
+      variant="grouped",
+      xLabel="Month",
+      yLabel="Rate"
+    ),
+    
+    // 5. Downtime split by cause
+    Downtime = Chart(
+      labels=["Planning", "Mechanical", "Human Error", "Spare Parts", "Equipment"],
+      series=[{"label": "Planning", "data": [3, 1, 0, 0, 0], "color": "#FFC107"}, {"label": "Mechanical", "data": [7, 2, 1, 1, 1], "color": "#9E9E9E"}, {"label": "Human Error", "data": [2, 1, 0, 0, 0], "color": "#E91E63"}, {"label": "Spare Parts", "data": [1, 0, 0, 0, 0], "color": "#00BCD4"}, {"label": "Equipment", "data": [0, 3, 2, 0, 0], "color": "#37474F"}],
+      variant="stacked",
+      xLabel="Cause",
+      yLabel="Hours"
+    ),
+    
+    // 6. Machines due for maintenance
+    MaintenanceQueue = Card([
+      CardItem("Machine A-01", "Scheduled", "Friday 08:00", "Routine inspection"),
+      CardItem("Machine B-03", "Due ASAP", "Tomorrow 07:30", "Bearing replacement"),
+      CardItem("Machine C-07", "Pending", "Next Monday 09:00", "Lubrication check"),
+      CardItem("Machinery D-12", "Overdue", "Today 14:00", "Major service required")
+    ], direction="row"),
+    
+    // 7. Stock of steel, resin and packaging
+    Inventory = Table(
+      columns=[
+        {"label": "Material", "type": "string"},
+        {"label": "Stock (kg)", "type": "number"},
+        {"label": "Status"}
+      ],
+      data=[
+        {"material": "Steel", "stock": 12500, "status": "Critical"},
+        {"material": "Resin", "stock": 8700, "status": "Healthy"},
+        {"material": "Packaging", "stock": 15000, "status": "Low"},
+        {"material": "Electronics", "stock": 3400, "status": "Normal"}
+      ]
+    ),
+    
+    // 8. Supplier deliveries due this week
+    Deliveries = Card([
+      CardItem("Steel Co.", "2026-06-05", "500 tons", "High priority"),
+      CardItem("Resin Ltd.", "2026-06-04", "3000 kg", "Medium priority"),
+      CardItem("Packaging Inc.", "2026-06-02", "2000 pcs", "Urgent"),
+      CardItem("Tool Supply", "2026-06-06", "100 tools", "Regular")
+    ], direction="row"),
+    
+    // 9. Shift outputs comparison
+    Shifts = Table(
+      columns=[
+        {"label": "Shift", "type": "string"},
+        {"label": "Output (units)", "type": "number"},
+        {"label": "OEE %", "type": "number"},
+        {"label": "Quality (defects)", "type": "number"}
+      ],
+      data=[
+        {"shift": "Morning", "output": 3420, "oee": 88, "quality": 12},
+        {"shift": "Afternoon", "output": 3100, "oee": 84, "quality": 18},
+        {"shift": "Night", "output": 2980, "oee": 79, "quality": 15}
+      ]
+    ),
+    
+    // 10. Safety incidents this year and days since last
+    Safety = Card([
+      CardItem("Incidents This Year", "3", "March", "Minor injuries"),
+      CardItem("Days Since Last Incident", "47", "June 1 to June 28"),
+      Divider(),
+      WarningBadge(
+        text="Safety Alert",
+        variant="warning",
+        title="Recent Incident Report",
+        description="Three minor incidents recorded this year. Review training protocols."
+      )
+    ]),
+    
+    // 11. Batches on quality hold
+    QualityHold = Card([
+      CardItem("Batch #4521", "Paint Run B", "Qty: 1,200 units", "Rejected - coating defect"),
+      CardItem("Batch #4890", "Assembly Line 3", "Qty: 850 units", "Rejected - dimensional error"),
+      CardItem("Batch #5012", "Wiring Test", "Qty: 600 units", "Pending review - sensor calibration")
+    ], direction="row"),
+    
+    // 12. Energy use today
+    EnergyUse = TextContent("3,240 kWh", "today", size="large", style="highlight"),
+    EnergySubtitle = TextContent("Energy consumption during shift hours", "energy", size="small"),
+    
+    // 13. Open work orders with priority
+    WorkOrders = [
+      Order("W-8821", "Priority High", "Machine A repair", "high"),
+      Order("W-8830", "Priority Medium", "Conveyor belt alignment", "medium"),
+      Order("W-8845", "Priority Low", "Software update", "low"),
+      Order("W-8852", "Priority High", "Press calibration", "high"),
+      Order("W-8860", "Priority Medium", "Power supply check", "medium")
+    ],
+    workOrderList = Card(workOrders, direction="row"),
+    
+    // 14. Maintenance scheduling interface
+    Scheduling = {
+      title="Schedule Maintenance",
+      description="Select machine and date for servicing",
+      components: [
+        {type: "Select", label: "Machine", options: ["A-01", "B-03", "C-07", "D-12"]},
+        {type: "DatePicker", label: "Date", defaultValue: "2026-06-20"},
+        {type: "Button", label: "Confirm Schedule", action: "maintenance_confirmed"}
+
+        // Fallback button for confirmation
+        {
+          type: "Button",
+          label: "Add Maintenance Slot",
+          action: "add_maintenance_slot"
+        }
+      ]
+    },
+    
+    // 15. Focus on one line
+    FocusController = {
+      title="Focus Mode",
+      description="Select a production line to view detailed metrics",
+      options: [
+        "Line 1 - Assembly",
+        "Line 2 - Packaging",
+        "Line 3 - Finishing",
+        "Line 4 - Quality Control"
+      ]
+    },
+    
+    // 16. Live Andon alerts
+    Andon = {
+      title="Live Andon Alerts",
+      alerts: [
+        {id: "A-001", severity: "critical", message: "Conveyor jam on Line 2", timestamp: "2026-06-19T14:30Z"},
+        {id: "A-002", severity: "warning", message: "Temperature deviation on Machine D-12", timestamp: "2026-06-19T16:15Z"},
+        {id: "A-003", severity: "info", message: "Production line 1 reached peak output", timestamp: "2026-06-19T09:00Z"}
+      ]
+    },
+    
+    // 17. Export shift report
+    ExportOption = Button(
+      label="Export Shift Report",
+      action: "export_report",
+      variant: "primary"
+    )
+  ],
+  variant: "card",
+  gap: "xl",
+  direction: "column",
+  align: "center",
+  wrap: true
+)
+```

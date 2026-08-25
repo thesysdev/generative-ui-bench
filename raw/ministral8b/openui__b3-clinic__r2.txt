@@ -1,0 +1,48 @@
+```openui-lang
+root = Card([header, statsSummary, appointments, noShowRate, roomStatus, nextPatient, checkInForm, dateNavigation])
+
+header = CardHeader("Clinic Reception Dashboard", "Today's Schedule Overview")
+statsSummary = Card([expectedPatients, noShowMetric], "sunk")
+expectedPatients = Card([Tag("Expected Patients", null, null, "success"), expectedCount], "sunk")
+expectedCount = TextContent("18", "large-heavy")
+noShowMetric = Card([Tag("No-Show Rate", null, null, "warning"), noShowValue], "sunk")
+noShowValue = TextContent("12%", "large-heavy")
+
+appointments = CardHeader("Today's Appointments")
+appointmentList = ListBlock([appointment1, appointment2, appointment3, appointment4, appointment5], "image")
+appointment1 = ListItem("Dr. Smith", "10:00 AM", ["https://picsum.photos/seed/patient1/60/60"], "Check In")
+appointment2 = ListItem("Dr. Johnson", "12:30 PM", ["https://picsum.photos/seed/patient2/60/60"], "Check In")
+appointment3 = ListItem("Dr. Lee", "2:15 PM", ["https://picsum.photos/seed/patient3/60/60"], "Check In")
+appointment4 = ListItem("Dr. Patel", "4:00 PM", ["https://picsum.photos/seed/patient4/60/60"], "Check In")
+appointment5 = ListItem("Dr. Brown", "5:45 PM", ["https://picsum.photos/seed/patient5/60/60"], "Check In")
+
+noShowRate = Card([Tag("Monthly No-Show Rate", null, null, "warning"), noShowChart], "sunk")
+noShowChart = PieChart(["No-Show", "On-Time"], [12, 88], "donut")
+
+roomStatus = CardHeader("Available Rooms")
+roomGrid = Card([room1, room2, room3], "sunk", "row", "l", null, "center")
+room1 = Card([Tag("Room 1", null, null, "success"), TextContent("Available")], "sunk")
+room2 = Card([Tag("Room 2", null, null, "success"), TextContent("Available")], "sunk")
+room3 = Card([Tag("Room 3", null, null, "success"), TextContent("Available")], "sunk")
+
+nextPatient = CardHeader("Next Patient")
+nextPatientInfo = Card([nextPatientName, nextPatientTime], "sunk")
+nextPatientName = TextContent("Sarah Johnson", "large-heavy")
+nextPatientTime = TextContent("10:00 AM", "large-heavy")
+
+checkInForm = Form("checkin-form", checkInButtons, [patientSelectField])
+patientSelectField = FormControl("Select Patient", patientSelect)
+patientSelect = Select("patient_id", [patientOption1, patientOption2, patientOption3], "Select patient to check in")
+patientOption1 = SelectItem("101", "Sarah Johnson")
+patientOption2 = SelectItem("102", "Michael Chen")
+patientOption3 = SelectItem("103", "Emily Davis")
+checkInButtons = Buttons([checkInBtn, cancelBtn])
+checkInBtn = Button("Check In", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+dateNavigation = Card([dateButtons], "sunk")
+dateButtons = Buttons([prevDayBtn, todayBtn, nextDayBtn], "row")
+prevDayBtn = Button("Previous", null, "secondary")
+todayBtn = Button("Today", null, "primary")
+nextDayBtn = Button("Next", null, "secondary")
+```

@@ -1,0 +1,33 @@
+root = Card([header, searchBar, inventoryTable, reorderDialog, followUps], "card", "column", "m")
+
+header = CardHeader("Inventory Alerts", "The following items have fallen below their safety threshold")
+
+searchBar = Form("item-search", searchButtons, [searchInput])
+searchInput = FormControl("Search products", searchInput)
+searchInput = Input("query", "Search by name or SKU...", "text")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "secondary")
+
+inventoryTable = Table([colName, colStock, colThreshold, colAction])
+colName = Col("Product", ["Organic Bananas", "Whole Milk (1L)", "Almond Butter", "Greek Yogurt"])
+colStock = Col("Remaining Units", [5, 12, 3, 8], "number")
+colThreshold = Col("Threshold", [15, 24, 10, 20], "number")
+colAction = Col("Actions", ["Reorder", "Reorder", "Reorder", "Reorder"], "action")
+
+reorderDialog = DialogBlock("Reorder Item", "Create Purchase Order", "Select quantity and supplier for this item", [orderForm])
+orderForm = Form("reorder-form", orderButtons, [qtyField, supplierField])
+qtyField = FormControl("Quantity to Order", qtyInput)
+qtyInput = Input("quantity", "50", "number")
+supplierField = FormControl("Preferred Supplier", supplierSelect)
+supplierSelect = Select("supplier", [suppA, suppB], "Select a vendor")
+suppA = SelectItem("v-001", "Global Produce Co.")
+suppB = SelectItem("v-002", "Dairy Delights Inc.")
+orderButtons = Buttons([confirmBtn, cancelBtn], "row")
+confirmBtn = Button("Confirm Order", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([
+    FollowUpItem("View all low stock items"),
+    FollowUpItem("Generate weekly replenishment report"),
+    FollowUpItem("Check supplier lead times")
+])

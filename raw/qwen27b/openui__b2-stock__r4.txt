@@ -1,0 +1,30 @@
+
+
+root = Card([header, thresholdAlert, searchForm, inventoryTable, reorderSection])
+
+header = CardHeader("Low Inventory Warning", "Items at or below reorder threshold")
+
+thresholdAlert = Alert("Reorder threshold", "Items with 10 or fewer remaining units trigger this warning. Reorder before stock runs out to avoid lost sales.", "warning")
+
+searchForm = Form("inventory-search", searchButtons, [searchField])
+searchField = FormControl("Search items", searchInput, "Filter by product name or SKU")
+searchInput = Input("search", "e.g. mouse, cable, monitor")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+
+inventoryTable = Table([itemCol, skuCol, remainingCol, thresholdCol, statusCol])
+itemCol = Col("Item", ["Wireless Mouse", "USB-C Cable 2m", "Laptop Stand", "Mechanical Keyboard", "27\" Monitor"])
+skuCol = Col("SKU", ["WM-2041", "UC-2002", "LS-1103", "MK-3310", "MN-2701"])
+remainingCol = Col("Remaining", [4, 7, 3, 6, 2])
+thresholdCol = Col("Threshold", [10, 10, 10, 10, 10])
+statusCol = Col("Status", ["Critical", "Low", "Critical", "Low", "Critical"])
+
+reorderSection = Card([reorderHeading, reorderButtons], "sunk")
+reorderHeading = Heading("Quick Reorder", "h3")
+reorderButtons = Buttons([reorderMouse, reorderCable, reorderStand, reorderKeyboard, reorderMonitor])
+reorderMouse = Button("Reorder Wireless Mouse", null, "primary")
+reorderCable = Button("Reorder USB-C Cable 2m", null, "primary")
+reorderStand = Button("Reorder Laptop Stand", null, "primary")
+reorderKeyboard = Button("Reorder Mechanical Keyboard", null, "primary")
+reorderMonitor = Button("Reorder 27\" Monitor", null, "primary")

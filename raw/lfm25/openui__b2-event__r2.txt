@@ -1,0 +1,104 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Event name, date and venue
+    CardHeader(
+      title="TechConference 2026",
+      subtitle="Innovate & Connect Summit"
+    ),
+    TextContent("TechConference 2026"),
+    TextContent("April 15-17, 2026"),
+    TextContent("San Francisco Convention Center"),
+    
+    // 2. Agenda with times
+    Divider(decorative=true),
+    Card([
+      TextContent("Agenda"),
+      H3("Monday, April 15"),
+      ListBlock([
+        ListItem("09:00 - Welcome Keynote", null),
+        ListItem("10:30 - Session 1: Future of AI", null),
+        ListItem("12:00 - Lunch Break", null),
+        ListItem("13:30 - Workshop: DevOps Best Practices", null),
+        ListItem("15:00 - Panel: Emerging Technologies", null),
+        ListItem("16:30 - Closing Remarks", null)
+      ]),
+      TextContent("Tuesday, April 16"),
+      ListBlock([
+        ListItem("08:00 - Morning Breakfast", null),
+        ListItem("09:30 - Session 2: Cloud Native Architecture", null),
+        ListItem("11:00 - Speaker: Dr. Jane Smith", null),
+        ListItem("13:00 - Networking Lunch", null),
+        ListItem("14:30 - Hands-on Lab: ML Deployment", null),
+        ListItem("16:00 - Q&A Session", null)
+      ]),
+      TextContent("Wednesday, April 17"),
+      ListBlock([
+        ListItem("07:30 - Early Bird Sessions", null),
+        ListItem("10:00 - Session 3: Cybersecurity Trends", null),
+        ListItem("12:00 - Closing Ceremony", null)
+      ])
+    ]),
+    
+    // 3. Speakers with one line each
+    Divider(decorative=false),
+    Card([
+      CardHeader(value="Speakers", title="Featured Speakers"),
+      ListBlock([
+        ListItem("Dr. Jane Smith - Chief Innovation Officer"),
+        ListItem("Mr. Carlos Mendes - CTO, TechCorp"),
+        ListItem("Prof. Aisha Khan - AI Research Director"),
+        ListItem("Dev Patel - Lead Engineer, Cloudworks")
+      ])
+    ]),
+    
+    // 4. Ticket tiers with prices
+    Divider(decorative=true),
+    Card([
+      CardHeader(value="Ticket Tiers", title="Attendance Options"),
+      Table([
+        Col(label="Category", data=["Standard Pass"]),
+        Col(label="Price", data=["$299"]),
+        Col(label="Early Bird (until April 8)", data=["$249 / $169"]),
+        
+        Col(label="VIP Pass", data=["$499"]),
+        Col(label="Price", data=["$499"]),
+        Col(label="Early Bird (until April 8)", data=["$399 / $279"]),
+        
+        Col(label="Student / Education", data=["$149"]),
+        Col(label="Price", data=["$149"]),
+        Col(label="Early Bird (until April 8)", data=["$119 / $99"]),
+        
+        Col(label="Enterprise Package", data=["Custom"]),
+        Col(label="Contact Sales", data=["+1-555-0100"])
+      ], columns=3)
+    ]),
+    
+    // 5. Registration with name and email
+    Divider(decorative=true),
+    Card([
+      CardHeader(value="Register Now", title="Secure Your Spot"),
+      TextContent("Please provide your details below to register."),
+      Form({
+        name: "registration-form",
+        fields: [
+          FormControl(label="Full Name", input="full_name"),
+          FormControl(label="Email Address", input="email", rules={"email": true}),
+          FormControl(label="Event Preferences", input="preferences")
+        ],
+        buttons: Buttons([
+          Button(label="Register Now", variant="primary"),
+          Button(label="Later", variant="secondary")
+        ])
+      })
+    ]),
+    
+    // 6. Days remaining until the event
+    Card([
+      CardHeader(value="Time Until Event", title="Countdown"),
+      TextContent("Only {{days}} days left!"),
+      Number(value={{days}}, size="large", fontWeight="bold")
+    ])
+  ]
+)
+```

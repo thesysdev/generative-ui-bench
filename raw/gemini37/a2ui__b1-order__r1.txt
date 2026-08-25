@@ -1,0 +1,185 @@
+Here is a delivery tracking screen displaying the real-time package location, estimated delivery date, and an issue reporting workflow.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "gap": "m",
+        "direction": "column",
+        "children": [
+          "header",
+          "etaAlert",
+          "currentStatusHeading",
+          "journeyProgress",
+          "trackingSteps",
+          "divider",
+          "issueDialog"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Package Tracking #EXP-908234",
+        "subtitle": "Standard Ground Delivery • Carrier: FastLogistics"
+      },
+      {
+        "id": "etaAlert",
+        "component": "Callout",
+        "variant": "info",
+        "title": "Estimated Delivery: Tomorrow, Oct 24 by 7:00 PM",
+        "description": "Your package is moving through the network on schedule."
+      },
+      {
+        "id": "currentStatusHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Current Location & Status"
+      },
+      {
+        "id": "journeyProgress",
+        "component": "Progress",
+        "value": 75,
+        "label": "In Transit (75% Complete)"
+      },
+      {
+        "id": "trackingSteps",
+        "component": "Steps",
+        "items": [
+          "stepCurrent",
+          "stepOutForDelivery",
+          "stepDelivered"
+        ]
+      },
+      {
+        "id": "stepCurrent",
+        "component": "StepsItem",
+        "title": "Current: Sorting Facility — Chicago Distribution Hub, IL",
+        "details": "Arrived at local hub and processed for final dispatch (Today at 10:45 AM)."
+      },
+      {
+        "id": "stepOutForDelivery",
+        "component": "StepsItem",
+        "title": "Out for Delivery",
+        "details": "Scheduled with local courier for Thursday morning."
+      },
+      {
+        "id": "stepDelivered",
+        "component": "StepsItem",
+        "title": "Delivered",
+        "details": "Final delivery to front door / reception."
+      },
+      {
+        "id": "divider",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "issueDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Report a Problem with this Delivery",
+        "triggerVariant": "outline",
+        "title": "Report Delivery Issue",
+        "description": "Please specify the issue so our support team can investigate with the carrier.",
+        "content": [
+          "issueForm"
+        ]
+      },
+      {
+        "id": "issueForm",
+        "component": "Form",
+        "name": "report-delivery-issue",
+        "buttons": "formActionBtns",
+        "fields": [
+          "issueTypeControl",
+          "notesControl"
+        ]
+      },
+      {
+        "id": "issueTypeControl",
+        "component": "FormControl",
+        "label": "Issue Type",
+        "hint": "Select the reason that best describes your problem",
+        "input": "issueSelect"
+      },
+      {
+        "id": "issueSelect",
+        "component": "Select",
+        "name": "issue_type",
+        "placeholder": "Choose issue type",
+        "items": [
+          "optDelay",
+          "optAddress",
+          "optDamaged",
+          "optMissing"
+        ]
+      },
+      {
+        "id": "optDelay",
+        "component": "SelectItem",
+        "value": "delayed",
+        "label": "Package appears delayed or stuck"
+      },
+      {
+        "id": "optAddress",
+        "component": "SelectItem",
+        "value": "incorrect_address",
+        "label": "Need to correct shipping address"
+      },
+      {
+        "id": "optDamaged",
+        "component": "SelectItem",
+        "value": "damage_alert",
+        "label": "Transit damage report"
+      },
+      {
+        "id": "optMissing",
+        "component": "SelectItem",
+        "value": "lost",
+        "label": "Package marked delivered but not received"
+      },
+      {
+        "id": "notesControl",
+        "component": "FormControl",
+        "label": "Additional Information",
+        "hint": "Provide any relevant details or special instructions",
+        "input": "notesInput"
+      },
+      {
+        "id": "notesInput",
+        "component": "TextArea",
+        "name": "issue_details",
+        "placeholder": "Describe the problem here...",
+        "rows": 3
+      },
+      {
+        "id": "formActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "submitIssueBtn"
+        ]
+      },
+      {
+        "id": "submitIssueBtn",
+        "component": "Button",
+        "label": "Submit Report",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

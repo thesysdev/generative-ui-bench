@@ -1,0 +1,23 @@
+thought
+root = Card([header, controls, kpiRow, chartSection, transactionSection])
+header = CardHeader("Month-End Financial Overview", "Performance for October 2023")
+controls = Card([monthSelector, downloadBtn], "row", "m")
+monthSelector = FormControl("Select Month", monthSelect)
+monthSelect = Select("month_picker", [oct, sep, aug], "October 2023")
+oct = SelectItem("oct_2023", "October 2023")
+sep = SelectItem("sep_2023", "September 2023")
+aug = SelectItem("aug_2023", "August 2023")
+downloadBtn = Button("Download Statement", null, "secondary")
+kpiRow = Card([cashKpi, burnKpi, runwayKpi], "row", "l")
+cashKpi = Card([Heading("Cash on Hand", "h4"), TextContent("$425,000", "large-heavy")], "sunk")
+burnKpi = Card([Heading("Monthly Burn", "h4"), TextContent("$82,400", "large-heavy")], "sunk")
+runwayKpi = Card([Heading("Runway", "h4"), TextContent("5.1 Months", "large-heavy")], "sunk")
+chartSection = Card([Heading("Expenses by Category", "h3"), expenseChart], "sunk")
+expenseChart = PieChart(expenseLabels, expenseValues, "donut")
+expenseLabels = ["Engineering", "Marketing", "Sales", "Operations", "Rent"]
+expenseValues = [45000, 15000, 12000, 8000, 2400]
+transactionSection = Card([Heading("High-Value Transactions (>$10k)", "h3"), transactionTable])
+transactionTable = Table([colVendor, colAmount, colDate])
+colVendor = Col("Vendor", ["AWS Infrastructure", "Salesforce Annual", "G2 Ads", "Apple Business"])
+colAmount = Col("Amount", [12400, 25000, 18500, 11000], "number")
+colDate = Col("Date", ["2023-10-02", "2023-10-05", "2023-10-12", "2023-10-28"])

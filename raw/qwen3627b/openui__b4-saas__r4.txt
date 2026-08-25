@@ -1,0 +1,97 @@
+root = Card([header, periodRow, kpisRow, signupsSection, planSection, topCustomersSection, atRiskSection, failedPaymentsSection, adoptionSection, npsSection, utilizationSection, inviteSection], "card", "column", "m")
+
+header = CardHeader("Admin Overview", "SaaS performance dashboard")
+
+periodRow = Card([periodField], "clear", "row", "none")
+periodField = FormControl("Reporting Period", periodSelect)
+periodSelect = Select("period", [last30, last60, last90, custom], "Select period", null, "last90")
+last30 = SelectItem("last30", "Last 30 days")
+last60 = SelectItem("last60", "Last 60 days")
+last90 = SelectItem("last90", "Last 90 days")
+custom = SelectItem("custom", "Custom range")
+
+kpisRow = Card([mrrCard, arrCard, churnCard, npsCard], "clear", "row", "m")
+
+mrrCard = Card([mrrLabel, mrrValue, mrrTrend], "sunk")
+mrrLabel = Heading("Monthly Recurring Revenue", "h3")
+mrrValue = TextContent("$284,500", "large-heavy")
+mrrTrend = Badge("+8.2% MoM", "secondary")
+
+arrCard = Card([arrLabel, arrValue, arrTrend], "sunk")
+arrLabel = Heading("Annual Recurring Revenue", "h3")
+arrValue = TextContent("$3,414,000", "large-heavy")
+arrTrend = Badge("+12.4% YoY", "secondary")
+
+churnCard = Card([churnLabel, churnValue, churnTrend], "sunk")
+churnLabel = Heading("Churn This Month", "h3")
+churnValue = TextContent("2.3%", "large-heavy")
+churnTrend = Badge("-0.5% vs last month", "secondary")
+
+npsCard = Card([npsLabel, npsValue, npsBadge], "sunk")
+npsLabel = Heading("Net Promoter Score", "h3")
+npsValue = TextContent("62", "large-heavy")
+npsBadge = Badge("Strong", "secondary")
+
+signupsSection = Card([signupsHeader, signupsChart], "sunk")
+signupsHeader = Heading("New Signups (90 Days)", "h3")
+signupsChart = LineChart(signupLabels, [signupSeries], "natural", "Week", "Signups")
+signupLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12", "W13"]
+signupSeries = Series("New Signups", [42, 38, 51, 47, 55, 62, 58, 71, 64, 69, 73, 68, 76])
+
+planSection = Card([planHeader, planChart], "sunk")
+planHeader = Heading("Customers by Plan", "h3")
+planChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Enterprise", "Business", "Professional", "Starter"]
+planValues = [48, 127, 312, 523]
+
+topCustomersSection = Card([topHeader, topTable], "sunk")
+topHeader = Heading("Top 10 Customers", "h3")
+topTable = Table([topName, topSeats, topSpend])
+topName = Col("Customer", ["Acme Corp", "Globex Inc", "Initech", "Umbrella Co", "Stark Industries", "Wayne Enterprises", "Cyberdyne", "Massive Dynamic", "Soylent Corp", "Tyrell Corp"])
+topSeats = Col("Seats", [450, 380, 320, 290, 275, 260, 240, 210, 195, 180])
+topSpend = Col("Monthly Spend", ["$45,000", "$38,000", "$32,000", "$29,000", "$27,500", "$26,000", "$24,000", "$21,000", "$19,500", "$18,000"])
+
+atRiskSection = Card([atRiskHeader, atRiskList], "sunk")
+atRiskHeader = Heading("Accounts at Risk", "h3")
+atRiskList = ListBlock(atRiskItems, "number")
+atRiskItems = [risk1, risk2, risk3, risk4, risk5]
+risk1 = ListItem("Acme Corp", "Usage dropped 40% in last 30 days; key admin left the company", null, "View")
+risk2 = ListItem("Globex Inc", "Support tickets increased 3x; contract renewal in 14 days", null, "View")
+risk3 = ListItem("Initech", "Failed payment on last 2 invoices; CFO requesting discount", null, "View")
+risk4 = ListItem("Stark Industries", "Competitor engagement detected; CTO on trial with rival", null, "View")
+risk5 = ListItem("Cyberdyne", "Seat utilization below 20%; manager requesting downgrade", null, "View")
+
+failedPaymentsSection = Card([failedHeader, failedTable], "sunk")
+failedHeader = Heading("Failed Payments", "h3")
+failedTable = Table([failedName, failedAmount, failedDate, failedAction])
+failedName = Col("Customer", ["Initech", "Hooli", "Pied Piper", "Dupe", "Chewston", "Raviga Capital"])
+failedAmount = Col("Amount", ["$3,200", "$1,800", "$960", "$4,500", "$720", "$2,400"])
+failedDate = Col("Failed On", ["2025-07-10", "2025-07-09", "2025-07-08", "2025-07-07", "2025-07-06", "2025-07-05"])
+failedAction = Col("Action", ["Retry", "Retry", "Retry", "Retry", "Retry", "Retry"])
+
+adoptionSection = Card([adoptionHeader, adoptionProgress1, adoptionProgress2, adoptionProgress3], "sunk")
+adoptionHeader = Heading("New Feature Adoption", "h3")
+adoptionProgress1 = Progress(68, "AI Copilot — 68% of active users")
+adoptionProgress2 = Progress(45, "Custom Workflows — 45% of active users")
+adoptionProgress3 = Progress(31, "SSO Integration — 31% of eligible customers")
+
+utilizationSection = Card([utilHeader, utilChart], "sunk")
+utilHeader = Heading("Seat Utilization by Plan", "h3")
+utilChart = HorizontalBarChart(utilLabels, [utilSeries], "grouped", "Plan", "Utilization %")
+utilLabels = ["Enterprise", "Business", "Professional", "Starter"]
+utilSeries = Series("Avg Utilization", [78, 64, 52, 38])
+
+inviteSection = Card([inviteHeader, inviteDialog], "clear", "row", "none")
+inviteHeader = Heading("Team Management", "h3")
+inviteDialog = DialogBlock("Invite Admin", "Invite Another Admin", "Add a new admin to your team", [inviteForm])
+
+inviteForm = Form("invite-admin", inviteButtons, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Email Address", inviteEmailInput, "Enter the admin's work email")
+inviteEmailInput = Input("invite_email", "admin@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("invite_role", [adminFull, adminRead], "Select role")
+adminFull = SelectItem("full", "Full Admin")
+adminRead = SelectItem("read", "Read-Only Admin")
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send Invitation", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")

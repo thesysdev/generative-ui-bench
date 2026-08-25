@@ -1,0 +1,139 @@
+Here is a mid-morning snapshot dashboard for your shop.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "comparisonCallout",
+          "summaryTable",
+          "hourlyTrend",
+          "trendSeriesToday",
+          "trendSeriesYesterday"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Mid-Morning Store Check-In",
+        "subtitle": "Today's performance as of 10:30 AM"
+      },
+      {
+        "id": "comparisonCallout",
+        "component": "Callout",
+        "variant": "success",
+        "title": "+18.2% vs. Yesterday",
+        "description": "Revenue so far today is $1,840.00 compared to $1,556.00 at this exact time yesterday (+ $284.00)."
+      },
+      {
+        "id": "summaryTable",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "todayCol",
+          "yesterdayCol",
+          "diffCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Revenue so far",
+          "Transactions",
+          "Average Order Value"
+        ]
+      },
+      {
+        "id": "todayCol",
+        "component": "Col",
+        "label": "Today (by 10:30 AM)",
+        "data": [
+          "$1,840.00",
+          "62",
+          "$29.68"
+        ]
+      },
+      {
+        "id": "yesterdayCol",
+        "component": "Col",
+        "label": "Yesterday (by 10:30 AM)",
+        "data": [
+          "$1,556.00",
+          "54",
+          "$28.81"
+        ]
+      },
+      {
+        "id": "diffCol",
+        "component": "Col",
+        "label": "Variance",
+        "data": [
+          "+$284.00 (+18.2%)",
+          "+8 (+14.8%)",
+          "+$0.87 (+3.0%)"
+        ]
+      },
+      {
+        "id": "hourlyTrend",
+        "component": "LineChart",
+        "labels": [
+          "7:00 AM",
+          "8:00 AM",
+          "9:00 AM",
+          "10:00 AM",
+          "10:30 AM"
+        ],
+        "series": [
+          "trendSeriesToday",
+          "trendSeriesYesterday"
+        ],
+        "variant": "natural",
+        "xLabel": "Hour",
+        "yLabel": "Cumulative Revenue ($)"
+      },
+      {
+        "id": "trendSeriesToday",
+        "component": "Series",
+        "category": "Today",
+        "values": [
+          180,
+          560,
+          1120,
+          1680,
+          1840
+        ]
+      },
+      {
+        "id": "trendSeriesYesterday",
+        "component": "Series",
+        "category": "Yesterday",
+        "values": [
+          140,
+          480,
+          940,
+          1420,
+          1556
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

@@ -1,0 +1,114 @@
+```openui
+root = Card([
+    portfolioValueSection,
+    pnlSection,
+    positionsSection,
+    exposureSection,
+    varSection,
+    moversSection,
+    watchlistSection,
+    workingOrdersSection,
+    marginSection,
+    headlinesSection,
+    economicReleasesSection,
+    strategyReturnsSection,
+    drawdownSection,
+    riskLimitsSection,
+    rebalanceSection,
+    placeOrderSection,
+    timeframeSection
+])
+
+portfolioValueSection = Card([portfolioValue], "card", "column", "none", "center", "center", false)
+portfolioValue = Heading("Portfolio Value: $1,250,000", "h2")
+
+pnlSection = Card([pnl], "card", "column", "none", "center", "center", false)
+pnl = Heading("P&L Today: +$15,000", "h2")
+
+positionsSection = Card([positionsHeading, positionsTable], "card", "column", "none", "center", "center", false)
+positionsHeading = Heading("Open Positions", "h3")
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentPriceCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA", "GOOG"])
+sizeCol = Col("Size", ["100", "200", "-150"])
+entryCol = Col("Entry", ["$150", "$600", "$2,800"])
+currentPriceCol = Col("Current Price", ["$155", "$620", "$2,750"])
+
+exposureSection = Card([exposureHeading, exposureTable], "card", "column", "none", "center", "center", false)
+exposureHeading = Heading("Exposure by Sector", "h3")
+exposureTable = Table([sectorCol, exposureCol])
+sectorCol = Col("Sector", ["Tech", "Auto", "Energy"])
+exposureCol = Col("Exposure", ["$500,000", "$200,000", "$150,000"])
+
+varSection = Card([var], "card", "column", "none", "center", "center", false)
+var = Heading("Value at Risk: $25,000", "h2")
+
+moversSection = Card([moversHeading, moversTable], "card", "column", "none", "center", "center", false)
+moversHeading = Heading("Today's Biggest Movers", "h3")
+moversTable = Table([tickerCol, changeCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA", "GOOG"])
+changeCol = Col("Change", ["+1.03%", "-2.15%", "+0.46%"])
+
+watchlistSection = Card([watchlistHeading, watchlistTable], "card", "column", "none", "center", "center", false)
+watchlistHeading = Heading("Instruments Being Watched", "h3")
+watchlistTable = Table([tickerCol, priceCol])
+tickerCol = Col("Ticker", ["MSFT", "AMZN", "NFLX"])
+priceCol = Col("Price", ["$300", "$3,500", "$520"])
+
+workingOrdersSection = Card([workingOrdersHeading, workingOrdersTable], "card", "column", "none", "center", "center", false)
+workingOrdersHeading = Heading("Working Orders", "h3")
+workingOrdersTable = Table([tickerCol, sideCol, quantityCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA"])
+sideCol = Col("Side", ["Buy", "Sell"])
+quantityCol = Col("Quantity", ["50", "75"])
+
+marginSection = Card([margin], "card", "column", "none", "center", "center", false)
+margin = Heading("Margin in Use: $100,000", "h2")
+
+headlinesSection = Card([headlinesHeading, headlinesTable], "card", "column", "none", "center", "center", false)
+headlinesHeading = Heading("Market Headlines", "h3")
+headlinesTable = Table([headlineCol, sentimentCol])
+headlineCol = Col("Headline", ["Dow Rises 0.5%", "Fed Signals Rate Hike", "Oil Prices Fall 1%"])
+sentimentCol = Col("Sentiment", ["Positive", "Neutral", "Negative"])
+
+economicReleasesSection = Card([economicReleases], "card", "column", "none", "center", "center", false)
+economicReleases = Heading("Economic Releases This Week", "h2")
+
+strategyReturnsSection = Card([strategyReturnsHeading, strategyReturnsTable], "card", "column", "none", "center", "center", false)
+strategyReturnsHeading = Heading("Strategy Returns This Year", "h3")
+strategyReturnsTable = Table([strategyCol, returnCol])
+strategyCol = Col("Strategy", ["Long Bull", "Short Bear", "Arbitrage"])
+returnCol = Col("Return", ["+15%", "+20%", "+8%"])
+
+drawdownSection = Card([drawdown], "card", "column", "none", "center", "center", false)
+drawdown = Heading("Drawdown Over Past Year: -12%", "h2")
+
+riskLimitsSection = Card([riskLimitsHeading, riskLimitsTable], "card", "column", "none", "center", "center", false)
+riskLimitsHeading = Heading("Risk Limits Close to Breach", "h3")
+riskLimitsTable = Table([limitCol, statusCol])
+limitCol = Col("Limit", ["Risk", "Leverage"])
+statusCol = Col("Status", ["Approaching", "Breach in 10%"])
+
+rebalanceSection = Buttons([rebalanceBtn])
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary")
+
+placeOrderSection = Form("place-order", placeOrderButtons, [tickerField, sideField, quantityField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", null, "text")
+sideField = FormControl("Side", sideSelect)
+sideSelect = Select("side", [buyItem, sellItem], "Choose a side")
+buyItem = SelectItem("Buy", "Buy")
+sellItem = SelectItem("Sell", "Sell")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", null, "number")
+placeOrderButtons = Buttons([placeOrderBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+
+timeframeSection = Form("change-timeframe", timeframeButtons, [timeframeField])
+timeframeField = FormControl("Timeframe", timeframeSelect)
+timeframeSelect = Select("timeframe", [dayItem, weekItem, monthItem], "Choose a timeframe")
+dayItem = SelectItem("Day", "1 Day")
+weekItem = SelectItem("Week", "1 Week")
+monthItem = SelectItem("Month", "1 Month")
+timeframeButtons = Buttons([changeTimeframeBtn])
+changeTimeframeBtn = Button("Change Timeframe", null, "secondary")
+```

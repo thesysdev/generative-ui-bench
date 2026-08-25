@@ -1,0 +1,30 @@
+root = Card([header, dateInfo, blockedCallout, updatesHeading, updatesTable, missingCallout, missingProgress, postHeading, postForm])
+
+header = CardHeader("Async Standup", "Daily check-in for the remote team")
+dateInfo = TextContent("**Today:** Thursday, June 12, 2025", "small-heavy")
+
+blockedCallout = Callout("warning", "2 teammates are blocked", "Priya is blocked on API access approval. Sam is blocked waiting on a design review.")
+
+updatesHeading = Heading("Team Updates", "h3")
+updatesTable = Table([nameCol, statusCol, updateCol])
+nameCol = Col("Teammate", ["Alice", "Bob", "Priya", "Sam", "Maria", "Jordan"], "string")
+statusCol = Col("Status", ["Done", "In progress", "Blocked", "Blocked", "Done", "No update"], "string")
+updateCol = Col("Update", ["Shipped the onboarding flow update", "Fixing edge-case bug in checkout", "Waiting on API access approval from IT", "Waiting on design review from Priya's team", "Reviewed 4 open PRs", "—"], "string")
+
+missingCallout = TextCallout("warning", "1 update missing", "Jordan hasn't posted a status update yet today.")
+missingProgress = Progress(83, "5 of 6 updates submitted")
+
+postHeading = Heading("Post Your Update", "h3")
+postForm = Form("standup-update", postButtons, [statusField, updateField, blockedField])
+statusField = FormControl("Status", statusSelect)
+statusSelect = Select("status", [statusDone, statusProgress, statusBlocked], "Select your status")
+statusDone = SelectItem("done", "Done")
+statusProgress = SelectItem("in_progress", "In progress")
+statusBlocked = SelectItem("blocked", "Blocked")
+updateField = FormControl("What did you work on today?", updateInput)
+updateInput = TextArea("update", "Describe your progress...", 3)
+blockedField = FormControl("Blockers (if any)", blockedInput, "Leave blank if you're not blocked")
+blockedInput = Input("blockers", "e.g. waiting on review")
+postButtons = Buttons([submitBtn, saveDraftBtn])
+submitBtn = Button("Post Update", null, "primary")
+saveDraftBtn = Button("Save as Draft", null, "tertiary")

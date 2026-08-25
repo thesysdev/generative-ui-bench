@@ -1,0 +1,61 @@
+```openui
+root = Card([header, currentHeadcount, openRoles, candidatePipelines, timeToHire, headcountByDepartment, interviewsThisWeek, attrition, openNewRole])
+header = CardHeader("HR Hiring Overview", "Current Status and Insights")
+
+currentHeadcount = Card([headcountTitle, headcountValue], "sunk")
+headcountTitle = Heading("Current Headcount", "h4")
+headcountValue = Badge("1,250", "success")
+
+openRoles = Card([rolesTitle, rolesList])
+rolesTitle = Heading("Open Roles by Department", "h4")
+rolesList = ListBlock([
+  ListItem("Software Engineer", "Engineering"),
+  ListItem("Product Manager", "Product"),
+  ListItem("Data Analyst", "Data Science")
+], "image")
+
+candidatePipelines = Card([pipelineTitle, pipelineChart])
+pipelineTitle = Heading("Candidates at Pipeline Stages", "h4")
+pipelineChart = HorizontalBarChart(["Applied", "Screened", "Interviewing", "Offered"], [pipelineSeries])
+pipelineSeries = Series("Candidates", [150, 90, 45, 30])
+
+timeToHire = Card([timeTitle, timeValue], "sunk")
+timeTitle = Heading("Average Time to Hire", "h4")
+timeValue = Badge("28 days", "info")
+
+headcountByDepartment = Card([departmentTitle, departmentTable])
+departmentTitle = Heading("Headcount by Department", "h4")
+departmentTable = Table([
+  departmentNameCol,
+  departmentCountCol
+])
+departmentNameCol = Col("Department", ["Engineering", "Product", "Data Science", "HR"])
+departmentCountCol = Col("Headcount", ["450", "300", "200", "300"])
+
+interviewsThisWeek = Card([interviewsTitle, interviewsValue], "sunk")
+interviewsTitle = Heading("Interviews Scheduled This Week", "h4")
+interviewsValue = Badge("15", "info")
+
+attrition = Card([attritionTitle, attritionChart])
+attritionTitle = Heading("Attrition Over the Past Six Months", "h4")
+attritionChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionSeries])
+attritionSeries = Series("Attrition Rate", [5, 4, 6, 7, 3, 5])
+
+openNewRole = DialogBlock("Open New Role", "Submit New Role Details", [
+  roleTitle,
+  departmentField,
+  roleDescriptionField,
+  submitButton
+])
+roleTitle = Heading("New Role Details", "h3")
+departmentField = FormControl("Department", departmentSelect)
+departmentSelect = Select("department", [engineering, product, dataScience, hr], "Select Department")
+engineering = SelectItem("Engineering", "Engineering")
+product = SelectItem("Product", "Product")
+dataScience = SelectItem("Data Science", "Data Science")
+hr = SelectItem("HR", "HR")
+roleDescriptionField = FormControl("Role Description", roleInput)
+roleInput = TextArea("description", "Enter role description")
+submitButton = Button("Submit Role")
+
+```

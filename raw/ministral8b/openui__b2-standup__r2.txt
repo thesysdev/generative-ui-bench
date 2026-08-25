@@ -1,0 +1,35 @@
+```openui-lang
+root = Card([dateHeader, missingUpdates, teammatesSection, updateForm])
+
+dateHeader = CardHeader(null, todayDate)
+todayDate = TextContent(todayDateString, "large-heavy")
+todayDateString = "Async Standup • " + currentDate
+
+missingUpdates = Card([missingUpdatesText, missingUpdatesCount], "sunk")
+missingUpdatesText = TextContent("Updates received", "small-heavy")
+missingUpdatesCount = TextContent(missingCount, "large-heavy")
+
+teammatesSection = Card([teammateListHeader, teammateUpdates], "sunk")
+teammateListHeader = CardHeader("Team Updates", null)
+teammateUpdates = ListBlock(teammateItems, "image")
+
+teammateItems = [
+    teammate1Item,
+    teammate2Item,
+    teammate3Item,
+    teammate4Item
+]
+
+teammate1Item = ListItem("Alex", "Fixed API integration • Blocked on DB schema approval", ["alex.jpg"], "Blocked")
+teammate2Item = ListItem("Jamie", "Wrote documentation • Waiting on peer review", ["jamie.jpg"])
+teammate3Item = ListItem("Priya", "Deployed v2.1 • All systems green", ["priya.jpg"])
+teammate4Item = ListItem("Carlos", "Debugging memory leak", ["carlos.jpg"])
+
+updateForm = Card([formHeader, updateInput, submitButton], "sunk")
+formHeader = Heading("Your Update", "h3")
+updateInput = TextArea("update", "Share your status for today...", 3, null, null)
+submitButton = Button("Post Update", null, "primary")
+
+currentDate = "2023-11-15"
+missingCount = 1
+```

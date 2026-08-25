@@ -1,0 +1,668 @@
+Here is the complete HR hiring and workforce overview dashboard.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "topKpiSection",
+          "openRoleModal",
+          "separator1",
+          "recruitmentTabs",
+          "separator2",
+          "interviewsSection",
+          "followUps"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "HR & Talent Acquisition Dashboard",
+        "subtitle": "Overview of headcount, hiring pipelines, open requisitions, and retention"
+      },
+      {
+        "id": "topKpiSection",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Current Headcount",
+          "Open Requisitions",
+          "Avg Time to Hire",
+          "Interviews Scheduled (This Week)",
+          "6-Month Attrition Rate"
+        ]
+      },
+      {
+        "id": "kpiValCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "482 employees",
+          "14 open roles",
+          "32 days",
+          "28 interviews",
+          "3.8% (Target < 5%)"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Health Indicator",
+        "data": [
+          "+12 net growth MoM",
+          "4 high priority",
+          "-4 days vs Q1",
+          "8 final round",
+          "Healthy / Low turnover"
+        ]
+      },
+      {
+        "id": "openRoleModal",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Open New Requisition",
+        "triggerVariant": "default",
+        "title": "Create New Job Requisition",
+        "description": "Fill in the details below to open a new role and initiate hiring approval workflows.",
+        "content": [
+          "newRoleForm"
+        ]
+      },
+      {
+        "id": "newRoleForm",
+        "component": "Form",
+        "name": "create_job_requisition",
+        "buttons": "newRoleFormActions",
+        "fields": [
+          "roleTitleField",
+          "roleDeptField",
+          "roleTypeField",
+          "roleBudgetField",
+          "roleNotesField"
+        ]
+      },
+      {
+        "id": "roleTitleField",
+        "component": "FormControl",
+        "label": "Role Title",
+        "hint": "e.g. Senior Backend Engineer",
+        "input": "roleTitleInput"
+      },
+      {
+        "id": "roleTitleInput",
+        "component": "Input",
+        "name": "title",
+        "placeholder": "Enter job title",
+        "type": "text"
+      },
+      {
+        "id": "roleDeptField",
+        "component": "FormControl",
+        "label": "Department",
+        "input": "roleDeptSelect"
+      },
+      {
+        "id": "roleDeptSelect",
+        "component": "Select",
+        "name": "department",
+        "placeholder": "Select department",
+        "items": [
+          "deptEng",
+          "deptProd",
+          "deptSales",
+          "deptMktg",
+          "deptOps",
+          "deptHR"
+        ]
+      },
+      {
+        "id": "deptEng",
+        "component": "SelectItem",
+        "value": "engineering",
+        "label": "Engineering"
+      },
+      {
+        "id": "deptProd",
+        "component": "SelectItem",
+        "value": "product",
+        "label": "Product & Design"
+      },
+      {
+        "id": "deptSales",
+        "component": "SelectItem",
+        "value": "sales",
+        "label": "Sales & CS"
+      },
+      {
+        "id": "deptMktg",
+        "component": "SelectItem",
+        "value": "marketing",
+        "label": "Marketing"
+      },
+      {
+        "id": "deptOps",
+        "component": "SelectItem",
+        "value": "operations",
+        "label": "Operations & Finance"
+      },
+      {
+        "id": "deptHR",
+        "component": "SelectItem",
+        "value": "hr",
+        "label": "People & HR"
+      },
+      {
+        "id": "roleTypeField",
+        "component": "FormControl",
+        "label": "Employment Type",
+        "input": "roleTypeRadio"
+      },
+      {
+        "id": "roleTypeRadio",
+        "component": "RadioGroup",
+        "name": "employment_type",
+        "defaultValue": "full_time",
+        "items": [
+          "typeFT",
+          "typePT",
+          "typeContract"
+        ]
+      },
+      {
+        "id": "typeFT",
+        "component": "RadioItem",
+        "label": "Full-Time",
+        "description": "Standard permanent contract",
+        "value": "full_time"
+      },
+      {
+        "id": "typePT",
+        "component": "RadioItem",
+        "label": "Part-Time",
+        "description": "Hourly / partial workload",
+        "value": "part_time"
+      },
+      {
+        "id": "typeContract",
+        "component": "RadioItem",
+        "label": "Contractor",
+        "description": "Fixed-term 6-12 month scope",
+        "value": "contractor"
+      },
+      {
+        "id": "roleBudgetField",
+        "component": "FormControl",
+        "label": "Target Base Salary Range",
+        "hint": "Annual salary or hourly rate",
+        "input": "roleBudgetInput"
+      },
+      {
+        "id": "roleBudgetInput",
+        "component": "Input",
+        "name": "salary_range",
+        "placeholder": "$140,000 - $170,000",
+        "type": "text"
+      },
+      {
+        "id": "roleNotesField",
+        "component": "FormControl",
+        "label": "Hiring Manager & Justification",
+        "input": "roleNotesInput"
+      },
+      {
+        "id": "roleNotesInput",
+        "component": "TextArea",
+        "name": "justification",
+        "placeholder": "Provide context on backfill or team expansion needs...",
+        "rows": 3
+      },
+      {
+        "id": "newRoleFormActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitRoleBtn",
+          "cancelRoleBtn"
+        ]
+      },
+      {
+        "id": "submitRoleBtn",
+        "component": "Button",
+        "label": "Submit Requisition",
+        "variant": "primary"
+      },
+      {
+        "id": "cancelRoleBtn",
+        "component": "Button",
+        "label": "Cancel",
+        "variant": "secondary"
+      },
+      {
+        "id": "separator1",
+        "component": "Separator"
+      },
+      {
+        "id": "recruitmentTabs",
+        "component": "Tabs",
+        "items": [
+          "tabRoles",
+          "tabPipeline",
+          "tabHeadcount",
+          "tabAttrition"
+        ]
+      },
+      {
+        "id": "tabRoles",
+        "component": "TabItem",
+        "value": "roles",
+        "trigger": "Open Roles (14)",
+        "content": [
+          "rolesTableHeading",
+          "openRolesTable"
+        ]
+      },
+      {
+        "id": "rolesTableHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Active Requisitions & Open Roles"
+      },
+      {
+        "id": "openRolesTable",
+        "component": "Table",
+        "columns": [
+          "roleColTitle",
+          "roleColDept",
+          "roleColHiringMgr",
+          "roleColDaysOpen",
+          "roleColCandidates"
+        ]
+      },
+      {
+        "id": "roleColTitle",
+        "component": "Col",
+        "label": "Job Title",
+        "data": [
+          "Staff Distributed Systems Engineer",
+          "Senior Frontend Developer",
+          "Lead Product Designer",
+          "Principal Product Manager",
+          "Enterprise Account Executive",
+          "Customer Success Lead",
+          "Growth Marketing Manager",
+          "Talent Acquisition Partner"
+        ]
+      },
+      {
+        "id": "roleColDept",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Engineering",
+          "Engineering",
+          "Product & Design",
+          "Product & Design",
+          "Sales",
+          "Customer Success",
+          "Marketing",
+          "People / HR"
+        ]
+      },
+      {
+        "id": "roleColHiringMgr",
+        "component": "Col",
+        "label": "Hiring Manager",
+        "data": [
+          "Alex Chen (VP Eng)",
+          "Dave Miller (EM)",
+          "Elena Vance (Dir Design)",
+          "Sarah Thorne (VP Prod)",
+          "Marcus Vance (VP Sales)",
+          "Claire Dupont (Head of CS)",
+          "Julian Roy (VP Growth)",
+          "Priya Patel (Head of People)"
+        ]
+      },
+      {
+        "id": "roleColDaysOpen",
+        "component": "Col",
+        "label": "Days Open",
+        "data": [
+          "18 days",
+          "24 days",
+          "38 days",
+          "14 days",
+          "42 days",
+          "9 days",
+          "15 days",
+          "7 days"
+        ]
+      },
+      {
+        "id": "roleColCandidates",
+        "component": "Col",
+        "label": "Active Pipeline",
+        "data": [
+          "19 candidates",
+          "34 candidates",
+          "12 candidates",
+          "22 candidates",
+          "15 candidates",
+          "28 candidates",
+          "41 candidates",
+          "16 candidates"
+        ]
+      },
+      {
+        "id": "tabPipeline",
+        "component": "TabItem",
+        "value": "pipeline",
+        "trigger": "Candidate Pipeline",
+        "content": [
+          "pipelineHeading",
+          "pipelineChart",
+          "avgTimeToHireCallout"
+        ]
+      },
+      {
+        "id": "pipelineHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Candidates Across Pipeline Stages"
+      },
+      {
+        "id": "pipelineChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "1. Sourced / Applied",
+          "2. Recruiter Screen",
+          "3. Technical / Portfolio Assessment",
+          "4. Onsite / Team Panel",
+          "5. Executive & Culture Fit",
+          "6. Offer Extended / Negotiation"
+        ],
+        "series": [
+          "pipelineCountSeries"
+        ],
+        "xLabel": "Number of Active Candidates",
+        "yLabel": "Pipeline Stage"
+      },
+      {
+        "id": "pipelineCountSeries",
+        "component": "Series",
+        "category": "Active Candidates",
+        "values": [
+          187,
+          64,
+          31,
+          18,
+          8,
+          5
+        ]
+      },
+      {
+        "id": "avgTimeToHireCallout",
+        "component": "TextCallout",
+        "variant": "info",
+        "title": "Time to Hire Benchmark: 32 Days Average",
+        "description": "Fastest department: Customer Success (21 days). Longest department: Engineering Staff+ roles (44 days). Target SLA across all orgs is under 35 days."
+      },
+      {
+        "id": "tabHeadcount",
+        "component": "TabItem",
+        "value": "headcount",
+        "trigger": "Headcount Split",
+        "content": [
+          "headcountHeading",
+          "headcountPieChart"
+        ]
+      },
+      {
+        "id": "headcountHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Headcount Distribution by Department (Total: 482)"
+      },
+      {
+        "id": "headcountPieChart",
+        "component": "PieChart",
+        "labels": [
+          "Engineering (210)",
+          "Sales & Account Execs (98)",
+          "Customer Success & Support (64)",
+          "Product & Design (42)",
+          "Marketing & Growth (36)",
+          "Operations, Legal & Finance (20)",
+          "People & Workplace (12)"
+        ],
+        "values": [
+          210,
+          98,
+          64,
+          42,
+          36,
+          20,
+          12
+        ],
+        "variant": "donut",
+        "appearance": "circular"
+      },
+      {
+        "id": "tabAttrition",
+        "component": "TabItem",
+        "value": "attrition",
+        "trigger": "Attrition Trend",
+        "content": [
+          "attritionHeading",
+          "attritionChart",
+          "attritionAlert"
+        ]
+      },
+      {
+        "id": "attritionHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Attrition & Departures (Past 6 Months)"
+      },
+      {
+        "id": "attritionChart",
+        "component": "BarChart",
+        "labels": [
+          "November",
+          "December",
+          "January",
+          "February",
+          "March",
+          "April (MTD)"
+        ],
+        "series": [
+          "voluntarySeries",
+          "involuntarySeries"
+        ],
+        "variant": "stacked",
+        "xLabel": "Month",
+        "yLabel": "Departures"
+      },
+      {
+        "id": "voluntarySeries",
+        "component": "Series",
+        "category": "Voluntary Exits",
+        "values": [
+          3,
+          2,
+          4,
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "id": "involuntarySeries",
+        "component": "Series",
+        "category": "Involuntary / Mutual",
+        "values": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "id": "attritionAlert",
+        "component": "Alert",
+        "variant": "success",
+        "title": "Healthy Retention Trend",
+        "description": "Total exits over 6 months: 18 employees (cumulative annualized attrition of ~7.5%, well below tech industry average of 12-15%)."
+      },
+      {
+        "id": "separator2",
+        "component": "Separator"
+      },
+      {
+        "id": "interviewsSection",
+        "component": "Card",
+        "variant": "sunk",
+        "gap": "s",
+        "children": [
+          "interviewHeading",
+          "interviewsTable"
+        ]
+      },
+      {
+        "id": "interviewHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Interviews Scheduled This Week (28 Total)"
+      },
+      {
+        "id": "interviewsTable",
+        "component": "Table",
+        "columns": [
+          "intCandidateCol",
+          "intRoleCol",
+          "intStageCol",
+          "intDateCol",
+          "intInterviewersCol"
+        ]
+      },
+      {
+        "intCandidateCol": "intCandidateCol",
+        "id": "intCandidateCol",
+        "component": "Col",
+        "label": "Candidate",
+        "data": [
+          "Maya Lin",
+          "Jordan Blake",
+          "Samantha Wu",
+          "Carlos Mendoza",
+          "Amina Zahir",
+          "Liam O'Connor"
+        ]
+      },
+      {
+        "id": "intRoleCol",
+        "component": "Col",
+        "label": "Role",
+        "data": [
+          "Staff Distributed Systems Engineer",
+          "Lead Product Designer",
+          "Enterprise Account Executive",
+          "Senior Frontend Developer",
+          "Principal Product Manager",
+          "Talent Acquisition Partner"
+        ]
+      },
+      {
+        "id": "intStageCol",
+        "component": "Col",
+        "label": "Stage",
+        "data": [
+          "Final System Architecture Panel",
+          "Portfolio Review & Design Challenge",
+          "Executive Pitch & Closing",
+          "Technical Pairing Session",
+          "Product Strategy Presentation",
+          "Culture & Values Interview"
+        ]
+      },
+      {
+        "id": "intDateCol",
+        "component": "Col",
+        "label": "Scheduled Time",
+        "data": [
+          "Today, 2:00 PM EST",
+          "Tomorrow, 10:30 AM EST",
+          "Tomorrow, 3:00 PM EST",
+          "Thursday, 11:00 AM EST",
+          "Thursday, 2:30 PM EST",
+          "Friday, 1:00 PM EST"
+        ]
+      },
+      {
+        "id": "intInterviewersCol",
+        "component": "Col",
+        "label": "Interview Panel",
+        "data": [
+          "Alex Chen, Tim K.",
+          "Elena Vance, Chloe S.",
+          "Marcus Vance, VP Revenue",
+          "Dave Miller, Dan B.",
+          "Sarah Thorne, CPO",
+          "Priya Patel, HR Team"
+        ]
+      },
+      {
+        "id": "followUps",
+        "component": "FollowUpBlock",
+        "items": [
+          "fu1",
+          "fu2",
+          "fu3"
+        ]
+      },
+      {
+        "id": "fu1",
+        "component": "FollowUpItem",
+        "text": "Export candidate pipeline report as CSV"
+      },
+      {
+        "id": "fu2",
+        "component": "FollowUpItem",
+        "text": "Filter open requisitions by Engineering"
+      },
+      {
+        "id": "fu3",
+        "component": "FollowUpItem",
+        "text": "View exit survey breakdown for 6-month attrition"
+      }
+    ]
+  }
+}
+</a2ui-json>

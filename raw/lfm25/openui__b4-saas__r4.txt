@@ -1,0 +1,383 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Monthly Recurring Revenue
+    CardHeader(
+      title="Monthly Recurring Revenue",
+      subtitle="Total MRR for the current billing cycle"
+    ),
+    TextContent(
+      text="$48,792",
+      size="large"
+    ),
+
+    // 2. Annual Recurring Revenue
+    Card(
+      children: [
+        CardHeader(
+          title="Annual Recurring Revenue (ARR)",
+          subtitle="12-month projected revenue"
+        ),
+        TextContent(
+          text="$587,904",
+          size="large"
+        )
+      ]
+    ),
+
+    // 3. Churn this month
+    Card(
+      children: [
+        CardHeader(
+          title="Churn This Month",
+          subtitle="Customers lost since last billing cycle"
+        ),
+        TextContent(
+          text="2.3%",
+          style={fontSize: "small"}
+        )
+      ]
+    ),
+
+    // 4. New signups over past 90 days
+    Card(
+      children: [
+        CardHeader(
+          title="New Signups (Last 90 Days)",
+          subtitle="Users acquired during the current period"
+        ),
+        TextContent(
+          text="24",
+          size="large"
+        )
+      ]
+    ),
+
+    // 5. Customers split by plan
+    CardHeader(
+      title="Customers by Plan",
+      subtitle="Distribution across subscription tiers"
+    ),
+    Table(
+      columns: [
+        { label: "Plan", type: "string" },
+        { label: "Customer Count", type: "number" },
+        { label: "Revenue Share", type: "string" }
+      ],
+      data: [
+        { plan: "Enterprise", count: 35, share: "$28,410" },
+        { plan: "Professional", count: 142, share: "$38,150" },
+        { plan: "Starter", count: 567, share: "$19,200" },
+        { plan: "Free", count: 2341, share: "$1,980" }
+      ]
+    ),
+
+    // 6. Ten largest customers with seats and spend
+    Card(
+      children: [
+        CardHeader(
+          title="Top 10 Largest Customers",
+          subtitle="Seats and annual spend"
+        ),
+        ListBlock(
+          items: [
+            {
+              title: "Acme Corp",
+              subtitle: "42 seats, $89,400/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "TechFlow Inc",
+              subtitle: "31 seats, $73,200/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "DataForge",
+              subtitle: "25 seats, $65,000/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "CloudScale",
+              subtitle: "18 seats, $54,300/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "BioSense Labs",
+              subtitle: "15 seats, $47,100/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "Metra Dynamics",
+              subtitle: "22 seats, $66,600/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "Quantum Leap",
+              subtitle: "30 seats, $84,900/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "FinStream",
+              subtitle: "12 seats, $36,300/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "Nexus AI",
+              subtitle: "40 seats, $114,700/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "PulseWorks",
+              subtitle: "9 seats, $27,600/year",
+              image: null,
+              actionLabel: "View Details"
+            },
+            {
+              title: "Orbit Systems",
+              subtitle: "27 seats, $78,300/year",
+              image: null,
+              actionLabel: "View Details"
+            }
+          ]
+        )
+      ]
+    ),
+
+    // 7. Accounts at risk with reasons
+    Card(
+      children: [
+        CardHeader(
+          title="Accounts at Risk",
+          subtitle="High-churn or payment issues"
+        ),
+        ListBlock(
+          items: [
+            {
+              title: "At-Risk: Acme Corp",
+              reason: "Payment delayed 14 days",
+              severity: "high"
+            },
+            {
+              title: "At-Risk: TechFlow Inc",
+              reason: "Two users not active for 45 days",
+              severity: "medium"
+            },
+            {
+              title: "At-Risk: CloudScale",
+              reason: "Billing dispute resolution pending",
+              severity: "high"
+            },
+            {
+              title: "At-Risk: BioSense Labs",
+              reason: "Churn probability >80% this quarter",
+              severity: "medium"
+            }
+          ]
+        )
+      ]
+    ),
+
+    // 8. Failed payments with retry
+    Card(
+      children: [
+        CardHeader(
+          title="Failed Payments",
+          subtitle="Unable to process charges"
+        ),
+        ListBlock(
+          items: [
+            {
+              title: "Pay-ID: PAY-2024-00123",
+              status: "failed",
+              amount: "$1,250",
+              reason: "Insufficient funds",
+              retry: true
+            },
+            {
+              title: "Pay-ID: PAY-2024-00456",
+              status: "failed",
+              amount: "$850",
+              reason: "Card expired",
+              retry: true
+            },
+            {
+              title: "Pay-ID: PAY-2024-00789",
+              status: "failed",
+              amount: "$420",
+              reason: "API timeout",
+              retry: true
+            }
+          ]
+        )
+      ]
+    ),
+
+    // 9. Adoption of three newest features
+    Card(
+      children: [
+        CardHeader(
+          title="Feature Adoption (Newest)",
+          subtitle="Usage trends for recent releases"
+        ),
+        HorizontalBarChart(
+          labels: ["Feature A", "Feature B", "Feature C"],
+          series: [
+            { category: "Feature A", values: [95, 88, 92] },
+            { category: "Feature B", values: [67, 71, 74] },
+            { category: "Feature C", values: [54, 58, 62] }
+          ],
+          xLabel: "Adoption Score",
+          yLabel: "Usage %"
+        )
+      ]
+    ),
+
+    // 10. Current NPS
+    Card(
+      children: [
+        CardHeader(
+          title="Current NPS",
+          subtitle="Customer satisfaction index"
+        ),
+        TextContent(
+          text="72",
+          style={fontSize: "large", fontWeight: "bold"}
+        ),
+        Column(
+          columns: [
+            { label: "Score", value: "72" },
+            { label: "Category", value: "Exceeded target" }
+          ],
+          children: []
+        )
+      ]
+    ),
+
+    // 11. Reporting period selector
+    Card(
+      children: [
+        Tab(
+          items: [
+            {
+              value: "Monthly",
+              trigger: "monthly",
+              content: Card(
+                children: [
+                  CardHeader("Monthly Report", "Report the past 30 days"),
+                  TextContent("Last 30 days summary", size="medium"),
+                  Table(
+                    columns: [
+                      { label: "Metric", type: "string" },
+                      { label: "Value", type: "number" }
+                    ],
+                    data: [
+                      { label: "MRR", value: 48792 },
+                      { label: "ARR", value: 587904 },
+                      { label: "Churn", value: 2.3 },
+                      { label: "New Signups", value: 24 },
+                      { label: "At-Risk", value: 4 }
+                    ]
+                  )
+                ]
+              )
+            },
+            {
+              value: "Quarterly",
+              trigger: "quarterly",
+              content: Card(
+                children: [
+                  CardHeader("Quarterly Report", "Report the past 3 months"),
+                  TextContent("Q2 2024 Summary", size="medium"),
+                  Table(
+                    columns: [
+                      { label: "Metric", type: "string" },
+                      { label: "Value", type: "number" }
+                    ],
+                    data: [
+                      { label: "MRR", value: 146736 },
+                      { label: "ARR", value: 439712 },
+                      { label: "Churn", value: 2.8 },
+                      { label: "New Signups", value: 68 },
+                      { label: "At-Risk", value: 6 }
+                    ]
+                  )
+                ]
+              )
+            },
+            {
+              value: "Yearly",
+              trigger: "yearly",
+              content: Card(
+                children: [
+                  CardHeader("Yearly Report", "Full year summary"),
+                  TextContent("2024 Summary", size="medium"),
+                  Table(
+                    columns: [
+                      { label: "Metric", type: "string" },
+                      { label: "Value", type: "number" }
+                    ],
+                    data: [
+                      { label: "Total Revenue", value: 587904 },
+                      { label: "Churn Rate", value: 2.5 },
+                      { label: "Avg. Customer Value", value: 1240 },
+                      { label: "Seat Utilization", value: "78%" },
+                      { label: "NPS", value: 72 }
+                    ]
+                  )
+                ]
+              )
+            }
+          ]
+        )
+      ]
+    ),
+
+    // 12. Seat utilization across company
+    Card(
+      children: [
+        CardHeader(
+          title="Seat Utilization",
+          subtitle="Current capacity vs. actual usage"
+        ),
+        HorizontalBarChart(
+          labels: ["Engineering", "Sales", "Support", "Marketing", "Product"],
+          series: [
+            { category: "Engineering", values: [85, 70, 60] },
+            { category: "Sales", values: [90, 75, 65] },
+            { category: "Support", values: [55, 45, 35] },
+            { category: "Marketing", values: [40, 30, 20] },
+            { category: "Product", values: [65, 55, 45] }
+          ],
+          xLabel: "Department",
+          yLabel: "Utilization %"
+        )
+      ]
+    )
+
+    // 13. Invite another admin
+    Card(
+      children: [
+        CardHeader(
+          title="Invite Another Admin",
+          subtitle="Expand your organization's access"
+        ),
+        Button(
+          label="Send Invitation",
+          action: "send_invite",
+          variant: "primary",
+          size: "medium"
+        )
+      ]
+    )
+  ]
+)
+```

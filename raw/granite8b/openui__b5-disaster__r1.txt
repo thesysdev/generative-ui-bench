@@ -1,0 +1,172 @@
+```openui-lang
+root = Card([
+    zoneIncidents,
+    overallSeverity,
+    resourcesSummary,
+    sheltersInfo,
+    evacuationRoutes,
+    weatherForecast,
+    rescueStats,
+    volunteers,
+    donations,
+    aidRequests,
+    comChannels,
+    closedRoads,
+    hospitalBeds,
+    openTasks,
+    requestResources,
+    broadcastUpdate,
+    focusZone,
+    situationReport
+], "card", "row", "l")
+
+zoneIncidents = Card([
+    CardHeader("Active Incidents by Zone", "Current Severity"),
+    Table([
+        Col("Zone", ["North", "South", "East", "West"]),
+        Col("Incident", ["Fire", "Flood", "Earthquake", "Chemical Leak"]),
+        Col("Severity", ["Critical", "High", "Moderate", "Low"])
+    ])
+], "sunk")
+
+overallSeverity = Callout("info", "Overall Severity: Critical", "Three zones at critical severity")
+
+resourcesSummary = Card([
+    CardHeader("Resources Available"),
+    ListBlock([
+        ListItem("Vehicles: 25", null, null, "View Details"),
+        ListItem("Personnel: 150", null, null, "View Details"),
+        ListItem("Supplies: 500 units", null, null, "View Details")
+    ], "number")
+], "clear")
+
+sheltersInfo = Card([
+    CardHeader("Shelters"),
+    Table([
+        Col("Shelter", ["Central", "Northwest", "Southeast"]),
+        Col("Capacity", ["200", "150", "180"]),
+        Col("Occupancy", ["180", "120", "160"])
+    ])
+], "sunk")
+
+evacuationRoutes = Card([
+    CardHeader("Evacuation Routes Status"),
+    Table([
+        Col("Route", ["A1", "B2", "C3"]),
+        Col("Status", ["Open", "Closed", "Open"])
+    ])
+], "clear")
+
+weatherForecast = Card([
+    CardHeader("Weather Forecast (Next 48h)"),
+    MarkDownRenderer("# 48‑Hour Weather Forecast\n\n- **Hour 0‑12**: Light rain, 20°C\n- **Hour 12‑24**: Clear skies, 22°C\n- **Hour 24‑36**: Thunderstorms, 18°C\n- **Hour 36‑48**: Partly cloudy, 19°C")
+], "card")
+
+rescueStats = Card([
+    CardHeader("Rescue Statistics"),
+    TextContent("People Rescued: 120\nCasualties: 5")
+], "sunk")
+
+volunteers = Card([
+    CardHeader("Volunteers On Duty"),
+    Table([
+        Col("Volunteer", ["John Doe", "Jane Smith", "Mike Lee"]),
+        Col("Assignment", ["Firefighting", "Medical Aid", "Logistics"])
+    ])
+], "clear")
+
+donations = Card([
+    CardHeader("Donations Received"),
+    ListBlock([
+        ListItem("Cash: $50,000", null, null, "View Details"),
+        ListItem("Food: 2,000 units", null, null, "View Details"),
+        ListItem("Medical Supplies: 500 kits", null, null, "View Details")
+    ], "number")
+], "sunk")
+
+aidRequests = Card([
+    CardHeader("Aid Requests Awaiting Action"),
+    ListBlock([
+        ListItem("Medical Team Request", null, null, "View Details"),
+        ListItem("Water Distribution Request", null, null, "View Details"),
+        ListItem("Transportation Request", null, null, "View Details")
+    ], "number")
+], "clear")
+
+comChannels = Card([
+    CardHeader("Communication Channels Status"),
+    Table([
+        Col("Channel", ["Radio 1", "Radio 2", "Satellite Link", "Cellular Network"]),
+        Col("Status", ["Up", "Down", "Up", "Down"])
+    ])
+], "sunk")
+
+closedRoads = Card([
+    CardHeader("Roads Closed"),
+    ListBlock([
+        ListItem("Main St", null, null, "View Details"),
+        ListItem("River Rd", null, null, "View Details"),
+        ListItem("Park Ave", null, null, "View Details")
+    ], "number")
+], "clear")
+
+hospitalBeds = Card([
+    CardHeader("Nearby Hospitals Free Beds"),
+    Table([
+        Col("Hospital", ["St. Mary's", "City General", "Regional Medical Center"]),
+        Col("Free Beds", ["30", "45", "20"])
+    ])
+], "sunk")
+
+openTasks = Card([
+    CardHeader("Open Tasks"),
+    Table([
+        Col("Task", ["Supply Distribution", "Evacuation Coordination", "Damage Assessment"]),
+        Col("Assignee", ["Team A", "Team B", "Team C"])
+    ])
+], "clear")
+
+requestResources = Card([
+    CardHeader("Request More Resources"),
+    Form("resource-request", requestButtons, [
+        FormControl("Resource Type", inputType, null),
+        FormControl("Quantity", inputQty, null)
+    ])
+], "sunk")
+
+requestButtons = Buttons([
+    Button("Submit Request")
+])
+
+broadcastUpdate = Card([
+    CardHeader("Broadcast Update"),
+    Form("broadcast-message", broadcastButtons, [
+        FormControl("Message", inputMsg, "Enter the update message")
+    ])
+], "sunk")
+
+broadcastButtons = Buttons([
+    Button("Broadcast")
+])
+
+inputType = TextArea("type", "e.g., Vehicles, Supplies", rows=2)
+inputQty = Input("quantity", "e.g., 50")
+inputMsg = TextArea("message", "Enter broadcast message", rows=4)
+
+focusZone = Button("Focus on Zone A", null, "primary", "focus-zone-action")
+
+situationReport = Card([
+    CardHeader("File Situation Report"),
+    Form("situation-report", reportButtons, [
+        FormControl("Report Details", inputReport, null)
+    ])
+], "clear")
+
+reportButtons = Buttons([
+    Button("Submit Report")
+])
+
+inputReport = TextArea("report", "Provide detailed situation report", rows=6)
+
+focusZoneAction = (string | number)[]
+```

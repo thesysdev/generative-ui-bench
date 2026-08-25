@@ -1,0 +1,63 @@
+```openui-lang
+root = Card([header, metricsRow, periodSelector, mainContent, footer])
+header = CardHeader("Admin Overview", "Company health dashboard")
+
+metricsRow = Card([mrrCard, arrCard, churnCard, signupsCard], "sunk")
+mrrCard = Card([Tag("MRR", null, null, "success"), TextContent("$2,456,789")], "card")
+arrCard = Card([Tag("ARR", null, null, "success"), TextContent("$30,281,468")], "card")
+churnCard = Card([Tag("Churn", null, null, "danger"), TextContent("12.3%")], "card")
+signupsCard = Card([Tag("New Signups", null, null, "success"), TextContent("421")], "card")
+
+periodSelector = Card([periodLabel, periodDropdown], "sunk")
+periodLabel = Label("Reporting period:")
+periodDropdown = Select("reporting_period", [periodOptions], "Last 30 days", null, "medium")
+periodOptions = [SelectItem("last_7", "Last 7 days"), SelectItem("last_30", "Last 30 days"), SelectItem("last_90", "Last 90 days"), SelectItem("last_year", "Last Year")]
+
+mainContent = Card([plansSection, topCustomers, atRiskAccounts, failedPayments, featureAdoption, npsSection, utilizationSection], "card")
+
+plansSection = Card([CardHeader("Customers by Plan"), plansTable], "sunk")
+plansTable = Table([planColumns])
+planColumns = [Col("Plan", ["Starter", "Professional", "Enterprise", "Custom"], "string"),
+               Col("Count", [142, 387, 123, 45], "number"),
+               Col("Revenue", ["$123K", "$876K", "$12.4M", "$3.1M"], "string"),
+               Col("% MRR", ["2%", "36%", "51%", "11%"], "string")]
+
+topCustomers = Card([CardHeader("Top 10 Customers"), topCustomersTable], "sunk")
+topCustomersTable = Table([customerColumns])
+customerColumns = [Col("Customer", ["TechCorp", "RetailInc", "FinanceLLC", "HealthcareX", "EcommerceY", "ManufacturingZ", "LogisticsA", "EducationB", "MediaC", "ConstructionD"], "string"),
+                   Col("Seats", [450, 210, 189, 321, 287, 198, 156, 134, 112, 98], "number"),
+                   Col("Spend", ["$124K", "$87K", "$76K", "$54K", "$43K", "$32K", "$28K", "$25K", "$21K", "$18K"], "string")]
+
+atRiskAccounts = Card([CardHeader("Accounts at Risk"), atRiskList], "sunk")
+atRiskList = ListBlock([atRiskItems], "image")
+atRiskItems = [
+    ListItem("RetailInc", "Inactive for 30+ days", ["https://picsum.photos/seed/retail/80/80"], "Mark as inactive"),
+    ListItem("FinanceLLC", "Usage dropped 80%", ["https://picsum.photos/seed/finance/80/80"], "Schedule call"),
+    ListItem("HealthcareX", "Unresolved support tickets", ["https://picsum.photos/seed/healthcare/80/80"], "Escalate"),
+    ListItem("EcommerceY", "Payment failed", ["https://picsum.photos/seed/ecommerce/80/80"], "Retry payment")
+]
+
+failedPayments = Card([CardHeader("Failed Payments"), failedPaymentsTable], "sunk")
+failedPaymentsTable = Table([paymentColumns])
+paymentColumns = [Col("Customer", ["RetailInc", "FinanceLLC", "HealthcareX", "EcommerceY"], "string"),
+                  Col("Amount", ["$1,245", "$876", "$543", "$321"], "string"),
+                  Col("Date", ["2023-11-15", "2023-11-10", "2023-11-05", "2023-11-01"], "string"),
+                  Col("Action", ["Retry", "Retry", "Retry", "Retry"], "action")]
+
+featureAdoption = Card([CardHeader("New Feature Adoption"), adoptionChart], "sunk")
+adoptionChart = BarChart(["Starter", "Professional", "Enterprise"], [featureAdoptionSeries], "grouped", "Plan", "Adoption %")
+featureAdoptionSeries = [Series("AI Assistant", [32, 78, 95]),
+                         Series("Analytics Dashboard", [15, 56, 82]),
+                         Series("Automated Backups", [45, 89, 98])]
+
+npsSection = Card([CardHeader("Net Promoter Score"), npsCard], "sunk")
+npsCard = Card([TextContent("Current NPS", "large-heavy"), TextContent("82", "large-heavy")], "card")
+
+utilizationSection = Card([CardHeader("Seat Utilization"), utilizationChart], "sunk")
+utilizationChart = RadarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"], [utilizationSeries])
+utilizationSeries = [Series("Utilization", [72, 78, 85, 89, 92, 95, 98])]
+
+footer = Card([inviteButton], "sunk")
+inviteButton = Button("Invite Admin", null, "primary")
+
+```

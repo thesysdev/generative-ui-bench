@@ -1,0 +1,26 @@
+```openui-lang
+root = Card([budgetOverview, spendingChart, largestExpense, changeMonthButton, addExpenseButton])
+
+totalBudget = 3000
+totalSpent = 2450
+categories = ["Groceries", "Rent", "Utilities", "Entertainment", "Misc"]
+categorySpent = [450, 1200, 300, 200, 400]
+
+budgetOverview = Card([budgetHeader, budgetStatus])
+budgetHeader = CardHeader("Budget Overview", "This Month")
+budgetStatus = Callout("info", "Total Spent This Month", "$" + toString(totalSpent) + " / $" + toString(totalBudget))
+
+spendingChart = PieChart(categories, categorySpent, "donut", "circular")
+
+largestExpense = Card([largestExpenseHeader, largestExpenseValue, largestExpenseCategory])
+largestExpenseHeader = Heading("Largest Expense", "h3")
+largestExpenseValue = TextContent("$" + toString(max(categorySpent)), "large")
+largestExpenseCategory = TextContent(categories[categorySpent.indexOf(max(categorySpent))], "small")
+
+changeMonthButton = Button("Change Month")
+addExpenseButton = Button("Add Expense")
+
+function max(array) {
+    return array.reduce((max, current) => (current > max ? current : max), array[0]);
+}
+```

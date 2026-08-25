@@ -1,0 +1,460 @@
+Here is the complete sales rep account view with deal overview, contacts, activities, renewal warning, quick note taking, and call logging.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "accountHeader",
+          "renewalAlert",
+          "quickActionsGroup",
+          "kpiCard",
+          "mainTabs"
+        ]
+      },
+      {
+        "id": "accountHeader",
+        "component": "CardHeader",
+        "title": "Acme Global Enterprise",
+        "subtitle": "Account Owner: Sarah Jenkins • Account Tier: Enterprise"
+      },
+      {
+        "id": "renewalAlert",
+        "component": "Alert",
+        "title": "Renewal Approaching (Nov 15, 2025)",
+        "description": "Annual contract renewal is in 18 days. Renewal health is flagged for review due to executive sponsor transition.",
+        "variant": "warning"
+      },
+      {
+        "id": "quickActionsGroup",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "logCallDialog",
+          "jotNoteDialog"
+        ]
+      },
+      {
+        "id": "logCallDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "📞 Log a Call",
+        "triggerVariant": "default",
+        "title": "Log Completed Call",
+        "description": "Record outcome and notes from client conversation",
+        "content": [
+          "callForm"
+        ]
+      },
+      {
+        "id": "callForm",
+        "component": "Form",
+        "name": "logCallForm",
+        "buttons": "callFormButtons",
+        "fields": [
+          "callContactField",
+          "callOutcomeField",
+          "callSummaryField"
+        ]
+      },
+      {
+        "id": "callContactField",
+        "component": "FormControl",
+        "label": "Contact",
+        "input": "callContactSelect"
+      },
+      {
+        "id": "callContactSelect",
+        "component": "Select",
+        "name": "contact_id",
+        "placeholder": "Select contact",
+        "items": [
+          "contactOpt1",
+          "contactOpt2",
+          "contactOpt3"
+        ]
+      },
+      {
+        "id": "contactOpt1",
+        "component": "SelectItem",
+        "value": "elena",
+        "label": "Elena Vance (VP Procurement)"
+      },
+      {
+        "id": "contactOpt2",
+        "component": "SelectItem",
+        "value": "marcus",
+        "label": "Marcus Brody (CTO)"
+      },
+      {
+        "id": "contactOpt3",
+        "component": "SelectItem",
+        "value": "claire",
+        "label": "Claire Dubois (Head of Ops)"
+      },
+      {
+        "id": "callOutcomeField",
+        "component": "FormControl",
+        "label": "Call Outcome",
+        "input": "callOutcomeSelect"
+      },
+      {
+        "id": "callOutcomeSelect",
+        "component": "Select",
+        "name": "outcome",
+        "placeholder": "Choose outcome",
+        "items": [
+          "out1",
+          "out2",
+          "out3"
+        ]
+      },
+      {
+        "id": "out1",
+        "component": "SelectItem",
+        "value": "connected_positive",
+        "label": "Connected - Positive"
+      },
+      {
+        "id": "out2",
+        "component": "SelectItem",
+        "value": "demo_scheduled",
+        "label": "Demo / Review Scheduled"
+      },
+      {
+        "id": "out3",
+        "component": "SelectItem",
+        "value": "left_voicemail",
+        "label": "Left Voicemail"
+      },
+      {
+        "id": "callSummaryField",
+        "component": "FormControl",
+        "label": "Call Summary & Notes",
+        "input": "callSummaryInput"
+      },
+      {
+        "id": "callSummaryInput",
+        "component": "TextArea",
+        "name": "call_notes",
+        "placeholder": "Discussed expansion proposal and renewal timeline...",
+        "rows": 3
+      },
+      {
+        "id": "callFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveCallBtn"
+        ]
+      },
+      {
+        "id": "saveCallBtn",
+        "component": "Button",
+        "label": "Save Call Log",
+        "variant": "primary"
+      },
+      {
+        "id": "jotNoteDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "📝 Jot a Quick Note",
+        "triggerVariant": "secondary",
+        "title": "Quick Account Note",
+        "description": "Save internal context or updates to the account feed",
+        "content": [
+          "noteForm"
+        ]
+      },
+      {
+        "id": "noteForm",
+        "component": "Form",
+        "name": "quickNoteForm",
+        "buttons": "noteFormButtons",
+        "fields": [
+          "noteTextField"
+        ]
+      },
+      {
+        "id": "noteTextField",
+        "component": "FormControl",
+        "label": "Note",
+        "input": "noteInput",
+        "hint": "Visible to all sales and account management teammates"
+      },
+      {
+        "id": "noteInput",
+        "component": "TextArea",
+        "name": "note_body",
+        "placeholder": "Jot key takeaway, competitor mention, or budget update...",
+        "rows": 4
+      },
+      {
+        "id": "noteFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveNoteBtn"
+        ]
+      },
+      {
+        "id": "saveNoteBtn",
+        "component": "Button",
+        "label": "Save Note",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "dealSummaryTable",
+          "stageProgress"
+        ]
+      },
+      {
+        "id": "dealSummaryTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Overview Item",
+        "data": [
+          "Total Deal Value",
+          "Current Deal Stage",
+          "Contract Renewal Date",
+          "Account Representative"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Details",
+        "data": [
+          "$480,000 ARR",
+          "Negotiation & Final Review",
+          "November 15, 2025",
+          "Sarah Jenkins"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Status Indicator",
+        "data": [
+          "+25% vs Prev Year",
+          "Stage 5 of 6",
+          "⚠️ Expiring in 18 Days",
+          "Primary Rep"
+        ]
+      },
+      {
+        "id": "stageProgress",
+        "component": "Progress",
+        "value": 85,
+        "label": "Deal Pipeline Progress (Stage 5 / 6 - Negotiation)"
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "tabActivities",
+          "tabContacts",
+          "tabFollowUps"
+        ]
+      },
+      {
+        "id": "tabActivities",
+        "component": "TabItem",
+        "value": "activities",
+        "trigger": "Recent Activity (Chronological)",
+        "content": [
+          "activityList"
+        ]
+      },
+      {
+        "id": "activityList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "act1",
+          "act2",
+          "act3",
+          "act4"
+        ]
+      },
+      {
+        "id": "act1",
+        "component": "ListItem",
+        "title": "Contract Redlines Returned (Today, 2:15 PM)",
+        "subtitle": "Legal team reviewed clause 4.2 regarding custom SLA guarantees; shared updated master agreement with Marcus."
+      },
+      {
+        "id": "act2",
+        "component": "ListItem",
+        "title": "Discovery Call & Product Walkthrough (Oct 26, 11:00 AM)",
+        "subtitle": "Reviewed multi-region data hosting with CTO Marcus Brody and DevOps lead; technical sign-off confirmed."
+      },
+      {
+        "id": "act3",
+        "component": "ListItem",
+        "title": "Pricing & Volume Discount Proposal Sent (Oct 22, 4:30 PM)",
+        "subtitle": "Delivered tier-2 enterprise quote of $480,000 for 1,200 seats with premium onboarding."
+      },
+      {
+        "id": "act4",
+        "component": "ListItem",
+        "title": "Renewal Notice Auto-Dispatched (Oct 15, 9:00 AM)",
+        "subtitle": "System sent 30-day renewal notice to Elena Vance with current usage summary."
+      },
+      {
+        "id": "tabContacts",
+        "component": "TabItem",
+        "value": "contacts",
+        "trigger": "Key Contacts & Roles",
+        "content": [
+          "contactsTable"
+        ]
+      },
+      {
+        "id": "contactsTable",
+        "component": "Table",
+        "columns": [
+          "contactNameCol",
+          "contactRoleCol",
+          "contactEmailCol",
+          "contactImpactCol"
+        ]
+      },
+      {
+        "id": "contactNameCol",
+        "component": "Col",
+        "label": "Contact Name",
+        "data": [
+          "Marcus Brody",
+          "Elena Vance",
+          "Claire Dubois",
+          "David Zhao"
+        ]
+      },
+      {
+        "id": "contactRoleCol",
+        "component": "Col",
+        "label": "Role & Department",
+        "data": [
+          "Chief Technology Officer (IT)",
+          "VP of Procurement (Finance)",
+          "Head of Operations (Operations)",
+          "Senior Security Architect (InfoSec)"
+        ]
+      },
+      {
+        "id": "contactEmailCol",
+        "component": "Col",
+        "label": "Email",
+        "data": [
+          "mbrody@acmeglobal.com",
+          "evance@acmeglobal.com",
+          "cdubois@acmeglobal.com",
+          "dzhao@acmeglobal.com"
+        ]
+      },
+      {
+        "id": "contactImpactCol",
+        "component": "Col",
+        "label": "Deal Influence",
+        "data": [
+          "Executive Decision Maker",
+          "Budget & Contract Signer",
+          "Key Business Champion",
+          "Technical Gatekeeper (Approved)"
+        ]
+      },
+      {
+        "id": "tabFollowUps",
+        "component": "TabItem",
+        "value": "followups",
+        "trigger": "Open Follow-ups",
+        "content": [
+          "followUpsTable"
+        ]
+      },
+      {
+        "id": "followUpsTable",
+        "component": "Table",
+        "columns": [
+          "taskCol",
+          "dueDateCol",
+          "assigneeCol",
+          "urgencyCol"
+        ]
+      },
+      {
+        "id": "taskCol",
+        "component": "Col",
+        "label": "Follow-up Action",
+        "data": [
+          "Deliver finalized SLA appendix to Marcus",
+          "Schedule renewal sign-off meeting with Elena",
+          "Send Security SOC2 Type II compliance pack",
+          "Confirm Q1 license provisioning seat count"
+        ]
+      },
+      {
+        "id": "dueDateCol",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Oct 30, 2025 (Tomorrow)",
+          "Nov 02, 2025 (3 days)",
+          "Nov 06, 2025 (Next week)",
+          "Nov 10, 2025 (12 days)"
+        ]
+      },
+      {
+        "id": "assigneeCol",
+        "component": "Col",
+        "label": "Assignee",
+        "data": [
+          "Sarah Jenkins",
+          "Sarah Jenkins",
+          "Security Team",
+          "Sarah Jenkins"
+        ]
+      },
+      {
+        "id": "urgencyCol",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "High",
+          "Critical",
+          "Medium",
+          "Medium"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

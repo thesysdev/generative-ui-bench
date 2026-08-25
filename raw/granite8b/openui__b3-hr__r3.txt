@@ -1,0 +1,76 @@
+```openui
+root = Card([
+    hiringOverviewHeader,
+    headcountSummary,
+    openRolesTable,
+    pipelineCandidates,
+    avgTimeToHire,
+    deptHeadcountBar,
+    interviewsThisWeek,
+    attritionPast6Months,
+    newRoleButton
+], "card", "row", "l")
+
+hiringOverviewHeader = CardHeader("Hiring Overview", "Current Metrics & Insights")
+
+headcountSummary = TextContent(
+    "Current Headcount: 1,250 employees\n" +
+    "Total Open Roles: 42"
+)
+
+openRolesTable = Table([
+    openRolesLabel,
+    openRolesDept
+])
+openRolesLabel = Col("Role", ["Software Engineer", "Product Manager", "UX Designer"])
+openRolesDept = Col("Department", ["Engineering", "Product", "Design"])
+
+pipelineCandidates = Card([
+    pipelineHeader,
+    pipelineTable
+], "sunk")
+pipelineHeader = Heading("Candidates by Pipeline Stage", "h3")
+pipelineTable = Table([
+    stageLabel,
+    stageCounts
+])
+stageLabel = Col("Stage", ["Applied", "Screened", "Interviewed", "Offered"])
+stageCounts = Col("Candidates", ["120", "85", "45", "20"])
+
+avgTimeToHire = Callout("info", "Average Time to Hire", "Average time to hire: 35 days")
+
+deptHeadcountBar = BarChart(
+    labels = ["Engineering", "Product", "Design", "HR", "Finance"],
+    series = [
+        Series("Headcount", [450, 300, 150, 100, 200])
+    ],
+    variant = "grouped",
+    xLabel = "Department",
+    yLabel = "Number of Employees"
+)
+
+interviewsThisWeek = Card([
+    weekHeader,
+    interviewList
+], "sunk")
+weekHeader = Heading("Interviews Scheduled This Week", "h3")
+interviewList = ListBlock([
+    interviewItem1,
+    interviewItem2,
+    interviewItem3
+], "number")
+interviewItem1 = ListItem("Jane Doe – Senior Engineer – 2025-08-20")
+interviewItem2 = ListItem("Mark Lee – Product Lead – 2025-08-21")
+interviewItem3 = ListItem("Sofia Patel – UX Designer – 2025-08-22")
+
+attritionPast6Months = Card([
+    attritionHeader,
+    attritionValue
+], "sunk")
+attritionHeader = Heading("Attrition (Last 6 Months)", "h3")
+attritionValue = TextContent("Attrition Rate: 4.2%")
+
+newRoleButton = Button("Open New Role", [newRoleAction], "primary")
+newRoleAction = "open_new_role"
+
+```

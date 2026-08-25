@@ -1,0 +1,28 @@
+```openui-lang
+root = Card([searchSection, inventoryWarning, itemsList, controls])
+
+searchSection = Card([searchInput], "sunk")
+searchInput = FormControl("Search items", searchField)
+searchField = Input("search", "Search inventory...", "text")
+
+inventoryWarning = CardHeader("Low Inventory Alert", "Items below 5 units trigger this warning")
+thresholdInfo = TextCallout("threshold", "Threshold", "Items below 5 units are flagged for reorder")
+
+itemsList = SectionBlock([lowInventoryItems], true)
+lowInventoryItems = SectionItem("low-inventory", "Low Inventory Items", [
+    Table([itemNameCol, quantityCol, reorderCol])
+])
+itemNameCol = Col("Item Name", ["Organic Apples", "Whole Wheat Bread", "Almond Milk", "Eggs", "Yogurt"])
+quantityCol = Col("Remaining Units", ["3", "2", "4", "1", "3"])
+reorderCol = Col("Action", [
+    Button("Reorder Apples", ["reorder", "apples"]),
+    Button("Reorder Bread", ["reorder", "bread"]),
+    Button("Reorder Almond Milk", ["reorder", "almond_milk"]),
+    Button("Reorder Eggs", ["reorder", "eggs"]),
+    Button("Reorder Yogurt", ["reorder", "yogurt"])
+])
+
+controls = Buttons([updateThresholdBtn, bulkReorderBtn], "column")
+updateThresholdBtn = Button("Update Threshold", null, "primary")
+bulkReorderBtn = Button("Bulk Reorder All", null, "secondary")
+```

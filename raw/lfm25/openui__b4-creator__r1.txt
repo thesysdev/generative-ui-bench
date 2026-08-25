@@ -1,0 +1,195 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Follower total and growth over past month
+    CardHeader(
+      title="Creator Studio Dashboard",
+      subtitle="April 2026 Performance Overview"
+    ),
+    
+    // 2. Engagement rate
+    TextContent(
+      text="Engagement Rate: 4.8%",
+      size="large"
+    ),
+    
+    // 3. Best posts this month with reach
+    Card(
+      children: [
+        CardHeader(
+          title="Top Performing Posts",
+          subtitle="This Month"
+        ),
+        Table(
+          columns: [
+            { label: "Post Title", data: "Morning Yoga Flow" },
+            { label: "Reach", data: "25,480" },
+            { label: "Likes", data: "1,842" },
+            { label: "Shares", data: "340" }
+          ],
+          data: [
+            { title: "Morning Yoga Flow", reach: "25,480", likes: "1,842", shares: "340" },
+            { title: "Creative Coding Tips", reach: "18,230", likes: "1,567", shares: "287" },
+            { title: "Behind the Scenes", reach: "15,100", likes: "1,203", shares: "195" },
+            { title: "Collaboration Spotlight", reach: "12,900", likes: "980", shares: "156" }
+          ]
+        )
+      ]
+    ),
+    
+    // 4. Audience split by platform
+    Card(
+      children: [
+        PieChart(
+          labels: ["Instagram", "TikTok", "Twitter", "YouTube", "LinkedIn"],
+          values: [35, 28, 19, 12, 6],
+          variant: "pie"
+        )
+      ]
+    ),
+    
+    // 5. Posts scheduled this week
+    Card(
+      children: [
+        CardHeader(
+          title="Scheduled Posts",
+          subtitle="This Week"
+        ),
+        ListBlock(
+          items: [
+            ListItem(title="Product Launch Teaser", subtitle="Thursday 6 PM", actionLabel: "View"),
+            ListItem(title="Behind-the-Scenes Reel", subtitle="Friday 9 AM", actionLabel: "View"),
+            ListItem(title="New Feature Preview", subtitle="Monday 3 PM", actionLabel: "View"),
+            ListItem(title="Community Q&A Live", subtitle="Wednesday 7 PM", actionLabel: "View")
+          ],
+          variant: "number"
+        )
+      ]
+    ),
+    
+    // 6. Best hour to post based on history
+    Card(
+      children: [
+        CardHeader(
+          title="Optimal Posting Time",
+          subtitle="Based on Historical Engagement"
+        ),
+        TextContent(
+          text="Best Hour: 7:00 PM",
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 7. Comments waiting for a reply
+    Card(
+      children: [
+        CardHeader(
+          title="Comments Waiting",
+          subtitle="Unanswered Questions"
+        ),
+        TextContent(
+          text="3 comments awaiting your reply",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // 8. Earnings this month
+    Card(
+      children: [
+        CardHeader(
+          title="March Earnings",
+          subtitle="Revenue Summary"
+        ),
+        TextContent(
+          text="$8,420",
+          size: "large",
+          variant: "success"
+        ),
+        TextContent(
+          text="Total Monthly Revenue: $8,420",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // 9. Pending collaboration requests
+    Card(
+      children: [
+        CardHeader(
+          title="Pending Collaborations",
+          subtitle="Outstanding Requests"
+        ),
+        ListBlock(
+          items: [
+            FollowUpItem(text="Design partnership with CreativeCo"),
+            FollowUpItem(text="Content co-create with TechBlogger"),
+            FollowUpItem(text="Live stream collaboration with ArtWorld")
+          ],
+          variant: "number"
+        )
+      ]
+    ),
+    
+    // 10. Schedule a post with caption and time
+    Card(
+      children: [
+        CardHeader(
+          title="Schedule New Post",
+          subtitle="Add to Your Calendar"
+        ),
+        Form(
+          name: "post_scheduler",
+          buttons: [
+            Button(label="Create Post", action: null, variant: "primary"),
+            Button(label="Cancel", action: null, variant: "tertiary")
+          ],
+          fields: [
+            // Caption field
+            FormControl(
+              label: "Caption",
+              input: TextArea(),
+              hint: "Write your post content here"
+            ),
+            // Post title
+            FormControl(
+              label: "Title",
+              input: TextArea(),
+              hint: "Brief title for the post"
+            ),
+            // Scheduled time (date+time)
+            FormControl(
+              label: "Schedule",
+              input: DatePicker(),
+              rule: [{ type: "date", format: "yyyy-MM-dd" }],
+              placeholder: "Pick a date..."
+            ),
+            // Platform filter (will be implemented via dropdown in main filter)
+            FormControl(
+              label: "Platform",
+              input: Select(),
+              placeholder: "Select platform"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 11. Narrow to one platform
+    Card(
+      children: [
+        TabItems: [
+          TabItem(value: "all", trigger: "all", content: null),
+          TabItem(value: "instagram", trigger: "instagram", content: null),
+          TabItem(value: "tiktok", trigger: "tiktok", content: null),
+          TabItem(value: "twitter", trigger: "twitter", content: null),
+          TabItem(value: "youtube", trigger: "youtube", content: null),
+          TabItem(value: "linkedin", trigger: "linkedin", content: null)
+        ]
+      ]
+    )
+  ],
+  variant: "card"
+)
+```

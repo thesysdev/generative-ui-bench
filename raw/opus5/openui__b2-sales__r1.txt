@@ -1,0 +1,39 @@
+root = Card([header, kpiRow, trendSection, productsSection, conversionSection, actions, followUps])
+
+header = CardHeader("Monthly Sales Check", "March 2024 · updated today")
+
+kpiRow = Card([revenueCard, growthTag], "sunk", "row", "l", "center", "between")
+revenueCard = Card([revenueLabel, revenueValue, revenueSub], "clear", "column", "xs")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = Heading("$184,320", "h1")
+revenueSub = TextContent("vs $161,940 in February", "small")
+growthTag = Tag("+13.8% MoM", null, "lg", "success")
+
+trendSection = Card([trendHeading, revenueTrend], "clear", "column", "s")
+trendHeading = Heading("Revenue, last six months", "h3")
+revenueTrend = LineChart(["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"], [revenueSeries], "natural", "Month", "Revenue (USD)")
+revenueSeries = Series("Revenue", [128400, 139200, 172600, 154800, 161940, 184320])
+
+productsSection = Card([productsHeading, productsTable, productsChart], "clear", "column", "s")
+productsHeading = Heading("Top three products", "h3")
+productsTable = Table([productCol, unitsCol, productRevCol])
+productCol = Col("Product", ["Aurora Desk Lamp", "Nomad Travel Mug", "Terra Ceramic Planter"])
+unitsCol = Col("Units sold", [1420, 1085, 860], "number")
+productRevCol = Col("Revenue", ["$56,800", "$32,550", "$25,800"])
+productsChart = HorizontalBarChart(["Aurora Desk Lamp", "Nomad Travel Mug", "Terra Ceramic Planter"], [unitsSeries], "grouped", "Units sold", "Product")
+unitsSeries = Series("Units", [1420, 1085, 860])
+
+conversionSection = Card([conversionHeading, conversionProgress, conversionNote], "sunk", "column", "s")
+conversionHeading = Heading("Conversion rate", "h3")
+conversionProgress = Progress(3.6, "3.6% of 48,200 sessions converted")
+conversionNote = TextContent("Up from **3.1%** in February. Checkout drop-off is still the largest leak.", "small")
+
+actions = Buttons([downloadCsv, downloadPdf, emailReport])
+downloadCsv = Button("Download CSV")
+downloadPdf = Button("Download PDF report", null, "secondary")
+emailReport = Button("Email me the numbers", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Why did December spike?")
+fu2 = FollowUpItem("Break revenue down by channel")
+fu3 = FollowUpItem("Where are we losing checkout conversions?")

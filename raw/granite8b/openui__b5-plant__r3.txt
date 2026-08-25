@@ -1,0 +1,162 @@
+```openui-lang
+root = Card([
+    header,
+    oeeWidget,
+    productionTargetWidget,
+    productionLinesWidget,
+    defectRateChart,
+    downtimeByCauseBar,
+    maintenanceDueWidget,
+    inventoryWidget,
+    supplierDeliveriesWidget,
+    shiftOutputComparison,
+    safetyIncidentsWidget,
+    qualityHoldBatchesWidget,
+    energyUseWidget,
+    workOrdersWidget,
+    maintenanceScheduler,
+    lineFocusSelector,
+    andonLiveAlerts,
+    exportShiftReportButton
+], "clear", "column", "none", "m", "center", "between")
+
+header = CardHeader("Factory Floor Console", "Real-time Operations Dashboard")
+
+oeeWidget = Card([
+    Callout("Info", "Overall Equipment Effectiveness: 92.3%", "success"),
+    TextCallout("neutral", "OEE", "92.3%")
+], "card")
+
+productionTargetWidget = Card([
+    Callout("Info", "Units Produced vs Target: 1,845 / 2,000", "info"),
+    TextCallout("neutral", "Units Produced", "1,845")
+], "card")
+
+productionLinesWidget = Card([
+    Heading("Production Lines", "h3"),
+    ListBlock(items: [
+        lineLineItem("Line A", "Rate: 45 UPH | Status: ✅ OK"),
+        lineLineItem("Line B", "Rate: 38 UPH | Status: ⚠️ Warning"),
+        lineLineItem("Line C", "Rate: 52 UPH | Status: ✅ OK"),
+        lineLineItem("Line D", "Rate: 30 UPH | Status: ❌ Stopped")
+    ], variant: "image")
+], "sunk")
+
+defectRateChart = HorizontalBarChart(
+    labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+    series: [defectSeries],
+    variant: "grouped",
+    xLabel: "Month",
+    yLabel: "Defect Rate (%)"
+)
+defectSeries = Series("Defect Rate", [2.1, 1.8, 2.3, 1.5, 2.0])
+
+downtimeByCauseBar = BarChart(
+    labels: ["Equipment", "Maintenance", "Setup", "Minor", "Other"],
+    series: [downtimeSeries],
+    variant: "grouped",
+    xLabel: "Cause",
+    yLabel: "Hours"
+)
+downtimeSeries = Series("Downtime (hrs)", [12, 8, 4, 2, 1])
+
+maintenanceDueWidget = Card([
+    Heading("Maintenance Due", "h3"),
+    ListBlock(items: [
+        maintenanceItem("Machine 101", "2025-08-20"),
+        maintenanceItem("Machine 203", "2025-08-22"),
+        maintenanceItem("Machine 405", "2025-08-25")
+    ], variant: "number")
+], "sunk")
+
+inventoryWidget = Card([
+    Heading("Inventory", "h3"),
+    Table(columns: [
+        Col("Material", ["Steel", "Resin", "Packaging"]),
+        Col("On Hand (kg)", ["15,000", "8,200", "5,100"])
+    ])
+], "clear")
+
+supplierDeliveriesWidget = Card([
+    Heading("Supplier Deliveries This Week", "h3"),
+    ListBlock(items: [
+        deliveryItem("Supplier X", "Steel", "2025-08-20", "2,500 kg"),
+        deliveryItem("Supplier Y", "Resin", "2025-08-21", "1,200 kg"),
+        deliveryItem("Supplier Z", "Packaging", "2025-08-22", "3,000 units")
+    ], variant: "image")
+], "sunk")
+
+shiftOutputComparison = Card([
+    Heading("Shift Output Comparison", "h3"),
+    Table(columns: [
+        Col("Shift", ["Morning", "Afternoon", "Night"]),
+        Col("Units Produced", ["900", "950", "800"])
+    ])
+], "clear")
+
+safetyIncidentsWidget = Card([
+    Callout("Info", "Safety Incidents This Year: 3 | Days Since Last: 45", "warning"),
+    TextCallout("neutral", "Incidents", "3")
+], "card")
+
+qualityHoldBatchesWidget = Card([
+    Heading("Quality Hold Batches", "h3"),
+    ListBlock(items: [
+        batchItem("Batch 123", "Steel Alloy"),
+        batchItem("Batch 456", "Resin Blend"),
+        batchItem("Batch 789", "Packaging Material")
+    ], variant: "number")
+], "sunk")
+
+energyUseWidget = Card([
+    Callout("Info", "Energy Use Today: 12,450 kWh", "success"),
+    TextCallout("neutral", "Energy (kWh)", "12,450")
+], "card")
+
+workOrdersWidget = Card([
+    Heading("Open Work Orders", "h3"),
+    Table(columns: [
+        Col("Priority", ["High", "Medium", "Low"]),
+        Col("Description", ["Rework 101", "Prep 202", "Testing 303"])
+    ])
+], "clear")
+
+maintenanceScheduler = Card([
+    Heading("Schedule Maintenance", "h3"),
+    Form("schedule-maintenance", buttons: maintenanceSchedulerButtons, fields: [
+        maintenanceField("Machine", machineSelect, "Select machine"),
+        maintenanceField("Date", dateInput, "Choose date"),
+        maintenanceField("Notes", textareaInput, "Add notes")
+    ])
+])
+machineSelect = Select("machine", [machineOption1, machineOption2, machineOption3], "Choose machine")
+machineOption1 = SelectItem("Machine 101", "Machine 101")
+machineOption2 = SelectItem("Machine 203", "Machine 203")
+machineOption3 = SelectItem("Machine 405", "Machine 405")
+dateInput = DatePicker("date", "single")
+textareaInput = TextArea("notes", "Notes", rows: 3)
+maintenanceSchedulerButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+lineFocusSelector = Card([
+    Heading("Focus on Production Line", "h3"),
+    Select("line", [lineOptionA, lineOptionB, lineOptionC, lineOptionD], "Select line")
+])
+lineOptionA = SelectItem("Line A", "Line A")
+lineOptionB = SelectItem("Line B", "Line B")
+lineOptionC = SelectItem("Line C", "Line C")
+lineOptionD = SelectItem("Line D", "Line D")
+
+andonLiveAlerts = Card([
+    Heading("Live ANDON Alerts", "h3"),
+    TextCallout("warning", "Alert 1", "High temperature on Line B")
+], "clear")
+
+exportShiftReportButton = Button("Export Shift Report", null, "secondary", "medium")
+
+lineLineItem = (line, status) => ListItem(title: line, subtitle: status, image: ["/line_icon.svg"], actionLabel: "View Details")
+maintenanceItem = (machine, dueDate) => ListItem(title: machine, subtitle: dueDate, image: ["/maintenance_icon.svg"], actionLabel: "Schedule")
+deliveryItem = (supplier, material, date, quantity) => ListItem(title: supplier, subtitle: quantity, image: ["/delivery_icon.svg"], actionLabel: "View Details")
+batchItem = (batch, description) => ListItem(title: batch, subtitle: description, image: ["/batch_icon.svg"], actionLabel: "Details")
+```

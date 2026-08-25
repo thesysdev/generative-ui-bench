@@ -1,0 +1,116 @@
+root = Card([overview, portfolioSection, positionsSection, exposureSection, riskSection, gainsLossSection, instrumentsSection, workingOrdersSection, marginSection, headlinesSection, economicSection, strategiesSection, drawdownSection, riskLimitsSection, rebalanceSection, orderSection, timeframeSection], "sunk")
+
+overview = CardHeader("Morning Workspace", "Trading Desk — Live")
+
+portfolioSection = CardHeader("Portfolio Summary", "Total value and today's P&L")
+portfolioValue = Tag("Portfolio Value", null, null, "primary")
+pnlToday = Tag("P&L Today", null, null, "success")
+
+positionsSection = CardHeader("Positions", "Open positions with key metrics")
+positionsList = ListBlock([
+  ListItem("AAPL", "1,200", "150.25", "152.80"),
+  ListItem("MSFT", "800", "378.50", "382.10"),
+  ListItem("GOOGL", "500", "142.30", "145.90"),
+  ListItem("TSLA", "300", "248.75", "255.30"),
+], "image")
+
+exposureSection = CardHeader("Exposure by Sector", "Allocation across industry sectors")
+sectorExposure = ListBlock([
+  ListItem("Technology", "42%", null, null),
+  ListItem("Healthcare", "18%", null, null),
+  ListItem("Financials", "15%", null, null),
+  ListItem("Energy", "12%", null, null),
+  ListItem("Consumer", "10%", null, null),
+], "image")
+
+riskSection = CardHeader("Risk Metrics", "Value at Risk and limit status")
+varValue = Tag("Value at Risk (95%)", null, null, "warning")
+riskLimit1 = Tag("Position Limit", "85% used", null, "danger")
+riskLimit2 = Tag("Leverage Cap", "72% used", null, "warning")
+
+gainsLossSection = CardHeader("Today's Gains & Losses", "Top movers by price change")
+gainsLossList = ListBlock([
+  ListItem("TSLA", "+12.40", "12.6%", "gain"),
+  ListItem("NVDA", "+8.30", "5.2%", "gain"),
+  ListItem("META", "-4.50", "-0.4%", "loss"),
+  ListItem("AMZN", "-3.20", "-0.6%", "loss"),
+], "image")
+
+instrumentsSection = CardHeader("Instruments Under Watch", "Live prices for key instruments")
+instrumentsList = ListBlock([
+  ListItem("AAPL", "152.80", "152.80"),
+  ListItem("MSFT", "382.10", "382.10"),
+  ListItem("GOOGL", "145.90", "145.90"),
+  ListItem("TSLA", "255.30", "255.30"),
+], "image")
+
+workingOrdersSection = CardHeader("Working Orders", "Pending and active orders")
+workingOrdersList = ListBlock([
+  ListItem("AAPL", "Buy 1,000", "150.25", "152.80"),
+  ListItem("TSLA", "Sell 500", "255.30", "252.00"),
+  ListItem("MSFT", "Buy 200", "378.50", "380.00"),
+], "image")
+
+marginSection = CardHeader("Margin in Use", "Leverage and margin status")
+marginValue = Tag("Margin Used", "42% of limit", null, "warning")
+marginLimit = Tag("Total Limit", "100%", null, "neutral")
+
+headlinesSection = CardHeader("Market Headlines", "Latest market sentiment")
+headlinesList = ListBlock([
+  ListItem("Fed Chair signals hawkish stance", "Negative", null, null),
+  ListItem("Sector rotation into tech", "Positive", null, null),
+  ListItem("Oil prices surge on supply concerns", "Neutral", null, null),
+  ListItem("Earnings beat expectations", "Positive", null, null),
+], "image")
+
+economicSection = CardHeader("Economic Releases This Week", "Key data points to watch")
+economicList = ListBlock([
+  ListItem("CPI Print", "Today, 9:30 AM", null, null),
+  ListItem("Non-Farm Payrolls", "Friday, 2:00 PM", null, null),
+  ListItem("Retail Sales", "Tuesday, 10:00 AM", null, null),
+  ListItem("Inflation Gauge", "Thursday, 12:00 PM", null, null),
+], "image")
+
+strategiesSection = CardHeader("Strategy Returns This Year", "Performance by strategy")
+strategiesList = ListBlock([
+  ListItem("Trend Following", "+18.4%", null, null),
+  ListItem("Mean Reversion", "+12.1%", null, null),
+  ListItem("Momentum", "+24.7%", null, null),
+  ListItem("Statistical Arbitrage", "+9.8%", null, null),
+], "image")
+
+drawdownSection = CardHeader("Drawdown Over the Past Year", "Maximum drawdown and current drawdown")
+drawdownValue = Tag("Max Drawdown", "-12.3%", null, "danger")
+drawdownCurrent = Tag("Current Drawdown", "-6.1%", null, "warning")
+
+riskLimitsSection = CardHeader("Risk Limits", "Limits approaching breach")
+riskLimitAlert = Alert("Risk Limit Approaching", "Sector exposure at 82% of limit", "warning")
+riskLimitAlert2 = Alert("Margin Risk", "Leverage at 72% of limit", "warning")
+
+rebalanceSection = CardHeader("Rebalance", "Action to rebalance portfolio")
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary")
+
+orderSection = CardHeader("Place Order", "Create a new trade")
+orderForm = Form("place-order", [
+  FormControl("Ticker", tickerInput, "Enter ticker symbol"),
+  FormControl("Side", sideSelect, "Buy or Sell"),
+  FormControl("Quantity", qtyInput, "Number of shares"),
+], [
+  Button("Place Order", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+tickerInput = Input("ticker", "AAPL", "text")
+sideSelect = Select("side", [
+  SelectItem("Buy", "Buy"),
+  SelectItem("Sell", "Sell"),
+], "Select side")
+qtyInput = Input("quantity", "100", "number")
+
+timeframeSection = CardHeader("Timeframe", "Change the charting timeframe")
+timeframeSelect = Select("timeframe", [
+  SelectItem("1D", "1 Day"),
+  SelectItem("1W", "1 Week"),
+  SelectItem("1M", "1 Month"),
+  SelectItem("1Y", "1 Year"),
+  SelectItem("ALL", "All Time"),
+], "Select timeframe")

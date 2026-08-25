@@ -1,0 +1,179 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Bed Occupancy
+    CardHeader("Bed Occupancy", "Current bed utilization across departments"),
+    BedTable([
+      {title: "General Wards", occupancy: "78%", available: "22/100"}, 
+      {title: "ICU", occupancy: "92%", available: "8/40"},
+      {title: "Surgery", occupancy: "65%", available: "35/55"},
+      {title: "Pediatrics", occupancy: "45%", available: "55/110"},
+      {title: "Mental Health", occupancy: "55%", available: "45/80"}
+    ]),
+    
+    // 2. Current ER Wait
+    Card(
+      header="Emergency Room Wait",
+      content=[
+        {
+          title="Wait Time",
+          value="42 minutes",
+          unit="min"
+        },
+        {
+          title="Current Patients",
+          value="37",
+          unit="patients"
+        }
+      ]
+    ),
+    
+    // 3. Admissions Over Past Two Weeks
+    Card(
+      header="Admissions (Last 14 Days)",
+      content=[
+        {
+          title="Total Admissions",
+          value="142",
+          unit="patients"
+        },
+        {
+          title="Admission Trend",
+          value="↑ 18% vs previous period",
+          type="growth"
+        }
+      ]
+    ),
+    
+    // 4. Patients Per Department
+    Card(
+      header="Patients by Department",
+      content=[
+        {title: "General Medicine", count: "58"}, 
+        {title: "ICU", count: "29"}, 
+        {title: "Surgery", count: "34"}, 
+        {title: "Pediatrics", count: "25"}, 
+        {title: "Orthopedics", count: "19"},
+        {title: "Psychiatry", count: "12"}
+      ]
+    ),
+    
+    // 5. Staff On Shift With Role
+    Card(
+      header="Staff On Shift",
+      content=[
+        {title: "Dr. Chen", role: "Attending Surgeon", status: "on_shift"},
+        {title: "Nurse Patel", role: "RN - ICU", status: "on_shift"},
+        {title: "Nurse Kim", role: "RN - General", status: "on_shift"},
+        {title: "Dr. Wang", role: "Attending Physician", status: "off_shift"},
+        {title: "Nurse Lee", role: "RN - Pediatrics", status: "on_shift"},
+        {title: "CNA Martinez", role: "CNC - General", status: "on_shift"}
+      ]
+    ),
+    
+    // 6. Critical Patients Called Out
+    Card(
+      header="Critical Patients",
+      content=[
+        {title: "Mr. Johnson", room: "302", condition: "Severe hemorrhage", severity: "critical"},
+        {title: "Mrs. White", room: "405", condition: "Acute respiratory failure", severity: "critical"},
+        {title: "Dr. Thompson", room: "108", condition: "Cardiac arrest follow-up", severity: "critical"},
+        {title: "Young Woman L", room: "211", condition: "Anaphylactic shock", severity: "critical"}
+      ]
+    ),
+    
+    // 7. Patients Ready for Discharge
+    Card(
+      header="Ready for Discharge",
+      content=[
+        {title: "Mr. Davis", bed: "B4", notes: "Stable, meds cleared"},
+        {title: "Ms. Rodriguez", bed: "E7", notes: "Vitals stable, discharge paperwork complete"},
+        {title: "Mr. Park", bed: "301", notes: "Post-op day 2, ready for transition"}
+      ]
+    ),
+    
+    // 8. Today's Operating Room Bookings
+    Card(
+      header="OR Bookings (Today)",
+      content=[
+        {title: "08:00 - 12:00", surgeon: "Dr. Chen", case: "Major orthopedic surgery", status: "in_progress"},
+        {title: "13:00 - 16:00", surgeon: "Dr. Wang", case: "Cardiac procedure", status: "scheduled"},
+        {title: "17:00 - 20:00", surgeon: "Nurse Lead", case: "Minor reconstructive", status: "available"}
+      ]
+    ),
+    
+    // 9. Supplies Running Low
+    Card(
+      header="Low Stock Alerts",
+      content=[
+        {title: "Blood Products", status: "low", quantity: "12 units remaining"},
+        {title: "Monitoring Equipment", status: "low", quantity: "8 units remaining"},
+        {title: "Surgical Kits", status: "critical", quantity: "4 units remaining"},
+        {title: "IV Sets", status: "critical", quantity: "6 units remaining"}
+      ],
+      variant="sunk"
+    ),
+    
+    // 10. Incident Filing
+    Card(
+      header="File Incident Report",
+      content=[
+        {
+          title="Incident Details",
+          description="Quickly log any safety or operational incidents",
+          variant="neutral"
+        },
+        {
+          title="Submit New Incident",
+          content=[
+            {type: "textarea", placeholder: "Describe the incident..."},
+            {type: "radio_group", options: ["Medical Error", "Equipment Failure", "Patient Safety", "Environmental"],
+             selected: "Medical Error"}
+          ]
+        }
+      ]
+    ),
+    
+    // 11. Another Day View (Toggle)
+    Card(
+      header="Today's Summary",
+      content=[
+        {title: "Summary Metrics", content="Bed occupancy: 74%, ER wait: 42min, Admissions: 142"},
+        {title: "Action Items", content="Review critical patients, check OR schedule, restock supplies"}
+      ]
+    ),
+    
+    // 12. Patient Transfer Request
+    Card(
+      header="Request Patient Transfer",
+      content=[
+        {
+          title: "Transfer Detail",
+          description="Specify patient and destination facility"
+        },
+        {
+          title: "Reason for Transfer",
+          choices: [
+            "Emergency transfer",
+            "Consultation referral",
+            "Recovery follow-up",
+            "Other"
+          ]
+        },
+        {
+          title: "Destination Facility",
+          options: [
+            "City Hospital",
+            "Regional Medical Center",
+            "Specialist Clinic",
+            "Home Care"
+          ]
+        }
+      ]
+    )
+  ],
+  variant="card",
+  direction="row",
+  gap="s"
+)
+```

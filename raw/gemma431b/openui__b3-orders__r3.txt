@@ -1,0 +1,38 @@
+root = Card([header, kpiGrid, filterSection, ordersTable, volumeChart, footer], "card", "column", "l")
+
+header = CardHeader("Operations Desk", "Real-time e-commerce monitoring")
+
+kpiGrid = Card([ordersKpi, revenueKpi, aovKpi, refundKpi], "sunk", "row", "m", "stretch", "between")
+ordersKpi = TextCallout("info", "Orders Today", "1,284")
+revenueKpi = TextCallout("success", "Revenue Today", "$42,150.00")
+aovKpi = TextCallout("neutral", "Avg Order Value", "$32.83")
+refundKpi = TextCallout("warning", "Monthly Refund Rate", "2.4%")
+
+filterSection = Card([searchField, statusFilter], "clear", "row", "m", "start", "start")
+searchField = FormControl("Customer Search", searchInput)
+searchInput = Input("customer_search", "Search by name...", "text")
+statusFilter = FormControl("Filter Status", statusSelect)
+statusSelect = Select("status_filter", [sPaid, sPending, sShipped, sCancelled], "All Statuses")
+sPaid = SelectItem("paid", "Paid")
+sPending = SelectItem("pending", "Pending")
+sShipped = SelectItem("shipped", "Shipped")
+sCancelled = SelectItem("cancelled", "Cancelled")
+
+ordersTable = Table([idCol, customerCol, totalCol, statusCol, actionCol])
+idCol = Col("Order ID", ["#10245", "#10244", "#10243", "#10242"], "string")
+customerCol = Col("Customer", ["Alex Rivera", "Sarah Chen", "Mike Ross", "Elena G."], "string")
+totalCol = Col("Total", ["$124.00", "$45.50", "$210.10", "$12.99"], "number")
+statusCol = Col("Status", ["Paid", "Pending", "Paid", "Shipped"], "string")
+actionCol = Col("Action", ["Fulfill", "Fulfill", "Fulfill", "Complete"], "action")
+
+volumeChart = Card([volHeading, volLine], "sunk", "column", "s")
+volHeading = Heading("Order Volume (Last 4 Weeks)", "h3")
+volLine = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volSeries], "natural", "Week", "Orders")
+volSeries = Series("Orders", [3100, 2850, 3400, 3210])
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Export today's report to CSV")
+f2 = FollowUpItem("View detailed refund analytics")
+
+actionBtn = Button("Mark as Fulfilled", null, "primary", "normal", "small")
+fulfillDialog = DialogBlock("Fulfill Order", "Confirm fulfillment", "Are you sure you want to mark this order as fulfilled?", [actionBtn])

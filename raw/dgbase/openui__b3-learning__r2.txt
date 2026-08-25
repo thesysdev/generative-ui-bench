@@ -1,0 +1,85 @@
+thought
+root = Card([header, filters, metrics, engagementChart, enrollmentTable, riskSection, footer])
+header = CardHeader("Learning Platform Analytics", "Global Performance & Engagement")
+filters = Card([cohortSelector, messageBtn], "row", "m")
+cohortSelector = FormControl("Filter by Cohort", Select("cohort", [all, eng1, mkt1, sales], "Select cohort..."))
+all = SelectItem("all", "All Cohorts")
+eng1 = SelectItem("eng_v1", "Engineering 2024")
+mkt1 = SelectItem("mkt_q1", "Marketing Q1")
+sales = SelectItem("sales", "Sales Excellence")
+messageBtn = Button("Message Cohort", null, "secondary")
+footerGroup = Buttons([messageBtn], "row") # wait, messageBtn is already a button, just using it.
+metrics = Card([activeLearners, completionRate, avgScore], "row", "l")
+activeLearners = MetricValue("1,240")
+completionRate = MetricValue("74%") 
+avgScore = MetricValue("82%")
+activeLearnerLabel = Text("Active Learners This Week", "small")
+completionLabel = Text("Course Completion Rate", "small")
+avgScoreLabel = Text("Avg Quiz Score", "small")
+activeLearnersCard = Card([activeLearnerLabel, activeLearners], "sunk")
+completionRateCard = Card([completionLabel, completionRate], "sunk")
+avgScoreCard = Card([avgScoreLabel, avgScore], "sunk")
+# Re-defining metrics to use the cards
+metrics = Card([activeLearnersCard, completionRateCard, avgScoreCard])
+activeLearners = Text("1,240", "large-heavy")
+completionRate = Text("74%", "large-heavy")
+avgScore = Text("82%", "large-heavy")
+engagementChart = Card([Heading("Engagement Trend (Last 8 Weeks)", "h3"), LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "natural", "Week", "Active %"])
+engagementSeries = Series("Engagement", [65, 68, 62, 70, 75, 72, 78, 82])
+enrollmentTable = Card([Heading("Courses by Enrollment", "h3"), Table([colCourse, colEnroll])])
+colCourse = Col("Course Name", ["Intro to Python", "Advanced React", "Data Science Basics", "Cloud Architecture", "UX Design"])
+colEnroll = Col("Enrollments", [1200, 850, 720, 450, 310])
+riskSection = Card([Heading("Learners at Risk", "h3"), ListBlock([risk1, risk2, risk3])])
+risk1 = ListItem("Alice Johnson", "No activity for 10 days", null, "View")
+risk2 = ListItem("Bob Smith", "Quiz scores below 60%", null, "Intervene")
+risk3 = ListItem("Charlie Davis", "Incomplete final module", null, "View")
+footer = FollowUpBlock([FollowUpItem("Download PDF Report"), FollowUpItem("Predict churn model")])
+# Fixing root reference
+root = Card([header, filters, metrics, engagementChart, enrollmentTable, riskSection, footer])
+# Wait, I need to make sure all variables are defined and used.
+# Let's re-verify:
+# header: used
+# filters: used
+# cohortSelector: used
+# all, eng1, mkt1, sales: used in cohortSelector
+# messageBtn: used
+# metrics: used
+# activeLearnersCard, completionRateCard, avgScoreCard: used in metrics
+# activeLearners, completionRate, avgScore used in cards
+# engagementChart is used
+# engagementSeries: used in engagementChart
+# enrollmentTable: used
+# colCourse, colEnroll: used in enrollmentTable
+# riskSection: used
+# risk1, risk2, risk3: used in riskSection
+# footer: used
+
+# I forgot to define MetricValue. I'll use Text instead.독# Let's just use Text(val, "large-heavy")
+# Actually I'll just use the components available in the signature.
+# MetricValue is not a component in the signature. 
+# I will use Text and Heading or Card.
+
+# Final structure check:
+root = Card([header, filters, metrics, engagementChart, enrollmentTable, riskSection, footer])
+header = CardHeader("Learning Platform Analytics", "Global Performance & Engagement")
+filters = Card([cohortSelector, messageBtn], "row", "m")
+cohortSelector = FormControl("Filter by Cohort", Select("cohort", [all, eng1, mkt1, sales], "Select cohort..."))
+all = SelectItem("all", "All Cohorts")
+eng1 = SelectItem("eng_v1", "Engineering 2024")
+mkt1 = SelectItem("mkt_q1", "Marketing Q1")
+sales = SelectItem("sales", "Sales Excellence")
+messageBtn = Button("Message Cohort", null, "secondary")
+metrics = Card([activeLearnersCard, completionRateCard, avgScoreCard])
+activeLearnersCard = Card([Text("Active Learners This Week", "small"), Text("1,240", "large-heavy")], "sunk")
+completionRateCard = Card([Text("Course Completion Rate", "small"), Text("74%", "large-heavy")], "sunk")
+avgScoreCard = Card([Text("Avg Quiz Score", "small"), Text("82%", "large-heavy")], "sunk")
+engagementChart = Card([Heading("Engagement Trend (Last 8 Weeks)", "h3"), LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "natural", "Week", "Active %"])
+engagementSeries = Series("Engagement", [65, 68, 62, 70, 75, 72, 78, 82])
+enrollmentTable = Card([Heading("Courses by Enrollment", "h3"), Table([colCourse, colEnroll])])
+colCourse = Col("Course Name", ["Intro to Python", "Advanced React", "Data Science Basics", "Cloud Architecture", "UX Design"])
+colEnroll = Col("Enrollments", [1200, 850, 720, 450, 310])
+riskSection = Card([Heading("Learners at Risk", "h3"), ListBlock([risk1, risk2, risk3])])
+risk1 = ListItem("Alice Johnson", "No activity for 10 days", null, "View")
+risk2 = ListItem("Bob Smith", "Quiz scores below 60%", null, "Intervene")
+risk3 = ListItem("Charlie Davis", "Incomplete final module", null, "View")
+footer = FollowUpBlock([FollowUpItem("Download PDF Report"), FollowUpItem("Predict churn model")])

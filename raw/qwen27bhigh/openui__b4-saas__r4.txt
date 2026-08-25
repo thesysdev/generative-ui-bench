@@ -1,0 +1,76 @@
+
+
+root = Card([header, periodRow, kpiCard, signupsCard, planSplitCard, topCustomersCard, atRiskCard, failedPaymentsCard, featureAdoptionCard, seatUtilCard, inviteAdminBtn])
+
+header = CardHeader("Admin Overview", "SaaS company dashboard — all metrics in USD")
+
+periodRow = Card([periodLabel, periodBtns], "clear", "row", "m", "center")
+periodLabel = TextContent("Reporting period:", "small")
+periodBtns = Buttons([btn30d, btn90d, btnYtd])
+btn30d = Button("30 days", null, "secondary", null, "small")
+btn90d = Button("90 days", null, "primary", null, "small")
+btnYtd = Button("YTD", null, "secondary", null, "small")
+
+kpiCard = Card([kpiHeading, kpiTable], "card")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiMetric, kpiValue, kpiChange])
+kpiMetric = Col("Metric", ["MRR", "ARR", "Churn (30 d)", "NPS"])
+kpiValue = Col("Value", ["$284,500", "$3,414,000", "2.3 %", "62"])
+kpiChange = Col("vs prior period", ["+4.2 %", "+3.8 %", "−0.4 pp", "+5"])
+
+signupsCard = Card([signupsHeading, signupsChart], "card")
+signupsHeading = Heading("New Signups — Past 90 Days", "h3")
+signupsChart = LineChart(signupsLabels, [signupsSeries], "natural", "Week", "Signups")
+signupsLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12", "W13"]
+signupsSeries = Series("New signups", [42, 51, 47, 63, 58, 71, 66, 74, 82, 79, 91, 88, 95])
+
+planSplitCard = Card([planHeading, planChart], "card")
+planHeading = Heading("Customers by Plan", "h3")
+planChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Starter", "Growth", "Enterprise"]
+planValues = [142, 89, 34]
+
+topCustomersCard = Card([topCustHeading, topCustTable], "card")
+topCustHeading = Heading("Top 10 Customers", "h3")
+topCustTable = Table([custName, custSeats, custSpend])
+custName = Col("Company", ["Acme Corp", "Globex", "Initech", "Umbrella", "Stark Industries", "Wayne Ent.", "Cyberdyne", "Soylent Corp", "Hooli", "Pied Piper"])
+custSeats = Col("Seats", [450, 320, 280, 240, 210, 185, 160, 145, 130, 120])
+custSpend = Col("Annual Spend", ["$486,000", "$341,000", "$298,000", "$252,000", "$224,000", "$198,000", "$172,000", "$156,000", "$141,000", "$132,000"])
+
+atRiskCard = Card([atRiskHeading, atRiskTable], "card")
+atRiskHeading = Heading("Accounts at Risk", "h3")
+atRiskTable = Table([riskAccount, riskReason, riskLevel])
+riskAccount = Col("Account", ["Globex", "Umbrella", "Soylent Corp", "Hooli"])
+riskReason = Col("Reason", ["3 failed admin logins; weekly active users down 40 %", "Contract expires in 14 days; no renewal contact yet", "NPS dropped to 12; 2 support tickets unresolved > 72 h", "Seat utilization fell below 50 % for 60 consecutive days"])
+riskLevel = Col("Risk", ["High", "High", "Medium", "Medium"])
+
+failedPaymentsCard = Card([fpHeading, fpTable], "card")
+fpHeading = Heading("Failed Payments", "h3")
+fpTable = Table([fpAccount, fpAmount, fpDate, fpAction])
+fpAccount = Col("Account", ["Initech", "Cyberdyne", "Pied Piper"])
+fpAmount = Col("Amount", ["$2,400", "$1,800", "$960"])
+fpDate = Col("Failed on", ["2025-01-03", "2025-01-05", "2025-01-07"])
+fpAction = Col("Action", ["Retry", "Retry", "Retry"], "action")
+
+featureAdoptionCard = Card([faHeading, faFeature1, faFeature2, faFeature3], "card")
+faHeading = Heading("New Feature Adoption", "h3")
+faFeature1 = Progress(72, "AI Copilot — launched Dec 2024")
+faFeature2 = Progress(58, "Custom Dashboards — launched Jan 2025")
+faFeature3 = Progress(34, "API Webhooks — launched Feb 2025")
+
+seatUtilCard = Card([suHeading, suProgress, suDetail], "card")
+suHeading = Heading("Seat Utilization", "h3")
+suProgress = Progress(71, "14,280 of 20,100 seats active")
+suDetail = TextContent("Company-wide seat utilization is 71 %. 5,820 seats are currently unused across all plans.", "small")
+
+inviteAdminBtn = DialogBlock("Invite Admin", "Invite a New Admin", "Add another admin to your organization. They will receive an email with a setup link.", [inviteForm])
+inviteForm = Form("invite-admin", inviteFormBtns, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Email", inviteEmailInput, "Must be a valid work email")
+inviteEmailInput = Input("email", "admin@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("role", [roleAdmin, roleViewer], "Select role")
+roleAdmin = SelectItem("admin", "Full admin")
+roleViewer = SelectItem("viewer", "Read-only")
+inviteFormBtns = Buttons([inviteSubmitBtn, inviteCancelBtn])
+inviteSubmitBtn = Button("Send Invite", null, "primary")
+inviteCancelBtn = Button("Cancel", null, "tertiary")

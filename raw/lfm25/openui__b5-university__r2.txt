@@ -1,0 +1,219 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("University Administration Dashboard", "Overview of key metrics and operations"),
+    
+    // 1. Total enrollment and 5-year movement
+    Card(
+      children: [
+        TextContent("Total Enrollment (5-Year Trend)", "Enrollment numbers showing growth over the past five years"),
+        Table([
+          {"year": "2019", "enrollment": 28500},
+          {"year": "2020", "enrollment": 29800},
+          {"year": "2021", "enrollment": 31200},
+          {"year": "2022", "enrollment": 32800},
+          {"year": "2023", "enrollment": 34500}
+        ]),
+        CardHeader("Enrollment Growth", "Year-over-year change"),
+        TextContent("+20.7% increase since 2019", style="color:green"),
+      ]
+    ),
+    
+    // 2. Applications by program
+    Card(
+      children: [
+        TextContent("Applications by Program", "Number of applications received per academic program"),
+        Table([
+          {"program": "Computer Science", "applications": 420},
+          {"program": "Engineering", "applications": 380},
+          {"program": "Business", "applications": 370},
+          {"program": "Arts & Humanities", "applications": 310},
+          {"program": "Medicine", "applications": 290},
+          {"program": "Education", "applications": 250},
+          {"program": "Law", "applications": 240}
+        ]),
+        CardHeader("Application Distribution", "Proportion of total applications"),
+        Table([
+          {"program": "Computer Science", "percentage": "31.7%"},
+          {"program": "Engineering", "percentage": "28.2%"},
+          {"program": "Business", "percentage": "27.2%"},
+          {"program": "Arts & Humanities", "percentage": "22.5%"},
+          {"program": "Medicine", "percentage": "21.8%"},
+          {"program": "Education", "percentage": "18.1%"},
+          {"program": "Law", "percentage": "17.3%"}
+        ])
+      ]
+    ),
+    
+    // 3. Acceptance rate
+    Card(
+      children: [
+        CardHeader("Acceptance Rate", "Overall acceptance rate across all programs"),
+        TextCallout(
+          variant="success",
+          title="78%",
+          description="Current acceptance rate stands at 78% across all undergraduate programs"
+        )
+      ]
+    ),
+    
+    // 4. Tuition revenue this year
+    Card(
+      children: [
+        CardHeader("Tuition Revenue (This Year)", "Total tuition income for the current academic year"),
+        TextContent("$142.5M", style="font-weight:bold"),
+        TextContent("Represents 38% of total operating budget", style="color:#666")
+      ]
+    ),
+    
+    // 5. How full each course offering is
+    Card(
+      children: [
+        TextContent("Course Offerings - Capacity vs Actual Enrollment", "Current utilization of course sections"),
+        HorizontalBarChart(
+          labels=['CS101', 'CS201', 'ENG102', 'MATH201', 'BUS401', 'PHYS130'],
+          series=[20000, 18000, 15000, 12000, 10000, 9000],
+          xLabel='Course',
+          yLabel='Enrollment Count'
+        ),
+        TextContent("All courses are currently above half-capacity", style="color:gray")
+      ]
+    ),
+    
+    // 6. Teaching load by faculty member
+    Card(
+      children: [
+        TextContent("Teaching Load by Faculty", "Current workload distribution across departments"),
+        BarChart(
+          labels=['Dept A', 'Dept B', 'Dept C', 'Dept D', 'Dept E'],
+          series=[45, 40, 35, 25, 20],
+          xLabel='Faculty Department',
+          yLabel='Average Classes/Term'
+        ),
+        TextContent("Faculty A: 12 classes | B: 10 | C: 8 | D: 6 | E: 4")
+      ]
+    ),
+    
+    // 7. Students at academic risk
+    Card(
+      children: [
+        TextContent("Students at Academic Risk", "Early warning indicators for at-risk students"),
+        ListBlock([
+          {"student_id": "S101", "name": "Alex Chen", "risk_level": "High"},
+          {"student_id": "S104", "name": "Maria Lopez", "risk_level": "Medium"},
+          {"student_id": "S108", "name": "Jordan Park", "risk_level": "Low"}
+        ])
+      ]
+    ),
+    
+    // 8. Scholarship budget used vs total
+    Card(
+      children: [
+        CardHeader("Scholarship Budget", "Funding allocation and usage"),
+        TextContent("Total Available: $15M | Used: $12.3M | Remaining: $2.7M"),
+        TextContent("70% of scholarship funds have been disbursed this cycle"),
+        Progress(value=70, label="Usage Progress")
+      ]
+    ),
+    
+    // 9. Housing occupancy
+    Card(
+      children: [
+        TextContent("Housing Occupancy", "Current room-adaptive capacity"),
+        TextContent("96.5% occupancy rate (as of fall term)",
+        TextContent("3,480 of 3,600 beds filled")
+      ]
+    ),
+    
+    // 10. Campus events this month
+    Card(
+      children: [
+        TextContent("Campus Events - October 2026", "Major events scheduled this month"),
+        ListBlock([
+          {"event": "Faculty Research Symposium", "date": "Oct 12-14", "type": "Conference"},
+          {"event": "Midterm Exam Week", "date": "Oct 19-23", "type": "Academic"},
+          {"event": "Student Dance 2026", "date": "Oct 28", "type": "Social"},
+          {"event": "Career Fair", "date": "Oct 26-27", "type": "Career"}
+        ])
+      ]
+    ),
+    
+    // 11. Alumni giving over past four years
+    Card(
+      children: [
+        TextContent("Alumni Giving - Past 4 Years", "Annual contribution trends from former students"),
+        LineChart(
+          labels=["2022", "2023", "2024", "2025"],
+          series=[120000, 145000, 162000, 178000],
+          xLabel="Year",
+          yLabel="Total Given (USD)"
+        ),
+        TextContent("Average annual giving increased from $120K to $178K (+48%)")
+      ]
+    ),
+    
+    // 12. Way to focus on one department
+    Card(
+      children: [
+        TextContent("Focus on Department", "Filter or highlight a specific academic unit"),
+        TabItem("All Departments", "View all departments"),
+        TabItem("Computer Science", "Focus on CS-specific metrics"),
+        TabItem("Engineering", "Focus on engineering outcomes"),
+        TabItem("Business", "Business school performance")
+      ]
+    ),
+    
+    // 13. This semester vs last
+    Card(
+      children: [
+        TextContent("This Semesters vs Previous Term", "Comparative performance metrics"),
+        TextContent("Math: +8% enrollment, 12% higher grades"),
+        TextContent("CS: Stable enrollment, 5% improvement in project scores"),
+        TextContent("Business: +15% applications, 3% drop in retention")
+      ]
+    ),
+    
+    // 14. Waitlisted students per program
+    Card(
+      children: [
+        TextContent("Waitlist Status by Program", "Number of students waiting for admission slots"),
+        Table([
+          {"program": "Computer Science", "waitlisted": 42},
+          {"program": "Engineering", "waitlisted": 38},
+          {"program": "Business", "waitlisted": 29},
+          {"program": "Arts & Humanities", "waitlisted": 15},
+          {"program": "Medicine", "waitlisted": 55},
+          {"program": "Education", "waitlisted": 22},
+          {"program": "Law", "waitlisted": 33}
+        ])
+      ]
+    ),
+    
+    // 15. Way to approve a new course
+    Card(
+      children: [
+        TextContent("Approve New Course", "Submit request for curriculum addition"),
+        Button(label="Approve Course Request", 
+               action="submit_course_approval", 
+               variant="primary")
+      ]
+    ),
+    
+    // 16. Way to send a message to a student group
+    Card(
+      children: [
+        TextContent("Send Message to Student Group", "Communicate with enrolled students"),
+        Button(label="Contact Student Group",
+               action="send_group_message",
+               variant="secondary")
+      ]
+    )
+  ],
+  variant="card",
+  direction="row",
+  gap="xl",
+  align="stretch",
+  wrap=true
+)
+```

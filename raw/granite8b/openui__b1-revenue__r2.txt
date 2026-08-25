@@ -1,0 +1,26 @@
+```openui-lang
+root = Card([todayRevenue, comparison, trend])
+
+todayRevenue = CardHeader("Revenue Today", "Mid‑morning snapshot")
+yesterdayRevenue = CardHeader("Revenue Yesterday", "Mid‑morning snapshot")
+
+revenueComparison = TextContent(
+  "Today's revenue: $12,450\n" +
+  "Yesterday at this time: $11,780\n" +
+  "Δ: +$670 (+5.7%)\n",
+  "large"
+)
+
+trendChart = LineChart(
+  ["08:00", "10:00", "12:00", "14:00"],
+  [seriesToday, seriesYesterday],
+  "natural",
+  "Time of Day",
+  "Revenue (USD)"
+)
+
+seriesToday = Series("Today", [12450, 13800, 15100, 16200])
+seriesYesterday = Series("Yesterday", [11780, 13000, 14250, 15500])
+
+comparison = Card([revenueComparison, trendChart], "sunk")
+```

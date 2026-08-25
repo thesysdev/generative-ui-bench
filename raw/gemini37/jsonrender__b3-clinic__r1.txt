@@ -1,0 +1,69 @@
+{"op":"add","path":"/root","value":"reception-dashboard"}
+{"op":"add","path":"/elements/reception-dashboard","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-nav","kpi-row","next-up-card","rooms-overview-card","checkin-section","appointments-list-card"]}}
+{"op":"add","path":"/elements/header-nav","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center","wrap":true},"children":["clinic-info","date-navigation"]}}
+{"op":"add","path":"/elements/clinic-info","value":{"type":"CardHeader","props":{"title":"Receptionist Desk - Day View","subtitle":"MetroCare Health Clinic - Central Wing"}}}
+{"op":"add","path":"/elements/date-navigation","value":{"type":"Card","props":{"variant":"sunk","direction":"row","gap":"s","align":"center"},"children":["prev-day-btn","today-badge","next-day-btn","date-picker-ctrl"]}}
+{"op":"add","path":"/elements/prev-day-btn","value":{"type":"Button","props":{"label":"‹ Prev Day","variant":"secondary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedDate","value":"Yesterday, Oct 23" factoryName}}}}}
+{"op":"add","path":"/elements/today-badge","value":{"type":"Badge","props":{"text":{"$state":"/selectedDate"},"variant":"default"}}}
+{"op":"add","path":"/elements/next-day-btn","value":{"type":"Button","props":{"label":"Next Day ›","variant":"secondary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedDate","value":"Tomorrow, Oct 25"}}}}}
+{"op":"add","path":"/elements/date-picker-ctrl","value":{"type":"DatePicker","props":{"name":"calendar_nav","mode":"single"}}}
+{"op":"add","path":"/state/selectedDate","value":"Today, Oct 24, 2024"}
+{"op":"add","path":"/elements/kpi-row","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","wrap":true},"children":["kpi-expected","kpi-checkedin","kpi-noshow"]}}
+{"op":"add","path":"/elements/kpi-expected","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs"},"children":["kpi-expected-title","kpi-expected-val","kpi-expected-sub"]}}
+{"op":"add","path":"/elements/kpi-expected-title","value":{"type":"TextContent","props":{"text":"**Patients Expected**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-expected-val","value":{"type":"Heading","props":{"text":"24 Patients","level":"h2"}}}
+{"op":"add","path":"/elements/kpi-expected-sub","value":{"type":"TextContent","props":{"text":"14 seen · 6 waiting · 4 upcoming","size":"small"}}}
+{"op":"add","path":"/elements/kpi-checkedin","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs"},"children":["kpi-checkedin-title","kpi-checkedin-val","kpi-checkedin-progress"]}}
+{"op":"add","path":"/elements/kpi-checkedin-title","value":{"type":"TextContent","props":{"text":"**Today's Schedule Progress**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-checkedin-val","value":{"type":"Heading","props":{"text":"83%","level":"h2"}}}
+{"op":"add","path":"/elements/kpi-checkedin-progress","value":{"type":"Progress","props":{"value":83,"label":"20 of 24 arrived"}}}
+{"op":"add","path":"/elements/kpi-noshow","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs"},"children":["kpi-noshow-title","kpi-noshow-val","kpi-noshow-sub"]}}
+{"op":"add","path":"/elements/kpi-noshow-title","value":{"type":"TextContent","props":{"text":"**No-Show Rate (This Month)**","size":"small"}}}
+{"op":"add","path":"/elements/kpi-noshow-val","value":{"type":"Heading","props":{"text":"4.2%","level":"h2"}}}
+{"op":"add","path":"/elements/kpi-noshow-sub","value":{"type":"Badge","props":{"text":"↓ 1.8% vs last month (Low)","variant":"secondary"}}}
+{"op":"add","path":"/elements/next-up-card","value":{"type":"Callout","props":{"variant":"info","title":"🔔 Next Patient Up: Eleanor Vance (10:45 AM)","description":"Reason: Routine Cardiac Follow-up · Assigned: Dr. Sarah Bennett · Room 102 (Available now)"}}}
+{"op":"add","path":"/elements/rooms-overview-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["rooms-header","rooms-list"]}}
+{"op":"add","path":"/elements/rooms-header","value":{"type":"CardHeader","props":{"title":"Room Availability (Live Status)","subtitle":"Instant room assignment status"}}}
+{"op":"add","path":"/elements/rooms-list","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","wrap":true},"repeat":{"statePath":"/rooms","key":"id"},"children":["room-chip"]}}
+{"op":"add","path":"/elements/room-chip","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs","align":"start"},"children":["room-chip-name","room-chip-badge","room-chip-detail"]}}
+{"op":"add","path":"/elements/room-chip-name","value":{"type":"TextContent","props":{"text":{"$item":"name"},"size":"small-heavy"}}}
+{"op":"add","path":"/elements/room-chip-badge","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":{"$cond":{"$item":"isFree"},"$then":"success","$else":"neutral"},"size":"sm"}}}
+{"op":"add","path":"/elements/room-chip-detail","value":{"type":"TextContent","props":{"text":{"$item":"doctor"},"size":"small"}}}
+{"op":"add","path":"/state/rooms","value":[]}
+{"op":"add","path":"/state/rooms/0","value":{"id":"r101","name":"Exam Room 101","status":"Occupied","isFree":false,"doctor":"Dr. Hayes (with J. Doe)"}}
+{"op":"add","path":"/state/rooms/1","value":{"id":"r102","name":"Exam Room 102","status":"FREE NOW","isFree":true,"doctor":"Ready for Eleanor Vance"}}
+{"op":"add","path":"/state/rooms/2","value":{"id":"r103","name":"Exam Room 103","status":"FREE NOW","isFree":true,"doctor":"Ready for next check-in"}}
+{"op":"add","path":"/state/rooms/3","value":{"id":"r104","name":"Triage & Vitals","status":"Occupied","isFree":false,"doctor":"Nurse Kelly"}}
+{"op":"add","path":"/state/rooms/4","value":{"id":"r105","name":"Consultation 105","status":"FREE NOW","isFree":true,"doctor":"Dr. Chen (Open)"}}
+{"op":"add","path":"/elements/checkin-section","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"s"},"children":["quick-checkin-header","quick-checkin-controls"]}}
+{"op":"add","path":"/elements/quick-checkin-header","value":{"type":"CardHeader","props":{"title":"Quick Patient Check-In","subtitle":"Search or select patient arriving at the front desk"}}}
+{"op":"add","path":"/elements/quick-checkin-controls","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","align":"center","wrap":true},"children":["search-input","room-select","confirm-checkin-btn"]}}
+{"op":"add","path":"/elements/search-input","value":{"type":"Input","props":{"name":"patientSearch","placeholder":"Patient Name or ID (e.g., Arthur Morgan)","value":{"$bindState":"/checkinName"}}}}
+{"op":"add","path":"/state/checkinName","value":""}
+{"op":"add","path":"/elements/room-select","value":{"type":"Select","props":{"name":"assignRoom","placeholder":"Assign Room (Optional)","items":["opt-102","opt-103","opt-105","opt-waiting"]}}}
+{"op":"add","path":"/elements/opt-102","value":{"type":"SelectItem","props":{"value":"102","label":"Room 102 (Free)"}}}
+{"op":"add","path":"/elements/opt-103","value":{"type":"SelectItem","props":{"value":"103","label":"Room 103 (Free)"}}}
+{"op":"add","path":"/elements/opt-105","value":{"type":"SelectItem","props":{"value":"105","label":"Consultation 105 (Free)"}}}
+{"op":"add","path":"/elements/opt-waiting","value":{"type":"SelectItem","props":{"value":"waiting","label":"Waiting Area"}}}
+{"op":"add","path":"/elements/confirm-checkin-btn","value":{"type":"Button","props":{"label":"Check In Patient","variant":"primary"},"on":{"press":{"action":"pushState","params":{"statePath":"/appointments","value":{"id":"$id","time":"Just now","patient":{"$state":"/checkinName"},"doctor":"Dr. Sarah Bennett","room":"Room 102","status":"Checked In","badgeVariant":"success"},"clearStatePath":"/checkinName"}}}}}
+{"op":"add","path":"/elements/appointments-list-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["appts-header","appts-items-container"]}}
+{"op":"add","path":"/elements/appts-header","value":{"type":"CardHeader","props":{"title":"Today's Appointment Schedule","subtitle":"Real-time list of all booked visits for today"}}}
+{"op":"add","path":"/elements/appts-items-container","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"repeat":{"statePath":"/appointments","key":"id"},"children":["appt-row-card"]}}
+{"op":"add","path":"/elements/appt-row-card","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"s","wrap":true},"children":["appt-left-info","appt-meta-info","appt-action-box"]}}
+{"op":"add","path":"/elements/appt-left-info","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","align":"center"},"children":["appt-time","appt-patient-details"]}}
+{"op":"add","path":"/elements/appt-time","value":{"type":"Badge","props":{"text":{"$item":"time"},"variant":"outline"}}}
+{"op":"add","path":"/elements/appt-patient-details","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["appt-name","appt-doc"]}}
+{"op":"add","path":"/elements/appt-name","value":{"type":"TextContent","props":{"text":{"$item":"patient"},"size":"large-heavy"}}}
+{"op":"add","path":"/elements/appt-doc","value":{"type":"TextContent","props":{"text":{"$item":"doctor"},"size":"small"}}}
+{"op":"add","path":"/elements/appt-meta-info","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["appt-room-tag","appt-status-tag"]}}
+{"op":"add","path":"/elements/appt-room-tag","value":{"type":"Tag","props":{"text":{"$item":"room"},"variant":"neutral","size":"sm"}}}
+{"op":"add","path":"/elements/appt-status-tag","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":{"$item":"badgeVariant"},"size":"md"}}}
+{"op":"add","path":"/elements/appt-action-box","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"xs"},"children":["quick-row-checkin-btn"]}}
+{"op":"add","path":"/elements/quick-row-checkin-btn","value":{"type":"Button","props":{"label":"Mark Arrived","variant":"secondary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":{"$template":"/appointments/${$index}/status"},"value":"Checked In"}}}}}
+{"op":"add","path":"/state/appointments","value":[]}
+{"op":"add","path":"/state/appointments/0","value":{"id":"apt-1","time":"10:45 AM","patient":"Eleanor Vance","doctor":"Dr. Sarah Bennett · Cardiology","room":"Room 102","status":"Next Up (Waiting)","badgeVariant":"info"}}
+{"op":"add","path":"/state/appointments/1","value":{"id":"apt-2","time":"11:00 AM","patient":"Marcus Brody","doctor":"Dr. Alan Hayes · General Practice","room":"Room 103","status":"Checked In","badgeVariant":"success"}}
+{"op":"add","path":"/state/appointments/2","value":{"id":"apt-3","time":"11:15 AM","patient":"Sophia Reyes","doctor":"Dr. Emily Chen · Dermatology","room":"Room 105","status":"Expected","badgeVariant":"neutral"}}
+{"op":"add","path":"/state/appointments/3","value":{"id":"apt-4","time":"11:30 AM","patient":"David Kim","doctor":"Dr. Sarah Bennett · Cardiology","room":"TBD","status":"Expected","badgeVariant":"neutral"}}
+{"op":"add","path":"/state/appointments/4","value":{"id":"apt-5","time":"11:45 AM","patient":"Rachel Green","doctor":"Dr. Alan Hayes · General Practice","room":"TBD","status":"Expected","badgeVariant":"neutral"}}
+{"op":"add","path":"/state/appointments/5","value":{"id":"apt-6","time":"10:15 AM","patient":"Jonathan Miller","doctor":"Dr. Emily Chen · Dermatology","room":"Room 101","status":"Completed","badgeVariant":"neutral"}}

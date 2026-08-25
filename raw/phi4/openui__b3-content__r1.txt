@@ -1,0 +1,78 @@
+```openui
+root = Card([
+  draftsStatus,
+  publishedThisWeek,
+  mostReadArticle,
+  readershipChart,
+  categoryPicker,
+  schedulePieceForm,
+  commentsAwaitingReply,
+  startNewDraftButton
+])
+
+draftsStatus = Card([
+  CardHeader("Drafts Status", "Current status of all drafts"),
+  Table([
+    draftStatusName,
+    draftStatusValue
+  ])
+])
+draftStatusName = Col("Draft", ["Draft 1", "Draft 2", "Draft 3"])
+draftStatusValue = Col("Status", ["In Progress", "Completed", "Review"])
+
+publishedThisWeek = Card([
+  CardHeader("Published This Week", "Articles published in the last 7 days"),
+  ListBlock([
+    ListItem("Article 1", "Published on 2023-10-15", ["thumbnail1.jpg"]),
+    ListItem("Article 2", "Published on 2023-10-16", ["thumbnail2.jpg"])
+  ], "image")
+])
+
+mostReadArticle = Card([
+  CardHeader("Most Read Article", "The most-read article of the month"),
+  TextContent("The Ultimate Guide to Content Editing", "large-heavy")
+])
+
+readershipChart = Card([
+  CardHeader("Readership Over 30 Days"),
+  LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
+    [readershipSeries],
+    "natural",
+    "Day",
+    "Reads"
+  )
+])
+readershipSeries = Series("Readership", [150, 200, 250, 300, 350])
+
+categoryPicker = Card([
+  CardHeader("Narrow by Category"),
+  Select("category", [
+    SelectItem("News", "News"),
+    SelectItem("Lifestyle", "Lifestyle"),
+    SelectItem("Technology", "Technology")
+  ], "Choose a category")
+])
+
+schedulePieceForm = Form("schedule-article", scheduleButtons, [
+  titleField,
+  publishDateField
+])
+titleField = FormControl("Title", titleInput)
+titleInput = Input("title", "Default Title")
+publishDateField = FormControl("Publish Date", publishDateInput)
+publishDateInput = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([
+  Button("Schedule", null, "primary")
+])
+
+commentsAwaitingReply = Card([
+  CardHeader("Comments Awaiting Reply", "Comments that need attention"),
+  ListBlock([
+    ListItem("Comment 1", "From John Doe"),
+    ListItem("Comment 2", "From Jane Smith")
+  ])
+])
+
+startNewDraftButton = Button("Start New Draft", null, "secondary")
+```

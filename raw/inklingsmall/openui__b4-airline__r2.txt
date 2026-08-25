@@ -1,0 +1,85 @@
+root = Card([header, kpiRow, flightsTable, delayedSection, gateChanges, crews, weather, loadSection, connections, rebookSection, hubSelect, cancellations, turnaround], "card", "column", "l")
+
+header = CardHeader("Hub Operations Desk", "ORD — Chicago O'Hare • 14:32 UTC")
+
+kpiRow = Card([otpCard, loadCard, turnaroundCard, cancelCard], "clear", "row", "m")
+
+otpCard = Card([otpLabel, otpValue], "sunk", "column", "s")
+otpLabel = TextContent("On-Time % Today")
+otpValue = Heading("87.3%", "h2")
+
+loadCard = Card([loadLabel, loadValue], "sunk", "column", "s")
+loadLabel = TextContent("Avg Passenger Load")
+loadValue = Heading("78%", "h2")
+
+turnaroundCard = Card([turnLabel, turnValue], "sunk", "column", "s")
+turnLabel = TextContent("Avg Turnaround")
+turnValue = Heading("42 min", "h2")
+
+cancelCard = Card([cancelLabel, cancelValue], "sunk", "column", "s")
+cancelLabel = TextContent("Cancellations Today")
+cancelValue = Heading("12", "h2")
+
+flightsTable = Card([flightsHeading, flightsTableData], "card", "column", "m")
+flightsHeading = Heading("Flights — Today", "h3")
+flightsTableData = Table([flightNumCol, routeCol, gateCol, statusCol])
+flightNumCol = Col("Flight", ["AA123", "UA456", "DL789", "WN321", "AS555"])
+routeCol = Col("Route", ["ORD→LAX", "ORD→JFK", "ORD→ATL", "ORD→DEN", "ORD→SEA"])
+gateCol = Col("Gate", ["B12", "C7", "A3", "D9", "E2"])
+statusCol = Col("Status", ["On Time", "Delayed", "On Time", "Boarding", "On Time"])
+
+delayedSection = Card([delayedHeading, delayedList], "clear", "column", "m")
+delayedHeading = Heading("Delayed Flights — Callout", "h3")
+delayedList = ListBlock([delayed1, delayed2], "number")
+delayed1 = ListItem("AA123 ORD→LAX", "Delayed 45 min • Gate B12")
+delayed2 = ListItem("UA456 ORD→JFK", "Delayed 22 min • Gate C7")
+
+gateChanges = Card([gateHeading, gateChangesList], "clear", "column", "m")
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateChangesList = ListBlock([gate1, gate2], "number")
+gate1 = ListItem("DL789 ORD→ATL", "Moved to A3 (from B4)")
+gate2 = ListItem("WN321 ORD→DEN", "Moved to D9 (from D11)")
+
+crews = Card([crewsHeading, crewsTags], "clear", "column", "m")
+crewsHeading = Heading("Crews Available for Reassignment", "h3")
+crewsTags = TagBlock(["CPT Miller • 2 pilots", "FO Chen • 3 first officers", "FA Patel • 4 flight attendants", "Ground Crew • 6 agents"])
+
+weather = Card([weatherAlert], "clear", "column", "m")
+weatherAlert = Alert("Weather Advisory", "Low visibility and crosswinds 18 kt from 230°. De-icing active at Gates A/B.", "warning")
+
+loadSection = Card([loadHeading, loadText], "clear", "column", "m")
+loadHeading = Heading("Average Passenger Load", "h3")
+loadText = TextContent("Today’s average load factor is 78% across all departing flights. Peak loads are on transcon routes (LAX/JFK/SEA) at 92–94%.")
+
+connections = Card([connHeading, connTable], "clear", "column", "m")
+connHeading = Heading("Connections at Risk", "h3")
+connTable = Table([connFlightCol, connToCol, connStatusCol])
+connFlightCol = Col("Flight", ["AA123", "DL789", "WN321"])
+connToCol = Col("Connecting To", ["LAX→HNL", "ATL→MIA", "DEN→SLC"])
+connStatusCol = Col("Risk", ["Missed • 35 min", "Tight • 15 min", "At risk • 20 min"])
+
+rebookSection = Card([rebookHeading, rebookForm], "clear", "column", "m")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookForm = Form("rebook", rebookButtons, [rebookField])
+rebookField = FormControl("Affected flight / passenger count", rebookInput)
+rebookInput = Input("rebook_input", "AA123 / 42 pax")
+rebookButtons = Buttons([rebookBtn])
+rebookBtn = Button("Initiate Rebooking", null, "primary")
+
+hubSelect = Card([hubHeading, hubSelectBtn], "clear", "column", "m")
+hubHeading = Heading("Hub Operations", "h3")
+hubSelectBtn = DialogBlock("Switch Hub", "Select Hub", "Choose a different operations hub to view.", [hubDialogContent], "secondary")
+hubDialogContent = Card([hubOptions], "clear", "column", "s")
+hubOptions = Buttons([hubORD, hubLAX, hubATL, hubDFW])
+hubORD = Button("ORD — Chicago")
+hubLAX = Button("LAX — Los Angeles")
+hubATL = Button("ATL — Atlanta")
+hubDFW = Button("DFW — Dallas")
+
+cancellations = Card([cancelHeading, cancelTags], "clear", "column", "m")
+cancelHeading = Heading("Cancellations Today", "h3")
+cancelTags = TagBlock(["AA123 — Mechanical", "UA456 — Crew", "DL789 — Weather", "WN321 — ATC"])
+
+turnaround = Card([turnHeading, turnText], "clear", "column", "m")
+turnHeading = Heading("Average Turnaround Time", "h3")
+turnText = TextContent("Average turnaround today is 42 minutes, 3 minutes faster than target. Fastest was 31 min (AS555); longest was 58 min (AA123 due to late inbound).")

@@ -1,0 +1,59 @@
+```openui-lang
+root = Card([header, dateRange, visitorChart, conversionSection, trafficSources, campaignTable, emailGrowth, exportBtn], "card", "column", "m", "start", "center", "evenly")
+
+header = CardHeader("Marketing Dashboard", "Weekly performance overview")
+
+dateRange = Card([dateLabel, datePicker], "sunk", "row", "s", "center", "center", true)
+dateLabel = TextContent("Date range:", "small")
+datePicker = CalendarBlock("range", "2023-10-01", 1)
+
+visitorChart = Card([chartHeading, visitorLineChart], "sunk")
+chartHeading = Heading("Site Visitors", "h3")
+visitorLineChart = LineChart(
+    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    [visitorSeries],
+    "natural",
+    "Day of week",
+    "Visitors"
+)
+visitorSeries = Series("Traffic", [1250, 1580, 1820, 2100, 2450, 2700, 2300])
+
+conversionSection = Card([conversionTitle, conversionRate, conversionChart], "sunk")
+conversionTitle = Heading("Conversion Rate", "h3")
+conversionRate = Card([rateValue, rateChange], "sunk", "row", "xs", "center", "center", true)
+rateValue = TextContent("1.8%", "large-heavy")
+rateChange = Tag("↑ 0.2%", null, null, "success")
+conversionChart = PieChart(
+    ["Visitors", "Converted"],
+    [100, 1.8],
+    "pie",
+    "circular"
+)
+
+trafficSources = Card([sourceTitle, sourceTable], "sunk")
+sourceTitle = Heading("Top Traffic Sources", "h3")
+sourceTable = Table([sourceCol, shareCol])
+sourceCol = Col("Source", ["Organic Search", "Direct", "Social Media", "Referrals", "Paid Ads"])
+shareCol = Col("Share", ["42%", "28%", "15%", "9%", "6%"], "number")
+
+campaignTable = Card([campaignTitle, campaignTableContent], "sunk")
+campaignTableContent = Table([campaignNameCol, campaignSpendCol, campaignROICol])
+campaignTitle = Heading("Running Campaigns", "h3")
+campaignNameCol = Col("Campaign", ["Summer Sale", "New Product Launch", "Email Promo", "Abandoned Cart", "Referral Program"])
+campaignSpendCol = Col("Spend ($)", ["$3,200", "$2,800", "$1,500", "$1,100", "$800"], "number")
+campaignROICol = Col("ROI", ["12.5x", "8.3x", "5.2x", "3.7x", "2.1x"])
+
+bestCampaign = Card([campaignCallout], "sunk")
+campaignCallout = Callout("Best Performing", "Summer Sale campaign delivered 12.5x ROI with 45% higher conversions than average", "success")
+
+emailGrowth = Card([growthTitle, growthChart, growthValue], "sunk")
+growthTitle = Heading("Email Subscribers", "h3")
+growthChart = SingleStackedBarChart(
+    ["Jan", "Feb", "Mar", "Apr", "May"],
+    [1500, 1800, 2200, 2700, 3200]
+)
+growthValue = TextContent("+850 this month", "large-heavy")
+
+exportBtn = Buttons([exportButton], "row", "end")
+exportButton = Button("Export Report", null, "primary", "normal", "medium")
+```

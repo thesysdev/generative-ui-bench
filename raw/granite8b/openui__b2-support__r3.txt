@@ -1,0 +1,89 @@
+```openui-lang
+root = Card(
+    children = [
+        header,
+        status,
+        recentTickets,
+        filterButtons,
+        newTicketButton
+    ],
+    variant = "card",
+    direction = "column",
+    gap = "m"
+)
+
+header = CardHeader("Support Dashboard", "Morning Summary")
+
+status = Tag("Open Tickets: 72", null, null, "info")
+avgResponse = Tag("Avg First Response: 12 min", null, null, "info")
+
+recentTickets = Carousel(
+    children = [
+        recentSlide
+    ],
+    variant = "card"
+)
+
+filterButtons = Buttons(
+    buttons = [
+        highPriorityFilter,
+        allTicketsFilter
+    ],
+    direction = "row"
+)
+
+newTicketButton = Button("Open New Ticket", null, "primary")
+
+# ------- Data definitions (referenced by the carousel slide) -------
+openTicketsCount = 72
+avgFirstResponse = 12   # minutes
+
+recentTicketsData = [
+    {"id": 101, "title": "Network outage", "priority": "high"},
+    {"id": 102, "title": "Password reset", "priority": "low"},
+    {"id": 103, "title": "Feature request", "priority": "medium"},
+    {"id": 104, "title": "Billing issue", "priority": "high"},
+    {"id": 105, "title": "Slow response", "priority": "high"},
+    {"id": 106, "title": "Documentation query", "priority": "low"},
+    {"id": 107, "title": "API integration", "priority": "medium"},
+]
+
+highPriorityTickets = list(filter(lambda t: t["priority"] == "high", recentTicketsData))
+lowPriorityTickets = list(filter(lambda t: t["priority"] != "high", recentTicketsData))
+
+# ------- Carousel slide definition -------
+recentSlide = Card(
+    children = [
+        TextContent(
+            text = "Recent Tickets:",
+            size = "default"
+        ),
+        Table(
+            columns = [
+                colTitle,
+                colPriority
+            ]
+        )
+    ],
+    variant = "clear"
+)
+
+colTitle = Col(
+    label = "Ticket",
+    data = [t["title"] for t in recentTicketsData[:5]],
+    type = "string"
+)
+
+colPriority = Col(
+    label = "Priority",
+    data = [t["priority"] for t in recentTicketsData[:5]],
+    type = "string"
+)
+
+# ------- Filter buttons definitions -------
+highPriorityFilter = Button("High Priority Only", action = ["filter", "high"], variant = "primary")
+allTicketsFilter = Button("All Tickets", action = ["filter", "all"], variant = "secondary")
+
+# ------- New ticket button definition -------
+newTicketButton = Button("Open New Ticket", action = ["newTicket"], variant = "primary")
+```

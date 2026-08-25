@@ -1,0 +1,67 @@
+```openui-lang
+root = Card([header, statusRow, mainContent, alerts, controls])
+
+header = CardHeader("National Power Grid Console", "Real-time monitoring and control")
+
+statusRow = Card([loadStatus, capacityStatus, priceStatus], "card", "row", "l", "center", "between")
+loadStatus = Card([loadValue, loadChart], "card", "column", "none", "center")
+loadValue = Card([TextContent("Current Load: ", "large-heavy"), loadMeter], "sunk", "row", "none", "center")
+loadMeter = TextContent("42.8 GW", "large-heavy", "danger")
+loadChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [loadSeries], "natural", "Time (UTC)", "Load (GW)")
+loadSeries = Series("Load", [38.2, 41.5, 45.6, 42.8])
+
+capacityStatus = Card([capacityValue], "card", "column", "none", "center")
+capacityValue = Card([TextContent("Capacity Utilization: ", "large"), capacityMeter], "sunk", "row", "none", "center")
+capacityMeter = TextContent("89.2%", "large", "warning")
+
+priceStatus = Card([priceValue], "card", "column", "none", "center")
+priceValue = Card([TextContent("Spot Price: ", "large"), priceMeter], "sunk", "row", "none", "center")
+priceMeter = TextContent("$42.3/MWh", "large", "success")
+
+mainContent = Card([generationSplit, plantsSection, outagesSection, forecastSection, emissionsSection], "card", "column", "m", "start")
+
+generationSplit = Card([CardHeader("Generation Split"), generationPie], "card", "column", "none", "start")
+generationPie = PieChart(["Coal", "Gas", "Nuclear", "Renewables", "Hydro"], [32.5, 28.1, 15.3, 18.7, 5.4], "donut")
+
+plantsSection = Card([CardHeader("Power Plants"), plantsTable], "card", "column", "none", "start")
+plantsTable = Table([plantNameCol, plantOutputCol, plantStatusCol])
+plantNameCol = Col("Plant", ["Blackthorn", "Greenfield", "Riverford", "Sunpeak", "Windhaven"])
+plantOutputCol = Col("Output (MW)", [1850, 2430, 1200, 980, 1150])
+plantStatusCol = Col("Status", [Tag("Online", null, null, "success"), Tag("Maintenance", null, null, "warning"), Tag("Online", null, null, "success"), Tag("Online", null, null, "success"), Tag("Online", null, null, "success")])
+
+outagesSection = Card([CardHeader("Current Outages"), outagesList], "card", "column", "none", "start")
+outagesList = ListBlock([outage1, outage2, outage3], "image")
+outage1 = ListItem("Midland Grid Failure", "Regions: Midwest, Southwest", ["https://picsum.photos/seed/outage1/100/100"], "Affecting 3 substations")
+outage2 = ListItem("Transmission Line 42", "Region: Northeast", ["https://picsum.photos/seed/outage2/100/100"], "Expected 45 mins")
+outage3 = ListItem("Solar Farm Outage", "Region: Southeast", ["https://picsum.photos/seed/outage3/100/100"], "Panel failure")
+
+forecastSection = Card([CardHeader("24h Demand Forecast"), forecastChart], "card", "column", "none", "start")
+forecastChart = AreaChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [forecastSeries], "natural", "Time (UTC)", "Demand (GW)")
+forecastSeries = Series("Forecast", [40.1, 45.3, 52.8, 48.2, 42.5])
+
+emissionsSection = Card([CardHeader("Today's Emissions"), emissionsChart], "card", "column", "none", "start")
+emissionsChart = RadialChart(["CO₂", "NOₓ", "SO₂"], [345.2, 12.8, 4.3], "circular")
+
+alerts = Card([alertsHeader, alertsList], "card", "column", "none", "start")
+alertsHeader = CardHeader("Live Alerts", "Real-time system notifications")
+alertsList = ListBlock([alert1, alert2, alert3], "number")
+alert1 = ListItem("High Wind Warning", "Regions: Pacific Northwest", null, "Affecting 3 turbines")
+alert2 = ListItem("Coal Plant Trip", "Plant: Blackthorn", null, "Emergency shutdown")
+alert3 = ListItem("Renewable Curtailment", "Region: Midwest", null, "Excess generation")
+
+controls = Card([regionFocus, curtailmentOrder], "card", "row", "l", "center", "between")
+regionFocus = Button("Focus Region", ["select_region"], "primary", "normal")
+curtailmentOrder = Button("Order Curtailment", ["curtail_generation"], "secondary", "normal")
+
+maintenanceSection = Card([CardHeader("Scheduled Maintenance"), maintenanceTable], "card", "column", "none", "start")
+maintenanceTable = Table([maintenanceDateCol, maintenancePlantCol, maintenanceTypeCol])
+maintenanceDateCol = Col("Date", ["2023-10-15", "2023-10-20", "2023-10-25"])
+maintenancePlantCol = Col("Plant", ["Greenfield", "Riverford", "Windhaven"])
+maintenanceTypeCol = Col("Type", ["Generator Overhaul", "Transmission Line", "Turbine Inspection"])
+
+alertsStream = Card([liveAlert1, liveAlert2], "card", "column", "none", "start")
+liveAlert1 = Alert("Grid Instability", "Regional voltage dip detected in Midwest", "warning")
+liveAlert2 = Alert("Curtailment Request", "Excess solar generation in Southwest", "info")
+
+mainContent = Card([generationSplit, plantsSection, outagesSection, forecastSection, maintenanceSection, emissionsSection], "card", "column", "m", "start")
+```

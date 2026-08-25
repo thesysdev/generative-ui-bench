@@ -1,0 +1,36 @@
+root = Card([header, dateInfo, blockedCallout, updatesHeading, teammateList, missingHeading, missingProgress, postHeading, updateForm])
+
+header = CardHeader("Async Standup", "Daily check-in for the remote team")
+dateInfo = TextContent("**Today:** Thursday, June 12, 2025", "small-heavy")
+
+blockedCallout = Callout("warning", "Blocked teammates", "Priya is blocked on API access approval and Marcus is blocked waiting on design review.")
+
+updatesHeading = Heading("Team updates", "h3")
+teammateList = ListBlock([itemAlex, itemPriya, itemMarcus, itemSofia, itemJin], "image")
+
+itemAlex = ListItem("Alex Chen", "✅ Shipped the billing refactor PR, starting on tests today.")
+itemPriya = ListItem("Priya Nair", "🚧 Blocked — waiting on API access approval from infra team.")
+itemMarcus = ListItem("Marcus Lee", "🚧 Blocked — design review pending before I can continue the onboarding flow.")
+itemSofia = ListItem("Sofia Ramirez", "✅ Fixed the flaky checkout test, picking up the analytics ticket next.")
+itemJin = ListItem("Jin Park", "✅ Reviewed two PRs, deploying the hotfix to staging this afternoon.")
+
+missingHeading = Heading("Missing updates", "h4")
+missingProgress = Progress(71, "5 of 7 teammates have posted today")
+
+postHeading = Heading("Post your update", "h4")
+updateForm = Form("standup-update", formButtons, [nameField, statusField, blockedField, detailsField])
+nameField = FormControl("Your name", nameSelect)
+nameSelect = Select("name", [optDana, optTom], "Select your name")
+optDana = SelectItem("dana", "Dana Whitfield")
+optTom = SelectItem("tom", "Tom Reyes")
+statusField = FormControl("Status", statusRadio)
+statusRadio = RadioGroup("status", [statusOnTrack, statusBlocked], "on-track")
+statusOnTrack = RadioItem("On track", "Progressing as expected", "on-track")
+statusBlocked = RadioItem("Blocked", "Need help to proceed", "blocked")
+blockedField = FormControl("Blocker details (if any)", blockerInput, "Only fill this in if you're blocked")
+blockerInput = Input("blocker", "e.g. waiting on API access")
+detailsField = FormControl("Today's update", detailsArea)
+detailsArea = TextArea("details", "What did you work on / plan to do today?", 4)
+formButtons = Buttons([submitBtn, saveDraftBtn])
+submitBtn = Button("Post update", null, "primary")
+saveDraftBtn = Button("Save draft", null, "tertiary")

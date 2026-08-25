@@ -1,0 +1,59 @@
+root = Card([header, kpiRow, revChart, costChart, budgetChart, headcountChart, risksList, initiativesList, runway, pipeline, winRate, customerTable, nps, boardItems, controlsRow], "card", "column", "l")
+
+header = CardHeader("CEO Quarterly Command View", "Q3 2024 • Global")
+
+kpiRow = Card([kpiRev, kpiCost, kpiProfit], "clear", "row", "m")
+kpiRev = TextCallout("success", "Revenue", "$42.3M")
+kpiCost = TextCallout("warning", "Costs", "$31.5M")
+kpiProfit = TextCallout("info", "Profit", "$10.8M")
+
+revChart = LineChart(["Q1","Q2","Q3","Q4"], [revSeries], "linear", "Quarter", "USD")
+revSeries = Series("Revenue", [38, 40, 42.3, 45])
+
+costChart = LineChart(["Q1","Q2","Q3","Q4"], [costSeries], "linear", "Quarter", "USD")
+costSeries = Series("Costs", [29, 30, 31.5, 33])
+
+budgetChart = HorizontalBarChart(["Engineering","Sales","Marketing","Operations","R&D"], [planSeries, actualSeries], "grouped", "Department", "USD")
+planSeries = Series("Plan", [10, 8, 5, 4, 6])
+actualSeries = Series("Actual", [9.5, 9, 5.2, 4.8, 5.5])
+
+headcountChart = BarChart(["Eng","Sales","Marketing","Ops","R&D"], [headcountSeries], "grouped")
+headcountSeries = Series("Headcount", [120, 45, 30, 25, 35])
+
+risksList = ListBlock([risk1, risk2, risk3])
+risk1 = ListItem("Supply chain disruption", "Owner: CTO")
+risk2 = ListItem("Talent retention in Eng", "Owner: CHRO")
+risk3 = ListItem("Regulatory change EU", "Owner: General Counsel")
+
+initiativesList = ListBlock([init1, init2, init3])
+init1 = ListItem("AI platform rollout", "Status: On track")
+init2 = ListItem("APAC market entry", "Status: At risk")
+init3 = ListItem("Cost restructuring", "Status: Completed")
+
+runway = TextCallout("info", "Months of Runway", "14 months")
+pipeline = TextCallout("success", "Sales Pipeline", "$18.7M")
+winRate = Progress(68, "Win Rate")
+customerTable = Table([custCol, valCol])
+custCol = Col("Metric", ["Customers", "Churn"])
+valCol = Col("Value", ["4,820", "2.1%"])
+nps = Progress(72, "NPS")
+
+boardItems = ListBlock([board1, board2, board3])
+board1 = ListItem("Capital allocation review")
+board2 = ListItem("M&A pipeline update")
+board3 = ListItem("ESG targets approval")
+
+quarterSelect = Buttons([q1, q2, q3, q4])
+q1 = Button("Q1")
+q2 = Button("Q2")
+q3 = Button("Q3")
+q4 = Button("Q4")
+
+regionSelect = Buttons([na, eu, apac])
+na = Button("North America")
+eu = Button("Europe")
+apac = Button("APAC")
+
+exportBtn = Button("Export Pack", null, "secondary")
+
+controlsRow = Card([quarterSelect, regionSelect, exportBtn], "clear", "row", "m")

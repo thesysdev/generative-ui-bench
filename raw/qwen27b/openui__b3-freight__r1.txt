@@ -1,0 +1,42 @@
+
+
+root = Card([header, kpiRow, delayAlert, searchSection, shipmentsSection, chartsSection, flagAction])
+
+header = CardHeader("Logistics Board", "Live shipment overview")
+lastRefreshed = TextContent("Last refreshed: **14:32 UTC** · 14 Jun 2025", "small")
+
+kpiRow = Card([onTimeStat, avgCostStat, inTransitStat], "sunk", "row", "m", "center")
+onTimeStat = Card([onTimeLabel, onTimeValue, onTimeBar], "clear", "column", "xs")
+onTimeLabel = TextContent("On-time rate (Jun)", "small")
+onTimeValue = TextContent("91.4%", "large-heavy")
+onTimeBar = Progress(91, "Target: 95%")
+avgCostStat = Card([avgCostLabel, avgCostValue, avgCostSub], "clear", "column", "xs")
+avgCostLabel = TextContent("Avg cost / shipment", "small")
+avgCostValue = TextContent("$482", "large-heavy")
+avgCostSub = TextContent("↓ 3% vs May", "small")
+inTransitStat = Card([inTransitLabel, inTransitValue, inTransitSub], "clear", "column", "xs")
+inTransitLabel = TextContent("In transit now", "small")
+inTransitValue = TextContent("127", "large-heavy")
+inTransitSub = TextContent("Across 5 carriers", "small")
+
+delayAlert = Alert("3 shipments delayed", "RTU-4421 (Shanghai → Rotterdam) +18h · RTU-3307 (Nairobi → Mombasa) +6h · RTU-5102 (Santos → Hamburg) +12h", "warning")
+
+searchSection = Card([searchInput, searchHint], "sunk", "row", "s", "center")
+searchInput = Input("route", "Search by origin or destination…", "text")
+searchHint = TextContent("e.g. \"Shanghai → Rotterdam\"", "small")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable], "sunk", "column", "s")
+shipmentsHeading = Heading("Shipments in transit", "h3")
+shipmentsTable = Table([colOrigin, colDest, colEta, colStatus])
+colOrigin = Col("Origin", ["Shanghai", "Nairobi", "Santos", "Rotterdam", "Singapore", "Hamburg", "Mumbai", "Los Angeles"])
+colDest = Col("Destination", ["Rotterdam", "Mombasa", "Hamburg", "Shanghai", "Hamburg", "Mumbai", "Singapore", "Rotterdam"])
+colEta = Col("ETA", ["18 Jun", "15 Jun", "22 Jun", "20 Jun", "19 Jun", "17 Jun", "21 Jun", "25 Jun"])
+colStatus = Col("Status", ["Delayed +18h", "Delayed +6h", "Delayed +12h", "On time", "On time", "On time", "On time", "On time"])
+
+chartsSection = Card([chartsHeading, carrierChart, volumeChart], "sunk", "column", "m")
+chartsHeading = Heading("Volume & carriers", "h3")
+carrierChart = PieChart(["Maersk", "MSC", "CMA CGM", "Hapag-Lloyd", "ONE"], [42, 31, 24, 18, 12], "donut")
+volumeChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "natural", "Week", "Shipments")
+volSeries = Series("Weekly volume", [98, 112, 105, 134, 121, 143, 138, 127])
+
+flagAction = AlertDialogBlock("Flag a shipment", "Flag for coordinator review", "Select a shipment reference to flag. The on-duty coordinator will be notified immediately.", "Flag", "Cancel", "destructive")

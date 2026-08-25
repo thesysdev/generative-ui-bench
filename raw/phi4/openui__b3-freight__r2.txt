@@ -1,0 +1,45 @@
+```openui
+root = Card([shipmentOverview, delayedShipments, onTimePercentage, volumeByCarrier, searchRoute, averageCost, weeklyVolume, flagShipment, lastRefreshed])
+
+shipmentOverview = Card([title, shipmentsTable], "card", "column")
+title = CardHeader("Shipments in Transit", null)
+shipmentsTable = Table([originColumn, destinationColumn, etaColumn, statusColumn])
+originColumn = Col("Origin", ["Port A", "Port B", "Port C"])
+destinationColumn = Col("Destination", ["City X", "City Y", "City Z"])
+etaColumn = Col("ETA", ["2023-10-05", "2023-10-06", "2023-10-07"])
+statusColumn = Col("Status", ["In Transit", "In Transit", "Delayed"])
+
+delayedShipments = Card([delayedTitle, delayedList], "card", "column")
+delayedTitle = CardHeader("Delayed Shipments", null)
+delayedList = ListBlock([delayedItem], "image")
+delayedItem = ListItem("Shipment 3", "Delay due to weather", ["image-url"], "View Details")
+
+onTimePercentage = Card([percentageTitle, percentage], "card", "column")
+percentageTitle = CardHeader("On-Time Percentage", "This Month")
+percentage = TextContent("97.5%", "large-heavy")
+
+volumeByCarrier = Card([carrierTitle, carrierChart], "sunk", "column")
+carrierTitle = CardHeader("Volume Split by Carrier", null)
+carrierChart = PieChart(["Carrier A", "Carrier B", "Carrier C"], [300, 450, 250])
+
+searchRoute = Card([searchTitle, searchInput], "card", "column")
+searchTitle = CardHeader("Search by Route", null)
+searchInput = Input("routeSearch", placeholder: "Enter route", type: "text")
+
+averageCost = Card([costTitle, costValue], "card", "column")
+costTitle = CardHeader("Average Cost per Shipment", null)
+costValue = TextContent("$320.50", "large-heavy")
+
+weeklyVolume = Card([volumeTitle, volumeChart], "card", "column")
+volumeTitle = CardHeader("Weekly Volume (Last 2 Months)", null)
+volumeChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volumeSeries], "natural")
+volumeSeries = Series("Volume", [120, 130, 125, 140, 150, 160, 155, 145])
+
+flagShipment = Card([flagTitle, flagButton], "card", "column")
+flagTitle = CardHeader("Flag a Shipment", null)
+flagButton = Button("Flag", null, "primary")
+
+lastRefreshed = Card([refreshTitle, refreshTime], "card", "column")
+refreshTitle = CardHeader("Last Refreshed", null)
+refreshTime = TextContent("2023-10-04 10:00 AM", "small")
+```

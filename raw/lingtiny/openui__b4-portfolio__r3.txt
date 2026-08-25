@@ -1,0 +1,200 @@
+root = Card([activeProjects, overdueMilestones, budgetSection, teamUtilization, risksSection, deadlinesSection, deliveryPace, blockedItems, healthSummary, quarterSelector, requestPeople, exportReview, archiveProject], "clear")
+activeProjects = Card([projectsHeading, projectsTable], "sunk")
+projectsHeading = Heading("Active Projects", "h3")
+projectsTable = Table([projectColumns])
+projectColumns = Col("Project", ["Name", "Owner", "Deadline", "Health"])
+projectsData = [
+  {name: "Project Alpha", owner: "Sarah Chen", deadline: "2025-02-15", health: "On Track"},
+  {name: "Project Beta", owner: "James Miller", deadline: "2025-02-20", health: "At Risk"},
+  {name: "Project Gamma", owner: "Priya Sharma", deadline: "2025-01-28", health: "Overdue"},
+  {name: "Project Delta", owner: "Alex Kim", deadline: "2025-03-01", health: "On Track"},
+  {name: "Project Epsilon", owner: "Maria Lopez", deadline: "2025-02-10", health: "At Risk"},
+]
+for p in projectsData:
+  healthTag = Tag(p.health, "success" if p.health == "On Track" else "warning" if p.health == "At Risk" else "danger")
+  projectRow = ListItem(p.name, f"Owner: {p.owner}\nDeadline: {p.deadline}\nHealth: {p.health}", null, healthTag.text)
+  projectsTable.items.append(projectRow)
+
+overdueMilestones = Card([overdueHeading, overdueList], "sunk")
+overdueHeading = Heading("Overdue Milestones", "h3")
+overdueList = ListBlock([overdueItem1, overdueItem2], "image")
+overdueItem1 = ListItem("Phase 2 Delivery", "Client sign-off delayed by 3 weeks", null, Tag("Overdue", "danger"))
+overdueItem2 = ListItem("API Integration", "Vendor SLA breach", null, Tag("Overdue", "danger"))
+
+budgetSection = Card([budgetHeading, budgetTable], "sunk")
+budgetHeading = Heading("Budget vs Allocation", "h3")
+budgetTable = Table([budgetColumns])
+budgetColumns = Col("Project", ["Name", "Allocated", "Spent", "Variance"])
+budgetData = [
+  {name: "Project Alpha", allocated: 100000, spent: 85000, variance: "15% remaining"},
+  {name: "Project Beta", allocated: 75000, spent: 92000, variance: "-23% over"},
+  {name: "Project Gamma", allocated: 50000, spent: 48000, variance: "4% remaining"},
+  {name: "Project Delta", allocated: 120000, spent: 60000, variance: "50% remaining"},
+  {name: "Project Epsilon", allocated: 60000, spent: 60000, variance: "0%"},
+]
+for b in budgetData:
+  varianceTag = Tag(b.variance, "success" if b.variance.startswith("0%") else "warning" if b.variance.startswith("-") else "danger")
+  budgetRow = ListItem(b.name, f"Allocated: ${b.allocated:,}\nSpent: ${b.spent:,}\nVariance: {b.variance}", null, varianceTag.text)
+  budgetTable.items.append(budgetRow)
+
+teamUtilization = Card([teamHeading, teamTable], "sunk")
+teamHeading = Heading("Team Utilization", "h3")
+teamTable = Table([teamColumns])
+teamColumns = Col("Team Member", ["Role", "Hours", "Utilization"])
+teamData = [
+  {name: "Sarah Chen", role: "PM", hours: 160, utilization: "100%"},
+  {name: "James Miller", role: "Developer", hours: 140, utilization: "85%"},
+  {name: "Priya Sharma", role: "Developer", hours: 120, utilization: "75%"},
+  {name: "Alex Kim", role: "QA", hours: 100, utilization: "90%"},
+  {name: "Maria Lopez", role: "Business Analyst", hours: 80, utilization: "60%"},
+]
+for t in teamData:
+  utilTag = Tag(t.utilization, "success" if t.utilization == "100%" else "warning" if t.utilization.startswith("80") else "neutral")
+  teamRow = ListItem(t.name, f"Role: {t.role}\nHours: {t.hours}\nUtilization: {t.utilization}", null, utilTag.text)
+  teamTable.items.append(teamRow)
+
+risksSection = Card([risksHeading, risksTable], "sunk")
+risksHeading = Heading("Risks", "h3")
+risksTable = Table([risksColumns])
+risksColumns = Col("Risk", "Severity", "Mitigation")
+risksData = [
+  {name: "Scope Creep", severity: "High", mitigation: "Weekly scope reviews"},
+  {name: "Key Person Availability", severity: "Medium", mitigation: "Cross-training program"},
+  {name: "Vendor Delay", severity: "High", mitigation: "Contingency timeline"},
+  {name: "Integration Complexity", severity: "Medium", mitigation: "Dedicated integration sprint"},
+  {name: "Data Migration", severity: "Low", mitigation: "Automated migration scripts"},
+]
+for r in risksData:
+  sevTag = Tag(r.severity, "danger" if r.severity == "High" else "warning" if r.severity == "Medium" else "success")
+  riskRow = ListItem(r.name, f"Severity: {r.severity}\nMitigation: {r.mitigation}", null, sevTag.text)
+  risksTable.items.append(riskRow)
+
+deadlinesSection = Card([deadlinesHeading, deadlinesList], "sunk")
+deadlinesHeading = Heading("Deadlines in Next Two Weeks", "h3")
+deadlinesList = ListBlock([deadline1, deadline2, deadline3], "image")
+deadline1 = ListItem("Project Alpha Review", "Feb 15, 2025", null, Tag("Upcoming", "info"))
+deadline2 = ListItem("Beta Launch", "Feb 20, 2025", null, Tag("Upcoming", "info"))
+deadline3 = ListItem("Epsilon Sprint Review", "Feb 10, 2025", null, Tag("Overdue", "danger"))
+
+deliveryPace = Card([deliveryHeading, deliveryChart], "sunk")
+deliveryHeading = Heading("Delivery Pace (Last 6 Sprints)", "h3")
+deliveryChart = LineChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"], [deliverySeries], "linear", "Sprint", "Story Points")
+deliverySeries = Series("Velocity", [42, 48, 51, 47, 55, 53])
+
+blockedItems = Card([blockedHeading, blockedList], "sunk")
+blockedHeading = Heading("Blocked Work Items", "h3")
+blockedList = ListBlock([blocked1, blocked2], "image")
+blocked1 = ListItem("API Gateway Integration", "Vendor dependency unresolved", null, Tag("Blocked", "danger"))
+blocked2 = ListItem("Database Migration", "Schema changes pending approval", null, Tag("Blocked", "warning"))
+
+healthSummary = Card([healthHeading, healthText], "sunk")
+healthHeading = Heading("Portfolio Health Summary", "h3")
+healthText = TextContent("Overall portfolio health is mixed: 2 projects at risk, 1 overdue, 10% budget variance, and 2 blocked items. Recommend immediate attention to Beta and Epsilon.", "large")
+
+quarterSelector = Card([quarterHeading, quarterOptions, exportBtn, archiveBtn], "sunk")
+quarterHeading = Heading("Quarter Selector", "h3")
+quarterOptions = Tabs([quarterQ1, quarterQ2, quarterQ3, quarterQ4])
+quarterQ1 = TabItem("Q1 2025", "Q1 2025", [quarterQ1Content])
+quarterQ2 = TabItem("Q2 2025", "Q2 2025", [quarterQ2Content])
+quarterQ3 = TabItem("Q3 2025", "Q3 2025", [quarterQ3Content])
+quarterQ4 = TabItem("Q4 2025", "Q4 2025", [quarterQ4Content])
+quarterQ1Content = Card([q1Heading, q1Table], "sunk")
+q1Heading = Heading("Q1 2025 Metrics", "h3")
+q1Table = Table([q1Columns])
+q1Columns = Col("Metric", ["Value"])
+q1Data = [["Active Projects", "5"],["Budget Variance", "10%"],["Overdue Milestones", "2"],["Team Utilization", "72%"],["Risks", "3"],["Delivery Pace", "48 SP/sprint"]]
+for q1 in q1Data:
+  q1Row = ListItem(q1[0], q1[1], null)
+  q1Table.items.append(q1Row)
+quarterQ2Content = Card([q2Heading, q2Table], "sunk")
+q2Heading = Heading("Q2 2025 Metrics", "h3")
+q2Table = Table([q2Columns])
+q2Columns = Col("Metric", ["Value"])
+q2Data = [["Active Projects", "5"],["Budget Variance", "12%"],["Overdue Milestones", "1"],["Team Utilization", "75%"],["Risks", "2"],["Delivery Pace", "52 SP/sprint"]]
+for q2 in q2Data:
+  q2Row = ListItem(q2[0], q2[1], null)
+  q2Table.items.append(q2Row)
+quarterQ3Content = Card([q3Heading, q3Table], "sunk")
+q3Heading = Heading("Q3 2025 Metrics", "h3")
+q3Table = Table([q3Columns])
+q3Columns = Col("Metric", ["Value"])
+q3Data = [["Active Projects", "5"],["Budget Variance", "8%"],["Overdue Milestones", "0"],["Team Utilization", "78%"],["Risks", "2"],["Delivery Pace", "58 SP/sprint"]]
+for q3 in q3Data:
+  q3Row = ListItem(q3[0], q3[1], null)
+  q3Table.items.append(q3Row)
+quarterQ4Content = Card([q4Heading, q4Table], "sunk")
+q4Heading = Heading("Q4 2025 Metrics", "h3")
+q4Table = Table([q4Columns])
+q4Columns = Col("Metric", ["Value"])
+q4Data = [["Active Projects", "5"],["Budget Variance", "15%"],["Overdue Milestones", "1"],["Team Utilization", "80%"],["Risks", "1"],["Delivery Pace", "62 SP/sprint"]]
+for q4 in q4Data:
+  q4Row = ListItem(q4[0], q4[1], null)
+  q4Table.items.append(q4Row)
+
+requestPeople = Card([requestHeading, requestForm], "sunk")
+requestHeading = Heading("Request More People", "h3")
+requestForm = Form("request-people", requestButtons, [requestName, requestRole, requestPriority])
+requestName = FormControl("Project", requestNameInput, "Name of the project needing more resources")
+requestNameInput = Input("request_name", "Enter project name", "text")
+requestRole = FormControl("Role", requestRoleSelect, "Required role")
+requestRoleSelect = Select("role", [rolePM, roleDev, roleQA, roleBA], "Select role")
+rolePM = SelectItem("PM", "Project Manager", "pm")
+roleDev = SelectItem("Developer", "Developer", "dev")
+roleQA = SelectItem("QA", "QA Engineer", "qa")
+roleBA = SelectItem("Business Analyst", "Business Analyst", "ba")
+requestPriority = FormControl("Priority", requestPrioritySelect, "Priority level")
+requestPrioritySelect = Select("priority", [priHigh, priMed, priLow], "Priority")
+priHigh = SelectItem("High", "High priority", "high")
+priMed = SelectItem("Medium", "Medium priority", "med")
+priLow = SelectItem("Low", "Low priority", "low")
+requestButtons = Buttons([requestSubmit, requestCancel])
+requestSubmit = Button("Submit Request", null, "primary")
+requestCancel = Button("Cancel", null, "tertiary")
+
+exportReview = Card([exportHeading, exportBtn], "sunk")
+exportHeading = Heading("Export Review", "h3")
+exportBtn = Button("Export as PDF", null, "secondary")
+
+archiveProject = Card([archiveHeading, archiveBtn], "sunk")
+archiveHeading = Heading("Archive Finished Project", "h3")
+archiveBtn = Button("Archive Selected Project", null, "tertiary")
+
+# Helper: Create a project row item
+def makeProjectRow(p):
+  healthTag = Tag(p.health, "success" if p.health == "On Track" else "warning" if p.health == "At Risk" else "danger")
+  return ListItem(p.name, f"Owner: {p.owner}\nDeadline: {p.deadline}\nHealth: {p.health}", null, healthTag.text)
+
+# Helper: Create a budget row item
+def makeBudgetRow(b):
+  varianceTag = Tag(b.variance, "success" if b.variance.startswith("0%") else "warning" if b.variance.startswith("-") else "danger")
+  return ListItem(b.name, f"Allocated: ${b.allocated:,}\nSpent: ${b.spent:,}\nVariance: {b.variance}", null, varianceTag.text)
+
+# Helper: Create a team row item
+def makeTeamRow(t):
+  utilTag = Tag(t.utilization, "success" if t.utilization == "100%" else "warning" if t.utilization.startswith("80") else "neutral")
+  return ListItem(t.name, f"Role: {t.role}\nHours: {t.hours}\nUtilization: {t.utilization}", null, utilTag.text)
+
+# Helper: Create a risk row item
+def makeRiskRow(r):
+  sevTag = Tag(r.severity, "danger" if r.severity == "High" else "warning" if r.severity == "Medium" else "success")
+  return ListItem(r.name, f"Severity: {r.severity}\nMitigation: {r.mitigation}", null, sevTag.text)
+
+# Helper: Create a deadline row item
+def makeDeadlineRow(d):
+  return ListItem(d.name, f"Date: {d.date}\nStatus: {d.status}", null, Tag(d.status, "success" if d.status == "Upcoming" else "danger" if d.status == "Overdue" else "info"))
+
+# Helper: Create a blocked row item
+def makeBlockedRow(b):
+  return ListItem(b.name, f"Status: {b.status}\nReason: {b.reason}", null, Tag(b.status, "danger" if b.status == "Blocked" else "warning"))
+
+# Helper: Create a delivery pace row item
+def makeDeliveryRow(d):
+  return ListItem(d.sprint, f"Velocity: {d.points} SP", null, Tag(d.status, "success" if d.status == "On Track" else "warning"))
+
+# Helper: Create a quarter row item
+def makeQuarterRow(q):
+  return ListItem(q.quarter, f"Projects: {q.projects} | Budget: {q.budget} | Overdue: {q.overdue} | Utilization: {q.utilization}", null, Tag(q.status, "success" if q.status == "On Track" else "danger"))
+
+# Helper: Create a risk row item
+def makeRiskRow2(r):
+  return ListItem(r.name, f"Severity: {r.severity}\nMitigation: {r.mitigation}", null, Tag(r.severity, "danger" if r.severity == "High" else "warning" if r.severity == "Medium" else "success"))

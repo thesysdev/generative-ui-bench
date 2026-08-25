@@ -1,0 +1,74 @@
+```openui-lang
+root = Card([hubSelector, otpSection, weatherAdvisory, cancellations, delayedFlights, connectionsRisk, flightsTable, gateChanges, crewsSection, passengerLoadSection, turnaroundSection, rebookActions], "card", "column", "l")
+
+hubSelector = Card([hubHeading, hubSelect], "clear", "row", "m", "stretch", "between")
+hubHeading = Heading("Hub Operations Desk — ORD", "h1")
+hubSelect = Select("hub", [ordItem, atlItem, dfwItem, denItem], "Select Hub", null, "ORD")
+ordItem = SelectItem("ORD", "ORD — Chicago O'Hare")
+atlItem = SelectItem("ATL", "ATL — Atlanta Hartsfield")
+dfwItem = SelectItem("DFW", "DFW — Dallas/Fort Worth")
+denItem = SelectItem("DEN", "DEN — Denver International")
+
+otpSection = Card([otpHeading, otpRow], "sunk")
+otpHeading = Heading("On-Time Performance Today", "h2")
+otpRow = Card([otpBadge, otpProgress], "clear", "row", "m")
+otpBadge = Badge("87%", "default")
+otpProgress = Progress(87, "87% on-time (target ≥ 80%)")
+
+weatherAdvisory = Callout("warning", "Weather Advisory", "Thunderstorms expected at ORD between 14:00–18:00 CDT. Reduced arrival capacity to 28/hr. Expect 30–45 min delays for inbound flights.")
+
+cancellations = Alert("Flight Cancellations", "3 flights cancelled today — 2 weather-related, 1 mechanical. Rebooking in progress for 187 passengers.", "destructive")
+
+delayedFlights = Callout("warning", "Delayed Flights (Active)", "12 flights delayed 30+ minutes. Max delay: 145 min (UA 1847 → LAX). Average delay: 42 min.")
+
+connectionsRisk = Alert("Connections at Risk", "23 connecting passengers may miss connections due to inbound delays. Top affected: UA 2104 → UA 1200, DL 1555 → DL 440.", "warning")
+
+flightsTable = Card([flightsHeading, flightTable], "sunk")
+flightsHeading = Heading("Today's Flights", "h2")
+flightTable = Table([flightNumCol, routeCol, gateCol, statusCol])
+flightNumCol = Col("Flight", ["UA 1001", "UA 1847", "DL 1555", "AA 2203", "UA 3310", "SW 445", "UA 778", "DL 992"])
+routeCol = Col("Route", ["ORD→LAX", "ORD→SFO", "ORD→ATL", "ORD→DFW", "ORD→JFK", "ORD→MIA", "ORD→SEA", "ORD→MSP"])
+gateCol = Col("Gate", ["B12", "C8", "A3", "H11", "B6", "G2", "C14", "A7"])
+statusCol = Col("Status", ["On Time", "Delayed 145m", "Delayed 38m", "On Time", "Boarding", "Delayed 22m", "On Time", "Delayed 15m"])
+
+gateChanges = Card([gateChangesHeading, gateTable], "sunk")
+gateChangesHeading = Heading("Recent Gate Changes", "h3")
+gateTable = Table([gateFlightCol, gateFromCol, gateToCol, gateTimeCol])
+gateFlightCol = Col("Flight", ["UA 1001", "DL 1555", "AA 2203", "UA 3310"])
+gateFromCol = Col("From", ["B10", "A5", "H9", "B4"])
+gateToCol = Col("To", ["B12", "A3", "H11", "B6"])
+gateTimeCol = Col("Time", ["09:15", "10:42", "11:08", "11:30"])
+
+crewsSection = Card([crewsHeading, crewsTable], "sunk")
+crewsHeading = Heading("Crew Availability for Reassignment", "h3")
+crewsTable = Table([crewFlightCol, crewLocCol, crewAvailCol, crewTypeCol])
+crewFlightCol = Col("Flight", ["UA 1847", "DL 1555", "AA 2203", "SW 445"])
+crewLocCol = Col("Location", ["ORD", "ORD", "ORD", "ORD"])
+crewAvailCol = Col("Available Crews", [3, 2, 1, 4])
+crewTypeCol = Col("Type", ["Pilots", "Pilots", "Flight Attendants", "Pilots"])
+
+passengerLoadSection = Card([loadHeading, loadChart], "sunk")
+loadHeading = Heading("Average Passenger Load Today", "h3")
+loadChart = BarChart(["Domestic", "International", "Regional"], [loadSeries], "grouped", "Route Type", "Avg Load %")
+loadSeries = Series("Load Factor", [89, 76, 64])
+
+turnaroundSection = Card([turnaroundHeading, turnaroundCard], "sunk")
+turnaroundHeading = Heading("Turnaround Time", "h3")
+turnaroundCard = Card([turnProgress, turnaroundList], "clear", "column", "s")
+turnProgress = Progress(93, "Avg 42 min / Target 45 min (93% of target)")
+turnaroundList = ListBlock([turn1, turn2, turn3, turn4, turn5, turn6, turn7, turn8])
+turn1 = ListItem("UA 1001", "In turnaround — 18 min remaining")
+turn2 = ListItem("DL 1555", "In turnaround — 32 min remaining")
+turn3 = ListItem("AA 2203", "In turnaround — 5 min remaining")
+turn4 = ListItem("UA 3310", "In turnaround — 25 min remaining")
+turn5 = ListItem("SW 445", "In turnaround — 40 min remaining")
+turn6 = ListItem("UA 778", "In turnaround — 12 min remaining")
+turn7 = ListItem("DL 992", "In turnaround — 28 min remaining")
+turn8 = ListItem("UA 1847", "In turnaround — 55 min remaining")
+
+rebookActions = Card([rebookHeading, rebookButtons], "clear")
+rebookHeading = Heading("Passenger Recovery", "h3")
+rebookButtons = Buttons([rebookBtn, viewAllBtn])
+rebookBtn = Button("Rebook Affected Passengers", null, "primary")
+viewAllBtn = Button("View All Affected Passengers", null, "secondary")
+```

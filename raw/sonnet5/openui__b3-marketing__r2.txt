@@ -1,0 +1,50 @@
+root = Card([header, controlsRow, visitorsSection, metricsRow, sourcesSection, campaignsSection, bestCampaignCallout, subscriberSection])
+
+header = CardHeader("Weekly Marketing Dashboard", "Performance summary for the last 30 days")
+
+controlsRow = Card([rangeForm, exportBtn], "clear", "row", "m", "end", "between")
+rangeForm = Form("date_range", rangeFormButtons, [rangeField])
+rangeField = FormControl("Date range", rangeSelect)
+rangeSelect = Select("range", [r7, r30, r90], "Last 30 days")
+r7 = SelectItem("7d", "Last 7 days")
+r30 = SelectItem("30d", "Last 30 days")
+r90 = SelectItem("90d", "Last 90 days")
+rangeFormButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary")
+exportBtn = Button("Export report", null, "secondary")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "sunk")
+visitorsHeading = Heading("Site Visitors (Last 30 Days)", "h3")
+visitorsChart = AreaChart(visitorDates, [visitorSeries], "natural", "Date", "Visitors")
+visitorDates = ["Jul 1", "Jul 3", "Jul 5", "Jul 7", "Jul 9", "Jul 11", "Jul 13", "Jul 15", "Jul 17", "Jul 19", "Jul 21", "Jul 23", "Jul 25", "Jul 27", "Jul 29"]
+visitorSeries = Series("Visitors", [4200, 4350, 4100, 4600, 4800, 5100, 4950, 5300, 5600, 5450, 5800, 6100, 5950, 6300, 6500])
+
+metricsRow = Card([conversionCard], "clear", "row", "m", "stretch", "start")
+conversionCard = Card([conversionHeading, conversionProgress, conversionNote], "sunk")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionProgress = Progress(3.8, "3.8% of visitors converted")
+conversionNote = TextContent("Up 0.4 points from last week", "small")
+
+sourcesSection = Card([sourcesHeading, sourcesChart, sourcesTable], "sunk")
+sourcesHeading = Heading("Top 5 Traffic Sources", "h3")
+sourcesChart = PieChart(sourceLabels, sourceValues, "donut")
+sourcesTable = Table([sourceCol, shareCol])
+sourceLabels = ["Organic Search", "Paid Social", "Direct", "Email", "Referral"]
+sourceValues = [38, 27, 15, 12, 8]
+sourceCol = Col("Source", sourceLabels)
+shareCol = Col("Share (%)", sourceValues, "number")
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "sunk")
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campaignNameCol, campaignSpendCol, campaignConvCol])
+campaignNameCol = Col("Campaign", ["Summer Sale", "Retarget Q3", "Brand Awareness", "New Product Launch", "Newsletter Boost"])
+campaignSpendCol = Col("Spend ($)", [4200, 2800, 3100, 5600, 1200], "number")
+campaignConvCol = Col("Conversions", [312, 198, 145, 421, 88], "number")
+
+bestCampaignCallout = Callout("success", "Best Performing Campaign: New Product Launch", "Generated 421 conversions from $5,600 spend, the highest ROI of any active campaign this week.")
+
+subscriberSection = Card([subscriberHeading, subscriberChart], "sunk")
+subscriberHeading = Heading("Email Subscriber Growth (This Month)", "h3")
+subscriberChart = LineChart(weekLabels, [subscriberSeries], "natural", "Week", "New Subscribers")
+weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+subscriberSeries = Series("Subscribers", [420, 510, 480, 610])

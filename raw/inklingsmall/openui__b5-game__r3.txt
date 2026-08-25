@@ -1,0 +1,93 @@
+root = Card([header, kpiRow, sessionSection, bestSection, regionsSection, crashSection, eventsSection, modsSection, inflationSection, experimentsSection, patchSection, focusSection, hotfixSection], "card", "column", "l")
+
+header = CardHeader("Live-Ops Room", "Real-time studio operations")
+
+kpiRow = Card([onlineCard, dauCard, mauCard, revCard, arpuCard], "clear", "row", "m", "start", "stretch")
+
+onlineCard = Card([onlineNum, onlineLabel], "sunk", "column", "s")
+onlineNum = TextContent("14,832", "large-heavy")
+onlineLabel = TextContent("Players online now")
+
+dauCard = Card([dauNum, dauLabel], "sunk", "column", "s")
+dauNum = TextContent("42,190", "large-heavy")
+dauLabel = TextContent("Daily active players")
+
+mauCard = Card([mauNum, mauLabel], "sunk", "column", "s")
+mauNum = TextContent("1,284,000", "large-heavy")
+mauLabel = TextContent("Monthly active players")
+
+revCard = Card([revNum, revLabel], "sunk", "column", "s")
+revNum = TextContent("$28,450", "large-heavy")
+revLabel = TextContent("Revenue today")
+
+arpuCard = Card([arpuNum, arpuLabel], "sunk", "column", "s")
+arpuNum = TextContent("$0.67", "large-heavy")
+arpuLabel = TextContent("Revenue per user")
+
+sessionSection = Card([sessionHeading, sessionChart], "card", "column", "m")
+sessionHeading = Heading("Session Length — Past 2 Weeks", "h3")
+sessionLabels = ["Mon 6", "Tue 7", "Wed 8", "Thu 9", "Fri 10", "Sat 11", "Sun 12", "Mon 13", "Tue 14", "Wed 15", "Thu 16", "Fri 17", "Sat 18", "Sun 19"]
+sessionSeries = Series("Avg minutes", [18, 22, 21, 25, 28, 32, 30, 26, 24, 27, 29, 31, 33, 30])
+sessionChart = LineChart(sessionLabels, [sessionSeries], "natural", "Day", "Minutes")
+
+bestSection = Card([bestHeading, bestTable], "card", "column", "m")
+bestHeading = Heading("Best-Selling Items", "h3")
+bestTable = Table([itemNameCol, itemUnitsCol])
+itemNameCol = Col("Item", ["Dragon Blade", "Shadow Cloak", "Health Potion (x10)", "Gold Chest", "XP Booster"])
+itemUnitsCol = Col("Units Sold", [8420, 6100, 15400, 3200, 9800])
+
+regionsSection = Card([regionsHeading, regionsTable], "card", "column", "m")
+regionsHeading = Heading("Server Regions — Health", "h3")
+regionsTable = Table([regionNameCol, regionHealthCol])
+regionNameCol = Col("Region", ["NA-East", "NA-West", "EU-Central", "EU-West", "APAC-South", "APAC-East", "SA-Brazil", "SA-Argentina"])
+regionHealthCol = Col("Health", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy", "Warning", "Healthy", "Healthy"])
+
+crashSection = Card([crashHeading, crashChart], "card", "column", "m")
+crashHeading = Heading("Crash Rate by App Version", "h3")
+crashLabels = ["v2.4.1", "v2.4.2", "v2.5.0", "v2.5.1", "v2.6.0"]
+crashSeries = Series("Crash %", [0.12, 0.08, 0.45, 0.22, 0.05])
+crashChart = BarChart(crashLabels, [crashSeries], "grouped", "App Version", "Crash Rate %")
+
+eventsSection = Card([eventsHeading, eventsList], "card", "column", "m")
+eventsHeading = Heading("Live Events", "h3")
+eventsList = ListBlock([eventRun, eventUp, eventGuild])
+eventRun = ListItem("Daily Raid — Running", "Ends in 4h")
+eventUp = ListItem("Weekend Tournament — Upcoming", "Starts Fri 00:00")
+eventGuild = ListItem("Guild War — Running", "Ends in 1d 2h")
+
+modsSection = Card([reportsAlert, appealsAlert], "clear", "column", "s")
+reportsAlert = Alert("Player Reports", "18 reports awaiting review", "warning")
+appealsAlert = Alert("Ban Appeals", "7 appeals awaiting review", "info")
+
+inflationSection = Card([inflationHeading, inflationChart], "card", "column", "m")
+inflationHeading = Heading("In-Game Currency Inflation", "h3")
+inflationLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+inflationSeries = Series("Currency Index", [100, 102, 105, 108, 112, 115, 118, 121])
+inflationChart = LineChart(inflationLabels, [inflationSeries], "linear", "Week", "Index")
+
+experimentsSection = Card([experimentsHeading, expTable], "card", "column", "m")
+experimentsHeading = Heading("Running Experiments — Results", "h3")
+expTable = Table([expNameCol, expStatusCol, expResultCol])
+expNameCol = Col("Experiment", ["New Loot Table", "Battle Pass Duration"])
+expStatusCol = Col("Status", ["Running", "Running"])
+expResultCol = Col("Result", ["+12% retention", "+8% revenue"])
+
+patchSection = Card([patchHeading, patchForm], "card", "column", "m")
+patchHeading = Heading("Draft Patch Notes", "h3")
+patchForm = Form("patch-notes", patchButtons, [patchField])
+patchField = FormControl("Patch Notes Draft", patchArea)
+patchArea = TextArea("patch_notes", "Write notes...", 4)
+patchButtons = Buttons([patchSaveBtn])
+patchSaveBtn = Button("Save Draft", null, "secondary")
+
+focusSection = Card([focusHeading, focusSelect], "card", "column", "m")
+focusHeading = Heading("Focus Region", "h3")
+focusSelect = Select("focus_region", [focusAll, focusNA, focusEU, focusAPAC], "Select region...")
+focusAll = SelectItem("all", "All Regions")
+focusNA = SelectItem("na", "NA")
+focusEU = SelectItem("eu", "EU")
+focusAPAC = SelectItem("apac", "APAC")
+
+hotfixSection = Card([hotfixHeading, hotfixDialog], "card", "column", "m")
+hotfixHeading = Heading("Ship Hotfix", "h3")
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Confirm Hotfix", "Deploy v2.5.2 to all regions?", "Confirm Ship", "Cancel", "destructive")

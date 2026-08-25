@@ -1,0 +1,24 @@
+root = Card([header, currentSection, outlookSection, sunSection, followUp], "card", "column", "l")
+
+header = CardHeader("Bengaluru Weather Brief", "Good morning! Here is your forecast for today.")
+
+currentSection = Card([currentHeading, currentGrid], "sunk", "column", "m")
+currentHeading = Heading("Current Conditions", "h3")
+currentGrid = Card([tempBadge, conditionText], "clear", "row", "m", "center", "between")
+tempBadge = Badge("24°C - Partly Cloudy", "default")
+conditionText = TextContent("Humidity: 68% | Wind: 12 km/h NE")
+
+outlookSection = Card([outlookHeading, outlookChart], "sunk", "column", "m")
+outlookHeading = Heading("3-Day Outlook", "h3")
+outlookChart = LineChart(["Today", "Tomorrow", "Day 3"], [tempSeries], "natural", "Day", "Temp (°C)")
+tempSeries = Series("High Temp", [28, 29, 27])
+
+sunSection = Card([sunHeading, sunTable], "sunk", "column", "m")
+sunHeading = Heading("Solar Schedule", "h3")
+sunTable = Table([sunColEvent, sunColTime])
+sunColEvent = Col("Event", ["Sunrise", "Sunset", "Daylight Duration"])
+sunColTime = Col("Time", ["06:05 AM", "06:18 PM", "12h 13m"])
+
+followUp = FollowUpBlock([fuRadar, fuHourly])
+fuRadar = FollowUpItem("Show rain radar")
+fuHourly = FollowUpItem("View hourly breakdown")

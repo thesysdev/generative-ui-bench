@@ -1,0 +1,456 @@
+Here is an analytics dashboard designed for your training platform covering all required metrics, engagement trends, risk monitoring, cohort filtering, and communication tools.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "cohortControlsCard",
+          "kpisCard",
+          "trendCard",
+          "coursesCard",
+          "atRiskCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Training & Learner Analytics",
+        "subtitle": "Performance metrics, engagement insights, and intervention tools"
+      },
+      {
+        "id": "cohortControlsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "cohortFilterControl",
+          "messageCohortDialog"
+        ]
+      },
+      {
+        "id": "cohortFilterControl",
+        "component": "FormControl",
+        "label": "Filter by Cohort",
+        "hint": "Narrow down all metrics and reports to a specific learner group",
+        "input": "cohortSelect"
+      },
+      {
+        "id": "cohortSelect",
+        "component": "Select",
+        "name": "selectedCohort",
+        "placeholder": "All Cohorts (Spring 2025)",
+        "items": [
+          "cohortAll",
+          "cohortSpringA",
+          "cohortSpringB",
+          "cohortEnterprise"
+        ]
+      },
+      {
+        "id": "cohortAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Cohorts (Spring 2025)"
+      },
+      {
+        "id": "cohortSpringA",
+        "component": "SelectItem",
+        "value": "cohort_2025_a",
+        "label": "2025-Q1 Engineering Cohort A"
+      },
+      {
+        "id": "cohortSpringB",
+        "component": "SelectItem",
+        "value": "cohort_2025_b",
+        "label": "2025-Q1 Product & Design Cohort B"
+      },
+      {
+        "id": "cohortEnterprise",
+        "component": "SelectItem",
+        "value": "cohort_enterprise",
+        "label": "Enterprise Leadership Onboarding"
+      },
+      {
+        "id": "messageCohortDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Message Cohort",
+        "triggerVariant": "secondary",
+        "title": "Send Cohort Announcement or Reminder",
+        "description": "Broadcast an email & in-app notification to all active learners in the selected cohort.",
+        "content": [
+          "messageForm"
+        ]
+      },
+      {
+        "id": "messageForm",
+        "component": "Form",
+        "name": "cohortMessageForm",
+        "buttons": "msgButtons",
+        "fields": [
+          "subjectField",
+          "bodyField",
+          "urgentCheck"
+        ]
+      },
+      {
+        "id": "subjectField",
+        "component": "FormControl",
+        "label": "Subject",
+        "input": "subjectInput"
+      },
+      {
+        "id": "subjectInput",
+        "component": "Input",
+        "name": "subject",
+        "placeholder": "e.g., Weekly Check-in & Quiz Reminder"
+      },
+      {
+        "id": "bodyField",
+        "component": "FormControl",
+        "label": "Message Content",
+        "input": "bodyTextArea"
+      },
+      {
+        "id": "bodyTextArea",
+        "component": "TextArea",
+        "name": "messageBody",
+        "placeholder": "Type your announcement or encouragement here...",
+        "rows": 4
+      },
+      {
+        "id": "urgentCheck",
+        "component": "CheckBoxGroup",
+        "name": "messageOptions",
+        "items": [
+          "sendPushItem"
+        ]
+      },
+      {
+        "id": "sendPushItem",
+        "component": "CheckBoxItem",
+        "name": "sendPush",
+        "label": "Send immediate mobile push notification",
+        "description": "Notifies learners directly on their mobile app",
+        "defaultChecked": false
+      },
+      {
+        "id": "msgButtons",
+        "component": "Buttons",
+        "buttons": [
+          "sendMsgBtn",
+          "cancelMsgBtn"
+        ]
+      },
+      {
+        "id": "sendMsgBtn",
+        "component": "Button",
+        "label": "Broadcast Message",
+        "variant": "primary"
+      },
+      {
+        "id": "cancelMsgBtn",
+        "component": "Button",
+        "label": "Cancel",
+        "variant": "tertiary"
+      },
+      {
+        "id": "kpisCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpisHeader",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpisHeader",
+        "component": "CardHeader",
+        "title": "Key Platform Metrics",
+        "subtitle": "Overview for the current active period"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiTargetCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Active Learners (This Week)",
+          "Course Completion Rate",
+          "Average Quiz Score"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "1,482 learners",
+          "78.4%",
+          "84.6 / 100"
+        ]
+      },
+      {
+        "id": "kpiTargetCol",
+        "component": "Col",
+        "label": "Target / Benchmark",
+        "data": [
+          "1,200 learners (+23.5%)",
+          "75.0% (+3.4%)",
+          "80.0 (+4.6 pts)"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Performance",
+        "data": [
+          "Exceeding Target",
+          "On Track",
+          "High Performance"
+        ]
+      },
+      {
+        "id": "trendCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "trendHeader",
+          "trendChart"
+        ]
+      },
+      {
+        "id": "trendHeader",
+        "component": "CardHeader",
+        "title": "Learner Engagement (Past 8 Weeks)",
+        "subtitle": "Weekly active learners and lesson completion counts"
+      },
+      {
+        "id": "trendChart",
+        "component": "AreaChart",
+        "variant": "natural",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4",
+          "W5",
+          "W6",
+          "W7",
+          "W8"
+        ],
+        "xLabel": "Timeline (Weeks)",
+        "yLabel": "Learner Activity Count",
+        "series": [
+          "activeSeries",
+          "completionSeries"
+        ]
+      },
+      {
+        "id": "activeSeries",
+        "component": "Series",
+        "category": "Active Sessions",
+        "values": [
+          920,
+          1040,
+          1180,
+          1120,
+          1310,
+          1380,
+          1420,
+          1482
+        ]
+      },
+      {
+        "id": "completionSeries",
+        "component": "Series",
+        "category": "Completed Lessons",
+        "values": [
+          680,
+          750,
+          890,
+          830,
+          990,
+          1060,
+          1110,
+          1240
+        ]
+      },
+      {
+        "id": "coursesCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "coursesHeader",
+          "enrollmentRankChart"
+        ]
+      },
+      {
+        "id": "coursesHeader",
+        "component": "CardHeader",
+        "title": "Courses Ranked by Enrollment",
+        "subtitle": "Total registered learners per training program"
+      },
+      {
+        "id": "enrollmentRankChart",
+        "component": "HorizontalBarChart",
+        "variant": "grouped",
+        "xLabel": "Enrolled Learners",
+        "yLabel": "Course",
+        "labels": [
+          "Full-Stack Web Dev",
+          "Data Engineering & SQL",
+          "Cloud Infrastructure & DevOps",
+          "Applied Machine Learning",
+          "Product Management Fundamentals"
+        ],
+        "series": [
+          "enrollmentSeries"
+        ]
+      },
+      {
+        "id": "enrollmentSeries",
+        "component": "Series",
+        "category": "Learners Enrolled",
+        "values": [
+          540,
+          432,
+          378,
+          295,
+          210
+        ]
+      },
+      {
+        "id": "atRiskCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "atRiskHeader",
+          "atRiskAlert",
+          "atRiskTable"
+        ]
+      },
+      {
+        "id": "atRiskHeader",
+        "component": "CardHeader",
+        "title": "Learners at Risk of Dropping Out",
+        "subtitle": "Identified by inactivity duration, low quiz scores, or stalled progress"
+      },
+      {
+        "id": "atRiskAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Intervention Recommended",
+        "description": "5 learners have been inactive for over 10 days or scored below 60% on recent modules."
+      },
+      {
+        "id": "atRiskTable",
+        "component": "Table",
+        "columns": [
+          "learnerCol",
+          "courseCol",
+          "lastActiveCol",
+          "quizCol",
+          "riskFactorCol"
+        ]
+      },
+      {
+        "id": "learnerCol",
+        "component": "Col",
+        "label": "Learner Name",
+        "data": [
+          "Marcus Vance",
+          "Elena Rostova",
+          "Jordan Lee",
+          "Devon Miles",
+          "Amina Patel"
+        ]
+      },
+      {
+        "id": "courseCol",
+        "component": "Col",
+        "label": "Enrolled Course",
+        "data": [
+          "Full-Stack Web Dev",
+          "Data Engineering & SQL",
+          "Cloud Infrastructure",
+          "Applied Machine Learning",
+          "Full-Stack Web Dev"
+        ]
+      },
+      {
+        "id": "lastActiveCol",
+        "component": "Col",
+        "label": "Last Active",
+        "data": [
+          "14 days ago",
+          "11 days ago",
+          "12 days ago",
+          "9 days ago",
+          "10 days ago"
+        ]
+      },
+      {
+        "id": "quizCol",
+        "component": "Col",
+        "label": "Avg Quiz Score",
+        "data": [
+          "52%",
+          "58%",
+          "48%",
+          "55%",
+          "59%"
+        ]
+      },
+      {
+        "id": "riskFactorCol",
+        "component": "Col",
+        "label": "Risk Level",
+        "data": [
+          "Critical Inactivity",
+          "Assessment Failure",
+          "Critical Inactivity",
+          "Stalled Module 3",
+          "Inactivity & Low Scores"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

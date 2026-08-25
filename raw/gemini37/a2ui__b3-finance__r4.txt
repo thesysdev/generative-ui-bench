@@ -1,0 +1,363 @@
+Here is the month-end finance overview screen for your startup.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "periodCard",
+          "metricsSummaryCard",
+          "expenseSectionCard",
+          "transactionsCard"
+        ],
+        "gap": "m"
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Month-End Financial Overview",
+        "subtitle": "Track runway, burn rate, breakdown by category, and high-value transactions."
+      },
+      {
+        "id": "periodCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "periodRowHeader",
+          "periodControlForm",
+          "actionsRow"
+        ],
+        "gap": "s"
+      },
+      {
+        "id": "periodRowHeader",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Statement Period & Actions"
+      },
+      {
+        "id": "periodControlForm",
+        "component": "Form",
+        "name": "periodSelectForm",
+        "buttons": "filterBtnContainer",
+        "fields": [
+          "monthField"
+        ]
+      },
+      {
+        "id": "monthField",
+        "component": "FormControl",
+        "label": "Select Reporting Month",
+        "input": "monthSelect",
+        "hint": "Switch statement period to view past or current reporting cycles"
+      },
+      {
+        "id": "monthSelect",
+        "component": "Select",
+        "name": "selectedMonth",
+        "placeholder": "Choose month",
+        "value": "2024-03",
+        "items": [
+          "optMarch",
+          "optFebruary",
+          "optJanuary",
+          "optDecember"
+        ]
+      },
+      {
+        "id": "optMarch",
+        "component": "SelectItem",
+        "label": "March 2024 (Current)",
+        "value": "2024-03"
+      },
+      {
+        "id": "optFebruary",
+        "component": "SelectItem",
+        "label": "February 2024",
+        "value": "2024-02"
+      },
+      {
+        "id": "optJanuary",
+        "component": "SelectItem",
+        "label": "January 2024",
+        "value": "2024-01"
+      },
+      {
+        "id": "optDecember",
+        "component": "SelectItem",
+        "label": "December 2023",
+        "value": "2023-12"
+      },
+      {
+        "id": "filterBtnContainer",
+        "component": "Buttons",
+        "buttons": [
+          "applyMonthBtn"
+        ]
+      },
+      {
+        "id": "applyMonthBtn",
+        "component": "Button",
+        "label": "Update View",
+        "variant": "secondary"
+      },
+      {
+        "id": "actionsRow",
+        "component": "Buttons",
+        "buttons": [
+          "downloadPdfBtn",
+          "downloadCsvBtn"
+        ],
+        "direction": "row"
+      },
+      {
+        "id": "downloadPdfBtn",
+        "component": "Button",
+        "label": "Download Statement (PDF)",
+        "variant": "primary"
+      },
+      {
+        "id": "downloadCsvBtn",
+        "component": "Button",
+        "label": "Export Statement (CSV)",
+        "variant": "tertiary"
+      },
+      {
+        "id": "metricsSummaryCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "kpiTitle",
+          "kpiTable"
+        ],
+        "gap": "s"
+      },
+      {
+        "id": "kpiTitle",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Core Financial Metrics"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "amountCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "1. Cash on Hand",
+          "2. Monthly Net Burn",
+          "3. Runway Remaining"
+        ]
+      },
+      {
+        "id": "amountCol",
+        "component": "Col",
+        "label": "Value",
+        "data": [
+          "$1,840,000",
+          "$115,000 / mo",
+          "16.0 Months"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Context",
+        "data": [
+          "Silicon Valley Bank & Mercury",
+          "-4.2% vs previous month",
+          "Target > 12 months"
+        ]
+      },
+      {
+        "id": "expenseSectionCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "expenseHeader",
+          "expenseChart",
+          "expenseTable"
+        ],
+        "gap": "m"
+      },
+      {
+        "id": "expenseHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "4. Expense Split by Category"
+      },
+      {
+        "id": "expenseChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "labels": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Software & Tooling",
+          "Office & Facilities",
+          "Marketing & Sales",
+          "Legal & Compliance"
+        ],
+        "values": [
+          78000,
+          24500,
+          14200,
+          10500,
+          8300,
+          4500
+        ]
+      },
+      {
+        "id": "expenseTable",
+        "component": "Table",
+        "columns": [
+          "categoryNameCol",
+          "categorySpendCol",
+          "categoryShareCol"
+        ]
+      },
+      {
+        "id": "categoryNameCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure (AWS/GCP)",
+          "Software & Tooling",
+          "Office & Facilities",
+          "Marketing & Growth",
+          "Legal & Compliance"
+        ]
+      },
+      {
+        "id": "categorySpendCol",
+        "component": "Col",
+        "label": "Total Spend",
+        "data": [
+          "$78,000",
+          "$24,500",
+          "$14,200",
+          "$10,500",
+          "$8,300",
+          "$4,500"
+        ]
+      },
+      {
+        "id": "categoryShareCol",
+        "component": "Col",
+        "label": "% of Total Burn",
+        "data": [
+          "55.7%",
+          "17.5%",
+          "10.1%",
+          "7.5%",
+          "5.9%",
+          "3.2%"
+        ]
+      },
+      {
+        "id": "transactionsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "txHeader",
+          "txAlert",
+          "txTable"
+        ],
+        "gap": "s"
+      },
+      {
+        "id": "txHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "5. Transactions Above $10,000"
+      },
+      {
+        "id": "txAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Large Outflows Filter Active",
+        "description": "Showing all single debits and wire transfers that exceed $10,000 for the selected billing period."
+      },
+      {
+        "id": "txTable",
+        "component": "Table",
+        "columns": [
+          "txDateCol",
+          "txVendorCol",
+          "txCategoryCol",
+          "txAmountCol"
+        ]
+      },
+      {
+        "id": "txDateCol",
+        "component": "Col",
+        "label": "Date",
+        "data": [
+          "Mar 28, 2024",
+          "Mar 15, 2024",
+          "Mar 12, 2024",
+          "Mar 01, 2024"
+        ]
+      },
+      {
+        "id": "txVendorCol",
+        "component": "Col",
+        "label": "Vendor / Payee",
+        "data": [
+          "Rippling Payroll Services",
+          "Amazon Web Services",
+          "Rippling Payroll Services",
+          "WeWork Coworking Spaces"
+        ]
+      },
+      {
+        "id": "txCategoryCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Payroll & Benefits",
+          "Office & Facilities"
+        ]
+      },
+      {
+        "id": "txAmountCol",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "$39,000.00",
+          "$24,500.00",
+          "$39,000.00",
+          "$10,500.00"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

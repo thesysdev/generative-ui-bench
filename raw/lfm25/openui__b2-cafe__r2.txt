@@ -1,0 +1,274 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title="Café Menu",
+      subtitle="Your daily caffeine fix"
+    ),
+    Divider(decorative=true),
+    DrinksSection,
+    Divider(),
+    FoodSection,
+    Divider(),
+    TodaySpecial,
+    VegetarianFilter,
+    OpeningHours
+  ],
+  variant="card",
+  direction="column",
+  gap="s",
+  align="center",
+  wrap=true
+)
+
+DrinksSection = Card([
+  CardHeader(
+    title="Drinks",
+    subtitle="Beverages",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  DrinkingRow,
+  CardHeader(
+    title="Daily Special",
+    subtitle="Today's Highlight",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  DailySpecialCard
+])
+
+DrinkingRow = Row(
+  children: [
+    Item(
+      text="Espresso",
+      price="$3.50"
+    ),
+    Item(
+      text="Latte Art",
+      price="$4.25"
+    ),
+    Item(
+      text="Cappuccino",
+      price="$4.25"
+    ),
+    Item(
+      text="Mocha",
+      price="$3.75"
+    )
+  ]
+)
+
+DailySpecialCard = Card([
+  CardHeader(
+    title="Today's Special",
+    subtitle="Limited Time Offer",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  Tag("special"),
+  ContentPanel(
+    text="Vegan Mocha Blend - Rich chocolate flavor with oat milk",
+    subtitle="Available until 8 PM",
+    style="text"
+  ),
+  PriceBadge("$9.99")
+])
+
+FoodSection = Card([
+  CardHeader(
+    title="Food",
+    subtitle="Appetizers & Mains",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  FoodRow,
+  CardHeader(
+    title="Today's Vegan Pick",
+    subtitle="Plant-based highlight",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  VegetarianHighlightCard
+])
+
+FoodRow = Row(
+  children: [
+    Item(
+      text="Avocado Toast",
+      price="$12.95",
+      emoji="🍽️"
+    ),
+    Item(
+      text="Chicken Salad",
+      price="$14.50",
+      emoji="🍗"
+    ),
+    Item(
+      text="Veggie Wrap",
+      price="$11.75",
+      emoji="🌯"
+    )
+  ]
+)
+
+VegetarianHighlightCard = Card([
+  CardHeader(
+    title="Veggie Only",
+    subtitle="Filter your selections",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  FilterToggle(
+    label="Show Vegetarian Only?",
+    checked=false,
+    onChange: () => {}
+  ),
+  VegetarianMenuPanel
+])
+
+VegetarianMenuPanel = Card([
+  CardHeader(
+    title="Vegetarian Options",
+    subtitle="Meat-free delights",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  Item(
+    text="Grilled Halloumi Sandwich",
+    price="$13.50",
+    emoji="🍞"
+  ),
+  Item(
+    text="Spinach & Feta Quiche",
+    price="$11.00",
+    emoji="🥧"
+  ),
+  Item(
+    text="Lentil Burger",
+    price="$12.25",
+    emoji="🌱"
+  )
+])
+
+OpeningHours = Card([
+  Heading("Opening Hours"),
+  Paragraph(
+    "Monday - Friday: 7:00 AM - 2:00 PM\n\n"
+    "Saturday: 8:00 AM - 6:00 PM\n\n"
+    "Sunday: Closed"
+  ),
+  Badge(
+    text="Open Now",
+    variant="success",
+    color="#4CAF50"
+  )
+])
+
+Row = Card(
+  children: [
+    Item(
+      text="Espresso",
+      price="$3.50"
+    ),
+    Item(
+      text="Latte Art",
+      price="$4.25"
+    ),
+    Item(
+      text="Cappuccino",
+      price="$4.25"
+    ),
+    Item(
+      text="Mocha",
+      price="$3.75"
+    )
+  ],
+  variant="card",
+  direction="row",
+  gap="xs"
+)
+
+Item = TextContent({
+  text: "Espresso",
+  size: "small"
+})
+
+PriceBadge = TextContent({
+  text: "€9.99",
+  style: "price"
+})
+
+Tag = TextContent({
+  text: "special",
+  variant: "tag",
+  color: "#555"
+})
+
+ContentPanel = TextContent({
+  text: "Vegan Mocha Blend - Rich chocolate flavor with oat milk\nAvailable until 8 PM",
+  size: "small-heavy"
+})
+
+PriceBadge = TextContent({
+  text: "€9.99",
+  style: "price",
+  fontSize: "small"
+})
+
+FilterToggle = TextContent({
+  text: "Show Vegetarian Only?",
+  isChecked: false,
+  label: "vegetarian_filter"
+})
+
+VegetarianMenuPanel = Card([
+  CardHeader(
+    title="Vegetarian Options",
+    subtitle="Meat-free delights",
+    variant="card",
+    direction="row",
+    gap="xs"
+  ),
+  Item(
+    text="Grilled Halloumi Sandwich",
+    price="$13.50",
+    emoji="🍞"
+  ),
+  Item(
+    text="Spinach & Feta Quiche",
+    price="$11.00",
+    emoji="🥧"
+  ),
+  Item(
+    text="Lentil Burger",
+    price="$12.25",
+    emoji="🌱"
+  )
+])
+
+OpeningHours = Card([
+  Heading("Opening Hours"),
+  Paragraph(
+    "Monday - Friday: 7:00 AM - 2:00 PM\n\n"
+    "Saturday: 8:00 AM - 6:00 PM\n\n"
+    "Sunday: Closed"
+  ),
+  TextContent({
+    text: "🎉 Today's Special - Vegan Mocha Blend",
+    size: "small",
+    style: "highlight"
+  })
+])
+
+Paragraph = TextContent({
+  text: "Monday - Friday: 7:00 AM - 2:00 PM\n\nSaturday: 8:00 AM - 6:00 PM\n\nSunday: Closed",
+  size: "small"
+})

@@ -1,0 +1,100 @@
+```openui
+root = Card(
+    [
+        header,
+        cashOnHand,
+        burnAndRunway,
+        expenseBreakdown,
+        highValueTransactions,
+        monthSelector,
+        downloadButton,
+    ],
+    "card",
+    "column",
+    "stretch",
+    "center"
+)
+
+header = CardHeader("Month‑End Finance", "Current Period")
+
+cashOnHand = Card(
+    [
+        TextContent("Cash on Hand: $128,400", "large"),
+    ],
+    "sunk"
+)
+
+burnAndRunway = Card(
+    [
+        TextContent("Monthly Burn: $12,300", "large"),
+        TextContent("Months of Runway: 10.4", "large"),
+    ],
+    "sunk"
+)
+
+expenseBreakdown = Card(
+    [
+        Table([
+            Col("Category", ["Rent", "Salaries", "Marketing", "Other"]),
+            Col("Amount", ["$5,000", "$7,000", "$3,000", "$2,400"])
+        ]),
+        TagBlock(["Expense Categories"]),
+    ],
+    "sunk"
+)
+
+highValueTransactions = Card(
+    [
+        TextContent(
+            "Transactions > $10,000 this month:",
+            "large"
+        ),
+        ListBlock(
+            items=[
+                ListItem("Inventory purchase: $12,500"),
+                ListItem("Equipment lease: $11,200"),
+                ListItem("Refund: -$9,800")  // negative value shown as refund
+            ],
+            variant="image"
+        ),
+        TagBlock(["High‑Value Transactions"]),
+    ],
+    "sunk"
+)
+
+monthSelector = Card(
+    [
+        Heading("Select Month", "h4"),
+        Select(
+            "month",
+            items=[
+                SelectItem("January", "January"),
+                SelectItem("February", "February"),
+                SelectItem("March", "March"),
+                SelectItem("April", "April"),
+                SelectItem("May", "May"),
+                SelectItem("June", "June")
+            ],
+            placeholder="Choose month",
+            value="May"
+        ),
+    ],
+    "sunk"
+)
+
+downloadButton = Button(
+    "Download Statement CSV",
+    action=["download_statement"],
+    variant="secondary",
+    size="medium"
+)
+
+// Hoisted references for streaming
+header
+cashOnHand
+burnAndRunway
+expenseBreakdown
+highValueTransactions
+monthSelector
+downloadButton
+```

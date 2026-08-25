@@ -1,0 +1,27 @@
+```openui
+root = Card([header, updatesSection, blockedSection, date, postUpdate, missingUpdates])
+header = CardHeader("Async Standup", "Team Status for Today")
+updatesSection = Card([updateHeading, updatesList])
+updateHeading = Heading("Team Updates", "h3")
+updatesList = ListBlock([janeUpdate, johnUpdate, lisaUpdate], "image")
+janeUpdate = ListItem("Jane Doe", "Completed feature X. Working on bug Y.", [janeImage])
+johnUpdate = ListItem("John Smith", "Reviewed PRs. Planning next sprint tasks.", [johnImage])
+lisaUpdate = ListItem("Lisa Ray", "Researching new tools. Awaiting feedback.", [lisaImage])
+janeImage = "https://picsum.photos/seed/jane/200/200"
+johnImage = "https://picsum.photos/seed/john/200/200"
+lisaImage = "https://picsum.photos/seed/lisa/200/200"
+blockedSection = Card([blockedHeading, blockedList])
+blockedHeading = Heading("Blocked", "h3")
+blockedList = ListBlock([blockItem], "number")
+blockItem = ListItem("John Smith", "Blocked on API access due to pending approval.")
+date = CardHeader("Date", "Today is October 10, 2023")
+postUpdate = Form("post-update", postButtons, [statusField, blockField])
+statusField = FormControl("Status Update", statusInput)
+statusInput = TextArea("status_update", "Describe your progress", 3)
+blockField = FormControl("Blocked", blockInput)
+blockInput = TextArea("blocked", "Mention any blockers", 2)
+postButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Post Update", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+missingUpdates = Alert("Missing Updates", "2 updates are still pending. Please submit yours.", "info")
+```

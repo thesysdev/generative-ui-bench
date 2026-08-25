@@ -1,0 +1,160 @@
+ – 4:00 PM")
+shift2 = ListItem("James Park", "Barista Lead · 7:00 AM – 3:00 PM")
+shift3 = ListItem("Aisha Patel", "Baker · 5:00 AM – 1:00 PM")
+shift4 = ListItem("Tom O'Brien", "Floor · 12:00 PM – 8:00 PM")
+shift5 = ListItem("Lily Chen", "Register · 10:00 AM – 6:00 PM")
+
+promoSection = Card([promoHeading, promoTable], "sunk", "column", "s")
+promoHeading = Heading("Running Promotions", "h3")
+promoTable = Table([promoName, promoStatus, promoRevenue, promoTarget, promoPct])
+promoName = Col("Promotion", ["Buy 1 Get 1 Cold Brew", "Weekend Bakery Special", "Loyalty Double Points"])
+promoStatus = Col("Status", ["Active", "Active", "Active"])
+promoRevenue = Col("Revenue", ["$2,340", "$1,890", "$3,120"])
+promoTarget = Col("Target", ["$3,000", "$2,500", "$4,000"])
+promoPct = Col("Progress", ["78%", "76%", "78%"])
+
+registerSection = Card([registerHeading, registerTable], "sunk", "column", "s")
+registerHeading = Heading("Registers", "h3")
+registerTable = Table([regName, regOperator, regStatus, regTxns])
+regName = Col("Register", ["Register 1", "Register 2", "Register 3", "Register 4"])
+regOperator = Col("Operator", ["Lily Chen", "Tom O'Brien", "James Park", "—"])
+regStatus = Col("Status", ["Open", "Open", "Open", "Closed"])
+regTxns = Col("Transactions", [47, 38, 52, 0])
+
+reorderDialog = DialogBlock("Reorder Item", "Reorder an Out-of-Stock Item", "Fill in the details to submit a reorder request to the warehouse.", [reorderForm])
+reorderForm = Form("reorder", reorderButtons, [reorderItem, reorderQty, reorderNotes])
+reorderItem = FormControl("Item", reorderItemInput)
+reorderItemInput = Input("item", "e.g. Organic Oat Milk 32oz")
+reorderQty = FormControl("Quantity", reorderQtyInput)
+reorderQtyInput = Input("qty", "e.g. 24", "number")
+reorderNotes = FormControl("Notes", reorderNotesArea, "Optional: urgency, supplier, etc.")
+reorderNotesArea = TextArea("notes", "Any additional details…", 3)
+reorderButtons = Buttons([reorderSubmit, reorderCancel])
+reorderSubmit = Button("Submit Reorder", null, "primary")
+reorderCancel = Button("Cancel", null, "tertiary")
+
+Now let me verify all variables are reachable:
+- root → header, storeRow, kpiRow, trafficSection, weekCompareSection, bestSellersSection, stockSection, shiftSection, promoSection, registerSection, reorderDialog ✓
+- header ✓
+- storeRow → storeLabel, storeSelect ✓
+- storeSelect → store42, store17, store08 ✓
+- kpiRow → salesCard, basketCard, returnsCard ✓
+- salesCard → salesLabel, salesProgress, salesDetail ✓
+- basketCard → basketLabel, basketValue, basketDetail ✓
+- returnsCard → returnsLabel, returnsValue, returnsDetail ✓
+- trafficSection → trafficHeading, trafficChart ✓
+- trafficChart → trafficSeries ✓
+- weekCompareSection → weekHeading, weekChart ✓
+- weekChart → thisWeekSeries, lastWeekSeries ✓
+- bestSellersSection → bestSellersHeading, bestSellersTable ✓
+- bestSellersTable → bsProduct, bsCategory, bsUnits, bsRevenue ✓
+- stockSection → stockHeading, stockList ✓
+- stockList → stock1, stock2, stock3, stock4 ✓
+- shiftSection → shiftHeading, shiftList ✓
+- shiftList → shift1, shift2, shift3, shift4, shift5 ✓
+- promoSection → promoHeading, promoTable ✓
+- promoTable → promoName, promoStatus, promoRevenue, promoTarget, promoPct ✓
+- registerSection → registerHeading, registerTable ✓
+- registerTable → regName, regOperator, regStatus, regTxns ✓
+- reorderDialog → reorderForm ✓
+- reorderForm → reorderItem, reorderQty, reorderNotes, reorderButtons ✓
+- reorderItem → reorderItemInput ✓
+- reorderQty → reorderQtyInput ✓
+- reorderNotes → reorderNotesArea ✓
+- reorderButtons → reorderSubmit, reorderCancel ✓
+
+All 12 items covered:
+1. Sales today against target → salesCard with Progress ✓
+2. Foot traffic through the day → trafficChart (AreaChart) ✓
+3. Best sellers with units → bestSellersTable ✓
+4. Items out of stock → stockList ✓
+5. Who is on shift today → shiftList ✓
+6. Average basket size → basketCard ✓
+7. Returns this week → returnsCard ✓
+8. How each running promotion is doing → promoTable ✓
+9. Each register and whether it is open → registerTable ✓
+10. A way to reorder an item → reorderDialog ✓
+11. A way to view a different store → storeSelect ✓
+12. This week compared with last week → weekChart (BarChart) ✓
+
+All good. Let me write the final output.
+
+
+root = Card([header, storeRow, kpiRow, trafficSection, weekCompareSection, bestSellersSection, stockSection, shiftSection, promoSection, registerSection, reorderDialog], "card", "column", "m")
+header = CardHeader("Store #42 – Maple & 5th", "Tuesday, June 10, 2025")
+storeRow = Card([storeLabel, storeSelect], "clear", "row", "s", "center")
+storeLabel = TextContent("Viewing store:", "small")
+storeSelect = Select("store", [store42, store17, store08], "Current store")
+store42 = SelectItem("42", "Store #42 – Maple & 5th")
+store17 = SelectItem("17", "Store #17 – Downtown")
+store08 = SelectItem("08", "Store #08 – Riverside")
+kpiRow = Card([salesCard, basketCard, returnsCard], "clear", "row", "m", "stretch")
+salesCard = Card([salesLabel, salesProgress, salesDetail], "sunk", "column", "xs")
+salesLabel = Heading("Sales Today", "h3")
+salesProgress = Progress(78, "$19,500 / $25,000 target")
+salesDetail = TextContent("78% of daily target reached", "small")
+basketCard = Card([basketLabel, basketValue, basketDetail], "sunk", "column", "xs")
+basketLabel = Heading("Avg Basket Size", "h3")
+basketValue = TextContent("$42.80", "large-heavy")
+basketDetail = TextContent("3.2 items per transaction", "small")
+returnsCard = Card([returnsLabel, returnsValue, returnsDetail], "sunk", "column", "xs")
+returnsLabel = Heading("Returns This Week", "h3")
+returnsValue = TextContent("$1,240", "large-heavy")
+returnsDetail = TextContent("18 items · 2.1% of revenue", "small")
+trafficSection = Card([trafficHeading, trafficChart], "sunk", "column", "s")
+trafficHeading = Heading("Foot Traffic", "h3")
+trafficChart = AreaChart(["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm"], [trafficSeries], "natural", "Hour", "Visitors")
+trafficSeries = Series("Visitors", [45, 78, 112, 134, 156, 148, 121, 108, 132, 167, 189, 145, 82])
+weekCompareSection = Card([weekHeading, weekChart], "sunk", "column", "s")
+weekHeading = Heading("This Week vs Last Week", "h3")
+weekChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [thisWeekSeries, lastWeekSeries], "grouped", "Day", "Revenue ($)")
+thisWeekSeries = Series("This Week", [18200, 19500, 21300, 19800, 24100, 28400, 22600])
+lastWeekSeries = Series("Last Week", [17400, 18900, 19600, 20200, 23500, 26800, 21900])
+bestSellersSection = Card([bestSellersHeading, bestSellersTable], "sunk", "column", "s")
+bestSellersHeading = Heading("Best Sellers Today", "h3")
+bestSellersTable = Table([bsProduct, bsCategory, bsUnits, bsRevenue])
+bsProduct = Col("Product", ["Cold Brew 12oz", "Sourdough Loaf", "Almond Croissant", "Matcha Latte", "Avocado Toast"])
+bsCategory = Col("Category", ["Beverages", "Bakery", "Bakery", "Beverages", "Food"])
+bsUnits = Col("Units", [84, 62, 58, 55, 47])
+bsRevenue = Col("Revenue", ["$588", "$310", "$290", "$330", "$282"])
+stockSection = Card([stockHeading, stockList], "sunk", "column", "s")
+stockHeading = Heading("Out of Stock", "h3")
+stockList = ListBlock([stock1, stock2, stock3, stock4])
+stock1 = ListItem("Organic Oat Milk 32oz", "Beverages · Last restocked 6/8 · Est. restock 6/11")
+stock2 = ListItem("Rye Bread Loaf", "Bakery · Last restocked 6/9 · Est. restock 6/10")
+stock3 = ListItem("Chai Concentrate 1L", "Beverages · Last restocked 6/7 · Est. restock 6/12")
+stock4 = ListItem("Granola Bar (Peanut)", "Snacks · Last restocked 6/9 · Est. restock 6/11")
+shiftSection = Card([shiftHeading, shiftList], "sunk", "column", "s")
+shiftHeading = Heading("On Shift Today", "h3")
+shiftList = ListBlock([shift1, shift2, shift3, shift4, shift5])
+shift1 = ListItem("Maria Gonzalez", "Store Manager · 8:00 AM – 4:00 PM")
+shift2 = ListItem("James Park", "Barista Lead · 7:00 AM – 3:00 PM")
+shift3 = ListItem("Aisha Patel", "Baker · 5:00 AM – 1:00 PM")
+shift4 = ListItem("Tom O'Brien", "Floor · 12:00 PM – 8:00 PM")
+shift5 = ListItem("Lily Chen", "Register · 10:00 AM – 6:00 PM")
+promoSection = Card([promoHeading, promoTable], "sunk", "column", "s")
+promoHeading = Heading("Running Promotions", "h3")
+promoTable = Table([promoName, promoStatus, promoRevenue, promoTarget, promoPct])
+promoName = Col("Promotion", ["Buy 1 Get 1 Cold Brew", "Weekend Bakery Special", "Loyalty Double Points"])
+promoStatus = Col("Status", ["Active", "Active", "Active"])
+promoRevenue = Col("Revenue", ["$2,340", "$1,890", "$3,120"])
+promoTarget = Col("Target", ["$3,000", "$2,500", "$4,000"])
+promoPct = Col("Progress", ["78%", "76%", "78%"])
+registerSection = Card([registerHeading, registerTable], "sunk", "column", "s")
+registerHeading = Heading("Registers", "h3")
+registerTable = Table([regName, regOperator, regStatus, regTxns])
+regName = Col("Register", ["Register 1", "Register 2", "Register 3", "Register 4"])
+regOperator = Col("Operator", ["Lily Chen", "Tom O'Brien", "James Park", "—"])
+regStatus = Col("Status", ["Open", "Open", "Open", "Closed"])
+regTxns = Col("Transactions", [47, 38, 52, 0])
+reorderDialog = DialogBlock("Reorder Item", "Reorder an Out-of-Stock Item", "Fill in the details to submit a reorder request to the warehouse.", [reorderForm])
+reorderForm = Form("reorder", reorderButtons, [reorderItem, reorderQty, reorderNotes])
+reorderItem = FormControl("Item", reorderItemInput)
+reorderItemInput = Input("item", "e.g. Organic Oat Milk 32oz")
+reorderQty = FormControl("Quantity", reorderQtyInput)
+reorderQtyInput = Input("qty", "e.g. 24", "number")
+reorderNotes = FormControl("Notes", reorderNotesArea, "Optional: urgency, supplier, etc.")
+reorderNotesArea = TextArea("notes", "Any additional details…", 3)
+reorderButtons = Buttons([reorderSubmit, reorderCancel])
+reorderSubmit = Button("Submit Reorder", null, "primary")
+reorderCancel = Button("Cancel", null, "tertiary")

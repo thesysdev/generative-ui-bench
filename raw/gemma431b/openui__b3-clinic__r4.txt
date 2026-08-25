@@ -1,0 +1,48 @@
+root = Card([header, statsRow, activePatient, mainContent, footer], "card", "column", "m")
+
+header = CardHeader("Clinic Day View", "Monday, Oct 23rd")
+
+statsRow = Card([patientCount, noShowRate, roomStatus], "sunk", "row", "m")
+patientCount = TextCallout("info", "Expected Patients", "24 patients scheduled today")
+noShowRate = TextCallout("warning", "Monthly No-Show Rate", "12.4% (↑ 2% from last month)")
+roomStatus = TextCallout("success", "Available Rooms", "Rooms 2, 4, and 7 are currently vacant")
+
+activePatient = Card([activeHeading, activeDetail, activeActions], "card", "column", "s")
+activeHeading = Heading("Now Calling", "h3")
+activeDetail = TextContent("Patient: **Sarah Jenkins** (Room 3)", "large-heavy")
+activeActions = Buttons([nextPatientBtn])
+nextPatientBtn = Button("Call Next Patient", null, "primary")
+
+mainContent = Tabs([appointmentsTab, checkInTab, scheduleTab])
+
+appointmentsTab = TabItem("appointments", "Today's Schedule", [apptList])
+apptList = ListBlock([p1, p2, p3, p4, p5], "image")
+p1 = ListItem("08:00 AM", "James Wilson - Routine Checkup", null, "Check In")
+p2 = ListItem("08:30 AM", "Maria Garcia - Follow-up", null, "Check In")
+p3 = ListItem("09:00 AM", "Robert Chen - Vaccination", null, "Check In")
+p4 = ListItem("09:30 AM", "Linda Smith - Consultation", null, "Check In")
+p5 = ListItem("10:00 AM", "Kevin Vane - Physical", null, "Check In")
+
+checkInTab = TabItem("checkin", "Quick Check-In", [checkInForm])
+checkInForm = Form("patient-checkin", checkInButtons, [patientIdField, arrivalStatus])
+patientIdField = FormControl("Patient ID / Name", idInput)
+idInput = Input("p_id", "Enter patient identifier...")
+arrivalStatus = FormControl("Status", statusSelect)
+statusSelect = Select("status", [sPresent, sLate], "Select status")
+sPresent = SelectItem("present", "Present")
+sLate = SelectItem("late", "Running Late")
+checkInButtons = Buttons([submitCheckIn])
+submitCheckIn = Button("Confirm Arrival", null, "primary")
+
+scheduleTab = TabItem("schedule", "Manage Date", [dateNav])
+dateNav = Card([navHeading, datePickerField, navButtons], "sunk", "column", "m")
+navHeading = Heading("Change Date", "h4")
+datePickerField = FormControl("Select Date", dateInput)
+dateInput = DatePicker("target_date", "single")
+navButtons = Buttons([prevDay, nextDay])
+prevDay = Button("Previous Day", null, "secondary")
+nextDay = Button("Next Day", null, "secondary")
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Generate end-of-day report")
+f2 = FollowUpItem("View room allocation map")

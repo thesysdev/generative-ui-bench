@@ -1,0 +1,118 @@
+```openui-lang
+root = Card([header, statsRow, occupancyCard, erStatus, admissionsChart, departmentStats, staffShift, criticalPatients, dischargeQueue, orBookings, suppliesAlert, incidentForm, datePicker, transferRequest])
+
+header = CardHeader("Hospital Operations Command Center", "Real-time overview of all units")
+
+statsRow = Card([bedOccupancy, erWait, criticalAlert], "card", "row", "l", "center", "between")
+bedOccupancy = Card([bedIcon, occupancyValue, occupancyPercent], "sunk")
+bedIcon = Image("Hospital bed icon", "https://cdn-icons-png.flaticon.com/512/114/114803.png")
+occupancyValue = TextContent("78%", "large-heavy")
+occupancyPercent = TextContent("78% capacity", "small")
+
+erWait = Card([erIcon, waitTime, waitQueue], "sunk")
+erIcon = Image("ER icon", "https://cdn-icons-png.flaticon.com/512/3045/3045749.png")
+waitTime = TextContent("45 minutes", "large-heavy")
+waitQueue = TextContent("12 patients waiting", "small")
+
+criticalAlert = Card([alertIcon, criticalCount], "sunk")
+alertIcon = Image("Critical alert icon", "https://cdn-icons-png.flaticon.com/512/839/839850.png")
+criticalCount = TextContent("3 critical", "large-heavy")
+
+occupancyCard = Card([occupancyGraph, bedTypes], "sunk")
+occupancyGraph = SingleStackedBarChart(["ICU", "Ward", "ER", "Pediatrics"], [95, 75, 60, 50])
+bedTypes = Table([bedTypeCol, bedCountCol])
+bedTypeCol = Col("Bed Type", ["ICU", "Ward", "ER", "Pediatrics", "Pediatrics"], "string")
+bedCountCol = Col("Occupied/Total", ["19/20", "56/72", "36/60", "12/24", "8/16"], "string")
+
+erStatus = Card([erChart, currentPatients], "sunk")
+erChart = RadarChart(["Triage", "Assessment", "Treatment"], [[8, 12, 5], [10, 14, 6]])
+currentPatients = TextContent("Current ER patients: 27", "default")
+
+admissionsChart = CardHeader("Admissions (Past 2 Weeks)", "h3")
+admissionsData = AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [series1, series2], "natural", "Day", "Patients")
+series1 = Series("Inpatient", [12, 15, 18, 22, 19, 25, 20])
+series2 = Series("Outpatient", [35, 40, 42, 45, 38, 50, 48])
+
+departmentStats = Card([deptTitle, deptChart], "sunk")
+deptTitle = CardHeader("Patients per Department", "h4")
+deptChart = HorizontalBarChart(["Cardiology", "Ortho", "Neuro", "Oncology", "Pediatrics"], [series3, series4, series5, series6, series7], "grouped", "Department", "Patients")
+series3 = Series("Cardiology", [45, 52, 60, 48, 55])
+series4 = Series("Ortho", [30, 35, 40, 32, 38])
+series5 = Series("Neuro", [25, 28, 32, 26, 30])
+series6 = Series("Oncology", [18, 20, 22, 19, 21])
+series7 = Series("Pediatrics", [35, 40, 45, 38, 42])
+
+staffShift = Card([staffTitle, staffTable], "sunk")
+staffTitle = CardHeader("Staff on Shift", "h4")
+staffTable = Table([staffNameCol, roleCol, statusCol])
+staffNameCol = Col("Name", ["Dr. Smith", "Nurse Lee", "Dr. Johnson", "Tech Chen", "Aide Brown", "Nurse White"])
+roleCol = Col("Role", ["Surgeon", "RN", "Anesthesiologist", "Lab Tech", "Aide", "RN"], "string")
+statusCol = Col("Status", ["On Call", "On Duty", "On Call", "On Duty", "On Duty", "On Call"], "string")
+
+criticalPatients = Card([criticalTitle, criticalList], "sunk")
+criticalTitle = CardHeader("Critical Patients Called Out", "h4")
+criticalList = ListBlock([criticalItem1, criticalItem2, criticalItem3])
+criticalItem1 = ListItem("Patient #1245", "Sepsis, ICU", ["https://picsum.photos/seed/1245/100/100"], "Check Status")
+criticalItem2 = ListItem("Patient #3789", "Respiratory Failure", ["https://picsum.photos/seed/3789/100/100"], "Check Status")
+criticalItem3 = ListItem("Patient #6543", "Cardiac Arrest", ["https://picsum.photos/seed/6543/100/100"], "Check Status")
+
+dischargeQueue = Card([dischargeTitle, dischargeList], "sunk")
+dischargeTitle = CardHeader("Patients Ready for Discharge", "h4")
+dischargeList = ListBlock([dischargeItem1, dischargeItem2, dischargeItem3])
+dischargeItem1 = ListItem("Patient #7890", "Fracture healing", ["https://picsum.photos/seed/7890/100/100"], "Process Discharge")
+dischargeItem2 = ListItem("Patient #2345", "Post-op recovery", ["https://picsum.photos/seed/2345/100/100"], "Process Discharge")
+dischargeItem3 = ListItem("Patient #4567", "Minor surgery", ["https://picsum.photos/seed/4567/100/100"], "Process Discharge")
+
+orBookings = Card([orTitle, orChart], "sunk")
+orTitle = CardHeader("Today's OR Bookings", "h4")
+orChart = Table([orTimeCol, procedureCol, surgeonCol, statusCol])
+orTimeCol = Col("Time", ["08:00", "09:30", "11:00", "13:00", "14:30"])
+procedureCol = Col("Procedure", ["Appendectomy", "Hysterectomy", "Knee Replacement", "Gallbladder Removal", "Laparoscopy"])
+surgeonCol = Col("Surgeon", ["Dr. Lee", "Dr. Chen", "Dr. Smith", "Dr. Brown", "Dr. White"])
+statusCol = Col("Status", ["Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"], "string")
+
+suppliesAlert = Card([alertTitle, suppliesList], "sunk")
+alertTitle = CardHeader("Supplies Running Low", "h4")
+suppliesList = ListBlock([supplyItem1, supplyItem2, supplyItem3])
+supplyItem1 = ListItem("Sutures", "Critical - 3 days left", ["https://picsum.photos/seed/sutures/100/100"], "Order Now")
+supplyItem2 = ListItem("Gauze", "Low - 1 week left", ["https://picsum.photos/seed/gauze/100/100"], "Order Now")
+supplyItem3 = ListItem("IV Fluids", "Low - 5 days left", ["https://picsum.photos/seed/iv/100/100"], "Order Now")
+
+incidentForm = Card([incidentTitle, incidentFormContainer], "sunk")
+incidentTitle = CardHeader("File an Incident", "h4")
+incidentFormContainer = Form("incident-report", incidentButtons, [incidentTypeField, locationField, descriptionField, priorityField])
+incidentTypeField = FormControl("Incident Type", incidentTypeSelect)
+incidentTypeSelect = Select("incident_type", [incidentOptions], "Select incident type")
+incidentOptions = [SelectItem("Medical Error", "Medical Error"), SelectItem("Safety Violation", "Safety Violation"), SelectItem("Equipment Failure", "Equipment Failure"), SelectItem("Other", "Other")]
+locationField = FormControl("Location", locationInput)
+locationInput = Input("location", "Department name")
+descriptionField = FormControl("Description", descriptionTextArea)
+descriptionTextArea = TextArea("description", "Briefly describe the incident", 4)
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [priorityOptions], "Select priority")
+priorityOptions = [SelectItem("Low", "Low"), SelectItem("Medium", "Medium"), SelectItem("High", "High"), SelectItem("Critical", "Critical")]
+incidentButtons = Buttons([submitIncidentBtn, cancelIncidentBtn])
+submitIncidentBtn = Button("File Incident", null, "primary")
+cancelIncidentBtn = Button("Cancel", null, "tertiary")
+
+datePicker = Card([dateTitle, datePickerComponent], "sunk")
+dateTitle = CardHeader("View Another Day", "h4")
+datePickerComponent = CalendarBlock("single", "2023-11-15")
+
+transferRequest = Card([transferTitle, transferFormContainer], "sunk")
+transferTitle = CardHeader("Request Patient Transfer", "h4")
+transferFormContainer = Form("patient-transfer", transferButtons, [patientField, fromDeptField, toDeptField, reasonField])
+patientField = FormControl("Patient ID", patientInput)
+patientInput = Input("patient_id", "Enter patient ID")
+fromDeptField = FormControl("From Department", fromDeptSelect)
+fromDeptSelect = Select("from_department", [fromDeptOptions], "Select department")
+fromDeptOptions = [SelectItem("ICU", "ICU"), SelectItem("Ward", "Ward"), SelectItem("ER", "ER"), SelectItem("Other", "Other")]
+toDeptField = FormControl("To Department", toDeptSelect)
+toDeptSelect = Select("to_department", [toDeptOptions], "Select department")
+toDeptOptions = [SelectItem("ICU", "ICU"), SelectItem("Ward", "Ward"), SelectItem("ER", "ER"), SelectItem("Other", "Other")]
+reasonField = FormControl("Reason for Transfer", reasonTextArea)
+reasonTextArea = TextArea("reason", "Briefly explain the reason for transfer", 3)
+transferButtons = Buttons([submitTransferBtn, cancelTransferBtn])
+submitTransferBtn = Button("Request Transfer", null, "primary")
+cancelTransferBtn = Button("Cancel", null, "tertiary")
+```

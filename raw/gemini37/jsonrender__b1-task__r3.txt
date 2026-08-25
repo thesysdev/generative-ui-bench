@@ -1,0 +1,29 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"variant":"card","gap":"l"},"children":["header","focusCard","completionNotice","actionSection"]}}
+{"op":"add","path":"/elements/header","value":{"type":"CardHeader","props":{"title":"Daily Focus","subtitle":"One high-impact priority for today"}}}
+{"op":"add","path":"/elements/focusCard","value":{"type":"Card","props":{"variant":"sunk","gap":"m"},"children":["topMeta","taskTitle","taskDescription","separator","detailRow","progressIndicator"]}}
+{"op":"add","path":"/elements/topMeta","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["priorityTag","statusBadge"]}}
+{"op":"add","path":"/elements/priorityTag","value":{"type":"Tag","props":{"text":"Urgent Priority","variant":"danger","size":"sm"}}}
+{"op":"add","path":"/elements/statusBadge","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/task/completed","eq":true},"$then":"Completed","$else":"In Progress"},"variant":{"$cond":{"$state":"/task/completed","eq":true},"$then":"default","$else":"secondary"}}}}
+{"op":"add","path":"/elements/taskTitle","value":{"type":"Heading","props":{"text":{"$state":"/task/title"},"level":"h2"}}}
+{"op":"add","path":"/elements/taskDescription","value":{"type":"TextContent","props":{"text":{"$state":"/task/description"},"size":"default"}}}
+{"op":"add","path":"/elements/separator","value":{"type":"Separator","props":{"orientation":"horizontal"}}}
+{"op":"add","path":"/elements/detailRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["deadlineContainer","assignedContainer"]}}
+{"op":"add","path":"/elements/deadlineContainer","value":{"type":"Card","props":{"variant":"clear","gap":"xs"},"children":["deadlineLabel","deadlineValue"]}}
+{"op":"add","path":"/elements/deadlineLabel","value":{"type":"TextContent","props":{"text":"Deadline","size":"small"}}}
+{"op":"add","path":"/elements/deadlineValue","value":{"type":"Tag","props":{"text":{"$state":"/task/deadline"},"variant":"warning","size":"md"}}}
+{"op":"add","path":"/elements/assignedContainer","value":{"type":"Card","props":{"variant":"clear","gap":"xs","align":"end"},"children":["categoryLabel","categoryValue"]}}
+{"op":"add","path":"/elements/categoryLabel","value":{"type":"TextContent","props":{"text":"Domain","size":"small"}}}
+{"op":"add","path":"/elements/categoryValue","value":{"type":"Badge","props":{"text":{"$state":"/task/category"},"variant":"outline"}}}
+{"op":"add","path":"/elements/progressIndicator","value":{"type":"Progress","props":{"value":{"$cond":{"$state":"/task/completed","eq":true},"$then":100,"$else":65},"label":{"$cond":{"$state":"/task/completed","eq":true},"$then":"Task complete (100%)","$else":"Estimated progress (65%)"}}}}
+{"op":"add","path":"/state/task","value":{}}
+{"op":"add","path":"/state/task/title","value":"Finalize Q3 Security Audit Report"}
+{"op":"add","path":"/state/task/description","value":"Review high-severity findings with the infrastructure team, confirm remediation timestamps, and publish signed executive summary to compliance board."}
+{"op":"add","path":"/state/task/deadline","value":"Today at 5:00 PM EST (2h remaining)"}
+{"op":"add","path":"/state/task/category","value":"Security & Compliance"}
+{"op":"add","path":"/state/task/completed","value":false}
+{"op":"add","path":"/elements/completionNotice","value":{"type":"Alert","props":{"title":"Task Marked Complete!","description":"Great job! Your top focus item for today has been recorded as finished.","variant":"success"},"visible":{"$state":"/task/completed","eq":true}}}
+{"op":"add","path":"/elements/actionSection","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["taskActions"]}}
+{"op":"add","path":"/elements/taskActions","value":{"type":"Buttons","props":{"buttons":["markDoneBtn","resetBtn"]}}}
+{"op":"add","path":"/elements/markDoneBtn","value":{"type":"Button","props":{"label":{"$cond":{"$state":"/task/completed","eq":true},"$then":"Completed ✓","$else":"Mark as Done"},"variant":"primary","size":"large"},"on":{"press":{"action":"setState","params":{"statePath":"/task/completed","value":true}}}}}
+{"op":"add","path":"/elements/resetBtn","value":{"type":"Button","props":{"label":"Reopen Task","variant":"tertiary","size":"medium"},"visible":{"$state":"/task/completed","eq":true},"on":{"press":{"action":"setState","params":{"statePath":"/task/completed","value":false}}}}}

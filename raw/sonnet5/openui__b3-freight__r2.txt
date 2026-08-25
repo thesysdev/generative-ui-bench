@@ -1,0 +1,64 @@
+root = Card([header, refreshInfo, delayedCallout, kpiRow, shipmentsSection, searchSection, chartsRow, flagSection])
+
+header = CardHeader("Logistics Coordinator Board", "Live shipment tracking and performance")
+
+refreshInfo = TextContent("Last refreshed: Today at 9:42 AM EST (auto-updates every 15 min)", "small")
+
+delayedCallout = Callout("warning", "3 shipments delayed", "SHP-2291 (Chicago → Denver) running 6h late due to weather. SHP-2308 (Miami → Atlanta) delayed 3h at customs. SHP-2315 (Seattle → Portland) delayed 2h, mechanical issue.")
+
+kpiRow = Card([onTimeCard, avgCostCard], "clear", "row", "l", "stretch")
+onTimeCard = Card([onTimeHeading, onTimeProgress], "sunk")
+onTimeHeading = Heading("On-Time Rate (This Month)", "h4")
+onTimeProgress = Progress(87, "87% of shipments on time")
+avgCostCard = Card([avgCostHeading, avgCostText], "sunk")
+avgCostHeading = Heading("Avg. Cost per Shipment", "h4")
+avgCostText = TextContent("$1,842", "large-heavy")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable], "sunk")
+shipmentsHeading = Heading("Shipments In Transit", "h3")
+shipmentsTable = Table([colId, colOrigin, colDest, colEta, colStatus])
+colId = Col("ID", ["SHP-2291", "SHP-2298", "SHP-2302", "SHP-2308", "SHP-2311", "SHP-2315"])
+colOrigin = Col("Origin", ["Chicago, IL", "Los Angeles, CA", "Dallas, TX", "Miami, FL", "New York, NY", "Seattle, WA"])
+colDest = Col("Destination", ["Denver, CO", "Phoenix, AZ", "Houston, TX", "Atlanta, GA", "Boston, MA", "Portland, OR"])
+colEta = Col("ETA", ["Today 4:00 PM", "Today 6:30 PM", "Tomorrow 9:00 AM", "Today 8:00 PM", "Today 2:15 PM", "Today 5:45 PM"])
+colStatus = Col("Status", ["Delayed", "On Time", "On Time", "Delayed", "On Time", "Delayed"])
+
+searchSection = Card([searchHeading, searchForm], "sunk")
+searchHeading = Heading("Search by Route", "h3")
+searchForm = Form("route-search", searchButtons, [originField, destField])
+originField = FormControl("Origin", originInput)
+originInput = Input("origin", "e.g. Chicago, IL")
+destField = FormControl("Destination", destInput)
+destInput = Input("destination", "e.g. Denver, CO")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary")
+
+chartsRow = Card([carrierCard, volumeCard], "clear", "row", "l", "stretch", "start", true)
+carrierCard = Card([carrierHeading, carrierChart], "sunk")
+carrierHeading = Heading("Volume Split by Carrier", "h3")
+carrierChart = PieChart(carrierLabels, carrierValues, "donut")
+carrierLabels = ["FastFreight", "OceanLine", "AirCargo", "RailCo", "TruckPro"]
+carrierValues = [320, 245, 180, 150, 210]
+
+volumeCard = Card([volumeHeading, volumeChart], "sunk")
+volumeHeading = Heading("Weekly Volume (Past 8 Weeks)", "h3")
+volumeChart = BarChart(weekLabels, [volumeSeries], "grouped", "Week", "Shipments")
+weekLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+volumeSeries = Series("Shipments", [142, 158, 135, 170, 165, 180, 175, 190])
+
+flagSection = Card([flagHeading, flagDialog], "sunk")
+flagHeading = Heading("Flag a Shipment", "h3")
+flagDialog = DialogBlock("Flag Shipment", "Flag a Shipment for Review", "Select a shipment and describe the issue", [flagForm], "outline")
+flagForm = Form("flag-shipment", flagButtons, [flagShipmentField, flagReasonField])
+flagShipmentField = FormControl("Shipment ID", flagShipmentSelect)
+flagShipmentSelect = Select("shipment_id", [opt1, opt2, opt3, opt4, opt5, opt6], "Select shipment")
+opt1 = SelectItem("SHP-2291", "SHP-2291 - Chicago to Denver")
+opt2 = SelectItem("SHP-2298", "SHP-2298 - LA to Phoenix")
+opt3 = SelectItem("SHP-2302", "SHP-2302 - Dallas to Houston")
+opt4 = SelectItem("SHP-2308", "SHP-2308 - Miami to Atlanta")
+opt5 = SelectItem("SHP-2311", "SHP-2311 - NY to Boston")
+opt6 = SelectItem("SHP-2315", "SHP-2315 - Seattle to Portland")
+flagReasonField = FormControl("Reason", flagReasonInput, "Describe the issue for the review team")
+flagReasonInput = TextArea("reason", "e.g. Damaged packaging reported by customer", 3)
+flagButtons = Buttons([flagSubmitBtn])
+flagSubmitBtn = Button("Submit Flag", null, "primary", "destructive")

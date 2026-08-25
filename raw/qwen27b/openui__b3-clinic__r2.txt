@@ -1,0 +1,51 @@
+
+
+root = Card([header, dayNav, statsRow, nextPatient, roomsSection, apptsSection, checkInSection])
+
+header = CardHeader("Clinic Day View", "Tuesday, June 10, 2025")
+
+dayNav = Card([datePicker, navButtons], "clear", "row", "m", "center")
+datePicker = DatePicker("day", "single")
+navButtons = Buttons([prevBtn, nextBtn])
+prevBtn = Button("← Previous day", null, "secondary")
+nextBtn = Button("Next day →", null, "secondary")
+
+statsRow = Card([patientsStat, noShowStat], "sunk", "row", "xl", "center")
+patientsStat = Card([patientsNumber, patientsLabel], "clear", "column", "none", "center")
+patientsNumber = TextContent("11", "large-heavy")
+patientsLabel = TextContent("Patients expected today", "small")
+noShowStat = Card([noShowNumber, noShowLabel], "clear", "column", "none", "center")
+noShowNumber = TextContent("12%", "large-heavy")
+noShowLabel = TextContent("No-show rate this month", "small")
+
+nextPatient = Callout("info", "Next patient to call", "Aisha Patel — Room 1, 09:00 appointment. Patient is waiting in the lobby.")
+
+roomsSection = Card([roomsHeading, roomsList], "sunk")
+roomsHeading = Heading("Room Status — Right Now", "h3")
+roomsList = Card([room1, room2, room3, room4, room5], "clear", "row", "s", "center", true)
+room1 = Tag("Exam 1 — In use", null, "md", "danger")
+room2 = Tag("Exam 2 — Free", null, "md", "success")
+room3 = Tag("Exam 3 — In use", null, "md", "danger")
+room4 = Tag("Exam 4 — Free", null, "md", "success")
+room5 = Tag("Triage — Free", null, "md", "success")
+
+apptsSection = Card([apptsHeading, apptsTable], "sunk")
+apptsHeading = Heading("Today's Appointments", "h3")
+apptsTable = Table([timeCol, patientCol, roomCol, statusCol])
+timeCol = Col("Time", ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "14:00", "14:30", "15:00"])
+patientCol = Col("Patient", ["Maria Gonzalez", "James Chen", "Aisha Patel", "Robert Kim", "Linda Torres", "David Okafor", "Susan Wang", "Carlos Mendez", "Emily Foster", "Hassan Ali", "Nina Petrov"])
+roomCol = Col("Room", ["Exam 1", "Exam 2", "Exam 1", "Exam 3", "Exam 2", "Exam 1", "Exam 3", "Exam 2", "Exam 1", "Exam 3", "Exam 2"])
+statusCol = Col("Status", ["Checked in", "Checked in", "Waiting", "In room", "Checked in", "No-show", "Waiting", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+checkInSection = Card([checkInHeading, checkInForm], "sunk")
+checkInHeading = Heading("Check In Patient", "h3")
+checkInForm = Form("check-in", checkInButtons, [patientField, roomField])
+patientField = FormControl("Patient name", patientInput, "Search by name or MRN")
+patientInput = Input("patient_name", "e.g. Aisha Patel or MRN-4482")
+roomField = FormControl("Assign room", roomSelect)
+roomSelect = Select("room", [roomOpt2, roomOpt4, roomOptTriage], "Only free rooms shown")
+roomOpt2 = SelectItem("exam2", "Exam 2")
+roomOpt4 = SelectItem("exam4", "Exam 4")
+roomOptTriage = SelectItem("triage", "Triage")
+checkInButtons = Buttons([checkInBtn])
+checkInBtn = Button("Check In", null, "primary")

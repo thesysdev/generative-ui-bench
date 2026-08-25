@@ -1,0 +1,87 @@
+```openui-lang
+root = Card([header, balancesSection, transactionsSection, spendingSection, billsSection, goalSection, scoreSection, transferSection, freezeSection, periodSection, alertsSection, disputeSection])
+
+header = CardHeader("Personal Banking", "Welcome back, Alex!")
+
+balancesSection = Card([balancesHeading, balancesTable, balancesChart], "sunk")
+balancesHeading = Heading("Your Balances", "h3")
+balancesTable = Table([balanceColumns])
+balanceColumns = [
+    Col("Account", ["Checking", "Savings", "Credit Card"], "string"),
+    Col("Balance", ["$4,285.67", "$12,456.92", "$3,456.21"], "string"),
+    Col("Available", ["$4,285.67", "$12,456.92", "$3,110.78"], "string")
+]
+balancesChart = PieChart(["Checking", "Savings", "Credit"], ["4285.67", "12456.92", "3456.21"], "pie")
+
+transactionsSection = Card([transactionsHeading, transactionsList], "sunk")
+transactionsHeading = Heading("Recent Transactions", "h3")
+transactionsList = ListBlock([transactionItems], "image")
+transactionItems = [
+    ListItem("Coffee Shop", "$12.50", ["https://picsum.photos/seed/coffee/100/100"], "Dispute"),
+    ListItem("Groceries", "$85.32", ["https://picsum.photos/seed/groceries/100/100"]),
+    ListItem("Netflix", "$15.99", ["https://picsum.photos/seed/netflix/100/100"]),
+    ListItem("Gas Station", "$42.75", ["https://picsum.photos/seed/gas/100/100"]),
+    ListItem("Amazon", "$78.99", ["https://picsum.photos/seed/amazon/100/100"], "Dispute")
+]
+
+spendingSection = Card([spendingHeading, spendingChart], "sunk")
+spendingHeading = Heading("Spending Breakdown", "h3")
+spendingChart = PieChart(["Food", "Transport", "Entertainment", "Utilities", "Other"], ["$1,250", "$350", "$420", "$280", "$150"], "pie")
+
+billsSection = Card([billsHeading, billsList], "sunk")
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock([billItems])
+billItems = [
+    ListItem("Electric Bill", "$185.23", null, "Pay"),
+    ListItem("Internet", "$72.99", null, "Pay"),
+    ListItem("Car Insurance", "$120.50", null, "Pay")
+]
+
+goalSection = Card([goalHeading, goalProgress], "sunk")
+goalHeading = Heading("Vacation Savings Goal", "h3")
+goalProgress = Progress(75, "Almost there!")
+
+scoreSection = Card([scoreHeading, scoreTag], "sunk")
+scoreHeading = Heading("Credit Score", "h3")
+scoreTag = Tag("Excellent", null, null, "success")
+
+transferSection = Card([transferHeading, transferForm], "sunk")
+transferHeading = Heading("Transfer Money", "h3")
+transferForm = Form("money-transfer", transferButtons, [transferField])
+transferField = FormControl("Amount", transferInput)
+transferInput = Input("amount", "Enter amount", "number", ["min:0.01", "max:100000"])
+transferButtons = Buttons([transferBtn])
+transferBtn = Button("Transfer", null, "primary")
+
+freezeSection = Card([freezeHeading, freezeButton], "sunk")
+freezeHeading = Heading("Freeze Credit Line", "h3")
+freezeButton = Button("Freeze Credit Line", null, "destructive")
+
+periodSection = Card([periodHeading, periodButtons], "sunk")
+periodHeading = Heading("Change Statement Period", "h3")
+periodButtons = Buttons([monthlyBtn, quarterlyBtn, yearlyBtn])
+monthlyBtn = Button("Monthly", null, "secondary")
+quarterlyBtn = Button("Quarterly", null, "secondary")
+yearlyBtn = Button("Yearly", null, "secondary")
+
+alertsSection = Card([alertsHeading, alertsForm], "sunk")
+alertsHeading = Heading("Manage Alerts", "h3")
+alertsForm = Form("alert-preferences", alertsButtons, [alertFields])
+alertFields = [
+    FormControl("Low Balance", alertSwitch1),
+    FormControl("Large Transaction", alertSwitch2),
+    FormControl("Bill Due", alertSwitch3)
+]
+alertSwitch1 = SwitchGroup("low-balance-alerts", [switchItem1])
+alertSwitch2 = SwitchGroup("large-transaction-alerts", [switchItem2])
+alertSwitch3 = SwitchGroup("bill-due-alerts", [switchItem3])
+switchItem1 = SwitchItem("Enable low balance alerts", null, "low-balance", true)
+switchItem2 = SwitchItem("Enable large transaction alerts", null, "large-transaction", true)
+switchItem3 = SwitchItem("Enable bill due alerts", null, "bill-due", true)
+alertsButtons = Buttons([saveAlertsBtn])
+saveAlertsBtn = Button("Save Alerts", null, "primary")
+
+disputeSection = Card([disputeHeading, disputeButton], "sunk")
+disputeHeading = Heading("Dispute Transaction", "h3")
+disputeButton = Button("Dispute", null, "secondary")
+```

@@ -1,0 +1,41 @@
+root = Card([header, statsRow, mainGrid, footer], "clear", "column", "m")
+
+header = CardHeader("Clinic Daily Dashboard", "Monday, October 23rd")
+
+statsRow = Card([patientCount, noShowRate, roomStatus], "sunk", "row", "m")
+patientCount = TextCallout("info", "Expected Patients", "24 patients scheduled for today")
+noShowRate = TextCallout("warning", "Monthly No-Show Rate", "12.4% (Up 2% from last month)")
+roomStatus = TextCallout("success", "Available Rooms", "Rooms 2, 4, and 7 are currently vacant")
+
+mainGrid = Card([appointmentSection, patientActionSection], "clear", "row", "l")
+
+appointmentSection = Card([aptHeading, aptTable], "card", "column", "s")
+aptHeading = Heading("Today's Schedule", "h3")
+aptTable = Table([timeCol, patientCol, statusCol])
+timeCol = Col("Time", ["08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM"], "string")
+patientCol = Col("Patient", ["Sarah Jenkins", "Michael Chen", "Elena Rodriguez", "David Smith", "Lisa Wong"], "string")
+statusCol = Col("Status", ["In Room 1", "Arrived", "Confirmed", "Scheduled", "Scheduled"], "string")
+
+patientActionSection = Card([actionHeading, nextPatient, checkInForm, dateNav], "card", "column", "m")
+actionHeading = Heading("Patient Management", "h3")
+
+nextPatient = Card([nextPatientLabel, nextPatientName], "sunk", "column", "xs")
+nextPatientLabel = TextContent("Next Patient Called:", "small")
+nextPatientName = TextContent("Elena Rodriguez", "large-heavy")
+
+checkInForm = Form("patient-checkin", checkInButtons, [patientIdField])
+patientIdField = FormControl("Patient ID / Name", patientInput)
+patientInput = Input("patient_id", "Enter patient identifier...")
+checkInButtons = Buttons([checkInBtn])
+checkInBtn = Button("Check In Patient", null, "primary")
+
+dateNav = Card([navLabel, navButtons], "clear", "column", "xs")
+navLabel = TextContent("Navigate Date", "small")
+navButtons = Buttons([prevDay, todayBtn, nextDay])
+prevDay = Button("Yesterday", null, "secondary", "normal", "small")
+todayBtn = Button("Today", null, "secondary", "normal", "small")
+nextDay = Button("Tomorrow", null, "secondary", "normal", "small")
+
+footer = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("View full monthly report")
+followUp2 = FollowUpItem("Manage room assignments")

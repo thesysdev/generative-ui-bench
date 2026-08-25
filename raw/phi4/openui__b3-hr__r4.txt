@@ -1,0 +1,32 @@
+```openui
+root = Card([headcountHeader, openRoles, pipelineStages, avgTimeToHire, deptHeadcount, interviewsThisWeek, attritionChart, newRoleButton])
+headcountHeader = CardHeader("Current Headcount", "Total: 150")
+openRoles = Card([openRolesHeader, openRolesList])
+openRolesHeader = Heading("Open Roles", "h3")
+openRolesList = ListBlock([
+    ListItem("Software Engineer", "Engineering"),
+    ListItem("Product Manager", "Product"),
+    ListItem("Data Analyst", "Data Science")
+], "image")
+pipelineStages = Card([pipelineHeader, pipelineChart])
+pipelineHeader = Heading("Candidate Pipeline", "h3")
+pipelineChart = RadarChart(["Applied", "Screened", "Interviewed", "Offered"], [
+    Series("Engineering", [120, 80, 50, 30]),
+    Series("Product", [50, 40, 25, 15]),
+    Series("Data Science", [30, 20, 15, 10])
+])
+avgTimeToHire = Card([avgTimeHeader, avgTimeValue])
+avgTimeHeader = Heading("Average Time to Hire", "h3")
+avgTimeValue = TextContent("45 days", "large")
+deptHeadcount = Card([deptHeadcountHeader, deptHeadcountChart])
+deptHeadcountHeader = Heading("Headcount by Department", "h3")
+deptHeadcountChart = PieChart(["Engineering", "Product", "Data Science"], [60, 45, 45])
+interviewsThisWeek = Card([interviewsHeader, interviewsValue])
+interviewsHeader = Heading("Interviews Scheduled This Week", "h3")
+interviewsValue = TextContent("12", "large")
+attritionChart = Card([attritionHeader, attritionChart])
+attritionHeader = Heading("Attrition Over 6 Months", "h3")
+attritionChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [
+    Series("Attrition", [5, 7, 4, 6, 8, 5])], "linear", "Month", "Count")
+newRoleButton = DialogBlock("Open New Role", "Add a New Role", "Fill in the role details to start the hiring process.")
+```

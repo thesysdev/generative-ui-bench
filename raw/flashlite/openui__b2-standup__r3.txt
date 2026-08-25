@@ -1,0 +1,41 @@
+root = Card([header, metricsCard, blockoutsAlert, teamSection, updateFormSection, followUps], "card", "column", "l")
+
+header = CardHeader("Async Standup", "Thursday, October 24, 2024")
+
+metricsCard = Card([metricsHeading, metricsTable], "sunk", "column", "m")
+metricsHeading = Heading("Team Overview", "h3")
+metricsTable = Table([metricCol, valueCol])
+metricCol = Col("Metric", ["Submitted", "Missing", "Total Team"])
+valueCol = Col("Count", ["6", "2", "8"])
+
+blockoutsAlert = Alert("Blockers Detected", "2 team members have reported being blocked on their current tasks and need assistance.", "warning")
+
+teamSection = Card([teamHeading, teamList], "clear", "column", "m")
+teamHeading = Heading("Today's Updates", "h3")
+teamList = ListBlock([member1, member2, member3, member4, member5, member6], "image")
+
+member1 = ListItem("Sarah Jenkins", "Finished the Q4 financial projections and updated the dashboard. No blockers.", ["https://picsum.photos/seed/sarah/100/100"])
+member2 = ListItem("Alex Rivera (BLOCKED)", "Working on API integration with the payment gateway. Blocked by missing auth tokens from vendor.", ["https://picsum.photos/seed/alex/100/100"])
+member3 = ListItem("Devon Taylor", "Writing unit tests for the auth service. Will finish today.", ["https://picsum.photos/seed/devon/100/100"])
+member4 = ListItem("Elena Rostova", "Reviewing PRs and refactoring legacy CSS. No blockers.", ["https://picsum.photos/seed/elena/100/100"])
+member5 = ListItem("Marcus Chen (BLOCKED)", "Setting up the Kubernetes deployment pipeline. Blocked due to AWS IAM permission limits.", ["https://picsum.photos/seed/marcus/100/100"])
+member6 = ListItem("Zoe Vance", "Drafting user research findings from customer interviews.", ["https://picsum.photos/seed/zoe/100/100"])
+
+updateFormSection = Card([formHeading, standupForm], "sunk", "column", "m")
+formHeading = Heading("Post Your Update", "h3")
+standupForm = Form("standup-submission", formButtons, [statusField, blockerField])
+
+statusField = FormControl("Today's Progress", statusInput, "What did you accomplish or what are you working on?")
+statusInput = TextArea("status_text", "Share your update for today...", 3)
+
+blockerField = FormControl("Are you blocked?", blockerSelect, "Select if you need help from the team")
+blockerSelect = Select("blocker_status", [notBlocked, isBlocked], "Select status")
+notBlocked = SelectItem("no", "No blockers - all clear")
+isBlocked = SelectItem("yes", "Yes - I am blocked")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Standup Update", null, "primary")
+
+followUps = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("Ping Alex regarding API auth tokens")
+fu2 = FollowUpItem("Check AWS IAM permissions for Marcus")

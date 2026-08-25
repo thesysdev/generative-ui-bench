@@ -1,0 +1,87 @@
+root = Card([header, summaryRow, accountDetails, activitySection, contactsSection, followUpSection, actionSection], "card", "column", "l")
+
+header = CardHeader("Acme Corp", "Enterprise Account")
+
+summaryRow = Card([dealValue, dealStage, renewalDate], "sunk", "row", "m", "stretch", "between")
+
+dealValue = TextCallout("info", "Total Deal Value", "$1.2M")
+
+dealStage = TextCallout("neutral", "Current Stage", "Negotiation")
+
+renewalDate = TextCallout("warning", "Renewal Date", "Oct 12, 2024 - Due Soon")
+
+accountDetails = Card([ownerInfo, accountTags], "clear", "column", "xs")
+
+ownerInfo = TextContent("Account Owner: **Sarah Jenkins**", "small")
+
+accountTags = TagBlock(["SaaS", "High Growth", "Strategic"])
+
+activitySection = Card([activityHeading, activityList], "sunk", "column", "s")
+
+activityHeading = Heading("Recent Activity", "h3")
+
+activityList = ListBlock([act1, act2, act3], "number")
+
+act1 = ListItem("Discovery Call", "Discussed Q4 expansion goals", null, "View Recording")
+
+act2 = ListItem("Email Sent", "Sent revised pricing proposal", null, "View Email")
+
+act3 = ListItem("Meeting", "Quarterly Business Review completed", null, "View Notes")
+
+contactsSection = Card([contactsHeading, contactsTable], "sunk", "column", "s")
+
+contactsHeading = Heading("Key Contacts", "h3")
+
+contactsTable = Table([colName, colRole, colEmail])
+
+colName = Col("Contact", ["James Wilson", "Linda Chen", "Robert Fox"])
+
+colRole = Col("Role", ["CTO", "Procurement Lead", "VP Engineering"])
+
+colEmail = Col("Email", ["j.wilson@acme.com", "l.chen@acme.com", "r.fox@acme.com"])
+
+followUpSection = Card([followUpHeading, followUpList], "sunk", "column", "s")
+
+followUpHeading = Heading("Open Follow-ups", "h3")
+
+followUpList = ListBlock([f1, f2], "image")
+
+f1 = ListItem("Follow up on pricing", "Due: Sept 25, 2024", null, "Mark Done")
+
+f2 = ListItem("Schedule Demo for Team", "Due: Sept 28, 2024", null, "Mark Done")
+
+actionSection = Card([actionHeading, noteForm, callAction], "sunk", "column", "m")
+
+actionHeading = Heading("Quick Actions", "h3")
+
+noteForm = Form("quick-note", noteButtons, [noteField])
+
+noteField = FormControl("Add Account Note", noteInput, "Quickly jot down a detail")
+
+noteInput = TextArea("note_text", "Enter note here...", 3)
+
+noteButtons = Buttons([saveNoteBtn])
+
+saveNoteBtn = Button("Save Note", null, "primary")
+
+callAction = DialogBlock("Log a Call", "Call Details", "Enter the details of your recent conversation", [callForm], "secondary")
+
+callForm = Form("log-call", callButtons, [callDuration, callOutcome])
+
+callDuration = FormControl("Duration", durationInput)
+
+durationInput = Input("duration", "e.g. 30 mins", "text")
+
+callOutcome = FormControl("Outcome", outcomeSelect)
+
+outcomeSelect = Select("outcome", [out1, out2, out3], "Select result")
+
+out1 = SelectItem("positive", "Positive")
+
+out2 = SelectItem("neutral", "Neutral")
+
+out3 = SelectItem("negative", "Negative")
+
+callButtons = Buttons([submitCallBtn])
+
+submitCallBtn = Button("Log Call", null, "primary")

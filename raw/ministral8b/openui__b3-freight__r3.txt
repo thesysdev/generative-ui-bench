@@ -1,0 +1,53 @@
+```openui-lang
+root = Card([header, refreshTime, searchBar, transitSection, delayedSection, metricsSection, carrierSplit, weeklyVolume, actions])
+
+header = CardHeader("Logistics Dashboard", "Real-time shipment tracking and analytics")
+
+refreshTime = TextContent("Last updated: " + currentTime, "small")
+
+searchBar = Card([searchInput], "sunk", "row", "m", "center", "center")
+searchInput = Input("route-search", "Search by route...", "text", null, "Search")
+
+transitSection = Card([shipmentsHeader, shipmentTable], "sunk")
+shipmentsHeader = Heading("Shipments in Transit", "h3")
+shipmentTable = Table([shipmentCols])
+shipmentCols = [
+    Col("Origin", ["New York", "Chicago", "Los Angeles", "Dallas", "Miami", "Seattle"], "string"),
+    Col("Destination", ["London", "Tokyo", "Paris", "Berlin", "Dubai", "Sydney"], "string"),
+    Col("ETA", ["2023-10-15", "2023-10-18", "2023-10-20", "2023-10-17", "2023-10-22", "2023-10-19"], "string"),
+    Col("Status", ["In Transit", "In Transit", "In Transit", "Delayed", "In Transit", "In Transit"], "string"),
+    Col("Action", ["", "", "", "", "", ""], "action")
+]
+
+delayedSection = Card([delayedHeader, delayedTable], "sunk")
+delayedHeader = Heading("Delayed Shipments", "h3")
+delayedTable = Table([delayedCols])
+delayedCols = [
+    Col("Origin", ["Chicago"], "string"),
+    Col("Destination", ["Tokyo"], "string"),
+    Col("ETA", ["2023-10-18"], "string"),
+    Col("Delay Reason", ["Port Strike"], "string"),
+    Col("New ETA", ["2023-10-25"], "string")
+]
+
+metricsSection = Card([onTimePercent, avgCost], "sunk")
+onTimePercent = Card([onTimeCard], "sunk")
+onTimeCard = Card([Tag("92%", null, null, "success"), TextContent("On-time this month")], "sunk", "row", "m", "center", "center")
+avgCost = Card([costCard], "sunk")
+costCard = Card([TextContent("Avg. Cost per Shipment"), Progress(75, "$425")], "sunk", "column")
+
+carrierSplit = Card([carrierHeader, carrierChart], "sunk")
+carrierHeader = Heading("Volume by Carrier", "h3")
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "TNT", "Other"], [45, 30, 15, 5, 5], "pie")
+
+weeklyVolume = Card([volumeHeader, volumeChart], "sunk")
+volumeHeader = Heading("Weekly Volume (Past 2 Months)", "h3")
+volumeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"], [volumeSeries], "natural", "Week", "Shipments")
+volumeSeries = Series("Volume", [1200, 1400, 1500, 1300, 1600, 1700, 1450, 1800])
+
+actions = Card([flagBtn, refreshBtn], "sunk", "row", "m", "center", "center")
+flagBtn = Button("Flag Shipment", null, "primary", "normal", "medium")
+refreshBtn = Button("Refresh Data", null, "secondary", "normal", "medium")
+
+currentTime = "2023-10-10 14:30:00"
+```

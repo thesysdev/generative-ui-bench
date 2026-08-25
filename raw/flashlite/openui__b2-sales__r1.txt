@@ -1,0 +1,30 @@
+root = Card([header, metricsRow, chartCard, productsCard, actions])
+
+header = CardHeader("Monthly Sales Check", "Founder's overview & performance metrics")
+
+metricsRow = Card([revenueBox, conversionBox], "clear", "row", "m", "center", "between")
+revenueBox = Card([revenueHeading, revenueValue, revenueBadge], "sunk", "column", "xs")
+revenueHeading = Heading("Revenue This Month", "h4")
+revenueValue = TextContent("### $48,250", "large")
+revenueBadge = Tag("+12% vs last month", null, "sm", "success")
+
+conversionBox = Card([conversionHeading, conversionValue, conversionBadge], "sunk", "column", "xs")
+conversionHeading = Heading("Conversion Rate", "h4")
+conversionValue = TextContent("### 3.8%", "large")
+conversionBadge = Tag("+0.4% pts", null, "sm", "success")
+
+chartCard = Card([chartHeader, trendChart], "card", "column", "m")
+chartHeader = CardHeader("Revenue Trend", "Performance over the last six months")
+trendChart = LineChart(["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"], [revenueSeries], "natural", "Month", "Revenue ($)")
+revenueSeries = Series("Monthly Revenue", [32000, 35000, 41000, 39000, 44000, 48250])
+
+productsCard = Card([productsHeader, productsTable], "card", "column", "m")
+productsHeader = CardHeader("Best-Selling Products", "Top 3 products by units sold this month")
+productsTable = Table([productCol, unitsCol, salesCol])
+productCol = Col("Product", ["Enterprise Tier", "Pro Subscription", "Starter Add-on"])
+unitsCol = Col("Units Sold", [142, 380, 520])
+salesCol = Col("Total Sales", ["$28,400", "$15,200", "$4,650"])
+
+actions = Buttons([downloadBtn, emailBtn])
+downloadBtn = Button("Download Report (CSV)")
+emailBtn = Button("Email Summary", null, "secondary")

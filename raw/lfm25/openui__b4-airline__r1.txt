@@ -1,0 +1,227 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. On-time performance today
+    CardHeader(
+      title: "Today's On-Time Performance",
+      subtitle: "Operational Summary"
+    ),
+    MetricCard(
+      title: "On-Time Rate",
+      value: "94%",
+      unit: "percent",
+      description: "Percentage of flights arriving on schedule today"
+    ),
+    
+    // 2. Flights with number, route, gate and status
+    FlightsList(
+      title: "Active Flights",
+      flights: [
+        {
+          flightNumber: "AA1234",
+          route: "NYC → LON",
+          gate: "B12",
+          status: "On Time",
+          delayMinutes: 0
+        },
+        {
+          flightNumber: "BA5678",
+          route: "LON → JFK",
+          gate: "D34",
+          status: "Delayed",
+          delayMinutes: 45
+        },
+        {
+          flightNumber: "DL9876",
+          route: "JFK → SFO",
+          gate: "E07",
+          status: "On Time",
+          delayMinutes: 0
+        },
+        {
+          flightNumber: "UA2345",
+          route: "SFO → LAX",
+          gate: "F22",
+          status: "Delayed",
+          delayMinutes: 90
+        }
+      ]
+    ),
+    
+    // 3. Delayed flights called out
+    DelayedFlights(
+      title: "Delayed Flights Today",
+      delayed: [
+        {
+          flight: "BA5678",
+          route: "LON → JFK",
+          gate: "D34",
+          status: "Delayed",
+          delayMinutes: 45,
+          reason: "Weather congestion"
+        },
+        {
+          flight: "UA2345",
+          route: "SFO → LAX",
+          gate: "F22",
+          status: "Delayed",
+          delayMinutes: 90,
+          reason: "Air traffic control delay"
+        }
+      ]
+    ),
+    
+    // 4. Recent gate changes
+    GateChanges(
+      title: "Recent Gate Changes",
+      changes: [
+        {
+          changeId: "GC-001",
+          oldGate: "B05",
+          newGate: "B12",
+          flight: "AA1234",
+          timestamp: "2026-07-20T08:30:00Z"
+        },
+        {
+          changeId: "GC-002",
+          oldGate: "D28",
+          newGate: "D34",
+          flight: "BA5678",
+          timestamp: "2026-07-20T09:15:00Z"
+        },
+        {
+          changeId: "GC-003",
+          oldGate: "E01",
+          newGate: "F22",
+          flight: "DL9876",
+          timestamp: "2026-07-20T10:45:00Z"
+        }
+      ]
+    ),
+    
+    // 5. Crews available for reassignment
+    CrewsAvailable(
+      title: "Crews Available for Reassignment",
+      crews: [
+        {
+          crewID: "CREW-001",
+          name: "Captain Sarah Chen",
+          availableSeats: 24,
+          roles: ["Pilot", "Lead"]
+        },
+        {
+          crewID: "CREW-002",
+          name: "First Officer Mike Ross",
+          availableSeats: 18,
+          roles: ["Assistant Pilot"]
+        },
+        {
+          crewID: "CREW-003",
+          name: "Engineer Lisa Park",
+          availableSeats: 12,
+          roles: ["Mechanic"]
+        }
+      ]
+    ),
+    
+    // 6. Weather advisories at the hub
+    WeatherAdvisories(
+      title: "Hub Weather Advisories",
+      advisories: [
+        {
+          condition: "Thunderstorms",
+          location: "North Run",
+          impact: "Reduced capacity - expect delays up to 60 minutes"
+        },
+        {
+          condition: "High winds",
+          location: "South Terminal",
+          impact: "Ground stops possible for certain aircraft"
+        },
+        {
+          condition: "Low visibility",
+          location: "Runway 27L",
+          impact: "Approaching minimums for some aircraft types"
+        }
+      ]
+    ),
+    
+    // 7. Average passenger load today
+    PassengerLoad(
+      title: "Average Passenger Load",
+      metric: "Today",
+      value: "$48,200",
+      unit: "passengers",
+      note: "Total passengers handled across all active flights"
+    ),
+    
+    // 8. Connections at risk of being missed
+    ConnectionsAtRisk(
+      title: "Connections at Risk",
+      riskyConnects: [
+        {
+          connection: "Flight AA1234 → BA4567",
+          riskLevel: "High",
+          issue: "Gate change to D34 may cause missed connection"
+        },
+        {
+          connection: "Flight DL9876 → SFO",
+          riskLevel: "Medium",
+          issue: "Delayed departure could miss local transfers"
+        }
+      ]
+    ),
+    
+    // 9. Way to rebook affected passengers
+    RebookPassengers(
+      title: "Rebook Affected Passengers",
+      method: "Click 'Rebook' below to initiate changes",
+      steps: [
+        "Select affected flight(s)",
+        "Choose new seating configuration",
+        "Confirm rebooking"
+      ],
+      button: Button("Rebase Now", "primary")
+    ),
+    
+    // 10. Way to look at a different hub
+    HubComparison(
+      title: "Compare with Another Hub",
+      options: [
+        { hub: "LAX", label: "Los Angeles"},
+        { hub: "ORD", label: "Chicago"},
+        { hub: "DEN", label: "Denver"}
+      ],
+      primaryHub: "JFK"
+    ),
+    
+    // 11. Cancellations today
+    CancellationsToday(
+      title: "Cancellations Today",
+      cancelled: [
+        {
+          flight: "Flight A1002",
+          reason: "Technical issue",
+          cancellationTime: "2026-07-20T14:00:00Z"
+        },
+        {
+          flight: "Flight K999",
+          reason: "Cabin overbooking",
+          cancellationTime: "2026-07-20T16:30:00Z"
+        }
+      ]
+    ),
+    
+    // 12. Average turnaround time
+    TurnaroundTime(
+      title: "Average Turnaround Time",
+      value: "78 minutes",
+      unit: "minutes",
+      note: "Typical gate-to-gate cycle for aircraft at hub"
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "s"
+)
+```

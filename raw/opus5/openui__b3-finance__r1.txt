@@ -1,0 +1,94 @@
+root = Card([header, runwayAlert, kpiSection, expenseSection, largeTxnSection, controlsSection, followUps])
+
+header = CardHeader("Finance Overview — March 2024", "Month-end close · Acme Robotics, Inc.")
+
+runwayAlert = Alert("Runway below 12 months", "At the current burn rate of $412,000/mo, cash runs out in February 2025. Board target is 18 months.", "warning")
+
+kpiSection = Card([kpiHeading, kpiRow, runwayProgress, kpiTable], "sunk")
+kpiHeading = Heading("Key metrics", "h3")
+kpiRow = Card([cashCard, burnCard, runwayCard], "clear", "row", "m", "stretch", "between")
+
+cashCard = Card([cashLabel, cashValue, cashDelta], "card", "column", "xs")
+cashLabel = TextContent("Cash on hand", "small")
+cashValue = TextContent("**$4,326,800**", "large-heavy")
+cashDelta = Tag("−$389K vs Feb", null, "sm", "warning")
+
+burnCard = Card([burnLabel, burnValue, burnDelta], "card", "column", "xs")
+burnLabel = TextContent("Net monthly burn", "small")
+burnValue = TextContent("**$412,000**", "large-heavy")
+burnDelta = Tag("+6.2% MoM", null, "sm", "danger")
+
+runwayCard = Card([runwayLabel, runwayValue, runwayDelta], "card", "column", "xs")
+runwayLabel = TextContent("Months of runway", "small")
+runwayValue = TextContent("**10.5 months**", "large-heavy")
+runwayDelta = Tag("Target 18 mo", null, "sm", "info")
+
+runwayProgress = Progress(58, "Runway vs 18-month board target (10.5 / 18 months)")
+
+kpiTable = Table([metricCol, marCol, febCol, changeCol])
+metricCol = Col("Metric", ["Cash on hand", "Gross burn", "Revenue collected", "Net burn", "Runway (months)"])
+marCol = Col("March", ["$4,326,800", "$561,400", "$149,400", "$412,000", "10.5"], "string")
+febCol = Col("February", ["$4,715,900", "$523,100", "$135,200", "$387,900", "12.2"], "string")
+changeCol = Col("Change", ["−8.2%", "+7.3%", "+10.5%", "+6.2%", "−1.7 mo"], "string")
+
+expenseSection = Card([expenseHeading, expenseSplit, expenseTrend, expenseTable], "sunk")
+expenseHeading = Heading("Expenses by category", "h3")
+expenseSplit = PieChart(expenseLabels, expenseValues, "donut")
+expenseLabels = ["Payroll & benefits", "Cloud & infrastructure", "Sales & marketing", "Contractors", "Office & travel", "Software & tools", "Legal & accounting"]
+expenseValues = [318500, 74200, 61800, 42300, 27600, 21400, 15600]
+
+expenseTrend = BarChart(trendMonths, [payrollSeries, infraSeries, gtmSeries], "stacked", "Month", "USD")
+trendMonths = ["Nov", "Dec", "Jan", "Feb", "Mar"]
+payrollSeries = Series("Payroll", [281000, 289400, 296700, 305200, 318500])
+infraSeries = Series("Infrastructure", [58900, 63400, 66100, 69800, 74200])
+gtmSeries = Series("Go-to-market", [44200, 51800, 55300, 58600, 61800])
+
+expenseTable = Table([catCol, amtCol, shareCol, momCol])
+catCol = Col("Category", ["Payroll & benefits", "Cloud & infrastructure", "Sales & marketing", "Contractors", "Office & travel", "Software & tools", "Legal & accounting", "Total"])
+amtCol = Col("March spend", ["$318,500", "$74,200", "$61,800", "$42,300", "$27,600", "$21,400", "$15,600", "$561,400"], "string")
+shareCol = Col("Share", ["56.7%", "13.2%", "11.0%", "7.5%", "4.9%", "3.8%", "2.8%", "100%"], "string")
+momCol = Col("vs Feb", ["+4.4%", "+6.3%", "+5.5%", "−2.1%", "+11.8%", "+3.4%", "−18.2%", "+7.3%"], "string")
+
+largeTxnSection = Card([largeTxnHeading, largeTxnNote, largeTxnTable, largeTxnPages], "sunk")
+largeTxnHeading = Heading("Transactions above $10,000 — March 2024", "h3")
+largeTxnNote = TextContent("9 transactions cleared the $10,000 threshold this month, totaling **$392,140** (69.9% of gross spend).", "small")
+largeTxnTable = Table([dateCol, vendorCol, txnCatCol, amountCol, statusCol])
+dateCol = Col("Date", ["Mar 01", "Mar 05", "Mar 08", "Mar 12", "Mar 15", "Mar 20", "Mar 25", "Mar 28", "Mar 29"])
+vendorCol = Col("Vendor / description", ["Gusto — payroll run 03/01", "AWS — March compute & storage", "Gusto — payroll run 03/15", "Meridian Staffing — contract eng.", "Harbor Legal LLP — Series B prep", "LinkedIn Ads — Q1 campaign", "Dell Technologies — lab hardware", "Snowflake — annual commit", "Regus — HQ lease Q2 prepay"])
+txnCatCol = Col("Category", ["Payroll", "Infrastructure", "Payroll", "Contractors", "Legal", "Marketing", "Equipment", "Software", "Office"])
+amountCol = Col("Amount", ["$156,200", "$48,900", "$154,300", "$31,500", "$14,200", "$22,400", "$18,700", "$13,900", "$12,040"], "string")
+statusCol = Col("Status", ["Cleared", "Cleared", "Cleared", "Cleared", "Cleared", "Cleared", "Pending", "Cleared", "Pending"])
+largeTxnPages = PaginationBlock(1, 2)
+
+controlsSection = Card([controlsHeading, periodForm, downloadRow], "sunk")
+controlsHeading = Heading("Period & statements", "h3")
+
+periodForm = Form("period-selector", periodButtons, [monthField, yearField, basisField])
+monthField = FormControl("Month", monthSelect, "Switch the whole view to a different close period")
+monthSelect = Select("month", [mMar, mFeb, mJan, mDec, mNov], "March", null, "Mar")
+mMar = SelectItem("Mar", "March 2024")
+mFeb = SelectItem("Feb", "February 2024")
+mJan = SelectItem("Jan", "January 2024")
+mDec = SelectItem("Dec", "December 2023")
+mNov = SelectItem("Nov", "November 2023")
+yearField = FormControl("Fiscal year", yearSelect)
+yearSelect = Select("year", [y2024, y2023], "2024", null, "2024")
+y2024 = SelectItem("2024", "FY 2024")
+y2023 = SelectItem("2023", "FY 2023")
+basisField = FormControl("Accounting basis", basisRadio)
+basisRadio = RadioGroup("basis", [basisCash, basisAccrual], "cash")
+basisCash = RadioItem("Cash", "Recognized when money moves", "cash")
+basisAccrual = RadioItem("Accrual", "Recognized when incurred", "accrual")
+periodButtons = Buttons([applyBtn, resetBtn])
+applyBtn = Button("Load this period", null, "primary")
+resetBtn = Button("Reset to latest close", null, "tertiary")
+
+downloadRow = Buttons([downloadPdf, downloadCsv, downloadDialog])
+downloadPdf = Button("Download statement (PDF)", null, "primary")
+downloadCsv = Button("Download transactions (CSV)", null, "secondary")
+downloadDialog = Button("Email to accountant", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Why did net burn rise 6.2% in March?")
+fu2 = FollowUpItem("Model runway if we cut contractor spend by 40%")
+fu3 = FollowUpItem("Compare March 2024 against March 2023")

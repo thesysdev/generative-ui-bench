@@ -1,0 +1,58 @@
+```openui-lang
+root = Card([header, headcountCard, openRoles, pipelineCard, timeToHire, departmentSplit, interviewsWeek, attritionChart, newRoleButton])
+
+header = CardHeader("Hiring Overview", "Weekly snapshot of recruitment metrics")
+
+headcountCard = Card([currentHeadcount, headcountGrowth], "sunk")
+currentHeadcount = CardHeader("Current Headcount", "128 employees")
+headcountGrowth = TextContent("+3 since last week", "small")
+
+openRoles = Card([rolesHeader, rolesTable], "sunk")
+rolesHeader = Heading("Open Roles", "h3")
+rolesTable = Table([deptCol, roleCol, priorityCol])
+deptCol = Col("Department", ["Engineering", "Marketing", "Design", "Sales", "HR", "Finance"])
+roleCol = Col("Role", ["Senior Backend Engineer", "Marketing Manager", "Product Designer", "Account Executive", "HR Specialist", "Financial Analyst"])
+priorityCol = Col("Priority", ["High", "Medium", "Medium", "Low", "High", "Medium"])
+
+pipelineCard = Card([pipelineHeader, pipelineChart], "sunk")
+pipelineHeader = Heading("Candidate Pipeline", "h3")
+pipelineChart = RadarChart(["Applied", "Screened", "Interviewed", "Offered", "Hired"], [pipelineSeries])
+pipelineSeries = Series("Current", [42, 18, 12, 5, 2])
+
+timeToHire = Card([timeHeader, timeValue], "sunk")
+timeHeader = Heading("Avg. Time to Hire", "h3")
+timeValue = TextContent("18 days", "large-heavy")
+
+departmentSplit = Card([splitHeader, splitChart], "sunk")
+splitHeader = Heading("Headcount by Department", "h3")
+splitChart = PieChart(["Engineering", "Marketing", "Design", "Sales", "HR", "Finance"], [32, 25, 18, 20, 7, 8])
+
+interviewsWeek = Card([interviewsHeader, interviewsTable], "sunk")
+interviewsHeader = Heading("Interviews Scheduled This Week", "h3")
+interviewsTable = Table([timeCol, roleCol, candidateCol])
+timeCol = Col("Time", ["9:00 AM", "11:30 AM", "2:00 PM", "4:00 PM"])
+roleCol = Col("Role", ["Senior Backend Engineer", "Marketing Manager", "Product Designer", "Account Executive"])
+candidateCol = Col("Candidate", ["Alex Johnson", "Priya Patel", "Carlos Rodriguez", "Emma Chen"])
+
+attritionChart = Card([attritionHeader, attritionLine], "sunk")
+attritionHeader = Heading("Attrition (Past 6 Months)", "h3")
+attritionLine = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionSeries], "natural", "Month", "Employees")
+attritionSeries = Series("Attrition", [5, 3, 4, 2, 6, 4])
+
+newRoleButton = Card([newRoleHeader, newRoleForm], "sunk")
+newRoleHeader = Heading("Open New Role", "h3")
+newRoleForm = Form("new-role", newRoleButtons, [roleField, deptField, priorityField])
+roleField = FormControl("Job Title", roleInput)
+roleInput = Input("title", "e.g. Data Scientist")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [deptOptions], "Select department")
+deptOptions = [SelectItem("engineering", "Engineering"), SelectItem("marketing", "Marketing"), SelectItem("design", "Design"), SelectItem("sales", "Sales"), SelectItem("hr", "HR"), SelectItem("finance", "Finance")]
+priorityField = FormControl("Priority", priorityRadio)
+priorityRadio = RadioGroup("priority", [priorityHigh, priorityMedium, priorityLow])
+priorityHigh = RadioItem("High", "Critical hire", "high")
+priorityMedium = RadioItem("Medium", "Standard fill", "medium")
+priorityLow = RadioItem("Low", "Long-term need", "low")
+newRoleButtons = Buttons([submitRoleBtn])
+submitRoleBtn = Button("Create Role", null, "primary")
+
+```

@@ -1,0 +1,25 @@
+root = Card([header, kpiGrid, trendSection, productSection, footer], "card", "column", "m")
+
+header = CardHeader("Monthly Sales Check", "Performance overview for the current period")
+
+kpiGrid = Card([revKpi, convKpi], "sunk", "row", "m", "stretch", "between")
+revKpi = Card([revLabel, revValue], "clear", "column", "none")
+revLabel = TextContent("Revenue This Month", "small")
+revValue = TextContent("$42,850", "large-heavy")
+convKpi = Card([convLabel, convValue], "clear", "column", "none")
+convLabel = TextContent("Conversion Rate", "small")
+convValue = TextContent("3.42%", "large-heavy")
+
+trendSection = Card([trendHeading, revChart], "sunk", "column", "s")
+trendHeading = Heading("Revenue Trend (6 Months)", "h3")
+revChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [revenueSeries], "natural", "Month", "USD")
+revenueSeries = Series("Monthly Revenue", [28000, 31000, 29500, 35000, 38000, 42850])
+
+productSection = Card([prodHeading, prodTable], "sunk", "column", "s")
+prodHeading = Heading("Top 3 Products", "h3")
+prodTable = Table([prodCol, unitsCol])
+prodCol = Col("Product", ["Quantum Widget", "Nebula Gear", "Apex Sensor"], "string")
+unitsCol = Col("Units Sold", ["1,240", "980", "850"], "number")
+
+footer = Card([downloadBtn], "clear", "row", "none", "center")
+downloadBtn = Button("Download Full Report", null, "primary", "normal", "medium")

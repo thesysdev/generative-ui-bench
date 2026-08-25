@@ -1,0 +1,79 @@
+```openui-lang
+root = Card([
+    occupancyCard,
+    erWaitCard,
+    admissionsCard,
+    departmentPatientsCard,
+    staffOnShiftCard,
+    criticalPatientsCard,
+    dischargeReadyCard,
+    roBookingsCard,
+    lowSuppliesCard,
+    incidentButton,
+    daySelector,
+    transferRequestButton
+], "card", "row", "l")
+
+# 1. Bed occupancy
+occupancyCard = Card([
+    CardHeader("Bed Occupancy", "Real-time"),
+    Table([bedLabel, bedStatus])
+], "sunk")
+bedLabel = Col("Department", ["Emergency", "ICU", "Medical", "Surgical", "Maternity"])
+bedStatus = Col("Occupied", ["30%", "45%", "20%", "10%", "5%"])
+
+# 2. Current ER wait
+erWaitCard = Card([TextContent("Current ER Wait: 12 minutes")], "clear")
+
+# 3. Admissions over the past two weeks
+admissionsCard = Card([
+    CardHeader("Admissions (Last 14 Days)", "Daily total"),
+    LineChart(["Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14"], [admissionsSeries], "linear", "Day", "Admissions")
+], "sunk")
+admissionsSeries = Series("Admissions", [45, 38, 52, 47, 60, 55, 70, 65, 80, 75, 90, 85, 95, 100])
+
+# 4. Patients per department
+departmentPatientsCard = Card([TextContent("Patients per Department")], "clear")
+# Placeholder; real data would be fetched and displayed in a Table or similar component.
+
+# 5. Staff on shift with role for each
+staffOnShiftCard = Card([
+    CardHeader("Staff on Shift"),
+    Table([staffRole, staffName])
+], "sunk")
+staffRole = Col("Role", ["Doctor", "Nurse", "Technician", "Admin"])
+staffName = Col("Name", ["Dr. Lee", "Nurse Patel", "Tech Gomez", "Admin Wang"])
+
+# 6. Critical patients called out
+criticalPatientsCard = Card([TextContent("Critical Patients Called Out: 3")], "clear")
+
+# 7. Patients ready for discharge
+dischargeReadyCard = Card([TextContent("Patients Ready for Discharge: 15")], "clear")
+
+# 8. Today's operating room bookings
+roBookingsCard = Card([
+    CardHeader("Today's OR Bookings"),
+    Table([procedure, surgeon, start, end])
+], "sunk")
+procedure = Col("Procedure", ["C-Section", "Cardiac Surgery", "Orthopedic", "Urology"])
+surgeon = Col("Surgeon", ["Dr. Kim", "Dr. Singh", "Dr. Patel", "Dr. Chen"])
+start = Col("Start Time", ["08:00", "10:30", "13:00", "15:45"])
+end = Col("End Time", ["09:30", "12:00", "15:30", "18:15"])
+
+# 9. Supplies running low
+lowSuppliesCard = Card([
+    Callout("warning", "Supplies Running Low", "IV bags: 10% left, Gloves: 15% left")
+], "clear")
+
+# 10. Way to file an incident
+incidentButton = Button("File Incident", null, "primary")
+
+# 11. Way to look at another day
+daySelector = DatePicker("day_selection", "single", value: "2025-08-22", label: "Select Day")
+
+# 12. Way to request a patient transfer
+transferRequestButton = Button("Request Patient Transfer", null, "secondary")
+
+# Optional: A footer to group the actions
+footer = Card([incidentButton, daySelector, transferRequestButton], "sunk")
+```

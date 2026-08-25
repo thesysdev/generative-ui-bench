@@ -1,0 +1,82 @@
+root = Card([pageHeader, refreshAlert, kpiRow, mainContent, searchSection, flagSection, followUps], "clear", "column", "l")
+
+pageHeader = CardHeader("Logistics Coordinator Board", "Live shipment tracking and performance overview")
+
+refreshAlert = Alert("Data last refreshed", "Today at 07:42 AM — all metrics reflect current state", "info")
+
+kpiRow = Card([onTimeCard, avgCostCard, inTransitCard], "sunk", "row", "m", "stretch")
+
+onTimeCard = Card([onTimeLabel, onTimePct, onTimeBar], "card", "column", "xs")
+onTimeLabel = TextContent("On-Time Delivery — This Month", "small")
+onTimePct = TextContent("87.4%", "large-heavy")
+onTimeBar = Progress(87, "87 of 100 shipments on time")
+
+avgCostCard = Card([avgCostLabel, avgCostValue, avgCostSub], "card", "column", "xs")
+avgCostLabel = TextContent("Avg Cost Per Shipment", "small")
+avgCostValue = TextContent("$342.18", "large-heavy")
+avgCostSub = TextContent("↓ 4.2% vs last month", "small")
+
+inTransitCard = Card([inTransitLabel, inTransitValue, inTransitSub], "card", "column", "xs")
+inTransitLabel = TextContent("Shipments In Transit", "small")
+inTransitValue = TextContent("214", "large-heavy")
+inTransitSub = TextContent("18 delayed · 196 on schedule", "small")
+
+mainContent = Card([leftCol, rightCol], "clear", "row", "l")
+
+leftCol = Card([shipmentsHeader, delayedCallout, shipmentsTable], "clear", "column", "m")
+shipmentsHeader = Heading("Shipments In Transit", "h3")
+
+delayedCallout = Callout("warning", "18 Shipments Delayed", "Delays detected on routes LAX→ORD, MIA→SEA, and DAL→BOS. Average delay: 14 hours. Review ETAs below.")
+
+shipmentsTable = Table([colId, colOrigin, colDest, colETA, colStatus])
+colId = Col("Shipment ID", ["SHP-4401", "SHP-4387", "SHP-4362", "SHP-4355", "SHP-4341", "SHP-4330", "SHP-4318", "SHP-4290"])
+colOrigin = Col("Origin", ["Los Angeles", "Miami", "Dallas", "Chicago", "Seattle", "Atlanta", "New York", "Phoenix"])
+colDest = Col("Destination", ["Chicago", "Seattle", "Boston", "Denver", "Houston", "New York", "Los Angeles", "Dallas"])
+colETA = Col("ETA", ["Jun 14 09:00", "Jun 14 11:30", "Jun 14 15:45", "Jun 14 08:20", "Jun 15 06:00", "Jun 14 14:00", "Jun 14 17:15", "Jun 15 10:30"])
+colStatus = Col("Status", ["Delayed", "Delayed", "On Time", "On Time", "Delayed", "On Time", "On Time", "On Time"])
+
+rightCol = Card([chartsHeader, carrierChart, weeklyHeader, weeklyChart], "clear", "column", "m")
+chartsHeader = Heading("Performance & Volume", "h3")
+
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "USPS", "XPO Logistics"], [72, 58, 41, 24, 19], "donut")
+
+weeklyHeader = Heading("Weekly Volume — Past 8 Weeks", "h4")
+weeklyChart = BarChart(["W1 Apr", "W2 Apr", "W3 Apr", "W4 Apr", "W1 May", "W2 May", "W3 May", "W4 May"], [weeklySeries], "grouped", "Week", "Shipments")
+weeklySeries = Series("Shipments", [198, 214, 231, 189, 243, 267, 251, 214])
+
+searchSection = Card([searchHeader, searchForm], "card", "column", "s")
+searchHeader = Heading("Search by Route", "h3")
+searchForm = Form("route-search", searchButtons, [originField, destField, dateField])
+originField = FormControl("Origin City", originInput, "Enter departure city or airport code")
+originInput = Input("origin", "e.g. Los Angeles", "text")
+destField = FormControl("Destination City", destInput, "Enter destination city or airport code")
+destInput = Input("destination", "e.g. Chicago", "text")
+dateField = FormControl("ETA Date Range", datePicker)
+datePicker = DatePicker("eta_range", "range")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search Shipments", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+
+flagSection = Card([flagHeader, flagDesc, flagDialog], "card", "column", "s")
+flagHeader = Heading("Flag a Shipment", "h3")
+flagDesc = TextContent("Use this to escalate a shipment for urgent review. A flag triggers a notification to the operations team.", "small")
+flagDialog = DialogBlock("Flag a Shipment", "Flag Shipment for Review", "Provide the shipment ID and reason for flagging. The operations team will be notified immediately.", [flagForm], "default")
+flagForm = Form("flag-shipment", flagButtons, [flagIdField, flagReasonField, flagPriorityField])
+flagIdField = FormControl("Shipment ID", flagIdInput, "e.g. SHP-4401")
+flagIdInput = Input("shipment_id", "SHP-XXXX", "text")
+flagReasonField = FormControl("Reason for Flagging", flagReasonArea, "Describe the issue in detail")
+flagReasonArea = TextArea("reason", "Describe the problem...", 4)
+flagPriorityField = FormControl("Priority Level", flagPrioritySelect)
+flagPrioritySelect = Select("priority", [flagLow, flagMed, flagHigh], "Select priority")
+flagLow = SelectItem("low", "Low — Monitor")
+flagMed = SelectItem("medium", "Medium — Investigate")
+flagHigh = SelectItem("high", "High — Escalate Immediately")
+flagButtons = Buttons([flagSubmitBtn, flagCancelBtn])
+flagSubmitBtn = Button("Submit Flag", null, "primary", "destructive")
+flagCancelBtn = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3, fu4])
+fu1 = FollowUpItem("Show me only the delayed shipments")
+fu2 = FollowUpItem("Which carrier has the best on-time rate?")
+fu3 = FollowUpItem("Break down average cost by carrier")
+fu4 = FollowUpItem("Export this week's shipment data")

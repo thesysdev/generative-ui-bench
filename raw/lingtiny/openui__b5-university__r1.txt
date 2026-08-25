@@ -1,0 +1,61 @@
+root = Card([overview, enrollment, applications, acceptance, tuition, courseLoad, risk, scholarships, housing, events, alumni, focus, compare, waitlist, approve, message], "clear")
+overview = CardHeader("University Overview", "Comprehensive snapshot of student and financial metrics")
+enrollment = CardHeader("Total Enrollment & Five-Year Trend", "Tracking student population growth")
+enrollmentTrend = LineChart(["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"], [enrollSeries], "natural", "Year", "Enrollment")
+enrollSeries = Series("Enrollment", [12400, 13100, 13800, 14500, 15200])
+applications = CardHeader("Applications by Program", "Breakdown of incoming applications across departments")
+applicationsData = [
+    {label: "Computer Science", value: 3200},
+    {label: "Business", value: 2800},
+    {label: "Engineering", value: 2400},
+    {label: "Health Sciences", value: 1900},
+    {label: "Arts & Sciences", value: 2100},
+    {label: "Law", value: 1400},
+]
+applicationsBar = HorizontalBarChart(applicationsData.map(d => d.label), [d.value for d in applicationsData], "grouped", "Program", "Applications")
+acceptance = CardHeader("Acceptance Rate", "Overall and by program")
+acceptanceRate = Progress(62, "Overall acceptance rate: 62%")
+acceptanceByProgram = HorizontalBarChart(["CS", "Business", "Engineering", "Health", "Arts", "Law"], [68, 55, 42, 72, 58, 45], "grouped", "Program", "Acceptance Rate")
+tuition = CardHeader("Tuition Revenue", "Current year financial performance")
+tuitionRevenue = Progress(87, "Tuition revenue: $8.7M of $10M target")
+tuitionChart = BarChart(["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"], [8200, 8400, 8600, 8800, 9100], "grouped", "Year", "Revenue")
+courseLoad = CardHeader("Course Offerings & Utilization", "How full each course is")
+courseUtil = HorizontalBarChart(["CS101", "CS201", "MATH101", "ENG101", "BIO101", "PHYS101", "CHEM101", "CS301"], [92, 85, 78, 95, 88, 72, 80, 65], "grouped", "Course", "Utilization")
+risk = CardHeader("Students at Academic Risk", "Students requiring intervention")
+riskStudents = ListBlock([ListItem("Maria Chen", "Risk: GPA below 2.0 in CS", null, "Alert"),ListItem("James Wilson", "Risk: Attendance below 60%", null, "Alert"),ListItem("Sarah Patel", "Risk: Financial hardship", null, "Warning")])
+scholarships = CardHeader("Scholarship Budget", "Budget utilization vs. total")
+scholarshipBudget = Progress(73, "Scholarship budget used: $730K of $1M")
+scholarshipChart = BarChart(["Need-Based", "Merit", "Athletic", "External", "Other"], [280, 190, 70, 150, 100], "grouped", "Type", "Amount")
+housing = CardHeader("Housing Occupancy", "Current occupancy rates")
+housingOccupancy = Progress(84, "84% of housing units occupied")
+housingList = ListBlock([ListItem("Dorm A", "92% occupied", null, "Info"),ListItem("Dorm B", "88% occupied", null, "Info"),ListItem("Dorm C", "76% occupied", null, "Warning")])
+events = CardHeader("Campus Events This Month", "Upcoming events on campus")
+eventsList = ListBlock([ListItem("Science Fair", "Jan 15", null, "Info"),ListItem("Career Fair", "Jan 18", null, "Info"),ListItem("Winter Concert", "Jan 22", null, "Info")])
+alumni = CardHeader("Alumni Giving", "Past four years of giving")
+alumniGiving = BarChart(["Year 1", "Year 2", "Year 3", "Year 4"], [1200, 1500, 1800, 2100], "grouped", "Year", "Donations")
+focus = CardHeader("Department Focus", "Select a department to explore")
+focusSelect = Select("department", [SelectItem("Computer Science", "CS Department"), SelectItem("Business", "Business School"), SelectItem("Engineering", "Engineering Dept"), SelectItem("Health Sciences", "Health Dept")], "Select a department")
+compare = CardHeader("This Semester vs Last", "Comparison of academic performance")
+compareChart = HorizontalBarChart(["CS", "Business", "Engineering", "Health", "Arts"], [85, 78, 72, 82, 76], "grouped", "Department", "Average GPA")
+waitlist = CardHeader("Waitlisted Students per Program", "Students waiting for program spots")
+waitlistData = [
+    {label: "Computer Science", value: 12},
+    {label: "Business", value: 8},
+    {label: "Engineering", value: 5},
+    {label: "Health Sciences", value: 3},
+    {label: "Arts & Sciences", value: 7},
+    {label: "Law", value: 4},
+]
+waitlistBar = HorizontalBarChart([d.label for d in waitlistData], [d.value for d in waitlistData], "grouped", "Program", "Waitlisted")
+approve = CardHeader("Approve a New Course", "Submit a request for a new course offering")
+approveForm = Form("new-course", [courseBtn], [courseNameInput, courseDeptInput, courseSemInput, courseUnitsInput])
+courseNameInput = FormControl("Course name", Input("course_name", "Introduction to Data Science"))
+courseDeptInput = FormControl("Department", Input("dept", "Computer Science"))
+courseSemInput = FormControl("Semester", Select("semester", [SelectItem("Fall", "Fall"), SelectItem("Spring", "Spring"), SelectItem("Summer", "Summer")], "Fall"))
+courseUnitsInput = FormControl("Units", Slider("units", "continuous", 1, 4, step: 1, defaultValue: [3], "Units", null, "Course credit hours"))
+approveBtn = Button("Submit Course Request", null, "primary")
+message = CardHeader("Message to Student Group", "Send a message to a student organization")
+messageForm = Form("student-group", [msgBtn], [groupSelect, msgTextInput])
+groupSelect = FormControl("Student group", Select("group", [SelectItem("Hackathon Team", "Hackathon Team"), SelectItem("Debate Club", "Debate Club"), SelectItem("Sustainability Alliance", "Sustainability Alliance")], "Select a group"))
+msgTextInput = FormControl("Message", TextArea("message", "Enter your message here...", rows: 4))
+msgBtn = Button("Send Message", null, "primary")

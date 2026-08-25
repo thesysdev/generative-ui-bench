@@ -1,0 +1,44 @@
+root = Card([header, dailyStats, workoutTrend, logSection, followUps])
+
+header = CardHeader("Daily Summary", "Thursday, Oct 24")
+
+dailyStats = Card([stepProgress, calorieCallout], "sunk", "row", "m")
+
+stepProgress = Card([stepLabel, stepBar], "clear", "column", "xs")
+stepLabel = TextContent("Steps: 8,432 / 10,000", "small-heavy")
+stepBar = Progress(84, "84% of daily goal")
+
+calorieCallout = TextCallout("info", "Calories Burned", "1,240 kcal today")
+
+workoutTrend = Card([trendHeader, trendChart], "card", "column", "s")
+trendHeader = Heading("Weekly Activity", "h3")
+trendChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "grouped", "Day", "Minutes")
+workoutSeries = Series("Workout Duration", [45, 30, 60, 40, 0, 90, 0])
+
+logSection = Card([logHeader, workoutForm], "card", "column", "m")
+logHeader = Heading("Log Workout", "h3")
+workoutForm = Form("log-workout", formButtons, [typeField, durationField, intensityField])
+
+typeField = FormControl("Activity Type", typeSelect, "What did you do?")
+typeSelect = Select("type", [runOpt, gymOpt, yogaOpt, swimOpt], "Select activity")
+runOpt = SelectItem("run", "Running")
+gymOpt = SelectItem("gym", "Weightlifting")
+yogaOpt = SelectItem("yoga", "Yoga")
+swimOpt = SelectItem("swim", "Swimming")
+
+durationField = FormControl("Duration (mins)", durationInput)
+durationInput = Input("duration", "45", "number")
+
+intensityField = FormControl("Intensity", intensityRadio)
+intensityRadio = RadioGroup("intensity", [lowInt, medInt, highInt], "medium")
+lowInt = RadioItem("Low", "Easy pace", "low")
+medInt = RadioItem("Medium", "Moderate effort", "medium")
+highInt = RadioItem("High", "Maximum effort", "high")
+
+formButtons = Buttons([saveBtn, cancelBtn])
+saveBtn = Button("Save Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "secondary")
+
+followUps = FollowUpBlock([nextTip, viewHistory])
+nextTip = FollowUpItem("Give me a tip to hit my step goal")
+viewHistory = FollowUpItem("View full monthly history")

@@ -1,0 +1,322 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        revenueSection,
+        churnAndSignups,
+        customersByPlan,
+        topTenCustomers,
+        atRiskAccounts,
+        failedPayments,
+        featureAdoption,
+        nps,
+        periodSelector,
+        seatUtilization,
+        inviteAdmin,
+    ],
+    "sunk",
+    "column",
+    "center",
+    "between",
+    true,
+)
+
+header = CardHeader("Admin Overview", "Current Reporting Period: Last 30 Days")
+
+revenueSection = Card(
+    [
+        mrrCard,
+        arrCard,
+    ],
+    variant = "clear",
+    "column",
+)
+
+mrrCard = Card(
+    [
+        TextContent(
+            "Monthly Recurring Revenue: $128,400",
+            size = "large",
+        ),
+    ],
+    variant = "clear",
+    "s",
+)
+
+arrCard = Card(
+    [
+        TextContent(
+            "Annual Recurring Revenue: $1,540,800",
+            size = "large",
+        ),
+    ],
+    variant = "clear",
+    "s",
+)
+
+churnAndSignups = Card(
+    [
+        churnCard,
+        newSignupsCard,
+    ],
+    variant = "clear",
+    "column",
+)
+
+churnCard = Card(
+    [
+        TextContent(
+            "Monthly Churn: 2.1%",
+            size = "large",
+        ),
+    ],
+    variant = "clear",
+    "s",
+)
+
+newSignupsCard = Card(
+    [
+        TextContent(
+            "New Signups (90 days): 1,982",
+            size = "large",
+        ),
+    ],
+    variant = "clear",
+    "s",
+)
+
+customersByPlan = Card(
+    [
+        planTable,
+    ],
+    variant = "clear",
+    "s",
+)
+
+planTable = Table(
+    columns = [
+        planCol,
+        activeCol,
+    ],
+)
+
+planCol = Col(
+    label = "Plan",
+    data = ["Free", "Pro", "Enterprise"],
+    type = "string",
+)
+
+activeCol = Col(
+    label = "Active Customers",
+    data = [250, 1,200, 150],
+    type = "number",
+)
+
+topTenCustomers = Card(
+    [
+        topTenTable,
+    ],
+    variant = "clear",
+    "s",
+)
+
+topTenTable = Table(
+    columns = [
+        nameCol,
+        seatsCol,
+        spendCol,
+    ],
+)
+
+nameCol = Col(
+    label = "Customer",
+    data = [
+        "Acme Corp",
+        "Beta Ltd",
+        "Gamma Inc",
+        "Delta LLC",
+        "Epsilon Co",
+        "Zeta Ltd",
+        "Eta Inc",
+        "Theta LLC",
+        "Iota Co",
+        "Kappa Ltd",
+    ],
+    type = "string",
+)
+
+seatsCol = Col(
+    label = "Seats",
+    data = [150, 200, 90, 300, 120, 80, 250, 60, 180, 100],
+    type = "number",
+)
+
+spendCol = Col(
+    label = "Spend (USD)",
+    data = [120000, 150000, 50000, 200000, 90000, 40000, 250000, 30000, 120000, 80000],
+    type = "number",
+)
+
+atRiskAccounts = Card(
+    [
+        atRiskTable,
+    ],
+    variant = "clear",
+    "s",
+)
+
+atRiskTable = Table(
+    columns = [
+        accountCol,
+        reasonCol,
+    ],
+)
+
+accountCol = Col(
+    label = "Account",
+    data = [
+        "Acme Corp",
+        "Beta Ltd",
+        "Gamma Inc",
+        "Delta LLC",
+        "Epsilon Co",
+    ],
+    type = "string",
+)
+
+reasonCol = Col(
+    label = "Reason",
+    data = [
+        "Payment failure",
+        "Inactive usage",
+        "License limit exceeded",
+        "Payment failure",
+        "Contract renewal pending",
+    ],
+    type = "string",
+)
+
+failedPayments = Card(
+    [
+        failedPaymentsList,
+    ],
+    variant = "clear",
+    "s",
+)
+
+failedPaymentsList = ListBlock(
+    items = [
+        FollowUpItem("Retry payment for Acme Corp"),
+        FollowUpItem("Retry payment for Beta Ltd"),
+        FollowUpItem("Retry payment for Gamma Inc"),
+    ],
+    variant = "image",
+)
+
+featureAdoption = Card(
+    [
+        featureBarChart,
+    ],
+    variant = "clear",
+    "s",
+)
+
+featureBarChart = BarChart(
+    labels = ["Feature X", "Feature Y", "Feature Z"],
+    series = [featureSeries],
+    variant = "grouped",
+    xLabel = "Feature",
+    yLabel = "Adoption %",
+)
+
+featureSeries = Series(
+    category = "Adoption",
+    values = [45, 30, 25],
+)
+
+nps = Card(
+    [
+        TextContent(
+            "Current NPS: 78",
+            size = "large",
+        ),
+    ],
+    variant = "clear",
+    "s",
+)
+
+periodSelector = Card(
+    [
+        periodButtons,
+    ],
+    variant = "clear",
+    "s",
+)
+
+periodButtons = Buttons(
+    buttons = [
+        Button("Last 7 Days", ["7d"], "secondary"),
+        Button("Last 30 Days", ["30d"], "primary"),
+        Button("Last 90 Days", ["90d"], "tertiary"),
+        Button("Last Quarter", ["Q3"], "outline"),
+    ],
+    direction = "row",
+)
+
+seatUtilization = Card(
+    [
+        seatUtilizationChart,
+    ],
+    variant = "clear",
+    "s",
+)
+
+seatUtilizationChart = HorizontalBarChart(
+    labels = ["Team A", "Team B", "Team C", "Team D", "Team E"],
+    series = [utilizationSeries],
+    variant = "grouped",
+    xLabel = "Team",
+    yLabel = "% Utilized",
+)
+
+utilizationSeries = Series(
+    category = "Utilization",
+    values = [65, 78, 52, 90, 48],
+)
+
+inviteAdmin = Card(
+    [
+        inviteForm,
+    ],
+    variant = "clear",
+    "s",
+)
+
+inviteForm = Form(
+    name = "invite_admin",
+    buttons = inviteButtons,
+    fields = [
+        emailField,
+    ],
+)
+
+emailField = FormControl(
+    label = "Admin Email",
+    input = Input(
+        name = "email",
+        type = "email",
+        placeholder = "admin@example.com",
+        rules = [],
+        value = "",
+    ),
+    hint = "The invited admin will receive a setup link.",
+)
+
+inviteButtons = Buttons(
+    buttons = [
+        Button("Invite Admin", null, "primary"),
+        Button("Cancel", null, "tertiary"),
+    ],
+    direction = "row",
+)
+```

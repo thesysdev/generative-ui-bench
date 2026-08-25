@@ -1,0 +1,962 @@
+Here is the complete PMO Project Portfolio Review dashboard covering all 13 requirements.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "healthSummaryAlert",
+          "controlsBar",
+          "portfolioTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "PMO Portfolio Executive Review",
+        "subtitle": "Comprehensive health, schedule, budget, resourcing, and risk assessment"
+      },
+      {
+        "id": "healthSummaryAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Portfolio Health Summary",
+        "description": "Portfolio is at Moderate Risk (Amber) — 6 of 8 active projects on schedule; velocity is steady at 112 pts/sprint, but Core Banking & Cloud Migration face critical staffing constraints and 4 overdue milestones."
+      },
+      {
+        "id": "controlsBar",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "gap": "m",
+        "wrap": true,
+        "children": [
+          "quarterField",
+          "globalActions"
+        ]
+      },
+      {
+        "id": "quarterField",
+        "component": "FormControl",
+        "label": "Review Period / Quarter",
+        "input": "quarterSelect",
+        "hint": "Switch timeline view"
+      },
+      {
+        "id": "quarterSelect",
+        "component": "Select",
+        "name": "quarter",
+        "placeholder": "Select Quarter",
+        "value": "q3_2024",
+        "items": [
+          "q1_item",
+          "q2_item",
+          "q3_item",
+          "q4_item"
+        ]
+      },
+      {
+        "id": "q1_item",
+        "component": "SelectItem",
+        "value": "q1_2024",
+        "label": "Q1 2024 (Archived)"
+      },
+      {
+        "id": "q2_item",
+        "component": "SelectItem",
+        "value": "q2_2024",
+        "label": "Q2 2024 (Archived)"
+      },
+      {
+        "id": "q3_item",
+        "component": "SelectItem",
+        "value": "q3_2024",
+        "label": "Q3 2024 (Current Active)"
+      },
+      {
+        "id": "q4_item",
+        "component": "SelectItem",
+        "value": "q4_2024",
+        "label": "Q4 2024 (Planned)"
+      },
+      {
+        "id": "globalActions",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "gap": "s",
+        "align": "center",
+        "children": [
+          "staffingRequestModal",
+          "archiveProjectModal",
+          "exportButton"
+        ]
+      },
+      {
+        "id": "staffingRequestModal",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Request Staffing Allocation",
+        "triggerVariant": "default",
+        "title": "Request Headcount / Resource Allocation",
+        "description": "Submit a resource surge or additional headcount request to the PMO staffing committee.",
+        "content": [
+          "staffingForm"
+        ]
+      },
+      {
+        "id": "staffingForm",
+        "component": "Form",
+        "name": "resource_request_form",
+        "buttons": "staffingButtons",
+        "fields": [
+          "targetProjectField",
+          "roleRequiredField",
+          "headcountField",
+          "justificationField"
+        ]
+      },
+      {
+        "id": "targetProjectField",
+        "component": "FormControl",
+        "label": "Target Project",
+        "input": "projectSelect"
+      },
+      {
+        "id": "projectSelect",
+        "component": "Select",
+        "name": "project_id",
+        "placeholder": "Choose project",
+        "items": [
+          "p1_opt",
+          "p2_opt",
+          "p3_opt"
+        ]
+      },
+      {
+        "id": "p1_opt",
+        "component": "SelectItem",
+        "value": "core_banking",
+        "label": "Core Banking Modernization"
+      },
+      {
+        "id": "p2_opt",
+        "component": "SelectItem",
+        "value": "cloud_mig",
+        "label": "AWS Cloud Migration"
+      },
+      {
+        "id": "p3_opt",
+        "component": "SelectItem",
+        "value": "bi_analytics",
+        "label": "Enterprise BI Platform"
+      },
+      {
+        "id": "roleRequiredField",
+        "component": "FormControl",
+        "label": "Required Skill Profile",
+        "input": "roleInput"
+      },
+      {
+        "id": "roleInput",
+        "component": "Input",
+        "name": "role",
+        "placeholder": "e.g. Senior Backend Engineer, Data Architect"
+      },
+      {
+        "id": "headcountField",
+        "component": "FormControl",
+        "label": "Requested FTEs",
+        "input": "headcountInput"
+      },
+      {
+        "id": "headcountInput",
+        "component": "Input",
+        "name": "headcount",
+        "type": "number",
+        "placeholder": "2"
+      },
+      {
+        "id": "justificationField",
+        "component": "FormControl",
+        "label": "Business Justification",
+        "input": "justificationInput"
+      },
+      {
+        "id": "justificationInput",
+        "component": "TextArea",
+        "name": "justification",
+        "rows": 3,
+        "placeholder": "Explain the delivery risk and impact of unfulfilled staffing..."
+      },
+      {
+        "id": "staffingButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitStaffingBtn"
+        ]
+      },
+      {
+        "id": "submitStaffingBtn",
+        "component": "Button",
+        "label": "Submit Allocation Request",
+        "variant": "primary"
+      },
+      {
+        "id": "archiveProjectModal",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "Archive Project",
+        "triggerVariant": "secondary",
+        "title": "Archive Completed Project",
+        "description": "Are you sure you want to archive 'Mobile App 3.0'? Archiving will lock all time entries, release remaining budget reserve, and move documentation to cold storage.",
+        "confirmLabel": "Confirm Archive",
+        "cancelLabel": "Dismiss"
+      },
+      {
+        "id": "exportButton",
+        "component": "Button",
+        "label": "Export Executive PDF / CSV",
+        "variant": "secondary"
+      },
+      {
+        "id": "portfolioTabs",
+        "component": "Tabs",
+        "items": [
+          "tabOverview",
+          "tabMilestonesBlockers",
+          "tabResourcingBudget",
+          "tabDeliveryRisks"
+        ]
+      },
+      {
+        "id": "tabOverview",
+        "component": "TabItem",
+        "value": "overview",
+        "trigger": "Active Projects & Budgets",
+        "content": [
+          "activeProjectsCard"
+        ]
+      },
+      {
+        "id": "activeProjectsCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "activeProjectsHeader",
+          "projectsTable"
+        ]
+      },
+      {
+        "id": "activeProjectsHeader",
+        "component": "CardHeader",
+        "title": "Active Projects Portfolio Status",
+        "subtitle": "Assigned owners, target deadlines, health indicators, and budget utilization"
+      },
+      {
+        "id": "projectsTable",
+        "component": "Table",
+        "columns": [
+          "colProjName",
+          "colOwner",
+          "colDeadline",
+          "colHealth",
+          "colAllocated",
+          "colSpent",
+          "colBudgetBurn"
+        ]
+      },
+      {
+        "id": "colProjName",
+        "component": "Col",
+        "label": "Project Name",
+        "data": [
+          "Core Banking Modernization",
+          "AWS Cloud Infrastructure Migration",
+          "Customer Portal Redesign",
+          "Enterprise BI Platform",
+          "Zero-Trust Security Rollout",
+          "Automated Billing Engine"
+        ]
+      },
+      {
+        "id": "colOwner",
+        "component": "Col",
+        "label": "Project Owner",
+        "data": [
+          "Sarah Jenkins (VP Eng)",
+          "Michael Chen (Cloud Arch)",
+          "Elena Rostova (Lead PM)",
+          "David Kim (Head of Data)",
+          "Marcus Vance (CISO)",
+          "Rachel Adams (FinTech PM)"
+        ]
+      },
+      {
+        "id": "colDeadline",
+        "component": "Col",
+        "label": "Deadline",
+        "data": [
+          "Nov 15, 2024",
+          "Oct 31, 2024",
+          "Sep 30, 2024",
+          "Dec 20, 2024",
+          "Oct 15, 2024",
+          "Jan 31, 2025"
+        ]
+      },
+      {
+        "id": "colHealth",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "🔴 Critical",
+          "🟡 At Risk",
+          "🟢 Healthy",
+          "🟢 Healthy",
+          "🟢 Healthy",
+          "🟢 Healthy"
+        ]
+      },
+      {
+        "id": "colAllocated",
+        "component": "Col",
+        "label": "Budget Allocation",
+        "data": [
+          "$1,200,000",
+          "$850,000",
+          "$420,000",
+          "$650,000",
+          "$310,000",
+          "$500,000"
+        ]
+      },
+      {
+        "id": "colSpent",
+        "component": "Col",
+        "label": "Budget Spent",
+        "data": [
+          "$1,140,000",
+          "$710,000",
+          "$290,000",
+          "$380,000",
+          "$215,000",
+          "$140,000"
+        ]
+      },
+      {
+        "id": "colBudgetBurn",
+        "component": "Col",
+        "label": "% Spent",
+        "data": [
+          "95.0% (Overburn)",
+          "83.5%",
+          "69.0%",
+          "58.5%",
+          "69.4%",
+          "28.0%"
+        ]
+      },
+      {
+        "id": "tabMilestonesBlockers",
+        "component": "TabItem",
+        "value": "schedule_blockers",
+        "trigger": "Milestones & Blockers",
+        "content": [
+          "milestonesBlockersContainer"
+        ]
+      },
+      {
+        "id": "milestonesBlockersContainer",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "twoWeeksDeadlineCard",
+          "overdueMilestonesCard",
+          "blockedItemsCard"
+        ]
+      },
+      {
+        "id": "twoWeeksDeadlineCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "twoWeeksHeader",
+          "twoWeeksTable"
+        ]
+      },
+      {
+        "id": "twoWeeksHeader",
+        "component": "CardHeader",
+        "title": "Upcoming Deadlines (Next 14 Days)",
+        "subtitle": "Deliverables and go/no-go gates approaching between Sep 19 and Oct 03"
+      },
+      {
+        "id": "twoWeeksTable",
+        "component": "Table",
+        "columns": [
+          "colDlDate",
+          "colDlProj",
+          "colDlMilestone",
+          "colDlOwner",
+          "colDlStatus"
+        ]
+      },
+      {
+        "id": "colDlDate",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Sep 22, 2024",
+          "Sep 26, 2024",
+          "Sep 30, 2024",
+          "Oct 02, 2024"
+        ]
+      },
+      {
+        "id": "colDlProj",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Customer Portal Redesign",
+          "Zero-Trust Security",
+          "AWS Cloud Migration",
+          "Enterprise BI Platform"
+        ]
+      },
+      {
+        "id": "colDlMilestone",
+        "component": "Col",
+        "label": "Milestone Deliverable",
+        "data": [
+          "UAT Sign-off & Client Demo",
+          "IdP Okta Federation Cutover",
+          "Database Replication Phase 2 Gate",
+          "Snowflake Ingestion Pipeline V1"
+        ]
+      },
+      {
+        "id": "colDlOwner",
+        "component": "Col",
+        "label": "Owner",
+        "data": [
+          "Elena Rostova",
+          "Marcus Vance",
+          "Michael Chen",
+          "David Kim"
+        ]
+      },
+      {
+        "id": "colDlStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "On Schedule",
+          "Testing Complete",
+          "At Risk of Slippage",
+          "Code Freeze"
+        ]
+      },
+      {
+        "id": "overdueMilestonesCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "overdueHeader",
+          "overdueTable"
+        ]
+      },
+      {
+        "id": "overdueHeader",
+        "component": "CardHeader",
+        "title": "Overdue Milestones Requiring Immediate Escalation",
+        "subtitle": "Uncompleted gates that have passed their baseline target date"
+      },
+      {
+        "id": "overdueTable",
+        "component": "Table",
+        "columns": [
+          "colOdMilestone",
+          "colOdProject",
+          "colOdTarget",
+          "colOdDaysLate",
+          "colOdAction"
+        ]
+      },
+      {
+        "id": "colOdMilestone",
+        "component": "Col",
+        "label": "Milestone",
+        "data": [
+          "Legacy Ledger Data Migration",
+          "Third-party PCI Audit Clearance",
+          "Multi-AZ Disaster Recovery Dry Run"
+        ]
+      },
+      {
+        "id": "colOdProject",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Core Banking Modernization",
+          "Core Banking Modernization",
+          "AWS Cloud Infrastructure Migration"
+        ]
+      },
+      {
+        "id": "colOdTarget",
+        "component": "Col",
+        "label": "Target Date",
+        "data": [
+          "Sep 05, 2024",
+          "Sep 12, 2024",
+          "Sep 14, 2024"
+        ]
+      },
+      {
+        "id": "colOdDaysLate",
+        "component": "Col",
+        "label": "Days Overdue",
+        "data": [
+          "14 Days Overdue",
+          "7 Days Overdue",
+          "5 Days Overdue"
+        ]
+      },
+      {
+        "id": "colOdAction",
+        "component": "Col",
+        "label": "Remediation Plan",
+        "data": [
+          "Contractor onboarding approved",
+          "External auditor re-scheduled for Sep 24",
+          "Script bug patch undergoing review"
+        ]
+      },
+      {
+        "id": "blockedItemsCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "blockedHeader",
+          "blockedTable"
+        ]
+      },
+      {
+        "id": "blockedHeader",
+        "component": "CardHeader",
+        "title": "Active Blocked Work Items",
+        "subtitle": "Impediments logged across engineering, compliance, and vendor dependencies"
+      },
+      {
+        "id": "blockedTable",
+        "component": "Table",
+        "columns": [
+          "colBlkItem",
+          "colBlkProj",
+          "colBlkReason",
+          "colBlkOwner",
+          "colBlkImpact"
+        ]
+      },
+      {
+        "id": "colBlkItem",
+        "component": "Col",
+        "label": "Blocked Item / Ticket",
+        "data": [
+          "PAY-4892: Real-time ACH Webhook Handler",
+          "SEC-1029: TLS 1.3 Cipher Suite Exemption",
+          "DATA-331: Salesforce CRM CDC Ingestion Connector"
+        ]
+      },
+      {
+        "id": "colBlkProj",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Core Banking Modernization",
+          "Zero-Trust Security",
+          "Enterprise BI Platform"
+        ]
+      },
+      {
+        "id": "colBlkReason",
+        "component": "Col",
+        "label": "Root Cause of Blocker",
+        "data": [
+          "Awaiting partner sandbox API key from vendor",
+          "Infra team capacity constraint for cert rollout",
+          "Salesforce schema change pending governance board review"
+        ]
+      },
+      {
+        "id": "colBlkOwner",
+        "component": "Col",
+        "label": "Escalation Lead",
+        "data": [
+          "Sarah Jenkins",
+          "Marcus Vance",
+          "David Kim"
+        ]
+      },
+      {
+        "id": "colBlkImpact",
+        "component": "Col",
+        "label": "Impact Level",
+        "data": [
+          "High (Sprint deliverable at risk)",
+          "Medium (Internal only)",
+          "High (Reporting delays)"
+        ]
+      },
+      {
+        "id": "tabResourcingBudget",
+        "component": "TabItem",
+        "value": "resourcing",
+        "trigger": "Team Utilization & Budget Charts",
+        "content": [
+          "resourcingLayout"
+        ]
+      },
+      {
+        "id": "resourcingLayout",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "teamUtilizationCard",
+          "budgetSpentComparisonCard"
+        ]
+      },
+      {
+        "id": "teamUtilizationCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "utilizationHeader",
+          "utilizationChart"
+        ]
+      },
+      {
+        "id": "utilizationHeader",
+        "component": "CardHeader",
+        "title": "Team Utilization Rates (% Capacity)",
+        "subtitle": "Calculated by logged billable/sprint hours vs available full-time capacity (Target: 80-85%)"
+      },
+      {
+        "id": "utilizationChart",
+        "component": "HorizontalBarChart",
+        "xLabel": "% Capacity Allocated",
+        "yLabel": "Engineering & Product Teams",
+        "variant": "grouped",
+        "labels": [
+          "Core Banking Pod",
+          "Cloud / DevOps Team",
+          "Frontend UI/UX",
+          "Data & Analytics Pod",
+          "SecOps & Compliance",
+          "Billing Services Squad"
+        ],
+        "series": [
+          "actualUtilizationSeries",
+          "targetCapacitySeries"
+        ]
+      },
+      {
+        "id": "actualUtilizationSeries",
+        "component": "Series",
+        "category": "Current Utilization (%)",
+        "values": [
+          108,
+          96,
+          82,
+          79,
+          85,
+          72
+        ]
+      },
+      {
+        "id": "targetCapacitySeries",
+        "component": "Series",
+        "category": "Target Threshold (%)",
+        "values": [
+          85,
+          85,
+          85,
+          85,
+          85,
+          85
+        ]
+      },
+      {
+        "id": "budgetSpentComparisonCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "budgetHeader",
+          "budgetComparisonChart"
+        ]
+      },
+      {
+        "id": "budgetHeader",
+        "component": "CardHeader",
+        "title": "Budget Spent vs. Total Allocation ($ in Thousands)",
+        "subtitle": "Comparison of approved capital envelope vs actual expenditures to date"
+      },
+      {
+        "id": "budgetComparisonChart",
+        "component": "BarChart",
+        "xLabel": "Projects",
+        "yLabel": "USD ($k)",
+        "variant": "grouped",
+        "labels": [
+          "Core Banking",
+          "Cloud Migration",
+          "Cust Portal",
+          "BI Platform",
+          "Zero-Trust",
+          "Auto Billing"
+        ],
+        "series": [
+          "budgetAllocatedSeries",
+          "budgetSpentSeries"
+        ]
+      },
+      {
+        "id": "budgetAllocatedSeries",
+        "component": "Series",
+        "category": "Budget Allocated ($k)",
+        "values": [
+          1200,
+          850,
+          420,
+          650,
+          310,
+          500
+        ]
+      },
+      {
+        "id": "budgetSpentSeries",
+        "component": "Series",
+        "category": "Budget Spent ($k)",
+        "values": [
+          1140,
+          710,
+          290,
+          380,
+          215,
+          140
+        ]
+      },
+      {
+        "id": "tabDeliveryRisks",
+        "component": "TabItem",
+        "value": "delivery_risks",
+        "trigger": "Delivery Pace & Risk Register",
+        "content": [
+          "deliveryRisksContainer"
+        ]
+      },
+      {
+        "id": "deliveryRisksContainer",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "deliveryPaceCard",
+          "riskRegisterCard"
+        ]
+      },
+      {
+        "id": "deliveryPaceCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "paceHeader",
+          "deliveryPaceChart"
+        ]
+      },
+      {
+        "id": "paceHeader",
+        "component": "CardHeader",
+        "title": "Delivery Pace Over the Past Six Sprints",
+        "subtitle": "Completed story points vs planned commitments across Portfolio engineering sprints"
+      },
+      {
+        "id": "deliveryPaceChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "xLabel": "Sprint Iteration",
+        "yLabel": "Story Points",
+        "labels": [
+          "Sprint 18",
+          "Sprint 19",
+          "Sprint 20",
+          "Sprint 21",
+          "Sprint 22",
+          "Sprint 23"
+        ],
+        "series": [
+          "plannedPointsSeries",
+          "completedPointsSeries"
+        ]
+      },
+      {
+        "id": "plannedPointsSeries",
+        "component": "Series",
+        "category": "Planned Points",
+        "values": [
+          110,
+          115,
+          120,
+          118,
+          125,
+          120
+        ]
+      },
+      {
+        "id": "completedPointsSeries",
+        "component": "Series",
+        "category": "Delivered Velocity",
+        "values": [
+          104,
+          112,
+          118,
+          105,
+          119,
+          114
+        ]
+      },
+      {
+        "id": "riskRegisterCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "riskHeader",
+          "riskTable"
+        ]
+      },
+      {
+        "id": "riskHeader",
+        "component": "CardHeader",
+        "title": "Portfolio Risk Register",
+        "subtitle": "Active risks categorized with calibrated severity ratings, exposure probability, and mitigations"
+      },
+      {
+        "id": "riskTable",
+        "component": "Table",
+        "columns": [
+          "colRiskId",
+          "colRiskDesc",
+          "colRiskProj",
+          "colRiskSeverity",
+          "colRiskProb",
+          "colRiskMitigation"
+        ]
+      },
+      {
+        "id": "colRiskId",
+        "component": "Col",
+        "label": "Risk ID",
+        "data": [
+          "RSK-101",
+          "RSK-102",
+          "RSK-103",
+          "RSK-104",
+          "RSK-105"
+        ]
+      },
+      {
+        "id": "colRiskDesc",
+        "component": "Col",
+        "label": "Risk Description",
+        "data": [
+          "Key person dependency in Core Banking legacy ETL architecture",
+          "Cloud data egress costs exceeding baseline AWS budget cap",
+          "Delay in SOC2 compliance audit readiness sign-off",
+          "Customer churn during portal UI redesign transition",
+          "Third-party payment gateway SLA latency regression"
+        ]
+      },
+      {
+        "id": "colRiskProj",
+        "component": "Col",
+        "label": "Project",
+        "data": [
+          "Core Banking Modernization",
+          "AWS Cloud Infrastructure Migration",
+          "Zero-Trust Security Rollout",
+          "Customer Portal Redesign",
+          "Automated Billing Engine"
+        ]
+      },
+      {
+        "id": "colRiskSeverity",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "CRITICAL",
+          "HIGH",
+          "HIGH",
+          "MEDIUM",
+          "LOW"
+        ]
+      },
+      {
+        "id": "colRiskProb",
+        "component": "Col",
+        "label": "Probability",
+        "data": [
+          "80%",
+          "65%",
+          "45%",
+          "30%",
+          "20%"
+        ]
+      },
+      {
+        "id": "colRiskMitigation",
+        "component": "Col",
+        "label": "Mitigation Strategy",
+        "data": [
+          "Request 2 additional staff contractors to cross-train",
+          "Implement reserved instances and S3 lifecycle rules",
+          "Engage external compliance consultant for pre-audit",
+          "Phased opt-in beta rollout with instant feedback widget",
+          "Establish fallback webhooks with secondary payment provider"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

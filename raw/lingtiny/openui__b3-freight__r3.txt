@@ -1,0 +1,51 @@
+root = Card([header, summary, shipments, carrierSplit, search, cost, weekly, flags, refresh], "sunk")
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment overview")
+summary = CardHeader("Key Metrics", "This month on-time rate and volume")
+shipments = Table([
+  Col("Origin", ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"]),
+  Col("Destination", ["Seattle", "Miami", "Denver", "Boston", "Atlanta"]),
+  Col("ETA", ["2024-06-15", "2024-06-16", "2024-06-17", "2024-06-18", "2024-06-19"]),
+  Col("Status", ["In Transit", "Delayed", "On Time", "Delayed", "In Transit"]),
+], "string")
+delayed = CardHeader("Delayed Shipments", "2 shipments require attention")
+delayed = CardHeader("Delayed Shipments", "2 shipments require attention")
+delayedContent = Card([
+  TextContent("Shipment #12345 — Origin: Chicago → Destination: Miami — ETA: 2024-06-20 — Status: Delayed (Weather delay)"),
+  TextContent("Shipment #12346 — Origin: Houston → Destination: Boston — ETA: 2024-06-21 — Status: Delayed (Carrier issue)"),
+], "card")
+onTime = CardHeader("On-Time Rate", "94.2% this month")
+onTimeContent = Card([
+  Progress(94.2, "On-Time"),
+  TextContent("28 of 30 shipments delivered on time"),
+])
+volumeByCarrier = CardHeader("Volume by Carrier", "Breakdown of shipments per carrier")
+volumeByCarrierContent = Card([
+  TextContent("FedEx: 1,240 (42%)"),
+  TextContent("UPS: 980 (34%)"),
+  TextContent("DHL: 640 (22%)"),
+])
+search = CardHeader("Search by Route", "Filter shipments by origin or destination")
+searchContent = Card([
+  Input("route", "Enter origin or destination city...", "text"),
+  TextContent("Type a city name to filter shipments by origin or destination"),
+])
+cost = CardHeader("Average Cost per Shipment", "$2,340")
+costContent = Card([
+  Progress(2340, "Avg Cost"),
+  TextContent("Average cost per shipment across all routes"),
+])
+weekly = CardHeader("Weekly Volume (Past 2 Months)", "Trend across 8 weeks")
+weeklyContent = Card([
+  LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "linear", "Week", "Shipments"),
+  Series("Volume", [4200, 4800, 5100, 4900, 5300, 5600, 5200, 5400]),
+])
+flags = CardHeader("Flag Shipment", "Mark a shipment for review")
+flagsContent = Card([
+  Input("flag", "Enter shipment number to flag...", "text"),
+  TextContent("Flagging a shipment will notify the logistics team for review"),
+])
+refresh = CardHeader("Last Refreshed", "2 minutes ago")
+refreshContent = Card([
+  Progress(100, "Fresh"),
+  TextContent("Data last refreshed 2 minutes ago"),
+])

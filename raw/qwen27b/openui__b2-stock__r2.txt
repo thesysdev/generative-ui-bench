@@ -1,0 +1,17 @@
+
+
+root = Card([header, thresholdCallout, searchSection, inventoryTable, reorderActions], "card", "column", "m")
+header = CardHeader("Low Inventory Warning", "Items below the reorder threshold need attention")
+thresholdCallout = Callout("warning", "Reorder threshold: 10 units", "Any item with 10 or fewer units remaining triggers this warning. Reorder before stock runs out.")
+searchSection = Card([searchInput], "sunk", "row", "s")
+searchInput = Input("search", "Search items by name or SKU…", "text")
+inventoryTable = Table([colItem, colSku, colRemaining, colThreshold, colStatus, colAction])
+colItem = Col("Item", ["Wireless Mouse", "USB-C Cable 1m", "Mechanical Keyboard", "HDMI Adapter", "Laptop Stand", "Noise-Cancelling Headphones"])
+colSku = Col("SKU", ["WM-2041", "UC-1100", "MK-3305", "HA-0072", "LS-4410", "NH-8821"])
+colRemaining = Col("Remaining", [3, 7, 2, 10, 5, 4])
+colThreshold = Col("Threshold", [10, 10, 10, 10, 10, 10])
+colStatus = Col("Status", ["Critical", "Low", "Critical", "At threshold", "Low", "Low"])
+colAction = Col("Reorder", ["Reorder", "Reorder", "Reorder", "Reorder", "Reorder", "Reorder"], "action")
+reorderActions = Card([reorderNote, bulkBtn], "clear", "column", "s")
+reorderNote = TextContent("Use the **Reorder** action on each row to place a purchase order at the default supplier quantity, or reorder all at once below.", "small")
+bulkBtn = Button("Reorder All (6 items)", null, "primary")

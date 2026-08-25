@@ -1,0 +1,32 @@
+root = Card([header, statusOverview, incidentSection, systemDetails, followUps], "card", "column", "l")
+
+header = CardHeader("Platform Status", "Real-time infrastructure health")
+
+statusOverview = Card([uptimeKpi, statusBadge], "sunk", "row", "m", "center", "between")
+uptimeKpi = Card([uptimeText], "clear", "column")
+uptimeText = TextContent("99.98% Uptime", "large-heavy")
+statusBadge = Badge("Operational", "success")
+
+incidentSection = Card([incidentHeading, incidentAlert, incidentDetails], "card", "column", "s")
+incidentHeading = Heading("Recent Incident", "h3")
+incidentAlert = Alert("API Latency Spike", "Intermittent timeouts observed in us-east-1 region", "warning")
+incidentDetails = TextContent("Resolved: Oct 24, 14:20 UTC. Root cause: Database connection pool exhaustion during a deployment rollout. Fixed by increasing pool size and optimizing query caching.", "small")
+
+systemDetails = Tabs([apiTab, dbTab, cacheTab])
+apiTab = TabItem("api", "API Gateway", [apiStatus, apiLatency])
+apiStatus = TextCallout("success", "API Gateway", "All endpoints responding within normal parameters")
+apiLatency = LineChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"], [latencySeries], "linear", "Time", "ms")
+latencySeries = Series("Response Time", [120, 115, 140, 130, 125, 118])
+
+dbTab = TabItem("db", "Database", [dbStatus, dbLoad])
+dbStatus = TextCallout("success", "Primary Cluster", "Read/Write operations healthy")
+dbLoad = BarChart(["CPU", "Memory", "IOPS"], [dbSeries], "grouped", "Metric", "Percentage")
+dbSeries = Series("Usage", [42, 68, 31])
+
+cacheTab = TabItem("cache", "Redis Cache", [cacheStatus])
+cacheStatus = TextCallout("info", "Cache Layer", "Cache hit rate at 84%. Optimization in progress.")
+
+followUps = FollowUpBlock([viewLogs, reportIssue, contactOncall])
+viewLogs = FollowUpItem("View detailed system logs")
+reportIssue = FollowUpItem("Report a new incident")
+contactOncall = FollowUpItem("Contact on-call engineer")

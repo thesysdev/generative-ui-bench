@@ -1,0 +1,93 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"l"},"children":["header-card","filter-card","metrics-grid","charts-card","endpoints-card","incidents-card","threshold-card"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["header-info","header-badges"]}}
+{"op":"add","path":"/elements/header-info","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["header-title","header-subtitle"]}}
+{"op":"add","path":"/elements/header-title","value":{"type":"Heading","props":{"text":"Service Health & On-Call Dashboard","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/header-subtitle","value":{"type":"TextContent","props":{"text":"Production Cluster: **core-api-production** • Primary On-Call: **Alex Chen**","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/header-badges","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["status-badge","env-badge"]}}
+{"op":"add","path":"/elements/status-badge","value":{"type":"Tag","props":{"text":"DEGRADED (1 INCIDENT)","variant":"warning","size":"md"},"children":[]}}
+{"op":"add","path":"/elements/env-badge","value":{"type":"Badge","props":{"text":"US-EAST-1 PRIMARY","variant":"outline"},"children":[]}}
+{"op":"add","path":"/elements/filter-card","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m"},"children":["region-controls","status-banner"]}}
+{"op":"add","path":"/elements/region-controls","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["region-label","region-select"]}}
+{"op":"add","path":"/elements/region-label","value":{"type":"Label","props":{"text":"Filter by Region:"},"children":[]}}
+{"op":"add","path":"/elements/region-select","value":{"type":"Select","props":{"name":"regionFilter","value":{"$bindState":"/selectedRegion"},"items":["opt-all","opt-us-east","opt-us-west","opt-eu-west","opt-ap-southeast"],"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/opt-all","value":{"type":"SelectItem","props":{"value":"all","label":"All Regions (Global)"},"children":[]}}
+{"op":"add","path":"/elements/opt-us-east","value":{"type":"SelectItem","props":{"value":"us-east-1","label":"us-east-1 (N. Virginia)"},"children":[]}}
+{"op":"add","path":"/elements/opt-us-west","value":{"type":"SelectItem","props":{"value":"us-west-2","label":"us-west-2 (Oregon)"},"children":[]}}
+{"op":"add","path":"/elements/opt-eu-west","value":{"type":"SelectItem","props":{"value":"eu-west-1","label":"eu-west-1 (Ireland)"},"children":[]}}
+{"op":"add","path":"/elements/opt-ap-southeast","value":{"type":"SelectItem","props":{"value":"ap-southeast-1","label":"ap-southeast-1 (Singapore)"},"children":[]}}
+{"op":"add","path":"/state/selectedRegion","value":"all"}
+{"op":"add","path":"/elements/status-banner","value":{"type":"TextContent","props":{"text":{"$template":"Active View: **${/selectedRegion}** • Auto-refreshing every 30s"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/metrics-grid","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m"},"children":["uptime-card","error-rate-card","p99-card"]}}
+{"op":"add","path":"/elements/uptime-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["uptime-header","uptime-value","uptime-progress","uptime-subtext"]}}
+{"op":"add","path":"/elements/uptime-header","value":{"type":"Label","props":{"text":"Uptime This Quarter (Q3)"},"children":[]}}
+{"op":"add","path":"/elements/uptime-value","value":{"type":"Heading","props":{"text":{"$template":"${/metrics/quarterUptime}%"},"level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/uptime-progress","value":{"type":"Progress","props":{"value":99.94,"label":"SLA Target: 99.90%"},"children":[]}}
+{"op":"add","path":"/elements/uptime-subtext","value":{"type":"TextContent","props":{"text":"18m 42s total downtime • SLA: Met","size":"small"},"children":[]}}
+{"op":"add","path":"/state/metrics","value":{}}
+{"op":"add","path":"/state/metrics/quarterUptime","value":"99.942"}
+{"op":"add","path":"/elements/error-rate-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["error-header","error-value","error-status","error-subtext"]}}
+{"op":"add","path":"/elements/error-header","value":{"type":"Label","props":{"text":"Error Rate (Right Now)"},"children":[]}}
+{"op":"add","path":"/elements/error-value","value":{"type":"Heading","props":{"text":{"$template":"${/metrics/errorRateNow}%"},"level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/error-status","value":{"type":"Tag","props":{"text":"ELEVATED (Threshold: 0.50%)","variant":"danger","size":"sm"},"children":[]}}
+{"op":"add","path":"/elements/error-subtext","value":{"type":"TextContent","props":{"text":"482 errors / sec • HTTP 500 & 503","size":"small"},"children":[]}}
+{"op":"add","path":"/state/metrics/errorRateNow","value":"0.74"}
+{"op":"add","path":"/elements/p99-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["p99-header","p99-value","p99-status","p99-subtext"]}}
+{"op":"add","path":"/elements/p99-header","value":{"type":"Label","props":{"text":"Current Global p99 Latency"},"children":[]}}
+{"op":"add","path":"/elements/p99-value","value":{"type":"Heading","props":{"text":{"$template":"${/metrics/currentP99} ms"},"level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/p99-status","value":{"type":"Tag","props":{"text":"NORMAL","variant":"success","size":"sm"},"children":[]}}
+{"op":"add","path":"/elements/p99-subtext","value":{"type":"TextContent","props":{"text":"Target: <300 ms • Baseline nominal","size":"small"},"children":[]}}
+{"op":"add","path":"/state/metrics/currentP99","value":"248"}
+{"op":"add","path":"/elements/charts-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["chart-header","sys-chart"]}}
+{"op":"add","path":"/elements/chart-header","value":{"type":"CardHeader","props":{"title":"System Utilization (Past 24 Hours)","subtitle":"CPU & Memory utilization aggregates across fleet"}}}
+{"op":"add","path":"/elements/sys-chart","value":{"type":"LineChart","props":{"labels":["-24h","-20h","-16h","-12h","-8h","-4h","Now"],"series":["cpu-series","mem-series"],"variant":"natural","xLabel":"Time Window","yLabel":"% Utilized"}}}
+{"op":"add","path":"/elements/cpu-series","value":{"type":"Series","props":{"category":"CPU Usage (%)","values":[44,48,62,78,84,71,68]}}}
+{"op":"add","path":"/elements/mem-series","value":{"type":"Series","props":{"category":"Memory Usage (%)","values":[58,59,63,68,74,76,73]}}}
+{"op":"add","path":"/elements/endpoints-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["endpoints-header","endpoints-table"]}}
+{"op":"add","path":"/elements/endpoints-header","value":{"type":"CardHeader","props":{"title":"Top 5 Slowest Endpoints (p99 Latency)","subtitle":"Ranked by response latency over the last 60 minutes"}}}
+{"op":"add","path":"/elements/endpoints-table","value":{"type":"Table","props":{"columns":["col-endpoint","col-method","col-p99","col-p50","col-volume"]}}}
+{"op":"add","path":"/elements/col-endpoint","value":{"type":"Col","props":{"label":"Endpoint Path","data":["/api/v2/reports/generate","/api/v1/search/composite","/api/v2/checkout/finalize","/api/v1/auth/mfa/verify","/api/v2/users/sync"]}}}
+{"op":"add","path":"/elements/col-method","value":{"type":"Col","props":{"label":"Method","data":["POST","GET","POST","POST","PUT"]}}}
+{"op":"add","path":"/elements/col-p99","value":{"type":"Col","props":{"label":"p99 Latency","data":["1,840 ms","920 ms","680 ms","490 ms","410 ms"]}}}
+{"op":"add","path":"/elements/col-p50","value":{"type":"Col","props":{"label":"p50 Latency","data":["410 ms","180 ms","120 ms","85 ms","62 ms"]}}}
+{"op":"add","path":"/elements/col-volume","value":{"type":"Col","props":{"label":"Traffic (req/s)","data":["140 rps","3,420 rps","890 rps","1,210 rps","540 rps"]}}}
+{"op":"add","path":"/elements/incidents-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["incidents-header","incident-list"]}}
+{"op":"add","path":"/elements/incidents-header","value":{"type":"CardHeader","props":{"title":"Active & Open Incidents","subtitle":"Live alert feed requiring on-call engineer triage and acknowledgment"}}}
+{"op":"add","path":"/elements/incident-list","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"repeat":{"statePath":"/incidents","key":"id"},"children":["incident-row"]}}
+{"op":"add","path":"/elements/incident-row","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m"},"children":["inc-left","inc-actions"]}}
+{"op":"add","path":"/elements/inc-left","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"m"},"children":["inc-severity-tag","inc-details"]}}
+{"op":"add","path":"/elements/inc-severity-tag","value":{"type":"Tag","props":{"text":{"$item":"severity"},"variant":{"$item":"variant"},"size":"md"},"children":[]}}
+{"op":"add","path":"/elements/inc-details","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["inc-title","inc-meta"]}}
+{"op":"add","path":"/elements/inc-title","value":{"type":"TextContent","props":{"text":{"$item":"title"},"size":"large-heavy"},"children":[]}}
+{"op":"add","path":"/elements/inc-meta","value":{"type":"TextContent","props":{"text":{"$template":"ID: **${id}** • Region: **${region}** • Triggered: ${triggeredAt} • Status: **${status}**"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/inc-actions","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["ack-btn","acked-tag"]}}
+{"op":"add","path":"/elements/ack-btn","value":{"type":"Button","props":{"label":"Acknowledge","variant":"primary","size":"small"},"visible":{"$item":"acknowledged","not":true},"on":{"press":{"action":"setState","params":{"statePath":{"$item":"ackStatePath"},"value":true}}},"children":[]}}
+{"op":"add","path":"/elements/acked-tag","value":{"type":"Tag","props":{"text":"Acknowledged","variant":"neutral","size":"sm"},"visible":{"$item":"acknowledged"},"children":[]}}
+{"op":"add","path":"/state/incidents","value":[]}
+{"op":"add","path":"/state/incidents/0","value":{"id":"INC-8492","severity":"SEV-1 CRITICAL","variant":"danger","title":"Elevated 5xx Rate on /api/v2/reports/generate","region":"us-east-1","triggeredAt":"14 mins ago","status":"FIRING","acknowledged":false,"ackStatePath":"/incidents/0/acknowledged"}}
+{"op":"add","path":"/state/incidents/1","value":{"id":"INC-8488","severity":"SEV-2 MAJOR","variant":"warning","title":"Postgres Connection Pool Utilization > 85%","region":"us-west-2","triggeredAt":"42 mins ago","status":"INVESTIGATING","acknowledged":true,"ackStatePath":"/incidents/1/acknowledged"}}
+{"op":"add","path":"/state/incidents/2","value":{"id":"INC-8475","severity":"SEV-3 MINOR","variant":"info","title":"Worker Node Memory Pressure Threshold Warning","region":"eu-west-1","triggeredAt":"2 hours ago","status":"RESOLVING","acknowledged":true,"ackStatePath":"/incidents/2/acknowledged"}}
+{"op":"add","path":"/elements/threshold-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["threshold-header","threshold-form","threshold-feedback"]}}
+{"op":"add","path":"/elements/threshold-header","value":{"type":"CardHeader","props":{"title":"Configure Alert Thresholds","subtitle":"Adjust automatic alerting triggers for on-call notification dispatch"}}}
+{"op":"add","path":"/elements/threshold-form","value":{"type":"Form","props":{"name":"thresholdSettings","buttons":"threshold-buttons","fields":["field-metric","field-operator","field-limit","field-duration"]}}}
+{"op":"add","path":"/elements/field-metric","value":{"type":"FormControl","props":{"label":"Target Metric","input":"metric-select"}}}
+{"op":"add","path":"/elements/metric-select","value":{"type":"Select","props":{"name":"alertMetric","value":{"$bindState":"/thresholdForm/metric"},"items":["opt-err","opt-cpu","opt-mem","opt-p99"],"size":"medium"},"children":[]}}
+{"op":"add","path":"/elements/opt-err","value":{"type":"SelectItem","props":{"value":"error_rate","label":"HTTP Error Rate (%)"},"children":[]}}
+{"op":"add","path":"/elements/opt-cpu","value":{"type":"SelectItem","props":{"value":"cpu_usage","label":"CPU Usage Fleet Aggregate (%)"},"children":[]}}
+{"op":"add","path":"/elements/opt-mem","value":{"type":"SelectItem","props":{"value":"mem_usage","label":"Memory Usage Fleet Aggregate (%)"},"children":[]}}
+{"op":"add","path":"/elements/opt-p99","value":{"type":"SelectItem","props":{"value":"p99_latency","label":"API Endpoint p99 Latency (ms)"},"children":[]}}
+{"op":"add","path":"/elements/field-operator","value":{"type":"FormControl","props":{"label":"Condition","input":"operator-select"}}}
+{"op":"add","path":"/elements/operator-select","value":{"type":"Select","props":{"name":"operator","value":{"$bindState":"/thresholdForm/operator"},"items":["opt-gt","opt-gte","opt-lt"],"size":"medium"},"children":[]}}
+{"op":"add","path":"/elements/opt-gt","value":{"type":"SelectItem","props":{"value":">","label":"Greater than (>)"},"children":[]}}
+{"op":"add","path":"/elements/opt-gte","value":{"type":"SelectItem","props":{"value":">=","label":"Greater than or equal (>=)"},"children":[]}}
+{"op":"add","path":"/elements/opt-lt","value":{"type":"SelectItem","props":{"value":"<","label":"Less than (<)"},"children":[]}}
+{"op":"add","path":"/elements/field-limit","value":{"type":"FormControl","props":{"label":"Threshold Value","input":"limit-input","hint":"e.g. 0.50 for error %, 85 for CPU %, 500 for ms latency"}}}
+{"op":"add","path":"/elements/limit-input","value":{"type":"Input","props":{"name":"limitValue","value":{"$bindState":"/thresholdForm/value"},"placeholder":"0.50","type":"number"}}}
+{"op":"add","path":"/elements/field-duration","value":{"type":"FormControl","props":{"label":"Sustained Duration (Minutes)","input":"duration-slider"}}}
+{"op":"add","path":"/elements/duration-slider","value":{"type":"Slider","props":{"name":"duration","variant":"discrete","min":1,"max":30,"step":1,"defaultValue":[5],"value":{"$bindState":"/thresholdForm/duration"}}}}
+{"op":"add","path":"/elements/threshold-buttons","value":{"type":"Buttons","props":{"buttons":["save-thresh-btn","reset-thresh-btn"]}}}
+{"op":"add","path":"/elements/save-thresh-btn","value":{"type":"Button","props":{"label":"Apply Alert Threshold","variant":"primary"},"on":{"press":{"action":"setState","params":{"statePath":"/thresholdSaved","value":true}}},"children":[]}}
+{"op":"add","path":"/elements/reset-thresh-btn","value":{"type":"Button","props":{"label":"Reset to Defaults","variant":"tertiary"},"on":{"press":{"action":"setState","params":{"statePath":"/thresholdSaved","value":false}}},"children":[]}}
+{"op":"add","path":"/state/thresholdForm","value":{"metric":"error_rate","operator":">","value":"0.50","duration":[5]}}
+{"op":"add","path":"/state/thresholdSaved","value":false}
+{"op":"add","path":"/elements/threshold-feedback","value":{"type":"Callout","props":{"variant":"success","title":"Threshold Updated Successfully","description":"The alert rule has been dispatched to Prometheus & Alertmanager across all clusters."},"visible":{"$state":"/thresholdSaved"},"children":[]}}

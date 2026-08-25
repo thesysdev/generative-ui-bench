@@ -1,0 +1,67 @@
+{"op":"add","path":"/root","value":"dashboard-root"}
+{"op":"add","path":"/elements/dashboard-root","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"l"},"children":["top-bar","alert-section","kpi-grid","search-and-flag-bar","shipments-container","analytics-grid"]}}
+{"op":"add","path":"/elements/top-bar","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center"},"children":["title-group","refresh-badge-group"]}}
+{"op":"add","path":"/elements/title-group","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["main-title","subtitle-desc"]}}
+{"op":"add","path":"/elements/main-title","value":{"type":"Heading","props":{"text":"Logistics Operations Command","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/subtitle-desc","value":{"type":"TextContent","props":{"text":"Real-time freight tracking, carrier performance, and dispatch management","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/refresh-badge-group","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["refresh-label","refresh-tag"]}}
+{"op":"add","path":"/elements/refresh-label","value":{"type":"TextContent","props":{"text":"Data sync:","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/refresh-tag","value":{"type":"Tag","props":{"text":{"$template":"Updated ${/lastUpdated}"},"icon":"clock","variant":"info","size":"md"},"children":[]}}
+{"op":"add","path":"/state/lastUpdated","value":"Today at 14:42:10 UTC (2 mins ago)"}
+{"op":"add","path":"/elements/alert-section","value":{"type":"Alert","props":{"title":"Critical Delay Notice (2 Shipments Delayed)","description":"SH-9042 (Chicago -> Dallas) delayed due to severe blizzard conditions. SH-8921 (Savannah -> Atlanta) delayed by port congestion. Re-routing options available.","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/kpi-grid","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","wrap":true},"children":["kpi-ontime","kpi-cost","kpi-in-transit","kpi-delayed"]}}
+{"op":"add","path":"/elements/kpi-ontime","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["ontime-label","ontime-val","ontime-prog"]}}
+{"op":"add","path":"/elements/ontime-label","value":{"type":"TextContent","props":{"text":"On-Time Rate (This Month)","size":"small-heavy"},"children":[]}}
+{"op":"add","path":"/elements/ontime-val","value":{"type":"Heading","props":{"text":{"$template":"${/metrics/ontimeRate}%"},"level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/ontime-prog","value":{"type":"Progress","props":{"value":94.2,"label":"Target: 95.0%"},"children":[]}}
+{"op":"add","path":"/elements/kpi-cost","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["cost-label","cost-val","cost-sub"]}}
+{"op":"add","path":"/elements/cost-label","value":{"type":"TextContent","props":{"text":"Avg Cost Per Shipment","size":"small-heavy"},"children":[]}}
+{"op":"add","path":"/elements/cost-val","value":{"type":"Heading","props":{"text":{"$template":"$${/metrics/avgCost}"},"level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/cost-sub","value":{"type":"Badge","props":{"text":"-3.8% vs last month","variant":"secondary"},"children":[]}}
+{"op":"add","path":"/elements/kpi-in-transit","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["transit-label","transit-val","transit-sub"]}}
+{"op":"add","path":"/elements/transit-label","value":{"type":"TextContent","props":{"text":"Active In-Transit","size":"small-heavy"},"children":[]}}
+{"op":"add","path":"/elements/transit-val","value":{"type":"Heading","props":{"text":"148 loads","level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/transit-sub","value":{"type":"Badge","props":{"text":"24 expedited","variant":"outline"},"children":[]}}
+{"op":"add","path":"/elements/kpi-delayed","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"xs"},"children":["delay-kpi-label","delay-kpi-val","delay-kpi-sub"]}}
+{"op":"add","path":"/elements/delay-kpi-label","value":{"type":"TextContent","props":{"text":"Attention Required","size":"small-heavy"},"children":[]}}
+{"op":"add","path":"/elements/delay-kpi-val","value":{"type":"Heading","props":{"text":"2 delayed","level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/delay-kpi-sub","value":{"type":"Badge","props":{"text":"Flagged for review","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/state/metrics","value":{"ontimeRate":"94.2","avgCost":"1,420"}}
+{"op":"add","path":"/elements/search-and-flag-bar","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","wrap":true,"gap":"m"},"children":["search-ctrl","flag-dialog-trigger"]}}
+{"op":"add","path":"/elements/search-ctrl","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["search-input","search-btn"]}}
+{"op":"add","path":"/elements/search-input","value":{"type":"Input","props":{"name":"routeSearch","placeholder":"Search route (e.g. Los Angeles, Chicago, Miami)...","value":{"$bindState":"/searchRoute"}},"children":[]}}
+{"op":"add","path":"/elements/search-btn","value":{"type":"Button","props":{"label":"Filter Route","variant":"secondary","size":"medium"},"children":[]}}
+{"op":"add","path":"/state/searchRoute","value":""}
+{"op":"add","path":"/elements/flag-dialog-trigger","value":{"type":"DialogBlock","props":{"triggerLabel":"Flag a Shipment","title":"Flag Shipment for Escalation","description":"Mark a shipment as priority, issue, or inspection requirement.","triggerVariant":"destructive","content":["flag-form-card"]},"children":[]}}
+{"op":"add","path":"/elements/flag-form-card","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"m"},"children":["flag-id-ctrl","flag-reason-ctrl","flag-notes-ctrl","flag-submit-btn"]}}
+{"op":"add","path":"/elements/flag-id-ctrl","value":{"type":"FormControl","props":{"label":"Shipment ID / Tracking #","input":"flag-id-input","hint":"e.g. SH-9042"},"children":[]}}
+{"op":"add","path":"/elements/flag-id-input","value":{"type":"Input","props":{"name":"flagShipmentId","placeholder":"Enter Shipment ID","value":{"$bindState":"/flagForm/id"}},"children":[]}}
+{"op":"add","path":"/elements/flag-reason-ctrl","value":{"type":"FormControl","props":{"label":"Flag Category","input":"flag-reason-select"},"children":[]}}
+{"op":"add","path":"/elements/flag-reason-select","value":{"type":"Select","props":{"name":"flagReason","items":["reason-delay","reason-damage","reason-customs","reason-refrigeration"],"placeholder":"Select reason","value":{"$bindState":"/flagForm/reason"}},"children":[]}}
+{"op":"add","path":"/elements/reason-delay","value":{"type":"SelectItem","props":{"value":"weather-delay","label":"Severe Weather Delay"},"children":[]}}
+{"op":"add","path":"/elements/reason-damage","value":{"type":"SelectItem","props":{"value":"cargo-inspection","label":"Customs / Cargo Hold"},"children":[]}}
+{"op":"add","path":"/elements/reason-customs","value":{"type":"SelectItem","props":{"value":"mechanical","label":"Vehicle Breakdown"},"children":[]}}
+{"op":"add","path":"/elements/reason-refrigeration","value":{"type":"SelectItem","props":{"value":"temp-breach","label":"Reefer Temp Alert"},"children":[]}}
+{"op":"add","path":"/elements/flag-notes-ctrl","value":{"type":"FormControl","props":{"label":"Coordinator Notes","input":"flag-notes-input","hint":"Action required or instructions for dispatch team"},"children":[]}}
+{"op":"add","path":"/elements/flag-notes-input","value":{"type":"TextArea","props":{"name":"flagNotes","placeholder":"Describe situation and required intervention...","rows":3,"value":{"$bindState":"/flagForm/notes"}},"children":[]}}
+{"op":"add","path":"/elements/flag-submit-btn","value":{"type":"Button","props":{"label":"Submit Escalation Flag","variant":"primary","size":"medium"},"on":{"press":{"action":"setState","params":{"statePath":"/flagSubmitted","value":true}}},"children":[]}}
+{"op":"add","path":"/state/flagForm","value":{"id":"","reason":"weather-delay","notes":""}}
+{"op":"add","path":"/state/flagSubmitted","value":false}
+{"op":"add","path":"/elements/shipments-container","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["shipments-header","shipments-table"]}}
+{"op":"add","path":"/elements/shipments-header","value":{"type":"CardHeader","props":{"title":"Live Shipments in Transit","subtitle":"Current freight status, origins, destinations, and estimated arrival times"}}}
+{"op":"add","path":"/elements/shipments-table","value":{"type":"Table","props":{"columns":["col-id","col-carrier","col-origin","col-destination","col-eta","col-status","col-flag"]},"children":[]}}
+{"op":"add","path":"/elements/col-id","value":{"type":"Col","props":{"label":"Shipment ID","data":["SH-9042","SH-9045","SH-8921","SH-9050","SH-9053","SH-9058"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-carrier","value":{"type":"Col","props":{"label":"Carrier","data":["Swift Transport","Apex Freight","Knight Logistics","Maverick Inc","Swift Transport","Echo Global"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-origin","value":{"type":"Col","props":{"label":"Origin","data":["Chicago, IL","Los Angeles, CA","Savannah, GA","Seattle, WA","Dallas, TX","Miami, FL"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-destination","value":{"type":"Col","props":{"label":"Destination","data":["Dallas, TX","Phoenix, AZ","Atlanta, GA","Denver, CO","Chicago, IL","New York, NY"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-eta","value":{"type":"Col","props":{"label":"ETA","data":["Oct 25, 22:00 (Delayed)","Oct 24, 18:30 (On Time)","Oct 26, 09:00 (Delayed)","Oct 25, 11:15 (On Time)","Oct 26, 14:00 (On Time)","Oct 27, 08:30 (On Time)"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-status","value":{"type":"Col","props":{"label":"Status","data":["DELAYED - Weather","IN TRANSIT","DELAYED - Congestion","IN TRANSIT","IN TRANSIT","CUSTOMS CLEARANCE"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/col-flag","value":{"type":"Col","props":{"label":"Flag Status","data":["[FLAGGED] High Priority","Normal","[FLAGGED] Monitoring","Normal","Normal","Normal"],"type":"string"},"children":[]}}
+{"op":"add","path":"/elements/analytics-grid","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","wrap":true},"children":["weekly-volume-card","carrier-split-card"]}}
+{"op":"add","path":"/elements/weekly-volume-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["vol-header","weekly-volume-chart"]}}
+{"op":"add","path":"/elements/vol-header","value":{"type":"CardHeader","props":{"title":"Weekly Volume (Past 2 Months)","subtitle":"Total shipped units across W1-W8"}}}
+{"op":"add","path":"/elements/weekly-volume-chart","value":{"type":"BarChart","props":{"labels":["Wk 1","Wk 2","Wk 3","Wk 4","Wk 5","Wk 6","Wk 7","Wk 8"],"series":["volumeSeries"],"variant":"grouped","xLabel":"Week","yLabel":"Shipments"},"children":[]}}
+{"op":"add","path":"/elements/volumeSeries","value":{"type":"Series","props":{"category":"Shipments","values":[310,345,390,375,410,435,460,485]},"children":[]}}
+{"op":"add","path":"/elements/carrier-split-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"s"},"children":["carrier-header","carrier-donut-chart"]}}
+{"op":"add","path":"/elements/carrier-header","value":{"type":"CardHeader","props":{"title":"Volume Split by Carrier","subtitle":"Share of total fleet dispatches"}}}
+{"op":"add","path":"/elements/carrier-donut-chart","value":{"type":"PieChart","props":{"labels":["Swift Transport","Knight Logistics","Apex Freight","Maverick Inc","Echo Global","Others"],"values":[34,26,18,12,7,3],"variant":"donut","appearance":"circular"},"children":[]}}

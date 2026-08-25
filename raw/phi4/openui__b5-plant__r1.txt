@@ -1,0 +1,99 @@
+```openui
+root = Card([overallEffectiveness, unitsProduced, productionLines, defectRate, downtimeSplit, maintenanceDue, stockLevels, supplierDeliveries, shiftComparison, safetyIncidents, qualityHold, energyUse, workOrders, scheduleMaintenance, focusLine, alerts, exportReport])
+
+overallEffectiveness = CardHeader("Overall Equipment Effectiveness", "OEE Score")
+
+unitsProduced = Card([unitHeader, unitProgress])
+unitHeader = Heading("Units Produced", "h3")
+unitProgress = HorizontalBarChart(["Today's Target", "Units Produced"], [targetSeries, producedSeries], null, null, null)
+targetSeries = Series("Target", [1000, 0])
+producedSeries = Series("Produced", [750, 750])
+
+productionLines = Card([lineHeader, lineChart], "row", "column", "l", "start", "stretch", null)
+lineHeader = Heading("Production Lines", "h3")
+lineChart = Buttons([line1, line2, line3])
+line1 = Button("Line 1: 95% - Active")
+line2 = Button("Line 2: 80% - Maintenance")
+line3 = Button("Line 3: 70% - Standby")
+
+defectRate = Card([defectHeader, defectChart])
+defectHeader = Heading("Defect Rate", "h3")
+defectChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [defectSeries], "linear", "Week", "Defect Rate (%)")
+defectSeries = Series("Defects", [2.5, 3.0, 1.8, 2.2])
+
+downtimeSplit = Card([downtimeHeader, downtimePie])
+downtimeHeader = Heading("Downtime Split", "h3")
+downtimePie = PieChart(["Maintenance", "Breakdowns", "Setup", "Other"], [15, 25, 35, 25])
+
+maintenanceDue = Card([maintenanceHeader, maintenanceList])
+maintenanceHeader = Heading("Machines Due for Maintenance", "h3")
+maintenanceList = ListBlock([machine1, machine2], "image")
+machine1 = ListItem("CNC Mill", null, ["cnc_mill.png"], "Schedule Maintenance")
+machine2 = ListItem("Lathe", null, ["lathe.png"], "Schedule Maintenance")
+
+stockLevels = Card([stockHeader, stockTable])
+stockHeader = Heading("Stock Levels", "h3")
+stockTable = Table([stockName, stockQty])
+stockName = Col("Material", ["Steel", "Resin", "Packaging"])
+stockQty = Col("Quantity", ["500 Tons", "150 Tons", "2000 Units"])
+
+supplierDeliveries = Card([supplierHeader, supplierList])
+supplierHeader = Heading("Supplier Deliveries", "h3")
+supplierList = ListBlock([delivery1, delivery2])
+delivery1 = ListItem("Steel from Acme", "Due: 2023-10-05")
+delivery2 = ListItem("Resin from Beta", "Due: 2023-10-07")
+
+shiftComparison = Card([shiftHeader, shiftChart])
+shiftHeader = Heading("Shift Output Comparison", "h3")
+shiftChart = BarChart(["1st Shift", "2nd Shift", "3rd Shift"], [shift1, shift2, shift3], "stacked", "Shift", "Units")
+shift1 = Series("1st Shift", [300, 320, 310])
+shift2 = Series("2nd Shift", [320, 300, 330])
+shift3 = Series("3rd Shift", [310, 330, 320])
+
+safetyIncidents = Card([safetyHeader, safetyData])
+safetyHeader = Heading("Safety Incidents", "h3")
+safetyData = Card([incidentCount, daysSince])
+incidentCount = Alert("Safety Incidents This Year", "Total Incidents: 5", null)
+daysSince = TextCallout("Days Since Last Incident", "Last Incident: 45 Days Ago", "info")
+
+qualityHold = Card([qualityHeader, qualityList])
+qualityHeader = Heading("Batches on Quality Hold", "h3")
+qualityList = ListBlock([batch1, batch2])
+batch1 = ListItem("Batch #1234", "Pending QC Approval")
+batch2 = ListItem("Batch #5678", "Re-test Required")
+
+energyUse = Card([energyHeader, energyUsage])
+energyHeader = Heading("Energy Use Today", "h3")
+energyUsage = Alert("Energy Consumption", "Total: 1500 kWh", "info")
+
+workOrders = Card([workHeader, workList])
+workHeader = Heading("Open Work Orders", "h3")
+workList = ListBlock([order1, order2], "number")
+order1 = ListItem("Order #001", null, null, "High Priority")
+order2 = ListItem("Order #002", null, null, "Medium Priority")
+
+scheduleMaintenance = Form("schedule-maintenance", formButtons, [machineSelect, dateInput])
+machineSelect = FormControl("Machine", selectMachine)
+selectMachine = Select("machine_id", [machine1Option, machine2Option], "Select a Machine", null, null, null)
+machine1Option = SelectItem("CNC Mill", "CNC Mill")
+machine2Option = SelectItem("Lathe", "Lathe")
+dateInput = FormControl("Date", datePicker)
+datePicker = DatePicker("maintenance_date", "single", null, null)
+formButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+
+focusLine = Card([focusHeader, focusChart])
+focusHeader = Heading("Focus on Line", "h3")
+focusChart = Buttons([focus1, focus2, focus3])
+focus1 = Button("Focus on Line 1")
+focus2 = Button("Focus on Line 2")
+focus3 = Button("Focus on Line 3")
+
+alerts = Card([alertsHeader, alertList])
+alertsHeader = Heading("Live Alerts", "h3")
+alertList = ListBlock([alert1, alert2])
+alert1 = ListItem("Alert: Machine Overheat", "Line 1", null, "Acknowledge")
+alert2 = ListItem("Alert: Low Stock", "Resin", null, "Acknowledge")
+
+exportReport = Button("Export Shift Report")
+```

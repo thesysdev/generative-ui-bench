@@ -1,0 +1,608 @@
+Here is the CEO's quarterly command view dashboard, covering all operational metrics, financial trajectories, risk registers, strategic programs, board agenda items, and executive controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "headerCard",
+          "controlsCard",
+          "kpiCard",
+          "financialTrajectoryCard",
+          "departmentBreakdownCard",
+          "initiativesAndRisksCard",
+          "boardAgendaCard"
+        ]
+      },
+      {
+        "id": "headerCard",
+        "component": "CardHeader",
+        "title": "Executive Command Center",
+        "subtitle": "Comprehensive Quarterly Performance, Financial Health, Risk Matrix & Board Strategy"
+      },
+      {
+        "id": "controlsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "gap": "m",
+        "wrap": true,
+        "children": [
+          "quarterControl",
+          "regionControl",
+          "exportActions"
+        ]
+      },
+      {
+        "id": "quarterControl",
+        "component": "FormControl",
+        "label": "Fiscal Quarter",
+        "input": "quarterSelect",
+        "hint": "Change reporting quarter"
+      },
+      {
+        "id": "quarterSelect",
+        "component": "Select",
+        "name": "quarter",
+        "items": [
+          "q4Current",
+          "q3Prev",
+          "q2Prev",
+          "q1Prev"
+        ],
+        "placeholder": "Select quarter"
+      },
+      {
+        "id": "q4Current",
+        "component": "SelectItem",
+        "value": "Q4-2024",
+        "label": "Q4 2024 (Current)"
+      },
+      {
+        "id": "q3Prev",
+        "component": "SelectItem",
+        "value": "Q3-2024",
+        "label": "Q3 2024"
+      },
+      {
+        "id": "q2Prev",
+        "component": "SelectItem",
+        "value": "Q2-2024",
+        "label": "Q2 2024"
+      },
+      {
+        "id": "q1Prev",
+        "component": "SelectItem",
+        "value": "Q1-2024",
+        "label": "Q1 2024"
+      },
+      {
+        "id": "regionControl",
+        "component": "FormControl",
+        "label": "Region Focus",
+        "input": "regionSelect",
+        "hint": "Filter view by geography"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "region",
+        "items": [
+          "regGlobal",
+          "regNA",
+          "regEMEA",
+          "regAPAC"
+        ],
+        "placeholder": "All Regions"
+      },
+      {
+        "id": "regGlobal",
+        "component": "SelectItem",
+        "value": "global",
+        "label": "Global (All Regions)"
+      },
+      {
+        "id": "regNA",
+        "component": "SelectItem",
+        "value": "na",
+        "label": "North America (NA)"
+      },
+      {
+        "id": "regEMEA",
+        "component": "SelectItem",
+        "value": "emea",
+        "label": "Europe & MEA (EMEA)"
+      },
+      {
+        "id": "regAPAC",
+        "component": "SelectItem",
+        "value": "apac",
+        "label": "Asia-Pacific (APAC)"
+      },
+      {
+        "id": "exportActions",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "exportPackBtn"
+        ]
+      },
+      {
+        "id": "exportPackBtn",
+        "component": "Button",
+        "label": "Export CEO & Board Pack (PDF/PPTX)",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "kpiHeader",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Quarterly Executive KPI Scorecard",
+        "subtitle": "Core top-line, profitability, growth velocity, and capital durability metrics"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiCategoryCol",
+          "kpiMetricCol",
+          "kpiResultCol",
+          "kpiTargetCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiCategoryCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Financial",
+          "Financial",
+          "Financial",
+          "Solvency",
+          "Commercial Pipeline",
+          "Commercial Pipeline",
+          "Customer Base",
+          "Customer Sentiment"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Executive Metric",
+        "data": [
+          "1. Revenue",
+          "2. Costs (OpEx + COGS)",
+          "3. Net Profit",
+          "10. Runway",
+          "11. Sales Pipeline Value",
+          "12. Win Rate",
+          "13. Customer Count & Churn Rate",
+          "14. Net Promoter Score (NPS)"
+        ]
+      },
+      {
+        "id": "kpiResultCol",
+        "component": "Col",
+        "label": "Current Q4 Result",
+        "data": [
+          "$48.5M",
+          "$34.2M",
+          "$14.3M (29.5% margin)",
+          "26.4 Months",
+          "$92.4M active",
+          "33.6%",
+          "1,420 logos (1.1% quarterly churn)",
+          "+64 NPS"
+        ]
+      },
+      {
+        "id": "kpiTargetCol",
+        "component": "Col",
+        "label": "Quarter Plan",
+        "data": [
+          "$46.0M",
+          "$35.0M",
+          "$11.0M",
+          "> 18.0 Months",
+          "$85.0M",
+          "30.0%",
+          "1,380 logos (< 1.5% churn)",
+          "+55 NPS"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Exceeded (+5.4%)",
+          "Under Budget (-2.3%)",
+          "Exceeded (+30.0%)",
+          "Secure",
+          "Strong (+8.7%)",
+          "Exceeded (+3.6%)",
+          "Healthy (98.9% Retention)",
+          "Top Quartile"
+        ]
+      },
+      {
+        "id": "financialTrajectoryCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "trajectoryHeader",
+          "trajectoryChart"
+        ]
+      },
+      {
+        "id": "trajectoryHeader",
+        "component": "CardHeader",
+        "title": "4. & 5. Four-Quarter Trajectory: Revenue vs Costs",
+        "subtitle": "Comparison across Q1, Q2, Q3, and Q4 in Millions USD"
+      },
+      {
+        "id": "trajectoryChart",
+        "component": "BarChart",
+        "labels": [
+          "Q1 2024",
+          "Q2 2024",
+          "Q3 2024",
+          "Q4 2024"
+        ],
+        "series": [
+          "revenueTrajectorySeries",
+          "costTrajectorySeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Fiscal Quarter",
+        "yLabel": "$ Millions (USD)"
+      },
+      {
+        "id": "revenueTrajectorySeries",
+        "component": "Series",
+        "category": "Revenue ($M)",
+        "values": [
+          38.2,
+          41.6,
+          44.9,
+          48.5
+        ]
+      },
+      {
+        "id": "costTrajectorySeries",
+        "component": "Series",
+        "category": "Costs ($M)",
+        "values": [
+          29.8,
+          31.4,
+          32.9,
+          34.2
+        ]
+      },
+      {
+        "id": "departmentBreakdownCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "deptHeader",
+          "deptTable"
+        ]
+      },
+      {
+        "id": "deptHeader",
+        "component": "CardHeader",
+        "title": "6. & 7. Departmental Budget Against Plan & Headcount",
+        "subtitle": "Variance tracking, spend burn, and allocated full-time headcounts by functional division"
+      },
+      {
+        "id": "deptTable",
+        "component": "Table",
+        "columns": [
+          "deptNameCol",
+          "deptHeadcountCol",
+          "deptBudgetActualCol",
+          "deptBudgetPlanCol",
+          "deptVarianceCol"
+        ]
+      },
+      {
+        "id": "deptNameCol",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Engineering & Technology",
+          "Product & Design",
+          "Sales & Commercial",
+          "Marketing & Growth",
+          "Customer Success & Support",
+          "G&A, Legal & Finance"
+        ]
+      },
+      {
+        "id": "deptHeadcountCol",
+        "component": "Col",
+        "label": "Headcount (FTEs)",
+        "data": [
+          "142 FTEs",
+          "48 FTEs",
+          "96 FTEs",
+          "38 FTEs",
+          "54 FTEs",
+          "32 FTEs"
+        ]
+      },
+      {
+        "id": "deptBudgetActualCol",
+        "component": "Col",
+        "label": "Actual Spend",
+        "data": [
+          "$14.8M",
+          "$4.9M",
+          "$6.7M",
+          "$3.1M",
+          "$2.8M",
+          "$1.9M"
+        ]
+      },
+      {
+        "id": "deptBudgetPlanCol",
+        "component": "Col",
+        "label": "Plan / Allocated",
+        "data": [
+          "$15.2M",
+          "$5.0M",
+          "$6.5M",
+          "$3.5M",
+          "$2.9M",
+          "$1.9M"
+        ]
+      },
+      {
+        "id": "deptVarianceCol",
+        "component": "Col",
+        "label": "Variance to Plan",
+        "data": [
+          "-$400K (Under)",
+          "-$100K (Under)",
+          "+$200K (Over)",
+          "-$400K (Under)",
+          "-$100K (Under)",
+          "$0 (On Plan)"
+        ]
+      },
+      {
+        "id": "initiativesAndRisksCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "initiativesHeader",
+          "initiativesTable",
+          "risksHeader",
+          "risksTable"
+        ]
+      },
+      {
+        "id": "initiativesHeader",
+        "component": "CardHeader",
+        "title": "9. Strategic Initiatives & Execution Status",
+        "subtitle": "Current progress across core corporate quarterly milestones"
+      },
+      {
+        "id": "initiativesTable",
+        "component": "Table",
+        "columns": [
+          "initNameCol",
+          "initOwnerCol",
+          "initProgressCol",
+          "initStatusCol"
+        ]
+      },
+      {
+        "id": "initNameCol",
+        "component": "Col",
+        "label": "Strategic Initiative",
+        "data": [
+          "Enterprise Tier Launch & Tier-1 SOC2 Compliance",
+          "APAC Commercial Expansion & Singapore Hub",
+          "Automated Self-Serve Cloud Onboarding Engine",
+          "M&A Data Platform Integration (Project Apollo)"
+        ]
+      },
+      {
+        "id": "initOwnerCol",
+        "component": "Col",
+        "label": "Exec Lead",
+        "data": [
+          "CTO (E. Vance)",
+          "CRO (M. Jenkins)",
+          "CPO (S. Lin)",
+          "VP Corp Dev (D. Ross)"
+        ]
+      },
+      {
+        "id": "initProgressCol",
+        "component": "Col",
+        "label": "Completion",
+        "data": [
+          "92%",
+          "70%",
+          "85%",
+          "45%"
+        ]
+      },
+      {
+        "id": "initStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "On Track (GA target next month)",
+          "On Track (First 12 pilots signed)",
+          "On Track (Conversion up 18%)",
+          "At Risk (Vendor migration delay)"
+        ]
+      },
+      {
+        "id": "risksHeader",
+        "component": "CardHeader",
+        "title": "8. Top Enterprise Risks & Designated Owners",
+        "subtitle": "Active risk mitigations, exposure levels, and accountability"
+      },
+      {
+        "id": "risksTable",
+        "component": "Table",
+        "columns": [
+          "riskTitleCol",
+          "riskOwnerCol",
+          "riskSeverityCol",
+          "riskMitigationCol"
+        ]
+      },
+      {
+        "id": "riskTitleCol",
+        "component": "Col",
+        "label": "Identified Risk",
+        "data": [
+          "Vendor migration data delays in Apollo platform",
+          "EU AI Act & Data Sovereignty regulatory changes",
+          "Key enterprise sales cycle lengthening (> 90 days)",
+          "Critical specialized engineering talent attrition"
+        ]
+      },
+      {
+        "id": "riskOwnerCol",
+        "component": "Col",
+        "label": "Owner",
+        "data": [
+          "VP Corp Dev (D. Ross)",
+          "General Counsel (A. Patel)",
+          "VP Sales (K. Miller)",
+          "VP People (H. Gomez)"
+        ]
+      },
+      {
+        "id": "riskSeverityCol",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "High",
+          "Medium",
+          "Medium",
+          "Low"
+        ]
+      },
+      {
+        "id": "riskMitigationCol",
+        "component": "Col",
+        "label": "Mitigation Strategy",
+        "data": [
+          "Embedded 4 dedicated sync engineers; daily standups with vendor leadership",
+          "Frankfurt isolated cluster deployed; local legal counsel audit completed",
+          "Introduced mid-market fast-track bundles and value realization calculators",
+          "Revamped equity refresh packages & senior engineering band progression"
+        ]
+      },
+      {
+        "id": "boardAgendaCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "boardHeader",
+          "boardTable"
+        ]
+      },
+      {
+        "id": "boardHeader",
+        "component": "CardHeader",
+        "title": "15. Next Board of Directors Meeting Agenda",
+        "subtitle": "Prepared topics, discussion leaders, and designated action items for the upcoming session"
+      },
+      {
+        "id": "boardTable",
+        "component": "Table",
+        "columns": [
+          "agendaItemCol",
+          "agendaLeadCol",
+          "agendaTimeCol",
+          "agendaTypeCol"
+        ]
+      },
+      {
+        "id": "agendaItemCol",
+        "component": "Col",
+        "label": "Board Topic / Action",
+        "data": [
+          "1. Executive Review: Q4 Financials, Runway, & FY25 Budget Approval",
+          "2. Commercial Trajectory: Enterprise ARR, Win Rates & Pipeline Expansion",
+          "3. Strategic M&A Review & Project Apollo Integration Update",
+          "4. Compensation Committee: Senior Leadership Equity Refresh & Talent Plan",
+          "5. Executive Session (Independent Directors & CEO)"
+        ]
+      },
+      {
+        "id": "agendaLeadCol",
+        "component": "Col",
+        "label": "Discussion Leader",
+        "data": [
+          "CEO & CFO",
+          "CRO",
+          "VP Corporate Development",
+          "Compensation Committee Chair",
+          "Lead Independent Director"
+        ]
+      },
+      {
+        "id": "agendaTimeCol",
+        "component": "Col",
+        "label": "Allocated Time",
+        "data": [
+          "40 mins",
+          "30 mins",
+          "25 mins",
+          "20 mins",
+          "20 mins"
+        ]
+      },
+      {
+        "id": "agendaTypeCol",
+        "component": "Col",
+        "label": "Type",
+        "data": [
+          "Approval Required",
+          "Discussion",
+          "Review & Guidance",
+          "Approval Required",
+          "Closed Session"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

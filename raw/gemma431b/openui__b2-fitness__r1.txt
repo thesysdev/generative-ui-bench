@@ -1,0 +1,41 @@
+root = Card([header, activityOverview, workoutTrends, logSection, followUps])
+
+header = CardHeader("Daily Summary", "Tuesday, Oct 24")
+
+activityOverview = Card([stepProgress, calorieInfo], "sunk", "row", "m")
+
+stepProgress = Card([stepHeading, stepBar], "clear", "column", "xs")
+stepHeading = Heading("Steps", "h4")
+stepBar = Progress(8400, "Goal: 10,000 steps")
+
+calorieInfo = Card([calHeading, calText], "clear", "column", "xs")
+calHeading = Heading("Calories", "h4")
+calText = TextContent("2,140 kcal burned", "large-heavy")
+
+workoutTrends = Card([trendHeading, trendChart], "card", "column", "s")
+trendHeading = Heading("Weekly Performance", "h3")
+trendChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "grouped", "Day", "Minutes")
+workoutSeries = Series("Workout Duration", [45, 60, 30, 0, 50, 90, 40])
+
+logSection = Card([logHeading, workoutForm], "card", "column", "m")
+logHeading = Heading("Log Activity", "h3")
+workoutForm = Form("log-workout", formButtons, [typeField, durationField, intensityField])
+
+typeField = FormControl("Workout Type", typeInput)
+typeInput = Input("type", "e.g. Running, Weightlifting")
+
+durationField = FormControl("Duration (mins)", durationInput)
+durationInput = Input("duration", "30", "number")
+
+intensityField = FormControl("Intensity", intensitySelect)
+intensitySelect = Select("intensity", [lowOpt, medOpt, highOpt], "Select level")
+lowOpt = SelectItem("low", "Low")
+medOpt = SelectItem("med", "Medium")
+highOpt = SelectItem("high", "High")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Save Workout", null, "primary")
+
+followUps = FollowUpBlock([next1, next2])
+next1 = FollowUpItem("View detailed heart rate analysis")
+next2 = FollowUpItem("Set a new daily step goal")

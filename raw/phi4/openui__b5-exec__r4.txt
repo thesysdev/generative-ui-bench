@@ -1,0 +1,126 @@
+```openui
+root = Card([
+    revenueBlock,
+    costsBlock,
+    profitBlock,
+    revenueTrendChart,
+    costsTrendChart,
+    budgetVsPlanBlock,
+    headcountBlock,
+    risksBlock,
+    initiativesBlock,
+    runwayBlock,
+    salesPipelineBlock,
+    winRateBlock,
+    customerMetricsBlock,
+    npsBlock,
+    nextBoardMeetingBlock,
+    controlsBlock
+])
+
+revenueBlock = Card([revenueTitle, revenueValue], "card")
+revenueTitle = Heading("Revenue", "h3")
+revenueValue = TextContent("$2,345,678", "large")
+
+costsBlock = Card([costsTitle, costsValue], "card")
+costsTitle = Heading("Costs", "h3")
+costsValue = TextContent("$1,234,567", "large")
+
+profitBlock = Card([profitTitle, profitValue], "card")
+profitTitle = Heading("Profit", "h3")
+profitValue = TextContent("$1,111,111", "large")
+
+revenueTrendChart = Card([revenueTrendChartTitle, revenueTrend], "sunk")
+revenueTrendChartTitle = Heading("Revenue Trend", "h3")
+revenueTrend = LineChart(["Q1", "Q2", "Q3", "Q4"], [revenueSeries], "linear", "Quarter", "USD")
+revenueSeries = Series("Revenue", [2500000, 2600000, 2700000, 2800000])
+
+costsTrendChart = Card([costsTrendChartTitle, costsTrend], "sunk")
+costsTrendChartTitle = Heading("Costs Trend", "h3")
+costsTrend = LineChart(["Q1", "Q2", "Q3", "Q4"], [costsSeries], "linear", "Quarter", "USD")
+costsSeries = Series("Costs", [1200000, 1300000, 1400000, 1500000])
+
+budgetVsPlanBlock = Card([budgetVsPlanTitle, budgetTable], "card")
+budgetVsPlanTitle = Heading("Budget by Department vs Plan", "h3")
+budgetTable = Table([dept, actual, plan, variance])
+dept = Col("Department", ["Sales", "Marketing", "Engineering"])
+actual = Col("Actual", ["$200,000", "$150,000", "$300,000"])
+plan = Col("Plan", ["$220,000", "$160,000", "$320,000"])
+variance = Col("Variance", ["$20,000 under", "$10,000 under", "$20,000 under"])
+
+headcountBlock = Card([headcountTitle, headcountTable], "card")
+headcountTitle = Heading("Headcount by Department", "h3")
+headcountTable = Table([dept, count])
+count = Col("Count", ["50", "30", "100"])
+
+risksBlock = Card([risksTitle, risksTable], "card")
+risksTitle = Heading("Top Risks with Owner", "h3")
+risksTable = Table([risk, owner])
+risk = Col("Risk", ["Supply Chain Delay", "Regulatory Changes", "Talent Retention"])
+owner = Col("Owner", ["John Doe", "Jane Smith", "Alice Johnson"])
+
+initiativesBlock = Card([initiativesTitle, initiativesTable], "card")
+initiativesTitle = Heading("Strategic Initiatives with Status", "h3")
+initiativesTable = Table([initiative, status])
+initiative = Col("Initiative", ["New Market Entry", "Product Launch", "Customer Experience"])
+status = Col("Status", ["In Progress", "Completed", "Planned"])
+
+runwayBlock = Card([runwayTitle, runwayValue], "card")
+runwayTitle = Heading("Months of Runway", "h3")
+runwayValue = TextContent("18 months", "large")
+
+salesPipelineBlock = Card([salesPipelineTitle, salesValue], "card")
+salesPipelineTitle = Heading("Sales Pipeline Value", "h3")
+salesValue = TextContent("$5,000,000", "large")
+
+winRateBlock = Card([winRateTitle, winRateValue], "card")
+winRateTitle = Heading("Win Rate", "h3")
+winRateValue = TextContent("25%", "large")
+
+customerMetricsBlock = Card([customerMetricsTitle, customerTable], "card")
+customerMetricsTitle = Heading("Customer Count and Churn", "h3")
+customerTable = Table([metric, value])
+metric = Col("Metric", ["Count", "Churn"])
+value = Col("Value", ["10,000", "2%"])
+
+npsBlock = Card([npsTitle, npsValue], "card")
+npsTitle = Heading("Net Promoter Score (NPS)", "h3")
+npsValue = TextContent("+45", "large")
+
+nextBoardMeetingBlock = Card([nextBoardTitle, nextBoardList], "card")
+nextBoardTitle = Heading("Items for Next Board Meeting", "h3")
+nextBoardList = ListBlock([
+    ListItem("Review Q4 Results"),
+    ListItem("Discuss Strategic Initiatives"),
+    ListItem("Update Risk Management Plan")
+])
+
+controlsBlock = Card([
+    quarterSelector,
+    regionFocus,
+    exportButton
+], "sunk")
+
+quarterSelector = Form("quarter-selector", formButtons, [
+    FormControl("Quarter", quarterSelect)
+])
+quarterSelect = Select("quarter", [
+    SelectItem("Q1", "Q1"),
+    SelectItem("Q2", "Q2"),
+    SelectItem("Q3", "Q3"),
+    SelectItem("Q4", "Q4")
+])
+formButtons = Buttons([submitQuarterBtn])
+submitQuarterBtn = Button("Change Quarter")
+
+regionFocus = Form("region-focus", formButtons, [
+    FormControl("Region", regionSelect)
+])
+regionSelect = Select("region", [
+    SelectItem("North America", "North America"),
+    SelectItem("Europe", "Europe"),
+    SelectItem("Asia", "Asia")
+])
+
+exportButton = Button("Export Report", ["export-action"], "primary")
+```

@@ -1,0 +1,796 @@
+Here is a comprehensive hub operations desk interface addressing all 12 operational requirements.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "hubSelectorForm",
+          "weatherAlert",
+          "delayedFlightsCallout",
+          "kpiOverviewCard",
+          "operationsTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Hub Operations Control Center (ORD - Chicago O'Hare)",
+        "subtitle": "Live operational overview, flight dispatch, crew assignments & disruption management"
+      },
+      {
+        "id": "hubSelectorForm",
+        "component": "Form",
+        "name": "hub_selector_form",
+        "fields": [
+          "hubSelectControl"
+        ],
+        "buttons": "hubSwitchButtons"
+      },
+      {
+        "id": "hubSelectControl",
+        "component": "FormControl",
+        "label": "Switch Active Hub Station",
+        "hint": "Select an alternate hub to monitor real-time turnaround and inbound waves",
+        "input": "hubSelectInput"
+      },
+      {
+        "id": "hubSelectInput",
+        "component": "Select",
+        "name": "selected_hub",
+        "placeholder": "ORD - Chicago O'Hare (Current)",
+        "items": [
+          "hubOrd",
+          "hubDfw",
+          "hubAtl",
+          "hubDen",
+          "hubSfo",
+          "hubJfk"
+        ]
+      },
+      {
+        "id": "hubOrd",
+        "component": "SelectItem",
+        "value": "ORD",
+        "label": "ORD - Chicago O'Hare (Active Hub)"
+      },
+      {
+        "id": "hubDfw",
+        "component": "SelectItem",
+        "value": "DFW",
+        "label": "DFW - Dallas/Fort Worth"
+      },
+      {
+        "id": "hubAtl",
+        "component": "SelectItem",
+        "value": "ATL",
+        "label": "ATL - Hartsfield-Jackson Atlanta"
+      },
+      {
+        "id": "hubDen",
+        "component": "SelectItem",
+        "value": "DEN",
+        "label": "DEN - Denver International"
+      },
+      {
+        "id": "hubSfo",
+        "component": "SelectItem",
+        "value": "SFO",
+        "label": "SFO - San Francisco International"
+      },
+      {
+        "id": "hubJfk",
+        "component": "SelectItem",
+        "value": "JFK",
+        "label": "JFK - New York John F. Kennedy"
+      },
+      {
+        "id": "hubSwitchButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnSwitchHub",
+          "btnRefreshFeed"
+        ]
+      },
+      {
+        "id": "btnSwitchHub",
+        "component": "Button",
+        "label": "Switch Hub View",
+        "variant": "primary"
+      },
+      {
+        "id": "btnRefreshFeed",
+        "component": "Button",
+        "label": "Refresh Radar & Feeds",
+        "variant": "secondary"
+      },
+      {
+        "id": "weatherAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Hub Weather Advisory: Gusty Winds & Ground Stop Risk",
+        "description": "FAA ground delay program in effect for ORD arrivals until 17:30 UTC. Low-level wind shear reported runway 28C. Average inbound sequencing delays: 24 mins."
+      },
+      {
+        "id": "delayedFlightsCallout",
+        "component": "Callout",
+        "variant": "error",
+        "title": "Critical Delays Alert (4 Flights Impacted)",
+        "description": "AA1042 (+75m, Inbound ATC), UA482 (+50m, Late Inbound Aircraft), DL1904 (+90m, Maintenance), UA2215 (+40m, Ramp Congestion). 38 connecting passengers at risk of misconnecting."
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "kpiHeader",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Today's Hub Performance Summary",
+        "subtitle": "System metrics recorded from 00:00 to 14:30 CST"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colTodayValue",
+          "colTarget",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Operational Metric",
+        "data": [
+          "On-Time Performance (OTP-15)",
+          "Average Turnaround Time (TAT)",
+          "Average Passenger Load Factor",
+          "Cancellations Today",
+          "Completed Departures / Total"
+        ]
+      },
+      {
+        "id": "colTodayValue",
+        "component": "Col",
+        "label": "Today's Figure",
+        "data": [
+          "82.4%",
+          "44.2 mins",
+          "88.6%",
+          "3 flights (0.8%)",
+          "184 / 340 flights"
+        ]
+      },
+      {
+        "id": "colTarget",
+        "component": "Col",
+        "label": "Target / Baseline",
+        "data": [
+          "88.0%",
+          "40.0 mins max",
+          "85.0%",
+          "< 1.0%",
+          "340 scheduled"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Below Target (ATC)",
+          "Acceptable",
+          "Optimal",
+          "Normal",
+          "In Progress"
+        ]
+      },
+      {
+        "id": "operationsTabs",
+        "component": "Tabs",
+        "items": [
+          "tabFlightStatus",
+          "tabGateChanges",
+          "tabAtRiskConnections",
+          "tabCrewAvailability",
+          "tabPassengerRebook"
+        ]
+      },
+      {
+        "id": "tabFlightStatus",
+        "component": "TabItem",
+        "value": "flights",
+        "trigger": "Flight Schedule & Gates (ORD)",
+        "content": [
+          "flightScheduleCard"
+        ]
+      },
+      {
+        "id": "flightScheduleCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "flightScheduleHeader",
+          "flightScheduleTable"
+        ]
+      },
+      {
+        "id": "flightScheduleHeader",
+        "component": "CardHeader",
+        "title": "Hub Flight Operations Board",
+        "subtitle": "Flight numbers, city-pair routes, assigned gates, and operational status"
+      },
+      {
+        "id": "flightScheduleTable",
+        "component": "Table",
+        "columns": [
+          "colFltNum",
+          "colRoute",
+          "colGate",
+          "colSchedDep",
+          "colFltStatus"
+        ]
+      },
+      {
+        "id": "colFltNum",
+        "component": "Col",
+        "label": "Flight #",
+        "data": [
+          "UA 482",
+          "AA 1042",
+          "DL 1904",
+          "UA 2215",
+          "UA 788",
+          "AA 512",
+          "DL 842",
+          "UA 1190"
+        ]
+      },
+      {
+        "id": "colRoute",
+        "component": "Col",
+        "label": "Route",
+        "data": [
+          "ORD → LGA (New York)",
+          "MIA → ORD (Inbound)",
+          "ORD → LAX (Los Angeles)",
+          "ORD → SFO (San Francisco)",
+          "ORD → LHR (London)",
+          "BOS → ORD (Inbound)",
+          "ORD → ATL (Atlanta)",
+          "ORD → SEA (Seattle)"
+        ]
+      },
+      {
+        "id": "colGate",
+        "component": "Col",
+        "label": "Gate",
+        "data": [
+          "B12",
+          "H6",
+          "K14",
+          "C18",
+          "C20",
+          "H10",
+          "T2-E4",
+          "B8"
+        ]
+      },
+      {
+        "id": "colSchedDep",
+        "component": "Col",
+        "label": "Scheduled / Est",
+        "data": [
+          "14:45 / 15:35",
+          "14:50 / 16:05",
+          "15:00 / 16:30",
+          "15:15 / 15:55",
+          "15:30 / 15:30",
+          "15:40 / 15:40",
+          "15:50 / 15:50",
+          "16:00 / 16:00"
+        ]
+      },
+      {
+        "id": "colFltStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "DELAYED (+50m)",
+          "DELAYED (+75m)",
+          "DELAYED (+90m)",
+          "DELAYED (+40m)",
+          "BOARDING (On Time)",
+          "ON TIME",
+          "ON TIME",
+          "CANCELLED (Tech)"
+        ]
+      },
+      {
+        "id": "tabGateChanges",
+        "component": "TabItem",
+        "value": "gate_changes",
+        "trigger": "Recent Gate Changes",
+        "content": [
+          "gateChangesCard"
+        ]
+      },
+      {
+        "id": "gateChangesCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "gateChangesHeader",
+          "gateChangesList"
+        ]
+      },
+      {
+        "id": "gateChangesHeader",
+        "component": "CardHeader",
+        "title": "Recent Gate Swaps & Reallocations",
+        "subtitle": "Updated within the last 45 minutes to prevent taxiway blockage"
+      },
+      {
+        "id": "gateChangesList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "gateItem1",
+          "gateItem2",
+          "gateItem3",
+          "gateItem4"
+        ]
+      },
+      {
+        "id": "gateItem1",
+        "component": "ListItem",
+        "title": "UA 482 (to LGA): Gate B4 ➔ Gate B12",
+        "subtitle": "Moved due to extended ground turnaround on incoming 737-900. Baggage tug rerouted.",
+        "actionLabel": "Notified Passengers"
+      },
+      {
+        "id": "gateItem2",
+        "component": "ListItem",
+        "title": "DL 1904 (to LAX): Gate K9 ➔ Gate K14",
+        "subtitle": "Maintenance crew requested widebody jet bridge facility. Ground power connected.",
+        "actionLabel": "Updated FIDS"
+      },
+      {
+        "id": "gateItem3",
+        "component": "ListItem",
+        "title": "UA 788 (to LHR): Gate C22 ➔ Gate C20",
+        "subtitle": "Prevented international gate overlap with inbound UA 953 from FRA.",
+        "actionLabel": "Catering Informed"
+      },
+      {
+        "id": "gateItem4",
+        "component": "ListItem",
+        "title": "AA 1042 (from MIA): Gate H2 ➔ Gate H6",
+        "subtitle": "Early arrival of regional jet AA 3319 required swap to open heavy stand.",
+        "actionLabel": "Ramp Alerted"
+      },
+      {
+        "id": "tabAtRiskConnections",
+        "component": "TabItem",
+        "value": "at_risk",
+        "trigger": "At-Risk Connections (38 Pax)",
+        "content": [
+          "atRiskCard"
+        ]
+      },
+      {
+        "id": "atRiskCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "atRiskHeader",
+          "atRiskTable"
+        ]
+      },
+      {
+        "id": "atRiskHeader",
+        "component": "CardHeader",
+        "title": "Tight & Compromised Passenger Connections",
+        "subtitle": "Inbound delays reducing minimum connect time (MCT < 35 min)"
+      },
+      {
+        "id": "atRiskTable",
+        "component": "Table",
+        "columns": [
+          "colInboundFlt",
+          "colOutboundFlt",
+          "colPaxCount",
+          "colProjectedConnectTime",
+          "colConnectRisk"
+        ]
+      },
+      {
+        "id": "colInboundFlt",
+        "component": "Col",
+        "label": "Inbound Flight",
+        "data": [
+          "AA 1042 (MIA)",
+          "AA 1042 (MIA)",
+          "UA 831 (DEN)",
+          "DL 409 (MSP)",
+          "UA 1520 (IAH)"
+        ]
+      },
+      {
+        "id": "colOutboundFlt",
+        "component": "Col",
+        "label": "Connecting Flight",
+        "data": [
+          "AA 580 to DFW (Gate H12)",
+          "AA 2109 to BOS (Gate K2)",
+          "UA 788 to LHR (Gate C20)",
+          "DL 1904 to LAX (Gate K14)",
+          "UA 2215 to SFO (Gate C18)"
+        ]
+      },
+      {
+        "id": "colPaxCount",
+        "component": "Col",
+        "label": "Pax",
+        "data": [
+          "14",
+          "9",
+          "6",
+          "5",
+          "4"
+        ]
+      },
+      {
+        "id": "colProjectedConnectTime",
+        "component": "Col",
+        "label": "Buffer Left",
+        "data": [
+          "-12 mins (MISSED)",
+          "4 mins (CRITICAL)",
+          "11 mins (TIGHT)",
+          "15 mins (TIGHT)",
+          "8 mins (CRITICAL)"
+        ]
+      },
+      {
+        "id": "colConnectRisk",
+        "component": "Col",
+        "label": "Auto-Action Recommendation",
+        "data": [
+          "Rebook via ORD-DFW 18:20",
+          "Hold gate 7 min OR Rebook",
+          "Express Terminal Transfer Tug",
+          "Luggage Hot Transfer",
+          "Hold Gate 5 min"
+        ]
+      },
+      {
+        "id": "tabCrewAvailability",
+        "component": "TabItem",
+        "value": "crews",
+        "trigger": "Available Crews for Reassignment",
+        "content": [
+          "crewCard"
+        ]
+      },
+      {
+        "id": "crewCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "crewHeader",
+          "crewTable"
+        ]
+      },
+      {
+        "id": "crewHeader",
+        "component": "CardHeader",
+        "title": "Hub Standby & Reserve Crew Pool",
+        "subtitle": "Flight deck & cabin crews on standby at ORD available for immediate dispatch"
+      },
+      {
+        "id": "crewTable",
+        "component": "Table",
+        "columns": [
+          "colCrewId",
+          "colCrewType",
+          "colCertType",
+          "colDutyHoursLeft",
+          "colAvailStatus"
+        ]
+      },
+      {
+        "id": "colCrewId",
+        "component": "Col",
+        "label": "Crew Member / ID",
+        "data": [
+          "Capt. Robert Lang (ID 44102)",
+          "FO Sarah Chen (ID 55921)",
+          "Capt. Marcus Rivera (ID 39201)",
+          "Purser Elena Gomez + 3 FA",
+          "Lead FA David Kim + 4 FA",
+          "FO Kevin Miller (ID 61890)"
+        ]
+      },
+      {
+        "id": "colCrewType",
+        "component": "Col",
+        "label": "Role",
+        "data": [
+          "Captain (PIC)",
+          "First Officer",
+          "Captain (PIC)",
+          "Cabin Crew (Narrowbody)",
+          "Cabin Crew (Widebody)",
+          "First Officer"
+        ]
+      },
+      {
+        "id": "colCertType",
+        "component": "Col",
+        "label": "Aircraft Rating",
+        "data": [
+          "B737-MAX / NG",
+          "B737-MAX / NG",
+          "B777 / B787",
+          "A320 / B737 Family",
+          "B787-8/9/10",
+          "A319 / A320 / A321"
+        ]
+      },
+      {
+        "id": "colDutyHoursLeft",
+        "component": "Col",
+        "label": "Remaining Legal Duty",
+        "data": [
+          "7h 45m",
+          "8h 10m",
+          "6h 30m",
+          "9h 00m",
+          "7h 15m",
+          "5h 50m"
+        ]
+      },
+      {
+        "id": "colAvailStatus",
+        "component": "Col",
+        "label": "Readiness",
+        "data": [
+          "Ready in Lounge (15m call)",
+          "Ready in Lounge (15m call)",
+          "Hotel Standby (45m call)",
+          "Ready at Gate C10",
+          "Ready in Ops Briefing",
+          "Ready in Lounge (15m call)"
+        ]
+      },
+      {
+        "id": "tabPassengerRebook",
+        "component": "TabItem",
+        "value": "rebook",
+        "trigger": "Passenger Rebooking Tool",
+        "content": [
+          "rebookingCard"
+        ]
+      },
+      {
+        "id": "rebookingCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "rebookHeader",
+          "rebookForm"
+        ]
+      },
+      {
+        "id": "rebookHeader",
+        "component": "CardHeader",
+        "title": "Instant Passenger Disruption Rebooking",
+        "subtitle": "Process automatic rebooking and hotel/meal voucher issuance for misconnected passengers"
+      },
+      {
+        "id": "rebookForm",
+        "component": "Form",
+        "name": "passenger_rebooking_form",
+        "fields": [
+          "fieldPnr",
+          "fieldDisruptedFlight",
+          "fieldProtectionStrategy",
+          "fieldAmenities"
+        ],
+        "buttons": "rebookActionButtons"
+      },
+      {
+        "id": "fieldPnr",
+        "component": "FormControl",
+        "label": "Passenger PNR or Group Manifest ID",
+        "hint": "Enter 6-character PNR or select 'AA1042-MISCONNECT-ALL' to batch rebook",
+        "input": "inputPnr"
+      },
+      {
+        "id": "inputPnr",
+        "component": "Input",
+        "name": "pnr_or_group",
+        "placeholder": "e.g. WX9K2L or AA1042-MISCONNECT-ALL",
+        "type": "text"
+      },
+      {
+        "id": "fieldDisruptedFlight",
+        "component": "FormControl",
+        "label": "Disrupted Inbound/Outbound Flight",
+        "input": "selectDisruptedFlight"
+      },
+      {
+        "id": "selectDisruptedFlight",
+        "component": "Select",
+        "name": "disrupted_flight_num",
+        "placeholder": "Select affected flight",
+        "items": [
+          "optFlt1",
+          "optFlt2",
+          "optFlt3",
+          "optFlt4"
+        ]
+      },
+      {
+        "id": "optFlt1",
+        "component": "SelectItem",
+        "value": "AA1042",
+        "label": "AA 1042 (MIA → ORD) - 23 Missed Connects"
+      },
+      {
+        "id": "optFlt2",
+        "component": "SelectItem",
+        "value": "UA1190",
+        "label": "UA 1190 (ORD → SEA) - CANCELLED (142 Pax)"
+      },
+      {
+        "id": "optFlt3",
+        "component": "SelectItem",
+        "value": "DL1904",
+        "label": "DL 1904 (ORD → LAX) - Delayed 90m (5 Pax Risk)"
+      },
+      {
+        "id": "optFlt4",
+        "component": "SelectItem",
+        "value": "UA482",
+        "label": "UA 482 (ORD → LGA) - Delayed 50m (6 Pax Risk)"
+      },
+      {
+        "id": "fieldProtectionStrategy",
+        "component": "FormControl",
+        "label": "Rebooking Routing & Protection Rule",
+        "input": "radioProtection"
+      },
+      {
+        "id": "radioProtection",
+        "component": "RadioGroup",
+        "name": "protection_policy",
+        "defaultValue": "next_avail_same_carrier",
+        "items": [
+          "radioSameCarrier",
+          "radioInterlineOAL",
+          "radioNextDayHotel"
+        ]
+      },
+      {
+        "id": "radioSameCarrier",
+        "component": "RadioItem",
+        "value": "next_avail_same_carrier",
+        "label": "Next Available Own-Metal Flight Today",
+        "description": "Auto-confirm same carrier on next leg, auto-assign seats and transfer bags"
+      },
+      {
+        "id": "radioInterlineOAL",
+        "component": "RadioItem",
+        "value": "interline_oal",
+        "label": "Interline Partner Re-routing (OAL / SkyTeam / Oneworld)",
+        "description": "Utilize partner alliance capacity to deliver passengers within 3 hours"
+      },
+      {
+        "id": "radioNextDayHotel",
+        "component": "RadioItem",
+        "value": "next_day_hotel",
+        "label": "Morning Flight + Overnight Hotel Voucher",
+        "description": "Book on tomorrow AM bank + automatically SMS QR hotel and dinner vouchers"
+      },
+      {
+        "id": "fieldAmenities",
+        "component": "FormControl",
+        "label": "Passenger Care Package & Comms",
+        "input": "checkAmenities"
+      },
+      {
+        "id": "checkAmenities",
+        "component": "CheckBoxGroup",
+        "name": "amenity_addons",
+        "items": [
+          "checkSmsPush",
+          "checkMealVoucher",
+          "checkBaggagePriority"
+        ]
+      },
+      {
+        "id": "checkSmsPush",
+        "component": "CheckBoxItem",
+        "name": "notify_sms",
+        "label": "Send updated digital boarding pass via SMS & Push notification",
+        "description": "Includes interactive gate navigation map",
+        "defaultChecked": true
+      },
+      {
+        "id": "checkMealVoucher",
+        "component": "CheckBoxItem",
+        "name": "meal_voucher",
+        "label": "Issue $30 Airport Terminal Food & Beverage Voucher",
+        "description": "Automatically loaded into digital wallet",
+        "defaultChecked": true
+      },
+      {
+        "id": "checkBaggagePriority",
+        "component": "CheckBoxItem",
+        "name": "bag_hot_transfer",
+        "label": "Expedite Luggage Hot-Transfer Tag to New Aircraft",
+        "description": "Signals ramp agents to retrieve and prioritize bags",
+        "defaultChecked": true
+      },
+      {
+        "id": "rebookActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnExecuteRebook",
+          "btnHoldSeats"
+        ]
+      },
+      {
+        "id": "btnExecuteRebook",
+        "component": "Button",
+        "label": "Execute Batch Rebooking & Issue Passes",
+        "variant": "primary"
+      },
+      {
+        "id": "btnHoldSeats",
+        "component": "Button",
+        "label": "Hold Inventory Only (15 min)",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

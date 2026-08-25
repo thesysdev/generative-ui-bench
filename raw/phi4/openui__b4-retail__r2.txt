@@ -1,0 +1,67 @@
+```openui
+root = Card([salesTargetCard, trafficCard, bestSellersCard, outOfStockCard, shiftCard, basketSizeCard, returnsCard, promotionCard, registerCard, reorderCard, compareCard])
+
+salesTargetCard = Card([salesTargetHeader, salesTargetChart], "card")
+salesTargetHeader = CardHeader("Sales Today", "Against Target")
+salesTarget = Series("Today", [12000])
+target = Series("Target", [15000])
+salesTargetChart = HorizontalBarChart(["Today", "Target"], [salesTarget, target], "grouped")
+
+trafficCard = Card([trafficHeader, trafficChart], "card")
+trafficHeader = CardHeader("Foot Traffic", "Through the Day")
+trafficChart = LineChart(["9am", "12pm", "3pm", "6pm"], [trafficSeries], "linear")
+trafficSeries = Series("Visitors", [150, 300, 450, 200])
+
+bestSellersCard = Card([bestSellersHeader, bestSellersTable], "card")
+bestSellersHeader = CardHeader("Best Sellers", "Units for Each")
+bestSellersTable = Table([itemName, unitsSold])
+itemName = Col("Item", ["Mug", "T-Shirt", "Notebook"])
+unitsSold = Col("Units", [75, 50, 100])
+
+outOfStockCard = Card([outOfStockHeader, outOfStockList], "card")
+outOfStockHeader = CardHeader("Out of Stock", "Items")
+outOfStockList = ListBlock([itemOutOfStock1, itemOutOfStock2], "number")
+itemOutOfStock1 = ListItem("Stickers", null, ["stockIcon"], "Reorder")
+itemOutOfStock2 = ListItem("Pens", null, ["stockIcon"], "Reorder")
+
+shiftCard = Card([shiftHeader, shiftList], "card")
+shiftHeader = CardHeader("Today's Shift", "Who is On")
+shiftList = ListBlock([employee1, employee2])
+employee1 = ListItem("Alice", "Morning", [], null)
+employee2 = ListItem("Bob", "Afternoon", [], null)
+
+basketSizeCard = Card([basketSizeHeader, basketSizeValue], "card")
+basketSizeHeader = CardHeader("Average Basket", "Size")
+basketSizeValue = TextContent("Average basket size: 3.2 items", "large")
+
+returnsCard = Card([returnsHeader, returnsChart], "card")
+returnsHeader = CardHeader("Returns This Week", null)
+returnsChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [returnsSeries], "stacked")
+returnsSeries = Series("Returns", [5, 3, 8, 4, 6, 10, 2])
+
+promotionCard = Card([promotionHeader, promotionList], "card")
+promotionHeader = CardHeader("Running Promotions", "Performance")
+promotionList = ListBlock([promo1, promo2], "image")
+promo1 = ListItem("Summer Sale", null, ["promoIcon"], "View")
+promo2 = ListItem("Clearance", null, ["promoIcon"], "View")
+
+registerCard = Card([registerHeader, registerList], "card")
+registerHeader = CardHeader("Registers", "Status")
+registerList = ListBlock([register1, register2], "image")
+register1 = ListItem("Register 1", null, ["openIcon"], "Open")
+register2 = ListItem("Register 2", null, ["closedIcon"], "Closed")
+
+reorderCard = Card([reorderHeader, reorderButton], "card")
+reorderHeader = CardHeader("Reorder Item", null)
+reorderButton = Button("Reorder Item", ["reorderAction"], "primary")
+
+compareCard = Card([compareHeader, compareChart], "card")
+compareHeader = CardHeader("This Week vs Last Week", null)
+compareChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [thisWeekSeries, lastWeekSeries], "linear")
+thisWeekSeries = Series("This Week", [12000, 11000, 13000, 12500, 14000, 15000, 13500])
+lastWeekSeries = Series("Last Week", [11500, 10500, 12500, 12000, 13500, 14500, 13000])
+
+actions = Buttons([reorderBtn, viewStoreBtn])
+reorderBtn = Button("Reorder Item", null, "primary")
+viewStoreBtn = Button("View Different Store", null, "secondary")
+```

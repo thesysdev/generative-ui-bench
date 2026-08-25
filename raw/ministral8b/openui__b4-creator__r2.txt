@@ -1,0 +1,81 @@
+```openui-lang
+root = Card([header, statsSummary, analyticsTabs, followerStats, engagementRate, topPosts, audienceSplit, scheduledPosts, bestPostingTime, pendingComments, earnings, pendingCollabs, platformFilter, postScheduler], "card", "column", "m", "start")
+
+header = CardHeader("Cross-Platform Studio", "Manage all your content in one place", "h2")
+
+statsSummary = Card([followerStats, engagementRate, earnings], "sunk", "row", "l", "center", "center")
+
+analyticsTabs = Tabs([platformTab, contentTab, analyticsTab])
+platformTab = TabItem("platform", "Platforms", [platformFilter])
+contentTab = TabItem("content", "Content", [topPosts, scheduledPosts])
+analyticsTab = TabItem("analytics", "Analytics", [followerStats, engagementRate, audienceSplit, bestPostingTime])
+
+followerStats = Card([followerTotal, followerGrowth], "card", "column", "s")
+followerTotal = CardHeader("Followers", "14,872", "h4")
+followerGrowth = TextContent("Growth: +1,245 (8.3%)", "small")
+
+engagementRate = Card([engagementHeader, engagementChart], "card", "column", "s")
+engagementHeader = CardHeader("Engagement Rate", "12.7%")
+engagementChart = PieChart(["Engagement", "Non-Engagement"], [1270, 8730], "pie")
+
+topPosts = Card([topPostsHeader, postTable], "card", "column", "s")
+topPostsHeader = CardHeader("Top Posts This Month", "Reach by post")
+postTable = Table([postCol1, postCol2])
+postCol1 = Col("Post", ["Video Reel", "Carousel Post", "Story Series", "Live Q&A"], "string")
+postCol2 = Col("Reach", ["12,456", "8,923", "6,345", "4,789"], "number")
+
+audienceSplit = Card([audienceHeader, audienceChart], "card", "column", "s")
+audienceHeader = CardHeader("Audience Split", "Platform distribution")
+audienceChart = RadarChart(["Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"], [45, 30, 15, 8, 2])
+
+scheduledPosts = Card([scheduledHeader, scheduleList], "card", "column", "s")
+scheduledHeader = CardHeader("Scheduled This Week", "Platform & Time")
+scheduleList = ListBlock([scheduleItem1, scheduleItem2, scheduleItem3])
+scheduleItem1 = ListItem("Instagram Story", "10:00 AM", ["https://picsum.photos/seed/1/300/200"], "Edit")
+scheduleItem2 = ListItem("TikTok Video", "3:00 PM", ["https://picsum.photos/seed/2/300/200"], "Edit")
+scheduleItem3 = ListItem("Twitter Thread", "6:00 PM", ["https://picsum.photos/seed/3/300/200"], "Edit")
+
+bestPostingTime = Card([bestTimeHeader, bestTimeChart], "card", "column", "s")
+bestTimeHeader = CardHeader("Best Posting Time", "Based on history")
+bestTimeChart = SingleStackedBarChart(["6 AM", "9 AM", "12 PM", "3 PM", "6 PM", "9 PM"], [15, 30, 25, 40, 55, 35])
+
+pendingComments = Card([pendingHeader, commentCount], "card", "column", "s")
+pendingHeader = CardHeader("Comments Waiting", "Reply needed")
+commentCount = TextCallout("danger", "You have 12 unread comments", "Check inbox for replies")
+
+earnings = Card([earningsHeader, earningsChart], "card", "column", "s")
+earningsHeader = CardHeader("Earnings This Month", "$3,456.23")
+earningsChart = BarChart(["Affiliate", "Ads", "Sponsorships"], [series1, series2], "grouped", "Source", "USD")
+series1 = Series("Earnings", [1200, 850, 1406])
+
+pendingCollabs = Card([collabHeader, collabList], "card", "column", "s")
+collabHeader = CardHeader("Pending Collaborations", "3 requests")
+collabList = ListBlock([collabItem1, collabItem2, collabItem3])
+collabItem1 = ListItem("Brand X", "Paid partnership", ["https://picsum.photos/seed/4/100/100"], "Accept")
+collabItem2 = ListItem("Creator Y", "Guest appearance", ["https://picsum.photos/seed/5/100/100"], "Accept")
+collabItem3 = ListItem("Influencer Z", "Affiliate deal", ["https://picsum.photos/seed/6/100/100"], "Accept")
+
+platformFilter = Card([filterHeader, filterButtons], "card", "column", "s")
+filterHeader = CardHeader("Filter by Platform", "Select one platform")
+filterButtons = Buttons([platformBtn1, platformBtn2, platformBtn3, platformBtn4, platformBtn5], "column")
+platformBtn1 = Button("All Platforms", null, "secondary")
+platformBtn2 = Button("Instagram", null, "primary")
+platformBtn3 = Button("TikTok", null, "secondary")
+platformBtn4 = Button("YouTube", null, "secondary")
+platformBtn5 = Button("Twitter", null, "secondary")
+
+postScheduler = Card([schedulerHeader, schedulerForm], "card", "column", "s")
+schedulerHeader = CardHeader("Schedule a Post", "Compose & schedule")
+schedulerForm = Form("schedule-post", schedulerButtons, [platformField, captionField, timeField])
+platformField = FormControl("Platform", platformSelect)
+platformSelect = Select("platform", [platformOptions], "Select platform")
+platformOptions = [SelectItem("Instagram", "Instagram"), SelectItem("TikTok", "TikTok"), SelectItem("YouTube", "YouTube"), SelectItem("Twitter", "Twitter")]
+captionField = FormControl("Caption", captionInput)
+captionInput = TextArea("caption", "Write your caption...", 3, null, null)
+timeField = FormControl("Scheduled Time", timeSelect)
+timeSelect = Select("time", [timeOptions], "Select time")
+timeOptions = [SelectItem("10:00 AM", "10:00 AM"), SelectItem("2:00 PM", "2:00 PM"), SelectItem("6:00 PM", "6:00 PM"), SelectItem("Custom", "Custom")]
+schedulerButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

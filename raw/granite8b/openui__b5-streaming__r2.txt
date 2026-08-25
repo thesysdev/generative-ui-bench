@@ -1,0 +1,234 @@
+```openui-lang
+root = Card(
+    [
+        CardHeader("Operations Dashboard", "Live Metrics"),
+        viewersPanel,
+        mostWatchedTitles,
+        watchTimeLastMonth,
+        newSubsAndCancellations,
+        performanceByGenre,
+        bufferingRate,
+        deliveryHealthByRegion,
+        upcomingReleases,
+        licensesExpiring,
+        recommendationClicks,
+        searchesWithoutPlayback,
+        revenueByPlan,
+        viewingByDevice,
+        regionFocusSwitch,
+        featureFlagsList,
+        promotionControl,
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+viewersPanel = Card(
+    [
+        TextContent("Viewers Watching Now: 12,345"),
+        HorizontalBarChart(["Realtime"], [viewersSeries]),
+        "realtime viewers",
+    ],
+    "sunk"
+)
+viewersSeries = Series("Current Viewers", [12345])
+
+mostWatchedTitles = Card(
+    [
+        Heading("Most-Watched Titles", "h3"),
+        Table(
+            [
+                Col("Title", ["Sonic the Hedgehog", "The Witcher", "Stranger Things"]),
+                Col("Hours Watched", ["342.5", "298.7", "215.2"]),
+            ]
+        ),
+    ]
+)
+
+watchTimeLastMonth = Card(
+    [
+        Heading("Watch Time – Past Month", "h3"),
+        LineChart(
+            ["W1", "W2", "W3", "W4", "W5", "W6"],
+            [
+                Series("Hours Watched", [210, 225, 240, 260, 275, 300]),
+                Series("Average Sessions", [12, 13, 14, 15, 16, 17]),
+            ],
+            "linear",
+            "Week",
+            "Hours"
+        ),
+    ]
+)
+
+newSubsAndCancellations = Card(
+    [
+        Heading("New Subscribers vs Cancellations", "h3"),
+        BarChart(
+            ["New Subs", "Cancellations"],
+            [
+                Series("New Subscribers", [450, 520, 480, 510, 470]),
+                Series("Cancellations", [30, 25, 35, 28, 32]),
+            ],
+            "grouped",
+            "Month",
+            "Count"
+        ),
+    ]
+)
+
+performanceByGenre = Card(
+    [
+        Heading("Performance by Genre", "h3"),
+        HorizontalBarChart(
+            ["Comedy", "Drama", "Action", "Sci-Fi"],
+            [
+                Series("Average Watch Time (hrs)", [3.2, 4.1, 5.0, 2.8]),
+                Series("Retention Rate (%)", [78, 85, 80, 75]),
+            ],
+            "grouped",
+            "Genre",
+            "Hours / %"
+        ),
+    ]
+)
+
+bufferingRate = Card(
+    [
+        Heading("Buffering Rate", "h3"),
+        Gauge("Buffering Rate", 12, "danger"),
+        TextContent("12% of streams experienced buffering"),
+    ]
+)
+
+deliveryHealthByRegion = Card(
+    [
+        Heading("Delivery Health by Region", "h3"),
+        RadarChart(
+            ["North America", "Europe", "APAC", "LATAM", "Middle East"],
+            [
+                Series("Latency (ms)", [45, 38, 52, 60, 55]),
+                Series("Error Rate (%)", [0.5, 0.3, 0.7, 0.8, 0.6]),
+            ]
+        ),
+    ]
+)
+
+upcomingReleases = Card(
+    [
+        Heading("Releases This Month", "h3"),
+        ListBlock(
+            [
+                ListItem("The New Frontier", "Sci-Fi, Aug 12"),
+                ListItem("Love in the City", "Comedy, Aug 15"),
+                ListItem("Night Shift", "Thriller, Aug 20"),
+            ],
+            "number"
+        ),
+    ]
+)
+
+licensesExpiring = Card(
+    [
+        Heading("Licenses Expiring Soon", "h3"),
+        Table(
+            [
+                Col("Title", ["Old School", "Classic Noir", "70s Thriller"]),
+                Col("Expiration", ["Aug 25", "Aug 30", "Sep 2"]),
+            ]
+        ),
+    ]
+)
+
+recommendationClicks = Card(
+    [
+        Heading("Recommendation Clicks", "h3"),
+        Gauge("Recommendation CTR", 18, "success"),
+        TextContent("18% click‑through rate on recommendations"),
+    ]
+)
+
+searchesWithoutPlayback = Card(
+    [
+        Heading("Searches Without Playback", "h3"),
+        HorizontalBarChart(
+            ["Search Term", "No Playback"],
+            [
+                Series("Count", [420, 380, 340, 310, 280]),
+            ],
+            "grouped",
+            "Search",
+            "Count"
+        ),
+    ]
+)
+
+revenueByPlan = Card(
+    [
+        Heading("Revenue Split by Plan", "h3"),
+        PieChart(
+            ["Premium", "Basic", "Ad‑Supported"],
+            [0.55, 0.30, 0.15]
+        ),
+    ]
+)
+
+viewingByDevice = Card(
+    [
+        Heading("Viewing Split by Device", "h3"),
+        HorizontalBarChart(
+            ["Smartphone", "Tablet", "Desktop", "TV"],
+            [
+                Series("Share (%)", [45, 20, 25, 10]),
+            ],
+            "grouped",
+            "Device",
+            "%"
+        ),
+    ]
+)
+
+regionFocusSwitch = Card(
+    [
+        Heading("Focus Region", "h3"),
+        Select(
+            "region_focus",
+            [
+                SelectItem("All", "All"),
+                SelectItem("North America", "North America"),
+                SelectItem("Europe", "Europe"),
+                SelectItem("APAC", "APAC"),
+            ],
+            placeholder="Select region",
+            value="All"
+        ),
+    ]
+)
+
+featureFlagsList = Card(
+    [
+        Heading("Feature Flags", "h3"),
+        Table(
+            [
+                Col("Flag", ["Dark Mode", "Live Chat", "Content AI"]),
+                Col("Enabled?", ["true", "false", "true"]),
+            ]
+        ),
+    ]
+)
+
+promotionControl = Card(
+    [
+        Heading("Promote Title on Home Screen", "h3"),
+        SwitchGroup(
+            "title_promotion",
+            [
+                SwitchItem("Enable Promotion", "Promote 'The New Frontier'"),
+            ],
+            "card",
+            value=[]
+        ),
+    ]
+)
+```

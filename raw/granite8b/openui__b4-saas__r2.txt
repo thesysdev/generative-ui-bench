@@ -1,0 +1,151 @@
+```openui-lang
+root = Card([
+    overviewHeader,
+    metricsSection,
+    planDistribution,
+    topCustomers,
+    atRiskAccounts,
+    failedPayments,
+    featureAdoption,
+    npsSection,
+    reportingPeriodSelector,
+    seatUtilization,
+    inviteAdmin
+], "card", "row", "l")
+
+overviewHeader = CardHeader("Admin Overview", "SaaS Dashboard")
+
+metricsSection = Card([
+    mrrSection,
+    arreSection,
+    churnSection,
+    newSignupsSection
+], "sunk")
+
+mrrSection = CardHeader("Monthly Recurring Revenue", "Current: $125,000")
+arreSection = CardHeader("Annual Recurring Revenue", "Current: $1,500,000")
+churnSection = CardHeader("Churn This Month", "Rate: 2.1%")
+newSignupsSection = CardHeader("New Signups (90 days)", "Count: 312")
+
+planDistribution = Card([
+    planDistributionHeader,
+    planDistributionTable
+], "sunk")
+planDistributionHeader = CardHeader("Customers by Plan", "Distribution")
+planDistributionTable = Table([
+    planCol,
+    countCol
+])
+planCol = Col("Plan", ["Free", "Pro", "Enterprise"], "string")
+countCol = Col("Customers", [124, 87, 45], "number")
+
+topCustomers = Card([
+    topCustomersHeader,
+    topCustomersTable
+], "sunk")
+topCustomersHeader = CardHeader("Top 10 Customers", "Seats & Spend")
+topCustomersTable = Table([
+    custNameCol,
+    seatsCol,
+    spendCol
+])
+custNameCol = Col("Customer", ["Acme Corp", "Beta Ltd", "Gamma Inc", "Delta LLC", "Epsilon Co", "Zeta LLC", "Eta Inc", "Theta Co", "Iota Ltd", "Kappa Corp"], "string")
+seatsCol = Col("Seats", [250, 180, 120, 95, 80, 65, 55, 40, 30, 25], "number")
+spendCol = Col("Spend (USD)", [150000, 112000, 75000, 60000, 50000, 40000, 35000, 25000, 20000, 15000], "number")
+
+atRiskAccounts = Card([
+    atRiskHeader,
+    atRiskTable
+], "sunk")
+atRiskHeader = CardHeader("Accounts at Risk", "Reasons")
+atRiskTable = Table([
+    acctNameCol,
+    reasonCol
+])
+acctNameCol = Col("Account", ["Acme Corp", "Beta Ltd", "Gamma Inc"], "string")
+reasonCol = Col("Reason", ["Low usage", "Upcoming renewal", "Payment failure"], "string")
+
+failedPayments = Card([
+    failedPaymentsHeader,
+    failedPaymentsList
+], "sunk")
+failedPaymentsHeader = CardHeader("Failed Payments", "Retry Options")
+failedPaymentsList = ListBlock([
+    fpItem1,
+    fpItem2,
+    fpItem3
+], "image")
+fpItem1 = ListItem("Acme Corp", "3 attempts", [retryBtn1])
+fpItem2 = ListItem("Beta Ltd", "2 attempts", [retryBtn2])
+fpItem3 = ListItem("Gamma Inc", "1 attempt", [retryBtn3])
+retryBtn1 = Button("Retry Payment", ["retry", "Acme Corp"], "primary")
+retryBtn2 = Button("Retry Payment", ["retry", "Beta Ltd"], "primary")
+retryBtn3 = Button("Retry Payment", ["retry", "Gamma Inc"], "primary")
+
+featureAdoption = Card([
+    featureAdoptionHeader,
+    featureAdoptionChart
+], "sunk")
+featureAdoptionHeader = CardHeader("Adoption of New Features", "Usage %")
+featureAdoptionChart = BarChart([
+    "Feature A",
+    "Feature B",
+    "Feature C"
+], [
+    Series("Feature A", [65]),
+    Series("Feature B", [50]),
+    Series("Feature C", [40])
+], "grouped", "Feature", "% Adopted")
+
+npsSection = Card([
+    npsHeader,
+    npsValue
+], "sunk")
+npsHeader = CardHeader("Current NPS", "Net Promoter Score")
+npsValue = TextContent("NPS: 78", "large")
+
+reportingPeriodSelector = Card([
+    periodSelectorHeader,
+    periodSelectorButtons
+], "clear")
+periodSelectorHeader = CardHeader("Change Reporting Period", "Dynamic period selection")
+periodSelectorButtons = Buttons([
+    last30Btn,
+    last90Btn,
+    last12Btn,
+    customBtn
+], "row")
+last30Btn = Button("Last 30 Days", ["period", "30"], "secondary")
+last90Btn = Button("Last 90 Days", ["period", "90"], "secondary")
+last12Btn = Button("Last 12 Months", ["period", "12m"], "secondary")
+customBtn = Button("Custom Range", ["period", "custom"], "tertiary")
+
+seatUtilization = Card([
+    utilizationHeader,
+    utilizationChart
+], "sunk")
+utilizationHeader = CardHeader("Seat Utilization Across Company", "Utilization %")
+utilizationChart = PieChart([
+    "Utilized",
+    "Unutilized"
+], [82, 18], "donut", "circular")
+utilizationChart.labels = ["Utilized", "Unutilized"]
+utilizationChart.values = [82, 18]
+
+inviteAdmin = Card([
+    inviteHeader,
+    inviteForm
+], "clear")
+inviteHeader = CardHeader("Invite Another Admin", "Add a new admin user")
+inviteForm = Form("invite-admin", inviteButtons, [
+    emailField
+])
+emailField = FormControl("Admin Email", emailInput)
+emailInput = Input("email", "invite@example.com", "email")
+inviteButtons = Buttons([
+    submitBtn,
+    cancelBtn
+])
+submitBtn = Button("Invite", ["invite"], "primary")
+cancelBtn = Button("Cancel", ["cancel"], "tertiary")
+```

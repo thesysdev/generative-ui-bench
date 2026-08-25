@@ -1,0 +1,102 @@
+root = Card([header, weatherRow, districtSelectRow, mainGrid, bottomGrid, actionsRow])
+header = CardHeader("City Operations Center", "Live dashboard — all districts")
+
+weatherRow = Card([weatherCard])
+weatherCard = Card([weatherTitle, weatherText], "clear")
+weatherTitle = Heading("Current Weather", "h3")
+weatherText = TextContent("22°C · Partly cloudy · Wind 14 km/h · Humidity 58%")
+
+districtSelectRow = Card([districtLabel, districtSelect])
+districtLabel = TextContent("District Focus")
+districtSelect = Select("district_focus", [d1, d2, d3], "Select district")
+d1 = SelectItem("north", "North")
+d2 = SelectItem("south", "South")
+d3 = SelectItem("east", "East")
+
+mainGrid = Card([leftCol, rightCol], "card", "row", "l")
+leftCol = Card([congestionCard, energyCard, waterCard, transitCard])
+rightCol = Card([airQualityCard, parkingCard, eventsCard, reportsCard])
+
+congestionCard = Card([congestionTitle, congestionText, congestionChart])
+congestionTitle = Heading("Congestion Right Now", "h4")
+congestionText = TextContent("Average delay: 8 min · Peak on Main St")
+congestionChart = BarChart(["Main St", "River Rd", "Park Ave"], [congSeries], "grouped")
+congSeries = Series("Delay (min)", [8, 14, 5])
+
+energyCard = Card([energyTitle, energyChart])
+energyTitle = Heading("Energy Use — Past Week", "h4")
+energyChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries])
+energySeries = Series("MWh", [420, 390, 410, 430, 450, 460, 440])
+
+waterCard = Card([waterTitle, waterProgress])
+waterTitle = Heading("Water Use Today", "h4")
+waterProgress = Progress(72, "72% of daily budget")
+
+transitCard = Card([transitTitle, transitTable])
+transitTitle = Heading("Transit Punctuality", "h4")
+transitTable = Table([transitColName, transitColVal])
+transitColName = Col("Route", ["N1", "S2", "E3", "W4"])
+transitColVal = Col("On Time %", [92, 78, 85, 94], "number")
+
+airQualityCard = Card([aqTitle, aqTable])
+aqTitle = Heading("Air Quality by District", "h4")
+aqTable = Table([aqColDist, aqColAqi])
+aqColDist = Col("District", ["North", "South", "East", "West", "Central"])
+aqColAqi = Col("AQI", [42, 58, 35, 61, 49], "number")
+
+parkingCard = Card([parkingTitle, parkingText])
+parkingTitle = Heading("Parking Availability — Downtown", "h4")
+parkingText = TextContent("Available: 312 spaces · 68% full")
+
+eventsCard = Card([eventsTitle, eventsList])
+eventsTitle = Heading("Public Events This Weekend", "h4")
+eventsList = ListBlock([event1, event2])
+event1 = ListItem("Street Market — Central Park", "Sat 10am")
+event2 = ListItem("Marathon — River Bridge", "Sun 7am")
+
+reportsCard = Card([reportsTitle, reportsTable])
+reportsTitle = Heading("Citizen Reports — Live", "h4")
+reportsTable = Table([reportsColType, reportsColStatus])
+reportsColType = Col("Issue", ["Noise", "Pothole", "Graffiti", "Light out"])
+reportsColStatus = Col("Status", ["Open", "Open", "Assigned", "Open"])
+
+bottomGrid = Card([bottomLeft, bottomRight], "card", "row", "l")
+bottomLeft = Card([incidentsCard, vehiclesCard, backlogCard])
+bottomRight = Card([districtFocusTitle, dispatchBtn, alertBtn, roadworksCard, maintenanceCard])
+
+incidentsCard = Card([incidentsTitle, incidentsTable])
+incidentsTitle = Heading("Open Incidents", "h4")
+incidentsTable = Table([incColLoc, incColSev])
+incColLoc = Col("Location", ["Main & 5th", "River Rd", "Park Ave"])
+incColSev = Col("Severity", ["High", "Medium", "Low"])
+
+vehiclesCard = Card([vehiclesTitle, vehiclesText])
+vehiclesTitle = Heading("Emergency Vehicles Deployed", "h4")
+vehiclesText = TextContent("Ambulance: North · Fire: South · Police: East")
+
+backlogCard = Card([backlogTitle, backlogText, backlogProgress])
+backlogTitle = Heading("Service Request Backlog", "h4")
+backlogText = TextContent("Pending: 47 open")
+backlogProgress = Progress(34, "34% cleared")
+
+districtFocusTitle = Heading("District Operations", "h4")
+
+dispatchBtn = Button("Dispatch Crew", ["dispatch_crew"], "primary")
+alertBtn = Button("Send Public Alert", ["send_alert"], "destructive")
+
+roadworksCard = Card([roadworksTitle, roadworksList])
+roadworksTitle = Heading("Roadworks Planned — This Month", "h4")
+roadworksList = ListBlock([rw1, rw2])
+rw1 = ListItem("Main St Resurfacing", "Jun 12–18")
+rw2 = ListItem("Bridge Repair — River Rd", "Jun 20–25")
+
+maintenanceCard = Card([maintTitle, maintList])
+maintTitle = Heading("Infrastructure Jobs Due", "h4")
+maintList = ListBlock([mj1, mj2])
+mj1 = ListItem("Water Pump — Station 4", "Due Jun 30")
+mj2 = ListItem("Traffic Signal — 5th Ave", "Due Jun 28")
+
+actionsRow = Card([followUpBlock])
+followUpBlock = FollowUpBlock([follow1, follow2])
+follow1 = FollowUpItem("Show district details")
+follow2 = FollowUpItem("Generate daily report")

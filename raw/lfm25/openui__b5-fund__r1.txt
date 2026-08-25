@@ -1,0 +1,222 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Trading Desk - Morning Overview",
+      subtitle: "Portfolio Dashboard"
+    ),
+    
+    // 1. Portfolio Value
+    TextContent(
+      text: "Total Portfolio Value: $4,250,000",
+      size: "large"
+    ),
+    
+    // 2. Profit and Loss Today
+    TextContent(
+      text: "Today's P&L: +$28,500 (Profit)",
+      size: "large"
+    ),
+    
+    // 3. Positions with ticker, size, entry and current price
+    Table(
+      columns: [
+        { label: "Position", type: "string" },
+        { label: "Ticker", type: "string" },
+        { label: "Size (Shares)", type: "number" },
+        { label: "Entry Price", type: "string" },
+        { label: "Current Price", type: "string" }
+      ],
+      data: [
+        { Position: "US Tech ETF", Ticker: "XLK", Size: "45", Entry: "$320.25", Current: "$345.80" },
+        { Position: "AI Hardware", Ticker: "NVDA", Size: "120", Entry: "$1150.00", Current: "$1420.50" },
+        { Position: "Green Energy", Ticker: "ENPH", Size: "30", Entry: "$210.40", Current: "$245.20" },
+        { Position: "FinTech", Ticker: "PLTR", Size: "80", Entry: "$480.00", Current: "$515.75" },
+        { Position: "Data Centers", Ticker: "ADBE", Size: "62", Entry: "$280.00", Current: "$310.20" },
+        { Position: "Biotech", Ticker: "NVAX", Size: "25", Entry: "$150.00", Current: "$178.90" }
+      ]
+    ),
+    
+    // 4. Exposure by Sector
+    Table(
+      columns: [
+        { label: "Sector", type: "string" },
+        { label: "Exposure ($)", type: "number" }
+      ],
+      data: [
+        { Sector: "Technology", Exposure: "$1,850,000" },
+        { Sector: "Healthcare", Exposure: "$620,000" },
+        { Sector: "Financials", Exposure: "$340,000" },
+        { Sector: "Energy", Exposure: "$180,000" },
+        { Sector: "Consumer Cyclical", Exposure: "$95,000" }
+      ]
+    ),
+    
+    // 5. Value at Risk
+    TextContent(
+      text: "Value at Risk (1%): $78,500",
+      size: "large"
+    ),
+    
+    // 6. Today's Biggest Gainers and Losers
+    HtmlBlock(
+      html: """
+      <div class="gainer-list">
+        <strong>Top Gainers Today</strong>
+        <ul>
+          <li><span class="gain">+3.2%</span> XYZ Corp (TICKER: ABCXY) - +$4,200</li>
+          <li><span class="gain">+2.8%</span> Beta Solutions (TICKER: BETAS) - +$3,100</li>
+          <li><span class="gain">+2.1%</span> Quantum AI (TICKER: QAI) - +$2,450</li>
+        </ul>
+      """,
+      variant: "neutral"
+    ),
+    HtmlBlock(
+      html: """
+      <div class="loss-list">
+        <strong>Top Losers Today</strong>
+        <ul>
+          <li><span class="loss">-2.9%</span> Delta Inc (TICKER: DELTA) - -$3,800</li>
+          <li><span class="loss">-2.5%</span> SolarPower (TICKER: SOLAR) - -$3,200</li>
+          <li><span class="loss">-2.0%</span> MedTech Plus (TICKER: MTECH) - -$2,900</li>
+        </ul>
+      """,
+      variant: "neutral"
+    ),
+    
+    // 7. Instruments Being Watched
+    Table(
+      columns: [
+        { label: "Ticker", type: "string" },
+        { label: "Price", type: "string" },
+        { label: "Change (%)", type: "string" },
+        { label: "Sentiment", type: "string" }
+      ],
+      data: [
+        { Ticker: "AAPL", Price: "$192.45", Change: "+1.4%", Sentiment: "Bullish" },
+        { Ticker: "MSFT", Price: "$425.30", Change: "+0.9%", Sentiment: "Neutral" },
+        { Ticker: "GOOGL", Price: "$132.60", Change: "-0.5%", Sentiment: "Cautionary" },
+        { Ticker: "AMZN", Price: "$185.20", Change: "+2.1%", Sentiment: "Bullish" },
+        { Ticker: "TSLA", Price: "$248.75", Change: "-3.2%", Sentiment: "Negative" },
+        { Ticker: "NFLX", Price: "$520.30", Change: "+1.8%", Sentiment: "Positive" }
+      ]
+    ),
+    
+    // 8. Working Orders
+    TextContent(
+      text: "Working Orders:\n• Buy 50 shares of NVDA\n• Sell 30 shares of ENPH\n• Adjust XLK position by 5%",
+      size: "medium"
+    ),
+    
+    // 9. Margin in Use
+    TextContent(
+      text: "Margin in Use: 68% of available limit",
+      size: "small"
+    ),
+    
+    // 10. Market Headlines with Sentiment
+    HtmlBlock(
+      html: """
+      <div class="headline-item">
+        <strong>Market Headline 1</strong><br>
+        "SaaS stocks surge ahead of earnings"<br>
+        <em>Sentiment: Bullish</em>
+      </div>
+      <div class="headline-item">
+        <strong>Market Headline 2</strong><br>
+        "Interest rates held steady, markets react"<br>
+        <em>Sentiment: Neutral</em>
+      </div>
+      <div class="headline-item">
+        <strong>Market Headline 3</strong><br>
+        "Oil prices drop due to supply concerns"<br>
+        <em>Sentiment: Bearish</em>
+      </div>
+      """
+    ),
+    
+    // 11. Economic Releases This Week
+    HtmlBlock(
+      html: """
+      <div class="release-1">
+        <strong>US GDP Q2 Report</strong><br>
+        Release: July 12, 2026<br>
+        Impact: Moderate growth, inflation holding steady<br>
+        Sentiment: Neutral
+      </div>
+      <div class="release-2">
+        <strong>Federal Reserve Rate Decision</strong><br>
+        Release: July 10, 2026<br>
+        Impact: Rates held constant<br>
+        Sentiment: Neutral
+      </div>
+      <div class="release-3">
+        <strong>CPI Inflation Data</strong><br>
+        Release: July 8, 2026<br>
+        Impact: 3.2% annual rate<br>
+        Sentiment: Cautionary
+      </div>
+      """
+    ),
+    
+    // 12. Strategy Returns This Year
+    Table(
+      columns: [
+        { label: "Strategy", type: "string" },
+        { label: "Return (YoY)", type: "number" },
+        { label: "Status", type: "string" }
+      ],
+      data: [
+        { Strategy: "Growth Alpha", Return: "18.5%", Status: "Strong" },
+        { Strategy: "Defensive Bonds", Return: "-1.2%", Status: "Underperforming" },
+        { Strategy: "Quant Arbitrage", Return: "22.0%", Status: "Excellent" },
+        { Strategy: "Crypto Allocation", Return: "35.7%", Status: "High" }
+      ]
+    ),
+    
+    // 13. Drawdown Over Past Year
+    TextContent(
+      text: "Portfolio Drawdown (Past Year): -14.8%",
+      size: "large"
+    ),
+    
+    // 14. Risk Limits Near Breach
+    TextContent(
+      text: "Risk Limits Status:<br>· Max Daily Loss: $5,000 (Current: $2,300)<br>· Max Position Size: $500,000 (Current: $420,000)",
+      size: "medium"
+    ),
+    
+    // 15. Rebalancing Option
+    TextContent(
+      text: "🔄 REBALANCE <button onclick=\"rebalance()\">Rebalance Portfolio</button>",
+      size: "medium"
+    ),
+    
+    // 16. Place Order
+    TextContent(
+      text: "📍 PLACE ORDER\nTicker: [ABCXY] | Side: [Buy/Sell] | Quantity: [Qty]",
+      size: "medium"
+    ),
+    
+    // 17. Timeframe Switcher
+    HorizontalBarChart(
+      labels: ["1M", "3M", "Year", "5Y"],
+      xLabel: "Time Frame",
+      yLabel: "Performance",
+      variant: "card",
+      data: [
+        { Category: "1M", Value: "9.2%" },
+        { Category: "3M", Value: "11.5%" },
+        { Category: "Year", Value: "24.8%" },
+        { Category: "5Y", Value: "32.1%" }
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "stretch",
+  wrap: true
+)
+```

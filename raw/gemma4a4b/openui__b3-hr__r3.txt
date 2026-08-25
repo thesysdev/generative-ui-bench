@@ -1,0 +1,35 @@
+root = Card([header, kpiRow, mainGrid, attritionChart, actions, followUps], "card", "column", "l")
+
+header = CardHeader("HR Hiring Overview", "Real-time recruitment and headcount metrics")
+
+kpiRow = Card([headcountCard, timeToHireCard, interviewsCard], "card", "row", "m", "center")
+headcountCard = Card([TextContent("Current Headcount", "small-heavy"), TextContent("1,248", "large-heavy")], "sunk", "column", "m", "center")
+timeToHireCard = Card([TextContent("Avg. Time to Hire", "small-heavy"), TextContent("32 Days", "large-heavy")], "sunk", "column", "m", "center")
+interviewsCard = Card([TextContent("Interviews This Week", "small-heavy"), TextContent("42", "large-heavy")], "sunk", "column", "m", "center")
+
+mainGrid = Card([rolesSection, pipelineSection, deptSplitSection], "clear", "column", "xl")
+
+rolesSection = SectionBlock([rolesList])
+rolesList = ListBlock([role1, role2, role3, role4], "number")
+role1 = ListItem("Senior Product Designer", "Design", null, "View")
+role2 = ListItem("Backend Engineer (Go)", "Engineering", null, "View")
+role3 = ListItem("HR Business Partner", "People", null, "View")
+role4 = ListItem("Marketing Manager", "Marketing", null, "View")
+
+pipelineSection = SectionBlock([pipelineTable])
+pipelineTable = Table([colStage, colCandidates])
+colStage = Col("Pipeline Stage", ["Sourcing", "Screening", "Interviewing", "Offer", "Hired"])
+colCandidates = Col("Candidates", ["142", "85", "34", "12", "8"])
+
+deptSplitSection = SectionBlock([deptChart])
+deptChart = Card([Heading("Headcount by Department", "h4"), RadialChart(["Eng", "Design", "Sales", "HR", "Ops"], [450, 80, 320, 45, 110])], "sunk")
+
+attritionChart = Card([Heading("Attrition Trend (6 Months)", "h4"), LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [seriesAttrition], "natural", "Month", "Rate (%)")], "sunk")
+seriesAttrition = Series("Attrition Rate", [1.2, 1.5, 1.1, 1.8, 1.4, 1.3])
+
+actions = Buttons([newRoleBtn], "row")
+newRoleBtn = Button("Open New Role", null, "primary")
+
+followUps = FollowUpBlock([follow1, follow2])
+follow1 = FollowUpItem("Show detailed candidate list")
+follow2 = FollowUpItem("Export attrition report")

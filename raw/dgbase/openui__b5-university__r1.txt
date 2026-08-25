@@ -1,0 +1,86 @@
+thought
+root = Card([header, filters, statsRow, mainGrid, bottomSection, actions], "card", "column", "l")
+
+header = CardHeader("University Administration Command", "Academic Year 2023-2024")
+
+filters = Card([deptFilter, semesterFilter], "card", "row", "m")
+deptFilter = FormControl("Focus Department", deptSelect)
+deptSelect = Select("dept", [allDepts, eng, bus, arts, sci], "Select Department")
+allDepts = SelectItem("all", "All University-wide")
+eng = SelectItem("eng", "Engineering")
+bus = SelectItem("bus", "Business School")
+arts = SelectItem("arts", "Arts & Humanities")
+sci = SelectItem("sci", "Natural Sciences")
+
+semesterFilter = FormControl("Compare Sem-mester", semSelect)
+semSelect = Select("sem", [curr, last], "Current vs")
+curr = SelectItem("curr", "Fall 2023 (Current)")
+last = SelectItem("last", "Spring 2023 (Previous)")
+
+statsRow = Card([enrollmentChart, acceptanceRate, tuitionRev, riskStatus], "card", "row", "s")
+enrollmentChart = Card([Heading("Enrollment Trend", "h4"), enrollLine], "sunk")
+enrollLine = LineChart(["2019", "2020", "2021", "2022", "2023"], [enrollSeries], "natural", "Year", "Students")
+enrollSeries = Series("Total Enrollment", [12400, 11800, 13100, 13900, 14200])
+
+acceptanceRate = Card([Heading("Acceptance Rate", "h4"), accPie], "sunk")
+accPie = PieChart(["Accepted", "Rejected", "Waitlisted"], [62, 30, 8], "donut")
+
+tuitionRev = Card([Heading("Tuition Revenue", "h4"), revText], "sunk")
+revText = TextContent("$42,500,000", "large-heavy")
+
+riskStatus = Card([Heading("Students at Risk", "h4"), riskList], "sunk")
+riskList = ListBlock([ListItem("John Doe", "GPA below 2.0"), ListItem("Jane Smith", "Financial Aid Probation")])
+
+mainGrid = Card([appsTable, courseFullness, facultyLoad, scholarshipBudget], "card", "row", "m")
+
+appsTable = Card([Heading("Applications & Waitlists", "h3"), appTable], "sunk")
+appTable = Table([colProg, colApps, colWait])
+colProg = Col("Program", ["Computer Science", "Biology", "Mechanical", "History"])
+colApps = Col("Apps", [1200, 850, 400, 300])
+colWait = Col("Waitlist", [150, 45, 10, 55])
+
+courseFullness = Card([Heading("Course Occupancy", "h3"), occupancyChart], "sunk")
+occChart = HorizontalBarChart(["CS 101", "PHYS 202", "ECON 301", "HIST 110"], [occSeries], "grouped", "", "%")
+occSeries = Series("Fill Rate", [95, 70, 88, 45])
+
+facultyLoad = Card([Heading("Faculty Teaching Load", "h3"), facultyTable], "sunk")
+facultyTable = Table([colFaculty, colLoad])
+colFaculty = Col("Faculty", ["Dr. Aris", "Dr. Jones", "Dr. Chen", "Dr. Lee"])
+colLoad = Col("Hours/Sem", [3, 4, 3, 4])
+
+scholarshipBudget = Card([Heading("Scholarship Budget", "h3"), budgetBar], "sunk")
+budgetBar = SingleStackedBarChart(["Used", "Remaining"], [7.5, 2.5])
+
+bottomSection = Card([events, housingOcc, alumniGiving], "card", "row", "m")
+
+events = Card([Heading("Campus Events", "h3"), eventList], "sunk")
+eventList = ListBlock([
+    ListItem("Annual Alumni Gala", "Oct 12", "Auditorium"),
+    ListItem("Student Career Fair", "Oct 15", "Main Hall"),
+    ListItem("Research Symposium", "Oct 22", "Science Center")
+])
+
+housingOcc = Card([Heading("Housing Occupancy", "h3"), housingChart], "sunk")
+housingChart = RadialChart(["Dorms", "Apartments"], [88, 65])
+
+alumniGiving = Card([Heading("Alumni Giving (4Y)", "h3"), givingChart], "sunk")
+givingChart = BarChart(["2020", "2021", "2022", "2023"], [givingSeries], "grouped", "Year", "$M")
+givingSeries = Series("Donations", [1200000, 1500000, 1100000, 1800000])
+
+actions = Card([approveCourse, messageGroup], "card", "row", "m")
+approveCourse = DialogBlock("Approve New Course", "Review pending curriculum changes", [
+    TextContent("New Course: AI Ethics (CS405)"),
+    Button("Approve Proposal", null, "primary"),
+    Button("Reject", null, "tertiary")
+], "outline")
+
+messageGroup = DialogBlock("Message Student Group", "Send communications to specific cohorts", [
+    FormControl("Target Group", groupSelect),
+    FormControl("Message", TextArea("msg", "Type here...")),
+    Button("Send Message", null, "primary")
+], "secondary")
+
+groupSelect = Select("group", [g1, g2, g3], "Select Group")
+g1 = SelectItem("freshmen", "Freshmen")
+g2 = SelectItem("seniors", "Seniors")
+g3 = SelectItem("athletes", "Athletes")

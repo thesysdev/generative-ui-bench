@@ -1,0 +1,78 @@
+```openui
+root = Card([
+    overviewSection,
+    engagementSection,
+    cohortFilterSection,
+    communicationSection
+])
+
+overviewSection = Card([
+    activeLearnersHeading,
+    activeLearnersValue,
+    completionRateHeading,
+    completionRateValue,
+    averageQuizScoreHeading,
+    averageQuizScoreValue,
+    coursesByEnrollmentHeading,
+    coursesByEnrollmentChart
+], "sunk")
+
+activeLearnersHeading = Heading("Active Learners This Week", "h3")
+activeLearnersValue = TextContent("3,450", "large")
+
+completionRateHeading = Heading("Course Completion Rate", "h3")
+completionRateValue = Badge("85%", "success")
+
+averageQuizScoreHeading = Heading("Average Quiz Score", "h3")
+averageQuizScoreValue = TextContent("78.5%", "large")
+
+coursesByEnrollmentHeading = Heading("Courses Ranked by Enrollment", "h3")
+coursesByEnrollmentChart = HorizontalBarChart(
+    ["Course A", "Course B", "Course C", "Course D"],
+    [enrollmentSeries],
+    "stacked"
+)
+enrollmentSeries = Series("Enrollment", [450, 320, 280, 150])
+
+engagementSection = Card([
+    atRiskLearnersHeading,
+    atRiskLearnersList,
+    pastEightWeeksHeading,
+    pastEightWeeksChart
+], "sunk")
+
+atRiskLearnersHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskLearnersList = ListBlock([
+    atRiskLearner1,
+    atRiskLearner2,
+    atRiskLearner3
+])
+atRiskLearner1 = ListItem("John Doe", "Session attendance is low")
+atRiskLearner2 = ListItem("Jane Smith", "Quiz scores declining")
+atRiskLearner3 = ListItem("Alex Johnson", "Forum activity dropped")
+
+pastEightWeeksHeading = Heading("Engagement Across the Past Eight Weeks", "h3")
+pastEightWeeksChart = LineChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+    [engagementSeries],
+    "linear",
+    "Week",
+    "Engagement Score"
+)
+engagementSeries = Series("Engagement", [78, 82, 80, 75, 85, 88, 90, 87])
+
+cohortFilterSection = Form("cohort-filter", filterButtons, [cohortSelectField])
+cohortSelectField = FormControl("Select Cohort", cohortSelect)
+cohortSelect = Select("cohort", [cohortAll, cohortA, cohortB, cohortC], "Choose a cohort")
+cohortAll = SelectItem("All", "All Learners")
+cohortA = SelectItem("A", "Cohort A")
+cohortB = SelectItem("B", "Cohort B")
+cohortC = SelectItem("C", "Cohort C")
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply Filter", null, "primary")
+
+communicationSection = Buttons([
+    messageCohortBtn
+])
+messageCohortBtn = Button("Message Cohort", ["send-message"], "primary")
+```

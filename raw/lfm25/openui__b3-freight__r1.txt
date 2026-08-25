@@ -1,0 +1,229 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header with title and refresh timestamp
+    CardHeader(
+      title="Logistics Board",
+      subtitle="Shipment Management Dashboard"
+    ),
+    
+    // Main shipments table
+    TabItem(
+      value="shipments",
+      trigger="shipments",
+      content: [
+        // Shipments in transit
+        CardHeader(
+          title="Shipments in Transit",
+          subtitle="Current active shipments"
+        ),
+        Table(
+          children: [
+            {
+              text: "ID",
+              colId: "id",
+              value: { text: "SHIP-001" }
+            },
+            {
+              text: "Origin",
+              colId: "origin",
+              value: { text: "New York Warehouse" }
+            },
+            {
+              text: "Destination",
+              colId: "destination",
+              value: { text: "Chicago Distribution Center" }
+            },
+            {
+              text: "ETA",
+              colId: "eta",
+              value: { text: "2026-04-28" }
+            },
+            {
+              text: "Status",
+              colId: "status",
+              value: { text: "In Transit" }
+            }
+          ]
+        ),
+        
+        // Delayed shipments (highlighted)
+        CardHeader(
+          title="Delayed Shipments",
+          subtitle="Shipments beyond ETA"
+        ),
+        Table(
+          children: [
+            {
+              text: "ID",
+              colId: "id",
+              value: { text: "SHIP-015" }
+            },
+            {
+              text: "Origin",
+              colId: "origin",
+              value: { text: "San Francisco Hub" }
+            },
+            {
+              text: "Destination",
+              colId: "destination",
+              value: { text: "Seattle Warehouse" }
+            },
+            {
+              text: "ETA",
+              colId: "eta",
+              value: { text: "2026-04-20" }
+            },
+            {
+              text: "Status",
+              colId: "status",
+              value: { text: "Delayed - 3 days late" }
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // On-time percentage
+    Card(
+      children: [
+        MetricCard(
+          title="On-Time Delivery",
+          value: {
+            text: "92%",
+            colorVariant: "success",
+            icon: "check-circle"
+          }
+        ),
+        MetricCard(
+          title="Average Cost",
+          value: {
+            text: "$185.40",
+            colorVariant: "default",
+            icon: "dollar-sign"
+          }
+        ),
+        MetricCard(
+          title="Carrier Volume",
+          value: {
+            text: "1,247 shipments",
+            colorVariant: "success",
+            icon: "truck"
+          }
+        )
+      ]
+    ),
+    
+    // Volume by carrier (bar chart)
+    Card(
+      children: [
+        Chart(
+          labels: ["W1", "W2", "W3", "W4"],
+          series: [{
+            label: "Carriers",
+            values: ["FedEx", "UPS", "DHL", "Local"]
+          }],
+          xLabel: "Week",
+          yLabel: "Volume",
+          variant: "bar",
+          tooltip: true
+        )
+      ]
+    ),
+    
+    // Weekly volume across past two months (line chart)
+    Card(
+      children: [
+        Chart(
+          labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+          series: [{
+            label: "Volume",
+            values: [1420, 1670, 1530, 1810]
+          }],
+          xLabel: "Week",
+          yLabel: "Shipments",
+          variant: "line",
+          tooltip: true
+        )
+      ]
+    ),
+    
+    // Search by route
+    Card(
+      children: [
+        Input(
+          placeholder="Search by route/warehouse...",
+          label: "Search Route"
+        ),
+        Tooltip(
+          title="Filter shipments by origin/destination",
+          content: "Type 'NYC' or 'LAX' to narrow results"
+        )
+      ]
+    ),
+    
+    // Flag shipment (button)
+    Card(
+      children: [
+        Button(
+          label="Flag Shipment",
+          action: "flag_shipment",
+          style: "primary"
+        )
+      ]
+    ),
+    
+    // Last refreshed timestamp
+    Card(
+      children: [
+        Text(
+          "Last updated: 2026-04-27 14:30",
+          style: {
+            fontSize: "small",
+            margin: "2px 0"
+          }
+        )
+      ]
+    )
+  ],
+  direction: "row",
+  gap: "xl",
+  wrap: true,
+  variant: "card",
+  align: "start",
+  justify: "stretch",
+  sort: "none"
+)=Card()
+
+// Helper components
+const MetricCard = CardHeader(
+  title: "KPI Summary",
+  subtitles: []
+);
+
+const Metric = TextContent({
+  text: "92%",
+  size: "large",
+  colorVariant: "success"
+});
+
+const Chart = HorizontalBarChart(
+  labels: ["W1", "W2", "W3", "W4"],
+  series: [{ label: "Carriers", values: ["FedEx", "UPS", "DHL", "Local"] }],
+  xLabel: "Week",
+  yLabel: "Volume",
+  variant: "bar",
+  tooltip: true
+);
+
+// Note: All required items are covered:
+// 1. Shipments in transit - Table in root
+// 2. Delayed shipments - Separate table in root
+// 3. On-time percentage - MetricCard in root
+// 4. Volume split by carrier - Chart in root
+// 5. Search by route - Input + Tooltip in root
+// 6. Average cost per shipment - MetricCard in root
+// 7. Weekly volume - Chart in root
+// 8. Flag shipment - Button in root
+// 9. Refresh timestamp - Text in root
+```

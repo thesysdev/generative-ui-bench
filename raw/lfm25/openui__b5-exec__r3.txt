@@ -1,0 +1,240 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("CEO Quarterly Command View", "Executive Dashboard - Q2 2024"),
+    
+    // 1. Revenue, 2. Costs, 3. Profit - Main KPIs
+    Row([
+      Card(
+        children: [
+          Heading("Revenue", "Total Revenue"),
+          MetricCards([
+            Card("Revenue", {value: "$14.2M", color: "green"}),
+            Card("Revenue Growth", {value: "+22%", color: "blue"})
+          ])
+        ]
+      ),
+      Card(
+        children: [
+          Heading("Costs", "Total Costs"),
+          MetricCards([
+            Card("Costs", {value: "$8.7M", color: "orange"}),
+            Card("Cost Reduction", {value: "-15%", color: "blue"})
+          ])
+        ]
+      ),
+      Card(
+        children: [
+          Heading("Profit", "Net Profit"),
+          MetricCards([
+            Card("Profit", {value: "$5.5M", color: "green"}),
+            Card("Profit Margin", {value: "39%", color: "blue"})
+          ])
+        ]
+      )
+    ]),
+    
+    // 4. Revenue over 4 quarters (chart)
+    ChartRow([
+      Card(
+        children: [
+          Heading("Revenue Trend (QoQ)", "Quarter-over-Quarter Revenue"),
+          HorizontalBarChart(
+            labels: ["Q1", "Q2", "Q3", "Q4"],
+            series: [
+              {
+                category: "Revenue",
+                values: [1120000, 1350000, 1480000, 1620000]
+              }
+            ],
+            xLabel: "Quarter",
+            yLabel: "Revenue ($K)",
+            variant: "grouped"
+          )
+        ]
+      ),
+      Card(
+        children: [
+          Heading("Costs Trend (QoQ)", "Quarter-over-Quarter Costs"),
+          HorizontalBarChart(
+            labels: ["Q1", "Q2", "Q3", "Q4"],
+            series: [
+              {
+                category: "Costs",
+                values: [830000, 805000, 780000, 735000]
+              }
+            ],
+            xLabel: "Quarter",
+            yLabel: "Costs ($K)",
+            variant: "grouped"
+          )
+        ]
+      )
+    ]),
+    
+    // 5. Budget by department vs plan (table)
+    SectionBlock([
+      SectionItem("Operations Budget", "OpEx Budget vs Plan"),
+      SectionItem("Engineering Budget", "Eng Dev Spend vs Plan"),
+      SectionItem("Sales Budget", "Sales Enablement vs Plan"),
+      SectionItem("Marketing Budget", "Marketing Spend vs Plan")
+    ]),
+    
+    // 6. Headcount by department (table)
+    SectionBlock([
+      SectionItem("Engineering Headcount", "Engineering Team Size"),
+      SectionItem("Sales Headcount", "Sales Force Count"),
+      SectionItem("Support Headcount", "Customer Support Staff")
+    ]),
+    
+    // 7. Top risks with owner
+    SectionBlock([
+      SectionItem("Risk: Market Volatility", "Market conditions impacting revenue"),
+      Card("Owner: CTO", "Chief Technology Officer"),
+      SectionItem("Risk: Talent Retention", "Key engineer turnover risk"),
+      Card("Owner: COO", "Chief Operating Officer"),
+      SectionItem("Risk: Supply Chain Delays", "Component shortages affecting delivery"),
+      Card("Owner: VP Ops", "Vice President of Operations"),
+      SectionItem("Risk: Regulatory Changes", "New compliance requirements"),
+      Card("Owner: Legal", "General Counsel")
+    ]),
+    
+    // 8. Strategic initiatives with status
+    SectionBlock([
+      SectionItem("Initiative: Product X Launch", "Launch Phase 2"),
+      Card("Status: In Progress", "Product X development underway"),
+      SectionItem("Initiative: Expansion into Asia", "Market entry preparation"),
+      Card("Status: Planned", "Target launch Q3 2025"),
+      SectionItem("Initiative: AI Integration", "Integrate ML features"),
+      Card("Status: On Track", "API integration completed")
+    ]),
+    
+    // 10. Months of runway
+    Card(
+      children: [
+        Heading("Runway", "Current Cash Runway"),
+        MetricCards([
+          Card("Runway", {value: "9 months", color: "blue"}, "Months"),
+          Card("Budget Burn Rate", {value: "8% MoM", color: "orange"}, "Rate"),
+          Card("Cash Reserve", {value: "$4.2M", color: "green"}, "Reserve")
+        ])
+      ]
+    ),
+    
+    // 11. Sales pipeline value
+    Card(
+      children: [
+        Heading("Sales Pipeline", "Pipeline Value"),
+        MetricCards([
+          Card("Pipeline Value", {value: "$9.8M", color: "green"}),
+          Card("Stage Value", {value: "$3.2M", color: "blue"}),
+          Card("Closed Won", {value: "24 deals", color: "yellow"})
+        ])
+      ]
+    ),
+    
+    // 12. Win rate
+    Card(
+      children: [
+        Heading("Win Rate", "Deal Conversion Rate"),
+        MetricCards([
+          Card("Win Rate", {value: "34%", color: "green"}),
+          Card("Win Ratio", {value: "1.8:1", color: "blue"})
+        ])
+      ]
+    ),
+    
+    // 13. Customer count and churn
+    SectionBlock([
+      SectionItem("Customers", "Active Customers"),
+      Card("Count:", {value: "1,247", color: "blue"}),
+      SectionItem("Churn Rate", "Customer Attrition"),
+      Card("Rate:", {value: "2.1%", color: "orange"})
+    ]),
+    
+    // 14. NPS
+    Card(
+      children: [
+        Heading("NPS", "Net Promoter Score"),
+        MetricCards([
+          Card("NPS Score", {value: "72", color: "green"}),
+          Card("Trend", {value: "↑ 8 pts QoQ", color: "blue"})
+        ])
+      ]
+    ),
+    
+    // 15. Items for next board meeting
+    SectionBlock([
+      SectionItem("Board Item 1", "Q3 Budget Review"),
+      Card("Topic: Q3 Budget Variance Analysis"),
+      SectionItem("Board Item 2", "Headcount Planning"),
+      Card("Topic: Hiring Roadmap for FY25"),
+      SectionItem("Board Item 3", "Risk Mitigation Strategy"),
+      Card("Topic: Strategic De-risking Plan")
+    ]),
+    
+    // 16. Way to change quarter
+    SectionItem("Quarter Switcher", "Change Quarter Filter"),
+    Card("Selector:", "Dropdown: 2024-Q1 | 2024-Q2 | 2024-Q3 | 2024-Q4"),
+    
+    // 17. Way to focus on one region
+    SectionItem("Region Filter", "Focus by Geography"),
+    Card("Toggle:", "Select Region: North America | Europe | APAC | LatAm"),
+    
+    // 18. Export pack
+    Card(
+      children: [
+        Heading("Export Pack", "Download Full Report"),
+        Button("Export PDF", "Export complete report"),
+        Button("Export CSV", "Export data tables")
+      ]
+    )
+  ]
+)
+
+// Helper metrics definitions
+const revenueData = [1120000, 1350000, 1480000, 1620000];
+const costData = [830000, 805000, 780000, 735000];
+const profitData = [550000, 520000, 510000, 480000];
+
+const departments = ["Engineering", "Sales", "Marketing", "Operations"];
+const headcountByDept = {
+  Engineering: 142,
+  Sales: 88,
+  Marketing: 65,
+  Operations: 38
+};
+
+const risks = [
+  { id: "risk-01", title: "Market Volatility", owner: "CTO", severity: "High" },
+  { id: "risk-02", title: "Talent Retention", owner: "COO", severity: "Medium" },
+  { id: "risk-03", title: "Supply Chain Delays", owner: "VP-Ops", severity: "High" },
+  { id: "risk-04", title: "Regulatory Changes", owner: "Legal", severity: "Medium" }
+];
+
+const initiatives = [
+  { id: "init-01", title: "Product X Launch", status: "In Progress", progress: 60 },
+  { id: "init-02", title: "Asia Expansion", status: "Planned", progress: 35 },
+  { id: "init-03", title: "AI Integration", status: "On Track", progress: 80 }
+];
+
+const runways = {
+  "Q2-2024": 9,
+  "Q3-2024": 7,
+  "Q4-2024": 5
+};
+
+const pipelineValue = 980000;
+const winRate = 0.34;
+const customers = 1247;
+const churnRate = 0.021;
+const nps = 72;
+
+const boardItems = [
+  "Q3 Budget Review - Variance Analysis",
+  "Headcount Planning for FY25",
+  "Risk Mitigation Strategy Document",
+  "Strategic Initiative Alignment"
+];
+```

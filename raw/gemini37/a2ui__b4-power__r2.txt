@@ -1,0 +1,669 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "liveAlert",
+          "controlsRow",
+          "kpiOverviewCard",
+          "chartsRowCard",
+          "operationsTabs",
+          "curtailmentCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Grid Control Centre — Real-Time Operations",
+        "subtitle": "National Transmission Network Dispatch & Monitoring Console"
+      },
+      {
+        "id": "liveAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "LIVE ALERTS: Frequency Deviation in Sector 4",
+        "description": "Grid frequency at 49.88 Hz (-0.12 Hz). Reserve spinning capacity activated on Substation B-12."
+      },
+      {
+        "id": "controlsRow",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "children": [
+          "regionFilterControl",
+          "curtailmentQuickTrigger"
+        ]
+      },
+      {
+        "id": "regionFilterControl",
+        "component": "FormControl",
+        "label": "Focus Region View (Item 10)",
+        "hint": "Filter telemetry, plants, and outages by balancing authority region",
+        "input": "regionSelect"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "focus_region",
+        "placeholder": "All Regions (National View)",
+        "items": [
+          "regAll",
+          "regNorth",
+          "regSouth",
+          "regEast",
+          "regWest"
+        ]
+      },
+      {
+        "id": "regAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "National Grid (All Interconnections)"
+      },
+      {
+        "id": "regNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "Northern Balancing Authority"
+      },
+      {
+        "id": "regSouth",
+        "component": "SelectItem",
+        "value": "south",
+        "label": "Southern Grid Intertie"
+      },
+      {
+        "id": "regEast",
+        "component": "SelectItem",
+        "value": "east",
+        "label": "Eastern Industrial Corridor"
+      },
+      {
+        "id": "regWest",
+        "component": "SelectItem",
+        "value": "west",
+        "label": "Western Renewable Zone"
+      },
+      {
+        "id": "curtailmentQuickTrigger",
+        "component": "DialogBlock",
+        "triggerLabel": "⚡ Order Emergency Curtailment",
+        "triggerVariant": "destructive",
+        "title": "Dispatch Curtailment Directive",
+        "description": "Initiate voluntary or automated load shed / generation curtailment protocol to protect system inertia.",
+        "content": [
+          "curtailmentForm"
+        ]
+      },
+      {
+        "id": "curtailmentForm",
+        "component": "Form",
+        "name": "curtailment_dispatch",
+        "buttons": "curtailmentButtons",
+        "fields": [
+          "curtailTargetField",
+          "curtailAmountField",
+          "curtailTypeField"
+        ]
+      },
+      {
+        "id": "curtailTargetField",
+        "component": "FormControl",
+        "label": "Target Region / Sector",
+        "input": "curtailTargetInput"
+      },
+      {
+        "id": "curtailTargetInput",
+        "component": "Select",
+        "name": "target_zone",
+        "placeholder": "Select zone",
+        "items": [
+          "zoneIndustrial",
+          "zoneExport",
+          "zoneRenewable"
+        ]
+      },
+      {
+        "id": "zoneIndustrial",
+        "component": "SelectItem",
+        "value": "ind_heavy",
+        "label": "Industrial Heavy Feeders (Non-Critical)"
+      },
+      {
+        "id": "zoneExport",
+        "component": "SelectItem",
+        "value": "intertie_export",
+        "label": "Intertie Net Export Link"
+      },
+      {
+        "id": "zoneRenewable",
+        "component": "SelectItem",
+        "value": "solar_wind_surplus",
+        "label": "Renewable Over-Generation Feeders"
+      },
+      {
+        "id": "curtailAmountField",
+        "component": "FormControl",
+        "label": "Curtailment Volume (MW)",
+        "input": "curtailAmountInput",
+        "hint": "Immediate dispatch response required within 4 minutes"
+      },
+      {
+        "id": "curtailAmountInput",
+        "component": "Input",
+        "name": "curtail_mw",
+        "type": "number",
+        "placeholder": "e.g. 250"
+      },
+      {
+        "id": "curtailTypeField",
+        "component": "FormControl",
+        "label": "Curtailment Class",
+        "input": "curtailTypeRadio"
+      },
+      {
+        "id": "curtailTypeRadio",
+        "component": "RadioGroup",
+        "name": "curtail_class",
+        "defaultValue": "rotational",
+        "items": [
+          "cTypeRotational",
+          "cTypeInterruptible"
+        ]
+      },
+      {
+        "id": "cTypeRotational",
+        "component": "RadioItem",
+        "label": "Interruptible Industrial Contract (Automated)",
+        "description": "Trigger negotiated industrial demand-response clauses",
+        "value": "interruptible"
+      },
+      {
+        "id": "cTypeInterruptible",
+        "component": "RadioItem",
+        "label": "Stage 1 Controlled Load Shedding",
+        "description": "Rotational 30-minute block shedding across distribution feeders",
+        "value": "rotational"
+      },
+      {
+        "id": "curtailmentButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitCurtailBtn",
+          "cancelCurtailBtn"
+        ]
+      },
+      {
+        "id": "submitCurtailBtn",
+        "component": "Button",
+        "label": "Execute Curtailment Order",
+        "type": "destructive"
+      },
+      {
+        "id": "cancelCurtailBtn",
+        "component": "Button",
+        "label": "Cancel",
+        "variant": "tertiary"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "kpiHeader",
+          "kpiTable",
+          "capacityProgress"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Live Telemetry & Capacity Headroom"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiColMetric",
+          "kpiColReading",
+          "kpiColBenchmark",
+          "kpiColStatus"
+        ]
+      },
+      {
+        "id": "kpiColMetric",
+        "component": "Col",
+        "label": "System Parameter",
+        "data": [
+          "Current Electricity Load (MW)",
+          "Installed & Active Capacity (MW)",
+          "Spot Price (per MWh)",
+          "Emissions Today (CO₂e Total)",
+          "Carbon Intensity"
+        ]
+      },
+      {
+        "id": "kpiColReading",
+        "component": "Col",
+        "label": "Live Value",
+        "data": [
+          "43,820 MW",
+          "48,500 MW",
+          "$74.20 / MWh",
+          "38,420 tonnes CO₂",
+          "184 g/kWh"
+        ]
+      },
+      {
+        "id": "kpiColBenchmark",
+        "component": "Col",
+        "label": "Operating Limit / Target",
+        "data": [
+          "Max Peak: 48,500 MW",
+          "Available Headroom: 4,680 MW",
+          "Day-Ahead Avg: $68.50",
+          "Daily Cap: 52,000 tonnes",
+          "Clean Energy Standard: <200 g"
+        ]
+      },
+      {
+        "id": "kpiColStatus",
+        "component": "Col",
+        "label": "Safety State",
+        "data": [
+          "90.35% Utilization",
+          "9.65% Operating Reserve",
+          "Peak Pricing Active",
+          "Below Daily Limit (-26%)",
+          "Compliant (Green)"
+        ]
+      },
+      {
+        "id": "capacityProgress",
+        "component": "Progress",
+        "value": 90.35,
+        "label": "Grid Capacity Utilization: 90.35% of 48,500 MW Maximum Operating Limit (9.65% Spinning Reserve Left)"
+      },
+      {
+        "id": "chartsRowCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "chartsHeader",
+          "forecastChart",
+          "mixHeading",
+          "genSplitChart"
+        ]
+      },
+      {
+        "id": "chartsHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "24-Hour Demand Forecast vs Net Generation (MW)"
+      },
+      {
+        "id": "forecastChart",
+        "component": "AreaChart",
+        "xLabel": "Hour (Next 24 Hours)",
+        "yLabel": "Megawatts (MW)",
+        "variant": "natural",
+        "labels": [
+          "00:00",
+          "03:00",
+          "06:00",
+          "09:00",
+          "12:00",
+          "15:00",
+          "18:00",
+          "21:00",
+          "24:00"
+        ],
+        "series": [
+          "forecastSeriesDemand",
+          "forecastSeriesGen"
+        ]
+      },
+      {
+        "id": "forecastSeriesDemand",
+        "component": "Series",
+        "category": "Forecasted Demand",
+        "values": [
+          34200,
+          31100,
+          36800,
+          42400,
+          44900,
+          43200,
+          46800,
+          41300,
+          35600
+        ]
+      },
+      {
+        "id": "forecastSeriesGen",
+        "component": "Series",
+        "category": "Scheduled Generation",
+        "values": [
+          36000,
+          33500,
+          39000,
+          44500,
+          47000,
+          45500,
+          48500,
+          43000,
+          37500
+        ]
+      },
+      {
+        "id": "mixHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Current Generation Split by Energy Source"
+      },
+      {
+        "id": "genSplitChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Nuclear (Baseload)",
+          "Natural Gas (CCGT)",
+          "Hydroelectric",
+          "Wind Farms",
+          "Solar Photovoltaic",
+          "Grid Battery Storage"
+        ],
+        "values": [
+          14200,
+          13800,
+          6400,
+          5100,
+          3200,
+          1120
+        ]
+      },
+      {
+        "id": "operationsTabs",
+        "component": "Tabs",
+        "items": [
+          "tabPlants",
+          "tabOutages",
+          "tabMaintenance"
+        ]
+      },
+      {
+        "id": "tabPlants",
+        "component": "TabItem",
+        "value": "plants",
+        "trigger": "Power Plants Fleet & Status",
+        "content": [
+          "plantsTable"
+        ]
+      },
+      {
+        "id": "plantsTable",
+        "component": "Table",
+        "columns": [
+          "plantNameCol",
+          "plantFuelCol",
+          "plantOutputCol",
+          "plantMaxCol",
+          "plantStatusCol"
+        ]
+      },
+      {
+        "id": "plantNameCol",
+        "component": "Col",
+        "label": "Plant Station",
+        "data": [
+          "Highland Nuclear Unit 1 & 2",
+          "Valley Combined Cycle Gas",
+          "Cascade Dam Hydro Complex",
+          "Prairie Ridge Wind Facility",
+          "Desert Sun PV Array Beta",
+          "Metro Fast-Response Peaker"
+        ]
+      },
+      {
+        "id": "plantFuelCol",
+        "component": "Col",
+        "label": "Primary Source",
+        "data": [
+          "Nuclear",
+          "Natural Gas",
+          "Hydro",
+          "Wind",
+          "Solar",
+          "Gas Aeroderivative"
+        ]
+      },
+      {
+        "id": "plantOutputCol",
+        "component": "Col",
+        "label": "Current Output (MW)",
+        "data": [
+          "2,400 MW",
+          "1,850 MW",
+          "980 MW",
+          "620 MW",
+          "410 MW",
+          "0 MW (Standby)"
+        ]
+      },
+      {
+        "id": "plantMaxCol",
+        "component": "Col",
+        "label": "Rated Capacity",
+        "data": [
+          "2,400 MW (100%)",
+          "2,000 MW (92.5%)",
+          "1,200 MW (81.6%)",
+          "800 MW (77.5%)",
+          "500 MW (82.0%)",
+          "350 MW (Spinning)"
+        ]
+      },
+      {
+        "id": "plantStatusCol",
+        "component": "Col",
+        "label": "Operational Status",
+        "data": [
+          "Online — Nominal",
+          "Online — Nominal",
+          "Online — Modulating",
+          "Online — Gusting",
+          "Online — Clear Sky",
+          "Hot Standby (10-min Synch)"
+        ]
+      },
+      {
+        "id": "tabOutages",
+        "component": "TabItem",
+        "value": "outages",
+        "trigger": "Active Outages & Contingencies",
+        "content": [
+          "outagesTable"
+        ]
+      },
+      {
+        "id": "outagesTable",
+        "component": "Table",
+        "columns": [
+          "outageIdCol",
+          "outageRegionCol",
+          "outageImpactCol",
+          "outageCauseCol",
+          "outageEstRestoreCol"
+        ]
+      },
+      {
+        "id": "outageIdCol",
+        "component": "Col",
+        "label": "Incident ID",
+        "data": [
+          "OUT-4401-N",
+          "OUT-4405-E",
+          "OUT-4409-S"
+        ]
+      },
+      {
+        "id": "outageRegionCol",
+        "component": "Col",
+        "label": "Affected Region",
+        "data": [
+          "Northern Balancing Authority (Substation 4)",
+          "Eastern Industrial Corridor (Feeder 11B)",
+          "Southern Intertie (Tie-Line 500kV)"
+        ]
+      },
+      {
+        "id": "outageImpactCol",
+        "component": "Col",
+        "label": "Impact / Lost Load",
+        "data": [
+          "145 MW / 12,400 Customers",
+          "80 MW / Industrial Park Loop",
+          "0 MW (Redundant line engaged)"
+        ]
+      },
+      {
+        "id": "outageCauseCol",
+        "component": "Col",
+        "label": "Root Cause",
+        "data": [
+          "Transformer Bus Breaker Trip",
+          "Downed 115kV Line (Storm Cell)",
+          "Protective Relay Misoperation"
+        ]
+      },
+      {
+        "id": "outageEstRestoreCol",
+        "component": "Col",
+        "label": "Est. Restoration (ETR)",
+        "data": [
+          "45 mins (Crews On Site)",
+          "2 hrs 15 mins (Line Rerouting)",
+          "15 mins (Remote Reset Pending)"
+        ]
+      },
+      {
+        "id": "tabMaintenance",
+        "component": "TabItem",
+        "value": "maintenance",
+        "trigger": "Monthly Scheduled Maintenance",
+        "content": [
+          "maintenanceTable"
+        ]
+      },
+      {
+        "id": "maintenanceTable",
+        "component": "Table",
+        "columns": [
+          "maintAssetCol",
+          "maintTypeCol",
+          "maintDateCol",
+          "maintDurationCol",
+          "maintImpactCol"
+        ]
+      },
+      {
+        "id": "maintAssetCol",
+        "component": "Col",
+        "label": "Asset / Facility",
+        "data": [
+          "Highland Unit 3 Refueling Outage",
+          "500kV Trans-Valley Line Reconductoring",
+          "Riverbed Hydro Turbine #2 Overhaul",
+          "Central Substation Breaker Replacement"
+        ]
+      },
+      {
+        "id": "maintTypeCol",
+        "component": "Col",
+        "label": "Maintenance Type",
+        "data": [
+          "Major Nuclear Overhaul",
+          "Transmission Line Upgrade",
+          "Routine Mechanical Service",
+          "Substation Modernization"
+        ]
+      },
+      {
+        "id": "maintDateCol",
+        "component": "Col",
+        "label": "Scheduled Window",
+        "data": [
+          "May 12 – May 28",
+          "May 18 – May 20",
+          "May 22 – May 25",
+          "May 29 – May 30"
+        ]
+      },
+      {
+        "id": "maintDurationCol",
+        "component": "Col",
+        "label": "Duration",
+        "data": [
+          "16 Days",
+          "48 Hours",
+          "72 Hours",
+          "24 Hours"
+        ]
+      },
+      {
+        "id": "maintImpactCol",
+        "component": "Col",
+        "label": "Grid Derating",
+        "data": [
+          "-1,200 MW Baseload",
+          "-400 MW Intertie Capacity",
+          "-150 MW Hydro Reserve",
+          "N-1 Redundancy Reduced"
+        ]
+      },
+      {
+        "id": "curtailmentCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "curtailmentHeader",
+          "curtailmentCallout"
+        ]
+      },
+      {
+        "id": "curtailmentHeader",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Grid Reliability & Safety Directives"
+      },
+      {
+        "id": "curtailmentCallout",
+        "component": "TextCallout",
+        "variant": "info",
+        "title": "Automated Dispatch Rule Active",
+        "description": "If operating headroom falls below 6.0% (<2,910 MW reserve), automated curtailment protocols will lock on non-firm export and voluntary industrial contracts."
+      }
+    ]
+  }
+}
+</a2ui-json>

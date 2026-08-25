@@ -1,0 +1,117 @@
+```openui
+root = Card([
+    playersOnlineSection,
+    activePlayersSection,
+    revenueSection,
+    sessionLengthChart,
+    bestSellingItemsSection,
+    serverHealthSection,
+    crashRateChart,
+    liveEventsSection,
+    playerReportsSection,
+    banAppealsSection,
+    currencyInflationSection,
+    experimentResultsSection,
+    patchNotesForm,
+    regionFocusSection,
+    hotfixButton
+])
+
+playersOnlineSection = Card([
+    CardHeader("Players Online", "Current Status")
+], "sunk", null, null, null, false, "row")
+activePlayersSection = Card([
+    CardHeader("Active Players"),
+    Table(activePlayersTable)
+], "sunk")
+activePlayersTable = Table([
+    Col("Metric", ["Daily", "Monthly"]),
+    Col("Players", [activePlayersDaily, activePlayersMonthly])
+])
+activePlayersDaily = Col("Count", [32567], "number")
+activePlayersMonthly = Col("Count", [987654], "number")
+revenueSection = Card([
+    CardHeader("Revenue Overview"),
+    Table(revenueTable)
+], "sunk")
+revenueTable = Table([
+    Col("Metric", ["Today", "Per User"]),
+    Col("Revenue", [revenueToday, revenuePerUser])
+])
+revenueToday = Col("Amount", ["$12,345"], "number")
+revenuePerUser = Col("Amount", ["$0.35"], "number")
+sessionLengthChart = Card([
+    CardHeader("Session Length", "Past 2 Weeks"),
+    LineChart(sessionLabels, [sessionLengthSeries], "linear", "Day", "Minutes")
+], "sunk")
+sessionLabels = Col("Day", ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"])
+sessionLengthSeries = Series("Average Session Length", [36, 42, 38, 45, 50, 48, 46, 47, 49, 51, 53, 50, 52, 54])
+bestSellingItemsSection = Card([
+    CardHeader("Best-Selling Items"),
+    Table(bestSellingItemsTable)
+], "sunk")
+bestSellingItemsTable = Table([
+    Col("Item", ["Sword of Truth", "Diamond Shield", "Magic Potion"]),
+    Col("Units Sold", [1234, 987, 4567])
+])
+serverHealthSection = Card([
+    CardHeader("Server Health"),
+    Table(serverHealthTable)
+], "sunk")
+serverHealthTable = Table([
+    Col("Region", ["NA", "EU", "ASIA"]),
+    Col("Health", ["Healthy", "Warning", "Critical"])
+])
+crashRateChart = Card([
+    CardHeader("Crash Rate", "By App Version"),
+    BarChart(crashRateLabels, [crashRateSeries], "grouped", "Version", "Rate")
+], "sunk")
+crashRateLabels = Col("Version", ["1.0", "1.1", "1.2", "2.0"])
+crashRateSeries = Series("Crash Rate", [0.02, 0.05, 0.01, 0.03])
+liveEventsSection = Card([
+    CardHeader("Live Events"),
+    Table(liveEventsTable)
+], "sunk")
+liveEventsTable = Table([
+    Col("Event", ["Event A", "Event B"]),
+    Col("Status", ["Running", "Upcoming"])
+])
+playerReportsSection = Card([
+    CardHeader("Player Reports"),
+    TextContent("Awaiting Review: 15")
+], "sunk")
+banAppealsSection = Card([
+    CardHeader("Ban Appeals"),
+    TextContent("Awaiting Review: 8")
+], "sunk")
+currencyInflationSection = Card([
+    CardHeader("Currency Inflation"),
+    TextContent("Current Inflation Rate: 3.2%")
+], "sunk")
+experimentResultsSection = Card([
+    CardHeader("Experiment Results"),
+    Table(experimentResultsTable)
+], "sunk")
+experimentResultsTable = Table([
+    Col("Experiment", ["A/B Testing", "Feature Rollout"]),
+    Col("Result", ["Variant B Wins", "Feature Positive"])
+])
+patchNotesForm = Form("patch-notes", patchNotesButtons, [draftPatchNotesField])
+draftPatchNotesField = FormControl("Draft Patch Notes", patchNotesTextArea)
+patchNotesTextArea = TextArea("notes", "Enter patch notes here...", 5)
+patchNotesButtons = Buttons([saveBtn, cancelBtn])
+saveBtn = Button("Save Draft")
+cancelBtn = Button("Cancel", null, "tertiary")
+regionFocusSection = Card([
+    CardHeader("Region Focus"),
+    Buttons([focusNA, focusEU, focusASIA])
+], "sunk")
+focusNA = Button("Focus on NA")
+focusEU = Button("Focus on EU")
+focusASIA = Button("Focus on ASIA")
+hotfixButton = Card([
+    CardHeader("Hotfix Deployment"),
+    Buttons([deployHotfix])
+], "sunk")
+deployHotfix = Button("Deploy Hotfix", null, "destructive")
+```

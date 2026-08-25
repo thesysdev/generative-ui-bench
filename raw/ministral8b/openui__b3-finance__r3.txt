@@ -1,0 +1,48 @@
+```openui-lang
+root = Card([financeHeader, cashStatus, metricsSection, expensesChart, transactionsTable, monthSelector, downloadButton])
+
+financeHeader = CardHeader("Month-End Finance", "January 2024")
+
+cashStatus = Callout("Current Status", "Healthy cash position with 12 months runway", "success")
+
+metricsSection = Card([runwayLabel, cashOnHand, monthlyBurn, monthsRunway], "sunk")
+runwayLabel = Heading("Key Metrics", "h3")
+
+cashOnHand = Card([cashLabel, cashValue], "card", "column", "m", "center")
+cashLabel = TextContent("Cash on Hand", "large-heavy")
+cashValue = TextContent("$1,285,000", "large-heavy")
+
+monthlyBurn = Card([burnLabel, burnValue], "card", "column", "m", "center")
+burnLabel = TextContent("Monthly Burn", "large-heavy")
+burnValue = TextContent("-$85,000", "large-heavy")
+
+monthsRunway = Card([runwayLabel, runwayValue], "card", "column", "m", "center")
+runwayLabel = TextContent("Months of Runway", "large-heavy")
+runwayValue = TextContent("12.5", "large-heavy")
+
+expensesChart = Card([expensesTitle, categoryChart], "sunk")
+expensesTitle = Heading("Expenses Breakdown", "h3")
+categoryChart = PieChart(["Salaries", "Rent", "Marketing", "Software", "Other"], [400000, 250000, 150000, 100000, 100000])
+
+transactionsTable = Card([transactionsTitle, largeTransactionsTable], "sunk")
+transactionsTitle = Heading("Transactions > $10K", "h3")
+largeTransactionsTable = Table([transactionColHeaders])
+transactionColHeaders = [
+    Col("Date", ["2024-01-15", "2024-01-22", "2024-01-05"], "string"),
+    Col("Description", ["Office Renovation", "Q1 Marketing", "Server Upgrade"], "string"),
+    Col("Amount", ["-$125,000", "$102,000", "$15,000"], "number"),
+    Col("Category", ["Rent", "Marketing", "Software"], "string")
+]
+
+monthSelector = Card([monthLabel, monthDropdown], "sunk")
+monthLabel = TextContent("Select Month", "large-heavy")
+monthDropdown = Select("month", [
+    SelectItem("2024-01", "January 2024"),
+    SelectItem("2024-02", "February 2024"),
+    SelectItem("2024-03", "March 2024")
+], "January 2024", null, "medium")
+
+downloadButton = Card([downloadLabel, downloadBtn], "sunk")
+downloadLabel = TextContent("Export Statement", "large-heavy")
+downloadBtn = Button("Download PDF", null, "primary")
+```

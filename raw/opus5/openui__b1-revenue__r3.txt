@@ -1,0 +1,32 @@
+root = Card([header, todayBlock, compareBlock, hourlyChart, breakdown, followUps])
+
+header = CardHeader("This morning at Fern & Flour", "Sales through 10:45 AM · Tuesday")
+
+todayBlock = Card([todayLabel, todayFigure, todayMeta], "sunk")
+todayLabel = TextContent("Revenue so far today", "small-heavy")
+todayFigure = Heading("$1,842.60", "h1")
+todayMeta = TextContent("**64 orders** · average basket **$28.79** · last sale 4 minutes ago")
+
+compareBlock = Card([compareHeading, compareTag, compareCallout, compareTable], "card", "column", "m")
+compareHeading = Heading("Versus 10:45 AM yesterday", "h3")
+compareTag = Tag("+12.4% ahead", null, "md", "success")
+compareCallout = TextCallout("success", "Ahead of yesterday's pace", "At this time yesterday you had taken $1,639.20 from 59 orders. You are up $203.40 — driven mostly by a bigger average basket rather than more customers.")
+compareTable = Table([metricCol, todayCol, yestCol, deltaCol])
+metricCol = Col("Metric", ["Revenue", "Orders", "Average basket", "Busiest hour"])
+todayCol = Col("Today (to 10:45)", ["$1,842.60", "64", "$28.79", "9–10 AM"])
+yestCol = Col("Yesterday (to 10:45)", ["$1,639.20", "59", "$27.78", "8–9 AM"])
+deltaCol = Col("Change", ["+$203.40 (+12.4%)", "+5 (+8.5%)", "+$1.01 (+3.6%)", "shifted later"])
+
+hourlyChart = LineChart(["7 AM", "8 AM", "9 AM", "10 AM", "10:45"], [todaySeries, yestSeries], "natural", "Time of day", "Cumulative revenue ($)")
+todaySeries = Series("Today", [186, 592, 1174, 1631, 1843])
+yestSeries = Series("Yesterday", [212, 648, 1088, 1452, 1639])
+
+breakdown = Card([breakdownHeading, breakdownChart, breakdownNote], "sunk")
+breakdownHeading = Heading("Where today's $1,842.60 came from", "h4")
+breakdownChart = PieChart(["Pastries", "Coffee & drinks", "Loaves", "Sandwiches", "Retail goods"], [648.4, 512.9, 391.2, 219.8, 70.3], "donut")
+breakdownNote = TextContent("Pastries are $88 ahead of yesterday morning; loaves are running $31 behind.", "small")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Project where today lands by closing time")
+f2 = FollowUpItem("Compare this morning with last Tuesday")
+f3 = FollowUpItem("Why are loaves behind yesterday?")

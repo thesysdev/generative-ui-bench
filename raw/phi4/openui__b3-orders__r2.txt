@@ -1,0 +1,38 @@
+```openui
+root = Card([ordersToday, revenueToday, avgOrderValue, recentOrders, filterPanel, refundRate, orderVolume, markOrderFulfilled])
+
+ordersToday = CardHeader("E-commerce Operations", "Daily Summary")
+revenueToday = TextContent("Revenue Today: $12,500", "large")
+avgOrderValue = TextContent("Average Order Value: $250", "large")
+
+recentOrdersHeader = CardHeader("Recent Orders", null)
+recentOrders = Table([orderId, customerId, total, status])
+orderId = Col("Order ID", ["O12345", "O12346", "O12347"])
+customerId = Col("Customer ID", ["C98765", "C98766", "C98767"])
+total = Col("Total", ["$300", "$450", "$200"])
+status = Col("Status", ["Pending", "Shipped", "Cancelled"])
+recentOrders = Card([recentOrdersHeader, recentOrders])
+
+filterPanel = Card([statusFilter, customerSearch])
+statusFilter = Form("filter-form", filterButtons, [statusField])
+statusField = FormControl("Order Status", statusSelect)
+statusSelect = Select("status", [allStatus, pendingStatus, shippedStatus, cancelledStatus], "Select status")
+allStatus = SelectItem("All", "All")
+pendingStatus = SelectItem("Pending", "Pending")
+shippedStatus = SelectItem("Shipped", "Shipped")
+cancelledStatus = SelectItem("Cancelled", "Cancelled")
+filterButtons = Buttons([applyFilter])
+applyFilter = Button("Apply Filter")
+
+customerSearch = FormControl("Customer Name", customerInput)
+customerInput = Input("customer", "Search by name")
+
+refundRate = TextContent("Refund Rate This Month: 5%", "large")
+
+orderVolumeHeader = CardHeader("Order Volume", "Past Four Weeks")
+orderVolume = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [orderVolumeSeries], "linear", "Week", "Orders")
+orderVolumeSeries = Series("Orders", [150, 175, 160, 190])
+
+markOrderFulfilledButton = Button("Mark Order Fulfilled", ["fulfillOrder"])
+markOrderFulfilled = Cards([markOrderFulfilledButton])
+```

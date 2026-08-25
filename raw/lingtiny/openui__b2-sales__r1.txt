@@ -1,0 +1,73 @@
+root = Card([
+  header,
+  kpiRow,
+  revenueTrend,
+  bestSellers,
+  conversion,
+  download,
+  footer,
+], "sunk", "column", "m", "40")
+
+header = CardHeader("Monthly Sales Check", "Founder's dashboard — this month")
+
+kpis = Table([
+  Col("Metric", ["Revenue", "Units Sold", "Conversion Rate"]),
+  Col("Value", ["$142,800", "3,210", "4.7%"]),
+] )
+
+kpiRow = Card([
+  kpis,
+  kpiSummary,
+])
+
+kpiSummary = Card([
+  heading,
+  statusBadge,
+])
+
+heading = Heading("Summary", "h3")
+statusBadge = Badge("Healthy", "success")
+
+revenueTrend = LineChart(
+  ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  [
+    Series("Revenue", [28000, 31000, 29500, 34000, 36000, 38000]),
+    Series("Target", [30000, 30000, 30000, 30000, 30000, 30000]),
+  ],
+  "linear",
+  "Month",
+  "Revenue ($)",
+)
+
+bestSellers = Card([
+  bestSellersHeading,
+  bestSellersTable,
+])
+
+bestSellersHeading = Heading("Top 3 Products", "h3")
+bestSellersTable = Table([
+  Col("Product", ["Product A", "Product B", "Product C"]),
+  Col("Units Sold", [1240, 980, 760]),
+])
+
+conversion = Card([
+  conversionHeading,
+  conversionBadge,
+])
+
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionBadge = Badge("4.7%", "info")
+
+download = Card([
+  downloadButton,
+])
+
+downloadButton = Button("Download CSV", null, "primary")
+
+footer = Card([
+  footerHeading,
+  footerNote,
+])
+
+footerHeading = Heading("End of month", "h4")
+footerNote = TextContent("All figures are estimates. Data updated every 5 minutes.", "small")

@@ -1,0 +1,32 @@
+```openui-lang
+root = Card([header, budgetSection, categorySection, largestExpense, monthSelector, addExpenseForm])
+
+header = CardHeader("Personal Budget Check", "Last 30 days")
+budgetSection = Card([budgetBar, budgetText], "sunk")
+categorySection = Card([categoryTable], "sunk")
+largestExpense = Card([highlightedExpense], "sunk")
+monthSelector = Card([monthDropdown], "sunk")
+addExpenseForm = Card([addExpenseButtons], "sunk")
+
+budgetBar = BarChart(["Spent vs Budget"], [spentSeries, budgetSeries], "grouped", "Month", "USD")
+spentSeries = Series("Spent", [1200, 1250, 1300])  // Example: values for each month
+budgetSeries = Series("Budget", [1500, 1500, 1500])
+budgetText = TextContent("You've spent $1,300 this month, $200 under your $1,500 budget.", "large")
+
+categoryTable = Table([catCol, amountCol])
+catCol = Col("Category", ["Food", "Transport", "Entertainment", "Utilities", "Misc"])
+amountCol = Col("Amount", [400, 200, 150, 300, 150], "number")
+
+highlightedExpense = Card([largestExpenseCard], "sunk")
+largestExpenseCard = CardHeader("Largest Expense", "Food: $400")
+
+monthSelector = Card([monthDropdown], "sunk")
+monthDropdown = DatePicker("selectMonth", "single", value: "2024-08")
+
+addExpenseForm = Form("addExpenseForm", addExpenseButtons, [expenseField])
+expenseField = FormControl("Expense amount", expenseInput, "Enter the expense amount")
+expenseInput = Input("expenseAmount", type: "number", value: "0")
+addExpenseButtons = Buttons([saveBtn, cancelBtn])
+saveBtn = Button("Add Expense", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

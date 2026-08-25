@@ -1,0 +1,84 @@
+root = Card([header, summaryCards, positionsTable, exposureChart, varSection, moversSection, watchTable, ordersTable, marginSection, headlinesSection, releasesTable, strategiesChart, drawdownChart, riskAlerts, rebalanceSection, orderForm, timeframeSection], "card", "column", "l")
+
+header = CardHeader("Trading Desk — Morning Workspace", "Real-time portfolio & risk overview")
+portfolioValue = TextContent("Portfolio Value: $4,821,390", "large-heavy")
+pnlToday = TextContent("P&L Today: +$42,180 (+0.88%)", "default")
+summaryCards = Card([portfolioValue, pnlToday], "sunk", "row", "m")
+
+tickerCol = Col("Ticker", ["AAPL", "NVDA", "TSLA", "MSFT", "AMZN", "JPM"])
+sizeCol = Col("Size", [2500, 800, 1500, 3000, 1200, 4500])
+entryCol = Col("Entry", [175.40, 420.00, 245.30, 310.20, 135.80, 145.60])
+currentCol = Col("Current", [182.10, 445.20, 238.50, 325.40, 142.10, 149.80])
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentCol])
+
+exposureChart = PieChart(["Tech", "Fin", "Energy", "Health", "Consumer"], [42, 18, 15, 12, 13], "pie", "circular")
+
+varTitle = Heading("Value at Risk (1-day, 95%)", "h3")
+varProgress = Progress(28400, "VaR $28,400 / $50,000 limit")
+varSection = Card([varTitle, varProgress], "clear", "column", "xs")
+
+moversTitle = Heading("Today's Biggest Gainers & Losers", "h3")
+mTicker = Col("Ticker", ["NVDA", "TSLA", "JPM", "AAPL", "AMZN"])
+mChange = Col("Change %", ["+5.9%", "-2.8%", "-1.4%", "+3.8%", "+4.6%"])
+moversTable = Table([mTicker, mChange])
+moversSection = Card([moversTitle, moversTable], "clear", "column", "xs")
+
+wTicker = Col("Ticker", ["BTC", "ETH", "GLD", "SPY", "EUR/USD"])
+wPrice = Col("Price", ["67,420", "3,520", "2,340", "512.30", "1.0840"])
+watchTable = Table([wTicker, wPrice])
+
+oTicker = Col("Ticker", ["NVDA", "AAPL", "MSFT", "TSLA"])
+oSide = Col("Side", ["Buy", "Sell", "Buy", "Sell"])
+oQty = Col("Qty", [200, 500, 300, 800])
+oStatus = Col("Status", ["Working", "Working", "Filled", "Working"])
+ordersTable = Table([oTicker, oSide, oQty, oStatus])
+
+marginTitle = Heading("Margin in Use", "h3")
+marginProgress = Progress(62, "62% of $2.0M line")
+marginSection = Card([marginTitle, marginProgress], "clear", "column", "xs")
+
+headlinesTitle = Heading("Market Headlines", "h3")
+h1 = ListItem("Fed signals patience on rates", "Sentiment: Positive")
+h2 = ListItem("Oil climbs on supply fears", "Sentiment: Negative")
+h3 = ListItem("Tech earnings beat estimates", "Sentiment: Positive")
+headlinesList = ListBlock([h1, h2, h3])
+headlinesSection = Card([headlinesTitle, headlinesList], "clear", "column", "xs")
+
+rEvent = Col("Event", ["US CPI", "ECB Rate Decision", "US Retail Sales"])
+rDate = Col("Date", ["Today 08:30", "Thu 14:00", "Fri 13:30"])
+rImpact = Col("Impact", ["High", "Medium", "Medium"])
+releasesTable = Table([rEvent, rDate, rImpact])
+
+stratSeries = Series("YTD Return %", [12.4, 8.7, 15.2, 6.3, 9.1])
+strategiesChart = BarChart(["Alpha", "Beta", "Gamma", "Delta", "Core"], [stratSeries], "grouped", "Strategy", "YTD %")
+
+drawdownSeries = Series("Drawdown %", [-2.1, -3.5, -1.2, -4.8, -2.4, -5.1, -3.2, -1.9, -2.7, -4.3, -3.8, -2.1])
+drawdownChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [drawdownSeries], "linear", "Month", "Drawdown %")
+
+risk1 = Alert("Energy exposure near limit", "Sector exposure at 92% of 15% cap", "warning")
+risk2 = Alert("Margin utilization elevated", "62% of line — review before noon", "destructive")
+riskAlerts = Card([risk1, risk2], "clear", "column", "xs")
+
+rebalanceTitle = Heading("Rebalance Portfolio", "h3")
+rebalanceBtn = Button("Rebalance to Target Weights", null, "primary")
+rebalanceSection = Card([rebalanceTitle, rebalanceBtn], "clear", "column", "xs")
+
+tickerInput = Input("ticker", "NVDA")
+tickerField = FormControl("Ticker", tickerInput)
+sideBuy = SelectItem("Buy", "Buy")
+sideSell = SelectItem("Sell", "Sell")
+sideSelect = Select("side", [sideBuy, sideSell], "Buy")
+sideField = FormControl("Side", sideSelect)
+qtyInput = Input("qty", "200", "number")
+qtyField = FormControl("Quantity", qtyInput)
+submitOrderBtn = Button("Place Order", null, "primary")
+orderButtons = Buttons([submitOrderBtn])
+orderForm = Form("place-order", orderButtons, [tickerField, sideField, qtyField])
+
+tfTitle = Heading("Timeframe", "h3")
+tf1 = Button("1H")
+tf2 = Button("4H")
+tf3 = Button("1D")
+tf4 = Button("1W")
+tfButtons = Buttons([tf1, tf2, tf3, tf4], "row")
+timeframeSection = Card([tfTitle, tfButtons], "clear", "column", "xs")

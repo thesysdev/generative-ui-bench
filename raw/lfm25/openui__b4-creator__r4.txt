@@ -1,0 +1,293 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Follower total and growth over the past month
+    CardHeader(
+      title="Creator Studio Dashboard",
+      subtitle="Your performance metrics at a glance"
+    ),
+    
+    // 2. Engagement rate
+    Card(
+      children: [
+        TextContent(
+          "Engagement Rate: 8.42%",
+          size: "default"
+        ),
+        CardHeader(
+          title="Engagement Overview",
+          subtitle="Average interactions per post"
+        ),
+        TextContent(
+          "8.42% — Across all platforms combined",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // 3. Best posts this month with reach for each
+    Card(
+      children: [
+        TextContent(
+          "Top Performing Posts (This Month)",
+          size: "default"
+        ),
+        Table(
+          columns: [
+            { label: "Post Title", type: "string" },
+            { label: "Platform", type: "string" },
+            { label: "Reach", type: "number" },
+            { label: "Engagement", type: "number" }
+          ],
+          data: [
+            { title: "Viral Reel - Product Launch", platform: "TikTok", reach: 125000, engagement: 8420 },
+            { title: "Behind-the-Scenes Studio Tour", platform: "Instagram", reach: 89000, engagement: 6230 },
+            { title: "Community Q&A Session", platform: "YouTube", reach: 67000, engagement: 4120 },
+            { title: "New Feature Announcement", platform: "Twitter", reach: 45000, engagement: 3100 },
+            { title: "Thought Leadership Article", platform: "LinkedIn", reach: 38000, engagement: 2450 }
+          ]
+        )
+      ]
+    ),
+    
+    // 4. Audience split by platform
+    Card(
+      children: [
+        TextContent(
+          "Audience Distribution by Platform",
+          size: "default"
+        ),
+        Table(
+          columns: [
+            { label: "Platform", type: "string" },
+            { label: "Percentage", type: "number" },
+            { label: "Count", type: "number" }
+          ],
+          data: [
+            { platform: "TikTok", percentage: 35, count: 12500 },
+            { platform: "Instagram", percentage: 28, count: 10000 },
+            { platform: "YouTube", percentage: 22, count: 7800 },
+            { platform: "Twitter", percentage: 15, count: 5500 },
+            { platform: "LinkedIn", percentage: 10, count: 3500 }
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Posts scheduled this week
+    Card(
+      children: [
+        TextContent(
+          "Posts Scheduled This Week",
+          size: "default"
+        ),
+        ListBlock(
+          items: [
+            ListItem(
+              title: "Launch Video - Wed 10 AM",
+              subtitle: "Prepared for Tuesday launch"
+            ),
+            ListItem(
+              title: "Product Review - Fri 2 PM",
+              subtitle: "Mid-week analysis post"
+            ),
+            ListItem(
+              title: "Live Stream Recap - Sat 6 PM",
+              subtitle: "Recap of yesterday's event"
+            )
+          ],
+          variant: "card"
+        )
+      ]
+    ),
+    
+    // 6. Best hour to post based on history
+    Card(
+      children: [
+        TextContent(
+          "Best Time to Post",
+          size: "default"
+        ),
+        Chart(
+          labels: ["9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM"],
+          series: [
+            {
+              category: "TikTok",
+              values: [72, 68, 85, 90, 75, 82, 80, 78, 74, 89]
+            },
+            {
+              category: "Instagram",
+              values: [65, 70, 88, 92, 78, 85, 91, 86, 79, 93]
+            },
+            {
+              category: "YouTube",
+              values: [45, 52, 38, 55, 40, 48, 58, 63, 57, 61]
+            },
+            {
+              category: "Twitter",
+              values: [30, 35, 42, 38, 33, 37, 39, 44, 40, 46]
+            },
+            {
+              category: "LinkedIn",
+              values: [20, 25, 32, 28, 24, 27, 31, 26, 23, 29]
+            }
+          ],
+          variant: "grouped",
+          xLabel: "Time of Day",
+          yLabel: "Post Performance"
+        )
+      ]
+    ),
+    
+    // 7. Comments waiting for a reply
+    Card(
+      children: [
+        TextContent(
+          "Comments Waiting for Reply",
+          size: "default"
+        ),
+        ListBlock(
+          items: [
+            FollowUpItem("Hey! Did you get my previous thread? I'd love to discuss further."),
+            FollowUpItem("Great work on this video - any thoughts on the analytics I shared?"),
+            FollowUpItem("Can we connect about potential collab on upcoming project?")
+          ],
+          variant: "card",
+          wrap: true
+        )
+      ]
+    ),
+    
+    // 8. Earnings this month
+    Card(
+      children: [
+        TextContent(
+          "Earnings This Month",
+          size: "default"
+        ),
+        Table(
+          columns: [
+            { label: "Source", type: "string" },
+            { label: "Amount ($)", type: "number" },
+            { label: "Currency", type: "string" }
+          ],
+          data: [
+            { source: "Sponsorships", amount: 25000, currency: "USD" },
+            { source: "Affiliate Links", amount: 8500, currency: "USD" },
+            { source: "Direct Sales", amount: 42000, currency: "USD" },
+            { source: "Merchandise", amount: 18000, currency: "USD" },
+            { source: "Other Income", amount: 3500, currency: "USD" }
+          ]
+        )
+      ]
+    ),
+    
+    // 9. Pending collaboration requests
+    Card(
+      children: [
+        TextContent(
+          "Pending Collaboration Requests",
+          size: "default"
+        ),
+        ListBlock(
+          items: [
+            FollowUpItem("Want to co-create a series on AI tools for creators?"),
+            FollowUpItem("Collaborating on a joint webinar next month?"),
+            FollowUpItem("Partnering for a cross-platform tutorial?"),
+            FollowUpItem("Interest in guest blogging exchange?")
+          ],
+          variant: "card",
+          wrap: true
+        )
+      ]
+    ),
+    
+    // 10. Schedule a new post with caption and time
+    Card(
+      children: [
+        TextContent(
+          "Schedule New Post",
+          size: "default"
+        ),
+        CardHeader(
+          title="Create Post",
+          subtitle="Add caption and publish time"
+        ),
+        Buttons(
+          buttons: [
+            Button(
+              label="Create Post",
+              action: "create_post",
+              variant: "primary",
+              size: "medium"
+            ),
+            Button(
+              label="Cancel",
+              action: "cancel",
+              variant: "secondary",
+              size: "medium"
+            )
+          ]
+        ),
+        Card(
+          children: [
+            TextContent(
+              "Caption:",
+              size: "small"
+            ),
+            Input(
+              name: "post_caption",
+              placeholder: "Write your post content...",
+              type: "text",
+              value: "New creative update and behind-the-scenes looks",
+              size: "small"
+            ),
+            TextContent(
+              "Publish Time:",
+              size: "small"
+            ),
+            Input(
+              name: "publish_time",
+              placeholder: "Select date and time...",
+              type: "time",
+              value: "2026-04-15T14:00:00",
+              size: "small"
+            ),
+            Button(
+              label="Save Draft",
+              action: "save_draft",
+              variant: "primary",
+              size: "medium"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 11. Filter by one platform
+    Card(
+      children: [
+        TextContent(
+          "Filter by Platform",
+          size: "default"
+        ),
+        Tabs(
+          items: [
+            TabItem("All", trigger: "all", content: []),
+            TabItem("TikTok", trigger: "tiktok", content: []),
+            TabItem("Instagram", trigger: "instagram", content: []),
+            TabItem("YouTube", trigger: "youtube", content: []),
+            TabItem("Twitter", trigger: "twitter", content: []),
+            TabItem("LinkedIn", trigger: "linkedin", content: [])
+          ],
+          variant: "card"
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```

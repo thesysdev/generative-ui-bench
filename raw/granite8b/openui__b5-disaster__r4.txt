@@ -1,0 +1,252 @@
+```openui-lang
+root = Card([
+    zoneGrid,
+    severitySummary,
+    resourcesOverview,
+    sheltersInfo,
+    evacuationRoutesStatus,
+    weatherForecast,
+    incidentStats,
+    volunteersOnDuty,
+    donationsReceived,
+    aidRequests,
+    communicationChannels,
+    roadsClosed,
+    nearbyHospitals,
+    openTasks,
+    requestResources,
+    broadcastUpdate,
+    focusZone,
+    fileSituationReport
+], "card", "column", "l")
+
+zoneGrid = TabBar([
+    zoneTabNorth,
+    zoneTabSouth,
+    zoneTabEast,
+    zoneTabWest
+])
+zoneTabNorth = TabItem("North", "North", [activeIncidentsNorth])
+zoneTabSouth = TabItem("South", "South", [activeIncidentsSouth])
+zoneTabEast = TabItem("East", "East", [activeIncidentsEast])
+zoneTabWest = TabItem("West", "West", [activeIncidentsWest])
+
+severitySummary = Callout(
+    "info",
+    "Overall Severity: High",
+    "Current incidents across zones are classified as high severity."
+)
+
+resourcesOverview = Card([
+    vehicles,
+    personnel,
+    supplies
+], "sunk")
+
+vehicles = Table([
+    Col("Available Vehicles", [ambulance, firetruck, medivac])
+])
+ambulance = Tag("Ambulances", "14", "success")
+firetruck = Tag("Fire Trucks", "8", "success")
+medivac = Tag("Medivac Helicopters", "3", "success")
+
+personnel = Table([
+    Col("Personnel", [onDuty, reserve])
+])
+onDuty = Tag("On Duty", "210", "success")
+reserve = Tag("Reserve", "120", "success")
+
+supplies = Table([
+    Col("Supplies", [water, food, medKit])
+])
+water = Tag("Water (liters)", "150,000", "success")
+food = Tag("Food (meals)", "75,000", "success")
+medKit = Tag("Medical Kits", "500", "success")
+
+sheltersInfo = Table([
+    Col("Shelter", "Capacity", "Occupancy"),
+    ...shelterRows
+])
+shelterRows = [
+    Row("Shelter A", "200", "150"),
+    Row("Shelter B", "300", "180"),
+    Row("Shelter C", "150", "90")
+]
+type Row(label, cap, occ) = TextContent(label + ": " + cap + " / " + occ, "small")
+
+evacuationRoutesStatus = Table([
+    Col("Route", "Status"),
+    ...routeRows
+])
+routeRows = [
+    Row("Route 1", "Open", "green"),
+    Row("Route 2", "Closed", "red"),
+    Row("Route 3", "Partial", "yellow")
+]
+
+weatherForecast = Card([
+    forecastTitle,
+    forecastTable
+], "clear")
+forecastTitle = Heading("Next 48‑Hour Forecast", "h3")
+forecastTable = Table([
+    Col("Time", "Condition", "Temp (°F)", "Precip")
+])
+forecastRows = [
+    Row("12 PM", "Partly Cloudy", "78", "0%"),
+    Row("4 PM", "Light Rain", "72", "30%"),
+    Row("8 PM", "Clear", "68", "0%"),
+    Row("12 AM", "Cloudy", "65", "10%")
+]
+type Row(t, c, temp, p) = TextContent(t + " • " + c + " • " + temp + "°F • " + p + "%", "small")
+
+incidentStats = Callout(
+    "info",
+    "Incident Summary",
+    "Rescued: 342 | Casualties: 12"
+)
+
+volunteersOnDuty = Table([
+    Col("Volunteer", "Assignment"),
+    ...volunteerRows
+])
+volunteerRows = [
+    Row("Alice", "Search & Rescue, Zone North"),
+    Row("Bob", "Medical Triage, Zone South"),
+    Row("Cara", "Logistics, Central Coordination")
+]
+
+donationsReceived = Table([
+    Col("Donation Type", "Amount (USD)"),
+    ...donationRows
+])
+donationRows = [
+    Row("Food", "$45,000"),
+    Row("Medical Supplies", "$120,000"),
+    Row("Funds", "$300,000")
+]
+
+aidRequests = Table([
+    Col("Request ID", "Description", "Status"),
+    ...aidRows
+])
+aidRows = [
+    Row("AR-001", "Medical kit shipment", "Pending"),
+    Row("AR-002", "Additional ambulances", "In Progress"),
+    Row("AR-003", "Shelter expansion", "Awaiting Review")
+]
+
+communicationChannels = Table([
+    Col("Channel", "Status"),
+    ...commRows
+])
+commRows = [
+    Row("Radio Net 1", "Up", "green"),
+    Row("Satellite Link", "Down", "red"),
+    Row("SMS Alert System", "Up", "green")
+]
+
+roadsClosed = ListBlock([
+    ListItem("Route 5 – North–South Connector", "Closed due to debris"),
+    ListItem("Route 12 – East–West Highway", "Closed for safety inspection"),
+    ListItem("Bridge 3", "Structural failure, closed")
+], "image")
+
+nearbyHospitals = Table([
+    Col("Hospital", "Free Beds"),
+    ...hospitalRows
+])
+hospitalRows = [
+    Row("St. Mary's Hospital", "24"),
+    Row("Community Health Center", "18"),
+    Row("Regional Medical Center", "12")
+]
+
+openTasks = Table([
+    Col("Task", "Assignee"),
+    ...taskRows
+])
+taskRows = [
+    Row("Secure Shelter A", "John Doe"),
+    Row("Deploy Additional Vehicles", "Jane Smith"),
+    Row("Update Weather Alerts", "Mike Brown")
+]
+
+requestResources = Form("resource-request", requestButtons, [
+    resourceType,
+    requestQuantity
+])
+resourceType = FormControl("Resource Type", selectResource, "Choose resource to request")
+selectResource = Select("resource", [typeAmbulance, typeWater, typeFood], "Select type")
+typeAmbulance = SelectItem("Ambulance", "Ambulance")
+typeWater = SelectItem("Water", "Water (liters)")
+typeFood = SelectItem("Food", "Food (meals)")
+
+requestQuantity = FormControl("Quantity", numberInput, "Enter quantity")
+numberInput = Input("quantity", "e.g., 5", "number")
+
+requestButtons = Buttons([submitBtn])
+submitBtn = Button("Request Resources", null, "primary")
+
+broadcastUpdate = Form("broadcast-update", broadcastButtons, [
+    updateMessage
+])
+updateMessage = TextArea("message", "Enter broadcast message", rows=4)
+broadcastButtons = Buttons([sendBtn])
+sendBtn = Button("Broadcast Update", null, "primary")
+
+focusZone = TabBar([
+    focusNorth,
+    focusSouth,
+    focusEast,
+    focusWest
+])
+focusNorth = TabItem("North", "Focus on North Zone", [activeIncidentsNorth])
+focusSouth = TabItem("South", "Focus on South Zone", [activeIncidentsSouth])
+focusEast = TabItem("East", "Focus on East Zone", [activeIncidentsEast])
+focusWest = TabItem("West", "Focus on West Zone", [activeIncidentsWest])
+
+fileSituationReport = Form("situation-report", reportButtons, [
+    reportTitle,
+    reportDetails
+])
+reportTitle = TextField("title", "Situation Report Title")
+reportDetails = TextArea("details", "Enter detailed report", rows=6)
+reportButtons = Buttons([submitReport])
+submitReport = Button("Submit Report", null, "primary")
+
+activeIncidentsNorth = Table([
+    Col("Zone", "Incident", "Severity")
+])
+activeIncidentsNorthRows = [
+    Row("North – Zone 1", "Flood", "High"),
+    Row("North – Zone 2", "Structural Fire", "Critical")
+]
+type Row(label, inc, sev) = TextContent(label + ": " + inc + " • Severity: " + sev, "small")
+
+activeIncidentsSouth = Table([
+    Col("Zone", "Incident", "Severity")
+])
+activeIncidentsSouthRows = [
+    Row("South – Zone 3", "Road Collapse", "High"),
+    Row("South – Zone 4", "Chemical Spill", "Medium")
+]
+
+activeIncidentsEast = Table([
+    Col("Zone", "Incident", "Severity")
+])
+activeIncidentsEastRows = [
+    Row("East – Zone 5", "Power Outage", "Medium"),
+    Row("East – Zone 6", "Wildfire", "High")
+]
+
+activeIncidentsWest = Table([
+    Col("Zone", "Incident", "Severity")
+])
+activeIncidentsWestRows = [
+    Row("West – Zone 7", "Coastal Storm", "Critical"),
+    Row("West – Zone 8", "Medical Emergency", "Low")
+]
+
+... = fn = (...args) => args
+```

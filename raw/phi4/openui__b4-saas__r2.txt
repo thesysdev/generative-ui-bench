@@ -1,0 +1,75 @@
+```openui
+root = Card([header, revenue, churn, signups, planSplit, topCustomers, atRiskAccounts, failedPayments, featureAdoption, nps, periodSelector, seatUtilization, inviteAdmin])
+
+header = CardHeader("Admin Overview", "Current period")
+
+revenueSection = Card([revenueHeader, monthlyRevenue, annualRevenue])
+revenueHeader = Heading("Revenue Overview", "h3")
+monthlyRevenue = Heading("$128,400", "h4")
+annualRevenue = Heading("$1,632,000", "h4")
+
+churnSection = Card([churnHeader, churnValue])
+churnHeader = Heading("Churn This Month", "h3")
+churnValue = Heading("5%", "h4")
+
+signupsSection = Card([signupsHeader, newSignups])
+signupsHeader = Heading("New Signups", "h3")
+newSignups = Heading("87", "h4")
+
+planSplitSection = Card([planSplitHeader, planSplitChart])
+planSplitHeader = Heading("Customers by Plan", "h3")
+planSplitChart = PieChart(["Free", "Pro", "Enterprise"], [34, 45, 21])
+
+topCustomersSection = Card([topCustomersHeader, topCustomersTable])
+topCustomersHeader = Heading("Top 10 Customers", "h3")
+topCustomersTable = Table([customerName, seats, spend])
+customerName = Col("Customer", ["Acme Corp", "Beta LLC", "Gamma Inc", "Delta Co", "Epsilon LLC", "Zeta Inc", "Eta LLC", "Theta Corp", "Iota Co", "Kappa LLC"])
+seats = Col("Seats", [150, 75, 200, 50, 120, 90, 30, 200, 40, 110])
+spend = Col("Spend", ["$20,000", "$15,000", "$30,000", "$10,000", "$18,000", "$14,000", "$9,000", "$25,000", "$11,000", "$16,000"])
+
+atRiskAccountsSection = Card([atRiskHeader, atRiskList])
+atRiskHeader = Heading("Accounts at Risk", "h3")
+atRiskList = ListBlock([acct1, acct2, acct3], "image")
+acct1 = ListItem("Acme Corp", "Inactivity for 60 days", null)
+acct2 = ListItem("Beta LLC", "Support tickets unresolved", null)
+acct3 = ListItem("Gamma Inc", "Subscription renewal due", null)
+
+failedPaymentsSection = Card([failedPaymentsHeader, retryFailedPayments])
+failedPaymentsHeader = Heading("Failed Payments", "h3")
+retryFailedPayments = Buttons([retryPayment1, retryPayment2])
+retryPayment1 = Button("Retry for Acme Corp")
+retryPayment2 = Button("Retry for Gamma Inc")
+
+featureAdoptionSection = Card([featureAdoptionHeader, feature1, feature2, feature3])
+featureAdoptionHeader = Heading("Feature Adoption", "h3")
+feature1 = Progress(75, "Feature A")
+feature2 = Progress(60, "Feature B")
+feature3 = Progress(40, "Feature C")
+
+npsSection = Card([npsHeader, npsValue])
+npsHeader = Heading("Current NPS", "h3")
+npsValue = Heading("45", "h4")
+
+periodSelector = Card([periodSelectorHeader, periodForm])
+periodSelectorHeader = Heading("Change Reporting Period", "h3")
+periodForm = Form("report-period", periodButtons, [startDate, endDate])
+startDate = FormControl("Start Date", startDateInput)
+startDateInput = DatePicker("start_date", "single")
+endDate = FormControl("End Date", endDateInput)
+endDateInput = DatePicker("end_date", "single")
+periodButtons = Buttons([applyBtn, resetBtn])
+applyBtn = Button("Apply")
+resetBtn = Button("Reset")
+
+seatUtilizationSection = Card([seatUtilizationHeader, seatUtilizationChart])
+seatUtilizationHeader = Heading("Seat Utilization", "h3")
+seatUtilizationChart = RadialChart(["Used", "Available"], [68, 32])
+
+inviteAdminSection = Card([inviteAdminHeader, inviteAdminForm])
+inviteAdminHeader = Heading("Invite Admin", "h3")
+inviteAdminForm = Form("invite-admin", inviteAdminButtons, [emailInput])
+emailInput = FormControl("Admin Email", inviteAdminInput)
+inviteAdminInput = Input("email", null, "email")
+inviteAdminButtons = Buttons([inviteBtn])
+inviteBtn = Button("Send Invite")
+```

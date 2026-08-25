@@ -1,0 +1,24 @@
+root = Card([header, overallStatus, uptimeCard, incidentCard, servicesTable, followUps], "card", "column", "l")
+header = CardHeader("Platform Engineering Status", "Real-time service availability and incident reporting")
+overallStatus = Callout("success", "All Systems Operational", "Core APIs and background services are operating within normal SLO thresholds.")
+
+uptimeCard = Card([uptimeHeading, uptimeProgress, uptimeDetails], "sunk", "column", "m")
+uptimeHeading = Heading("API Availability (Current Month)", "h3")
+uptimeProgress = Progress(99.94, "99.94% Uptime (Target: 99.90%)")
+uptimeDetails = TextContent("**Monthly Target:** 99.90% | **MTTR:** 14 mins | **Total Requests:** 142.8M", "small")
+
+incidentCard = Card([incidentHeading, incidentAlert, incidentTimeline], "card", "column", "s")
+incidentHeading = Heading("Most Recent Incident", "h3")
+incidentAlert = Alert("INC-8492: Elevated 5xx Rates on /v2/auth", "Resolved on Oct 24, 2024 at 14:32 UTC (Duration: 18 mins). Root cause was a stale connection pool during blue-green deployment rollouts.", "info")
+incidentTimeline = MarkDownRenderer("**Resolution Summary:** The connection pool configuration was hotfixed and all authentication endpoints resumed sub-50ms latency. No data loss occurred.", "clear")
+
+servicesTable = Table([serviceCol, statusCol, uptimeCol, latencyCol])
+serviceCol = Col("Service Name", ["REST API Gateway", "Auth Service", "Billing Webhooks", "Search & Indexer"])
+statusCol = Col("Status", ["Operational", "Operational", "Operational", "Operational"])
+uptimeCol = Col("30-Day Uptime", ["99.94%", "99.91%", "99.99%", "99.88%"])
+latencyCol = Col("p95 Latency", ["42ms", "28ms", "85ms", "110ms"])
+
+followUps = FollowUpBlock([followUp1, followUp2, followUp3])
+followUp1 = FollowUpItem("View incident post-mortem for INC-8492")
+followUp2 = FollowUpItem("Subscribe to platform incident alerts")
+followUp3 = FollowUpItem("View historical latency graphs")

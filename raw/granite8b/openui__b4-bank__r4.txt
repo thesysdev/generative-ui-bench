@@ -1,0 +1,281 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        balanceSection,
+        recentTransactions,
+        spendingByCategory,
+        billsDue,
+        vacationGoal,
+        creditScore,
+        moneyTransfer,
+        creditFreeze,
+        statementPeriodSelector,
+        alertTriggers,
+        disputeTransaction
+    ],
+    "card",
+    "column",
+    "stretch",
+    "center",
+    wrap = true
+)
+
+header = CardHeader("Personal Banking Dashboard", "Your accounts at a glance")
+
+balanceSection = Card(
+    [
+        checkingBalance,
+        savingsBalance,
+        creditBalance
+    ],
+    "sunk"
+)
+checkingBalance = TextContent("Checking: $12,345.67", "large")
+savingsBalance = TextContent("Savings: $5,432.10", "large")
+creditBalance = TextContent("Credit Line: $20,000.00 (Available: $18,500.00)", "large")
+
+recentTransactions = Card(
+    [
+        recentTransactionsHeader,
+        recentTransactionsList
+    ],
+    "clear"
+)
+recentTransactionsHeader = Heading("Recent Transactions", "h4")
+recentTransactionsList = ListBlock(
+    [
+        txn1,
+        txn2,
+        txn3,
+        txn4
+    ],
+    "number"
+)
+txn1 = ListItem("Starbucks", "$9.50", ["☕"], "View details")
+txn2 = ListItem("Grocery Store", "$45.30", ["🛒"], "View details")
+txn3 = ListItem("Utility Bill", "-$120.00", ["💡"], "View details")
+txn4 = ListItem("Online Shopping", "$78.99", ["🛍️"], "View details")
+
+spendingByCategory = Card(
+    [
+        spendingByCategoryHeader,
+        spendingByCategoryChart
+    ],
+    "sunk"
+)
+spendingByCategoryHeader = Heading("Spending by Category This Month", "h4")
+spendingByCategoryChart = BarChart(
+    ["Transportation", "Food", "Utilities", "Entertainment", "Shopping"],
+    [
+        Series("Amount", [1200, 3400, 800, 1500, 2300])
+    ],
+    "grouped",
+    "Category",
+    "USD"
+)
+
+billsDue = Card(
+    [
+        billsDueHeader,
+        billsDueList
+    ],
+    "clear"
+)
+billsDueHeader = Heading("Bills Due Soon", "h4")
+billsDueList = ListBlock(
+    [
+        bill1,
+        bill2
+    ]
+)
+bill1 = ListItem("Rent", "$1,200", ["🏠"], "Pay now")
+bill2 = ListItem("Phone Bill", "$45", ["📞"], "Pay now")
+
+vacationGoal = Card(
+    [
+        vacationGoalHeader,
+        vacationGoalProgress
+    ],
+    "sunk"
+)
+vacationGoalHeader = Heading("Vacation Savings Goal", "h4")
+vacationGoalProgress = Progress(value = 0.75, label = "75% toward $2,000 goal")
+
+creditScore = TextContent("Current Credit Score: 780", "large")
+
+moneyTransfer = Card(
+    [
+        moneyTransferHeader,
+        moneyTransferForm
+    ],
+    "clear"
+)
+moneyTransferHeader = Heading("Transfer Money Between Accounts", "h4")
+moneyTransferForm = Form(
+    "transfer",
+    transferButtons,
+    [
+        transferAmount,
+        transferFrom,
+        transferTo
+    ]
+)
+transferAmount = FormControl(
+    "Amount",
+    amountInput,
+    "Enter the amount to transfer"
+)
+amountInput = Input("amount", "123.45", "number")
+transferFrom = FormControl(
+    "From",
+    fromSelect,
+    "Select source account"
+)
+fromSelect = Select("from_account", [checkingOpt, savingsOpt], "Select account")
+checkingOpt = SelectItem("Checking", "Checking")
+savingsOpt = SelectItem("Savings", "Savings")
+transferTo = FormControl(
+    "To",
+    toSelect,
+    "Select destination account"
+)
+toSelect = Select("to_account", [checkingOpt, savingsOpt], "Select account")
+transferButtons = Buttons(
+    [transferBtn, cancelBtn],
+    "column"
+)
+transferBtn = Button("Transfer", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+creditFreeze = Card(
+    [
+        creditFreezeHeader,
+        creditFreezeSwitch
+    ],
+    "clear"
+)
+creditFreezeHeader = Heading("Freeze Credit Line", "h4")
+creditFreezeSwitch = SwitchGroup(
+    "freeze_status",
+    [
+        freezeSwitch
+    ],
+    "card"
+)
+freezeSwitch = SwitchItem(
+    "Freeze Credit Line",
+    "Freezes the credit line until manually unfrozen",
+    "freeze_status",
+    defaultChecked = false
+)
+
+statementPeriodSelector = Card(
+    [
+        statementPeriodSelectorHeader,
+        statementPeriodSelectorForm
+    ],
+    "sunk"
+)
+statementPeriodSelectorHeader = Heading("Select Statement Period", "h4")
+statementPeriodSelectorForm = Form(
+    "statement_period",
+    statementPeriodButtons,
+    [
+        periodSelect
+    ]
+)
+periodSelect = FormControl(
+    "Statement Period",
+    periodPicker,
+    "Choose period for the statement"
+)
+periodPicker = DatePicker(
+    "statement_period",
+    mode = "single",
+    value = ["2024-07-01", "2024-07-31"]
+)
+statementPeriodButtons = Buttons(
+    [selectBtn, cancelBtn],
+    "column"
+)
+selectBtn = Button("Select Period", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+alertTriggers = Card(
+    [
+        alertTriggersHeader,
+        alertTriggersForm
+    ],
+    "clear"
+)
+alertTriggersHeader = Heading("Manage Alert Triggers", "h4")
+alertTriggersForm = Form(
+    "alert_settings",
+    alertTriggersButtons,
+    [
+        triggerSwitches
+    ]
+)
+triggerSwitches = CheckBoxGroup(
+    "alert_triggers",
+    [
+        lowBalanceSwitch,
+        largeTransactionSwitch,
+        billDueSwitch
+    ],
+    value = [true, true, false]
+)
+lowBalanceSwitch = CheckBoxItem(
+    "Low Balance Alerts",
+    "Notify when balance falls below $500",
+    "low_balance",
+    defaultChecked = true
+)
+largeTransactionSwitch = CheckBoxItem(
+    "Large Transaction Alerts",
+    "Notify on transactions > $500",
+    "large_txn",
+    defaultChecked = true
+)
+billDueSwitch = CheckBoxItem(
+    "Bill Due Alerts",
+    "Notify on upcoming bill payments",
+    "bill_due",
+    defaultChecked = false
+)
+alertTriggersButtons = Buttons(
+    [saveBtn, cancelBtn],
+    "column"
+)
+saveBtn = Button("Save Settings", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+disputeTransaction = Card(
+    [
+        disputeTransactionHeader,
+        disputeTransactionForm
+    ],
+    "sunk"
+)
+disputeTransactionHeader = Heading("Dispute a Transaction", "h4")
+disputeTransactionForm = Form(
+    "dispute_txn",
+    disputeButtons,
+    [
+        disputeDetails
+    ]
+)
+disputeDetails = FormControl(
+    "Transaction Details",
+    disputeInput,
+    "Enter transaction ID or description to dispute"
+)
+disputeInput = TextArea("dispute", "Enter transaction ID or details", rows = 2)
+disputeButtons = Buttons(
+    [disputeBtn, cancelBtn],
+    "column"
+)
+disputeBtn = Button("Submit Dispute", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

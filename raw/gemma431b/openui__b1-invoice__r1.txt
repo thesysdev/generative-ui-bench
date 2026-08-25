@@ -1,0 +1,32 @@
+root = Card([header, summaryCard, billingDetails, lineItems, paymentSection, footer], "clear", "column", "l")
+
+header = CardHeader("Invoice #INV-2024-001", "Freelance Design Services")
+
+summaryCard = Card([amountDue, dueDate, statusBadge], "card", "row", "m", "between", "center")
+amountDue = TextContent("$2,450.00 USD", "large-heavy")
+dueDate = TextContent("Due: Oct 24, 2024", "default")
+statusBadge = Badge("Pending", "outline")
+
+billingDetails = Card([clientInfo, freelancerInfo], "sunk", "row", "l", "stretch")
+clientInfo = Card([clientH, clientT], "clear", "column", "none")
+clientH = Heading("Bill To", "h4")
+clientT = TextContent("Acme Corp Ltd.\n123 Business Ave\nNew York, NY")
+freelancerInfo = Card([freeH, freeT], "clear", "column", "none")
+freeH = Heading("From", "h4")
+freeT = TextContent("Alex Rivera\nDesign Studio\nRemote, USA")
+
+lineItems = Table([itemCol, rateCol, totalCol])
+itemCol = Col("Description", ["UI/UX Design - Landing Page", "Brand Identity Guidelines", "Consultation Hours (5h)"], "string")
+rateCol = Col("Rate", ["$1,200", "$800", "$90/hr"], "string")
+totalCol = Col("Amount", ["$1,200", "$800", ["$450"], "number"])
+
+paymentSection = Card([payHeading, payCallout, payButtons], "card", "column", "m")
+payHeading = Heading("Payment Information", "h3")
+payCallout = Callout("info", "Secure Payment", "Please complete the payment by the due date to avoid late fees.")
+payButtons = Buttons([payNowBtn, payLaterBtn])
+payNowBtn = Button("Pay Now", null, "primary", "normal", "large")
+payLaterBtn = Button("Save for Later", null, "secondary", "normal", "medium")
+
+footer = FollowUpBlock([downloadPdf, emailClient])
+downloadPdf = FollowUpItem("Download Invoice PDF")
+emailClient = FollowUpItem("Email Client Copy")

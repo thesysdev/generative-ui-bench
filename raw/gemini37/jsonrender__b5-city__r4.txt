@@ -1,0 +1,181 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["top-bar","alerts-row","ops-tabs"]}}
+{"op":"add","path":"/elements/top-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"sunk"},"children":["title-meta","district-selector","quick-actions"]}}
+{"op":"add","path":"/elements/title-meta","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["center-title","weather-badge"]}}
+{"op":"add","path":"/elements/center-title","value":{"type":"Heading","props":{"text":"Metropolis Operations Command Center","level":"h2"}}}
+{"op":"add","path":"/elements/weather-badge","value":{"type":"Tag","props":{"text":{"$template":"Current Weather: ${/weather/temp} | ${/weather/condition} | Humidity: ${/weather/humidity} | Wind: ${/weather/wind}"},"variant":"info"}}}
+{"op":"add","path":"/state/weather","value":{"temp":"72°F (22°C)","condition":"Partly Cloudy","humidity":"58%","wind":"11 mph NW"}}
+{"op":"add","path":"/elements/district-selector","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["district-label","district-select"]}}
+{"op":"add","path":"/elements/district-label","value":{"type":"Label","props":{"text":"Filter by District (Item 13):"}}}
+{"op":"add","path":"/elements/district-select","value":{"type":"Select","props":{"name":"district_focus","items":["d-all","d-downtown","d-north","d-waterfront","d-east","d-west"],"placeholder":"All Districts","value":{"$bindState":"/focusedDistrict"}}}}
+{"op":"add","path":"/elements/d-all","value":{"type":"SelectItem","props":{"value":"all","label":"All Districts (Citywide)"}}}
+{"op":"add","path":"/elements/d-downtown","value":{"type":"SelectItem","props":{"value":"downtown","label":"Downtown Core"}}}
+{"op":"add","path":"/elements/d-north","value":{"type":"SelectItem","props":{"value":"north","label":"North Heights"}}}
+{"op":"add","path":"/elements/d-waterfront","value":{"type":"SelectItem","props":{"value":"waterfront","label":"Waterfront Bay"}}}
+{"op":"add","path":"/elements/d-east","value":{"type":"SelectItem","props":{"value":"east","label":"East End Industrial"}}}
+{"op":"add","path":"/elements/d-west","value":{"type":"SelectItem","props":{"value":"west","label":"West Midtown"}}}
+{"op":"add","path":"/state/focusedDistrict","value":"all"}
+{"op":"add","path":"/elements/quick-actions","value":{"type":"Card","props":{"direction":"row","gap":"s","variant":"clear"},"children":["dispatch-dialog","alert-dialog"]}}
+{"op":"add","path":"/elements/dispatch-dialog","value":{"type":"DialogBlock","props":{"triggerLabel":"Dispatch Crew (Item 14)","title":"Emergency / Utility Crew Dispatch","description":"Assign operational units to active incidents","triggerVariant":"default","content":["dispatch-form"]}}}
+{"op":"add","path":"/elements/dispatch-form","value":{"type":"Form","props":{"name":"crew_dispatch","buttons":"dispatch-btn-group","fields":["df-unit-type","df-district","df-priority","df-notes"]}}}
+{"op":"add","path":"/elements/df-unit-type","value":{"type":"FormControl","props":{"label":"Unit & Crew Type","input":"df-unit-input"}}}
+{"op":"add","path":"/elements/df-unit-input","value":{"type":"Input","props":{"name":"unitType","placeholder":"e.g. Engine 4, Water Main Crew B, Traffic Unit 2"}}}
+{"op":"add","path":"/elements/df-district","value":{"type":"FormControl","props":{"label":"Target District & Location","input":"df-dist-input"}}}
+{"op":"add","path":"/elements/df-dist-input","value":{"type":"Input","props":{"name":"location","placeholder":"e.g. Downtown 4th & Elm"}}}
+{"op":"add","path":"/elements/df-priority","value":{"type":"FormControl","props":{"label":"Priority Code","input":"df-pri-select"}}}
+{"op":"add","path":"/elements/df-pri-select","value":{"type":"Select","props":{"name":"priority","items":["pri-1","pri-2","pri-3"],"placeholder":"Select priority"}}}
+{"op":"add","path":"/elements/pri-1","value":{"type":"SelectItem","props":{"value":"p1","label":"Code 3 (Critical / Sirens)"}}}
+{"op":"add","path":"/elements/pri-2","value":{"type":"SelectItem","props":{"value":"p2","label":"Code 2 (Urgent)"}}}
+{"op":"add","path":"/elements/pri-3","value":{"type":"SelectItem","props":{"value":"p3","label":"Standard Routine"}}}
+{"op":"add","path":"/elements/df-notes","value":{"type":"FormControl","props":{"label":"Dispatch Directives","input":"df-notes-input"}}}
+{"op":"add","path":"/elements/df-notes-input","value":{"type":"TextArea","props":{"name":"notes","placeholder":"Enter instructions for on-scene commander..."}}}
+{"op":"add","path":"/elements/dispatch-btn-group","value":{"type":"Buttons","props":{"buttons":["submit-dispatch-btn"]}}}
+{"op":"add","path":"/elements/submit-dispatch-btn","value":{"type":"Button","props":{"label":"Transmit Dispatch Order","variant":"primary"}}}
+{"op":"add","path":"/elements/alert-dialog","value":{"type":"DialogBlock","props":{"triggerLabel":"Send Public Alert (Item 15)","title":"Broadcast Emergency Public Warning","description":"Issue broadcast push notification and EAS alerts","triggerVariant":"destructive","content":["alert-form"]}}}
+{"op":"add","path":"/elements/alert-form","value":{"type":"Form","props":{"name":"public_alert","buttons":"alert-btn-group","fields":["af-channel","af-severity","af-message"]}}}
+{"op":"add","path":"/elements/af-channel","value":{"type":"FormControl","props":{"label":"Broadcast Channel","input":"af-chan-select"}}}
+{"op":"add","path":"/elements/af-chan-select","value":{"type":"Select","props":{"name":"channel","items":["ch-all","ch-app","ch-sms","ch-eas"],"placeholder":"Broadcast Scope"}}}
+{"op":"add","path":"/elements/ch-all","value":{"type":"SelectItem","props":{"value":"all","label":"All Channels (Cell Broadcast + EAS + Sirens)"}}}
+{"op":"add","path":"/elements/ch-app","value":{"type":"SelectItem","props":{"value":"app","label":"City App Push Notifications Only"}}}
+{"op":"add","path":"/elements/ch-sms","value":{"type":"SelectItem","props":{"value":"sms","label":"SMS / Opt-in Registry"}}}
+{"op":"add","path":"/elements/ch-eas","value":{"type":"SelectItem","props":{"value":"eas","label":"Emergency Broadcast System (TV/Radio)"}}}
+{"op":"add","path":"/elements/af-severity","value":{"type":"FormControl","props":{"label":"Alert Level","input":"af-sev-select"}}}
+{"op":"add","path":"/elements/af-sev-select","value":{"type":"Select","props":{"name":"severity","items":["as-info","as-warn","as-crit"],"placeholder":"Level"}}}
+{"op":"add","path":"/elements/as-info","value":{"type":"SelectItem","props":{"value":"info","label":"Advisory"}}}
+{"op":"add","path":"/elements/as-warn","value":{"type":"SelectItem","props":{"value":"warn","label":"Warning"}}}
+{"op":"add","path":"/elements/as-crit","value":{"type":"SelectItem","props":{"value":"crit","label":"Extreme / Life Safety"}}}
+{"op":"add","path":"/elements/af-message","value":{"type":"FormControl","props":{"label":"Public Alert Message (Max 160 chars)","input":"af-msg-input"}}}
+{"op":"add","path":"/elements/af-msg-input","value":{"type":"TextArea","props":{"name":"message","placeholder":"e.g. FLASH FLOOD WARNING: Avoid Lower Waterfront Underpass until 21:00."}}}
+{"op":"add","path":"/elements/alert-btn-group","value":{"type":"Buttons","props":{"buttons":["submit-alert-btn"]}}}
+{"op":"add","path":"/elements/submit-alert-btn","value":{"type":"Button","props":{"label":"Broadcast Public Alert Now","variant":"primary","type":"destructive"}}}
+{"op":"add","path":"/elements/alerts-row","value":{"type":"Card","props":{"direction":"row","gap":"m","variant":"clear"},"children":["live-notice","system-status-badge"]}}
+{"op":"add","path":"/elements/live-notice","value":{"type":"Alert","props":{"title":"Operations Status Active","description":"Real-time telemetry stream synchronized across all municipal districts.","variant":"info"}}}
+{"op":"add","path":"/elements/system-status-badge","value":{"type":"Tag","props":{"text":"EOC Level 2 Activation","variant":"warning"}}}
+{"op":"add","path":"/elements/ops-tabs","value":{"type":"Tabs","props":{"items":["tab-overview","tab-incidents-fleet","tab-maintenance-events","tab-reports-backlog"]}}}
+{"op":"add","path":"/elements/tab-overview","value":{"type":"TabItem","props":{"value":"overview","trigger":"Live City Vitals & Utilities (1,2,3,4,5,8)","content":["overview-container"]}}}
+{"op":"add","path":"/elements/overview-container","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["vitals-grid","charts-row","parking-air-row"]}}
+{"op":"add","path":"/elements/vitals-grid","value":{"type":"Card","props":{"direction":"row","gap":"m","wrap":true},"children":["vital-congestion","vital-transit","vital-water","vital-parking"]}}
+{"op":"add","path":"/elements/vital-congestion","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["cong-title","cong-val","cong-prog","cong-sub"]}}
+{"op":"add","path":"/elements/cong-title","value":{"type":"Heading","props":{"text":"Traffic Congestion (Item 1)","level":"h4"}}}
+{"op":"add","path":"/elements/cong-val","value":{"type":"TextContent","props":{"text":"64% Capacity — Heavy Bottlenecks","size":"large-heavy"}}}
+{"op":"add","path":"/elements/cong-prog","value":{"type":"Progress","props":{"value":64,"label":"Arterial Road Index"}}}
+{"op":"add","path":"/elements/cong-sub","value":{"type":"TextContent","props":{"text":"Peak delays on I-90 Westbound & Downtown 5th Ave corridor.","size":"small"}}}
+{"op":"add","path":"/elements/vital-transit","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["tran-title","tran-val","tran-prog","tran-sub"]}}
+{"op":"add","path":"/elements/tran-title","value":{"type":"Heading","props":{"text":"Transit Punctuality (Item 2)","level":"h4"}}}
+{"op":"add","path":"/elements/tran-val","value":{"type":"TextContent","props":{"text":"91.4% On-Time Performance","size":"large-heavy"}}}
+{"op":"add","path":"/elements/tran-prog","value":{"type":"Progress","props":{"value":91,"label":"Metro Rail: 96% | Bus Rapid: 87%"}}}
+{"op":"add","path":"/elements/tran-sub","value":{"type":"TextContent","props":{"text":"420 active vehicles in scheduled transit network.","size":"small"}}}
+{"op":"add","path":"/elements/vital-water","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["water-title","water-val","water-prog","water-sub"]}}
+{"op":"add","path":"/elements/water-title","value":{"type":"Heading","props":{"text":"Water Use Today (Item 5)","level":"h4"}}}
+{"op":"add","path":"/elements/water-val","value":{"type":"TextContent","props":{"text":"48.2M Gallons Consumed","size":"large-heavy"}}}
+{"op":"add","path":"/elements/water-prog","value":{"type":"Progress","props":{"value":74,"label":"74% of Daily Reservoir Target"}}}
+{"op":"add","path":"/elements/water-sub","value":{"type":"TextContent","props":{"text":"Pressure normal across all 5 supply zones; no major main ruptures.","size":"small"}}}
+{"op":"add","path":"/elements/vital-parking","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["park-title","park-val","park-prog","park-sub"]}}
+{"op":"add","path":"/elements/park-title","value":{"type":"Heading","props":{"text":"Downtown Parking Availability (Item 8)","level":"h4"}}}
+{"op":"add","path":"/elements/park-val","value":{"type":"TextContent","props":{"text":"1,840 Available Spots (28% Open)","size":"large-heavy"}}}
+{"op":"add","path":"/elements/park-prog","value":{"type":"Progress","props":{"value":28,"label":"Available Capacity"}}}
+{"op":"add","path":"/elements/park-sub","value":{"type":"TextContent","props":{"text":"Center Garage: 45 spots | 9th St Deck: 120 spots | On-street: 12%","size":"small"}}}
+{"op":"add","path":"/elements/charts-row","value":{"type":"Card","props":{"direction":"row","gap":"m"},"children":["energy-chart-card","air-quality-chart-card"]}}
+{"op":"add","path":"/elements/energy-chart-card","value":{"type":"Card","props":{"direction":"column","gap":"s"},"children":["energy-header","energy-chart"]}}
+{"op":"add","path":"/elements/energy-header","value":{"type":"CardHeader","props":{"title":"Grid Energy Consumption (Item 4)","subtitle":"Daily past 7 days power load in Megawatt Hours (MWh)"}}}
+{"op":"add","path":"/elements/energy-chart","value":{"type":"LineChart","props":{"labels":["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],"series":["energy-series-commercial","energy-series-residential"],"variant":"natural","xLabel":"Past Week","yLabel":"MWh"}}}
+{"op":"add","path":"/elements/energy-series-commercial","value":{"type":"Series","props":{"category":"Commercial / Ind","values":[4200,4350,4410,4390,4280,3100,2950]}}}
+{"op":"add","path":"/elements/energy-series-residential","value":{"type":"Series","props":{"category":"Residential","values":[2800,2850,2900,2920,3100,3600,3750]}}}
+{"op":"add","path":"/elements/air-quality-chart-card","value":{"type":"Card","props":{"direction":"column","gap":"s"},"children":["aq-header","aq-chart"]}}
+{"op":"add","path":"/elements/aq-header","value":{"type":"CardHeader","props":{"title":"Air Quality Index (AQI) by District (Item 3)","subtitle":"Current sensor readings (Lower is better; 0-50 Good, 51-100 Mod)"}}}
+{"op":"add","path":"/elements/aq-chart","value":{"type":"HorizontalBarChart","props":{"labels":["Downtown Core","North Heights","Waterfront Bay","East End Ind.","West Midtown"],"series":["aqi-series"],"variant":"grouped","xLabel":"AQI Score","yLabel":"District"}}}
+{"op":"add","path":"/elements/aqi-series","value":{"type":"Series","props":{"category":"AQI (PM2.5/Ozone)","values":[68,34,42,86,51]}}}
+{"op":"add","path":"/elements/parking-air-row","value":{"type":"Card","props":{"direction":"row","gap":"m"},"children":["parking-table-card","aqi-table-card"]}}
+{"op":"add","path":"/elements/parking-table-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["pk-tbl-header","pk-tbl"]}}
+{"op":"add","path":"/elements/pk-tbl-header","value":{"type":"CardHeader","props":{"title":"Downtown Parking Decks Detail","subtitle":"Real-time gate and sensor occupancy"}}}
+{"op":"add","path":"/elements/pk-tbl","value":{"type":"Table","props":{"columns":["col-pk-facility","col-pk-avail","col-pk-rate","col-pk-status"]}}}
+{"op":"add","path":"/elements/col-pk-facility","value":{"type":"Col","props":{"label":"Facility","data":["City Center Garage","Civic Plaza Underground","Harbor North Structure","9th & Market Deck","Metro Center Lot"]}}}
+{"op":"add","path":"/elements/col-pk-avail","value":{"type":"Col","props":{"label":"Open / Total","data":["45 / 800","320 / 1200","510 / 1000","125 / 650","840 / 1500"]}}}
+{"op":"add","path":"/elements/col-pk-rate","value":{"type":"Col","props":{"label":"Rate","data":["$4.50/hr","$3.00/hr","$2.50/hr","$3.50/hr","$2.00/hr"]}}}
+{"op":"add","path":"/elements/col-pk-status","value":{"type":"Col","props":{"label":"Status","data":["Almost Full (94%)","Open (73%)","Open (49%)","Busy (81%)","Available (44%)"]}}}
+{"op":"add","path":"/elements/aqi-table-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["aqi-tbl-header","aqi-tbl"]}}
+{"op":"add","path":"/elements/aqi-tbl-header","value":{"type":"CardHeader","props":{"title":"District Air Quality Breakdown","subtitle":"Primary pollutants and health category"}}}
+{"op":"add","path":"/elements/aqi-tbl","value":{"type":"Table","props":{"columns":["col-aq-dist","col-aq-val","col-aq-status","col-aq-pollutant"]}}}
+{"op":"add","path":"/elements/col-aq-dist","value":{"type":"Col","props":{"label":"District","data":["East End Industrial","Downtown Core","West Midtown","Waterfront Bay","North Heights"]}}}
+{"op":"add","path":"/elements/col-aq-val","value":{"type":"Col","props":{"label":"AQI","data":[86,68,51,42,34]}}}
+{"op":"add","path":"/elements/col-aq-status","value":{"type":"Col","props":{"label":"Rating","data":["Moderate (Warning)","Moderate","Moderate","Good","Good"]}}}
+{"op":"add","path":"/elements/col-aq-pollutant","value":{"type":"Col","props":{"label":"Primary Pollutant","data":["PM10 / NO2","PM2.5 / Traffic","O3","PM2.5","Pollen / O3"]}}}
+{"op":"add","path":"/elements/tab-incidents-fleet","value":{"type":"TabItem","props":{"value":"incidents","trigger":"Open Incidents & Fleet Deployments (6,7)","content":["incidents-fleet-container"]}}}
+{"op":"add","path":"/elements/incidents-fleet-container","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["inc-header-bar","inc-table-card","fleet-section-card"]}}
+{"op":"add","path":"/elements/inc-header-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"sunk"},"children":["inc-heading","inc-badge"]}}
+{"op":"add","path":"/elements/inc-heading","value":{"type":"Heading","props":{"text":"Active Emergency & Operations Incidents (Item 6)","level":"h3"}}}
+{"op":"add","path":"/elements/inc-badge","value":{"type":"Badge","props":{"text":"5 Incidents Active in Dispatch","variant":"destructive"}}}
+{"op":"add","path":"/elements/inc-table-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["inc-table"]}}
+{"op":"add","path":"/elements/inc-table","value":{"type":"Table","props":{"columns":["col-inc-id","col-inc-type","col-inc-loc","col-inc-sev","col-inc-units","col-inc-status"]}}}
+{"op":"add","path":"/elements/col-inc-id","value":{"type":"Col","props":{"label":"Incident ID","data":["INC-9104","INC-9102","INC-9098","INC-9095","INC-9088"]}}}
+{"op":"add","path":"/elements/col-inc-type","value":{"type":"Col","props":{"label":"Event Type","data":["Multi-Vehicle Collision","Water Main Breach 12-inch","Signal Outage Grid","Structure Smoke Advisory","Chemical Fume Report"]}}}
+{"op":"add","path":"/elements/col-inc-loc","value":{"type":"Col","props":{"label":"Location & District","data":["I-90 Mile 14 (Downtown)","744 Pine St (East End)","4th Ave & Union (Downtown)","120 Harbor Blvd (Waterfront)","2800 Tech Way (North)"]}}}
+{"op":"add","path":"/elements/col-inc-sev","value":{"type":"Col","props":{"label":"Severity (Item 6)","data":["Critical / Code 3","Major Severity","Moderate Severity","Minor Severity","Moderate Severity"]}}}
+{"op":"add","path":"/elements/col-inc-units","value":{"type":"Col","props":{"label":"Assigned Units","data":["Squad 12, Medic 4, Patrol 8","Water Crew 2, Traffic 1","Traffic Eng Unit 5","Engine 7, Ladder 3","HazMat 1, Engine 14"]}}}
+{"op":"add","path":"/elements/col-inc-status","value":{"type":"Col","props":{"label":"Dispatch Status","data":["On Scene — Extrication","En Route — Valves closing","Technician On-Site","Investigating — Under Control","Containment in progress"]}}}
+{"op":"add","path":"/elements/fleet-section-card","value":{"type":"Card","props":{"direction":"column","gap":"s"},"children":["fleet-head","fleet-table"]}}
+{"op":"add","path":"/elements/fleet-head","value":{"type":"CardHeader","props":{"title":"Where Emergency Vehicles are Deployed (Item 7)","subtitle":"Real-time GPS AVL Tracking across Police, Fire/Rescue, EMS & Public Works"}}}
+{"op":"add","path":"/elements/fleet-table","value":{"type":"Table","props":{"columns":["col-fl-callsign","col-fl-dept","col-fl-district","col-fl-currloc","col-fl-state"]}}}
+{"op":"add","path":"/elements/col-fl-callsign","value":{"type":"Col","props":{"label":"Callsign / Vehicle","data":["Engine 7 (Pumper)","Ladder 3 (Aerial)","Medic 4 (Ambulance)","Patrol Unit 104","Patrol Unit 212","HazMat 1 Unit","PW Utility 9 (Hydraulic)","Traffic Signal Truck 3"]}}}
+{"op":"add","path":"/elements/col-fl-dept","value":{"type":"Col","props":{"label":"Department","data":["Fire & Rescue","Fire & Rescue","Emergency Medical","Police Department","Police Department","HazMat Division","Public Works Water","DOT Signals"]}}}
+{"op":"add","path":"/elements/col-fl-district","value":{"type":"Col","props":{"label":"Current District","data":["Waterfront Bay","Waterfront Bay","Downtown Core","Downtown Core","East End Industrial","North Heights","East End Industrial","Downtown Core"]}}}
+{"op":"add","path":"/elements/col-fl-currloc","value":{"type":"Col","props":{"label":"Active Geo-Location (Item 7)","data":["120 Harbor Blvd Pier 4","120 Harbor Blvd Pier 4","I-90 Overpass @ MP 14","4th & Pine St Sector A","22nd & Industrial Way","2800 Tech Way Gate B","744 Pine St Junction","4th Ave & Union Intersect"]}}}
+{"op":"add","path":"/elements/col-fl-state","value":{"type":"Col","props":{"label":"Operational State","data":["Deployed / On-Scene","Deployed / On-Scene","Deployed / Transporting","Deployed / Traffic Control","Deployed / Perimeter","Deployed / Sampling","Deployed / Repairing","Deployed / Signal Reset"]}}}
+{"op":"add","path":"/elements/tab-maintenance-events","value":{"type":"TabItem","props":{"value":"works_events","trigger":"Roadworks, Maintenance & Weekend Events (9,16,17)","content":["works-events-container"]}}}
+{"op":"add","path":"/elements/works-events-container","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["maint-grid-row","events-weekend-card"]}}
+{"op":"add","path":"/elements/maint-grid-row","value":{"type":"Card","props":{"direction":"row","gap":"m"},"children":["roadworks-card","infra-jobs-card"]}}
+{"op":"add","path":"/elements/roadworks-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["rw-header","rw-table"]}}
+{"op":"add","path":"/elements/rw-header","value":{"type":"CardHeader","props":{"title":"Roadworks Planned This Month (Item 16)","subtitle":"Authorized street closures, resurfacing and lane restrictions"}}}
+{"op":"add","path":"/elements/rw-table","value":{"type":"Table","props":{"columns":["col-rw-loc","col-rw-scope","col-rw-dates","col-rw-impact"]}}}
+{"op":"add","path":"/elements/col-rw-loc","value":{"type":"Col","props":{"label":"Corridor / Location","data":["Main St (1st to 8th)","Bay Shore Expressway","Grand Ave Bridge","Roosevelt Blvd South"]}}}
+{"op":"add","path":"/elements/col-rw-scope","value":{"type":"Col","props":{"label":"Work Scope","data":["Full Asphalt Resurfacing","Expansion Joint Replacement","Structural Painting & Deck","Underground Fiber Conduit"]}}}
+{"op":"add","path":"/elements/col-rw-dates","value":{"type":"Col","props":{"label":"Scheduled Window","data":["Oct 5 - Oct 18","Oct 12 - Oct 25","Oct 20 - Nov 10","Oct 8 - Oct 14"]}}}
+{"op":"add","path":"/elements/col-rw-impact","value":{"type":"Col","props":{"label":"Traffic Impact","data":["Full Nightly Closure","2 Lanes Closed Westbound","Single Lane Alternating","Right Shoulder Blocked"]}}}
+{"op":"add","path":"/elements/infra-jobs-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["ij-header","ij-table"]}}
+{"op":"add","path":"/elements/ij-header","value":{"type":"CardHeader","props":{"title":"Infrastructure Jobs Due for Maintenance (Item 17)","subtitle":"Preventive and critical municipal asset servicing list"}}}
+{"op":"add","path":"/elements/ij-table","value":{"type":"Table","props":{"columns":["col-ij-asset","col-ij-type","col-ij-due","col-ij-status"]}}}
+{"op":"add","path":"/elements/col-ij-asset","value":{"type":"Col","props":{"label":"Asset / Facility","data":["Pump Station #4 (East)","Bayside Lift Bridge Mech","Substation B Transformer 3","Storm Drain Outfall 12","Traffic Camera Array 4"]}}}
+{"op":"add","path":"/elements/col-ij-type","value":{"type":"Col","props":{"label":"Maintenance Category","data":["Pump Overhaul & Seals","Hydraulic Cylinder Servicing","Cooling Oil Flush / Check","Debris Silt Clearing","Firmware & Optical Cleaning"]}}}
+{"op":"add","path":"/elements/col-ij-due","value":{"type":"Col","props":{"label":"Due Date","data":["Overdue by 3 days","Due in 2 days","Due in 5 days","Due in 8 days","Due in 14 days"]}}}
+{"op":"add","path":"/elements/col-ij-status","value":{"type":"Col","props":{"label":"Priority / Status","data":["High (Action Required)","Scheduled Crew Assigned","Inspection Booked","Routine Queue","Routine Queue"]}}}
+{"op":"add","path":"/elements/events-weekend-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["ev-header","ev-table"]}}
+{"op":"add","path":"/elements/ev-header","value":{"type":"CardHeader","props":{"title":"Public Events This Weekend (Item 9)","subtitle":"Permitted large gatherings, marathons, parades and expected crowds"}}}
+{"op":"add","path":"/elements/ev-table","value":{"type":"Table","props":{"columns":["col-ev-name","col-ev-when","col-ev-loc","col-ev-crowd","col-ev-ops"]}}}
+{"op":"add","path":"/elements/col-ev-name","value":{"type":"Col","props":{"label":"Event Title","data":["City Marathon & 10K","Waterfront Autumn Food Festival","Civic Plaza Farmers Market","Metropolis FC vs City Rivals (Soccer)"]}}}
+{"op":"add","path":"/elements/col-ev-when","value":{"type":"Col","props":{"label":"Schedule","data":["Saturday 06:30 - 13:00","Sat & Sun 11:00 - 22:00","Sunday 08:00 - 14:00","Sunday 17:30 Kickoff"]}}}
+{"op":"add","path":"/elements/col-ev-loc","value":{"type":"Col","props":{"label":"Location / Route","data":["Downtown to Waterfront Loop","Bayside Pier Promenade","Civic Center Square","Metropolis Stadium (Midtown)"]}}}
+{"op":"add","path":"/elements/col-ev-crowd","value":{"type":"Col","props":{"label":"Expected Attendance","data":["18,000 participants / fans","25,000 visitors","4,500 shoppers","42,000 attendees"]}}}
+{"op":"add","path":"/elements/col-ev-ops","value":{"type":"Col","props":{"label":"Required Operations Prep","data":["16 Rolling Road Blocks + 6 Medics","Parking Shuttle Sync + Extra Trash","Pedestrian Zone Only (No Transit)","Special Rail Sched + Stadium Crowd Mgmt"]}}}
+{"op":"add","path":"/elements/tab-reports-backlog","value":{"type":"TabItem","props":{"value":"citizen_backlog","trigger":"Citizen Reports & 311 Backlog (10,11)","content":["reports-backlog-container"]}}}
+{"op":"add","path":"/elements/reports-backlog-container","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["reports-top-row","backlog-analysis-card"]}}
+{"op":"add","path":"/elements/reports-top-row","value":{"type":"Card","props":{"direction":"row","gap":"m"},"children":["incoming-reports-card","backlog-kpi-card"]}}
+{"op":"add","path":"/elements/incoming-reports-card","value":{"type":"Card","props":{"direction":"column","gap":"s"},"children":["cr-header","cr-list"]}}
+{"op":"add","path":"/elements/cr-header","value":{"type":"CardHeader","props":{"title":"Citizen Reports as They Come In (Item 10)","subtitle":"Live 311 app stream and hotline submissions"}}}
+{"op":"add","path":"/elements/cr-list","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/citizenReports","key":"id"},"children":["cr-item"]}}
+{"op":"add","path":"/elements/cr-item","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["cr-item-top","cr-item-desc"]}}
+{"op":"add","path":"/elements/cr-item-top","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["cr-item-title","cr-item-tag"]}}
+{"op":"add","path":"/elements/cr-item-title","value":{"type":"TextContent","props":{"text":{"$template":"**${type}** — ${location} (${time})"},"size":"default"}}}
+{"op":"add","path":"/elements/cr-item-tag","value":{"type":"Badge","props":{"text":{"$item":"status"},"variant":"secondary"}}}
+{"op":"add","path":"/elements/cr-item-desc","value":{"type":"TextContent","props":{"text":{"$item":"detail"},"size":"small"}}}
+{"op":"add","path":"/state/citizenReports","value":[]}
+{"op":"add","path":"/state/citizenReports/0","value":{"id":"cr-1","type":"Traffic Light Stuck on Red","location":"8th & Jefferson (Downtown)","time":"2 min ago","status":"New Dispatch","detail":"Northbound signal holding red for over 8 minutes causing 20 car backup."}}
+{"op":"add","path":"/state/citizenReports/1","value":{"id":"cr-2","type":"Downed Tree Branch on Sidewalk","location":"1420 Elmwood Dr (North)","time":"7 min ago","status":"Triage","detail":"Large oak branch blocking pedestrian walkway and cycle lane."}}
+{"op":"add","path":"/state/citizenReports/2","value":{"id":"cr-3","type":"Water Meter Leak on Curb","location":"512 Harbor Ave (Waterfront)","time":"14 min ago","status":"Assigned","detail":"Potable water pooling along curbline near storm inlet."}}
+{"op":"add","path":"/state/citizenReports/3","value":{"id":"cr-4","type":"Pothole in Right Lane","location":"Midtown Bypass near Exit 2","time":"22 min ago","status":"Logged","detail":"Deep road hazard; multiple drivers swerving sharply."}}
+{"op":"add","path":"/elements/backlog-kpi-card","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["bk-header","bk-progress-group","bk-quick-stats"]}}
+{"op":"add","path":"/elements/bk-header","value":{"type":"CardHeader","props":{"title":"Service Request Backlog (Item 11)","subtitle":"311 / Municipal ticketing resolution rate & queues"}}}
+{"op":"add","path":"/elements/bk-progress-group","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"sunk"},"children":["bk-p1","bk-p2","bk-p3"]}}
+{"op":"add","path":"/elements/bk-p1","value":{"type":"Progress","props":{"value":78,"label":"Potholes & Road Repair: 142 open / 180 target (78%)"}}}
+{"op":"add","path":"/elements/bk-p2","value":{"type":"Progress","props":{"value":54,"label":"Streetlight Outages: 88 open / 160 target (54%)"}}}
+{"op":"add","path":"/elements/bk-p3","value":{"type":"Progress","props":{"value":92,"label":"Sanitation & Debris: 24 open / 300 target (92% Clear)"}}}
+{"op":"add","path":"/elements/bk-quick-stats","value":{"type":"Card","props":{"direction":"row","justify":"between","wrap":true,"variant":"clear"},"children":["stat-open","stat-avg-time","stat-resolved"]}}
+{"op":"add","path":"/elements/stat-open","value":{"type":"Tag","props":{"text":"Total Active Backlog: 312 tickets","variant":"warning"}}}
+{"op":"add","path":"/elements/stat-avg-time","value":{"type":"Tag","props":{"text":"Avg Resolution: 28.4 hours","variant":"neutral"}}}
+{"op":"add","path":"/elements/stat-resolved","value":{"type":"Tag","props":{"text":"Closed Today: 184 tickets","variant":"success"}}}
+{"op":"add","path":"/elements/backlog-analysis-card","value":{"type":"Card","props":{"direction":"column","gap":"xs"},"children":["bl-table-head","bl-table"]}}
+{"op":"add","path":"/elements/bl-table-head","value":{"type":"CardHeader","props":{"title":"311 Service Request Backlog by Department","subtitle":"Category SLA compliance and active workload"}}}
+{"op":"add","path":"/elements/bl-table","value":{"type":"Table","props":{"columns":["col-bk-dept","col-bk-open","col-bk-sla","col-bk-trend"]}}}
+{"op":"add","path":"/elements/col-bk-dept","value":{"type":"Col","props":{"label":"Responsible Department","data":["Transportation & Signals","Water & Waste Utilities","Parks & Forestry","Code Compliance","Sanitation & Street Sweeping"]}}}
+{"op":"add","path":"/elements/col-bk-open","value":{"type":"Col","props":{"label":"Open Backlog Count","data":["114 tickets","68 tickets","49 tickets","57 tickets","24 tickets"]}}}
+{"op":"add","path":"/elements/col-bk-sla","value":{"type":"Col","props":{"label":"Within SLA Rate","data":["84.2%","91.5%","76.0%","88.3%","97.1%"]}}}
+{"op":"add","path":"/elements/col-bk-trend","value":{"type":"Col","props":{"label":"Week-over-Week Trend","data":["-12% (Improving)","-4% (Stable)","+8% (Increasing)","-2% (Stable)","-18% (Improving)"]}}}

@@ -1,0 +1,200 @@
+Here is the package tracking screen tailored to show current status, estimated delivery date, and a reporting mechanism.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "currentStatusCallout",
+          "deliveryDetailsCard",
+          "timelineSection",
+          "reportProblemDialog"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Package Tracking",
+        "subtitle": "Tracking #TRK-892410-US • Express Delivery"
+      },
+      {
+        "id": "currentStatusCallout",
+        "component": "Callout",
+        "variant": "info",
+        "title": "Current Location: Regional Distribution Center",
+        "description": "Your package is currently in transit at the Dallas Metro Distribution Hub, TX (Updated 42 mins ago)."
+      },
+      {
+        "id": "deliveryDetailsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "estDateHeading",
+          "progressSummary",
+          "progressStatus"
+        ]
+      },
+      {
+        "id": "estDateHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Estimated Delivery: Thursday, Oct 24 by 7:00 PM"
+      },
+      {
+        "id": "progressSummary",
+        "component": "TextContent",
+        "text": "Status: **On Schedule** • Carrier: SwiftLogistics",
+        "size": "default"
+      },
+      {
+        "id": "progressStatus",
+        "component": "Progress",
+        "value": 65,
+        "label": "Shipment Progress: 65% Completed"
+      },
+      {
+        "id": "timelineSection",
+        "component": "Steps",
+        "items": [
+          "step1",
+          "step2",
+          "step3",
+          "step4"
+        ]
+      },
+      {
+        "id": "step1",
+        "component": "StepsItem",
+        "title": "Order Processed",
+        "details": "Oct 21, 09:15 AM - Warehouse, Austin TX"
+      },
+      {
+        "id": "step2",
+        "component": "StepsItem",
+        "title": "Departed Facility",
+        "details": "Oct 22, 02:40 PM - Austin Transit Hub, TX"
+      },
+      {
+        "id": "step3",
+        "component": "StepsItem",
+        "title": "In Transit (Current)",
+        "details": "Oct 23, 08:30 AM - Regional Hub, Dallas TX"
+      },
+      {
+        "id": "step4",
+        "component": "StepsItem",
+        "title": "Out for Delivery",
+        "details": "Pending arrival at local carrier station"
+      },
+      {
+        "id": "reportProblemDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Report a problem with this delivery",
+        "triggerVariant": "destructive",
+        "title": "Report Delivery Issue",
+        "description": "Please specify the issue with tracking #TRK-892410-US so our support team can investigate immediately.",
+        "content": [
+          "reportForm"
+        ]
+      },
+      {
+        "id": "reportForm",
+        "component": "Form",
+        "name": "reportIssueForm",
+        "buttons": "reportFormActions",
+        "fields": [
+          "issueTypeField",
+          "detailsField"
+        ]
+      },
+      {
+        "id": "issueTypeField",
+        "component": "FormControl",
+        "label": "Issue Category",
+        "input": "issueSelect",
+        "hint": "Select the option that best describes your situation"
+      },
+      {
+        "id": "issueSelect",
+        "component": "Select",
+        "name": "issue_type",
+        "placeholder": "Choose issue category",
+        "items": [
+          "issueItem1",
+          "issueItem2",
+          "issueItem3",
+          "issueItem4"
+        ]
+      },
+      {
+        "id": "issueItem1",
+        "component": "SelectItem",
+        "value": "delayed",
+        "label": "Package severely delayed / tracking not updating"
+      },
+      {
+        "id": "issueItem2",
+        "component": "SelectItem",
+        "value": "wrong_address",
+        "label": "Incorrect delivery address listed"
+      },
+      {
+        "id": "issueItem3",
+        "component": "SelectItem",
+        "value": "damaged",
+        "label": "Package reported damaged in transit"
+      },
+      {
+        "id": "issueItem4",
+        "component": "SelectItem",
+        "value": "other",
+        "label": "Other inquiry or concern"
+      },
+      {
+        "id": "detailsField",
+        "component": "FormControl",
+        "label": "Additional Details",
+        "input": "detailsInput",
+        "hint": "Provide any relevant notes for our resolution team"
+      },
+      {
+        "id": "detailsInput",
+        "component": "TextArea",
+        "name": "issue_details",
+        "placeholder": "Describe what happened...",
+        "rows": 3
+      },
+      {
+        "id": "reportFormActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitReportBtn"
+        ]
+      },
+      {
+        "id": "submitReportBtn",
+        "component": "Button",
+        "label": "Submit Issue Report",
+        "variant": "primary",
+        "type": "destructive"
+      }
+    ]
+  }
+}
+</a2ui-json>

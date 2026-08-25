@@ -1,0 +1,745 @@
+Here is the power network operator's real-time monitoring and dispatch console covering all grid parameters, generation telemetry, alerts, and operational controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "regionFilterCard",
+          "liveAlertBanner",
+          "kpiOverviewCard",
+          "gridTelemetryCard",
+          "plantsTableCard",
+          "outagesMaintenanceCard",
+          "curtailmentCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "National Grid Operations Console",
+        "subtitle": "Real-time supervisory control, telemetry & dispatch system"
+      },
+      {
+        "id": "regionFilterCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "gap": "m",
+        "children": [
+          "regionLabel",
+          "regionSelect",
+          "curtailmentQuickTrigger"
+        ]
+      },
+      {
+        "id": "regionLabel",
+        "component": "Label",
+        "text": "Active Region Focus (Item 10):"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "selectedRegion",
+        "placeholder": "Select regional jurisdiction",
+        "items": [
+          "regAll",
+          "regNorth",
+          "regEast",
+          "regSouth",
+          "regWest",
+          "regCentral"
+        ]
+      },
+      {
+        "id": "regAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Regions (National View)"
+      },
+      {
+        "id": "regNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "Northern Interconnect"
+      },
+      {
+        "id": "regEast",
+        "component": "SelectItem",
+        "value": "east",
+        "label": "Eastern Grid Hub"
+      },
+      {
+        "id": "regSouth",
+        "component": "SelectItem",
+        "value": "south",
+        "label": "Southern Corridor"
+      },
+      {
+        "id": "regWest",
+        "component": "SelectItem",
+        "value": "west",
+        "label": "Western Renewable Basin"
+      },
+      {
+        "id": "regCentral",
+        "component": "SelectItem",
+        "value": "central",
+        "label": "Central Industrial Zone"
+      },
+      {
+        "id": "curtailmentQuickTrigger",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "Emergency Load Shedding",
+        "triggerVariant": "destructive",
+        "title": "Initiate Stage 2 Fast Curtailment?",
+        "description": "This will immediately signal industrial shedding of 850 MW across the selected region. Confirm to execute SCADA protocol.",
+        "confirmLabel": "Confirm Curtailment Order",
+        "cancelLabel": "Abort"
+      },
+      {
+        "id": "liveAlertBanner",
+        "component": "Alert",
+        "title": "Live Alert (Item 9): Frequency Deviation & High Reserve Margin Notice",
+        "description": "[14:22:05 UTC] West HVDC Tie-line running near thermal rating (+4.2%). Automatic generation control (AGC) compensating.",
+        "variant": "warning"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "kpiHeader",
+          "capacityProgress",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Network Capacity & Grid Metrics",
+        "subtitle": "Items 1, 2, 7 & 12: Real-time load, margin, market clearing price, and emissions"
+      },
+      {
+        "id": "capacityProgress",
+        "component": "Progress",
+        "value": 84,
+        "label": "Current Network Capacity Stress: 84.3% (42,150 MW / 50,000 MW Max Operating Limit)"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colCurrentVal",
+          "colTargetRange",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Key Parameter",
+        "data": [
+          "1. Current Network Load",
+          "2. Operating Reserve Margin",
+          "7. Wholesale Spot Price (MWh)",
+          "12. Total Emissions Today",
+          "Grid Frequency"
+        ]
+      },
+      {
+        "id": "colCurrentVal",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "42,150 MW",
+          "7,850 MW (15.7% headroom)",
+          "$68.45 / MWh",
+          "142,800 tCO2e (avg 210 g/kWh)",
+          "50.02 Hz"
+        ]
+      },
+      {
+        "id": "colTargetRange",
+        "component": "Col",
+        "label": "Normal Operating Baseline",
+        "data": [
+          "30,000 - 45,000 MW",
+          "> 12.0% Reserve Margin",
+          "$45.00 - $85.00 / MWh",
+          "< 160,000 tCO2e daily cap",
+          "49.95 - 50.05 Hz"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "System Status",
+        "data": [
+          "High Demand",
+          "Adequate",
+          "Nominal",
+          "Within Standard",
+          "Stable"
+        ]
+      },
+      {
+        "id": "gridTelemetryCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "chartsHeader",
+          "genSourcePie",
+          "forecastLineChart"
+        ]
+      },
+      {
+        "id": "chartsHeader",
+        "component": "CardHeader",
+        "title": "Generation Mix & 24-Hour Day-Ahead Demand Forecast",
+        "subtitle": "Items 3 & 6: Real-time source partition and predicted demand curve"
+      },
+      {
+        "id": "genSourcePie",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Natural Gas (Combined Cycle)",
+          "Nuclear (Baseload)",
+          "Hydroelectric",
+          "Wind Farms",
+          "Solar Photovoltaic",
+          "Battery Storage (BESS Discharging)"
+        ],
+        "values": [
+          16860,
+          11200,
+          5400,
+          4800,
+          2690,
+          1200
+        ]
+      },
+      {
+        "id": "forecastLineChart",
+        "component": "LineChart",
+        "variant": "natural",
+        "xLabel": "Hour (24h Ahead)",
+        "yLabel": "Demand (MW)",
+        "labels": [
+          "00:00",
+          "03:00",
+          "06:00",
+          "09:00",
+          "12:00",
+          "15:00",
+          "18:00",
+          "21:00",
+          "23:59"
+        ],
+        "series": [
+          "forecastSeries",
+          "actualSeries"
+        ]
+      },
+      {
+        "id": "forecastSeries",
+        "component": "Series",
+        "category": "Forecast Demand (MW)",
+        "values": [
+          31000,
+          29500,
+          34200,
+          41800,
+          43500,
+          44200,
+          43100,
+          39000,
+          33800
+        ]
+      },
+      {
+        "id": "actualSeries",
+        "component": "Series",
+        "category": "Scheduled Generation (MW)",
+        "values": [
+          32000,
+          30100,
+          35000,
+          42150,
+          43800,
+          44600,
+          43500,
+          39800,
+          34500
+        ]
+      },
+      {
+        "id": "plantsTableCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "plantsHeader",
+          "plantsTable"
+        ]
+      },
+      {
+        "id": "plantsHeader",
+        "component": "CardHeader",
+        "title": "Power Generation Plants Telemetry",
+        "subtitle": "Item 4: Live output, capacity, and operational status per generation asset"
+      },
+      {
+        "id": "plantsTable",
+        "component": "Table",
+        "columns": [
+          "colPlantName",
+          "colPlantType",
+          "colPlantRegion",
+          "colPlantOutput",
+          "colPlantMaxCap",
+          "colPlantStatus"
+        ]
+      },
+      {
+        "id": "colPlantName",
+        "component": "Col",
+        "label": "Plant Name",
+        "data": [
+          "Cedar Creek Nuclear Unit 1 & 2",
+          "Highland Combined-Cycle CCGT",
+          "Riverbed Hydro Station",
+          "Prairie Horizon Wind Farm",
+          "Solaria Solar Park Phase A",
+          "Apex BESS Grid Storage"
+        ]
+      },
+      {
+        "id": "colPlantType",
+        "component": "Col",
+        "label": "Fuel / Tech",
+        "data": [
+          "Nuclear",
+          "Natural Gas",
+          "Hydro",
+          "Wind",
+          "Solar PV",
+          "Li-Ion Battery"
+        ]
+      },
+      {
+        "id": "colPlantRegion",
+        "component": "Col",
+        "label": "Region",
+        "data": [
+          "North",
+          "East",
+          "West",
+          "West",
+          "South",
+          "Central"
+        ]
+      },
+      {
+        "id": "colPlantOutput",
+        "component": "Col",
+        "label": "Current Output",
+        "data": [
+          "2,400 MW",
+          "1,650 MW",
+          "820 MW",
+          "640 MW",
+          "380 MW",
+          "150 MW"
+        ]
+      },
+      {
+        "id": "colPlantMaxCap",
+        "component": "Col",
+        "label": "Max Rating",
+        "data": [
+          "2,400 MW",
+          "1,800 MW",
+          "1,000 MW",
+          "800 MW",
+          "500 MW",
+          "200 MW"
+        ]
+      },
+      {
+        "id": "colPlantStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Online - Baseload (100%)",
+          "Online - Dispatched (91%)",
+          "Online - Regulating (82%)",
+          "Generating (80%)",
+          "Generating (76%)",
+          "Discharging (75%)"
+        ]
+      },
+      {
+        "id": "outagesMaintenanceCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "outageMaintTabs"
+        ]
+      },
+      {
+        "id": "outageMaintTabs",
+        "component": "Tabs",
+        "items": [
+          "tabOutages",
+          "tabMaintenance"
+        ]
+      },
+      {
+        "id": "tabOutages",
+        "component": "TabItem",
+        "value": "outages",
+        "trigger": "Active Grid Outages (Item 5)",
+        "content": [
+          "outagesTable"
+        ]
+      },
+      {
+        "id": "outagesTable",
+        "component": "Table",
+        "columns": [
+          "colOutageId",
+          "colOutageRegion",
+          "colOutageAsset",
+          "colOutageImpact",
+          "colOutageEta"
+        ]
+      },
+      {
+        "id": "colOutageId",
+        "component": "Col",
+        "label": "Incident ID",
+        "data": [
+          "OUT-8491",
+          "OUT-8494",
+          "OUT-8502"
+        ]
+      },
+      {
+        "id": "colOutageRegion",
+        "component": "Col",
+        "label": "Affected Region",
+        "data": [
+          "Northern Interconnect",
+          "Eastern Grid Hub",
+          "Central Industrial Zone"
+        ]
+      },
+      {
+        "id": "colOutageAsset",
+        "component": "Col",
+        "label": "Substation / Line",
+        "data": [
+          "Pine Valley 345kV Transformer Bank B",
+          "Feeder #14 Industrial Loop",
+          "Metro South 138kV Breaker 3A"
+        ]
+      },
+      {
+        "id": "colOutageImpact",
+        "component": "Col",
+        "label": "Impact / Customers",
+        "data": [
+          "180 MW isolated (0 unserved)",
+          "42 MW / 6,400 customers",
+          "15 MW / 1,200 commercial"
+        ]
+      },
+      {
+        "id": "colOutageEta",
+        "component": "Col",
+        "label": "Est. Restoration",
+        "data": [
+          "Today, 16:30 UTC",
+          "Today, 15:15 UTC",
+          "Today, 18:00 UTC"
+        ]
+      },
+      {
+        "id": "tabMaintenance",
+        "component": "TabItem",
+        "value": "maintenance",
+        "trigger": "Planned Maintenance This Month (Item 8)",
+        "content": [
+          "maintTable"
+        ]
+      },
+      {
+        "id": "maintTable",
+        "component": "Table",
+        "columns": [
+          "colMaintId",
+          "colMaintRegion",
+          "colMaintFacility",
+          "colMaintWindow",
+          "colMaintScope"
+        ]
+      },
+      {
+        "id": "colMaintId",
+        "component": "Col",
+        "label": "Maint ID",
+        "data": [
+          "PLN-MAY-01",
+          "PLN-MAY-04",
+          "PLN-MAY-09",
+          "PLN-MAY-12"
+        ]
+      },
+      {
+        "id": "colMaintRegion",
+        "component": "Col",
+        "label": "Region",
+        "data": [
+          "Southern Corridor",
+          "Western Renewable Basin",
+          "Northern Interconnect",
+          "Central Industrial Zone"
+        ]
+      },
+      {
+        "id": "colMaintFacility",
+        "component": "Col",
+        "label": "Facility / Equipment",
+        "data": [
+          "Oakridge Substation 500kV Switchyard",
+          "Desert Sun Solar Inverter Group 3",
+          "Kettle Rapids Hydro Turbine #2",
+          "Downtown Underground Cable 69kV"
+        ]
+      },
+      {
+        "id": "colMaintWindow",
+        "component": "Col",
+        "label": "Scheduled Window",
+        "data": [
+          "May 12 - May 15",
+          "May 18 - May 19",
+          "May 22 - May 28",
+          "May 29 - May 30"
+        ]
+      },
+      {
+        "id": "colMaintScope",
+        "component": "Col",
+        "label": "Outage Type & Scope",
+        "data": [
+          "Planned Derate (-250 MW)",
+          "Partial Unit Outage (-75 MW)",
+          "Full Overhaul (-300 MW)",
+          "Redundant Bypass (0 MW loss)"
+        ]
+      },
+      {
+        "id": "curtailmentCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "curtailmentHeader",
+          "curtailmentForm"
+        ]
+      },
+      {
+        "id": "curtailmentHeader",
+        "component": "CardHeader",
+        "title": "Dispatch Control: Order Load & Generation Curtailment",
+        "subtitle": "Item 11: Issue formal manual or emergency curtailment directives"
+      },
+      {
+        "id": "curtailmentForm",
+        "component": "Form",
+        "name": "curtailmentDispatchForm",
+        "buttons": "curtailmentActions",
+        "fields": [
+          "curtailRegionField",
+          "curtailTypeField",
+          "curtailAmountField",
+          "curtailReasonField"
+        ]
+      },
+      {
+        "id": "curtailRegionField",
+        "component": "FormControl",
+        "label": "Target Region",
+        "input": "curtailRegionSelect",
+        "hint": "Select grid zone for directive dispatch"
+      },
+      {
+        "id": "curtailRegionSelect",
+        "component": "Select",
+        "name": "targetRegion",
+        "placeholder": "Choose region",
+        "items": [
+          "cRegNorth",
+          "cRegEast",
+          "cRegSouth",
+          "cRegWest",
+          "cRegCentral"
+        ]
+      },
+      {
+        "id": "cRegNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "Northern Interconnect"
+      },
+      {
+        "id": "cRegEast",
+        "component": "SelectItem",
+        "value": "east",
+        "label": "Eastern Grid Hub"
+      },
+      {
+        "id": "cRegSouth",
+        "component": "SelectItem",
+        "value": "south",
+        "label": "Southern Corridor"
+      },
+      {
+        "id": "cRegWest",
+        "component": "SelectItem",
+        "value": "west",
+        "label": "Western Renewable Basin"
+      },
+      {
+        "id": "cRegCentral",
+        "component": "SelectItem",
+        "value": "central",
+        "label": "Central Industrial Zone"
+      },
+      {
+        "id": "curtailTypeField",
+        "component": "FormControl",
+        "label": "Curtailment Category",
+        "input": "curtailTypeRadio"
+      },
+      {
+        "id": "curtailTypeRadio",
+        "component": "RadioGroup",
+        "name": "curtailmentType",
+        "defaultValue": "demand",
+        "items": [
+          "curtailDemand",
+          "curtailGenRenewable",
+          "curtailGenThermal"
+        ]
+      },
+      {
+        "id": "curtailDemand",
+        "component": "RadioItem",
+        "value": "demand",
+        "label": "Demand Response Curtailment",
+        "description": "Trigger industrial and commercial shedding contracts"
+      },
+      {
+        "id": "curtailGenRenewable",
+        "component": "RadioItem",
+        "value": "renewable_gen",
+        "label": "Renewable Generation Curtailment",
+        "description": "Down-regulate wind and solar due to transmission congestion"
+      },
+      {
+        "id": "curtailGenThermal",
+        "component": "RadioItem",
+        "value": "thermal_gen",
+        "label": "Thermal Generation Ramp-Down",
+        "description": "Despatch ramp instruction to CCGT/Peakers"
+      },
+      {
+        "id": "curtailAmountField",
+        "component": "FormControl",
+        "label": "Curtailment Magnitude",
+        "input": "curtailSlider",
+        "hint": "Specify desired reduction in Megawatts (MW)"
+      },
+      {
+        "id": "curtailSlider",
+        "component": "Slider",
+        "name": "curtailAmountMW",
+        "variant": "discrete",
+        "min": 50,
+        "max": 2000,
+        "step": 50,
+        "defaultValue": [
+          250
+        ]
+      },
+      {
+        "id": "curtailReasonField",
+        "component": "FormControl",
+        "label": "Log Directive Justification",
+        "input": "curtailReasonInput",
+        "hint": "Required for regulatory compliance and market settlement logs"
+      },
+      {
+        "id": "curtailReasonInput",
+        "component": "Input",
+        "name": "curtailReason",
+        "placeholder": "e.g., Transmission line N-1 contingency protection"
+      },
+      {
+        "id": "curtailmentActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitCurtailmentBtn",
+          "resetFormBtn"
+        ]
+      },
+      {
+        "id": "submitCurtailmentBtn",
+        "component": "Button",
+        "label": "Issue Curtailment Directive",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFormBtn",
+        "component": "Button",
+        "label": "Reset Form",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

@@ -1,0 +1,329 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Congestion right now - Map-like indicator
+    congestionMap = Image("https://picsum.photos/seed/congestion/800/400?random=1"),
+    
+    // 2. Transit punctuality
+    transitPunctuality = Card(
+      children: [
+        Heading("Transit Punctuality", "Current Performance"), 
+        BarChart(
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          series: [
+            {category: "Bus", value: 85},
+            {category: "Train", value: 92},
+            {category: "Bike Share", value: 78}
+          ],
+          xLabel: "Day of Week",
+          yLabel: "On-Time Percentage (%)"
+        )
+      ]
+    ),
+    
+    // 3. Air quality by district
+    airQuality = Card(
+      children: [
+        Heading("Air Quality by District", "Real-time Monitoring"),
+        Map(
+          columns: [
+            {label: "District North", color: "#ff6b6b"},
+            {label: "District Central", color: "#4ecdc4"},
+            {label: "District South", color: "#45b7d1"}
+          ],
+          data: [
+            {"district": "North", "index": 0, "value": 42, "unit": "ppm"},
+            {"district": "Central", "index": 1, "value": 38, "unit": "ppm"},
+            {"district": "South", "index": 2, "value": 55, "unit": "ppm"}
+          ]
+        )
+      ]
+    ),
+    
+    // 4. Energy use over past week
+    energyUse = Card(
+      children: [
+        Heading("Energy Consumption (Past Week)", "Daily Usage"),
+        LineChart(
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          series: [
+            {label: "Residential", value: [120, 135, 142, 138, 150, 145, 160]},
+            {label: "Commercial", value: [80, 90, 95, 100, 88, 92, 105]},
+            {label: "Industrial", value: [200, 210, 215, 220, 205, 230, 240]}
+          ],
+          xLabel: "Day",
+          yLabel: "MW"
+        )
+      ]
+    ),
+    
+    // 5. Water use today
+    waterUse = Card(
+      children: [
+        Heading("Water Consumption Today", "Latest Readings"),
+        MetricRow([
+          {label: "Total", value: "$124,500", unit: "kgal"},
+          {label: "Domestic", value: "$68,300", unit: "kgal"},
+          {label: "Industrial", value: "$28,000", unit: "kgal"},
+          {label: "Irrigation", value: "$18,200", unit: "kgal"}
+        ]),
+        Chart(
+          labels: ["Morning", "Afternoon", "Evening", "Night"],
+          series: [
+            {label: "Flow Rate", value: [450, 520, 480, 350]},
+            {label: "Consumed", value: [380, 420, 390, 260]}
+          ],
+          xLabel: "Time Period",
+          yLabel: "Gallons/hr"
+        )
+      ]
+    ),
+    
+    // 6. Open incidents with location and severity
+    openIncidents = Card(
+      children: [
+        Heading("Open Incidents", "Active Alerts"),
+        ListBlock(
+          items: [
+            {
+              title: "Traffic Accident - Downtown Intersection",
+              subtitle: "Severe damage to intersection",
+              image: "https://picsum.photos/seed/incident1/600/300?random=2"
+            },
+            {
+              title: "Pipeline Leak - East Side",
+              subtitle: "Minor leak detected",
+              image: "https://picsum.photos/seed/incident2/600/300?random=3"
+            },
+            {
+              title: "Power Outage - Central Park",
+              subtitle: "Partial coverage",
+              image: "https://picsum.photos/seed/incident3/600/300?random=4"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 7. Emergency vehicle deployment locations
+    emergencyDeployments = Card(
+      children: [
+        Heading("Emergency Vehicle Deployment", "Current Response Units"),
+        ListBlock(
+          items: [
+            {
+              title: "Unit 7 - Downtown Core",
+              subtitle: "Dispatched to traffic incident",
+              location: "Downtown Intersection"
+            },
+            {
+              title: "Unit 12 - North Ward",
+              subtitle: "Responding to pipeline leak",
+              location: "East Side Industrial Zone"
+            },
+            {
+              title: "Unit 3 - West District",
+              subtitle: "Stationed at central hub",
+              location: "West Plaza"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Parking availability downtown
+    parkingAvailability = Card(
+      children: [
+        Heading("Parking Availability - Downtown", "Real-time Metrics"),
+        ListBlock(
+          items: [
+            {
+              title: "Main Street Lot",
+              subtitle: "85% occupied",
+              capacity: 250,
+              available: 40
+            },
+            {
+              title: "Secondary Park (South)",
+              subtitle: "60% occupied",
+              capacity: 180,
+              available: 108
+            },
+            {
+              title: "Downtown Garage (North)",
+              subtitle: "75% occupied",
+              capacity: 320,
+              available: 56
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 9. Public events this weekend
+    publicEvents = Card(
+      children: [
+        Heading("Public Events This Weekend", "Scheduled Activities"),
+        ListBlock(
+          items: [
+            {
+              title: "City Park Fest",
+              date: "Sat-Sun",
+              description: "Live music, food vendors, family activities"
+            },
+            {
+              title: "Riverfront Marathon",
+              date: "Sat",
+              description: "10km run along the river"
+            },
+            {
+              title: "Tech Expo",
+              date: "Sun",
+              description: "Demonstrations and workshops"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 10. Citizen reports as they come in
+    citizenReports = Card(
+      children: [
+        Heading("Citizen Reports", "Recent Feedback"),
+        ListBlock(
+          items: [
+            {
+              title: "Pothole on 5th Ave",
+              severity: "High",
+              status: "Open",
+              reportedBy: "Community @ 9:30 AM",
+              time: "Today"
+            },
+            {
+              title: "Traffic Light Fault - Main St",
+              severity: "Medium",
+              status: "Investigating",
+              reportedBy: "Passenger @ 2:15 PM",
+              time: "Yesterday"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 11. Service request backlog
+    serviceBacklog = Card(
+      children: [
+        Heading("Service Request Backlog", "Pending Work"),
+        Progress(
+          value: 47,
+          label: "Outstanding Requests"
+        ),
+        ListBlock(
+          items: [
+            {title: "Road Repair - Oak St", status: "In Progress", priority: "High"},
+            {title: "Inspect Sewer Line", status: "Queued", priority: "Medium"},
+            {title: "Install Street Lights", status: "Planned", priority: "Low"}
+          ]
+        )
+      ]
+    ),
+    
+    // 12. Current weather
+    currentWeather = Card(
+      children: [
+        Heading("Current Weather", "Real-time Conditions"),
+        MetricRow([
+          {label: "Temperature", value: "72°F", unit: "°F"},
+          {label: "Conditions", value: "Partly Cloudy"},
+          {label: "Wind", value: "10 mph", unit: "mph"},
+          {label: "Humidity", value: "45%", unit: "%"}
+        ]),
+        WeatherIcon("https://picsum.photos/seed/weather/300/200?random=5")
+      ]
+    ),
+    
+    // 13. Focus on one district (filter/tab)
+    districtFilter = Card(
+      children: [
+        Heading("District Focus", "View Specific Area"),
+        Select(
+          options: ["All Districts", "North", "Central", "South"],
+          value: "All Districts",
+          onChange: null
+        ),
+        ListBlock(
+          items: []
+        )
+      ]
+    ),
+    
+    // 14. Dispatch a crew
+    dispatchCrew = Card(
+      children: [
+        Heading("Dispatch Crew", "Send Response Team"),
+        Container(
+          children: [
+            Button("Create Dispatch", null, "primary"),
+            Divider(),
+            Button("Confirm Assignment", null, "primary")
+          ]
+        )
+      ]
+    ),
+    
+    // 15. Send public alert
+    sendAlert = Card(
+      children: [
+        Heading("Public Alert", "Notify Citizens"),
+        Form(
+          name: "Public Alert",
+          fields: [
+            {type: "title", label: "Alert Title", placeholder: "Enter alert title"},
+            {type: "message", label: "Message", placeholder: "Describe the issue"},
+            {type: "severity", label: "Severity", choices: ["Low", "Medium", "High", "Critical"]},
+            {type: "location", label: "Location", placeholder: "Where? (street/district)"},
+            {type: "action", label: "Action", placeholder: "What do citizens need?"}
+          ],
+          buttons: [
+            {label: "Send Alert", action: "send_alert"}
+          ]
+        )
+      ]
+    ),
+    
+    // 16. Roadworks planned this month
+    roadworks = Card(
+      children: [
+        Heading("Roadworks - Planned This Month", "Construction Schedule"),
+        ListBlock(
+          items: [
+            {title: "Broadway Bridge Repair", date: "Mar 15-30", status: "Active"},
+            {title: "Elm St Resurfacing", date: "Mar 20-25", status: "Planned"},
+            {title: "Rivertain Road Expansion", date: "Apr 1-15", status: "Scheduled"}
+          ]
+        )
+      ]
+    ),
+    
+    // 17. Infrastructure jobs due for maintenance
+    maintenanceJobs = Card(
+      children: [
+        Heading("Infrastructure Jobs - Due for Maintenance", "Upcoming Tasks"),
+        ListBlock(
+          items: [
+            {title: "Power Grid Upgrade - Sector 3", status: "Due soon", priority: "High"},
+            {title: "Bridge Inspections", status: "Pending", priority: "Medium"},
+            {title: "Stormwater System Audit", status: "Scheduled", priority: "Low"}
+          ]
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "stretch",
+  wrap: true
+)
+```

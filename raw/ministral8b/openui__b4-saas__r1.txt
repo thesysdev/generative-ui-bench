@@ -1,0 +1,102 @@
+```openui-lang
+root = Card([header, periodSelector, metricsRow, mrrSection, arpuSection, churnSection, signupsSection, plansSection, topCustomers, riskAccounts, paymentFailures, featureAdoption, npsSection, utilizationSection, inviteAdmin])
+
+header = CardHeader("Admin Overview", "Monthly metrics and health dashboard")
+
+periodSelector = Card([periodLabel, periodButtons], "sunk")
+periodLabel = TextContent("Reporting period:", "small")
+periodButtons = Buttons([quarterBtn, monthBtn, customBtn])
+quarterBtn = Button("Last Quarter", null, null, null, "medium")
+monthBtn = Button("This Month", null, "primary", null, "medium")
+customBtn = Button("Custom", null, null, null, "medium")
+
+metricsRow = Card([mrrCard, arpuCard, churnCard, signupsCard], "sunk", "row", "xl", "start", "between")
+mrrCard = Card([mrrValue, mrrChange], "sunk")
+mrrValue = TextContent("$2,410,000", "large-heavy")
+mrrChange = TextContent("+12.3% vs last month", "small", "success")
+arpuCard = Card([arpuValue, arpuChange], "sunk")
+arpuValue = TextContent("$1,205", "large-heavy")
+arpuChange = TextContent("-0.5% vs last month", "small", "warning")
+churnCard = Card([churnValue, churnChange], "sunk")
+churnValue = TextContent("1.8%", "large-heavy")
+churnChange = TextContent("+0.3pp vs last month", "small", "warning")
+signupsCard = Card([signupsValue, signupsChange], "sunk")
+signupsValue = TextContent("42", "large-heavy")
+signupsChange = TextContent("+8 new signups", "small", "success")
+
+mrrSection = Card([mrrHeading, mrrChart], "sunk")
+mrrHeading = Heading("Monthly Recurring Revenue", "h3")
+mrrChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May"], [mrrSeries], "natural", "Month", "USD")
+mrrSeries = Series("MRR", [1800000, 2010000, 2250000, 2380000, 2410000])
+
+arpuSection = Card([arpuHeading, arpuChart], "sunk")
+arpuHeading = Heading("Average Revenue Per User", "h3")
+arpuChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May"], [arpuSeries], "natural", "Month", "USD")
+arpuSeries = Series("ARPU", [1150, 1180, 1210, 1230, 1205])
+
+churnSection = Card([churnHeading, churnChart], "sunk")
+churnHeading = Heading("Monthly Churn", "h3")
+churnChart = HorizontalBarChart(["Jan", "Feb", "Mar", "Apr", "May"], [churnSeries], "grouped", "Month", "% Churn")
+churnSeries = Series("Churn Rate", [1.5, 1.7, 1.9, 2.1, 1.8])
+
+signupsSection = Card([signupsHeading, signupsChart], "sunk")
+signupsHeading = Heading("New Signups (90 days)", "h3")
+signupsChart = BarChart(["Jan", "Feb", "Mar"], [signupsSeries], "grouped", "Month", "New Signups")
+signupsSeries = Series("Signups", [12, 18, 22])
+
+plansSection = Card([plansHeading, plansChart], "sunk")
+plansHeading = Heading("Customers by Plan", "h3")
+plansChart = PieChart(["Starter", "Pro", "Enterprise"], [1200, 750, 300], "pie", "circular")
+plansData = ["Starter", "Pro", "Enterprise"]
+plansValues = [1200, 750, 300]
+
+topCustomers = Card([topCustomersHeading, topCustomersTable], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h3")
+topCustomersTable = Table([customerCol, seatsCol, spendCol])
+customerCol = Col("Customer", ["Acme Corp", "Globex Inc", "Tech Solutions", "Initech", "Umbrella Corp", "Wayne Enterprises", "Stark Industries", "Pymetrics", "Oscorp", "Stryker Corp"])
+seatsCol = Col("Seats", [450, 310, 280, 250, 220, 200, 180, 160, 140, 120])
+spendCol = Col("Spend ($)", ["$560K", "$380K", "$340K", "$310K", "$275K", "$250K", "$220K", "$200K", "$180K", "$160K"])
+
+riskAccounts = Card([riskHeading, riskTable], "sunk")
+riskHeading = Heading("Accounts at Risk", "h3")
+riskTable = Table([accountCol, reasonCol, actionCol])
+accountCol = Col("Account", ["Globex Inc", "Tech Solutions", "Initech", "Umbrella Corp"])
+reasonCol = Col("Reason", ["Payment failure", "Feature request backlog", "Contract renewal", "Support ticket open"])
+actionCol = Col("Action", ["Retry payment", "Schedule call", "Renew now", "Escalate"])
+
+paymentFailures = Card([paymentHeading, paymentTable], "sunk")
+paymentHeading = Heading("Failed Payments", "h3")
+paymentTable = Table([accountCol2, amountCol, dateCol, retryCol])
+accountCol2 = Col("Account", ["Globex Inc", "Tech Solutions", "Initech", "Umbrella Corp"])
+amountCol = Col("Amount ($)", ["$3,100", "$2,800", "$2,500", "$2,200"])
+dateCol = Col("Next Attempt", ["May 15", "May 16", "May 17", "May 18"])
+retryCol = Col("Action", [retryBtn1, retryBtn2, retryBtn3, retryBtn4])
+retryBtn1 = Button("Retry", ["retry_payment", "Globex Inc"], "primary", null, "small")
+retryBtn2 = Button("Retry", ["retry_payment", "Tech Solutions"], "primary", null, "small")
+retryBtn3 = Button("Retry", ["retry_payment", "Initech"], "primary", null, "small")
+retryBtn4 = Button("Retry", ["retry_payment", "Umbrella Corp"], "primary", null, "small")
+
+featureAdoption = Card([adoptionHeading, adoptionChart], "sunk")
+adoptionHeading = Heading("New Feature Adoption", "h3")
+adoptionChart = BarChart(["AI Assistant", "Collaboration Mode", "Custom Dashboards"], [adoptionSeries], "grouped", "Feature", "% Adoption")
+adoptionSeries = Series("Adoption", [65, 42, 30])
+
+npsSection = Card([npsHeading, npsValue, npsDetails], "sunk")
+npsHeading = Heading("Net Promoter Score", "h3")
+npsValue = TextContent("42", "large-heavy")
+npsDetails = TextContent("Based on 1,245 surveys from last month", "small")
+
+utilizationSection = Card([utilizationHeading, utilizationChart], "sunk")
+utilizationHeading = Heading("Seat Utilization", "h3")
+utilizationChart = RadarChart(["Jan", "Feb", "Mar", "Apr", "May"], [utilizationSeries])
+utilizationSeries = Series("Utilization", [85, 88, 90, 92, 95])
+
+inviteAdmin = Card([inviteHeading, inviteForm], "sunk")
+inviteHeading = Heading("Invite Another Admin", "h3")
+inviteForm = Form("admin-invite", inviteButtons, [emailField])
+emailField = FormControl("Email", emailInput)
+emailInput = Input("email", "Enter admin email", "email")
+inviteButtons = Buttons([inviteBtn, cancelBtn])
+inviteBtn = Button("Invite", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

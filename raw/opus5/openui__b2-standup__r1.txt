@@ -1,0 +1,67 @@
+root = Card([header, dateTag, missingCallout, progress, teamHeading, teamList, blockedCallout, divider, postHeading, updateForm, followUps])
+
+header = CardHeader("Async Standup", "Distributed Platform Team · Thursday, June 12, 2025")
+
+dateTag = TagBlock(["Thursday, June 12, 2025", "9:00 UTC cutoff", "6 of 9 posted"])
+
+missingCallout = TextCallout("warning", "3 updates still missing", "Priya Raman, Tomás Silva and Wei Chen have not posted yet. Nudges go out automatically at 11:00 UTC.")
+
+progress = Progress(67, "Standup completion — 6 of 9 updates posted")
+
+teamHeading = Heading("Today's updates", "h3")
+
+teamList = ListBlock([itemMaya, itemAndre, itemLena, itemJonas, itemSofia, itemRachel, itemPriya, itemTomas, itemWei])
+
+itemMaya = ListItem("Maya Ortiz — On track", "Yesterday: finished retry logic for the ingest worker. Today: writing integration tests, then opening the PR. No blockers.")
+itemAndre = ListItem("Andre Boateng — Blocked", "Yesterday: drafted the billing migration plan. Today: stalled — waiting on production DB snapshot access from IT (ticket OPS-4412, open 2 days).")
+itemLena = ListItem("Lena Fischer — On track", "Yesterday: shipped the new onboarding empty states. Today: design review at 14:00 UTC, then start dark-mode tokens.")
+itemJonas = ListItem("Jonas Meyer — At risk", "Yesterday: chased a flaky end-to-end suite. Today: same suite still red on CI; may slip the Friday release if it isn't green by noon.")
+itemSofia = ListItem("Sofia Marin — Blocked", "Yesterday: prepared the search reindex script. Today: blocked on Andre's schema decision — cannot run the reindex until the billing tables are final.")
+itemRachel = ListItem("Rachel Kim — On track", "Yesterday: cut the v2.3 release notes. Today: customer call at 15:00 UTC, then triaging the support backlog.")
+itemPriya = ListItem("Priya Raman — No update yet", "Last posted Wednesday. Was working on the notification service rate limits.")
+itemTomas = ListItem("Tomás Silva — No update yet", "Last posted Wednesday. Was pairing with Maya on the ingest worker.")
+itemWei = ListItem("Wei Chen — No update yet", "On-call this week; last posted Tuesday.")
+
+blockedCallout = Callout("error", "2 people are blocked", "Andre Boateng needs production DB snapshot access (OPS-4412). Sofia Marin is blocked behind Andre's billing schema decision. Both surface in the 10:30 UTC unblock huddle.")
+
+divider = Separator("horizontal")
+
+postHeading = Heading("Post your update", "h3")
+
+updateForm = Form("standup-update", formButtons, [whoField, statusField, yesterdayField, todayField, blockerField, helpField])
+
+whoField = FormControl("Your name", whoSelect)
+whoSelect = Select("teammate", [optPriya, optTomas, optWei, optOther], "Select your name")
+optPriya = SelectItem("priya", "Priya Raman")
+optTomas = SelectItem("tomas", "Tomás Silva")
+optWei = SelectItem("wei", "Wei Chen")
+optOther = SelectItem("other", "Someone else")
+
+statusField = FormControl("How is it going?", statusRadio)
+statusRadio = RadioGroup("status", [statusOk, statusRisk, statusBlocked], "on-track")
+statusOk = RadioItem("On track", "Moving as planned", "on-track")
+statusRisk = RadioItem("At risk", "Might slip, no hard blocker", "at-risk")
+statusBlocked = RadioItem("Blocked", "Cannot progress without help", "blocked")
+
+yesterdayField = FormControl("What you did yesterday", yesterdayInput)
+yesterdayInput = TextArea("yesterday", "Shipped the retry logic, reviewed two PRs...", 3)
+
+todayField = FormControl("What you're doing today", todayInput)
+todayInput = TextArea("today", "Integration tests, then opening the PR...", 3)
+
+blockerField = FormControl("Blockers", blockerInput, "Leave empty if nothing is in your way")
+blockerInput = TextArea("blockers", "Waiting on staging credentials from IT", 2)
+
+helpField = FormControl("Need a synchronous chat?", helpCheck)
+helpCheck = CheckBoxGroup("help", [helpHuddle, helpPair])
+helpHuddle = CheckBoxItem("Add me to the unblock huddle", "10:30 UTC, 15 minutes", "huddle")
+helpPair = CheckBoxItem("Looking for a pairing partner", "Someone will claim this in the thread", "pair")
+
+formButtons = Buttons([submitBtn, draftBtn])
+submitBtn = Button("Post update", null, "primary")
+draftBtn = Button("Save draft", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Nudge the 3 people who haven't posted")
+fu2 = FollowUpItem("Summarize this standup for the weekly report")
+fu3 = FollowUpItem("Show blocker history for the last two weeks")

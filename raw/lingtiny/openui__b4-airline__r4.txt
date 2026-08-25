@@ -1,0 +1,80 @@
+root = Card([hubHeader, onTime, flights, delayed, gateChanges, crews, weather, load, connections, rebook, hubSelector, cancellations, turnaround], "clear")
+hubHeader = CardHeader("Hub Operations Desk", "Central Operations — Live Status")
+onTime = CardHeader("On-Time Performance Today", "Current day's punctuality metrics")
+flights = CardHeader("Flights & Gate Status", "Live flight tracking with gate assignments")
+delayed = CardHeader("Delayed Flights", "Flights currently flagged as delayed")
+gateChanges = CardHeader("Recent Gate Changes", "Latest gate assignments and relocations")
+crews = CardHeader("Crews Available for Reassignment", "Current staffing levels and availability")
+weather = CardHeader("Weather Advisories", "Hub weather alerts and conditions")
+load = CardHeader("Average Passenger Load Today", "Passenger count and load metrics")
+connections = CardHeader("Connections at Risk of Being Missed", "High-risk connection tracking")
+rebook = CardHeader("Rebook Affected Passengers", "Actionable rebooking options")
+hubSelector = CardHeader("Select a Different Hub", "Switch to another hub for comparison")
+cancellations = CardHeader("Cancellations Today", "Flight cancellation summary")
+turnaround = CardHeader("Average Turnaround Time", "Operational turnaround metrics")
+onTime = TextContent("On-Time Performance: 87% | On-Time Flights: 342 of 390 | Delay Rate: 13% | Punctuality Target: 90%", "default")
+flights = [
+  {label: "Flight 101", route: "SFO → JFK", gate: "B12", status: "On Time"},
+  {label: "Flight 102", route: "JFK → LAX", gate: "A05", status: "Delayed"},
+  {label: "Flight 103", route: "LAX → SEA", gate: "C03", status: "On Time"},
+  {label: "Flight 104", route: "SEA → MIA", gate: "D07", status: "Delayed"},
+  {label: "Flight 105", route: "MIA → SFO", gate: "B12", status: "On Time"},
+  {label: "Flight 106", route: "SFO → DEN", gate: "A05", status: "On Time"},
+  {label: "Flight 107", route: "DEN → JFK", gate: "C03", status: "Delayed"},
+  {label: "Flight 108", route: "JFK → SFO", gate: "D07", status: "On Time"},
+]
+delayed = [
+  {label: "Flight 102", route: "JFK → LAX", gate: "A05", status: "Delayed (32 min)", reason: "Late departure"},
+  {label: "Flight 104", route: "SEA → MIA", gate: "D07", status: "Delayed (45 min)", reason: "Weather delay"},
+  {label: "Flight 107", route: "DEN → JFK", gate: "C03", status: "Delayed (55 min)", reason: "Aircraft turnaround"},
+]
+gateChanges = [
+  {label: "Flight 102", oldGate: "A05", newGate: "A06", reason: "Gate assignment change"},
+  {label: "Flight 104", oldGate: "D07", newGate: "D08", reason: "Gate relocation"},
+  {label: "Flight 107", oldGate: "C03", newGate: "C04", reason: "Gate reassignment"},
+]
+crews = [
+  {label: "Gate Agents", available: 4, total: 6, status: "Available"},
+  {label: "Catering Staff", available: 2, total: 4, status: "Available"},
+  {label: "Security", available: 3, total: 3, status: "Assigned"},
+  {label: "Medical", available: 1, total: 2, status: "Available"},
+]
+weather = [
+  {label: "Temperature", value: "72°F", note: "Clear skies"},
+  {label: "Wind", value: "8 kts", note: "Moderate, from the west"},
+  {label: "Visibility", value: "10 mi", note: "Excellent"},
+  {label: "Precipitation", value: "0%", note: "No rain"},
+]
+load = [
+  {label: "Passengers Today", value: "1,482", note: "12% above average"},
+  {label: "Average Load Factor", value: "88%", note: "Target: 92%"},
+  {label: "Cabin Mix", value: "38% Economy", note: "52% Business"},
+]
+connections = [
+  {label: "Flight 102 → 103", risk: "High", reason: "Delayed 32 min"},
+  {label: "Flight 104 → 107", risk: "Medium", reason: "Delayed 45 min"},
+  {label: "Flight 107 → 108", risk: "High", reason: "Delayed 55 min"},
+]
+rebook = [
+  {label: "Rebook Flight 102 → 103", action: "Auto-reassign to Flight 103 (10:15)", variant: "primary"},
+  {label: "Rebook Flight 104 → 107", action: "Auto-reassign to Flight 105 (11:30)", variant: "primary"},
+  {label: "Rebook Flight 107 → 108", action: "Auto-reassign to Flight 106 (13:45)", variant: "primary"},
+]
+hubSelector = [
+  {label: "Hub: JFK", note: "Switch to New York (JFK)"},
+  {label: "Hub: LAX", note: "Switch to Los Angeles (LAX)"},
+  {label: "Hub: SEA", note: "Switch to Seattle (SEA)"},
+  {label: "Hub: DEN", note: "Switch to Denver (DEN)"},
+]
+cancellations = [
+  {label: "Flight 109", route: "JFK → LAX", time: "06:15", reason: "Mechanical issue"},
+  {label: "Flight 115", route: "LAX → SEA", time: "10:00", reason: "Crew shortage"},
+  {label: "Flight 122", route: "SEA → MIA", time: "14:30", reason: "Weather delay"},
+]
+turnaround = [
+  {label: "Average Turnaround", value: "42 min", note: "Target: 60 min"},
+  {label: "Gate-to-Gate", value: "38 min", note: "Target: 45 min"},
+  {label: "Cabin Loading", value: "22 min", note: "Target: 30 min"},
+  {label: "Crew Briefing", value: "10 min", note: "Target: 15 min"},
+]
+root = Card([hubHeader, onTime, flights, delayed, gateChanges, crews, weather, load, connections, rebook, hubSelector, cancellations, turnaround], "clear")

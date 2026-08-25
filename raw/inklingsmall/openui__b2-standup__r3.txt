@@ -1,0 +1,41 @@
+root = Card([header, dateBlock, teammatesSection, blockedAlert, postSection, missingSection], "card", "column", "l")
+
+header = CardHeader("Async Standup", "Remote team — today's check-in")
+dateBlock = TextContent("Today: Monday, June 23, 2025", "large-heavy")
+
+teammatesSection = Card([teammateHeading, teammateList], "clear", "column", "m")
+teammateHeading = Heading("Team Updates", "h3")
+teammateList = Card([teammate1, teammate2, teammate3, teammate4], "clear", "column", "s")
+
+teammate1 = Card([t1Name, t1Status], "card", "column", "xs")
+t1Name = TextContent("Alex Rivera", "small-heavy")
+t1Status = TextContent("Shipped auth flow. Reviewing PRs.", "default")
+
+teammate2 = Card([t2Name, t2Status], "card", "column", "xs")
+t2Name = TextContent("Jordan Kim", "small-heavy")
+t2Status = TextContent("Blocked: waiting on backend access for API review.", "default")
+
+teammate3 = Card([t3Name, t3Status], "card", "column", "xs")
+t3Name = TextContent("Sam Patel", "small-heavy")
+t3Status = TextContent("Working on design system tokens.", "default")
+
+teammate4 = Card([t4Name, t4Status], "card", "column", "xs")
+t4Name = TextContent("Taylor Brooks", "small-heavy")
+t4Status = TextContent("No blockers. Planning sprint retro.", "default")
+
+blockedAlert = Callout("warning", "Blocked teammate", "Jordan Kim is blocked on the API review — needs backend access from DevOps.")
+
+postSection = Card([postHeading, postForm], "sunk", "column", "m")
+postHeading = Heading("Post your update", "h3")
+postForm = Form("standup-post", postButtons, [nameField, statusField])
+nameField = FormControl("Your name", nameInput)
+nameInput = Input("name", "Jordan Kim")
+statusField = FormControl("Today's status", statusTextArea)
+statusTextArea = TextArea("status", "Write your update...", 3)
+postButtons = Buttons([submitBtn])
+submitBtn = Button("Post update", null, "primary")
+
+missingSection = Card([missingHeading, missingProgress, missingText], "clear", "column", "s")
+missingHeading = Heading("Updates missing", "h3")
+missingProgress = Progress(3, "3 of 6 updates still missing")
+missingText = TextContent("Waiting on Jordan, Taylor, and Sam — please post by EOD.", "small")

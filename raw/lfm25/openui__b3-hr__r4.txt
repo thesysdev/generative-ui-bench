@@ -1,0 +1,682 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("HR Hiring Overview", "Executive Summary"),
+    
+    // Key Metrics Row
+    Div(
+      spacing: 12,
+      children: [
+        MetricCard(
+          title: "Current Headcount",
+          value: "2,847",
+          unit: "employees",
+          icon: "users"
+        ),
+        MetricCard(
+          title: "Avg Time to Hire",
+          value: "42 days",
+          unit: "days",
+          icon: "clock"
+        ),
+        MetricCard(
+          title: "Open Roles",
+          value: "18",
+          unit: "positions",
+          icon: "briefcase"
+        )
+      ]
+    ),
+    
+    // Open Roles Section
+    SectionBlock(
+      sections: [
+        SectionItem("Engineering", [
+          Card([
+            CardHeader("Senior Software Engineer", "engineering", "engineering"),
+            ListItem("Senior Backend Developer", "Engineering", "https://example.com/app-dev", "Apply now"),
+            ListItem("DevOps Engineer", "Engineering", "https://example.com/infrastructure", "Apply now"),
+            ListItem("Frontend Specialist", "Engineering", "https://example.com/ui", "Apply now")
+          ])
+        ]),
+        SectionItem("Product", [
+          Card([
+            CardHeader("Product Manager", "product", "product"),
+            ListItem("Senior PM", "product", "https://example.com/pm", "Apply now"),
+            ListItem("UX Designer", "product", "https://example.com/design", "Apply now")
+          ])
+        ]),
+        SectionItem("Sales", [
+          Card([
+            CardHeader("Account Executive", "sales", "sales"),
+            ListItem("Enterprise AE", "sales", "https://example.com/sales", "Apply now"),
+            ListItem("SDR", "sales", "https://example.com/sales", "Apply now")
+          ])
+        ])
+      ],
+      isFoldable: true
+    ),
+    
+    // Pipeline Stages
+    PipelineView(
+      stages: [
+        { stage: "Applied", count: 87 },
+        { stage: "Screening", count: 45 },
+        { stage: "Interview", count: 23 },
+        { stage: "Hired", count: 19 },
+        { stage: "Rejected", count: 62 }
+      ]
+    ),
+    
+    // Department Split
+    DepartmentBreakdown(
+      departments: [
+        { dept: "Engineering", count: 1420, color: "#3498db" },
+        { dept: "Product", count: 380, color: "#2ecc71" },
+        { dept: "Sales", count: 320, color: "#f39c12" },
+        { dept: "Marketing", count: 150, color: "#9b59b6" },
+        { dept: "Operations", count: 280, color: "#1abc9c" }
+      ]
+    ),
+    
+    // Interviews Scheduled This Week
+    InterviewsThisWeek(
+      count: 15,
+      scheduledBy: [
+        "Engineering Team",
+        "Product Team",
+        "Sales Team",
+        "Operations Team"
+      ]
+    ),
+    
+    // Attrition Over Six Months
+    AttritionChart(
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      values: [12, 8, 15, 10, 20, 18],
+      variant: "horizontal",
+      xLabel: "Month",
+      yLabel: "Attrition Rate (%)"
+    ),
+    
+    // New Role Form
+    OpenRoleForm(
+      title: "Create New Role",
+      body: """
+        <div class="role-form">
+          <Card>
+            <CardHeader("New Role Creation", "Recruitment", "onboarding") />
+            <TextContent>
+              Please provide details for the new position you'd like to post:
+              
+              <div class="field">
+                <Label>Job Title</Label>
+                <Input name="job_title" placeholder="e.g., Senior Data Scientist" />
+              </div>
+              <div class="field">
+                <Label>Department</Label>
+                <Select name="department" placeholder="Select department..." />
+              </div>
+              <div class="field">
+                <Label>Location</Label>
+                <Input name="location" placeholder="City/Region" />
+              </div>
+              <div class="field">
+                <Label>Number of Positions</Label>
+                <Input name="positions" placeholder="e.g., 3" type="number" />
+              </div>
+              <Button label="Create Role" />
+            </Card>
+          </div>
+        </div>
+      """
+    ),
+  ],
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```
+
+Wait, looking at the component signatures more carefully, I need to make sure all arguments are correct. Let me review:
+
+1. `CardHeader(title?, subtitle?)` - OK
+2. `Div` - Not a standard component in the list, but it could work as a container. However, the examples show simpler structures. Let me check if Div is valid... Actually, the example doesn't use Div, and the schema doesn't list it explicitly. I should stick to documented components.
+
+Looking at the allowed components again:
+- Card, Tab, Tabs, Accordion, Steps, Carousel, SectionBlock, FollowUpBlock, Callout, TextCallout, Alert, Badge, Avatar, Progress, PaginationBlock, Header, Heading, TextContent, MarkDownRenderer, Blockquote, InlineCode, CodeBlock, Image, ImageBlock, ImageGallery, Separator, HorizontalBarChart, RadarChart, PieChart, RadialChart, SingleStackedBarChart, ScatterChart, AreaChart, BarChart, LineChart, Table, TagBlock, Form, Buttons, Steps, Tabs, Carousel
+
+So `Div` is NOT a valid component. I need to remove that. I can use `Card` with different configurations or find another way to separate sections.
+
+For the pipeline view, I should use a proper component. Looking at the list, there's no direct "PipelineView" component. I could use a Table or a custom arrangement with Cards.
+
+Actually, for the pipeline stages, I can create a simple array of cards or use a Table with columns [stage, count]. Or I can use Sections with individual cards showing each stage.
+
+Let me restructure to use only valid components:
+
+1. Keep `CardHeader` for headers
+2. Replace `Div` with another `Card` or use `Separator` or arrange differently
+3. For pipeline - use a Table or multiple Cards with Stage/Counter format
+4. Department breakdown - could use a Table or List with grouped sections
+5. Attrition - can use a Table or Chart
+
+Let me rewrite more carefully:
+
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("HR Hiring Overview", "Executive Summary"),
+    
+    // Key Metrics Row - using Cards in a row
+    [
+      Card([], "current headcount", {
+        text: "2,847",
+        type: "large"
+      }),
+      Card([], "average time to hire", {
+        text: "42 days",
+        type: "large"
+      }),
+      Card([], "open roles", {
+        text: "18",
+        type: "large"
+      })
+    ],
+    direction: "row",
+    gap: "xl",
+    wrap: true
+  ),
+  
+  // Open Roles Section
+  SectionBlock(
+    sections: [
+      SectionItem("Engineering", [
+        Card([
+          CardHeader("Senior Backend Developer", "engineering", "engineering"),
+          ListItem("Senior Backend Developer", "Engineering", "https://example.com/app-dev", "Apply now")
+        ])
+      ]),
+      SectionItem("Product", [
+        Card([
+          CardHeader("Senior Product Manager", "product", "product"),
+          ListItem("Senior PM", "product", "https://example.com/pm", "Apply now")
+        ])
+      ]),
+      SectionItem("Sales", [
+        Card([
+          CardHeader("Account Executive", "sales", "sales"),
+          ListItem("Senior AE", "sales", "https://example.com/sales", "Apply now")
+        ])
+      ])
+    ],
+    isFoldable: true
+  ),
+  
+  // Pipeline Stages - using a Table for clarity
+  Table(
+    columns: [
+      { colId: "stage", label: "Stage" },
+      { colId: "count", label: "Count" }
+    ],
+    data: [
+      { stage: "Applied", count: 87 },
+      { stage: "Screening", count: 45 },
+      { stage: "Interview", count: 23 },
+      { stage: "Hired", count: 19 },
+      { stage: "Rejected", count: 62 }
+    ],
+    sort: "descending"
+  ),
+  
+  // Department Split - Table
+  Table(
+    columns: [
+      { colId: "dept", label: "Department" },
+      { colId: "headcount", label: "Headcount" }
+    ],
+    data: [
+      { dept: "Engineering", headcount: 1420 },
+      { dept: "Product", headcount: 380 },
+      { dept: "Sales", headcount: 320 },
+      { dept: "Marketing", headcount: 150 },
+      { dept: "Operations", headcount: 280 }
+    ],
+    sort: "descending"
+  ),
+  
+  // Interviews Scheduled This Week
+  Card([
+    Card([], "Interviews Scheduled This Week", "interviews", "this-week"),
+    TextContent("15 interviews scheduled across Engineering, Product, Sales, and Operations teams."),
+    Card([], "Details", "interviews-details")
+  ], direction: "column", gap: "x"),
+  
+  // Attrition Over Six Months
+  Table(
+    columns: [
+      { colId: "month", label: "Month" },
+      { colId: "rate", label: "Attrition Rate (%)" }
+    ],
+    data: [
+      { month: "Jan", rate: 12 },
+      { month: "Feb", rate: 8 },
+      { month: "Mar", rate: 15 },
+      { month: "Apr", rate: 10 },
+      { month: "May", rate: 20 },
+      { month: "Jun", rate: 18 }
+    ],
+    sort: "ascending"
+  ),
+  
+  // New Role Form
+  Card([
+    Card([], "Create New Role", "recruitment", "new-role"),
+    TextContent("Post a new job opening with title, department, location, and position count."),
+    Div(
+      spacing: 12,
+      children: [
+        Input(name="job_title", placeholder="Job Title"),
+        Select(name="department", placeholder="Select department..."),
+        Input(name="location", placeholder="Location"),
+        Input(name="positions", placeholder="Number of positions", type="number"),
+        Button(label="Create Role", variant="primary")
+      ]
+    )
+  ])
+]
+```
+
+Wait, I'm still using invalid components (`Div`, unnamed `Card` without `[...]`). Also, the root must have `children` as the first argument. And all referenced names must be defined.
+
+Let me be very careful:
+- `root` must be `Card([children], "card", "row", "xl", "2xl")` at minimum
+- All variables used must be defined elsewhere
+- No duplicate definitions of the same key in children
+
+Let me structure this properly with clear parent-child relationships:
+
+1. `root` = Card(children array, "card", "row", "xl", "2xl")
+   - Children includes:
+     - CardHeader("HR Hiring Overview", "Executive Summary")
+     - Card (key metrics row)
+     - SectionBlock (open roles)
+     - Table (pipeline stages)
+     - Table (department split)
+     - Card (interviews this week)
+     - Table (attrition)
+     - Card (new role form)
+
+For the "current headcount", "avg time to hire", "open roles" - these should be stats displayed somewhere. I'll put them in the first Card (the key metrics row).
+
+But wait - the metrics row needs to contain three pieces of information. Can I put them all in one Card? Yes, using nested components within that Card.
+
+Actually, looking at the Card signature: `Card(children: (TextContent | MarkDownRenderer | CardHeader | ...)[], ...)`
+
+The children can be an array of any compatible components. So I can have:
+- CardHeader
+- Card (with nested TextContent for each metric)
+
+That should work.
+
+Now let me also think about the "way to open a new role" - this is the form at the bottom. That's covered.
+
+One issue: the text content inside Cards should be handled correctly. TextContent is a valid component.
+
+Let me also ensure all enums match the signatures:
+- `direction?: "row" | "column"` ✓
+- `gap?: "none" | "xs" | "s" | "m" | "l" | "xl" | "2xl"` ✓
+- `align?: "start" | "center" | "end" | "stretch" | "baseline"` - not used
+- `justify?: "start" | "center" | "end" | "between" | "around" | "evenly"` - not used
+- `wrap?: boolean` ✓
+
+For `Table`, the columns and data must match. Let me verify:
+- `Table(columns: (Col)[])` where Col has `{label: string, data: (string | number)[], type?: "string" | "number" | "action"}`)
+- `data` is an array of objects with `colId` property and `label`/`headcount` properties
+
+My tables look correct.
+
+For `SectionItem`:
+- `SectionItem(value: string, trigger: string, content: Array<Component>)`
+
+
+- `value` is unique ID (string), `trigger` is the label for the tab, `content` is array of components
+
+The section items reference the content directly. Good.
+
+For `Table`:
+- `columns: (Col)[]` - each Col has `label: string` and `data: (string | number)[]`
+- My data arrays have correct types
+
+Everything looks consistent. Let me write the final version being very careful about:
+1. Correct order (root first, then children)
+2. All component names defined before use
+3. Proper array/list syntax
+4. No undefined variables
+
+One thing I notice: the `Card` I use for the key metrics row contains nested `CardHeader` and `Card` - both are valid. But the outer Card's children includes those. That's fine because nested cards don't need to be referenced elsewhere.
+
+However, I need to make sure every component is reachable from root. The root has children including Cards, Sections, Tables, etc. All of these are defined in the same scope, so they are reachable.
+
+Let me count all defined variables:
+- root (required)
+- CardHeader (defined in its line)
+- SectionBlock (defined in its line)
+- SectionItem (defined twice - both are local variables, that's fine)
+- Table (two instances - both defined)
+- Div - NOT USED (remove)
+- Box - NO such component exists
+
+Wait, I should remove the Div wrapper around the interviews section. I was using it incorrectly.
+
+Let me clean up and produce the final code:
+
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("HR Hiring Overview", "Executive Summary"),
+    
+    // Key Metrics Row - using nested Cards for each metric
+    [
+      Card([], "Current Headcount", {
+        text: "2,847",
+        type: "large"
+      }),
+      Card([], "Average Time to Hire", {
+        text: "42 days",
+        type: "large"
+      }),
+      Card([], "Open Roles", {
+        text: "18",
+        type: "large"
+      })
+    ],
+    direction: "row",
+    gap: "xl",
+    wrap: true
+  ],
+  
+  // Open Roles by Department
+  SectionBlock(
+    sections: [
+      SectionItem("Engineering", [
+        Card([
+          CardHeader("Senior Backend Developer", "engineering", "engineering"),
+          ListItem("Senior Backend Developer", "Engineering", "https://example.com/app-dev", "Apply now")
+        ])
+      ]),
+      SectionItem("Product", [
+        Card([
+          CardHeader("Senior Product Manager", "product", "product"),
+          ListItem("Senior PM", "product", "https://example.com/pm", "Apply now")
+        ])
+      ]),
+      SectionItem("Sales", [
+        Card([
+          CardHeader("Account Executive", "sales", "sales"),
+          ListItem("Senior AE", "sales", "https://example.com/sales", "Apply now")
+        ])
+      ])
+    ],
+    isFoldable: true
+  ),
+  
+  // Pipeline Stages
+  Table(
+    columns: [
+      { colId: "stage", label: "Stage" },
+      { colId: "count", label: "Count" }
+    ],
+    data: [
+      { stage: "Applied", count: 87 },
+      { stage: "Screening", count: 45 },
+      { stage: "Interview", count: 23 },
+      { stage: "Hired", count: 19 },
+      { stage: "Rejected", count: 62 }
+    ],
+    sort: "descending"
+  ),
+  
+  // Headcount by Department
+  Table(
+    columns: [
+      { colId: "dept", label: "Department" },
+      { colId: "headcount", label: "Headcount" }
+    ],
+    data: [
+      { dept: "Engineering", headcount: 1420 },
+      { dept: "Product", headcount: 380 },
+      { dept: "Sales", headcount: 320 },
+      { dept: "Marketing", headcount: 150 },
+      { dept: "Operations", headcount: 280 }
+    ],
+    sort: "descending"
+  ),
+  
+  // Interviews Scheduled This Week
+  Card([
+    Card([], "Interviews Scheduled This Week", "interviews", "this-week"),
+    TextContent("15 interviews scheduled across Engineering, Product, Sales, and Operations teams."),
+    Card([], "Details", "interviews-details")
+  ], direction: "column", gap: "x"),
+  
+  // Attrition Over Six Months
+  Table(
+    columns: [
+      { colId: "month", label: "Month" },
+      { colId: "rate", label: "Attrition Rate (%)" }
+    ],
+    data: [
+      { month: "Jan", rate: 12 },
+      { month: "Feb", rate: 8 },
+      { month: "Mar", rate: 15 },
+      { month: "Apr", rate: 10 },
+      { month: "May", rate: 20 },
+      { month: "Jun", rate: 18 }
+    ],
+    sort: "ascending"
+  ),
+  
+  // New Role Creation Form
+  Card([
+    Card([], "Create New Role", "recruitment", "new-role"),
+    TextContent("Post a new job opening with title, department, location, and position count."),
+    Card([
+      Input(name="job_title", placeholder="Job Title"),
+      Select(name="department", placeholder="Select department..."),
+      Input(name="location", placeholder="Location"),
+      Input(name="positions", placeholder="Number of positions", type="number"),
+      Button(label="Create Role", variant="primary")
+    ])
+  ])
+]
+```
+
+Wait, I have an issue. The `Card` at the end (new role form) has children `[Card([], "Create New Role", "recruitment", "new-role"), ...]` but the inner `Card` also has children. That's fine - nested cards are allowed.
+
+But I need to check: did I define all variables that are referenced?
+- `root` - yes (entry point)
+- `CardHeader` - defined in line 2
+- The array in children[0] has references to `CardHeader` (used via index 0) and `Card` (used at indices 1,2,3)
+- `SectionBlock` - defined in line 7
+- `SectionItem` - defined twice (lines 13 and 17)
+- `Table` - defined twice (lines 22 and 29)
+- All Table data objects use properties `stage`, `count` / `dept`, `headcount` - these match the Col definitions
+
+Everything seems referenced. Let me double-check the `Table` signature:
+```
+Table(columns: (Col)[]), data: (Array<Col>[])
+```
+Yes, my Table calls have `columns` and `data` parameters.
+
+One potential issue: the `Sort: "descending"` parameter on Table - is this valid? Looking at the Table signature in the docs, I don't see a sort parameter explicitly listed. Let me check...
+
+The Table signature says: `Table(columns: (Col)[] , data: (Array<Col>[]))` - no sort parameter mentioned. But many chart-like components have sorting. However, strict adherence means I shouldn't add unsupported parameters.
+
+Actually, looking more carefully at the provided signatures, I don't see `sort` on Table. But the example usage shows `DataTable` with `rows` and stuff. Hmm.
+
+Given the constraint "Your ENTIRE response must be valid openui-lang code — no markdown", and the specification says to follow the signatures exactly, I should avoid adding unsupported parameters. If `sort` isn't in the signature, I shouldn't use it.
+
+But wait, I need to make sure all required parameters are present. The Table signature requires `columns` and `data`. I'm providing both. Additional parameters are allowed but not required.
+
+Actually, looking at the examples in the prompt:
+```
+| Column |
+|--------|
+| Metric | Value |
+
+RowBlock(items: (ListItem)[], ...)
+```
+
+And for Table specifically:
+```
+Table(columns: (Col)[]), data: (Array<Col>[])
+```
+
+No mention of sort. So I'll remove sort to be safe.
+
+Similarly, for `Card` - do I need any special parameters? The signature is:
+```
+Card(children: (TextContent | MarkDownRenderer | CardHeader | ...)[], direction?: ..., gap?: ..., wrap?: ...)
+```
+
+I'm using `direction: "row"`, `gap: "xl"`, `wrap: true` - all valid options.
+
+For `SectionBlock`: `(sections: (SectionItem)[], isFoldable?: boolean)` - I'm providing both.
+
+For `SectionItem`: `(value: string, trigger: string, content: (Components)[])` - I'm providing all three.
+
+Everything checks out. Let me finalize the code.
+
+One last check: the root must be the FIRST line. My code starts with `root = Card(...` which is correct.
+
+Also, I need to make sure I didn't miss any requirement:
+1. ✅ current headcount - in first Card metrics row
+2. ✅ open roles with department - SectionBlock with engineering, product, sales
+3. ✅ candidates at each pipeline stage - Table with Applied, Screening, Interview, Hired, Rejected
+4. ✅ average time to hire - in first Card metrics row
+5. ✅ headcount split by department - Table with dept and headcount
+6. ✅ interviews scheduled this week - Card with intermediate text
+7. ✅ attrition over past six months - Table with month/rate
+8. ✅ way to open a new role - Card form at the bottom
+
+All covered. The code is ready.```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("HR Hiring Overview", "Executive Summary"),
+    
+    // Key Metrics Row - Current Headcount, Avg Time to Hire, Open Roles
+    [
+      Card([], "Current Headcount", {
+        text: "2,847",
+        type: "large"
+      }),
+      Card([], "Average Time to Hire", {
+        text: "42 days",
+        type: "large"
+      }),
+      Card([], "Open Roles", {
+        text: "18",
+        type: "large"
+      })
+    ],
+    direction: "row",
+    gap: "xl",
+    wrap: true
+  ],
+  
+  // Open Roles by Department
+  SectionBlock(
+    sections: [
+      SectionItem("Engineering", [
+        Card([
+          CardHeader("Senior Backend Developer", "engineering", "engineering"),
+          ListItem("Senior Backend Developer", "Engineering", "https://example.com/app-dev", "Apply now")
+        ])
+      ]),
+      SectionItem("Product", [
+        Card([
+          CardHeader("Senior Product Manager", "product", "product"),
+          ListItem("Senior PM", "product", "https://example.com/pm", "Apply now")
+        ])
+      ]),
+      SectionItem("Sales", [
+        Card([
+          CardHeader("Account Executive", "sales", "sales"),
+          ListItem("Senior AE", "sales", "https://example.com/sales", "Apply now")
+        ])
+      ])
+    ],
+    isFoldable: true
+  ),
+  
+  // Candidates at each pipeline stage
+  Table(
+    columns: [
+      { colId: "stage", label: "Stage" },
+      { colId: "count", label: "Count" }
+    ],
+    data: [
+      { stage: "Applied", count: 87 },
+      { stage: "Screening", count: 45 },
+      { stage: "Interview", count: 23 },
+      { stage: "Hired", count: 19 },
+      { stage: "Rejected", count: 62 }
+    ]
+  ),
+  
+  // Headcount split by department
+  Table(
+    columns: [
+      { colId: "dept", label: "Department" },
+      { colId: "headcount", label: "Headcount" }
+    ],
+    data: [
+      { dept: "Engineering", headcount: 1420 },
+      { dept: "Product", headcount: 380 },
+      { dept: "Sales", headcount: 320 },
+      { dept: "Marketing", headcount: 150 },
+      { dept: "Operations", headcount: 280 }
+    ]
+  ),
+  
+  // Interviews scheduled this week
+  Card([
+    Card([], "Interviews Scheduled This Week", "interviews", "this-week"),
+    TextContent("15 interviews scheduled across Engineering, Product, Sales, and Operations teams."),
+    Card([], "Details", "interviews-details")
+  ], direction: "column", gap: "x"),
+  
+  // Attrition over the past six months
+  Table(
+    columns: [
+      { colId: "month", label: "Month" },
+      { colId: "rate", label: "Attrition Rate (%)" }
+    ],
+    data: [
+      { month: "Jan", rate: 12 },
+      { month: "Feb", rate: 8 },
+      { month: "Mar", rate: 15 },
+      { month: "Apr", rate: 10 },
+      { month: "May", rate: 20 },
+      { month: "Jun", rate: 18 }
+    ]
+  ),
+  
+  // How to open a new role
+  Card([
+    Card([], "Create New Role", "recruitment", "new-role"),
+    TextContent("Post a new job opening with title, department, location, and position count."),
+    Card([
+      Input(name="job_title", placeholder="Job Title"),
+      Select(name="department", placeholder="Select department..."),
+      Input(name="location", placeholder="Location"),
+      Input(name="positions", placeholder="Number of positions", type="number"),
+      Button(label="Create Role", variant="primary")
+    ])
+  ])
+)
+```

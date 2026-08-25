@@ -1,0 +1,89 @@
+root = Card([header, quarterDialog, healthSummary, projectsHeading, projectsTable, overdueHeading, overdueList, budgetHeading, budgetChart, utilizationHeading, utilizationChart, risksHeading, risksTable, deadlinesHeading, deadlinesList, deliveryHeading, deliveryChart, blockedHeading, blockedList, exportActions, requestPeopleDialog, archiveDialog], "card", "column", "m")
+
+header = CardHeader("Project Portfolio Review", "Q4 2024 — Current Quarter")
+
+quarterDialog = DialogBlock("Change Quarter", "Select Quarter", "Choose a different quarter to review", [quarterForm])
+quarterForm = Form("quarter-select", quarterFormButtons, [quarterField])
+quarterField = FormControl("Quarter", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select quarter")
+q1 = SelectItem("q1-2024", "Q1 2024")
+q2 = SelectItem("q2-2024", "Q2 2024")
+q3 = SelectItem("q3-2024", "Q3 2024")
+q4 = SelectItem("q4-2024", "Q4 2024")
+quarterFormButtons = Buttons([quarterSubmit])
+quarterSubmit = Button("Load Quarter", null, "primary")
+
+healthSummary = Callout("warning", "Portfolio Health", "Portfolio is at risk — 1 critical project, 2 at-risk projects, 3 overdue milestones, and 4 blocked items require immediate attention.")
+
+projectsHeading = Heading("Active Projects", "h2")
+projectsTable = Table([projName, projOwner, projDeadline, projHealth])
+projName = Col("Project", ["Cloud Migration", "API Redesign", "Mobile App v3", "Data Pipeline", "Security Audit", "CRM Integration"])
+projOwner = Col("Owner", ["Sarah Chen", "James Park", "Maria Garcia", "Alex Thompson", "Priya Patel", "Tom Wilson"])
+projDeadline = Col("Deadline", ["Dec 15, 2024", "Nov 30, 2024", "Jan 20, 2025", "Dec 28, 2024", "Nov 22, 2024", "Jan 5, 2025"])
+projHealth = Col("Health", ["🟢 On Track", "🟡 At Risk", "🟢 On Track", "🔴 Critical", "🟢 On Track", "🟡 At Risk"])
+
+overdueHeading = Heading("Overdue Milestones", "h2")
+overdueList = ListBlock([overdue1, overdue2, overdue3], "number")
+overdue1 = ListItem("API Redesign: Auth module review", "Due Nov 15 — 10 days overdue — James Park", null, "Escalate")
+overdue2 = ListItem("Data Pipeline: ETL testing", "Due Nov 18 — 7 days overdue — Alex Thompson", null, "Escalate")
+overdue3 = ListItem("Data Pipeline: Performance benchmarks", "Due Nov 20 — 5 days overdue — Alex Thompson", null, "Escalate")
+
+budgetHeading = Heading("Budget: Spent vs Allocated", "h2")
+budgetChart = BarChart(projectLabels, [allocatedSeries, spentSeries], "grouped", "Project", "Budget (K USD)")
+projectLabels = ["Cloud Migration", "API Redesign", "Mobile App v3", "Data Pipeline", "Security Audit", "CRM Integration"]
+allocatedSeries = Series("Allocated", [450, 280, 350, 200, 120, 180])
+spentSeries = Series("Spent", [312, 245, 180, 195, 95, 60])
+
+utilizationHeading = Heading("Team Utilization", "h2")
+utilizationChart = HorizontalBarChart(teamNames, [utilizationSeries], "grouped", "Team Member", "Utilization (%)")
+teamNames = ["Sarah Chen", "James Park", "Maria Garcia", "Alex Thompson", "Priya Patel", "Tom Wilson"]
+utilizationSeries = Series("Utilization", [92, 110, 85, 105, 78, 65])
+
+risksHeading = Heading("Risks", "h2")
+risksTable = Table([riskDesc, riskSeverity, riskMitigation])
+riskDesc = Col("Risk", ["Data Pipeline capacity constraints", "API team burnout", "Vendor delay on CRM module", "Security compliance gap", "Cloud cost overrun"])
+riskSeverity = Col("Severity", ["🔴 High", "🔴 High", "🟡 Medium", "🟡 Medium", "🟢 Low"])
+riskMitigation = Col("Mitigation", ["Scaling review scheduled Nov 28", "Resource rotation planned", "Escalation initiated with vendor", "Audit in progress", "Cost monitoring active"])
+
+deadlinesHeading = Heading("Deadlines — Next Two Weeks", "h2")
+deadlinesList = ListBlock([deadline1, deadline2, deadline3, deadline4, deadline5, deadline6], "number")
+deadline1 = ListItem("Security Audit: Final report delivery", "Nov 22, 2024 — Priya Patel", null, null)
+deadline2 = ListItem("API Redesign: Auth module delivery", "Nov 30, 2024 — James Park", null, null)
+deadline3 = ListItem("Cloud Migration: Phase 3 testing", "Dec 1, 2024 — Sarah Chen", null, null)
+deadline4 = ListItem("CRM Integration: Requirements sign-off", "Dec 5, 2024 — Tom Wilson", null, null)
+deadline5 = ListItem("Mobile App v3: Beta launch", "Dec 10, 2024 — Maria Garcia", null, null)
+deadline6 = ListItem("Cloud Migration: Go-live", "Dec 15, 2024 — Sarah Chen", null, null)
+
+deliveryHeading = Heading("Delivery Pace — Last 6 Sprints", "h2")
+deliveryChart = LineChart(sprintLabels, [velocitySeries], "natural", "Sprint", "Story Points Delivered")
+sprintLabels = ["Sprint 21", "Sprint 22", "Sprint 23", "Sprint 24", "Sprint 25", "Sprint 26"]
+velocitySeries = Series("Story Points", [34, 38, 32, 41, 36, 39])
+
+blockedHeading = Heading("Blocked Work Items", "h2")
+blockedList = ListBlock([block1, block2, block3, block4], "number")
+block1 = ListItem("API changes pending security team sign-off", "Blocked since Nov 10 — James Park — Security team", null, "Unblock")
+block2 = ListItem("Database migration blocked by vendor licensing", "Blocked since Nov 12 — Alex Thompson — Procurement", null, "Unblock")
+block3 = ListItem("UI components delayed by design system update", "Blocked since Nov 14 — Maria Garcia — Design team", null, "Unblock")
+block4 = ListItem("Testing environment provisioned but not configured", "Blocked since Nov 16 — Sarah Chen — DevOps", null, "Unblock")
+
+exportActions = Buttons([exportBtn])
+exportBtn = Button("Export Review", null, "secondary")
+
+requestPeopleDialog = DialogBlock("Request More People", "Request Additional Resources", "Submit a resource request for any active project", [resourceForm])
+resourceForm = Form("resource-request", resourceFormButtons, [resourceProjectField, resourceCountField, resourceReasonField])
+resourceProjectField = FormControl("Project", resourceProjectSelect)
+resourceProjectSelect = Select("project", [resProj1, resProj2, resProj3, resProj4, resProj5, resProj6], "Select project")
+resProj1 = SelectItem("cloud-migration", "Cloud Migration")
+resProj2 = SelectItem("api-redesign", "API Redesign")
+resProj3 = SelectItem("mobile-app-v3", "Mobile App v3")
+resProj4 = SelectItem("data-pipeline", "Data Pipeline")
+resProj5 = SelectItem("security-audit", "Security Audit")
+resProj6 = SelectItem("crm-integration", "CRM Integration")
+resourceCountField = FormControl("Number of people", resourceCountInput)
+resourceCountInput = Input("count", "How many additional people?", "number")
+resourceReasonField = FormControl("Reason", resourceReasonInput)
+resourceReasonInput = TextArea("reason", "Explain why additional resources are needed", 3)
+resourceFormButtons = Buttons([resourceSubmitBtn])
+resourceSubmitBtn = Button("Submit Request", null, "primary")
+
+archiveDialog = AlertDialogBlock("Archive Finished Project", "Archive Project", "Are you sure you want to archive this project? This action cannot be undone.", "Archive", "Cancel", "destructive")

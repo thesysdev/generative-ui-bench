@@ -1,0 +1,26 @@
+root = Card([header, currentSection, outlookSection, sunSection, followUps])
+
+header = CardHeader("Bengaluru Weather Brief", "Morning Update • Today")
+
+currentSection = Card([currentHeading, currentGrid], "sunk", "column", "m")
+currentHeading = Heading("Current Conditions", "h3")
+currentGrid = Card([tempText, condBadge, descText], "clear", "row", "l", "center", "between")
+tempText = TextContent("24°C", "large-heavy")
+condBadge = Badge("Parties Cloudy", "default")
+descText = TextContent("Humidity: 68% • Wind: 12 km/h SW", "small")
+
+outlookSection = Card([outlookHeading, outlookChart], "sunk", "column", "m")
+outlookHeading = Heading("3-Day Outlook", "h3")
+outlookChart = BarChart(["Today", "Tomorrow", "Thursday"], [tempSeries], "grouped", "Day", "Temperature (°C)")
+tempSeries = Series("High / Low", [28, 29, 27])
+
+sunSection = Card([sunHeading, sunDetails], "sunk", "column", "m")
+sunHeading = Heading("Solar Schedule", "h3")
+sunDetails = Card([sunriseCallout, sunsetCallout], "clear", "row", "m", "stretch", "between")
+sunriseCallout = TextCallout("info", "Sunrise", "06:08 AM")
+sunsetCallout = TextCallout("warning", "Sunset", "06:42 PM")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Check air quality")
+fu2 = FollowUpItem("Hourly forecast")
+fu3 = FollowUpItem("Weekend outlook")

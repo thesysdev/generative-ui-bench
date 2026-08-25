@@ -1,0 +1,81 @@
+```openui-lang
+root = Card([storeHeader, statsRow, salesTarget, footTraffic, bestSellers, stockAlerts, staffShift, basketSize, returnsWeek, promotions, registers, reorderBtn, storeSwitcher, weeklyComparison], "card", "column", "m", "start", "start")
+
+storeHeader = CardHeader("Store Dashboard", "Welcome, Manager")
+
+statsRow = Card([salesTarget, footTraffic, basketSize, returnsWeek], "sunk", "row", "xl", "center", "between")
+
+salesTarget = Card([targetValue, targetChart], "sunk", "column", "s")
+targetValue = Card([targetText, targetProgress], "sunk", "column", "m")
+targetText = Card([TextContent("Today's Sales: $12,450"), TextContent("Target: $15,000")], "column", "s", "start")
+targetProgress = Progress(83, "83% of target")
+
+targetChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri"], [targetSeries], "natural", "Day", "Sales ($)")
+targetSeries = Series("Sales", [8500, 10200, 12450, 13800, 14700])
+
+footTraffic = Card([trafficText, trafficChart], "sunk", "column", "s")
+trafficText = TextContent("Foot Traffic: 1,245 visitors")
+trafficChart = BarChart(["Morning", "Afternoon", "Evening"], [trafficSeries], "grouped", "Time", "Visitors")
+trafficSeries = Series("Traffic", [450, 680, 1115])
+
+bestSellers = Card([bestSellersHeader, bestSellersTable], "sunk", "column", "m")
+bestSellersHeader = CardHeader("Best Sellers")
+bestSellersTable = Table([bestSellersCol1, bestSellersCol2, bestSellersCol3])
+bestSellersCol1 = Col("Product", ["Organic Apples", "Whole Wheat Bread", "Yogurt (Plain)", "Chocolate Bars"])
+bestSellersCol2 = Col("Units Sold", [128, 95, 82, 76])
+bestSellersCol3 = Col("Revenue ($)", ["$320", "$190", "$164", "$152"])
+
+stockAlerts = Card([stockAlertsHeader, stockAlertsList], "sunk", "column", "m")
+stockAlertsHeader = TextContent("Out of Stock", "large-heavy")
+stockAlertsList = ListBlock([stockItem1, stockItem2, stockItem3], "image")
+stockItem1 = ListItem("Organic Apples", "Expected back Friday", ["https://picsum.photos/seed/apples/100/100"])
+stockItem2 = ListItem("Whole Wheat Bread", "Low stock", ["https://picsum.photos/seed/bread/100/100"])
+stockItem3 = ListItem("Yogurt (Plain)", "Out of stock", ["https://picsum.photos/seed/yogurt/100/100"])
+
+staffShift = Card([staffText, staffAvatar], "sunk", "column", "s")
+staffText = TextContent("Shift Staff: 3 employees")
+staffAvatar = Avatar("https://picsum.photos/seed/manager/50/50", "Manager", "👨‍🍳")
+
+basketSize = Card([basketText, basketChart], "sunk", "column", "s")
+basketText = TextContent("Avg Basket Size: $32.85")
+basketChart = RadialChart(["$20-$30", "$30-$40", "$40+"], [35, 50, 15])
+
+returnsWeek = Card([returnsText, returnsChart], "sunk", "column", "s")
+returnsText = TextContent("Returns This Week: 18 items")
+returnsChart = SingleStackedBarChart(["Mon", "Tue", "Wed", "Thu", "Fri"], [3, 5, 7, 4, 1])
+
+promotions = Card([promotionsHeader, promotionsTable], "sunk", "column", "m")
+promotionsHeader = CardHeader("Running Promotions")
+promotionsTable = Table([promotionsCol1, promotionsCol2, promotionsCol3, promotionsCol4])
+promotionsCol1 = Col("Promotion", ["Summer Sale", "Bulk Discount", "Loyalty Points"])
+promotionsCol2 = Col("Items", [15, 8, 12])
+promotionsCol3 = Col("Revenue ($)", ["$450", "$210", "$360"])
+promotionsCol4 = Col("Status", ["Active", "Active", "Active"])
+
+registers = Card([registersHeader, registersTable], "sunk", "column", "m")
+registersHeader = CardHeader("Register Status")
+registersTable = Table([registersCol1, registersCol2])
+registersCol1 = Col("Register", ["Register 1", "Register 2", "Register 3", "Register 4"])
+registersCol2 = Col("Status", ["Open 🟢", "Closed 🔴", "Open 🟢", "Closed 🔴"])
+
+reorderBtn = DialogBlock("Reorder Items", "Select Item to Reorder", "Choose an item to place a reorder request", reorderContent, "primary")
+reorderContent = Card([reorderSelect], "sunk")
+reorderSelect = Select("reorder_item", [reorderOption1, reorderOption2, reorderOption3], "Select an item", null, "medium")
+reorderOption1 = SelectItem("Organic Apples", "Organic Apples")
+reorderOption2 = SelectItem("Whole Wheat Bread", "Whole Wheat Bread")
+reorderOption3 = SelectItem("Yogurt (Plain)", "Yogurt (Plain)")
+
+storeSwitcher = DialogBlock("Switch Store", "Select Store", "Choose a different store to view", storeSelectContent, "secondary")
+storeSelectContent = Card([storeSelect], "sunk")
+storeSelect = Select("store_location", [storeOption1, storeOption2, storeOption3], "Select a store", null, "medium")
+storeOption1 = SelectItem("Main Street", "Main Street Location")
+storeOption2 = SelectItem("Downtown", "Downtown Location")
+storeOption3 = SelectItem("Airport", "Airport Location")
+
+weeklyComparison = Card([weeklyComparisonHeader, weeklyComparisonTable], "sunk", "column", "m")
+weeklyComparisonHeader = CardHeader("Weekly Comparison")
+weeklyComparisonTable = Table([comparisonCol1, comparisonCol2, comparisonCol3])
+comparisonCol1 = Col("Metric", ["Sales", "Foot Traffic", "Returns"])
+comparisonCol2 = Col("This Week", ["$58,200", "5,240", "78"])
+comparisonCol3 = Col("Last Week", ["$52,100", "4,890", "65"])
+```

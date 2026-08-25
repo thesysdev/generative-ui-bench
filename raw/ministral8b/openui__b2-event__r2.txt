@@ -1,0 +1,57 @@
+```openui-lang
+root = Card([eventHeader, countdown, agenda, speakers, tickets, registrationForm])
+
+eventHeader = Card([eventInfo, eventLogo], "card")
+eventInfo = Card([eventName, eventDate, eventVenue], "column")
+eventName = Heading("Innovate 2024: The Future of AI", "h1")
+eventDate = TextContent("June 15–17, 2024", "large")
+eventVenue = TextContent("San Francisco Convention Center", "large")
+eventLogo = Image("AI Conference Logo", "https://picsum.photos/seed/ai-conference/300/150")
+
+countdown = Card([countdownText, countdownDays], "sunk")
+countdownText = TextContent("Days until the event:", "small-heavy")
+countdownDays = TextContent("12", "large-heavy")
+
+agenda = Card([agendaHeader, agendaItems], "sunk")
+agendaHeader = CardHeader("Agenda", "Full schedule below")
+agendaItems = Table([agendaTimes, agendaTopics])
+agendaTimes = Col("Time", ["9:00 AM", "10:30 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"])
+agendaTopics = Col("Topic", [
+    "Keynote: AI in 2024",
+    "Breakout Session: Ethics & Regulation",
+    "Lunch & Networking",
+    "Workshop: Building AI Models",
+    "Panel: Industry Trends",
+    "Closing Keynote & Awards"
+])
+
+speakers = Card([speakersHeader, speakerList], "sunk")
+speakersHeader = CardHeader("Speakers", "Meet our featured presenters")
+speakerList = ListBlock([
+    ListItem("Dr. Emily Carter", "AI Researcher at MIT", null, "View Bio"),
+    ListItem("Raj Patel", "CEO of Neural Networks Inc.", null, "View Bio"),
+    ListItem("Sophia Chen", "Ethics & Policy Expert", null, "View Bio"),
+    ListItem("Michael Brown", "Product Lead at DeepMind", null, "View Bio"),
+    ListItem("Priya Kapoor", "Founder of AI Startup", null, "View Bio")
+])
+
+tickets = Card([ticketsHeader, ticketOptions], "sunk")
+ticketsHeader = CardHeader("Ticket Prices", "Choose your tier")
+ticketOptions = Table([ticketTypes, ticketPrices])
+ticketTypes = Col("Ticket Type", ["Early Bird", "Standard", "Late Bird", "VIP"])
+ticketPrices = Col("Price", ["$199", "$249", "$299", "$499"])
+
+registrationForm = Card([registrationHeader, form], "sunk")
+registrationHeader = CardHeader("Register Now", "Secure your spot today")
+form = Form("conference-registration", registrationButtons, [
+    nameField,
+    emailField
+])
+nameField = FormControl("Full Name", nameInput)
+nameInput = Input("name", "John Doe", "text")
+emailField = FormControl("Email Address", emailInput, "We’ll send updates here")
+emailInput = Input("email", "john@example.com", "email")
+registrationButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Register", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

@@ -1,0 +1,140 @@
+```openui-lang
+root = Card([header, enrollmentSection, applicationsSection, acceptanceSection,
+             revenueSection, courseLoadSection, riskSection, scholarshipSection,
+             housingSection, eventsSection, alumniSection, departmentFilter,
+             semesterComparison, waitlistSection, newCourseForm, messageForm])
+
+header = CardHeader("University Dashboard", "Real-time administrative overview")
+
+# Enrollment Section
+enrollmentSection = Card([enrollmentHeading, enrollmentChart, enrollmentTable], "sunk")
+enrollmentHeading = Heading("Total Enrollment", "h3")
+enrollmentChart = LineChart(["2019", "2020", "2021", "2022", "2023"],
+                           [enrollmentSeries], "natural", "Year", "Students")
+enrollmentSeries = Series("Enrollment", [12500, 13200, 13800, 14500, 15200])
+
+# Applications Section
+applicationsSection = Card([applicationsHeading, applicationsChart], "sunk")
+applicationsHeading = Heading("Applications by Program", "h3")
+applicationsChart = PieChart(["Computer Science", "Business", "Engineering", "Humanities", "Arts"],
+                           [applicationsValues], "pie")
+applicationsValues = [3500, 2800, 2200, 1800, 1500]
+
+# Acceptance Section
+acceptanceSection = Card([acceptanceHeading, acceptanceChart], "sunk")
+acceptanceHeading = Heading("Acceptance Rate", "h3")
+acceptanceChart = PieChart(["2022", "2023"], [acceptanceValues], "pie")
+acceptanceValues = [0.65, 0.62]
+
+# Tuition Revenue Section
+revenueSection = Card([revenueHeading, revenueTable], "sunk")
+revenueHeading = Heading("Tuition Revenue", "h3")
+revenueTable = Table([revenueCol1, revenueCol2])
+revenueCol1 = Col("Category", ["Total Revenue", "International", "State", "Out-of-State"])
+revenueCol2 = Col("Amount ($M)", ["$182.5", "$45.3", "$78.9", "$58.3"])
+
+# Course Load Section
+courseLoadSection = Card([courseLoadHeading, courseLoadTable], "sunk")
+courseLoadHeading = Heading("Teaching Load by Faculty", "h3")
+courseLoadTable = Table([facultyCol1, facultyCol2, facultyCol3])
+facultyCol1 = Col("Faculty", ["Dr. Smith", "Prof. Johnson", "Dr. Lee", "Prof. Chen"])
+facultyCol2 = Col("Courses", ["5", "7", "4", "6"])
+facultyCol3 = Col("Students", ["125", "180", "95", "140"])
+
+# Academic Risk Section
+riskSection = Card([riskHeading, riskTable], "sunk")
+riskHeading = Heading("Students at Academic Risk", "h3")
+riskTable = Table([riskCol1, riskCol2, riskCol3])
+riskCol1 = Col("Program", ["Computer Science", "Business", "Engineering"])
+riskCol2 = Col("At Risk", ["12%", "8%", "15%"])
+riskCol3 = Col("Total Students", ["850", "600", "500"])
+
+# Scholarship Section
+scholarshipSection = Card([scholarshipHeading, scholarshipChart], "sunk")
+scholarshipHeading = Heading("Scholarship Budget", "h3")
+scholarshipChart = HorizontalBarChart(["Merit", "Need-Based", "Athletic", "Diversity"],
+                                     [scholarshipValues], "grouped", "Type", "Amount ($M)")
+scholarshipValues = Series("Used", [4.2, 3.8, 1.5, 1.0])
+
+# Housing Section
+housingSection = Card([housingHeading, housingChart], "sunk")
+housingHeading = Heading("Housing Occupancy", "h3")
+housingChart = PieChart(["Residence Halls", "Apartments", "Dorms", "Off-Campus"], [housingValues], "pie")
+housingValues = [0.87, 0.75, 0.92, 0.65]
+
+# Events Section
+eventsSection = Card([eventsHeading, eventsList], "sunk")
+eventsHeading = Heading("Campus Events This Month", "h3")
+eventsList = ListBlock([event1, event2, event3, event4], "image")
+event1 = ListItem("Tech Hackathon", "Friday, June 14", ["https://picsum.photos/seed/tech/200/150"], "Register Now")
+event2 = ListItem("Business Expo", "Monday, June 17", ["https://picsum.photos/seed/business/200/150"], "View Schedule")
+event3 = ListItem("Arts Festival", "Wednesday, June 26", ["https://picsum.photos/seed/arts/200/150"], "Explore")
+event4 = ListItem("Sports Day", "Saturday, June 29", ["https://picsum.photos/seed/sports/200/150"], "Join Us")
+
+# Alumni Giving Section
+alumniSection = Card([alumniHeading, alumniChart], "sunk")
+alumniHeading = Heading("Alumni Giving", "h3")
+alumniChart = LineChart(["2020", "2021", "2022", "2023"],
+                        [alumniSeries], "natural", "Year", "Amount ($M)")
+alumniSeries = Series("Giving", [1.2, 1.5, 1.8, 2.1])
+
+# Department Filter
+departmentFilter = Card([filterHeading, departmentTabs], "sunk")
+filterHeading = Heading("Focus on Department", "h3")
+departmentTabs = Tabs([deptTab1, deptTab2, deptTab3, deptTab4])
+deptTab1 = TabItem("Computer Science", "CS", [deptContent])
+deptTab2 = TabItem("Business", "Business", [deptContent])
+deptTab3 = TabItem("Engineering", "Engineering", [deptContent])
+deptTab4 = TabItem("Humanities", "Humanities", [deptContent])
+deptContent = Card([Heading("Data for {{trigger}}", "h4"), TextContent("Select a department to view detailed metrics.")])
+
+# Semester Comparison Section
+semesterComparison = Card([comparisonHeading, comparisonTable], "sunk")
+comparisonHeading = Heading("This Semester vs Last", "h3")
+comparisonTable = Table([comparisonCol1, comparisonCol2, comparisonCol3])
+comparisonCol1 = Col("Metric", ["Enrollment", "Applications", "Acceptance Rate"])
+comparisonCol2 = Col("Last Semester", ["15000", "12000", "62%"])
+comparisonCol3 = Col("This Semester", ["15200", "12500", "65%"])
+
+# Waitlist Section
+waitlistSection = Card([waitlistHeading, waitlistTable], "sunk")
+waitlistHeading = Heading("Waitlisted Students by Program", "h3")
+waitlistTable = Table([waitlistCol1, waitlistCol2])
+waitlistCol1 = Col("Program", ["Computer Science", "Business", "Engineering", "Humanities"])
+waitlistCol2 = Col("Waitlisted", ["42", "28", "19", "15"])
+
+# New Course Form
+newCourseForm = Card([formHeading, courseForm], "sunk")
+formHeading = Heading("Propose a New Course", "h3")
+courseForm = Form("new-course", courseButtons, [courseNameField, courseDeptField, courseInstructorField, courseSectionField])
+courseNameField = FormControl("Course Name", courseNameInput)
+courseNameInput = Input("course_name", "Example: CS450 Advanced AI")
+courseDeptField = FormControl("Department", courseDeptSelect)
+courseDeptSelect = Select("department", [csDept, busDept, engDept, humanitiesDept], "Select Department")
+csDept = SelectItem("CS", "Computer Science")
+busDept = SelectItem("BUS", "Business")
+engDept = SelectItem("ENG", "Engineering")
+humanitiesDept = SelectItem("HUM", "Humanities")
+courseInstructorField = FormControl("Instructor", courseInstructorInput)
+courseInstructorInput = Input("instructor", "Dr. Smith")
+courseSectionField = FormControl("Section", courseSectionInput)
+courseSectionInput = Input("section", "Fall 2024")
+courseButtons = Buttons([submitCourseBtn, cancelCourseBtn])
+submitCourseBtn = Button("Submit Proposal", null, "primary")
+cancelCourseBtn = Button("Cancel", null, "tertiary")
+
+# Message Form
+messageForm = Card([messageHeading, messageFormContent], "sunk")
+messageHeading = Heading("Send Message to Group", "h3")
+messageFormContent = Form("group-message", messageButtons, [recipientField, messageField])
+recipientField = FormControl("Recipient Group", recipientSelect)
+recipientSelect = Select("recipient", [freshmenGroup, sophomoresGroup, facultyGroup], "Select Group")
+freshmenGroup = SelectItem("freshmen", "First-Year Students")
+sophomoresGroup = SelectItem("sophomores", "Sophomores")
+facultyGroup = SelectItem("faculty", "Faculty")
+messageField = FormControl("Message", messageInput)
+messageInput = TextArea("message", "Hello students! This is an important announcement...", 5)
+messageButtons = Buttons([sendMessageBtn, cancelMessageBtn])
+sendMessageBtn = Button("Send Message", null, "primary")
+cancelMessageBtn = Button("Cancel", null, "tertiary")
+```

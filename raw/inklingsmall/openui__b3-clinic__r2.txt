@@ -1,0 +1,33 @@
+root = Card([header, stats, apptSection, roomsSection, nextCalled, checkInSection, dayNav], "card", "column", "l")
+
+header = CardHeader("Reception Desk — Today", "Monday, June 16")
+stats = Card([expectedBlock, noShowBlock], "sunk", "row", "m")
+expectedBlock = TextContent("14 patients expected today", "large-heavy")
+noShowBlock = TextContent("No-show rate this month: 12%", "default")
+
+apptSection = Card([apptHeading, apptTable], "clear")
+apptHeading = Heading("Today's Appointments", "h3")
+apptTable = Table([timeCol, patientCol])
+timeCol = Col("Time", ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM"])
+patientCol = Col("Patient", ["Maria Lopez", "James Carter", "Aisha Patel", "David Kim", "Sarah O'Neil", "Tom Rivera", "Emily Zhang", "Liam Brooks"])
+
+roomsSection = Card([roomsHeading, roomsList], "clear")
+roomsHeading = Heading("Free Rooms Right Now", "h3")
+roomsList = ListBlock([room2, room4, roomB])
+room2 = ListItem("Exam Room 2")
+room4 = ListItem("Exam Room 4")
+roomB = ListItem("Procedure Room B")
+
+nextCalled = Callout("info", "Next Patient Called", "David Kim — Exam Room 2")
+
+checkInSection = Card([checkInHeading, checkInForm], "sunk")
+checkInHeading = Heading("Check In Patient", "h3")
+checkInForm = Form("checkin", checkInButtons, [nameField])
+nameField = FormControl("Patient name", checkInInput, "Enter full name")
+checkInInput = Input("patient_name", "Search or type name...")
+checkInButtons = Buttons([checkInBtn])
+checkInBtn = Button("Check In", null, "primary")
+
+dayNav = Buttons([prevBtn, nextBtn], "row")
+prevBtn = Button("Previous Day")
+nextBtn = Button("Next Day")

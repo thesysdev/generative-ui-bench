@@ -1,0 +1,193 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header section
+    CardHeader(
+      title="Training Analytics Dashboard",
+      subtitle="Weekly Performance Overview"
+    ),
+    
+    // 1. Active learners this week
+    Card(
+      children: [
+        TextContent(
+          "Active Learners This Week",
+          "142",
+          "default"
+        )
+      ]
+    ),
+    
+    // 2. Course completion rate
+    Card(
+      children: [
+        TextContent(
+          "Course Completion Rate",
+          "78%",
+          "default"
+        ),
+        Label("Status"),
+        TextContent(
+          "On track - 78% of enrolled learners have completed their courses",
+          true
+        )
+      ]
+    ),
+    
+    // 3. Average quiz score
+    Card(
+      children: [
+        TextContent(
+          "Average Quiz Score",
+          "84.3%",
+          "default"
+        ),
+        Label("Scale"),
+        TextContent(
+          "Average score across all quizzes: 84.3%",
+          true
+        )
+      ]
+    ),
+    
+    // 4. Courses ranked by enrollment
+    Card(
+      children: [
+        TextContent(
+          "Courses Ranked by Enrollment",
+          "Total enrollments per course",
+          "default"
+        ),
+        Table(
+          columns: [
+            { label: "Course", data: ["Python Fundamentals", "Data Science Bootcamp", "Web Development", "AI Basics", "Mobile Apps"], type: "string" },
+            { label: "Enrollments", data: [342, 289, 256, 198, 187], type: "number" },
+            { label: "Growth", data: ["+15%", "+12%", "+9%", "+8%", "+7%"], type: "string" }
+          ],
+          isSelected: false,
+          sortDirection: "desc"
+        )
+      ]
+    ),
+    
+    // 5. Learners at risk of dropping out
+    Card(
+      children: [
+        TextContent(
+          "Learners at Risk of Dropping Out",
+          "23 learners identified",
+          "default"
+        ),
+        Label("Count"),
+        TextContent(
+          "23 learners flagged for proactive intervention",
+          true
+        )
+      ]
+    ),
+    
+    // 6. Filter to narrow to one cohort
+    Card(
+      children: [
+        Label("Cohort Filter"),
+        Select(
+          label: "Cohort",
+          items: [
+            "All Cohorts",
+            "Q1 2024",
+            "Q2 2024",
+            "Q3 2024",
+            "Recent",
+            "Custom"
+          ],
+          selectedIndex: 0,
+          onChange: null
+        ),
+        Button("Apply Filter")
+      ]
+    ),
+    
+    // 7. Engagement across the past eight weeks
+    Card(
+      children: [
+        TextContent(
+          "Engagement - Past 8 Weeks",
+          "Weekly activity summary",
+          "default"
+        ),
+        HorizontalBarChart(
+          labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+          series: [
+            {
+              name: "Logins",
+              values: [145, 178, 162, 203, 189, 215, 240, 268]
+            },
+            {
+              name: "Quizzes Completed",
+              values: [320, 345, 298, 412, 387, 456, 521, 589]
+            },
+            {
+              name: "Time Spent",
+              values: [42, 58, 44, 67, 52, 71, 89, 105]
+            }
+          ],
+          xLabel: "Week",
+          yLabel: "Activity Metric",
+          variant: "grouped",
+          gap: "s"
+        )
+      ]
+    ),
+    
+    // 8. Way to message a cohort
+    Card(
+      children: [
+        TextContent(
+          "Message a Cohort",
+          "Contact learning managers for individual cohort communication",
+          "default"
+        ),
+        Button("Start Messaging Cohort", null, "primary"),
+        Divider()
+      ]
+    ),
+    
+    // Additional: Recent learner activity feed
+    Card(
+      children: [
+        TextContent(
+          "Recent Activity",
+          "Latest learner interactions",
+          "default"
+        ),
+        ListBlock(
+          items: [
+            {
+              title: "Alice Johnson",
+              subtitle: "Completed Python Fundamentals",
+              image: "https://picsum.photos/seed/alice/200/150",
+              actionLabel: "View Profile"
+            },
+            {
+              title: "Bob Chen",
+              subtitle: "In Progress - Data Science Bootcamp",
+              image: "https://picsum.photos/seed/bob/200/150",
+              actionLabel: "Get Help"
+            },
+            {
+              title: "Cara Martinez",
+              subtitle: "Completed Web Development",
+              image: "https://picsum.photos/seed/cara/200/150",
+              actionLabel: "View Progress"
+            }
+          ],
+          variant: "list"
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl"
+)
+```

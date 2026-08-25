@@ -1,0 +1,17 @@
+
+
+root = Card([header, thresholdCallout, searchSection, inventoryTable, followUp], "card", "column", "m")
+header = CardHeader("Low Inventory Warning", "Items below reorder threshold need attention")
+thresholdCallout = Callout("warning", "Reorder Threshold", "Items with remaining stock below 10 units trigger this warning. Reorder before stock hits zero to avoid lost sales.")
+searchSection = Card([searchInput], "sunk", "row", "s")
+searchInput = Input("search", "Search by item name or SKU...")
+inventoryTable = Table([itemCol, skuCol, unitsCol, thresholdCol, actionCol])
+itemCol = Col("Item", ["Wireless Mouse M380", "USB-C Cable 1m", "Laptop Stand Aluminum", "Mechanical Keyboard K8", "27\" Monitor Arm", "Webcam C920"])
+skuCol = Col("SKU", ["WM-380-001", "UC-1M-002", "LS-AL-003", "MK-K8-004", "MA-27-005", "WC-920-006"])
+unitsCol = Col("Remaining", [3, 7, 4, 9, 2, 6])
+thresholdCol = Col("Threshold", [10, 10, 10, 10, 10, 10])
+actionCol = Col("Action", ["Reorder", "Reorder", "Reorder", "Reorder", "Reorder", "Reorder"], "action")
+followUp = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Reorder all items at once")
+fu2 = FollowUpItem("Show inventory trend for the last 30 days")
+fu3 = FollowUpItem("Adjust reorder threshold to 15 units")

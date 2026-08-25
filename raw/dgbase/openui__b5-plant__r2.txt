@@ -1,0 +1,196 @@
+thought
+root = Card([header, statusRow, kpiRow, productionGrid, qualitySection, maintenanceSection, inventorySection, logisticsSection, shiftComparison, workOrdersSection, actions])
+header = CardHeader("Factory Floor Command", "Plant 4 - Shift A (Day)")
+statusRow = Card([safetyBadge, daysSinceBadge, andonAlert], "row", "m")
+safetyBadge = Badge("0 Incidents YTD", null, null, "success")
+daysSinceBadge = Badge("142 Days since last", null, null, "info")
+andonAlert = Alert("CRITICAL: Line 3 Motor Heat", "Emergency stop triggered", "destructive")
+
+kpiRow = Card([eeCard, targetProgress, energyUsage], "row", "l")
+eeCard = Callout("Overall OEE", "84.4% - Slightly above target")
+targetProgress = Progress(742, "Units Produced: 742 / 1000 target")
+energyUsage = TextContent("Energy: 1.2MWh today", "small")
+
+productionGrid = Card([line1, line2, line3], "row", "m")
+line1 = ListItem("Line 1 - Alpha", "Running - 45 u/hr", null, "Focus Line")
+line2 = ListItem("Line 2 - Beta", "Running - 38 u/hr", null, "Focus Line")
+line3 = ListItem("Line 3 - Gamma", "Down - Motor Failure", null, "Focus Line")
+
+qualitySection = Card([defectChart, downtimeChart, qualityHold], "row", "m")
+defectChart = LineChart(["W1", "W2", "W3", "W4", "W5"], [defectSeries], "natural", "Week", "%")
+defectSeries = Series("Defect Rate", [2.1, 1.8, 2.5, 2.0, 1.9])
+downtimeChart = PieChart(["Mechanical", "Electrical", "Setup", "Material"], [45, 25, 20, 10], "donut")
+qualityHold = Callout("Quality Hold", "3 Batches currently de-facto for inspection", "warning")
+
+maintenanceSection = Card([maintenanceList, scheduleForm], "row", "m")
+maintenanceList = ListBlock([ListItem("Machine-X12", "Belt replacement - 2 days"), ListItem("Machine-Y04", "Oil change - Overdue")])
+scheduleForm = Form("Schedule Maintenance", scheduleButtons, [machineInput, dateInput])
+machineInput = FormControl("Machine ID", Input("m_id", "X-12"))
+dateInput = FormControl("Date", DatePicker("date", "single"))
+scheduleButtons = Buttons([Button("Schedule", null, "primary")])
+
+inventorySection = Card([inventoryTable, deliveryList], "row", "m")
+inventoryTable = Table([matCol, stockCol, statusCol])
+matCol = Col("Material", ["Steel", "Resin", "Packaging"])
+stockCol = Col("Stock (kg)", [1200, 450, 3000])
+statusCol = Col("Status", ["Healthy", "Low", "Healthy"])
+deliveryList = ListBlock([ListItem("SteelCo Inc", "Due Tuesday"), ListItem("ResinCorp", "Due Thursday")])
+
+// Wait, I missed quality batches
+qualityHoldItems = TextContent("Batch #992: High viscosity variance\nBatch #995: Surface contamination")
+qualityHold = Card([Heading("Quality Hold", "h4"), qualityHoldItems])
+// Re-defining qualitySection to include updated hold
+qualitySection = Card([defectChart, downtimeChart, qualityHold], "row", "m")
+
+shiftComparison = Card([shiftChart], "row", "m")
+shiftChart = HorizontalBarChart(["Shift A", "Shift B", "Shift C"], [shiftData], "grouped", "", "Units")
+shiftData = Series("Output", [742, 680, 715])
+
+workOrdersSection = Card([workOrderList], "row", "m")
+workOrderList = ListBlock([ListItem("WO-882", "High Priority - Mold Change"), ListItem("WO-885", "Medium Priority - Assembly")])
+
+actions = Buttons([exportBtn, focusBtn], "row", "s")
+exportBtn = Button("Export Shift Report", null, "secondary")
+focusBtn = Button("Focus on Line View", null, "tertiary")
+
+// Final check to ensure all variables are used
+// header, statusRow, kpiRow, productionGrid, qualitySection, maintenanceSection, inventorySection, logisticsSection, shiftComparison, workOrdersSection, actions
+// All referenced.
+// Wait, I need to make sure line1, line2, line3 are used, and safetyBadge, daysSinceBadge, andonAlert are used.
+// eeCard, targetProgress, energyUsage are used.
+// defectChart, downtimeChart, qualityHold are used.
+// maintenanceList, scheduleForm, machineInput, dateInput, scheduleButtons are used.독// matCol, stockCol, statusCol, deliveryList are used.
+// shiftChart, shiftData are used.
+// workOrderList is used.
+// exportBtn, focusBtn are used.
+// Everything is linked.
+
+// Wait, I need to define the variables used in the charts properly.
+// I'll add them at the bottom.
+// defectSeries is already defined.
+// shiftData is already defined.
+// Everything is good.
+
+// Wait, I used the andonAlert variant which is "destructive".
+// Alert signature: title, description, variant, confirmLabel, cancelLabel, triggerVariant
+// I used Alert(title, description, variant). Correct.
+
+// Wait, checking the Card signature: Card(children, variant, direction, gap)
+// I used Card([children], "row", "m"). Correct.
+
+// Correcting the Table signature: Table(columns: (Col)[])
+// I used Table([matCol, stockCol, statusCol]). Correct.
+
+// Correcting the ListBlock signature: ListBlock(items: (ListItem)[], variant?: "number" | "image")
+// I used ListBlock([ListItem(...)]). Correct.
+
+// Correcting the Form signature: Form(name: string, buttons: Buttons, fields: (FormControl)[])
+// I used Form("Schedule Maintenance", scheduleButtons, [machineInput, dateInput]). Correct.
+
+// Correcting the Buttons signature: Buttons(buttons: (Button)[], direction?: "row" | "column")
+// I used Buttons([exportBtn, focusBtn], "row", "s"). Correct.
+
+// One small fix: I need to make sure the root is defined first for the protocol.
+// Let's re-order for the final output.
+
+root = Card([header, statusRow, kpiRow, productionGrid, qualitySection, maintenanceSection, inventorySection, logisticsSection, shiftComparison, workOrdersSection, actions])
+header = CardHeader("Factory Floor Command", "Plant 4 - Shift A (Day)")
+statusRow = Card([safetyBadge, daysSinceBadge, andonAlert], "row", "m")
+safetyBadge = Badge("0 Incidents YTD", null, null, "success")
+daysSinceBadge = Badge("142 Days since last", null, null, "info")
+andonAlert = Alert("CRITICAL: Line 3 Motor Heat", "Emergency stop triggered", "destructive")
+kpiRow = Card([eeCard, targetProgress, energyUsage], "row", "l")
+eeCard = Callout("Overall OEE", "84.4% - Slightly above target")
+targetProgress = Progress(742, "Units Produced: 742 / 1000 target")
+energyUsage = TextContent("Energy: 1.2MWh today", "small")
+productionGrid = Card([line1, line2, line3], "row", "m")
+line1 = ListItem("Line 1 - Alpha", "Running - 45 u/hr", null, "Focus Line")
+line2 = ListItem("Line 2 - Beta", "Running - 38 u/hr", null, "Focus Line")
+line3 = ListItem("Line 3 - Gamma", "Down - Motor Failure", null, "Focus Line")
+qualitySection = Card([defectChart, downtimeChart, qualityHold], "row", "m")
+defectChart = LineChart(["W1", "W2", "W3", "W4", "W5"], [defectSeries], "natural", "Week", "%")
+defectSeries = Series("Defect Rate", [2.1, 1.8, 2.5, 2.0, 1.9])
+downtimeChart = PieChart(["Mechanical", "Electrical", "Setup", "Material"], [45, 25, 20, 10], "donut")
+qualityHold = Card([Heading("Quality Hold", "h4"), TextContent("Batch #992: High viscosity variance\nBatch #995: Surface contamination")])
+maintenanceSection = Card([maintenanceList, scheduleForm], "row", "m")
+maintenanceList = ListBlock([ListItem("Machine-X12", "Belt replacement - 2 days"), ListItem("Machine-Y04", "Oil change - Overdue")])
+scheduleForm = Form("Schedule Maintenance", scheduleButtons, [machineInput, dateInput])
+machineInput = FormControl("Machine ID", Input("m_id", "X-12"))
+dateInput = FormControl("Date", DatePicker("date", "single"))
+scheduleButtons = Buttons([Button("Schedule", null, "primary")])
+inventorySection = Card([inventoryTable, deliveryList], "row", "m")
+inventoryTable = Table([matCol, stockCol, statusCol])
+matCol = Col("Material", ["Steel", "Resin", "Packaging"])
+stockCol = Col("Stock (kg)", [1200, 450, 3000])
+statusCol = Col("Status", ["Healthy", "Low", "Healthy"])
+deliveryList = ListBlock([ListItem("SteelCo Inc", "Due Tuesday"), ListItem("ResinCorp", "Due Thursday")])
+shiftComparison = Card([shiftChart], "row", "m")
+shiftChart = HorizontalBarChart(["Shift A", "Shift B", "Shift C"], [shiftData], "grouped", "", "Units")
+shiftData = Series("Output", [742, 680, 715])
+workOrdersSection = Card([workOrderList], "row", "m")
+workOrderList = ListBlock([ListItem("WO-882", "High Priority - Mold Change"), ListItem("WO-885", "Medium Priority - Assembly")])
+actions = Buttons([exportBtn, focusBtn], "row", "s")
+exportBtn = Button("Export Shift Report", null, "secondary")
+focusBtn = Button("Focus on Line View", null, "tertiary")
+// Wait, I used logisticsSection in root but didn't define it.
+// Let's fix that.
+logisticsSection = Card([inventoryTable, deliveryList], "row", "m")
+// Actually, I already have inventorySection for that. 
+// I will just update root to be correct.
+
+root = Card([header, statusRow, kpiRow, productionGrid, qualitySection, maintenanceSection, inventorySection, shiftComparison, workOrdersSection, actions])
+// (Wait, I removed logisticsSection from root because it was redundant) 
+// Final check on root variables:
+// header: yes
+// statusRow: yes
+// kpiRow: yes
+// productionGrid: yes
+// qualitySection: yes
+// maintenanceSection: yes
+// inventorySection: yes
+// shiftComparison: yes
+// workOrdersSection: yes
+// actions: yes
+// All present.
+``` (Wait, the prompt asks for ONLY the code. I will provide the final clean version now.)
+
+root = Card([header, statusRow, kpiRow, productionGrid, qualitySection, maintenanceSection, inventorySection, shiftComparison, workOrdersSection, actions])
+header = CardHeader("Factory Floor Command", "Plant 4 - Shift A (Day)")
+statusRow = Card([safetyBadge, daysSinceBadge, andonAlert], "row", "m")
+safetyBadge = Badge("0 Incidents YTD", null, null, "success")
+daysSinceBadge = Badge("142 Days since last", null, null, "info")
+andonAlert = Alert("CRITICAL: Line 3 Motor Heat", "Emergency stop triggered", "destructive")
+kpiRow = Card([eeCard, targetProgress, energyUsage], "row", "l")
+eeCard = Callout("Overall OEE", "84.4% - Slightly above target")
+targetProgress = Progress(742, "Units Produced: 742 / 1000 target")
+energyUsage = TextContent("Energy: 1.2MWh today", "small")
+productionGrid = Card([line1, line2, line3], "row", "m")
+line1 = ListItem("Line 1 - Alpha", "Running - 45 u/hr", null, "Focus Line")
+line2 = ListItem("Line 2 - Beta", "Running - 38 u/hr", null, "Focus Line")
+line3 = ListItem("Line 3 - Gamma", "Down - Motor Failure", null, "Focus Line")
+qualitySection = Card([defectChart, downtimeChart, qualityHold], "row", "m")
+defectChart = LineChart(["W1", "W2", "W3", "W4", "W5"], [defectSeries], "natural", "Week", "%")
+defectSeries = Series("Defect Rate", [2.1, 1.8, 2.5, 2.0, 1.9])
+downtimeChart = PieChart(["Mechanical", "Electrical", "Setup", "Material"], [45, 25, 20, 10], "donut")
+qualityHold = Card([Heading("Quality Hold", "h4"), TextContent("Batch #992: High viscosity variance\nBatch #995: Surface contamination")])
+maintenanceSection = Card([maintenanceList, scheduleForm], "row", "m")
+maintenanceList = ListBlock([ListItem("Machine-X12", "Belt replacement - 2 days"), ListItem("Machine-Y04", "Oil change - Overdue")])
+scheduleForm = Form("Schedule Maintenance", scheduleButtons, [machineInput, dateInput])
+machineInput = FormControl("Machine ID", Input("m_id", "X-12"))
+dateInput = FormControl("Date", DatePicker("date", "single"))
+scheduleButtons = Buttons([Button("Schedule", null, "primary")])
+inventorySection = Card([inventoryTable, deliveryList], "row", "m")
+inventoryTable = Table([matCol, stockCol, statusCol])
+matCol = Col("Material", ["Steel", "Resin", "Packaging"])
+stockCol = Col("Stock (kg)", [1200, 450, 3000])
+statusCol = Col("Status", ["Healthy", "Low", "Healthy"])
+deliveryList = ListBlock([ListItem("SteelCo Inc", "Due Tuesday"), ListItem("ResinCorp", "Due Thursday")])
+shiftComparison = Card([shiftChart], "row", "m")
+shiftChart = HorizontalBarChart(["Shift A", "Shift B", "Shift C"], [shiftData], "grouped", "", "Units")
+shiftData = Series("Output", [742, 680, 715])
+workOrdersSection = Card([workOrderList], "row", "m")
+workOrderList = ListBlock([ListItem("WO-882", "High Priority - Mold Change"), ListItem("WO-885", "Medium Priority - Assembly")])
+actions = Buttons([exportBtn, focusBtn], "row", "s")
+exportBtn = Button("Export Shift Report", null, "secondary")
+focusBtn = Button("Focus on Line View", null, "tertiary")
+```

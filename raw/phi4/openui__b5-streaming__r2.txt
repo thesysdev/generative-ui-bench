@@ -1,0 +1,111 @@
+```openui
+root = Card([currentViewers, popularTitles, monthlyWatchTime, subscriberChanges, genrePerformance, bufferingRate, deliveryHealth, upcomingReleases, expiringLicenses, recommendationClicks, failedSearches, revenueSplit, deviceSplit, regionFocus, featureFlags, promoteTitle])
+
+currentViewers = Card([viewersHeader, viewersCount])
+viewersHeader = Heading("Current Viewers")
+viewersCount = TextContent("2,500 viewers watching now", "large")
+
+popularTitles = Card([popularHeader, titlesTable])
+popularHeader = Heading("Most-Watched Titles")
+titlesTable = Table([titleName, watchHours])
+titleName = Col("Title", ["Space Odyssey", "Galactic Wars", "Stellar Quest"])
+watchHours = Col("Watched Hours", ["1,200h", "950h", "870h"])
+
+monthlyWatchTime = Card([watchTimeHeader, watchTimeChart])
+watchTimeHeader = Heading("Watch Time Over the Past Month")
+watchTimeChart = AreaChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [watchTimeSeries], "linear", "Month", "Hours")
+watchTimeSeries = Series("Total Watch Time", [800, 950, 1020, 1100, 1150, 1200])
+
+subscriberChanges = Card([subscriberHeader, subscriberChart])
+subscriberHeader = Heading("New Subscribers vs Cancellations")
+subscriberChart = BarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [newSubscribersSeries, cancellationsSeries], "stacked", "Month", "Subscribers")
+newSubscribersSeries = Series("New Subscribers", [1500, 1600, 1700, 1800, 1900, 2000])
+cancellationsSeries = Series("Cancellations", [100, 120, 130, 140, 150, 160])
+
+genrePerformance = Card([genreHeader, genreChart])
+genreHeader = Heading("Performance by Genre")
+genreChart = PieChart(["Sci-Fi", "Action", "Drama", "Comedy"], [30, 25, 20, 25])
+
+bufferingRate = Card([bufferingHeader, bufferingValue])
+bufferingHeader = Heading("Buffering Rate")
+bufferingValue = TextContent("2.1% (down from 3.5%)", "small")
+
+deliveryHealth = Card([deliveryHeader, deliveryChart])
+deliveryHeader = Heading("Delivery Health by Region")
+deliveryChart = RadarChart(["NA", "EU", "ASIA", "SA", "AF"], [deliveryNorthAmerica, deliveryEurope, deliveryAsia, deliverySA, deliveryAF])
+deliveryNorthAmerica = Series("NA", [95, 98, 97, 99, 98])
+deliveryEurope = Series("EU", [97, 99, 98, 97, 96])
+deliveryAsia = Series("ASIA", [92, 94, 91, 93, 95])
+deliverySA = Series("SA", [90, 92, 93, 91, 89])
+deliveryAF = Series("AF", [85, 87, 88, 86, 85])
+
+upcomingReleases = Card([releasesHeader, releasesList])
+releasesHeader = Heading("Releases Coming This Month")
+releasesList = ListBlock([releaseItem1, releaseItem2, releaseItem3], "image")
+releaseItem1 = ListItem("Cosmic Dawn", "Sci-Fi | 2024-05-10", [imageUrl1])
+releaseItem2 = ListItem("Galactic Battles", "Action | 2024-05-15", [imageUrl2])
+releaseItem3 = ListItem("Quantum Leap", "Drama | 2024-05-20", [imageUrl3])
+
+expiringLicenses = Card([licensingHeader, licensingChart])
+licensingHeader = Heading("Licenses Expiring Soon")
+licensingChart = HorizontalBarChart(["Audio", "Video", "Subtitles"], [expiringAudio, expiringVideo, expiringSubtitles], "grouped", "License Type", "Count")
+expiringAudio = Series("Audio", [20, 15, 10])
+expiringVideo = Series("Video", [25, 20, 15])
+expiringSubtitles = Series("Subtitles", [10, 8, 5])
+
+recommendationClicks = Card([recommendationsHeader, recommendationsValue])
+recommendationsHeader = Heading("Recommendation Click Rate")
+recommendationsValue = TextContent("14.3% (up from 12.1%)", "small")
+
+failedSearches = Card([searchesHeader, searchesValue])
+searchesHeader = Heading("Searches Ending Without Playback")
+searchesValue = TextContent("5.7% (down from 6.8%)", "small")
+
+revenueSplit = Card([revenueHeader, revenueChart])
+revenueHeader = Heading("Revenue Split by Plan")
+revenueChart = PieChart(["Basic", "Premium", "Family"], [40, 45, 15])
+
+viewingSplit = Card([viewingHeader, viewingChart])
+viewingHeader = Heading("Viewing Split by Device")
+viewingChart = PieChart(["Smart TV", "Mobile", "Web", "Tablet"], [50, 25, 15, 10])
+
+regionFocus = Card([focusHeader, focusSwitch])
+focusHeader = Heading("Focus on a Region")
+focusSwitch = SwitchGroup("region_focus", [switchNA, switchEU, switchASIA, switchSA, switchAF])
+switchNA = SwitchItem("North America", null, "NA", true)
+switchEU = SwitchItem("Europe", null, "EU", false)
+switchASIA = SwitchItem("Asia", null, "ASIA", false)
+switchSA = SwitchItem("South America", null, "SA", false)
+switchAF = SwitchItem("Africa", null, "AF", false)
+
+featureFlags = Card([featureHeader, featureList])
+featureHeader = Heading("Feature Flags")
+featureList = ListBlock([flagItem1, flagItem2, flagItem3])
+
+flagItem1 = ListItem("Dark Mode", "Enabled", [flagIcon])
+flagItem2 = ListItem("Beta Features", "Disabled", [flagIcon])
+flagItem3 = ListItem("New Onboarding", "Enabled", [flagIcon])
+
+promoteTitle = Card([promoteHeader, promoteForm])
+promoteHeader = Heading("Promote a Title")
+promoteForm = Form("promote-form", promoteButtons, [titleSelect, regionSelect, startDateInput])
+titleSelect = FormControl("Title", titleSelectInput)
+titleSelectInput = Select("title", [titleOption1, titleOption2, titleOption3], "Select a title")
+titleOption1 = SelectItem("Cosmic Dawn", "Cosmic Dawn")
+titleOption2 = SelectItem("Galactic Battles", "Galactic Battles")
+titleOption3 = SelectItem("Quantum Leap", "Quantum Leap")
+regionSelect = FormControl("Region", regionSelectInput)
+regionSelectInput = Select("region", [regionNA, regionEU, regionASIA, regionSA, regionAF], "Select a region")
+regionNA = SelectItem("NA", "North America")
+regionEU = SelectItem("EU", "Europe")
+regionASIA = SelectItem("ASIA", "Asia")
+regionSA = SelectItem("SA", "South America")
+regionAF = SelectItem("AF", "Africa")
+startDateInput = FormControl("Start Date", dateInput)
+dateInput = DatePicker("start_date", "single")
+promoteButtons = Buttons([promoteBtn, cancelBtn])
+promoteBtn = Button("Promote", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```
+
+This code defines a UI for a streaming service's operations room using the openui-lang language, covering all the specified requirements.

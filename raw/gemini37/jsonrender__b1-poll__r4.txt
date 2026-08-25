@@ -1,0 +1,19 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"direction":"column","gap":"l","variant":"card"},"children":["pollHeader","statusBadge","voteCallout","optionsList","submitCard"]}}
+{"op":"add","path":"/elements/pollHeader","value":{"type":"CardHeader","props":{"title":"Where should we go for lunch on Friday?","subtitle":"Cast your vote for this week's team lunch outing by 12:00 PM Thursday."}}}
+{"op":"add","path":"/elements/statusBadge","value":{"type":"Badge","props":{"text":"Poll Open • 3 Options","variant":"secondary"}}}
+{"op":"add","path":"/elements/voteCallout","value":{"type":"Callout","props":{"variant":"info","title":"Selected Restaurant","description":{"$cond":{"$state":"/selectedOption"},"$then":{"$template":"You selected: ${/selectedOptionName}"},"$else":"Please select one option below to register your vote."}}}}
+{"op":"add","path":"/elements/optionsList","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"repeat":{"statePath":"/restaurants","key":"id"},"children":["restaurantCard"]}}
+{"op":"add","path":"/elements/restaurantCard","value":{"type":"Card","props":{"variant":{"$cond":{"$state":"/selectedOption","eq":{"$item":"id"}},"$then":"card","$else":"sunk"},"direction":"row","justify":"between","align":"center","gap":"m"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedOption","value":{"$item":"id"}}}},"children":["restInfo","restAction"]}}
+{"op":"add","path":"/elements/restInfo","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["restTitle","restDetails"]}}
+{"op":"add","path":"/elements/restTitle","value":{"type":"TextContent","props":{"text":{"$template":"**${name}**  •  *${cuisine}*"},"size":"large"}}}
+{"op":"add","path":"/elements/restDetails","value":{"type":"TextContent","props":{"text":{"$template":"📍 ${distance}  |  💵 ${priceRange}  |  ⭐ ${rating} (${votes} current votes)"},"size":"small"}}}
+{"op":"add","path":"/elements/restAction","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/selectedOption","eq":{"$item":"id"}},"$then":"✓ Selected","$else":"Click to Vote"},"variant":{"$cond":{"$state":"/selectedOption","eq":{"$item":"id"}},"$then":"default","$else":"outline"}}}}
+{"op":"add","path":"/state/selectedOption","value":"1"}
+{"op":"add","path":"/state/selectedOptionName","value":"Tatsu Ramen Bar"}
+{"op":"add","path":"/state/restaurants","value":[]}
+{"op":"add","path":"/state/restaurants/0","value":{"id":"1","name":"Tatsu Ramen Bar","cuisine":"Japanese / Noodles","distance":"0.2 miles away","priceRange":"$$","rating":"4.8","votes":5}}
+{"op":"add","path":"/state/restaurants/1","value":{"id":"2","name":"Taqueria El Sol","cuisine":"Authentic Mexican","distance":"0.4 miles away","priceRange":"$","rating":"4.6","votes":3}}
+{"op":"add","path":"/state/restaurants/2","value":{"id":"3","name":"Green Basil Bistro","cuisine":"Mediterranean & Bowls","distance":"0.3 miles away","priceRange":"$$","rating":"4.7","votes":4}}
+{"op":"add","path":"/elements/submitCard","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"end","gap":"m"},"children":["submitBtn"]}}
+{"op":"add","path":"/elements/submitBtn","value":{"type":"Button","props":{"label":"Confirm My Vote","variant":"primary","size":"medium"}}}

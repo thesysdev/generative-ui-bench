@@ -1,0 +1,123 @@
+```openui-lang
+root = Card([
+    header,
+    balancesSection,
+    recentTransactions,
+    spendingByCategory,
+    billsDue,
+    vacationGoalProgress,
+    creditScore,
+    transferMoney,
+    freezeCreditLine,
+    statementPeriodPicker,
+    alertTriggersManager,
+    disputeTransaction
+], "card", "column", "m")
+
+header = CardHeader("Personal Banking Dashboard", "Your financial overview")
+
+balancesSection = Card([
+    TextContent("Checking: $4,567.89"),
+    TextContent("Savings: $12,345.67"),
+    TextContent("Credit: $23,456.78 (Available: $15,000)"),
+], "sunk")
+
+recentTransactions = Card([
+    Heading("Recent Transactions", "h4"),
+    Table([
+        Col("Merchant", ["Acme Groceries", "Tech Gadgets Inc.", "Online Store"]),
+        Col("Amount", ["-$45.23", "$120.00", "-$89.50"])
+    ])
+])
+
+spendingByCategory = Card([
+    Heading("Spending This Month", "h4"),
+    BarChart(
+        labels=["Food", "Transport", "Entertainment", "Utilities", "Shopping"],
+        series=[
+            Series("Spent", [250, 120, 80, 150, 300])
+        ],
+        variant="grouped",
+        xLabel="Category",
+        yLabel="USD"
+    )
+])
+
+billsDue = Card([
+    Heading("Bills Due Soon", "h4"),
+    ListBlock(
+        items=[
+            ListItem("Rent", "Due in 2 days"),
+            ListItem("Electricity", "Due in 5 days"),
+            ListItem("Internet", "Due in 3 days")
+        ],
+        variant="number"
+    )
+])
+
+vacationGoalProgress = Card([
+    Heading("Vacation Savings Goal", "h4"),
+    Progress(
+        value=0.72,
+        label="72% of $5,000 goal reached"
+    )
+])
+
+creditScore = Card([
+    Heading("Credit Score", "h4"),
+    TextContent("Current Score: 785")
+])
+
+transferMoney = Form("transfer_form", transferButtons, [
+    FormControl("Amount to Transfer", transferAmountInput),
+    FormControl("From Account", fromAccountSelect),
+    FormControl("To Account", toAccountSelect)
+])
+transferAmountInput = Input("transfer_amount", "Enter amount")
+fromAccountSelect = Select("from_account", [checkingOpt, savingsOpt, creditOpt], "Choose source")
+checkingOpt = SelectItem("Checking", "Checking")
+savingsOpt = SelectItem("Savings", "Savings")
+creditOpt = SelectItem("Credit", "Credit")
+toAccountSelect = Select("to_account", [checkingOpt, savingsOpt, creditOpt], "Choose destination")
+transferButtons = Buttons([submitTransfer, cancelTransfer])
+submitTransfer = Button("Transfer", null, "primary")
+cancelTransfer = Button("Cancel", null, "tertiary")
+
+freezeCreditLine = Card([
+    Heading("Freeze Credit Line", "h4"),
+    Button("Freeze Credit Line", null, "destructive")
+])
+
+statementPeriodPicker = Card([
+    Heading("Statement Period", "h4"),
+    DatePicker(
+        name="statement_period",
+        mode="single",
+        value="2024-08-01"
+    )
+])
+
+alertTriggersManager = Card([
+    Heading("Alert Triggers", "h4"),
+    Buttons([
+        Button("Low Balance Alert", null, "info"),
+        Button("Large Purchase Alert", null, "warning"),
+        Button("Expired Card Alert", null, "error")
+    ])
+])
+
+disputeTransaction = Card([
+    Heading("Dispute a Transaction", "h4"),
+    Form("dispute_form", disputeButtons, [
+        FormControl("Transaction Date", disputeDateInput),
+        FormControl("Amount", disputeAmountInput),
+        FormControl("Reason", disputeReasonTextArea)
+    ])
+    disputeDateInput = Input("dispute_date", "YYYY-MM-DD")
+    disputeAmountInput = Input("dispute_amount", "Enter amount")
+    disputeReasonTextArea = TextArea("dispute_reason", placeholder="Explain the dispute", rows=4)
+    disputeButtons = Buttons([submitDispute, cancelDispute])
+    submitDispute = Button("Dispute Transaction", null, "primary")
+    cancelDispute = Button("Cancel", null, "tertiary")
+])
+```

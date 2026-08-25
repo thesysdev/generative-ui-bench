@@ -1,0 +1,80 @@
+root = Card([header, metricsRow, planSplit, topCustomers, atRisk, failedPayments, adoption, nps, periodSelector, seatUtil, inviteAdmin], "card", "column", "l")
+
+header = CardHeader("Admin Overview", "SaaS metrics and actions")
+
+metricsRow = Card([mrrCard, arrCard, churnCard, signupsCard], "clear", "row", "m")
+
+mrrCard = Card([mrrLabel, mrrValue], "sunk")
+mrrLabel = TextContent("Monthly Recurring Revenue", "small")
+mrrValue = TextContent("$48,200", "large-heavy")
+
+arrCard = Card([arrLabel, arrValue], "sunk")
+arrLabel = TextContent("Annual Recurring Revenue", "small")
+arrValue = TextContent("$578,400", "large-heavy")
+
+churnCard = Card([churnLabel, churnValue], "sunk")
+churnLabel = TextContent("Churn this month", "small")
+churnValue = TextContent("2.4%", "large-heavy")
+
+signupsCard = Card([signupsLabel, signupsValue], "sunk")
+signupsLabel = TextContent("New signups (90d)", "small")
+signupsValue = TextContent("142", "large-heavy")
+
+planSplit = Card([planHeading, planChart], "clear")
+planHeading = Heading("Customers by plan", "h2")
+planChart = PieChart(["Starter", "Growth", "Enterprise"], [42, 38, 20])
+
+topCustomers = Card([topHeading, topTable], "clear")
+topHeading = Heading("Ten largest customers", "h2")
+topTable = Table([custName, seats, spend])
+custName = Col("Customer", ["Acme Corp", "Globex", "Initech", "Umbrella", "Stark", "Wayne", "Cyberdyne", "Massive", "Solemn", "Oscorp"])
+seats = Col("Seats", [250, 180, 120, 95, 87, 72, 65, 58, 52, 45])
+spend = Col("Monthly spend", ["$12,500", "$9,200", "$6,800", "$5,400", "$4,900", "$4,100", "$3,800", "$3,200", "$2,900", "$2,500"])
+
+atRisk = Card([atRiskHeading, atRiskList], "clear")
+atRiskHeading = Heading("Accounts at risk", "h2")
+atRiskList = ListBlock([risk1, risk2, risk3, risk4])
+risk1 = ListItem("Acme Corp", "Usage dropped 60% in 30 days")
+risk2 = ListItem("Globex", "Payment failed twice")
+risk3 = ListItem("Initech", "Key champion left")
+risk4 = ListItem("Umbrella", "No login in 14 days")
+
+failedPayments = Card([failedHeading, failedList], "clear")
+failedHeading = Heading("Failed payments", "h2")
+failedList = ListBlock([fail1, fail2, fail3])
+fail1 = ListItem("Stark Industries", "$4,900 — Card expired", null, "Retry")
+fail2 = ListItem("Wayne Ent.", "$4,100 — Insufficient funds", null, "Retry")
+fail3 = ListItem("Cyberdyne", "$3,800 — Bank declined", null, "Retry")
+
+adoption = Card([adoptHeading, adoptChart], "clear")
+adoptHeading = Heading("Adoption of newest features", "h2")
+adoptChart = BarChart(["AI Assist", "Bulk Export", "Audit Log"], [seriesAdopt])
+seriesAdopt = Series("Adoption %", [68, 42, 31])
+
+nps = Card([npsHeading, npsValue], "clear")
+npsHeading = Heading("Current NPS", "h2")
+npsValue = TextContent("72 — Promoters 68% / Detractors 12%", "large-heavy")
+
+periodSelector = Card([periodHeading, periodForm], "clear")
+periodHeading = Heading("Reporting period", "h2")
+periodForm = Form("period-form", periodButtons, [periodField])
+periodField = FormControl("Period", periodSelect)
+periodSelect = Select("period", [p30, p90, p180, p365], "Select range")
+p30 = SelectItem("30d", "Last 30 days")
+p90 = SelectItem("90d", "Last 90 days")
+p180 = SelectItem("180d", "Last 6 months")
+p365 = SelectItem("365d", "Last 12 months")
+periodButtons = Buttons([applyBtn])
+applyBtn = Button("Apply")
+
+seatUtil = Card([seatHeading, seatProgress], "clear")
+seatHeading = Heading("Seat utilization", "h2")
+seatProgress = Progress(78, "78% of 1,240 seats used")
+
+inviteAdmin = Card([inviteHeading, inviteForm], "clear")
+inviteHeading = Heading("Invite another admin", "h2")
+inviteForm = Form("invite-form", inviteButtons, [inviteField])
+inviteField = FormControl("Email", inviteInput)
+inviteInput = Input("invite_email", "colleague@company.com", "email")
+inviteButtons = Buttons([inviteBtn])
+inviteBtn = Button("Send invite", null, "primary")

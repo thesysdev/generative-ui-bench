@@ -1,0 +1,42 @@
+```javascript
+root = Card(
+  children: [
+    // Main header
+    CardHeader("Support Dashboard - Morning View", "Open tickets and performance metrics"),
+    
+    // 1. How many tickets are open
+    Card([],
+      TextContent("Open Tickets:", true),
+      TextContent(`${openCount} active`), // Count of open tickets
+      
+      // 2. Average first-response time
+      TextContent("Average First-Response Time:", true),
+      TextContent(`${avgResponseTime} minutes`),
+      
+      // 3. Five most recent tickets with priority
+      Table({
+        columns: [
+          {label: "Ticket ID", type: "string"},
+          {label: "Priority", type: "string"},
+          {label: "Status", type: "string"},
+          {label: "Created", type: "string"}
+        ],
+        data: [
+          {id: "TICKET-101", priority: "High", status: "Open", created: "2026-04-05T09:30:00Z"},
+          {id: "TICKET-102", priority: "Medium", status: "In Progress", created: "2026-04-05T08:45:00Z"},
+          {id: "TICKET-103", priority: "Low", status: "Resolved", created: "2026-04-04T16:20:00Z"},
+          {id: "TICKET-104", priority: "High", status: "Pending", created: "2026-04-05T10:15:00Z"},
+          {id: "TICKET-105", priority: "Critical", status: "Open", created: "2026-04-05T11:00:00Z"}
+        ]
+      }),
+      
+      // 4. Filter to high-priority only
+      TextContent("Filter:", true),
+      Toggle("show_high_priority", true, "Display only high-priority tickets"),
+      
+      // 5. Way to open a new ticket
+      Button("Create New Ticket", null, "primary")
+    )
+  ]
+)
+```

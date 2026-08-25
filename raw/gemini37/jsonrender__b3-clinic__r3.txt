@@ -1,0 +1,83 @@
+{"op":"add","path":"/root","value":"reception-dashboard"}
+{"op":"add","path":"/elements/reception-dashboard","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["top-bar","metrics-grid","next-patient-banner","main-split-view"]}}
+{"op":"add","path":"/elements/top-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["header-info","day-navigation"]}}
+{"op":"add","path":"/elements/header-info","value":{"type":"CardHeader","props":{"title":"Clinic Reception Desk","subtitle":{"$template":"Active Schedule: ${/selectedDateLabel}"}}}}
+{"op":"add","path":"/elements/day-navigation","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"sunk"},"children":["prev-day-btn","today-btn","next-day-btn","date-picker-ctrl"]}}
+{"op":"add","path":"/elements/prev-day-btn","value":{"type":"Button","props":{"label":"‹ Prev Day","variant":"secondary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedDateLabel","value":"Yesterday (Oct 23, 2023)"}}}}}
+{"op":"add","path":"/elements/today-btn","value":{"type":"Button","props":{"label":"Today","variant":"primary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedDateLabel","value":"Today, Oct 24, 2023"}}}}}
+{"op":"add","path":"/elements/next-day-btn","value":{"type":"Button","props":{"label":"Next Day ›","variant":"secondary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/selectedDateLabel","value":"Tomorrow (Oct 25, 2023)"}}}}}
+{"op":"add","path":"/elements/date-picker-ctrl","value":{"type":"DatePicker","props":{"name":"calendarPicker","mode":"single"}}}
+{"op":"add","path":"/state/selectedDateLabel","value":"Today, Oct 24, 2023"}
+{"op":"add","path":"/elements/metrics-grid","value":{"type":"Card","props":{"direction":"row","gap":"m","wrap":true},"children":["expected-patients-card","noshow-metric-card","available-rooms-card"]}}
+{"op":"add","path":"/elements/expected-patients-card","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["expected-title","expected-count-text","expected-progress"]}}
+{"op":"add","path":"/elements/expected-title","value":{"type":"TextContent","props":{"text":"**Patients Expected Today**","size":"small"}}}
+{"op":"add","path":"/elements/expected-count-text","value":{"type":"Heading","props":{"text":{"$template":"${/checkedInCount} / ${/totalExpected} Arrived"},"level":"h3"}}}
+{"op":"add","path":"/elements/expected-progress","value":{"type":"Progress","props":{"value":58,"label":"58% checked in"}}}
+{"op":"add","path":"/state/checkedInCount","value":7}
+{"op":"add","path":"/state/totalExpected","value":12}
+{"op":"add","path":"/elements/noshow-metric-card","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["noshow-title","noshow-stat","noshow-context"]}}
+{"op":"add","path":"/elements/noshow-title","value":{"type":"TextContent","props":{"text":"**Monthly No-Show Rate**","size":"small"}}}
+{"op":"add","path":"/elements/noshow-stat","value":{"type":"Heading","props":{"text":"4.2%","level":"h3"}}}
+{"op":"add","path":"/elements/noshow-context","value":{"type":"Badge","props":{"text":"↓ 1.1% vs last month","variant":"secondary"}}}
+{"op":"add","path":"/elements/available-rooms-card","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["rooms-title","rooms-status-tag","room-badges-list"]}}
+{"op":"add","path":"/elements/rooms-title","value":{"type":"TextContent","props":{"text":"**Rooms Free Right Now**","size":"small"}}}
+{"op":"add","path":"/elements/rooms-status-tag","value":{"type":"Tag","props":{"text":"3 of 5 Rooms Available","variant":"success","size":"md"}}}
+{"op":"add","path":"/elements/room-badges-list","value":{"type":"Card","props":{"direction":"row","gap":"xs","wrap":true,"variant":"clear"},"repeat":{"statePath":"/freeRooms","key":"id"},"children":["room-badge-item"]}}
+{"op":"add","path":"/elements/room-badge-item","value":{"type":"Badge","props":{"text":{"$template":"${roomNumber} (${type})"},"variant":"outline"}}}
+{"op":"add","path":"/state/freeRooms","value":[]}
+{"op":"add","path":"/state/freeRooms/0","value":{"id":"r1","roomNumber":"Room 102","type":"Exam"}}
+{"op":"add","path":"/state/freeRooms/1","value":{"id":"r2","roomNumber":"Room 104","type":"Consult"}}
+{"op":"add","path":"/state/freeRooms/2","value":{"id":"r3","roomNumber":"Room 105","type":"Procedure"}}
+{"op":"add","path":"/elements/next-patient-banner","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["next-patient-info","next-patient-actions"]}}
+{"op":"add","path":"/elements/next-patient-info","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["next-patient-tag","next-patient-name","next-patient-meta"]}}
+{"op":"add","path":"/elements/next-patient-tag","value":{"type":"Badge","props":{"text":"NEXT UP FOR TRIAGE / ROOMING","variant":"destructive"}}}
+{"op":"add","path":"/elements/next-patient-name","value":{"type":"Heading","props":{"text":{"$template":"${/nextPatient/name} — ${/nextPatient/time}"},"level":"h2"}}}
+{"op":"add","path":"/elements/next-patient-meta","value":{"type":"TextContent","props":{"text":{"$template":"**Reason:** ${/nextPatient/reason} | **Assigned Physician:** ${/nextPatient/doctor} | **Status:** Waiting in Lobby"},"size":"default"}}}
+{"op":"add","path":"/elements/next-patient-actions","value":{"type":"Buttons","props":{"buttons":["call-in-btn","assign-room-btn"]}}}
+{"op":"add","path":"/elements/call-in-btn","value":{"type":"Button","props":{"label":"Call Patient Out","variant":"primary","size":"large"}}}
+{"op":"add","path":"/elements/assign-room-btn","value":{"type":"Button","props":{"label":"Direct to Room 102","variant":"secondary","size":"large"}}}
+{"op":"add","path":"/state/nextPatient","value":{"name":"Eleanor Vance","time":"10:15 AM","reason":"Follow-up Routine BP Check","doctor":"Dr. Angela Davis"}}
+{"op":"add","path":"/elements/main-split-view","value":{"type":"Card","props":{"direction":"row","gap":"l","align":"start"},"children":["checkin-panel","appointments-list-panel"]}}
+{"op":"add","path":"/elements/checkin-panel","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"card"},"children":["checkin-header","checkin-form","recent-checked-alert"]}}
+{"op":"add","path":"/elements/checkin-header","value":{"type":"CardHeader","props":{"title":"Express Patient Check-In","subtitle":"Record patient arrival & verify intake details"}}}
+{"op":"add","path":"/elements/checkin-form","value":{"type":"Form","props":{"name":"patientCheckIn","buttons":"checkin-actions","fields":["field-patient-name","field-app-time","field-doc-select","field-room-assign"]}}}
+{"op":"add","path":"/elements/field-patient-name","value":{"type":"FormControl","props":{"label":"Patient Full Name","input":"input-patient-name","hint":"Type patient legal name"}}}
+{"op":"add","path":"/elements/input-patient-name","value":{"type":"Input","props":{"name":"patientName","placeholder":"e.g. Robert Johnson","value":{"$bindState":"/newCheckIn/name"}}}}
+{"op":"add","path":"/elements/field-app-time","value":{"type":"FormControl","props":{"label":"Scheduled Time","input":"input-app-time"}}}
+{"op":"add","path":"/elements/input-app-time","value":{"type":"Input","props":{"name":"appointmentTime","placeholder":"e.g. 11:30 AM","value":{"$bindState":"/newCheckIn/time"}}}}
+{"op":"add","path":"/elements/field-doc-select","value":{"type":"FormControl","props":{"label":"Physician","input":"select-doc"}}}
+{"op":"add","path":"/elements/select-doc","value":{"type":"Select","props":{"name":"doctor","placeholder":"Select Attending Doctor","items":["doc-1","doc-2","doc-3"],"value":{"$bindState":"/newCheckIn/doctor"}}}}
+{"op":"add","path":"/elements/doc-1","value":{"type":"SelectItem","props":{"value":"Dr. Angela Davis","label":"Dr. Angela Davis (Internal Med)"}}}
+{"op":"add","path":"/elements/doc-2","value":{"type":"SelectItem","props":{"value":"Dr. Mark Higgins","label":"Dr. Mark Higgins (Pediatrics)"}}}
+{"op":"add","path":"/elements/doc-3","value":{"type":"SelectItem","props":{"value":"Dr. Sarah Lin","label":"Dr. Sarah Lin (Cardiology)"}}}
+{"op":"add","path":"/elements/field-room-assign","value":{"type":"FormControl","props":{"label":"Direct to Room (Optional)","input":"select-room"}}}
+{"op":"add","path":"/elements/select-room","value":{"type":"Select","props":{"name":"room","placeholder":"Select free room or lobby","items":["room-opt-lobby","room-opt-102","room-opt-104","room-opt-105"],"value":{"$bindState":"/newCheckIn/room"}}}}
+{"op":"add","path":"/elements/room-opt-lobby","value":{"type":"SelectItem","props":{"value":"Lobby Waiting","label":"Lobby Waiting Area"}}}
+{"op":"add","path":"/elements/room-opt-102","value":{"type":"SelectItem","props":{"value":"Room 102","label":"Room 102 (Exam)"}}}
+{"op":"add","path":"/elements/room-opt-104","value":{"type":"SelectItem","props":{"value":"Room 104","label":"Room 104 (Consult)"}}}
+{"op":"add","path":"/elements/room-opt-105","value":{"type":"SelectItem","props":{"value":"Room 105","label":"Room 105 (Procedure)"}}}
+{"op":"add","path":"/elements/checkin-actions","value":{"type":"Buttons","props":{"buttons":["confirm-checkin-btn"]}}}
+{"op":"add","path":"/elements/confirm-checkin-btn","value":{"type":"Button","props":{"label":"Complete Check-In","variant":"primary","size":"medium"},"on":{"press":{"action":"pushState","params":{"statePath":"/appointments","value":{"id":"$id","time":{"$state":"/newCheckIn/time"},"name":{"$state":"/newCheckIn/name"},"doctor":{"$state":"/newCheckIn/doctor"},"room":{"$state":"/newCheckIn/room"},"status":"Checked In","statusVariant":"success"}}}}}}
+{"op":"add","path":"/elements/recent-checked-alert","value":{"type":"Callout","props":{"variant":"info","title":"Quick Note","description":"Copay collection and ID scans must be completed before directing patients to triage."}}}
+{"op":"add","path":"/state/newCheckIn","value":{"name":"","time":"11:15 AM","doctor":"Dr. Angela Davis","room":"Room 102"}}
+{"op":"add","path":"/elements/appointments-list-panel","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"children":["app-list-header","app-cards-container"]}}
+{"op":"add","path":"/elements/app-list-header","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["app-table-heading","filter-badge"]}}
+{"op":"add","path":"/elements/app-table-heading","value":{"type":"Heading","props":{"text":"Today's Appointment Schedule","level":"h3"}}}
+{"op":"add","path":"/elements/filter-badge","value":{"type":"Badge","props":{"text":"Showing All 6 Slots","variant":"outline"}}}
+{"op":"add","path":"/elements/app-cards-container","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/appointments","key":"id"},"children":["patient-row-card"]}}
+{"op":"add","path":"/elements/patient-row-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"sunk"},"children":["patient-main-info","patient-status-group"]}}
+{"op":"add","path":"/elements/patient-main-info","value":{"type":"Card","props":{"direction":"row","gap":"m","align":"center","variant":"clear"},"children":["patient-time-badge","patient-details"]}}
+{"op":"add","path":"/elements/patient-time-badge","value":{"type":"Badge","props":{"text":{"$item":"time"},"variant":"default"}}}
+{"op":"add","path":"/elements/patient-details","value":{"type":"Card","props":{"direction":"column","gap":"none","variant":"clear"},"children":["patient-name-txt","patient-sub-txt"]}}
+{"op":"add","path":"/elements/patient-name-txt","value":{"type":"TextContent","props":{"text":{"$template":"**${name}**"},"size":"large"}}}
+{"op":"add","path":"/elements/patient-sub-txt","value":{"type":"TextContent","props":{"text":{"$template":"Provider: ${doctor} • Location: ${room}"},"size":"small"}}}
+{"op":"add","path":"/elements/patient-status-group","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["patient-status-badge","patient-row-action"]}}
+{"op":"add","path":"/elements/patient-status-badge","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":{"$item":"statusVariant"},"size":"sm"}}}
+{"op":"add","path":"/elements/patient-row-action","value":{"type":"Button","props":{"label":"Update","variant":"tertiary","size":"extra-small"}}}
+{"op":"add","path":"/state/appointments","value":[]}
+{"op":"add","path":"/state/appointments/0","value":{"id":"apt-1","time":"09:00 AM","name":"Arthur Pendelton","doctor":"Dr. Angela Davis","room":"Room 101 (In Exam)","status":"With Doctor","statusVariant":"info"}}
+{"op":"add","path":"/state/appointments/1","value":{"id":"apt-2","time":"09:30 AM","name":"Marcus Brody","doctor":"Dr. Sarah Lin","room":"Room 103 (In Exam)","status":"With Doctor","statusVariant":"info"}}
+{"op":"add","path":"/state/appointments/2","value":{"id":"apt-3","time":"10:00 AM","name":"Clara Oswald","doctor":"Dr. Mark Higgins","room":"Lobby Waiting","status":"Checked In","statusVariant":"success"}}
+{"op":"add","path":"/state/appointments/3","value":{"id":"apt-4","time":"10:15 AM","name":"Eleanor Vance","doctor":"Dr. Angela Davis","room":"Lobby Waiting","status":"Next Up","statusVariant":"warning"}}
+{"op":"add","path":"/state/appointments/4","value":{"id":"apt-5","time":"10:45 AM","name":"Julian Bashir","doctor":"Dr. Sarah Lin","room":"Unassigned","status":"Scheduled","statusVariant":"neutral"}}
+{"op":"add","path":"/state/appointments/5","value":{"id":"apt-6","time":"11:15 AM","name":"Gwendolyn Stacy","doctor":"Dr. Mark Higgins","room":"Unassigned","status":"Scheduled","statusVariant":"neutral"}}

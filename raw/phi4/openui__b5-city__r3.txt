@@ -1,0 +1,137 @@
+```openui
+root = Card([
+    congestionSection,
+    transitSection,
+    airQualitySection,
+    energySection,
+    waterSection,
+    incidentsSection,
+    emergencyVehiclesSection,
+    parkingSection,
+    eventsSection,
+    citizenReportsSection,
+    backlogSection,
+    weatherSection,
+    dispatchSection,
+    alertSection,
+    roadworksSection,
+    maintenanceSection
+])
+
+congestionSection = Card([
+    Heading("Current Congestion", "h3"),
+    congestionChart
+], "sunk")
+congestionChart = HorizontalBarChart(["Downtown", "Suburbs", "Highway"], [congestionSeries])
+congestionSeries = Series("Traffic Volume", [75, 40, 60])
+
+transitSection = Card([
+    Heading("Transit Punctuality", "h3"),
+    punctualityChart
+], "sunk")
+punctualityChart = RadarChart(["Bus", "Tram", "Metro"], [punctualitySeries])
+punctualitySeries = Series("On Time", [90, 85, 95])
+
+airQualitySection = Card([
+    Heading("Air Quality by District", "h3"),
+    airQualityPie
+], "sunk")
+airQualityPie = PieChart(["North", "South", "East", "West"], [50, 30, 15, 5])
+
+energySection = Card([
+    Heading("Energy Use Last Week", "h3"),
+    energyLine
+], "sunk")
+energyLine = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries])
+energySeries = Series("MWh", [200, 195, 205, 198, 210, 190, 185])
+
+waterSection = Card([
+    Heading("Water Use Today", "h3"),
+    waterRadial
+], "sunk")
+waterRadial = RadialChart(["Residential", "Commercial", "Industrial"], [70, 20, 10])
+
+incidentsSection = Card([
+    Heading("Open Incidents", "h3"),
+    incidentsList
+], "sunk")
+incidentsList = ListBlock([
+    ListItem("Fire at Elm St.", "High severity", ["fire_icon"], "View Details"),
+    ListItem("Road Accident on 5th Ave.", "Medium severity", ["accident_icon"], "View Details")
+], "image")
+
+emergencyVehiclesSection = Card([
+    Heading("Emergency Vehicles", "h3"),
+    vehiclesMap
+], "sunk")
+vehiclesMap = Image("Map showing emergency vehicle locations", ["emergency_vehicles_map.jpg"])
+
+parkingSection = Card([
+    Heading("Parking Availability Downtown", "h3"),
+    parkingChart
+], "sunk")
+parkingChart = SingleStackedBarChart(["Street", "Garage", "Pay & Display"], [parkingSeries])
+parkingSeries = Series("Availability", [20, 50, 30])
+
+eventsSection = Card([
+    Heading("Public Events This Weekend", "h3"),
+    eventsTable
+], "sunk")
+eventsTable = Table([
+    eventsTitle,
+    eventsData
+])
+eventsTitle = Col("Event", ["Music Festival", "Food Fair", "Charity Run"])
+eventsData = Col("Location", ["City Park", "Main Square", "Riverbank"])
+
+citizenReportsSection = Card([
+    Heading("Citizen Reports", "h3"),
+    reportsList
+], "sunk")
+reportsList = ListBlock([
+    ListItem("Pothole on 3rd St.", null, null, "Acknowledge"),
+    ListItem("Graffiti on Library Wall", null, null, "Acknowledge")
+])
+
+backlogSection = Card([
+    Heading("Service Request Backlog", "h3"),
+    backlogChart
+], "sunk")
+backlogChart = BarChart(["Plumbing", "Electrical", "Waste"], [backlogSeries], "stacked")
+backlogSeries = Series("Requests", [15, 5, 10])
+
+weatherSection = Card([
+    Heading("Current Weather", "h3"),
+    weatherImage
+], "sunk")
+weatherImage = Image("Sunny with mild winds", ["current_weather.jpg"])
+
+districtFocus = CardHeader("Focus on District", null)
+dispatchSection = Button("Dispatch Crew", [
+    "crew_id",
+    "location"
+], "primary")
+alertSection = Button("Send Public Alert", [
+    "alert_message"
+], "destructive")
+
+roadworksSection = Card([
+    Heading("Roadworks Planned This Month", "h3"),
+    roadworksTable
+], "sunk")
+roadworksTable = Table([
+    roadworksTitle,
+    roadworksData
+])
+roadworksTitle = Col("Location", ["Main St.", "River Rd.", "Highway 1"])
+roadworksData = Col("Start Date", ["2023-10-01", "2023-10-05", "2023-10-10"])
+
+maintenanceSection = Card([
+    Heading("Infrastructure Maintenance", "h3"),
+    maintenanceList
+], "sunk")
+maintenanceList = ListBlock([
+    ListItem("Bridge Inspection", "Due next week", null, "View Details"),
+    ListItem("Tunnel Lighting", "Due in two weeks", null, "View Details")
+])
+```

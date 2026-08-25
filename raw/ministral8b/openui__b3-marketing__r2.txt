@@ -1,0 +1,50 @@
+```openui-lang
+root = Card([dashboardHeader, dateRangeSelector, visitorChart, conversionMetrics, trafficSources, campaignPerformance, subscriberGrowth, exportButton])
+
+dashboardHeader = CardHeader("Marketing Dashboard", "Weekly Performance Overview")
+
+dateRangeSelector = FormControl("Date Range", datePicker, "Select a custom period")
+datePicker = DatePicker("date_range", null, null, ["2023-10-01", "2023-10-31"])
+
+visitorChart = Card([chartHeader, lineChart], "sunk")
+chartHeader = CardHeader("Site Visitors (Last 30 Days)", "Daily average")
+lineChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [visitorsSeries], "natural", "Day", "Visitors")
+
+visitorsSeries = Series("Traffic", [1250, 1480, 1620, 1850, 2100, 2350, 2050, 1980, 2200, 2450, 2600, 2850, 3000, 3200, 3100, 3300, 3500, 3600, 3800, 3900, 4100, 4000, 4300, 4500, 4700, 4800, 5000])
+
+conversionMetrics = Card([metricsHeader, conversionRate, avgValue], "sunk")
+metricsHeader = CardHeader("Conversion Metrics", "Key performance indicators")
+conversionRate = Card([rateLabel, rateValue], "card", "row", "none", "center")
+rateLabel = TextContent("Conversion Rate", "large-heavy")
+rateValue = TextContent("2.8%", "large-heavy", "success")
+avgValue = TextContent("Average Order Value", "large-heavy")
+avgValueDetail = TextContent("$128.50", "large-heavy", "success")
+
+trafficSources = Card([sourcesHeader, sourcesChart], "sunk")
+sourcesHeader = CardHeader("Top Traffic Sources", "Referral share")
+sourcesChart = HorizontalBarChart(["Organic Search", "Direct", "Social Media", "Email Campaigns", "Referrals"], [trafficSeries], "grouped", "Source", "Share (%)")
+trafficSeries = Series("Share", [45, 30, 12, 8, 5])
+
+campaignPerformance = Card([campaignHeader, campaignsTable, bestCampaign], "sunk")
+campaignHeader = CardHeader("Running Campaigns", "Spend breakdown")
+campaignsTable = Table([campaignName, campaignSpend, campaignROI])
+campaignName = Col("Campaign Name", ["Summer Sale", "New Product Launch", "Black Friday", "Referral Program", "Abandoned Cart"])
+campaignSpend = Col("Spend ($)", ["$12,500", "$8,200", "$15,000", "$6,800", "$4,700"])
+campaignROI = Col("ROI", ["3.2x", "2.8x", "4.1x", "1.9x", "2.5x"])
+
+bestCampaign = Card([bestLabel, bestCampaignCard], "sunk")
+bestLabel = TextCallout("Best Performing", "Summer Sale", "success")
+bestCampaignCard = Card([bestTitle, bestDetails], "card")
+bestTitle = Heading("Summer Sale", "h4")
+bestDetails = Card([bestROI, bestConversion], "sunk")
+bestROI = TextContent("ROI: 3.2x", "large-heavy")
+bestConversion = TextContent("Conversion: 4.1%", "large-heavy", "success")
+
+subscriberGrowth = Card([growthHeader, growthChart], "sunk")
+growthHeader = CardHeader("Email Subscribers", "Monthly growth")
+growthChart = SingleStackedBarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"], [subscriberGrowthData])
+subscriberGrowthData = [1500, 1800, 2100, 2400, 2700, 3000, 3400, 3800, 4200, 4800]
+
+exportButton = Buttons([exportBtn], "column")
+exportBtn = Button("Export Report", null, "primary", "normal")
+```

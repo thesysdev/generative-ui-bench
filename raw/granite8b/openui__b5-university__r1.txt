@@ -1,0 +1,131 @@
+```openui-lang
+root = Card([
+    enrollmentChart,
+    applicationsByProgram,
+    acceptanceRate,
+    tuitionRevenue,
+    courseCapacity,
+    facultyTeachingLoad,
+    atRiskStudents,
+    scholarshipBudget,
+    housingOccupancy,
+    campusEvents,
+    alumniGiving,
+    departmentFocus,
+    semesterComparison,
+    waitlistedStudents,
+    approveNewCourse,
+    sendMessageToGroup
+])
+
+enrollmentChart = LineChart(
+    ["2019", "2020", "2021", "2022", "2023"],
+    [8500, 8700, 8900, 9100, 9300],
+    "natural",
+    "Year",
+    "Enrollment"
+)
+
+applicationsByProgram = Table([
+    Col("Program", ["Engineering", "Business", "Arts", "Science"]),
+    Col("Applications", [1200, 950, 800, 1100])
+])
+
+acceptanceRate = Tag("Acceptance Rate: 68%", null, null, "success")
+
+tuitionRevenue = BarChart(
+    ["Q1", "Q2", "Q3", "Q4"],
+    [ [360000, 380000, 400000, 420000] ],
+    "grouped",
+    "Quarter",
+    "Revenue (USD)"
+)
+
+courseCapacity = Table([
+    Col("Course", ["CS101", "MATH202", "ENG101"]),
+    Col("Capacity", [100, 80, 120]),
+    Col("Enrolled", [95, 78, 115]),
+    Col("Fullness %", [95, 97.5, 95.8])
+])
+
+facultyTeachingLoad = Table([
+    Col("Faculty", ["Dr. Smith", "Prof. Lee", "Mr. Patel"]),
+    Col("Load (credits)", [3, 4, 2]),
+    Col("Course Count", [2, 3, 1])
+])
+
+atRiskStudents = Tag("At Academic Risk: 215 students", null, null, "warning")
+
+scholarshipBudget = PieChart(
+    ["Budget Used", "Remaining"],
+    [850000, 150000],
+    "donut"
+)
+
+housingOccupancy = Tag("Housing Occupancy: 92%", null, null, "info")
+
+campusEvents = CardsCarousel([
+    Card([Heading("Career Fair", "h4"), TextContent("Oct 15 - 17, 2023")]),
+    Card([Heading("International Festival", "h4"), TextContent("Oct 20, 2023")]),
+    Card([Heading("Guest Lecture", "h4"), TextContent("Oct 22, 2023 - AI in Healthcare")])
+])
+
+alumniGiving = LineChart(
+    ["2019", "2020", "2021", "2022"],
+    [ [250000, 275000, 300000, 320000] ],
+    "natural",
+    "Year",
+    "Giving (USD)"
+)
+
+departmentFocus = Tabs([
+    TabItem("Engineering", "Engineering", [Card([Heading("Engineering Overview", "h3"), TextContent("Programs, enrollment, faculty")])]),
+    TabItem("Business", "Business", [Card([Heading("Business Overview", "h3"), TextContent("Programs, enrollment, faculty")])]),
+    TabItem("Arts", "Arts", [Card([Heading("Arts Overview", "h3"), TextContent("Programs, enrollment, faculty")])]),
+    TabItem("Science", "Science", [Card([Heading("Science Overview", "h3"), TextContent("Programs, enrollment, faculty")])])
+])
+
+semesterComparison = Card([
+    Heading("Semester Comparison", "h4"),
+    Table([
+        Col("Metric", ["Fall 2022", "Fall 2023"]),
+        Col("Enrollment", [9200, 9300]),
+        Col("Acceptance Rate", ["70%", "68%"]),
+        Col("Tuition Revenue", ["$4.1M", "$4.2M"])
+    ])
+])
+
+waitlistedStudents = BarChart(
+    ["Engineering", "Business", "Arts", "Science"],
+    [ [150, 80, 50, 30] ],
+    "grouped",
+    "Program",
+    "Waitlisted Students"
+)
+
+approveNewCourse = DialogBlock(
+    "Approve New Course",
+    "New Course Submission",
+    "Review and approve the proposed course.",
+    [Form("course_approval", Buttons([ApproveBtn, RejectBtn]), [
+        FormControl("Course Title", Input("title", "New Data Science Course")),
+        FormControl("Credits", Input("credits", "3", "number")),
+        FormControl("Instructor", Select("instructor", [SelectItem("Dr. Kim", "Kim"), SelectItem("Prof. Lee", "Lee")], "Choose Instructor")),
+        FormControl("Prerequisites", TextArea("prereqs", "Basic Statistics"))
+    ])]
+)
+ApproveBtn = Button("Approve", "primary")
+RejectBtn = Button("Reject", "destructive")
+
+sendMessageToGroup = DialogBlock(
+    "Send Message",
+    "Student Group Communication",
+    "Compose a message to a selected student group.",
+    [Form("message_form", Buttons([SendMessageBtn]), [
+        FormControl("Group", Select("group", [SelectItem("Engineering Students", "eng"), SelectItem("Business Students", "biz")], "Select Group")),
+        FormControl("Subject", Input("subject", "Upcoming Events")),
+        FormControl("Message", TextArea("body", "Dear students, ..."))
+    ])]
+)
+SendMessageBtn = Button("Send Message", "primary")
+```

@@ -1,0 +1,57 @@
+```openui-lang
+root = Card([header, filters, metricsSection, engagementChart, riskSection, cohortActions, footer])
+
+header = CardHeader("Training Analytics", "Weekly overview of platform performance")
+filters = Card([cohortFilter, resetFilter], "sunk")
+cohortFilter = FormControl("Filter by cohort", cohortSelect)
+cohortSelect = Select("cohort", [cohortOption1, cohortOption2, cohortOption3, cohortOptionAll], "All cohorts")
+cohortOption1 = SelectItem("Q3-2023", "Q3-2023 cohort")
+cohortOption2 = SelectItem("Q4-2023", "Q4-2023 cohort")
+cohortOption3 = SelectItem("Jan-2024", "January 2024 cohort")
+cohortOptionAll = SelectItem("all", "All cohorts")
+resetFilter = Button("Reset filters", null, "tertiary")
+
+metricsSection = Card([metricsTitle, activeLearners, completionRate, avgScore], "sunk")
+metricsTitle = Heading("Key Metrics", "h3")
+activeLearners = Card([activeLearnersTitle, activeLearnersValue, activeLearnersChart], "sunk")
+activeLearnersTitle = TextContent("Active learners this week")
+activeLearnersValue = TextContent("1,284", "large-heavy")
+activeLearnersChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [weeklyActivitySeries], "grouped", "Day", "Learners")
+
+completionRate = Card([completionRateTitle, completionRateValue, completionRateChart], "sunk")
+completionRateTitle = TextContent("Course completion rate")
+completionRateValue = TextContent("87%", "large-heavy")
+completionRateChart = PieChart(["Completed", "In Progress", "Dropped"], [87, 10, 3], "pie")
+
+avgScore = Card([avgScoreTitle, avgScoreValue, avgScoreChart], "sunk")
+avgScoreTitle = TextContent("Average quiz score")
+avgScoreValue = TextContent("82%", "large-heavy")
+avgScoreChart = RadialChart(["All Quizzes"], [82], null, "semiCircular")
+
+enrollmentRanking = Card([enrollmentTitle, enrollmentTable], "sunk")
+enrollmentTitle = Heading("Courses by Enrollment", "h3")
+enrollmentTable = Table([courseCol, enrollmentCol, completionCol])
+courseCol = Col("Course", ["Leadership 101", "Data Science Basics", "Project Management", "Python Fundamentals", "UX Design"])
+enrollmentCol = Col("Enrollments", [245, 198, 156, 123, 98], "number")
+completionCol = Col("Completion Rate", ["78%", "85%", "92%", "68%", "80%"], "string")
+
+engagementChart = Card([engagementTitle, engagementChartContent], "sunk")
+engagementTitle = Heading("Engagement Over Time", "h3")
+engagementChartContent = AreaChart(weeks, [engagementSeries], "natural", "Week", "Engagement Score")
+weeks = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+engagementSeries = Series("Engagement", [45, 52, 60, 68, 72, 65, 58, 49])
+
+riskSection = Card([riskTitle, riskTable], "sunk")
+riskTitle = Heading("Learners at Risk", "h3")
+riskTable = Table([learnerCol, courseCol, daysCol, actionCol])
+learnerCol = Col("Learner", ["Alex Johnson", "Maria Rodriguez", "Kevin Lee", "Sophia Kim", "Daniel Chen"])
+courseCol = Col("Course", ["Leadership 101", "Data Science Basics", "Project Management", "UX Design", "Python Fundamentals"])
+daysCol = Col("Days Inactive", [5, 7, 3, 9, 4])
+actionCol = Col("Action", ["[Message]", "[Message]", "[Message]", "[Message]", "[Message]"], "action")
+
+cohortActions = Card([messageCohortBtn, cohortSummary], "sunk")
+messageCohortBtn = Button("Message Cohort", null, "primary")
+cohortSummary = TextContent("Selected cohort: All cohorts")
+
+footer = TextCallout("data", "Weekly analytics for all active cohorts. Last updated: 2024-03-15")
+```

@@ -1,0 +1,73 @@
+thought
+root = Card([header, status, filters, portfolioTable, overdueSection, budgetChart, utilizationSection, paceChart, blockedSection, actions])
+header = CardHeader("PMO Portfolio Review", "Q3 2024 Performance")
+status = Callout("info", "Portfolio Health", "Overall portfolio is stable, though resource constraints are emerging in the Infrastructure track.")
+filters = Card([quarterSelector, exportBtn])
+quarterSelector = FormControl("Select Quarter", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3], "Q3 2024")
+q1 = SelectItem("q3-2024", "Third Quarter 2024")
+q2 = SelectItem("q2-2024", "Second Quarter 2024")
+q3 = SelectItem("q1-2024", "First Quarter 2024")
+exportBtn = Button("Export Review", null, "secondary")
+
+portfolioTable = Table([colProject, colOwner, colDeadline, colHealth])
+colProject = Col("Project", ["Cloud Migration", "Mobile App Redesign", "Security Audit", "Data Warehouse"])
+colOwner = Col("Owner", ["Alice Chen", "Bob Smith", "Charlie Day", "Diana Prince"])
+colDeadline = Col("Deadline", ["2024-11-15", "2024-10-20", "2024-11-05", "2024-12-01"])
+colHealth = Col("Health", ["Green", "At Risk", "Critical", "Green"])
+
+overdueSection = SectionBlock([overdueItem, upcomingItem])
+overdueItem = SectionItem("overdue", "Overdue Milestones", ListBlock([ListItem("API Gateway", "Overdue by 4 days"), ListItem("DB Schema", "Overdue by 2 days")]))
+upcomingItem = SectionItem("upcoming", "Deadlines Next 2 Weeks", ListBlock([ListItem("UAT Testing", "Due Oct 25"), ListItem("Security Scan", "Due Nov 02")]))
+
+budgetChart = Card([Heading("Budget vs Allocation", "h3"), budgetData], "sunk")
+budgetData = HorizontalBarChart(["Cloud", "Mobile", "Security", "Data"], [s1, s2, s3, s4])
+s1 = Series("Spent", [45000])
+s2 = Series("Allocated", [50000])
+s3 = Series("Spent", [12000])
+s4 = Series("Allocated", [15000])
+# Note: The signature for HorizontalBarChart takes labels and series. 
+# Let's use a simpler approach for budget for visual clarity:
+spentSeries = Series("Spent", [45000])
+allocSeries = Series("Allocated", [50000])
+
+utilizationSection = Card([Heading("Team Utilization", "h3"), utilChart], "sunk")
+utilChart = RadialChart(["Dev", "QA", "Design", "PM"], [85, 95, 70, 60])
+
+paceChart = Card([Heading("Delivery Pace (Velocity)", "h3"), paceData], "sunk")
+paceData = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [velSeries], "natural", "Sprint", "Points")
+velSeries = Series("Velocity", [42, 48, 35, 50, 55, 62])
+
+blockedSection = SectionBlock([blockedItems, riskItems])
+blockedItems = SectionItem("blocked", "Blocked Items", ListBlock([ListItem("Auth Integration", "Waiting on API docs"), ListItem("UI Assets", "Designer on leave")]))
+riskItems = SectionItem("risks", "Project Risks", ListBlock([ListItem("Resource Churn", "High"), ListItem("Scope Volatility", "Medium")]))
+
+actions = Buttons([requestPeopleBtn, archiveBtn])
+requestPeopleBtn = DialogBlock("Request Resources", "Resource Request", "Add headcount to a project", Form("res-req", Buttons([submitReq]), [projField, countField])) 
+archiveBtn = AlertDialogBlock("Archive Project", "Archive Project", "Are you sure you want to archive this project?", "Confirm", "Cancel", "destructive")
+
+projField = FormControl("Project Name", projInput)
+projInput = Input("proj_name", "Cloud Migration")
+countField = FormControl("Headcount Needed", countInput)
+countInput = Slider("count", "discrete", 1, 5, 1, [1])
+submitReq = Button("Submit Request", null, "primary")
+
+# Re-defining budgetChart to match signature better if needed, 
+# Actually HorizontalBarChart is (labels, series, variant, x, y)
+budgetData = Chart(["Cloud", "Mobile", "Security", "Data"], [b1, b2])
+b1 = Series("Spent", [45000, 12000, 8000, 30000])
+b2 = Series("Allocated", [50000, 15000, 20000, 40000])
+# Wait, the signature says Series takes one value per label. 
+# Let's just use a bar chart for budget to be safe.
+budgetChart = BarChart(["Cloud", "Mobile", "Security", "Data"], [b1, b2], "grouped", "Project", "USD")
+b1 = Series("Spent", [45000, 12000, 8000, 30000])
+b2 = Series("Allocated", [50000, 15000, 20000, 40000])
+
+root = Card([header, status, filters, portfolioTable, overdueSection, budgetChart, utilizationSection, paceChart, blockedSection, actions])
+# Re-checking root to ensure all variables are used.
+# root uses header, status, filters, portfolioTable, overdueSection, budgetChart, utilizationSection, paceChart, blockedSection, actions.
+# All defined.
+# Wait, I need to fix the budgetChart definition in order.
+# b1 and b2 are defined.
+# velSeries is defined.
+# utilChart is defined.

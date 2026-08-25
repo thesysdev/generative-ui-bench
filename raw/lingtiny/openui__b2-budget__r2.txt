@@ -1,0 +1,24 @@
+root = Card([monthSelect, budgetSection, spendingChart, largestExpense, addExpense], "sunk")
+
+monthSelect = Select("month", [january, february, march], "Select month")
+january = SelectItem("January", "January")
+february = SelectItem("February", "February")
+march = SelectItem("March", "March")
+
+budgetSection = CardHeader("Monthly Budget", "Total spent against your budget")
+budgetInfo = TextCallout("warning", "Budget: $2000", "Current: $1850")
+
+spendingChart = RadarChart("categories", [januarySeries, februarySeries, marchSeries])
+januarySeries = Series("Rent", [800, 800, 800])
+februarySeries = Series("Rent", [800, 800, 800])
+marchSeries = Series("Rent", [800, 800, 800])
+
+largestExpense = CardHeader("Largest Expense", "This month")
+largestExpenseItem = TextCallout("danger", "Rent", "$800")
+
+addExpense = CardHeader("Add Expense", "Record a new expense")
+addExpenseForm = Form("add-expense", [addBtn], [descInput, amountInput, categorySelect])
+descInput = TextArea("Description", "Enter description", 3, "Enter a description for the expense", "")
+amountInput = Input("Amount", "50.00", "number", "Enter the expense amount")
+categorySelect = Select("Category", [food, transport, entertainment, utilities, rent], "Select category")
+addBtn = Button("Add Expense", null, "primary")

@@ -1,0 +1,94 @@
+root = Card(children: [
+  // 1. Current electricity load on the network
+  CardHeader("Network Load", "Real-time Power Consumption"),
+  
+  // 2. How close the network is to capacity
+  Progress({ value: 78, label: "Load vs Capacity" }),
+  
+  // 3. Generation split by source
+  PieChart({
+    labels: ["Solar", "Wind", "Gas", "Hydro", "Diesel"],
+    series: [
+      { value: 35 },
+      { value: 25 },
+      { value: 20 },
+      { value: 12 },
+      { value: 8 }
+    ]
+  }),
+  
+  // 4. Each plant with output and status
+  ListBlock([
+    { title: "Plant Alpha", subtitle: "450 MW", status: "Operational" },
+    { title: "Plant Beta", subtitle: "320 MW", status: "Under maintenance" },
+    { title: "Plant Gamma", subtitle: "280 MW", status: "Operational" },
+    { title: "Plant Delta", subtitle: "150 MW", status: "Standby" }
+  ]),
+  
+  // 5. Outages with affected region
+  ListBlock([
+    { title: "North Zone", description: "Transformer failure affecting 15MW", region: "North" },
+    { title: "East District", description: "Line fault causing voltage drop", region: "East" },
+    { title: "Central Hub", description: "Substation overload", region: "Central" }
+  ]),
+  
+  // 6. Demand forecast for the next 24 hours
+  LineChart({
+    labels: ["Hour 0", "Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7", "Hour 8", "Hour 9", "Hour 10", "Hour 11", "Hour 12", "Hour 13", "Hour 14", "Hour 15", "Hour 16", "Hour 17", "Hour 18", "Hour 19", "Hour 20", "Hour 21", "Hour 22", "Hour 23"],
+    series: [{
+      label: "Predicted Demand (MW)",
+      data: [850, 860, 870, 880, 890, 895, 905, 915, 925, 940, 950, 960, 970, 980, 990, 1000, 1010, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090]
+    }]
+  }),
+  
+  // 7. Current price per megawatt hour
+  Alert({
+    title: "Live Price",
+    description: "Current market price: $42.50/MWh",
+    variant: "default"
+  }),
+  
+  // 8. Maintenance planned this month
+  ListBlock([
+    { title: "Quarter Turn Rotor Replacement", date: "2026-05-15", region: "North" },
+    { title: "Generator Fan Inspection", date: "2026-05-18", region: "South" },
+    { title: "Transmission Line Upgrade", date: "2026-05-22", region: "Central" },
+    { title: "Battery Bank Scaling", date: "2026-06-01", region: "West" }
+  ]),
+  
+  // 9. Live alerts as they arrive
+  [
+    { title: "High Load Alert", description: "Network approaching 80% capacity", variant: "warning" },
+    { title: "Generation Shortfall", description: "Wind farm offline reducing supply", variant: "error" },
+    { title: "Grid Stability Warning", description: "Frequency deviation detected", variant: "warning" },
+    { title: "Price Spike Notice", description: "Midday price surge detected", variant: "info" }
+  ],
+  
+  // 10. Way to focus on one region (region selector)
+  Select({
+    options: [
+      { value: "north", label: "North Region" },
+      { value: "east", label: "East Region" },
+      { value: "central", label: "Central Region" },
+      { value: "west", label: "West Region" }
+    ]
+  }),
+  
+  // 11. Way to order curtailment (priority-sorted list)
+  ListBlock([
+    { title: "Unit 4 - 15MW curtailment", status: "Pending", priority: "high" },
+    { title: "Unit 7 - 8MW curtailment", status: "Pending", priority: "medium" },
+    { title: "Unit 2 - 22MW curtailment", status: "Pending", priority: "high" },
+    { title: "Unit 5 - 5MW curtailment", status: "Pending", priority: "low" }
+  ]),
+  
+  // 12. Emissions today
+  Card({
+    title: "Today's Emissions",
+    content: {
+      text: "CO₂: 15,340 tonnes (24h)",
+      style: "sunk",
+      typography: "small"
+    }
+  })
+])

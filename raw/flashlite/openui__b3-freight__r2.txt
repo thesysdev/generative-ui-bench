@@ -1,0 +1,57 @@
+root = Card([header, metricsRow, alertsSection, transitSection, chartsRow, searchAndFlagSection])
+
+header = CardHeader("Logistics Operations Board", "Live overview and carrier performance • Numbers last refreshed: Today at 08:30 UTC")
+
+metricsRow = Card([onTimeCard, costCard], "sunk", "row", "m")
+onTimeCard = Card([onTimeTitle, onTimeProgress, onTimeValue], "card", "column", "s")
+onTimeTitle = Heading("On-Time Percentage", "h4")
+onTimeProgress = Progress(92.4, "92.4% on-time this month")
+onTimeValue = TextContent("Target is 90.0%. Up 1.2% from last month.", "small")
+
+costCard = Card([costTitle, costVal, costSub], "card", "column", "s")
+costTitle = Heading("Average Cost per Shipment", "h4")
+costVal = Heading("$1,245.80", "h2")
+costSub = TextContent("Based on 1,420 active shipments this month.", "small")
+
+alertsSection = Card([alertTitle, delayAlert], "clear", "column", "s")
+alertTitle = Heading("Attention Required", "h3")
+delayAlert = Alert("Delayed Shipments Detected", "Shipment SHP-4092 (Chicago to Dallas) and SHP-8812 (Seattle to Denver) are currently delayed due to severe weather conditions.", "warning")
+
+transitSection = Card([transitTitle, transitTable], "card", "column", "s")
+transitTitle = Heading("Shipments in Transit", "h3")
+transitTable = Table([idCol, originCol, destCol, etaCol, statusCol])
+idCol = Col("Shipment ID", ["SHP-1001", "SHP-4092", "SHP-5521", "SHP-8812", "SHP-9934"], "string")
+originCol = Col("Origin", ["New York", "Chicago", "Atlanta", "Seattle", "Miami"], "string")
+destCol = Col("Destination", ["Los Angeles", "Dallas", "Boston", "Denver", "Houston"], "string")
+etaCol = Col("ETA", ["Oct 24, 14:00", "Oct 25, 09:30", "Oct 24, 18:45", "Oct 26, 12:00", "Oct 24, 22:15"], "string")
+statusCol = Col("Status", ["In Transit", "Delayed", "On Time", "Delayed", "In Transit"], "string")
+
+chartsRow = Card([volumeCard, carrierCard], "clear", "row", "m")
+volumeCard = Card([volTitle, volChart], "card", "column", "s")
+volTitle = Heading("Weekly Volume (Past 2 Months)", "h3")
+volChart = BarChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "grouped", "Week", "Shipments")
+volSeries = Series("Volume", [310, 345, 390, 420, 380, 410, 450, 465])
+
+carrierCard = Card([carTitle, carChart], "card", "column", "s")
+carTitle = Heading("Volume Split by Carrier", "h3")
+carChart = PieChart(["SwiftLog", "ApexCargo", "BlueFreight", "GlobalTransit"], [450, 380, 290, 300], "donut", "circular")
+
+searchAndFlagSection = Card([toolsTitle, searchForm, flagForm], "card", "column", "m")
+toolsTitle = Heading("Shipment Management Tools", "h3")
+
+searchForm = Form("search-route", searchButtons, [routeField])
+routeField = FormControl("Search by Route", routeInput, "Enter origin or destination (e.g., Chicago)")
+routeInput = Input("route_query", "Chicago", "text")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search Route", null, "primary")
+
+flagForm = Form("flag-shipment", flagButtons, [shipmentIdField, reasonField])
+shipmentIdField = FormControl("Shipment ID to Flag", shipmentIdInput, "Enter exact shipment ID")
+shipmentIdInput = Input("shipment_id", "SHP-4092", "text")
+reasonField = FormControl("Reason for Flagging", reasonSelect)
+reasonSelect = Select("flag_reason", [reasonDelay, reasonDamage, reasonCustoms], "Select reason")
+reasonDelay = SelectItem("weather", "Severe Weather Delay")
+reasonDamage = SelectItem("damage", "Reported Cargo Damage")
+reasonCustoms = SelectItem("customs", "Customs Inspection Hold")
+flagButtons = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment", null, "destructive")

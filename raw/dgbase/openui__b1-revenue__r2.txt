@@ -1,0 +1,14 @@
+thought
+root = Card([header, status, metricsRow, comparisonChart, actions])
+header = CardHeader("Morning Performance Check", "As of 10:30 AM today")
+status = Callout("success", "Target Met", "You are currently 12% ahead of yesterday at this time.")
+metricsRow = Card([revenueCard, orderCard], "card", "row", "m")
+revenueCard = Card([Heading("Today's Revenue", "h3"), TextContent("$4,280.50", "large-heavy"), Badge("+12% vs yesterday", null, "success")], "sunk")
+orderCard = Card([Heading("Orders Today", "h3"), TextContent("34", "large-heavy"), Badge("+5 vs yesterday", null, "info")], "sunk")
+comparisonChart = Card([Heading("Revenue Trend: Today vs Yesterday", "h4"), LineChart(labels, [todaySeries, yesterdaySeries], "natural", "Time", "USD")], "sunk")
+labels = ["06:00", "07:00", "08:00", "09:00", "10:00"]
+todaySeries = Series("Today", [420, 850, 1200, 1810, 4280])
+yesterdaySeries = Series("Yesterday", [380, 700, 950, 1500, 3820])
+actions = Buttons([refreshBtn, reportBtn])
+refreshBtn = Button("Refresh Data", null, "secondary")
+reportBtn = Button("View Full Report", null, "tertiary")

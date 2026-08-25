@@ -1,0 +1,236 @@
+```openui-lang
+root = Card(children: [
+  CardHeader(
+    title: "Support Lead Morning View",
+    subtitle: "Ticket Dashboard"
+  ),
+  Divider(decorative: true),
+  StatCard(
+    title: "Open Tickets",
+    value: "12",
+    icon: "tickets",
+    color: "blue"
+  ),
+  StatCard(
+    title: "Avg First Response Time",
+    value: "2.4 hours",
+    unit: "hrs",
+    icon: "clock",
+    color: "green"
+  ),
+  Card(
+    children: [
+      CardTitle("Recent Tickets (Most Recent)"),
+      TicketList(
+        items: [
+          {
+            id: "TICKET-001",
+            priority: "high",
+            title: "Critical: Payment gateway down",
+            createdAt: "2026-04-05 09:15",
+            assignedTo: "Dev Team",
+            status: "in progress"
+          },
+          {
+            id: "TICKET-002",
+            priority: "high",
+            title: "Customer portal login issue",
+            createdAt: "2026-04-05 08:45",
+            assignedTo: "Support Lead",
+            status: "resolved"
+          },
+          {
+            id: "TICKET-003",
+            priority: "medium",
+            title: "API rate limit exceeded",
+            createdAt: "2026-04-05 07:30",
+            assignedTo: "Backend Team",
+            status: "pending"
+          },
+          {
+            id: "TICKET-004",
+            priority: "low",
+            title: "Documentation update request",
+            createdAt: "2026-04-04 16:20",
+            assignedTo: "Tech Writing",
+            status: "open"
+          },
+          {
+            id: "TICKET-005",
+            priority: "high",
+            title: "Database connection timeout",
+            createdAt: "2026-04-05 06:00",
+            assignedTo: "Infra Team",
+            status: "in progress"
+          }
+        ],
+        sortBy: "createdAt",
+        limit: 5,
+        highlightPriority: "high"
+      )
+    ]
+  ),
+  Divider(orientation: "horizontal"),
+  ControlSection({
+    label: "Filter by Priority",
+    options: [
+      {"text": "All", "variant": "default"},
+      {"text": "High Priority Only", "variant": "primary"}
+    ],
+    activeOption: "all",
+    onChange: () => {}
+  }),
+  Card(
+    title: "New Ticket",
+    children: [
+      Form(
+        name: "new-ticket",
+        fields: [
+          {
+            label: "Subject",
+            input: Input("subject", "What happened?", "Enter issue summary")
+          },
+          {
+            label: "Priority",
+            select: Select(
+              name: "priority",
+              items: [
+                { value: "low", label: "Low" },
+                { value: "medium", label: "Medium" },
+                { value: "high", label: "High" }
+              ],
+              selected: "medium",
+              onChange: () => {}
+            )
+          },
+          {
+            label: "Status",
+            select: Select(
+              name: "status",
+              items: [
+                { value: "open", label: "Open" },
+                { value: "in progress", label: "In Progress" },
+                { value: "resolved", label: "Resolved" },
+                { value: "closed", label: "Closed" }
+              ],
+              selected: "open",
+              onChange: () => {}
+            )
+          },
+          {
+            label: "Assignee",
+            textInput: TextInput("assignee", "Who should handle this?")
+          }
+        ],
+        buttons: [
+          Button(label: "Create Ticket", variant: "primary")
+        ]
+      }
+    ]
+  )],
+root = Card(children: [
+  CardHeader(
+    title: "Support Lead Morning View",
+    subtitle: "Today's ticket overview"
+  ),
+  Divider(decorative: true),
+  StatCard(
+    title: "Open Tickets",
+    value: "12",
+    icon: "tickets",
+    color: "blue"
+  ),
+  StatCard(
+    title: "Average First Response Time",
+    value: "2.4 hours",
+    unit: "hrs",
+    icon: "clock",
+    color: "green"
+  ),
+  Divider(),
+  Card(
+    title: "Recent Tickets (Most Recent)",
+    children: [
+      CardTitle("Top 5 Recent Tickets"),
+      {
+        role: "list",
+        items: [
+          {
+            id: "TICKET-001",
+            priority: "high",
+            title: "Critical: Payment gateway down",
+            severity: "critical",
+            createdAt: "2026-04-05 09:15",
+            assignedTo: "Dev Team",
+            status: "in progress"
+          },
+          {
+            id: "TICKET-002",
+            priority: "high",
+            title: "Customer portal login issue",
+            severity: "critical",
+            createdAt: "2026-04-05 08:45",
+            assignedTo: "Support Lead",
+            status: "resolved"
+          },
+          {
+            id: "TICKET-003",
+            priority: "medium",
+            title: "API rate limit exceeded",
+            severity: "major",
+            createdAt: "2026-04-05 07:30",
+            assignedTo: "Backend Team",
+            status: "pending"
+          },
+          {
+            id: "TICKET-004",
+            priority: "low",
+            title: "Documentation update request",
+            severity: "minor",
+            createdAt: "2026-04-04 16:20",
+            assignedTo: "Tech Writing",
+            status: "open"
+          },
+          {
+            id: "TICKET-005",
+            priority: "high",
+            title: "Database connection timeout",
+            severity: "critical",
+            createdAt: "2026-04-05 06:00",
+            assignedTo: "Infra Team",
+            status: "in progress"
+          }
+        ]
+      }
+    ]
+  ),
+  Divider(decorative: true),
+  ControlSection({
+    label: "Filter by Priority",
+    options: [
+      {"text": "All", "variant": "default"},
+      {"text": "High Priority Only", "variant": "primary"}
+    ],
+    activeOption: "all",
+    onChange: () => {}
+  }),
+  Card(
+    title: "Create New Ticket",
+    children: [
+      Form(
+        name: "new-ticket",
+        fields: [
+          { label: "Subject", input: Input("subject", "What happened?") },
+          { label: "Priority", Select(name: "priority", items: [{"value": "low", "label": "Low"}, {"value": "medium", "label": "Medium"}, {"value": "high", "label": "High"}])} },
+          { label: "Status", Select(name: "status", items: [{"value": "open", "label": "Open"}, {"value": "in progress", "label": "In Progress"}, {"value": "resolved", "label": "Resolved"}])} },
+          { label: "Assignee", TextInput() },
+          { label: "Description", TextArea() }
+        ],
+        buttons: [
+          Button(label: "Submit", variant: "primary")
+        ]
+      ]
+    ]
+  )]
+])
+```

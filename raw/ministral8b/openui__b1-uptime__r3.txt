@@ -1,0 +1,26 @@
+```openui-lang
+root = Card([statusHeader, uptimeCard, incidentCard, recentIncidents])
+
+statusHeader = CardHeader("Platform Status", "All systems operational")
+
+uptimeCard = Card([uptimeTitle, uptimeChart, uptimeNote], "sunk")
+uptimeTitle = Heading("API Uptime", "h3")
+uptimeChart = PieChart(["Operational", "Degraded"], [99.8, 0.2], "pie")
+uptimeNote = TextContent("Current month uptime: 99.8%")
+
+incidentCard = Card([incidentHeader, incidentDetails, incidentTimeline], "sunk")
+incidentHeader = Heading("Recent Incident", "h3")
+incidentDetails = Card([incidentTitle, incidentDescription], "sunk")
+incidentTitle = TextContent("Database Shard Rebalancing", "large-heavy")
+incidentDescription = TextContent("Primary shard experienced temporary latency during routine rebalancing operation. Affected read-heavy services.", "default")
+incidentTimeline = Card([incidentTime, incidentStatus], "sunk")
+incidentTime = TextContent("Resolved: 2023-11-15 03:47 UTC", "small")
+incidentStatus = Tag("Resolved", null, null, "success")
+
+recentIncidents = Card([incidentHeader2, incidentList], "sunk")
+incidentHeader2 = Heading("Recent Incidents", "h3")
+incidentList = Table([incidentDateCol, incidentTypeCol, incidentStatusCol])
+incidentDateCol = Col("Date", ["2023-11-15", "2023-11-10", "2023-11-05"], "string")
+incidentTypeCol = Col("Type", ["Database", "Network", "Authentication"], "string")
+incidentStatusCol = Col("Status", ["Resolved", "Resolved", "Resolved"], "string")
+```

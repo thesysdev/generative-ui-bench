@@ -1,0 +1,83 @@
+root = Card([overview, rolesSection, pipelineSection, metricsSection, headcountSection, interviewsSection, attritionSection, newRoleSection], "clear")
+
+overview = CardHeader("Hiring Overview", "HR Lead Dashboard")
+
+rolesSection = CardHeader("Open Roles by Department", "Current hiring pipeline")
+
+pipelineSection = CardHeader("Candidates by Pipeline Stage", "Recruitment funnel")
+
+metricsSection = CardHeader("Key Hiring Metrics", "Performance indicators")
+
+headcountSection = CardHeader("Headcount by Department", "Workforce distribution")
+
+interviewsSection = CardHeader("Interviews This Week", "Scheduled sessions")
+
+attritionSection = CardHeader("Attrition Summary", "Six-month trend")
+
+newRoleSection = CardHeader("Open New Role", "Create a new position")
+
+roles = [
+  {title: "Software Engineer", department: "Engineering"},
+  {title: "Data Analyst", department: "Data"},
+  {title: "Product Manager", department: "Product"},
+  {title: "UX Designer", department: "Design"},
+  {title: "Sales Representative", department: "Sales"}
+]
+
+pipeline = [
+  {stage: "Sourcing", count: 12},
+  {stage: "Screening", count: 8},
+  {stage: "Interview", count: 5},
+  {stage: "Assessment", count: 3},
+  {stage: "Offer", count: 2},
+  {stage: "Hired", count: 1}
+]
+
+metrics = [
+  {label: "Avg Time to Hire", value: "23 days"},
+  {label: "Time to Hire (12mo)", value: "45 days"},
+  {label: "Hiring Rate", value: "85%"},
+  {label: "Offer Acceptance", value: "78%"}
+]
+
+headcount = [
+  {label: "Engineering", count: 12},
+  {label: "Data", count: 5},
+  {label: "Product", count: 3},
+  {label: "Design", count: 2},
+  {label: "Sales", count: 4},
+  {label: "Total", count: 26}
+]
+
+interviews = [
+  {label: "Engineering", count: 4},
+  {label: "Data", count: 1},
+  {label: "Product", count: 2},
+  {label: "Design", count: 1},
+  {label: "Sales", count: 1}
+]
+
+attrition = [
+  {label: "Month 1", count: 1},
+  {label: "Month 2", count: 2},
+  {label: "Month 3", count: 1},
+  {label: "Month 4", count: 0},
+  {label: "Month 5", count: 0},
+  {label: "Month 6", count: 0}
+]
+
+newRoleSectionContent = CardHeader("Add New Role", "Create a new position in the pipeline")
+
+newRoleForm = Form("new-role", [submitBtn], [roleName, departmentSelect, postingDate])
+
+roleName = FormControl("Job title", input)
+input = Input("job_title", "Enter role title", "text")
+departmentSelect = FormControl("Department", select)
+select = Select("department", [deptS, deptM, deptL], "Choose department")
+deptS = SelectItem("Engineering", "Engineering")
+deptM = SelectItem("Data", "Data")
+deptL = SelectItem("Product", "Product")
+postingDate = FormControl("Start date", date)
+datePicker = DatePicker("start_date", "single")
+
+submitBtn = Button("Create Role", null, "primary")

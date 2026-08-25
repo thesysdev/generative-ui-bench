@@ -1,0 +1,67 @@
+root = Card([header, kpiRow, mainContent, operationsRow, followUps], "card", "column", "l")
+
+header = CardHeader("E-Commerce Operations Desk", "Live operational metrics and order management")
+
+kpiRow = Card([ordersCard, revenueCard, aovCard, refundCard], "card", "row", "m", "stretch", "between")
+
+ordersCard = Card([ordersTitle, ordersVal, ordersTag], "sunk", "column", "xs")
+ordersTitle = Heading("Orders Today", "h4")
+ordersVal = Heading("342", "h2")
+ordersTag = Badge("+12% vs yesterday", "default")
+
+revenueCard = Card([revTitle, revVal, revTag], "sunk", "column", "xs")
+revTitle = Heading("Revenue Today", "h4")
+revVal = Heading("$48,290", "h2")
+revTag = Badge("+8% vs yesterday", "default")
+
+aovCard = Card([aovTitle, aovVal, aovTag], "sunk", "column", "xs")
+aovTitle = Heading("Average Order Value", "h4")
+aovVal = Heading("$141.20", "h2")
+aovTag = Badge("Stable", "secondary")
+
+refundCard = Card([refTitle, refVal, refTag], "sunk", "column", "xs")
+refTitle = Heading("Refund Rate (Month)", "h4")
+refVal = Heading("2.1%", "h2")
+refTag = Badge("Within target", "secondary")
+
+mainContent = Card([chartCard, tableCard], "card", "column", "l")
+
+chartCard = Card([chartHeader, volumeChart], "sunk", "column", "m")
+chartHeader = CardHeader("Order Volume (Past 4 Weeks)", "Weekly breakdown of fulfillment volume")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "grouped", "Week", "Orders")
+volumeSeries = Series("Orders", [1820, 2150, 2400, 2890])
+
+tableCard = Card([tableHeader, filterForm, ordersTable], "sunk", "column", "m")
+tableHeader = CardHeader("Recent Orders", "Manage and track customer purchases")
+
+filterForm = Form("filter-form", filterButtons, [searchField, statusField])
+searchField = FormControl("Search Customer", searchInput, "Filter by customer name")
+searchInput = Input("customer_search", "Enter customer name...")
+statusField = FormControl("Filter Status", statusSelect, "Narrow orders by fulfillment status")
+statusSelect = Select("status_filter", [statusAll, statusPending, statusFulfilled, statusCancelled], "All Statuses")
+statusAll = SelectItem("all", "All Statuses")
+statusPending = SelectItem("pending", "Pending")
+statusFulfilled = SelectItem("fulfilled", "Fulfilled")
+statusCancelled = SelectItem("cancelled", "Cancelled")
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply Filters", null, "primary")
+
+ordersTable = Table([idCol, customerCol, totalCol, statusCol])
+idCol = Col("Order ID", ["#ORD-9421", "#ORD-9420", "#ORD-9419", "#ORD-9418", "#ORD-9417"])
+customerCol = Col("Customer", ["Sarah Jenkins", "Michael Chang", "Emily Davis", "Robert Taylor", "Lisa Anderson"])
+totalCol = Col("Total", ["$240.00", "$89.50", "$410.00", "$120.00", "$65.00"])
+statusCol = Col("Status", ["Pending", "Fulfilled", "Pending", "Fulfilled", "Fulfilled"])
+
+operationsRow = Card([fulfillmentCard], "card", "column", "m")
+fulfillmentCard = Card([fulfillmentHeader, fulfillmentForm], "sunk", "column", "m")
+fulfillmentHeader = CardHeader("Fulfillment Action", "Mark a specific order as fulfilled instantly")
+fulfillmentForm = Form("fulfillment-form", fulfillmentButtons, [orderIdField])
+orderIdField = FormControl("Order ID to Fulfill", orderIdInput, "Enter exact order ID e.g. #ORD-9421")
+orderIdInput = Input("target_order_id", "#ORD-...")
+fulfillmentButtons = Buttons([fulfillBtn])
+fulfillBtn = Button("Mark Fulfilled", null, "primary")
+
+followUps = FollowUpBlock([follow1, follow2, follow3])
+follow1 = FollowUpItem("View pending fulfillment queue")
+follow2 = FollowUpItem("Export today's financial report")
+follow3 = FollowUpItem("Check inventory alerts")

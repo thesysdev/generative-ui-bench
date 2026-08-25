@@ -1,0 +1,51 @@
+```openui-lang
+root = Card([header, statsSection, filtersSection, ordersTable, metricsSection, actions])
+header = CardHeader("E-Commerce Operations", "Monitor and manage orders in real-time")
+
+statsSection = Card([todayOrders, todayRevenue, avgOrderValue, refundRate], "sunk")
+todayOrders = Card([orderCountText], "sunk")
+orderCountText = TextContent("123 orders placed today", "large-heavy")
+todayRevenue = Card([revenueValueText], "sunk")
+revenueValueText = TextContent("$12,845.20", "large-heavy")
+avgOrderValue = Card([avgValueText], "sunk")
+avgValueText = TextContent("Avg: $106.89", "large-heavy")
+refundRate = Card([refundRateText], "sunk")
+refundRateText = TextContent("Refund rate: 7.2%", "large-heavy")
+
+filtersSection = Card([searchBar, statusFilter], "sunk")
+searchBar = FormControl("Search customers", searchInput)
+searchInput = Input("customer_search", "Search by name...", "text")
+statusFilter = FormControl("Filter by status", statusSelect)
+statusSelect = Select("order_status", [allStatus, pendingStatus, fulfilledStatus, shippedStatus, cancelledStatus], "All statuses")
+allStatus = SelectItem("all", "All")
+pendingStatus = SelectItem("pending", "Pending")
+fulfilledStatus = SelectItem("fulfilled", "Fulfilled")
+shippedStatus = SelectItem("shipped", "Shipped")
+cancelledStatus = SelectItem("cancelled", "Cancelled")
+
+ordersTable = Card([recentOrdersTable], "sunk")
+recentOrdersTable = Table([orderIdCol, customerCol, totalCol, statusCol, actionCol])
+orderIdCol = Col("Order ID", ["ORD-2023-12345", "ORD-2023-67890", "ORD-2023-54321", "ORD-2023-98765", "ORD-2023-45678"])
+customerCol = Col("Customer", ["Alex Johnson", "Maria Rodriguez", "David Kim", "Sophia Lee", "Michael Chen"])
+totalCol = Col("Total", ["$112.45", "$98.75", "$156.20", "$78.90", "$210.50"])
+statusCol = Col("Status", ["Pending", "Shipped", "Cancelled", "Fulfilled", "Pending"])
+actionCol = Col("Action", [null, null, null, null, null], "action")
+
+metricsSection = Card([volumeChart], "sunk")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "grouped", "Week", "Order Volume")
+volumeSeries = Series("Orders", [182, 210, 195, 230])
+
+actions = Buttons([markFulfilledBtn, refreshBtn])
+markFulfilledBtn = Button("Mark as Fulfilled", ["fulfill_order"], "primary", "normal", "medium")
+refreshBtn = Button("Refresh", null, "secondary", "normal", "medium")
+
+fulfillOrderAction = DialogBlock(
+    "Mark as Fulfilled",
+    "Confirm Fulfillment",
+    "Are you sure you want to mark this order as fulfilled?",
+    [confirmFulfillmentBtn, cancelFulfillmentBtn],
+    "primary"
+)
+confirmFulfillmentBtn = Button("Confirm", ["fulfill_order_confirm"], "primary", "normal", "medium")
+cancelFulfillmentBtn = Button("Cancel", null, "secondary", "normal", "medium")
+```

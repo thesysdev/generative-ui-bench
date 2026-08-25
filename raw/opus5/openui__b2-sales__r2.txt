@@ -1,0 +1,50 @@
+root = Card([header, kpiRow, trendSection, productsSection, conversionSection, actions, followUps])
+header = CardHeader("Monthly Sales Check", "March 2024 · updated today")
+
+kpiRow = Card([revenueCard, conversionCard], "clear", "row", "m", "stretch")
+revenueCard = Card([revenueLabel, revenueValue, revenueDelta], "sunk", "column", "xs")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = TextContent("$412,800", "large-heavy")
+revenueDelta = Tag("+11.4% vs February", null, "sm", "success")
+conversionCard = Card([conversionLabel, conversionValue, conversionBar, conversionNote], "sunk", "column", "xs")
+conversionLabel = TextContent("Conversion rate", "small")
+conversionValue = TextContent("3.8%", "large-heavy")
+conversionBar = Progress(3.8, "3.8% of 24,180 visitors converted")
+conversionNote = Tag("+0.4 pts vs February", null, "sm", "success")
+
+trendSection = Card([trendHeading, trendChart, trendTable], "sunk", "column", "m")
+trendHeading = Heading("Revenue, last six months", "h3")
+trendChart = LineChart(trendLabels, [trendSeries], "natural", "Month", "Revenue (USD)")
+trendLabels = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
+trendSeries = Series("Revenue", [298400, 321500, 386900, 344200, 370600, 412800])
+trendTable = Table([trendMonthCol, trendRevCol, trendChangeCol])
+trendMonthCol = Col("Month", ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"])
+trendRevCol = Col("Revenue", ["$298,400", "$321,500", "$386,900", "$344,200", "$370,600", "$412,800"])
+trendChangeCol = Col("Change", ["+2.1%", "+7.7%", "+20.3%", "-11.0%", "+7.7%", "+11.4%"])
+
+productsSection = Card([productsHeading, productsChart, productsTable], "sunk", "column", "m")
+productsHeading = Heading("Top three products by units sold", "h3")
+productsChart = HorizontalBarChart(productLabels, [unitsSeries], "grouped", "Units sold", "Product")
+productLabels = ["Atlas Standing Desk", "Nomad Laptop Stand", "Halo Desk Lamp"]
+unitsSeries = Series("Units sold", [1840, 1275, 960])
+productsTable = Table([prodNameCol, prodUnitsCol, prodRevCol])
+prodNameCol = Col("Product", ["Atlas Standing Desk", "Nomad Laptop Stand", "Halo Desk Lamp"])
+prodUnitsCol = Col("Units sold", [1840, 1275, 960], "number")
+prodRevCol = Col("Revenue", ["$147,200", "$71,400", "$52,800"])
+
+conversionSection = Card([funnelHeading, funnelChart, funnelNote], "sunk", "column", "m")
+funnelHeading = Heading("How the 3.8% converts", "h3")
+funnelChart = BarChart(funnelLabels, [funnelSeries], "grouped", "Stage", "Visitors")
+funnelLabels = ["Visitors", "Added to cart", "Checkout started", "Purchased"]
+funnelSeries = Series("March", [24180, 6420, 1810, 919])
+funnelNote = TextContent("919 orders from 24,180 visitors. Checkout completion is the weakest step at 50.8%.", "small")
+
+actions = Buttons([csvBtn, pdfBtn, emailBtn])
+csvBtn = Button("Download CSV", null, "primary")
+pdfBtn = Button("Download PDF summary", null, "secondary")
+emailBtn = Button("Email report to me", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Why did January revenue drop 11%?")
+fu2 = FollowUpItem("Break March revenue down by sales channel")
+fu3 = FollowUpItem("What would 4.5% conversion be worth in dollars?")

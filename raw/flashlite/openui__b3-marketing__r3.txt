@@ -1,0 +1,60 @@
+root = Card([header, kpiRow, topSection, middleSection, campaignSection, exportSection])
+header = CardHeader("Marketing Dashboard", "Weekly overview and campaign performance")
+
+kpiRow = Card([visitorsCard, conversionCard, subscriberCard], "sunk", "row", "l", "stretch", "between")
+
+visitorsCard = Card([visitorsHeading, visitorsValue, visitorsChange], "card", "column", "xs")
+visitorsHeading = Heading("Site Visitors (30d)", "h4")
+visitorsValue = Heading("48,250", "h2")
+visitorsChange = Tag("+12.4% vs last month", null, "sm", "success")
+
+conversionCard = Card([convHeading, convValue, convChange], "card", "column", "xs")
+convHeading = Heading("Conversion Rate", "h4")
+convValue = Heading("3.2%", "h2")
+convChange = Tag("+0.4% vs last month", null, "sm", "success")
+
+subscriberCard = Card([subHeading, subValue, subChange], "card", "column", "xs")
+subHeading = Heading("Email Subscribers", "h4")
+subValue = Heading("12,840", "h2")
+subChange = Tag("+850 this month", null, "sm", "success")
+
+topSection = Card([trendCard, sourcesCard], "clear", "row", "l", "stretch", "between")
+
+trendCard = Card([trendHeader, visitorChart], "card", "column", "m")
+trendHeader = CardHeader("Visitor Trend", "Daily unique visitors over the last 30 days")
+visitorChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [visitorSeries], "natural", "Week", "Visitors")
+visitorSeries = Series("Visitors", [10200, 11800, 12900, 13350])
+
+sourcesCard = Card([sourcesHeader, sourcesChart], "card", "column", "m")
+sourcesHeader = CardHeader("Traffic Sources", "Top five sources by visitor share")
+sourcesChart = PieChart(["Organic Search", "Direct", "Paid Social", "Email", "Referral"], [42, 24, 18, 10, 6], "donut", "circular")
+
+middleSection = Card([bestCampaignAlert, dateRangeCard], "clear", "row", "l", "stretch", "between")
+
+bestCampaignAlert = Alert("Top Performing Campaign", "Summer Promo 2024 is leading with an ROI of 4.2x and highest conversion volume.", "success")
+
+dateRangeCard = Card([dateHeader, dateForm], "card", "column", "s")
+dateHeader = CardHeader("Date Range", "Filter report period")
+dateForm = Form("date-form", dateButtons, [dateField])
+dateField = FormControl("Select Period", dateSelect)
+dateSelect = Select("date_range", [dateOpt1, dateOpt2, dateOpt3], "Last 30 Days")
+dateOpt1 = SelectItem("30d", "Last 30 Days")
+dateOpt2 = SelectItem("7d", "Last 7 Days")
+dateOpt3 = SelectItem("90d", "Last 90 Days")
+dateButtons = Buttons([updateBtn])
+updateBtn = Button("Apply Range", null, "primary")
+
+campaignSection = Card([campaignHeader, campaignTable], "card", "column", "m")
+campaignHeader = CardHeader("Running Campaigns", "Active ad spend and performance metrics")
+campaignTable = Table([campName, campSpend, campRoi, campStatus])
+campName = Col("Campaign Name", ["Summer Promo 2024", "Brand Awareness Q3", "Retargeting Web", "Email Blast Weekly", "Influencer Collab"])
+campSpend = Col("Spend", ["$4,500", "$3,200", "$1,800", "$800", "$2,500"])
+campRoi = Col("ROI", ["4.2x", "2.8x", "3.5x", "5.1x", "3.0x"])
+campStatus = Col("Status", ["Active", "Active", "Active", "Completed", "Active"])
+
+exportSection = Card([exportHeader, exportButtons], "sunk", "row", "l", "center", "between")
+exportHeader = CardHeader("Export Report", "Download or share current dashboard data")
+exportButtons = Buttons([csvBtn, pdfBtn, shareBtn])
+csvBtn = Button("Export CSV")
+pdfBtn = Button("Download PDF", null, "secondary")
+shareBtn = Button("Share Link", null, "tertiary")

@@ -1,0 +1,26 @@
+root = Card([header, revenueCard, trendCard, productsCard, conversionCard, actions], "card", "column", "m")
+
+header = CardHeader("Monthly Sales Check", "October 2024")
+
+revenueCard = Card([revenueLabel, revenueValue], "sunk")
+revenueLabel = TextContent("Revenue This Month", "small-heavy")
+revenueValue = TextContent("$147,350", "large-heavy")
+
+trendCard = Card([trendLabel, trendChart], "sunk")
+trendLabel = TextContent("Revenue — Last 6 Months", "small-heavy")
+trendChart = LineChart(months, [revenueSeries], "natural", "Month", "Revenue (USD)")
+months = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]
+revenueSeries = Series("Revenue", [98200, 112400, 105800, 128600, 135200, 147350])
+
+productsCard = Card([productsLabel, productsTable], "sunk")
+productsLabel = TextContent("Top 3 Products", "small-heavy")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Wireless Earbuds Pro", "Smart Water Bottle", "USB-C Hub 7-in-1"])
+unitsCol = Col("Units Sold", [1245, 987, 756])
+
+conversionCard = Card([conversionLabel, conversionProgress], "sunk")
+conversionLabel = TextContent("Conversion Rate", "small-heavy")
+conversionProgress = Progress(3.2, "3.2%")
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download Report")

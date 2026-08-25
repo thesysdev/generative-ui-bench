@@ -1,0 +1,102 @@
+```openui-lang
+root = Card([
+    header,
+    portfolioValue,
+    pnlToday,
+    positionsTable,
+    exposureBySector,
+    valueAtRisk,
+    topGainersLosers,
+    watchedInstruments,
+    workingOrders,
+    marginInUse,
+    marketHeadlines,
+    strategyReturns,
+    drawdown,
+    riskLimits,
+    rebalanceButton,
+    orderForm,
+    timeframeSelector
+])
+
+header = CardHeader("Morning Trading Workspace", "Real-time Overview")
+portfolioValue = Tag("$12,345,678", null, null, "success")
+pnlToday = Tag("+$1,234", null, null, "success")
+positionsTable = Table([
+    tickerCol,
+    sizeCol,
+    entryCol,
+    currentPriceCol
+])
+tickerCol = Col("Ticker", ["AAPL", "GOOG", "TSLA"])
+sizeCol = Col("Size", ["500", "300", "250"])
+entryCol = Col("Entry", ["150.25", "1234.00", "720.00"])
+currentPriceCol = Col("Current", ["152.10", "1235.50", "725.30"])
+exposureBySector = PieChart(["Technology", "Healthcare", "Finance"], [45, 30, 25], "donut")
+valueAtRisk = Tag("VaR: $2,300", null, null, "warning")
+topGainersLosers = Card([
+    CardHeader("Top Gainers", null),
+    Table([
+        tickerCol,
+        changeCol
+    ]),
+    CardHeader("Top Losers", null),
+    Table([
+        tickerCol,
+        changeCol
+    ])
+])
+watchedInstruments = ListBlock([
+    ListItem("AAPL", "Price: $152.10", null, "View"),
+    ListItem("GOOG", "Price: $1235.50", null, "View"),
+    ListItem("TSLA", "Price: $725.30", null, "View")
+])
+workingOrders = Card([
+    CardHeader("Working Orders", null),
+    ListBlock([
+        ListItem("BUY 100 AAPL @ $152.00", null, null, "Cancel"),
+        ListItem("SELL 50 GOOG @ $1235.00", null, null, "Modify")
+    ])
+])
+marginInUse = Tag("Margin Used: $4,500,000", null, null, "info")
+marketHeadlines = ListBlock([
+    ListItem("Tech Stocks Surge on AI Hype (Positive)", null, null, "Read more"),
+    ListItem("Central Bank Rate Hike Expected (Neutral)", null, null, "Read more"),
+    ListItem("Earnings Beats at Biotech Giant (Positive)", null, null, "Read more")
+])
+strategyReturns = Table([
+    strategyCol,
+    returnCol
+])
+strategyCol = Col("Strategy", ["Alpha Fund", "Beta Fund", "Gamma Fund"])
+returnCol = Col("Return YTD", ["+12.3%", "+8.7%", "+5.1%"])
+drawdown = BarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    [drawdownSeries],
+                    "stacked",
+                    "Month",
+                    "Drawdown (%)")
+drawdownSeries = Series("Yearly Drawdown", [2, 1.5, 3, 2.5, 1, 4, 2.2, 1.8, 3.1, 2.3, 2.8, 1.9])
+riskLimits = Callout("Warning", "Long exposure to Energy sector at 85% of limit", "info")
+rebalanceButton = Button("Rebalance Portfolio", null, "primary")
+orderForm = Form("place-order", orderButtons, [
+    orderInput
+])
+orderInput = FormControl("Order", orderSelector)
+orderSelector = Select("order", [
+    orderBuy,
+    orderSell
+], "Select")
+orderBuy = SelectItem("Buy", "Buy")
+orderSell = SelectItem("Sell", "Sell")
+orderButtons = Buttons([submitOrderBtn, cancelOrderBtn])
+submitOrderBtn = Button("Submit Order", null, "primary")
+cancelOrderBtn = Button("Cancel", null, "tertiary")
+timeframeSelector = Card([
+    CardHeader("Timeframe", null),
+    Buttons([
+        Button("1 Day", null, "secondary"),
+        Button("1 Week", null, "secondary"),
+        Button("1 Month", null, "secondary")
+    ])
+])
+```

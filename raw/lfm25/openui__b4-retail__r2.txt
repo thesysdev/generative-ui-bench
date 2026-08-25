@@ -1,0 +1,453 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("Store Dashboard - Daily Console", "Real-time store analytics"),
+    
+    // 1. Sales today vs target
+    Row(
+      children: [
+        Card(
+          id: "sales-today",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Today's Sales", "Actual vs Target"),
+            MetricCard(
+              title: "Sales Today",
+              value: 84720,
+              unit: "USD",
+              changePercent: 12.5,
+              trend: "up"
+            ),
+            MetricCard(
+              title: "Sales Target",
+              value: 75000,
+              unit: "USD",
+              diff: "+8.4%",
+              color: "positive"
+            )
+          ]
+        ),
+        Card(
+          id: "sales-target",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Target", "Target Sales Goal"),
+            MetricCard(
+              title: "Target",
+              value: 75000,
+              unit: "USD",
+              color: "green"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 2. Foot traffic
+    Row(
+      children: [
+        Card(
+          id: "foot-traffic",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Foot Traffic", "Daily Visitors"),
+            StatCard(
+              label: "Total Visitors",
+              value: 1245,
+              unit: "people",
+              icon: "users"
+            ),
+            StatCard(
+              label: "Peak Hour",
+              value: "18:00",
+              unit: "hours",
+              icon: "clock"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 3. Best sellers
+    Row(
+      children: [
+        Card(
+          id: "best-sellers",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Top Sellers Today", "Best selling products"),
+            ListBlock(
+              items: [
+                {
+                  title: "Wireless Headphones",
+                  units: 142,
+                  image: "https://picsum.photos/seed/heads/200/100"
+                },
+                {
+                  title: "Bluetooth Speaker",
+                  units: 98,
+                  image: "https://picsum.photos/seed/speaker/200/100"
+                },
+                {
+                  title: "Smartwatch",
+                  units: 87,
+                  image: "https://picsum.photos/seed/watch/200/100"
+                },
+                {
+                  title: "Noise Canceling Earbuds",
+                  units: 76,
+                  image: "https://picsum.photos/seed/earbuds/200/100"
+                }
+              ],
+              sortBy: "units",
+              descending: true
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 4. Items out of stock
+    Row(
+      children: [
+        Card(
+          id: "out-of-stock",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Items Out of Stock", "Low inventory alerts"),
+            ListBlock(
+              items: [
+                {
+                  title: "Premium Coffee Mug",
+                  sku: "COFFEE-MUG-01",
+                  quantity: 0,
+                  status: "out_of_stock"
+                },
+                {
+                  title: "Mechanical Keyboard",
+                  sku: "KEYBOARD-MK-02",
+                  quantity: 3,
+                  status: "low_stock"
+                },
+                {
+                  title: "Gaming Mouse",
+                  sku: "MOUSE-GAMER-03",
+                  quantity: 0,
+                  status: "out_of_stock"
+                }
+              ],
+              highlightOutOfStock: true
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Staff on shift
+    Row(
+      children: [
+        Card(
+          id: "staff-shift",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Staff Schedule", "Team deployment today"),
+            ListBlock(
+              items: [
+                {
+                  name: "Alice Johnson",
+                  role: "Manager",
+                  shiftStart: "08:00",
+                  shiftEnd: "16:00",
+                  status: "on_shift"
+                },
+                {
+                  name: "Bob Smith",
+                  role: "Cashier",
+                  shiftStart: "10:00",
+                  shiftEnd: "18:00",
+                  status: "on_shift"
+                },
+                {
+                  name: "Carol Davis",
+                  role: "Cashier",
+                  shiftStart: "12:00",
+                  shiftEnd: "20:00",
+                  status: "off_shift"
+                }
+              ],
+              sorting: "shift_start",
+              selected: "Alice Johnson"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 6. Average basket size
+    Row(
+      children: [
+        Card(
+          id: "basket-size",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Average Basket Size", "Recent transactions"),
+            StatCard(
+              label: "Avg Units Per Transaction",
+              value: 4.2,
+              unit: "items",
+              icon: "shopping_cart"
+            ),
+            StatCard(
+              label: "Transactions Today",
+              value: 68,
+              unit: "count",
+              icon: "arrow_upward"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 7. Returns this week
+    Row(
+      children: [
+        Card(
+          id: "returns-week",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Returns This Week", "Customer returns"),
+            ListBlock(
+              items: [
+                {
+                  title: "Headphones",
+                  count: 23,
+                  refundAmount: 287.50,
+                  status: "processed"
+                },
+                {
+                  title: "Speakers",
+                  count: 15,
+                  refundAmount: 198.75,
+                  status: "pending"
+                },
+                {
+                  title: "Keyboards",
+                  count: 8,
+                  refundAmount: 126.00,
+                  status: "processed"
+                }
+              ],
+              sortBy: "refund_amount",
+              ascending: false
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Running promotions
+    Row(
+      children: [
+        Card(
+          id: "promotions",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Active Promotions", "Current deals"),
+            ListBlock(
+              items: [
+                {
+                  name: "Summer Sale",
+                  discount: 25,
+                  percentage: "25%",
+                  eligibleProducts: ["Wireless Headphones", "Bluetooth Speaker"],
+                  status: "active"
+                },
+                {
+                  name: "Back to Basics",
+                  discount: 15,
+                  percentage: "15%",
+                  eligibleProducts: ["Smartwatch", "Noise Canceling Earbuds"],
+                  status: "active"
+                },
+                {
+                  name: "Clearance Week",
+                  discount: 40,
+                  percentage: "40%",
+                  eligibleProducts: ["Mechanical Keyboard", "Gaming Mouse"],
+                  status: "completed"
+                }
+              ],
+              sortBy: "discount_desc",
+              reversed: true
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 9. Registers and open status
+    Row(
+      children: [
+        Card(
+          id: "registers",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Registers", "POS systems"),
+            ListBlock(
+              items: [
+                {
+                  name: "Register #001",
+                  status: "open",
+                  currentTotal: 1523.40,
+                  transactions: 42
+                },
+                {
+                  name: "Register #002",
+                  status: "closed",
+                  currentTotal: 890.60,
+                  transactions: 28
+                },
+                {
+                  name: "Register #003",
+                  status: "open",
+                  currentTotal: 3245.80,
+                  transactions: 67
+                },
+                {
+                  name: "Register #004",
+                  status: "closed",
+                  currentTotal: 1560.20,
+                  transactions: 19
+                }
+              ],
+              highlightOpen: true
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 10. Reorder item
+    Row(
+      children: [
+        Card(
+          id: "reorder-item",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Add to Order", "Reorder managed items"),
+            ListBlock(
+              items: [
+                {
+                  title: "Premium Coffee Mug",
+                  sku: "COFFEE-MUG-01",
+                  currentStock: 0,
+                  reorderQuantity: 50,
+                  pricePerUnit: 29.99,
+                  status: "needs_reorder"
+                },
+                {
+                  title: "Mechanical Keyboard",
+                  sku: "KEYBOARD-MK-02",
+                  currentStock: 3,
+                  reorderQuantity: 30,
+                  pricePerUnit: 149.99,
+                  status: "needs_reorder"
+                },
+                {
+                  title: "Gaming Mouse",
+                  sku: "MOUSE-GAMER-03",
+                  currentStock: 0,
+                  reorderQuantity: 40,
+                  pricePerUnit: 79.99,
+                  status: "needs_reorder"
+                }
+              ],
+              action: () => reorderItem("COFFEE-MUG-01"),
+              icon: "shopping_bag"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 11. View different store
+    Row(
+      children: [
+        Card(
+          id: "store-view",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Store Selection", "View another location"),
+            Select(
+              options: ["Main Store", "West Branch", "East Warehouse"],
+              selected: "Main Store",
+              onChange: (value) => updateStoreSelection(value)
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 12. Week vs last week comparison
+    Row(
+      children: [
+        Card(
+          id: "week-comparison",
+          type: "card",
+          variant: "card",
+          children: [
+            TextContent("Week vs Last Week", "Performance comparison"),
+            ComparisonGrid([
+              {
+                label: "Sales Today",
+                valueToday: 84720,
+                valueLastWeek: 78300,
+                difference: "+8.4%",
+                graphType: "bar"
+              },
+              {
+                label: "Foot Traffic",
+                valueToday: 1245,
+                valueLastWeek: 1100,
+                difference: "+13.6%",
+                graphType: "bar"
+              },
+              {
+                label: "Average Basket",
+                valueToday: 4.2,
+                valueLastWeek: 3.8,
+                difference: "+10.5%",
+                graphType: "bar"
+              },
+              {
+                label: "Return Rate",
+                valueToday: 0.92,
+                valueLastWeek: 0.85,
+                difference: "+8.2%",
+                graphType: "bar"
+              }
+            ]),
+            TextContent("Key Insights:", "Higher sales and traffic today, improved average basket size")
+          ]
+        )
+      ]
+    )
+  ],
+  direction: "column",
+  gap: "xl",
+  align: "stretch"
+)
+```

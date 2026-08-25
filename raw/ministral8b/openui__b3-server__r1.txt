@@ -1,0 +1,62 @@
+```openui-lang
+root = Card([headerSection, uptimeCard, metricsCard, incidentsCard, regionFilter, slowEndpoints, alertThreshold, acknowledgeIncident])
+
+headerSection = CardHeader("Service Health Dashboard", "Monitoring your quarterly uptime and real-time metrics")
+
+uptimeCard = Card([uptimeGraph, uptimeStats], "sunk")
+uptimeGraph = PieChart(["Q1 Uptime", "Downtime"], [99.8, 0.2], "donut", "circular")
+uptimeStats = Card([statTitle, statValue], "card")
+statTitle = TextContent("Quarterly Uptime", "large")
+statValue = TextContent("99.8%", "large-heavy")
+
+metricsCard = Card([cpuUsage, memoryUsage], "sunk")
+cpuUsage = Card([metricLabel, cpuChart], "card")
+cpuLabel = TextContent("CPU Usage (Last 24h)", "large")
+cpuChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [cpuSeries], "linear", "Time", "Usage (%)")
+cpuSeries = Series("CPU", [65, 72, 58, 81])
+
+memoryUsage = Card([metricLabel, memoryChart], "card")
+memoryLabel = TextContent("Memory Usage (Last 24h)", "large")
+memoryChart = LineChart(["00:00", "06:00", "12:00", "18:00"], [memorySeries], "linear", "Time", "Usage (%)")
+memorySeries = Series("Memory", [82, 88, 79, 91])
+
+errorRateCard = Card([errorRateValue, errorRateTrend], "sunk")
+errorRateValue = TextContent("Current Error Rate: 0.3%", "large-heavy")
+errorRateTrend = LineChart(["10m", "20m", "30m", "40m"], [errorSeries], "linear", "Time", "Errors (%)")
+errorSeries = Series("Errors", [0.2, 0.3, 0.1, 0.4])
+
+incidentsCard = Card([incidentsTitle, incidentsTable], "sunk")
+incidentsTitle = TextContent("Open Incidents", "large")
+incidentsTable = Table([severityCol, regionCol, statusCol, createdCol, incidentCol])
+severityCol = Col("Severity", ["Critical", "High", "Medium", "Low", "Warning"], "string")
+regionCol = Col("Region", ["us-west", "eu-central", "ap-south", "us-east", "asia-northeast"])
+statusCol = Col("Status", ["Investigating", "Acknowledged", "Under Repair", "Resolved", "Monitoring"], "string")
+createdCol = Col("Created", ["2h ago", "5h ago", "1d ago", "3d ago", "1w ago"], "string")
+incidentCol = Col("Incident", ["Database latency spike", "API timeout errors", "Storage capacity warning", "Region outage", "Monitoring alert"], "string")
+
+regionFilter = Card([regionLabel, regionSelect], "sunk")
+regionLabel = TextContent("Filter by Region", "large")
+regionSelect = Select("region", [regionOption1, regionOption2, regionOption3, regionOption4, regionOption5], "Global", "string", "medium")
+regionOption1 = SelectItem("us-west", "US West")
+regionOption2 = SelectItem("eu-central", "EU Central")
+regionOption3 = SelectItem("ap-south", "Asia Pacific South")
+regionOption4 = SelectItem("us-east", "US East")
+regionOption5 = SelectItem("asia-northeast", "Asia Northeast")
+
+slowEndpoints = Card([endpointsTitle, endpointsTable], "sunk")
+endpointsTitle = TextContent("Top 5 Slowest Endpoints", "large")
+endpointsTable = Table([endpointCol, latencyCol, regionCol])
+endpointCol = Col("Endpoint", ["/api/v1/orders", "/api/v1/users", "/api/v1/reports", "/api/v1/health", "/api/v1/logs"], "string")
+latencyCol = Col("Latency (ms)", ["420", "310", "280", "250", "230"], "number")
+regionCol = Col("Region", ["us-west", "eu-central", "ap-south", "us-east", "asia-northeast"], "string")
+
+alertThreshold = Card([thresholdTitle, thresholdSlider], "sunk")
+thresholdTitle = TextContent("Set Alert Threshold", "large")
+thresholdSlider = Slider("alert_threshold", "continuous", 0, 100, 5, "90%", "Set CPU threshold (%)", null, "90")
+
+acknowledgeIncident = Card([acknowledgeTitle, acknowledgeButtons], "sunk")
+acknowledgeTitle = TextContent("Acknowledge Incident", "large")
+acknowledgeButtons = Buttons([acknowledgeBtn, cancelBtn])
+acknowledgeBtn = Button("Acknowledge", null, "primary", "normal")
+cancelBtn = Button("Cancel", null, "tertiary", "normal")
+```

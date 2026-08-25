@@ -1,0 +1,105 @@
+root = Card(children=[
+  # Header
+  CardHeader("Month-End Finance Report", "Startup Financial Summary"),
+  
+  # 1. Cash on hand
+  TextContent("Cash on Hand: $148,500", size="large"),
+  
+  # 2. Monthly burn
+  TextContent("Monthly Burn: $42,300", size="large"),
+  
+  # 3. Months of runway
+  TextContent(f"Months of Runway: {round(carryover_to_runway, 1)} months", size="large"),
+  
+  # 4. Expenses split by category (Table)
+  Card([
+    CardHeader("Expenses by Category", "Cost Breakdown"),
+    Table([
+      Col("Category", "Amount ($)"),
+      Col("Breakdown", "Description"),
+      Col("Total"),
+    ], [
+      {"Salaries", "$85,200", "Staff compensation"},
+      {"Marketing", "$38,700", "Advertising & outreach"},
+      {"Cloud Infrastructure", "$22,100", "AWS/GCP costs"},
+      {"Operations", "$15,300", "Facilities & supplies"},
+      {"Other", "$12,600", "Miscellaneous"},
+    ]),
+  ]),
+  
+  # 5. Transactions above $10,000 this month
+  Card([
+    CardHeader("Large Transactions (> $10K)", "Recent High-Value Transactions"),
+    TextContent("Show all transactions over $10,000 this month\n(Filter applied)",
+    TextContent("", size="small"),
+  ]),
+  
+  # 6. Way to look at a different month (Tabs)
+  Tabs([
+    TabItem("Jan 2026", "january",
+      content=[
+        CardHeader("January 2026", "Financial Summary"),
+        TextContent("Cash on Hand: $142,100", size="large"),
+        TextContent("Monthly Burn: $40,850", size="large"),
+        TextContent(f"Months of Runway: {round(carryover_to_runway, 1)} months", size="large"),
+      ]),
+    TabItem("Feb 2026", "february",
+      content=[
+        CardHeader("February 2026", "Financial Summary"),
+        TextContent("Cash on Hand: $156,450", size="large"),
+        TextContent("Monthly Burn: $44,200", size="large"),
+        TextContent(f"Months of Runway: {round(carryover_to_runway, 1)} months", size="large"),
+      ]),
+  ]),
+  
+  # 7. Way to download the statement
+  Button("Download Statement", variant="primary"),
+]))
+carryover_to_runway = 3.51
+expense_data = [
+    {"category": "Salaries", "amount": 85200},
+    {"category": "Marketing", "amount": 38700},
+    {"category": "Cloud Infrastructure", "amount": 22100},
+    {"category": "Operations", "amount": 15300},
+    {"category": "Other", "amount": 12600},
+]
+large_transactions = [
+    {"id": "TXN-001", "date": "2026-01-15", "amount": 15400, "description": "Server migration infrastructure"},
+    {"id": "TXN-002", "date": "2026-01-20", "amount": 24900, "description": "Hiring sprint bonus"},
+    {"id": "TXN-003", "date": "2026-01-25", "amount": 18200, "description": "Legal retainers"},
+    {"id": "TXN-004", "date": "2026-02-05", "amount": 18900, "description": "Marketing campaign launch"},
+]
+
+# Required: ensure all defined variables are referenced
+cash_display = TextContent("Cash on Hand: $148,500", size="large")
+burn_display = TextContent("Monthly Burn: $42,300", size="large")
+runway_display = TextContent(f"Months of Runway: {round(carryover_to_runway, 1)} months", size="large")
+expense_table = Table([
+    {"label": "Category", "data": ["Category", "Amount ($)"], "type": "string"},
+    {"label": "Breakdown", "data": ["Breakdown", "Description"], "type": "string"},
+    {"label": "Total", "data": [], "type": "number"},
+], [
+    {"text": "Salary", "value": 85200}, {"text": "Marketing", "value": 38700}, 
+    {"text": "Cloud Infra", "value": 22100}, {"text": "Operations", "value": 15300},
+    {"text": "Other", "value": 12600}
+])
+# Reference all inner components
+cash_on_hand = cash_display
+monthly_burn = burn_display
+months_of_runway = runway_display
+expenses_by_category = expense_table
+recent_large_txns = recent_large_transactions
+month_viewer = month_tabs  # Note: Tabs isn't a component we can reference by name differently - we already used it
+download_statement = Button("Download Statement", variant="primary")
+
+# Update root with proper references
+root.children = [
+    CardHeader("Month-End Finance Report", "Startup Financial Summary"),
+    cash_on_hand,
+    monthly_burn,
+    runway_display,
+    expenses_by_category,
+    recent_large_txns,
+    month_viewer,
+    download_statement,
+]')]<|tool_call_end|>

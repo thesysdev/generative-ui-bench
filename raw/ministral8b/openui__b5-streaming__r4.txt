@@ -1,0 +1,101 @@
+```openui-lang
+root = Card([header, viewerStats, topTitles, watchTimeTrend, subscriberNet, genrePerformance,
+             bufferingRate, deliveryHealth, upcomingReleases, expiringLicenses, recClickRate,
+             searchDrops, revenueSplit, deviceSplit, regionFocus, featureFlags, titlePromotion])
+
+header = CardHeader("Operations Room Dashboard", "Live streaming analytics")
+
+viewerStats = Card([viewerCount, viewerMap], "sunk")
+viewerCount = Card([liveViewers, viewerGrowth], "sunk")
+liveViewers = CardHeader("Current Viewers", "1,245,892 live right now")
+viewerGrowth = Tag("+12.3%", null, null, "success")
+
+viewerMap = Image("Global viewer distribution", "https://picsum.photos/seed/operations/800/300")
+
+topTitles = Card([topTitlesHeader, topTitlesTable], "sunk")
+topTitlesHeader = CardHeader("Top Titles (Last 24h)", "Hours Watched")
+topTitlesTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["The Last Dance", "Stranger Things S4", "The Queen's Gambit", "Breaking Bad", "Dark"])
+hoursCol = Col("Hours Watched", ["45,201", "38,742", "32,198", "28,934", "26,457"])
+
+watchTimeTrend = Card([watchTimeChart, watchTimeLabel], "sunk")
+watchTimeChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May"], [watchTimeSeries], "natural", "Month", "Hours Watched")
+watchTimeSeries = Series("Total Watch Time", [125000, 142000, 158000, 171000, 189000])
+
+subscriberNet = Card([subscriberNetChart, netLabel], "sunk")
+subscriberNetChart = BarChart(["Jan", "Feb", "Mar", "Apr", "May"], [subscribersSeries, cancellationsSeries], "grouped", "Month", "Users")
+subscribersSeries = Series("New Subscribers", [4500, 5200, 6100, 6800, 7500])
+cancellationsSeries = Series("Cancellations", [1800, 2100, 2400, 2700, 3000])
+
+genrePerformance = Card([genreChart, genreLabel], "sunk")
+genreChart = PieChart(["Drama", "Comedy", "Action", "Documentary", "Animation"], [18, 25, 12, 15, 20], "pie")
+genreLabel = TextContent("Genre Distribution by Watch Time")
+
+bufferingRate = Card([bufferingMetric, bufferingChart], "sunk")
+bufferingMetric = CardHeader("Buffering Rate", "1.8% (Last 5m)")
+bufferingChart = RadarChart(["NA", "EU", "APAC", "LATAM", "MEA"], [bufferingSeries], null, null, "circular")
+bufferingSeries = Series("Buffering Rate", [1.5, 2.1, 1.8, 2.3, 1.9])
+
+deliveryHealth = Card([deliveryHealthTable, regionFocusBtn], "sunk")
+deliveryHealthTable = Table([regionCol, healthCol, latencyCol])
+regionCol = Col("Region", ["North America", "Europe", "APAC", "Latin America", "Middle East"])
+healthCol = Col("Health", ["✅ 99.8%", "⚠️ 98.7%", "✅ 99.5%", "⚠️ 97.3%", "✅ 99.2%"])
+latencyCol = Col("Avg Latency", ["120ms", "180ms", "150ms", "210ms", "160ms"])
+regionFocusBtn = Button("Focus on Region", null, "secondary")
+
+upcomingReleases = Card([releaseHeader, releaseTable], "sunk")
+releaseHeader = CardHeader("Upcoming Releases (This Month)", "12 new titles")
+releaseTable = Table([titleCol2, releaseDateCol])
+titleCol2 = Col("Title", ["The Bear", "Squid Game S2", "Lupin Season 3", "Euphoria S2", "The Witcher S3"])
+releaseDateCol = Col("Release Date", ["May 15", "May 20", "May 22", "May 25", "May 30"])
+
+expiringLicenses = Card([licenseHeader, licenseTable], "sunk")
+licenseHeader = CardHeader("Licenses Expiring Soon", "3 licenses expiring in <30 days")
+licenseTable = Table([titleCol3, expirationDateCol])
+titleCol3 = Col("License Title", ["The Irishman", "Joker", "1917", "Tenet", "Mank"])
+expirationDateCol = Col("Expiration", ["May 28", "May 30", "June 2", "June 5", "June 7"])
+
+recClickRate = Card([recClickChart, recClickLabel], "sunk")
+recClickChart = SingleStackedBarChart(["Homepage", "Search", "Recommendations", "Browse"], [12000, 8500, 25000, 5000])
+recClickLabel = TextContent("Recommendation Clicks (Last 24h)")
+
+searchDrops = Card([searchDropChart, searchDropLabel], "sunk")
+searchDropChart = BarChart(["No Results", "Error", "Timeout", "Other"], [searchDropSeries], "grouped")
+searchDropSeries = Series("Search Drops", [450, 280, 190, 320])
+
+revenueSplit = Card([revenueChart, revenueLabel], "sunk")
+revenueChart = PieChart(["Basic", "Premium", "Family", "Student"], [35, 45, 15, 5], "donut")
+revenueLabel = TextContent("Revenue Split by Plan")
+
+deviceSplit = Card([deviceChart, deviceLabel], "sunk")
+deviceChart = PieChart(["Mobile", "TV", "Web", "Tablet", "Console"], [45, 25, 20, 8, 2], "pie")
+deviceLabel = TextContent("Viewing Split by Device")
+
+regionFocus = Card([regionFocusSelector, regionActions], "sunk")
+regionFocusSelector = Select("focusRegion", [regionNA, regionEU, regionAPAC, regionLATAM, regionMEA], "Select Region", null, "global")
+regionNA = SelectItem("North America", "North America")
+regionEU = SelectItem("Europe", "Europe")
+regionAPAC = SelectItem("APAC", "APAC")
+regionLATAM = SelectItem("Latin America", "Latin America")
+regionMEA = SelectItem("Middle East", "Middle East")
+regionActions = Buttons([applyFocusBtn, resetFocusBtn])
+applyFocusBtn = Button("Apply Focus", null, "primary")
+resetFocusBtn = Button("Reset Focus", null, "tertiary")
+
+featureFlags = Card([featureFlagsHeader, featureFlagsTable], "sunk")
+featureFlagsHeader = CardHeader("Feature Flags", "Toggle active flags")
+featureFlagsTable = Table([flagCol, statusCol, toggleCol])
+flagCol = Col("Feature", ["Dynamic Thumbnails", "Personalized Recommendations", "Adaptive Bitrate", "Live Chat", "Parental Controls"])
+statusCol = Col("Status", ["Active", "Active", "Active", "Inactive", "Active"])
+toggleCol = Col("Toggle", [Button("Toggle", null, "ghost", "normal", "small"), Button("Toggle", null, "ghost", "normal", "small"), Button("Toggle", null, "ghost", "normal", "small"), Button("Toggle", null, "ghost", "normal", "small"), Button("Toggle", null, "ghost", "normal", "small")])
+
+titlePromotion = Card([promotionSection, promotionBtn], "sunk")
+promotionSection = CardHeader("Home Screen Promotion", "Featured Title")
+promotionBtn = Button("Promote Title", null, "primary")
+promotionDropdown = Select("promoteTitle", [promoteDance, promoteStranger, promoteQueen, promoteBreaking, promoteDark], "Select Title", null, "The Last Dance")
+promoteDance = SelectItem("The Last Dance", "The Last Dance")
+promoteStranger = SelectItem("Stranger Things S4", "Stranger Things S4")
+promoteQueen = SelectItem("The Queen's Gambit", "The Queen's Gambit")
+promoteBreaking = SelectItem("Breaking Bad", "Breaking Bad")
+promoteDark = SelectItem("Dark", "Dark")
+```
