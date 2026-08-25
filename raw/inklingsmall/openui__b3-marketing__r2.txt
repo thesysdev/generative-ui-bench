@@ -1,0 +1,40 @@
+root = Card([header, dateRow, visitorsSection, conversionSection, trafficSection, campaignsSection, bestCallout, emailSection, actions], "card", "column", "l")
+
+header = CardHeader("Weekly Marketing Dashboard", "Performance overview • Updated today")
+
+dateRow = Card([dateLabel, dateSelect], "clear")
+dateLabel = TextContent("Date range")
+dateSelect = Select("date_range", [range7, range30, range90], "Last 30 days")
+range7 = SelectItem("7d", "Last 7 days")
+range30 = SelectItem("30d", "Last 30 days")
+range90 = SelectItem("90d", "Last 90 days")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "card")
+visitorsHeading = Heading("Site Visitors — Last 30 Days", "h2")
+visitorsChart = LineChart(["W1", "W2", "W3", "W4", "W5"], [visitorsSeries], "natural", "Week", "Visitors")
+visitorsSeries = Series("Visitors", [4200, 5100, 4800, 6200, 5800])
+
+conversionSection = Card([conversionHeading, conversionValue, conversionSub], "sunk")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("3.8%", "large-heavy")
+conversionSub = TextContent("+0.4% vs last week")
+
+trafficSection = Card([trafficHeading, trafficPie], "card")
+trafficHeading = Heading("Top 5 Traffic Sources", "h2")
+trafficPie = PieChart(["Organic Search", "Direct", "Social", "Referral", "Email"], [42, 23, 18, 10, 7], "donut")
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "card")
+campaignsHeading = Heading("Running Campaigns", "h2")
+campaignsTable = Table([campNameCol, campSpendCol])
+campNameCol = Col("Campaign", ["Summer Sale", "Brand Awareness", "Retargeting", "Product Launch"])
+campSpendCol = Col("Spend", ["$12,400", "$8,200", "$5,600", "$3,100"])
+
+bestCallout = Callout("success", "Best Performing Campaign", "Summer Sale leads with 4.2% conversion and $12,400 spend.")
+
+emailSection = Card([emailHeading, emailChart], "card")
+emailHeading = Heading("Email Subscriber Growth — This Month", "h2")
+emailChart = LineChart(["W1", "W2", "W3", "W4"], [emailSeries], "linear", "Week", "New subscribers")
+emailSeries = Series("New subscribers", [320, 410, 380, 520])
+
+actions = Card([exportBtn], "clear")
+exportBtn = Button("Export Report", null, "primary")

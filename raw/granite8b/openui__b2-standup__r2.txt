@@ -1,0 +1,37 @@
+```openui-lang
+root = Card([
+    dateHeader,
+    statusSection,
+    missingCount,
+    postUpdateForm,
+    blockedSection
+])
+
+dateHeader = CardHeader("Standup", "2025-08-27")
+statusSection = SectionBlock([
+    sectionItem1,
+    sectionItem2,
+    sectionItem3
+], isFoldable = false)
+blockedSection = Callout("Warning", "Blocked teammates:", "Blocked members highlighted below.")
+postUpdateForm = Form("standup-update", Buttons([postBtn]), [
+    updateField
+])
+missingCount = TextContent("2 updates still missing", "large")
+
+sectionItem1 = SectionItem("alice", "Alice - Today I worked on feature X and resolved the UI layout bug.", [
+    TextContent("Feature X progress: 80% complete", "small"),
+    TextContent("UI bug fixed", "small")
+])
+sectionItem2 = SectionItem("bob", "Bob - Blocked on waiting for API response from backend team.", [
+    Callout("Warning", "Blocked", "Waiting for backend API response")
+])
+sectionItem3 = SectionItem("carol", "Carol - Completed data migration script, ready for QA.", [
+    TextContent("Migration script deployed", "small"),
+    TextContent("Ready for QA testing", "small")
+])
+
+postBtn = Button("Post My Update")
+updateField = FormControl("Your update", Input("my_update", type = "text", placeholder = "Write your status update here"))
+
+```

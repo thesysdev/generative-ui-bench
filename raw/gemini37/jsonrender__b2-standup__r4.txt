@@ -1,0 +1,49 @@
+{"op":"add","path":"/root","value":"standup-root"}
+{"op":"add","path":"/elements/standup-root","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-card","blocker-alert","summary-row","post-update-card","updates-section"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["header-info","date-badge"]}}
+{"op":"add","path":"/elements/header-info","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["title-text","subtitle-text"]}}
+{"op":"add","path":"/elements/title-text","value":{"type":"Heading","props":{"text":"Daily Engineering Standup","level":"h2"}}}
+{"op":"add","path":"/elements/subtitle-text","value":{"type":"TextContent","props":{"text":"Async check-ins, priorities, and unblocking for Core Platform","size":"small"}}}
+{"op":"add","path":"/elements/date-badge","value":{"type":"Tag","props":{"text":{"$template":"📅 ${/currentDate}"},"variant":"info","size":"lg"}}}
+{"op":"add","path":"/state/currentDate","value":"Wednesday, Oct 24, 2024"}
+{"op":"add","path":"/elements/blocker-alert","value":{"type":"Alert","props":{"title":"1 Teammate is Blocked","description":"Sarah Chen needs review on Auth Migration PR #142 to continue database cutover.","variant":"destructive"}}}
+{"op":"add","path":"/elements/summary-row","value":{"type":"Card","props":{"direction":"row","gap":"m","variant":"sunk","align":"center"},"children":["progress-col","missing-badge-card"]}}
+{"op":"add","path":"/elements/progress-col","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["progress-text","progress-bar"]}}
+{"op":"add","path":"/elements/progress-text","value":{"type":"TextContent","props":{"text":{"$template":"**Participation:** ${/submittedCount} of ${/totalTeamCount} submitted (${/missingCount} missing)"},"size":"small"}}}
+{"op":"add","path":"/elements/progress-bar","value":{"type":"Progress","props":{"value":75,"label":"75% checked in"}}}
+{"op":"add","path":"/elements/missing-badge-card","value":{"type":"Card","props":{"direction":"column","align":"end","variant":"clear"},"children":["missing-badge"]}}
+{"op":"add","path":"/elements/missing-badge","value":{"type":"Badge","props":{"text":{"$template":"⚠️ ${/missingCount} updates pending"},"variant":"outline"}}}
+{"op":"add","path":"/state/submittedCount","value":3}
+{"op":"add","path":"/state/totalTeamCount","value":4}
+{"op":"add","path":"/state/missingCount","value":1}
+{"op":"add","path":"/elements/post-update-card","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"card"},"children":["form-title","today-field","blocker-field","submit-btn-row"]}}
+{"op":"add","path":"/elements/form-title","value":{"type":"Heading","props":{"text":"Share Your Update","level":"h3"}}}
+{"op":"add","path":"/elements/today-field","value":{"type":"FormControl","props":{"label":"What are you working on today?","input":"today-input","hint":"Include active branch or ticket ID"}}}
+{"op":"add","path":"/elements/today-input","value":{"type":"Input","props":{"name":"todayTask","placeholder":"e.g. Completing Stripe webhook retry logic (PLAT-890)","value":{"$bindState":"/myUpdate/task"}}}}
+{"op":"add","path":"/elements/blocker-field","value":{"type":"FormControl","props":{"label":"Any blockers? (Leave blank if none)","input":"blocker-input"}}}
+{"op":"add","path":"/elements/blocker-input","value":{"type":"Input","props":{"name":"todayBlocker","placeholder":"e.g. Waiting on AWS credentials approval","value":{"$bindState":"/myUpdate/blocker"}}}}
+{"op":"add","path":"/elements/submit-btn-row","value":{"type":"Buttons","props":{"buttons":["publish-btn"]}}}
+{"op":"add","path":"/elements/publish-btn","value":{"type":"Button","props":{"label":"Post Standup Update","variant":"primary"},"on":{"press":{"action":"pushState","params":{"statePath":"/standups","value":{"id":"$id","name":"Alex Rivera (You)","role":"Senior Frontend Engineer","avatar":"AR","yesterday":"Closed all drawer edge-case regressions","today":{"$state":"/myUpdate/task"},"blocker":{"$state":"/myUpdate/blocker"},"time":"Just now","statusTag":"Posted"},"clearStatePath":"/myUpdate/task"}}}}}
+{"op":"add","path":"/state/myUpdate","value":{"task":"","blocker":""}}
+{"op":"add","path":"/elements/updates-section","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"children":["section-heading","standup-list"]}}
+{"op":"add","path":"/elements/section-heading","value":{"type":"Heading","props":{"text":"Today's Team Updates","level":"h3"}}}
+{"op":"add","path":"/elements/standup-list","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"repeat":{"statePath":"/standups","key":"id"},"children":["member-card"]}}
+{"op":"add","path":"/elements/member-card","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"card"},"children":["member-header","tasks-detail","blocker-box"]}}
+{"op":"add","path":"/elements/member-header","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["member-info","member-meta"]}}
+{"op":"add","path":"/elements/member-info","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["member-avatar","member-names"]}}
+{"op":"add","path":"/elements/member-avatar","value":{"type":"Avatar","props":{"fallback":{"$item":"avatar"}}}}
+{"op":"add","path":"/elements/member-names","value":{"type":"Card","props":{"direction":"column","gap":"none","variant":"clear"},"children":["member-name","member-role"]}}
+{"op":"add","path":"/elements/member-name","value":{"type":"TextContent","props":{"text":{"$item":"name"},"size":"default"}}}
+{"op":"add","path":"/elements/member-role","value":{"type":"TextContent","props":{"text":{"$item":"role"},"size":"small"}}}
+{"op":"add","path":"/elements/member-meta","value":{"type":"Card","props":{"direction":"row","gap":"xs","align":"center","variant":"clear"},"children":["member-time","status-tag"]}}
+{"op":"add","path":"/elements/member-time","value":{"type":"TextContent","props":{"text":{"$item":"time"},"size":"small"}}}
+{"op":"add","path":"/elements/status-tag","value":{"type":"Tag","props":{"text":{"$item":"statusTag"},"variant":"neutral","size":"sm"}}}
+{"op":"add","path":"/elements/tasks-detail","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["task-yesterday","task-today"]}}
+{"op":"add","path":"/elements/task-yesterday","value":{"type":"TextContent","props":{"text":{"$template":"**Yesterday:** ${yesterday}"},"size":"small"}}}
+{"op":"add","path":"/elements/task-today","value":{"type":"TextContent","props":{"text":{"$template":"**Today:** ${today}"},"size":"small"}}}
+{"op":"add","path":"/elements/blocker-box","value":{"type":"Card","props":{"direction":"row","align":"center","gap":"s","variant":"card"},"visible":{"$item":"blocker"},"children":["blocker-text"]}}
+{"op":"add","path":"/elements/blocker-text","value":{"type":"TextContent","props":{"text":{"$template":"🚨 **Blocker:** ${blocker}"},"size":"small"}}}
+{"op":"add","path":"/state/standups","value":[]}
+{"op":"add","path":"/state/standups/0","value":{"id":"1","name":"Sarah Chen","role":"Staff Backend Engineer","avatar":"SC","yesterday":"Configured replication pipeline on staging RDS cluster","today":"Executing schema migration dry run and indexing validation","blocker":"Need DevOps approval on PR #142 for Auth Migration","time":"8:45 AM","statusTag":"Blocked"}}
+{"op":"add","path":"/state/standups/1","value":{"id":"2","name":"Marcus Vance","role":"Product Designer","avatar":"MV","yesterday":"Finalized design tokens and component specs in Figma","today":"User research interviews for upcoming analytics dashboard","blocker":"","time":"9:12 AM","statusTag":"Active"}}
+{"op":"add","path":"/state/standups/2","value":{"id":"3","name":"Elena Rostova","role":"DevOps Engineer","avatar":"ER","yesterday":"Upgraded Kubernetes clusters in eu-central-1 region","today":"Investigating latency spikes on ingestion service endpoints","blocker":"","time":"9:30 AM","statusTag":"Active"}}

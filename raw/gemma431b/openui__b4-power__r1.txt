@@ -1,0 +1,67 @@
+root = Card([header, alertBar, topGrid, midGrid, bottomGrid, footer], "clear", "column", "m")
+
+header = CardHeader("Grid Control Center", "Network Operations & Load Balancing")
+
+alertBar = Alert("Critical Frequency Deviation", "Substation 42-B reporting voltage instability in Sector North", "warning")
+
+topGrid = Card([loadCard, capacityCard, priceCard, emissionsCard], "clear", "row", "m", "stretch", "between", true)
+
+loadCard = Card([loadHeading, loadValue], "card", "column", "xs")
+loadHeading = Heading("Current Load", "h4")
+loadValue = TextContent("42,105 MW", "large-heavy")
+
+capacityCard = Card([capHeading, capProgress], "card", "column", "xs")
+capHeading = Heading("Capacity Utilization", "h4")
+capProgress = Progress(84, "84% of Total Capacity")
+
+priceCard = Card([priceHeading, priceValue], "card", "column", "xs")
+priceHeading = Heading("Current Price", "h4")
+priceValue = TextContent("$64.20 / MWh", "large-heavy")
+
+emissionsCard = Card([emHeading, emValue], "card", "column", "xs")
+emHeading = Heading("Daily Emissions", "h4")
+emValue = TextContent("12.4k tCO2e", "large-heavy")
+
+midGrid = Card([genSection, forecastSection], "clear", "row", "m")
+
+genSection = Card([genHeading, genChart, genTable], "card", "column", "m")
+genHeading = Heading("Generation Mix & Assets", "h3")
+genChart = PieChart(["Nuclear", "Gas", "Wind", "Solar", "Hydro"], [15000, 12000, 8000, 4000, 3105], "donut")
+genTable = Table([plantName, plantOutput, plantStatus])
+plantName = Col("Plant", ["North Nuclear", "East Gas Peak", "West Wind Farm", "South Solar Array", "River Hydro"])
+plantOutput = Col("Output (MW)", ["12000", "11500", "7800", "3800", "3000"], "number")
+plantStatus = Col("Status", ["Stable", "Ramping", "Intermittent", "Stable", "Stable"])
+
+forecastSection = Card([foreHeading, foreChart], "card", "column", "m")
+foreHeading = Heading("24h Demand Forecast", "h3")
+foreChart = AreaChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"], [demandSeries], "natural", "Hour", "MW")
+demandSeries = Series("Projected Load", [38000, 35000, 45000, 41000, 48000, 43000])
+
+bottomGrid = Card([outageSection, maintenanceSection, controlSection], "clear", "row", "m")
+
+outageSection = Card([outageHeading, outageList], "card", "column", "m")
+outageHeading = Heading("Active Outages", "h3")
+outageList = ListBlock([outage1, outage2], "image")
+outage1 = ListItem("Line Trip - Sector 7", "Region: North-West", null, "Dispatch Team")
+outage2 = ListItem("Transformer Failure", "Region: South-East", null, "Repair Pending")
+
+maintenanceSection = Card([maintHeading, maintList], "card", "column", "m")
+maintHeading = Heading("Planned Maintenance", "h3")
+maintList = ListBlock([maint1, maint2], "number")
+maint1 = ListItem("Turbine Overhaul", "Plant: East Gas", null, "Oct 12-15")
+maint2 = ListItem("Grid Upgrade", "Region: Central", null, "Oct 20-22")
+
+controlSection = Card([ctrlHeading, regionSelect, curtailBtn], "card", "column", "m")
+ctrlHeading = Heading("Grid Controls", "h3")
+regionSelect = FormControl("Focus Region", regionDropdown, "Filter all telemetry by region")
+regionDropdown = Select("region_focus", [regN, regS, regE, regW], "All Regions")
+regN = SelectItem("north", "North Sector")
+regS = SelectItem("south", "South Sector")
+regE = SelectItem("east", "East Sector")
+regW = SelectItem("west", "West Sector")
+curtailBtn = Buttons([curtailAction])
+curtailAction = Button("Order Load Curtailment", null, "destructive", "destructive", "large")
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Run stability simulation for Sector North")
+f2 = FollowUpItem("View detailed emissions report")

@@ -1,0 +1,120 @@
+```openui
+root = Card([
+    portfolioValue,
+    pnlToday,
+    positionTable,
+    exposureBySector,
+    valueAtRisk,
+    biggestGainersLosers,
+    instrumentsWatched,
+    workingOrders,
+    marginInUse,
+    marketHeadlines,
+    economicReleases,
+    strategyReturns,
+    drawdownPastYear,
+    riskLimits,
+    rebalanceButton,
+    placeOrderForm,
+    timeframeSelector
+])
+
+portfolioValue = CardHeader("Portfolio Value", "$150,000")
+pnlToday = Card([pnlHeader, pnlValue])
+pnlHeader = Heading("Profit and Loss Today", "h4")
+pnlValue = TextContent("Profit: $1,200", "large")
+
+positionTable = Card([positionHeader, positionTable])
+positionHeader = Heading("Positions", "h4")
+positionTable = Table([tickerCol, sizeCol, entryPriceCol, currentPriceCol])
+tickerCol = Col("Ticker", ["AAPL", "GOOGL", "AMZN"])
+sizeCol = Col("Size", ["100", "50", "75"])
+entryPriceCol = Col("Entry Price", ["145", "2,800", "3,100"])
+currentPriceCol = Col("Current Price", ["150", "2,850", "3,050"])
+
+exposureBySector = Card([exposureHeader, exposureChart])
+exposureHeader = Heading("Exposure by Sector", "h4")
+exposureChart = RadarChart(["Tech", "Health", "Finance"], [techSeries, healthSeries, financeSeries])
+techSeries = Series("Technology", [30, 20, 10])
+healthSeries = Series("Healthcare", [10, 15, 20])
+financeSeries = Series("Finance", [15, 10, 5])
+
+valueAtRisk = Card([varHeader, varValue])
+varHeader = Heading("Value at Risk", "h4")
+varValue = TextContent("$2,500", "large")
+
+biggestGainersLosers = Card([bglHeader, bglTable])
+bglHeader = Heading("Biggest Gainers and Losers", "h4")
+bglTable = Table([tickerCol, changeCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA", "MSFT", "GOOGL", "AMZN"])
+changeCol = Col("Change", ["+3.5%", "-2.1%", "+1.2%", "-0.5%", "+4.0%"])
+
+instrumentsWatched = Card([iwHeader, iwList])
+iwHeader = Heading("Instruments Being Watched", "h4")
+iwList = ListBlock([
+    ListItem("AAPL", "$150", null, "View Details"),
+    ListItem("GOOGL", "$2,850", null, "View Details"),
+    ListItem("AMZN", "$3,050", null, "View Details")
+])
+
+workingOrders = Card([woHeader, woTable])
+woHeader = Heading("Working Orders", "h4")
+woTable = Table([tickerCol, sideCol, quantityCol])
+tickerCol = Col("Ticker", ["AAPL", "GOOGL", "AMZN"])
+sideCol = Col("Side", ["Buy", "Sell", "Buy"])
+quantityCol = Col("Quantity", ["100", "50", "75"])
+
+marginInUse = Card([muiHeader, muiValue])
+muiHeader = Heading("Margin in Use", "h4")
+muiValue = TextContent("$50,000", "large")
+
+marketHeadlines = Card([mhHeader, mhList])
+mhHeader = Heading("Market Headlines", "h4")
+mhList = ListBlock([
+    ListItem("Market rallies on positive earnings reports", null, null, "Read More"),
+    ListItem("Tech stocks lead gains as interest rates hold steady", null, null, "Read More"),
+    ListItem("Energy sector declines amid oil supply concerns", null, null, "Read More")
+])
+
+economicReleases = Card([erHeader, erList])
+erHeader = Heading("Economic Releases This Week", "h4")
+erList = TextContent([
+    "Mon: GDP Report\n",
+    "Wed: Employment Data\n",
+    "Fri: Consumer Confidence Index"
+], "small")
+
+strategyReturns = Card([srHeader, srTable])
+srHeader = Heading("Strategy Returns This Year", "h4")
+srTable = Table([strategyCol, returnCol])
+strategyCol = Col("Strategy", ["Macro", "Sector Rotation", "Momentum"])
+returnCol = Col("Return", ["+15%", "+20%", "+10%"])
+
+drawdownPastYear = Card([dpHeader, dpValue])
+dpHeader = Heading("Drawdown Over the Past Year", "h4")
+dpValue = TextContent("-8%", "large")
+
+riskLimits = Card([rlHeader, rlList])
+rlHeader = Heading("Risk Limits Close to Breach", "h4")
+rlList = ListBlock([
+    ListItem("Leverage Ratio", "Approaching 3:1", null, null),
+    ListItem("Concentration Limit", "AAPL near 10% cap", null, null)
+])
+
+rebalanceButton = Button("Rebalance Portfolio", ["rebalance-action"])
+placeOrderForm = Form("place-order-form", orderFormButtons, [tickerInput, sideSelect, quantityInput])
+tickerInput = Input("ticker", "Enter Ticker", "text")
+sideSelect = Select("side", [sideBuy, sideSell], "Select Side")
+sideBuy = SelectItem("Buy", "Buy")
+sideSell = SelectItem("Sell", "Sell")
+quantityInput = Input("quantity", "Enter Quantity", "number")
+orderFormButtons = Buttons([submitOrderBtn])
+submitOrderBtn = Button("Place Order", null, "primary")
+
+timeframeSelector = Card([tsHeader, tsSelect])
+tsHeader = Heading("Timeframe", "h4")
+tsSelect = Select("timeframe", [day, week, month], "Select Timeframe")
+day = SelectItem("1D", "1 Day")
+week = SelectItem("1W", "1 Week")
+month = SelectItem("1M", "1 Month")
+```

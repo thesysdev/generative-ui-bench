@@ -1,0 +1,31 @@
+root = Card([header, statsRow, trendSection, productsSection, conversionSection, downloadSection])
+header = CardHeader("Monthly Sales Check", "Snapshot of this month's performance")
+
+statsRow = Card([revenueStat, conversionStat], "sunk", "row", "l", null, null, true)
+revenueStat = Card([revenueLabel, revenueValue], "clear")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = TextContent("$84,250", "large-heavy")
+conversionStat = Card([conversionLabel, conversionValue], "clear")
+conversionLabel = TextContent("Conversion rate", "small")
+conversionValue = TextContent("3.8%", "large-heavy")
+
+trendSection = Card([trendHeading, trendChart], "sunk")
+trendHeading = Heading("Revenue trend — last 6 months", "h3")
+trendChart = LineChart(["May", "Jun", "Jul", "Aug", "Sep", "Oct"], [revenueSeries], "natural", "Month", "Revenue ($)")
+revenueSeries = Series("Revenue", [61200, 68500, 72900, 77300, 79800, 84250])
+
+productsSection = Card([productsHeading, productsTable], "sunk")
+productsHeading = Heading("Top 3 best-selling products", "h3")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Aurora Desk Lamp", "Nimbus Backpack", "Cascade Water Bottle"])
+unitsCol = Col("Units Sold", [1240, 980, 875], "number")
+
+conversionSection = Card([conversionHeading, conversionProgress], "sunk")
+conversionHeading = Heading("Conversion performance", "h3")
+conversionProgress = Progress(3.8, "3.8% of visitors converted to customers")
+
+downloadSection = Card([downloadHeading, downloadButtons], "sunk")
+downloadHeading = Heading("Export your numbers", "h3")
+downloadButtons = Buttons([downloadCsvBtn, downloadPdfBtn])
+downloadCsvBtn = Button("Download CSV", null, "primary")
+downloadPdfBtn = Button("Download PDF", null, "secondary")

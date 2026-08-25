@@ -1,0 +1,58 @@
+```openui
+root = Card([
+    header,
+    stepsSection,
+    caloriesSection,
+    workoutsSection,
+    logWorkoutForm,
+], "card", "row", "m")
+
+header = CardHeader("Daily Fitness Summary", "Today's Progress")
+
+stepsSection = Card([
+    stepsIndicator,
+    stepsLabel,
+], "sunk")
+
+caloriesSection = Card([
+    caloriesIndicator,
+    caloriesLabel,
+], "sunk")
+
+workoutsSection = Card([
+    weekOverview,
+], "sunk")
+
+logWorkoutForm = Form("log-workout", workoutButtons, [
+    workoutNameField,
+    workoutDurationField,
+    workoutTypeField,
+    logBtn,
+])
+
+workoutNameField = FormControl("Workout name", nameInput)
+nameInput = Input("workout_name", placeholder: "e.g., Yoga")
+
+workoutDurationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", type: "number", placeholder: "120")
+
+workoutTypeField = FormControl("Type", typeSelect)
+typeSelect = Select("workout_type", [typeCardio, typeStrength, typeYoga], placeholder: "Select type")
+typeCardio = SelectItem("Cardio", "Cardio")
+typeStrength = SelectItem("Strength", "Strength")
+typeYoga = SelectItem("Yoga", "Yoga")
+
+logBtn = Button("Log Workout", null, "primary")
+workoutButtons = Buttons([logBtn], "column")
+
+stepsIndicator = Tag("Steps", null, null, "success")
+stepsLabel = TextContent("10,250 steps / 10,000 goal", size: "large")
+
+caloriesIndicator = Tag("Calories", null, null, "success")
+caloriesLabel = TextContent("1,250 calories burned", size: "large")
+
+weekOverview = Table([dayCol, activityCol])
+dayCol = Col("Day", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])
+activityCol = Col("Workout", ["Yoga", "Run", "Strength", "Swim", "Yoga", "Bike", "Rest"])
+
+```

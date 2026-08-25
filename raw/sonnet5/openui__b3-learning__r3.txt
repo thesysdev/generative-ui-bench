@@ -1,0 +1,50 @@
+root = Card([header, statsRow, filterSection, engagementSection, coursesSection, riskSection, messageSection])
+
+header = CardHeader("Training Platform Analytics", "Cohort performance and engagement overview")
+
+statsRow = Card([activeLearners, completionRate, avgQuizScore], "sunk", "row", "l")
+activeLearners = TextCallout("info", "Active Learners This Week", "1,284")
+completionRate = TextCallout("success", "Course Completion Rate", "76%")
+avgQuizScore = TextCallout("neutral", "Average Quiz Score", "82%")
+
+filterSection = Card([filterHeading, cohortFilterForm], "sunk")
+filterHeading = Heading("Narrow to a Cohort", "h3")
+cohortFilterForm = Form("cohort-filter", filterButtons, [cohortFilterField])
+cohortFilterField = FormControl("Cohort", cohortSelect)
+cohortSelect = Select("cohort", [cohortAll, cohortA, cohortB, cohortC], "Select a cohort")
+cohortAll = SelectItem("all", "All Cohorts")
+cohortA = SelectItem("cohort-a", "Cohort A - Fall Intake")
+cohortB = SelectItem("cohort-b", "Cohort B - Winter Intake")
+cohortC = SelectItem("cohort-c", "Cohort C - Spring Intake")
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply Filter", null, "primary")
+
+engagementSection = Card([engagementHeading, engagementChart], "sunk")
+engagementHeading = Heading("Engagement - Past 8 Weeks", "h3")
+engagementChart = LineChart(weekLabels, [engagementSeries], "natural", "Week", "Engagement %")
+weekLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+engagementSeries = Series("Engagement", [62, 65, 68, 64, 70, 73, 71, 75])
+
+coursesSection = Card([coursesHeading, coursesChart], "sunk")
+coursesHeading = Heading("Courses Ranked by Enrollment", "h3")
+coursesChart = HorizontalBarChart(courseLabels, [enrollSeries], "grouped", "Enrollments", "Course")
+courseLabels = ["Intro to Data", "Python Basics", "UX Fundamentals", "Agile 101", "SQL Mastery"]
+enrollSeries = Series("Enrollments", [420, 380, 310, 275, 190])
+
+riskSection = Card([riskHeading, atRiskTable], "sunk")
+riskHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskTable = Table([colLearner, colCohort, colLastActive, colRisk])
+colLearner = Col("Learner", ["Maria Chen", "James Okoro", "Priya Patel", "Liam Fischer", "Sofia Rossi"])
+colCohort = Col("Cohort", ["Cohort A", "Cohort B", "Cohort A", "Cohort C", "Cohort B"])
+colLastActive = Col("Last Active", ["14 days ago", "10 days ago", "12 days ago", "9 days ago", "16 days ago"])
+colRisk = Col("Risk Level", ["High", "High", "Medium", "Medium", "High"])
+
+messageSection = Card([messageHeading, messageCohortForm], "sunk")
+messageHeading = Heading("Message a Cohort", "h3")
+messageCohortForm = Form("message-cohort", msgButtons, [msgCohortField, msgField])
+msgCohortField = FormControl("Cohort", msgCohortSelect)
+msgCohortSelect = Select("message_cohort", [cohortAll, cohortA, cohortB, cohortC], "Select cohort")
+msgField = FormControl("Message", msgTextArea)
+msgTextArea = TextArea("message", "Type your message to the cohort...", 4)
+msgButtons = Buttons([sendBtn])
+sendBtn = Button("Send Message", null, "primary")

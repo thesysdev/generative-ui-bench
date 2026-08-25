@@ -1,0 +1,56 @@
+root = Card([header, metricsRow, bestCampaignAlert, chartsSection, campaignsSection, exportSection, followUps], "card", "column", "l")
+
+header = CardHeader("Weekly Marketing Dashboard", "Performance overview and traffic insights")
+
+metricsRow = Card([visitorsCard, conversionCard, subsCard], "clear", "row", "m", "stretch", "between")
+
+visitorsCard = Card([visitorsHeader, visitorsValue, visitorsBadge], "card", "column", "s")
+visitorsHeader = CardHeader("Site Visitors (30d)")
+visitorsValue = Heading("48,250", "h2")
+visitorsBadge = Badge("+12.4% vs last month", "default")
+
+conversionCard = Card([conversionHeader, conversionValue, conversionBadge], "card", "column", "s")
+conversionHeader = CardHeader("Conversion Rate")
+conversionValue = Heading("3.2%", "h2")
+conversionBadge = Badge("+0.4% vs target", "secondary")
+
+subsCard = Card([subsHeader, subsValue, subsBadge], "card", "column", "s")
+subsHeader = CardHeader("Email Subscribers")
+subsValue = Heading("12,480", "h2")
+subsBadge = Badge("+850 this month", "default")
+
+bestCampaignAlert = Alert("Top Performing Campaign", "Summer Promo 2024 is leading with an impressive 5.8% conversion rate and 420 conversions.", "success")
+
+chartsSection = Card([chartsHeading, chartsRow], "sunk", "column", "m")
+chartsHeading = Heading("Traffic & Sources", "h3")
+chartsRow = Card([trendCard, sourcesCard], "clear", "row", "m")
+
+trendCard = Card([trendHeader, lineChart], "card", "column", "s")
+trendHeader = CardHeader("Daily Visitors", "Past 30 days")
+lineChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [visitorSeries], "natural", "Week", "Visitors")
+visitorSeries = Series("Visitors", [10500, 11200, 12800, 13750])
+
+sourcesCard = Card([sourcesHeader, pieChart], "card", "column", "s")
+sourcesHeader = CardHeader("Traffic Sources Share")
+pieChart = PieChart(["Organic Search", "Paid Ads", "Social Media", "Email", "Direct"], [45, 25, 15, 10, 5], "donut", "circular")
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "sunk", "column", "m")
+campaignsHeading = Heading("Active Campaigns & Spend", "h3")
+campaignsTable = Table([campNameCol, campSpendCol, campConvCol])
+campNameCol = Col("Campaign Name", ["Summer Promo 2024", "Retargeting Q3", "Newsletter Blast", "Product Hunt Launch", "Influencer Collab"])
+campSpendCol = Col("Spend", ["$4,500", "$2,800", "$1,200", "$3,500", "$5,000"])
+campConvCol = Col("Conversions", ["420", "190", "95", "310", "280"])
+
+exportSection = Card([exportHeading, exportForm], "sunk", "column", "m")
+exportHeading = Heading("Report Controls & Export", "h3")
+exportForm = Form("export-form", exportButtons, [dateField])
+dateField = FormControl("Date Range", datePicker, "Select the reporting period")
+datePicker = DatePicker("date_range", "range")
+exportButtons = Buttons([exportBtn, updateBtn])
+exportBtn = Button("Export Report", null, "primary")
+updateBtn = Button("Update Range", null, "secondary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me a detailed breakdown of the Social Media traffic")
+fu2 = FollowUpItem("How can we optimize the Retargeting Q3 campaign?")
+fu3 = FollowUpItem("Schedule automated weekly reports")

@@ -1,0 +1,36 @@
+root = Card([header, statsCard, workoutsSection, logWorkout], "card", "column", "l")
+
+header = CardHeader("Daily Summary", "Tuesday, March 11")
+
+statsCard = Card([stepsProgress, caloriesText], "sunk", "column", "m")
+stepsProgress = Progress(85, "Steps: 8,500 of 10,000")
+caloriesText = TextContent("**540 kcal** burned today")
+
+workoutsSection = Card([workoutsHeading, workoutsChart], "clear", "column")
+workoutsHeading = Heading("Workouts Past Week", "h3")
+workoutsChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [durationSeries], "grouped", "Day", "Minutes")
+durationSeries = Series("Workout minutes", [30, 0, 45, 25, 0, 60, 40])
+
+logWorkout = DialogBlock("Log Workout", "Log a New Workout", "Record your workout details", [workoutForm], "primary")
+
+workoutForm = Form("workout-log", workoutFormButtons, [typeField, durationField, caloriesField, dateField])
+
+typeField = FormControl("Workout type", typeSelect)
+typeSelect = Select("workout_type", [typeRunning, typeCycling, typeStrength, typeYoga], "Choose type")
+typeRunning = SelectItem("running", "Running")
+typeCycling = SelectItem("cycling", "Cycling")
+typeStrength = SelectItem("strength", "Strength training")
+typeYoga = SelectItem("yoga", "Yoga")
+
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", "30", "number")
+
+caloriesField = FormControl("Calories burned", caloriesInput)
+caloriesInput = Input("calories", "300", "number")
+
+dateField = FormControl("Date", datePicker)
+datePicker = DatePicker("workout_date", "single")
+
+workoutFormButtons = Buttons([saveBtn, cancelBtn])
+saveBtn = Button("Save Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

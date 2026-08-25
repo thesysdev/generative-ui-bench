@@ -1,0 +1,321 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "dailyCallout",
+          "todayHeading",
+          "metricsTable",
+          "stepProgressBar",
+          "historyHeading",
+          "weeklyWorkoutChart",
+          "divider",
+          "logHeading",
+          "logWorkoutForm"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Daily Activity Summary",
+        "subtitle": "Today's stats and weekly performance"
+      },
+      {
+        "id": "dailyCallout",
+        "component": "Callout",
+        "variant": "success",
+        "title": "Great pace today!",
+        "description": "You have reached 84% of your daily step goal and burned 620 active calories."
+      },
+      {
+        "id": "todayHeading",
+        "component": "Heading",
+        "text": "Today's Metrics",
+        "level": "h3"
+      },
+      {
+        "id": "metricsTable",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "currentCol",
+          "targetCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Steps Walked",
+          "Active Calories",
+          "Active Time",
+          "Distance"
+        ]
+      },
+      {
+        "id": "currentCol",
+        "component": "Col",
+        "label": "Today",
+        "data": [
+          "8,420 steps",
+          "620 kcal",
+          "48 mins",
+          "6.2 km"
+        ]
+      },
+      {
+        "id": "targetCol",
+        "component": "Col",
+        "label": "Daily Goal",
+        "data": [
+          "10,000 steps (84%)",
+          "500 kcal (124%)",
+          "45 mins (107%)",
+          "7.0 km (89%)"
+        ]
+      },
+      {
+        "id": "stepProgressBar",
+        "component": "Progress",
+        "value": 84,
+        "label": "Step Goal Progress: 8,420 / 10,000 steps (84%)"
+      },
+      {
+        "id": "historyHeading",
+        "component": "Heading",
+        "text": "Workouts Over the Past Week",
+        "level": "h3"
+      },
+      {
+        "id": "weeklyWorkoutChart",
+        "component": "BarChart",
+        "labels": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun"
+        ],
+        "series": [
+          "caloriesSeries",
+          "minutesSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Day of Week",
+        "yLabel": "Activity Volume"
+      },
+      {
+        "id": "caloriesSeries",
+        "component": "Series",
+        "category": "Calories Burned (kcal)",
+        "values": [
+          480,
+          550,
+          320,
+          610,
+          490,
+          720,
+          620
+        ]
+      },
+      {
+        "id": "minutesSeries",
+        "component": "Series",
+        "category": "Duration (mins)",
+        "values": [
+          40,
+          45,
+          30,
+          50,
+          40,
+          65,
+          48
+        ]
+      },
+      {
+        "id": "divider",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "logHeading",
+        "component": "Heading",
+        "text": "Log a New Workout",
+        "level": "h3"
+      },
+      {
+        "id": "logWorkoutForm",
+        "component": "Form",
+        "name": "workout-log",
+        "buttons": "formButtons",
+        "fields": [
+          "activityTypeField",
+          "durationField",
+          "caloriesField",
+          "intensityField"
+        ]
+      },
+      {
+        "id": "activityTypeField",
+        "component": "FormControl",
+        "label": "Activity Type",
+        "input": "activitySelect"
+      },
+      {
+        "id": "activitySelect",
+        "component": "Select",
+        "name": "activity_type",
+        "placeholder": "Select workout type",
+        "items": [
+          "optRunning",
+          "optCycling",
+          "optStrength",
+          "optHIIT",
+          "optSwimming",
+          "optWalking"
+        ]
+      },
+      {
+        "id": "optRunning",
+        "component": "SelectItem",
+        "value": "running",
+        "label": "Outdoor / Treadmill Run"
+      },
+      {
+        "id": "optCycling",
+        "component": "SelectItem",
+        "value": "cycling",
+        "label": "Cycling"
+      },
+      {
+        "id": "optStrength",
+        "component": "SelectItem",
+        "value": "strength",
+        "label": "Strength Training"
+      },
+      {
+        "id": "optHIIT",
+        "component": "SelectItem",
+        "value": "hiit",
+        "label": "HIIT / Circuit"
+      },
+      {
+        "id": "optSwimming",
+        "component": "SelectItem",
+        "value": "swimming",
+        "label": "Swimming"
+      },
+      {
+        "id": "optWalking",
+        "component": "SelectItem",
+        "value": "walking",
+        "label": "Brisk Walk"
+      },
+      {
+        "id": "durationField",
+        "component": "FormControl",
+        "label": "Duration (minutes)",
+        "input": "durationInput"
+      },
+      {
+        "id": "durationInput",
+        "component": "Input",
+        "name": "duration",
+        "type": "number",
+        "placeholder": "e.g. 45"
+      },
+      {
+        "id": "caloriesField",
+        "component": "FormControl",
+        "label": "Estimated Calories Burned (kcal)",
+        "input": "caloriesInput",
+        "hint": "Leave blank to auto-calculate based on duration"
+      },
+      {
+        "id": "caloriesInput",
+        "component": "Input",
+        "name": "calories",
+        "type": "number",
+        "placeholder": "e.g. 350"
+      },
+      {
+        "id": "intensityField",
+        "component": "FormControl",
+        "label": "Perceived Intensity",
+        "input": "intensityRadio"
+      },
+      {
+        "id": "intensityRadio",
+        "component": "RadioGroup",
+        "name": "intensity",
+        "defaultValue": "moderate",
+        "items": [
+          "intLight",
+          "intModerate",
+          "intVigorous"
+        ]
+      },
+      {
+        "id": "intLight",
+        "component": "RadioItem",
+        "label": "Light",
+        "description": "Warm-up or easy pace",
+        "value": "light"
+      },
+      {
+        "id": "intModerate",
+        "component": "RadioItem",
+        "label": "Moderate",
+        "description": "Noticeable effort, steady breathing",
+        "value": "moderate"
+      },
+      {
+        "id": "intVigorous",
+        "component": "RadioItem",
+        "label": "Vigorous / High Intensity",
+        "description": "Hard effort, near maximum heart rate",
+        "value": "vigorous"
+      },
+      {
+        "id": "formButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitWorkoutBtn",
+          "resetWorkoutBtn"
+        ]
+      },
+      {
+        "id": "submitWorkoutBtn",
+        "component": "Button",
+        "label": "Save Workout",
+        "variant": "primary"
+      },
+      {
+        "id": "resetWorkoutBtn",
+        "component": "Button",
+        "label": "Clear",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

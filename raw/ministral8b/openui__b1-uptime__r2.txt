@@ -1,0 +1,40 @@
+```openui-lang
+root = Card([statusHeader, uptimeChart, incidentNote, supportContact], "card")
+
+statusHeader = CardHeader("Platform Status", "All systems operational")
+
+uptimeChart = Card(
+    [
+        TextContent("API Availability", "large-heavy"),
+        BarChart(
+            ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            [uptimeSeries],
+            "grouped",
+            "Month",
+            "Availability (%)"
+        )
+    ],
+    "sunk"
+)
+
+uptimeSeries = Series("API", [99.8, 99.95, 100, 99.99, 99.9, 99.98])
+
+incidentNote = Card(
+    [
+        CardHeader("Recent Incident", "Resolved 2023-07-15"),
+        TextContent("The primary database cluster experienced a scheduled maintenance window that caused a 45-minute outage. All services were restored within the planned window with no data loss.")
+    ],
+    "sunk"
+)
+
+supportContact = Card(
+    [
+        Heading("Need Help?", "h3"),
+        TextContent("For urgent issues, contact on-call support via Slack channel #platform-alerts. For non-critical questions, email platform-support@company.com"),
+        Buttons([contactBtn], "row")
+    ],
+    "sunk"
+)
+
+contactBtn = Button("Open Slack Channel", null, "secondary")
+```

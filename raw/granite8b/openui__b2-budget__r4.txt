@@ -1,0 +1,35 @@
+```openui-lang
+root = Card([header, spendingSummary, categoryBreakdown, largestExpense, monthSelector, addExpenseForm])
+
+header = CardHeader("Monthly Budget Check", "Current Month")
+
+spendingSummary = Card([totalVsBudget], "sunk")
+totalVsBudget = Card([budgetBar, spentBar, differenceText], "row", "m", "center", "between")
+budgetBar = BarChart(["Budget"], [BudgetSeries], "grouped", "Month", "USD")
+spentBar = BarChart(["Spent"], [SpentSeries], "grouped", "Month", "USD")
+differenceText = TextContent("Spent $3,120 vs $5,000 budget", "large")
+
+categoryBreakdown = Card([categoryTable], "clear")
+categoryTable = Table([catLabel, catValues])
+catLabel = Col("Category", ["Food", "Transport", "Entertainment", "Utilities"])
+catValues = Col("Amount", ["$750", "$300", "$400", "$470"])
+
+largestExpense = Card([highlightedItem], "sunk")
+highlightedItem = TextContent("Largest expense: $800 on Travel", "large", "success")
+
+monthSelector = Card([monthDropdown], "clear")
+monthDropdown = Select("month", [monthJan, monthFeb, monthMar, monthApr], "Select month", size="medium")
+monthJan = SelectItem("January", "January")
+monthFeb = SelectItem("February", "February")
+monthMar = SelectItem("March", "March")
+monthApr = SelectItem("April", "April")
+
+addExpenseForm = Form("add_expense", addButtons, [expenseInput, descriptionInput, submitBtn])
+expenseInput = Input("amount", "Enter expense amount", "number")
+descriptionInput = TextArea("description", "Enter expense description", rows=2)
+submitBtn = Button("Add expense", null, "primary")
+addButtons = Buttons([submitBtn], "row")
+
+BudgetSeries = Series("Budget", [5000])
+SpentSeries = Series("Spent", [3120])
+```

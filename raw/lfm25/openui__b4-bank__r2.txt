@@ -1,0 +1,220 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Personal Banking",
+      subtitle: "Your financial dashboard"
+    ),
+    
+    // 1. Balances
+    Section("Account Balances"),
+    CardHeader(
+      title: "Account Balances",
+      subtitle: "Current balances by account"
+    ),
+    TableBalances([
+      { label: "Checking", value: 12500, currency: "$" },
+      { label: "Savings", value: 4500, currency: "$" },
+      { label: "Credit", value: 28000, currency: "$" }
+    ]),
+    
+    // 2. Recent Transactions
+    Section("Recent Transactions"),
+    Card(
+      children: [
+        TextCallout(
+          variant: "neutral",
+          title: "Recent Activity",
+          description: "Last 5 transactions"
+        ),
+        Transitions([
+          TransactionRow(
+            merchant: "Starbucks",
+            amount: "-8.50",
+            date: "2026-05-25"
+          ),
+          TransactionRow(
+            merchant: "Amazon",
+            amount: "+149.99",
+            date: "2026-05-24"
+          ),
+          TransactionRow(
+            merchant: "Gas Station",
+            amount: "-45.20",
+            date: "2026-05-23"
+          ),
+          TransactionRow(
+            merchant: "Eating out",
+            amount: "-32.40",
+            date: "2026-05-22"
+          ),
+          TransactionRow(
+            merchant: "Netflix",
+            amount: "-15.99",
+            date: "2026-05-21"
+          )
+        ])
+      ]
+    ),
+    
+    // 3. Spending by Category (this month)
+    Section("This Month's Spending"),
+    Card(
+      children: [
+        TextCallout(
+          variant: "neutral",
+          title: "Spending Breakdown",
+          description: "Category-wise expenses for May 2026"
+        ),
+        SpendingTable([
+          {
+            col: { label: "Category", data: "Food & Dining" },
+            val: { label: "$420.00", type: "number" }
+          },
+          {
+            col: { label: "Category", data: "Transportation" },
+            val: { label: "$180.50", type: "number" }
+          },
+          {
+            col: { label: "Category", data: "Shopping" },
+            val: { label: "$95.75", type: "number" }
+          },
+          {
+            col: { label: "Category", data: "Bills & Utilities" },
+            val: { label: "$130.20", type: "number" }
+          },
+          {
+            col: { label: "Category", data: "Entertainment" },
+            val: { label: "$65.30", type: "number" }
+          }
+        ])
+      ]
+    ),
+    
+    // 4. Bills Due Soon
+    Section("Upcoming Bills"),
+    Card(
+      children: [
+        TextCallout(
+          variant: "neutral",
+          title: "Bills Due",
+          description: "Unpaid obligations"
+        ),
+        BillsList([
+          { id: "electric", name: "Electric Bill", amount: 89.99, dueDate: "2026-05-28" },
+          { id: "internet", name: "Internet Service", amount: 49.99, dueDate: "2026-06-01" },
+          { id: "water", name: "Water Bill", amount: 62.00, dueDate: "2026-05-30" },
+          { id: "phone", name: "Phone Plan", amount: 55.00, dueDate: "2026-05-29" }
+        ])
+      ]
+    ),
+    
+    // 5. Vacation Savings Progress
+    Section("Vacation Goal"),
+    Card(
+      children: [
+        TextCallout(
+          variant: "success",
+          title: "Vacation Fund",
+          description: "Progress toward your trip savings"
+        ),
+        ProgressBar(
+          value: 68,
+          label: "68%",
+          color: "green"
+        ),
+        ProgressInfo({
+          target: 100,
+          current: 68,
+          label: "To reach your vacation fund"
+        })
+      ]
+    ),
+    
+    // 6. Credit Score
+    Section("Credit Score"),
+    Card(
+      children: [
+        CreditScoreComponent(
+          score: 720,
+          label: "Credit Score",
+          color: "green"
+        )
+      ]
+    ),
+    
+    // 7. Move Money Between Accounts
+    Section("Transfer Funds"),
+    Card(
+      children: [
+        TransferFlow([
+          TransferSource("Checking"),
+          amount: "100.00",
+          transferTo: "Savings"
+        ])
+      ]
+    ),
+    
+    // 8. Freeze Credit Line
+    Section("Manage Accounts"),
+    Card(
+      children: [
+        CreditFreezeToggle(
+          frozen: true,
+          label: "Freeze Credit Line"
+        ),
+        CreditFreezeDetails({
+          reason: "Emergency",
+          action: "temporarily lock credit line",
+          confirm: true
+        })
+      ]
+    ),
+    
+    // 9. Pick Statement Period
+    Section("Statement Period"),
+    Card(
+      children: [
+        PeriodSelector([
+          { value: "May 2026", label: "May 2026" },
+          { value: "April 2026", label: "April 2026" },
+          { value: "Q2 2026", label: "Q2 2026" }
+        ])
+      ]
+    ),
+    
+    // 10. Manage Alert Triggers
+    Section("Alert Preferences"),
+    Card(
+      children: [
+        AlertSettingsPanel([
+          AlertType("Low Balance"),
+          AlertType("High Spending"),
+          AlertType("Transaction Alerts"),
+          AlertType("Bill Due")
+        ])
+      ]
+    ),
+    
+    // 11. Dispute Transaction
+    Section("Dispute Transaction"),
+    Card(
+      children: [
+        TransactionDisputeComponent(
+          transactionId: "txn_001",
+          merchant: "Amazon",
+          amount: "149.99",
+          reason: "Unauthorized purchase",
+          resolved: false
+        )
+      ]
+    )
+  ],
+  direction: "column",
+  gap: "xl",
+  align: "stretch",
+  wrap: true,
+  variant: "card"
+)
+```

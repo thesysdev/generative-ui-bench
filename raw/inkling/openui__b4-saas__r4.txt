@@ -1,0 +1,63 @@
+root = Card([header, metricsRow, periodForm, signupsChart, planSplit, topCustomers, atRisk, failedPayments, featureAdoption, npsDisplay, seatUtil, inviteAdmin])
+
+header = CardHeader("SaaS Admin Overview", "Live company metrics and health")
+
+metricsRow = Card([mrrBox, arrBox, churnBox, npsBox], "clear", "row", "m")
+mrrBox = Card([TextContent("MRR", "small"), TextContent("$124,500", "large-heavy")], "card")
+arrBox = Card([TextContent("ARR", "small"), TextContent("$1,494,000", "large-heavy")], "card")
+churnBox = Card([TextContent("Churn (month)", "small"), TextContent("2.4%", "large-heavy")], "card")
+npsBox = Card([TextContent("NPS", "small"), TextContent("+42", "large-heavy")], "card")
+
+periodForm = Form("reporting-period", periodButtons, [periodField])
+periodField = FormControl("Reporting period", periodSelect)
+periodSelect = Select("period", [p30, p90, p365], "Last 90 days")
+p30 = SelectItem("30", "Last 30 days")
+p90 = SelectItem("90", "Last 90 days")
+p365 = SelectItem("365", "Last 365 days")
+periodButtons = Buttons([updateBtn])
+updateBtn = Button("Update")
+
+signupsChart = Card([TextContent("New signups (90 days)", "small"), signupsLine])
+signupsLine = LineChart(["Day 1", "Day 30", "Day 60", "Day 90"], [signupSeries], "linear", "Day", "Signups")
+signupSeries = Series("New", [12, 28, 45, 58])
+
+planSplit = Card([TextContent("Customers by plan", "small"), planPie])
+planPie = PieChart(["Enterprise", "Pro", "Starter"], [42, 118, 340], "donut")
+
+topCustomers = Card([TextContent("Top 10 customers", "small"), customersTable])
+customersTable = Table([custNameCol, seatsCol, spendCol])
+custNameCol = Col("Customer", ["Acme Corp", "Beta Inc", "Gamma LLC", "Delta Co", "Epsilon Ltd", "Zeta SA", "Eta GmbH", "Theta LLC", "Iota Inc", "Kappa LLC"])
+seatsCol = Col("Seats", [120, 85, 72, 65, 58, 52, 48, 45, 40, 38])
+spendCol = Col("Monthly spend", ["$18,200", "$12,400", "$9,800", "$8,600", "$7,200", "$6,900", "$6,100", "$5,800", "$5,400", "$5,100"])
+
+atRisk = Card([TextContent("Accounts at risk", "small"), riskList])
+riskList = ListBlock([risk1, risk2, risk3, risk4])
+risk1 = ListItem("Acme Corp", "Usage drop 60% + open support ticket")
+risk2 = ListItem("Beta Inc", "No login in 14 days")
+risk3 = ListItem("Delta Co", "Payment failed twice")
+risk4 = ListItem("Zeta SA", "NPS score dropped to 2")
+
+failedPayments = Card([TextContent("Failed payments", "small"), failedTable, retryButtons])
+failedTable = Table([failNameCol, failAmountCol, failStatusCol])
+failNameCol = Col("Account", ["Gamma LLC", "Eta GmbH", "Theta LLC"])
+failAmountCol = Col("Amount", ["$9,800", "$6,100", "$5,800"])
+failStatusCol = Col("Status", ["Failed", "Failed", "Failed"])
+retryButtons = Buttons([retryBtn])
+retryBtn = Button("Retry all")
+
+featureAdoption = Card([TextContent("Newest feature adoption", "small"), adoptionBars])
+adoptionBars = BarChart(["AI Assist", "Team Workflows", "Advanced Reports"], [adoptSeries])
+adoptSeries = Series("Adoption %", [34, 62, 18])
+
+npsDisplay = Card([TextContent("Current NPS", "small"), npsScore, npsBreakdown])
+npsScore = TextContent("+42 (Excellent)", "large-heavy")
+npsBreakdown = TextContent("Promoters: 62% | Passives: 24% | Detractors: 14%", "small")
+
+seatUtil = Card([TextContent("Seat utilization", "small"), utilProgress])
+utilProgress = Progress(68, "68% of 1,240 seats active")
+
+inviteAdmin = Form("invite-admin", inviteButtons, [inviteField])
+inviteField = FormControl("Invite admin", inviteInput, "Send invite to a new admin")
+inviteInput = Input("email", "admin@company.com", "email")
+inviteButtons = Buttons([inviteBtn])
+inviteBtn = Button("Send invite", null, "primary")

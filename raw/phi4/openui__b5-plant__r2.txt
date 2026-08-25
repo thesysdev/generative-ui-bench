@@ -1,0 +1,128 @@
+```openui
+root = Card([
+    header, 
+    equipmentEffectiveness, 
+    productionTarget, 
+    productionLines, 
+    defectRate, 
+    downtimeSplit, 
+    maintenanceSchedule, 
+    stockStatus, 
+    supplierDeliveries, 
+    shiftComparison, 
+    safetyIncidents, 
+    qualityHold, 
+    energyUse, 
+    workOrders, 
+    maintenanceScheduler, 
+    focusLineSelector, 
+    liveAlerts, 
+    exportButton
+])
+
+header = CardHeader("Factory Floor Supervisor Console", "Real-Time Overview")
+
+equipmentEffectiveness = Card([CardHeader("Overall Equipment Effectiveness"), TextContent("75.3%")])
+
+productionTarget = Card([CardHeader("Units Produced vs Target"), TextContent("Produced: 1200 / Target: 1500")])
+
+productionLines = Card([CardHeader("Production Line Status"), 
+    Table([
+        lineHeader, 
+        line1, 
+        line2, 
+        line3
+    ])
+])
+lineHeader = Col(["Line", "Rate", "Status"])
+line1 = Col(["Line 1", "80%", "Active"])
+line2 = Col(["Line 2", "75%", "Active"])
+line3 = Col(["Line 3", "70%", "Maintenance"])
+
+defectRate = Card([CardHeader("Defect Rate (Past Month)"), BarChart(["Jan", "Feb", "Mar", "Apr"], [defectSeries], "stacked", "Month", "Defects (%)")])
+defectSeries = Series("Defect Rate", [1.2, 1.5, 1.3, 1.1])
+
+downtimeSplit = Card([CardHeader("Downtime by Cause"), PieChart(["Mechanical", "Electrical", "Operator"], [15, 10, 5])])
+
+maintenanceSchedule = Card([CardHeader("Machines Due for Maintenance"), 
+    ListBlock([machine1, machine2, machine3], "image")
+])
+machine1 = ListItem("Press 1", "Due: 2023-11-15", ["press-1.jpg"], "Schedule Maintenance")
+machine2 = ListItem("Cutter 2", "Due: 2023-11-20", ["cutter-2.jpg"], "Schedule Maintenance")
+machine3 = ListItem("Welder 3", "Due: 2023-11-25", ["welder-3.jpg"], "Schedule Maintenance")
+
+stockStatus = Card([CardHeader("Stock Levels"), 
+    Table([
+        stockHeader, 
+        steel, 
+        resin, 
+        packaging
+    ])
+])
+stockHeader = Col(["Material", "Stock"])
+steel = Col(["Steel", "3000 kg"])
+resin = Col(["Resin", "1500 kg"])
+packaging = Col(["Packaging", "500 units"])
+
+supplierDeliveries = Card([CardHeader("Supplier Deliveries (This Week)"), 
+    Table([
+        deliveryHeader, 
+        delivery1, 
+        delivery2
+    ])
+])
+deliveryHeader = Col(["Supplier", "Due Date", "Material"])
+delivery1 = Col(["Supplier A", "2023-11-10", "Steel"])
+delivery2 = Col(["Supplier B", "2023-11-12", "Resin"])
+
+shiftComparison = Card([CardHeader("Shift Output Comparison"), 
+    HorizontalBarChart(["Morning", "Afternoon", "Night"], [shiftSeries])])
+shiftSeries = Series("Output", [1200, 1300, 1100])
+
+safetyIncidents = Card([CardHeader("Safety Incidents"), 
+    TextContent("Incidents: 2 / Days Since Last: 45")])
+
+qualityHold = Card([CardHeader("Batches on Quality Hold"), ListBlock([batch1, batch2], "number")])
+batch1 = ListItem("Batch 102", "Hold Reason: Excess Defects")
+batch2 = ListItem("Batch 103", "Hold Reason: Labeling Error")
+
+energyUse = Card([CardHeader("Energy Use Today"), TextContent("Usage: 5000 kWh")])
+
+workOrders = Card([CardHeader("Open Work Orders"), 
+    Table([
+        orderHeader, 
+        order1, 
+        order2
+    ])
+])
+orderHeader = Col(["Order ID", "Priority", "Status"])
+order1 = Col(["WO-001", "High", "In Progress"])
+order2 = Col(["WO-002", "Medium", "Pending"])
+
+maintenanceScheduler = Card([CardHeader("Schedule Maintenance"), 
+    Form("maintenance-schedule", formButtons, [
+        machineField, 
+        dateField
+    ])
+])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [press1, cutter2, welder3])
+press1 = SelectItem("Press 1", "Press 1")
+cutter2 = SelectItem("Cutter 2", "Cutter 2")
+welder3 = SelectItem("Welder 3", "Welder 3")
+dateField = FormControl("Date", dateInput)
+dateInput = Input("date", "2023-11-15", "date")
+formButtons = Buttons([scheduleButton])
+scheduleButton = Button("Schedule")
+
+focusLineSelector = Card([CardHeader("Focus on Production Line"), 
+    Select("focus-line", [line1, line2, line3], "Choose a line to focus")])
+
+liveAlerts = Card([CardHeader("Live Alerts"), 
+    ListBlock([alert1, alert2], "image")
+])
+alert1 = ListItem("Alert 1", "Machine Overheat", ["alert-1.jpg"])
+alert2 = ListItem("Alert 2", "Operator Absent", ["alert-2.jpg"])
+
+exportButton = Button("Export Shift Report")
+```

@@ -1,0 +1,24 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"direction":"column","gap":"m"},"children":["header","alertBanner","configCard","searchBar","itemsList"]}}
+{"op":"add","path":"/elements/header","value":{"type":"CardHeader","props":{"title":"Low Inventory Monitor","subtitle":"Track critical stock levels, reorder inventory, and manage alert thresholds"}}}
+{"op":"add","path":"/elements/alertBanner","value":{"type":"Alert","props":{"title":"4 Items Below Threshold","description":"Stock is critically low for selected catalog items. Urgent reorders recommended to prevent fulfillment delays.","variant":"warning"}}}
+{"op":"add","path":"/elements/configCard","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m"},"children":["thresholdInfo","thresholdBadge"]}}
+{"op":"add","path":"/elements/thresholdInfo","value":{"type":"TextContent","props":{"text":"**Global Alert Trigger Threshold**: Items with stock at or below **15 units** automatically trigger warnings."}}}
+{"op":"add","path":"/elements/thresholdBadge","value":{"type":"Badge","props":{"text":"Threshold: ≤ 15 units","variant":"destructive"}}}
+{"op":"add","path":"/elements/searchBar","value":{"type":"Input","props":{"name":"itemSearch","placeholder":"🔍 Search low stock items by SKU, name, or category...","type":"text","value":{"$bindState":"/searchQuery"}}}}
+{"op":"add","path":"/state/searchQuery","value":""}
+{"op":"add","path":"/elements/itemsList","value":{"type":"Card","props":{"direction":"column","gap":"s"},"repeat":{"statePath":"/inventoryItems","key":"id"},"children":["itemRow"]}}
+{"op":"add","path":"/elements/itemRow","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","gap":"m"},"children":["itemDetails","stockStatus","reorderAction"]}}
+{"op":"add","path":"/elements/itemDetails","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["itemTitle","itemMeta"]}}
+{"op":"add","path":"/elements/itemTitle","value":{"type":"TextContent","props":{"text":{"$template":"**${name}**"},"size":"default"}}}
+{"op":"add","path":"/elements/itemMeta","value":{"type":"TextContent","props":{"text":{"$template":"SKU: `${sku}` • Category: ${category} • Min Threshold: ${threshold} units"},"size":"small"}}}
+{"op":"add","path":"/elements/stockStatus","value":{"type":"Card","props":{"variant":"clear","direction":"column","align":"center","gap":"none"},"children":["stockCount","stockTag"]}}
+{"op":"add","path":"/elements/stockCount","value":{"type":"TextContent","props":{"text":{"$template":"**${remainingUnits} left**"},"size":"large-heavy"}}}
+{"op":"add","path":"/elements/stockTag","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":"danger","size":"sm"}}}
+{"op":"add","path":"/elements/reorderAction","value":{"type":"Buttons","props":{"buttons":["reorderBtn"]}}}
+{"op":"add","path":"/elements/reorderBtn","value":{"type":"Button","props":{"label":"Reorder Restock","variant":"primary","size":"small"}}}
+{"op":"add","path":"/state/inventoryItems","value":[]}
+{"op":"add","path":"/state/inventoryItems/0","value":{"id":"item-1","name":"Ceramic Drip Coffee Mug (12oz)","sku":"KIT-MUG-042","category":"Kitchenware","remainingUnits":4,"threshold":15,"status":"Critically Low"}}
+{"op":"add","path":"/state/inventoryItems/1","value":{"id":"item-2","name":"Organic Cotton Tote Bag","sku":"APP-BAG-108","category":"Apparel","remainingUnits":6,"threshold":15,"status":"Low Stock"}}
+{"op":"add","path":"/state/inventoryItems/2","value":{"id":"item-3","name":"Wireless Desk Charging Pad","sku":"ELE-CHG-991","category":"Electronics","remainingUnits":2,"threshold":15,"status":"Critically Low"}}
+{"op":"add","path":"/state/inventoryItems/3","value":{"id":"item-4","name":"Matte Black Ballpoint Pens (Pack of 5)","sku":"OFF-PEN-019","category":"Office Supplies","remainingUnits":11,"threshold":15,"status":"Low Stock"}}

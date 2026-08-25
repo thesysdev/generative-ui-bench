@@ -1,0 +1,76 @@
+root = Card([
+  header,
+  statusBar,
+  uptimeSection,
+  cpuMemorySection,
+  errorRateSection,
+  incidentsSection,
+  regionFilter,
+  slowEndpointsSection,
+  alertThresholdSection,
+  acknowledgeIncidentSection,
+], "sunk")
+
+header = CardHeader("Service Health Dashboard", "On-call engineer view — last 24 hours")
+statusBar = Progress(87, "Uptime: 87.3%")
+
+uptimeSection = Card([uptimeHeading, uptimeCard], "sunk")
+uptimeHeading = Heading("Uptime This Quarter", "h2")
+uptimeCard = Table([uptimeCol, uptimeVal])
+uptimeCol = Col("Metric", ["Uptime", "Last 7 days", "Last 30 days"])
+uptimeVal = Col("Value", ["99.8%", "99.9%", "99.5%"])
+
+cpuMemorySection = Card([cpuMemoryHeading, cpuMemoryChart], "sunk")
+cpuMemoryHeading = Heading("CPU and Memory Usage — Past 24 Hours", "h2")
+cpuMemoryChart = AreaChart(["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"], [cpuSeries, memSeries], "linear", "Time", "Percent")
+cpuSeries = Series("CPU", [34, 28, 22, 18, 15, 20, 30, 45, 55, 40, 35, 30])
+memSeries = Series("Memory", [55, 58, 60, 62, 65, 68, 72, 75, 78, 74, 70, 65])
+
+errorRateSection = Card([errorRateHeading, errorRateChart], "sunk")
+errorRateHeading = Heading("Error Rate — Right Now", "h2")
+errorRateChart = HorizontalBarChart(["Error Rate", "Latency", "Throughput"], [errorRateSeries, latencySeries, throughputSeries], "grouped", "Time", "Requests/sec")
+errorRateSeries = Series("Error Rate", [12, 142, 3400])
+latencySeries = Series("Avg Latency", [45, 67, 120])
+throughputSeries = Series("Throughput", [4800, 3900, 2100])
+
+incidentsSection = Card([incidentsHeading, incidentsList], "sunk")
+incidentsHeading = Heading("Open Incidents", "h2")
+incidentsList = ListBlock([
+  ListItem("API Gateway timeout — us-east-1", "Critical", "api-gw", "api-gw"),
+  ListItem("Auth service memory leak — us-west-2", "High", "auth", "auth"),
+  ListItem("Database replication lag — eu-central-1", "Medium", "db-repl", "db-repl"),
+  ListItem("CDN cache miss storm — ap-south-1", "Low", "cdn-cache", "cdn-cache"),
+])
+
+regionFilter = Card([regionHeading, regionOptions], "sunk")
+regionHeading = Heading("Region Filter", "h2")
+regionOptions = Select("region", [
+  SelectItem("All Regions", "All"),
+  SelectItem("us-east-1", "US East"),
+  SelectItem("us-west-2", "US West"),
+  SelectItem("eu-central-1", "EU Central"),
+  SelectItem("ap-south-1", "AP South"),
+  SelectItem("ap-northeast-1", "AP Northeast"),
+], "Select region to narrow the view")
+
+slowEndpointsSection = Card([slowEndpointsHeading, slowEndpointsChart], "sunk")
+slowEndpointsHeading = Heading("Five Slowest Endpoints", "h2")
+slowEndpointsChart = Table([slowEndpointCol, slowEndpointLatency, slowEndpointStatus])
+slowEndpointCol = Col("Endpoint", ["/api/v1/users", "/api/v1/transactions", "/api/v1/search", "/api/v1/inventory", "/api/v1/orders"])
+slowEndpointLatency = Col("Avg Latency (ms)", [120, 95, 88, 72, 65])
+slowEndpointStatus = Col("Status", ["Degraded", "Degraded", "Degraded", "Degraded", "Degraded"])
+
+alertThresholdSection = Card([alertHeading, alertSlider], "sunk")
+alertHeading = Heading("Set Alert Threshold", "h2")
+alertSlider = Slider("Alert threshold", "continuous", 0.01, 0.5, 0.05, "Error rate threshold", "Error rate (%)", 0.05)
+
+acknowledgeIncidentSection = Card([acknowledgeHeading, acknowledgeActions], "sunk")
+acknowledgeHeading = Heading("Acknowledge Incident", "h2")
+acknowledgeActions = Buttons([
+  AckNow,
+  AckLater,
+  Escalate,
+])
+AckNow = Button("Acknowledge This Incident", null, "primary")
+AckLater = Button("Acknowledge & Defer", null, "secondary")
+Escalate = Button("Escalate to On-Call Lead", null, "tertiary")

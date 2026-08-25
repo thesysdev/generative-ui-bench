@@ -1,0 +1,150 @@
+```openui-lang
+root = Card([
+    enrollmentChart,
+    applicationsByProgramTable,
+    acceptanceRateBadge,
+    tuitionRevenueBar,
+    courseUtilizationTable,
+    teachingLoadByFacultyTable,
+    academicRiskStudentsList,
+    scholarshipBudgetUsageDonut,
+    housingOccupancyGauge,
+    campusEventsCarousel,
+    alumniGivingLineChart,
+    departmentFocusTabs,
+    semesterComparisonSection,
+    waitlistedStudentsTable,
+    approveNewCourseButton,
+    sendMessageToStudentGroupForm
+], "card", "row", "l")
+
+enrollmentChart = LineChart(
+    ["2019", "2020", "2021", "2022", "2023"],
+    [
+        Series("Enrollment", [42000, 42500, 43000, 43500, 44000])
+    ],
+    "natural",
+    "Year",
+    "Students"
+)
+
+applicationsByProgramTable = Table([
+    Col("Program", ["Engineering", "Arts", "Science", "Business"]),
+    Col("Applications", [2100, 1500, 2300, 1800])
+])
+
+acceptanceRateBadge = Tag("Acceptance Rate: 68%", null, null, "success")
+
+tuitionRevenueBar = BarChart(
+    ["2023"],
+    [
+        Series("Revenue", [1200000])
+    ],
+    null,
+    "Year",
+    "USD"
+)
+
+courseUtilizationTable = Table([
+    Col("Course", ["MATH101", "ENG101", "HIST202"]),
+    Col("Enrolled / Capacity", ["85 / 100", "78 / 90", "92 / 95"])
+])
+
+teachingLoadByFacultyTable = Table([
+    Col("Faculty", ["Prof. Smith", "Prof. Jones", "Prof. Lee"]),
+    Col("Load (hrs/week)", [24, 30, 22])
+])
+
+academicRiskStudentsList = ListBlock(items=[
+    ListItem("John Doe", "English 101", "Risk: Low"),
+    ListItem("Jane Smith", "Calculus II", "Risk: High"),
+    ListItem("Mike Brown", "Physics Lab", "Risk: Medium")
+])
+
+scholarshipBudgetUsageDonut = PieChart(
+    ["Used", "Remaining"],
+    [850000, 150000],
+    "donut",
+    "circular"
+)
+
+housingOccupancyGauge = Progress(value=78, label="Housing Occupancy: 78%")
+
+campusEventsCarousel = Carousel(children=[
+    TextContent("Community Picnic – Aug 15"),
+    TextContent("International Fair – Aug 20"),
+    TextContent("Career Expo – Sep 5")
+])
+
+alumniGivingLineChart = LineChart(
+    ["2020", "2021", "2022", "2023"],
+    [
+        Series("Giving (USD)", [500000, 550000, 600000, 650000])
+    ],
+    "linear",
+    "Year",
+    "USD"
+)
+
+departmentFocusTabs = Tabs(items=[
+    TabItem("Engineering", "Engineering", [
+        enrollmentChart,
+        applicationsByProgramTable,
+        courseUtilizationTable
+    ]),
+    TabItem("Arts", "Arts", [
+        enrollmentChart,
+        applicationsByProgramTable,
+        courseUtilizationTable
+    ]),
+    TabItem("Science", "Science", [
+        enrollmentChart,
+        applicationsByProgramTable,
+        courseUtilizationTable
+    ])
+])
+
+semesterComparisonSection = Card([
+    TextContent(
+        "This Semester vs. Last: Enrollment ↑ 2%, Tuition Revenue ↑ 3%"
+    ),
+    BarChart(
+        ["This Semester", "Last Semester"],
+        [
+            Series("Enrollment", [44000, 43500]),
+            Series("Revenue", [1200000, 1180000])
+        ],
+        null,
+        "Semester",
+        "Students / USD"
+    )
+])
+
+waitlistedStudentsTable = Table([
+    Col("Program", ["Engineering", "Arts", "Science"]),
+    Col("Waitlisted Students", ["45", "30", "25"])
+])
+
+approveNewCourseButton = Button("Approve New Course", null, "primary")
+
+sendMessageToStudentGroupForm = Form(
+    "message-to-students",
+    Buttons([
+        Button("Send Message", null, "primary")
+    ]),
+    [
+        FormControl(
+            "Message",
+            TextArea(
+                "message",
+                placeholder="Compose your message here",
+                rows=4,
+                rules=[],
+                value=""
+            ),
+            "Optional hint"
+        )
+    ]
+)
+
+```

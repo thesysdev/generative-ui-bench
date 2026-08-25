@@ -1,0 +1,69 @@
+root = Card([header, kpiRow, mainContent, attritionChart, followUps], "card", "column", "l")
+
+header = CardHeader("HR Hiring Overview", "Real-time talent acquisition metrics")
+
+kpiRow = Card([headcountCard, timeToHireCard, interviewsCard], "card", "row", "m")
+headcountCard = Card([headcountLabel, headcountValue], "sunk", "column", "xs", "center")
+headcountLabel = TextContent("Current Headcount", "small")
+headcountValue = Heading("1,248", "h2")
+
+timeToHireCard = Card([tthLabel, tthValue], "sunk", "column", "xs", "center")
+tthLabel = TextContent("Avg. Time to Hire", "small")
+tthValue = Heading("24 Days", "h2")
+
+interviewsCard = Card([intLabel, intValue], "sunk", "column", "xs", "center")
+intLabel = TextContent("Interviews This Week", "small")
+intValue = Heading("42", "h2")
+
+mainContent = Tabs([rolesTab, pipelineTab, deptTab], "column")
+rolesTab = TabItem("roles", "Open Roles", [rolesHeading, rolesTable])
+rolesHeading = Heading("Active Vacancies", "h4")
+rolesTable = Table([roleTitle, roleDept, roleStatus])
+roleTitle = Col("Role", ["Senior Frontend Engineer", "Product Designer", "Sales Manager", "DevOps Lead", "HR Generalist"])
+roleDept = Col("Department", ["Engineering", "Product", "Sales", "Engineering", "People"])
+roleStatus = Col("Status", ["Interviewing", "Sourcing", "Offer Sent", "Sourcing", "Review"])
+
+pipelineTab = TabItem("pipeline", "Candidate Pipeline", [pipelineHeading, pipelineChart])
+pipelineHeading = Heading("Pipeline Distribution", "h4")
+pipelineChart = BarChart(["Sourcing", "Screening", "Technical", "Cultural", "Offer"], [seriesPipeline], "grouped", "Stage", "Candidates")
+seriesPipeline = Series("Candidates", [45, 32, 18, 12, 5])
+
+deptTab = TabItem("dept", "Headcount by Dept", [deptHeading, deptChart])
+deptHeading = Heading("Departmental Split", "h4")
+deptChart = PieChart(["Engineering", "Sales", "Product", "Marketing", "Operations", "People"], [deptValues], "donut")
+deptValues = [450, 210, 180, 120, 250, 38]
+
+attritionChart = Card([attritionHeading, attritionTrend], "sunk", "column", "m")
+attritionHeading = Heading("Attrition Trend (Last 6 Months)", "h4")
+attritionTrend = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [seriesAttrition], "natural", "Month", "%")
+seriesAttrition = Series("Attrition Rate", [1.2, 1.5, 1.1, 1.8, 2.1, 1.4])
+
+newRoleTrigger = DialogBlock("Open New Role", "Create a new job requisition", "Fill out the details below to start the hiring process for a new position.", [newRoleForm])
+newRoleForm = Form("new-role", newRoleButtons, [roleNameField, deptField, priorityField])
+roleNameField = FormControl("Job Title", roleTitleInput)
+roleTitleInput = Input("job_title", "e.g. Senior Software Engineer")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [dEng, dSal, dPro, dMar, dOps, dPeo])
+dEng = SelectItem("Engineering", "Engineering")
+dSal = SelectItem("Sales", "Sales")
+dPro = SelectItem("Product", "Product")
+dMar = SelectItem("Marketing", "Marketing")
+dOps = SelectItem("Operations", "Operations")
+dPeo = SelectItem("People", "People")
+priorityField = FormControl("Priority Level", priorityRadio)
+priorityRadio = RadioGroup("priority", [pLow, pMed, pHigh])
+pLow = RadioItem("Low", "Standard hiring", "low")
+pMed = RadioItem("Medium", "Priority hire", "medium")
+pHigh = RadioItem("High", "Urgent vacancy", "high")
+newRoleButtons = Buttons([submitRoleBtn, cancelRoleBtn], "row")
+submitRoleBtn = Button("Create Role", null, "primary")
+cancelRoleBtn = Button("Cancel", null, "tertiary")
+
+# Add the button to the main content
+mainContentWithAction = Card([mainContent, newRoleTrigger], "card", "column", "xl")
+# Redefine root to include the action button properly
+root = Card([header, kpiRow, mainContentWithAction, attritionChart, followUps], "card", "column", "l")
+
+followUps = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("View detailed candidate profiles")
+followUp2 = FollowUpItem("Download monthly attrition report")

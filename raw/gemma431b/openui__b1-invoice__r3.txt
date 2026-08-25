@@ -1,0 +1,28 @@
+root = Card([invoiceHeader, paymentSummary, invoiceDetails, paymentActions, followUps])
+
+invoiceHeader = CardHeader("Invoice #INV-2024-08", "Client: Acme Corp")
+
+paymentSummary = Card([amountDue, dueDate], "sunk", "row", "l", "between")
+amountDue = TextContent("$4,250.00 USD", "large-heavy")
+dueDate = TextContent("Due: Oct 15, 2024", "default")
+
+invoiceDetails = SectionBlock([lineItems, taxSection], true)
+lineItems = SectionItem("item-list", "Billable Items", [itemsTable])
+itemsTable = Table([colDesc, colHours, colRate, colTotal])
+colDesc = Col("Description", ["UI/UX Design - Homepage", "Frontend Development", "API Integration", "Project Management"])
+colHours = Col("Hours", ["20", "40", "15", "5"])
+colRate = Col("Rate", ["$100", "$80", "$80", "$60"])
+colTotal = Col("Total", ["$2,000", "$3,200", "$1,200", "$300"])
+
+taxSection = SectionItem("tax-info", "Taxes & Adjustments", [taxTable])
+taxTable = Table([taxLabel, taxVal])
+taxLabel = Col("Type", ["Subtotal", "VAT (10%)", "Discount"])
+taxVal = Col("Amount", ["$6,700", "$670", "-$3,120"])
+
+paymentActions = Card([payNowBtn, downloadBtn], "card", "row", "m", "center")
+payNowBtn = Button("Pay Now", null, "primary", "normal", "large")
+downloadBtn = Button("Download PDF", null, "secondary", "normal", "medium")
+
+followUps = FollowUpBlock([queryPayment, requestChange])
+queryPayment = FollowUpItem("How can I change the payment method?")
+requestChange = FollowUpItem("I need to dispute a line item")

@@ -1,0 +1,84 @@
+root = Card([header, controlPanel, mainGrid, bottomGrid, footers], "clear", "column", "l")
+
+header = CardHeader("City Operations Command Center", "Live Urban Infrastructure Monitoring")
+
+controlPanel = Card([districtSelector, dispatchBtn, alertBtn], "sunk", "row", "m", "center", "between")
+districtSelector = Select("district_focus", [d1, d2, d3, d4], "Focus District: All")
+d1 = SelectItem("north", "North District")
+d2 = SelectItem("south", "South District")
+d3 = SelectItem("east", "East District")
+d4 = SelectItem("west", "West District")
+dispatchBtn = Button("Dispatch Crew", null, "primary")
+alertBtn = Button("Send Public Alert", null, "secondary")
+
+mainGrid = Card([congestionCard, transitCard, airQualityCard, energyCard], "clear", "row", "m", "stretch", "start", true)
+
+congestionCard = Card([congestionHeading, congestionChart], "card", "column", "s")
+congestionHeading = Heading("Real-time Congestion", "h3")
+congestionChart = BarChart(["Main St", "Oak Ave", "Bridge Rd", "Tunnel"], [congSeries], "grouped", "Location", "Delay (min)")
+congSeries = Series("Current", [12, 5, 22, 18])
+
+transitCard = Card([transitHeading, transitProgress], "card", "column", "s")
+transitHeading = Heading("Transit Punctuality", "h3")
+transitProgress = Progress(88, "On-Time Performance: 88%")
+
+airQualityCard = Card([airHeading, airChart], "card", "column", "s")
+airHeading = Heading("Air Quality by District", "h3")
+airChart = RadarChart(["North", "South", "East", "West"], [aqiSeries])
+aqiSeries = Series("AQI Index", [42, 65, 38, 51])
+
+energyCard = Card([energyHeading, energyChart], "card", "column", "s")
+energyHeading = Heading("Energy Use (7 Days)", "h3")
+energyChart = AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries], "natural", "Day", "MW")
+energySeries = Series("Grid Load", [450, 470, 460, 480, 510, 420, 410])
+
+bottomGrid = Card([incidentCard, vehicleCard, parkingCard, weatherCard, reportCard], "clear", "row", "m", "stretch", "start", true)
+
+incidentCard = Card([incHeading, incTable], "card", "column", "s")
+incHeading = Heading("Open Incidents", "h3")
+incTable = Table([incLoc, incSev])
+incLoc = Col("Location", ["Sector 4", "Bayside", "Central Park"])
+incSev = Col("Severity", ["High", "Medium", "Low"])
+
+vehicleCard = Card([vehHeading, vehList], "card", "column", "s")
+vehHeading = Heading("Emergency Deployment", "h3")
+vehList = ListBlock([v1, v2, v3], "image")
+v1 = ListItem("Fire Engine 4", "Deployed to Sector 4", ["https://picsum.photos/seed/fire/50/50"])
+v2 = ListItem("Ambulance 12", "En route to Bayside", ["https://picsum.photos/seed/med/50/50"])
+v3 = ListItem("Police Unit 8", "Patrolling Central", ["https://picsum.photos/seed/police/50/50"])
+
+parkingCard = Card([parkHeading, parkChart], "card", "column", "s")
+parkHeading = Heading("Downtown Parking", "h3")
+parkChart = PieChart(["Available", "Occupied"], [30, 70], "donut")
+
+weatherCard = Card([weatherHeading, weatherText], "card", "column", "s")
+weatherHeading = Heading("Current Weather", "h3")
+weatherText = TextContent("☀️ 24°C | Clear Skies\nWind: 12km/h NE\nHumidity: 45%")
+
+reportCard = Card([repHeading, repList], "card", "column", "s")
+repHeading = Heading("Citizen Reports", "h3")
+repList = ListBlock([r1, r2], "number")
+r1 = ListItem("Pothole", "Main St & 5th", null)
+r2 = ListItem("Street Light Out", "Oak Ave", null)
+
+footers = Card([backlogCard, eventsCard, roadworksCard, maintenanceCard], "clear", "row", "m", "stretch", "start", true)
+
+backlogCard = Card([backHeading, backProgress], "card", "column", "s")
+backHeading = Heading("Service Backlog", "h3")
+backProgress = Progress(65, "Pending Requests: 1,240")
+
+eventsCard = Card([eventHeading, eventList], "card", "column", "s")
+eventHeading = Heading("Weekend Events", "h3")
+eventList = ListBlock([e1, e2], "number")
+e1 = ListItem("City Marathon", "Saturday 8 AM", null)
+e2 = ListItem("Jazz Festival", "Sunday 2 PM", null)
+
+roadworksCard = Card([roadHeading, roadText], "card", "column", "s")
+roadHeading = Heading("Planned Roadworks", "h3")
+roadText = TextContent("• Bridge Rd: Repaving (Oct 12-15)\n• Main St: Utility Upgrade (Oct 20-22)")
+
+maintenanceCard = Card([maintHeading, maintTable], "card", "column", "s")
+maintHeading = Heading("Infrastructure Jobs", "h3")
+maintTable = Table([mJob, mDue])
+mJob = Col("Asset", ["Water Main A", "Power Substation 2", "Sewage Pump 1"])
+mDue = Col("Due Date", ["Oct 10", "Oct 15", "Oct 28"])

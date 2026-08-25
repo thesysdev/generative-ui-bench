@@ -1,0 +1,26 @@
+```openui
+root = Card([dailySummary, weeklySummary, logWorkoutSection])
+dailySummary = Card([stepsSection, caloriesSection], "sunk", "column")
+stepsSection = CardHeader("Steps", "Today vs. Goal")
+stepsProgress = Progress(7500, "Steps (Goal: 10000)")
+caloriesSection = TextContent("Calories burned today: 650", "medium")
+
+weeklySummary = Card([workoutsHeading, workoutsChart], "sunk", "column")
+workoutsHeading = Heading("Weekly Workouts Overview", "h3")
+workoutsChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "linear", "Days", "Duration")
+workoutSeries = Series("Workout Duration", [30, 45, 0, 60, 30, 0, 20])
+
+logWorkoutSection = Card([logWorkoutHeader, workoutForm], "sunk", "column")
+logWorkoutHeader = CardHeader("Log New Workout", "Fill out the form below")
+workoutForm = Form("new-workout-form", submitButton, [workoutTypeField, durationField, intensityField])
+workoutTypeField = FormControl("Workout Type", workoutTypeSelect, "Select your workout type")
+workoutTypeSelect = Select("workout_type", [cardio, strength], "Choose one")
+cardio = SelectItem("Cardio", "Cardio exercises")
+strength = SelectItem("Strength", "Strength training")
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", null, "number")
+intensityField = FormControl("Intensity", intensitySlider, "Set intensity level")
+intensitySlider = Slider("intensity", "continuous", 1, 10, 5, "Intensity")
+submitButton = Buttons([submitButton])
+submitButton = Button("Submit Workout", null, "primary")
+```

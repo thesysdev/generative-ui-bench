@@ -1,0 +1,109 @@
+root = Card([
+  // Service header
+  CardHeader("Service Health Dashboard", "Q3 2024"),
+  
+  // 1. Uptime this quarter
+  Card([{
+    type: "textcontent",
+    text: "Uptime: 99.5%",
+    size: "large"
+  }]),
+  
+  // 2. CPU and memory usage over past 24 hours (two horizontal bar charts)
+  Card([{
+    type: "textcontent",
+    text: "CPU Usage (24h)",
+    size: "default"
+  }], 
+  HorizontalBarChart(
+    labels: ["0h", "12h", "24h"],
+    series: [78, 82, 75],
+    variant: "grouped"
+  )),
+  
+  Card([{
+    type: "textcontent",
+    text: "Memory Usage (24h)",
+    size: "default"
+  }], 
+  HorizontalBarChart(
+    labels: ["0h", "12h", "24h"],
+    series: [65, 70, 58],
+    variant: "grouped"
+  )),
+  
+  // 3. Error rate right now
+  Card([{
+    type: "textcontent",
+    text: "Error Rate (Current)",
+    size: "large"
+  }]),
+  
+  // 4. Open incidents with severity for each
+  Card([{
+    type: "table",
+    columns: [
+      { label: "Incident ID", type: "text" },
+      { label: "Title", type: "text" },
+      { label: "Severity", type: "text" },
+      { label: "Status", type: "text" },
+      { label: "Created", type: "text" }
+    ],
+    rows: [
+      { value: "INC-101", type: "text", severity: "critical", status: "open", created: "2024-06-15" },
+      { value: "INC-102", type: "text", severity: "high", status: "in_progress", created: "2024-06-16" },
+      { value: "INC-103", type: "text", severity: "medium", status: "resolved", created: "2024-06-14" },
+      { value: "INC-104", type: "text", severity: "low", status: "open", created: "2024-06-17" }
+    ]
+  }]),
+  
+  // 5. Way to narrow to one region
+  Card([{
+    type: "button",
+    label: "Filter by Region",
+    action: "filter_region"
+  }]),
+  
+  // 6. Five slowest endpoints with latency for each
+  Card([{
+    type: "table",
+    columns: [
+      { label: "Endpoint", type: "text" },
+      { label: "Latency (ms)", type: "text" },
+      { label: "Requests", type: "text" }
+    ],
+    rows: [
+      { value: "/api/users", type: "text", latency: "45", requests: "1200" },
+      { value: "/api/orders", type: "text", latency: "52", requests: "1450" },
+      { value: "/api/payments", type: "text", latency: "38", requests: "980" },
+      { value: "/api/notifications", type: "text", latency: "29", requests: "2100" },
+      { value: "/api/reports", type: "text", latency: "67", requests: "430" }
+    ]
+  }]),
+  
+  // 7. Way to set an alert threshold
+  Card([{
+    type: "card",
+    children: [
+      { type: "heading", text: "Alert Thresholds", size: "medium" },
+      { type: "textcontent", text: "Configure custom thresholds for monitoring", size: "default" },
+      { type: "button",
+        label: "Set Thresholds",
+        action: "configure_alert_threshold"
+      }
+    ]
+  }]),
+  
+  // 8. Way to acknowledge an incident
+  Card([{
+    type: "callout",
+    variant: "info",
+    title: "Acknowledge Incidents",
+    description: "Mark open incidents as resolved",
+    action: "acknowledge_incident"
+  }])
+])
+
+filter_region = Function()
+configure_alert_threshold = Function()
+acknowledge_incident = Function()

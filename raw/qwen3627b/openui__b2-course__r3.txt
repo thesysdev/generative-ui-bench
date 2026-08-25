@@ -1,0 +1,64 @@
+Let me build a comprehensive course home screen that covers all 6 requirements:
+
+1. Course title and instructor
+2. Overall progress percentage
+3. Modules with completion status for each
+4. The next lesson called out
+5. The average learner rating
+6. A way to continue learning
+
+Let me plan the layout:
+- CardHeader for course title and instructor
+- Progress bar for overall progress
+- A section showing modules with completion status (maybe a Table or ListBlock)
+- A callout for the next lesson
+- A badge or tag for average rating
+- A button to continue learning
+
+Let me design this carefully:
+
+```
+root = Card([
+  header,
+  progressBar,
+  ratingSection,
+  nextLesson,
+  modulesSection,
+  continueButton
+])
+```
+
+Let me think about the components:
+- CardHeader for title/instructor
+- Progress for overall percentage
+- Badge for rating
+- Callout for next lesson
+- Table or ListBlock for modules
+- Button for continue
+
+Let me build this out with realistic data.
+root = Card([header, progressRow, ratingRow, nextLessonCallout, modulesSection, continueBtn])
+
+header = CardHeader("Advanced Machine Learning with Python", "Dr. Sarah Chen · Stanford University")
+
+progressRow = Card([progressLabel, progressValue], "clear")
+progressLabel = TextContent("Overall Progress", "small-heavy")
+progressValue = Progress(67, "67% complete")
+
+ratingRow = Card([ratingLabel, ratingBadge], "clear")
+ratingLabel = TextContent("Average Learner Rating", "small-heavy")
+ratingBadge = Badge("⭐ 4.7 out of 5", "secondary")
+
+nextLessonCallout = Callout("info", "Next Up: Neural Network Architectures", "Module 5 · Lesson 3 — covers CNNs, RNNs, and Transformers. Estimated time: 45 minutes. Click 'Continue Learning' to jump right in.")
+
+modulesSection = Card([modulesHeading, modulesTable], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+modulesTable = Table([modCol, statusCol, lessonsCol, progressCol])
+
+modCol = Col("Module", ["1. Foundations of ML", "2. Supervised Learning", "3. Unsupervised Learning", "4. Deep Learning Intro", "5. Neural Network Architectures", "6. Model Evaluation & Tuning", "7. Reinforcement Learning", "8. Capstone Project"])
+statusCol = Col("Status", ["Completed", "Completed", "Completed", "In Progress", "In Progress", "Locked", "Locked", "Locked"])
+lessonsCol = Col("Lessons", ["10/10", "8/8", "12/12", "6/10", "3/8", "0/10", "0/9", "0/1"])
+progressCol = Col("Progress", ["100%", "100%", "100%", "60%", "38%", "0%", "0%", "0%"])
+
+continueBtn = Buttons([startBtn])
+startBtn = Button("Continue Learning", null, "primary", "normal", "large")

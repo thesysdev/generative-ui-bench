@@ -1,0 +1,376 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Hospital Operations Command",
+      subtitle: "Real-time operational dashboard"
+    ),
+    
+    // 1. Bed Occupancy
+    Card(
+      children: [
+        CardHeader(
+          title: "Bed Occupancy",
+          subtitle: "Current utilization"
+        ),
+        Table(
+          columns: [
+            {"label": "Unit", "type": "string"},
+            {"label": "Occupied", "type": "number"},
+            {"label": "Free", "type": "number"},
+            {"label": "Capacity%", "type": "number"}
+          ],
+          data: [
+            {"unit": "ICU", "occupied": 42, "free": 18, "capacity": 95},
+            {"unit": "General", "occupied": 78, "free": 22, "capacity": 98},
+            {"unit": "Surgery", "occupied": 55, "free": 15, "capacity": 100},
+            {"unit": "Pediatrics", "occupied": 35, "free": 25, "capacity": 90}
+          ]
+        )
+      ]
+    ),
+    
+    // 2. Current ER Wait
+    Card(
+      children: [
+        TextCallout(
+          variant: "info",
+          title: "ER Wait Time",
+          description: "Current emergency room wait estimate"
+        ),
+        Card(
+          children: [
+            TextContent(
+              "⏱ 45 minutes average wait",
+              size: "large"
+            ),
+            TextContent(
+              "🕒 Active wait queue: 23 patients",
+              size: "medium"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 3. Admissions over past two weeks
+    Card(
+      children: [
+        TextCallout(
+          variant: "success",
+          title: "Admissions (Last 14 Days)",
+          description: "Total patient admissions"
+        ),
+        BarChart(
+          labels: ["Jan 15", "Jan 16", "Jan 17", "Jan 18", "Jan 19", "Jan 20", "Jan 21", "Jan 22"],
+          series: [
+            {
+              "category": "Admissions",
+              "values": [142, 156, 131, 178, 204, 189, 215, 198, 221, 247, 265, 238, 201, 175]
+            }
+          ],
+          xLabel: "Day",
+          yLabel: "Admission Count",
+          variant: "grouped"
+        )
+      ]
+    ),
+    
+    // 4. Patients per department
+    Card(
+      children: [
+        CardHeader(
+          title: "Patients by Department",
+          subtitle: "Current distribution"
+        ),
+        Table(
+          columns: [
+            {"label": "Department", "type": "string"},
+            {"label": "Count", "type": "number"},
+            {"label": "Status", "type": "string"}
+          ],
+          data: [
+            {"department": "Emergency", "count": 28, "status": "High"},
+            {"department": "ICU", "count": 52, "status": "Critical"},
+            {"department": "General Ward", "count": 67, "status": "Normal"},
+            {"department": "Surgery", "count": 31, "status": "Stable"},
+            {"department": "Pediatrics", "count": 24, "status": "Low"}
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Staff on shift with role
+    Card(
+      children: [
+        CardHeader(
+          title: "Staff On Shift",
+          subtitle: "Current personnel"
+        ),
+        ListBlock(
+          items: [
+            ListItem(
+              title: "Nurse Manager",
+              subtitle: "Dr. Sarah Chen",
+              actionLabel: "View Schedule"
+            ),
+            ListItem(
+              title: "Attending Physicians",
+              subtitle: "3 specialists on duty",
+              actionLabel: "Contact"
+            ),
+            ListItem(
+              title: "RN Team Lead",
+              subtitle: "12 nurses supervising",
+              actionLabel: "Assign Shifts"
+            ),
+            ListItem(
+              title: "Laboratory Tech",
+              subtitle: "2 technicians available",
+              actionLabel: "Check Equipment"
+            ),
+            ListItem(
+              title: "Chief of Surgery",
+              subtitle: "Dr. James Wilson",
+              actionLabel: "Call In"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 6. Critical patients called out
+    Card(
+      children: [
+        CardHeader(
+          title: "Critical Patients",
+          subtitle: "Immediate attention required"
+        ),
+        Card(
+          children: [
+            Callout(
+              variant: "error",
+              title: "Critical Alerts",
+              description: "Patients requiring urgent intervention"
+            ),
+            ListBlock(
+              items: [
+                ListItem(
+                  text: "- Patient 4021: Respiratory failure, ICU",
+                  actionLabel: null
+                ),
+                ListItem(
+                  text: "- Patient 5015: Septic shock, ICU",
+                  actionLabel: null
+                ),
+                ListItem(
+                  text: "- Patient 6103: Multi-organ failure, ICU",
+                  actionLabel: null
+                ),
+                ListItem(
+                  text: "- Patient 7042: Cardiac arrest, Surgical",
+                  actionLabel: null
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 7. Patients ready for discharge
+    Card(
+      children: [
+        CardHeader(
+          title: "Ready for Discharge",
+          subtitle: "Eligible for release"
+        ),
+        Card(
+          children: [
+            TextContent(
+              "✅ 34 patients cleared for discharge",
+              size: "large"
+            ),
+            TextContent(
+              "🏥 Total capacity: 50 beds",
+              size: "medium"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Today's operating room bookings
+    Card(
+      children: [
+        CardHeader(
+          title: "OR Schedule Today",
+          subtitle: "Today's surgical bookings"
+        ),
+        HorizontalBarChart(
+          labels: ["09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00"],
+          series: [
+            {
+              "category": "Or Room A",
+              "values": [1, 0, 1, 0, 1, 0, 1]
+            },
+            {
+              "category": "Or Room B",
+              "values": [0, 1, 0, 1, 0, 1, 0]
+            },
+            {
+              "category": "Or Room C",
+              "values": [2, 0, 1, 0, 0, 1, 0]
+            }
+          ],
+          xLabel: "Time Slot",
+          yLabel: "Booking Count",
+          variant: "grouped",
+          gap: "s"
+        )
+      ]
+    ),
+    
+    // 9. Supplies running low
+    Card(
+      children: [
+        CardHeader(
+          title: "Low Stock Alerts",
+          subtitle: "Supplies needing replenishment"
+        ),
+        SectionBlock(
+          sections: [
+            SectionItem(
+              value: "ICU Fluid Reserves",
+              trigger: "critical_supply",
+              content: [
+                Alert(
+                  variant: "warning",
+                  title: "Urgent",
+                  description: "ICU fluid reserves below 15% threshold"
+                )
+              ]
+            ),
+            SectionItem(
+              value: "Ventilator Batteries",
+              trigger: "critical_supply",
+              content: [
+                Alert(
+                  variant: "warning",
+                  title: "Warning",
+                  description: "Ventilator battery stock critically low"
+                )
+              ]
+            ),
+            SectionItem(
+              value: "Or Sterile Gowns",
+              trigger: "low_inventory",
+              content: [
+                Alert(
+                  variant: "neutral",
+                  title: "Monitor",
+                  description: "Standard surgical gown inventory at 40%"
+                )
+              ]
+            )
+          ],
+          isFoldable: true
+        )
+      ]
+    ),
+    
+    // 10. Incident reporting
+    Card(
+      children: [
+        CardHeader(
+          title: "Report Incident",
+          subtitle: "Log safety or equipment issues"
+        ),
+        Form(
+          name: "incident_report",
+          buttons: [
+            Buttons([
+              Button(label: "Submit Incident", action: "report_incident", variant: "primary"),
+              Button(label: "Cancel", action: "abort", variant: "secondary")
+            ])
+          ],
+          fields: [
+            FormControl(
+              label: "Incident Description",
+              input: TextCallout()
+            ),
+            FormControl(
+              label: "Severity Level",
+              select: ["Minor", "Moderate", "Critical"]
+            ),
+            FormControl(
+              label: "Location",
+              select: ["ER", "ICU", "General", "Operating Room", "Other"]
+            ),
+            FormControl(
+              label: "Reporter",
+              input: Input()
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // 11. View another day
+    Card(
+      children: [
+        CardHeader(
+          title: "Daily Summary - [Selection]",
+          subtitle: "Filter by date or department"
+        ),
+        DropdownBlock(
+          items: [
+            {"label": "Today", "value": "today"},
+            {"label": "Yesterday", "value": "yesterday"},
+            {"label": "Week Ahead", "value": "week_ahead"}
+          ],
+          variant: "card"
+        )
+      ]
+    ),
+    
+    // 12. Request patient transfer
+    Card(
+      children: [
+        CardHeader(
+          title: "Request Patient Transfer",
+          subtitle: "Move patient between units"
+        ),
+        Form(
+          name: "transfer_request",
+          buttons: [
+            Buttons([
+              Button(label: "Create Transfer Request", action: "create_transfer", variant: "primary"),
+              Button(label: "Cancel", action: "abort", variant: "secondary")
+            ])
+          ],
+          fields: [
+            FormControl(
+              label: "Patient ID",
+              input: Input()
+            ),
+            FormControl(
+              label: "Destination Unit",
+              select: ["ER", "ICU", "General", "Surgery", "Pediatrics", "Other"]
+            ),
+            FormControl(
+              label: "Reason for Transfer",
+              textarea: TextArea()
+            ),
+            FormControl(
+              label: "Transferred By",
+              select: ["Chief of Medicine", "Nursing Director", "Attending Physician", "Admin"]
+            )
+          ]
+        )
+      ]
+    )
+  ]
+)
+```

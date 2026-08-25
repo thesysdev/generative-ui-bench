@@ -1,0 +1,63 @@
+root = Card([header, kpiRow, openRolesSection, pipelineSection, headcountSection, interviewsSection, attritionSection, newRoleSection])
+header = CardHeader("Hiring Overview", "HR dashboard snapshot")
+
+kpiRow = Card([headcountStat, timeToHireStat], "sunk", "row", "l")
+headcountStat = TextCallout("info", "Current Headcount", "248 employees")
+timeToHireStat = TextCallout("neutral", "Avg Time to Hire", "32 days")
+
+openRolesSection = Card([openRolesHeading, openRolesTable])
+openRolesHeading = Heading("Open Roles", "h3")
+openRolesTable = Table([roleCol, deptCol, locCol])
+roleCol = Col("Role", ["Senior Backend Engineer", "Product Designer", "Sales Development Rep", "Customer Success Manager", "Data Analyst", "Recruiter"])
+deptCol = Col("Department", ["Engineering", "Design", "Sales", "Support", "Data", "HR"])
+locCol = Col("Location", ["Remote", "New York, NY", "Austin, TX", "Remote", "San Francisco, CA", "Remote"], "string")
+
+pipelineSection = Card([pipelineHeading, pipelineChart])
+pipelineHeading = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = HorizontalBarChart(pipelineLabels, [pipelineSeries], "grouped", "Candidates", "Stage")
+pipelineLabels = ["Applied", "Screened", "Interviewing", "Offer", "Hired"]
+pipelineSeries = Series("Candidates", [312, 148, 64, 21, 9])
+
+headcountSection = Card([headcountHeading, headcountChart])
+headcountHeading = Heading("Headcount by Department", "h3")
+headcountChart = PieChart(deptLabels, deptValues, "donut")
+deptLabels = ["Engineering", "Sales", "Support", "Marketing", "Design", "HR", "Data"]
+deptValues = [92, 48, 36, 24, 18, 14, 16]
+
+interviewsSection = Card([interviewsHeading, interviewsList])
+interviewsHeading = Heading("Interviews Scheduled This Week", "h3")
+interviewsList = ListBlock([interview1, interview2, interview3, interview4])
+interview1 = ListItem("Alex Chen - Senior Backend Engineer", "Onsite panel, Tue 10:00 AM")
+interview2 = ListItem("Priya Nair - Product Designer", "Portfolio review, Wed 1:30 PM")
+interview3 = ListItem("Marcus Lee - Sales Development Rep", "Phone screen, Thu 9:00 AM")
+interview4 = ListItem("Sofia Reyes - Data Analyst", "Take-home debrief, Fri 3:00 PM")
+
+attritionSection = Card([attritionHeading, attritionChart])
+attritionHeading = Heading("Attrition - Past 6 Months", "h3")
+attritionChart = LineChart(attritionMonths, [attritionSeries], "natural", "Month", "Attrition Rate (%)")
+attritionMonths = ["Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+attritionSeries = Series("Attrition Rate", [2.1, 1.8, 2.6, 3.2, 2.4, 1.9])
+
+newRoleSection = Card([newRoleHeading, newRoleDialog])
+newRoleHeading = Heading("Open a New Role", "h3")
+newRoleDialog = DialogBlock("Open New Role", "Create New Role", "Fill in the details for the new position", [newRoleForm])
+newRoleForm = Form("new_role", newRoleButtons, [titleField, deptField, locField, typeField])
+titleField = FormControl("Role Title", titleInput)
+titleInput = Input("title", "e.g. Senior Backend Engineer")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [deptEng, deptSales, deptMkt, deptSupport, deptHR], "Select department")
+deptEng = SelectItem("engineering", "Engineering")
+deptSales = SelectItem("sales", "Sales")
+deptMkt = SelectItem("marketing", "Marketing")
+deptSupport = SelectItem("support", "Support")
+deptHR = SelectItem("hr", "HR")
+locField = FormControl("Location", locInput)
+locInput = Input("location", "e.g. Remote / NYC")
+typeField = FormControl("Employment Type", typeRadio)
+typeRadio = RadioGroup("emp_type", [typeFull, typePart, typeContract])
+typeFull = RadioItem("Full-time", "40 hrs/week", "full_time")
+typePart = RadioItem("Part-time", "Less than 40 hrs/week", "part_time")
+typeContract = RadioItem("Contract", "Fixed-term engagement", "contract")
+newRoleButtons = Buttons([submitRoleBtn, cancelRoleBtn])
+submitRoleBtn = Button("Create Role", null, "primary")
+cancelRoleBtn = Button("Cancel", null, "tertiary")

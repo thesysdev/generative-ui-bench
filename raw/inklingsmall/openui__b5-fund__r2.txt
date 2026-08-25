@@ -1,0 +1,98 @@
+root = Card([header, summaryRow, positionsSection, exposureSection, watchSection, ordersSection, gainersLosersSection, marketSection, riskSection, strategySection, drawdownSection, orderForm, timeframeSection], "card", "column", "l")
+
+header = CardHeader("Trading Desk — Morning Workspace", "Live morning view")
+
+summaryRow = Card([portfolioValue, pnlToday, varValue, marginUse], "sunk", "row", "m", true)
+
+portfolioValue = Card([portfolioLabel, portfolioNum], "clear", "column", "xs")
+portfolioLabel = TextContent("Portfolio Value", "small")
+portfolioNum = TextContent("$4,872,340", "large-heavy")
+
+pnlToday = Callout("success", "P&L Today", "+$12,450 (+0.26%)")
+
+varValue = Callout("warning", "Value at Risk", "$42,300 / $50,000 limit (84.6%)")
+
+marginUse = Progress(78, "Margin in use")
+
+positionsSection = Card([posHeading, positionsTable], "card", "column", "m")
+posHeading = Heading("Positions", "h3")
+positionsTable = Table([tickerCol, sizeCol, entryCol, currCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA", "NVDA", "MSFT"])
+sizeCol = Col("Size", [500, 200, 300, 400])
+entryCol = Col("Entry", ["150.20", "240.00", "875.00", "420.00"])
+currCol = Col("Current", ["152.40", "238.50", "920.00", "415.00"])
+
+exposureSection = Card([expHeading, exposureChart], "card", "column", "m")
+expHeading = Heading("Exposure by Sector", "h3")
+exposureChart = PieChart(["Tech", "Health", "Energy", "Fin"], [45, 20, 15, 20], "pie")
+
+watchSection = Card([watchHeading, watchlist], "card", "column", "m")
+watchHeading = Heading("Watched Instruments", "h3")
+watchlist = Table([wTicker, wPrice])
+wTicker = Col("Ticker", ["NVDA", "TSLA", "AMD", "AMZN"])
+wPrice = Col("Price", ["920.00", "238.50", "178.20", "182.00"])
+
+ordersSection = Card([ordersHeading, ordersTable], "card", "column", "m")
+ordersHeading = Heading("Working Orders", "h3")
+ordersTable = Table([oTicker, oSide, oQty, oPrice])
+oTicker = Col("Ticker", ["AAPL", "TSLA"])
+oSide = Col("Side", ["Buy", "Sell"])
+oQty = Col("Qty", [100, 50])
+oPrice = Col("Price", ["151.50", "240.00"])
+
+gainersLosersSection = Card([glHeading, gainersLosers], "card", "column", "m")
+glHeading = Heading("Today's Gainers & Losers", "h3")
+gainersLosers = Table([glTicker, glChange])
+glTicker = Col("Ticker", ["NVDA", "AAPL", "TSLA", "MSFT"])
+glChange = Col("Change", ["+5.14%", "+1.46%", "-0.63%", "-1.19%"])
+
+marketSection = Card([marketHeading, marketHeadlines, economicReleases], "card", "column", "m")
+marketHeading = Heading("Market Headlines & Releases", "h3")
+marketHeadlines = ListBlock([headline1, headline2, headline3])
+headline1 = ListItem("Fed holds rates steady", "Neutral sentiment")
+headline2 = ListItem("Oil prices surge on supply fears", "Positive sentiment")
+headline3 = ListItem("Tech earnings beat estimates", "Positive sentiment")
+economicReleases = ListBlock([rel1, rel2])
+rel1 = ListItem("US CPI", "Wed 08:30 ET")
+rel2 = ListItem("ECB Rate Decision", "Thu 14:00 ET")
+
+riskSection = Card([riskHeading, riskLimits, rebalanceSection], "card", "column", "m")
+riskHeading = Heading("Risk & Rebalance", "h3")
+riskLimits = Card([riskAlert1, riskAlert2], "sunk", "column", "s")
+riskAlert1 = Alert("Margin utilization near limit", "78% used / 85% limit", "warning")
+riskAlert2 = Alert("Position concentration high", "NVDA at 30% / 35% single-name limit", "warning")
+
+rebalanceSection = Card([rebalanceTitle, rebalanceDesc, rebalanceBtn], "clear", "column", "xs")
+rebalanceTitle = Heading("Rebalance Portfolio", "h3")
+rebalanceDesc = TextContent("Adjust weights to target allocation.", "small")
+rebalanceBtn = Button("Rebalance Now", ["rebalance"], "primary")
+
+strategySection = Card([stratHeading, strategyReturns], "card", "column", "m")
+stratHeading = Heading("Strategy Returns YTD", "h3")
+strategyReturns = BarChart(["Global Macro", "Quant", "Value", "Growth"], [seriesStrat], "grouped", "Strategy", "YTD Return %")
+seriesStrat = Series("Return %", [12.3, 8.1, 4.5, 9.8])
+
+drawdownSection = Card([drawHeading, drawdown], "card", "column", "m")
+drawHeading = Heading("Drawdown (Past Year)", "h3")
+drawdown = AreaChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [drawSeries], "linear", "Month", "Drawdown %")
+drawSeries = Series("Drawdown", [-0.5, -2.1, -3.4, -1.8, -4.2, -6.1, -5.3, -3.9, -2.2, -4.8, -3.1, -1.4])
+
+orderForm = Form("place-order", orderButtons, [tickerField, sideField, qtyField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL")
+sideField = FormControl("Side", sideSelect)
+sideSelect = Select("side", [sideBuy, sideSell], "Choose side")
+sideBuy = SelectItem("buy", "Buy")
+sideSell = SelectItem("sell", "Sell")
+qtyField = FormControl("Quantity", qtyInput)
+qtyInput = Input("qty", "100", "number")
+orderButtons = Buttons([submitOrderBtn])
+submitOrderBtn = Button("Place Order", ["place"], "primary")
+
+timeframeSection = Card([tfTitle, tfButtons], "clear", "column", "xs")
+tfTitle = Heading("Timeframe", "h3")
+tfButtons = Buttons([tf1d, tf1w, tf1m, tf3m])
+tf1d = Button("1D", ["tf_1d"], "secondary")
+tf1w = Button("1W", ["tf_1w"], "secondary")
+tf1m = Button("1M", ["tf_1m"], "secondary")
+tf3m = Button("3M", ["tf_3m"], "secondary")

@@ -1,0 +1,49 @@
+root = Card([studioHeader, filterSection, draftsTable, publishedTable, topRead, readershipChart, scheduleForm, commentsList, newDraftBtn], "card", "column", "l")
+
+studioHeader = CardHeader("Editor's Content Studio", "Dashboard & workflow")
+
+filterSection = Card([filterLabel, filterSelect], "clear")
+filterLabel = TextContent("Filter by category")
+filterControl = FormControl("Category", categorySelect)
+categorySelect = Select("category", [catArts, catTech, catOpinion, catNews], "Select category")
+catArts = SelectItem("arts", "Arts")
+catTech = SelectItem("tech", "Technology")
+catOpinion = SelectItem("opinion", "Opinion")
+catNews = SelectItem("news", "News")
+
+draftsTable = Table([draftTitleCol, draftStatusCol, draftDateCol])
+draftTitleCol = Col("Draft", ["The Future of Print", "Tech Trends Q3", "Opinion: Climate Action", "Interview Series"])
+draftStatusCol = Col("Status", ["In review", "Editing", "Pending", "Draft"])
+draftDateCol = Col("Updated", ["Oct 12", "Oct 10", "Oct 08", "Oct 05"])
+
+publishedTable = Table([pubTitleCol, pubDateCol])
+pubTitleCol = Col("Published This Week", ["Digital Nomads", "AI Ethics", "Local Elections", "Food Culture"])
+pubDateCol = Col("Date", ["Oct 14", "Oct 13", "Oct 11", "Oct 09"])
+
+topRead = Callout("success", "Most-Read Article This Month", "Digital Nomads — 42,380 reads")
+topReadSub = TextContent("Published Oct 14 • Arts category • 12 min read")
+
+readershipChart = Card([readershipHeading, lineChart], "sunk")
+readershipHeading = Heading("Readership — Past 30 Days", "h3")
+lineChart = LineChart(["W1", "W2", "W3", "W4"], [readershipSeries], "linear", "Week", "Readers")
+readershipSeries = Series("Readers", [12400, 15600, 18900, 22300])
+
+scheduleForm = Card([scheduleHeading, scheduleFormEl], "card")
+scheduleHeading = Heading("Schedule a Piece", "h3")
+scheduleFormEl = Form("schedule-piece", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Title", titleInput)
+titleInput = Input("title", "Enter piece title")
+dateField = FormControl("Publish Date", datePicker)
+datePicker = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+
+commentsList = Card([commentsHeading, commentsItems])
+commentsHeading = Heading("Comments Awaiting Reply", "h3")
+commentsItems = ListBlock([comment1, comment2, comment3])
+comment1 = ListItem("Re: Climate Action", "Needs clarification on data sources")
+comment2 = ListItem("Re: AI Ethics", "Author response pending")
+comment3 = ListItem("Re: Digital Nomads", "Editorial note required")
+
+newDraftBtn = Buttons([startDraftBtn])
+startDraftBtn = Button("Start New Draft", null, "primary")

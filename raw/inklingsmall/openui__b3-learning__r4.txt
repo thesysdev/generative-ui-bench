@@ -1,0 +1,43 @@
+root = Card([header, kpiRow, cohortFilterSection, enrollmentSection, atRiskSection, engagementSection, messageSection], "card", "column", "l")
+
+header = CardHeader("Training Platform Analytics", "Cohort-level insights")
+kpiRow = Card([kpiActive, kpiComplete, kpiQuiz], "clear", "row", "l")
+kpiActive = Card([TextContent("Active learners this week", "small"), TextContent("1,247", "large-heavy")], "card")
+kpiComplete = Card([TextContent("Course completion rate", "small"), TextContent("82%", "large-heavy")], "card")
+kpiQuiz = Card([TextContent("Average quiz score", "small"), TextContent("87.3", "large-heavy")], "card")
+
+cohortFilterSection = Card([cohortHeading, cohortSelect], "sunk")
+cohortHeading = Heading("Narrow to one cohort", "h3")
+cohortSelect = Select("cohort_filter", [cohortAll, cohortQ3, cohortQ4, cohortNH], "Select cohort")
+cohortAll = SelectItem("all", "All cohorts")
+cohortQ3 = SelectItem("q3-2024", "Q3 2024")
+cohortQ4 = SelectItem("q4-2024", "Q4 2024")
+cohortNH = SelectItem("new-hires", "New Hires")
+
+enrollmentSection = Card([enrollHeading, enrollChart], "card")
+enrollHeading = Heading("Courses ranked by enrollment", "h3")
+enrollLabels = ["Data Science Bootcamp", "UX Design Fundamentals", "Python for Analysts", "Leadership Essentials", "Cloud Architecture"]
+enrollSeries = Series("Enrollments", [3420, 2890, 2150, 1980, 1540])
+enrollChart = HorizontalBarChart(enrollLabels, [enrollSeries], "grouped", "Courses", "Learners")
+
+atRiskSection = Card([atRiskHeading, atRiskList], "card")
+atRiskHeading = Heading("Learners at risk of dropping out", "h3")
+atRiskList = ListBlock([atRisk1, atRisk2, atRisk3, atRisk4])
+atRisk1 = ListItem("Jordan Lee", "3 missed assignments • Last active 5 days ago")
+atRisk2 = ListItem("Avery Chen", "Low engagement • Quiz scores declining")
+atRisk3 = ListItem("Morgan Patel", "No login for 7 days • 2 overdue modules")
+atRisk4 = ListItem("Casey Rivera", "Participation drop • 40% content viewed")
+
+engagementSection = Card([engageHeading, engageChart], "card")
+engageHeading = Heading("Engagement across the past eight weeks", "h3")
+weeks = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+engageSeries = Series("Engagement %", [72, 68, 75, 71, 69, 78, 82, 85])
+engageChart = LineChart(weeks, [engageSeries], "linear", "Week", "%")
+
+messageSection = Card([messageHeading, messageForm], "card")
+messageHeading = Heading("Message a cohort", "h3")
+messageForm = Form("message-cohort", messageButtons, [messageField])
+messageField = FormControl("Message to cohort", messageInput)
+messageInput = TextArea("message_text", "Type your message...", 3)
+messageButtons = Buttons([sendBtn])
+sendBtn = Button("Send message", null, "primary")

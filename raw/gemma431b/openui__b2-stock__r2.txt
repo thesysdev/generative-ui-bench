@@ -1,0 +1,19 @@
+root = Card([header, searchSection, warningBanner, inventoryTable, footerActions], "card", "column", "l")
+
+header = CardHeader("Low Inventory Alert", "Restock required for 4 items")
+
+searchSection = Card([searchField], "clear", "row", "none")
+searchField = FormControl("Search Inventory", searchInput, "Filter by product name or SKU")
+searchInput = Input("search", "Search items...")
+
+warningBanner = Callout("warning", "Low Stock Threshold", "Items are flagged when inventory drops below 15 units.")
+
+inventoryTable = Table([colItem, colStock, colStatus, colAction])
+colItem = Col("Product", ["Organic Coffee Beans", "Oat Milk (1L)", "Eco-Friendly Filters", "Dark Chocolate Bar"], "string")
+colStock = Col("Remaining", ["8", "12", "4", "11"], "number")
+colStatus = Col("Status", ["Critical", "Low", "Critical", "Low"], "string")
+colAction = Col("Action", ["Reorder", "Reorder", "Reorder", "Reorder"], "action")
+
+footerActions = Buttons([bulkReorderBtn, dismissBtn], "row")
+bulkReorderBtn = Button("Reorder All Low Stock", null, "primary")
+dismissBtn = Button("Dismiss Alerts", null, "secondary")

@@ -1,0 +1,108 @@
+```openui
+root = Card([
+    quarterSelector,
+    regionFilter,
+    revenueSection,
+    costSection,
+    profitSection,
+    quarterCharts,
+    budgetByDept,
+    headcountByDept,
+    topRisks,
+    strategicInitiatives,
+    runwayInfo,
+    salesPipeline,
+    winRate,
+    customerMetrics,
+    nps,
+    boardItems,
+    exportBtn
+], "card", "column", "m")
+
+quarterSelector = Card([
+    Button("Q1", action: ["quarter", 1]),
+    Button("Q2", action: ["quarter", 2]),
+    Button("Q3", action: ["quarter", 3]),
+    Button("Q4", action: ["quarter", 4])
+], variant: "sunk")
+
+regionFilter = Card([
+    Select("region", [USItem, EUItem, APACItem], placeholder: "Select region")
+], variant: "sunk")
+
+revenueSection = Card([
+    Heading("Revenue", "h3"),
+    TextContent("Quarterly revenue: $12,500,000")
+], variant: "clear")
+
+costSection = Card([
+    Heading("Costs", "h3"),
+    TextContent("Quarterly costs: $8,200,000")
+], variant: "clear")
+
+profitSection = Card([
+    Heading("Profit", "h3"),
+    TextContent("Quarterly profit: $4,300,000")
+], variant: "clear")
+
+quarterCharts = Card([
+    HorizontalBarChart(["Q1", "Q2", "Q3", "Q4"], [revSeries, costSeries], variant: "grouped", xLabel: "Quarter", yLabel: "USD")
+], variant: "sunk")
+
+revSeries = Series("Revenue", [12500000, 13800000, 14200000, 15000000])
+costSeries = Series("Costs", [8200000, 8500000, 8700000, 8900000])
+
+budgetByDept = Table([deptCol, budgetCol, planCol])
+deptCol = Col("Department", ["Finance", "Marketing", "R&D", "Operations"])
+budgetCol = Col("Budget", ["$2M", "$1.5M", "$3M", "$1M"])
+planCol = Col("Plan", ["$2M", "$1.6M", "$3.2M", "$1.1M"])
+
+headcountByDept = Table([deptCol2, headcountCol])
+deptCol2 = Col("Department", ["Finance", "Marketing", "R&D", "Operations"])
+headcountCol = Col("Headcount", ["120", "85", "250", "90"])
+
+topRisks = Table([riskCol, ownerCol])
+riskCol = Col("Risk", ["Market volatility", "Supply chain delays", "Regulatory changes"])
+ownerCol = Col("Owner", ["Jane Doe", "Mike Smith", "Emily Clark"])
+
+strategicInitiatives = Table([initCol, statusCol])
+initCol = Col("Initiative", ["AI adoption", "Global expansion", "Sustainability program"])
+statusCol = Col("Status", ["Planned", "In progress", "Completed"])
+
+runwayInfo = Card([
+    Heading("Runway", "h3"),
+    TextContent("Months of runway: 18")
+], variant: "clear")
+
+salesPipeline = Card([
+    Heading("Sales Pipeline", "h3"),
+    TextContent("Pipeline value: $5,000,000")
+], variant: "clear")
+
+winRate = Card([
+    Heading("Win Rate", "h3"),
+    TextContent("Win rate: 22%")
+], variant: "clear")
+
+customerMetrics = Card([
+    Heading("Customers", "h3"),
+    TextContent("Customer count: 4,200 | Churn: 3%")
+], variant: "clear")
+
+nps = Card([
+    Heading("NPS", "h3"),
+    TextContent("NPS: 68")
+], variant: "clear")
+
+boardItems = Card([
+    Heading("Next Board Meeting Items", "h3"),
+    TextContent([
+        "Review Q2 financial results",
+        "Update strategic initiative status",
+        "Discuss top risks and mitigation plans"
+    ], size: "large")
+], variant: "clear")
+
+exportBtn = Button("Export Pack", action: ["export"])
+
+```

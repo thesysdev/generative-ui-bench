@@ -1,0 +1,294 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        section1,
+        section2,
+        section3,
+        section4,
+        section5,
+        section6,
+        section7,
+        section8,
+        section9,
+        section10,
+        actions
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+header = CardHeader("Creator Studio Dashboard", "All Platforms")
+
+section1 = Card(
+    [
+        followerGrowth,
+        engagementRate
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+followerGrowth = Card(
+    [
+        TextContent(
+            "👤 Followers: 12,345\n📈 Growth (last month): +3.2% 📈",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+engagementRate = Card(
+    [
+        TextContent(
+            "💬 Engagement Rate: 7.8%",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+section2 = Card(
+    [
+        bestPosts
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+bestPosts = Table(
+    [
+        colPosts,
+        colReach
+    ]
+)
+
+colPosts = Col("Best Posts", ["Photo 1", "Video 2", "Story 3"], "string")
+colReach = Col("Reach", ["45,000", "38,200", "22,500"], "number")
+
+section3 = Card(
+    [
+        audienceSplit
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+audienceSplit = Table(
+    [
+        colPlatform,
+        colPercent
+    ]
+)
+
+colPlatform = Col("Platform", ["Instagram", "Twitter", "TikTok"], "string")
+colPercent = Col("Split", ["45%", "30%", "25%"], "string")
+
+section4 = Card(
+    [
+        scheduledPosts
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+scheduledPosts = ListBlock(
+    items=[
+        listItemPost1,
+        listItemPost2,
+        listItemPost3
+    ],
+    variant="image"
+)
+
+listItemPost1 = ListItem(
+    title="Travel Vlog",
+    subtitle="July 15, 10:00 AM",
+    image="https://picsum.photos/seed/travel/800/500"
+)
+
+listItemPost2 = ListItem(
+    title="Lifestyle Tips",
+    subtitle="July 16, 3:00 PM",
+    image="https://picsum.photos/seed/lifestyle/800/500"
+)
+
+listItemPost3 = ListItem(
+    title="Behind the Scenes",
+    subtitle="July 17, 7:00 PM",
+    image="https://picsum.photos/seed/behind/800/500"
+)
+
+section5 = Card(
+    [
+        bestHour
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+bestHour = Card(
+    [
+        TextContent(
+            "⏰ Best Hour to Post: 6:00 PM (based on historical engagement)",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+section6 = Card(
+    [
+        commentsWaiting
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+commentsWaiting = Card(
+    [
+        TextContent(
+            "💬 Comments Waiting for Reply: 12",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+section7 = Card(
+    [
+        earningsThisMonth
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+earningsThisMonth = Card(
+    [
+        TextContent(
+            "💰 Earnings This Month: $2,450",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+section8 = Card(
+    [
+        pendingCollabs
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+pendingCollabs = Card(
+    [
+        TextContent(
+            "🤝 Pending Collaboration Requests: 5",
+            "large"
+        )
+    ],
+    "clear"
+)
+
+section9 = Card(
+    [
+        schedulePost
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+schedulePost = Form(
+    name="postScheduler",
+    buttons=postButtons,
+    fields=[
+        captionField,
+        timeField
+    ]
+)
+
+captionField = FormControl(
+    label="Caption",
+    input=TextArea(
+        name="caption",
+        placeholder="Write your post caption...",
+        rows=2,
+        rules=[100]
+    )
+)
+
+timeField = FormControl(
+    label="Post Time (local)",
+    input=DatePicker(
+        name="postTime",
+        mode="single",
+        rules=[],
+        value="2025-07-18T10:00:00"
+    )
+)
+
+postButtons = Buttons(
+    buttons=[
+        submitBtn,
+        clearBtn
+    ],
+    direction="row"
+)
+
+submitBtn = Button("Schedule Post", "primary")
+clearBtn = Button("Clear", "tertiary")
+
+section10 = Card(
+    [
+        platformFilter
+    ],
+    "card",
+    "column",
+    "m"
+)
+
+platformFilter = Card(
+    [
+        TextContent(
+            "🔍 Filter by Platform: All",
+            "small"
+        ),
+        Buttons(
+            buttons=[
+                instaBtn,
+                twitterBtn,
+                tiktokBtn
+            ],
+            direction="row"
+        )
+    ],
+    "clear"
+)
+
+instaBtn = Button("Instagram", "outline", "secondary")
+twitterBtn = Button("Twitter", "outline", "secondary")
+tiktokBtn = Button("TikTok", "outline", "secondary")
+
+actions = Buttons(
+    buttons=[
+        exportBtn,
+        shareBtn
+    ],
+    direction="row"
+)
+
+exportBtn = Button("Export CSV", "secondary")
+shareBtn = Button("Share Dashboard", "tertiary")
+```

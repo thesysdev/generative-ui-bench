@@ -1,0 +1,85 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Event name, date and venue
+    CardHeader("Tech Innovate 2026", "Conference Landing Screen"),
+    
+    // 2. Agenda with times
+    SectionBlock(
+      sections: [
+        {
+          value: "Agenda",
+          trigger: "agenda",
+          content: [
+            Card([Heading("Monday, May 15, 2026"), "Event Details"]),
+            ListBlock([
+              {title: "09:00 AM", time: "Opening keynote"},
+              {title: "10:30 AM", time: "AI Ethics Panel"},
+              {title: "12:00 PM", time: "Networking lunch"},
+              {title: "02:00 PM", time: "Machine Learning Workshop"},
+              {title: "04:00 PM", time: "Closing remarks"},
+            ])
+          ],
+          isFoldable: true
+        }
+      ]
+    ),
+    
+    // 3. Speakers with one line each
+    SectionBlock(
+      sections: [
+        {
+          value: "Speakers",
+          trigger: "speakers",
+          content: [
+            Card([Heading("Dr. Sarah Chen"), TextCallout(variant: "info", title: "Keynote"), "Global tech leader and AI ethicist"]),
+            Card([Heading("Marcus Rivera"), TextCallout(variant: "info", title: "Track Lead"), "ML researcher and startup founder"]),
+            Card([Heading("Priya Patel"), TextCallout(variant: "info", title: "Workshop Host"), "Expert in cloud architecture"]),
+          ]
+        }
+      ]
+    ),
+    
+    // 4. Ticket tiers with prices
+    SectionBlock(
+      sections: [
+        {
+          value: "Ticket Tiers",
+          trigger: "tickets",
+          content: [
+            Card([Heading("General Admission"), TextCallout(variant: "success", title: "Standard", description: "Full access to all sessions")]),
+            Card([Heading("VIP Pass"), TextCallout(variant: "success", title: "Premium", description: "Early access + networking dinner")]),
+            Card([Heading("Speaker Access"), TextCallout(variant: "warning", title: "Limited", description: "Only 20 spots available")]),
+          ]
+        }
+      ]
+    ),
+    
+    // 5. Register with name and email
+    SectionBlock(
+      sections: [
+        {
+          value: "Register Now",
+          trigger: "register",
+          content: [
+            Form("conference-registration", 
+                  Buttons([SubmitBtn, CancelBtn]),
+                  FormFields([
+                    FormControl(label: "Full Name", input: Input("name", "John Doe")),
+                    FormControl(label: "Email", input: Input("email", "john@example.com")),
+                  ]))
+                ]
+            ]
+        }
+      ]
+    ),
+    
+    // 6. Days remaining until the event
+    Card([
+      CardHeader("Time Left", "Countdown"),
+      TextContent(`14 days remaining`, size: "large")
+    ])
+  ],
+  variant: "card"
+)
+```

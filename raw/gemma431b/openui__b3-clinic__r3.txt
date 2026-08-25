@@ -1,0 +1,39 @@
+root = Card([header, statsRow, currentStatus, scheduleSection, roomSection, navigation, footer], "card", "column", "l")
+
+header = CardHeader("Clinic Daily View", "Tuesday, October 24th")
+
+statsRow = Card([patientCount, noShowRate], "sunk", "row", "m")
+patientCount = TextCallout("info", "Expected Patients", "24 patients scheduled for today")
+noShowRate = TextCallout("warning", "Monthly No-Show Rate", "8.4% (Current Month)")
+
+currentStatus = Card([statusHeading, nextPatient, checkInBtn], "card", "column", "s")
+statusHeading = Heading("Now Serving", "h3")
+nextPatient = TextContent("Patient: Sarah Jenkins (Room 3)", "large-heavy")
+checkInBtn = Buttons([checkInAction])
+checkInAction = Button("Check-In Next Patient", null, "primary")
+
+scheduleSection = Card([scheduleHeading, appointmentTable], "clear", "column", "m")
+scheduleHeading = Heading("Today's Appointments", "h3")
+appointmentTable = Table([timeCol, patientCol, statusCol])
+timeCol = Col("Time", ["08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM"], "string")
+patientCol = Col("Patient", ["James Wilson", "Maria Garcia", "Robert Chen", "Linda Smith", "Kevin Lee"], "string")
+statusCol = Col("Status", ["Arrived", "Confirmed", "In-Room", "Scheduled", "Confirmed"], "string")
+
+roomSection = Card([roomHeading, roomList], "clear", "column", "m")
+roomHeading = Heading("Room Availability", "h3")
+roomList = ListBlock([room1, room2, room3, room4], "image")
+room1 = ListItem("Room 1", "Occupied", null, "Clear Room")
+room2 = ListItem("Room 2", "Available", null, "Assign Patient")
+room3 = ListItem("Room 3", "Occupied", null, "Clear Room")
+room4 = ListItem("Room 4", "Available", null, "Assign Patient")
+
+navigation = Card([navHeading, dateControls], "clear", "column", "s")
+navHeading = Heading("Schedule Navigation", "h4")
+dateControls = Buttons([prevDay, nextDay, todayBtn])
+prevDay = Button("Previous Day", null, "secondary")
+nextDay = Button("Next Day", null, "secondary")
+todayBtn = Button("Jump to Today", null, "tertiary")
+
+footer = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("View patient medical history")
+followUp2 = FollowUpItem("Generate end-of-day report")

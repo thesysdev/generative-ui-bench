@@ -1,0 +1,454 @@
+Here is the training platform analytics dashboard covering all your requested metrics, cohort filtering, engagement trends, at-risk alerts, and messaging actions.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "cohortFilterCard",
+          "kpiOverviewCard",
+          "alertAtRisk",
+          "atRiskTableCard",
+          "engagementTrendCard",
+          "courseRankingsCard",
+          "messageCohortCard"
+        ],
+        "gap": "l"
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Training & Learning Analytics",
+        "subtitle": "Performance tracking, learner retention, and cohort management"
+      },
+      {
+        "id": "cohortFilterCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "cohortFilterControl"
+        ]
+      },
+      {
+        "id": "cohortFilterControl",
+        "component": "FormControl",
+        "label": "Filter by Cohort",
+        "hint": "Narrow metrics and actions to a specific learner group",
+        "input": "cohortSelect"
+      },
+      {
+        "id": "cohortSelect",
+        "component": "Select",
+        "name": "selectedCohort",
+        "placeholder": "All Cohorts (Spring 2025, Fall 2024...)",
+        "items": [
+          "optAll",
+          "optSpring25",
+          "optWinter25",
+          "optFall24"
+        ]
+      },
+      {
+        "id": "optAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Cohorts"
+      },
+      {
+        "id": "optSpring25",
+        "component": "SelectItem",
+        "value": "cohort-2025-spring",
+        "label": "Spring 2025 - Engineering & Product"
+      },
+      {
+        "id": "optWinter25",
+        "component": "SelectItem",
+        "value": "cohort-2025-winter",
+        "label": "Winter 2025 - Sales Onboarding"
+      },
+      {
+        "id": "optFall24",
+        "component": "SelectItem",
+        "value": "cohort-2024-fall",
+        "label": "Fall 2024 - Leadership Track"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "children": [
+          "kpiHeader",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "CardHeader",
+        "title": "Key Platform Metrics",
+        "subtitle": "Weekly activity, completion rate, and assessment score overview"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetricName",
+          "colMetricValue",
+          "colMetricBenchmark"
+        ]
+      },
+      {
+        "id": "colMetricName",
+        "component": "Col",
+        "label": "Core KPI",
+        "data": [
+          "Active Learners (This Week)",
+          "Course Completion Rate",
+          "Average Quiz Score"
+        ]
+      },
+      {
+        "id": "colMetricValue",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "1,428 learners",
+          "78.4%",
+          "86.2%"
+        ]
+      },
+      {
+        "id": "colMetricBenchmark",
+        "component": "Col",
+        "label": "Status vs Target",
+        "data": [
+          "+12% vs last week",
+          "+4.2% vs target (75%)",
+          "+3.1% vs target (85%)"
+        ]
+      },
+      {
+        "id": "alertAtRisk",
+        "component": "Alert",
+        "title": "Learners At Risk Alert",
+        "description": "24 learners have been inactive for >10 days or scored below 60% on recent checkpoints.",
+        "variant": "warning"
+      },
+      {
+        "id": "atRiskTableCard",
+        "component": "Card",
+        "children": [
+          "atRiskHeader",
+          "atRiskTable"
+        ]
+      },
+      {
+        "id": "atRiskHeader",
+        "component": "CardHeader",
+        "title": "Learners At Risk of Dropping Out",
+        "subtitle": "Identified by inactivity, falling quiz scores, or overdue assignments"
+      },
+      {
+        "id": "atRiskTable",
+        "component": "Table",
+        "columns": [
+          "colLearnerName",
+          "colLearnerCohort",
+          "colDaysInactive",
+          "colAvgQuizScore",
+          "colRiskStatus"
+        ]
+      },
+      {
+        "id": "colLearnerName",
+        "component": "Col",
+        "label": "Learner",
+        "data": [
+          "Alex Morgan",
+          "David Kim",
+          "Elena Rostova",
+          "Marcus Vance"
+        ]
+      },
+      {
+        "id": "colLearnerCohort",
+        "component": "Col",
+        "label": "Cohort",
+        "data": [
+          "Spring 2025",
+          "Winter 2025",
+          "Spring 2025",
+          "Fall 2024"
+        ]
+      },
+      {
+        "id": "colDaysInactive",
+        "component": "Col",
+        "label": "Inactivity",
+        "data": [
+          "12 days",
+          "14 days",
+          "9 days",
+          "16 days"
+        ]
+      },
+      {
+        "id": "colAvgQuizScore",
+        "component": "Col",
+        "label": "Quiz Avg",
+        "data": [
+          "54%",
+          "58%",
+          "61%",
+          "49%"
+        ]
+      },
+      {
+        "id": "colRiskStatus",
+        "component": "Col",
+        "label": "Risk Level",
+        "data": [
+          "High Risk",
+          "High Risk",
+          "Medium Risk",
+          "Critical"
+        ]
+      },
+      {
+        "id": "engagementTrendCard",
+        "component": "Card",
+        "children": [
+          "engagementHeader",
+          "engagementChart"
+        ]
+      },
+      {
+        "id": "engagementHeader",
+        "component": "CardHeader",
+        "title": "Learner Engagement (Past 8 Weeks)",
+        "subtitle": "Weekly active users and module completions over time"
+      },
+      {
+        "id": "engagementChart",
+        "component": "LineChart",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4",
+          "W5",
+          "W6",
+          "W7",
+          "W8"
+        ],
+        "series": [
+          "activeLearnersSeries",
+          "moduleCompletionsSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Week",
+        "yLabel": "Learner Count / Completions"
+      },
+      {
+        "id": "activeLearnersSeries",
+        "component": "Series",
+        "category": "Active Learners",
+        "values": [
+          1120,
+          1180,
+          1240,
+          1210,
+          1310,
+          1350,
+          1390,
+          1428
+        ]
+      },
+      {
+        "id": "moduleCompletionsSeries",
+        "component": "Series",
+        "category": "Completed Modules",
+        "values": [
+          840,
+          890,
+          950,
+          910,
+          1040,
+          1090,
+          1150,
+          1210
+        ]
+      },
+      {
+        "id": "courseRankingsCard",
+        "component": "Card",
+        "children": [
+          "rankingsHeader",
+          "rankingsChart"
+        ]
+      },
+      {
+        "id": "rankingsHeader",
+        "component": "CardHeader",
+        "title": "Courses Ranked by Enrollment",
+        "subtitle": "Total registered learners per course track"
+      },
+      {
+        "id": "rankingsChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "Full-Stack Dev Bootcamp",
+          "Cloud & DevOps Architecture",
+          "Product Management Fundamentals",
+          "Data Analytics with SQL & Python",
+          "Cybersecurity Essentials"
+        ],
+        "series": [
+          "enrollmentSeries"
+        ],
+        "xLabel": "Enrolled Learners",
+        "yLabel": "Course Name"
+      },
+      {
+        "id": "enrollmentSeries",
+        "component": "Series",
+        "category": "Enrolled Learners",
+        "values": [
+          640,
+          520,
+          430,
+          390,
+          280
+        ]
+      },
+      {
+        "id": "messageCohortCard",
+        "component": "Card",
+        "children": [
+          "messageHeader",
+          "messageForm"
+        ]
+      },
+      {
+        "id": "messageHeader",
+        "component": "CardHeader",
+        "title": "Message a Cohort",
+        "subtitle": "Send announcements, nudges, or reminder broadcasts directly to enrolled learners"
+      },
+      {
+        "id": "messageForm",
+        "component": "Form",
+        "name": "cohortMessagingForm",
+        "fields": [
+          "targetCohortField",
+          "msgSubjectField",
+          "msgBodyField"
+        ],
+        "buttons": "msgButtons"
+      },
+      {
+        "id": "targetCohortField",
+        "component": "FormControl",
+        "label": "Target Cohort / Group",
+        "input": "targetCohortSelect"
+      },
+      {
+        "id": "targetCohortSelect",
+        "component": "Select",
+        "name": "targetCohort",
+        "placeholder": "Choose recipient cohort",
+        "items": [
+          "targetSpring25",
+          "targetWinter25",
+          "targetFall24",
+          "targetAtRisk"
+        ]
+      },
+      {
+        "id": "targetSpring25",
+        "component": "SelectItem",
+        "value": "spring-2025",
+        "label": "Spring 2025 - Engineering & Product"
+      },
+      {
+        "id": "targetWinter25",
+        "component": "SelectItem",
+        "value": "winter-2025",
+        "label": "Winter 2025 - Sales Onboarding"
+      },
+      {
+        "id": "targetFall24",
+        "component": "SelectItem",
+        "value": "fall-2024",
+        "label": "Fall 2024 - Leadership Track"
+      },
+      {
+        "id": "targetAtRisk",
+        "component": "SelectItem",
+        "value": "all-at-risk",
+        "label": "All At-Risk Learners (Re-engagement Nudge)"
+      },
+      {
+        "id": "msgSubjectField",
+        "component": "FormControl",
+        "label": "Subject",
+        "input": "msgSubjectInput"
+      },
+      {
+        "id": "msgSubjectInput",
+        "component": "Input",
+        "name": "subject",
+        "placeholder": "e.g., Weekly Sprint Check-in & Office Hours"
+      },
+      {
+        "id": "msgBodyField",
+        "component": "FormControl",
+        "label": "Message Content",
+        "hint": "Broadcast via platform notification and email",
+        "input": "msgBodyTextArea"
+      },
+      {
+        "id": "msgBodyTextArea",
+        "component": "TextArea",
+        "name": "messageBody",
+        "placeholder": "Enter your announcement or re-engagement message here...",
+        "rows": 4
+      },
+      {
+        "id": "msgButtons",
+        "component": "Buttons",
+        "buttons": [
+          "sendBroadcastBtn",
+          "saveDraftBtn"
+        ]
+      },
+      {
+        "id": "sendBroadcastBtn",
+        "component": "Button",
+        "label": "Send Broadcast",
+        "variant": "primary"
+      },
+      {
+        "id": "saveDraftBtn",
+        "component": "Button",
+        "label": "Save Draft",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

@@ -1,0 +1,63 @@
+root = Card([hubHeader, hubControls, hubKpis, weatherAlert, operationsGrid, crewSection, rebookSection, followUps], "clear", "column", "l")
+
+hubHeader = CardHeader("Hub Operations Command Center", "Hub: ATL (Hartsfield-Jackson)")
+
+hubControls = Buttons([hubSwitchBtn])
+hubSwitchBtn = Button("Switch Hub", null, "secondary")
+
+hubKpis = Card([otpGauge, loadGauge, turnaroundGauge, cancelCount], "sunk", "row", "m", "center", "between")
+otpGauge = Card([otpText, otpProgress], "clear", "column", "none", "center")
+otpText = TextContent("OTP: 82%", "small-heavy")
+otpProgress = Progress(82, "On-Time Performance")
+loadGauge = Card([loadText, loadProgress], "clear", "column", "none", "center")
+loadText = TextContent("Load: 78%", "small-heavy")
+loadProgress = Progress(78, "Avg Passenger Load")
+turnaroundGauge = Card([turnText, turnProgress], "clear", "column", "none", "center")
+turnText = TextContent("Turn: 42m", "small-heavy")
+turnProgress = Progress(70, "Turnaround Efficiency")
+cancelCount = Badge("12 Cancellations", "destructive")
+
+weatherAlert = Alert("Severe Weather Advisory", "Thunderstorms expected 14:00 - 18:00. Ground stop potential.", "warning")
+
+operationsGrid = Card([flightsTab, riskTab, changesTab], "card", "column", "m")
+flightsTab = TabItem("flights", "Flight Status", [flightTable, delayedCallout])
+riskTab = TabItem("risk", "Connections at Risk", [riskTable])
+changesTab = TabItem("changes", "Gate Changes", [changesList])
+
+flightTable = Table([fNum, fRoute, fGate, fStatus])
+fNum = Col("Flight", ["DL102", "DL441", "DL882", "DL19", "DL305"])
+fRoute = Col("Route", ["ATL-LHR", "ATL-JFK", "ATL-LAX", "ATL-ORD", "ATL-MIA"])
+fGate = Col("Gate", ["F12", "B10", "A5", "T1", "B22"])
+fStatus = Col("Status", ["On Time", "Delayed", "On Time", "Delayed", "Boarding"])
+
+delayedCallout = Callout("warning", "Delayed Flights", "DL441 and DL19 are currently experiencing ground delays.")
+
+riskTable = Table([riskFlight, riskPax, riskDest])
+riskFlight = Col("Flight", ["DL441", "DL19", "DL882"])
+riskPax = Col("Pax at Risk", ["12", "4", "21"])
+riskDest = Col("Connection", ["SFO", "SEA", "MIA"])
+
+changesList = ListBlock([change1, change2], "image")
+change1 = ListItem("DL102", "Gate F12 → F15", null, "Update")
+change2 = ListItem("DL305", "Gate B22 → B18", null, "Update")
+
+crewSection = SectionBlock([crewItem], true)
+crewItem = SectionItem("crews", "Available Crews for Reassignment", [crewTable])
+crewTable = Table([crewId, crewRank, crewHours])
+crewId = Col("Crew ID", ["C-442", "C-901", "C-112"])
+crewRank = Col("Rank", ["Captain", "FO", "Captain"])
+crewHours = Col("Duty Hours", ["4h", "2h", "6h"])
+
+rebookSection = Card([rebookHeading, rebookForm], "sunk", "column", "m")
+rebookHeading = Heading("Passenger Rebooking", "h3")
+rebookForm = Form("rebook-pax", rebookButtons, [paxIdField, newFlightField])
+paxIdField = FormControl("Passenger ID / PNR", paxInput)
+paxInput = Input("pnr", "ABC123XYZ")
+newFlightField = FormControl("New Flight Number", flightInput)
+flightInput = Input("flight", "DL999")
+rebookButtons = Buttons([rebookSubmit])
+rebookSubmit = Button("Process Rebooking", null, "primary")
+
+followUps = FollowUpBlock([fup1, fup2])
+fup1 = FollowUpItem("Show detailed weather radar")
+fup2 = FollowUpItem("Analyze turnaround bottlenecks")

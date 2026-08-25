@@ -1,0 +1,63 @@
+root = Card([header, alerts, dashboard, controls, followUps], "card", "column", "l")
+
+header = CardHeader("Hospital Operations Command Center", "Real-time Facility Status")
+
+alerts = Card([criticalAlerts, lowSupplies], "sunk", "row", "m")
+criticalAlerts = Callout("critical", "CRITICAL PATIENTS", "4 patients in ICU requiring immediate intervention", "error")
+lowSupplies = Callout("warning", "SUPPLY ALERT", "Oxygen concentrators and surgical gloves are below threshold", "warning")
+
+dashboard = Card([metrics, mainGrid], "clear")
+metrics = Card([occupancyCard, erWaitCard, dischargeCard], "row", "m")
+occupancyCard = Card([Heading("Bed Occupancy", "h3"), Progress(88, "Current Capacity"), TextContent("88% of total beds occupied")], "sunk", "column", "m")
+erWaitCard = Card([Heading("ER Wait Time", "h3"), TextContent("45 mins", "large-heavy"), TextContent("Average wait for triage")], "sunk", "column", "m")
+dischargeCard = Card([Heading("Discharges Ready", "h3"), TextContent("12", "large-heavy"), TextContent("Pending final verification")], "sunk", "column", "m")
+
+mainGrid = Card([statsSection, staffingSection, scheduleSection], "row", "l")
+
+statsSection = Card([admissionsChart, deptChart], "column", "m")
+admissionsChart = Card([Heading("Admissions (Last 2 Weeks)", "h4"), LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"], [admissionsSeries], "natural", "Day", "Count")], "sunk")
+admissionsSeries = Series("Admissions", [45, 52, 48, 61, 55, 40, 38, 42, 47, 50, 55, 58, 62, 59])
+deptChart = Card([Heading("Patients per Department", "h4"), BarChart(["ICU", "ER", "Surgery", "Maternity", "Pediatrics"], [deptSeries], "vertical")], "sunk")
+deptSeries = Series("Volume", [12, 24, 18, 10, 15])
+
+staffingSection = Card([staffTable], "column", "m")
+staffTable = Table([colName, colRole, colStatus])
+colName = Col("Staff Name", ["Dr. Aris", "Nurse Chen", "Dr. Smith", "Nurse Patel", "Dr. Kumar"])
+colRole = Col("Role", ["Attending", "RN", "Surgeon", "RN", "Resident"])
+colStatus = Col("Status", ["On-Shift", "On-Shift", "On-Shift", "On-Shift", "On-Shift"])
+
+scheduleSection = Card([orSchedule, transferAction], "column", "m")
+orSchedule = Card([Heading("Today's OR Bookings", "h4"), ListBlock([
+    ListItem("OR-1", "10:00 AM - Cardiac Bypass", "Dr. Aris"),
+    ListItem("OR-2", "11:30 AM - Laparoscopic", "Dr. Smith"),
+    ListItem("OR-3", "01:00 PM - Orthopedic Repair", "Dr. Kumar")
+])], "sunk")
+transferAction = DialogBlock("Request Patient Transfer", "Initiate Inter-facility Transfer", "Complete the form below to request a transfer for a patient.", [transferForm], "outline")
+transferForm = Form("transfer-form", transferButtons, [transferPatient, transferReason])
+transferPatient = FormControl("Patient ID", transferInput)
+transferInput = Input("patient_id", "Enter MRN")
+transferReason = FormControl("Reason", transferReasonSelect)
+transferReasonSelect = Select("reason", [reasonA, reasonB, reasonC])
+reasonA = SelectItem("1", "Critical Care Need")
+reasonB = SelectItem("2", "Resource Availability")
+reasonC = SelectItem("3", "Scheduled Transfer")
+transferButtons = Buttons([transferSubmit])
+transferSubmit = Button("Submit Request", null, "primary")
+
+controls = Card([datePicker, incidentAction], "row", "m")
+datePicker = DatePicker("view_date", "single")
+incidentAction = DialogBlock("File Incident", "Report a clinical or operational incident", "Enter details regarding the incident below.", [incidentForm], "destructive")
+incidentForm = Form("incident-form", incidentButtons, [incidentType, incidentDesc])
+incidentType = Select("type", [typeA, typeB])
+typeA = SelectItem("1", "Clinical Error")
+typeB = SelectItem("2", "Facility Issue")
+incidentDesc = FormControl("Description", incidentText)
+incidentText = TextArea("description", "Describe the incident details...", 3)
+incidentButtons = Buttons([incidentSubmit])
+incidentSubmit = Button("Submit Report", null, "destructive")
+
+followUps = FollowUpBlock([
+    FollowUpItem("Show detailed lab results"),
+    FollowUpItem("View upcoming surgical schedule"),
+    FollowUpItem("Check supply inventory levels")
+])

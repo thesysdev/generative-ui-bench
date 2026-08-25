@@ -1,0 +1,95 @@
+```openui
+root = Card([
+    shipmentsSection,
+    delayedShipmentCallout,
+    onTimePercentage,
+    volumeByCarrier,
+    searchFeature,
+    averageCost,
+    weeklyVolumeChart,
+    flagShipmentFeature,
+    lastRefreshed
+])
+
+shipmentsSection = Card([
+    shipmentsHeader,
+    shipmentsTable
+])
+shipmentsHeader = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([
+    shipmentOrigin,
+    shipmentDestination,
+    shipmentEta,
+    shipmentStatus
+])
+shipmentOrigin = Col("Origin", ["NYC", "LAX", "SFO"])
+shipmentDestination = Col("Destination", ["SFO", "LAX", "NYC"])
+shipmentEta = Col("ETA", ["2023-10-10", "2023-10-12", "2023-10-15"])
+shipmentStatus = Col("Status", ["In Transit", "In Transit", "In Transit"])
+
+delayedShipmentCallout = Callout("warning", "Delayed Shipments", "3 shipments are delayed. Immediate attention required.")
+
+onTimePercentage = Card([
+    onTimeHeading,
+    onTimeValue
+], "sunk")
+onTimeHeading = Heading("On-Time Percentage", "h4")
+onTimeValue = TextContent("96.5%", "large")
+
+volumeByCarrier = Card([
+    volumeHeading,
+    volumeChart
+])
+volumeHeading = Heading("Volume Split by Carrier", "h3")
+volumeChart = BarChart(
+    ["FedEx", "UPS", "DHL"],
+    [fedExSeries, upsSeries, dhlSeries],
+    "stacked",
+    "Carrier",
+    "Volume"
+)
+fedExSeries = Series("FedEx", [5000, 4500, 4800])
+upsSeries = Series("UPS", [3000, 3200, 3100])
+dhlSeries = Series("DHL", [2000, 2200, 2100])
+
+searchFeature = Form(
+    "search-route",
+    searchButtons,
+    [routeInputField]
+)
+routeInputField = FormControl("Route", routeInput)
+routeInput = Input("route", null, "text")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary")
+
+averageCost = Card([
+    averageCostHeading,
+    averageCostValue
+])
+averageCostHeading = Heading("Average Cost Per Shipment", "h3")
+averageCostValue = TextContent("$250", "large")
+
+weeklyVolumeChart = Card([
+    weeklyVolumeHeading,
+    weeklyVolumeChart
+])
+weeklyVolumeHeading = Heading("Weekly Volume (Last 2 Months)", "h3")
+weeklyVolumeChart = LineChart(
+    ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"],
+    [volumeSeries],
+    "step",
+    "Week",
+    "Volume"
+)
+volumeSeries = Series("Shipments", [1200, 1500, 1300, 1600, 1700, 1400, 1800, 1900])
+
+flagShipmentFeature = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment", null, "destructive")
+
+lastRefreshed = Card([
+    lastRefreshHeading,
+    lastRefreshValue
+])
+lastRefreshHeading = Heading("Last Refreshed", "h3")
+lastRefreshValue = TextContent("2023-10-09 10:15 AM", "small")
+```

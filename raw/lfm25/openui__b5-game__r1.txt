@@ -1,0 +1,335 @@
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Live Ops Dashboard",
+      subtitle: "Game Studio Real-Time Metrics"
+    ),
+    
+    // 1. Players Online Right Now
+    StatCard(
+      title: "Players Online",
+      value: 28473,
+      unit: "users",
+      change: "+342 since last hour"
+    ),
+    
+    // 2. Daily and Monthly Active Players
+    Divider(decorative: true),
+    StatsRow([
+      CardHeader(
+        title: "Daily Active Users (DAU)",
+        subtitle: "Today",
+        children: [
+          Card(
+            title: "28,915",
+            value: "28,915",
+            unit: "players",
+            icon: "users"
+          )
+        ]
+      ),
+      CardHeader(
+        title: "Monthly Active Users (MAU)",
+        subtitle: "This Month",
+        children: [
+          Card(
+            title: "52,340",
+            value: "52,340",
+            unit: "players",
+            icon: "account"
+          )
+        ]
+      ),
+      Divider(decorative: true),
+      CardHeader(
+        title: "DAU vs MAU",
+        subtitle: "Engagement Ratio",
+        children: [
+          Card(
+            title: "53.9%",
+            value: "53.9%",
+            unit: "engagement ratio",
+            icon: "chart-bar"
+          ),
+          Card(
+            title: "Avg Session Length",
+            value: "42 min",
+            unit: "minutes",
+            icon: "clock"
+          )
+        ]
+      )
+    ],
+    
+    // 3. Revenue Today
+    StatsRow([
+      CardHeader(
+        title: "Revenue Today",
+        subtitle: "Current Day Income",
+        children: [
+        Card(
+          title: "¥15.2M",
+          value: "¥15.2M",
+          unit: "yen",
+          icon: "money"
+        )
+      ]
+    ]),
+    
+    // 4. Revenue Per User
+    StatsRow([
+      CardHeader(
+        title: "Revenue Per User",
+        subtitle: "ARPU",
+        children: [
+        Card(
+          title: "€4.87",
+          value: "€4.87",
+          unit: "per user",
+          icon: "currency"
+        )
+      ]
+    ]),
+    
+    // 5. Session Length Over Past Two Weeks
+    StatsRow([
+      CardHeader(
+        title: "Average Session Duration",
+        subtitle: "Past 14 Days",
+        children: [
+        Card(
+          title: "43 min",
+          value: "43 min",
+          unit: "minutes",
+          icon: "clock"
+        ),
+        Card(
+          title: "Peak Hour",
+          value: "8.2 hrs/day",
+          unit: "hours",
+          icon: "graph-up"
+        )
+      ]
+    ]),
+    
+    // 6. Best-Selling Items with Units
+    BestSellersPanel([
+      {
+        itemId: "item_pulse_01",
+        name: "Neon Blade",
+        units: "48",
+        salesToday: 1240,
+        price: "250 yen"
+      },
+      {
+        itemId: "item_holo_grid",
+        name: "Hologram Grid",
+        units: "89",
+        salesToday: 870,
+        price: "180 yen"
+      },
+      {
+        itemId: "item_energy_core",
+        name: "Energy Core",
+        units: "156",
+        salesToday: 920,
+        price: "320 yen"
+      }
+    ]),
+    
+    // 7. Server Regions and Health
+    RegionsPanel([
+      {
+        region: "US-East",
+        health: "🟢 Healthy",
+        uptime: "99.97%",
+        load: "62%",
+        players: 18420
+      },
+      {
+        region: "EU-West",
+        health: "🟢 Healthy",
+        uptime: "99.95%",
+        load: "58%",
+        players: 15380
+      },
+      {
+        region: "APAC-South",
+        health: "🟡 Degraded",
+        uptime: "98.8%",
+        load: "78%",
+        players: 3120
+      },
+      {
+        region: "Latin America",
+        health: "🟢 Healthy",
+        uptime: "99.92%",
+        load: "55%",
+        players: 2100
+      }
+    ]),
+    
+    // 8. Crash Rate by App Version
+    CrashStats([
+      {
+        version: "v2.4.1",
+        crashRate: "0.35%",
+        affectedUsers: "1,240",
+        resolutionStatus: "in progress"
+      },
+      {
+        version: "v2.3.0",
+        crashRate: "0.61%",
+        affectedUsers: "2,450",
+        resolutionStatus: "resolved"
+      },
+      {
+        version: "v2.1.5",
+        crashRate: "1.08%",
+        affectedUsers: "3,100",
+        resolutionStatus: "pending"
+      }
+    ]),
+    
+    // 9. Live Events Running and Upcoming
+    EventsPanel([
+      {
+        type: "running",
+        name: "Seasonal Battle Pass Launch",
+        start: "2026-03-15",
+        end: "2026-03-29",
+        status: "active"
+      },
+      {
+        type: "upcoming",
+        name: "New Quest: Ancient Ruins",
+        start: "2026-04-02",
+        end: "2026-04-15",
+        status: "scheduled"
+      },
+      {
+        type: "running",
+        name: "Community Showcase Event",
+        start: "2026-03-18",
+        end: "2026-03-25",
+        status: "active"
+      }
+    ]),
+    
+    // 10. Player Reports Awaiting Review
+    ReportsPanel([
+      {
+        title: "Performance Bug Report",
+        summary: "Players experiencing stutter on mobile devices",
+        priority: "high",
+        status: "awaiting_review"
+      },
+      {
+        title: "Cheat Detection Claim",
+        summary: "Suspicious activity detected in multiplayer lobby",
+        priority: "critical",
+        status: "awaiting_review"
+      },
+      {
+        title: "Difficulty Balance Issue",
+        summary: "Certain levels consistently too easy for high-level players",
+        priority: "medium",
+        status: "awaiting_review"
+      },
+      {
+        title: "Login Timeout Problem",
+        summary: "Repeated login failures during peak hours",
+        priority: "high",
+        status: "awaiting_review"
+      }
+    ]),
+    
+    // 11. Ban Appeals Awaiting Review
+    BanAppeals([
+      {
+        appealId: "BAN-2026-045",
+        playerID: "P-789012",
+        reason: "Excessive toxicity in chat",
+        status: "under_review",
+        reviewer: "mod_team_02"
+      },
+      {
+        appealId: "BAN-2026-038",
+        playerID: "P-234567",
+        reason: "Account sharing allegations",
+        status: "under_review",
+        reviewer: "mod_team_03"
+      },
+      {
+        appealId: "BAN-2026-031",
+        playerID: "P-901234",
+        reason: "Harassment report",
+        status: "under_review",
+        reviewer: "mod_team_01"
+      }
+    ]),
+    
+    // 12. In-Game Currency Inflation
+    CurrencyWidget({
+      baseCurrency: "gold",
+      inflationRate: "2.3%",
+      weeklyGrowth: "142,000 gold added",
+      note: "Overall inflation slightly above target"
+    }),
+    
+    // 13. Results of Two Running Experiments
+    ExperimentsPanel([
+      {
+        experiment: "Balancing Patch v2.4",
+        title: "Hit Rate Optimization",
+        period: "Days 1-7",
+        results: {
+          increase: "+8.2%",
+          confidence: "high",
+          insight: "Adjusting damage thresholds improved kill streaks"
+        }
+      },
+      {
+        experiment: "Monetization Trial",
+        title: "Premium Bundles",
+        period: "Days 3-10",
+        results: {
+          revenueDelta: "+15.4%",
+          conversion: "3.8%",
+          insight: "Limited edition bundles drove higher ARPU"
+        }
+      }
+    ]),
+    
+    // 14. Draft Patch Notes
+    PatchNotesDraft({
+      title: "Patch Notes v2.4.0 - Release Candidate",
+      sections: [
+        { heading: "Overview", content: "Stability improvements and balance tweaks"} ,
+        { heading: "Bug Fixes", content: "Resolved crashes in v2.1.5 and v2.3.0" },
+        { heading: "New Features", content: "Seasonal Battle Pass launch, Ancient Ruins quest" },
+        { heading: "Changelog", content: "Detailed version-specific changes" }
+      ],
+      status: "draft"
+    }),
+    
+    // 15. Focus on One Region
+    RegionFilter({
+      enabled: true,
+      options: ["All", "US-East", "EU-West", "APAC-South", "Latin America"],
+      currentFocus: "US-East"
+    }),
+    
+    // 16. Ship a Hotfix
+    HotfixDeploy({
+      title: "Ship Hotfix",
+      steps: [
+        { label: "Verify fix", action: "confirm" },
+        { label: "Test in staging", action: "run" },
+        { label: "Rollout to production", action: "deploy" }
+      ],
+      progress: "in_progress"
+    })
+  ]
+)

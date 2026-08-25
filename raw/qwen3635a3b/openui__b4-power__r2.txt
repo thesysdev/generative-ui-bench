@@ -1,0 +1,108 @@
+```openui-lang
+root = Card([header, kpiRow, genSplitSection, forecastSection, plantTableSection, outageSection, maintSection, alertSection, regionSection, curtailSection], "card", "column", "l", "start", "start", true)
+
+header = CardHeader("Power Network Operations Console", "Real-time system monitoring and control")
+
+kpiRow = Card([loadCard, capacityCard, priceCard, emissionsCard], "sunk", "row", "m", "center", "between", true)
+loadCard = Card([loadLabel, loadValue, loadUnit], "clear", "column", "s", "center", "center")
+loadLabel = TextContent("Current Load", "small")
+loadValue = TextContent("48,320 MW", "large-heavy")
+loadUnit = TextContent("Megawatts", "small")
+capacityCard = Card([capLabel, capValue, capBar], "clear", "column", "s", "center", "center")
+capLabel = TextContent("Capacity Utilization", "small")
+capValue = TextContent("87.0%", "large-heavy")
+capBar = Progress(87)
+priceCard = Card([priceLabel, priceValue, priceUnit], "clear", "column", "s", "center", "center")
+priceLabel = TextContent("Current Price", "small")
+priceValue = TextContent("$62.40/MWh", "large-heavy")
+priceUnit = TextContent("Real-time LMP", "small")
+emissionsCard = Card([emisLabel, emisValue, emisUnit], "clear", "column", "s", "center", "center")
+emisLabel = TextContent("Emissions Today", "small")
+emisValue = TextContent("18,450 tCO₂", "large-heavy")
+emisUnit = TextContent("Tonnes CO₂e", "small")
+
+genSplitSection = Card([genHeading, genPie], "sunk")
+genHeading = Heading("Generation Split by Source", "h3")
+genPie = PieChart(["Coal", "Natural Gas", "Nuclear", "Wind", "Solar", "Hydro", "Other"], [8200, 12400, 9800, 5600, 4100, 6200, 2020], "pie", "circular")
+
+forecastSection = Card([forecastHeading, forecastChart], "sunk")
+forecastHeading = Heading("24-Hour Demand Forecast", "h3")
+forecastChart = LineChart(["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"], [forecastSeries], "natural", "Time", "MW")
+forecastSeries = Series("Forecast Demand", [42100, 39800, 43500, 47200, 50100, 51400, 49800, 45200])
+
+plantTableSection = Card([plantHeading, plantTable], "sunk")
+plantHeading = Heading("Plant Output & Status", "h3")
+plantTable = Table([plantName, plantOutput, plantStatus])
+plantName = Col("Plant", ["Springfield Coal", "Riverside Gas", "Bunker Hill Nuclear", "Prairie Wind Farm", "Desert Sun Solar", "Cascade Hydro", "Harbor Diesel", "Mountain Peak Gas", "Valley Solar", "Lake Wind"])
+plantOutput = Col("Output (MW)", [4200, 3800, 9800, 2100, 3200, 4800, 600, 2400, 900, 1500])
+plantStatus = Col("Status", [
+    "online", "online", "online", "online", "online", "online", "online", "online", "online", "online"
+])
+
+outageSection = Card([outageHeading, outageList], "sunk")
+outageHeading = Heading("Active Outages", "h3")
+outageList = ListBlock([
+    outage1, outage2, outage3, outage4
+], "number")
+outage1 = ListItem("Transmission line 345kV — Zone A", "Outage in progress: Line tripped at 06:12. Crew dispatched.", "red")
+outage2 = ListItem("Substation B — Zone C", "Scheduled maintenance: 14:00-20:00. 800 MW redispatched.", "orange")
+outage3 =ListItem("Distribution feeder 12 — Zone E", "Storm damage: Tree contact. Estimated repair 3 hours.", "red")
+outage4 = ListItem("Generator Unit 3 — Riverside", "Unit forced outage: Turbine trip at 11:45. 380 MW lost.", "red")
+
+maintSection = Card([maintHeading, maintList], "sunk")
+maintHeading = Heading("Planned Maintenance — June 2025", "h3")
+maintList = ListBlock([
+    maint1, maint2, maint3, maint4, maint5
+], "number")
+maint1 = ListItem("Springfield Coal — Unit 2", "Boiler tube replacement: Jun 10-14. ~2,100 MW capacity loss.", "blue")
+maint2 = ListItem("Cascade Hydro — Dam Spillway", "Spillway gate overhaul: Jun 5-9. No generation impact.", "blue")
+maint3 = ListItem("Desert Sun Solar — Inverter Bank 4", "Inverter replacement: Jun 15-16. ~1,200 MW impact.", "blue")
+maint4 = ListItem("Prairie Wind — Turbines 12-18", "Gearbox overhaul: Jun 20-23. ~700 MW impact.", "blue")
+maint5 = ListItem("Bunker Hill Nuclear — Refuel Outage", "Scheduled refueling: Jun 28 - Jul 15. 9,800 MW impact.", "blue")
+
+alertSection = Card([alertHeading, alertList], "sunk")
+alertHeading = Heading("Live Alerts", "h3")
+alertList = ListBlock([
+    alert1, alert2, alert3, alert4, alert5
+], "number")
+alert1 = ListItem("CRITICAL: Frequency 49.72 Hz", "System frequency below 50.0 Hz threshold. Under-frequency load shedding at risk.", "red")
+alert2 = ListItem("WARNING: Reserve margin 2.1%", "Operating reserves below 3% minimum. Consider economic dispatch.", "orange")
+alert3 = ListItem("INFO: Solar ramp event", "Solar output dropping 1,800 MW/h. Gas peakers ramping up.", "blue")
+alert4 = ListItem("CRITICAL: Line overload Zone A", "Line 345kV at 112% thermal limit. Immediate redispatch required.", "red")
+alert5 = ListItem("INFO: Price spike", "LMP jumped to $89.20/MWh. Market clearing price elevated.", "orange")
+
+regionSection = Card([regionHeading, regionButtons], "sunk")
+regionHeading = Heading("Focus on Region", "h3")
+regionButtons = Buttons([
+    btnAll, btnZoneA, btnZoneB, btnZoneC, btnZoneD, btnZoneE
+])
+btnAll = Button("All Zones", null, "primary")
+btnZoneA = Button("Zone A", null, "secondary")
+btnZoneB = Button("Zone B", null, "secondary")
+btnZoneC = Button("Zone C", null, "secondary")
+btnZoneD = Button("Zone D", null, "secondary")
+btnZoneE = Button("Zone E", null, "secondary")
+
+curtailSection = Card([curtailHeading, curtailForm], "sunk")
+curtailHeading = Heading("Order Curtailment", "h3")
+curtailForm = Form("curtailment-order", curtailButtons, [curtailRegion, curtailAmount, curtailReason])
+curtailRegion = FormControl("Target Region", regionSelect)
+regionSelect = Select("curtail_region", [regAll, regA, regB, regC, regD, regE], "Select region")
+regAll = SelectItem("all", "All Zones")
+regA = SelectItem("zoneA", "Zone A")
+regB = SelectItem("zoneB", "Zone B")
+regC = SelectItem("zoneC", "Zone C")
+regD = SelectItem("zoneD", "Zone D")
+regE = SelectItem("zoneE", "Zone E")
+curtailAmount = FormControl("Curtailment Amount (MW)", amountInput, "Amount to curtail from selected region")
+amountInput = Input("curtail_amount", "500", "number")
+curtailReason = FormControl("Reason", reasonSelect)
+reasonSelect = Select("curtail_reason", [resFreq, resReserve, resCongestion, resManual], "Select reason")
+resFreq = SelectItem("frequency", "Frequency event")
+resReserve = SelectItem("reserve", "Reserve requirement")
+resCongestion = SelectItem("congestion", "Transmission congestion")
+resManual = SelectItem("manual", "Manual dispatch")
+curtailButtons = Buttons([executeCurtail, cancelCurtail])
+executeCurtail = Button("Execute Curtailment", null, "primary")
+cancelCurtail = Button("Cancel", null, "tertiary")
+```

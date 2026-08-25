@@ -1,0 +1,82 @@
+root = Card([
+  header,
+  hubSelectorCard,
+  onTimeSection,
+  flightsSection,
+  delayedCallout,
+  gateChangesSection,
+  crewsSection,
+  weatherAlert,
+  connectionsSection,
+  cancellationsAlert,
+  turnaroundText,
+  rebookDialog
+], "card", "column", "l")
+
+header = CardHeader("Airline Hub Operations", "Today's Overview")
+
+hubSelectorCard = Card([hubSelectorForm], "clear", "row", "s")
+hubSelectorForm = Form("hub-select", hubSwitchButtons, [hubField])
+hubField = FormControl("Select Hub", hubSelect)
+hubSelect = Select("hub", [hubAtl, hubDfw, hubOrd, hubDen], "Choose hub", null, "ATL")
+hubAtl = SelectItem("ATL", "Atlanta (ATL)")
+hubDfw = SelectItem("DFW", "Dallas/Fort Worth (DFW)")
+hubOrd = SelectItem("ORD", "Chicago O'Hare (ORD)")
+hubDen = SelectItem("DEN", "Denver (DEN)")
+hubSwitchButtons = Buttons([hubSwitchBtn])
+hubSwitchBtn = Button("Switch Hub", null, "primary")
+
+onTimeSection = Card([onTimeHeader, onTimeProgress, loadProgress], "sunk", "row", "m", "start")
+onTimeHeader = CardHeader("Performance Metrics")
+onTimeProgress = Progress(87, "On-time performance")
+loadProgress = Progress(82, "Average passenger load")
+
+flightsSection = Card([flightsHeader, flightsTable], "sunk")
+flightsHeader = CardHeader("Today's Flights")
+flightsTable = Table([flightNumCol, routeCol, gateCol, statusCol])
+flightNumCol = Col("Flight", ["AA1234", "UA5678", "DL2345", "AA6789", "WN123", "B690"])
+routeCol = Col("Route", ["JFK-LAX", "ORD-SFO", "ATL-BOS", "DFW-MIA", "DEN-SEA", "LGA-IAH"])
+gateCol = Col("Gate", ["B12", "C7", "A3", "D10", "B5", "C9"])
+statusCol = Col("Status", ["On Time", "Delayed", "Cancelled", "Cancelled", "On Time", "Delayed"])
+
+delayedCallout = TextCallout("warning", "Delayed Flights", "AA1234 delayed 45 min (mechanical), UA5678 delayed 1h20m (weather), B690 delayed 30 min (crew)")
+
+gateChangesSection = Card([gateChangesHeader, gateChangesList], "sunk")
+gateChangesHeader = CardHeader("Recent Gate Changes")
+gateChangesList = ListBlock([gateChange1, gateChange2, gateChange3], "number")
+gateChange1 = ListItem("AA1234", "Gate B12 → C4 (10:25), reason: congestion")
+gateChange2 = ListItem("WN123", "Gate B5 → D2 (11:10), reason: late inbound")
+gateChange3 = ListItem("B690", "Gate C9 → A7 (11:45), reason: equipment")
+
+crewsSection = Card([crewsHeader, crewsTable], "sunk")
+crewsHeader = CardHeader("Crews Available for Reassignment")
+crewsTable = Table([crewNameCol, crewRoleCol, crewAvailableCol])
+crewNameCol = Col("Crew", ["Smith, J", "Lee, M", "Garcia, R", "Chen, L"])
+crewRoleCol = Col("Role", ["Captain", "First Officer", "Flight Attendant", "Flight Attendant"])
+crewAvailableCol = Col("Available From", ["14:30", "15:00", "13:45", "14:10"])
+
+weatherAlert = Alert("Weather Advisory", "Thunderstorms expected at hub from 15:00-19:00. Expect ground stops and delays.", "warning")
+
+connectionsSection = Card([connectionsHeader, connectionsTable], "sunk")
+connectionsHeader = CardHeader("Connections at Risk")
+connectionsTable = Table([connFlightCol, connPaxCol, connRiskCol])
+connFlightCol = Col("Inbound Flight", ["AA1234", "UA5678", "DL2345"])
+connPaxCol = Col("Connecting Passengers", [45, 32, 28])
+connRiskCol = Col("Risk Level", ["High", "Medium", "High"])
+
+cancellationsAlert = Alert("Cancellations Today", "2 flights cancelled: DL2345 (ATL-BOS) - 142 pax, AA6789 (DFW-MIA) - 118 pax. Rebooking required.", "destructive")
+
+turnaroundText = TextContent("Average turnaround time: **42 minutes**", "default")
+
+rebookDialog = DialogBlock("Rebook Passengers", "Rebooking Center", "Select affected flight and rebook passengers.", [rebookForm], "primary")
+rebookForm = Form("rebook-form", rebookButtons, [rebookFlightField, rebookPaxField])
+rebookFlightField = FormControl("Affected Flight", rebookFlightSelect)
+rebookFlightSelect = Select("flight", [rebookAA, rebookDL, rebookAA2], "Select flight")
+rebookAA = SelectItem("AA1234", "AA1234")
+rebookDL = SelectItem("DL2345", "DL2345")
+rebookAA2 = SelectItem("AA6789", "AA6789")
+rebookPaxField = FormControl("Passenger Count", rebookPaxInput)
+rebookPaxInput = Input("pax_count", "e.g., 45", "number")
+rebookButtons = Buttons([rebookSubmitBtn, rebookCancelBtn])
+rebookSubmitBtn = Button("Process Rebooking", null, "primary")
+rebookCancelBtn = Button("Cancel", null, "tertiary")

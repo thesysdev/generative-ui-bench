@@ -1,0 +1,121 @@
+```openui-lang
+// Define data for demonstration
+categories = ["Rent", "Groceries", "Utilities", "Transport", "Entertainment", "Dining Out", "Miscellaneous"]
+monthlySpent = [1200, 300, 150, 80, 100, 200, 50] // amounts per category
+budget = 2000
+expenses = [
+    {category: "Rent", amount: 1200},
+    {category: "Groceries", amount: 300},
+    {category: "Utilities", amount: 150},
+    {category: "Transport", amount: 80},
+    {category: "Entertainment", amount: 100},
+    {category: "Dining Out", amount: 200},
+    {category: "Miscellaneous", amount: 50}
+]
+selectedMonth = "2024-08"
+
+// Helper to find largest expense
+largestExpense = categories[0] + ": $" + String(expenses[0].amount)
+maxAmount = 0
+for i from 0 to expenses.length - 1 {
+    if expenses[i].amount > maxAmount {
+        maxAmount = expenses[i].amount
+        largestExpense = categories[i] + ": $" + String(expenses[i].amount)
+    }
+}
+
+// UI components
+root = Card(
+    [
+        // Header
+        CardHeader("Monthly Budget Check", "Current: " + selectedMonth),
+
+        // Total vs Budget
+        Card([totalVsBudget, arrowButtons], "sunk"),
+
+        // Total vs Budget details
+        totalVsBudget = Card(
+            [
+                TextContent("Total Spent: $" + String(sum(monthlySpent))),
+                TextContent("Budget: $" + String(budget)),
+                TextContent("Remaining: $" + String(budget - sum(monthlySpent))),
+                Tag(largestExpense, null, null, "success")
+            ],
+            "clear"
+        ),
+
+        // Spending by Category
+        spendingByCategory = BarChart(
+            categories,
+            [Series("Spent", monthlySpent)],
+            "grouped",
+            "Category",
+            "Amount Spent"
+        ),
+
+        // Month selector
+        monthSelector = Buttons(
+            [
+                Button("Previous Month", ["previousMonth"]),
+                Button("Next Month", ["nextMonth"])
+            ],
+            "row"
+        ),
+
+        // Add expense form
+        addExpenseForm = Form(
+            "addExpense",
+            formButtons,
+            [
+                addExpenseInput,
+                addExpenseSubmit
+            ]
+        ),
+
+        // Form controls
+        addExpenseInput = FormControl(
+            "Expense details",
+            inputField,
+            "Enter category and amount (e.g., Groceries $150)"
+        ),
+        inputField = TextArea(
+            "expense_input",
+            "Expense details",
+            2
+        ),
+        addExpenseSubmit = FormControl(
+            "Add Expense",
+            submitButton,
+            null
+        ),
+        submitButton = Button("Add", ["addExpense"], "primary"),
+
+        // Form buttons group
+        formButtons = Buttons(
+            [
+                addExpenseSubmit
+            ]
+        ),
+
+        // Arrow buttons for month navigation
+        arrowButtons = Buttons(
+            [
+                Button("← Previous", ["previousMonth"]),
+                Button("Next →", ["nextMonth"])
+            ]
+        )
+    ],
+    "card",
+    "column",
+    "center",
+    "stretch",
+    "none"
+)
+
+// Define actions (to be handled by backend)
+actionMap = {
+    "previousMonth": "loadMonth(selectedMonth - 1)",
+    "nextMonth": "loadMonth(selectedMonth + 1)",
+    "addExpense": "addExpense(inputField.value)"
+}
+```

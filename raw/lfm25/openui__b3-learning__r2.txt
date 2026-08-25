@@ -1,0 +1,50 @@
+```javascript
+root = Card([
+  // 1. Header
+  CardHeader("Training Analytics Dashboard", "Key performance indicators for our learning platform"),
+  
+  // 2. Active learners this week
+  ActiveLearners = TextContent("Active Learners: 245"),
+  
+  // 3. Course completion rate
+  CompletionRate = TextContent("Course Completion Rate: 78.5%"),
+  
+  // 4. Average quiz score
+  AverageQuizScore = TextContent("Average Quiz Score: 87.3"),
+  
+  // 5. Courses ranked by enrollment (Table)
+  CoursesByEnrollment = Table([
+    { col: { label: "Rank", data: "" }, col: { label: "Course", data: "Python Fundamentals" }, col: { label: "Enrollment", data: "142" } },
+    { col: { label: "Rank", data: "" }, col: { label: "Course", data: "Data Engineering" }, col: { label: "Enrollment", data: "118" } },
+    { col: { label: "Rank", data: "" }, col: { label: "Course", data: "Machine Learning" }, col: { label: "Enrollment", data: "105" } },
+    { col: { label: "Rank", data: "" }, col: { label: "Course", data: "Web Development" }, col: { label: "Enrollment", data: "98" } },
+    { col: { label: "Rank", data: "" }, col: { label: "Course", data: "Cyber Security" }, col: { label: "Enrollment", data: "87" } }
+  ]),
+  
+  // 6. Learners at risk of dropping out
+  AtRiskLearners = TextContent("Learners at Risk of Dropping Out: 34"),
+  
+  // 7. Engagement across the past eight weeks (HorizontalBarChart)
+  EngagementPast8Weeks = HorizontalBarChart({
+    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+    series: [{
+      category: "Engagement",
+      values: [42, 39, 44, 47, 52, 48, 55, 61]
+    }]
+  }),
+  
+  // 8. Cohort filter - allows narrowing to one cohort
+  CohortFilter = Select([
+    { value: "all", label: "All Cohorts" },
+    { value: "beginner", label: "Beginner Cohort" },
+    { value: "intermediate", label: "Intermediate Cohort" },
+    { value: "advanced", label: "Advanced Cohort" }
+  ], value: "all"),
+  
+  // 9. Message a cohort - button to send message to selected cohort
+  MessageCohort = Button({
+    label: "Message Selected Cohort",
+    onClick: () => console.log("Message sent to:", CohortFilter.value)
+  })
+])
+```

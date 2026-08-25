@@ -1,0 +1,38 @@
+{"op":"add","path":"/root","value":"main-container"}
+{"op":"add","path":"/elements/main-container","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-card","search-filter-card","inventory-overview-card","inventory-list","threshold-info-card"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["header-text-group","header-badge"]}}
+{"op":"add","path":"/elements/header-text-group","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["title-heading","subtitle-text"]}}
+{"op":"add","path":"/elements/title-heading","value":{"type":"Heading","props":{"text":"Inventory Alert: Low Stock Warning","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/subtitle-text","value":{"type":"TextContent","props":{"text":"Items below or nearing their critical replenishment threshold requiring immediate reorder.","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/header-badge","value":{"type":"Badge","props":{"text":"4 Critical Items","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/search-filter-card","value":{"type":"Card","props":{"variant":"sunk","direction":"row","gap":"m","align":"center"},"children":["search-input-wrapper"]}}
+{"op":"add","path":"/elements/search-input-wrapper","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["search-input"]}}
+{"op":"add","path":"/elements/search-input","value":{"type":"Input","props":{"name":"search","placeholder":"Search low stock items by SKU or product name...","value":{"$bindState":"/searchQuery"}},"children":[]}}
+{"op":"add","path":"/state/searchQuery","value":""}
+{"op":"add","path":"/elements/inventory-overview-card","value":{"type":"Card","props":{"variant":"card","direction":"row","gap":"m","justify":"between","align":"center"},"children":["threshold-callout","stock-chart"]}}
+{"op":"add","path":"/elements/threshold-callout","value":{"type":"Alert","props":{"title":"Global Threshold Warning","description":"Items trigger automated low-stock warnings when remaining inventory drops to ≤ 15 units. Reorder triggers are highlighted in red when ≤ 5 units.","variant":"warning"},"children":[]}}
+{"op":"add","path":"/elements/stock-chart","value":{"type":"HorizontalBarChart","props":{"labels":["Espresso Roast","Oat Milk Barista","Organic Matcha","Cold Brew Cans"],"series":["stockSeries"],"xLabel":"Remaining Units","yLabel":"SKU"},"children":[]}}
+{"op":"add","path":"/elements/stockSeries","value":{"type":"Series","props":{"category":"Current Stock","values":[3,7,4,11]},"children":[]}}
+{"op":"add","path":"/elements/inventory-list","value":{"type":"Card","props":{"direction":"column","gap":"m"},"repeat":{"statePath":"/lowStockItems","key":"id"},"children":["inventory-item-card"]}}
+{"op":"add","path":"/elements/inventory-item-card","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","gap":"m"},"children":["item-details-group","item-stock-status","item-reorder-action"]}}
+{"op":"add","path":"/elements/item-details-group","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["item-title","item-meta"]}}
+{"op":"add","path":"/elements/item-title","value":{"type":"Heading","props":{"text":{"$item":"name"},"level":"h4"},"children":[]}}
+{"op":"add","path":"/elements/item-meta","value":{"type":"TextContent","props":{"text":{"$template":"SKU: ${sku} • Category: ${category} • Supplier: ${supplier}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/item-stock-status","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"xs","align":"center"},"children":["remaining-count","threshold-detail"]}}
+{"op":"add","path":"/elements/remaining-count","value":{"type":"Badge","props":{"text":{"$template":"${remaining} units left"},"variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/threshold-detail","value":{"type":"TextContent","props":{"text":{"$template":"Threshold: ${threshold} units"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/item-reorder-action","value":{"type":"Buttons","props":{"buttons":["reorder-btn","history-btn"],"direction":"row"},"children":[]}}
+{"op":"add","path":"/elements/reorder-btn","value":{"type":"Button","props":{"label":{"$template":"Reorder (+${reorderQty})"},"variant":"primary","size":"medium"},"children":[]}}
+{"op":"add","path":"/elements/history-btn","value":{"type":"Button","props":{"label":"Vendor Details","variant":"secondary","size":"medium"},"children":[]}}
+{"op":"add","path":"/state/lowStockItems","value":[]}
+{"op":"add","path":"/state/lowStockItems/0","value":{"id":"1","name":"Organic Espresso Dark Roast (1kg)","sku":"COF-ESP-001","category":"Coffee Beans","supplier":"Andes Roasters Co.","remaining":3,"threshold":15,"reorderQty":50}}
+{"op":"add","path":"/state/lowStockItems/1","value":{"id":"2","name":"Barista Oat Milk (32oz Pack of 6)","sku":"MLK-OAT-004","category":"Dairy Alternatives","supplier":"Nordic Grains Ltd.","remaining":7,"threshold":15,"reorderQty":80}}
+{"op":"add","path":"/state/lowStockItems/2","value":{"id":"3","name":"Ceremonial Grade Matcha Powder (100g)","sku":"TEA-MTC-012","category":"Tea & Infusions","supplier":"Kyoto Herbal Imports","remaining":4,"threshold":12,"reorderQty":30}}
+{"op":"add","path":"/state/lowStockItems/3","value":{"id":"4","name":"Nitro Cold Brew 12oz Cans (Case of 24)","sku":"BEV-CLD-009","category":"Ready to Drink","supplier":"Pacific Beverage Hub","remaining":11,"threshold":20,"reorderQty":40}}
+{"op":"add","path":"/elements/threshold-info-card","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"s"},"children":["threshold-header","threshold-table"]}}
+{"op":"add","path":"/elements/threshold-header","value":{"type":"CardHeader","props":{"title":"Category Low-Stock Trigger Thresholds","subtitle":"Automated notification parameters configured by store operations"},"children":[]}}
+{"op":"add","path":"/elements/threshold-table","value":{"type":"Table","props":{"columns":["colCategory","colMinThreshold","colLeadTime","colStatus"]},"children":[]}}
+{"op":"add","path":"/elements/colCategory","value":{"type":"Col","props":{"label":"Category","data":["Coffee Beans","Dairy Alternatives","Tea & Infusions","Ready to Drink","Syrups & Flavorings"]},"children":[]}}
+{"op":"add","path":"/elements/colMinThreshold","value":{"type":"Col","props":{"label":"Warning Trigger (Units)","data":["15 units","15 units","12 units","20 units","10 units"]},"children":[]}}
+{"op":"add","path":"/elements/colLeadTime","value":{"type":"Col","props":{"label":"Supplier Lead Time","data":["2 business days","1 business day","5 business days","3 business days","2 business days"]},"children":[]}}
+{"op":"add","path":"/elements/colStatus","value":{"type":"Col","props":{"label":"Alert State","data":["CRITICAL","LOW","CRITICAL","LOW","NORMAL"]},"children":[]}}

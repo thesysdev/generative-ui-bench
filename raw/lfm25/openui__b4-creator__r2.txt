@@ -1,0 +1,151 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("Creator Studio Dashboard", "All metrics at a glance"),
+
+    // 1. Follower total and growth over the past month
+    FollowerStats("Total Followers", "Growth Last Month"),
+    FollowerStats(followersTotal: 45200, followersGrowth: 12.5),
+
+    // 2. Engagement rate
+    EngagementRate("Engagement Rate", "This Month"),
+    EngagementRate(engagementRate: 8.5),
+
+    // 3. Best posts this month with reach for each
+    BestPosts("Top Performing Posts - This Month",
+      PostArray([
+        {
+          title: "Project Launch Announcement",
+          reach: 21500,
+          platform: "Instagram",
+          date: "2026-09-15"
+        },
+        {
+          title: "Behind-the-Scenes Worktime",
+          reach: 17800,
+          platform: "TikTok",
+          date: "2026-09-18"
+        },
+        {
+          title: "Q3 Project Update",
+          reach: 14200,
+          platform: "YouTube",
+          date: "2026-09-20"
+        }
+      ]),
+
+    // 4. Audience split by platform
+    AudienceSplit("Audience Distribution by Platform",
+      PlatformData({
+        instagram: 55,
+        tiktok: 25,
+        youtube: 12,
+        twitter: 7
+      })),
+
+    // 5. Posts scheduled this week
+    UpcomingPosts("Posts Scheduled This Week",
+      PostSchedule([
+        {
+          platform: "Instagram",
+          time: "2026-09-17T10:00",
+          caption: "New project teaser",
+          id: "post_001"
+        },
+        {
+          platform: "TikTok",
+          time: "2026-09-18T16:00",
+          caption: "Day in the life",
+          id: "post_002"
+        },
+        {
+          platform: "YouTube",
+          time: "2026-09-19T14:00",
+          caption: "Deep dive series",
+          id: "post_003"
+        },
+        {
+          platform: "Twitter",
+          time: "2026-09-21T09:00",
+          caption: "Quick tips",
+          id: "post_004"
+        }
+      ]),
+
+    // 6. Best hour to post based on history
+    BestPostTime("Optimal Posting Time",
+      bestHour: "Evening 6:00-9:00 PM"),
+    BestPostTime(bestHourToPost: "6:00-9:00 PM Tuesday-Friday"),
+
+    // 7. Comments waiting for a reply
+    WaitingComments("Comments Awaiting Reply",
+      CommentQueue([
+        {
+          user: "creator_john",
+          comment: "Great work on the recent post!",
+          unread: true
+        },
+        {
+          user: "design_anna",
+          comment: "Could we get more behind-the-scenes content?",
+          unread: true
+        },
+        {
+          user: "tech_mike",
+          comment: "Nice timing for the launch announcement.",
+          unread: false
+        }
+      ]),
+
+    // 8. Earnings this month
+    MonthlyEarnings("This Month's Earnings",
+      earnings: { amount: 12500, currency: "USD" }),
+
+    // 9. Pending collaboration requests
+    CollaborationRequests("Pending Collaboration Requests",
+      RequestList([
+        {
+          creator: "DesignCo",
+          topic: "Brand identity package",
+          status: "pending"
+        },
+        {
+          creator: "AudioWave",
+          topic: "Podcast sponsorship",
+          status: "pending"
+        },
+        {
+          creator: "TechInsights",
+          topic: "Webinar co-hosting",
+          status: "pending"
+        }
+      ]),
+
+    // 10. Way to schedule a post with caption and time
+    PostScheduler("Schedule New Post",
+      SchedulerForm([
+        {
+          label: "Caption",
+          input: CaptionInput("Your post caption here..."),
+          required: true
+        },
+        {
+          label: "Publish Time",
+          input: TimePicker("Choose a datetime..."),
+          required: true
+        }
+      ]),
+
+    // 11. Way to narrow everything to one platform
+    PlatformFilter("Filter by Platform",
+      FilterDropdown(["All", "Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"]),
+      activePlatform: "All")
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "s",
+  align: "stretch",
+  wrap: true
+)
+```

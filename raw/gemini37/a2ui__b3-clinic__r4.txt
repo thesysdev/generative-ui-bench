@@ -1,0 +1,480 @@
+Here is a clinic receptionist day-view dashboard covering appointment tracking, room availability, metrics, quick patient check-in, and date navigation.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "nextPatientAlert",
+          "dateNavRow",
+          "kpiCard",
+          "roomStatusCard",
+          "tabsSection",
+          "checkInDialog"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Front Desk Reception — Daily Schedule",
+        "subtitle": "Tuesday, October 24 • Dr. Sarah Jenkins & Dr. Michael Chen"
+      },
+      {
+        "id": "nextPatientAlert",
+        "component": "Alert",
+        "title": "Next Patient: Clara Oswald (09:15 AM)",
+        "description": "Assigned to Exam Room 2 with Dr. Sarah Jenkins. Ready to be called in.",
+        "variant": "info"
+      },
+      {
+        "id": "dateNavRow",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "datePickerCtrl",
+          "quickNavButtons"
+        ]
+      },
+      {
+        "id": "datePickerCtrl",
+        "component": "DatePicker",
+        "name": "view_date",
+        "mode": "single",
+        "value": ["2023-10-24"]
+      },
+      {
+        "id": "quickNavButtons",
+        "component": "Buttons",
+        "buttons": [
+          "prevDayBtn",
+          "todayBtn",
+          "nextDayBtn"
+        ]
+      },
+      {
+        "id": "prevDayBtn",
+        "component": "Button",
+        "label": "← Previous Day",
+        "variant": "secondary",
+        "size": "small"
+      },
+      {
+        "id": "todayBtn",
+        "component": "Button",
+        "label": "Today",
+        "variant": "primary",
+        "size": "small"
+      },
+      {
+        "id": "nextDayBtn",
+        "component": "Button",
+        "label": "Next Day →",
+        "variant": "secondary",
+        "size": "small"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "expectedPatientsCard",
+          "noShowRateCard"
+        ]
+      },
+      {
+        "id": "expectedPatientsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "expectedHeader",
+          "expectedProgress"
+        ]
+      },
+      {
+        "id": "expectedHeader",
+        "component": "CardHeader",
+        "title": "28 Patients Expected Today",
+        "subtitle": "8 Checked In • 1 In Exam • 19 Remaining"
+      },
+      {
+        "id": "expectedProgress",
+        "component": "Progress",
+        "value": 32,
+        "label": "32% daily arrival completion"
+      },
+      {
+        "id": "noShowRateCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "noShowHeader",
+          "noShowBadge"
+        ]
+      },
+      {
+        "id": "noShowHeader",
+        "component": "CardHeader",
+        "title": "4.2% No-Show Rate",
+        "subtitle": "Month-to-date (Target: < 5.0%)"
+      },
+      {
+        "id": "noShowBadge",
+        "component": "Badge",
+        "text": "1.1% lower than last month",
+        "variant": "secondary"
+      },
+      {
+        "id": "roomStatusCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "roomHeader",
+          "freeRoomsTags"
+        ]
+      },
+      {
+        "id": "roomHeader",
+        "component": "CardHeader",
+        "title": "Live Room Availability",
+        "subtitle": "Green indicates rooms currently vacant and sanitized"
+      },
+      {
+        "id": "freeRoomsTags",
+        "component": "TagBlock",
+        "tags": [
+          "Room 101 (General): FREE",
+          "Room 103 (Pediatrics): FREE",
+          "Room 104 (Triage): FREE",
+          "Room 102 (Occupied - Dr. Chen)",
+          "Room 105 (Sanitizing)"
+        ]
+      },
+      {
+        "id": "tabsSection",
+        "component": "Tabs",
+        "items": [
+          "scheduleTab",
+          "quickCheckInTab"
+        ]
+      },
+      {
+        "id": "scheduleTab",
+        "component": "TabItem",
+        "value": "schedule",
+        "trigger": "Today's Appointments",
+        "content": [
+          "appointmentsTable"
+        ]
+      },
+      {
+        "id": "appointmentsTable",
+        "component": "Table",
+        "columns": [
+          "timeCol",
+          "patientCol",
+          "providerCol",
+          "roomCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "timeCol",
+        "component": "Col",
+        "label": "Time",
+        "type": "string",
+        "data": [
+          "08:30 AM",
+          "09:00 AM",
+          "09:15 AM",
+          "09:45 AM",
+          "10:15 AM",
+          "10:45 AM",
+          "11:15 AM"
+        ]
+      },
+      {
+        "id": "patientCol",
+        "component": "Col",
+        "label": "Patient Name",
+        "type": "string",
+        "data": [
+          "Eleanor Vance",
+          "Marcus Brody",
+          "Clara Oswald",
+          "David Sterling",
+          "Anita Patel",
+          "Lucas Gray",
+          "Sophia Rossi"
+        ]
+      },
+      {
+        "id": "providerCol",
+        "component": "Col",
+        "label": "Provider",
+        "type": "string",
+        "data": [
+          "Dr. Chen",
+          "Dr. Jenkins",
+          "Dr. Jenkins",
+          "Dr. Chen",
+          "Dr. Jenkins",
+          "Dr. Chen",
+          "Dr. Jenkins"
+        ]
+      },
+      {
+        "id": "roomCol",
+        "component": "Col",
+        "label": "Assigned Room",
+        "type": "string",
+        "data": [
+          "Room 102",
+          "Room 101",
+          "Room 103",
+          "Room 101",
+          "Room 103",
+          "Room 102",
+          "Room 103"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Status",
+        "type": "string",
+        "data": [
+          "Completed",
+          "In Consultation",
+          "Arrived (Next)",
+          "Checked In",
+          "Scheduled",
+          "Scheduled",
+          "Scheduled"
+        ]
+      },
+      {
+        "id": "quickCheckInTab",
+        "component": "TabItem",
+        "value": "checkin",
+        "trigger": "Fast Check-In Form",
+        "content": [
+          "checkInForm"
+        ]
+      },
+      {
+        "id": "checkInForm",
+        "component": "Form",
+        "name": "checkin-patient-form",
+        "buttons": "formButtonsGroup",
+        "fields": [
+          "patientSelectField",
+          "copayField",
+          "assignRoomField"
+        ]
+      },
+      {
+        "id": "patientSelectField",
+        "component": "FormControl",
+        "label": "Select Arrived Patient",
+        "hint": "Search from scheduled appointments",
+        "input": "patientSelect"
+      },
+      {
+        "id": "patientSelect",
+        "component": "Select",
+        "name": "patient_id",
+        "placeholder": "Choose patient to check in",
+        "items": [
+          "p1",
+          "p2",
+          "p3",
+          "p4"
+        ]
+      },
+      {
+        "id": "p1",
+        "component": "SelectItem",
+        "value": "clara",
+        "label": "Clara Oswald (09:15 AM - Dr. Jenkins)"
+      },
+      {
+        "id": "p2",
+        "component": "SelectItem",
+        "value": "david",
+        "label": "David Sterling (09:45 AM - Dr. Chen)"
+      },
+      {
+        "id": "p3",
+        "component": "SelectItem",
+        "value": "anita",
+        "label": "Anita Patel (10:15 AM - Dr. Jenkins)"
+      },
+      {
+        "id": "p4",
+        "component": "SelectItem",
+        "value": "lucas",
+        "label": "Lucas Gray (10:45 AM - Dr. Chen)"
+      },
+      {
+        "id": "copayField",
+        "component": "FormControl",
+        "label": "Copay Collection Status",
+        "input": "copayRadio"
+      },
+      {
+        "id": "copayRadio",
+        "component": "RadioGroup",
+        "name": "copay_status",
+        "defaultValue": "collected",
+        "items": [
+          "copayCollected",
+          "copayWaived",
+          "copayPending"
+        ]
+      },
+      {
+        "id": "copayCollected",
+        "component": "RadioItem",
+        "value": "collected",
+        "label": "Copay Collected ($25.00)",
+        "description": "Payment confirmed via terminal"
+      },
+      {
+        "id": "copayWaived",
+        "component": "RadioItem",
+        "value": "waived",
+        "label": "No Copay Due",
+        "description": "Secondary insurance / Preventative visit"
+      },
+      {
+        "id": "copayPending",
+        "component": "RadioItem",
+        "value": "pending",
+        "label": "Bill to Patient",
+        "description": "Collect at checkout"
+      },
+      {
+        "id": "assignRoomField",
+        "component": "FormControl",
+        "label": "Destination Exam Room",
+        "hint": "Only showing currently available sanitized rooms",
+        "input": "roomSelect"
+      },
+      {
+        "id": "roomSelect",
+        "component": "Select",
+        "name": "destination_room",
+        "placeholder": "Assign free room",
+        "items": [
+          "room101",
+          "room103",
+          "room104",
+          "waitingArea"
+        ]
+      },
+      {
+        "id": "room101",
+        "component": "SelectItem",
+        "value": "101",
+        "label": "Room 101 (General - Vacant)"
+      },
+      {
+        "id": "room103",
+        "component": "SelectItem",
+        "value": "103",
+        "label": "Room 103 (Pediatrics - Vacant)"
+      },
+      {
+        "id": "room104",
+        "component": "SelectItem",
+        "value": "104",
+        "label": "Room 104 (Triage - Vacant)"
+      },
+      {
+        "id": "waitingArea",
+        "component": "SelectItem",
+        "value": "waiting",
+        "label": "Main Waiting Room"
+      },
+      {
+        "id": "formButtonsGroup",
+        "component": "Buttons",
+        "buttons": [
+          "confirmCheckInBtn",
+          "notifyDoctorBtn"
+        ]
+      },
+      {
+        "id": "confirmCheckInBtn",
+        "component": "Button",
+        "label": "Complete Check-In",
+        "variant": "primary"
+      },
+      {
+        "id": "notifyDoctorBtn",
+        "component": "Button",
+        "label": "Check In & Notify Provider",
+        "variant": "secondary"
+      },
+      {
+        "id": "checkInDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Quick Walk-In Check In",
+        "triggerVariant": "default",
+        "title": "Emergency / Walk-In Registration",
+        "description": "Create a priority queue slot for an unregistered arrival.",
+        "content": [
+          "walkinNameField",
+          "walkinSubmitButtons"
+        ]
+      },
+      {
+        "id": "walkinNameField",
+        "component": "FormControl",
+        "label": "Patient Full Name",
+        "input": "walkinNameInput"
+      },
+      {
+        "id": "walkinNameInput",
+        "component": "Input",
+        "name": "walkin_name",
+        "placeholder": "e.g. John Doe"
+      },
+      {
+        "id": "walkinSubmitButtons",
+        "component": "Buttons",
+        "buttons": [
+          "queueWalkinBtn"
+        ]
+      },
+      {
+        "id": "queueWalkinBtn",
+        "component": "Button",
+        "label": "Add to Triage Queue",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

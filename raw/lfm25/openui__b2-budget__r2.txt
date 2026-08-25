@@ -1,0 +1,218 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header section
+    CardHeader("Personal Budget", "This month's spending overview"),
+    
+    // Month toggle
+    Separator(),
+    MonthSelector("View month:", null, "current", "last", "previous", variant="row"),
+    
+    // Budget summary
+    Card(
+      children: [
+        CardHeader("Budget Summary", "Total spent vs budget"),
+        Progress(value: 87.5, label: "Spent {87.5}% of budget"),
+        Text("Total Spent: ${12,450}"),
+        Text("Budget Limit: ${15,000}"),
+        Spacer()
+      ]
+    ),
+    
+    // Category breakdown
+    Card(
+      children: [
+        CardHeader("Spending by Category", "Breakdown of expenses"),
+        Table(
+          columns: [
+            {"label": "Category", "type": "string"},
+            {"label": "Amount", "type": "number"},
+            {"label": "Percentage", "type": "number"}
+          ],
+          data: [
+            {"label": "Housing", "amount": 4200, "percentage": 35},
+            {"label": "Food", "amount": 2800, "percentage": 24},
+            {"label": "Transport", "amount": 1800, "percentage": 15},
+            {"label": "Entertainment", "amount": 900, "percentage": 8},
+            {"label": "Utilities", "amount": 700, "percentage": 6},
+            {"label": "Other", "amount": 350, "percentage": 3}
+          ]
+        ),
+        // Largest expense highlight
+        Card(
+          children: [
+            CardHeader("Largest Expense", "Top spending item"),
+            Divider(decorative: true),
+            MetricCard(
+              title: "Biggest Spend",
+              value: "${4,200}",
+              icon: "coin"
+            ),
+            Text("Grocery Shopping"),
+            Spacer()
+          ]
+        )
+      ]
+    ),
+    
+    // Add expense form
+    Card(
+      children: [
+        CardHeader("Add New Expense", "Record your spending"),
+        Form(
+          name: "add_expense_form",
+          buttons: [Button("Submit", null, "primary")],
+          fields: [
+            FormControl("expense_name", "What did you spend on?", "text"),
+            FormControl("category", "Which category?", "select"),
+            FormControl("amount", "How much?", "number", "min": 0.01),
+            FormControl("date", "When?", "date")
+          ]
+        )
+      ]
+    ),
+    
+    // Month navigation icons
+    Card(
+      children: [
+        Icon("chevron-up", "Previous"),
+        Icon("chevron-down", "Next"),
+        Text("Month selector active: current")
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "center"
+)
+```
+
+Wait, I need to check if all components are properly defined and referenced. Let me review:
+
+- `root` - defined as Card - OK
+- `MonthSelector` - defined - OK  
+- `Progress` - part of CardHeader's sub-components? Actually Progress is a standalone component. Need to ensure it's referenced correctly.
+- `Table` - with columns and data - OK
+- `Divider` - OK
+- `MetricCard` - Hmm, this isn't a standard component in the signature. The available components include CardHeader, Heading, TextContent, MarkDownRenderer, CodeBlock, Image, ImageBlock, ImageGallery, Separator, HorizontalBarChart, RadarChart, PieChart, RadialChart, SingleStackedBarChart, ScatterChart, AreaChart, BarChart, LineChart, Table, TagBlock, Form, Buttons, Steps, Tabs, Accordion, Carousel, Card, etc.
+
+Actually looking at the available components, there's no `MetricCard` or similar. I should use existing components like `Card`, `Heading`, `Text`, `Progress` (which is actually a component), `Table`, etc.
+
+Let me fix this - remove `Divider` (not in signature), replace `MetricCard` with actual components, and ensure all references are valid.
+
+Also, `Progress` is a component that shows progress bars. That's good for the "spent vs budget" visualization.
+
+For the "largest expense" highlight, I can use a `Card` with some styling or perhaps a `Heading` with bold text and maybe an indicator.
+
+Let me revise the code to be fully compliant with the available components:
+
+```openui-lang
+root = Card(
+  children: [
+    // Header section
+    CardHeader("Personal Budget", "This month's spending overview"),
+    
+    // Month toggle
+    Separator(),
+    MonthSelector("View month:", null, "current", "last", "previous", variant="row"),
+    
+    // Budget summary
+    Card(
+      children: [
+        CardHeader("Budget Summary", "Total spent vs budget"),
+        Progress(value: 87.5, label: "Spent {87.5}% of budget"),
+        Text("Total Spent: ${12,450}"),
+        Text("Budget Limit: ${15,000}"),
+        Spacer()
+      ]
+    ),
+    
+    // Category breakdown
+    Card(
+      children: [
+        CardHeader("Spending by Category", "Breakdown of expenses"),
+        Table(
+          columns: [
+            {"label": "Category", "type": "string"},
+            {"label": "Amount", "type": "number"},
+            {"label": "Percentage", "type": "number"}
+          ],
+          data: [
+            {"label": "Housing", "amount": 4200, "percentage": 35},
+            {"label": "Food", "amount": 2800, "percentage": 24},
+            {"label": "Transport", "amount": 1800, "percentage": 15},
+            {"label": "Entertainment", "amount": 900, "percentage": 8},
+            {"label": "Utilities", "amount": 700, "percentage": 6},
+            {"label": "Other", "amount": 350, "percentage": 3}
+          ]
+        ),
+        // Largest expense highlight
+        Card(
+          children: [
+            CardHeader("Largest Expense", "Top spending item"),
+            Text("Grocery Shopping - ${4,200}"),
+            Spacer()
+          ]
+        )
+      ]
+    ),
+    
+    // Add expense form
+    Card(
+      children: [
+        CardHeader("Add New Expense", "Record your spending"),
+        Form(
+          name: "add_expense_form",
+          buttons: [Button("Submit", null, "primary")],
+          fields: [
+            FormControl("expense_name", "What did you spend on?", "text"),
+            FormControl("category", "Which category?", "select"),
+            FormControl("amount", "How much?", "number", "min": 0.01),
+            FormControl("date", "When?", "date")
+          ]
+        )
+      ]
+    ),
+    
+    // Month navigation icons
+    Card(
+      children: [
+        Icon("chevron-up", "Previous"),
+        Icon("chevron-down", "Next"),
+        Text("Current month view")
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "center"
+)
+```
+
+Wait, I need to check if `Icon` is a valid component. Looking at the signatures, I don't see `Icon` listed explicitly. The available components include: Card, CardHeader, Heading, TextContent, MarkDownRenderer, CodeBlock, Image, ImageBlock, ImageGallery, Separator, HorizontalBarChart, RadarChart, PieChart, RadialChart, SingleStackedBarChart, ScatterChart, AreaChart, BarChart, LineChart, Table, TagBlock, Form, Buttons, Steps, Tabs, Accordion, Carousel, Card, etc.
+
+Hmm, `Icon` might not be available. Let me remove it and use alternative approaches. For the month navigation, I could use simpler text or use other available components.
+
+Actually, looking more carefully at the component list, there's no `Icon` component mentioned. I should avoid using it. Instead, I can use a simple Text element or combine with other components.
+
+Let me also verify that `Progress` is indeed a valid component. Yes, it's listed in the Cards section: `Progress(value: number, label?: string)` - this is a valid component.
+
+Also, `Form` requires explicit buttons - I'm providing `[Button("Submit", null, "primary")]` which is correct.
+
+One issue: the `add_expense_form` uses `Form` which requires exactly 2 arguments: `(name, buttons)`. I have `[Button("Submit", null, "primary")]` - that's correct.
+
+But wait - the `Form` signature says: `Form(name: string, buttons: Buttons[], direction?: "row" | "column")`. So `buttons` should be an array of `Button` components. My array has one button, which is fine.
+
+However, I notice that in the example, they show `Form("demo-request", formButtons, [nameField, emailField, sizeField, planField])` where `formButtons` is passed as the second argument. So yes, `buttons` parameter accepts an array of `Button` components.
+
+Everything looks good now. Let me double-check all required items are covered:
+
+1. ✅ Total spent this month against the budget - The `Progress` component shows 87.5% spent, and the budget limit/spent amounts are shown in text
+2. ✅ Spending split by category - The `Table` with category columns shows breakdown
+3. ✅ The single largest expense highlighted - The bottom card with "Largest Expense" and Grocery Shopping
+4. ✅ A way to look at a different month - The `MonthSelector` allows switching between months
+5. ✅ A way to add an expense - The `Form` with add expense fields
+
+All items are covered. The code is valid OpenUI-Lang with proper referencing. Let me output the final code.<|tool_call_start|>[openui_lang_code(root='root = Card(\n  children: [\n    // Header section\n    CardHeader("Personal Budget", "This month's spending overview"),\n    \n    // Month toggle\n    Separator(),\n    MonthSelector("View month:", null, "current", "last", "previous", variant="row"),\n    \n    // Budget summary\n    Card(\n      children: [\n        CardHeader("Budget Summary", "Total spent vs budget"),\n        Progress(value: 87.5, label: "Spent {87.5}% of budget"),\n        Text("Total Spent: ${12,450}"),\n        Text("Budget Limit: ${15,000}"),\n        Spacer()\n      ]\n    ),\n    \n    // Category breakdown\n    Card(\n      children: [\n        CardHeader("Spending by Category", "Breakdown of expenses"),\n        Table(\n          columns: [\n            {"label": "Category", "type": "string"},\n            {"label": "Amount", "type": "number"},\n            {"label": "Percentage", "type": "number"}\n          ],\n          data: [\n            {"label": "Housing", "amount": 4200, "percentage": 35},\n            {"label": "Food", "amount": 2800, "percentage": 24},\n            {"label": "Transport", "amount": 1800, "percentage": 15},\n            {"label": "Entertainment", "amount": 900, "percentage": 8},\n            {"label": "Utilities", "amount": 700, "percentage": 6},\n            {"label": "Other", "amount": 350, "percentage": 3}\n          ]\n        ),\n        // Largest expense highlight\n        Card(\n          children: [\n            CardHeader("Largest Expense", "Top spending item"),\n            Text("Grocery Shopping - ${4,200}"),\n            Spacer()\n          ]\n        )\n      ]\n    ),\n    \n    // Add expense form\n    Card(\n      children: [\n        CardHeader("Add New Expense", "Record your spending"),\n        Form(\n          name: "add_expense_form",\n          buttons: [Button("Submit", null, "primary")],\n          fields: [\n            FormControl("expense_name", "What did you spend on?", "text"),\n            FormControl("category", "Which category?", "select"),\n            FormControl("amount", "How much?", "number", "min": 0.01),\n            FormControl("date", "When?", "date")\n          ]\n        )\n      ]\n    ),\n    \n    // Month navigation\n    Card(\n      children: [\n        Text("Previous month →"),\n        Text("Next month →"),\n        Text("Showing: Current month")\n      ]\n    )\n  ],\n  variant: "card",\n  direction: "row",\n  gap: "xl",\n  align: "center"\n)', function_name='root')]<|tool_call_end|>

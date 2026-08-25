@@ -1,0 +1,47 @@
+root = Card([header, kpis, expensesSection, transactionsSection, controlsSection, followUps], "card", "column", "l")
+
+header = CardHeader("Month-End Finance View", "October 2023 Financial Summary")
+
+kpis = Card([cashCard, burnCard, runwayCard], "sunk", "row", "m", "stretch", "between")
+cashCard = Card([cashTitle, cashValue, cashBadge], "card", "column", "xs")
+cashTitle = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$1,450,000", "large-heavy")
+cashBadge = Badge("+8% vs last month", "secondary")
+
+burnCard = Card([burnTitle, burnValue, burnBadge], "card", "column", "xs")
+burnTitle = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$120,000", "large-heavy")
+burnBadge = Badge("-4% vs last month", "outline")
+
+runwayCard = Card([runwayTitle, runwayValue, runwayBadge], "card", "column", "xs")
+runwayTitle = TextContent("Runway", "small")
+runwayValue = TextContent("12.1 Months", "large-heavy")
+runwayBadge = Badge("Healthy", "default")
+
+expensesSection = Card([expensesHeading, expensesChart], "clear", "column", "m")
+expensesHeading = Heading("Expenses Split by Category", "h3")
+expensesChart = PieChart(["Engineering", "Marketing", "Operations", "G&A", "Sales"], [65000, 25000, 15000, 10000, 5000], "donut")
+
+transactionsSection = Card([transactionsHeading, transactionsTable], "clear", "column", "m")
+transactionsHeading = Heading("Transactions > $10,000 (October)", "h3")
+transactionsTable = Table([txDate, txDesc, txCat, txAmount])
+txDate = Col("Date", ["2023-10-04", "2023-10-15", "2023-10-28"])
+txDesc = Col("Description", ["AWS Cloud Hosting", "Q4 Brand Campaign", "Enterprise Software Licenses"])
+txCat = Col("Category", ["Engineering", "Marketing", "Operations"])
+txAmount = Col("Amount", ["$14,200", "$25,000", "$12,500"])
+
+controlsSection = Card([controlsHeading, controlsForm], "sunk", "column", "m")
+controlsHeading = Heading("Statement Controls", "h3")
+controlsForm = Form("statement-controls", controlsButtons, [monthField])
+monthField = FormControl("Select Month", monthSelect, "Switch to view another month's statement")
+monthSelect = Select("month", [octItem, sepItem, augItem], "October 2023")
+octItem = SelectItem("2023-10", "October 2023")
+sepItem = SelectItem("2023-09", "September 2023")
+augItem = SelectItem("2023-08", "August 2023")
+controlsButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show runway projection for next 12 months")
+fu2 = FollowUpItem("Break down Engineering expenses further")
+fu3 = FollowUpItem("Export all transactions to CSV")

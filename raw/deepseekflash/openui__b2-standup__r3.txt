@@ -1,0 +1,27 @@
+root = Card([header, dateTag, missingCallout, blockedCallout, updatesHeading, updatesTable, postHeading, postForm])
+
+header = CardHeader("Async Standup", "Daily team check-in")
+dateTag = Tag("Wednesday, October 15, 2025", null, "md", "neutral")
+
+missingCallout = Callout("warning", "3 updates missing", "Five of eight teammates have posted. Three are still pending — please post your update before noon.")
+blockedCallout = Callout("error", "2 teammates are blocked", "Priya Patel and Marcus Reed need help today. Review their updates and reach out if you can unblock them.")
+
+updatesHeading = Heading("Today's updates", "h3")
+
+updatesTable = Table([nameCol, updateCol, statusCol])
+nameCol = Col("Teammate", ["Priya Patel", "Marcus Reed", "Jordan Lee", "Alex Kim", "Sam Torres"])
+updateCol = Col("Today's update", ["Blocked: awaiting API credentials from IT since Monday", "Blocked: test environment is down, investigating", "Shipped the dashboard filter — could use a review", "Finalizing the Q3 report outline", "Pairing with design on the new onboarding flow"])
+statusCol = Col("Status", ["Blocked", "Blocked", "On track", "On track", "On track"])
+
+postHeading = Heading("Post your update", "h3")
+postForm = Form("standup-update", postButtons, [nameField, statusField, updateField])
+nameField = FormControl("Your name", nameInput)
+nameInput = Input("name", "Kelly Ochoa")
+statusField = FormControl("Status for today", statusSelect)
+statusSelect = Select("status", [onTrackItem, blockedItem], "How's your day going?")
+onTrackItem = SelectItem("on-track", "On track")
+blockedItem = SelectItem("blocked", "Blocked")
+updateField = FormControl("Today's update", updateArea)
+updateArea = TextArea("update", "What did you work on today? Anything blocking you?", 4)
+postButtons = Buttons([submitBtn])
+submitBtn = Button("Post update", null, "primary")

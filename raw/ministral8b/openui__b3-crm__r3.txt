@@ -1,0 +1,53 @@
+```openui-lang
+root = Card([accountHeader, statsRow, activitySection, contactsSection, followUps, notesSection, renewalSection, callLogging])
+
+accountHeader = CardHeader("Acme Corp", "Owned by: Sarah Johnson")
+statsRow = Card([totalValue, dealStage], "sunk")
+totalValue = Card([valueLabel, valueAmount], "sunk")
+valueLabel = TextContent("Total Deal Value:", "small-heavy")
+valueAmount = TextContent("$1,285,000", "large-heavy", "success")
+dealStage = Card([stageLabel, stageValue], "sunk")
+stageLabel = TextContent("Current Stage:", "small-heavy")
+stageValue = TextContent("Negotiation", "large", "info")
+
+activitySection = CardHeader("Recent Activity", "Last 7 days")
+activityLog = ListBlock([activityItem1, activityItem2, activityItem3], "number")
+
+activityItem1 = ListItem("Proposal sent", "2 days ago", null, "View")
+activityItem2 = ListItem("Follow-up call", "4 days ago", null, "View")
+activityItem3 = ListItem("Contract review", "6 days ago", null, "View")
+
+contactsSection = CardHeader("Key Contacts", "3 total")
+contactsList = ListBlock([contact1, contact2, contact3], "image")
+contact1 = ListItem("Michael Chen", "CTO", ["https://picsum.photos/seed/michael/60/60"], "Call")
+contact2 = ListItem("Emily Rodriguez", "VP Sales", ["https://picsum.photos/seed/emily/60/60"], "Email")
+contact3 = ListItem("David Kim", "Legal", ["https://picsum.photos/seed/david/60/60"], "Schedule")
+
+followUps = CardHeader("Open Follow-ups")
+followUpItems = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("Follow up on proposal with Michael")
+followUp2 = FollowUpItem("Confirm contract signing date with Emily")
+
+notesSection = CardHeader("Quick Notes")
+noteForm = Form("account-notes", noteButtons, [noteField])
+noteField = FormControl("Add a note", noteInput)
+noteInput = TextArea("note", "Briefly summarize key discussion points...", 3)
+noteButtons = Buttons([addNoteBtn])
+addNoteBtn = Button("Add Note", null, "primary")
+
+renewalSection = Card([renewalDate, renewalWarning], "sunk")
+renewalDate = TextContent("Renewal Date:", "small-heavy")
+renewalDateValue = TextContent("June 15, 2025", "large", null, "danger")
+renewalWarning = Callout("Warning", "Renewal in 6 months", "warning")
+
+callLogging = CardHeader("Log a Call")
+callForm = Form("call-logging", callButtons, [callDetails, callNotes])
+callDetails = FormControl("Call Details", callSelect)
+callSelect = Select("call_type", [callType1, callType2], "Select call type")
+callType1 = SelectItem("Proposal discussion", "Proposal discussion")
+callType2 = SelectItem("Contract review", "Contract review")
+callNotes = FormControl("Notes", callInput)
+callInput = TextArea("call_notes", "Briefly summarize key points...", 3)
+callButtons = Buttons([logCallBtn])
+logCallBtn = Button("Log Call", null, "primary")
+```

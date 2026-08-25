@@ -1,0 +1,26 @@
+root = Card([header, todayBlock, compareBlock, hourlyChart, followUps])
+
+header = CardHeader("This morning at a glance", "Tuesday, 10:42 AM · Bridge Street Shop")
+
+todayBlock = Card([todayLabel, todayFigure, todayMeta], "sunk")
+todayLabel = TextContent("Revenue so far today", "small-heavy")
+todayFigure = Heading("$3,480", "h1")
+todayMeta = TextContent("48 orders · average basket $72.50 · doors open 3h 42m", "small")
+
+compareBlock = Card([compareCallout, compareTable, compareTags], "card", "column", "m")
+compareCallout = TextCallout("success", "Ahead of yesterday by $412", "At 10:42 AM yesterday you had taken $3,068. You are up 13.4% on the same point in the day.")
+compareTable = Table([metricCol, todayCol, yestCol, diffCol])
+metricCol = Col("Metric", ["Revenue", "Orders", "Average basket", "Busiest hour"])
+todayCol = Col("Today (to 10:42)", ["$3,480", "48", "$72.50", "9-10 AM"])
+yestCol = Col("Yesterday (to 10:42)", ["$3,068", "45", "$68.18", "10-11 AM"])
+diffCol = Col("Change", ["+13.4%", "+3", "+$4.32", "—"])
+compareTags = TagBlock(["Revenue +13.4%", "Orders +6.7%", "Basket +6.3%"])
+
+hourlyChart = LineChart(["7 AM", "8 AM", "9 AM", "10 AM", "10:42"], [todaySeries, yesterdaySeries], "natural", "Hour", "Cumulative revenue (USD)")
+todaySeries = Series("Today", [290, 940, 2110, 3120, 3480])
+yesterdaySeries = Series("Yesterday", [245, 810, 1760, 2680, 3068])
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Which products are driving today's lift?")
+fu2 = FollowUpItem("Compare this morning with last Tuesday")
+fu3 = FollowUpItem("Forecast today's closing total")

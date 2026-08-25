@@ -1,0 +1,54 @@
+root = Card([dayView, summary, nextPatient, checkIn, moveDay], "sunk")
+dayView = Card([header, schedule, roomList, nextPatientCallout], "sunk")
+header = CardHeader("Today's Appointments", "Receptionist View")
+schedule = ListBlock([
+  ListItem("9:00 AM - Alice Johnson (General)", "Patient arriving, check-in required", null, "check-in"),
+  ListItem("10:30 AM - Bob Martinez (Dental)", "Scheduled appointment, confirm arrival", null, "check-in"),
+  ListItem("11:45 AM - Carol Davis (Ophthalmology)", "Eye exam, arrive 15 min early", null, "check-in"),
+  ListItem("1:15 PM - David Kim (Cardiology)", "Follow-up visit, confirm arrival", null, "check-in"),
+  ListItem("2:30 PM - Emma Wilson (Pediatrics)", "Pediatric check-up, arrive 10 min early", null, "check-in"),
+], "number")
+roomList = Card([roomHeader, roomRows], "sunk")
+roomHeader = CardHeader("Available Rooms", "Currently free for booking")
+roomRows = ListBlock([
+  ListItem("Room 101 - Exam Room", "Available", null, null),
+  ListItem("Room 102 - Exam Room", "Available", null, null),
+  ListItem("Room 103 - Exam Room", "Available", null, null),
+  ListItem("Room 201 - Exam Room", "Available", null, null),
+  ListItem("Room 202 - Exam Room", "Available", null, null),
+], "number")
+nextPatientCallout = Callout("Next Patient Called", "Patient Sarah Lee has been called for 10:15 AM appointment", "warning")
+summary = Card([summaryHeading, kpiRow, noShowRate, freeRooms], "sunk")
+summaryHeading = Heading("Day Summary", "h3")
+kpiRow = Card([kpi1, kpi2, kpi3], "sunk")
+kpi1 = CardHeader("Total Patients", "Expected today")
+kpi2 = CardHeader("No-Show Rate", "This month")
+kpi3 = CardHeader("Next Patient", "Called out")
+kpi1 = Card([kpi1Header, kpi1Value], "sunk")
+kpi1Header = CardHeader("Total Patients", "Expected today")
+kpi1Value = TextCallout("12 patients expected", "10 scheduled, 2 cancelled", "info")
+kpi2 = Card([kpi2Header, kpi2Value], "sunk")
+kpi2Header = CardHeader("No-Show Rate", "This month")
+kpi2Value = TextCallout("1 of 12 (8.3%) no-shows", "Below the 10% threshold", "success")
+kpi3 = Card([kpi3Header, kpi3Value], "sunk")
+kpi3Header = CardHeader("Next Patient", "Called out")
+kpi3Value = CardHeader("Sarah Lee", "10:15 AM appointment")
+freeRooms = Card([freeRoomsHeader, freeRoomsRows], "sunk")
+freeRoomsHeader = CardHeader("Available Rooms", "Currently free for booking")
+freeRoomsRows = ListBlock([
+  ListItem("Room 101 - Exam Room", "Available"),
+  ListItem("Room 102 - Exam Room", "Available"),
+  ListItem("Room 103 - Exam Room", "Available"),
+  ListItem("Room 201 - Exam Room", "Available"),
+  ListItem("Room 202 - Exam Room", "Available"),
+], "number")
+checkIn = Card([checkInHeading, checkInActions], "sunk")
+checkInHeading = Heading("Check In a Patient", "Process new appointments")
+checkInActions = Buttons([checkInBtn, quickCheckInBtn], "column")
+checkInBtn = Button("Check In Patient", null, "primary")
+quickCheckInBtn = Button("Quick Check-In", null, "secondary")
+moveDay = Card([moveDayHeading, moveDayActions], "sunk")
+moveDayHeading = Heading("Move to Another Day", "Select a different date")
+moveDayActions = Buttons([prevDayBtn, nextDayBtn], "column")
+prevDayBtn = Button("Previous Day", null, "tertiary")
+nextDayBtn = Button("Next Day", null, "tertiary")

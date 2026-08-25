@@ -1,0 +1,48 @@
+root = Card([header, budgetSection, categorySection, largestExpenseSection, monthSection, addExpenseSection])
+
+header = CardHeader("Monthly Budget Check", "October 2024")
+
+budgetSection = Card([budgetText, budgetProgress], "sunk")
+budgetText = TextContent("**$2,840** spent of **$3,500** budget — $660 remaining", "default")
+budgetProgress = Progress(81, "81% of budget used")
+
+categorySection = Card([categoryHeading, categoryChart, categoryTable], "sunk")
+categoryHeading = Heading("Spending by Category", "h3")
+categoryChart = PieChart(categoryLabels, categoryValues, "donut")
+categoryLabels = ["Housing", "Food", "Transport", "Entertainment", "Utilities", "Shopping"]
+categoryValues = [1200, 480, 320, 210, 340, 290]
+categoryTable = Table([categoryCol, amountCol])
+categoryCol = Col("Category", ["Housing", "Food", "Transport", "Entertainment", "Utilities", "Shopping"])
+amountCol = Col("Amount", ["$1,200", "$480", "$320", "$210", "$340", "$290"], "string")
+
+largestExpenseSection = TextCallout("warning", "Largest Expense", "Rent payment — $1,200 (Housing) — 42% of total spending this month")
+
+monthSection = Form("month-select", monthButtons, [monthField])
+monthField = FormControl("Select month", monthSelect)
+monthSelect = Select("month", [octItem, sepItem, augItem, julItem], "Choose a month", null, "October")
+octItem = SelectItem("october", "October 2024")
+sepItem = SelectItem("september", "September 2024")
+augItem = SelectItem("august", "August 2024")
+julItem = SelectItem("july", "July 2024")
+monthButtons = Buttons([viewMonthBtn])
+viewMonthBtn = Button("View month", null, "secondary")
+
+addExpenseSection = DialogBlock("Add Expense", "Add a New Expense", "Enter the details of your expense below", [addExpenseForm], "default")
+addExpenseForm = Form("add-expense", addExpenseButtons, [expenseNameField, expenseAmountField, expenseCategoryField, expenseDateField])
+expenseNameField = FormControl("Expense name", expenseNameInput)
+expenseNameInput = Input("expense_name", "e.g. Groceries")
+expenseAmountField = FormControl("Amount", expenseAmountInput)
+expenseAmountInput = Input("amount", "0.00", "number")
+expenseCategoryField = FormControl("Category", expenseCategorySelect)
+expenseCategorySelect = Select("category", [catHousing, catFood, catTransport, catEntertainment, catUtilities, catShopping], "Choose category")
+catHousing = SelectItem("housing", "Housing")
+catFood = SelectItem("food", "Food")
+catTransport = SelectItem("transport", "Transport")
+catEntertainment = SelectItem("entertainment", "Entertainment")
+catUtilities = SelectItem("utilities", "Utilities")
+catShopping = SelectItem("shopping", "Shopping")
+expenseDateField = FormControl("Date", expenseDatePicker)
+expenseDatePicker = DatePicker("expense_date", "single")
+addExpenseButtons = Buttons([submitExpenseBtn, cancelExpenseBtn])
+submitExpenseBtn = Button("Add expense", null, "primary")
+cancelExpenseBtn = Button("Cancel", null, "tertiary")

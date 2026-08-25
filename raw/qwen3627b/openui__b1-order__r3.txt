@@ -1,0 +1,49 @@
+root = Card([header, statusCallout, steps, deliveryDateCard, problemCard], "card", "column", "m")
+
+header = CardHeader("Track Your Package", "Order #ORD-2024-78432")
+
+statusCallout = Callout("info", "Current Location", "Your package is at the **Central Distribution Hub** in Memphis, TN. It departed the facility at 2:30 PM and is en route to the local delivery station.")
+
+steps = Steps([step1, step2, step3, step4])
+
+step1 = StepsItem("Order Confirmed", "January 15, 2025 at 10:23 AM")
+
+step2 = StepsItem("Picked Up", "January 16, 2025 at 8:45 AM — Seller facility, Austin, TX")
+
+step3 = StepsItem("In Transit", "January 17, 2025 at 2:30 PM — Memphis Distribution Hub, TN")
+
+step4 = StepsItem("Out for Delivery", "Expected January 18, 2025 — Local station, Dallas, TX")
+
+deliveryDateCard = Card([deliveryHeading, deliveryDate], "sunk")
+
+deliveryHeading = Heading("Estimated Delivery", "h3")
+
+deliveryDate = TextContent("**January 18, 2025** by 8:00 PM", "large")
+
+problemCard = Card([problemHeading, problemForm], "sunk")
+
+problemHeading = Heading("Report a Problem", "h3")
+
+problemForm = Form("report-problem", formButtons, [issueField, detailField])
+
+issueField = FormControl("Issue Type", issueSelect)
+
+issueSelect = Select("issue_type", [issueDamaged, issueLate, issueMissing, issueOther], "Select the type of issue")
+
+issueDamaged = SelectItem("damaged", "Package damaged")
+
+issueLate = SelectItem("late", "Delivery late")
+
+issueMissing = SelectItem("missing", "Package missing")
+
+issueOther = SelectItem("other", "Other issue")
+
+detailField = FormControl("Details", detailInput, "Provide any additional information")
+
+detailInput = TextArea("details", "Describe the problem you're experiencing...", 4)
+
+formButtons = Buttons([submitBtn, cancelBtn])
+
+submitBtn = Button("Submit Report", null, "primary")
+
+cancelBtn = Button("Cancel", null, "tertiary")

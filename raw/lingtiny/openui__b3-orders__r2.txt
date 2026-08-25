@@ -1,0 +1,38 @@
+root = Card([header, filters, stats, orders, statusFilter, refundRate, volumeChart], "clear", "column", "m")
+
+header = CardHeader("E-Commerce Operations Desk", "Orders dashboard — today and this month")
+
+filters = Card([statusFilter, searchBar], "sunk")
+
+statusFilter = Select("Order Status", [statusAll, statusPending, statusShipped, statusDelivered, statusRefunded], "All statuses")
+
+searchBar = Input("Search customer name", placeholder: "Enter customer name", value: "")
+
+stats = Card([avgOrderValue, refundRate, volumeChart], "sunk")
+
+avgOrderValue = TextCallout("info", "Avg Order Value", "$127.42")
+
+refundRate = TextCallout("warning", "Refund Rate", "8.3%")
+
+volumeChart = HorizontalBarChart(["W1", "W2", "W3", "W4"], [volSeries], "grouped", "Week", "Orders")
+volSeries = Series("Volume", [1240, 1380, 1520, 1610])
+
+orders = Card([ordersTable], "sunk")
+
+ordersTable = Table([ordersCol, customerCol, totalCol, statusCol], [ordersData, customerData, totalData, statusData])
+
+ordersCol = Col("Order ID", ["ORD-0001", "ORD-0002", "ORD-0003", "ORD-0004", "ORD-0005"])
+customerCol = Col("Customer", ["Alice Chen", "Bob Martinez", "Carol Kim", "David Park", "Eva Johansson"])
+totalCol = Col("Total", ["$124.50", "$89.00", "$210.75", "$45.20", "$178.30"])
+statusCol = Col("Status", ["Shipped", "Pending", "Delivered", "Shipped", "Refunded"])
+
+statusFilter = Select("Order Status", [statusAll, statusPending, statusShipped, statusDelivered, statusRefunded], "All statuses")
+
+searchBar = Input("Search customer name", placeholder: "Enter customer name", value: "")
+
+refundRate = TextCallout("warning", "Refund Rate", "8.3%")
+
+volumeChart = HorizontalBarChart(["W1", "W2", "W3", "W4"], [volSeries], "grouped", "Week", "Orders")
+volSeries = Series("Volume", [1240, 1380, 1520, 1610])
+
+root = Card([header, filters, stats, orders, statusFilter, refundRate, volumeChart], "clear", "column", "m")

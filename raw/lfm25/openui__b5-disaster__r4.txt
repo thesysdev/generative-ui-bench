@@ -1,0 +1,172 @@
+root = Card(
+  children: [
+    // 1. Active incidents by zone with severity
+    incidentList = [
+      {
+        type: "incident-table",
+        data: [
+          { zone: "North District", severity: "Critical", incidentId: "INC-001", status: "Active", description: "Building collapse, 5 trapped" },
+          { zone: "South Valley", severity: "High", incidentId: "INC-002", status: "Ongoing", description: "Flooding, 12 displaced" },
+          { zone: "East Park", severity: "Medium", incidentId: "INC-003", status: "Resolved", description: "Fire containment complete" },
+          { zone: "West Hills", severity: "Critical", incidentId: "INC-004", status: "Active", description: "Structural failure, 8 injured" },
+          { zone: "South Market", severity: "High", incidentId: "INC-005", status: "Monitoring", description: "Chemical leak, hazmat response" }
+        ]
+      },
+      {
+        type: "severity-summary-card",
+        value: "Severe: 40%, High: 35%, Critical: 25%",
+        subtitle: "Overall Incident Severity"
+      },
+      
+      // 2. Overall severity summary
+      summaryCard = CardHeader("Incident Summary", "Overall Emergency Snapshot"),
+      severityTotal = TextContent("Severity", "40% Severe / 35% High / 25% Critical"),
+      incidentsCount = TextContent("Active Incidents", "5"),
+      resolutionRate = TextContent("Resolved", "60%"),
+      newIncidentsThisHour = TextContent("New Today", "3")
+      
+      // 3. Vehicles, personnel and supplies
+      resourcesSummary = Card(
+        children: [
+          { type: "metric-card", label: "Vehicles Available", value: "42", icon: "🚑" },
+          { type: "metric-card", label: "Personnel On Duty", value: "87", icon: "👥" },
+          { type: "metric-card", label: "Supplies Stocked", value: "78%", icon: "📦" }
+        ]
+      ),
+      
+      // 4. Shelters with capacity and occupancy
+      sheltersList = [
+        { name: "Oak Haven", capacity: "250", occupied: "180", zone: "North District" },
+        { name: "Peace Garden", capacity: "320", occupied: "240", zone: "South Valley" },
+        { name: "Safe Harbor", capacity: "150", occupied: "90", zone: "East Park" },
+        { name: "Sunrise Shelter", capacity: "200", occupied: "0", zone: "West Hills" }
+      ],
+      
+      // 5. Evacuation routes status
+      routesStatus = [
+        { route: "Route Alpha", status: "Open", progress: "85%" },
+        { route: "Route Beta", status: "Partial", progress: "45%" },
+        { route: "Route Gamma", status: "Closed", reason: "Flood damage" },
+        { route: "Route Delta", status: "Active", progress: "100%" }
+      ],
+      
+      // 6. Weather forecast 48 hours
+      weatherForecast = Card(
+        children: [
+          { label: "Today", value: "Partly cloudy, 28°C", icon: "🌤️" },
+          { label: "Tomorrow", value: "Showers, 24°C", icon: "☔" },
+          { label: "Day 3-4", value: "Rainy, 22°C", icon: "🌧️" },
+          { label: "Day 5-6", value: "Clear, 26°C", icon: "☀️" },
+          { label: "Day 7-8", value: "Storm watch, 25°C", icon: "⚡" }
+        ]
+      ),
+      
+      // 7. People rescued and casualties
+      outcomes = [
+        { metric: "People Rescued", value: "142", icon: "👥" },
+        { metric: "Casualties", value: "23", icon: "❌" },
+        { metric: "Recovered Alive", value: "89", icon: "🩺" }
+      ],
+      
+      // 8. Volunteers on duty with assignment
+      volunteers = [
+        { name: "Maria Lopez", role: "Logistics Lead", assignments: "Transport fleet coordination" },
+        { name: "James Chen", role: "Medical Ops", assignments: "Field hospital support" },
+        { name: "Aisha Patel", role: "Communications", assignments: "Channel monitoring" },
+        { name: "Carlos Mendes", role: "Site Safety", assignments: "Zone perimeter" }
+      ],
+      
+      // 9. Donations received
+      donations = [
+        { donor: "Red Cross", amount: "$15,000", currency: "USD" },
+        { donor: "Global Relief", amount: "8,500", currency: "USD" },
+        { donor: "Local Fund", amount: "3,200", currency: "USD" },
+        { donor: "Charity Aide", amount: "1,100", currency: "USD" }
+      ],
+      
+      // 10. Aid requests awaiting action
+      aidRequests = [
+        { id: "AR-01", type: "Food Supplies", priority: "High", status: "Pending" },
+        { id: "AR-02", type: "Medical Kits", priority: "Medium", status: "Pending" },
+        { id: "AR-03", type: "Water Purification", priority: "High", status: "Pending" }
+      ],
+      
+      // 11. Communication channels status
+      channels = [
+        { channel: "Twitter", status: "Online", alerts: 12 },
+        { channel: "Facebook", status: "Online", alerts: 5 },
+        { channel: "Radio", status: "Offline", alerts: 0 },
+        { channel: "SMS Network", status: "Online", outages: 2 }
+      ],
+      
+      // 12. Roads closed
+      closedRoads = [
+        "Main Street (North-South) - Flooding",
+        "Elm Avenue (East-West) - Landslide debris",
+        "River Road - Full closure due to storm surge",
+        "Central Highway - Construction work"
+      ],
+      
+      // 13. Nearby hospitals with free beds
+      hospitals = [
+        { name: "City General", bedsFree: 45, distance: "3 km" },
+        { name: "Riverside Medical", bedsFree: 30, distance: "5 km" },
+        { name: "Hilltop Hospital", bedsFree: 20, distance: "8 km" },
+        { name: "Valley Care", bedsFree: 60, distance: "6 km" }
+      ],
+      
+      // 14. Open tasks with assignee
+      tasks = [
+        { task: "Secure North Zone Perimeter", assignee: "Maria Lopez", status: "In Progress" },
+        { task: "Deploy medical teams to South Valley", assignee: "James Chen", status: "Pending" },
+        { task: "Set up water distribution points", assignee: "Aisha Patel", status: "Completed" },
+        { task: "Coordinate helicopter landings", assignee: "Carlos Mendes", status: "In Progress" }
+      ],
+      
+      // 15. Request more resources form
+      resourceRequestForm = Form(
+        name: "Resource Request",
+        fields: [
+          { label: "Resource Type", options: ["Vehicles", "Medical", "Supplies", "Power Generators"] },
+          { label: "Quantity", inputType: "number", min: 1, max: 100 },
+          { label: "Priority Level", options: ["Low", "Medium", "High", "Critical"] },
+          { label: "Description", multiline: true }
+        ],
+        submitAction: "request-resources"
+      ),
+      
+      // 16. Broadcast update
+      broadcastButton = Button("Broadcast Update", "broadcast", "primary"),
+      broadcastMessage = TextContent("Enter your update message..."),
+      
+      // 17. Focus on one zone
+      zoneFilterDropdown = Dropdown(
+        options: ["All Zones", "North District", "South Valley", "East Park", "West Hills"],
+        selected: "All Zones",
+        onChange: "update_zone_filter"
+      ),
+      
+      // 18. File situation report
+      situationReportForm = Form(
+        name: "Situation Report",
+        fields: [
+          { label: "Incident ID", input: "text" },
+          { label: "Location", input: "text" },
+          { label: "Status", radioOptions: ["Active", "Resolved", "Monitoring", "Closed"] },
+          { label: "Notes", multiline: true }
+        ],
+        submitAction: "file-sreport"
+      )
+      
+      // Main layout composition
+      zonesAndMetrics = [
+        { type: "section", title: "Active Incidents by Zone", children: [
+          { type: "incidentList", data: incidentList[0] },  // incidentList is already defined
+          { type: "summary-card", value: severityTotal },
+          { type: "severity-bars", bars: [60, 35, 25] }  // approximate severity percentages
+        ]}
+      ],
+      
+      // Actually let me restructure - ensure all variables are properly defined and referenced
+  ]
+)

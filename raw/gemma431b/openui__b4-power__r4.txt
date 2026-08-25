@@ -1,0 +1,57 @@
+root = Card([header, topMetrics, gridLayout, alertSection, footerActions], "clear", "column", "l")
+
+header = CardHeader("Grid Operations Command Center", "Real-time Network Stability & Generation Monitoring")
+
+topMetrics = Card([loadKpi, capacityKpi, priceKpi, emissionsKpi], "card", "row", "m", "between")
+loadKpi = TextCallout("info", "Current Load", "42,500 MW")
+capacityKpi = TextCallout("warning", "Capacity Margin", "12% Remaining")
+priceKpi = TextCallout("neutral", "Market Price", "$64.20 / MWh")
+emissionsKpi = TextCallout("danger", "Daily Emissions", "1.2M Tons CO2e")
+
+gridLayout = Card([regionSelector, mainDashboard], "clear", "column", "m")
+regionSelector = Form("region-focus", regionButtons, [regionField])
+regionField = FormControl("Active Monitoring Region", regionSelect)
+regionSelect = Select("region", [regNorth, regSouth, regEast, regWest], "All Regions")
+regNorth = SelectItem("north", "North Sector")
+regSouth = SelectItem("south", "South Sector")
+regEast = SelectItem("east", "East Sector")
+regWest = SelectItem("west", "West Sector")
+regionButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Focus Region", null, "primary")
+
+mainDashboard = Tabs([genTab, plantsTab, outagesTab, forecastTab])
+
+genTab = TabItem("generation", "Generation Mix", [genChart, genTable])
+genChart = PieChart(["Solar", "Wind", "Nuclear", "Gas", "Coal"], [8000, 12000, 15000, 7000, 500], "donut")
+genTable = Table([genSource, genValue])
+genSource = Col("Source", ["Solar", "Wind", "Nuclear", "Gas", "Coal"])
+genValue = Col("Output (MW)", ["8,000", "12,000", "15,000", "7,000", "500"])
+
+plantsTab = TabItem("plants", "Plant Status", [plantList])
+plantList = Table([pName, pOutput, pStatus])
+pName = Col("Plant Name", ["North-Wind A", "Solar-Valley", "Nu-Core 1", "Gas-Peak 4", "Coal-Legacy"])
+pOutput = Col("Current Output", ["2,400 MW", "1,100 MW", "4,500 MW", "800 MW", "100 MW"])
+pStatus = Col("Status", ["Optimal", "Intermittent", "Optimal", "Standby", "Degraded"])
+
+outagesTab = TabItem("outages", "Network Outages", [outageList])
+outageList = ListBlock([out1, out2, out3], "image")
+out1 = ListItem("Substation 42 Failure", "North Sector - Industrial Zone", ["https://picsum.photos/seed/outage1/100/100"])
+out2 = ListItem("Transmission Line Trip", "East Sector - Coastal", ["https://picsum.photos/seed/outage2/100/100"])
+out3 = ListItem("Transformer Overheat", "South Sector - Urban", ["https://picsum.photos/seed/outage3/100/100"])
+
+forecastTab = TabItem("forecast", "24h Demand Forecast", [demandChart])
+demandChart = AreaChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"], [demandSeries], "natural", "Time", "MW")
+demandSeries = Series("Projected Load", [38000, 35000, 45000, 48000, 46000, 43000])
+
+alertSection = Card([alertHeading, liveAlerts, maintenanceSection], "sunk", "column", "m")
+alertHeading = Heading("System Alerts & Maintenance", "h3")
+liveAlerts = ListBlock([a1, a2], "number")
+a1 = ListItem("Voltage Drop: Sector 7", "Critical threshold reached in Substation B")
+a2 = ListItem("Frequency Deviation", "Minor oscillation detected in West Grid")
+maintenanceSection = Accordion([maintItem])
+maintItem = AccordionItem("maint-1", "Planned Maintenance (October)", [maintContent])
+maintContent = MarkDownRenderer("- **Oct 12**: Transformer replacement (East Sector)\n- **Oct 15**: Line scrubbing (North Sector)\n- **Oct 22**: Turbine overhaul (Nu-Core 2)")
+
+footerActions = Card([curtailmentBtn, helpBtn], "clear", "row", "l", "end")
+curtailmentBtn = Button("Order Load Curtailment", null, "destructive", "destructive", "large")
+helpBtn = Button("System Manual", null, "secondary")

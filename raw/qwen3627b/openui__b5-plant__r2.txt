@@ -1,0 +1,190 @@
+Let me build a comprehensive factory floor supervisor's console. I need to cover all 17 items:
+
+1. Overall Equipment Effectiveness (OEE) - can use a RadialChart or Badge with percentage
+2. Units produced vs today's target - Progress or a comparison display
+3. Each production line with rate and status - Table or ListBlock
+4. Defect rate over past month - LineChart
+5. Downtime split by cause - PieChart or BarChart
+6. Machines due for maintenance - ListBlock or Table
+7. Stock of steel, resin, packaging - HorizontalBarChart or Table
+8. Supplier deliveries due this week - ListBlock or Table
+9. Each shift's output compared - BarChart
+10. Safety incidents this year and days since last - Badge/TextContent
+11. Batches on quality hold - ListBlock or Table
+12. Energy use today - AreaChart or BarChart
+13. Open work orders with priority - Table
+14. Schedule maintenance form - Form with machine and date
+15. Focus on one line - DialogBlock or DrawerBlock
+16. Live andon alerts - Callout or Alert
+17. Export shift report - Button
+
+Let me structure this as a Card with multiple sections. I'll use a column layout with various cards and components.
+
+Let me plan the layout:
+- Top section: OEE badge, units vs target, andon alerts
+- Middle section: Production lines table, defect rate chart, downtime chart
+- Lower section: Maintenance machines, stock levels, deliveries
+- Bottom section: Shift comparison, safety, quality hold, energy, work orders
+- Forms: Schedule maintenance, focus on line, export
+
+Let me build this out carefully, making sure every variable is referenced.
+
+I need to be careful about:
+- Every defined variable must be referenced
+- Positional arguments only
+- Proper component signatures
+
+Let me structure this:
+
+root = Card([...], "card", "column", "m")
+
+Sections:
+1. Header with title
+2. Top KPIs row (OEE, units vs target, safety)
+3. Andon alerts
+4. Production lines table
+5. Charts row (defect rate, downtime)
+6. Maintenance + Stock + Deliveries
+7. Shift output + Energy
+8. Quality hold + Work orders
+9. Schedule maintenance form
+10. Focus on line dialog
+11. Export button
+
+Let me write this out now. I need to be very careful with all the positional arguments.
+
+For the OEE, I'll use a RadialChart or a single value display. Actually, OEE is a single percentage - I could use a Badge or a RadialChart with one value. Let me use a Badge for the OEE percentage and a Progress for units vs target.
+
+Actually, let me think about this more carefully. I'll create a comprehensive dashboard.
+
+Let me write the code now, being very careful about every detail.
+root = Card([header, topKpis, andonAlerts, productionLines, chartsRow, opsRow, shiftEnergyRow, qualityOrdersRow, maintenanceForm, focusDialog, exportBtn], "card", "column", "m")
+
+header = CardHeader("Factory Floor Supervisor Console", "Live production dashboard — Last updated 2 min ago")
+
+topKpis = Card([oeeCard, unitsCard, safetyCard], "clear", "row", "m")
+
+oeeCard = Card([oeeLabel, oeeValue, oeeBreakdown], "sunk", "column", "s")
+oeeLabel = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = Badge("82.4%", "default")
+oeeBreakdown = TextContent("Availability: **89.1%** · Performance: **93.2%** · Quality: **99.6%**")
+
+unitsCard = Card([unitsLabel, unitsProgress, unitsText], "sunk", "column", "s")
+unitsLabel = Heading("Today's Production", "h3")
+unitsProgress = Progress(78, "7,820 / 10,000 units")
+unitsText = TextContent("**22%** remaining · On pace to hit target")
+
+safetyCard = Card([safetyLabel, safetyBadge, safetyDays], "sunk", "column", "s")
+safetyLabel = Heading("Safety", "h3")
+safetyBadge = Badge("2 incidents YTD", "secondary")
+safetyDays = TextContent("**147 days** since last recordable incident")
+
+andonAlerts = Card([andonHeader, andonActive1, andonActive2, andonActive3], "card", "column", "s")
+andonHeader = Heading("Live Andon Alerts", "h3")
+andonActive1 = Alert("Line 3 — Quality Stop", "Out-of-spec thickness detected on Batch #4482. Line halted pending QA review.", "destructive")
+andonActive2 = Alert("Line 1 — Material Low", "Steel coil running below 15%. Replenishment required within 45 min.", "warning")
+andonActive3 = Alert("Line 5 — Minor Jam", "Packaging arm jam cleared. Resuming in 3 min.", "info")
+
+productionLines = Card([linesHeader, linesTable], "card", "column", "s")
+linesHeader = Heading("Production Lines Status", "h3")
+linesTable = Table([lineCol, rateCol, statusCol, outputCol])
+lineCol = Col("Line", ["Line 1 — Press", "Line 2 — Press", "Line 3 — Molding", "Line 4 — Assembly", "Line 5 — Packaging"])
+rateCol = Col("Rate (units/hr)", ["142", "138", "0 (halted)", "156", "128"])
+statusCol = Col("Status", ["Running", "Running", "Quality Stop", "Running", "Recovering"])
+outputCol = Col("Today's Output", ["2,840", "2,760", "1,220", "3,120", "2,560"])
+
+chartsRow = Card([defectChart, downtimeChart], "clear", "row", "m")
+
+defectChart = Card([defectHeader, defectLineChart], "card", "column", "s")
+defectHeader = Heading("Defect Rate — Past 30 Days", "h3")
+defectLineChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6"], [defectSeries], "natural", "Week", "Defect Rate (%)")
+defectSeries = Series("Defect %", [1.8, 1.5, 2.1, 1.3, 1.1, 0.9])
+
+downtimeChart = Card([downtimeHeader, downtimePie], "card", "column", "s")
+downtimeHeader = Heading("Downtime by Cause — This Month", "h3")
+downtimePie = PieChart(["Changeover", "Unplanned Breakdown", "Material Shortage", "Quality Hold", "Scheduled Maint."], [18, 24, 12, 15, 31], "donut")
+
+opsRow = Card([maintCard, stockCard, deliveriesCard], "clear", "row", "m")
+
+maintCard = Card([maintHeader, maintList], "card", "column", "s")
+maintHeader = Heading("Machines Due for Maintenance", "h3")
+maintList = ListBlock([maint1, maint2, maint3, maint4])
+maint1 = ListItem("Hydraulic Press #7", "Due: Today · PM — Lubrication & seal check", null, "Schedule")
+maint2 = ListItem("Injection Molder #3", "Due: Tomorrow · CM — Barrel inspection", null, "Schedule")
+maint3 = ListItem("CNC Router #2", "Due: In 3 days · PM — Tool calibration", null, "Schedule")
+maint4 = ListItem("Conveyor System B", "Due: In 5 days · PM — Belt tension check", null, "Schedule")
+
+stockCard = Card([stockHeader, stockTable], "card", "column", "s")
+stockHeader = Heading("Raw Material Stock", "h3")
+stockTable = Table([materialCol, stockQty, stockStatus])
+materialCol = Col("Material", ["Steel Coil", "Resin Pellets", "Packaging Film"])
+stockQty = Col("Current Stock", ["4.2 tons", "18.5 tons", "3,200 rolls"])
+stockStatus = Col("Status", ["⚠ Low (1.5 days)", "✓ OK (6 days)", "✓ OK (4 days)"])
+
+deliveriesCard = Card([delHeader, delTable], "card", "column", "s")
+delHeader = Heading("Supplier Deliveries — This Week", "h3")
+delTable = Table([supplierCol, deliveryItem, deliveryDate, deliveryQty])
+supplierCol = Col("Supplier", ["MetalWorks Inc.", "PolyChem Ltd.", "PackRight Co.", "SteelCorp"])
+deliveryItem = Col("Item", ["Steel Coil 2mm", "Resin Grade A", "Packaging Film", "Steel Coil 3mm"])
+deliveryDate = Col("Expected", ["Mon", "Wed", "Thu", "Fri"])
+deliveryQty = Col("Quantity", ["5 tons", "20 tons", "5,000 rolls", "8 tons"])
+
+shiftEnergyRow = Card([shiftChart, energyChart], "clear", "row", "m")
+
+shiftChart = Card([shiftHeader, shiftBarChart], "card", "column", "s")
+shiftHeader = Heading("Shift Output Comparison — This Week", "h3")
+shiftBarChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri"], [shiftA, shiftB, shiftC], "grouped", "Day", "Units")
+shiftA = Series("Shift A (6-14)", [3200, 3350, 3100, 3400, 3280])
+shiftB = Series("Shift B (14-22)", [2900, 3050, 2800, 3100, 3020])
+shiftC = Series("Shift C (22-6)", [2100, 2200, 2050, 2300, 2150])
+
+energyChart = Card([energyHeader, energyArea], "card", "column", "s")
+energyHeader = Heading("Energy Consumption Today (kWh)", "h3")
+energyArea = AreaChart(["6am", "8am", "10am", "12pm", "2pm", "4pm", "6pm", "8pm", "10pm", "Midnight"], [energySeries], "natural", "Time", "kWh")
+energySeries = Series("kWh", [420, 680, 850, 920, 880, 910, 760, 540, 380, 310])
+
+qualityOrdersRow = Card([qualityCard, ordersCard], "clear", "row", "m")
+
+qualityCard = Card([qualHeader, qualTable], "card", "column", "s")
+qualHeader = Heading("Batches on Quality Hold", "h3")
+qualTable = Table([batchCol, batchLine, batchReason, batchTime])
+batchCol = Col("Batch #", ["4482", "4479", "4471"])
+batchLine = Col("Line", ["Line 3", "Line 2", "Line 1"])
+batchReason = Col("Reason", ["Thickness OOS", "Surface defect", "Color variance"])
+batchTime = Col("Held Since", ["14:22", "11:05", "08:40"])
+
+ordersCard = Card([woHeader, woTable], "card", "column", "s")
+woHeader = Heading("Open Work Orders", "h3")
+woTable = Table([woId, woDesc, woPriority, woAssignee])
+woId = Col("WO #", ["WO-1127", "WO-1128", "WO-1131", "WO-1133", "WO-1135"])
+woDesc = Col("Description", ["Replace press die #7", "Calibrate thermocouples", "Fix conveyor sensor", "Install new filter", "Upgrade PLC firmware"])
+woPriority = Col("Priority", ["🔴 High", "🟡 Medium", "🟡 Medium", "🟢 Low", "🟡 Medium"])
+woAssignee = Col("Assigned", ["Mike R.", "Sarah L.", "Tom K.", "Mike R.", "Sarah L."])
+
+maintenanceForm = Card([maintFormHeader, scheduleForm], "card", "column", "s")
+maintFormHeader = Heading("Schedule Maintenance", "h3")
+scheduleForm = Form("schedule-maintenance", formButtons, [machineField, dateField, typeField, notesField])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [m1, m2, m3, m4, m5], "Select machine")
+m1 = SelectItem("press7", "Hydraulic Press #7")
+m2 = SelectItem("molder3", "Injection Molder #3")
+m3 = SelectItem("cnc2", "CNC Router #2")
+m4 = SelectItem("conveyorB", "Conveyor System B")
+m5 = SelectItem("pack1", "Packaging Arm #1")
+dateField = FormControl("Maintenance Date", dateInput)
+dateInput = DatePicker("maint_date")
+typeField = FormControl("Maintenance Type", typeRadio)
+typeRadio = RadioGroup("maint_type", [pmOpt, cmOpt, emOpt])
+pmOpt = RadioItem("Preventive", "Scheduled preventive maintenance", "pm")
+cmOpt = RadioItem("Corrective", "Fix an existing issue", "cm")
+emOpt = RadioItem("Emergency", "Urgent unscheduled repair", "em")
+notesField = FormControl("Notes", notesInput)
+notesInput = TextArea("maint_notes", "Describe the maintenance scope...", 3)
+formButtons = Buttons([submitMaintBtn, cancelMaintBtn])
+submitMaintBtn = Button("Schedule", null, "primary")
+cancelMaintBtn = Button("Cancel", null, "tertiary")
+
+focusDialog = DialogBlock("Focus on One Line", "Line Deep Dive", "Select a line to view detailed performance, quality metrics, and real-time sensor data.", [focusContent], "outline")
+focusContent = MarkDownRenderer("### Line Deep Dive\n\nChoose a line to monitor in detail:\n\n- **Real-time rate** with minute-by-minute tracking\n- **Quality metrics** — CPK, defect Pareto, SPC charts\n- **Sensor telemetry** — temperature, pressure, vibration\n- **Operator log** — shift handoff notes and events\n- **Downtime timeline** — visual breakdown of all stops today")
+
+exportBtn = Button("Export Shift Report", null, "secondary")

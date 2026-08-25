@@ -1,0 +1,92 @@
+Let me build a comprehensive personal banking home screen that covers all 11 requirements:
+
+1. Balances for checking, savings, and credit - I'll use a table or card layout
+2. Recent transactions with merchant and amount - Table component
+3. Spending split by category this month - PieChart or SingleStackedBarChart
+4. Bills due soon - ListBlock
+5. Progress toward vacation savings goal - Progress component
+6. Current credit score - Badge or TextContent with a number
+7. Move money between accounts with amount - Form with Select and Input
+8. Freeze credit line - Button or AlertDialogBlock
+9. Pick a statement period - DatePicker
+10. Manage alert triggers - DialogBlock with CheckBoxGroup
+11. Dispute a transaction - DialogBlock or Button
+
+Let me plan the layout:
+- CardHeader for the banking home
+- Section 1: Account balances (checking, savings, credit) - maybe a table or cards
+- Section 2: Recent transactions - Table
+- Section 3: Spending by category - PieChart
+- Section 4: Bills due soon - ListBlock
+- Section 5: Vacation savings progress - Progress
+- Section 6: Credit score - Badge/TextContent
+- Section 7: Transfer money - Form
+- Section 8: Freeze credit line - Button/AlertDialogBlock
+- Section 9: Statement period picker - DialogBlock with DatePicker
+- Section 10: Alert management - DialogBlock with CheckBoxGroup
+- Section 11: Dispute transaction - DialogBlock
+
+Let me structure this carefully. I'll use Cards for sections and make sure everything is reachable from root.
+
+Let me think about the layout more carefully:
+
+Root Card with column direction containing:
+- CardHeader "Personal Banking"
+- Balances section (Card with 3 balance items)
+- Recent transactions table
+- Spending chart section
+- Bills due soon list
+- Vacation savings progress
+- Credit score
+- Quick actions (transfer, freeze, statement period, alerts, dispute)
+
+Let me code this up properly.
+root = Card([header, balancesCard, transactionsCard, spendingCard, billsCard, goalsCard, scoreCard, actionsCard], "card", "column", "m")
+
+header = CardHeader("Personal Banking", "Welcome back, Alex")
+
+balancesCard = Card([balancesTitle, balancesTable], "sunk", "column", "s")
+balancesTitle = Heading("Account Balances", "h3")
+balancesTable = Table([balanceType, balanceAmount, balanceStatus])
+balanceType = Col("Account", ["Checking", "Savings", "Credit Card"])
+balanceAmount = Col("Balance", ["$4,283.52", "$12,750.00", "-$1,847.33"])
+balanceStatus = Col("Status", ["Active", "Active", "Utilization 37%"])
+
+transactionsCard = Card([txTitle, txTable], "sunk", "column", "s")
+txTitle = Heading("Recent Transactions", "h3")
+txTable = Table([txMerchant, txDate, txCategory, txAmount])
+txMerchant = Col("Merchant", ["Amazon", "Starbucks", "Whole Foods", "Netflix", "Shell Gas", "Uber"])
+txDate = Col("Date", ["Jan 15", "Jan 14", "Jan 14", "Jan 13", "Jan 12", "Jan 11"])
+txCategory = Col("Category", ["Shopping", "Dining", "Groceries", "Entertainment", "Transport", "Transport"])
+txAmount = Col("Amount", ["-$89.99", "-$5.40", "-$62.35", "-$15.99", "-$42.18", "-$18.75"])
+
+spendingCard = Card([spendingTitle, spendingChart], "sunk", "column", "s")
+spendingTitle = Heading("Spending by Category — January", "h3")
+spendingChart = PieChart(["Groceries", "Dining", "Shopping", "Transport", "Entertainment", "Bills"], [623.50, 187.20, 459.99, 218.18, 75.98, 540.00], "donut", "circular")
+
+billsCard = Card([billsTitle, billsList], "sunk", "column", "s")
+billsTitle = Heading("Bills Due Soon", "h3")
+billsList = ListBlock([bill1, bill2, bill3, bill4], "number")
+bill1 = ListItem("Electric Company", "Due Jan 18 — $142.50")
+bill2 = ListItem("Internet Provider", "Due Jan 20 — $79.99")
+bill3 = ListItem("Car Insurance", "Due Jan 22 — $156.00")
+bill4 = ListItem("Student Loan", "Due Jan 25 — $320.00")
+
+goalsCard = Card([goalsTitle, vacationProgress], "sunk", "column", "s")
+goalsTitle = Heading("Vacation Savings Goal", "h3")
+vacationProgress = Progress(65, "65% — $3,250 of $5,000")
+
+scoreCard = Card([scoreTitle, scoreContent], "sunk", "column", "s")
+scoreTitle = Heading("Credit Score", "h3")
+scoreContent = Card([scoreBadge, scoreText], "clear", "row", "m", "center")
+scoreBadge = Badge("742", "default")
+scoreText = TextContent("Good — above average. Last updated Jan 10", "default")
+
+actionsCard = Card([actionsTitle, actionButtons], "sunk", "column", "s")
+actionsTitle = Heading("Quick Actions", "h3")
+actionButtons = Buttons([transferBtn, freezeBtn, statementBtn, alertsBtn, disputeBtn], "row")
+transferBtn = Button("Transfer Funds", null, "primary", "normal", "medium")
+freezeBtn = Button("Freeze Credit", null, "secondary", "normal", "medium")
+statementBtn = Button("Statement Period", null, "secondary", "normal", "medium")
+alertsBtn = Button("Manage Alerts", null, "secondary", "normal", "medium")
+disputeBtn = Button("Dispute Transaction", null, "secondary", "normal", "medium")

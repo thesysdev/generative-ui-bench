@@ -1,0 +1,69 @@
+Let me build a comprehensive month-end finance view for a startup. I need to cover:
+
+1. Cash on hand - a prominent display
+2. Monthly burn - another key metric
+3. Months of runway - calculated metric
+4. Expenses split by category - a chart (pie or bar chart)
+5. Transactions above $10,000 this month - a table
+6. A way to look at a different month - a date picker or select
+7. A way to download the statement - a button
+
+Let me plan the layout:
+- CardHeader for the title
+- Key metrics section (cash on hand, monthly burn, runway) - could use a table or badges
+- Expenses by category chart - PieChart or BarChart
+- Large transactions table
+- Month selector - Select or DatePicker
+- Download button
+
+Let me create realistic data for a startup:
+- Cash on hand: $1,247,500
+- Monthly burn: $185,000
+- Runway: ~6.7 months
+- Expenses by category: Payroll ($85k), Office/Remote ($12k), Software/Tools ($28k), Marketing ($35k), Legal/Compliance ($8k), Other ($17k)
+- Large transactions: several above $10k
+
+Let me structure this properly with openui-lang.
+
+I'll use:
+- CardHeader for title
+- A sunk card for key metrics with a table
+- A PieChart for expense categories
+- A Table for large transactions
+- A Select for month picker
+- A Button for download
+
+Let me write this out carefully, making sure every variable is referenced and all arguments are positional.
+root = Card([header, metricsCard, expensesCard, transactionsCard, controlsCard])
+
+header = CardHeader("Month-End Finance View", "October 2024")
+
+metricsCard = Card([metricsHeader, metricsTable, statusBadge], "sunk")
+metricsHeader = Heading("Key Metrics", "h3")
+metricsTable = Table([metricCol, valueCol])
+metricCol = Col("Metric", ["Cash on Hand", "Monthly Burn", "Months of Runway"])
+valueCol = Col("Value", ["$1,247,500", "$185,000", "6.7 months"])
+statusBadge = Badge("Runway: Healthy", "secondary")
+
+expensesCard = Card([expensesHeader, expenseChart], "sunk")
+expensesHeader = Heading("Expenses by Category", "h3")
+expenseChart = PieChart(["Payroll", "Marketing", "Software & Tools", "Office & Facilities", "Legal & Compliance", "Professional Services"], [85000, 35000, 28000, 12000, 8000, 17000], "donut", "circular")
+
+transactionsCard = Card([txHeader, txTable], "sunk")
+txHeader = Heading("Transactions Above $10,000", "h3")
+txTable = Table([txDateCol, txDescCol, txCategoryCol, txAmountCol])
+txDateCol = Col("Date", ["Oct 1", "Oct 3", "Oct 5", "Oct 7", "Oct 10", "Oct 14", "Oct 18", "Oct 22", "Oct 25", "Oct 28"])
+txDescCol = Col("Description", ["Payroll - Full Team", "AWS Cloud Services", "Google Ads Campaign", "Office Lease - HQ", "Salesforce License Renewal", "LinkedIn Ads Q4", "Slack & Zoom Annual", "Legal Retainer - Q4", "HubSpot Enterprise Plan", "Server Migration Services"])
+txCategoryCol = Col("Category", ["Payroll", "Software", "Marketing", "Office", "Software", "Marketing", "Software", "Legal", "Software", "Professional Services"])
+txAmountCol = Col("Amount", ["$85,000", "$18,500", "$15,200", "$12,000", "$11,400", "$14,800", "$10,500", "$10,000", "$12,600", "$13,500"])
+
+controlsCard = Card([monthSelector, downloadBtn], "clear")
+monthSelector = FormControl("Select Month", monthSelect)
+monthSelect = Select("month", [octItem, sepItem, augItem, julItem, junItem, mayItem], "October 2024")
+octItem = SelectItem("oct2024", "October 2024")
+sepItem = SelectItem("sep2024", "September 2024")
+augItem = SelectItem("aug2024", "August 2024")
+julItem = SelectItem("jul2024", "July 2024")
+junItem = SelectItem("jun2024", "June 2024")
+mayItem = SelectItem("may2024", "May 2024")
+downloadBtn = Button("Download Statement", null, "primary")

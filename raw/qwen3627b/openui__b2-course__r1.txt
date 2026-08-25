@@ -1,0 +1,136 @@
+The user wants a learner's course home screen with 6 specific items:
+1. Course title and instructor
+2. Overall progress percentage
+3. Modules with completion status for each
+4. Next lesson called out
+5. Average learner rating
+6. A way to continue learning
+
+Let me plan the components:
+
+1. CardHeader for course title and instructor
+2. Progress for overall progress percentage
+3. ListBlock or SectionBlock for modules with completion status
+4. Callout or TextCallout for the next lesson
+5. Badge or Tag for average learner rating
+6. Button for "continue learning"
+
+Let me build this out:
+
+- root = Card([...])
+- header = CardHeader("title", "instructor")
+- progress = Progress(percentage, "label")
+- modules = ListBlock([...]) or SectionBlock([...])
+- nextLesson = Callout or TextCallout
+- rating = Badge or Tag
+- continueBtn = Button
+
+Let me think about the layout more carefully:
+
+I'll use a Card with column direction and arrange:
+1. CardHeader - course title + instructor
+2. A row with progress + rating (side by side)
+3. Next lesson callout
+4. Modules list
+5. Continue button
+
+Let me define the modules as ListItem entries with completion status.
+
+For the modules, I'll use a ListBlock with variant "number" to show numbered modules.
+
+Let me code this up:
+
+```
+root = Card([header, statsRow, nextLesson, modulesSection, continueBtn], "card", "column", "m")
+header = CardHeader("Advanced Machine Learning", "Dr. Sarah Chen, Stanford University")
+statsRow = Card([progressBar, ratingBadge], "clear", "row", "m", "center", "between")
+progressBar = Progress(65, "Course Progress")
+ratingBadge = Badge("4.8 ★")
+nextLesson = Callout("info", "Next Lesson", "Neural Network Architecture - Chapter 7: Convolutional Neural Networks")
+modulesSection = Card([modulesHeading, modulesList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+modulesList = ListBlock([mod1, mod2, mod3, mod4, mod5, mod6], "number")
+mod1 = ListItem("Module 1: Introduction to ML", "✓ Completed", null, "")
+mod2 = ListItem("Module 2: Linear Regression", "✓ Completed", null, "")
+mod3 = ListItem("Module 3: Classification", "✓ Completed", null, "")
+mod4 = ListItem("Module 4: Decision Trees", "✓ Completed", null, "")
+mod5 = ListItem("Module 5: Neural Networks", "In Progress - 65%", null, "")
+mod6 = ListItem("Module 6: Deep Learning", "Not Started", null, "")
+continueBtn = Buttons([continueButton])
+continueButton = Button("Continue Learning", null, "primary")
+```
+
+Wait, I need to be careful about the ListItem signature: `ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)`
+
+So the subtitle can show completion status. Let me refine.
+
+Also, I should make sure the layout is visually appealing. Let me use a Card with "sunk" variant for the modules section to create visual hierarchy.
+
+Let me also add a Tag for the rating to make it more prominent.
+
+Actually, let me reconsider the structure. I want:
+1. Header with title and instructor
+2. Progress + rating on one row
+3. Next lesson callout
+4. Modules list
+5. Continue button
+
+Let me finalize:
+
+```
+root = Card([header, statsCard, nextLesson, modulesCard, actions], "card", "column", "m")
+header = CardHeader("Advanced Machine Learning", "Dr. Sarah Chen • Stanford University")
+statsCard = Card([progressBar, ratingTag], "sunk", "row", "m", "center", "between")
+progressBar = Progress(65, "65% Complete")
+ratingTag = Tag("4.8 ★ Average Rating", null, null, "info")
+nextLesson = TextCallout("info", "Up Next", "Chapter 7: Convolutional Neural Networks — 45 min")
+modulesCard = Card([modulesHeading, modulesList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+modulesList = ListBlock([mod1, mod2, mod3, mod4, mod5, mod6], "number")
+mod1 = ListItem("Introduction to Machine Learning", "✓ Completed", null, "")
+mod2 = ListItem("Linear Regression", "✓ Completed", null, "")
+mod3 = ListItem("Classification Algorithms", "✓ Completed", null, "")
+mod4 = ListItem("Decision Trees & Random Forests", "✓ Completed", null, "")
+mod5 = ListItem("Neural Network Architecture", "In Progress", null, "")
+mod6 = ListItem("Deep Learning & CNNs", "Locked", null, "")
+actions = Buttons([continueBtn])
+continueBtn = Button("Continue Learning", null, "primary")
+```
+
+Hmm, I need to check if TextCallout has the right signature. Looking at it:
+`TextCallout(variant?: "neutral" | "info" | "warning" | "success" | "danger", title?: string, description?: string)`
+
+So all are optional. I can pass: `TextCallout("info", "Up Next", "Chapter 7: Convolutional Neural Networks — 45 min")`
+
+That looks right.
+
+Let me also make sure the ListBlock items are correct. The signature is:
+`ListBlock(items: (ListItem)[], variant?: "number" | "image")`
+
+And ListItem is:
+`ListItem(title: string, subtitle?: string, image?: (string | number)[], actionLabel?: string)`
+
+So `mod1 = ListItem("Introduction to Machine Learning", "✓ Completed", null, "")` should work.
+
+Wait, I should double-check the actionLabel. It's optional, so I can just omit it or pass null. Let me pass null to be safe.
+
+Actually, looking more carefully, I think I should use an empty string or just omit the optional params. Let me just pass the title and subtitle and omit the rest.
+
+Let me finalize the code.
+root = Card([header, statsCard, nextLesson, modulesCard, actions], "card", "column", "m")
+header = CardHeader("Advanced Machine Learning", "Dr. Sarah Chen • Stanford University")
+statsCard = Card([progressBar, ratingTag], "sunk", "row", "m", "center", "between")
+progressBar = Progress(65, "65% Complete")
+ratingTag = Tag("4.8 ★ Average Rating", null, null, "info")
+nextLesson = TextCallout("info", "Up Next", "Chapter 7: Convolutional Neural Networks — 45 min")
+modulesCard = Card([modulesHeading, modulesList], "sunk")
+modulesHeading = Heading("Course Modules", "h3")
+modulesList = ListBlock([mod1, mod2, mod3, mod4, mod5, mod6], "number")
+mod1 = ListItem("Introduction to Machine Learning", "✓ Completed", null, "")
+mod2 = ListItem("Linear Regression", "✓ Completed", null, "")
+mod3 = ListItem("Classification Algorithms", "✓ Completed", null, "")
+mod4 = ListItem("Decision Trees & Random Forests", "✓ Completed", null, "")
+mod5 = ListItem("Neural Network Architecture", "In Progress", null, "")
+mod6 = ListItem("Deep Learning & CNNs", "Locked", null, "")
+actions = Buttons([continueBtn])
+continueBtn = Button("Continue Learning", null, "primary")

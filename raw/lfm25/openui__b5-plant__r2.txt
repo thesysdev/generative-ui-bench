@@ -1,0 +1,158 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("Factory Floor Supervisor Console", "Real-time operational dashboard"),
+    
+    // 1. Overall Equipment Effectiveness
+    Card(
+      "Overall Equipment Effectiveness (OEE)",
+      TextContent("OEE: 78.5%", size="large"),
+      TextContent("Formula: Availability × Performance × Quality"),
+    ),
+    
+    // 2. Units produced vs today's target
+    Card(
+      "Production Summary",
+      TextContent("Units Produced: 1,247 | Daily Target: 1,350 | Variance: -4%",
+          style="text-warning"),
+      TextContent("Performance: Below target but stable"),
+    ),
+    
+    // 3. Each production line with rate and status
+    Card(
+      "Production Lines",
+      [
+        {
+          "name": "Line 1 - Assembly",
+          "rate": "142 units/hr",
+          "status": "Operational",
+          "color": "green",
+        },
+        {
+          "name": "Line 2 - Packaging",
+          "rate": "128 units/hr",
+          "status": "Normal",
+          "color": "blue",
+        },
+        {
+          "name": "Line 3 - Finishing",
+          "rate": "135 units/hr",
+          "status": "Slight Delay",
+          "color": "yellow",
+        },
+      ]
+    ),
+    
+    // 4. Defect rate over the past month
+    Card(
+      "Defect Rate (Last 30 Days)",
+      TextContent("Defect Rate: 3.2% | Total Defective Units: 89 | Within Threshold: Yes"),
+    ),
+    
+    // 5. Downtime split by cause
+    Card(
+      "Downtime Breakdown",
+      TextContent("Equipment Failure: 45 minutes | Material Shortage: 20 minutes | Setup Time: 15 minutes"),
+    ),
+    
+    // 6. Machines due for maintenance
+    Card(
+      "Machines Requiring Maintenance",
+      TextContent("Machine #3 (Line 1): 2h remaining | Machine #7 (Line 2): 8h remaining | Machine #12 (Line 3): 24h remaining"),
+    ),
+    
+    // 7. Stock of steel, resin and packaging
+    Card(
+      "Material Inventory",
+      TextContent("Steel: 85 tons | Resin: 120 gallons | Packaging: 200 boxes"),
+    ),
+    
+    // 8. Supplier deliveries due this week
+    Card(
+      "Upcoming Deliveries (This Week)",
+      TextContent("Delivery A: Steel shipment - Due Tuesday 2026-03-10 | Delivery B: Resin - Due Wednesday 2026-03-11 | Delivery C: Packaging - Due Thursday 2026-03-12"),
+    ),
+    
+    // 9. Each shift's output compared
+    Card(
+      "Shift Output Comparison",
+      TextContent("Morning Shift: 980 units | Afternoon Shift: 310 units | Night Shift: Off"),
+    ),
+    
+    // 10. Safety incidents this year and days since last
+    Card(
+      "Safety Incidents (2026)",
+      TextContent("Incidents This Year: 4 | Days Since Last Incident: 18"),
+    ),
+    
+    // 11. Batches on quality hold
+    Card(
+      "Batches on Quality Hold",
+      TextContent("Batch #H-47: Wiring inspection failed | Batch #H-52: Material conformity issue"),
+    ),
+    
+    // 12. Energy use today
+    Card(
+      "Energy Consumption (Today)",
+      TextContent("Total: 4,280 kWh | Peak Hour: 58.5 kW | Efficiency: 92%"),
+    ),
+    
+    // 13. Open work orders with priority
+    Card(
+      "Open Work Orders",
+      TextContent("Critical: 2 | Medium: 3 | Low: 1 | Priority Levels: High, Medium, Low"),
+    ),
+    
+    // 14. Schedule maintenance with machine and date
+    Card(
+      "Maintenance Scheduling",
+      TextContent("Available Slots: Mon 08:00, Wed 14:00, Fri 09:00 | Add new task"),
+      Form(
+        "New Maintenance Task",
+        [
+          {
+            "machine": "Machine #3 (Line 1)",
+            "date": "2026-03-12",
+            "task": "Lubrication & calibration",
+            "priority": "high",
+          },
+          {
+            "machine": "Machine #7 (Line 2)",
+            "date": "2026-03-13",
+            "task": "Filter replacement",
+            "priority": "medium",
+          },
+        ],
+        Buttons([Button("Confirm", null, "primary")]),
+      )
+    ),
+    
+    // 15. Focus on one line
+    Card(
+      "Line Selection",
+      RadioGroup(
+        "lineSelection",
+        "Line 1 - Assembly",
+        "Line 2 - Packaging",
+        "Line 3 - Finishing",
+      )
+    ),
+    
+    // 16. Live andon alerts
+    Card(
+      "Live Andon Alerts",
+      TextContent("Critical: Conveyor Jam - Line 1 | Warning: Temp Spike - Line 2 | Info: Spare Parts Low - Line 3"),
+    ),
+    
+    // 17. Export shift report
+    Card(
+      "Export Shift Report",
+      Button("Export PDF", null, "primary"),
+    )
+  ],
+  variant = "card",
+  direction = "row",
+  gap = "s"
+)
+```

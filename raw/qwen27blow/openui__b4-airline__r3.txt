@@ -1,0 +1,75 @@
+
+
+root = Card([header, kpiRow, weatherCallout, delayAlert, flightsSection, gateChangesSection, connectionsSection, crewsSection, rebookSection, hubSwitch], "card", "column", "m")
+
+header = CardHeader("ATL Hub Operations Desk", "Atlanta International — Live Status | Today")
+
+kpiRow = Card([otpStat, paxLoadStat, cancelStat, turnaroundStat], "sunk", "row", "m", "center")
+
+otpStat = Card([otpLabel, otpValue, otpBar], "clear", "column", "xs")
+otpLabel = TextContent("**On-Time Performance**", "small")
+otpValue = TextContent("78.4%", "large-heavy")
+otpBar = Progress(78, "Target: 85%")
+
+paxLoadStat = Card([paxLabel, paxValue], "clear", "column", "xs")
+paxLabel = TextContent("**Avg Passenger Load**", "small")
+paxValue = TextContent("82.3%", "large-heavy")
+
+cancelStat = Card([cancelLabel, cancelValue], "clear", "column", "xs")
+cancelLabel = TextContent("**Cancellations Today**", "small")
+cancelValue = TextContent("6", "large-heavy")
+
+turnaroundStat = Card([turnLabel, turnValue], "clear", "column", "xs")
+turnLabel = TextContent("**Avg Turnaround**", "small")
+turnValue = TextContent("38 min", "large-heavy")
+
+weatherCallout = Callout("warning", "Weather Advisory — Moderate Thunderstorms", "Cell moving NE toward ATL at 14kt. Expected impact 1400–1700Z. Ground stop risk after 1530Z if cell intensifies. De-icing not required.")
+
+delayAlert = Callout("error", "14 Flights Currently Delayed", "Largest delays: AA 2104 (+75 min), DL 883 (+62 min), AA 1567 (+55 min). Cause: weather + crew availability.")
+
+flightsSection = Card([flightsHeading, flightsTable], "sunk", "column", "s")
+flightsHeading = Heading("Active Flights", "h3")
+flightsTable = Table([colFlight, colRoute, colGate, colStatus])
+colFlight = Col("Flight", ["AA 2104", "DL 883", "AA 1567", "DL 442", "AA 3391", "DL 1102", "AA 776", "DL 2205"])
+colRoute = Col("Route", ["ATL → ORD", "ATL → LAX", "ATL → MIA", "ATL → BOS", "ATL → DFW", "ATL → JFK", "ATL → SEA", "ATL → DEN"])
+colGate = Col("Gate", ["B12", "B28", "A4", "C7", "B15", "A11", "D3", "B22"])
+colStatus = Col("Status", ["Delayed 75m", "Delayed 62m", "Delayed 55m", "On Time", "Boarding", "Departed", "On Time", "Delayed 20m"])
+
+gateChangesSection = Card([gateHeading, gateTable], "sunk", "column", "s")
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateTable = Table([colGcFlight, colGcFrom, colGcTo, colGcTime])
+colGcFlight = Col("Flight", ["AA 2104", "DL 442", "AA 3391", "DL 1102"])
+colGcFrom = Col("From Gate", ["B12", "C3", "B15", "A11"])
+colGcTo = Col("To Gate", ["B28", "C7", "B18", "A14"])
+colGcTime = Col("Changed At", ["1342Z", "1315Z", "1258Z", "1245Z"])
+
+connectionsSection = Card([connHeading, connTable], "sunk", "column", "s")
+connHeading = Heading("Connections At Risk", "h3")
+connTable = Table([colConnPax, colConnFrom, colConnTo, colConnWindow])
+colConnPax = Col("Pax", ["4", "7", "3", "11"])
+colConnFrom = Col("Inbound", ["AA 2104 → ORD 1430", "DL 883 → LAX 1515", "AA 1567 → MIA 1400", "DL 2205 → DEN 1600"])
+colConnTo = Col("Outbound", ["ORD 1430 → SFO", "LAX 1515 → HNL", "MIA 1400 → SCL", "DEN 1600 → GEG"])
+colConnWindow = Col("Conn Window", ["18 min", "22 min", "15 min", "35 min"])
+
+crewsSection = Card([crewHeading, crewTable], "sunk", "column", "s")
+crewHeading = Heading("Crews Available for Reassignment", "h3")
+crewTable = Table([colCrewId, colCrewType, colCrewStatus, colCrewUntil])
+colCrewId = Col("Crew", ["FL-2201", "FL-2207", "FL-2214", "FL-2219", "FL-2223"])
+colCrewType = Col("Type", ["Pilot (B763)", "Cabin (B763)", "Pilot (A321)", "Cabin (A321)", "Pilot (B738)"])
+colCrewStatus = Col("Status", ["Available", "Available", "Available", "Available", "Available"])
+colCrewUntil = Col("Duty Until", ["1930Z", "1845Z", "2015Z", "1900Z", "1745Z"])
+
+rebookSection = Card([rebookHeading, rebookText, rebookBtns], "sunk", "column", "s")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookText = TextContent("25 passengers across 4 flights are at risk of missing connections. Use the rebooking tool to assign alternative routings.", "small")
+rebookBtns = Buttons([rebookBtn])
+rebookBtn = Button("Open Rebooking Tool", null, "primary")
+
+hubSwitch = Card([hubHeading, hubSelect], "sunk", "row", "m", "center")
+hubHeading = TextContent("**Switch Hub**", "default")
+hubSelect = Select("hub", [atl, dfw, ord, lax, mia], "Select hub")
+atl = SelectItem("ATL", "Atlanta International")
+dfw = SelectItem("DFW", "Dallas/Fort Worth")
+ord = SelectItem("ORD", "Chicago O'Hare")
+lax = SelectItem("LAX", "Los Angeles")
+mia = SelectItem("MIA", "Miami International")

@@ -1,0 +1,94 @@
+root = Card([
+  // 1. Uptime this quarter
+  TextContent("Service Uptime (Q3)", "99.2%"),
+  
+  // 2. CPU and memory usage over the past 24 hours
+  BarChart({
+    labels: ["Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6"],
+    series: [
+      {category: "CPU (%)", values: [45, 52, 48, 55, 49, 53]},
+      {category: "Memory (%)", values: [78, 82, 76, 84, 77, 79]}
+    ],
+    xLabel: "Time",
+    yLabel: "Utilization"
+  },
+  
+  // 3. Error rate right now
+  TextContent("Current Error Rate:", "18.5%"),
+  
+  // 4. Open incidents with severity for each
+  ListBlock([
+    {
+      title: "INC-101",
+      severity: "critical",
+      status: "open",
+      region: "us-east-1"
+    },
+    {
+      title: "INC-102",
+      severity: "high",
+      status: "in_progress",
+      region: "eu-west-1"
+    },
+    {
+      title: "INC-103",
+      severity: "medium",
+      status: "resolved",
+      region: "us-west-2"
+    }
+  ]),
+  
+  // 5. Way to narrow to one region
+  Card([
+    CardHeader("Filter by Region", "Select region to focus"),
+    Select({
+      items: [
+        {"value": "us-east-1", "label": "US East"},
+        {"value": "eu-west-1", "label": "EU West"},
+        {"value": "asia-pacific", "label": "Asia Pacific"}
+      ]
+    })
+  ]),
+  
+  // 6. Five slowest endpoints with latency
+  ListBlock([
+    {
+      title: "/api/users",
+      latency_ms: 1450,
+      status: "slow"
+    },
+    {
+      title: "/api/orders",
+      latency_ms: 1320,
+      status: "moderate"
+    },
+    {
+      title: "/api/payments",
+      latency_ms: 1180,
+      status: "critical"
+    },
+    {
+      title: "/api/inventory",
+      latency_ms: 980,
+      status: "warn"
+    },
+    {
+      title: "/api/notifications",
+      latency_ms: 850,
+      status: "good"
+    }
+  ]),
+  
+  // 7. Way to set alert threshold
+  Form([
+    FormControl({label: "Error Rate Threshold (%)", input: "35"}),
+    FormControl({label: "CPU Threshold (%)", input: "75"}),
+    FormControl({label: "Memory Threshold (%)", input: "85"})
+  ]),
+  
+  // 8. Way to acknowledge an incident
+  Card([
+    CardHeader("Acknowledge Incidents", "Mark as resolved"),
+    Button({label: "Acknowledge All Critical", variant: "primary", type: "normal"})
+  ])
+])

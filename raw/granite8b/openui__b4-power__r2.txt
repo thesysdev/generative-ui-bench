@@ -1,0 +1,150 @@
+```openui-lang
+root = Card([
+    regionHeader,
+    loadAndCapacity,
+    generationSplit,
+    plantDetails,
+    outages,
+    demandForecast,
+    price,
+    maintenancePlan,
+    liveAlerts,
+    regionFocus,
+    curtailmentOrder,
+    emissionsToday
+], "card", "column", "m", "center", "between", true)
+
+regionHeader = CardHeader("Power Network Operator Console", "Live Dashboard")
+
+loadAndCapacity = Card([
+    TextContent("Current Load: 12,450 MW", "large"),
+    Tag("Capacity Utilization: 78%", null, null, "warning"),
+    Separator(orientation: "horizontal", decorative: true)
+], "sunk")
+
+generationSplit = HorizontalBarChart(
+    ["Solar", "Wind", "Coal", "Gas", "Hydro"],
+    [Series("Generation Split", [30, 45, 15, 5, 5])],
+    "grouped",
+    "Energy Sources",
+    "Percentage"
+)
+
+plantDetails = Card([
+    Heading("Plant Status", "h4"),
+    Table([
+        Col("Plant", []),
+        Col("Output (MW)", []),
+        Col("Status", [])
+    ]),
+    // Example data – in real use, bind to live data source
+    // Each plant row must be added via a ListItem or similar
+    // Placeholder: rows = [
+    //   ListItem("Plant A", "5,200", "Online"),
+    //   ListItem("Plant B", "3,800", "Offline")
+    // ]
+    // rows
+], "clear")
+
+outages = Card([
+    Heading("Outages", "h4"),
+    Table([
+        Col("Region", []),
+        Col("Description", [])
+    ]),
+    // Example data – in real use, bind to live data source
+    // Placeholder: outageRows = [
+    //   ListItem("Midwest", "Transmission fault on line 12"),
+    //   ListItem("Northeast", "Generator tripped at Plant C")
+    // ]
+    // outageRows
+], "sunk")
+
+demandForecast = Card([
+    Heading("24‑Hour Demand Forecast", "h4"),
+    LineChart(
+        ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+        [Series("Forecast", [12, 14, 16, 18, 20, 22, 24, 22])],
+        "linear",
+        "Time (hour)",
+        "MW"
+    )
+], "clear")
+
+price = TextContent("Current Price: $45.67 per MWh", "large")
+
+maintenancePlan = Card([
+    Heading("Planned Maintenance (This Month)", "h4"),
+    ListBlock(items: [
+        ListItem("Plant X", "Transformer upgrade, 2025‑08‑15"),
+        ListItem("Plant Y", "Generator overhaul, 2025‑09‑02"),
+        ListItem("Transmission Line Z", "Inspection, 2025‑10‑05")
+    ], variant: "number")
+], "sunk")
+
+liveAlerts = Card([
+    Heading("Live Alerts", "h4"),
+    // Alerts will be pushed here; use a reactive list to append new alerts
+    // Placeholder: alerts = [
+    //   TextContent("Alert 1: High wind speeds in Southwest", "small-heavy", "warning"),
+    //   TextContent("Alert 2: Smoke detected at Plant B", "small-heavy", "danger")
+    // ]
+    // alerts
+], "clear")
+
+regionFocus = Card([
+    Heading("Focus Region", "h4"),
+    Select(
+        "region",
+        [
+            SelectItem("All", "All"),
+            SelectItem("North", "North"),
+            SelectItem("South", "South"),
+            SelectItem("East", "East"),
+            SelectItem("West", "West")
+        ],
+        placeholder: "Select region",
+        value: "All",
+        size: "medium"
+    ),
+    Separator(orientation: "horizontal", decorative: true)
+], "sunk")
+
+curtailmentOrder = Card([
+    Heading("Curtailment Order", "h4"),
+    Form(
+        "curtailment",
+        Buttons([
+            Button("Order Curtailment", ["order", "curtailment"], "primary")
+        ]),
+        [
+            FormControl(
+                "Amount (MW)",
+                Input("amount", type: "number", placeholder: "Enter MW", value: "0")
+            ),
+            FormControl(
+                "Region",
+                Select(
+                    "region",
+                    [
+                        SelectItem("All", "All"),
+                        SelectItem("North", "North"),
+                        SelectItem("South", "South"),
+                        SelectItem("East", "East"),
+                        SelectItem("West", "West")
+                    ],
+                    placeholder: "Select region",
+                    value: "All",
+                    size: "medium"
+                )
+            )
+        ]
+    )
+], "clear")
+
+emissionsToday = Card([
+    Heading("Emissions (Today)", "h4"),
+    Tag("CO₂: 4,200 metric tons", null, null, "info")
+], "sunk")
+
+```

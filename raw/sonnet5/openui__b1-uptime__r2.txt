@@ -1,0 +1,12 @@
+root = Card([header, uptimeSection, incidentSection])
+header = CardHeader("Platform Status", "API Service Health")
+
+uptimeSection = Card([uptimeHeading, uptimeProgress, uptimeStats], "sunk")
+uptimeHeading = Heading("Uptime This Month", "h3")
+uptimeProgress = Progress(99.94, "API Uptime — October")
+uptimeStats = TagBlock(["99.94% Uptime", "26 min downtime", "SLA: 99.9%"])
+
+incidentSection = Card([incidentHeading, incidentCallout, incidentDetails], "sunk")
+incidentHeading = Heading("Most Recent Incident", "h3")
+incidentCallout = TextCallout("success", "Resolved", "Elevated API latency causing intermittent 500 errors on the /orders endpoint.")
+incidentDetails = TextContent("**Incident:** Elevated latency on /orders endpoint\n**Started:** Oct 12, 2025, 14:32 UTC\n**Resolved:** Oct 12, 2025, 15:58 UTC\n**Duration:** 1h 26m\n**Root cause:** A database connection pool exhaustion under peak load triggered timeouts. Mitigated by scaling the connection pool and adding circuit breakers.", "default")

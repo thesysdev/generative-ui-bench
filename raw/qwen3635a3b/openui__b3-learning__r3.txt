@@ -1,0 +1,42 @@
+root = Card([header, kpisSection, filterSection, engagementSection, coursesSection, atRiskSection, actionsSection])
+
+header = CardHeader("Training Analytics", "Weekly overview and cohort insights")
+
+kpisSection = Card([activeLearners, completionRate, avgQuizScore], "sunk", "row", "l")
+activeLearners = TextContent("Active Learners This Week: 1,247", "large-heavy")
+completionRate = Card([completionLabel, completionProgress], "clear", "column", "s")
+completionLabel = TextContent("Course Completion Rate", "default")
+completionProgress = Progress(78, "78%")
+avgQuizScore = TextContent("Average Quiz Score: 82.4%", "large-heavy")
+
+filterSection = Card([filterLabel, cohortFilter], "clear", "column", "s")
+filterLabel = TextContent("Filter by Cohort", "default")
+cohortFilter = Select("cohort", [cohortAll, cohortEngineering, cohortMarketing, cohortSales, cohortDesign], "Select a cohort", null, "medium")
+cohortAll = SelectItem("all", "All Cohorts")
+cohortEngineering = SelectItem("engineering", "Engineering")
+cohortMarketing = SelectItem("marketing", "Marketing")
+cohortSales = SelectItem("sales", "Sales")
+cohortDesign = SelectItem("design", "Design")
+
+engagementSection = Card([engagementHeading, engagementChart], "sunk")
+engagementHeading = Heading("Engagement Over 8 Weeks", "h3")
+engagementChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"], [engagementSeries], "linear", "Week", "Active Sessions")
+engagementSeries = Series("Active Sessions", [820, 910, 875, 1050, 1120, 1080, 1190, 1247])
+
+coursesSection = Card([coursesHeading, coursesChart], "sunk")
+coursesHeading = Heading("Courses by Enrollment", "h3")
+coursesChart = HorizontalBarChart(["Data Science 101", "Cloud Architecture", "Leadership Skills", "Cybersecurity Fundamentals", "Agile Methodologies", "UX Design Patterns"], [enrollmentSeries], "grouped", "Course", "Enrollments")
+enrollmentSeries = Series("Enrollments", [342, 289, 256, 198, 167, 143])
+
+atRiskSection = Card([atRiskHeading, atRiskList], "sunk")
+atRiskHeading = Heading("Learners At Risk of Dropping Out", "h3")
+atRiskList = ListBlock([risk1, risk2, risk3, risk4, risk5], "number")
+risk1 = ListItem("Marcus Chen", "Last active 12 days ago • 3 courses behind")
+risk2 = ListItem("Sarah Johnson", "Quiz scores declining • 5 days inactive")
+risk3 = ListItem("David Park", "No submission in 2 weeks • Low engagement")
+risk4 = ListItem("Aisha Patel", "Failed 2 quizzes • 8 days inactive")
+risk5 = ListItem("Tom Rivera", "Progress stalled at 20% • 6 days inactive")
+
+actionsSection = Buttons([messageBtn, exportBtn], "row")
+messageBtn = Button("Message Selected Cohort")
+exportBtn = Button("Export Report", null, "secondary")

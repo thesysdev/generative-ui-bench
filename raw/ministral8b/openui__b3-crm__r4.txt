@@ -1,0 +1,57 @@
+```openui-lang
+root = Card([headerSection, accountInfo, metrics, activity, contacts, followUps, notes, renewal, callLog], "card", "column", "m")
+
+headerSection = Card([accountHeader], "sunk")
+accountHeader = CardHeader("Account Overview", "Managed by: John Smith")
+
+accountInfo = Card([accountName, dealValue], "sunk")
+accountName = Heading("Acme Corp", "h3")
+dealValue = TextContent("Total Deal Value: $1,250,000", "large-heavy")
+
+metrics = Card([stage, pipelineValue], "sunk")
+stage = Tag("Negotiation", null, null, "info")
+pipelineValue = TextCallout("Pipeline Value", "$875,000", "neutral")
+
+activity = Card([activityTitle, recentActivity], "sunk")
+activityTitle = Heading("Recent Activity", "h4")
+recentActivity = ListBlock([activityItem1, activityItem2, activityItem3])
+activityItem1 = ListItem("Meeting scheduled", "Today 2:00 PM", null, "View")
+activityItem2 = ListItem("Proposal sent", "Yesterday", null, "View")
+activityItem3 = ListItem("Follow-up call", "2 days ago", null, "View")
+
+contacts = Card([contactsTitle, contactList], "sunk")
+contactsTitle = Heading("Contacts", "h4")
+contactList = ListBlock([contact1, contact2, contact3])
+contact1 = ListItem("Michael Chen", "VP of Sales", ["https://picsum.photos/seed/michael/60/60"], null)
+contact2 = ListItem("Sarah Johnson", "Director of Marketing", ["https://picsum.photos/seed/sarah/60/60"], null)
+contact3 = ListItem("David Kim", "CEO", ["https://picsum.photos/seed/david/60/60"], null)
+
+followUps = Card([followUpsTitle, followUpItems], "sunk")
+followUpsTitle = Heading("Open Follow-ups", "h4")
+followUpItems = ListBlock([followUp1, followUp2])
+followUp1 = ListItem("Schedule demo", "2023-12-15", null, null)
+followUp2 = ListItem("Address concerns", "2023-12-20", null, null)
+
+notes = Card([notesTitle, noteInput], "sunk")
+notesTitle = Heading("Quick Notes", "h4")
+noteInput = TextArea("notes", "Add a quick note...", 3, null, null)
+
+renewal = Card([renewalDate, renewalWarning], "sunk")
+renewalDate = TextContent("Renewal Date: 2024-03-31", "large-heavy")
+renewalWarning = Callout("Renewal Approaching", "Renewal in 60 days", "warning")
+
+callLog = Card([callLogTitle, callLogButton], "sunk")
+callLogTitle = Heading("Log a Call", "h4")
+callLogButton = Button("Log Call", null, "primary")
+
+callLogDialog = DialogBlock("Log Call", "Call Details", "Record this call for the account", [callForm], "primary")
+callForm = Form("call-log", callButtons, [callDate, callDuration, callNotes])
+callDate = FormControl("Call Date", callDatePicker)
+callDatePicker = DatePicker("call_date", "single", null, null)
+callDuration = FormControl("Duration (min)", callSlider)
+callSlider = Slider("call_duration", "continuous", 5, 60, 5, null, "Duration", null, null)
+callNotes = FormControl("Notes", callTextArea)
+callTextArea = TextArea("call_notes", "Brief summary...", 3, null, null)
+callButtons = Buttons([callSubmitBtn])
+callSubmitBtn = Button("Save Call", null, "primary")
+```

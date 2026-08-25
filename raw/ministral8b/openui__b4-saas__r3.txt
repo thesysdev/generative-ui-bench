@@ -1,0 +1,66 @@
+```openui-lang
+root = Card([header, metricsRow, periodSelector, mainContent, inviteSection])
+
+header = CardHeader("Admin Overview", "All metrics in USD")
+
+metricsRow = Card([mrrCard, arrCard, churnCard, signupsCard], "row", "m", "center", "center")
+mrrCard = Card([Tag("MRR", null, null, "success"), TextContent("$124,850")], "sunk")
+arrCard = Card([Tag("ARR", null, null, "success"), TextContent("$1,498,200")], "sunk")
+churnCard = Card([Tag("Churn", null, null, "danger"), TextContent("3.2%")], "sunk")
+signupsCard = Card([Tag("New Signups", null, null, "success"), TextContent("42")], "sunk")
+
+periodSelector = Card([periodLabel, periodOptions], "row", "m", "center", "center")
+periodLabel = TextContent("Reporting period: ")
+periodOptions = Buttons([periodBtn("Last 30 days"), periodBtn("Last 90 days"), periodBtn("Last 12 months")], "row")
+
+mainContent = Card([plansChart, topCustomers, riskAccounts, failedPayments, featureAdoption, nps, utilizationChart], "column", "m")
+
+plansChart = Card([CardHeader("Customers by Plan"), pieChart], "sunk")
+pieChart = PieChart(["Starter", "Pro", "Enterprise"], [120, 85, 15], "donut")
+
+topCustomers = Card([CardHeader("Top Customers"), topCustomersTable], "sunk")
+topCustomersTable = Table([customerCol, seatsCol, spendCol])
+customerCol = Col("Customer", ["Acme Corp", "Globex Inc", "Tech Solutions", "Initech", "Umbrella Corp", "Windmill Corp", "Giant Corp", "Futurama", "Portland", "Wayne Enterprises"])
+seatsCol = Col("Seats", [450, 320, 280, 240, 210, 190, 180, 150, 140, 120])
+spendCol = Col("Spend", ["$18,200", "$12,800", "$11,200", "$9,600", "$8,400", "$7,600", "$7,200", "$6,000", "$5,600", "$4,800"])
+
+riskAccounts = Card([CardHeader("Accounts at Risk"), riskAccountsTable], "sunk")
+riskAccountsTable = Table([accountCol, reasonCol, actionCol])
+accountCol = Col("Account", ["Acme Corp", "Globex Inc", "Tech Solutions", "Initech", "Wayne Enterprises"])
+reasonCol = Col("Reason", ["Payment issue", "Feature request", "Competitor switch", "Pricing concern", "No clear ROI"])
+actionCol = Col("Action", ["Contact", "Contact", "Contact", "Contact", "Contact"])
+
+failedPayments = Card([CardHeader("Failed Payments"), failedPaymentsTable], "sunk")
+failedPaymentsTable = Table([accountCol2, amountCol, dateCol, retryCol])
+accountCol2 = Col("Account", ["Acme Corp", "Globex Inc", "Tech Solutions", "Initech", "Wayne Enterprises"])
+amountCol = Col("Amount", ["$1,200", "$950", "$800", "$700", "$650"])
+dateCol = Col("Date", ["2023-10-15", "2023-10-10", "2023-09-28", "2023-09-20", "2023-09-15"])
+retryCol = Col("Action", [Button("Retry", ["retry_payment", "Acme Corp"], "primary", "normal", "small"), Button("Retry", ["retry_payment", "Globex Inc"], "primary", "normal", "small"), Button("Retry", ["retry_payment", "Tech Solutions"], "primary", "normal", "small"), Button("Retry", ["retry_payment", "Initech"], "primary", "normal", "small"), Button("Retry", ["retry_payment", "Wayne Enterprises"], "primary", "normal", "small")])
+
+featureAdoption = Card([CardHeader("New Feature Adoption"), featureAdoptionChart], "sunk")
+featureAdoptionChart = BarChart(["Feature A", "Feature B", "Feature C"], [featureSeriesA, featureSeriesB, featureSeriesC], "grouped", "Feature", "Adoption Rate (%)")
+featureSeriesA = Series("Adoption", [78, 65, 52])
+featureSeriesB = Series("Adoption", [82, 71, 48])
+featureSeriesC = Series("Adoption", [69, 55, 37])
+
+nps = Card([CardHeader("Current NPS"), npsValue], "sunk")
+npsValue = Card([Tag("NPS", null, null, "success"), TextContent("68")], "sunk")
+
+utilizationChart = Card([CardHeader("Seat Utilization"), utilizationChartData], "sunk")
+utilizationChartData = RadarChart(["Team A", "Team B", "Team C", "Team D", "Team E"], [utilizationSeriesA, utilizationSeriesB, utilizationSeriesC, utilizationSeriesD, utilizationSeriesE])
+utilizationSeriesA = Series("Utilization", [85, 72, 68, 78, 65])
+utilizationSeriesB = Series("Utilization", [78, 65, 52, 82, 71])
+utilizationSeriesC = Series("Utilization", [69, 55, 48, 61, 59])
+utilizationSeriesD = Series("Utilization", [82, 75, 68, 85, 79])
+utilizationSeriesE = Series("Utilization", [75, 63, 58, 77, 69])
+
+inviteSection = Card([CardHeader("Invite Admin"), inviteForm], "sunk")
+inviteForm = Form("invite-admin", inviteButtons, [emailField])
+emailField = FormControl("Admin Email", emailInput, "Enter the email address of the new admin")
+emailInput = Input("email", "admin@example.com", "email")
+inviteButtons = Buttons([inviteBtn, cancelBtn])
+inviteBtn = Button("Invite Admin", ["invite_admin"], "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")
+
+periodBtn = Button("Last 30 days", ["set_period", "30"], "ghost", "normal", "medium")
+```

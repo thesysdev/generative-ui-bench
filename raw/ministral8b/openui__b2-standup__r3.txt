@@ -1,0 +1,37 @@
+```openui-lang
+root = Card([dateSection, statusUpdates, missingCount, postUpdateForm])
+
+dateSection = CardHeader(todayDate, null, null, "card", "column", "m", "center")
+todayDate = TextContent(todayDateText, "large-heavy")
+todayDateText = "Async Standup • " + currentDate
+
+statusUpdates = Card([statusTitle, updatesList], "sunk")
+statusTitle = Heading("Team Updates", "h3")
+
+updatesList = ListBlock(teammatesUpdates, "image")
+teammatesUpdates = [
+    teammate1Update,
+    teammate2Update,
+    blockedUpdate,
+    teammate3Update,
+    teammate4Update
+]
+
+teammate1Update = ListItem("Alex", "Finished API docs. Blocked on design review.", ["alex.jpg"], "Review")
+teammate2Update = ListItem("Jamie", "Deployed feature X. Waiting for QA signoff.", ["jamie.jpg"])
+blockedUpdate = ListItem("Priya", "Stuck on database migration. Needs DB team help.", ["priya.jpg"], "🚧 Blocked", null, "danger")
+teammate3Update = ListItem("Carlos", "Working on bug fixes. All tests passing.", ["carlos.jpg"])
+teammate4Update = ListItem("Taylor", "Starting new project Y tomorrow.", ["taylor.jpg"])
+
+missingCount = Card([missingTitle, missingCountText], "sunk", "row", "s", "center", "center")
+missingTitle = TextContent("Missing updates:", "small-heavy")
+missingCountText = TextContent(missingCountValue, "large-heavy")
+missingCountValue = "3/10"
+
+postUpdateForm = Card([postUpdateTitle, updateInput, submitButton], "sunk")
+postUpdateTitle = Heading("Your Update", "h4")
+updateInput = FormControl("Status Update", textAreaInput)
+textAreaInput = TextArea("update", "Share your progress and blockers...", 3)
+submitButton = Button("Post Update", null, "primary", "normal")
+
+```

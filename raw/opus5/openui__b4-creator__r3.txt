@@ -1,0 +1,102 @@
+root = Card([header, filterHeading, filterButtons, filterNote, sep1, kpiTable, growthHeading, growthChart, engagementProgress, earningsCallout, sep2, bestPostsHeading, bestPostsTable, audienceHeading, audienceChart, sep3, scheduleHeading, scheduledTable, bestHourHeading, bestHourChart, bestHourCallout, sep4, inboxHeading, commentsBadge, commentsList, collabHeading, collabList, collabActions, sep5, composerHeading, composerForm, followUps])
+
+header = CardHeader("Creator Studio", "Cross-platform performance — March 1–31")
+
+filterHeading = Heading("Filter by platform", "h3")
+filterButtons = Buttons([fAll, fIg, fTt, fYt, fX])
+fAll = Button("All platforms", null, "primary", null, "small")
+fIg = Button("Instagram", null, "secondary", null, "small")
+fTt = Button("TikTok", null, "secondary", null, "small")
+fYt = Button("YouTube", null, "secondary", null, "small")
+fX = Button("X", null, "secondary", null, "small")
+filterNote = TextContent("Showing **all platforms**. Pick one to narrow every metric, list and chart on this screen.", "small")
+
+sep1 = Separator("horizontal")
+
+kpiTable = Table([kpiMetric, kpiValue, kpiChange])
+kpiMetric = Col("Metric", ["Total followers", "Net growth (30d)", "Engagement rate", "Earnings this month"])
+kpiValue = Col("Value", ["128,412", "+7,318", "4.8%", "$7,240"])
+kpiChange = Col("vs. last month", ["+6.2%", "+18.4%", "+0.4 pt", "+22.1%"])
+
+growthHeading = Heading("Follower growth, past month", "h3")
+growthChart = AreaChart(["Mar 1", "Mar 8", "Mar 15", "Mar 22", "Mar 31"], [growthSeries], "natural", "Week", "Total followers")
+growthSeries = Series("Followers", [121094, 123180, 124910, 126640, 128412])
+
+engagementProgress = Progress(48, "Engagement rate 4.8% — top 12% of creators in your size band")
+
+earningsCallout = TextCallout("success", "$7,240 earned in March", "$4,900 brand deals · $1,610 platform payouts · $730 affiliate. Next payout lands Apr 5.")
+
+sep2 = Separator("horizontal")
+
+bestPostsHeading = Heading("Best posts this month", "h3")
+bestPostsTable = Table([postCol, platformCol, reachCol, engCol])
+postCol = Col("Post", ["Studio setup tour", "3 edits in 60 seconds", "Answering your DMs", "Gear I regret buying", "Morning routine, honestly"])
+platformCol = Col("Platform", ["TikTok", "Instagram", "YouTube", "Instagram", "TikTok"])
+reachCol = Col("Reach", [412000, 288400, 196700, 154200, 131900], "number")
+engCol = Col("Engagement", ["9.1%", "7.4%", "6.2%", "5.8%", "5.1%"])
+
+audienceHeading = Heading("Audience split by platform", "h3")
+audienceChart = PieChart(["TikTok", "Instagram", "YouTube", "X"], [52840, 41260, 24710, 9602], "donut")
+
+sep3 = Separator("horizontal")
+
+scheduleHeading = Heading("Scheduled this week", "h3")
+scheduledTable = Table([schedDay, schedTime, schedPlatform, schedPost])
+schedDay = Col("Day", ["Mon", "Tue", "Wed", "Fri", "Sun"])
+schedTime = Col("Time", ["7:00 PM", "12:30 PM", "7:00 PM", "6:45 PM", "10:00 AM"])
+schedPlatform = Col("Platform", ["TikTok", "Instagram", "YouTube", "TikTok", "Instagram"])
+schedPost = Col("Post", ["Lighting on a budget", "Carousel: 5 caption hooks", "Full studio walkthrough", "Duet reply compilation", "Sunday reset vlog"])
+
+bestHourHeading = Heading("Best hour to post", "h3")
+bestHourChart = BarChart(["6 AM", "9 AM", "12 PM", "3 PM", "6 PM", "7 PM", "9 PM"], [hourSeries], "grouped", "Hour (local)", "Avg engagement %")
+hourSeries = Series("Avg engagement", [2.1, 3.4, 4.6, 4.2, 6.8, 7.9, 5.3])
+bestHourCallout = Callout("info", "Post at 7:00 PM", "Across 184 posts, 7–8 PM local time earns 1.6x the engagement of your average slot. Tuesdays and Fridays perform best.")
+
+sep4 = Separator("horizontal")
+
+inboxHeading = Heading("Comments waiting for a reply", "h3")
+commentsBadge = Badge("14 unanswered · oldest 2 days", "secondary")
+commentsList = ListBlock([c1, c2, c3, c4], "number")
+c1 = ListItem("@mira.builds — \"Which mic is that on the left?\"", "Studio setup tour · TikTok · 2 days ago", null, "Reply")
+c2 = ListItem("@theo.k — \"Can you do a version for beginners?\"", "3 edits in 60 seconds · Instagram · 1 day ago", null, "Reply")
+c3 = ListItem("@journalofsam — \"The color grade here is unreal.\"", "Gear I regret buying · Instagram · 19 hours ago", null, "Reply")
+c4 = ListItem("@nlow — \"Link to the desk mount?\"", "Answering your DMs · YouTube · 6 hours ago", null, "Reply")
+
+collabHeading = Heading("Pending collaboration requests", "h3")
+collabList = ListBlock([b1, b2, b3], "number")
+b1 = ListItem("Lumen Optics — $3,200", "2 Reels + 1 Story · responds by Apr 4 · full creative control", null, "Review")
+b2 = ListItem("Copperfield Coffee — $1,450", "1 TikTok integration · responds by Apr 7 · 30-day exclusivity", null, "Review")
+b3 = ListItem("Northbeam Audio — $5,000", "YouTube dedicated video · responds by Apr 12 · script approval required", null, "Review")
+collabActions = Buttons([acceptBtn, negotiateBtn, declineBtn])
+acceptBtn = Button("Accept selected", null, "primary")
+negotiateBtn = Button("Send counter-offer", null, "secondary")
+declineBtn = Button("Decline", null, "tertiary", "destructive")
+
+sep5 = Separator("horizontal")
+
+composerHeading = Heading("Schedule a post", "h3")
+composerForm = Form("schedule-post", composerButtons, [captionField, platformField, dateField, timeField])
+captionField = FormControl("Caption", captionInput, "Hooks under 12 words perform best for you")
+captionInput = TextArea("caption", "Three lighting setups, one $40 budget…", 4)
+platformField = FormControl("Publish to", platformChecks)
+platformChecks = CheckBoxGroup("platforms", [pkIg, pkTt, pkYt, pkX])
+pkIg = CheckBoxItem("Instagram", "Reels + feed", "instagram", true)
+pkTt = CheckBoxItem("TikTok", "Video only", "tiktok", true)
+pkYt = CheckBoxItem("YouTube", "Shorts", "youtube", false)
+pkX = CheckBoxItem("X", "Video + text", "x", false)
+dateField = FormControl("Date", dateInput)
+dateInput = DatePicker("publish_date", "single")
+timeField = FormControl("Time", timeSelect, "7:00 PM is your highest-performing slot")
+timeSelect = Select("publish_time", [t1, t2, t3, t4], "Choose a time", null, "19:00")
+t1 = SelectItem("12:30", "12:30 PM")
+t2 = SelectItem("18:00", "6:00 PM")
+t3 = SelectItem("19:00", "7:00 PM — recommended")
+t4 = SelectItem("21:00", "9:00 PM")
+composerButtons = Buttons([scheduleBtn, draftBtn])
+scheduleBtn = Button("Schedule post", null, "primary")
+draftBtn = Button("Save draft", null, "tertiary")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Show me TikTok only")
+f2 = FollowUpItem("Draft replies to the 14 waiting comments")
+f3 = FollowUpItem("Compare March earnings to February")

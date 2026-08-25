@@ -1,0 +1,28 @@
+root = Card([header, statsRow, comparisonSection, hourlyTrend, followUps])
+header = CardHeader("Good Morning!", "Shop performance as of 11:00 AM")
+
+statsRow = Card([revenueToday, revenueYesterday, deltaTag], "sunk", "row", "l", "stretch", "between")
+revenueToday = Card([revTodayLabel, revTodayValue], "clear")
+revTodayLabel = TextContent("Revenue Today", "small")
+revTodayValue = TextContent("$1,284", "large-heavy")
+
+revenueYesterday = Card([revYestLabel, revYestValue], "clear")
+revYestLabel = TextContent("Same Time Yesterday", "small")
+revYestValue = TextContent("$1,050", "large-heavy")
+
+deltaTag = Card([deltaLabel, deltaTagBlock], "clear")
+deltaLabel = TextContent("Change", "small")
+deltaTagBlock = Tag("+22.3%", null, "lg", "success")
+
+comparisonSection = Callout("success", "Ahead of yesterday's pace", "You've earned $234 more by this time compared to yesterday — a 22.3% increase.")
+
+hourlyTrend = Card([trendHeading, trendChart], "sunk")
+trendHeading = Heading("Hourly Revenue: Today vs Yesterday", "h4")
+trendChart = LineChart(hourLabels, [todaySeries, yesterdaySeries], "natural", "Hour", "Revenue ($)")
+hourLabels = ["8am", "9am", "10am", "11am"]
+todaySeries = Series("Today", [180, 410, 720, 1284])
+yesterdaySeries = Series("Yesterday", [150, 330, 610, 1050])
+
+followUps = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("Show revenue breakdown by product")
+followUp2 = FollowUpItem("Compare this week to last week")

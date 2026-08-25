@@ -1,0 +1,105 @@
+root = Card([header, filterBar, mainTabs, followUps])
+
+header = CardHeader("Creator Studio", "Cross-platform performance at a glance")
+
+filterBar = Card([filterLabel, filterButtons], "sunk", "row", "m", "center", "start")
+filterLabel = TextContent("Filter by platform:", "small-heavy")
+filterButtons = Buttons([allBtn, igBtn, tiktokBtn, ytBtn, xBtn])
+allBtn = Button("All", null, "primary", "normal", "small")
+igBtn = Button("Instagram", null, "secondary", "normal", "small")
+tiktokBtn = Button("TikTok", null, "secondary", "normal", "small")
+ytBtn = Button("YouTube", null, "secondary", "normal", "small")
+xBtn = Button("X", null, "secondary", "normal", "small")
+
+mainTabs = Tabs([overviewTab, contentTab, communityTab, earningsTab])
+
+overviewTab = TabItem("overview", "Overview", [followersSection, engagementSection, audienceSection, bestHourSection])
+
+followersSection = Card([followersHeader, followersStat, followersChart], "sunk")
+followersHeader = CardHeader("Followers", "Past 30 days")
+followersStat = TextCallout("success", "128,400 total followers", "+7,480 this month (+6.2%)")
+followersChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [followersSeries], "natural", "Week", "Followers")
+followersSeries = Series("Followers", [120920, 123510, 126080, 128400])
+
+engagementSection = Card([engagementHeader, engagementProgress], "sunk")
+engagementHeader = CardHeader("Engagement rate", "Likes, comments & shares vs reach")
+engagementProgress = Progress(4.8, "4.8% average engagement rate")
+
+audienceSection = Card([audienceHeader, audienceChart], "sunk")
+audienceHeader = CardHeader("Audience split", "By platform")
+audienceChart = PieChart(audienceLabels, audienceValues, "donut")
+audienceLabels = ["Instagram", "TikTok", "YouTube", "X"]
+audienceValues = [46, 32, 15, 7]
+
+bestHourSection = Card([bestHourHeader, bestHourChart, bestHourCallout], "sunk")
+bestHourHeader = CardHeader("Best time to post", "Average engagement by hour, last 90 days")
+bestHourChart = BarChart(hourLabels, [hourSeries], "grouped", "Hour", "Avg engagement")
+hourLabels = ["8am", "11am", "2pm", "5pm", "7pm", "9pm"]
+hourSeries = Series("Engagement", [2.1, 3.0, 3.4, 4.2, 5.6, 4.0])
+bestHourCallout = Callout("info", "Best hour to post", "7:00 PM consistently drives the highest engagement across platforms")
+
+contentTab = TabItem("content", "Content & Schedule", [bestPostsSection, scheduledSection, scheduleFormSection])
+
+bestPostsSection = Card([bestPostsHeader, bestPostsTable], "sunk")
+bestPostsHeader = CardHeader("Best posts this month", "Ranked by reach")
+bestPostsTable = Table([postCol, platformCol, reachCol])
+postCol = Col("Post", ["Morning routine reel", "Q&A livestream clip", "Studio tour", "Behind the scenes"])
+platformCol = Col("Platform", ["Instagram", "TikTok", "YouTube", "X"])
+reachCol = Col("Reach", [245000, 189300, 132750, 58900], "number")
+
+scheduledSection = Card([scheduledHeader, scheduledList], "sunk")
+scheduledHeader = CardHeader("Scheduled this week", "Upcoming posts")
+scheduledList = ListBlock([sched1, sched2, sched3, sched4])
+sched1 = ListItem("New collab teaser", "Instagram · Tomorrow 7:00 PM")
+sched2 = ListItem("Weekly vlog", "YouTube · Wed 12:00 PM")
+sched3 = ListItem("Trend remix", "TikTok · Thu 7:00 PM")
+sched4 = ListItem("Poll thread", "X · Fri 9:00 AM")
+
+scheduleFormSection = Card([scheduleFormHeader, scheduleForm], "sunk")
+scheduleFormHeader = CardHeader("Schedule a new post", "Set caption, platform and time")
+scheduleForm = Form("schedule_post", scheduleFormButtons, [platformField, captionField, dateField, timeField])
+platformField = FormControl("Platform", platformSelect)
+platformSelect = Select("platform", [platIg, platTiktok, platYt, platX], "Choose platform")
+platIg = SelectItem("instagram", "Instagram")
+platTiktok = SelectItem("tiktok", "TikTok")
+platYt = SelectItem("youtube", "YouTube")
+platX = SelectItem("x", "X")
+captionField = FormControl("Caption", captionInput)
+captionInput = TextArea("caption", "Write your caption...", 3)
+dateField = FormControl("Date", dateInput)
+dateInput = DatePicker("post_date", "single")
+timeField = FormControl("Time", timeInput, "24-hour format, e.g. 19:00")
+timeInput = Input("post_time", "19:00", "text")
+scheduleFormButtons = Buttons([scheduleBtn, cancelScheduleBtn])
+scheduleBtn = Button("Schedule post", null, "primary")
+cancelScheduleBtn = Button("Cancel", null, "tertiary")
+
+communityTab = TabItem("community", "Community", [commentsSection, collabSection])
+
+commentsSection = Card([commentsHeader, commentsList], "sunk")
+commentsHeader = CardHeader("Comments waiting for reply", "12 unanswered")
+commentsList = ListBlock([comment1, comment2, comment3])
+comment1 = ListItem("@sara.creates", "\"Love this! What camera do you use?\"", null, "Reply")
+comment2 = ListItem("@markbuilds", "\"Can you do a tutorial on this?\"", null, "Reply")
+comment3 = ListItem("@junetravels", "\"Where was this filmed?\"", null, "Reply")
+
+collabSection = Card([collabHeader, collabList], "sunk")
+collabHeader = CardHeader("Pending collaboration requests", "3 awaiting response")
+collabList = ListBlock([collab1, collab2, collab3])
+collab1 = ListItem("GlowSkin Co.", "Sponsored post proposal · $2,500", null, "Review")
+collab2 = ListItem("FitGear", "Product seeding + affiliate", null, "Review")
+collab3 = ListItem("Local Coffee Roasters", "Story shoutout swap", null, "Review")
+
+earningsTab = TabItem("earnings", "Earnings", [earningsSection])
+
+earningsSection = Card([earningsHeader, earningsSummary, earningsTable], "sunk")
+earningsHeader = CardHeader("Earnings this month", "All revenue streams")
+earningsSummary = TextCallout("success", "$8,940 total earned this month", "+18% vs last month")
+earningsTable = Table([earningSourceCol, earningAmountCol])
+earningSourceCol = Col("Source", ["Brand deals", "Ad revenue", "Tips & memberships", "Affiliate"])
+earningAmountCol = Col("Amount", [5200, 2100, 980, 660], "number")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show only TikTok performance")
+fu2 = FollowUpItem("Draft a reply to @sara.creates")
+fu3 = FollowUpItem("Compare this month vs last month")

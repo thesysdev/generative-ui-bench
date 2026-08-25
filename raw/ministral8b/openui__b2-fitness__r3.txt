@@ -1,0 +1,42 @@
+```openui-lang
+root = Card([summaryHeader, statsCard, workoutChart, newWorkoutForm])
+
+summaryHeader = CardHeader("Daily Fitness Summary", "Track your progress today")
+
+statsCard = Card([stepGoal, calorieBurned], "sunk")
+stepGoal = Card([
+    TextContent("Steps today: 8,245 / 10,000", "large-heavy"),
+    Progress(82.45, "82.45% of goal")
+], "sunk")
+calorieBurned = Card([
+    TextContent("Calories burned: 2,450", "large-heavy"),
+    Tag("Good job!", null, null, "success")
+], "sunk")
+
+workoutChart = Card([
+    CardHeader("Weekly Workouts"),
+    HorizontalBarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "grouped", "Day", "Duration (min)")
+], "sunk")
+workoutSeries = Series("Workouts", [45, 30, 60, 20, 50, 0, 35])
+
+newWorkoutForm = Card([
+    CardHeader("Log a New Workout"),
+    Form("workout-log", workoutButtons, [workoutTypeField, durationField, intensityField])
+], "sunk")
+workoutTypeField = FormControl("Workout type", workoutTypeSelect, "Choose your activity")
+workoutTypeSelect = Select("workout_type", [runItem, walkItem, bikeItem, gymItem], "Select type")
+runItem = SelectItem("running", "Running")
+walkItem = SelectItem("walking", "Walking")
+bikeItem = SelectItem("cycling", "Cycling")
+gymItem = SelectItem("gym", "Gym")
+durationField = FormControl("Duration (min)", durationInput, "How long?")
+durationInput = Input("duration", "30", "number", ["min: 5, max: 120"], "30")
+intensityField = FormControl("Intensity", intensityRadio, "How hard?")
+intensityRadio = RadioGroup("intensity", [lightItem, moderateItem, hardItem])
+lightItem = RadioItem("Light", "Easy pace", "light")
+moderateItem = RadioItem("Moderate", "Steady effort", "moderate")
+hardItem = RadioItem("Hard", "Challenging", "hard")
+workoutButtons = Buttons([logBtn, cancelBtn])
+logBtn = Button("Log Workout", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

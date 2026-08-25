@@ -1,0 +1,102 @@
+root = Card([header, dashboardGrid, controlPanel, alertPanel, followUp])
+
+header = CardHeader("City Operations Command Center", "Real-time Urban Management Dashboard")
+
+dashboardGrid = Card([metricsRow, chartsRow, incidentSection, logisticsSection, maintenanceSection], "sunk", "column", "m")
+
+metricsRow = Card([weatherCard, congestionCard, transitCard, parkingCard, waterCard], "card", "row", "m", "wrap", true)
+
+weatherCard = Card([weatherHeading, weatherText], "card", "column")
+weatherHeading = Heading("Current Weather", "h4")
+weatherText = TextContent("Partly Cloudy, 22°C", "large")
+
+congestionCard = Card([congestionHeading, congestionValue, congestionBadge], "card", "column")
+congestionHeading = Heading("Congestion", "h4")
+congestionValue = TextContent("High (72%)", "large-heavy")
+congestionBadge = Tag("Heavy Traffic", null, "md", "warning")
+
+transitCard = Card([transitHeading, transitProgress], "card", "column")
+transitHeading = Heading("Transit Punctuality", "h4")
+transitProgress = Progress(88, "On-time arrivals")
+
+parkingCard = Card([parkingHeading, parkingStatus], "card", "column")
+parkingHeading = Heading("Downtown Parking", "h4")
+parkingStatus = TextContent("14% Available", "default")
+
+waterCard = Card([waterHeading, waterUse], "card", "column")
+waterHeading = Heading("Water Use (Today)", "h4")
+waterUse = TextContent("4.2M Gallons", "default")
+
+chartsRow = Card([airQualityChart, energyChart], "card", "row", "m")
+
+airQualityChart = Card([aqHeading, aqChart], "card", "column")
+aqHeading = Heading("Air Quality by District", "h4")
+aqChart = RadialChart(["North", "South", "East", "West", "Central"], [45, 30, 85, 55, 20])
+
+energyChart = Card([energyHeading, energyTrend], "card", "column")
+energyHeading = Heading("Energy Use (Weekly)", "h4")
+energyTrend = AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [seriesEnergy], "natural", "Day", "MWh")
+seriesEnergy = Series("Grid Load", [450, 480, 420, 510, 590, 320, 300])
+
+incidentSection = Card([incidentHeading, incidentTable, citizenReports, eventList], "card", "column")
+incidentHeading = Heading("Active Incidents & Reports", "h3")
+incidentTable = Table([colLoc, colSev, colType])
+colLoc = Col("Location", ["Main St & 5th", "East Harbor", "Central Park", "Industrial Zone"])
+colSev = Col("Severity", ["High", "Medium", "Low", "Medium"])
+colType = Col("Type", ["Collision", "Water Leak", "Power Outage", "Fire"])
+
+citizenReports = Card([reportHeading, reportList], "card", "column")
+reportHeading = Heading("Live Citizen Reports", "h4")
+reportList = ListBlock([report1, report2])
+report1 = ListItem("Streetlight out", "Oak St, Sector 4")
+report2 = ListItem("Pothole reported", "Broadway Ave")
+
+eventList = Card([eventHeading, eventItems], "card", "column")
+eventHeading = Heading("Public Events (Weekend)", "h4")
+eventItems = ListBlock([event1, event2])
+event1 = ListItem("City Jazz Festival", "Central Park")
+event2 = ListItem("Farmers Market", "Downtown Square")
+
+logisticsSection = Card([logisticsHeading, deploymentChart, backlogStatus], "card", "column")
+logisticsHeading = Heading("Logistics & Deployment", "h3")
+deploymentChart = HorizontalBarChart(["Ambulance", "Fire", "Police", "Utility"], [seriesDeploy])
+seriesDeploy = Series("Active Units", [12, 8, 24, 5])
+backlogStatus = TextCallout("warning", "Service Request Backlog", "42 pending requests")
+
+maintenanceSection = Card([maintHeading, roadworksTable, infraTable], "card", "column")
+maintHeading = Heading("Maintenance & Infrastructure", "h3")
+roadworksTable = Table([rwColLoc, rwColDate])
+rwColLoc = Col("Roadwork Location", ["Highway 101", "Bridge St"])
+rwColDate = Col("Planned Date", ["Oct 12", "Oct 15"])
+infraTable = Table([infColTask, infColStatus])
+infColTask = Col("Infrastructure Job", ["Pipe Inspection", "Grid Update"])
+infColStatus = Col("Status", ["Due", "In Progress"])
+
+controlPanel = Card([controlHeading, districtFilter, dispatchForm, alertForm], "card", "column")
+controlHeading = Heading("Operations Controls", "h3")
+
+districtFilter = FormControl("Focus District", Select("district_select", [dNorth, dSouth, dEast, dWest, dCentral]))
+dNorth = SelectItem("north", "North District")
+dSouth = SelectItem("south", "South District")
+dEast = SelectItem("east", "East District")
+dWest = SelectItem("west", "West District")
+dCentral = SelectItem("central", "Central District")
+
+dispatchForm = Form("dispatch-crew", dispatchButtons, [crewType, crewLoc])
+crewType = FormControl("Crew Type", Select("crew_type", [cFire, cMed, cUtil]))
+cFire = SelectItem("fire", "Fire Department")
+cMed = SelectItem("med", "Medical Services")
+cUtil = SelectItem("util", "Utility Crew")
+crewLoc = FormControl("Location", Input("crew_loc", "Enter coordinates or street"))
+dispatchButtons = Buttons([dispatchBtn])
+dispatchBtn = Button("Dispatch Crew", null, "primary")
+
+alertForm = Form("public-alert", alertButtons, [alertMsg])
+alertMsg = FormControl("Alert Message", TextArea("alert_msg", "Enter public broadcast message"))
+alertButtons = Buttons([sendAlertBtn])
+sendAlertBtn = Button("Send Public Alert", null, "destructive")
+
+followUp = FollowUpBlock([follow1, follow2, follow3])
+follow1 = FollowUpItem("View detailed incident logs")
+follow2 = FollowUpItem("Generate daily summary report")
+follow3 = FollowUpItem("Switch to night mode view")

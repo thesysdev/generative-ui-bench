@@ -1,0 +1,125 @@
+The user wants a personal budget check screen with:
+1. Total spent this month against the budget
+2. Spending split by category
+3. The single largest expense highlighted
+4. A way to look at a different month
+5. A way to add an expense
+
+Let me plan the layout:
+- CardHeader for the title
+- A section showing total spent vs budget (maybe a Progress bar and some text)
+- A PieChart or BarChart for spending by category
+- A highlighted callout for the largest expense
+- A DatePicker or Select for choosing a different month
+- A Form or DialogBlock for adding an expense
+
+Let me think about the data:
+- Budget: $3,000
+- Spent: $2,450
+- Categories: Food ($680), Rent ($800), Utilities ($150), Entertainment ($320), Transport ($280), Shopping ($220)
+- Largest expense: Rent at $800
+
+For month selection, I'll use a Select dropdown with months.
+
+For adding an expense, I'll use a DialogBlock that opens a Form.
+
+Let me structure this:
+
+1. root = Card with all children
+2. header = CardHeader
+3. budgetOverview = Card (sunk) with budget details
+4. budgetProgress = Progress
+5. budgetText = TextContent
+6. categoryChart = PieChart or BarChart
+7. largestExpense = Callout
+8. monthSelector = Select inside a Form or just a Buttons/Select
+9. addExpenseDialog = DialogBlock with a Form
+
+Let me think about the layout more carefully:
+
+- Top: CardHeader "Personal Budget"
+- Budget summary card (sunk): Shows total spent vs budget with progress bar
+- Category breakdown: PieChart
+- Largest expense: Callout highlighting the biggest expense
+- Month selector: A Select or DatePicker
+- Add expense: DialogBlock button
+
+For the month selector, I could use a Select inside a small Form, or just a Buttons approach. Let me use a Select in a small card.
+
+
+For adding an expense, I'll create a DialogBlock that opens a Form with fields for amount, category, and description. Now I'll build out the full UI with all these components integrated together.
+root = Card([header, budgetSummary, categoryChart, largestExpense, monthSelector, addExpenseBtn], "card", "column", "m", "start", "start", false)
+
+header = CardHeader("Personal Budget", "Monthly spending overview")
+
+budgetSummary = Card([budgetHeading, budgetDetails, budgetProgress], "sunk")
+
+budgetHeading = Heading("Budget Overview", "h3")
+
+budgetDetails = TextContent("You've spent **$2,450** of your **$3,000** monthly budget — that's **82%** used.")
+
+budgetProgress = Progress(82, "82% of budget used")
+
+categoryChart = Card([chartHeading, pieChart], "sunk")
+
+chartHeading = Heading("Spending by Category", "h3")
+
+pieChart = PieChart(["Rent", "Food", "Entertainment", "Transport", "Shopping", "Utilities"], [800, 680, 320, 280, 220, 150], "donut", "circular")
+
+largestExpense = Callout("warning", "Largest Expense", "Rent at **$800** is your biggest expense this month, accounting for 33% of total spending.")
+
+monthSelector = Card([monthHeading, monthForm], "sunk")
+
+monthHeading = Heading("View Different Month", "h3")
+
+monthForm = Form("month-selector", monthButtons, [monthField])
+
+monthField = FormControl("Select Month", monthSelect)
+
+monthSelect = Select("month", [janItem, febItem, marItem, aprItem, mayItem, junItem, julItem, augItem, sepItem, octItem, novItem, decItem], "Choose a month", null, "oct")
+
+janItem = SelectItem("jan", "January")
+febItem = SelectItem("feb", "February")
+marItem = SelectItem("mar", "March")
+aprItem = SelectItem("apr", "April")
+mayItem = SelectItem("may", "May")
+junItem = SelectItem("jun", "June")
+julItem = SelectItem("jul", "July")
+augItem = SelectItem("aug", "August")
+sepItem = SelectItem("sep", "September")
+octItem = SelectItem("oct", "October")
+novItem = SelectItem("nov", "November")
+decItem = SelectItem("dec", "December")
+
+monthButtons = Buttons([viewMonthBtn])
+
+viewMonthBtn = Button("View Month", null, "primary")
+
+addExpenseBtn = DialogBlock("Add Expense", "Add a New Expense", "Record a new expense for this month", [addExpenseForm])
+
+addExpenseForm = Form("add-expense", expenseButtons, [amountField, categoryField, descriptionField])
+
+amountField = FormControl("Amount ($)", amountInput)
+
+amountInput = Input("amount", "0.00", "number")
+
+categoryField = FormControl("Category", categorySelect)
+
+categorySelect = Select("category", [rentOpt, foodOpt, utilOpt, entOpt, transOpt, shopOpt], "Select category")
+
+rentOpt = SelectItem("rent", "Rent")
+foodOpt = SelectItem("food", "Food")
+utilOpt = SelectItem("utilities", "Utilities")
+entOpt = SelectItem("entertainment", "Entertainment")
+transOpt = SelectItem("transport", "Transport")
+shopOpt = SelectItem("shopping", "Shopping")
+
+descriptionField = FormControl("Description", descInput, "Optional note")
+
+descInput = Input("description", "e.g. Grocery shopping")
+
+expenseButtons = Buttons([saveExpenseBtn, cancelExpenseBtn])
+
+saveExpenseBtn = Button("Save Expense", null, "primary")
+
+cancelExpenseBtn = Button("Cancel", null, "tertiary")

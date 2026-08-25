@@ -1,0 +1,287 @@
+root = Card([
+  header,
+  statusBadge,
+  viewersSection,
+  mostWatchedSection,
+  watchTimeSection,
+  subscribersSection,
+  performanceSection,
+  bufferingSection,
+  deliveryHealthSection,
+  releasesSection,
+  licensesSection,
+  recommendationClicksSection,
+  searchFailuresSection,
+  revenueSplitSection,
+  viewingSplitSection,
+  regionFocus,
+  featureFlags,
+  titlePromotion,
+], "clear", "column", "m")
+
+header = CardHeader("Operations Room — Streaming Service", "Real-time monitoring dashboard")
+statusBadge = Badge("Live", "success")
+
+viewersSection = Card([
+  viewersHeading,
+  viewersKpi,
+  viewersBarChart,
+])
+viewersHeading = Heading("Viewers Watching Right Now", "h3")
+viewersKpi = CardHeader("14,327", "Live")
+viewersBarChart = HorizontalBarChart(
+  ["18-24", "25-34", "35-44", "45-54", "55+"],
+  [
+    Series("Viewers", [4200, 3800, 3100, 2400, 1800]),
+  ],
+  "grouped",
+  "Age Group",
+  "Current Viewers"
+)
+
+mostWatchedSection = Card([
+  mostWatchedHeading,
+  mostWatchedTable,
+])
+mostWatchedHeading = Heading("Most-Watched Titles", "h3")
+mostWatchedTable = Table([
+  Col("Title", ["The Last Frontier", "Echoes of Tomorrow", "Neon City", "Iron Peak", "Starfall"]),
+  Col("Hours", [312, 278, 245, 198, 167]),
+])
+
+watchTimeSection = Card([
+  watchTimeHeading,
+  watchTimeBarChart,
+])
+watchTimeHeading = Heading("Watch Time — Past Month", "h3")
+watchTimeBarChart = HorizontalBarChart(
+  ["W1", "W2", "W3", "W4"],
+  [
+    Series("Hours", [12400, 14200, 15800, 18900]),
+  ],
+  "grouped",
+  "Week",
+  "Watch Hours"
+)
+
+subscribersSection = Card([
+  subscribersHeading,
+  subscribersTable,
+])
+subscribersHeading = Heading("New Subscribers vs Cancellations", "h3")
+subscribersTable = Table([
+  Col("Period", ["Jan", "Feb", "Mar", "Apr", "May"]),
+  Col("New Subscribers", [2400, 2800, 3100, 2700, 3500]),
+  Col("Cancellations", [1200, 1500, 1800, 1600, 2100]),
+])
+
+performanceSection = Card([
+  performanceHeading,
+  performanceRadarChart,
+])
+performanceHeading = Heading("Performance by Genre", "h3")
+performanceRadarChart = RadarChart(
+  ["Action", "Comedy", "Drama", "Sci-Fi", "Fantasy", "Documentary"],
+  [
+    Series("Engagement", [85, 72, 68, 78, 60, 55]),
+    Series("Retention", [70, 65, 75, 60, 72, 80]),
+  ]
+)
+
+bufferingSection = Card([
+  bufferingHeading,
+  bufferingBarChart,
+])
+bufferingHeading = Heading("Buffering Rate", "h3")
+bufferingBarChart = HorizontalBarChart(
+  ["1AM", "3AM", "5AM", "7AM", "9AM", "11AM", "1PM", "3PM", "5PM", "7PM"],
+  [
+    Series("Buffering %", [2, 3, 1, 5, 8, 6, 3, 4, 7, 2]),
+  ],
+  "grouped",
+  "Time",
+  "Buffering Rate (%)"
+)
+
+deliveryHealthSection = Card([
+  deliveryHealthHeading,
+  deliveryHealthBarChart,
+])
+deliveryHealthHeading = Heading("Delivery Health by Region", "h3")
+deliveryHealthBarChart = HorizontalBarChart(
+  ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East", "Africa"],
+  [
+    Series("Health %", [97, 94, 89, 82, 78, 71]),
+  ],
+  "grouped",
+  "Region",
+  "Delivery Health (%)"
+)
+
+releasesSection = Card([
+  releasesHeading,
+  releasesList,
+])
+releasesHeading = Heading("Releases This Month", "h3")
+releasesList = ListBlock([
+  ListItem("The Horizon Protocol", "Sci-Fi", null, "Coming in 3 days"),
+  ListItem("Neon Dreams", "Action", null, "Coming in 5 days"),
+  ListItem("Echoes of Tomorrow", "Drama", null, "Coming in 7 days"),
+  ListItem("Starfall", "Sci-Fi", null, "Coming in 10 days"),
+], "image")
+
+licensesSection = Card([
+  licensesHeading,
+  licensesTable,
+])
+licensesHeading = Heading("Licenses Expiring Soon", "h3")
+licensesTable = Table([
+  Col("Title", ["The Last Frontier", "Echoes of Tomorrow", "Neon City", "Iron Peak", "Starfall"]),
+  Col("Expires", ["Mar 15", "Mar 22", "Apr 01", "Apr 08", "Apr 12"]),
+  Col("Status", ["14 days", "21 days", "32 days", "39 days", "45 days"]),
+])
+
+recommendationClicksSection = Card([
+  recommendationClicksHeading,
+  recommendationClicksBarChart,
+])
+recommendationClicksHeading = Heading("Recommendations Click-Through Rate", "h3")
+recommendationClicksBarChart = HorizontalBarChart(
+  ["Action", "Comedy", "Drama", "Sci-Fi", "Fantasy", "Documentary"],
+  [
+    Series("Click Rate %", [32, 18, 25, 41, 15, 22]),
+  ],
+  "grouped",
+  "Genre",
+  "Click-Through Rate"
+)
+
+searchFailuresSection = Card([
+  searchFailuresHeading,
+  searchFailuresBarChart,
+])
+searchFailuresHeading = Heading("Searches Ending Without Playback", "h3")
+searchFailuresBarChart = HorizontalBarChart(
+  ["Search", "No Results", "Playback Error", "Account Locked", "Premium Paywall"],
+  [
+    Series("Count", [1820, 940, 310, 150, 220]),
+  ],
+  "grouped",
+  "Failure Type",
+  "Search Failures"
+)
+
+revenueSplitSection = Card([
+  revenueSplitHeading,
+  revenueSplitBarChart,
+])
+revenueSplitHeading = Heading("Revenue Split by Plan", "h3")
+revenueSplitBarChart = HorizontalBarChart(
+  ["Free", "Basic", "Premium", "Family", "Business"],
+  [
+    Series("Revenue $", [12000, 34000, 78000, 52000, 41000]),
+  ],
+  "grouped",
+  "Plan",
+  "Revenue"
+)
+
+viewingSplitSection = Card([
+  viewingSplitHeading,
+  viewingSplitBarChart,
+])
+viewingSplitHeading = Heading("Viewing Split by Device", "h3")
+viewingSplitBarChart = HorizontalBarChart(
+  ["Mobile", "Desktop", "Smart TV", "Tablet", "VR"],
+  [
+    Series("Share %", [45, 30, 15, 7, 3]),
+  ],
+  "grouped",
+  "Device",
+  "Viewing Share"
+)
+
+regionFocus = Card([
+  regionFocusHeading,
+  regionFocusTabs,
+])
+regionFocusHeading = Heading("Focus on One Region", "h3")
+regionFocusTabs = Tabs([
+  TabItem("North America", "NA", [
+    CardHeader("North America", "97% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [97, 2, 45]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+  TabItem("Europe", "EU", [
+    CardHeader("Europe", "94% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [94, 3, 52]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+  TabItem("Asia Pacific", "APAC", [
+    CardHeader("Asia Pacific", "89% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [89, 4, 61]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+  TabItem("Latin America", "LATAM", [
+    CardHeader("Latin America", "82% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [82, 6, 73]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+  TabItem("Middle East", "MEA", [
+    CardHeader("Middle East", "78% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [78, 8, 68]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+  TabItem("Africa", "AFR", [
+    CardHeader("Africa", "71% delivery health"),
+    BarChart(["Delivery", "Buffering", "Latency"], [
+      Series("Health %", [71, 9, 82]),
+    ], "grouped", "Metric", "Value"),
+  ]),
+])
+
+featureFlags = Card([
+  featureFlagsHeading,
+  featureFlagsSwitchGroup,
+])
+featureFlagsHeading = Heading("Feature Flags", "h3")
+featureFlagsSwitchGroup = SwitchGroup("flags", [
+  SwitchItem("new_dashboard", "Enable new dashboard UI", "new_dashboard", true),
+  SwitchItem("predictive_recommendations", "Enable ML-based recommendations", "predictive_recommendations", false),
+  SwitchItem("autoplay_enabled", "Enable autoplay on video", "autoplay_enabled", true),
+  SwitchItem("analytics_telemetry", "Enable analytics collection", "analytics_telemetry", false),
+  SwitchItem("beta_cdn", "Enable beta CDN routing", "beta_cdn", true),
+  SwitchItem("dark_mode", "Enable dark mode for UI", "dark_mode", false),
+  SwitchItem("multi_region_load_balancing", "Enable multi-region load balancing", "multi_region_load_balancing", true),
+  SwitchItem("experimental_ai_recommendations", "Enable AI-based recommendations", "experimental_ai_recommendations", false),
+], "clear")
+
+titlePromotion = Card([
+  titlePromotionHeading,
+  titlePromotionForm,
+])
+titlePromotionHeading = Heading("Promote a Title on the Home Screen", "h3")
+titlePromotionForm = Form("title-promotion", [
+  FormControl("Title", titleInput, "Select a title from the list to promote"),
+  FormControl("Promotion Type", typeSelect, "Choose how to promote the title"),
+  FormControl("Start Date", dateInput, "When the promotion should go live"),
+  FormControl("Duration (days)", durationSlider, "How long the promotion runs"),
+], [
+  Buttons([
+    Button("Submit Promotion", null, "primary"),
+    Button("Clear", null, "tertiary"),
+  ]),
+])
+titleInput = Input("title", "The Last Frontier", "text")
+typeSelect = Select("promo_type", [
+  SelectItem("Banner", "Display banner on home screen"),
+  SelectItem("Featured", "Featured placement in sidebar"),
+  SelectItem("Video", "Promotional video"),
+], "Select promotion type")
+dateInput = DatePicker("start_date", "single", "Select start date")
+durationSlider = Slider("duration_days", "continuous", 1, 30, 1, "Duration (days)", "Promotion length in days")

@@ -1,0 +1,94 @@
+The user wants a single screen showing upcoming calendar information with:
+1. Next meeting's title and start time
+2. Who is attending
+3. A way to join the call
+
+Let me build this as a clean, focused UI card.
+
+I'll structure it as:
+- A Card with a header
+- Meeting title and time prominently displayed
+- Attendees list
+- A join call button
+
+Let me think about the components:
+- Card as root
+- CardHeader for the section title
+- Heading for the meeting title
+- TextContent for the start time
+- ListBlock or Avatar components for attendees
+- Button for joining the call
+
+Let me design this:
+
+```
+root = Card([header, meetingInfo, attendees, joinBtn])
+header = CardHeader("Up Next", "Your next scheduled meeting")
+meetingInfo = Card([title, time], "sunk")
+title = Heading("Design System Review", "h2")
+time = TextContent("Today at 2:30 PM — 3:30 PM")
+attendees = Card([attendeesLabel, attendeeList], "sunk")
+attendeesLabel = Heading("Attendees", "h3")
+attendeeList = ListBlock([att1, att2, att3, att4])
+att1 = ListItem("Sarah Chen", "Design Lead")
+att2 = ListItem("Marcus Johnson", "Product Manager")
+att3 = ListItem("Priya Patel", "UX Engineer")
+att4 = ListItem("Alex Rivera", "Frontend Developer")
+joinBtn = Buttons([join])
+join = Button("Join Call", null, "primary", "normal", "large")
+```
+
+Wait, let me check the Button signature:
+Button(label: string, action?: (string | number)[], variant?: "primary" | "secondary" | "tertiary", type?: "normal" | "destructive", size?: "extra-small" | "small" | "medium" | "large")
+
+So: Button("Join Call", null, "primary", "normal", "large") - that's 5 args.
+
+Let me also add avatars for attendees. ListItem has an optional image parameter.
+
+Actually, let me make this more visually appealing. I'll use avatars for attendees and make the meeting info more prominent.
+
+Let me reconsider the structure to be cleaner:
+
+root = Card([header, meetingCard, joinBtn])
+header = CardHeader("Up Next")
+meetingCard = Card([title, time, attendeesSection], "sunk")
+title = Heading("Design System Review", "h2")
+time = TextContent("Today at 2:30 PM — 3:30 PM")
+attendeesSection = Card([attendeesHeading, attendeeList], "clear")
+attendeesHeading = Heading("Attendees", "h3")
+attendeeList = ListBlock([att1, att2, att3, att4])
+att1 = ListItem("Sarah Chen", "Design Lead")
+att2 = ListItem("Marcus Johnson", "Product Manager")
+att3 = ListItem("Priya Patel", "UX Engineer")
+att4 = ListItem("Alex Rivera", "Frontend Developer")
+joinBtn = Buttons([join])
+join = Button("Join Call", null, "primary", "normal", "large")
+
+This looks good. Let me verify all references are connected and everything is positional.
+root = Card([header, meetingCard, joinBtn])
+
+header = CardHeader("Up Next")
+
+meetingCard = Card([title, time, attendeesSection], "sunk")
+
+title = Heading("Design System Review", "h2")
+
+time = TextContent("Today at 2:30 PM — 3:30 PM")
+
+attendeesSection = Card([attendeesHeading, attendeeList], "clear")
+
+attendeesHeading = Heading("Attendees", "h3")
+
+attendeeList = ListBlock([att1, att2, att3, att4])
+
+att1 = ListItem("Sarah Chen", "Design Lead")
+
+att2 = ListItem("Marcus Johnson", "Product Manager")
+
+att3 = ListItem("Priya Patel", "UX Engineer")
+
+att4 = ListItem("Alex Rivera", "Frontend Developer")
+
+joinBtn = Buttons([join])
+
+join = Button("Join Call", null, "primary", "normal", "large")

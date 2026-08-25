@@ -1,0 +1,108 @@
+```openui-lang
+root = Card([factoryHeader, oeeSection, productionSummary, linesSection, defectTrend, downtimeChart, maintenanceAlerts, stockLevels, deliveries, shiftComparison, safetyStats, qualityHold, energyUse, workOrders, maintenanceForm, lineFocus, andonAlerts, exportBtn], "card", "column", "m", "start", "start")
+
+factoryHeader = CardHeader("Factory Floor Supervisor Console", "Real-time production overview")
+
+oeeSection = Card([oeeTitle, oeeMetrics], "sunk")
+oeeTitle = Heading("Overall Equipment Effectiveness", "h3")
+oeeMetrics = Table([oeeColLabels, oeeColValues])
+oeeColLabels = Col("Metric", ["Availability", "Performance", "Quality"], "string")
+oeeColValues = Col("Value (%)", ["92.5", "88.2", "97.8"], "number")
+
+productionSummary = Card([targetTitle, targetProgress], "sunk")
+targetTitle = Heading("Today's Production Target", "h3")
+targetProgress = Card([targetValue, actualValue], "sunk", "row", "l")
+targetValue = TextContent("Target: 1,250 units", "large")
+actualValue = TextContent("Actual: 1,187 units", "large", "danger")
+
+linesSection = Card([linesTitle, linesTable], "sunk")
+linesTitle = Heading("Production Lines", "h3")
+linesTable = Table([lineColHeaders, lineColData])
+lineColHeaders = Col("Line", ["Rate (units/hr)", "Status", "Defects"], "string")
+lineColData = Col("Data", ["Line 1: 85 | ✅", "Line 2: 72 | ⚠️", "Line 3: 90 | ✅", "Line 4: 55 | ❌"], "string")
+
+defectTrend = Card([defectChart], "sunk")
+defectChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May"], [defectSeries], "natural", "Month", "Defects (%)")
+defectSeries = Series("Defect Rate", [1.2, 1.8, 1.5, 2.1, 1.9])
+
+downtimeChart = Card([downtimeTitle, downtimePie], "sunk")
+downtimeTitle = Heading("Downtime Breakdown", "h3")
+downtimePie = PieChart(["Mechanical", "Human Error", "Maintenance", "Other"], [45, 25, 15, 15], "pie")
+
+maintenanceAlerts = Card([maintenanceTitle, machinesList], "sunk")
+maintenanceTitle = Heading("Machines Due for Maintenance", "h3")
+machinesList = ListBlock([machine1, machine2, machine3], "image")
+machine1 = ListItem("Press 001", "Due: 2023-11-15", ["https://picsum.photos/100/100?random=1"], "Inspect")
+machine2 = ListItem("Lathe 005", "Due: 2023-11-18", ["https://picsum.photos/100/100?random=2"], "Lubricate")
+machine3 = ListItem("Robot 012", "Due: 2023-11-20", ["https://picsum.photos/100/100?random=3"], "Calibrate")
+
+stockLevels = Card([stockTitle, stockTable], "sunk")
+stockTitle = Heading("Material Stock Levels", "h3")
+stockTable = Table([stockColHeaders, stockColValues])
+stockColHeaders = Col("Material", ["Stock", "Threshold"], "string")
+stockColValues = Col("Current", ["Steel: 4,200 kg | 5,000 kg", "Resin: 1,800 L | 2,000 L", "Packaging: 3,500 units | 4,000 units"], "string")
+
+deliveries = Card([deliveriesTitle, deliveriesList], "sunk")
+deliveriesTitle = Heading("Supplier Deliveries (This Week)", "h3")
+deliveriesList = ListBlock([delivery1, delivery2, delivery3])
+delivery1 = ListItem("Steel Supplier", "10,000 kg | 10:00 AM", null, "View")
+delivery2 = ListItem("Resin Supplier", "2,500 L | 2:30 PM", null, "View")
+delivery3 = ListItem("Packaging Supplier", "5,000 units | 4:00 PM", null, "View")
+
+shiftComparison = Card([shiftTitle, shiftChart], "sunk")
+shiftTitle = Heading("Shift Output Comparison", "h3")
+shiftChart = BarChart(["Morning", "Afternoon", "Night"], [shiftSeries], "grouped", "Shift", "Units")
+shiftSeries = Series("Output", [425, 450, 390])
+
+safetyStats = Card([safetyTitle, safetyMetrics], "sunk")
+safetyTitle = Heading("Safety Performance", "h3")
+safetyMetrics = Card([incidentsCount, daysSinceLast], "sunk", "row", "l")
+incidentsCount = TextContent("Incidents this year: 3", "large")
+daysSinceLast = TextContent("Days since last incident: 45", "large")
+
+qualityHold = Card([holdTitle, holdTable], "sunk")
+holdTitle = Heading("Batches on Quality Hold", "h3")
+holdTable = Table([holdColHeaders, holdColData])
+holdColHeaders = Col("Batch", ["Reason", "Action"], "string")
+holdColData = Col("Data", ["Batch 42 | Material defect | Inspect", "Batch 58 | Calibration error | Recalibrate"], "string")
+
+energyUse = Card([energyTitle, energyValue], "sunk")
+energyTitle = Heading("Energy Usage Today", "h3")
+energyValue = TextContent("Current: 125.3 kWh | Target: 120 kWh", "large")
+
+workOrders = Card([workTitle, workTable], "sunk")
+workTitle = Heading("Open Work Orders", "h3")
+workTable = Table([workColHeaders, workColData])
+workColHeaders = Col("Priority", ["Description", "Due Date"], "string")
+workColData = Col("Data", ["High | Press 001 alignment | 2023-11-14", "Medium | Lathe 005 maintenance | 2023-11-16", "Low | Robot 012 software update | 2023-11-20"], "string")
+
+maintenanceForm = DialogBlock("Schedule Maintenance", "Schedule Maintenance", "Select machine and date", [maintenanceContent], "primary")
+maintenanceContent = Form("maintenance-request", maintenanceButtons, [machineSelect, dateSelect])
+machineSelect = FormControl("Machine", machineSelectInput)
+machineSelectInput = Select("machine", [machineOption1, machineOption2, machineOption3], "Select machine")
+machineOption1 = SelectItem("Press 001", "Press 001")
+machineOption2 = SelectItem("Lathe 005", "Lathe 005")
+machineOption3 = SelectItem("Robot 012", "Robot 012")
+dateSelect = FormControl("Date", dateSelectInput)
+dateSelectInput = DatePicker("date", "single")
+maintenanceButtons = Buttons([scheduleBtn], "column")
+scheduleBtn = Button("Schedule", null, "primary")
+
+lineFocus = Tabs([lineTab1, lineTab2, lineTab3, lineTab4])
+lineTab1 = TabItem("line1", "Line 1", [focusContent])
+lineTab2 = TabItem("line2", "Line 2", [focusContent])
+lineTab3 = TabItem("line3", "Line 3", [focusContent])
+lineTab4 = TabItem("line4", "Line 4", [focusContent])
+focusContent = Card([focusTitle, focusChart], "sunk")
+focusTitle = Heading("Focused Line Metrics", "h3")
+focusChart = RadarChart(["Rate", "Quality", "Availability", "Defects"], [focusSeries])
+
+andonAlerts = Card([andonTitle, alertList], "sunk")
+andonTitle = Heading("Live Andon Alerts", "h3")
+alertList = ListBlock([alert1, alert2, alert3])
+alert1 = ListItem("Line 2", "Material jam detected", null, "Acknowledge")
+alert2 = ListItem("Press 001", "Temperature high", null, "Acknowledge")
+alert3 = ListItem("Robot 012", "Calibration drift", null, "Acknowledge")
+
+exportBtn = Button("Export Shift Report", null, "primary")
+```

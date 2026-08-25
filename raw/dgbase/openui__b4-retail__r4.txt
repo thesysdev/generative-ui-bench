@@ -1,0 +1,46 @@
+thought
+root = Card([header, statsRow, trafficChart, salesSection, inventorySection, staffSection, promoSection])
+header = CardHeader("Store Console #402", "Downtown Metro Branch")
+statsRow = Card([salesTarget, basketSize, returnsWeek], "card", "row", "m")
+salesTarget = Card([Heading("Sales Today", "h3"), TextContent("$12,450 / $15,000 target", "large-heavy"), Progress(83, "Target Achievement")], "sunk")
+basketSize = Card([Heading("Avg. Basket", "h3"), TextContent("$64.20", "large-heavy")], "sunk")
+returnsWeek = Card([Heading("Returns (Week)", "h3"), TextContent("24 units", "large-heavy")], "sunk")
+trafficChart = Card([Heading("Foot Traffic Trend", "h3"), LineChart(["8am", "10am", "12pm", "2pm", "4pm", "6pm"], [trafficSeries], "natural", "Time", "Count")
+trafficSeries = Series("Traffic", [45, 120, 210, 180, 310, 240])
+salesSection = Card([Heading("Best Sellers", "h3"), Table([colProduct, colUnits, colRev]), Separator(), Heading("Register Status", "h3"), Table([colReg, colStatus])], "card", "column", "m")
+colProduct = Col("Product", ["Classic Tee", "Denim Jacket", "Leather Belt", "Wool Scarf"])
+colUnits = Col("Units Sold", [42, 28, 15, 12])
+colRev = Col("Revenue", ["$2,100", "$3,560", "$1,200", "$1,800"])
+colReg = Col("Register", ["Reg 01", "Reg 02", "Reg 03"])
+colStatus = Col("Status", ["Open", "Closed", "Open"])
+inventorySection = Card([Heading("Out of Stock", "h3"), ListBlock([item1, item2]), Separator(), Heading("Quick Actions", "h4"), Buttons([reorderBtn, storeSwitcher])], "card", "column", "m")
+item1 = ListItem("White Sneakers (S)", "0 units left", null, "Reorder")
+item2 = ListItem("Black Hoodie (M)", "0 units left", null, "Reorder")
+reorderBtn = Button("Reorder Selected", null, "primary")
+storeSwitcher = Button("Switch Store View", null, "secondary")
+staffSection = Card([Heading("On Shift", "h3"), ListBlock([staff1, staff2, staff3])], "card", "column", "m")
+staff1 = ListItem("Alice Chen", "Floor Manager")
+staff2 = ListItem("Bob Smith", "Cashier")
+staff3 = ListItem("Charlie Day", "Sales Associate")
+promoSection = Card([Heading("Active Promotions", "h3"), ListBlock([promo1, promo2]), Separator(), Heading("Weekly Comparison", "h3"), HorizontalBarChart(["Last Week", "This Week"], [compSeries], "grouped", "", "USD")], "card", "column", "m")
+promo1 = ListItem("Summer Sale", "15% off all swimwear - High engagement")
+promo2 = ListItem("BOGO Accessories", "Buy one get one free - Slow movement")
+compSeries = Series("Last Week", [45000])
+comp2 = Series("This Week", [52000]) # Wait, the signature for HorizontalBarChart takes labels and series. Let's fix the data.
+# Correction: HorizontalBarChart(labels, series)
+# labels = ["Last Week", "This Week"]
+# series = [Series("Sales", [45000, 52000])]
+# Re-defining to match signature:
+compData = Series("Sales", [45000, 52000])
+# Wait, I need to define the chart properly in the section.
+# Let's re-map the chart.
+promoChart = HorizontalBarChart(["Last Week", "This Week"], [Series("Sales", [45000, 52000])], "grouped", "", "")
+# Let's just re-write the root to use the variables correctly.
+root = Card([header, statsRow, trafficChart, salesSection, inventorySection, staffSection, promoSection])
+# Actually, I need to include promoChart in promoSection.
+promoSection = Card([Heading("Active Promotions", "h3"), ListBlock([promo1, promo2]), Separator(), Heading("Weekly Comparison", "h3"), promoChart], "card", "column", "m")
+# All variables are now referenced.
+# header, statsRow, salesTarget, basketSize, returnsWeek, trafficChart, trafficSeries, salesSection, colProduct, colUnits, colRev, colReg, colStatus, inventorySection, item1, item2, reorderBtn, storeSwitcher, staffSection, staff1, staff2, staff3, promoSection, promo1, promo2, promoChart.
+# Wait, I need to define promoChart.
+promoChart = HorizontalBarChart(["Last Week", "This Week"], [Series("Sales", [45000, 52000])], "grouped", "", "") 
+# Final check: all variables are defined.

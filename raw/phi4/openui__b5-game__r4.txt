@@ -1,0 +1,81 @@
+```openui
+root = Card([
+    playerStats,
+    revenueStats,
+    sessionStats,
+    salesStats,
+    serverStats,
+    appStats,
+    eventStats,
+    reportStats,
+    experimentResults,
+    patchNotes,
+    focusRegionBtn,
+    shipHotfixBtn
+])
+
+playerStats = Card([
+    onlinePlayers,
+    dailyMAU,
+    monthlyMAU
+], "card", "column", "s", "start", "start", false)
+
+onlinePlayers = CardHeader("Players Online", "Current Count")
+dailyMAU = CardHeader("Daily Active Users", "Last 24 Hours")
+monthlyMAU = CardHeader("Monthly Active Users", "Last 30 Days")
+
+revenueStats = Card([
+    revenueToday,
+    revenuePerUser
+], "sunk", "column", "s", "start", "start", false)
+
+revenueToday = CardHeader("Revenue Today", "$12,456")
+revenuePerUser = CardHeader("Revenue Per User", "$0.50")
+
+sessionStats = Card([sessionLengthChart], "card", "column", "s", "start", "start", false)
+sessionLengthChart = LineChart(["14 Days Ago", "13 Days Ago", ..., "Today"], [sessionSeries], "natural", "Day", "Minutes")
+sessionSeries = Series("Average Session Length", [30, 32, ..., 45])
+
+salesStats = Card([bestSellingItems], "card", "column", "s", "start", "start", false)
+bestSellingItems = Table([itemName, unitsSold])
+itemName = Col("Item Name", ["Sword of Truth", "Dragon Shield", "Potion of Speed"])
+unitsSold = Col("Units Sold", ["5,432", "3,210", "4,567"])
+
+serverStats = Card([serverRegions], "card", "column", "s", "start", "start", false)
+serverRegions = Table([regionName, regionHealth])
+regionName = Col("Region", ["NA", "EU", "ASIA", "SA"])
+regionHealth = Col("Health", ["Good", "Fair", "Critical", "Good"])
+
+appStats = Card([crashRateChart], "card", "column", "s", "start", "start", false)
+crashRateChart = BarChart(["1.0", "1.1", "1.2", "1.3"], [crashRateSeries], "stacked", "App Version", "Crash Rate")
+crashRateSeries = Series("Crash Rate", [0.02, 0.05, 0.01, 0.03])
+
+eventStats = Card([
+    liveEvents,
+    upcomingEvents
+], "card", "column", "s", "start", "start", false)
+
+liveEvents = CardHeader("Live Events", "Event 1: Cosplay Contest")
+upcomingEvents = CardHeader("Upcoming Events", "Event 2: Anniversary Celebration")
+
+reportStats = Card([
+    playerReports,
+    banAppeals
+], "card", "column", "s", "start", "start", false)
+
+playerReports = CardHeader("Player Reports", "3 Reports Awaiting Review")
+banAppeals = CardHeader("Ban Appeals", "2 Appeals Awaiting Review")
+
+experimentResults = Card([experiment1Results, experiment2Results], "sunk", "column", "s", "start", "start", false)
+experiment1Results = CardHeader("Experiment 1", "Increased Drop Rate - Positive")
+experiment2Results = CardHeader("Experiment 2", "New Map - Neutral")
+
+patchNotes = Form("patch-notes-form", patchNotesButtons, [notesField])
+notesField = FormControl("Draft Notes", notesTextArea)
+notesTextArea = TextArea("patch-notes", "Write your patch notes here", 4)
+patchNotesButtons = Buttons([saveBtn])
+saveBtn = Button("Save Draft", null, "primary")
+
+focusRegionBtn = Button("Focus on Region", null, "secondary")
+shipHotfixBtn = Button("Ship Hotfix", null, "destructive")
+```

@@ -1,0 +1,41 @@
+```openui
+root = Card([header, activeLearners, completionRate, avgQuizScore, enrollmentChart, atRiskLearners, cohortFilter, engagementChart, messageCohortButton])
+header = CardHeader("Training Platform Analytics", "Weekly Summary")
+
+activeLearners = Card([activeLearnersHeading, activeLearnersValue])
+activeLearnersHeading = Heading("Active Learners This Week", "h3")
+activeLearnersValue = TextContent("1,234 active learners", "large")
+
+completionRate = Card([completionRateHeading, completionRateValue])
+completionRateHeading = Heading("Course Completion Rate", "h3")
+completionRateValue = TextContent("78%", "large")
+
+avgQuizScore = Card([avgQuizScoreHeading, avgQuizScoreValue])
+avgQuizScoreHeading = Heading("Average Quiz Score", "h3")
+avgQuizScoreValue = TextContent("85%", "large")
+
+enrollmentChart = Card([enrollmentChartHeading, lineChart])
+enrollmentChartHeading = Heading("Courses Ranked by Enrollment", "h3")
+lineChart = LineChart(["Course A", "Course B", "Course C", "Course D", "Course E"], [enrollmentSeries], "natural", "Course", "Enrollments")
+enrollmentSeries = Series("Enrollment", [1200, 950, 875, 650, 400])
+
+atRiskLearners = Card([atRiskLearnersHeading, atRiskLearnersValue])
+atRiskLearnersHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskLearnersValue = TextContent("45 learners", "large")
+
+cohortFilter = Card([cohortFilterHeading, cohortSelect])
+cohortFilterHeading = Heading("Filter by Cohort", "h3")
+cohortSelect = Select("cohort", [cohort1, cohort2, cohort3], "Select a cohort")
+cohort1 = SelectItem("Cohort 1", "January Cohort")
+cohort2 = SelectItem("Cohort 2", "February Cohort")
+cohort3 = SelectItem("Cohort 3", "March Cohort")
+
+engagementChart = Card([engagementChartHeading, horizontalBarChart])
+engagementChartHeading = Heading("Engagement Over Past Eight Weeks", "h3")
+horizontalBarChart = HorizontalBarChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"], [engagementSeries], "grouped", "Week", "Engagement")
+engagementSeries = Series("Engagement", [85, 88, 90, 87, 92, 89, 91, 93])
+
+messageCohortButton = Card([messageCohortButtonHeading, messageCohort])
+messageCohortButtonHeading = Heading("Message a Cohort", "h3")
+messageCohort = AlertDialogBlock("Message Cohort", "Send a message to a selected cohort", "Are you sure you want to send this message?", "Send", "Cancel")
+```

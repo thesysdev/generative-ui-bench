@@ -1,0 +1,148 @@
+```openui
+root = Card([
+    overviewSection,
+    revenueCostsProfitSection,
+    quarterlyTrendsSection,
+    departmentBudgetSection,
+    headcountSection,
+    risksSection,
+    initiativesSection,
+    financialMetricsSection,
+    navigationSection,
+    exportButton
+])
+
+overviewSection = Card([
+    CardHeader("CEO's Quarterly Command View", "Q2 2023 Overview")
+])
+
+revenueCostsProfitSection = Card([
+    revenueHeading,
+    revenueValue,
+    costsValue,
+    profitValue
+], "sunk", "column")
+revenueHeading = Heading("Revenue", "h4")
+revenueValue = TextContent("$1.2M", "large")
+costsHeading = Heading("Costs", "h4")
+costsValue = TextContent("$850K", "large")
+profitHeading = Heading("Profit", "h4")
+profitValue = TextContent("$350K", "large")
+
+quarterlyTrendsSection = Card([
+    revenueTrendChart,
+    costsTrendChart
+], "sunk", "column")
+revenueTrendChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [revenueSeries], "linear", "Quarter", "USD")
+revenueSeries = Series("Revenue", [1100000, 1200000, 1150000, 1250000])
+costsTrendChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [costsSeries], "linear", "Quarter", "USD")
+costsSeries = Series("Costs", [800000, 850000, 820000, 870000])
+
+departmentBudgetSection = Card([
+    departmentBudgetHeading,
+    departmentBudgetTable
+], "sunk")
+departmentBudgetHeading = Heading("Budget by Department vs. Plan", "h4")
+departmentBudgetTable = Table([
+    deptNameCol,
+    budgetCol,
+    planCol,
+    varianceCol
+])
+deptNameCol = Col("Department", ["Sales", "R&D", "Marketing", "HR"])
+budgetCol = Col("Budget", [200000, 300000, 150000, 50000])
+planCol = Col("Plan", [210000, 290000, 160000, 55000])
+varianceCol = Col("Variance", ["($10K)", "(10K)", "($10K)", "($5K)"])
+
+headcountSection = Card([
+    headcountHeading,
+    headcountTable
+], "sunk")
+headcountHeading = Heading("Headcount by Department", "h4")
+headcountTable = Table([
+    deptNameCol,
+    headcountCol
+])
+headcountCol = Col("Headcount", [25, 40, 15, 10])
+
+risksSection = Card([
+    risksHeading,
+    risksTable
+], "sunk")
+risksHeading = Heading("Top Risks with Owner", "h4")
+risksTable = Table([
+    riskCol,
+    ownerCol
+])
+riskCol = Col("Risk", ["Market Volatility", "Tech Debt", "Talent Retention", "Regulatory Changes"])
+ownerCol = Col("Owner", ["Alice", "Bob", "Carol", "Dave"])
+
+initiativesSection = Card([
+    initiativesHeading,
+    initiativesTable
+], "sunk")
+initiativesHeading = Heading("Strategic Initiatives with Status", "h4")
+initiativesTable = Table([
+    initiativeCol,
+    statusCol
+])
+initiativeCol = Col("Initiative", ["Expand to EU", "Launch Product X", "Improve Customer Experience", "Upgrade IT Infrastructure"])
+statusCol = Col("Status", ["In Progress", "Completed", "Planned", "Delayed"])
+
+financialMetricsSection = Card([
+    monthsOfRunway,
+    salesPipelineValue,
+    winRate,
+    customerCount,
+    churnRate,
+    nps
+], "sunk", "column")
+monthsOfRunway = TextContent("18 Months", "large")
+salesPipelineValue = TextContent("$3.5M", "large")
+winRate = TextContent("75%", "large")
+customerCount = TextContent("1,200 Customers", "large")
+churnRate = TextContent("5%", "large")
+nps = TextContent("45", "large")
+
+navigationSection = Card([
+    changeQuarterButton,
+    focusRegionButton
+], "sunk", "column")
+changeQuarterButton = Button("Change Quarter")
+focusRegionButton = Button("Focus on Region", null, "secondary")
+
+exportButton = Button("Export Pack", null, "tertiary")
+
+boardItemsSection = Card([
+    boardItemsHeading,
+    boardItemsList
+], "sunk")
+boardItemsHeading = Heading("Items for Next Board Meeting", "h4")
+boardItemsList = ListBlock([
+    listItem1,
+    listItem2,
+    listItem3
+])
+listItem1 = ListItem("Discuss Q2 Revenue", "Review strategies to boost sales")
+listItem2 = ListItem("Evaluate New Markets", "Consider expansion into Asia-Pacific")
+listItem3 = ListItem("Talent Retention Plan", "Present retention initiatives and results")
+
+nextQuarterSelector = Card([quarterLabel, quarterSelect], "sunk")
+quarterLabel = Label("Select Quarter")
+quarterSelect = Select("quarter", [
+    SelectItem("Q1", "Q1"),
+    SelectItem("Q2", "Q2"),
+    SelectItem("Q3", "Q3"),
+    SelectItem("Q4", "Q4")
+], "Q2", "medium")
+
+regionFocusSelector = Card([regionLabel, regionSelect], "sunk")
+regionLabel = Label("Focus on Region")
+regionSelect = Select("region", [
+    SelectItem("North America", "North America"),
+    SelectItem("Europe", "Europe"),
+    SelectItem("Asia-Pacific", "Asia-Pacific"),
+    SelectItem("Latin America", "Latin America"),
+    SelectItem("Middle East", "Middle East")
+], "North America", "medium")
+```

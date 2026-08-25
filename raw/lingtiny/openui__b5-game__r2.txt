@@ -1,0 +1,241 @@
+root = Card([overviewSection, metricsSection, revenueSection, sessionsSection, bestSellersSection, regionsSection, crashSection, eventsSection, reportsSection, banSection, inflationSection, experimentsSection, patchSection, focusSection, shipSection], "sunk")
+
+overviewSection = SectionItem("Live-Ops Dashboard", "Real-time game room overview with key metrics, live events, and quick actions")
+overviewContent = Card([
+  Header("Live-Ops Dashboard", "Real-time game room overview"),
+  Row([
+    leftCol("Players Online", "1,247", "success"),
+    rightCol("Daily Active", "3,891", "info"),
+  ]),
+  Row([
+    leftCol("Monthly Active", "12,450", "info"),
+    rightCol("Revenue Today", "$4,320", "success"),
+  ]),
+  Row([
+    leftCol("Revenue per User", "$3.47", "success"),
+    rightCol("Sessions (2wk)", "18,234", "info"),
+  ]),
+  Row([
+    leftCol("Best Sellers", "4 items", "info"),
+    rightCol("Regions (healthy)", "5/5", "success"),
+  ]),
+  Row([
+    leftCol("Crash Rate", "1.2%", "warning"),
+    rightCol("Events Running", "3 active", "info"),
+  ]),
+])
+
+metricsSection = SectionItem("Key Metrics", "Real-time player and revenue metrics")
+metricsContent = Card([
+  Header("Key Metrics"),
+  Table([
+    Col("Metric", ["Players Online", "Daily Active", "Monthly Active", "Revenue Today", "Revenue/User", "Sessions (2wk)", "Crash Rate", "Events Running"]),
+    Col("Value", ["1,247", "3,891", "12,450", "$4,320", "$3.47", "18,234", "1.2%", "3 active"]),
+  ]),
+])
+
+revenueSection = SectionItem("Revenue", "Today's revenue breakdown")
+revenueContent = Card([
+  Header("Revenue Today"),
+  BarChart([
+    "Solo", "Party", "Guild", "Daily Quest", "Event", "New Player",
+  ], [
+    { category: "Solo", values: [1200, 800, 450, 300, 200, 150] },
+    { category: "Party", values: [900, 600, 350, 250, 180, 120] },
+    { category: "Guild", values: [600, 400, 200, 150, 100, 80] },
+    { category: "Daily Quest", values: [400, 300, 180, 120, 90, 60] },
+    { category: "Event", values: [300, 200, 120, 80, 60, 40] },
+    { category: "New Player", values: [150, 100, 60, 40, 30, 20] },
+  ], "grouped", "Revenue", "USD"),
+  TextContent("Revenue per user: $3.47 | 12,450 daily active | 3,891 daily"),
+])
+
+sessionsSection = SectionItem("Session Length", "Past two weeks of session data")
+sessionsContent = Card([
+  Header("Session Length (2 Weeks)"),
+  LineChart(
+    ["W1 Mon", "W1 Tue", "W1 Wed", "W1 Thu", "W1 Fri", "W1 Sat", "W1 Sun", "W2 Mon", "W2 Tue", "W2 Wed", "W2 Thu", "W2 Fri", "W2 Sat", "W2 Sun"],
+    [{ category: "Avg Session", values: [22, 25, 28, 24, 30, 35, 32, 26, 29, 31, 27, 33, 36, 30] }],
+    "linear", "Duration (min)", "Minutes"
+  ),
+  TextContent("Peak session: 36 min | Avg: 29 min | 18,234 total sessions"),
+])
+
+bestSellersSection = SectionItem("Best Sellers", "Top items by units sold")
+bestSellersContent = Card([
+  Header("Best Sellers"),
+  Table([
+    Col("Item", ["Sword of Dawn", "Shadow Cloak", "Mystic Staff", "Ancient Shield", "Phoenix Gauntlet", "Crystal Amulet"]),
+    Col("Units", [4520, 3890, 2950, 1870, 1240, 890]),
+  ]),
+])
+
+regionsSection = SectionItem("Server Regions", "Health status by region")
+regionsContent = Card([
+  Header("Server Regions"),
+  RadarChart(
+    ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East", "Africa"],
+    [
+      { category: "Health", values: [92, 88, 95, 78, 85, 72] },
+      { category: "Load", values: [65, 70, 80, 55, 68, 50] },
+      { category: "Players", values: [80, 75, 90, 60, 72, 55] },
+    ]
+  ),
+  TextContent("All 6 regions healthy | North America lead (92%) | LatAm lowest (72%)"),
+])
+
+crashSection = SectionItem("Crash Rate by App Version", "Crash analysis across versions")
+crashContent = Card([
+  Header("Crash Rate by App Version"),
+  BarChart(
+    ["v1.4.2", "v1.4.1", "v1.4.0", "v1.3.5", "v1.3.4", "v1.3.3"],
+    [
+      { category: "Crash Rate %", values: [1.2, 1.8, 2.5, 3.1, 2.8, 1.5] },
+    ],
+    "grouped", "Crash Rate", "%"
+  ),
+  TextContent("v1.3.3 lowest (1.5%) | v1.4.0 highest (2.5%) | Focus on v1.4.2 stability"),
+])
+
+eventsSection = SectionItem("Live Events", "Running and upcoming events")
+eventsContent = Card([
+  Header("Live Events"),
+  Table([
+    Col("Event", ["Shadow Siege", "Frost Gala", "Golden Rush", "Starfall Festival", "Phoenix Rising", "Crystal Hunt", "Dragon Trials", "Shadow Arena"]),
+    Col("Status", ["Running", "Running", "Running", "Upcoming", "Upcoming", "Upcoming", "Upcoming", "Upcoming"]),
+    Col("Players", ["2,340", "1,890", "1,560", "0", "0", "0", "0", "0"]),
+  ]),
+])
+
+reportsSection = SectionItem("Player Reports", "Reports awaiting review")
+reportsContent = Card([
+  Header("Player Reports"),
+  Table([
+    Col("Report", ["Cheating Report", "Exploit Report", "Harassment", "Inappropriate Content", "Bug Report", "Account Suspended"]),
+    Col("Count", ["45", "23", "31", "18", "52", "12"]),
+    Col("Status", ["Review", "Review", "Review", "Review", "Review", "Review"]),
+  ]),
+])
+
+banSection = SectionItem("Ban Appeals", "Ban appeals awaiting review")
+banContent = Card([
+  Header("Ban Appeals"),
+  Table([
+    Col("Appeal", ["Account Ban Appeal", "Account Ban Appeal", "Account Ban Appeal", "Account Ban Appeal", "Account Ban Appeal", "Account Ban Appeal"]),
+    Col("Count", ["8", "5", "3", "2", "1", "1"]),
+    Col("Status", ["Review", "Review", "Review", "Review", "Review", "Review"]),
+  ]),
+])
+
+inflationSection = SectionItem("Currency Inflation", "In-game currency supply and demand")
+inflationContent = Card([
+  Header("Currency Inflation"),
+  BarChart(
+    ["Gold", "Silver", "Copper", "Platinum", "Arcane"],
+    [
+      { category: "Supply", values: [85, 72, 65, 40, 25] },
+      { category: "Demand", values: [90, 68, 70, 35, 20] },
+    ],
+    "grouped", "Supply/Demand", "Index"
+  ),
+  TextContent("Inflation index: 8.2 | Gold supply above demand | Platinum demand high"),
+])
+
+experimentsSection = SectionItem("Running Experiments", "Two active experiments")
+experimentsContent = Card([
+  Header("Running Experiments"),
+  Table([
+    Col("Experiment", ["Experiment A: Weapon Balance", "Experiment B: PvP Balance"]),
+    Col("Status", ["Running", "Running"]),
+    Col("Participants", ["4,200", "3,800"]),
+    Col("Duration", ["14 days", "7 days"]),
+    Col("Variant", ["A/B", "A/B"]),
+  ]),
+])
+
+patchSection = SectionItem("Patch Notes", "Draft patch notes")
+patchContent = Card([
+  Header("Patch Notes"),
+  Form(
+    "patch-notes",
+    [
+      Button("Draft Patch Notes", null, "primary"),
+      Button("Cancel", null, "tertiary"),
+    ],
+    [
+      FormControl("Patch Title", Input("patch_title", "Season 12 Patch Notes")),
+      FormControl("Changelog", TextArea("changelog", "Add new features, fix bugs", rows: 10)),
+      FormControl("Release Date", DatePicker("release_date", "single")),
+      FormControl("Target Version", Select("target_version", [
+        SelectItem("v1.4.2", "v1.4.2"),
+        SelectItem("v1.4.3", "v1.4.3"),
+      ], "Choose version")),
+    ]
+  ),
+])
+
+focusSection = SectionItem("Region Focus", "Focus on one region")
+focusContent = Card([
+  Header("Region Focus"),
+  RadioGroup("region_focus", [
+    RadioItem("North America", "Focus on NA servers", "na"),
+    RadioItem("Europe", "Focus on EU servers", "eu"),
+    RadioItem("Asia Pacific", "Focus on APAC servers", "apac"),
+    RadioItem("Latin America", "Focus on LatAm servers", "latam"),
+  ], defaultValue: "na", label: "Select region to focus on"),
+  TextContent("Select a region to highlight in the dashboard"),
+])
+
+shipSection = SectionItem("Hotfix Ship", "Ship a hotfix")
+shipContent = Card([
+  Header("Hotfix Ship"),
+  Form(
+    "hotfix",
+    [
+      Button("Ship Hotfix", null, "primary"),
+      Button("Cancel", null, "tertiary"),
+    ],
+    [
+      FormControl("Hotfix Title", Input("hotfix_title", "Critical Bug Fix")),
+      FormControl("Affected Version", Select("affected_version", [
+        SelectItem("v1.4.2", "v1.4.2"),
+        SelectItem("v1.4.3", "v1.4.3"),
+      ], "Choose version")),
+      FormControl("Priority", Select("priority", [
+        SelectItem("Critical", "Critical"),
+        SelectItem("High", "High"),
+        SelectItem("Medium", "Medium"),
+      ], "Choose priority")),
+    ]
+  ),
+])
+
+Header(text: string, subtitle?: string) = CardHeader(title: text, subtitle: subtitle)
+Row = Row
+TextContent(text: string, size?: "small" | "default" | "large" | "small-heavy" | "large-heavy") = TextContent(text, size)
+BarChart(labels: (string | number)[], series: (Series)[], variant?: "grouped" | "stacked", xLabel?: string, yLabel?: string) = BarChart(labels, series, variant, xLabel, yLabel)
+LineChart(labels: (string | number)[], series: (Series)[], variant?: "linear" | "natural" | "step", xLabel?: string, yLabel?: string) = LineChart(labels, series, variant, xLabel, yLabel)
+RadarChart(labels: (string | number)[], series: (Series)[]) = RadarChart(labels, series)
+Table(columns: (Col)[]) = Table(columns)
+Col(label: string, data: (string | number)[], type?: "string" | "number" | "action") = Col(label, data, type)
+SelectItem(value: string, label: string) = SelectItem(value, label)
+RadioItem(label: string, description: string, value: string) = RadioItem(label, description, value)
+Button(label: string, action?: (string | number)[], variant?: "primary" | "secondary" | "tertiary", type?: "normal" | "destructive", size?: "extra-small" | "small" | "medium" | "large") = Button(label, action, variant, type, size)
+Buttons(buttons: (Button)[], direction?: "row" | "column") = Buttons(buttons, direction)
+Form(name: string, buttons: Buttons, fields: (FormControl)[]) = Form(name, buttons, fields)
+FormControl(label: string, input: Input | TextArea | Select | DatePicker | Slider | CheckBoxGroup | RadioGroup, hint?: string) = FormControl(label, input, hint)
+Input(name: string, placeholder?: string, type?: "text" | "email" | "password" | "number" | "url", rules?: (string | number)[], value?: string) = Input(name, placeholder, type, rules, value)
+TextArea(name: string, placeholder?: string, rows?: number, rules?: (string | number)[], value?: string) = TextArea(name, placeholder, rows, rules, value)
+Select(name: string, items: (SelectItem)[], placeholder?: string, rules?: (string | number)[], value?: string, size?: "small" | "medium" | "large") = Select(name, items, placeholder, rules, value, size)
+DatePicker(name: string, mode?: "single" | "range", rules?: (string | number)[], value?: (string | number)[]) = DatePicker(name, mode, rules, value)
+Slider(name: string, variant: "continuous" | "discrete", min: number, max: number, step?: number, defaultValue?: (string | number)[], label?: string, rules?: (string | number)[], value?: (string | number)) = Slider(name, variant, min, max, step, defaultValue, label, rules, value)
+CheckBoxGroup(name: string, items: (CheckBoxItem)[], rules?: (string | number)[], value?: (string | number)) = CheckBoxGroup(name, items, rules, value)
+CheckBoxItem(label: string, description: string, name: string, defaultChecked?: boolean) = CheckBoxItem(label, description, name, defaultChecked)
+RadioGroup(name: string, items: (RadioItem)[], defaultValue?: string, rules?: (string | number)[], value?: string) = RadioGroup(name, items, defaultValue, rules, value)
+RadioItem(label: string, description: string, value: string) = RadioItem(label, description, value)
+SwitchGroup(name: string, items: (SwitchItem)[], variant?: "clear" | "card" | "sunk", value?: (string | number)) = SwitchGroup(name, items, variant, value)
+SwitchItem(label?: string, description?: string, name: string, defaultChecked?: boolean) = SwitchItem(label, description, name, defaultChecked)
+Tag(text: string, icon?: string, size?: "sm" | "md" | "lg", variant?: "neutral" | "info" | "success" | "warning" | "danger") = Tag(text, icon, size, variant)
+Alert(title: string, description: string, variant?: "default" | "destructive" | "info" | "success" | "warning") = Alert(title, description, variant)
+Callout(variant: "info" | "warning" | "error" | "success" | "neutral", title: string, description: string) = Callout(variant, title, description)
+CardHeader(title?: string, subtitle?: string) = CardHeader(title, subtitle)

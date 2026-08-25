@@ -1,0 +1,58 @@
+root = Card([header, statsRow, regionSection, usageSection, incidentsSection, endpointsSection, thresholdSection])
+
+header = CardHeader("Service Health", "On-call overview · payments-api")
+
+statsRow = Card([uptimeCard, errorRateCard], "clear", "row", "l", "stretch", "start", true)
+
+uptimeCard = Card([uptimeHeading, uptimeProgress], "sunk")
+uptimeHeading = Heading("Uptime this quarter", "h4")
+uptimeProgress = Progress(99.94, "99.94% uptime (Q3)")
+
+errorRateCard = Card([errorHeading, errorCallout], "sunk")
+errorHeading = Heading("Error rate right now", "h4")
+errorCallout = TextCallout("warning", "1.8% error rate", "Elevated vs. 0.4% baseline over the last hour")
+
+regionSection = Card([regionHeading, regionForm], "sunk")
+regionHeading = Heading("Narrow to a region", "h4")
+regionForm = Form("region-filter", regionButtons, [regionField])
+regionField = FormControl("Region", regionSelect)
+regionSelect = Select("region", [regionUS, regionEU, regionAPAC, regionAll], "Select a region", null, "us-east", "medium")
+regionUS = SelectItem("us-east", "US East")
+regionEU = SelectItem("eu-west", "EU West")
+regionAPAC = SelectItem("ap-south", "Asia Pacific")
+regionAll = SelectItem("all", "All regions")
+regionButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Apply filter", null, "primary")
+
+usageSection = Card([usageHeading, usageChart], "sunk")
+usageHeading = Heading("CPU & memory — past 24 hours", "h4")
+usageChart = LineChart(usageLabels, [cpuSeries, memSeries], "natural", "Hour", "Usage %")
+usageLabels = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]
+cpuSeries = Series("CPU", [42, 39, 37, 41, 55, 68, 74, 71, 65, 58, 50, 45])
+memSeries = Series("Memory", [61, 60, 59, 62, 65, 70, 73, 74, 72, 69, 66, 63])
+
+incidentsSection = Card([incidentsHeading, incidentsTable, ackRow], "sunk")
+incidentsHeading = Heading("Open incidents", "h4")
+incidentsTable = Table([incidentIdCol, incidentSevCol, incidentRegionCol, incidentAgeCol])
+incidentIdCol = Col("Incident", ["INC-1042", "INC-1039", "INC-1031"], "string")
+incidentSevCol = Col("Severity", ["Critical", "High", "Medium"], "string")
+incidentRegionCol = Col("Region", ["us-east", "eu-west", "ap-south"], "string")
+incidentAgeCol = Col("Open for", ["18m", "1h 42m", "3h 05m"], "string")
+ackRow = Card([ack1, ack2, ack3], "clear", "row", "m", "start", "start", true)
+ack1 = AlertDialogBlock("Acknowledge INC-1042", "Acknowledge INC-1042?", "This marks the critical incident as seen by on-call.", "Acknowledge", "Cancel", "destructive")
+ack2 = AlertDialogBlock("Acknowledge INC-1039", "Acknowledge INC-1039?", "This marks the high-severity incident as seen by on-call.", "Acknowledge", "Cancel", "outline")
+ack3 = AlertDialogBlock("Acknowledge INC-1031", "Acknowledge INC-1031?", "This marks the medium-severity incident as seen by on-call.", "Acknowledge", "Cancel", "outline")
+
+endpointsSection = Card([endpointsHeading, endpointsChart], "sunk")
+endpointsHeading = Heading("Five slowest endpoints", "h4")
+endpointsChart = HorizontalBarChart(endpointLabels, [latencySeries], "grouped", "Latency (ms)", "Endpoint")
+endpointLabels = ["GET /api/v2/reports/export", "POST /api/v2/transactions/reconcile", "GET /api/v2/users/search", "POST /api/v2/payments/refund", "GET /api/v2/analytics/summary"]
+latencySeries = Series("p95 latency (ms)", [1840, 1420, 980, 870, 640])
+
+thresholdSection = Card([thresholdHeading, thresholdForm], "sunk")
+thresholdHeading = Heading("Set alert threshold", "h4")
+thresholdForm = Form("alert-threshold", thresholdButtons, [thresholdField])
+thresholdField = FormControl("Error rate threshold (%)", thresholdSlider, "Trigger a page when error rate exceeds this value")
+thresholdSlider = Slider("error_threshold", "continuous", 0, 10, 0.1, [2], "Error rate %")
+thresholdButtons = Buttons([saveThresholdBtn])
+saveThresholdBtn = Button("Save threshold", null, "primary")

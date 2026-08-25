@@ -1,0 +1,30 @@
+root = Card([header, kpis, moMNote, trendSection, productsSection, actions], "card", "column", "m")
+
+header = CardHeader("Monthly Sales Check", "January 2025")
+
+kpis = Card([revenueBlock, convBlock], "sunk", "row", "m", "start", "start")
+
+revenueBlock = Card([revenueLabel, revenueValue], "clear", "column", "none")
+revenueLabel = TextContent("Revenue This Month", "small-heavy")
+revenueValue = TextContent("$127,400", "large-heavy")
+
+convBlock = Card([convLabel, convValue], "clear", "column", "none")
+convLabel = TextContent("Conversion Rate", "small-heavy")
+convValue = Tag("3.2%", null, "lg", "success")
+
+moMNote = Callout("success", "Up 13.1% MoM", "Revenue grew from $112,600 in December to $127,400 this month.")
+
+trendSection = Card([trendHeading, trendChart], "sunk", "column", "s")
+trendHeading = Heading("6-Month Revenue Trend", "h3")
+trendChart = LineChart(monthLabels, [revSeries], "natural", "Month", "Revenue (USD)")
+monthLabels = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan"]
+revSeries = Series("Revenue", [89200, 102500, 95800, 118300, 112600, 127400])
+
+productsSection = Card([productsHeading, productsTable], "sunk", "column", "s")
+productsHeading = Heading("Top 3 Products", "h3")
+productsTable = Table([prodCol, unitsCol])
+prodCol = Col("Product", ["Wireless Headphones", "Smart Watch", "USB-C Hub"])
+unitsCol = Col("Units Sold", ["1,247", "893", "654"])
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download Report")

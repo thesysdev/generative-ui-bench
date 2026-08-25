@@ -1,0 +1,204 @@
+```openui-lang
+root = Card([platformFilter, statsHeader, followerStats, engagementStats, bestPosts, audienceBreakdown, scheduledPosts, optimalPostingTime, commentsQueue, earnings, collaborations, schedulePostForm])
+
+platformFilter = Card(
+    [platformFilterLabel, platformFilterSelect],
+    "sunk"
+)
+platformFilterLabel = TextContent("Filter by platform:")
+platformFilterSelect = Select(
+    "platform_filter",
+    [platformOptions],
+    "All platforms",
+    null,
+    null,
+    "medium"
+)
+platformOptions = [
+    SelectItem("all", "All platforms"),
+    SelectItem("instagram", "Instagram"),
+    SelectItem("tiktok", "TikTok"),
+    SelectItem("youtube", "YouTube"),
+    SelectItem("twitter", "Twitter")
+]
+
+statsHeader = CardHeader("Creator Studio Dashboard", "Cross-platform analytics")
+
+followerStats = Card(
+    [followerCount, followerGrowthChart],
+    "sunk"
+)
+followerCount = Card(
+    [followerTotal, followerGrowth],
+    "sunk"
+)
+followerTotal = TextContent("Followers: 42,378", "large-heavy")
+followerGrowth = TextContent("+1,892 this month", "large-heavy", "success")
+
+followerGrowthChart = LineChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [growthSeries],
+    "natural",
+    "Week", "Followers"
+)
+growthSeries = Series("Growth", [1200, 2450, 3100, 1892])
+
+engagementStats = Card(
+    [engagementRate, engagementRateDescription],
+    "sunk"
+)
+engagementRate = TextContent("Engagement Rate: 8.2%", "large-heavy")
+engagementRateDescription = TextContent("Average across all platforms")
+
+bestPosts = Card(
+    [bestPostsTitle, postsTable],
+    "sunk"
+)
+bestPostsTitle = Heading("Top Posts This Month", "h3")
+postsTable = Table([postColumns])
+postColumns = [
+    Col("Post", ["Reel", "Story", "Live", "Video"], "string"),
+    Col("Platform", ["Instagram", "Instagram", "TikTok", "YouTube"], "string"),
+    Col("Reach", ["124,567", "89,234", "145,678", "98,765"], "number"),
+    Col("Engagement", ["4.8%", "3.2%", "5.6%", "2.9%"], "string")
+]
+
+audienceBreakdown = Card(
+    [audienceTitle, audienceChart],
+    "sunk"
+)
+audienceTitle = Heading("Audience Split", "h3")
+audienceBreakdownChart = PieChart(
+    ["Instagram", "TikTok", "YouTube", "Twitter"],
+    [45, 35, 15, 5]
+)
+
+scheduledPosts = Card(
+    [scheduledTitle, scheduledList],
+    "sunk"
+)
+scheduledTitle = Heading("Scheduled This Week", "h3")
+scheduledList = ListBlock(
+    [
+        ListItem("New Recipe", "Pasta Carbonara", null, "Edit"),
+        ListItem("Weekend Update", "Travel plans", null, "Edit"),
+        ListItem("Product Launch", "New shoes", null, "Edit")
+    ],
+    "number"
+)
+
+optimalPostingTime = Card(
+    [optimalTimeTitle, optimalTimeChart],
+    "sunk"
+)
+optimalTimeTitle = Heading("Best Posting Time", "h3")
+optimalTimeChart = RadialChart(
+    ["7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM"],
+    [0, 5, 10, 15, 20, 18, 12, 8, 5, 3, 2, 1]
+)
+
+commentsQueue = Card(
+    [commentsTitle, commentsCount],
+    "sunk"
+)
+commentsTitle = Heading("Comments Waiting", "h3")
+commentsCount = TextContent("14 new comments", "large-heavy", "warning")
+commentsQueueList = ListBlock(
+    [
+        ListItem("Thanks for sharing!", "User @john_doe", null, "Reply"),
+        ListItem("Great tip!", "User @sarah_blog", null, "Reply")
+    ],
+    "number"
+)
+
+earnings = Card(
+    [earningsTitle, earningsAmount],
+    "sunk"
+)
+earningsTitle = Heading("Earnings This Month", "h3")
+earningsAmount = TextContent("$3,456.78", "large-heavy")
+
+collaborations = Card(
+    [collabsTitle, collabsCount],
+    "sunk"
+)
+collabsTitle = Heading("Pending Collaborations", "h3")
+collabsCount = TextContent("3 requests", "large-heavy")
+collabsList = ListBlock(
+    [
+        ListItem("Brand X", "Product partnership", null, "Accept"),
+        ListItem("Influencer Y", "Guest post", null, "Accept"),
+        ListItem("Creator Z", "Collab video", null, "Accept")
+    ],
+    "number"
+)
+
+schedulePostForm = Card(
+    [scheduleTitle, scheduleForm],
+    "sunk"
+)
+scheduleTitle = Heading("Schedule New Post", "h3")
+scheduleForm = Form(
+    "schedule_post",
+    scheduleButtons,
+    [
+        FormControl("Caption", captionInput),
+        FormControl("Platform", platformSelect),
+        FormControl("Post Time", timeSelect),
+        FormControl("Media", mediaSelect)
+    ]
+)
+captionInput = TextArea(
+    "caption",
+    "Write your caption here...",
+    3,
+    null,
+    "Your engaging caption goes here!"
+)
+platformSelect = Select(
+    "platform",
+    [platformOptions],
+    "Select platform",
+    null,
+    null,
+    "medium"
+)
+timeSelect = Input(
+    "post_time",
+    "Select time (HH:MM)",
+    "time",
+    null,
+    "14:00"
+)
+mediaSelect = Select(
+    "media",
+    [
+        SelectItem("image", "Image"),
+        SelectItem("video", "Video"),
+        SelectItem("reel", "Reel"),
+        SelectItem("story", "Story")
+    ],
+    "Select media type",
+    null,
+    null,
+    "medium"
+)
+scheduleButtons = Buttons(
+    [
+        Button("Schedule", null, "primary"),
+        Button("Cancel", null, "tertiary")
+    ]
+)
+
+schedulePostForm = Card(
+    [scheduleTitle, scheduleForm],
+    "sunk"
+)
+
+scheduleButtons = Buttons(
+    [
+        Button("Schedule", null, "primary"),
+        Button("Cancel", null, "tertiary")
+    ]
+)
+```

@@ -1,0 +1,65 @@
+```openui
+root = Card([header, cardBody])
+header = CardHeader("HR Lead Hiring Overview", "Comprehensive Hiring Metrics")
+
+cardBody = Card([
+  headcountInfo,
+  openRoles,
+  pipelineStages,
+  timeToHire,
+  departmentSplit,
+  interviewsThisWeek,
+  attrition,
+  newRoleButton
+])
+
+headcountInfo = Card([currentHeadcount], "sunk")
+currentHeadcount = Heading("Current Headcount", "h3")
+currentHeadcount = Heading("Total: 350", "h4")
+
+openRoles = Card([rolesHeading, rolesTable], "sunk")
+rolesHeading = Heading("Open Roles by Department", "h3")
+rolesTable = Table([departmentCol, roleCol, openRolesCol])
+departmentCol = Col("Department", ["Engineering", "Marketing", "Sales"])
+roleCol = Col("Role", ["Software Engineer", "Content Writer", "Sales Rep"])
+openRolesCol = Col("Open Roles", ["3", "2", "5"])
+
+pipelineStages = Card([pipelineHeading, pipelineChart], "sunk")
+pipelineHeading = Heading("Candidates at Each Pipeline Stage", "h3")
+pipelineChart = BarChart(["Applied", "Screened", "Interviewed", "Offered"], [pipelineSeries])
+pipelineSeries = Series("Candidates", [120, 85, 60, 30])
+
+timeToHire = Card([timeHeading, timeValue], "sunk")
+timeHeading = Heading("Average Time to Hire", "h3")
+timeValue = Heading("25 days", "h4")
+
+departmentSplit = Card([splitHeading, splitChart], "sunk")
+splitHeading = Heading("Headcount by Department", "h3")
+splitChart = PieChart(["Eng", "Mkt", "Sales"], [50, 20, 30], "donut")
+
+interviewsThisWeek = Card([interviewsHeading, interviewsCount], "sunk")
+interviewsHeading = Heading("Interviews Scheduled This Week", "h3")
+interviewsCount = Heading("12", "h4")
+
+attrition = Card([attritionHeading, attritionChart], "sunk")
+attritionHeading = Heading("Attrition Over the Past 6 Months", "h3")
+attritionChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionSeries], "natural", "Month", "Employees")
+attritionSeries = Series("Left", [5, 3, 6, 2, 4, 7])
+
+newRoleButton = DialogBlock("Open New Role", "Create a New Role", null, [
+  CardHeader("New Role", "Fill in the details below"),
+  Form("new-role-form", formButtons, [
+    FormControl("Role Title", roleInput),
+    FormControl("Department", departmentInput),
+    FormControl("Number of Positions", numberInput)
+  ])
+])
+roleInput = Input("roleTitle", "Software Engineer")
+departmentInput = Select("department", [eng, mkt, sales], "Select a department")
+eng = SelectItem("Engineering", "Engineering")
+mkt = SelectItem("Marketing", "Marketing")
+sales = SelectItem("Sales", "Sales")
+numberInput = Input("positions", "3", "number")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Create Role", null, "primary")
+```

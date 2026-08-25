@@ -1,0 +1,63 @@
+thought
+root = Card([header, statsRow, metricsGrid, experimentSection, serverStatus, eventsSection, moderationSection, economySection, actions], "card", "column", "l")
+
+header = CardHeader("Live-Ops Command Center", "Real-time performance and operations")
+
+statsRow = Card([onlineCount, activePlayers, revenueToday, rpu], "card", "row", "m")
+onlineCount = Callout("info", "Players Online", "42,509 currently active")
+activePlayers = Callout("info", "DAU / MAU", "Daily: 128k / Monthly: 3.4M")
+revenueToday = Callout("success", "Revenue Today", "$44,200.50")
+rpu = Callout("success", "ARPU", "$1.82")
+
+metricsGrid = Card([sessionTrend, bestSellers, crashRates], "card", "row", "m")
+sessionTrend = Card([Heading("Avg Session Length (14 Days)", "h4"), sessionChart], "sunk")
+sessionChart = LineChart(["14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"], [sessionSeries], "natural", "Day", "Minutes")
+sessionSeries = Series("Minutes", [24, 25, 23, 22, 26, 28, 30, 31, 29, 28, 27, 26, 25, 24])
+bestSellers = Card([Heading("Best-Selling Items", "h4"), salesTable], "sunk")
+salesTable = Table([itemCol, unitCol])
+itemCol = Col("Item Name", ["Dragon Skin", "Season Pass", "Gems Starter Bundle", "XP Booster"])
+unitCol = Col("Units Sold", [1200, 850, 3400, 2100])
+crashRates = Card([Heading("Crash Rate by Version", "h4"), crashChart], "sunk")
+crashChart = HorizontalBarChart(["v2.4.1", "v2.4.0", "v2.3.9"], [crashSeries], "grouped", "Version", "%")
+crashSeries = Series("Crash %", [0.02, 0.45, 1.12])
+
+experimentSection = Card([Heading("Active Experiments", "h2"), expA, expB], "card", "row", "m")
+expA = Callout("neutral", "Exp A: Store UI Overhaul", "Conversion: +4.2% (Variant B is winning)")
+expB = Callout("neutral", "Exp B: Battle Pass Scaling", "Retention: +1.1% (Variant A is deailing)")
+
+serverStatus = Card([Heading("Regional Server Health", "h2"), serverTable], "card", "column", "m")
+serverTable = Table([regionCol, healthCol, latencyCol])
+regionCol = Col("Region", ["US-East", "EU-West", "Asia-Pacific", "South-America"])
+healthCol = Col("Health", ["99.9%", "98.2%", "85.0%", "99.1%"])
+latencyCol = Col("Latency (ms)", ["22", "45", "180", "110"])
+
+eventsSection = Card([Heading("Live & Upcoming Events", "h2"), eventsList], "card", "column", "m")
+eventsList = ListBlock([
+    ListItem("Summer Solstice", "Ends in 2 days"),
+    ListItem("Double XP Weekend", "Starting in 4 hours"),
+    ListItem("New Map Reveal", "Scheduled for Oct 15th")
+])
+
+moderationSection = Card([Heading("Moderation Queue", "h2"), reports, appeals], "card", "row", "m")
+reports = ListBlock([
+    ListItem("Toxic Behavior Report", "14 pending review"),
+    ListItem("Exploit Allegation", "3 items flagged")
+])
+appeals = ListBlock([
+    ListItem("User #8821", "Account Ban - cheating"),
+    ListItem("User #4412", "Involuntary purchase appeal")
+])
+
+economySection = Card([Heading("Economy Stability", "h2"), inflationChart], "card", "column", "m")
+inflationChart = PieChart(["Gold", "Gems", "Tokens"], [70, 15, 15], "donut")
+
+actions = Card([Heading("Quick Actions", "h2"), patchDraft, regionFocus, hotfix], "card", "row", "m")
+patchDraft = Form("patch-notes", Buttons([saveBtn]), [noteField])
+noteField = FormControl("Draft Notes", TextArea("notes", "", 4))
+saveBtn = Button("Save Draft", null, "secondary")
+regionFocus = FormControl("Focus Region", Select("region", [regAll, regUS, regEU, regAsia])) 
+regAll = SelectItem("All", "Global View")
+regUS = SelectItem("US-East", "US-East")
+regEU = SelectItem("EU-West", "EU-West")
+regAsia = SelectItem("Asia-Pacific", "Asia-Pacific")
+hotfix = DialogBlock("Ship Hotfix", "Deploy Emergency Patch", "This will trigger an immediate restart for all instances.", [TextContent("Are you sure you want to deploy v2.4.2-hotfix?")], "destructive")

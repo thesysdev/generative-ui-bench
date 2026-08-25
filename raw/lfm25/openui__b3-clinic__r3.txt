@@ -1,0 +1,66 @@
+root = Card([
+  // Main header
+  CardHeader("Clinic Receptionist Dashboard", "Today's Schedule Overview"),
+  
+  // Today's appointments with times and patient names
+  Card([
+    CardHeader("Appointments", "Today's Scheduled Patients"),
+    Card({ text: "09:00 AM - Dr. Smith - Follow-up" }),
+    Card({ text: "11:30 AM - Jane Doe - Checkup" }),
+    Card({ text: "02:00 PM - John Kim - Surgery Prep" })
+  ]),
+  
+  // How many patients are expected
+  Card([
+    CardHeader("Patients Expected", "Total Patients for Today"),
+    Col({
+      label: "Count",
+      data: ["23"],
+      type: "number"
+    })
+  ]),
+  
+  // No-show rate this month
+  Card([
+    CardHeader("No-Show Rate", "This Month's No-Shows"),
+    Alert({
+      title: "No-Show Rate",
+      description: "8.5% of scheduled patients have already cancelled"
+    })
+  ]),
+  
+  // Which rooms are free right now
+  Card([
+    CardHeader("Available Rooms", "Rooms Free Right Now"),
+    [
+      { id: "room-201", status: "Free" },
+      { id: "room-301", status: "Free" },
+      { id: "room-402", status: "Occupied" }
+    ]
+  ]),
+  
+  // The next patient called out
+  Card([
+    CardHeader("Next Patient", "Coming Soon"),
+    Card({
+      title: "Upcoming",
+      details: "Dr. Patel - Heart Echo (in 45 minutes)"
+    })
+  ]),
+  
+  // Ways to check a patient in
+  Card([
+    CardHeader("Check Patient In", "Verify Arrival"),
+    Button("Check In - Dr. Smith", variant: "primary"),
+    Button("Check In - Jane Doe", variant: "secondary")
+  ]),
+  
+  // Way to move to another day
+  Card([
+    Tabs([
+      { item: { value: "today", label: "Today" } },
+      { item: { value: "tomorrow", label: "Tomorrow" } },
+      { item: { value: "previous", label: "Previous" } }
+    ], variant: "card")
+  ])
+])

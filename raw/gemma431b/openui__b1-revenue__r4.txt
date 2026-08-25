@@ -1,0 +1,32 @@
+root = Card([header, summarySection, performanceSection, recentOrders, quickActions], "card", "column", "m")
+
+header = CardHeader("Shop Morning Check-in", "Thursday, Oct 24 • 10:42 AM")
+
+summarySection = Card([revenueKpi, comparisonKpi], "sunk", "row", "m")
+
+revenueKpi = Card([revLabel, revValue], "clear", "column", "none")
+revLabel = TextContent("Revenue So Far", "small")
+revValue = TextContent("$1,240.50", "large-heavy")
+
+comparisonKpi = Card([compLabel, compValue, compBadge], "clear", "column", "none")
+compLabel = TextContent("Vs. Yesterday", "small")
+compValue = TextContent("+$185.20", "large-heavy")
+compBadge = Badge("14.2% Increase", "secondary")
+
+performanceSection = Card([perfHeading, hourlyChart], "card", "column", "s")
+perfHeading = Heading("Hourly Revenue Trend", "h3")
+hourlyChart = BarChart(["6AM", "7AM", "8AM", "9AM", "10AM"], [todaySeries, yesterdaySeries], "grouped", "Time", "USD")
+todaySeries = Series("Today", [120, 240, 310, 420, 150])
+yesterdaySeries = Series("Yesterday", [100, 200, 280, 380, 120])
+
+recentOrders = Card([ordersHeading, ordersTable], "card", "column", "s")
+ordersHeading = Heading("Recent Transactions", "h3")
+ordersTable = Table([orderIdCol, orderTotalCol, orderStatusCol])
+orderIdCol = Col("Order ID", ["#1042", "#1041", "#1040", "#1039"], "string")
+orderTotalCol = Col("Total", ["$45.00", "$120.50", "$12.99", "$88.00"], "number")
+orderStatusCol = Col("Status", ["Completed", "Completed", "Pending", "Completed"], "string")
+
+quickActions = Buttons([inventoryBtn, staffBtn, reportBtn])
+inventoryBtn = Button("Check Inventory", null, "secondary")
+staffBtn = Button("Staff Schedule", null, "secondary")
+reportBtn = Button("Daily Report", null, "primary")

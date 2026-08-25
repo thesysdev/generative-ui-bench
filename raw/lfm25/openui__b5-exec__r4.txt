@@ -1,0 +1,411 @@
+```openui-lang
+root = Card(
+  children: [
+    // Quarter selector and region filter (item 16 & 17)
+    Tuple([
+      CardHeader(
+        title: "Q4 2024 Executive Dashboard",
+        subtitle: "CEO Command View"
+      ),
+      Controls([
+        Button(
+          label: "Change Quarter",
+          action: null,
+          variant: "primary",
+          direction: "row"
+        ),
+        DropdownSelector(
+          label: "Filter by Region",
+          items: [
+            { value: "global", label: "All Regions" },
+            { value: "north", label: "North America" },
+            { value: "east", label: "Europe" },
+            { value: "apac", label: "Asia-Pacific" }
+          ],
+          selected: "all"
+        )
+      ])
+    ),
+    
+    // Revenue, Costs, Profit (items 1-3)
+    Tuple([
+      Card(
+        title: "Revenue",
+        children: [
+          KolumArray([
+            { label: "Quarter", value: "Q4 2024" },
+            { label: "Revenue ($M)" } 
+          ]),
+          Card(
+            title: "Revenue",
+            children: [
+              TextContent(
+                " $1,240,000 ",
+                size: "large"
+              )
+            ]
+          ),
+          Card(
+            title: "Costs",
+            children: [
+              TextContent(
+                " $780,000 ",
+                size: "large"
+              )
+            ]
+          ),
+          Card(
+            title: "Profit",
+            children: [
+              TextContent(
+                " $460,000 ",
+                size: "large"
+              )
+            ]
+          )
+        ]
+      ),
+      
+      Card(
+        title: "Revenue Trend (4 Quarters)",
+        children: [
+          HorizontalBarChart(
+            labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024"],
+            series: [
+              {
+                category: "Revenue",
+                values: [920000, 1050000, 1180000, 1240000]
+              }
+            ],
+            xLabel: "Quarter",
+            yLabel: "Revenue ($M)"
+          )
+        ]
+      ),
+      
+      Card(
+        title: "Costs Trend (4 Quarters)",
+        children: [
+          HorizontalBarChart(
+            labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024"],
+            series: [
+              {
+                category: "Costs",
+                values: [690000, 750000, 820000, 780000]
+              }
+            ],
+            xLabel: "Quarter",
+            yLabel: "Costs ($M)"
+          )
+        ]
+      )
+    ]),
+    
+    // Budget by department vs plan (item 6)
+    Tuple([
+      Card(
+        title: "Budget vs Plan",
+        children: [
+          MarkDownRenderer(
+            "Departmental Budget vs Plan\n\n| Department | Budget | Actual Plan | Variance |\n|----------|--------|-------------|----------|\n| Engineering | $450K | $420K | -$30K |\n| Marketing | $300K | $340K | +$40K |\n| Sales | $200K | $190K | -$10K |\n| Operations | $150K | $160K | +$10K |\n", 
+            "variant": "card"
+          )
+        ]
+      ),
+      Card(
+        title: "Headcount by Department",
+        children: [
+          Table(
+            columns: [
+              { label: "Department", type: "string" },
+              { label: "Headcount", type: "number" },
+              { label: "Variance %", type: "number" }
+            ],
+            data: [
+              { department: "Engineering", value: 85, variance: 0 },
+              { department: "Marketing", value: 45, variance: 16.7 },
+              { department: "Sales", value: 60, variance: -12.5 },
+              { department: "Operations", value: 35, variance: 20.0 },
+              { department: "HR", value: 25, variance: 5.0 }
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Top risks with owner (item 8)
+    Tuple([
+      Card(
+        title: "Top Risks",
+        children: [
+          Card(
+            title: "Risk: Market Saturation",
+            children: [
+              Badge(
+                text: "High Priority",
+                variant: "warning",
+                size: "lg"
+              ),
+              TextContent(
+                "Decreasing market share in key segments.\nOwner: VP of Product",
+                size: "medium"
+              )
+            ]
+          ),
+          Card(
+            title: "Risk: Talent Retention",
+            children: [
+              Badge(
+                text: "Medium Priority",
+                variant: "info",
+                size: "lg"
+              ),
+              TextContent(
+                "Key engineers at risk of attrition.\nOwner: CHRO",
+                size: "medium"
+              )
+            ]
+          ),
+          Card(
+            title: "Risk: Supply Chain Delays",
+            children: [
+              TextContent(
+                "Critical components delayed due to supplier issues.\nOwner: COO",
+                size: "medium"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Strategic initiatives with status (item 9)
+    Tuple([
+      Card(
+        title: "Strategic Initiatives",
+        children: [
+          ListItem(
+            value: "AI Product Launch",
+            details: "Phase 1 completion expected Q1 2025.\nStatus: In Progress",
+            size: "medium"
+          ),
+          ListItem(
+            value: "Market Expansion",
+            details: "Enter Europe and APAC new markets.\nStatus: Planned",
+            size: "medium"
+          ),
+          ListItem(
+            value: "Customer Success Platform",
+            details: "Roll out unified CS platform.\nStatus: Ready for Q1 2025 launch",
+            size: "medium"
+          ),
+          ListItem(
+            value: "Partnership Program",
+            details: "New developer ecosystem partnerships.\nStatus: In Review",
+            size: "medium"
+          )
+        ]
+      )
+    ]),
+    
+    // Months of runway (item 10)
+    Tuple([
+      Card(
+        title: "Runway Analysis",
+        children: [
+          TextContent(
+            "48 months remaining\nBased on current burn rate and projected revenue.",
+            size: "large"
+          ),
+          Card(
+            title: "Current Burn Rate",
+            children: [
+              TextContent(
+                " $24M annually\n$19.6M consumed Q4 2024",
+                size: "large"
+              )
+            ]
+          ),
+          Card(
+            title: "Projected Lifetime Value",
+            children: [
+              TextContent(
+                " $95M additional revenue potential\nthrough upsells and cross-sell",
+                size: "large"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Sales pipeline value (item 11)
+    Tuple([
+      Card(
+        title: "Sales Pipeline",
+        children: [
+          TextContent(
+            " $4.2M valued opportunities\nAcross all stages",
+            size: "large"
+          ),
+          Card(
+            title: "Pipeline Breakdown",
+            children: [
+              ListItem(
+                value: "Qualified Opportunities",
+                details: "$3.1M | 45% of total",
+                size: "small"
+              ),
+              ListItem(
+                value: "In Dev / Negotiation",
+                details: "$900K | 30% of total",
+                size: "small"
+              ),
+              ListItem(
+                value: "Closed Won",
+                details: "$700K | 20% of total",
+                size: "small"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Win rate (item 12)
+    Tuple([
+      Card(
+        title: "Win Rate",
+        children: [
+          TextContent(
+            "34% \n(12 won from 35 lost opportunities)",
+            size: "large"
+          ),
+          Card(
+            title: "Conversion Metrics",
+            children: [
+              TextContent(
+                "Closing Ratio: 38%\nAverage Deal Size: $82K",
+                size: "medium"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Customer count and churn (item 13)
+    Tuple([
+      Card(
+        title: "Customer Metrics",
+        children: [
+          TextContent(
+            "23 customers active\nChurn rate: 8% (quarterly)",
+            size: "large"
+          ),
+          Card(
+            title: "Customer Health",
+            children: [
+              TextContent(
+                "Health Score: 78/100\nTop 3 customers at risk",
+                size: "medium"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // NPS (item 14)
+    Tuple([
+      Card(
+        title: "NPS Score",
+        children: [
+          TextContent(
+            "72\n(Excellent - above industry benchmark)",
+            size: "large"
+          ),
+          Card(
+            title: "Driver Analysis",
+            children: [
+              TextContent(
+                "Drivers: Product excellence (+15)\nTeam productivity (+12)\nInnovation velocity (+8)",
+                size: "small"
+              )
+            ]
+          )
+        ]
+      )
+    ]),
+    
+    // Items for next board meeting (item 15)
+    Tuple([
+      Card(
+        title: "Board Meeting Agenda",
+        children: [
+          ListItem(
+            value: "Quarterly Financial Review",
+            details: "Approval of Q4 results and budget adjustments",
+            size: "small"
+          ),
+          ListItem(
+            value: "Headcount Planning",
+            details: "Review hiring targets and retention strategy",
+            size: "small"
+          ),
+          ListItem(
+            value: "Strategic Initiative Updates",
+            details: "Status reports for AI launch and market expansion",
+            size: "small"
+          ),
+          ListItem(
+            value: "Risk Mitigation",
+            details: "Mitigation plans for talent retention and supply chain",
+            size: "small"
+          ),
+          ListItem(
+            value: "Financial Forecast",
+            details: "Projections for HQ 2025 and beyond",
+            size: "small"
+          ),
+          ListItem(
+            value: "Competitive Landscape",
+            details: "Analysis of key competitors and market shifts",
+            size: "small"
+          )
+        ]
+      )
+    ]),
+    
+    // Export pack (item 18)
+    Tuple([
+      Card(
+        title: "Export Pack",
+        children: [
+          Button(
+            label: "Export Dashboard",
+            action: null,
+            variant: "primary",
+            size: "extra-small"
+          ),
+          Card(
+            title: "Export Options",
+            children: [
+              TextContent(
+                "• Full Excel Report\n• PDF Summary\n• CSV Data Dump\n• PowerPoint Deck",
+                size: "small"
+              ),
+              Button(
+                label: "Download Export",
+                action: null,
+                variant: "secondary",
+                size: "medium"
+              )
+            ]
+          )
+        ]
+      )
+    ])
+  ]
+)
+```

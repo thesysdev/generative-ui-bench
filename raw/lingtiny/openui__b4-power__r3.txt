@@ -1,0 +1,64 @@
+root = Card([networkSection, generationSection, plantsSection, outagesSection, forecastSection, priceSection, maintenanceSection, alertsSection, focusSection, orderSection, emissionsSection], "sunk")
+
+networkSection = CardHeader("Network Load", "Real-time electricity load on the power network")
+networkLoad = Progress(87, "Load: 87% of capacity")
+networkStatus = Tag("Normal", null, null, "success")
+networkAlert = Callout("warning", "Load approaching capacity", "Network is 13% from full capacity")
+
+generationSection = CardHeader("Generation Split by Source", "Current generation mix")
+generationChart = HorizontalBarChart(["Thermal", "Hydro", "Nuclear", "Wind", "Solar"], [genSeries], "grouped", "Source", "GW")
+genSeries = [12800, 4200, 8500, 3200, 1800]
+
+plantsSection = CardHeader("Plant Output & Status", "Each plant with output and status")
+plantTable = Table([
+  Col("Plant", ["H1", "H2", "H3", "H4"]),
+  Col("Output (MW)", [4500, 3200, 5100, 2800]),
+  Col("Status", ["Operational", "Operational", "Standby", "Operational"]),
+])
+
+outagesSection = CardHeader("Outages & Affected Regions", "Outages with affected region for each")
+outageTable = Table([
+  Col("Outage", ["H1 Grid", "H2 Grid", "H3 Grid"]),
+  Col("Region", ["North", "South", "East"]),
+  Col("Status", ["Affected", "Resolved", "Affected"]),
+])
+
+forecastSection = CardHeader("Demand Forecast (Next 24 Hours)", "Demand forecast for the next 24 hours")
+forecastChart = LineChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"], [demandSeries], "linear", "Time", "MW")
+demandSeries = [9200, 8500, 9100, 9800, 10200, 9600, 9000]
+
+priceSection = CardHeader("Current Price per MWh", "Current electricity price")
+priceTag = Tag("$0.12", null, null, "success")
+priceBar = Progress(12, "Price index")
+
+maintenanceSection = CardHeader("Maintenance Planned This Month", "Scheduled maintenance activities")
+maintenanceList = ListBlock([
+  ListItem("H1 Grid turbine inspection", "Scheduled for 14:00-18:00"),
+  ListItem("H2 Grid transformer replacement", "Scheduled for 20:00-02:00"),
+  ListItem("H3 Unit cooling system", "Scheduled for 06:00-10:00"),
+  ListItem("H4 Substation upgrade", "Scheduled for 08:00-12:00"),
+], "image")
+
+alertsSection = CardHeader("Live Alerts", "Alerts as they arrive")
+alertTag1 = Tag("High load warning", null, null, "warning")
+alertTag2 = Tag("H1 grid fault", null, null, "danger")
+alertTag3 = Tag("H2 transformer overheating", null, null, "warning")
+
+focusSection = CardHeader("Focus on One Region", "Click a region to isolate its data")
+regionSelect = Select("Region", [
+  SelectItem("North", "North Region"),
+  SelectItem("South", "South Region"),
+  SelectItem("East", "East Region"),
+  SelectItem("West", "West Region"),
+], "All Regions")
+
+orderSection = CardHeader("Curtailment Order", "Order curtailment by severity")
+curtailmentSelect = Select("Curtailment", [
+  SelectItem("High", "High severity"),
+  SelectItem("Medium", "Medium severity"),
+  SelectItem("Low", "Low severity"),
+], "Sort by Severity")
+
+emissionsSection = CardHeader("Emissions Today", "Emissions data for today")
+emissionsChart = HorizontalBarChart(["CO2", "NOx", "SO2", "PM2.5"], [emissionsSeries], "grouped", "Pollutant", "Tonnes")
+emissionsSeries = [1200, 340, 180, 95]

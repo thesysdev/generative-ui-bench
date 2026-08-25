@@ -1,0 +1,242 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        oeeWidget,
+        productionTargetWidget,
+        productionLinesWidget,
+        defectRateChart,
+        downtimeByCauseChart,
+        maintenanceDueWidget,
+        stockWidget,
+        supplierDeliveriesWidget,
+        shiftOutputComparisonWidget,
+        safetyIncidentsWidget,
+        qualityHoldWidget,
+        energyUsageWidget,
+        openWorkOrdersWidget,
+        maintainScheduleModal,
+        focusLineModal,
+        liveAndonAlertsWidget,
+        exportShiftReportButton
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+header = CardHeader("Factory Floor Supervisor Console", "Real‑time Operations Dashboard")
+
+oeeWidget = Card(
+    [oeeHeading, oeeValue],
+    "sunk"
+)
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = Tag("92.3%", null, null, "success")
+
+productionTargetWidget = Card(
+    [targetHeading, targetValue],
+    "sunk"
+)
+targetHeading = Heading("Units Produced vs. Today's Target", "h3")
+targetValue = Tag("12,450 / 14,000", null, null, "primary")
+
+productionLinesWidget = Card(
+    [linesHeader, productionLinesTable],
+    "sunk"
+)
+linesHeader = Heading("Production Lines", "h3")
+productionLinesTable = Table(
+    [lineNameCol, lineRateCol, lineStatusCol]
+)
+lineNameCol = Col("Line", ["A", "B", "C", "D"], "string")
+lineRateCol = Col("Rate", ["120", "115", "130", "108"], "number")
+lineStatusCol = Col("Status", ["Running", "Running", "Paused", "Running"], "string")
+
+defectRateChart = RadarChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+    [Series("Defect Rate", [2.1, 1.9, 2.3, 2.0, 1.8])],
+    "radar"
+)
+
+downtimeByCauseChart = BarChart(
+    ["Mechanical", "Electrical", "Operator", "Material", "Other"],
+    [Series("Downtime Hours", [12, 8, 5, 3, 2])],
+    "grouped"
+)
+
+maintenanceDueWidget = Card(
+    [dueHeader, dueTable],
+    "sunk"
+)
+dueHeader = Heading("Machines Due for Maintenance", "h3")
+dueTable = Table(
+    [machineNameCol, dueDateCol]
+)
+machineNameCol = Col("Machine", ["M‑101", "M‑202", "M‑303"], "string")
+dueDateCol = Col("Due", ["2025-08-20", "2025-08-22", "2025-08-25"], "date")
+
+stockWidget = Card(
+    [stockHeader, stockTable],
+    "sunk"
+)
+stockHeader = Heading("Raw Material Stock", "h3")
+stockTable = Table(
+    [materialCol, stockCol]
+)
+materialCol = Col("Material", ["Steel", "Resin", "Packaging"], "string")
+stockCol = Col("Stock (kg)", ["5000", "3000", "2000"], "number")
+
+supplierDeliveriesWidget = Card(
+    [deliveriesHeader, deliveriesList],
+    "sunk"
+)
+deliveriesHeader = Heading("Supplier Deliveries This Week", "h3")
+deliveriesList = ListBlock(
+    [
+        ListItem("Supplier A – Steel – 2025‑08‑20"),
+        ListItem("Supplier B – Resin – 2025‑08‑21"),
+        ListItem("Supplier C – Packaging – 2025‑08‑22")
+    ],
+    "image"
+)
+
+shiftOutputComparisonWidget = Card(
+    [shiftHeader, shiftComparisonChart],
+    "sunk"
+)
+shiftHeader = Heading("Shift Output Comparison", "h3")
+shiftComparisonChart = LineChart(
+    ["Morning", "Afternoon", "Evening"],
+    [Series("Units Produced", [4500, 4700, 4300])],
+    "linear"
+)
+
+safetyIncidentsWidget = Card(
+    [incidentsHeader, incidentsValue],
+    "sunk"
+)
+incidentsHeader = Heading("Safety Incidents This Year", "h3")
+incidentsValue = Tag("4 incidents", "Last incident: 2025‑07‑15", "warning")
+
+qualityHoldWidget = Card(
+    [holdHeader, holdList],
+    "sunk"
+)
+holdHeader = Heading("Batches on Quality Hold", "h3")
+holdList = ListBlock(
+    [
+        ListItem("Batch #B123 – Steel – Pending"),
+        ListItem("Batch #B124 – Resin – Pending"),
+        ListItem("Batch #B125 – Packaging – Pending")
+    ],
+    "number"
+)
+
+energyUsageWidget = Card(
+    [energyHeader, energyValue],
+    "sunk"
+)
+energyHeader = Heading("Energy Use Today (kWh)", "h3")
+energyValue = Tag("3,450 kWh", null, null, "primary")
+
+openWorkOrdersWidget = Card(
+    [ordersHeader, ordersTable],
+    "sunk"
+)
+ordersHeader = Heading("Open Work Orders", "h3")
+ordersTable = Table(
+    [orderIDCol, priorityCol, descriptionCol]
+)
+orderIDCol = Col("Order ID", ["WO‑001", "WO‑002", "WO‑003"], "string")
+priorityCol = Col("Priority", ["High", "Medium", "Low"], "string")
+descriptionCol = Col("Description", ["Retrofit M‑101", "Resin shortage", "Packaging redesign"], "string")
+
+maintainScheduleModal = DialogBlock(
+    "Schedule Maintenance",
+    "Schedule Machine Maintenance",
+    "Enter machine and date",
+    [
+        form,
+        buttons
+    ],
+    "outline"
+)
+form = Form(
+    "maintenance_form",
+    buttons,
+    [
+        machineSelect,
+        datePicker
+    ]
+)
+machineSelect = FormControl(
+    "Machine",
+    selectMachine,
+    "Select the machine"
+)
+selectMachine = Select(
+    "maintenance_machine",
+    [SelectItem("M‑101", "M‑101"), SelectItem("M‑202", "M‑202"), SelectItem("M‑303", "M‑303")],
+    "Choose machine"
+)
+datePicker = FormControl(
+    "Date",
+    datePickerInput,
+    "Pick maintenance date"
+)
+datePickerInput = DatePicker(
+    "maintenance_date",
+    "single"
+)
+buttons = Buttons(
+    [scheduleBtn, cancelBtn],
+    "row"
+)
+scheduleBtn = Button("Schedule", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+focusLineModal = DialogBlock(
+    "Focus on Line",
+    "Select Production Line",
+    "Focus on the chosen line",
+    [
+        lineSelector,
+        closeBtn
+    ],
+    "outline"
+)
+lineSelector = FormControl(
+    "Line",
+    selectLine,
+    "Choose line to focus"
+)
+selectLine = Select(
+    "focus_line",
+    [SelectItem("A", "Line A"), SelectItem("B", "Line B"), SelectItem("C", "Line C"), SelectItem("D", "Line D")],
+    "Choose line"
+)
+closeBtn = Button("Focus", null, "primary")
+
+liveAndonAlertsWidget = Card(
+    [alertsHeader, alertsList],
+    "sunk"
+)
+alertsHeader = Heading("Live Andon Alerts", "h3")
+alertsList = ListBlock(
+    [
+        ListItem("Line B – Sensor Fault – Critical"),
+        ListItem("Line D – Overheat – Warning"),
+        ListItem("Line A – Material Jam – Info")
+    ],
+    "number"
+)
+
+exportShiftReportButton = Button(
+    "Export Shift Report",
+    ["export", "shift"],
+    "secondary"
+)
+
+# All references are reachable from root.children, satisfying the unreferenced rule.
+```

@@ -1,0 +1,47 @@
+```openui-lang
+root = Card([header, kpiRow, separator1, expenseSection, separator2, transactionsSection, actions])
+
+header = CardHeader("Month-End Finance", "October 2024")
+
+kpiRow = Card([cashBlock, burnBlock, runwayBlock], "sunk", "row", "l")
+
+cashBlock = Card([cashLabel, cashValue, cashBadge], "clear", "column", "s")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$2,847,320", "large-heavy")
+cashBadge = Tag("▲ 8.2% vs last month", null, "sm", "info")
+
+burnBlock = Card([burnLabel, burnValue, burnBadge], "clear", "column", "s")
+burnLabel = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$184,500", "large-heavy")
+burnBadge = Tag("▼ 3.1% vs last month", null, "sm", "success")
+
+runwayBlock = Card([runwayLabel, runwayValue, runwayBadge], "clear", "column", "s")
+runwayLabel = TextContent("Months of Runway", "small")
+runwayValue = TextContent("15.4 months", "large-heavy")
+runwayBadge = Tag("On track", null, "sm", "success")
+
+separator1 = Separator("horizontal")
+
+expenseSection = Card([expenseHeading, expenseChart], "sunk")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = HorizontalBarChart(expenseCategories, [expenseSeries], "stacked", "Category", "Amount")
+expenseCategories = ["Salaries & Benefits", "Cloud Infrastructure", "Marketing", "Office & Facilities", "Legal & Admin"]
+expenseSeries = Series("October 2024", [98000, 42500, 18200, 12300, 13500])
+
+separator2 = Separator("horizontal")
+
+transactionsSection = Card([txHeading, txTable], "sunk")
+txHeading = Heading("Transactions Above $10,000", "h3")
+txTable = Table([txVendor, txAmount, txDate, txCategory])
+txVendor = Col("Vendor", ["Amazon AWS", "Google Workspace", "WeWork HQ", "HubSpot Marketing", "Wilson & Reed LLP", "DigitalOcean", "Notion Labs", "ADP Payroll"])
+txAmount = Col("Amount", ["$14,230", "$12,800", "$18,500", "$22,000", "$15,000", "$11,400", "$10,200", "$17,800"])
+txDate = Col("Date", ["Oct 3", "Oct 5", "Oct 1", "Oct 12", "Oct 8", "Oct 15", "Oct 2", "Oct 28"])
+txCategory = Col("Category", ["Infrastructure", "SaaS", "Office", "Marketing", "Legal", "Infrastructure", "SaaS", "Payroll"])
+
+actions = Card([monthSelector, downloadBtn], "clear", "row", "s")
+monthSelector = Select("month", [oct24, nov24, dec24], "Select month")
+oct24 = SelectItem("2024-10", "October 2024")
+nov24 = SelectItem("2024-11", "November 2024")
+dec24 = SelectItem("2025-01", "January 2025")
+downloadBtn = Button("Download Statement", null, "primary")
+```

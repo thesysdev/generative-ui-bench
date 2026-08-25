@@ -1,0 +1,71 @@
+```openui-lang
+dateRangeControl = FormControl("Date range", dateRangeSlider, "Select a date range")
+dateRangeSlider = Slider("continuous", 0, 90, 1, 30, "Days", null, "dayRange")
+dayRange = 30
+
+exportButton = Button("Export report", null, "secondary")
+exportButton.action = ["exportCSV"]
+
+root = Card([
+    header,
+    visitorsChart,
+    conversionRate,
+    trafficSourcesTable,
+    campaignsTable,
+    bestCampaignCallout,
+    dateRangeControl,
+    subscriberGrowth,
+    exportButton
+], "card", "row", "m")
+
+header = CardHeader("Weekly Marketing Dashboard", "Last " + dayRange + " days")
+
+visitorsChart = LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10",
+     "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19",
+     "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28",
+     "Day 29", "Day 30"],
+    [visitorsSeries],
+    "natural",
+    "Day",
+    "Visitors"
+)
+visitorsSeries = Series("Visitors", [25000, 26000, 25500, 27000, 28000, 28500, 29500, 30000,
+                                    31000, 32000, 33000, 33500, 34000, 34500, 35000, 35500,
+                                    36000, 36500, 37000, 37500, 38000, 38500, 39000, 39500,
+                                    40000, 40500, 41000, 41500, 42000, 42500])
+
+conversionRate = TextContent("Conversion rate: 4.2%", "large")
+
+trafficSourcesTable = Table([
+    trafficSourceLabel,
+    trafficSourceShare
+])
+trafficSourceLabel = Col("Source", ["Organic Search", "Paid Search", "Social", "Referral", "Email"])
+trafficSourceShare = Col("Share (%)", ["27", "18", "15", "12", "8"])
+
+campaignsTable = Table([
+    campaignName,
+    campaignSpend
+])
+campaignName = Col("Campaign", ["Campaign A", "Campaign B", "Campaign C", "Campaign D", "Campaign E"])
+campaignSpend = Col("Spend ($)", ["15000", "12000", "18000", "9000", "20000"])
+
+bestCampaignCallout = Callout(
+    "success",
+    "Best Performing Campaign",
+    "Campaign E led the week with $20,000 spend and highest engagement."
+)
+
+subscriberGrowth = TextContent("Email subscribers this month: +3,200", "large")
+
+dateRangeControl = FormControl("Date range", dateRangeSlider, "Select a date range")
+dateRangeSlider = Slider("continuous", 0, 90, 1, dayRange, "Days", null, "dayRange")
+dateRangeSlider.onValueChange = (newRange) => {
+    dayRange = newRange
+    // Update charts and data here if needed
+}
+
+exportButton = Button("Export report", null, "secondary")
+exportButton.action = ["exportCSV"]
+```

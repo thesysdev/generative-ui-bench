@@ -1,0 +1,83 @@
+```openui
+root = Card(
+    [
+        activeLearnersSection,
+        completionRateSection,
+        avgQuizScoreSection,
+        enrollmentRankingSection,
+        atRiskLearnersSection,
+        cohortFilterSection,
+        engagementOverTimeSection,
+        messageCohortButton
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+activeLearnersSection = CardHeader("Active Learners This Week", "Learners: 12,345")
+completionRateSection = Card(
+    [
+        CardHeader("Course Completion Rate", "Rate: 78%"),
+        TextContent(
+            "Completion rate reflects the proportion of learners who have finished the assigned courses within the current week."
+        )
+    ],
+    "sunk"
+)
+avgQuizScoreSection = Card(
+    [
+        CardHeader("Average Quiz Score", "Score: 85.2%"),
+        TextContent(
+            "Average quiz score is calculated across all quizzes taken by learners in the past week."
+        )
+    ],
+    "sunk"
+)
+enrollmentRankingSection = Table(
+    [
+        Col("Rank", ["1", "2", "3", "4", "5"]),
+        Col("Course Title", ["Data Science Fundamentals", "Advanced Python", "Project Management", "Cloud Architecture", "UX Design"]),
+        Col("Enrollment", ["1,200", "950", "800", "650", "500"])
+    ],
+    "card"
+)
+atRiskLearnersSection = Card(
+    [
+        CardHeader("Learners at Risk of Dropping Out", "Count: 124"),
+        TextContent(
+            "Identified learners who have not logged in for 3 consecutive days or have a quiz score below 50%."
+        )
+    ],
+    "sunk"
+)
+cohortFilterSection = Form(
+    "cohort-filter",
+    Buttons([applyFilterBtn]),
+    [
+        FormControl("Select Cohort", selectCohort, "Choose a cohort to narrow the view")
+    ]
+)
+applyFilterBtn = Button("Apply", null, "primary")
+selectCohort = Select(
+    "cohort",
+    [
+        SelectItem("Cohort Alpha", "Alpha"),
+        SelectItem("Cohort Beta", "Beta"),
+        SelectItem("Cohort Gamma", "Gamma")
+    ],
+    "Select Cohort",
+    "medium"
+)
+engagementOverTimeSection = LineChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+    [
+        Series("Active Learners", [1200, 1350, 1400, 1550, 1600, 1700, 1800, 1900]),
+        Series("Quiz Attempts", [800, 850, 870, 900, 950, 980, 1000, 1020])
+    ],
+    "natural",
+    "Week",
+    "Engagement Metric"
+)
+messageCohortButton = Button("Message Cohort", null, "secondary")
+```

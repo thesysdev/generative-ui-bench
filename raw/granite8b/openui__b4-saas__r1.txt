@@ -1,0 +1,244 @@
+```openui-lang
+root = Card(
+    [
+        overviewHeader,
+        revenueSection,
+        churnAndSignups,
+        customersByPlan,
+        topTenCustomers,
+        accountsAtRisk,
+        failedPayments,
+        featureAdoption,
+        npsSection,
+        reportingPeriodPicker,
+        seatUtilization,
+        inviteAdminButton
+    ],
+    "card",
+    "column",
+    "center",
+    "between",
+    true
+)
+
+overviewHeader = CardHeader("Admin Overview", "Key Metrics & Actions")
+
+revenueSection = Card(
+    [
+        mrrHeader,
+        mrrValue,
+        arrHeader,
+        arrValue
+    ],
+    "sunk"
+)
+
+mrrHeader = Heading("Monthly Recurring Revenue", "h3")
+mrrValue = TextContent("$1,245,000", "large")
+
+arrHeader = Heading("Annual Recurring Revenue", "h3")
+arrValue = TextContent("$14,940,000", "large")
+
+churnAndSignups = Card(
+    [
+        churnHeader,
+        churnValue,
+        newSignupsHeader,
+        newSignupsValue
+    ],
+    "sunk"
+)
+
+churnHeader = Heading("Churn This Month", "h3")
+churnValue = TextContent("2.1%", "large")
+
+newSignupsHeader = Heading("New Signups (90 days)", "h3")
+newSignupsValue = TextContent("312", "large")
+
+customersByPlan = Card(
+    [
+        planHeader,
+        planTable
+    ],
+    "sunk"
+)
+
+planHeader = Heading("Customers by Plan", "h3")
+planTable = Table(
+    [
+        planCol,
+        activeCol
+    ]
+)
+
+planCol = Col("Plan", ["Free", "Pro", "Enterprise"], "string")
+activeCol = Col("Active Customers", [120, 540, 45], "number")
+
+topTenCustomers = Card(
+    [
+        topHeader,
+        topTenTable
+    ],
+    "sunk"
+)
+
+topHeader = Heading("Top 10 Largest Customers", "h3")
+topTenTable = Table(
+    [
+        nameCol,
+        seatsCol,
+        spendCol
+    ]
+)
+
+nameCol = Col("Customer", ["Acme Corp", "Beta Ltd", "Gamma Inc", "Delta Co", "Epsilon LLC", "Zeta Ltd", "Eta Corp", "Theta Inc", "Iota Co", "Kappa LLC"], "string")
+seatsCol = Col("Seats", [250, 180, 120, 95, 80, 70, 60, 55, 50, 45], "number")
+spendCol = Col("Spend (USD)", [120000, 95000, 72000, 57000, 48000, 42000, 36000, 33000, 30000, 28000], "number")
+
+accountsAtRisk = Card(
+    [
+        riskHeader,
+        riskTable
+    ],
+    "sunk"
+)
+
+riskHeader = Heading("Accounts at Risk", "h3")
+riskTable = Table(
+    [
+        accountCol,
+        reasonCol
+    ]
+)
+
+accountCol = Col("Account", ["Acme Corp", "Beta Ltd", "Gamma Inc", "Delta Co", "Epsilon LLC"], "string")
+reasonCol = Col("Reason", ["No payment", "Trial expired", "License limit", "License limit", "Payment failed"], "string")
+
+failedPayments = Card(
+    [
+        paymentHeader,
+        paymentList
+    ],
+    "sunk"
+)
+
+paymentHeader = Heading("Failed Payments", "h3")
+paymentList = ListBlock(
+    items=[
+        FollowUpItem("Acme Corp – $1200 – retry"),
+        FollowUpItem("Beta Ltd – $950 – retry"),
+        FollowUpItem("Gamma Inc – $720 – retry"),
+        FollowUpItem("Delta Co – $570 – retry"),
+        FollowUpItem("Epsilon LLC – $480 – retry")
+    ],
+    variant="image"
+)
+
+featureAdoption = Card(
+    [
+        adoptionHeader,
+        adoptionChart
+    ],
+    "sunk"
+)
+
+adoptionHeader = Heading("Adoption of New Features", "h3")
+adoptionChart = BarChart(
+    labels=["Feature A", "Feature B", "Feature C"],
+    series=[
+        Series("Adopters", [85, 70, 60])
+    ],
+    variant="grouped",
+    xLabel="Feature",
+    yLabel="% of Customers"
+)
+
+npsSection = Card(
+    [
+        npsHeader,
+        npsValue
+    ],
+    "sunk"
+)
+
+npsHeader = Heading("Current NPS", "h3")
+npsValue = TextContent("78", "large")
+
+reportingPeriodPicker = Card(
+    [
+        pickerHeader,
+        periodPicker
+    ],
+    "sunk"
+)
+
+pickerHeader = Heading("Change Reporting Period", "h3")
+periodPicker = Form(
+    "reporting_period",
+    Buttons([savePicker]),
+    [
+        FormControl("Period", DatePicker("report_period", mode="range", rules=["required"], value=["2024-01-01", "2024-03-01"]), "Select date range")
+    ]
+)
+
+savePicker = Button("Apply", null, "primary")
+
+seatUtilization = Card(
+    [
+        utilizationHeader,
+        utilizationChart
+    ],
+    "sunk"
+)
+
+utilizationHeader = Heading("Seat Utilization Across Company", "h3")
+utilizationChart = HorizontalBarChart(
+    labels=["Team A", "Team B", "Team C", "Team D", "Team E"],
+    series=[
+        Series("Utilized", [45, 60, 55, 70, 80])
+    ],
+    variant="grouped",
+    xLabel="Team",
+    yLabel="% Utilized"
+)
+
+inviteAdminButton = Card(
+    [
+        inviteHeader,
+        inviteForm
+    ],
+    "clear"
+)
+
+inviteHeader = Heading("Invite Another Admin", "h3")
+inviteForm = Form(
+    "invite_admin",
+    Buttons([inviteSubmit]),
+    [
+        FormControl("Email", Input("email", type="email", placeholder="admin@example.com", rules=["required", "email"]), "Enter admin email")
+    ]
+)
+
+inviteSubmit = Button("Invite", null, "primary")
+root = Card(
+    [
+        overviewHeader,
+        revenueSection,
+        churnAndSignups,
+        customersByPlan,
+        topTenCustomers,
+        accountsAtRisk,
+        failedPayments,
+        featureAdoption,
+        npsSection,
+        reportingPeriodPicker,
+        seatUtilization,
+        inviteAdminButton
+    ],
+    "card",
+    "column",
+    "center",
+    "between",
+    true
+)
+```

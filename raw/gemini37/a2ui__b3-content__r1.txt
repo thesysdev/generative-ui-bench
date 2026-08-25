@@ -1,0 +1,453 @@
+Here is a unified workspace for the Editor's Content Studio containing drafts management, readership analytics, recent publications, schedule actions, category filters, and pending community comments.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "quickActions",
+          "filterCategoryCard",
+          "topArticleCard",
+          "analyticsCard",
+          "draftsCard",
+          "publishedCard",
+          "scheduleCard",
+          "commentsCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Editor's Content Studio",
+        "subtitle": "Overview, draft pipeline, scheduling, and reader engagement"
+      },
+      {
+        "id": "quickActions",
+        "component": "Buttons",
+        "buttons": [
+          "newDraftBtn",
+          "viewSiteBtn"
+        ]
+      },
+      {
+        "id": "newDraftBtn",
+        "component": "Button",
+        "label": "+ Start New Draft",
+        "variant": "primary"
+      },
+      {
+        "id": "viewSiteBtn",
+        "component": "Button",
+        "label": "Live Publication",
+        "variant": "secondary"
+      },
+      {
+        "id": "filterCategoryCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "filterHeader",
+          "filterCategorySelect"
+        ]
+      },
+      {
+        "id": "filterHeader",
+        "component": "CardHeader",
+        "title": "Filter View",
+        "subtitle": "Narrow content by editorial category"
+      },
+      {
+        "id": "filterCategorySelect",
+        "component": "Select",
+        "name": "category_filter",
+        "placeholder": "Select Category (All categories)",
+        "items": [
+          "catAll",
+          "catTech",
+          "catCulture",
+          "catOpinion",
+          "catInvestigations"
+        ]
+      },
+      {
+        "id": "catAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Categories"
+      },
+      {
+        "id": "catTech",
+        "component": "SelectItem",
+        "value": "tech",
+        "label": "Technology & AI"
+      },
+      {
+        "id": "catCulture",
+        "component": "SelectItem",
+        "value": "culture",
+        "label": "Culture & Society"
+      },
+      {
+        "id": "catOpinion",
+        "component": "SelectItem",
+        "value": "opinion",
+        "label": "Opinion & Essays"
+      },
+      {
+        "id": "catInvestigations",
+        "component": "SelectItem",
+        "value": "investigations",
+        "label": "Deep Dive Investigations"
+      },
+      {
+        "id": "topArticleCard",
+        "component": "Card",
+        "children": [
+          "topArticleHeader",
+          "topArticleAlert"
+        ]
+      },
+      {
+        "id": "topArticleHeader",
+        "component": "CardHeader",
+        "title": "Most-Read Article This Month",
+        "subtitle": "Top performing story across all sections"
+      },
+      {
+        "id": "topArticleAlert",
+        "component": "Alert",
+        "title": "The Quiet Revolution in Open Source Tooling",
+        "description": "342,850 unique readers · 4.8 min avg read time · 1,420 shares · Published Oct 4",
+        "variant": "success"
+      },
+      {
+        "id": "analyticsCard",
+        "component": "Card",
+        "children": [
+          "analyticsHeader",
+          "readershipChart"
+        ]
+      },
+      {
+        "id": "analyticsHeader",
+        "component": "CardHeader",
+        "title": "Readership Over Past 30 Days",
+        "subtitle": "Daily active unique page views (aggregated in 5-day intervals)"
+      },
+      {
+        "id": "readershipChart",
+        "component": "AreaChart",
+        "labels": [
+          "Day 1-5",
+          "Day 6-10",
+          "Day 11-15",
+          "Day 16-20",
+          "Day 21-25",
+          "Day 26-30"
+        ],
+        "series": [
+          "readersSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Past 30 Days",
+        "yLabel": "Unique Readers"
+      },
+      {
+        "id": "readersSeries",
+        "component": "Series",
+        "category": "Readership",
+        "values": [
+          68000,
+          82500,
+          74000,
+          99200,
+          118000,
+          145600
+        ]
+      },
+      {
+        "id": "draftsCard",
+        "component": "Card",
+        "children": [
+          "draftsHeader",
+          "draftsTable"
+        ]
+      },
+      {
+        "id": "draftsHeader",
+        "component": "CardHeader",
+        "title": "Current Drafts & Pipeline",
+        "subtitle": "Working drafts undergoing writing, review, and copy-editing"
+      },
+      {
+        "id": "draftsTable",
+        "component": "Table",
+        "columns": [
+          "draftTitleCol",
+          "draftAuthorCol",
+          "draftCategoryCol",
+          "draftStatusCol"
+        ]
+      },
+      {
+        "id": "draftTitleCol",
+        "component": "Col",
+        "label": "Draft Title",
+        "data": [
+          "State of Generative Media in 2025",
+          "The Urban Transit Turnaround",
+          "Interview: Rethinking Modern Architecture",
+          "The Economics of Micro-Subscriptions"
+        ]
+      },
+      {
+        "id": "draftAuthorCol",
+        "component": "Col",
+        "label": "Author",
+        "data": [
+          "Elena Vance",
+          "Marcus Thorne",
+          "Sarah Lin",
+          "David K."
+        ]
+      },
+      {
+        "id": "draftCategoryCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Technology",
+          "Investigations",
+          "Culture",
+          "Opinion"
+        ]
+      },
+      {
+        "id": "draftStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "In Review",
+          "Copy Editing",
+          "Drafting",
+          "Legal Approval"
+        ]
+      },
+      {
+        "id": "publishedCard",
+        "component": "Card",
+        "children": [
+          "publishedHeader",
+          "publishedTable"
+        ]
+      },
+      {
+        "id": "publishedHeader",
+        "component": "CardHeader",
+        "title": "Pieces Published This Week",
+        "subtitle": "Articles live and indexed during the current cycle"
+      },
+      {
+        "id": "publishedTable",
+        "component": "Table",
+        "columns": [
+          "pubTitleCol",
+          "pubDateCol",
+          "pubReadsCol"
+        ]
+      },
+      {
+        "id": "pubTitleCol",
+        "component": "Col",
+        "label": "Title",
+        "data": [
+          "Navigating New Spatial Computing Interfaces",
+          "Global Supply Chains: The Post-Crisis Reality",
+          "Why Local Journalism Is Making a Comeback"
+        ]
+      },
+      {
+        "id": "pubDateCol",
+        "component": "Col",
+        "label": "Published Date",
+        "data": [
+          "Yesterday, 14:30",
+          "2 days ago, 09:15",
+          "4 days ago, 11:00"
+        ]
+      },
+      {
+        "id": "pubReadsCol",
+        "component": "Col",
+        "label": "Reads",
+        "data": [
+          "18,420",
+          "42,910",
+          "31,050"
+        ]
+      },
+      {
+        "id": "scheduleCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "scheduleHeader",
+          "scheduleForm"
+        ]
+      },
+      {
+        "id": "scheduleHeader",
+        "component": "CardHeader",
+        "title": "Schedule a Piece",
+        "subtitle": "Set release parameters and queued publication time"
+      },
+      {
+        "id": "scheduleForm",
+        "component": "Form",
+        "name": "schedule-piece-form",
+        "buttons": "scheduleFormBtns",
+        "fields": [
+          "pieceTitleField",
+          "pieceDateField",
+          "pieceSlotSelectField"
+        ]
+      },
+      {
+        "id": "pieceTitleField",
+        "component": "FormControl",
+        "label": "Piece Title",
+        "hint": "Select or enter the finalized headline to queue",
+        "input": "pieceTitleInput"
+      },
+      {
+        "id": "pieceTitleInput",
+        "component": "Input",
+        "name": "piece_title",
+        "placeholder": "e.g., The Future of Modular Operating Systems"
+      },
+      {
+        "id": "pieceDateField",
+        "component": "FormControl",
+        "label": "Publish Date",
+        "hint": "Select the target release date",
+        "input": "pieceDatePicker"
+      },
+      {
+        "id": "pieceDatePicker",
+        "component": "DatePicker",
+        "name": "publish_date",
+        "mode": "single"
+      },
+      {
+        "id": "pieceSlotSelectField",
+        "component": "FormControl",
+        "label": "Time Slot",
+        "input": "pieceSlotSelect"
+      },
+      {
+        "id": "pieceSlotSelect",
+        "component": "Select",
+        "name": "time_slot",
+        "placeholder": "Select slot",
+        "items": [
+          "slotMorning",
+          "slotNoon",
+          "slotEvening"
+        ]
+      },
+      {
+        "id": "slotMorning",
+        "component": "SelectItem",
+        "value": "morning",
+        "label": "Morning Edition (07:00 AM)"
+      },
+      {
+        "id": "slotNoon",
+        "component": "SelectItem",
+        "value": "noon",
+        "label": "Midday Feature (12:30 PM)"
+      },
+      {
+        "id": "slotEvening",
+        "component": "SelectItem",
+        "value": "evening",
+        "label": "Evening Digest (06:00 PM)"
+      },
+      {
+        "id": "scheduleFormBtns",
+        "component": "Buttons",
+        "buttons": [
+          "submitScheduleBtn"
+        ]
+      },
+      {
+        "id": "submitScheduleBtn",
+        "component": "Button",
+        "label": "Queue for Publishing",
+        "variant": "primary"
+      },
+      {
+        "id": "commentsCard",
+        "component": "Card",
+        "children": [
+          "commentsHeader",
+          "commentsList"
+        ]
+      },
+      {
+        "id": "commentsHeader",
+        "component": "CardHeader",
+        "title": "Comments Awaiting Reply",
+        "subtitle": "Community responses flagged for author or editorial moderation"
+      },
+      {
+        "id": "commentsList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "comment1",
+          "comment2",
+          "comment3"
+        ]
+      },
+      {
+        "id": "comment1",
+        "component": "ListItem",
+        "title": "Clarification on benchmark hardware configs",
+        "subtitle": "On 'The Quiet Revolution in Open Source Tooling' · by @dev_dan (2h ago)",
+        "actionLabel": "Reply"
+      },
+      {
+        "id": "comment2",
+        "component": "ListItem",
+        "title": "Request for data source breakdown on freight costs",
+        "subtitle": "On 'Global Supply Chains: The Post-Crisis Reality' · by @analyst_m (4h ago)",
+        "actionLabel": "Reply"
+      },
+      {
+        "id": "comment3",
+        "component": "ListItem",
+        "title": "Question regarding interview transcript availability",
+        "subtitle": "On 'Why Local Journalism Is Making a Comeback' · by @claire_w (7h ago)",
+        "actionLabel": "Reply"
+      }
+    ]
+  }
+}
+</a2ui-json>

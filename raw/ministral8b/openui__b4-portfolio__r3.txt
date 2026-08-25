@@ -1,0 +1,125 @@
+```openui-lang
+root = Card([portfolioHeader, healthSummary, activeProjects, overdueMilestones, budgetChart, utilizationChart, risksTable, upcomingDeadlines, deliveryPace, blockedItems, quarterSelector, actions])
+
+portfolioHeader = CardHeader("Project Portfolio Review", "Q2 2024")
+
+healthSummary = Card(
+    [summaryText, summaryBadge],
+    "sunk"
+)
+summaryText = TextContent("Portfolio health: **Stable but with 3 high-risk items**", "large-heavy")
+summaryBadge = Tag("Stable", null, "md", "success")
+
+activeProjects = Card(
+    [projectsHeader, projectsTable],
+    "sunk"
+)
+projectsHeader = Heading("Active Projects", "h3")
+projectsTable = Table([ownerCol, deadlineCol, healthCol])
+ownerCol = Col("Owner", ["Alex Chen", "Jamie Lee", "Ravi Patel", "Sophia Kim"])
+deadlineCol = Col("Deadline", ["2024-07-15", "2024-08-05", "2024-09-10", "2024-08-22"])
+healthCol = Col("Health", ["Good", "At Risk", "Critical", "Warning"])
+
+overdueMilestones = Card(
+    [milestonesHeader, milestonesTable],
+    "sunk"
+)
+milestonesHeader = Heading("Overdue Milestones", "h3")
+milestonesTable = Table([projectCol, milestoneCol, daysOverCol, ownerCol])
+projectCol = Col("Project", ["Mobile App", "CRM Integration", "Data Migration"])
+milestoneCol = Col("Milestone", ["API Design", "User Testing", "Final Validation"])
+daysOverCol = Col("Days Overdue", ["5", "7", "3"])
+
+budgetChart = Card(
+    [budgetHeader, budgetChartVisual],
+    "sunk"
+)
+budgetHeader = Heading("Budget vs Allocation", "h3")
+budgetChartVisual = BarChart(
+    ["Mobile App", "CRM Integration", "Data Migration", "Analytics Dashboard"],
+    [
+        Series("Spent", [120000, 85000, 150000, 95000]),
+        Series("Allocated", [150000, 100000, 180000, 120000])
+    ],
+    "grouped",
+    "Project",
+    "USD"
+)
+
+utilizationChart = Card(
+    [utilizationHeader, utilizationChartVisual],
+    "sunk"
+)
+utilizationHeader = Heading("Team Utilization", "h3")
+utilizationChartVisual = RadarChart(
+    ["Alex", "Jamie", "Ravi", "Sophia", "Tina"],
+    [
+        Series("Utilization", [85, 70, 95, 65, 80])
+    ]
+)
+
+risksTable = Card(
+    [risksHeader, risksTableVisual],
+    "sunk"
+)
+risksHeader = Heading("Risks", "h3")
+risksTableVisual = Table([riskCol, severityCol, impactCol, ownerCol])
+riskCol = Col("Risk", ["Vendor delay", "Key team member leave", "Scope expansion", "Data quality issues"])
+severityCol = Col("Severity", ["High", "High", "Medium", "Low"])
+impactCol = Col("Impact", ["Project delay", "Resource gap", "Budget overrun", "Report accuracy"])
+
+upcomingDeadlines = Card(
+    [deadlinesHeader, deadlinesTable],
+    "sunk"
+)
+deadlinesHeader = Heading("Next 2 Weeks Deadlines", "h3")
+deadlinesTable = Table([dateCol, milestoneCol, projectCol])
+dateCol = Col("Date", ["2024-06-15", "2024-06-18", "2024-06-20", "2024-06-22"])
+milestoneCol = Col("Milestone", ["API Review", "User Stories", "Data Load", "Final Sign-off"])
+projectCol = Col("Project", ["Mobile App", "CRM Integration", "Data Migration", "Analytics Dashboard"])
+
+deliveryPace = Card(
+    [paceHeader, paceChart],
+    "sunk"
+)
+paceHeader = Heading("Delivery Pace (Last 6 Sprints)", "h3")
+paceChart = LineChart(
+    ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"],
+    [Series("Sprints Completed", [1, 2, 3, 2, 4, 3])],
+    "natural",
+    "Sprint",
+    "Sprints"
+)
+
+blockedItems = Card(
+    [blockedHeader, blockedTable],
+    "sunk"
+)
+blockedHeader = Heading("Blocked Work Items", "h3")
+blockedTable = Table([itemCol, blockerCol, ownerCol])
+itemCol = Col("Item", ["Mobile App - Login Flow", "CRM - Integration Tests", "Data Migration - Schema"])
+blockerCol = Col("Blocker", ["Vendor delay", "Missing documentation", "Data quality issues"])
+ownerCol = Col("Owner", ["Alex", "Jamie", "Ravi"])
+
+quarterSelector = Card(
+    [quarterHeader, quarterButtons],
+    "sunk"
+)
+quarterHeader = Heading("Select Quarter", "h3")
+quarterButtons = Buttons([
+    Button("Q1 2024", null, "secondary"),
+    Button("Q2 2024", null, "primary"),
+    Button("Q3 2024", null, "secondary"),
+    Button("Q4 2024", null, "secondary")
+])
+
+actions = Card(
+    [actionButtons],
+    "sunk"
+)
+actionButtons = Buttons([
+    Button("Request Resources", null, "primary"),
+    Button("Archive Project", null, "secondary"),
+    Button("Export Review", null, "tertiary")
+])
+```

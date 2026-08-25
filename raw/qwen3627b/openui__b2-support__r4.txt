@@ -1,0 +1,41 @@
+root = Card([header, kpiCard, toolbar, ticketsHeading, ticketsTable, newTicketDialog], "card", "column", "m", "start", "start")
+
+header = CardHeader("Support Dashboard", "Morning overview — June 14, 2025")
+
+kpiCard = Card([openTicketsKpi, responseTimeKpi], "sunk", "row", "m", "start", "center")
+openTicketsKpi = Card([openTicketsValue, openTicketsLabel], "clear", "column", "none", "start", "start")
+openTicketsValue = TextContent("47", "large-heavy")
+openTicketsLabel = TextContent("Open Tickets", "small")
+responseTimeKpi = Card([responseTimeValue, responseTimeLabel], "clear", "column", "none", "start", "start")
+responseTimeValue = TextContent("2m 34s", "large-heavy")
+responseTimeLabel = TextContent("Avg First Response", "small")
+
+toolbar = Buttons([highPriorityBtn], "row")
+highPriorityBtn = Button("Show high-priority only", null, "secondary")
+
+ticketsHeading = Heading("Most Recent Tickets", "h3")
+
+ticketsTable = Table([ticketId, ticketSubject, ticketPriority, ticketStatus, ticketCreated])
+ticketId = Col("ID", ["#4821", "#4820", "#4819", "#4818", "#4817"])
+ticketSubject = Col("Subject", ["Payment failed on checkout", "Cannot reset password", "Feature request: dark mode", "Billing discrepancy on invoice", "App crashes on startup"])
+ticketPriority = Col("Priority", ["High", "High", "Low", "Medium", "High"])
+ticketStatus = Col("Status", ["Awaiting reply", "Open", "Open", "In progress", "Awaiting reply"])
+ticketCreated = Col("Created", ["10 min ago", "28 min ago", "1 hr ago", "2 hrs ago", "3 hrs ago"])
+
+newTicketDialog = DialogBlock("New Ticket", "Create a Support Ticket", "", [newTicketForm])
+
+newTicketForm = Form("new-ticket", formButtons, [subjectField, descriptionField, priorityField])
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Brief description of the issue")
+descriptionField = FormControl("Description", descTextarea)
+descTextarea = TextArea("description", "Provide full details...", 5)
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [lowOpt, medOpt, highOpt, urgentOpt], "Select priority")
+lowOpt = SelectItem("low", "Low")
+medOpt = SelectItem("medium", "Medium")
+highOpt = SelectItem("high", "High")
+urgentOpt = SelectItem("urgent", "Urgent")
+
+formButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Create Ticket", null, "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")

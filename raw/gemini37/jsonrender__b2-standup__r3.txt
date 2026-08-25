@@ -1,0 +1,54 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-card","stats-summary-card","blocker-alert","post-update-card","feed-header","updates-container"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center"},"children":["title-group","date-badge"]}}
+{"op":"add","path":"/elements/title-group","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["standup-title","standup-subtitle"]}}
+{"op":"add","path":"/elements/standup-title","value":{"type":"Heading","props":{"text":"🚀 Daily Async Standup","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/standup-subtitle","value":{"type":"TextContent","props":{"text":"Core Platform & Product Team • Remote Sync","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/date-badge","value":{"type":"Badge","props":{"text":{"$state":"/standupDate"},"variant":"default"},"children":[]}}
+{"op":"add","path":"/state/standupDate","value":"Wednesday, Oct 25, 2023"}
+{"op":"add","path":"/elements/stats-summary-card","value":{"type":"Card","props":{"variant":"sunk","direction":"row","justify":"between","align":"center","gap":"m","wrap":true},"children":["progress-overview","missing-count-tag"]}}
+{"op":"add","path":"/elements/progress-overview","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["completion-label","completion-progress"]}}
+{"op":"add","path":"/elements/completion-label","value":{"type":"TextContent","props":{"text":{"$template":"**Participation:** ${/submittedCount} of ${/totalTeamMembers} teammates submitted"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/completion-progress","value":{"type":"Progress","props":{"value":75,"label":"75% submitted"},"children":[]}}
+{"op":"add","path":"/elements/missing-count-tag","value":{"type":"Tag","props":{"text":{"$template":"⏳ ${/missingCount} updates missing: ${/missingMembers}"},"variant":"warning","size":"md"},"children":[]}}
+{"op":"add","path":"/state/totalTeamMembers","value":8}
+{"op":"add","path":"/state/submittedCount","value":6}
+{"op":"add","path":"/state/missingCount","value":2}
+{"op":"add","path":"/state/missingMembers","value":"Devon (Mobile), Lin (QA)"}
+{"op":"add","path":"/elements/blocker-alert","value":{"type":"Alert","props":{"variant":"destructive","title":"⚠️ Blockers Alert (1 Teammate Needs Help)","description":"Marcus is blocked on AWS Staging IAM permissions. Reach out to DevOps channel if you have admin access."},"children":[]}}
+{"op":"add","path":"/elements/post-update-card","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["form-title","update-form"]}}
+{"op":"add","path":"/elements/form-title","value":{"type":"Heading","props":{"text":"✍️ Post Your Daily Update","level":"h4"},"children":[]}}
+{"op":"add","path":"/elements/update-form","value":{"type":"Form","props":{"name":"standupForm","buttons":"form-buttons","fields":["field-author","field-today","field-blockers"]},"children":[]}}
+{"op":"add","path":"/elements/field-author","value":{"type":"FormControl","props":{"label":"Your Name & Role","input":"input-author","hint":"e.g. Alex Rivera • Senior Frontend Engineer"},"children":[]}}
+{"op":"add","path":"/elements/input-author","value":{"type":"Input","props":{"name":"author","placeholder":"Your Name (Role)","value":{"$bindState":"/newUpdate/name"}},"children":[]}}
+{"op":"add","path":"/elements/field-today","value":{"type":"FormControl","props":{"label":"What are you working on today?","input":"input-today","hint":"Key priorities and focus areas"},"children":[]}}
+{"op":"add","path":"/elements/input-today","value":{"type":"TextArea","props":{"name":"today","placeholder":"1. Finalizing responsive UI layouts\n2. Code review for auth PR #412","rows":3,"value":{"$bindState":"/newUpdate/today"}},"children":[]}}
+{"op":"add","path":"/elements/field-blockers","value":{"type":"FormControl","props":{"label":"Any blockers?","input":"input-blockers","hint":"Leave empty or write 'None' if clear"},"children":[]}}
+{"op":"add","path":"/elements/input-blockers","value":{"type":"Input","props":{"name":"blockers","placeholder":"e.g. None or Need staging API key","value":{"$bindState":"/newUpdate/blockers"}},"children":[]}}
+{"op":"add","path":"/elements/form-buttons","value":{"type":"Buttons","props":{"buttons":["submit-update-btn"],"direction":"row"},"children":[]}}
+{"op":"add","path":"/elements/submit-update-btn","value":{"type":"Button","props":{"label":"Submit Today's Standup","variant":"primary"},"on":{"press":{"action":"pushState","params":{"statePath":"/updates","value":{"id":"$id","name":{"$state":"/newUpdate/name"},"role":"Team Member","avatar":"AR","time":"Just now","yesterday":"Closed pull requests and joined planning session","today":{"$state":"/newUpdate/today"},"blockers":{"$state":"/newUpdate/blockers"},"hasBlocker":false},"clearStatePath":"/newUpdate/today"}}},"children":[]}}
+{"op":"add","path":"/state/newUpdate","value":{"name":"Alex Rivera (Frontend)","today":"","blockers":""}}
+{"op":"add","path":"/elements/feed-header","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["feed-heading","feed-tag"]}}
+{"op":"add","path":"/elements/feed-heading","value":{"type":"Heading","props":{"text":"📋 Today's Standup Feed","level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/feed-tag","value":{"type":"Tag","props":{"text":"All Timezones","size":"sm","variant":"neutral"},"children":[]}}
+{"op":"add","path":"/elements/updates-container","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"repeat":{"statePath":"/updates","key":"id"},"children":["teammate-update-card"]}}
+{"op":"add","path":"/elements/teammate-update-card","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"card"},"children":["update-header-row","update-body","update-blocker-row"]}}
+{"op":"add","path":"/elements/update-header-row","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["user-meta","time-badge"]}}
+{"op":"add","path":"/elements/user-meta","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["user-avatar","user-info-text"]}}
+{"op":"add","path":"/elements/user-avatar","value":{"type":"Avatar","props":{"fallback":{"$item":"avatar"}},"children":[]}}
+{"op":"add","path":"/elements/user-info-text","value":{"type":"Card","props":{"direction":"column","variant":"clear"},"children":["user-name-text","user-role-text"]}}
+{"op":"add","path":"/elements/user-name-text","value":{"type":"TextContent","props":{"text":{"$item":"name"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/user-role-text","value":{"type":"TextContent","props":{"text":{"$item":"role"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/time-badge","value":{"type":"Badge","props":{"text":{"$item":"time"},"variant":"outline"},"children":[]}}
+{"op":"add","path":"/elements/update-body","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"sunk"},"children":["yesterday-text","today-text"]}}
+{"op":"add","path":"/elements/yesterday-text","value":{"type":"TextContent","props":{"text":{"$template":"⏮️ **Yesterday:** ${yesterday}"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/today-text","value":{"type":"TextContent","props":{"text":{"$template":"🎯 **Today:** ${today}"},"size":"default"},"children":[]}}
+{"op":"add","path":"/elements/update-blocker-row","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["blocker-pill"]}}
+{"op":"add","path":"/elements/blocker-pill","value":{"type":"Tag","props":{"text":{"$template":"🚧 Blockers: ${blockers}"},"variant":{"$cond":{"$item":"hasBlocker"},"$then":"danger","$else":"success"},"size":"sm"},"children":[]}}
+{"op":"add","path":"/state/updates","value":[]}
+{"op":"add","path":"/state/updates/0","value":{"id":"u1","name":"Marcus Vance","role":"Backend Lead • UTC-5","avatar":"MV","time":"8:45 AM","yesterday":"Merged PostgreSQL v15 schema migration script and prepared seed data","today":"Investigating deadlock on Redis queue under concurrency test","blockers":"Blocked on AWS Staging IAM permissions for SQS access (@DevOps)","hasBlocker":true}}
+{"op":"add","path":"/state/updates/1","value":{"id":"u2","name":"Sarah Chen","role":"Staff Product Designer • UTC-8","avatar":"SC","time":"9:10 AM","yesterday":"Finished high-fidelity Figma prototypes for checkout revamp","today":"Synthesizing usability test notes from round 2 user interviews","blockers":"None - all clear!","hasBlocker":false}}
+{"op":"add","path":"/state/updates/2","value":{"id":"u3","name":"Elena Rostova","role":"Senior Frontend Engineer • UTC+1","avatar":"ER","time":"9:30 AM","yesterday":"Implemented design system token upgrades in web app","today":"Building dashboard analytics charts with real-time SSE streaming","blockers":"None","hasBlocker":false}}
+{"op":"add","path":"/state/updates/3","value":{"id":"u4","name":"Kenji Sato","role":"DevOps Engineer • UTC+9","avatar":"KS","time":"10:05 AM","yesterday":"Migrated Kubernetes cluster to EKS 1.28 in staging","today":"Reviewing pending IAM access PRs and optimizing GitHub Actions runners","blockers":"None","hasBlocker":false}}
+{"op":"add","path":"/state/updates/4","value":{"id":"u5","name":"Maya Patel","role":"Product Manager • UTC-4","avatar":"MP","time":"10:20 AM","yesterday":"Sprint 24 backlog grooming and customer discovery calls","today":"Finalizing Q4 roadmap deliverables & coordinating sprint kick-off","blockers":"None","hasBlocker":false}}
+{"op":"add","path":"/state/updates/5","value":{"id":"u6","name":"Liam O'Connor","role":"Fullstack Engineer • UTC+0","avatar":"LO","time":"10:45 AM","yesterday":"Refactored webhook notification retry dispatcher","today":"Pairing with Elena on WebSocket event payloads and unit test coverage","blockers":"None","hasBlocker":false}}

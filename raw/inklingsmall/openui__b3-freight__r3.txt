@@ -1,0 +1,48 @@
+root = Card([header, refreshLine, searchRow, kpiRow, transitSection, delayedCallout, chartsRow, flagSection, refreshFooter], "card", "column", "l")
+
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment tracking")
+refreshLine = TextContent("Last refreshed: 14:32 UTC • Auto-refresh every 5 min", "small")
+
+searchRow = Card([searchInput, searchBtn], "clear", "row", "s")
+searchInput = Input("route_search", "Search route (e.g., NYC → CHI)")
+searchBtn = Button("Search")
+
+kpiRow = Card([kpiOnTime, kpiAvgCost, kpiDelayed], "clear", "row", "m")
+kpiOnTime = Card([TextContent("On-time %", "small"), TextContent("94.2%", "large-heavy")], "sunk")
+kpiAvgCost = Card([TextContent("Avg Cost / Ship", "small"), TextContent("$842", "large-heavy")], "sunk")
+kpiDelayed = Card([TextContent("Delayed", "small"), TextContent("3", "large-heavy")], "sunk")
+
+transitSection = Card([transitHeading, transitTable], "clear")
+transitHeading = Heading("Shipments in Transit", "h3")
+transitTable = Table([colShip, colOrigin, colDest, colETA, colStatus])
+colShip = Col("Shipment", ["S-4821", "S-4822", "S-4823", "S-4824"])
+colOrigin = Col("Origin", ["Chicago", "Dallas", "Seattle", "Atlanta"])
+colDest = Col("Destination", ["Denver", "Phoenix", "Portland", "Miami"])
+colETA = Col("ETA", ["Jun 14 08:00", "Jun 14 14:30", "Jun 15 09:00", "Jun 15 11:00"])
+colStatus = Col("Status", ["In transit", "In transit", "In transit", "In transit"])
+
+delayedCallout = Callout("warning", "Delayed Shipments", "S-4822 (Dallas → Phoenix) delayed 6h; S-4824 (Atlanta → Miami) delayed 3h. Review dispatch.")
+
+chartsRow = Card([carrierSection, volumeSection], "clear", "column", "l")
+carrierSection = Card([carrierHeading, carrierPie], "clear")
+carrierHeading = Heading("Volume by Carrier", "h3")
+carrierPie = PieChart(["FedEx", "UPS", "DHL", "XPO"], [42, 28, 18, 12], "donut")
+
+volumeSection = Card([volumeHeading, volumeChart], "clear")
+volumeHeading = Heading("Weekly Volume — Past 8 Weeks", "h3")
+volumeSeries = Series("Shipments", [320, 350, 310, 340, 360, 390, 410])
+volumeChart = LineChart(["W1 May", "W2 May", "W3 May", "W4 May", "W1 Jun", "W2 Jun", "W3 Jun"], [volumeSeries], "linear", "Week", "Shipments")
+
+flagSection = Card([flagHeading, flagForm], "clear")
+flagHeading = Heading("Flag a Shipment", "h3")
+flagForm = Form("flag-form", flagButtons, [flagField])
+flagField = FormControl("Shipment", flagSelect)
+flagSelect = Select("flag_ship", [flagItem1, flagItem2, flagItem3, flagItem4], "Select shipment")
+flagItem1 = SelectItem("S-4821", "S-4821")
+flagItem2 = SelectItem("S-4822", "S-4822")
+flagItem3 = SelectItem("S-4823", "S-4823")
+flagItem4 = SelectItem("S-4824", "S-4824")
+flagBtn = Button("Flag Shipment")
+flagButtons = Buttons([flagBtn])
+
+refreshFooter = TextContent("Data refreshed at 14:32 UTC • Auto-refresh every 5 minutes", "small")

@@ -1,0 +1,113 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Event name, date, and venue
+    CardHeader(
+      title="Tech Innovators Conference 2024",
+      subtitle="June 15-17, 2024 | San Francisco Convention Center"
+    ),
+    Spacer(),
+    Card(
+      children: [
+        TextContent("Tech Innovators Conference 2024"),
+        Heading(level=2, text="June 15-17, 2024 - San Francisco Convention Center"),
+        Div(
+          text="📍 San Francisco Convention Center\n· West 2nd Street, SF, CA 94107",
+          variant="note"
+        )
+      ]
+    ),
+    
+    // 2. Agenda with times
+    Card(
+      children: [
+        TextContent("Agenda", style="text-h3"),
+        HorizontalBarChart(
+          labels=["9:00 AM", "12:30 PM", "2:00 PM", "5:00 PM"],
+          series=[{category: "Opening Keynote", values: [45]}, 
+                  {category: "AI Breakout", values: [60]}],
+          xLabel="Schedule",
+          yLabel="Duration (min)"
+        )
+      ]
+    ),
+    
+    // 3. Speakers with one line each
+    Card(
+      children: [
+        CardHeader(
+          title="Speakers",
+          subtitle="Featured Presenters"
+        ),
+        ListBlock(
+          items: [
+            ListItem("Dr. Amanda Chen", "AI Ethics & Future of Work"),
+            ListItem("Marcus Rivera", "Quantum Computing Breakthroughs"),
+            ListItem("Priya Patel", "Web3 Infrastructure & Scaling"),
+            ListItem("James O'Neil", "Climate Tech & Sustainability")
+          ],
+          verticalAlignment="middle"
+        )
+      ]
+    ),
+    
+    // 4. Ticket tiers with prices
+    Card(
+      children: [
+        CardHeader(
+          title="Ticket Tiers",
+          subtitle="Choose Your Pass"
+        ),
+        Table(
+          columns: [
+            {label: "Tier", data: "General Admission"},
+            {label: "Early Bird", data: "Early Bird"},
+            {label: "VIP Access", data: "VIP Experience"}
+          ],
+          rows: [
+            {"tier": "General Admission", "price": "$129", "includes": "Standard access"},
+            {"tier": "Early Bird", "price": "$89", "includes": "Early access + 20% discount"},
+            {"tier": "VIP Experience", "price": "$249", "includes": "VIP lounge, networking dinner, priority seating"}
+          ]
+        )
+      ]
+    ),
+    
+    // 5. Registration form with name and email
+    Card(
+      children: [
+        CardHeader(
+          title="Register Now",
+          subtitle="Claim Your Spot"
+        ),
+        Form(
+          name="registration-form",
+          butons: [
+            Button(label="Confirm Attendance", action="register", variant="primary"),
+            Button(label="Later", action="noop")
+          ],
+          fields: [
+            FormControl(label="full_name", input="text"),
+            FormControl(label="email", input="email", rules={"required": true})
+          ]
+        )
+      ]
+    ),
+    
+    // 6. Days remaining until the event
+    Card(
+      children: [
+        Badge(
+          text="Upcoming",
+          variant="success",
+          icon="calendar"
+        ),
+        TextContent(
+          "Days remaining: 7",
+          style="text-center"
+        )
+      ]
+    )
+  ]
+)
+```

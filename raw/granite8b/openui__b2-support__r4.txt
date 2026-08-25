@@ -1,0 +1,47 @@
+```openui-lang
+root = Card([
+    header,
+    ticketStats,
+    recentTickets,
+    filters,
+    newTicketForm
+], "card", "column", "m")
+
+header = CardHeader("Support Lead Dashboard", "Morning Overview")
+
+ticketStats = Card([
+    openTickets,
+    avgFirstResponse
+], "sunk")
+
+openTickets = TextContent("Open Tickets: 42", "large")
+avgFirstResponse = TextContent("Avg First Response: 12 min", "large")
+
+recentTickets = Table(columns: [ticketLabel, ticketPriority])
+ticketLabel = Col("Ticket", ["T‑00123", "T‑00122", "T‑00121", "T‑00120", "T‑00119"])
+ticketPriority = Col("Priority", ["High", "Medium", "Low", "High", "Medium"])
+
+filters = Buttons([
+    highPriButton,
+    allPriButton
+], "row")
+
+highPriButton = Button("High Priority Only", ["filter", "high"], "primary")
+allPriButton = Button("All Tickets", ["filter", "all"], "secondary")
+
+newTicketForm = Form("new-ticket", newTicketButtons, [
+    subjectField,
+    detailsField,
+    submitBtn
+])
+
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "New feature request", "text")
+
+detailsField = FormControl("Details", detailsTextArea)
+detailsTextArea = TextArea("details", "Describe the issue or request...", 5)
+
+newTicketButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Create Ticket", ["submit"], "primary")
+cancelBtn = Button("Cancel", ["cancel"], "tertiary")
+```

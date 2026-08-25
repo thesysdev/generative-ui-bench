@@ -1,0 +1,140 @@
+```openui-lang
+root = Card([header, dashboardGrid], "card", "column", "m")
+header = CardHeader("City Operations Center", "Real-time citywide monitoring")
+
+dashboardGrid = Card([congestionSection, transitSection, airQualitySection, energySection,
+                     waterSection, incidentsSection, vehiclesSection, parkingSection,
+                     eventsSection, reportsSection, backlogSection, weatherSection,
+                     districtFilter, dispatchControls, alertControls, roadworksSection,
+                     maintenanceSection], "sunk", "column", "xl", "start", "start")
+
+congestionSection = Card([congestionHeading, congestionChart], "card", "column", "m")
+congestionHeading = Heading("Current Traffic Congestion", "h3")
+congestionChart = BarChart(["Downtown", "North", "South", "East", "West"],
+                          [congestionSeries], "grouped", "District", "Congestion Level")
+
+congestionSeries = Series("Traffic", [85, 42, 68, 35, 72])
+
+transitSection = Card([transitHeading, transitChart], "card", "column", "m")
+transitHeading = Heading("Transit Punctuality", "h3")
+transitChart = RadarChart(["Buses", "Trains", "Subways", "Ferries"],
+                          [punctualitySeries], "sunk")
+
+punctualitySeries = Series("Punctuality (%)", [89, 95, 92, 87])
+
+airQualitySection = Card([airQualityHeading, airQualityTable], "card", "column", "m")
+airQualityHeading = Heading("Air Quality by District", "h3")
+airQualityTable = Table([airQualityCol, airQualityValueCol])
+airQualityCol = Col("District", ["Downtown", "North", "South", "East", "West"])
+airQualityValueCol = Col("AQI (Low-Medium-High)", ["72-85-90", "55-68-72", "60-75-88", "45-62-70", "78-89-95"])
+
+energySection = Card([energyHeading, energyChart], "card", "column", "m")
+energyHeading = Heading("Energy Use (Past Week)", "h3")
+energyChart = AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                        [energySeries], "natural", "Day", "MWh")
+
+energySeries = Series("Energy Consumption", [1250, 1320, 1280, 1400, 1350, 1200, 1150])
+
+waterSection = Card([waterHeading, waterChart], "card", "column", "m")
+waterHeading = Heading("Water Use Today", "h3")
+waterChart = SingleStackedBarChart(["Downtown", "North", "South", "East", "West"],
+                                  [waterSeries])
+
+waterSeries = Series("Water Usage (Liters)", [1200000, 950000, 820000, 780000, 1050000])
+
+incidentsSection = Card([incidentsHeading, incidentsTable], "card", "column", "m")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsTable = Table([incidentLocCol, incidentSeverityCol, incidentTypeCol])
+incidentLocCol = Col("Location", ["Downtown Bridge", "North Park", "South Plaza", "East Tunnel"])
+incidentSeverityCol = Col("Severity", ["High", "Medium", "Low", "High"])
+incidentTypeCol = Col("Type", ["Traffic Accident", "Tree Fall", "Power Outage", "Flooding"])
+
+vehiclesSection = Card([vehiclesHeading, vehicleMap], "card", "column", "m")
+vehiclesHeading = Heading("Emergency Vehicle Deployment", "h3")
+vehicleMap = Image("Emergency vehicle locations", "https://picsum.photos/seed/vehicles/800/300")
+vehicleMap = Callout("info", "Real-time vehicle tracking", "View live map for current deployments")
+
+parkingSection = Card([parkingHeading, parkingChart], "card", "column", "m")
+parkingHeading = Heading("Downtown Parking Availability", "h3")
+parkingChart = PieChart(["Available", "Occupied", "Reserved"],
+                        [parkingSeries], "pie", "circular")
+
+parkingSeries = Series("Parking", [45, 55, 0])
+
+eventsSection = Card([eventsHeading, eventsTable], "card", "column", "m")
+eventsHeading = Heading("Public Events This Weekend", "h3")
+eventsTable = Table([eventNameCol, eventDateCol, eventLocationCol])
+eventNameCol = Col("Event", ["City Festival", "Outdoor Concert", "Community Fair"])
+eventDateCol = Col("Date", ["Saturday", "Sunday", "Saturday"])
+eventLocationCol = Col("Location", ["Central Park", "Downtown Plaza", "North District"])
+
+reportsSection = Card([reportsHeading, reportsList], "card", "column", "m")
+reportsHeading = Heading("Citizen Reports", "h3")
+reportsList = ListBlock([report1, report2, report3])
+report1 = ListItem("Pothole on Main St", "Downtown", null, "Reported")
+report2 = ListItem("Litter in North Park", "North", null, "Reported")
+report3 = ListItem("Broken traffic light", "East", null, "Reported")
+
+backlogSection = Card([backlogHeading, backlogChart], "card", "column", "m")
+backlogHeading = Heading("Service Request Backlog", "h3")
+backlogChart = HorizontalBarChart(["Road Repairs", "Tree Trimming", "Sidewalk Fixes", "Utility Work"],
+                                  [backlogSeries], "grouped", "Category", "Count")
+
+backlogSeries = Series("Requests", [42, 18, 35, 12])
+
+weatherSection = Card([weatherHeading, weatherInfo], "card", "column", "m")
+weatherHeading = Heading("Current Weather", "h3")
+weatherInfo = Card([weatherTemp, weatherConditions], "sunk", "column", "m")
+weatherTemp = TextContent("22°C", "large")
+weatherConditions = TextContent("Partly Cloudy", "default")
+
+districtFilter = Card([districtHeading, districtSelect], "card", "column", "m")
+districtHeading = Heading("Focus District", "h3")
+districtSelect = Select("district_filter", [districtOption1, districtOption2, districtOption3, districtOption4, districtOption5], "Select a district")
+districtOption1 = SelectItem("Downtown", "Downtown")
+districtOption2 = SelectItem("North", "North")
+districtOption3 = SelectItem("South", "South")
+districtOption4 = SelectItem("East", "East")
+districtOption5 = SelectItem("West", "West")
+
+dispatchControls = Card([dispatchHeading, dispatchForm], "card", "column", "m")
+dispatchHeading = Heading("Dispatch Crew", "h3")
+dispatchForm = Form("dispatch", dispatchButtons, [crewField, locationField, typeField])
+crewField = FormControl("Crew Type", crewSelect)
+crewSelect = Select("crew_type", [crewOption1, crewOption2, crewOption3], "Select crew type")
+crewOption1 = SelectItem("Road Repair", "Road Repair")
+crewOption2 = SelectItem("Tree Trimming", "Tree Trimming")
+crewOption3 = SelectItem("Emergency Response", "Emergency Response")
+locationField = FormControl("Location", locationInput)
+locationInput = Input("location", "Enter location")
+typeField = FormControl("Issue Type", issueSelect)
+issueSelect = Select("issue_type", [issueOption1, issueOption2, issueOption3], "Select issue type")
+issueOption1 = SelectItem("Traffic Incident", "Traffic Incident")
+issueOption2 = SelectItem("Utility Issue", "Utility Issue")
+issueOption3 = SelectItem("Environmental Hazard", "Environmental Hazard")
+dispatchButtons = Buttons([dispatchBtn], "column")
+dispatchBtn = Button("Dispatch Crew", null, "primary")
+
+alertControls = Card([alertHeading, alertForm], "card", "column", "m")
+alertHeading = Heading("Send Public Alert", "h3")
+alertForm = Form("public_alert", alertButtons, [alertMessageField])
+alertMessageField = FormControl("Alert Message", alertMessageInput)
+alertMessageInput = TextArea("message", "Enter your alert message", 3, null, "Urgent: Road closure ahead on Main St due to accident.")
+alertButtons = Buttons([alertBtn], "column")
+alertBtn = Button("Send Alert", null, "primary")
+
+roadworksSection = Card([roadworksHeading, roadworksTable], "card", "column", "m")
+roadworksHeading = Heading("Roadworks Planned This Month", "h3")
+roadworksTable = Table([roadworkLocationCol, roadworkDateCol, roadworkDurationCol])
+roadworkLocationCol = Col("Location", ["Main St", "Bridge Ave", "Parkway Rd"])
+roadworkDateCol = Col("Date", ["June 15", "June 20", "June 25"])
+roadworkDurationCol = Col("Duration", ["8 AM - 4 PM", "9 AM - 3 PM", "10 AM - 5 PM"])
+
+maintenanceSection = Card([maintenanceHeading, maintenanceTable], "card", "column", "m")
+maintenanceHeading = Heading("Infrastructure Jobs Due for Maintenance", "h3")
+maintenanceTable = Table([maintenanceItemCol, maintenancePriorityCol, maintenanceTypeCol])
+maintenanceItemCol = Col("Item", ["Downtown Bridge", "North Sewer Lines", "South Water Pipes", "East Traffic Lights"])
+maintenancePriorityCol = Col("Priority", ["High", "Medium", "Low", "High"])
+maintenanceTypeCol = Col("Type", ["Structural", "Repair", "Replacement", "Calibration"])
+
+```

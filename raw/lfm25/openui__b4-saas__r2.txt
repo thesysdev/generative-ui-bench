@@ -1,0 +1,279 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Admin Dashboard",
+      subtitle: "SaaS Company Overview"
+    ),
+    
+    // 1. Monthly Recurring Revenue
+    Card(
+      children: [
+        CardHeader(
+          title: "Monthly Recurring Revenue (MRR)",
+          subtitle: "Current month revenue from active plans"
+        ),
+        TextContent(
+          text: `$128,450`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 2. Annual Recurring Revenue
+    Card(
+      children: [
+        CardHeader(
+          title: "Annual Recurring Revenue (ARR)",
+          subtitle: "Total yearly revenue from contracts"
+        ),
+        TextContent(
+          text: `$1,581,600`,
+          size: "large"
+        )
+      ]
+    ),
+    
+    // 3. Churn this month
+    Card(
+      children: [
+        CardHeader(
+          title: "Churn – This Month",
+          subtitle: "Customers lost during the current billing cycle"
+        ),
+        TextContent(
+          text: "2.3%",
+          style: "text"
+        )
+      ]
+    ),
+    
+    // 4. New signups over past 90 days
+    Card(
+      children: [
+        CardHeader(
+          title: "New Signups (90 Days)",
+          subtitle: "Customers acquired in the last quarter"
+        ),
+        TextContent(
+          text: "47 new customers",
+          style: "text"
+        )
+      ]
+    ),
+    
+    // 5. Customers split by plan
+    Card(
+      children: [
+        CardHeader(
+          title: "Customers by Plan",
+          subtitle: "Distribution across subscription tiers"
+        ),
+        Table(
+          columns: [
+            { label: "Plan", data: ["Pro", "Enterprise", "Starter", "Basic"] },
+            { label: "Count", data: [24, 18, 32, 15] },
+            { label: "Revenue", data: ["$89K", "$142K", "$56K", "$22K"] }
+          ],
+          sort: "desc"
+        )
+      ]
+    ),
+    
+    // 6. Top 10 largest customers with seats and spend
+    Card(
+      children: [
+        CardHeader(
+          title: "Top 10 Customers",
+          subtitle: "Largest accounts by ARR"
+        ),
+        Table(
+          columns: [
+            { label: "Customer ID", data: ["CUST-1001", "CUST-1002", "CUST-1003", "CUST-1004", "CUST-1005", 
+             "CUST-1006", "CUST-1007", "CUST-1008", "CUST-1009", "CUST-1010"] },
+            { label: "Plan", data: ["Enterprise", "Enterprise", "Pro", "Pro", "Enterprise", 
+             "Pro", "Starter", "Pro", "Enterprise", "Pro"] },
+            { label: "Seats", data: [45, 38, 28, 35, 52, 20, 15, 42, 33, 25] },
+            { label: "Spend ($)", data: ["$456K", "$389K", "$210K", "$198K", "$475K", 
+             "$95K", "$60K", "$178K", "$234K", "$105K"] }
+          ],
+          sort: "desc"
+        )
+      ]
+    ),
+    
+    // 7. Accounts at risk with reason
+    Card(
+      children: [
+        CardHeader(
+          title: "Accounts at Risk",
+          subtitle: "High-value customers showing warning signs"
+        ),
+        ListBlock(
+          items: [
+            {
+              id: "ACCT-8842",
+              name: "Acme Corp",
+              reason: "50% decrease in monthly usage",
+              status: "high"
+            },
+            {
+              id: "ACCT-7711",
+              name: "Globex Inc.",
+              reason: "Payment delay - 3 days overdue",
+              status: "high"
+            },
+            {
+              id: "ACCT-6205",
+              name: "Initech Ltd.",
+              reason: "Low engagement score (32/100)",
+              status: "medium"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 8. Failed payments with retry option
+    Card(
+      children: [
+        CardHeader(
+          title: "Failed Payments",
+          subtitle: "Payments that require attention"
+        ),
+        ListBlock(
+          items: [
+            {
+              id: "PAY-2024-001",
+              amount: "$2,450.00",
+              date: "2024-03-15",
+              status: "failed",
+              retry: true,
+              action: "retry_payment"
+            },
+            {
+              id: "PAY-2024-002",
+              amount: "$1,200.00",
+              date: "2024-03-16",
+              status: "failed",
+              retry: true,
+              action: "retry_payment"
+            },
+            {
+              id: "PAY-2024-003",
+              amount: "$850.00",
+              date: "2024-03-17",
+              status: "failed",
+              retry: true,
+              action: "retry_payment"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    // 9. Adoption of three newest features
+    Card(
+      children: [
+        CardHeader(
+          title: "Feature Adoption",
+          subtitle: "Usage of recent releases"
+        ),
+        Table(
+          columns: [
+            { label: "Feature", data: ["Real-time Analytics", "AI-Powered Insights", "Collaboration Hub"] },
+            { label: "Adoption %", data: ["85%", "72%", "61%"] },
+            { label: "Users", data: [156, 98, 67] }
+          ],
+          sort: "desc"
+        )
+      ]
+    ),
+    
+    // 10. Current NPS
+    Card(
+      children: [
+        CardHeader(
+          title: "Customer Satisfaction (NPS)",
+          subtitle: "Net Promoter Score"
+        ),
+        TextContent(
+          text: "78",
+          style: "text",
+          color: "green"
+        )
+      ]
+    ),
+    
+    // 11. Reporting period selector
+    Card(
+      children: [
+        CardHeader(
+          title: "Reporting Period",
+          subtitle: "Select the time range for metrics"
+        ),
+        Buttons(
+          buttons: [
+            {
+              text: "Last 30 Days",
+              action: "set_period_30d"
+            },
+            {
+              text: "Last 90 Days",
+              action: "set_period_90d"
+            },
+            {
+              text: "Last Year",
+              action: "set_period_yearly"
+            }
+          ],
+          direction: "row"
+        )
+      ]
+    ),
+    
+    // 12. Seat utilization across company
+    Card(
+      children: [
+        CardHeader(
+          title: "Seat Utilization",
+          subtitle: "Current capacity vs. actual usage"
+        ),
+        Table(
+          columns: [
+            { label: "Department", data: ["Engineering", "Product", "Sales", "Support"] },
+            { label: "Seats Available", data: [320, 280, 150, 200] },
+            { label: "Seats Used", data: [295, 230, 110, 180] },
+            { label: "Utilization %", data: ["92.5%", "82.1%", "73.3%", "90.0%"] }
+          ],
+          sort: "desc"
+        )
+      ]
+    ),
+    
+    // 13. Invite another admin
+    Card(
+      children: [
+        CardHeader(
+          title: "Invite New Admin",
+          subtitle: "Add another administrator to the organization"
+        ),
+        TextContent(
+          text: "Click to send an invitation to a new admin account",
+          size: "small"
+        ),
+        Button(
+          label: "Send Invitation",
+          action: "invite_admin",
+          variant: "primary"
+        )
+      ]
+    )
+  ],
+  direction: "column",
+  gap: "m",
+  align: "stretch",
+  wrap: true
+)
+```

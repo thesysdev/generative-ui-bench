@@ -1,0 +1,760 @@
+Here is a complete, single-screen Power Network Operator's Console addressing all required real-time metrics, regional filtering, plant statuses, demand forecasts, active outages, maintenance schedules, alerts, emissions, and emergency curtailment controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "controlBanner",
+          "alert1",
+          "kpisCard",
+          "chartsRow",
+          "tabsSection"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "National Grid Operations Console",
+        "subtitle": "Real-time dispatch, network stability & balancing control"
+      },
+      {
+        "id": "controlBanner",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "regionSelectControl",
+          "actionControls"
+        ]
+      },
+      {
+        "id": "regionSelectControl",
+        "component": "FormControl",
+        "label": "Filter Network Focus Region",
+        "hint": "Filter live telemetry by sub-grid jurisdiction",
+        "input": "regionSelect"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "grid_region",
+        "placeholder": "All Regions (National)",
+        "items": [
+          "regAll",
+          "regNorth",
+          "regEast",
+          "regSouth",
+          "regWest"
+        ]
+      },
+      {
+        "id": "regAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Regions (National Grid)"
+      },
+      {
+        "id": "regNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "Northern Interconnect"
+      },
+      {
+        "id": "regEast",
+        "component": "SelectItem",
+        "value": "east",
+        "label": "Eastern Metro & Industrial"
+      },
+      {
+        "id": "regSouth",
+        "component": "SelectItem",
+        "value": "south",
+        "label": "Southern Corridor"
+      },
+      {
+        "id": "regWest",
+        "component": "SelectItem",
+        "value": "west",
+        "label": "Western Renewable Basin"
+      },
+      {
+        "id": "actionControls",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "gap": "s",
+        "children": [
+          "curtailmentDialog"
+        ]
+      },
+      {
+        "id": "curtailmentDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Order Load Curtailment",
+        "triggerVariant": "destructive",
+        "title": "Emergency Dispatch: Order Load Curtailment",
+        "description": "Issue mandatory spinning reserve or demand-response curtailment instruction to regional substations.",
+        "content": [
+          "curtailmentForm"
+        ]
+      },
+      {
+        "id": "curtailmentForm",
+        "component": "Form",
+        "name": "curtailment_order",
+        "buttons": "curtailActionButtons",
+        "fields": [
+          "curtailRegionField",
+          "curtailTargetField",
+          "curtailTypeField"
+        ]
+      },
+      {
+        "id": "curtailRegionField",
+        "component": "FormControl",
+        "label": "Target Region",
+        "input": "curtailRegionSelect"
+      },
+      {
+        "id": "curtailRegionSelect",
+        "component": "Select",
+        "name": "target_zone",
+        "placeholder": "Select Zone",
+        "items": [
+          "cZoneEast",
+          "cZoneNorth",
+          "cZoneWest",
+          "cZoneSouth"
+        ]
+      },
+      {
+        "id": "cZoneEast",
+        "component": "SelectItem",
+        "value": "east",
+        "label": "Eastern Metro (Zone 1)"
+      },
+      {
+        "id": "cZoneNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "Northern Corridor (Zone 2)"
+      },
+      {
+        "id": "cZoneWest",
+        "component": "SelectItem",
+        "value": "west",
+        "label": "Western Renewables (Zone 3)"
+      },
+      {
+        "id": "cZoneSouth",
+        "component": "SelectItem",
+        "value": "south",
+        "label": "Southern Basin (Zone 4)"
+      },
+      {
+        "id": "curtailTargetField",
+        "component": "FormControl",
+        "label": "Curtailment Volume (MW)",
+        "hint": "Recommended threshold: 150 - 600 MW",
+        "input": "curtailInput"
+      },
+      {
+        "id": "curtailInput",
+        "component": "Input",
+        "name": "curtail_mw",
+        "type": "number",
+        "placeholder": "300"
+      },
+      {
+        "id": "curtailTypeField",
+        "component": "FormControl",
+        "label": "Protocol Tier",
+        "input": "curtailRadio"
+      },
+      {
+        "id": "curtailRadio",
+        "component": "RadioGroup",
+        "name": "curtail_tier",
+        "items": [
+          "tier1",
+          "tier2"
+        ]
+      },
+      {
+        "id": "tier1",
+        "component": "RadioItem",
+        "label": "Tier 1: Commercial & Industrial Interruptible Contracts",
+        "description": "Compensated demand response without consumer blackout",
+        "value": "c_and_i"
+      },
+      {
+        "id": "tier2",
+        "component": "RadioItem",
+        "label": "Tier 2: Controlled Feeder Rolling Shed",
+        "description": "Direct substation circuit breaker tripping (High severity)",
+        "value": "rolling_shed"
+      },
+      {
+        "id": "curtailActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "confirmCurtailBtn"
+        ]
+      },
+      {
+        "id": "confirmCurtailBtn",
+        "component": "Button",
+        "label": "Transmit Curtailment Dispatch Directive",
+        "type": "destructive",
+        "variant": "primary"
+      },
+      {
+        "id": "alert1",
+        "component": "Alert",
+        "title": "Live Alert: Primary Substation Transformer Over-Temperature",
+        "description": "Substation 4B (Eastern Metro) operating at 92°C with automated cooling pump 2 failure. High local congestion.",
+        "variant": "warning"
+      },
+      {
+        "id": "kpisCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "kpiLoadCard",
+          "kpiPriceCard",
+          "kpiEmissionsCard"
+        ]
+      },
+      {
+        "id": "kpiLoadCard",
+        "component": "Card",
+        "variant": "sunk",
+        "weight": 1,
+        "children": [
+          "loadLabel",
+          "loadValue",
+          "loadProgress",
+          "capacityLabel"
+        ]
+      },
+      {
+        "id": "loadLabel",
+        "component": "TextContent",
+        "text": "**Current Grid Load & Capacity**",
+        "size": "small-heavy"
+      },
+      {
+        "id": "loadValue",
+        "component": "Heading",
+        "level": "h2",
+        "text": "34,850 MW / 41,000 MW"
+      },
+      {
+        "id": "loadProgress",
+        "component": "Progress",
+        "value": 85,
+        "label": "85% of total grid operating capacity utilized"
+      },
+      {
+        "id": "capacityLabel",
+        "component": "Badge",
+        "text": "Reserve Margin: 6,150 MW (15.0%)",
+        "variant": "secondary"
+      },
+      {
+        "id": "kpiPriceCard",
+        "component": "Card",
+        "variant": "sunk",
+        "weight": 1,
+        "children": [
+          "priceLabel",
+          "priceValue",
+          "priceBadge",
+          "priceSub"
+        ]
+      },
+      {
+        "id": "priceLabel",
+        "component": "TextContent",
+        "text": "**Spot Market Clearing Price**",
+        "size": "small-heavy"
+      },
+      {
+        "id": "priceValue",
+        "component": "Heading",
+        "level": "h2",
+        "text": "$78.40 / MWh"
+      },
+      {
+        "id": "priceBadge",
+        "component": "Badge",
+        "text": "+12.4% past 60 min",
+        "variant": "destructive"
+      },
+      {
+        "id": "priceSub",
+        "component": "TextContent",
+        "text": "Frequency Stability: 50.02 Hz (Nominal)",
+        "size": "small"
+      },
+      {
+        "id": "kpiEmissionsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "weight": 1,
+        "children": [
+          "emissionsLabel",
+          "emissionsValue",
+          "emissionsBadge",
+          "emissionsSub"
+        ]
+      },
+      {
+        "id": "emissionsLabel",
+        "component": "TextContent",
+        "text": "**Cumulative Emissions Today**",
+        "size": "small-heavy"
+      },
+      {
+        "id": "emissionsValue",
+        "component": "Heading",
+        "level": "h2",
+        "text": "142,860 t CO₂e"
+      },
+      {
+        "id": "emissionsBadge",
+        "component": "Badge",
+        "text": "Grid Carbon Intensity: 312 gCO₂/kWh",
+        "variant": "default"
+      },
+      {
+        "id": "emissionsSub",
+        "component": "TextContent",
+        "text": "Renewable generation mix today: 41.5%",
+        "size": "small"
+      },
+      {
+        "id": "chartsRow",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "forecastCard",
+          "fuelSplitCard"
+        ]
+      },
+      {
+        "id": "forecastCard",
+        "component": "Card",
+        "variant": "card",
+        "weight": 2,
+        "children": [
+          "forecastHeader",
+          "demandChart"
+        ]
+      },
+      {
+        "id": "forecastHeader",
+        "component": "CardHeader",
+        "title": "24-Hour Demand Forecast vs Actual Load",
+        "subtitle": "Hourly comparison in Megawatts (MW) through T+24"
+      },
+      {
+        "id": "demandChart",
+        "component": "LineChart",
+        "labels": [
+          "00:00",
+          "04:00",
+          "08:00",
+          "12:00",
+          "16:00",
+          "18:00",
+          "20:00",
+          "24:00"
+        ],
+        "series": [
+          "forecastSeries",
+          "actualSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Timestamp",
+        "yLabel": "Power (MW)"
+      },
+      {
+        "id": "forecastSeries",
+        "component": "Series",
+        "category": "Forecasted Demand (MW)",
+        "values": [
+          28500,
+          26200,
+          33100,
+          36800,
+          38500,
+          39900,
+          37200,
+          31000
+        ]
+      },
+      {
+        "id": "actualSeries",
+        "component": "Series",
+        "category": "Actual Telemetry (MW)",
+        "values": [
+          28100,
+          25900,
+          33450,
+          37100,
+          34850,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "fuelSplitCard",
+        "component": "Card",
+        "variant": "card",
+        "weight": 1,
+        "children": [
+          "fuelSplitHeader",
+          "generationPie"
+        ]
+      },
+      {
+        "id": "fuelSplitHeader",
+        "component": "CardHeader",
+        "title": "Generation by Fuel Source",
+        "subtitle": "Current live generation split (MW)"
+      },
+      {
+        "id": "generationPie",
+        "component": "PieChart",
+        "variant": "donut",
+        "labels": [
+          "Natural Gas",
+          "Nuclear",
+          "Solar PV",
+          "Wind Offshore/Onshore",
+          "Hydro & Pumped",
+          "Coal"
+        ],
+        "values": [
+          12500,
+          7800,
+          6100,
+          4900,
+          2450,
+          1100
+        ]
+      },
+      {
+        "id": "tabsSection",
+        "component": "Tabs",
+        "items": [
+          "tabPlants",
+          "tabOutages",
+          "tabMaintenance",
+          "tabAlerts"
+        ]
+      },
+      {
+        "id": "tabPlants",
+        "component": "TabItem",
+        "value": "plants",
+        "trigger": "Plant Output & Status",
+        "content": [
+          "plantTable"
+        ]
+      },
+      {
+        "id": "plantTable",
+        "component": "Table",
+        "columns": [
+          "colPlantName",
+          "colPlantFuel",
+          "colPlantOutput",
+          "colPlantMax",
+          "colPlantStatus"
+        ]
+      },
+      {
+        "id": "colPlantName",
+        "component": "Col",
+        "label": "Plant Name / Unit",
+        "data": [
+          "Canyon Creek Unit 1-3",
+          "Bayview Nuclear Station",
+          "Prairie Vista Wind Farm",
+          "Highland Hydro Complex",
+          "Mojave Sun Array Alpha",
+          "Ironwood CCGT Station"
+        ]
+      },
+      {
+        "id": "colPlantFuel",
+        "component": "Col",
+        "label": "Fuel Type",
+        "data": [
+          "Natural Gas",
+          "Nuclear",
+          "Wind",
+          "Hydro",
+          "Solar",
+          "Combined Cycle Gas"
+        ]
+      },
+      {
+        "id": "colPlantOutput",
+        "component": "Col",
+        "label": "Current Output (MW)",
+        "data": [
+          "1,840 MW",
+          "2,200 MW",
+          "1,120 MW",
+          "850 MW",
+          "980 MW",
+          "0 MW"
+        ]
+      },
+      {
+        "id": "colPlantMax",
+        "component": "Col",
+        "label": "Nameplate (MW)",
+        "data": [
+          "2,000 MW",
+          "2,200 MW",
+          "1,400 MW",
+          "1,100 MW",
+          "1,050 MW",
+          "750 MW"
+        ]
+      },
+      {
+        "id": "colPlantStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Online - Generating",
+          "Online - Baseload",
+          "Online - Variable",
+          "Online - Peaking",
+          "Online - Curtailable",
+          "Offline - Tripped"
+        ]
+      },
+      {
+        "id": "tabOutages",
+        "component": "TabItem",
+        "value": "outages",
+        "trigger": "Active Outages",
+        "content": [
+          "outageTable"
+        ]
+      },
+      {
+        "id": "outageTable",
+        "component": "Table",
+        "columns": [
+          "colOutageId",
+          "colOutageRegion",
+          "colOutageType",
+          "colOutageImpact",
+          "colOutageEstRestore"
+        ]
+      },
+      {
+        "id": "colOutageId",
+        "component": "Col",
+        "label": "Outage Ref",
+        "data": [
+          "OUT-8491",
+          "OUT-8495",
+          "OUT-8502"
+        ]
+      },
+      {
+        "id": "colOutageRegion",
+        "component": "Col",
+        "label": "Affected Region",
+        "data": [
+          "Eastern Metro (Downtown Feeder 12)",
+          "Northern Interconnect (Sub-77)",
+          "Western Renewable Basin (Trunk 4)"
+        ]
+      },
+      {
+        "id": "colOutageType",
+        "component": "Col",
+        "label": "Failure Cause",
+        "data": [
+          "Underground Cable Fault",
+          "Lightning Strike / Insulator Flash",
+          "Transmission Line Sag / Thermal Trip"
+        ]
+      },
+      {
+        "id": "colOutageImpact",
+        "component": "Col",
+        "label": "Impact / Customers",
+        "data": [
+          "14,200 customers (42 MW)",
+          "3,100 customers (8 MW)",
+          "Wind Farm Disconnect (320 MW)"
+        ]
+      },
+      {
+        "id": "colOutageEstRestore",
+        "component": "Col",
+        "label": "Est. Restoration",
+        "data": [
+          "17:45 UTC (Crew on site)",
+          "19:00 UTC (Dispatched)",
+          "21:30 UTC (Switching in progress)"
+        ]
+      },
+      {
+        "id": "tabMaintenance",
+        "component": "TabItem",
+        "value": "maintenance",
+        "trigger": "Monthly Maintenance Schedule",
+        "content": [
+          "maintTable"
+        ]
+      },
+      {
+        "id": "maintTable",
+        "component": "Table",
+        "columns": [
+          "colMaintAsset",
+          "colMaintRegion",
+          "colMaintDates",
+          "colMaintCapacityLoss",
+          "colMaintScope"
+        ]
+      },
+      {
+        "id": "colMaintAsset",
+        "component": "Col",
+        "label": "Asset / Facility",
+        "data": [
+          "Apex Gas Turbine #2",
+          "500kV Intertie Line 104",
+          "Clearwater Dam Unit 4",
+          "Substation 12 Transformer Bank"
+        ]
+      },
+      {
+        "id": "colMaintRegion",
+        "component": "Col",
+        "label": "Region",
+        "data": [
+          "Eastern Metro",
+          "Northern Interconnect",
+          "Southern Corridor",
+          "Western Renewable Basin"
+        ]
+      },
+      {
+        "id": "colMaintDates",
+        "component": "Col",
+        "label": "Scheduled Window",
+        "data": [
+          "Oct 12 - Oct 18",
+          "Oct 15 - Oct 17",
+          "Oct 22 - Oct 29",
+          "Oct 25 - Oct 26"
+        ]
+      },
+      {
+        "id": "colMaintCapacityLoss",
+        "component": "Col",
+        "label": "Derate / Capacity Out",
+        "data": [
+          "-350 MW",
+          "-1,200 MW Path Transfer",
+          "-180 MW",
+          "-450 MW Local Feed"
+        ]
+      },
+      {
+        "id": "colMaintScope",
+        "component": "Col",
+        "label": "Maintenance Scope",
+        "data": [
+          "Major Rotor Overhaul",
+          "Conductor Re-tensioning",
+          "Turbine Runner Inspection",
+          "Bushing Replacement & Oil Testing"
+        ]
+      },
+      {
+        "id": "tabAlerts",
+        "component": "TabItem",
+        "value": "alerts",
+        "trigger": "Live Grid Alerts Log",
+        "content": [
+          "alertsList"
+        ]
+      },
+      {
+        "id": "alertsList",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "alertItem1",
+          "alertItem2",
+          "alertItem3",
+          "alertItem4"
+        ]
+      },
+      {
+        "id": "alertItem1",
+        "component": "ListItem",
+        "title": "[16:12:04] Voltage Fluctuation at Substation 4B (Eastern)",
+        "subtitle": "Bus voltage dropped to 0.94 pu. Capacitor banks auto-engaged."
+      },
+      {
+        "id": "alertItem2",
+        "component": "ListItem",
+        "title": "[15:58:19] Frequency Nadir Warning (50.02 Hz recovered from 49.88 Hz)",
+        "subtitle": "Automatic generation control (AGC) dispatched 200 MW rapid spinning reserve."
+      },
+      {
+        "id": "alertItem3",
+        "component": "ListItem",
+        "title": "[15:45:00] Wind Ramp-Down Alert (Western Basin)",
+        "subtitle": "Sudden front calm dropped renewable production by 420 MW in 15 minutes."
+      },
+      {
+        "id": "alertItem4",
+        "component": "ListItem",
+        "title": "[15:30:22] Carbon Intensity Target Deviation",
+        "subtitle": "Peaker gas plants brought online exceeding target hourly emission baseline by 8%."
+      }
+    ]
+  }
+}
+</a2ui-json>

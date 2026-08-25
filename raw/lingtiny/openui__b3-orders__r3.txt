@@ -1,0 +1,42 @@
+root = Card([header, kpis, filters, orderList, statusFilter, searchInput, summary, fulfilledBadge, actions], "sunk", "column", "m")
+
+header = CardHeader("E-Commerce Operations Desk", "Real-time dashboard for orders, revenue, and fulfillment status")
+
+kpis = Table([
+  Col("Metric", ["Orders Today", "Revenue Today", "Avg Order Value", "Refund Rate", "Volume (4 Weeks)"]),
+  Col("Value", ["124", "$48,200", "$388", "3.2%", "2,847"]),
+  Col("Status", ["Active", "Healthy", "Healthy", "Normal", "Healthy"])
+])
+
+filters = Card([statusFilter, searchInput], "row", "m")
+
+statusFilter = Select("Order Status", [
+  SelectItem("All", "All Status"),
+  SelectItem("Pending", "Pending"),
+  SelectItem("Shipped", "Shipped"),
+  SelectItem("Delivered", "Delivered"),
+  SelectItem("Refunded", "Refunded")
+], "Filter by status")
+
+searchInput = Input("Search by customer name", "Enter customer name", "search")
+
+orderList = ListBlock([
+  ListItem("Order #1001 - Alice Chen - $245.00 - Shipped", "Order #1001, Alice Chen, $245.00, Shipped"),
+  ListItem("Order #1002 - Bob Martinez - $189.50 - Delivered", "Order #1002, Bob Martinez, $189.50, Delivered"),
+  ListItem("Order #1003 - Carol Davis - $312.00 - Pending", "Order #1003, Carol Davis, $312.00, Pending"),
+  ListItem("Order #1004 - David Kim - $95.00 - Shipped", "Order #1004, David Kim, $95.00, Shipped"),
+  ListItem("Order #1005 - Eve Thompson - $420.00 - Delivered", "Order #1005, Eve Thompson, $420.00, Delivered")
+], "image")
+
+summary = Card([
+  Heading("4-Week Order Volume", "h3"),
+  LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volSeries], "linear", "Week", "Orders"),
+  volSeries = Series("Volume", [580, 640, 710, 690])
+], "sunk")
+
+fulfilledBadge = Badge("12 orders fulfilled this month", "success")
+
+actions = Buttons([
+  Button("Mark as Fulfilled", null, "primary"),
+  Button("Export Report", null, "secondary")
+])

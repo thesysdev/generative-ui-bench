@@ -1,0 +1,56 @@
+```openui-lang
+root = Card([header, uptimeCard, metricsCard, incidentsCard, regionFilter, slowEndpoints, alertThreshold, acknowledgeBtn])
+
+header = CardHeader("Service Health Dashboard", "Monitoring all regions")
+
+uptimeCard = Card([uptimeTitle, uptimeValue, uptimeChart], "sunk")
+uptimeTitle = Heading("Uptime", "h3")
+uptimeValue = TextContent("99.98%", "large-heavy")
+uptimeChart = PieChart(["Up", "Down"], [9998, 2], "donut")
+
+metricsCard = Card([metricsTitle, cpuUsage, memoryUsage, errorRate], "sunk")
+metricsTitle = Heading("Resource Metrics (Last 24h)", "h3")
+cpuUsage = Card([LineChart(["00:00", "06:00", "12:00", "18:00"], [cpuSeries], "natural", "Time", "CPU %")])
+cpuSeries = Series("CPU Usage", [65, 72, 58, 81])
+memoryUsage = Card([LineChart(["00:00", "06:00", "12:00", "18:00"], [memSeries], "natural", "Time", "Memory %")])
+memSeries = Series("Memory Usage", [78, 85, 69, 92])
+errorRate = Card([TextCallout("error", "Current Error Rate", "5.2% (↓1.1% from last hour)")])
+
+incidentsCard = Card([incidentsTitle, incidentsTable], "sunk")
+incidentsTitle = Heading("Open Incidents", "h3")
+incidentsTable = Table([severityCol, regionCol, statusCol, createdCol])
+severityCol = Col("Severity", ["Critical", "Major", "Warning", "Info", "Info"], "string")
+regionCol = Col("Region", ["us-east", "eu-west", "ap-south", "eu-west", "us-west"], "string")
+statusCol = Col("Status", ["In Progress", "Acknowledged", "Monitoring", "Acknowledged", "In Progress"], "string")
+createdCol = Col("Created", ["2023-10-15 14:30", "2023-10-14 18:15", "2023-10-13 09:45", "2023-10-12 16:20", "2023-10-11 22:05"], "string")
+
+regionFilter = Card([regionTitle, regionSelect], "sunk")
+regionTitle = Heading("Filter by Region", "h3")
+regionSelect = Select("region", [regionUs, regionEu, regionAp], "All Regions", null, "medium")
+regionUs = SelectItem("us-east", "US East")
+regionEu = SelectItem("eu-west", "EU West")
+regionAp = SelectItem("ap-south", "Asia Pacific")
+
+slowEndpoints = Card([endpointsTitle, endpointsTable], "sunk")
+endpointsTitle = Heading("Top 5 Slowest Endpoints", "h3")
+endpointsTable = Table([endpointCol, latencyCol])
+endpointCol = Col("Endpoint", ["/api/v2/orders", "/api/v1/users", "/api/v2/payments", "/api/v1/reports", "/api/v2/logs"], "string")
+latencyCol = Col("Avg Latency (ms)", ["1245", "892", "765", "689", "543"], "number")
+
+alertThreshold = Card([thresholdTitle, cpuThreshold, memoryThreshold], "sunk")
+thresholdTitle = Heading("Set Alert Thresholds", "h3")
+cpuThreshold = Slider("cpu_threshold", "continuous", 0, 100, 5, "CPU Usage Alert Threshold (%)", null, 80)
+memoryThreshold = Slider("memory_threshold", "continuous", 0, 100, 5, "Memory Usage Alert Threshold (%)", null, 90)
+
+acknowledgeBtn = Card([acknowledgeTitle, acknowledgeForm], "sunk")
+acknowledgeTitle = Heading("Acknowledge Incident", "h3")
+acknowledgeForm = Form("incident_acknowledgment", acknowledgeButtons, [incidentSelect])
+incidentSelect = FormControl("Incident ID", incidentDropdown)
+incidentDropdown = Select("incident_id", [incident1, incident2, incident3], "Select Incident", null, "medium")
+incident1 = SelectItem("INC-2023-1015-001", "US East Database Outage")
+incident2 = SelectItem("INC-2023-1014-002", "EU West API Latency Spikes")
+incident3 = SelectItem("INC-2023-1013-003", "Asia Pacific Cache Failures")
+acknowledgeButtons = Buttons([acknowledgeBtnRef, cancelBtnRef])
+acknowledgeBtnRef = Button("Acknowledge", null, "primary")
+cancelBtnRef = Button("Cancel", null, "tertiary")
+```

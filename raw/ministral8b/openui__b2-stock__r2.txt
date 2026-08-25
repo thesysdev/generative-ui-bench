@@ -1,0 +1,26 @@
+```openui-lang
+root = Card([searchSection, thresholdSection, lowInventoryItems, actions])
+searchSection = Card([searchInput, searchBtn], "card", "row", "l", "center", "between")
+searchInput = Input("search", "Search inventory...", "text")
+searchBtn = Button("Search", null, "tertiary")
+
+thresholdSection = Card([thresholdInfo], "card")
+thresholdInfo = TextContent("Low inventory threshold: 5 units remaining")
+
+lowInventoryItems = SectionBlock([lowInventorySection], true)
+lowInventorySection = SectionItem("low-inventory", "Items running low", [
+    lowInventoryTable
+])
+lowInventoryTable = Table([itemCol, quantityCol, reorderCol])
+itemCol = Col("Item", ["Premium Widget", "Rare Component", "Special Part", "Deluxe Kit"])
+quantityCol = Col("Remaining Units", ["3", "2", "4", "1"])
+reorderCol = Col("Action", [
+    Button("Reorder", ["reorder", "Premium Widget"], "primary", "normal", "medium"),
+    Button("Reorder", ["reorder", "Rare Component"], "primary", "normal", "medium"),
+    Button("Reorder", ["reorder", "Special Part"], "primary", "normal", "medium"),
+    Button("Reorder", ["reorder", "Deluxe Kit"], "primary", "normal", "medium")
+])
+
+actions = Card([reorderAllBtn], "card", "row", "l", "center", "end")
+reorderAllBtn = Button("Reorder All Low-Quantity Items", null, "primary", "normal", "large")
+```

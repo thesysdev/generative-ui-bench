@@ -1,0 +1,44 @@
+thought
+root = Card([header, filters, statsGrid, performanceSection, scheduleSection, tasks], "column", "l")
+header = CardHeader("Creator Studio", "Cross-platform Performance Dashboard")
+filters = Card([platformFilter], "clear", "row", "m")
+platformFilter = FormControl("Filter Platform", platformSelect)
+platformSelect = Select("platform", [all, insta, tk, yt, x], "All Platforms")
+all = SelectItem("all", "All Platforms")
+insta = SelectItem("instagram", "Instagram")
+tk = SelectItem("tiktok", "TikTok")
+yt = SelectItem("youtube", "YouTube")
+x = SelectItem("x", "X / Twitter")
+
+statsGrid = Card([followerStats, engagementStats, earningsStats], "row", "m")
+followerStats = Card([Heading("Total Followers", "h3"), TextContent("248,500", "large-heavy"), Tag("+12.4% growth", null, "md", "success")], "sunk", "column", "s", "m")
+engagementStats = Card([Heading("Engagement Rate", "h3"), TextContent("4.8%", "large-heavy"), Tag("+0.2% vs avg", null, "md", "info")], "sunk", "column", "s", "m")
+earningsStats = Card([Heading("Monthly Earnings", "h3"), TextContent("$12,400", "large-heavy"), Badge("Top 5% Creator", "outline")], "sunk", "column", "s", "m")
+
+performanceSection = Card([bestPosts, audienceChart, bestHourChart], "column", "row", "l")
+bestPosts = Card([Heading("Best Posts This Month", "h2"), Table([postCol, reachCol, platformCol])], "card")
+postCol = Col("Post Content", ["Morning Routine Vlog", "Unboxing Tech X", "Setup Tour", "Quick Editing Tips"])
+reachCol = Col("Reach", [45000, 120000, 89000, 31000], "number")
+platformCol = Col("Platform", ["Instagram", "YouTube", "TikTok", "Instagram"])
+audienceChart = Card([Heading("Audience Split", "h2"), PieChart(platforms, shares, "donut")], "sunk")
+platforms = ["Instagram", "TikTok", "YouTube", "X"]
+shares = [45, 30, 15, 10]
+bestHourChart = Card([Heading("Best Posting Time", "h2"), BarChart(hours, [activitySeries], "grouped", "Hour", "Engagement %")], "sunk")
+hours = ["6am", "9am", "12pm", "3pm", "6pm", "9pm", "12am", "3am"]
+activitySeries = Series("Engagement", [20, 45, 60, 55, 90, 95, 30, 10])
+
+scheduleSection = Card([scheduledPosts, postForm, pendingTasks], "column", "row", "l")
+scheduledPosts = Card([Heading("Scheduled This Week", "h2"), ListBlock([s1, s2, s3])], "card")
+s1 = ListItem("New Vlog Intro", "Tuesday at 10:00 AM")
+s2 = ListItem("Short: Tutorial Hack", "Thursday at 2:00 PM")
+s3 = ListItem("Brand Colab", "Saturday at 11:00 AM")
+postForm = Form("Schedule New Post", postButtons, [captionField, timeField, platformField])
+captionField = FormControl("Caption", TextArea("caption", "What's the post about?", 3))
+timeField = FormControl("Date & Time", DatePicker("post_time", "single"))
+platformField = FormControl("Platform", platformSelect)
+postButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+
+pendingTasks = Card([Heading("Pending Actions", "h2"), ListBlock([comments, collabs])], "card")
+comments = ListItem("14 Comments Waiting", "Reply replies needed", "Reply Now")
+collabs = ListItem("3 Collaboration Requests", "Review contracts", "View Requests")

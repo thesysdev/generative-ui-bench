@@ -1,0 +1,164 @@
+```openui-lang
+root = Card([
+    enrollmentTrend,
+    applicationsByProgram,
+    acceptanceRate,
+    tuitionRevenue,
+    courseFullness,
+    teachingLoad,
+    atRiskStudents,
+    scholarshipBudget,
+    housingOccupancy,
+    campusEvents,
+    alumniGiving,
+    departmentFocus,
+    semesterComparison,
+    waitlistedStudents,
+    approveCourse,
+    sendMessage
+], "card", "row", "l")
+
+enrollmentTrend = Card([
+    EnrollmentChart,
+    EnrollmentExplanation
+], "sunk")
+EnrollmentChart = LineChart(["2019","2020","2021","2022","2023"], [enrollmentSeries], "natural", "Year", "Enrollment")
+enrollmentSeries = Series("Enrollment", [4200, 4300, 4450, 4600, 4750])
+
+applicationsByProgram = Card([
+    ApplicationsTable
+], "clear")
+ApplicationsTable = Table([
+    appProgramCol,
+    appCountCol
+])
+appProgramCol = Col("Program", ["Engineering", "Arts", "Science", "Business"])
+appCountCol = Col("Applications", [1200, 800, 1500, 900])
+
+acceptanceRate = Card([
+    AcceptanceRateCallout
+], "clear")
+AcceptanceRateCallout = Callout("info", "Acceptance Rate", "Overall acceptance rate: 32% this year")
+
+tuitionRevenue = Card([
+    TuitionRevenueBar
+], "clear")
+TuitionRevenueBar = BarChart(["2023"], [tuitionSeries], "grouped", "Year", "Tuition Revenue (USD)")
+tuitionSeries = Series("Revenue", [1120000])
+
+courseFullness = Card([
+    CourseFullnessTable
+], "clear")
+CourseFullnessTable = Table([
+    courseNameCol,
+    enrollmentCol,
+    capacityCol
+])
+courseNameCol = Col("Course", ["CS101", "MATH202", "HIST303"])
+enrollmentCol = Col("Enrolled", [85, 70, 90])
+capacityCol = Col("Capacity", [80, 75, 95])
+
+teachingLoad = Card([
+    TeachingLoadChart
+], "clear")
+TeachingLoadChart = BarChart(["Prof. A", "Prof. B", "Prof. C"], [loadSeries], "grouped", "Faculty", "Teaching Load (courses)")
+loadSeries = Series("Load", [4, 3, 5])
+
+atRiskStudents = Card([
+    AtRiskStudentsCallout
+], "clear")
+AtRiskStudentsCallout = Callout("warning", "Students at Academic Risk", "Currently 150 students flagged as at risk")
+
+scholarshipBudget = Card([
+    ScholarshipBudgetRatio
+], "clear")
+ScholarshipBudgetRatio = Callout("info", "Scholarship Utilization", "Used: $2.3M / Total: $3.0M (77%)")
+
+housingOccupancy = Card([
+    HousingOccupancyBar
+], "clear")
+HousingOccupancyBar = HorizontalBarChart(["Residence Hall A", "Residence Hall B", "Residence Hall C"], [occupancySeries], "grouped", "Hall", "Occupancy (%)")
+occupancySeries = Series("Occupancy", [85, 78, 92])
+
+campusEvents = Card([
+    CampusEventsList
+], "clear")
+CampusEventsList = ListBlock([
+    event1,
+    event2,
+    event3
+], "number")
+event1 = ListItem("Hackathon", "Oct 5-7, 2023", ["calendar"])
+event2 = ListItem("Guest Lecture", "Oct 12, 2023", ["speaker"])
+event3 = ListItem("Sports Day", "Oct 20, 2023", ["trophy"])
+
+alumniGiving = Card([
+    AlumniGivingLine
+], "clear")
+AlumniGivingLine = LineChart(["2019","2020","2021","2022"], [givingSeries], "linear", "Year", "Alumni Giving (USD)")
+givingSeries = Series("Giving", [2500000, 2600000, 2750000, 2850000])
+
+departmentFocus = Card([
+    DepartmentTabs
+], "sunk")
+DepartmentTabs = Tabs([
+    engTab,
+    artsTab,
+    sciTab,
+    busTab
+])
+engTab = TabItem("Engineering", "Engineering Department", [EngOverview])
+artsTab = TabItem("Arts", "Arts Department", [ArtsOverview])
+sciTab = TabItem("Science", "Science Department", [SciOverview])
+busTab = TabItem("Business", "Business Department", [BusOverview])
+EngOverview = CardHeader("Engineering Overview", "Key metrics for Engineering")
+ArtsOverview = CardHeader("Arts Overview", "Highlights for Arts")
+SciOverview = CardHeader("Science Snapshot", "Science department stats")
+BusOverview = CardHeader("Business Brief", "Business school updates")
+
+semesterComparison = Card([
+    SemesterComparisonTable
+], "clear")
+SemesterComparisonTable = Table([
+    semesterCol,
+    enrollCol,
+    gpaCol
+])
+semesterCol = Col("Semester", ["Fall 2023", "Fall 2022"])
+enrollCol = Col("Enrollment", [4800, 4700])
+gpaCol = Col("Avg GPA", ["3.45", "3.42"])
+
+waitlistedStudents = Card([
+    WaitlistByProgram
+], "clear")
+WaitlistByProgram = Table([
+    programCol,
+    waitlistCol
+])
+programCol = Col("Program", ["Engineering", "Arts", "Science", "Business"])
+waitlistCol = Col("Waitlisted", [120, 80, 150, 90])
+
+approveCourse = Card([
+    ApproveCourseForm
+], "clear")
+ApproveCourseForm = Form("approve_course", approveButtons, [courseNameField, instructorField, capacityField])
+courseNameField = FormControl("Course Title", Input("course_name", "New AI Workshop"))
+instructorField = FormControl("Instructor", Input("instructor", "Dr. Smith"))
+capacityField = FormControl("Capacity", Input("capacity", "50", "number"))
+approveButtons = Buttons([approveBtn, cancelBtn])
+approveBtn = Button("Approve Course", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+sendMessage = Card([
+    MessageForm
+], "clear")
+MessageForm = Form("send_message", messageButtons, [groupField, contentField])
+groupField = FormControl("Student Group", Select("group", [sg1, sg2, sg3], "Choose group"))
+sg1 = SelectItem("Undergraduates", "Undergraduates")
+sg2 = SelectItem("Graduates", "Graduates")
+sg3 = SelectItem("International Students", "International Students")
+contentField = FormControl("Message", TextArea("message", "Hello, this is an important announcement.", 5))
+messageButtons = Buttons([sendBtn, cancelBtn])
+sendBtn = Button("Send Message", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

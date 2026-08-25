@@ -1,0 +1,70 @@
+{"op":"add","path":"/root","value":"main-container"}
+{"op":"add","path":"/elements/main-container","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"children":["header-card","stats-row","action-bar","tickets-container"]}}
+{"op":"add","path":"/elements/header-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["header-text","new-ticket-dialog"]}}
+{"op":"add","path":"/elements/header-text","value":{"type":"CardHeader","props":{"title":"Support Lead Dashboard","subtitle":"Morning queue overview and operations"}}}
+{"op":"add","path":"/elements/new-ticket-dialog","value":{"type":"DialogBlock","props":{"triggerLabel":"+ Open New Ticket","title":"Create Support Ticket","description":"Submit a new urgent or standard issue directly to the triage queue.","triggerVariant":"default","content":["new-ticket-form"]}}}
+{"op":"add","path":"/elements/new-ticket-form","value":{"type":"Form","props":{"name":"createTicket","buttons":"dialog-form-btns","fields":["subject-field","requester-field","priority-field","desc-field"]}}}
+{"op":"add","path":"/elements/subject-field","value":{"type":"FormControl","props":{"label":"Subject","input":"subject-input"}}}
+{"op":"add","path":"/elements/subject-input","value":{"type":"Input","props":{"name":"subject","placeholder":"e.g. SSO Login Failure"}}}
+{"op":"add","path":"/elements/requester-field","value":{"type":"FormControl","props":{"label":"Requester Email","input":"requester-input"}}}
+{"op":"add","path":"/elements/requester-input","value":{"type":"Input","props":{"name":"requester","placeholder":"user@acme.com","type":"email"}}}
+{"op":"add","path":"/elements/priority-field","value":{"type":"FormControl","props":{"label":"Priority","input":"priority-select"}}}
+{"op":"add","path":"/elements/priority-select","value":{"type":"Select","props":{"name":"priority","placeholder":"Select priority","items":["p-high","p-med","p-low"]}}}
+{"op":"add","path":"/elements/p-high","value":{"type":"SelectItem","props":{"value":"High","label":"High Priority"}}}
+{"op":"add","path":"/elements/p-med","value":{"type":"SelectItem","props":{"value":"Medium","label":"Medium Priority"}}}
+{"op":"add","path":"/elements/p-low","value":{"type":"SelectItem","props":{"value":"Low","label":"Low Priority"}}}
+{"op":"add","path":"/elements/desc-field","value":{"type":"FormControl","props":{"label":"Description","input":"desc-textarea"}}}
+{"op":"add","path":"/elements/desc-textarea","value":{"type":"TextArea","props":{"name":"description","placeholder":"Detailed steps to reproduce..."}}}
+{"op":"add","path":"/elements/dialog-form-btns","value":{"type":"Buttons","props":{"buttons":["submit-ticket-btn"]}}}
+{"op":"add","path":"/elements/submit-ticket-btn","value":{"type":"Button","props":{"label":"Submit Ticket","variant":"primary"}}}
+{"op":"add","path":"/elements/stats-row","value":{"type":"Card","props":{"direction":"row","gap":"m","variant":"clear"},"children":["stat-open-tickets","stat-avg-frt","stat-sla-badge"]}}
+{"op":"add","path":"/elements/stat-open-tickets","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["stat-open-label","stat-open-value","stat-open-sub"]}}
+{"op":"add","path":"/elements/stat-open-label","value":{"type":"TextContent","props":{"text":"**OPEN TICKETS**","size":"small"}}}
+{"op":"add","path":"/elements/stat-open-value","value":{"type":"Heading","props":{"text":{"$state":"/stats/openTickets"},"level":"h1"}}}
+{"op":"add","path":"/elements/stat-open-sub","value":{"type":"TextContent","props":{"text":"↑ 4 new since last night","size":"small"}}}
+{"op":"add","path":"/state/stats","value":{"openTickets":"24","avgFrt":"18 mins","slaMet":"96.4%"}}
+{"op":"add","path":"/elements/stat-avg-frt","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["stat-frt-label","stat-frt-value","stat-frt-sub"]}}
+{"op":"add","path":"/elements/stat-frt-label","value":{"type":"TextContent","props":{"text":"**AVG FIRST-RESPONSE TIME**","size":"small"}}}
+{"op":"add","path":"/elements/stat-frt-value","value":{"type":"Heading","props":{"text":{"$state":"/stats/avgFrt"},"level":"h1"}}}
+{"op":"add","path":"/elements/stat-frt-sub","value":{"type":"TextContent","props":{"text":"Target: < 30 mins (Healthy)","size":"small"}}}
+{"op":"add","path":"/elements/stat-sla-badge","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["stat-sla-label","stat-sla-value","stat-sla-sub"]}}
+{"op":"add","path":"/elements/stat-sla-label","value":{"type":"TextContent","props":{"text":"**SLA COMPLIANCE (TODAY)**","size":"small"}}}
+{"op":"add","path":"/elements/stat-sla-value","value":{"type":"Heading","props":{"text":{"$state":"/stats/slaMet"},"level":"h1"}}}
+{"op":"add","path":"/elements/stat-sla-sub","value":{"type":"TextContent","props":{"text":"2 High-priority tickets nearing SLA","size":"small"}}}
+{"op":"add","path":"/elements/action-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"sunk"},"children":["filter-toggles","filter-alert"]}}
+{"op":"add","path":"/elements/filter-toggles","value":{"type":"Buttons","props":{"buttons":["filter-all-btn","filter-high-btn"]}}}
+{"op":"add","path":"/elements/filter-all-btn","value":{"type":"Button","props":{"label":"All Recent (5)","variant":{"$cond":{"$state":"/filterHighOnly","eq":true},"$then":"secondary","$else":"primary"}},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":false}}}}}
+{"op":"add","path":"/elements/filter-high-btn","value":{"type":"Button","props":{"label":"🔥 High Priority Only","variant":{"$cond":{"$state":"/filterHighOnly","eq":true},"$then":"primary","$else":"secondary"}},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":true}}}}}
+{"op":"add","path":"/elements/filter-alert","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/filterHighOnly","eq":true},"$then":"Showing High Priority (2)","$else":"Showing All Recent (5)"},"variant":"outline"}}}
+{"op":"add","path":"/state/filterHighOnly","value":false}
+{"op":"add","path":"/elements/tickets-container","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"children":["all-tickets-section","high-tickets-section"]}}
+{"op":"add","path":"/elements/all-tickets-section","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly","neq":true},"children":["recent-tickets-header","all-tickets-list"]}}
+{"op":"add","path":"/elements/recent-tickets-header","value":{"type":"TextContent","props":{"text":"### 5 Most Recent Tickets","size":"default"}}}
+{"op":"add","path":"/elements/all-tickets-list","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/allRecentTickets","key":"id"},"children":["ticket-row-card"]}}
+{"op":"add","path":"/elements/ticket-row-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["ticket-main-info","ticket-side-info"]}}
+{"op":"add","path":"/elements/ticket-main-info","value":{"type":"Card","props":{"direction":"column","gap":"none","variant":"clear"},"children":["ticket-id-title","ticket-requester-text"]}}
+{"op":"add","path":"/elements/ticket-id-title","value":{"type":"TextContent","props":{"text":{"$template":"**#${id}** — ${subject}"},"size":"default"}}}
+{"op":"add","path":"/elements/ticket-requester-text","value":{"type":"TextContent","props":{"text":{"$template":"Requested by **${requester}** • ${timeAgo}"},"size":"small"}}}
+{"op":"add","path":"/elements/ticket-side-info","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["ticket-priority-badge","ticket-status-tag"]}}
+{"op":"add","path":"/elements/ticket-priority-badge","value":{"type":"Badge","props":{"text":{"$item":"priority"},"variant":{"$cond":{"$item":"priority","eq":"High"},"$then":"destructive","$else":"secondary"}}}}
+{"op":"add","path":"/elements/ticket-status-tag","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":{"$cond":{"$item":"status","eq":"Waiting FRT"},"$then":"warning","$else":"neutral"}}}}
+{"op":"add","path":"/state/allRecentTickets","value":[]}
+{"op":"add","path":"/state/allRecentTickets/0","value":{"id":"TCK-1049","subject":"Database timeout on checkout endpoint","priority":"High","requester":"dev-ops@fintech.io","timeAgo":"4 mins ago","status":"Waiting FRT"}}
+{"op":"add","path":"/state/allRecentTickets/1","value":{"id":"TCK-1048","subject":"Cannot reset MFA token via self-service","priority":"High","requester":"sarah.c@cloudscale.net","timeAgo":"12 mins ago","status":"In Progress"}}
+{"op":"add","path":"/state/allRecentTickets/2","value":{"id":"TCK-1047","subject":"Invoice #892 missing VAT breakdown","priority":"Medium","requester":"billing@vertex.com","timeAgo":"25 mins ago","status":"Waiting FRT"}}
+{"op":"add","path":"/state/allRecentTickets/3","value":{"id":"TCK-1046","subject":"Typo in onboarding documentation guide","priority":"Low","requester":"alex.k@startup.co","timeAgo":"41 mins ago","status":"Assigned"}}
+{"op":"add","path":"/state/allRecentTickets/4","value":{"id":"TCK-1045","subject":"Webhook delivery failing intermittently","priority":"Medium","requester":"integrations@globalapi.org","timeAgo":"58 mins ago","status":"Investigating"}}
+{"op":"add","path":"/elements/high-tickets-section","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly","eq":true},"children":["high-tickets-header","high-tickets-alert","high-tickets-list"]}}
+{"op":"add","path":"/elements/high-tickets-header","value":{"type":"TextContent","props":{"text":"### High-Priority Filtered View","size":"default"}}}
+{"op":"add","path":"/elements/high-tickets-alert","value":{"type":"Alert","props":{"title":"2 High-Priority Tickets Require Immediate Action","description":"Both tickets are within 15 minutes of SLA first-response breach threshold.","variant":"destructive"}}}
+{"op":"add","path":"/elements/high-tickets-list","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"repeat":{"statePath":"/highTickets","key":"id"},"children":["high-ticket-row-card"]}}
+{"op":"add","path":"/elements/high-ticket-row-card","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["high-ticket-main-info","high-ticket-side-info"]}}
+{"op":"add","path":"/elements/high-ticket-main-info","value":{"type":"Card","props":{"direction":"column","gap":"none","variant":"clear"},"children":["high-ticket-id-title","high-ticket-requester-text"]}}
+{"op":"add","path":"/elements/high-ticket-id-title","value":{"type":"TextContent","props":{"text":{"$template":"**#${id}** — ${subject}"},"size":"default"}}}
+{"op":"add","path":"/elements/high-ticket-requester-text","value":{"type":"TextContent","props":{"text":{"$template":"Requested by **${requester}** • ${timeAgo}"},"size":"small"}}}
+{"op":"add","path":"/elements/high-ticket-side-info","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["high-ticket-priority-badge","high-ticket-status-tag"]}}
+{"op":"add","path":"/elements/high-ticket-priority-badge","value":{"type":"Badge","props":{"text":{"$item":"priority"},"variant":"destructive"}}}
+{"op":"add","path":"/elements/high-ticket-status-tag","value":{"type":"Tag","props":{"text":{"$item":"status"},"variant":"danger"}}}
+{"op":"add","path":"/state/highTickets","value":[]}
+{"op":"add","path":"/state/highTickets/0","value":{"id":"TCK-1049","subject":"Database timeout on checkout endpoint","priority":"High","requester":"dev-ops@fintech.io","timeAgo":"4 mins ago","status":"Waiting FRT"}}
+{"op":"add","path":"/state/highTickets/1","value":{"id":"TCK-1048","subject":"Cannot reset MFA token via self-service","priority":"High","requester":"sarah.c@cloudscale.net","timeAgo":"12 mins ago","status":"In Progress"}}

@@ -1,0 +1,27 @@
+root = Card([header, summary, paymentSection, detailsSection, footer], "card", "column", "m")
+
+header = CardHeader("Invoice #INV-2024-08", "Project: Brand Identity Redesign")
+
+summary = Card([amountDue, dueDate], "sunk", "row", "l", "start", "between")
+amountDue = Card([amountText], "clear", "column", "none")
+amountText = TextContent("$4,250.00 USD", "large-heavy")
+dueDate = Card([dateText], "clear", "column", "none")
+dateText = TextContent("Due: Oct 24, 2024", "small-heavy")
+
+paymentSection = Card([payNowBtn, paymentMethods], "card", "column", "s", "center", "center")
+payNowBtn = Button("Pay Now", null, "primary", "normal", "large")
+paymentMethods = TextContent("Secure payment via Stripe, PayPal, or Bank Transfer", "small")
+
+detailsSection = Card([detailsHeading, itemsTable, totalRow], "clear", "column", "m")
+detailsHeading = Heading("Line Items", "h3")
+itemsTable = Table([colDesc, colQty, colRate, colTotal])
+colDesc = Col("Description", ["Logo Concepts & Iterations", "Brand Style Guide", "Social Media Kit", "Consultation Hours"])
+colQty = Col("Qty", ["1", "1", "1", "5"])
+colRate = Col("Rate", ["$2,000", "$1,500", "$500", "$50"])
+colTotal = Col("Total", ["$2,000", "$1,500", "$500", "$250"])
+totalRow = Card([totalText], "clear", "row", "none", "end")
+totalText = TextContent("Total Amount: $4,250.00", "large-heavy")
+
+footer = FollowUpBlock([downloadPdf, contactFreelancer])
+downloadPdf = FollowUpItem("Download PDF Invoice")
+contactFreelancer = FollowUpItem("Contact Freelancer")

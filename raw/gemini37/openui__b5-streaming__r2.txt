@@ -1,0 +1,149 @@
+root = Card([headerSection, filterBar, kpiGrid, tabContainer, followUps], "card", "column", "l")
+
+headerSection = Card([headerTitle, sysAlert], "clear", "column", "s")
+headerTitle = CardHeader("Streaming Operations Control Room", "Live telemetry, catalog performance, infrastructure health & release management")
+sysAlert = Alert("Global CDN Degradation - APAC South", "Buffering rate elevated to 1.1% in Mumbai PoP due to upstream transit issue. Traffic automatically rerouted.", "warning")
+
+filterBar = Card([filterLabel, regionSelectCtrl, refreshActions], "sunk", "row", "m", "center", "between")
+filterLabel = Heading("Region Focus (Scope Telemetry):", "h4")
+regionSelectCtrl = FormControl("Selected Region", regionSelect, "Filter global metrics, CDN health, and live streams")
+regionSelect = Select("region_scope", [regGlobal, regNA, regEU, regAPAC, regLATAM, regMEA], "Select Region", null, "Global (All Regions)")
+regGlobal = SelectItem("global", "Global (All Regions)")
+regNA = SelectItem("na", "North America (US/CA)")
+regEU = SelectItem("eu", "Europe (EU West/Central)")
+regAPAC = SelectItem("apac", "Asia-Pacific (APAC)")
+regLATAM = SelectItem("latam", "Latin America (LATAM)")
+regMEA = SelectItem("mea", "Middle East & Africa (MEA)")
+refreshActions = Buttons([refreshBtn, incidentBtn])
+refreshBtn = Button("Sync Telemetry", null, "secondary", "normal", "small")
+incidentBtn = Button("Declare Incident", null, "tertiary", "destructive", "small")
+
+kpiGrid = Card([liveViewersCard, bufferingCard, recoCtrCard, zeroSearchCard], "clear", "row", "m")
+
+liveViewersCard = Card([liveViewerTitle, liveViewerCount, liveViewerBadge], "sunk", "column", "xs")
+liveViewerTitle = TextContent("1. Viewers Watching Right Now", "small-heavy")
+liveViewerCount = Heading("3,842,910", "h2")
+liveViewerBadge = Tag("Peak +14.2% vs yesterday", null, "sm", "success")
+
+bufferingCard = Card([bufferingTitle, bufferingValue, bufferingBadge], "sunk", "column", "xs")
+bufferingTitle = TextContent("6. Global Buffering Rate", "small-heavy")
+bufferingValue = Heading("0.48%", "h2")
+bufferingBadge = Tag("SLA Threshold: < 0.60%", null, "sm", "success")
+
+recoCtrCard = Card([recoTitle, recoValue, recoBadge], "sunk", "column", "xs")
+recoTitle = TextContent("10. Recommendation Click Rate (CTR)", "small-heavy")
+recoValue = Heading("28.4%", "h2")
+recoBadge = Tag("+3.1% lift vs prev week", null, "sm", "info")
+
+zeroSearchCard = Card([zeroSearchTitle, zeroSearchValue, zeroSearchBadge], "sunk", "column", "xs")
+zeroSearchTitle = TextContent("11. Zero-Playback Searches", "small-heavy")
+zeroSearchValue = Heading("14.2%", "h2")
+zeroSearchBadge = Tag("Top Miss: 'Severance S2'", null, "sm", "warning")
+
+tabContainer = Tabs([tabOverview, tabAudience, tabContent, tabDelivery, tabOps])
+
+tabOverview = TabItem("tab_overview", "Overview & Streaming Trends", [overviewTrendHeading, watchTimeChart, topTitlesSection])
+
+overviewTrendHeading = Heading("3. Watch Time Over the Past Month (Total Hours Streamed)", "h3")
+watchTimeChart = AreaChart(["Week 1", "Week 2", "Week 3", "Week 4"], [watchTimeSeries], "natural", "Timeline (Past 30 Days)", "Million Hours Streamed")
+watchTimeSeries = Series("Watch Time (M hrs)", [142.5, 158.2, 171.9, 189.4])
+
+topTitlesSection = Card([topTitlesHeading, topTitlesChart], "sunk", "column", "s")
+topTitlesHeading = Heading("2. Most-Watched Titles (Past 24 Hours)", "h4")
+topTitlesChart = HorizontalBarChart(["Cyberpunk: Neo Tokyo", "The Crowned Kingdom S3", "Midnight Heist", "Deep Abyss: Live Action", "Galactic Drifters"], [topTitlesSeries], "grouped", "Hours Streamed (M)", "Title")
+topTitlesSeries = Series("Hours Streamed (M)", [28.4, 22.1, 19.8, 15.3, 11.7])
+
+tabAudience = TabItem("tab_audience", "Audience & Growth", [subGrowthHeading, subGrowthChart, distContainer])
+
+subGrowthHeading = Heading("4. New Subscribers vs. Cancellations (Past 4 Weeks)", "h3")
+subGrowthChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [newSubsSeries, churnSubsSeries], "grouped", "Week", "Subscriber Count")
+newSubsSeries = Series("New Subscribers", [185000, 210000, 245000, 290000])
+churnSubsSeries = Series("Cancellations (Churn)", [62000, 58000, 64000, 71000])
+
+distContainer = Card([revenueSplitCard, deviceSplitCard], "clear", "row", "m")
+
+revenueSplitCard = Card([revHeading, revPie], "sunk", "column", "s")
+revHeading = Heading("12. Revenue Split by Plan", "h4")
+revPie = PieChart(["Standard (Ads) - $9.99", "Premium 4K - $19.99", "Family Multi-Screen - $24.99", "Basic Mobile - $5.99"], [38, 42, 14, 6], "donut")
+
+deviceSplitCard = Card([deviceHeading, devicePie], "sunk", "column", "s")
+deviceHeading = Heading("13. Viewing Split by Device", "h4")
+devicePie = PieChart(["Smart TV & Consoles", "Mobile (iOS / Android)", "Web Browser", "Tablet & Other"], [54, 26, 13, 7], "donut")
+
+tabContent = TabItem("tab_content", "Catalog & Rights", [genreHeading, genreRadar, releasesAndLicenses])
+
+genreHeading = Heading("5. Performance by Genre (Watch Time Score / Engagement)", "h3")
+genreRadar = RadarChart(["Sci-Fi & Fantasy", "Crime Thriller", "Drama", "Comedy", "Documentary", "Animation"], [genrePerfSeries])
+genrePerfSeries = Series("Catalog Engagement Index", [94, 88, 76, 62, 58, 81])
+
+releasesAndLicenses = Card([releasesCard, licensesCard], "clear", "row", "m")
+
+releasesCard = Card([releasesHeading, releasesTable], "sunk", "column", "s")
+releasesHeading = Heading("8. Releases Coming This Month", "h4")
+releasesTable = Table([releaseTitleCol, releaseDateCol, releaseTierCol])
+releaseTitleCol = Col("Upcoming Title", ["Shadow Protocol S1", "Quantum Dawn (Movie)", "Chef's Crucible", "The Lost Horizon"])
+releaseDateCol = Col("Release Date", ["Oct 12", "Oct 18", "Oct 24", "Oct 30"])
+releaseTierCol = Col("Tier", ["Original Tentpole", "Global Feature", "Unscripted Series", "Acquired Doc"])
+
+licensesCard = Card([licensesHeading, licensesTable], "sunk", "column", "s")
+licensesHeading = Heading("9. Licenses Expiring Soon (Action Required)", "h4")
+licensesTable = Table([licTitleCol, licExpCol, licTerritoryCol, licStatusCol])
+licTitleCol = Col("Licensed Content", ["Interstellar Horizons", "Office Comedy Classics S1-9", "Metro City Detectives", "Racer Legacy"])
+licExpCol = Col("Expires In", ["4 days", "9 days", "14 days", "21 days"])
+licTerritoryCol = Col("Territories", ["Global", "NA, EU", "APAC Only", "LATAM"])
+licStatusCol = Col("Renewal Status", ["Under Negotiation", "Expiring / Drop", "Pending Studio Signoff", "Auto-Renewal Review"])
+
+tabDelivery = TabItem("tab_delivery", "14. Regional Delivery & CDN", [cdnHeading, cdnTable])
+
+cdnHeading = Heading("7. Delivery Health & Edge Performance by Region", "h3")
+cdnTable = Table([cdnRegCol, cdnStatusCol, cdnBitrateCol, cdnBufCol, cdnP95Col])
+cdnRegCol = Col("Region PoP", ["North America East (us-east)", "North America West (us-west)", "Europe Central (eu-fra)", "APAC South (ap-bom)", "Latin America (sa-gru)", "Middle East (me-dxb)"])
+cdnStatusCol = Col("CDN Status", ["Operational (99.99%)", "Operational (99.98%)", "Operational (99.96%)", "Degraded (99.12%)", "Operational (99.95%)", "Operational (99.97%)"])
+cdnBitrateCol = Col("Avg Bitrate", ["14.2 Mbps (4K)", "13.8 Mbps (4K)", "12.4 Mbps (1080p+)", "8.2 Mbps (1080p)", "9.6 Mbps (1080p)", "11.1 Mbps (1080p+)"])
+cdnBufCol = Col("Buffering Rate", ["0.21%", "0.24%", "0.38%", "1.12% (Alert)", "0.45%", "0.33%"])
+cdnP95Col = Col("P95 TTFB", ["42 ms", "48 ms", "61 ms", "138 ms", "89 ms", "74 ms"])
+
+tabOps = TabItem("tab_ops", "Ops: Flags & Hero Promotion", [opsContainer])
+
+opsContainer = Card([featureFlagsCard, promoteHeroCard], "clear", "row", "m")
+
+featureFlagsCard = Card([ffHeading, ffDesc, ffSwitches], "sunk", "column", "s")
+ffHeading = Heading("15. Live Feature Flags & Rollouts", "h4")
+ffDesc = TextContent("Runtime switches for edge CDN, player codecs, and UI experiment rollouts.", "small")
+ffSwitches = SwitchGroup("feature_toggles", [ffAv1, ffAdInsertion, ffLowLatency, ffRecoV3])
+ffAv1 = SwitchItem("AV1 Codec Pipeline", "Active on Web and Android clients (40% rollout)", "ff_av1", true)
+ffAdInsertion = SwitchItem("Dynamic Server-Side Ad Insertion (SSAI)", "Enabled across ad-supported tiers", "ff_ssai", true)
+ffLowLatency = SwitchItem("Ultra-Low-Latency Live HLS Chunking", "Experimental stream buffer tuning", "ff_ull", false)
+ffRecoV3 = SwitchItem("DeepRank Recommendation Engine v3.4", "AI-driven personalized carousel ordering", "ff_recov3", true)
+
+promoteHeroCard = Card([promoteHeading, promoteForm], "sunk", "column", "s")
+promoteHeading = Heading("16. Promote Title to Hero Billboard (Home Screen)", "h4")
+promoteForm = Form("promote_hero_form", promoteFormBtns, [promoteSelectCtrl, promoteSlotCtrl, promoteTargetCtrl])
+promoteSelectCtrl = FormControl("Title to Promote", promoteTitleSelect, "Select from active licensed and original catalog")
+promoteTitleSelect = Select("title_id", [titleCyber, titleCrown, titleMidnight, titleQuantum], "Choose title", null, "Cyberpunk: Neo Tokyo")
+titleCyber = SelectItem("tt_cyber", "Cyberpunk: Neo Tokyo (Original)")
+titleCrown = SelectItem("tt_crown", "The Crowned Kingdom S3 (Original)")
+titleMidnight = SelectItem("tt_midnight", "Midnight Heist (Feature)")
+titleQuantum = SelectItem("tt_quantum", "Quantum Dawn (Upcoming Release)")
+
+promoteSlotCtrl = FormControl("Slot Placement & Priority", promoteSlotRadio)
+promoteSlotRadio = RadioGroup("hero_slot", [slotMainHero, slotSecondary, slotPreRelease], "hero_main")
+slotMainHero = RadioItem("Slot 1: Main Home Billboard", "Top featured slot with autoplay trailer", "hero_main")
+slotSecondary = RadioItem("Slot 2: Top 10 Carousel Lead", "Badge highlighted prominently", "hero_secondary")
+slotPreRelease = RadioItem("Slot 3: 'Coming Soon' Spotlight", "Pre-save notification enabled", "hero_prerelease")
+
+promoteTargetCtrl = FormControl("Target Audience Segment", promoteAudienceSelect)
+promoteAudienceSelect = Select("audience_target", [audAll, audPremium, audLapsed], "Target group", null, "All Users (Global)")
+audAll = SelectItem("all", "All Users (Global)")
+audPremium = SelectItem("premium", "Premium 4K Tier Only")
+audLapsed = SelectItem("lapsed", "Win-Back / Lapsed Subscribers")
+
+promoteFormBtns = Buttons([promoteSubmitBtn, promotePreviewBtn])
+promoteSubmitBtn = Button("Deploy Hero Campaign", null, "primary")
+promotePreviewBtn = Button("Preview on Client", null, "secondary")
+
+followUps = FollowUpBlock([fuAPAC, fuExpiring, fuHeroRollout, fuZeroSearch])
+fuAPAC = FollowUpItem("Reroute APAC South traffic to Singapore backup CDN PoP")
+fuExpiring = FollowUpItem("Initiate contract extension for Office Comedy Classics")
+fuHeroRollout = FollowUpItem("Check real-time conversion for Cyberpunk: Neo Tokyo billboard")
+fuZeroSearch = FollowUpItem("Review zero-result search keyword telemetry")

@@ -1,0 +1,229 @@
+root = Card([hubOverview, flightsSection, delayedFlightsSection, gateChangesSection, crewsSection, weatherSection, loadSection, connectionsSection, rebookSection, changeHubSection, cancellationsSection, turnaroundSection], "sunk")
+hubOverview = CardHeader("Hub Operations Desk", "Central command for hub activities")
+flightsSection = CardHeader("Flights", "Live flight statuses for the hub")
+delayedFlightsSection = CardHeader("Delayed Flights", "Flights that are delayed")
+gateChangesSection = CardHeader("Gate Changes", "Recent gate changes")
+crewsSection = CardHeader("Crews Available", "Crew members available for reassignment")
+weatherSection = CardHeader("Weather Advisories", "Current weather conditions at the hub")
+loadSection = CardHeader("Passenger Load", "Average passenger load today")
+connectionsSection = CardHeader("Connections at Risk", "Connections that may be missed")
+rebookSection = CardHeader("Rebook Affected Passengers", "Option to rebook delayed passengers")
+changeHubSection = CardHeader("Change Hub", "Look at a different hub")
+cancellationsSection = CardHeader("Cancellations Today", "Flights cancelled today")
+turnaroundSection = CardHeader("Average Turnaround Time", "Average time between arrival and departure")
+flights = Table([
+  Col("Flight #", ["AA 1234", "DL 5678", "UA 9012", "BA 3456", "EK 7890", "AF 1122", "LH 3344", "CA 5566"]),
+  Col("Route", ["JFK → LAX", "ORD → SFO", "DFW → MIA", "ATL → SEA", "SFO → JFK", "BOS → MIA", "MIA → DFW", "LAX → SEA"]),
+  Col("Gate", ["A12", "B03", "C07", "D01", "E05", "F02", "G04", "H09"]),
+  Col("Status", ["On Time", "Delayed", "On Time", "Delayed", "On Time", "On Time", "Delayed", "On Time"])
+]
+delayedFlights = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "A12", "Delayed — 15 min", null),
+  ListItem("DL 5678", "ORD → SFO", "B03", "Delayed — 22 min", null),
+  ListItem("UA 9012", "DFW → MIA", "C07", "Delayed — 10 min", null),
+  ListItem("BA 3456", "ATL → SEA", "D01", "Delayed — 18 min", null),
+  ListItem("EK 7890", "SFO → JFK", "E05", "Delayed — 25 min", null),
+  ListItem("AF 1122", "BOS → MIA", "F02", "Delayed — 12 min", null),
+  ListItem("LH 3344", "MIA → DFW", "G04", "Delayed — 20 min", null),
+  ListItem("CA 5566", "LAX → SEA", "H09", "On Time", null),
+], "number")
+delayedFlightsSub = CardHeader("Delayed Flights — Details", "All flights currently delayed")
+delayedFlightsDetails = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "A12", "Gate A12, 15 min delay, catering on standby", null),
+  ListItem("DL 5678", "ORD → SFO", "B03", "Gate B03, 22 min delay, crew rebooking in progress", null),
+  ListItem("UA 9012", "DFW → MIA", "C07", "Gate C07, 10 min delay, bags on tarmac", null),
+  ListItem("BA 3456", "ATL → SEA", "D01", "Gate D01, 18 min delay, crew reassignment needed", null),
+  ListItem("EK 7890", "SFO → JFK", "E05", "Gate E05, 25 min delay, maintenance delay", null),
+  ListItem("AF 1122", "BOS → MIA", "F02", "Gate F02, 12 min delay, crew shortage", null),
+  ListItem("LH 3344", "MIA → DFW", "G04", "Gate G04, 20 min delay, weather delay", null),
+], "small")
+gateChanges = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "A12", "Changed to Gate B03 at 08:45", null),
+  ListItem("DL 5678", "ORD → SFO", "B03", "Changed to Gate C07 at 09:10", null),
+  ListItem("UA 9012", "DFW → MIA", "C07", "Changed to Gate D01 at 09:30", null),
+  ListItem("BA 3456", "ATL → SEA", "D01", "Changed to Gate E05 at 10:00", null),
+  ListItem("EK 7890", "SFO → JFK", "E05", "Changed to Gate F02 at 10:15", null),
+  ListItem("AF 1122", "BOS → MIA", "F02", "Changed to Gate G04 at 10:30", null),
+  ListItem("LH 3344", "MIA → DFW", "G04", "Changed to Gate H09 at 10:45", null),
+  ListItem("CA 5566", "LAX → SEA", "H09", "No change — still Gate H09", null),
+], "small")
+crews = ListBlock([
+  ListItem("Sarah Johnson", "Gate A12", "Available", null),
+  ListItem("Michael Chen", "Gate B03", "Available", null),
+  ListItem("Emily Rodriguez", "Gate C07", "Available", null),
+  ListItem("David Kim", "Gate D01", "Available", null),
+  ListItem("Lisa Wang", "Gate E05", "Available", null),
+  ListItem("James Patel", "Gate F02", "Available", null),
+  ListItem("Anna Kowalski", "Gate G04", "Available", null),
+  ListItem("Tom Harris", "Gate H09", "Available", null),
+], "number")
+weather = CardHeader("Weather Advisories", "Current conditions and alerts at the hub")
+weatherDetails = ListBlock([
+  ListItem("Clear Sky", "Temperatures 18°C to 25°C", "No impact", null),
+  ListItem("Light Rain", "Temperatures 14°C to 20°C", "Minor delays possible", null),
+  ListItem("Strong Winds", "15-20 knot winds", "Baggage handling may be affected", null),
+  ListItem("Fog", "Visibility 1 km", "Approach delays expected", null),
+], "small")
+passengerLoad = CardHeader("Passenger Load", "Average passenger load today")
+loadDetails = ListBlock([
+  ListItem("Total Passengers", "3,456", "100%", null),
+  ListItem("Average Load", "172 passengers per flight", "High", null),
+  ListItem("Overcapacity", "5 flights over 150%", "Warning", null),
+], "small")
+connections = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "1 connection", "At risk — 35 min", null),
+  ListItem("DL 5678", "ORD → SFO", "2 connections", "At risk — 40 min", null),
+  ListItem("UA 9012", "DFW → MIA", "1 connection", "At risk — 28 min", null),
+  ListItem("BA 3456", "ATL → SEA", "2 connections", "At risk — 30 min", null),
+  ListItem("EK 7890", "SFO → JFK", "1 connection", "At risk — 20 min", null),
+  ListItem("AF 1122", "BOS → MIA", "2 connections", "At risk — 32 min", null),
+  ListItem("LH 3344", "MIA → DFW", "1 connection", "At risk — 25 min", null),
+  ListItem("CA 5566", "LAX → SEA", "2 connections", "At risk — 18 min", null),
+], "number")
+rebook = CardHeader("Rebook Affected Passengers", "Rebook passengers on delayed flights")
+rebookDetails = Form("rebooking-form", [
+  FormControl("Passenger Name", nameInput, "Enter the passenger name"),
+  FormControl("Flight #", flightInput, "Select the delayed flight"),
+  FormControl("New Destination", destInput, "Enter new destination"),
+], [
+  Button("Rebook", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+nameInput = Input("Passenger Name", "Enter passenger name", "text")
+flightInput = Select("Flight #", [
+  SelectItem("AA 1234", "AA 1234 — JFK → LAX"),
+  SelectItem("DL 5678", "DL 5678 — ORD → SFO"),
+  SelectItem("UA 9012", "UA 9012 — DFW → MIA"),
+  SelectItem("BA 3456", "BA 3456 — ATL → SEA"),
+  SelectItem("EK 7890", "EK 7890 — SFO → JFK"),
+  SelectItem("AF 1122", "AF 1122 — BOS → MIA"),
+  SelectItem("LH 3344", "LH 3344 — MIA → DFW"),
+  SelectItem("CA 5566", "CA 5566 — LAX → SEA"),
+], "Choose a flight")
+destInput = Input("New Destination", "Enter new destination", "text")
+cancellations = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "Cancelled — 08:00", "Passengers rebooked", null),
+  ListItem("DL 5678", "ORD → SFO", "Cancelled — 09:30", "Passengers rebooked", null),
+  ListItem("UA 9012", "DFW → MIA", "Cancelled — 11:15", "Passengers rebooked", null),
+  ListItem("BA 3456", "ATL → SEA", "Cancelled — 12:45", "Passengers rebooked", null),
+  ListItem("EK 7890", "SFO → JFK", "Cancelled — 14:00", "Passengers rebooked", null),
+  ListItem("AF 1122", "BOS → MIA", "Cancelled — 15:30", "Passengers rebooked", null),
+  ListItem("LH 3344", "MIA → DFW", "Cancelled — 16:45", "Passengers rebooked", null),
+  ListItem("CA 5566", "LAX → SEA", "Cancelled — 17:00", "Passengers rebooked", null),
+], "number")
+turnaround = CardHeader("Average Turnaround Time", "Average time between arrival and departure")
+turnaroundDetails = ListBlock([
+  ListItem("Total Turnaround", "45 minutes", "Normal", null),
+  ListItem("Arrival to Departure", "28 minutes", "Normal", null),
+  ListItem("Gate Change to Departure", "15 minutes", "Normal", null),
+  ListItem("Catering to Departure", "10 minutes", "Normal", null),
+  ListItem("Crew Check", "5 minutes", "Normal", null),
+], "small")
+changeHub = CardHeader("Change Hub", "Look at a different hub")
+changeHubSub = CardHeader("Select a Hub", "Switch to a different hub for a different view")
+changeHubOptions = [
+  { label: "New York (JFK)", value: "jfk" },
+  { label: "Chicago (ORD)", value: "ord" },
+  { label: "Dallas (DFW)", value: "dfw" },
+  { label: "Atlanta (ATL)", value: "atl" },
+  { label: "Los Angeles (LAX)", value: "lax" },
+  { label: "Seattle (SEA)", value: "sea" },
+  { label: "Boston (BOS)", value: "bos" },
+  { label: "Miami (MIA)", value: "mia" },
+]
+changeHubAction = Button("Switch Hub", null, "primary")
+changeHubSubContent = CardHeader("Hub Details", "Hub-specific metrics")
+changeHubMetrics = Table([
+  Col("Metric", ["Passengers Today", "Flights Today", "On-Time %", "Cancellations", "Avg Load"]),
+  Col("Value", ["3,456", "42", "92%", "3", "172"]),
+], "number")
+changeHubCancellations = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "Cancelled", "Re-entered", null),
+  ListItem("DL 5678", "ORD → SFO", "Cancelled", "Re-entered", null),
+  ListItem("UA 9012", "DFW → MIA", "Cancelled", "Re-entered", null),
+  ListItem("BA 3456", "ATL → SEA", "Cancelled", "Re-entered", null),
+  ListItem("EK 7890", "SFO → JFK", "Cancelled", "Re-entered", null),
+  ListItem("AF 1122", "BOS → MIA", "Cancelled", "Re-entered", null),
+  ListItem("LH 3344", "MIA → DFW", "Cancelled", "Re-entered", null),
+  ListItem("CA 5566", "LAX → SEA", "Cancelled", "Re-entered", null),
+], "small")
+changeHubLoad = ListBlock([
+  ListItem("Total Passengers", "3,456", "100%", null),
+  ListItem("Average Load", "172 passengers per flight", "High", null),
+  ListItem("Overcapacity", "5 flights over 150%", "Warning", null),
+], "small")
+changeHubConnections = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "1 connection", "At risk — 35 min", null),
+  ListItem("DL 5678", "ORD → SFO", "2 connections", "At risk — 40 min", null),
+  ListItem("UA 9012", "DFW → MIA", "1 connection", "At risk — 28 min", null),
+  ListItem("BA 3456", "ATL → SEA", "2 connections", "At risk — 30 min", null),
+  ListItem("EK 7890", "SFO → JFK", "1 connection", "At risk — 20 min", null),
+  ListItem("AF 1122", "BOS → MIA", "2 connections", "At risk — 32 min", null),
+  ListItem("LH 3344", "MIA → DFW", "1 connection", "At risk — 25 min", null),
+  ListItem("CA 5566", "LAX → SEA", "2 connections", "At risk — 18 min", null),
+], "number")
+changeHubFlights = Table([
+  Col("Flight #", ["AA 1234", "DL 5678", "UA 9012", "BA 3456", "EK 7890", "AF 1122", "LH 3344", "CA 5566"]),
+  Col("Route", ["JFK → LAX", "ORD → SFO", "DFW → MIA", "ATL → SEA", "SFO → JFK", "BOS → MIA", "MIA → DFW", "LAX → SEA"]),
+  Col("Gate", ["A12", "B03", "C07", "D01", "E05", "F02", "G04", "H09"]),
+  Col("Status", ["Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled"]),
+], "number")
+changeHubWeather = ListBlock([
+  ListItem("Clear Sky", "Temperatures 18°C to 25°C", "No impact", null),
+  ListItem("Light Rain", "Temperatures 14°C to 20°C", "Minor delays possible", null),
+  ListItem("Strong Winds", "15-20 knot winds", "Baggage handling may be affected", null),
+  ListItem("Fog", "Visibility 1 km", "Approach delays expected", null),
+], "small")
+changeHubCrews = ListBlock([
+  ListItem("Sarah Johnson", "Gate A12", "Available", null),
+  ListItem("Michael Chen", "Gate B03", "Available", null),
+  ListItem("Emily Rodriguez", "Gate C07", "Available", null),
+  ListItem("David Kim", "Gate D01", "Available", null),
+  ListItem("Lisa Wang", "Gate E05", "Available", null),
+  ListItem("James Patel", "Gate F02", "Available", null),
+  ListItem("Anna Kowalski", "Gate G04", "Available", null),
+  ListItem("Tom Harris", "Gate H09", "Available", null),
+], "number")
+changeHubGateChanges = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "Changed to Gate B03 at 08:45", null),
+  ListItem("DL 5678", "ORD → SFO", "Changed to Gate C07 at 09:10", null),
+  ListItem("UA 9012", "DFW → MIA", "Changed to Gate D01 at 09:30", null),
+  ListItem("BA 3456", "ATL → SEA", "Changed to Gate E05 at 10:00", null),
+  ListItem("EK 7890", "SFO → JFK", "Changed to Gate F02 at 10:15", null),
+  ListItem("AF 1122", "BOS → MIA", "Changed to Gate G04 at 10:30", null),
+  ListItem("LH 3344", "MIA → DFW", "Changed to Gate H09 at 10:45", null),
+  ListItem("CA 5566", "LAX → SEA", "No change — still Gate H09", null),
+], "small")
+changeHubDelayedFlights = ListBlock([
+  ListItem("AA 1234", "JFK → LAX", "Delayed — 15 min", null),
+  ListItem("DL 5678", "ORD → SFO", "Delayed — 22 min", null),
+  ListItem("UA 9012", "DFW → MIA", "Delayed — 10 min", null),
+  ListItem("BA 3456", "ATL → SEA", "Delayed — 18 min", null),
+  ListItem("EK 7890", "SFO → JFK", "Delayed — 25 min", null),
+  ListItem("AF 1122", "BOS → MIA", "Delayed — 12 min", null),
+  ListItem("LH 3344", "MIA → DFW", "Delayed — 20 min", null),
+  ListItem("CA 5566", "LAX → SEA", "On Time", null),
+], "small")
+changeHubFlights = Table([
+  Col("Flight #", ["AA 1234", "DL 5678", "UA 9012", "BA 3456", "EK 7890", "AF 1122", "LH 3344", "CA 5566"]),
+  Col("Route", ["JFK → LAX", "ORD → SFO", "DFW → MIA", "ATL → SEA", "SFO → JFK", "BOS → MIA", "MIA → DFW", "LAX → SEA"]),
+  Col("Gate", ["A12", "B03", "C07", "D01", "E05", "F02", "G04", "H09"]),
+  Col("Status", ["Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled", "Cancelled"]),
+], "number")
+changeHubWeatherDetails = ListBlock([
+  ListItem("Clear Sky", "Temperatures 18°C to 25°C", "No impact", null),
+  ListItem("Light Rain", "Temperatures 14°C to 20°C", "Minor delays possible", null),
+  ListItem("Strong Winds", "15-20 knot winds", "Baggage handling may be affected", null),
+  ListItem("Fog", "Visibility 1 km", "Approach delays expected", null),
+], "small")
+changeHubCrewsDetails = ListBlock([
+  ListItem("Sarah Johnson", "Gate A12", "Available", null),
+  ListItem("Michael Chen", "Gate B03", "Available", null),
+  ListItem("Emily Rodriguez", "Gate C07", "Available", null),
+  ListItem("David Kim", "Gate D01", "Available", null),
+  ListItem("Lisa Wang", "Gate E05", "Available", null),
+  ListItem("James Patel", "Gate F02", "Available", null),
+  ListItem("Anna Kowalski", "Gate G04", "Available", null),
+  ListItem("Tom Harris", "Gate H09", "Available", null),
+], "number")
+root = Card([hubOverview, flightsSection, delayedFlightsSection, gateChangesSection, crewsSection, weatherSection, loadSection, connectionsSection, rebookSection, changeHubSection, cancellationsSection, turnaroundSection], "sunk")

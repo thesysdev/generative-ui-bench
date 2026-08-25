@@ -1,0 +1,120 @@
+Let me plan out this logistics coordinator's board. I need to cover all 9 items:
+
+1. Shipments in transit with origin, destination, ETA and status - Table
+2. Delayed shipments called out - Callout or Alert
+3. On-time percentage this month - Progress or a metric display
+4. Volume split by carrier - PieChart or BarChart
+5. A way to search by route - Form with search input
+6. Average cost per shipment - Metric display
+7. Weekly volume across the past two months - BarChart or LineChart
+8. A way to flag a shipment - DialogBlock or DrawerBlock
+9. When the numbers were last refreshed - TextContent
+
+Let me design this as a comprehensive dashboard.
+
+Layout plan:
+- CardHeader for the board title
+- Last refreshed timestamp
+- Top metrics row: On-time %, Avg cost per shipment
+- Delayed shipments callout
+- Main content area with tabs or sections:
+  - Shipments table
+  - Charts (carrier volume, weekly volume)
+- Search form
+- Flag shipment button/dialog
+
+Let me structure this carefully:
+
+1. Root Card with column direction
+2. CardHeader
+3. Last refreshed text
+4. A Card with metrics (on-time %, avg cost)
+5. Delayed shipments alert
+6. Search form
+7. Shipments table
+8. Charts section (carrier split + weekly volume)
+9. Flag shipment dialog
+
+Let me build this out with realistic data.
+
+For the shipments table, I'll create columns: ID, Origin, Destination, ETA, Status
+
+For delayed shipments, I'll call out specific ones.
+
+For on-time percentage, maybe 94.2%
+
+For carrier volume split, a PieChart with carriers like FedEx, UPS, DHL, Maersk
+
+For weekly volume, a BarChart with 8 weeks of data
+
+
+For average cost, I'll use $1,247 per shipment as the baseline metric. Now I'll write the openui-lang code with all the data and components.
+root = Card([header, refreshedRow, metricsCard, delayedAlert, searchCard, shipmentsCard, chartsCard, flagDialog], "card", "column", "m")
+
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment tracking & performance")
+
+refreshedRow = Card([refreshedText], "clear")
+refreshedText = TextContent("Last refreshed: Dec 18, 2025 at 2:47 PM UTC", "small")
+
+metricsCard = Card([metricsHeading, metricsGrid], "sunk")
+metricsHeading = Heading("Key Metrics", "h3")
+metricsGrid = Card([onTimeCard, avgCostCard], "clear", "row", "m")
+onTimeCard = Card([onTimeLabel, onTimeValue, onTimeProgress], "card", "column", "s")
+onTimeLabel = TextContent("On-Time Delivery (This Month)", "small")
+onTimeValue = TextContent("94.2%", "large-heavy")
+onTimeProgress = Progress(94.2, "On-time rate")
+avgCostCard = Card([avgCostLabel, avgCostValue, avgCostDetail], "card", "column", "s")
+avgCostLabel = TextContent("Avg Cost Per Shipment", "small")
+avgCostValue = TextContent("$1,247", "large-heavy")
+avgCostDetail = TextContent("Down 3.1% vs last month", "small")
+
+delayedAlert = Alert("⚠ 3 Shipments Delayed", "SHP-2847 (Shanghai → Rotterdam): +2 days due to port congestion. SHP-3102 (Mexico City → Houston): +1 day weather hold. SHP-3215 (Mumbai → Liverpool): +3 days customs inspection.", "warning")
+
+searchCard = Card([searchHeading, searchForm], "sunk")
+searchHeading = Heading("Search by Route", "h3")
+searchForm = Form("route-search", searchButtons, [originField, destField])
+originField = FormControl("Origin City", originInput)
+originInput = Input("origin", "e.g. Shanghai", "text")
+destField = FormControl("Destination City", destInput)
+destInput = Input("destination", "e.g. Rotterdam", "text")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search Route", null, "primary", "normal", "medium")
+clearBtn = Button("Clear", null, "tertiary", "normal", "medium")
+
+shipmentsCard = Card([shipmentsHeading, shipmentsTable], "sunk")
+shipmentsHeading = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([idCol, originCol, destCol, etaCol, statusCol, carrierCol])
+idCol = Col("Shipment ID", ["SHP-2847", "SHP-2901", "SHP-2955", "SHP-3012", "SHP-3078", "SHP-3102", "SHP-3145", "SHP-3215", "SHP-3250", "SHP-3289"])
+originCol = Col("Origin", ["Shanghai", "Los Angeles", "Mumbai", "Dubai", "Hamburg", "Mexico City", "Singapore", "Mumbai", "Rotterdam", "Tokyo"])
+destCol = Col("Destination", ["Rotterdam", "Shanghai", "Liverpool", "New York", "Busan", "Houston", "Sydney", "Liverpool", "Miami", "Long Beach"])
+etaCol = Col("ETA", ["Dec 21", "Dec 19", "Dec 20", "Dec 18", "Dec 22", "Dec 20", "Dec 23", "Dec 24", "Dec 19", "Dec 21"])
+statusCol = Col("Status", ["Delayed", "In Transit", "In Transit", "In Transit", "In Transit", "Delayed", "In Transit", "Delayed", "In Transit", "In Transit"])
+carrierCol = Col("Carrier", ["Maersk", "FedEx", "DHL", "UPS", "Maersk", "DHL", "FedEx", "DHL", "UPS", "Maersk"])
+
+chartsCard = Card([chartsHeading, chartsGrid], "sunk")
+chartsHeading = Heading("Volume Analytics", "h3")
+chartsGrid = Card([carrierChart, weeklyChart], "clear", "row", "m")
+carrierChart = Card([carrierHeading, carrierPie], "clear", "column", "s")
+carrierHeading = Heading("Volume by Carrier", "h4")
+carrierPie = PieChart(["Maersk", "FedEx", "DHL", "UPS"], [38, 27, 22, 13], "donut")
+weeklyChart = Card([weeklyHeading, weeklyBar], "clear", "column", "s")
+weeklyHeading = Heading("Weekly Volume (Past 8 Weeks)", "h4")
+weeklyBar = BarChart(["Oct 28", "Nov 4", "Nov 11", "Nov 18", "Nov 25", "Dec 2", "Dec 9", "Dec 16"], [volumeSeries], "grouped", "Week", "Shipments")
+volumeSeries = Series("Shipments", [142, 158, 135, 167, 121, 174, 189, 163])
+
+flagDialog = DialogBlock("Flag Shipment", "Flag a Shipment", "Select a shipment and add a note to flag it for priority review.", [flagForm], "secondary")
+flagForm = Form("flag-shipment", flagButtons, [flagShipmentField, flagReasonField, flagNoteField])
+flagShipmentField = FormControl("Shipment ID", flagShipmentInput)
+flagShipmentInput = Input("flag_shipment_id", "e.g. SHP-2847", "text")
+flagReasonField = FormControl("Reason", flagReasonSelect)
+flagReasonSelect = Select("flag_reason", [reasonPriority, reasonCustoms, reasonDamage, reasonReroute, reasonOther], "Select reason")
+reasonPriority = SelectItem("priority", "Priority delivery")
+reasonCustoms = SelectItem("customs", "Customs issue")
+reasonDamage = SelectItem("damage", "Potential damage")
+reasonReroute = SelectItem("reroute", "Reroute needed")
+reasonOther = SelectItem("other", "Other")
+flagNoteField = FormControl("Additional Notes", flagNoteInput)
+flagNoteInput = TextArea("flag_notes", "Describe the issue...", 3)
+flagButtons = Buttons([flagSubmitBtn, flagCancelBtn])
+flagSubmitBtn = Button("Submit Flag", null, "primary", "normal", "medium")
+flagCancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")

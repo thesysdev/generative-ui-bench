@@ -1,0 +1,27 @@
+root = Card([header, currentSection, outlookSection, sunSection, followUps], "card", "column", "m")
+
+header = CardHeader("Morning Brief", "Bengaluru, India")
+
+currentSection = Card([currentTemp, currentStatus, weatherAlert], "sunk", "column", "s")
+currentTemp = Heading("24°C", "h1")
+currentStatus = TextContent("Partly Cloudy with a gentle breeze", "large")
+weatherAlert = Callout("info", "UV Index High", "Apply sunscreen if heading outdoors today")
+
+outlookSection = Card([outlookHeading, forecastChart, forecastTable], "card", "column", "m")
+outlookHeading = Heading("3-Day Outlook", "h3")
+forecastChart = LineChart(["Today", "Tomorrow", "Wednesday"], [tempSeries], "natural", "Day", "Temp °C")
+tempSeries = Series("Expected High", [26, 25, 27])
+forecastTable = Table([dayCol, condCol, rainCol])
+dayCol = Col("Day", ["Today", "Tomorrow", "Wednesday"], "string")
+condCol = Col("Condition", ["Partly Cloudy", "Light Rain", "Sunny"], "string")
+rainCol = Col("Rain %", ["20%", "60%", "10%"], "string")
+
+sunSection = Card([sunGrid], "clear", "row", "m")
+sunGrid = ListBlock([sunriseItem, sunsetItem], "image")
+sunriseItem = ListItem("Sunrise", "06:12 AM")
+sunsetItem = ListItem("Sunset", "06:24 PM")
+
+followUps = FollowUpBlock([nextHour, clothingTip, weekendForecast])
+nextHour = FollowUpItem("What's the hourly forecast?")
+clothingTip = FollowUpItem("What should I wear today?")
+weekendForecast = FollowUpItem("How is the weather this weekend?")

@@ -1,0 +1,92 @@
+```openui-lang
+// Root card containing all analytics sections
+root = Card([
+    weeklySummary,                     // 1 active learners this week
+    completionRate,                    // 2 course completion rate
+    avgQuizScore,                      // 3 average quiz score
+    enrollmentRanking,                 // 4 courses ranked by enrollment
+    atRiskLearners,                    // 5 learners at risk of dropping out
+    cohortFilter,                      // 6 narrow to one cohort
+    engagementTrend,                   // 7 engagement across past eight weeks
+    messageCohort,                     // 8 way to message a cohort
+], "card", "column", "m")
+
+// 1. Active learners this week
+weeklySummary = Card([
+    CardHeader("Active Learners This Week"),
+    TextContent("4,572 learners were active in the last 7 days.")
+], "card", "row")
+
+// 2. Course completion rate
+completionRate = Card([
+    CardHeader("Course Completion Rate"),
+    Callout("success", "85%", "Completion of 85% of enrolled users have finished their courses.")
+], "clear", "row")
+
+// 3. Average quiz score
+avgQuizScore = Card([
+    CardHeader("Average Quiz Score"),
+    Callout("info", "78%", "The mean quiz score across all learners is 78%.")
+], "card", "row")
+
+// 4. Courses ranked by enrollment
+enrollmentRanking = Card([
+    CardHeader("Courses Ranked by Enrollment"),
+    Table([
+        Col("Rank", ["1", "2", "3", "4", "5"]),
+        Col("Course", ["Python Basics", "Data Science Intro", "Web Development", "Machine Learning", "Cybersecurity"]),
+        Col("Enrolled", ["12,400", "9,800", "7,600", "5,200", "3,900"])
+    ]),
+    TextCallout("neutral", "Top 5", "These courses have the highest number of current enrollments.")
+], "sunk", "row")
+
+// 5. Learners at risk of dropping out
+atRiskLearners = Card([
+    CardHeader("Learners at Risk"),
+    Callout("warning", "312 learners", "312 users show signs of disengagement and may drop out soon.")
+], "card", "row")
+
+// 6. Cohort filter (way to narrow to one cohort)
+cohortFilter = Card([
+    CardHeader("Filter by Cohort"),
+    Form("cohort_filter", formButtons, [
+        FormControl("Select Cohort", selectCohort)
+    ])
+], "clear", "row")
+
+selectCohort = Select(
+    "cohort",
+    [
+        SelectItem("Alpha", "Alpha Cohort"),
+        SelectItem("Beta", "Beta Cohort"),
+        SelectItem("Gamma", "Gamma Cohort")
+    ],
+    placeholder: "Choose a cohort"
+)
+
+formButtons = Buttons([
+    Button("Apply Filter", null, "primary"),
+    Button("Reset", null, "tertiary")
+])
+
+// 7. Engagement across the past eight weeks
+engagementTrend = Card([
+    CardHeader("Engagement Trend (Last 8 Weeks)"),
+    LineChart(
+        labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"],
+        series: [
+            Series("Engaged Learners", [450, 520, 480, 510, 490, 530, 470, 505])
+        ],
+        variant: "linear",
+        xLabel: "Week",
+        yLabel: "Engaged Learners"
+    ),
+    TextCallout("info", "Trend", "Weekly engagement shows a slight dip in week 7 followed by a recovery.")
+], "card", "row")
+
+// 8. Way to message a cohort
+messageCohort = Card([
+    CardHeader("Message Cohort"),
+    TextContent("Select a cohort and compose your message below to send a notification to all members.")
+], "sunk", "row")
+```

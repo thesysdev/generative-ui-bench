@@ -1,0 +1,22 @@
+```openui
+root = Card([header, thresholdCallout, searchForm, summary, inventoryTable], "clear")
+header = CardHeader("Low Inventory", "Items at or below the reorder threshold")
+thresholdCallout = Callout("warning", "Reorder threshold", "Any item with 20 or fewer units remaining is flagged as low and needs reordering.")
+searchForm = Form("search-inventory", searchButtons, [searchField])
+searchField = FormControl("Search inventory", searchInput, "Filter by item name or SKU")
+searchInput = Input("search", "Search by name or SKU...")
+searchButtons = Buttons([searchBtn, clearBtn])
+searchBtn = Button("Search", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+summary = Card([summaryText, lowChart], "sunk")
+summaryText = TextContent("**6 items** are at or below the threshold of **20 units**. Reorder to avoid stockouts.")
+lowChart = BarChart(itemLabels, [unitsSeries], "grouped", "Item", "Units remaining")
+itemLabels = ["Espresso Beans", "Paper Cups", "Milk Cartons", "Coffee Filters", "Chocolate Syrup", "Almond Milk"]
+unitsSeries = Series("Remaining units", [12, 8, 15, 5, 9, 18])
+inventoryTable = Table([itemCol, catCol, unitsCol, statusCol, actionCol])
+itemCol = Col("Item", ["Espresso Beans", "Paper Cups", "Milk Cartons", "Coffee Filters", "Chocolate Syrup", "Almond Milk"])
+catCol = Col("Category", ["Coffee", "Packaging", "Dairy", "Coffee", "Syrups", "Dairy"])
+unitsCol = Col("Remaining", [12, 8, 15, 5, 9, 18])
+statusCol = Col("Status", ["Low", "Low", "Low", "Critically low", "Low", "Low"])
+actionCol = Col("Action", ["Reorder", "Reorder", "Reorder", "Reorder", "Reorder", "Reorder"], "action")
+```

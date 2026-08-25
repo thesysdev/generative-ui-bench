@@ -1,0 +1,33 @@
+```openui-lang
+root = Card([locationSection, deliveryDate, problemReport], "card", "column", "m")
+
+locationSection = Card([locationTitle, locationContent, trackingImage], "sunk")
+locationTitle = Heading("Your Package Location", "h2")
+locationContent = TextContent("Your package is currently in transit and is expected to arrive at our local hub in **New York, NY** by **10:30 AM today**.")
+trackingImage = Image("Delivery tracking map", "https://picsum.photos/seed/tracking/400/250")
+
+deliveryDate = Card([deliveryDateTitle, deliveryDateContent, estimatedTime], "sunk")
+deliveryDateTitle = Heading("Estimated Delivery Date", "h2")
+deliveryDateContent = TextContent("Your package is scheduled for delivery on **June 15, 2024**.")
+estimatedTime = TextContent("Estimated delivery window: **9:00 AM - 12:00 PM**.")
+
+problemReport = Card([problemTitle, problemForm], "sunk")
+problemTitle = Heading("Report a Problem", "h2")
+problemForm = Form("delivery-problem", problemButtons, [problemType, description, contactInfo])
+problemType = FormControl("Issue Type", issueSelect)
+issueSelect = Select("issue_type", [missingItem, wrongAddress, damagedItem, otherIssue], "Select your issue", null, "medium")
+missingItem = SelectItem("Missing item", "Missing item in package")
+wrongAddress = SelectItem("Wrong address", "Package delivered to wrong address")
+damagedItem = SelectItem("Damaged item", "Item appears damaged")
+otherIssue = SelectItem("Other", "Other issue")
+
+description = FormControl("Description", descriptionTextArea, "Briefly describe the issue")
+descriptionTextArea = TextArea("description", "Describe the problem in detail", 4, null, null)
+
+contactInfo = FormControl("Your Contact Info", contactInput, "We’ll use this to follow up")
+contactInput = Input("contact", "Enter your phone number or email", "tel")
+
+problemButtons = Buttons([reportBtn, cancelBtn])
+reportBtn = Button("Report Problem", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

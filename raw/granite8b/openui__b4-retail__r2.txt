@@ -1,0 +1,108 @@
+```openui-lang
+root = Card([
+    salesVsTarget,
+    footTraffic,
+    bestSellers,
+    outOfStock,
+    onShift,
+    avgBasketSize,
+    returnsThisWeek,
+    promotionPerformance,
+    registerStatus,
+    reorderItem,
+    viewOtherStore,
+    weekVsLastWeek
+], "card", "column", "m")
+
+salesVsTarget = Card([
+    CardHeader("Sales vs Target"),
+    KPIs([salesToday, target]),
+    LineChart(["Today", "Target"], [targetSeries], "linear", "Sales", "$")
+], "sunk")
+
+footTraffic = Card([
+    CardHeader("Foot Traffic"),
+    Table([timeSlots, visitors]),
+    VerticalBarChart(timeSlots, visitors, "Foot Traffic by Hour")
+], "clear")
+
+bestSellers = Card([
+    CardHeader("Best Sellers"),
+    Table([item, units]),
+    PieChart(items, units, "donut")
+], "card")
+
+outOfStock = Card([
+    CardHeader("Out of Stock Items"),
+    ListBlock(items, "image"),
+    Badge("Low Stock")
+], "sunk")
+
+onShift = Card([
+    CardHeader("Staff on Shift"),
+    TextContent(employeesOnShift, "large")
+], "clear")
+
+avgBasketSize = Card([
+    CardHeader("Average Basket Size"),
+    TextContent("Avg basket: $42.75", "large")
+], "card")
+
+returnsThisWeek = Card([
+    CardHeader("Returns This Week"),
+    TextContent("Returns: 12 units", "large")
+], "sunk")
+
+promotionPerformance = Card([
+    CardHeader("Promotion Performance"),
+    Table([promotion, metric]),
+    BarChart(promotions, metrics, "grouped", "Promotion", "Metric")
+], "clear")
+
+registerStatus = Card([
+    CardHeader("Register Status"),
+    Table([register, status]),
+    TagBlock(statuses)
+], "sunk")
+
+reorderItem = Form("reorder", buttons, [
+    FormControl("Item ID", input, "Enter item ID to reorder"),
+    FormControl("Quantity", input, "Enter quantity")
+])
+input = Input("item_id")
+buttons = Buttons([submit, cancel])
+submit = Button("Reorder", "primary")
+cancel = Button("Cancel", "tertiary")
+
+viewOtherStore = Button("View Other Store", ["other_store_action"], "secondary")
+
+weekVsLastWeek = Card([
+    CardHeader("Week vs Last Week"),
+    Table([metric, thisWeek, lastWeek]),
+    LineChart(["Metric"], [compareSeries], "linear", "Metric", "Units")
+], "card")
+
+# ---- Data definitions (referenced above) ----
+salesToday = "115,200"
+target = "120,000"
+targetSeries = Series("Target", [120000])
+
+timeSlots = Col("Hour", ["08:00", "12:00", "16:00", "20:00"])
+visitors = Col("Visitors", [450, 620, 510, 380])
+
+items = ["Laptop", "Smartphone", "Headphones"]
+units = [120, 250, 80]
+
+employeesOnShift = "Alice, Bob, Charlie"
+
+promotions = ["SummerSale", "BackToSchool"]
+metrics = [300, 180]
+
+register = ["Reg1", "Reg2", "Reg3"]
+status = ["Open", "Closed", "Open"]
+
+promotionPerformance.items = Col("Promotion", promotions)
+promotionPerformance.metric = Col("Metric", metrics)
+
+compareSeries = Series("Metric", [112000, 108000])  // Example metric values for this week vs last week
+```

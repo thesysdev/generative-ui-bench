@@ -1,0 +1,65 @@
+```openui-lang
+root = Card([
+    header,
+    shipmentsTable,
+    delayedCallout,
+    onTimePercentage,
+    carrierVolumeChart,
+    routeSearchInput,
+    averageCost,
+    weeklyVolumeChart,
+    flagShipmentButton,
+    lastRefreshed
+])
+
+header = CardHeader("Logistics Coordinator Dashboard", "Real-time shipment overview")
+
+shipmentsTable = Table([
+    originCol,
+    destinationCol,
+    etaCol,
+    statusCol
+], "shipments")
+originCol = Col("Origin", ["NY", "CA", "TX"], "string")
+destinationCol = Col("Destination", ["FL", "TX", "WA"], "string")
+etaCol = Col("ETA", ["2023-10-05", "2023-10-07", "2023-10-06"], "date")
+statusCol = Col("Status", ["In Transit", "Delayed", "On Time"], "string")
+
+delayedCallout = Callout(
+    "warning",
+    "Delayed Shipments",
+    "The following shipments are delayed:\n- CA → TX (ETA: 2023-10-07)\n- TX → WA (ETA: 2023-10-06)"
+)
+
+onTimePercentage = Tag("On-Time: 92%", null, null, "success")
+
+carrierVolumeChart = PieChart(
+    labels = ["Carrier A", "Carrier B", "Carrier C"],
+    values = [45, 35, 20]
+)
+
+routeSearchInput = FormControl(
+    "Search Route",
+    Input("route_search", placeholder="Origin → Destination")
+)
+
+averageCost = Tag("Avg Cost: $12.50 per shipment", null, null, "neutral")
+
+weeklyVolumeChart = BarChart(
+    labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"],
+    series = [
+        Series("Last 2 Months", [1200, 1300, 1250, 1400, 1350, 1500])
+    ],
+    variant = "grouped",
+    xLabel = "Week",
+    yLabel = "Shipments"
+)
+
+flagShipmentButton = Button("Flag Shipment", null, "primary")
+
+lastRefreshed = TextContent(
+    "Data last refreshed: 2023-10-05 14:32 UTC",
+    size = "small"
+)
+
+```

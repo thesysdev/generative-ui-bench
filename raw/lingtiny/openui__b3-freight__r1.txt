@@ -1,0 +1,61 @@
+root = Card([header, stats, shipments, carrierVolume, searchBar, costBreakdown, weeklyVolume, flags, refresh], "sunk")
+header = CardHeader("Logistics Coordinator Board", "Shipments, volumes, and operational metrics")
+stats = Card([onTime, volumeByCarrier, costPerShipment], "sunk")
+onTime = CardHeader("On-Time Performance", "This month")
+onTimeValue = TextCallout("success", "94.2%", "On-time shipments this month")
+volumeByCarrier = CardHeader("Volume by Carrier", "Past two months")
+volumeByCarrierValue = TextCallout("neutral", "12,450 shipments", "10 carriers, 28% volume")
+costPerShipment = CardHeader("Average Cost Per Shipment", "Current")
+costPerShipmentValue = TextCallout("info", "$284", "Average cost per shipment")
+shipments = CardHeader("Shipments In Transit", "Current status")
+shipmentsValue = ListBlock([
+  ListItem("Order #4821 — New York to Los Angeles", "ETA: 2024-06-15", "In Transit", "Active"),
+  ListItem("Order #4819 — Chicago to Houston", "ETA: 2024-06-14", "In Transit", "Active"),
+  ListItem("Order #4817 — Miami to Seattle", "ETA: 2024-06-16", "In Transit", "Active"),
+  ListItem("Order #4815 — Dallas to Phoenix", "ETA: 2024-06-13", "In Transit", "Active"),
+  ListItem("Order #4813 — Denver to Atlanta", "ETA: 2024-06-15", "In Transit", "Active"),
+  ListItem("Order #4811 — Boston to San Francisco", "ETA: 2024-06-14", "In Transit", "Active"),
+  ListItem("Order #4809 — Portland to Salt Lake City", "ETA: 2024-06-16", "In Transit", "Active"),
+  ListItem("Order #4807 — Jacksonville to Nashville", "ETA: 2024-06-15", "In Transit", "Active"),
+], "number")
+delayedShipments = CardHeader("Delayed Shipments", "Flagged for attention")
+delayedShipmentsValue = ListBlock([
+  ListItem("Order #4815 — Dallas to Phoenix", "ETA: 2024-06-13 — 2 days behind", "Delayed", "Warning"),
+  ListItem("Order #4807 — Jacksonville to Nashville", "ETA: 2024-06-15 — 1 day behind", "Delayed", "Warning"),
+  ListItem("Order #4819 — Chicago to Houston", "ETA: 2024-06-14 — 1 day behind", "Delayed", "Warning"),
+], "image")
+carrierVolume = Card([carrierVolumeHeading, carrierVolumeValue, volumeLegend], "sunk")
+carrierVolumeHeading = Heading("Volume by Carrier", "h3")
+carrierVolumeValue = TextCallout("neutral", "12,450 shipments total", "28% domestic, 72% international")
+volumeLegend = CardHeader("Volume Legend", "")
+volumeLegendValue = ListBlock([
+  ListItem("FedEx", "3,400", "27%", "info"),
+  ListItem("UPS", "2,800", "22%", "info"),
+  ListItem("DHL", "2,100", "17%", "info"),
+  ListItem("USPS", "1,900", "15%", "info"),
+  ListItem("Other", "2,150", "17%", "info"),
+])
+searchBar = CardHeader("Search by Route", "Filter shipments by origin or destination")
+searchBarValue = TextCallout("info", "Search: New York to Los Angeles", "Type to filter shipments")
+costBreakdown = CardHeader("Average Cost Per Shipment", "Current")
+costBreakdownValue = TextCallout("info", "$284", "Average cost per shipment across all routes")
+weeklyVolume = CardHeader("Weekly Volume — Past Two Months", "Trend")
+weeklyVolumeValue = ListBlock([
+  ListItem("Week 1 (Jun 1–7)", "3,200", "2,800", "3,400", "info"),
+  ListItem("Week 2 (Jun 8–14)", "3,100", "2,900", "3,300", "info"),
+  ListItem("Week 3 (Jun 15–21)", "3,500", "3,000", "3,600", "info"),
+  ListItem("Week 4 (Jun 22–28)", "3,300", "3,100", "3,400", "info"),
+  ListItem("Week 5 (Jul 1–7)", "3,600", "3,200", "3,700", "info"),
+  ListItem("Week 6 (Jul 8–14)", "3,400", "3,000", "3,500", "info"),
+])
+flags = CardHeader("Flag a Shipment", "Mark for review or escalation")
+flagsValue = CardHeader("Flag Shipment", "Select a shipment to flag")
+flagsValue = ListBlock([
+  ListItem("Order #4815 — Dallas to Phoenix", "Pickup delay", "primary"),
+  ListItem("Order #4807 — Jacksonville to Nashville", "Custom handling needed", "primary"),
+  ListItem("Order #4813 — Denver to Atlanta", "Temperature concern", "secondary"),
+  ListItem("Order #4821 — New York to Los Angeles", "Priority delivery", "secondary"),
+])
+refresh = CardHeader("Last Refreshed", "Data sync status")
+refreshValue = TextCallout("success", "Just now", "Last data refresh: real-time")
+refreshTimestamp = TextCallout("neutral", "Last updated: 2024-06-14 14:32 UTC", "Data timestamp")

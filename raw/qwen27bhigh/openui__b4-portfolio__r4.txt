@@ -1,0 +1,179 @@
+", "A. Patel", "J. Kim", "L. Torres", "R. Nakamura", "D. Okafor", "E. Virtanen"])
+deadlineCol = Col("Deadline", ["2025-09-15", "2025-10-01", "2025-08-28", "2025-09-30", "2025-11-15", "2025-09-05", "2025-10-20", "2025-12-01"])
+healthCol = Col("Health", ["On Track", "On Track", "At Risk", "On Track", "On Track", "Critical", "On Track", "On Track"])
+
+overdueSection = Card([overdueHeading, overdueTable], "sunk", "column", "s")
+overdueHeading = Heading("Overdue Milestones", "h3")
+overdueTable = Table([milestoneCol, projCol2, dueCol, daysCol])
+milestoneCol = Col("Milestone", ["Security audit sign-off", "UAT completion"])
+projCol2 = Col("Project", ["Summit Security", "Pulse CRM"])
+dueCol = Col("Due Date", ["2025-08-15", "2025-08-22"])
+daysCol = Col("Days Overdue", [14, 7])
+
+budgetSection = Card([budgetHeading, budgetChart], "sunk", "column", "s")
+budgetHeading = Heading("Budget: Spent vs Allocated", "h3")
+budgetChart = BarChart(["Atlas", "Nova", "Orion", "Pulse", "Quartz", "Ridge", "Summit", "Tide"], [allocSeries, spentSeries], "grouped", "Project", "USD (k)")
+allocSeries = Series("Allocated", [420, 310, 250, 180, 390, 140, 200, 160])
+spentSeries = Series("Spent", [298, 245, 212, 155, 120, 138, 189, 95])
+
+utilizationSection = Card([utilHeading, utilChart], "sunk", "column", "s")
+utilHeading = Heading("Team Utilization", "h3")
+utilChart = HorizontalBarChart(["Platform Team", "Data Team", "Mobile Team", "Security Team", "API Team"], [utilSeries], "grouped", "Team", "Utilization %")
+utilSeries = Series("Utilization", [92, 78, 85, 95, 71])
+
+risksSection = Card([risksHeading, risksTable], "sunk", "column", "s")
+risksHeading = Heading("Risks", "h3")
+risksTable = Table([riskDescCol, riskProjCol, severityCol, owner2Col])
+riskDescCol = Col("Risk", ["Vendor contract renewal delay", "Key engineer on leave 3 weeks", "Data migration scope creep", "Third-party API deprecation", "Compliance audit finding"])
+riskProjCol = Col("Project", ["Atlas Migration", "Nova Platform", "Orion Analytics", "Ridge API Gateway", "Summit Security"])
+severityCol = Col("Severity", ["High", "Medium", "Medium", "Critical", "High"])
+owner2Col = Col("Owner", ["S. Chen", "M. Okafor", "A. Patel", "R. Nakamura", "D. Okafor"])
+
+deadlinesSection = Card([deadlinesHeading, deadlinesList], "sunk", "column", "s")
+deadlinesHeading = Heading("Deadlines — Next 2 Weeks", "h3")
+deadlinesList = ListBlock([dl1, dl2, dl3, dl4, dl5], "number")
+dl1 = ListItem("Ridge API Gateway — v2.1 release", "Due Aug 29 · Owner: R. Nakamura")
+dl2 = ListItem("Pulse CRM — UAT sign-off", "Due Sep 2 · Owner: J. Kim")
+dl3 = ListItem("Atlas Migration — cutover window", "Due Sep 5 · Owner: S. Chen")
+dl4 = ListItem("Orion Analytics — board demo", "Due Sep 8 · Owner: A. Patel")
+dl5 = ListItem("Quartz Mobile — App Store submission", "Due Sep 12 · Owner: L. Torres")
+
+deliverySection = Card([deliveryHeading, deliveryChart], "sunk", "column", "s")
+deliveryHeading = Heading("Delivery Pace — Last 6 Sprints", "h3")
+deliveryChart = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [velocitySeries, committedSeries], "natural", "Sprint", "Story Points")
+velocitySeries = Series("Delivered", [42, 55, 48, 61, 53, 58])
+committedSeries = Series("Committed", [45, 55, 50, 60, 55, 60])
+
+blockedSection = Card([blockedHeading, blockedTable], "sunk", "column", "s")
+blockedHeading = Heading("Blocked Work Items", "h3")
+blockedTable = Table([blockedItemCol, blockedProjCol, blockedReasonCol, blockedDaysCol])
+blockedItemCol = Col("Work Item", ["ID-4821: Auth token refresh", "ID-4903: Webhook retry logic", "ID-4756: Schema migration script"])
+blockedProjCol = Col("Project", ["Ridge API Gateway", "Pulse CRM", "Tide Data Pipeline"])
+blockedReasonCol = Col("Blocked By", ["Waiting on security review", "Third-party API rate limit", "DBA approval pending"])
+blockedDaysCol = Col("Days Blocked", [9, 5, 3])
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show detailed Gantt chart for Atlas Migration")
+fu2 = FollowUpItem("Generate executive summary PDF for this review")
+fu3 = FollowUpItem("Compare Q3 vs Q2 delivery velocity")
+
+Now let me verify all variables are referenced:
+- root: references header, healthSummary, controlBar, activeProjectsSection, overdueSection, budgetSection, utilizationSection, risksSection, deadlinesSection, deliverySection, blockedSection, followUps ✓
+- header: standalone ✓
+- healthSummary: standalone ✓
+- controlBar: references quarterCard, actionButtons ✓
+- quarterCard: references quarterLabel, quarterBtns ✓
+- quarterLabel: standalone ✓
+- quarterBtns: references q2Btn, q3Btn, q4Btn, q1Btn2026 ✓
+- q2Btn, q3Btn, q4Btn, q1Btn2026: standalone ✓
+- actionButtons: references requestHeadcountBtn, exportBtn, archiveBtn ✓
+- requestHeadcountBtn: standalone ✓
+- exportBtn: standalone ✓
+- archiveBtn: standalone (AlertDialogBlock) ✓
+- activeProjectsSection: references activeProjectsHeading, activeProjectsTable ✓
+- activeProjectsHeading: standalone ✓
+- activeProjectsTable: references projCol, ownerCol, deadlineCol, healthCol ✓
+- projCol, ownerCol, deadlineCol, healthCol: standalone ✓
+- overdueSection: references overdueHeading, overdueTable ✓
+- overdueHeading: standalone ✓
+- overdueTable: references milestoneCol, projCol2, dueCol, daysCol ✓
+- milestoneCol, projCol2, dueCol, daysCol: standalone ✓
+- budgetSection: references budgetHeading, budgetChart ✓
+- budgetHeading: standalone ✓
+- budgetChart: references allocSeries, spentSeries ✓
+- allocSeries, spentSeries: standalone ✓
+- utilizationSection: references utilHeading, utilChart ✓
+- utilHeading: standalone ✓
+- utilChart: references utilSeries ✓
+- utilSeries: standalone ✓
+- risksSection: references risksHeading, risksTable ✓
+- risksHeading: standalone ✓
+- risksTable: references riskDescCol, riskProjCol, severityCol, owner2Col ✓
+- riskDescCol, riskProjCol, severityCol, owner2Col: standalone ✓
+- deadlinesSection: references deadlinesHeading, deadlinesList ✓
+- deadlinesHeading: standalone ✓
+- deadlinesList: references dl1-dl5 ✓
+- dl1-dl5: standalone ✓
+- deliverySection: references deliveryHeading, deliveryChart ✓
+- deliveryHeading: standalone ✓
+- deliveryChart: references velocitySeries, committedSeries ✓
+- velocitySeries, committedSeries: standalone ✓
+- blockedSection: references blockedHeading, blockedTable ✓
+- blockedHeading: standalone ✓
+- blockedTable: references blockedItemCol, blockedProjCol, blockedReasonCol, blockedDaysCol ✓
+- blockedItemCol, blockedProjCol, blockedReasonCol, blockedDaysCol: standalone ✓
+- followUps: references fu1, fu2, fu3 ✓
+- fu1, fu2, fu3: standalone ✓
+
+All good! Let me write the final output.
+
+
+root = Card([header, healthSummary, controlBar, activeProjectsSection, overdueSection, budgetSection, utilizationSection, risksSection, deadlinesSection, deliverySection, blockedSection, followUps], "card", "column", "m")
+header = CardHeader("Project Portfolio Review", "Q3 2025 · PMO Portfolio Dashboard")
+healthSummary = Callout("warning", "Portfolio Health", "6 of 8 projects on track · 1 at risk · 1 critical — 2 milestones overdue, 3 work items blocked")
+controlBar = Card([quarterCard, actionButtons], "clear", "row", "m", "start", "between")
+quarterCard = Card([quarterLabel, quarterBtns], "clear", "column", "xs")
+quarterLabel = Heading("Viewing quarter", "h4")
+quarterBtns = Buttons([q2Btn, q3Btn, q4Btn, q1Btn2026])
+q2Btn = Button("Q2 2025", null, "secondary", "small")
+q3Btn = Button("Q3 2025", null, "primary", "small")
+q4Btn = Button("Q4 2025", null, "secondary", "small")
+q1Btn2026 = Button("Q1 2026", null, "secondary", "small")
+actionButtons = Buttons([requestHeadcountBtn, exportBtn, archiveBtn])
+requestHeadcountBtn = Button("Request Headcount", null, "secondary", "small")
+exportBtn = Button("Export Review", null, "secondary", "small")
+archiveBtn = AlertDialogBlock("Archive Finished Project", "Confirm Archive", "This will move the selected project to the archive. This action cannot be undone.", "Archive", "Cancel", "destructive")
+activeProjectsSection = Card([activeProjectsHeading, activeProjectsTable], "sunk", "column", "s")
+activeProjectsHeading = Heading("Active Projects", "h3")
+activeProjectsTable = Table([projCol, ownerCol, deadlineCol, healthCol])
+projCol = Col("Project", ["Atlas Migration", "Nova Platform", "Orion Analytics", "Pulse CRM", "Quartz Mobile", "Ridge API Gateway", "Summit Security", "Tide Data Pipeline"])
+ownerCol = Col("Owner", ["S. Chen", "M. Okafor", "A. Patel", "J. Kim", "L. Torres", "R. Nakamura", "D. Okafor", "E. Virtanen"])
+deadlineCol = Col("Deadline", ["2025-09-15", "2025-10-01", "2025-08-28", "2025-09-30", "2025-11-15", "2025-09-05", "2025-10-20", "2025-12-01"])
+healthCol = Col("Health", ["On Track", "On Track", "At Risk", "On Track", "On Track", "Critical", "On Track", "On Track"])
+overdueSection = Card([overdueHeading, overdueTable], "sunk", "column", "s")
+overdueHeading = Heading("Overdue Milestones", "h3")
+overdueTable = Table([milestoneCol, oProjCol, dueCol, daysCol])
+milestoneCol = Col("Milestone", ["Security audit sign-off", "UAT completion"])
+oProjCol = Col("Project", ["Summit Security", "Pulse CRM"])
+dueCol = Col("Due Date", ["2025-08-15", "2025-08-22"])
+daysCol = Col("Days Overdue", [14, 7])
+budgetSection = Card([budgetHeading, budgetChart], "sunk", "column", "s")
+budgetHeading = Heading("Budget: Spent vs Allocated", "h3")
+budgetChart = BarChart(["Atlas", "Nova", "Orion", "Pulse", "Quartz", "Ridge", "Summit", "Tide"], [allocSeries, spentSeries], "grouped", "Project", "USD (k)")
+allocSeries = Series("Allocated", [420, 310, 250, 180, 390, 140, 200, 160])
+spentSeries = Series("Spent", [298, 245, 212, 155, 120, 138, 189, 95])
+utilizationSection = Card([utilHeading, utilChart], "sunk", "column", "s")
+utilHeading = Heading("Team Utilization", "h3")
+utilChart = HorizontalBarChart(["Platform Team", "Data Team", "Mobile Team", "Security Team", "API Team"], [utilSeries], "grouped", "Team", "Utilization %")
+utilSeries = Series("Utilization", [92, 78, 85, 95, 71])
+risksSection = Card([risksHeading, risksTable], "sunk", "column", "s")
+risksHeading = Heading("Risks", "h3")
+risksTable = Table([riskDescCol, riskProjCol, severityCol, riskOwnerCol])
+riskDescCol = Col("Risk", ["Vendor contract renewal delay", "Key engineer on leave 3 weeks", "Data migration scope creep", "Third-party API deprecation", "Compliance audit finding unresolved"])
+riskProjCol = Col("Project", ["Atlas Migration", "Nova Platform", "Orion Analytics", "Ridge API Gateway", "Summit Security"])
+severityCol = Col("Severity", ["High", "Medium", "Medium", "Critical", "High"])
+riskOwnerCol = Col("Owner", ["S. Chen", "M. Okafor", "A. Patel", "R. Nakamura", "D. Okafor"])
+deadlinesSection = Card([deadlinesHeading, deadlinesList], "sunk", "column", "s")
+deadlinesHeading = Heading("Deadlines — Next 2 Weeks", "h3")
+deadlinesList = ListBlock([dl1, dl2, dl3, dl4, dl5], "number")
+dl1 = ListItem("Ridge API Gateway — v2.1 release", "Due Aug 29 · Owner: R. Nakamura")
+dl2 = ListItem("Pulse CRM — UAT sign-off", "Due Sep 2 · Owner: J. Kim")
+dl3 = ListItem("Atlas Migration — cutover window", "Due Sep 5 · Owner: S. Chen")
+dl4 = ListItem("Orion Analytics — board demo", "Due Sep 8 · Owner: A. Patel")
+dl5 = ListItem("Quartz Mobile — App Store submission", "Due Sep 12 · Owner: L. Torres")
+deliverySection = Card([deliveryHeading, deliveryChart], "sunk", "column", "s")
+deliveryHeading = Heading("Delivery Pace — Last 6 Sprints", "h3")
+deliveryChart = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [velocitySeries, committedSeries], "natural", "Sprint", "Story Points")
+velocitySeries = Series("Delivered", [42, 55, 48, 61, 53, 58])
+committedSeries = Series("Committed", [45, 55, 50, 60, 55, 60])
+blockedSection = Card([blockedHeading, blockedTable], "sunk", "column", "s")
+blockedHeading = Heading("Blocked Work Items", "h3")
+blockedTable = Table([blockedItemCol, blockedProjCol, blockedReasonCol, blockedDaysCol])
+blockedItemCol = Col("Work Item", ["ID-4821: Auth token refresh", "ID-4903: Webhook retry logic", "ID-4756: Schema migration script"])
+blockedProjCol = Col("Project", ["Ridge API Gateway", "Pulse CRM", "Tide Data Pipeline"])
+blockedReasonCol = Col("Blocked By", ["Waiting on security review", "Third-party API rate limit", "DBA approval pending"])
+blockedDaysCol = Col("Days Blocked", [9, 5, 3])
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show detailed Gantt chart for Atlas Migration")
+fu2 = FollowUpItem("Generate executive summary PDF for this review")
+fu3 = FollowUpItem("Compare Q3 vs Q2 delivery velocity")

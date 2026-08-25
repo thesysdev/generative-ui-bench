@@ -1,0 +1,28 @@
+root = Card([header, uptimeSection, incidentSection, followUps])
+
+header = CardHeader("Platform Status", "API health and incident history — March 2025")
+
+uptimeSection = Card([uptimeHeading, uptimeStatus, uptimeProgress, uptimeNote, uptimeTable], "sunk")
+uptimeHeading = Heading("API uptime this month", "h3")
+uptimeStatus = Tag("All systems operational", null, "md", "success")
+uptimeProgress = Progress(99.94, "API availability: 99.94% (SLO target 99.90%)")
+uptimeNote = TextContent("**26 minutes** of total downtime across 30 days, measured against the public REST and GraphQL endpoints.", "small")
+uptimeTable = Table([svcCol, uptimeCol, sloCol])
+svcCol = Col("Service", ["REST API", "GraphQL API", "Webhooks", "Auth"])
+uptimeCol = Col("Uptime", ["99.94%", "99.97%", "99.88%", "100.00%"])
+sloCol = Col("SLO", ["99.90%", "99.90%", "99.50%", "99.95%"])
+
+incidentSection = Card([incidentHeading, incidentAlert, incidentDetails, incidentTimeline], "sunk")
+incidentHeading = Heading("Most recent incident", "h3")
+incidentAlert = Alert("Resolved — elevated API latency (INC-1428)", "Started 18 Mar 2025, 14:12 UTC · Resolved 18 Mar 2025, 14:38 UTC (26 min)", "success")
+incidentDetails = TextContent("A connection-pool exhaustion in the primary read replica caused p95 latency on `/v1/*` endpoints to rise above 4s, with roughly 3% of requests returning 503. Traffic was shifted to a standby replica and pool limits were raised. A permanent fix (auto-scaling pool sizing) ships this week.")
+incidentTimeline = Steps([step1, step2, step3, step4])
+step1 = StepsItem("14:12 UTC — Detected", "Latency alarm fired on p95 > 2s for the REST API.")
+step2 = StepsItem("14:19 UTC — Identified", "Read replica connection pool found saturated after a batch export job.")
+step3 = StepsItem("14:31 UTC — Mitigated", "Traffic failed over to the standby replica; error rate returned to baseline.")
+step4 = StepsItem("14:38 UTC — Resolved", "Pool limits raised and monitoring confirmed full recovery. Postmortem published 19 Mar.")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show the INC-1428 postmortem in full")
+fu2 = FollowUpItem("Break down uptime by region")
+fu3 = FollowUpItem("List all incidents from the last 90 days")

@@ -1,0 +1,65 @@
+thought
+root = Card([header, topStats, mainGrid, secondaryGrid, actionBar, contentTabs, footerActions], "card", "column", "l")
+
+header = CardHeader("StreamOps Command Center", "Real-time global monitoring")
+
+topStats = Card([viewerCount, subGains, bufferingRate], "card", "row", "m")
+viewerCount = Callout("info", "Active Viewers", "4.2M users currently streaming globally")
+subGains = Callout("success", "Subscriber Growth", "+12.4k new / -2.1k cancellations today")
+bufferingRate = Callout("warning", "Buffering Rate", "1.8% (Global avg - within threshold)")
+
+mainGrid = Card([titlesSection, watchTimeChart, genrePerformance], "card", "column", "m")
+titlesSection = SectionItem("top_titles", "Most Watched Titles", [Table([colTitle, colHours])])
+colTitle = Col("Title", ["The Last Horizon", "Neon Nights", "Space Chef", "Deep Sea"])
+colHours = Col("Hours Wat", ["142k", "98k", "85k", "42k"])
+
+watchTimeChart = SectionItem("watch_trend", "Watch Time (Past 30 Days)", [AreaChart(labels, [timeSeries], "linear", "Week", "Hours")])
+labels = ["W1", "W2", "W3", "W4", "W5"]
+timeSeries = Series("Total Hours", [450000, 520000, 490000, 610000, 580000])
+
+genrePerformance = SectionItem("genre_stats", "Performance by Genre", [HorizontalBarChart(genres, [genreData], "grouped", "", "Hours")])
+genres = ["Sci-Fi", "Comedy", "Drama", "Horror", "Documentary"]
+genreData = Series("Hours", [850, 720, 610, 450, 300])
+
+secondaryGrid = Card([regionHealth, deviceSplit, revenueSplit], "card", "row", "m")
+regionHealth = SectionItem("region_health", "Delivery Health by Region", [PieChart(regions, healthValues, "donut")])
+regions = ["NA", "EMEA", "APAC", "LATAM", "AF"]
+healthValues = [98, 94, 89, 82, 76]
+
+deviceSplit = SectionItem("device_stats", "Viewing by Device", [PieChart(devices, deviceValues, "pie")])
+devices = ["Smart TV", "Mobile", "Web", "Console"]
+deviceValues = [55, 25, 15, 5]
+
+revenueSplit = SectionItem("revenue_stats", "Revenue Split by Plan", [RadialChart(plans, revValues)])
+plans = ["Basic", "Standard", "Premium"]
+revValues = [30, 45, 25]
+
+contentTabs = Tabs([releaseTab, licenseTab, engagementTab])
+releaseTab = TabItem("releases", "New Releases Month", [ListBlock([rel1, rel2, rel3])])
+rel1 = ListItem("Shadow Protocol", "Sci-Fi Series", "Oct 12")
+rel2 = ListItem("Midnight Warrior", "Martial Arts", "Oct 15")
+rel3 = ListItem("The Great Beyond", "Documentary", "Oct 21")
+
+licenseTab = TabItem("licenses", "Expiring Soon", [ListBlock([exp1, exp2])])
+exp1 = ListItem("Action Pack Vol.", "Expiring in 12 days")
+exp2 = ListItem("Comedy Classics", "Expiring in 28 days")
+
+engagementTab = TabItem("engagement", "Engagement Metrics", [Card([recClick, searchFail], "sunk")])
+recClick = Callout("info", "Recommendation CTR", "24.5% of clicks lead to immediate playback")
+searchFail = Callout("error", "Zero-Play Searches", "1.2k searches ended with no playback (up 5% vs last week)")
+
+actionBar = Card([regionFilter, featureFlags, promoteBtn], "card", "row", "s")
+regionFilter = FormControl("Focus Region", Select("reg_sel", [rGlobal, rNA, rEMEA, rAPAC], "Global"))
+rGlobal = SelectItem("global", "Global View")
+rNA = SelectItem("na", "North America")
+rEMEA = SelectItem("emea", "Europe")
+rAPAC = SelectItem("apac", "Asia-Pacific")
+
+featureFlags = SectionItem("flags", "Feature Flags", [SwitchGroup("flags", [f1, f2, f3])])
+f1 = SwitchItem("AI-Rec-V2", "Beta testing", "v2", true)
+f2 = SwitchItem("4K-Ultra", "Global rollout", "4k", false)
+f3 = SwitchItem("New-UI-Layout", "Experimental", "ui", true)
+
+promoteBtn = Button("Promote Title", null, "primary", "large")
+
+footerActions = Buttons([Button("Refresh Data", null, "secondary"), Button("Export Report", null, "tertiary")])

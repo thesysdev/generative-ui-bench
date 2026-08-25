@@ -1,0 +1,355 @@
+root = Card([
+  header,
+  overview,
+  viewersSection,
+  watchTime,
+  subscribers,
+  performance,
+  buffering,
+  delivery,
+  releases,
+  licenses,
+  recommendations,
+  searches,
+  revenueSplit,
+  viewingSplit,
+  regionFocus,
+  featureFlags,
+  promoteTitle,
+], "clear", "column", "m")
+
+header = CardHeader("Operations Room", "Streaming Service Dashboard")
+
+overview = Card([
+  title,
+  subtitle,
+  kpis,
+  revenueSection,
+  deviceSection,
+], "sunk", "column", "m")
+
+title = Heading("Overview", "h2")
+subtitle = TextContent("Live operations for the streaming platform. All metrics reflect real-time data from the last 30 days.")
+
+kpis = Table([
+  Col("Metric", ["Viewers", "Watch Time (hrs)", "New Subscribers", "Cancellations", "Revenue", "Releases"]),
+  Col("Value", [1247, "28,420", 384, 29, "$1.2M", 12]),
+], "string")
+
+revenueSection = Card([
+  revenueHeading,
+  revenueChart,
+], "sunk", "column", "m")
+
+revenueHeading = Heading("Revenue by Plan", "h3")
+revenueChart = HorizontalBarChart(
+  ["Premium", "Standard", "Basic"],
+  [
+    Series("Revenue", [820000, 340000, 40000]),
+    Series("Growth", [5.2, 3.1, 8.7]),
+  ],
+  "grouped",
+  "Plan",
+  "Revenue ($)"
+)
+
+deviceSection = Card([
+  deviceHeading,
+  deviceChart,
+], "sunk", "column", "m")
+
+deviceHeading = Heading("Viewing Split by Device", "h3")
+deviceChart = HorizontalBarChart(
+  ["Mobile", "Desktop", "Smart TV", "Tablet"],
+  [
+    Series("Hours", [14200, 11800, 8700, 3900]),
+    Series("Share", [45, 32, 20, 3]),
+  ],
+  "grouped",
+  "Device",
+  "Hours"
+)
+
+viewersSection = Card([
+  viewersHeading,
+  viewersChart,
+  viewersStatus,
+], "sunk", "column", "m")
+
+viewersHeading = Heading("Viewers Watching Right Now", "h2")
+viewersChart = RadarChart(
+  ["Active", "Idle", "Away", "Offline"],
+  [
+    Series("Count", [1247, 432, 156, 89]),
+    Series("Trend", [3.2, -1.1, 0.8, -2.4]),
+  ],
+  "linear",
+  "Users",
+  "Count"
+)
+viewersStatus = TagBlock(
+  ["Active: 1,247", "Idle: 432", "Away: 156", "Offline: 89"]
+)
+
+watchTime = Card([
+  watchHeading,
+  watchChart,
+  watchSummary,
+], "sunk", "column", "m")
+
+watchHeading = Heading("Watch Time Over the Past Month", "h2")
+watchChart = LineChart(
+  ["Week 1", "Week 2", "Week 3", "Week 4"],
+  [
+    Series("Watch Hours", [5200, 6100, 5800, 7200]),
+    Series("Avg Hours", [210, 225, 230, 280]),
+  ],
+  "linear",
+  "Week",
+  "Hours"
+)
+watchSummary = TextContent("Total watch time: 21,300 hours. Average session: 2.5 hours. Peak hour: Saturday 10 PM.")
+
+subscribers = Card([
+  subHeading,
+  subChart,
+  subSummary,
+], "sunk", "column", "m")
+
+subHeading = Heading("New Subscribers vs Cancellations", "h2")
+subChart = BarChart(
+  ["Week 1", "Week 2", "Week 3", "Week 4"],
+  [
+    Series("New", [820, 940, 780, 1050]),
+    Series("Cancelled", [310, 290, 340, 260]),
+  ],
+  "grouped",
+  "Week",
+  "Count"
+)
+subSummary = TextContent("Net: +1,210 subscribers. Retention rate: 84%.")
+
+performance = Card([
+  perfHeading,
+  perfChart,
+  perfSummary,
+], "sunk", "column", "m")
+
+perfHeading = Heading("Performance by Genre", "h2")
+perfChart = HorizontalBarChart(
+  ["Action", "Comedy", "Drama", "Sci-Fi", "Horror", "Documentary"],
+  [
+    Series("Hours Watched", [8400, 5200, 6100, 3800, 2100, 1400]),
+    Series("Revenue Share", [28, 18, 22, 12, 9, 11]),
+  ],
+  "grouped",
+  "Genre",
+  "Hours"
+)
+perfSummary = TextContent("Action dominates with 28% of revenue. Documentary is the slowest growing genre.")
+
+buffering = Card([
+  bufHeading,
+  bufChart,
+  bufSummary,
+], "sunk", "column", "m")
+
+bufHeading = Heading("Buffering Rate", "h2")
+bufChart = LineChart(
+  ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  [
+    Series("Avg Rate %", [2.1, 1.8, 3.4, 2.7, 1.5, 1.2, 1.4]),
+    Series("Peak Rate %", [8.2, 6.5, 12.1, 9.8, 5.3, 4.1, 5.6]),
+  ],
+  "linear",
+  "Time",
+  "Rate %"
+)
+bufSummary = TextContent("Overall buffering: 2.5%. Peak was Thursday at 9.8%. 12% spike on Wednesday due to a content update.")
+
+delivery = Card([
+  delHeading,
+  delChart,
+  delSummary,
+], "sunk", "column", "m")
+
+delHeading = Heading("Delivery Health by Region", "h2")
+delChart = HorizontalBarChart(
+  ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East", "Africa"],
+  [
+    Series("Health %", [97, 94, 89, 82, 78, 71]),
+    Series("Latency (ms)", [12, 24, 45, 67, 89, 112]),
+  ],
+  "grouped",
+  "Region",
+  "Health"
+)
+delSummary = TextContent("North America leads at 97% health. Asia Pacific needs attention (89%). Latency spikes in Africa.")
+
+releases = Card([
+  relHeading,
+  relChart,
+  relSummary,
+], "sunk", "column", "m")
+
+relHeading = Heading("Releases This Month", "h2")
+relChart = HorizontalBarChart(
+  ["New Series", "Updated Series", "Remastered", "Special Events"],
+  [
+    Series("Count", [5, 3, 2, 4]),
+    Series("Expected Hours", [1200, 800, 600, 400]),
+  ],
+  "grouped",
+  "Type",
+  "Count"
+)
+relSummary = TextContent("6 new titles coming. 4 special events planned. First week is the busiest.")
+
+licenses = Card([
+  licHeading,
+  licChart,
+  licSummary,
+], "sunk", "column", "m")
+
+licHeading = Heading("Licenses Expiring Soon", "h2")
+licChart = PieChart(
+  ["Content License", "Streaming License", "API License", "Distribution License"],
+  [
+    Series("Expires", [15, 12, 8, 5]),
+  ],
+  "donut",
+  "Circular"
+)
+licSummary = TextContent("3 licenses expire in 30 days. 2 in 60 days. 1 in 90 days. Review within 2 weeks.")
+
+recommendations = Card([
+  recHeading,
+  recChart,
+  recSummary,
+], "sunk", "column", "m")
+
+recHeading = Heading("Recommendation Click Rate", "h2")
+recChart = BarChart(
+  ["Category", "Click Rate %"],
+  [
+    Series("New Users", [12.5]),
+    Series("Returning Users", [8.3]),
+    Series("Subscribers", [5.1]),
+    Series("Lapsed Users", [3.2]),
+  ],
+  "grouped",
+  "Category",
+  "Click Rate"
+)
+recSummary = TextContent("New users click 12.5% more than returning users. Lapsed users have the lowest click rate at 3.2%.")
+
+searches = Card([
+  srHeading,
+  srChart,
+  srSummary,
+], "sunk", "column", "m")
+
+srHeading = Heading("Searches Ending Without Playback", "h2")
+srChart = BarChart(
+  ["Search Term", "Clicks", "No-Playback Rate %"],
+  [
+    Series("Cinema", [820, 12]),
+    Series("Sports", [450, 18]),
+    Series("Music", [620, 24]),
+    Series("Comedy", [310, 9]),
+    Series("Documentary", [180, 5]),
+  ],
+  "grouped",
+  "Search",
+  "No-Playback Rate"
+)
+srSummary = TextContent("Cinema searches have the highest no-playback rate at 12%. Audio content has 24%. 1,480 searches failed to play.")
+
+revenueSplit = Card([
+  revHeading,
+  revChart,
+], "sunk", "column", "m")
+
+revHeading = Heading("Revenue Split by Plan", "h2")
+revChart = PieChart(
+  ["Premium", "Standard", "Basic"],
+  [
+    Series("Revenue Share", [68, 22, 10]),
+  ],
+  "donut",
+  "Circular"
+)
+
+viewingSplit = Card([
+  devHeading,
+  devChart,
+], "sunk", "column", "m")
+
+devHeading = Heading("Viewing Split by Device", "h2")
+devChart = HorizontalBarChart(
+  ["Mobile", "Desktop", "Smart TV", "Tablet"],
+  [
+    Series("Hours", [14200, 11800, 8700, 3900]),
+    Series("Share", [45, 32, 20, 3]),
+  ],
+  "grouped",
+  "Device",
+  "Hours"
+)
+
+regionFocus = Card([
+  regionHeading,
+  regionChart,
+  regionSummary,
+], "sunk", "column", "m")
+
+regionHeading = Heading("Focus on One Region", "h2")
+regionChart = HorizontalBarChart(
+  ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East", "Africa"],
+  [
+    Series("Active Viewers", [420, 280, 350, 150, 120, 80]),
+    Series("Health Score", [97, 94, 89, 82, 78, 71]),
+  ],
+  "grouped",
+  "Region",
+  "Viewers"
+)
+regionSummary = TextContent("Click a region to focus. North America has the most viewers. Europe is a strong performer.")
+
+featureFlags = Card([
+  flagHeading,
+  flagChart,
+  flagSummary,
+], "sunk", "column", "m")
+
+flagHeading = Heading("Feature Flags", "h2")
+flagChart = HorizontalBarChart(
+  ["New UI", "Live Chat", "Offline Mode", "Recommendations", "Social Sharing", "HD Stream", "Subtitle Track"],
+  [
+    Series("Enabled", [1, 1, 1, 1, 1, 1, 1]),
+    Series("State", ["On", "On", "On", "On", "On", "On", "On"]),
+  ],
+  "grouped",
+  "Feature",
+  "State"
+)
+flagSummary = TextContent("All 7 feature flags are currently enabled. Toggle any to test feature rollout.")
+
+promoteTitle = Card([
+  promoteHeading,
+  promoteAction,
+], "sunk", "column", "m")
+
+promoteHeading = Heading("Promote a Title on the Home Screen", "h2")
+promoteAction = Card([
+  promoteBtn,
+  promoteDesc,
+], "sunk", "column", "m")
+
+promoteBtn = Buttons([
+  Button("Promote to Home", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+], "row")
+
+promoteDesc = TextContent("Select a title from the list to promote it to the home screen. The title will appear on the home screen for 48 hours.")
+</

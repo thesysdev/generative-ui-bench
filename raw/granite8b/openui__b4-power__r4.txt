@@ -1,0 +1,224 @@
+```openui-lang
+root = Card(
+    [
+        loadCard,
+        capacityCard,
+        generationSplit,
+        plantDetails,
+        outagesList,
+        demandForecast,
+        priceCard,
+        maintenancePlan,
+        liveAlerts,
+        regionFocus,
+        curtailmentOrder,
+        emissionsToday,
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+loadCard = Card(
+    [
+        TextContent(
+            "Current Electricity Load: 92 GW",
+            size="large"
+        ),
+        Progress(
+            value=92,
+            label="GW",
+            max=120,
+            variant="info"
+        )
+    ],
+    "sunk"
+)
+
+capacityCard = Card(
+    [
+        TextContent(
+            "Network Capacity Utilization: 77%",
+            size="large"
+        ),
+        Progress(
+            value=77,
+            label="%",
+            max=100,
+            variant="warning"
+        )
+    ],
+    "sunk"
+)
+
+generationSplit = HorizontalBarChart(
+    labels=["Hydro", "Wind", "Solar", "Coal", "Gas", "Other"],
+    series=[
+        Series(
+            category="Generation Split",
+            values=[25, 35, 15, 20, 5, 0]
+        )
+    ],
+    variant="grouped",
+    xLabel="Source",
+    yLabel="% of Total Generation"
+)
+
+plantDetails = Card(
+    [
+        CardHeader("Plant Status"),
+        Table(
+            columns=[
+                Col("Plant", ["Plant A", "Plant B", "Plant C", "Plant D"]),
+                Col("Output (MW)", [85000, 72000, 45000, 62000]),
+                Col("Status", ["Online", "Online", "Offline", "Online"]),
+            ]
+        )
+    ],
+    "clear"
+)
+
+outagesList = Card(
+    [
+        CardHeader("Recent Outages"),
+        Table(
+            columns=[
+                Col("Region", ["Midwest", "Northeast", "South", "West"]),
+                Col("Description", ["Transmission fault", "Storm damage", "Equipment failure", "Scheduled maintenance"]),
+            ]
+        )
+    ],
+    "clear"
+)
+
+demandForecast = Card(
+    [
+        CardHeader("Demand Forecast (Next 24h)"),
+        LineChart(
+            labels=["0h", "6h", "12h", "18h", "24h"],
+            series=[
+                Series(
+                    category="Forecasted Demand (MW)",
+                    values=[95, 100, 105, 110, 108]
+                )
+            ],
+            variant="linear",
+            xLabel="Hours",
+            yLabel="MW"
+        )
+    ],
+    "clear"
+)
+
+priceCard = Card(
+    [
+        TextContent(
+            "Current Price: $45.20 per MWh",
+            size="large"
+        )
+    ],
+    "sunk"
+)
+
+maintenancePlan = Card(
+    [
+        CardHeader("Planned Maintenance (This Month)"),
+        TextContent(
+            "Planned outages: Plant B (3 days), Plant D (2 days)",
+            size="default"
+        )
+    ],
+    "clear"
+)
+
+liveAlerts = Card(
+    [
+        CardHeader("Live Alerts"),
+        Callout(
+            variant="info",
+            title="Alert 1",
+            description="High temperature warning in Southwest region."
+        ),
+        Callout(
+            variant="warning",
+            title="Alert 2",
+            description="Possible grid instability due to sudden load spike."
+        )
+    ],
+    "sunk"
+)
+
+regionFocus = Card(
+    [
+        CardHeader("Focus Region"),
+        Select(
+            name="region",
+            items=[
+                SelectItem(value="Midwest", label="Midwest"),
+                SelectItem(value="Northeast", label="Northeast"),
+                SelectItem(value="South", label="South"),
+                SelectItem(value="West", label="West")
+            ],
+            placeholder="Select Region",
+            size="medium"
+        )
+    ],
+    "clear"
+)
+
+curtailmentOrder = Card(
+    [
+        CardHeader("Order Curtailment"),
+        Form(
+            name="curtailment_form",
+            buttons=Buttons([
+                Button("Order Curtailment", action=["order", "curtailment"]),
+                Button("Cancel", variant="tertiary")
+            ], direction="row"),
+            fields=[
+                FormControl(
+                    label="Region",
+                    input=Select(
+                        name="region",
+                        items=[
+                            SelectItem(value="Midwest", label="Midwest"),
+                            SelectItem(value="Northeast", label="Northeast"),
+                            SelectItem(value="South", label="South"),
+                            SelectItem(value="West", label="West")
+                        ],
+                        placeholder="Select Region",
+                        size="medium"
+                    ),
+                    hint="Select the region to curtail"
+                ),
+                FormControl(
+                    label="Curtailment Level (MW)",
+                    input=Input(
+                        name="curtailment_mw",
+                        type="number",
+                        placeholder="Enter MW"
+                    ),
+                    hint="Enter amount of MW to curtail"
+                )
+            ]
+        )
+    ],
+    "sunk"
+)
+
+emissionsToday = Card(
+    [
+        TextContent(
+            "Emissions Today: 12,450 tCO₂e",
+            size="large"
+        ),
+        Progress(
+            value=12_450,
+            label="tCO₂e",
+            max=15_000,
+            variant="error"
+        )
+    ],
+    "sunk"
+)
+```

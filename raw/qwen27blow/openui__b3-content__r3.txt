@@ -1,0 +1,68 @@
+
+
+root = Card([header, filterRow, topRow, readershipSection, draftsSection, publishedSection, commentsSection, scheduleSection, newDraftBtn])
+
+header = CardHeader("Content Studio", "Your editorial workspace at a glance")
+
+filterRow = Card([categoryLabel, categorySelect], "clear", "row", "m", "center", "start")
+categoryLabel = TextContent("Filter by category:", "small")
+categorySelect = Select("category", [allCat, techCat, cultureCat, scienceCat, businessCat], "All categories")
+allCat = SelectItem("all", "All categories")
+techCat = SelectItem("tech", "Technology")
+cultureCat = SelectItem("culture", "Culture")
+scienceCat = SelectItem("science", "Science")
+businessCat = SelectItem("business", "Business")
+
+topRow = Card([mostReadCard, readershipSection], "clear", "row", "m")
+
+mostReadCard = Card([mostReadLabel, mostReadTitle, mostReadMeta], "card", "column", "s")
+mostReadLabel = Badge("Most Read This Month", "secondary")
+mostReadTitle = TextContent("The Quiet Revolution in Local Journalism", "large-heavy")
+mostReadMeta = TextContent("12,847 reads · 342 shares · Technology", "small")
+
+readershipSection = Card([readershipHeading, readershipChart], "sunk", "column", "s")
+readershipHeading = Heading("Readership — Last 30 Days", "h3")
+readershipChart = AreaChart(["Apr 1","Apr 3","Apr 5","Apr 7","Apr 9","Apr 11","Apr 13","Apr 15","Apr 17","Apr 19","Apr 21","Apr 23","Apr 25","Apr 27","Apr 29"], [dailyReaders], "natural", "Day", "Unique readers")
+dailyReaders = Series("Unique readers", [1820, 1940, 2100, 1780, 1650, 2230, 2410, 2380, 2520, 2690, 2450, 2310, 2780, 2940, 3120])
+
+draftsSection = Card([draftsHeading, draftsTable], "sunk", "column", "s")
+draftsHeading = Heading("Drafts", "h3")
+draftsTable = Table([draftTitleCol, draftCategoryCol, draftStatusCol, draftUpdatedCol])
+draftTitleCol = Col("Title", ["AI and the Future of Creative Work", "Why City Halls Are Losing Trust", "The New Economics of Remote Work", "A Field Guide to Urban Foraging"])
+draftCategoryCol = Col("Category", ["Technology", "Culture", "Business", "Science"])
+draftStatusCol = Col("Status", ["In review", "Writing", "Editing", "Outline"])
+draftUpdatedCol = Col("Last updated", ["2h ago", "1d ago", "3d ago", "5d ago"])
+
+publishedSection = Card([publishedHeading, publishedList], "sunk", "column", "s")
+publishedHeading = Heading("Published This Week", "h3")
+publishedList = ListBlock([pub1, pub2, pub3, pub4])
+pub1 = ListItem("The Quiet Revolution in Local Journalism", "Apr 25 · Technology · 12,847 reads")
+pub2 = ListItem("How Small Teams Ship Faster", "Apr 24 · Business · 8,210 reads")
+pub3 = ListItem("The Hidden Cost of Free Apps", "Apr 22 · Technology · 6,540 reads")
+pub4 = ListItem("Rebuilding Public Trust in Science", "Apr 21 · Science · 5,890 reads")
+
+commentsSection = Card([commentsHeading, commentsList], "sunk", "column", "s")
+commentsHeading = Heading("Comments Awaiting Reply", "h3")
+commentsList = ListBlock([cmt1, cmt2, cmt3])
+cmt1 = ListItem("Maria S. on 'AI and the Future of Creative Work'", "\"This misses the point about prompt engineering entirely…\" · 4h ago")
+cmt2 = ListItem("James T. on 'The Quiet Revolution in Local Journalism'", "\"Great piece but the funding data seems outdated…\" · 1d ago")
+cmt3 = ListItem("Priya K. on 'How Small Teams Ship Faster'", "\"We tried this at our 8-person team and it…\" · 2d ago")
+
+scheduleSection = Card([scheduleHeading, scheduleForm], "sunk", "column", "s")
+scheduleHeading = Heading("Schedule a Piece", "h3")
+scheduleForm = Form("schedule-piece", scheduleButtons, [schedTitleField, schedDateField, schedCategoryField])
+schedTitleField = FormControl("Article title", schedTitleInput)
+schedTitleInput = Input("title", "e.g. The Next Decade of Renewable Energy")
+schedDateField = FormControl("Publish date", schedDatePicker)
+schedDatePicker = DatePicker("publish_date", "single")
+schedCategoryField = FormControl("Category", schedCatSelect)
+schedCatSelect = Select("sched_category", [schedTech, schedCulture, schedScience, schedBusiness], "Choose category")
+schedTech = SelectItem("tech", "Technology")
+schedCulture = SelectItem("culture", "Culture")
+schedScience = SelectItem("science", "Science")
+schedBusiness = SelectItem("business", "Business")
+scheduleButtons = Buttons([scheduleSubmitBtn, scheduleCancelBtn])
+scheduleSubmitBtn = Button("Schedule", null, "primary")
+scheduleCancelBtn = Button("Cancel", null, "tertiary")
+
+newDraftBtn = Button("＋ Start a New Draft", null, "primary", "large")

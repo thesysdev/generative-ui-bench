@@ -1,0 +1,48 @@
+```javascript
+root = Card([
+  // 1. Today's date
+  CardHeader("Async Standup - 2026-04-05"),
+  
+  // 2. Each teammate with today's status update
+  [
+    {
+      CardHeader("Alice Chen", subtitle: "Done working on API integration"),
+      TextContent("Implementing the new authentication module. Testing with staging environment."),
+    },
+    {
+      CardHeader("Bob Martinez", subtitle: "Reviewing PR #123"),
+      TextContent("Currently reviewing pull request #456. Feedback pending from team leads."),
+    },
+    {
+      CardHeader("Carol Davis", subtitle: "Blocked on database migration"),
+      TextContent("Waiting on schema approval from DBA team. Cannot proceed until resolved."),
+    },
+    {
+      CardHeader("David Kim", subtitle: "Wrapping up sprint tasks"),
+      TextContent("Finishing up backend refactoring. Ready for quality assurance."),
+    },
+  ],
+  
+  // 2. Anyone blocked called out
+  Card([
+    CardHeader("🚧 Blocked:", subtitle: "Team members experiencing issues"),
+    "Carol Davis - Database migration pending",
+    "Ethan Wilson - Awaiting design review",
+  ]),
+  
+  // 4. Way to post your own update
+  Form(
+    name: "my-standup-update",
+    buttons: [
+      Button("Post Update", null, "primary"),
+      Button("Skip", null, "secondary"),
+    ],
+    fields: [
+      FormControl("update-text", Input("update", "What's your update?", "text"))
+    ]
+  ),
+  
+  // 5. How many updates are still missing
+  TextContent("Missing updates: 1", size: "small"),
+]),
+```

@@ -1,0 +1,63 @@
+root = Card([header, healthSummary, quarterCard, activeTable, overdueMilestones, budgetChart, teamUtilTable, riskTable, upcomingDeadlines, deliveryPace, blockedWork, peopleForm, exportBtn, archiveDialog], "card", "column", "l")
+
+header = CardHeader("Portfolio Review — Q3 2024", "PMO active portfolio and actions")
+healthSummary = TextCallout("warning", "Portfolio health: 3 at risk, 2 overdue, 1 blocked — review required.", "Portfolio Health")
+quarterCard = Card([quarterLabel, quarterSelect, switchBtn], "clear", "row", "m")
+quarterLabel = TextContent("View quarter:", "small")
+quarterSelect = Select("quarter", [q3Opt, q4Opt], "Q3 2024")
+q3Opt = SelectItem("q3", "Q3 2024")
+q4Opt = SelectItem("q4", "Q4 2024")
+switchBtn = Button("Switch Quarter")
+
+activeTable = Table([projCol, ownerCol, deadlineCol, healthCol])
+projCol = Col("Project", ["Alpha", "Beta", "Gamma", "Delta"])
+ownerCol = Col("Owner", ["J. Doe", "A. Smith", "M. Lee", "R. Park"])
+deadlineCol = Col("Deadline", ["Aug 15", "Sep 2", "Aug 30", "Sep 10"])
+healthCol = Col("Health", ["Good", "At Risk", "Good", "Critical"])
+
+overdueMilestones = ListBlock([m1, m2, m3])
+m1 = ListItem("Alpha — Phase 2 gate", "Due Aug 10 (3 days overdue)")
+m2 = ListItem("Beta — Vendor contract", "Due Aug 05 (8 days overdue)")
+m3 = ListItem("Gamma — Design freeze", "Due Aug 12 (1 day overdue)")
+
+budgetChart = BarChart(budgetLabels, [spentSeries, allocSeries], "grouped", "Project", "% of Budget")
+budgetLabels = ["Alpha", "Beta", "Gamma", "Delta"]
+spentSeries = Series("Spent %", [72, 95, 68, 110])
+allocSeries = Series("Allocated %", [100, 100, 100, 100])
+
+teamUtilTable = Table([projCol2, utilCol])
+projCol2 = Col("Project", ["Alpha", "Beta", "Gamma", "Delta"])
+utilCol = Col("Utilization %", ["85%", "92%", "78%", "110%"])
+
+riskTable = Table([riskCol, sevCol])
+riskCol = Col("Risk", ["Vendor delay", "Scope creep", "Key hire", "Tech debt"])
+sevCol = Col("Severity", ["High", "Medium", "Medium", "Critical"])
+
+upcomingDeadlines = ListBlock([d1, d2, d3, d4])
+d1 = ListItem("Beta — Milestone review", "Aug 20")
+d2 = ListItem("Delta — UAT start", "Aug 22")
+d3 = ListItem("Alpha — Launch prep", "Aug 25")
+d4 = ListItem("Gamma — Integration", "Aug 28")
+
+deliveryPace = LineChart(paceLabels, [paceSeries], "linear", "Sprint", "Stories")
+paceLabels = ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"]
+paceSeries = Series("Stories delivered", [42, 38, 55, 48, 62, 58])
+
+blockedWork = ListBlock([b1, b2])
+b1 = ListItem("Beta — API integration", "Blocked by vendor response")
+b2 = ListItem("Delta — Security review", "Blocked by compliance sign-off")
+
+peopleForm = Form("request-people", peopleButtons, [projectField, peopleField])
+projectField = FormControl("Project", projectSelect)
+projectSelect = Select("project", [alphaOpt, betaOpt, gammaOpt, deltaOpt], "Select")
+alphaOpt = SelectItem("alpha", "Alpha")
+betaOpt = SelectItem("beta", "Beta")
+gammaOpt = SelectItem("gamma", "Gamma")
+deltaOpt = SelectItem("delta", "Delta")
+peopleField = FormControl("People needed", peopleInput)
+peopleInput = Input("people", "2")
+peopleButtons = Buttons([submitPeopleBtn])
+submitPeopleBtn = Button("Request staff")
+
+exportBtn = Button("Export Review")
+archiveDialog = AlertDialogBlock("Archive finished project", "Archive Project", "Confirm archiving Delta? This removes it from active portfolio.", "Archive", "Cancel", "destructive")

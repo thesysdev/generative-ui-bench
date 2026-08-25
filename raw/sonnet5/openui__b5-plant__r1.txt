@@ -1,0 +1,98 @@
+root = Card([header, andonSection, mainTabs, exportSection])
+
+header = CardHeader("Factory Floor Console", "Live production status — Assembly Plant, Day Shift")
+
+andonSection = Card([andonHeading, andon1, andon2, andon3], "sunk")
+andonHeading = Heading("Live Andon Alerts", "h3")
+andon1 = Callout("error", "Line 2 – Station 4", "Torque sensor fault, line stopped 6 min ago")
+andon2 = Callout("warning", "Line 5", "Running below target rate at 78% of standard")
+andon3 = Callout("success", "Line 1", "Resolved: conveyor jam cleared, back to full rate")
+
+mainTabs = Tabs([overviewTab, productionTab, inventoryTab, qualityTab, maintenanceTab])
+
+overviewTab = TabItem("overview", "Overview", [oeeSection, unitsSection, shiftChart, energyChart])
+oeeSection = Card([oeeHeading, oeeChart, oeeBreakdown], "sunk")
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeChart = RadialChart(["OEE"], [78])
+oeeBreakdown = TagBlock(["Availability 91%", "Performance 88%", "Quality 97%"])
+
+unitsSection = Card([unitsHeading, unitsProgress, unitsCallout], "sunk")
+unitsHeading = Heading("Units Produced vs Target", "h3")
+unitsProgress = Progress(84, "8,420 of 10,000 units produced today")
+unitsCallout = TextCallout("info", "On pace", "Projected to reach 96% of daily target by end of shift")
+
+shiftChart = BarChart(["Shift A", "Shift B", "Shift C"], [shiftSeries], "grouped", "Shift", "Units Produced")
+shiftSeries = Series("Units Produced", [3200, 2950, 2270])
+
+energyChart = AreaChart(["6am", "9am", "12pm", "3pm", "6pm", "9pm"], [energySeries], "natural", "Time", "kWh")
+energySeries = Series("Energy Use", [120, 210, 340, 380, 300, 150])
+
+productionTab = TabItem("production", "Production Lines", [linesTable, focusForm])
+linesTable = Table([lineCol, rateCol, statusCol])
+lineCol = Col("Line", ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5"])
+rateCol = Col("Rate (units/hr)", [420, 0, 385, 410, 310])
+statusCol = Col("Status", ["Running", "Stopped", "Running", "Running", "Degraded"])
+
+focusForm = Form("focus_line", focusButtons, [focusField])
+focusField = FormControl("Select a line to focus on", focusSelect)
+focusSelect = Select("line", [l1, l2, l3, l4, l5], "Choose a line")
+l1 = SelectItem("line1", "Line 1")
+l2 = SelectItem("line2", "Line 2")
+l3 = SelectItem("line3", "Line 3")
+l4 = SelectItem("line4", "Line 4")
+l5 = SelectItem("line5", "Line 5")
+focusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus on line", null, "primary")
+
+inventoryTab = TabItem("inventory", "Inventory & Supply", [stockChart, deliveriesTable])
+stockChart = HorizontalBarChart(["Steel", "Resin", "Packaging"], [stockSeries], "grouped", "Stock Level", "Material")
+stockSeries = Series("Stock Level (tons/units)", [340, 128, 6200])
+
+deliveriesTable = Table([supplierCol, materialCol, dateCol, statusDelCol])
+supplierCol = Col("Supplier", ["Acme Steel", "Poly Resin Co", "BoxPack Ltd", "Acme Steel"])
+materialCol = Col("Material", ["Steel", "Resin", "Packaging", "Steel"])
+dateCol = Col("Due Date", ["Mon", "Wed", "Wed", "Fri"])
+statusDelCol = Col("Status", ["Confirmed", "Confirmed", "Pending", "Confirmed"])
+
+qualityTab = TabItem("quality", "Quality & Safety", [defectChart, downtimeChart, holdTable, safetySection])
+defectChart = LineChart(["Wk1", "Wk2", "Wk3", "Wk4"], [defectSeries], "natural", "Week", "Defect Rate %")
+defectSeries = Series("Defect Rate", [2.1, 1.8, 2.6, 1.9])
+
+downtimeChart = PieChart(["Mechanical", "Electrical", "Changeover", "Material Shortage", "Operator"], [40, 25, 15, 12, 8], "donut")
+
+holdTable = Table([batchCol, reasonCol, qtyCol])
+batchCol = Col("Batch", ["B-1042", "B-1055", "B-1061"])
+reasonCol = Col("Hold Reason", ["Dimension out of spec", "Pending lab test", "Surface defect"])
+qtyCol = Col("Qty (units)", [850, 1200, 430])
+
+safetySection = Card([safetyHeading, safetyIncidents, safetyDays], "sunk")
+safetyHeading = Heading("Safety Record", "h3")
+safetyIncidents = TextCallout("warning", "Incidents this year", "3 recorded incidents")
+safetyDays = TextCallout("success", "Days since last incident", "47 days")
+
+maintenanceTab = TabItem("maintenance", "Maintenance & Work Orders", [maintenanceTable, workOrdersTable, scheduleForm])
+maintenanceTable = Table([machineCol, dueDateColMaint, priorityMaintCol])
+machineCol = Col("Machine", ["CNC-03", "Press-07", "Conveyor-2", "Robot-Arm-5"])
+dueDateColMaint = Col("Due Date", ["Tomorrow", "In 3 days", "In 5 days", "Overdue"])
+priorityMaintCol = Col("Priority", ["High", "Medium", "Medium", "High"])
+
+workOrdersTable = Table([woIdCol, descCol, priorityCol])
+woIdCol = Col("Work Order", ["WO-2291", "WO-2293", "WO-2297", "WO-2301"])
+descCol = Col("Description", ["Replace hydraulic seal", "Calibrate sensor", "Lubricate bearings", "Fix conveyor belt"])
+priorityCol = Col("Priority", ["High", "Low", "Medium", "Critical"])
+
+scheduleForm = Form("schedule_maintenance", scheduleButtons, [scheduleMachineField, scheduleDateField])
+scheduleMachineField = FormControl("Machine", scheduleMachineSelect)
+scheduleMachineSelect = Select("machine", [m1, m2, m3, m4], "Select machine")
+m1 = SelectItem("cnc03", "CNC-03")
+m2 = SelectItem("press07", "Press-07")
+m3 = SelectItem("conveyor2", "Conveyor-2")
+m4 = SelectItem("robotarm5", "Robot-Arm-5")
+scheduleDateField = FormControl("Maintenance Date", scheduleDatePicker)
+scheduleDatePicker = DatePicker("maintenance_date", "single")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule maintenance", null, "primary")
+
+exportSection = Card([exportButtons], "sunk")
+exportButtons = Buttons([exportBtn])
+exportBtn = Button("Export shift report", null, "secondary")

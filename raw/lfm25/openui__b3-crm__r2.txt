@@ -1,0 +1,62 @@
+```openui-lang
+const accountName = "Acme Corp"
+const owner = "John Smith"
+const totalDealValue = "$128,500"
+const dealStage = "Closed - Won"
+const recentActivities = [
+  { title: "Contract signed", subtitle: "March 15, 2026", actionLabel: "View" },
+  { title: "Proposal approved", subtitle: "February 28, 2026", actionLabel: "View" },
+  { title: "Payment received", subtitle: "January 20, 2026", actionLabel: "View" }
+]
+const contacts = [
+  { title: "Sarah Lee", subtitle: "Account Manager", role: "account_manager" },
+  { title: "Mike Chen", subtitle: "Client Contact", role: "client" },
+  { title: "Priya Patel", subtitle: "Legal Counsel", role: "legal" }
+]
+const followUps = [
+  { title: "Confirm Q1 contract", subtitle: "Due March 1, 2026", dueDate: "2026-03-01" },
+  { title: "Schedule demo", subtitle: "Due February 15, 2026", dueDate: "2026-02-15" }
+]
+const noteInput = "Add notes here..."
+const logCallButton = "Log Call"
+
+root = Card({
+  children: [
+    // 1. Account name and owner
+    CardHeader(accountName, owner),
+    
+    // 2. Total deal value
+    TextContent(totalDealValue, "large"),
+    
+    // 3. Current deal stage
+    TextContent(dealStage, "large"),
+    
+    // 4. Recent activity in order
+    ListBlock(recentActivities),
+    
+    // 5. Contacts with role
+    ListBlock(contacts),
+    
+    // 6. Open follow-ups with due dates
+    ListBlock(followUps),
+    
+    // 7. Way to jot a note
+    TextContent(noteInput, "small"),
+    Button("New Note", null, "primary"),
+    Label("Note saved"),
+    
+    // 8. Renewal date with warning
+    Alert({
+      title: "Renewal Date",
+      description: "December 31, 2026 - Please review and act before expiration",
+      variant: "warning"
+    }),
+    
+    // 9. Way to log a call
+    Button(logCallButton, null, "secondary")
+  ],
+  variant: "card",
+  direction: "column",
+  gap: "xl"
+})
+```

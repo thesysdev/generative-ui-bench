@@ -1,0 +1,65 @@
+root = Card([header, topRow, blockedAlert, updatesHeading, updates, missingCallout, progress, separator, postHeading, postForm, followUps])
+
+header = CardHeader("Async Standup — Thursday, June 12, 2025", "Distributed team · replies due 11:00 UTC")
+
+topRow = Card([dateTag, postedTag, missingTag, blockedTag], "sunk", "row", "s", "center", "start", true)
+dateTag = Tag("Thu, Jun 12, 2025", null, "md", "info")
+postedTag = Tag("5 of 8 posted", null, "md", "success")
+missingTag = Tag("3 updates missing", null, "md", "warning")
+blockedTag = Tag("2 blocked", null, "md", "danger")
+
+blockedAlert = Alert("2 teammates are blocked", "Priya Raman is waiting on staging DB credentials (owner: Marcus). Diego Alvarez is blocked on the design handoff for the billing modal (owner: Aisha).", "destructive")
+
+updatesHeading = Heading("Today's updates", "h3")
+
+updates = ListBlock([u1, u2, u3, u4, u5], "image")
+u1 = ListItem("Priya Raman — BLOCKED · Backend", "Yesterday: finished the invoice retry worker. Today: cannot deploy to staging, waiting on new DB credentials from Marcus. Blocked ~14h.", ["https://i.pravatar.cc/128?img=47"], "Nudge Marcus")
+u2 = ListItem("Marcus Lee — On track · Platform", "Yesterday: rotated secrets across all environments. Today: issuing staging DB credentials to Priya, then finishing the CI cache rework.", ["https://i.pravatar.cc/128?img=12"], "Reply")
+u3 = ListItem("Diego Alvarez — BLOCKED · Frontend", "Yesterday: shipped the pricing page refactor. Today: billing modal is stalled until design handoff lands from Aisha. Picking up test cleanup meanwhile.", ["https://i.pravatar.cc/128?img=33"], "Reply")
+u4 = ListItem("Aisha Ndiaye — On track · Design", "Yesterday: iterated on billing modal states. Today: exporting the final handoff for Diego before 13:00 UTC, then onboarding flow review.", ["https://i.pravatar.cc/128?img=45"], "Reply")
+u5 = ListItem("Tomas Berg — On track · QA", "Yesterday: closed 11 regression tickets. Today: writing smoke tests for the invoice retry worker, pending Priya's staging deploy.", ["https://i.pravatar.cc/128?img=15"], "Reply")
+
+missingCallout = TextCallout("warning", "3 updates still missing", "No update yet from Lena Fischer (Data), Kwame Osei (Mobile) and Sofia Rossi (Docs). Reminder auto-sends at 11:00 UTC.")
+
+progress = Progress(63, "Standup completion — 5 of 8 posted")
+
+separator = Separator("horizontal", true)
+
+postHeading = Heading("Post your update", "h3")
+
+postForm = Form("standup-update", formButtons, [whoField, statusField, yesterdayField, todayField, blockerField, availabilityField])
+
+whoField = FormControl("Who are you posting as?", whoSelect)
+whoSelect = Select("teammate", [wLena, wKwame, wSofia, wOther], "Select your name")
+wLena = SelectItem("lena", "Lena Fischer — Data")
+wKwame = SelectItem("kwame", "Kwame Osei — Mobile")
+wSofia = SelectItem("sofia", "Sofia Rossi — Docs")
+wOther = SelectItem("other", "Someone else")
+
+statusField = FormControl("Status", statusRadio)
+statusRadio = RadioGroup("status", [sOnTrack, sAtRisk, sBlocked], "on_track")
+sOnTrack = RadioItem("On track", "Making expected progress today", "on_track")
+sAtRisk = RadioItem("At risk", "Progressing, but the date may slip", "at_risk")
+sBlocked = RadioItem("Blocked", "Cannot move forward without help", "blocked")
+
+yesterdayField = FormControl("What did you do yesterday?", yesterdayInput)
+yesterdayInput = TextArea("yesterday", "Shipped, reviewed, closed…", 3)
+
+todayField = FormControl("What will you do today?", todayInput)
+todayInput = TextArea("today", "Your focus for the next 8 hours", 3)
+
+blockerField = FormControl("Blockers", blockerInput, "Name the person or thing you need. Leave blank if none.")
+blockerInput = Input("blockers", "e.g. waiting on staging DB credentials from Marcus")
+
+availabilityField = FormControl("Hours available today", hoursSlider)
+hoursSlider = Slider("hours", "discrete", 0, 10, 1, [8], "Focus hours")
+
+formButtons = Buttons([submitBtn, draftBtn, skipBtn])
+submitBtn = Button("Post update", null, "primary")
+draftBtn = Button("Save draft", null, "secondary")
+skipBtn = Button("I'm out today", null, "tertiary")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Remind the 3 teammates who haven't posted")
+f2 = FollowUpItem("Summarize both blockers for the team lead")
+f3 = FollowUpItem("Show yesterday's standup for comparison")

@@ -1,0 +1,857 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Viewers watching right now
+    CardHeader(
+      title: "Live Viewers",
+      subtitle: "Current streaming activity"
+    ),
+    ViewerCounter(
+      count: 12450,
+      unit: "viewers"
+    ),
+    
+    // 2. Most-watched titles with hours
+    Divider(),
+    CardTitle("Most-Watched Titles"),
+    MostWatchedList(),
+    
+    // 3. Watch time over past month
+    Divider(),
+    CardTitle("Watch Time - Last 30 Days"),
+    MonthlyWatchChart(),
+    
+    // 4. New subscribers vs cancellations
+    Divider(),
+    CardTitle("Subscriber Metrics"),
+    SubscriberComparisonChart(),
+    
+    // 5. Performance by genre
+    Divider(),
+    CardTitle("Genre Performance"),
+    GenrePerformanceChart(),
+    
+    // 6. Buffering rate
+    Divider(),
+    CardTitle("Buffering Rate"),
+    BufferingIndicator(),
+    
+    // 7. Delivery health by region
+    Divider(),
+    CardTitle("Delivery Health by Region"),
+    RegionHealthMap(),
+    
+    // 8. Releases coming this month
+    Divider(),
+    CardTitle("Coming This Month"),
+    UpcomingReleasesList(),
+    
+    // 9. Licenses expiring soon
+    Divider(),
+    CardTitle("Licenses Expiring Soon"),
+    LicenseExpirationList(),
+    
+    // 10. Recommendations click frequency
+    Divider(),
+    CardTitle("Recommendation Engagement"),
+    RecommendationClickChart(),
+    
+    // 11. Searches that ended without playback
+    Divider(),
+    CardTitle("Failed Searches"),
+    SearchFailureList(),
+    
+    // 12. Revenue split by plan
+    Divider(),
+    CardTitle("Revenue by Plan"),
+    RevenueSplitChart(),
+    
+    // 13. Viewing split by device
+    Divider(),
+    CardTitle("Viewing by Device"),
+    DeviceViewingDonut(),
+    
+    // 14. Region filter
+    Divider(),
+    CardTitle("Filter by Region"),
+    RegionFilterDropdown(),
+    
+    // 15. Feature flags with state
+    Divider(),
+    CardTitle("Feature Flags"),
+    FeatureFlagsGrid(),
+    
+    // 16. Promote a title on home screen
+    Divider(),
+    CardTitle("Promote Top Title"),
+    PromoteButton(),
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```
+
+Now let me define all the required sub-components. I need to ensure every variable is defined and referenced properly.
+
+```openui-lang
+// 1. Viewers watching right now - already defined as ViewerCounter
+ViewerCounter = Card([
+  TextContent("Live Viewers", size: "large"),
+  Number("12,450", size: "large")
+])
+
+// 2. Most-watched titles with hours
+MostWatchedList = [
+  Card[
+    CardHeader(
+      title: "Top 5 Most Watched",
+      subtype: "card"
+    ),
+    ListItems(
+      [
+        {
+          title: "Stranger Things Season 5",
+          value: "45 hours",
+          trend: "up 18% w/w"
+        },
+        {
+          title: "The Last Kingdom",
+          value: "38 hours",
+          trend: "stable"
+        },
+        {
+          title: "Black Mirror: Bandersnatch",
+          value: "32 hours",
+          trend: "down 5% w/w"
+        },
+        {
+          title: "Sunday Morning",
+          value: "28 hours",
+          trend: "up 12% w/w"
+        },
+        {
+          title: "Cosmos: A Spacetime Odyssey",
+          value: "25 hours",
+          trend: "up 22% w/w"
+        }
+      ]
+    )
+  ]
+]
+
+// 3. Watch time over past month - LineChart
+MonthlyWatchChart = HorizontalBarChart(
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  series: [
+    Series("Total Watch Time (hrs)", [14200, 15800, 17100, 18900, 20500, 22300, 24500, 27100, 29800, 26500, 23800, 21500])
+  ],
+  xLabel: "Month",
+  yLabel: "Hours Watched",
+  variant: "grouped"
+)
+
+// 4. New subscribers vs cancellations - BarChart comparison
+SubscriberComparisonChart = BarChart(
+  labels: ["New Subscribers", "Cancellations"],
+  series: [
+    Series("New Subscriptions", [850, 200]),
+    Series("Cancellations", [150, 320])
+  ],
+  xLabel: "Category",
+  yLabel: "Count",
+  variant: "grouped"
+)
+
+// 5. Performance by genre - RadarChart
+GenrePerformanceChart = RadarChart(
+  labels: ["Action", "Drama", "Comedy", "Documentary", "Thriller"],
+  series: [
+    Series("Viewership Hours", [4200, 3800, 2900, 2100, 1600]),
+    Series("Engagement Rate", [75, 68, 82, 65, 58])
+  ],
+  xLabel: "Genres",
+  yLabel: "Metrics",
+  variant: "spider"
+)
+
+// 6. Buffering rate - Gauge-like indicator
+BufferingIndicator = Progress(
+  value: 3.2,
+  label: "3.2%",
+  threshold: "2.5-5.0"
+)
+
+// 7. Delivery health by region - Map visualization (using Grid)
+RegionHealthMap = [
+  Image(
+    alt: "Regional delivery health",
+    src: "https://picsum.photos/seed/region-map/600/400",
+    style: { borderRadius: "8px", margin: "12px" }
+  ),
+  TextContent("Global delivery performance varies by region.", size: "large")
+]
+
+// 8. Releases coming this month - ListBlock
+UpcomingReleasesList = ListBlock(
+  items: [
+    {
+      title: "New Comedy Series - Spring 2026",
+      date: "2026-04-15",
+      duration: "8 episodes",
+      status: "release"
+    },
+    {
+      title: "Horror Anthology",
+      date: "2026-04-20",
+      duration: "6 episodes",
+      status: "release"
+    },
+    {
+      title: "Science Fiction Miniseries",
+      date: "2026-04-22",
+      duration: "10 episodes",
+      status: "release"
+    }
+  ]
+)
+
+// 9. Licenses expiring soon - Table
+LicenseExpirationList = Table(
+  columns: [
+    { label: "License ID", type: "string" },
+    { label: "Title", type: "string" },
+    { label: "Expires", type: "string" },
+    { label: "Status", type: "string" }
+  ],
+  rows: [
+    { title: "L-2026-001", value: "Star Wars Expansion", expires: "2026-03-01", status: "expiring" },
+    { title: "L-2026-042", value: "Docu Series Archive", expires: "2026-02-15", status: "expiring" },
+    { title: "L-2026-089", value: "Originals Vault", expires: "2026-01-30", status: "expiring" }
+  ]
+)
+
+// 10. Recommendations click frequency - PieChart
+RecommendationClickChart = PieChart(
+  labels: ["Home", "Search", "Browsing"],
+  series: [
+    Series("Home Page Clicks", [35, 40]),
+    Series("Search Engine", [25, 15]),
+    Series("Browse Flow", [30, 10])
+  ],
+  xLabel: "Platform",
+  yLabel: "Click Count"
+)
+
+// 11. Searches that ended without playback - ListBlock
+SearchFailureList = ListBlock(
+  items: [
+    {
+      title: "Weather forecast search",
+      reason: "No relevant matches found",
+      action: "continue searching"
+    },
+    {
+      title: "Anime recommendations",
+      reason: "Popular but currently offline",
+      action: "try similar topics"
+    },
+    {
+      title: "Sports highlights 2026",
+      reason: "Archive unavailable",
+      action: "check alternative sources"
+    }
+  ]
+)
+
+// 12. Revenue split by plan - PieChart
+RevenueSplitChart = PieChart(
+  labels: ["Premium", "Standard", "Free"],
+  series: [
+    Series("Premium Revenue", [55, 0, 0]),
+    Series("Standard Revenue", [30, 0, 0]),
+    Series("Free Revenue", [15, 0, 0])
+  ],
+  xLabel: "Plan Type",
+  yLabel: "Revenue Share",
+  variant: "donut"
+)
+
+// 13. Viewing split by device - Donut chart
+DeviceViewingDonut = DonutChart(
+  labels: ["Mobile", "Desktop", "Tablet"],
+  series: [
+    Series("Mobile", [45, 0, 0]),
+    Series("Desktop", [35, 0, 0]),
+    Series("Tablet", [20, 0, 0])
+  ]
+)
+
+// 14. Region filter - Dropdown
+RegionFilterDropdown = Select(
+  items: [
+    { value: "global", label: "All Regions" },
+    { value: "us", label: "United States" },
+    { value: "eu", label: "Europe" },
+    { value: "apac", label: "Asia-Pacific" },
+    { value: "latam", label: "Latin America" }
+  ],
+  value: "global",
+  placeholder: "Select region"
+)
+
+// 15. Feature flags with state - Toggles
+FeatureFlagsGrid = [
+  {
+    id: "auto-sync",
+    name: "Auto-Sync Preferences",
+    value: "enabled",
+    icon: "settings"
+  },
+  {
+    id: "dark-mode",
+    name: "Dark Mode Enabled",
+    value: "disabled",
+    icon: "moon"
+  },
+  {
+    id: "offline-mode",
+    name: "Offline Content Access",
+    value: "disabled",
+    icon: "download"
+  },
+  {
+    id: "personalized-rec" ,
+    name: "Personalized Recommendations",
+    value: "enabled",
+    icon: "person"
+  },
+  {
+    id: "ad-blocking",
+    name: "Advertisements Enabled",
+    value: "disabled",
+    icon: "banner"
+  }
+]
+FeatureFlags = Array(
+  item => (
+    <ToggleFlag
+      key={item.id}
+      name={item.name}
+      value={item.value}
+      onChange={() => updateFeatureFlag(item.id)}>
+    </ToggleFlag>
+  )
+)
+
+// 16. Promote a title on home screen - Button
+PromoteButton = Button(
+  label: "Promote 'Stranger Things S5' to Home",
+  action: "promote_title",
+  variant: "primary",
+  size: "large"
+)
+```
+
+Wait, I need to make sure all components are properly defined and referenced. Let me review the structure and fix any issues. The issue is that some components like `Number`, `TextContent`, `CardHeader`, etc. are built-in components that don't need to be defined separately - they're part of the OpenUI language. But I'm creating custom arrays/lists for things like `ViewerCounter`, `MostWatchedList`, etc. 
+
+Actually looking at the syntax rules again, I see that components can be:
+- Simple types: strings, numbers, booleans, null, arrays, objects
+- Component calls: `TypeName(arg1, arg2, ...)`
+
+For UI components like `Card`, `CardHeader`, `TextContent`, `Number`, `Button`, etc., these are the actual UI elements. But when I put them in an array (like `[ViewerCounter]`), that's fine because the element itself is created.
+
+However, I notice some potential issues:
+1. Some components might need to be explicitly instantiated with proper parameters
+2. The `FeatureFlags` array contains objects that should map to some UI representation
+
+Let me refine the code to ensure all variables are properly defined and the structure is correct. I'll also make sure every referenced variable is actually defined somewhere in the file.
+
+Looking at the requirements again, I need to cover all 16 items. Let me verify my implementation covers everything:
+
+1. ✅ Viewers watching right now - `ViewerCounter`
+2. ✅ Most-watched titles with hours - `MostWatchedList` with `MostWatchedChart`
+3. ✅ Watch time over past month - `MonthlyWatchChart`
+4. ✅ New subscribers vs cancellations - `SubscriberComparisonChart`
+5. ✅ Performance by genre - `GenrePerformanceChart`
+6. ✅ Buffering rate - `BufferingIndicator`
+7. ✅ Delivery health by region - `RegionHealthMap`
+8. ✅ Releases coming this month - `UpcomingReleasesList`
+9. ✅ Licenses expiring soon - `LicenseExpirationList`
+10. ✅ Recommendations click frequency - `RecommendationClickChart`
+11. ✅ Searches that ended without playback - `SearchFailureList`
+12. ✅ Revenue split by plan - `RevenueSplitChart`
+13. ✅ Viewing split by device - `DeviceViewingDonut`
+14. ✅ Filter by region - `RegionFilterDropdown`
+15. ✅ Feature flags - `FeatureFlags` (array of flag objects)
+16. ✅ Promote title - `PromoteButton`
+
+All items are covered. Now let me clean up the code and ensure proper formatting. I need to make sure:
+- The root is always the first line
+- All variables are defined before being used
+- No unreferenced variables
+
+One thing to note: `Number("12,450", size: "large")` - wait, can I mix TypeScript-style numbers with commas? The spec says numbers should be numeric values. But in OpenUI-lang examples, they show `Number("12,400")` which suggests strings with commas are allowed for display purposes. However, strictly speaking, the type says "numbers". Let me use plain integers for safety, or keep the comma-separated format if that's what the examples show.
+
+Actually, looking at the examples more carefully:
+- `Color("#ff0000")` - hex color
+- `"Hello world"` - strings with quotes
+- `123` - numbers without quotes
+
+The `Number()` function seems to be a wrapper that converts input to a number. So `Number("12,450")` would return 12450. But in the example, they use `Number("12,400")` which implies it handles the comma.
+
+To be safe and consistent with the spec which says numbers are typed as such, I'll use plain integer values for counts and keep the comma notation only in display contexts where appropriate.
+
+Also, I realize I should be more careful about nested structures. For instance, `FeatureFlags` is supposed to be a grid of feature flags. In OpenUI, a grid-like component could be represented as a list of items. But the specification shows `Accordion` and `Tabs` for grouped content. For simple grid/list of features, a `ListBlock` or simple array works.
+
+Let me finalize the code with all corrections:
+
+```openui-lang
+root = Card(
+  children: [
+    // 1. Viewers watching right now
+    CardHeader(
+      title: "Live Viewers",
+      subtitle: "Current streaming activity"
+    ),
+    ViewerCounter(
+      count: 12450,
+      unit: "viewers"
+    ),
+
+    // 2. Most-watched titles with hours
+    Divider(),
+    CardTitle("Most-Watched Titles"),
+    MostWatchedList(),
+
+    // 3. Watch time over past month
+    Divider(),
+    CardTitle("Watch Time - Last 30 Days"),
+    MonthlyWatchChart(),
+
+    // 4. New subscribers vs cancellations
+    Divider(),
+    CardTitle("Subscriber Metrics"),
+    SubscriberComparisonChart(),
+
+    // 5. Performance by genre
+    Divider(),
+    CardTitle("Genre Performance"),
+    GenrePerformanceChart(),
+
+    // 6. Buffering rate
+    Divider(),
+    CardTitle("Buffering Rate"),
+    BufferingIndicator(),
+
+    // 7. Delivery health by region
+    Divider(),
+    CardTitle("Delivery Health by Region"),
+    RegionHealthMap(),
+
+    // 8. Releases coming this month
+    Divider(),
+    CardTitle("Coming This Month"),
+    UpcomingReleasesList(),
+
+    // 9. Licenses expiring soon
+    Divider(),
+    CardTitle("Licenses Expiring Soon"),
+    LicenseExpirationList(),
+
+    // 10. Recommendations click frequency
+    Divider(),
+    CardTitle("Recommendation Engagement"),
+    RecommendationClickChart(),
+
+    // 11. Searches that ended without playback
+    Divider(),
+    CardTitle("Failed Searches"),
+    SearchFailureList(),
+
+    // 12. Revenue split by plan
+    Divider(),
+    CardTitle("Revenue by Plan"),
+    RevenueSplitChart(),
+
+    // 13. Viewing split by device
+    Divider(),
+    CardTitle("Viewing by Device"),
+    DeviceViewingDonut(),
+
+    // 14. Filter by region
+    Divider(),
+    CardTitle("Filter by Region"),
+    RegionFilterDropdown(),
+
+    // 15. Feature flags with state
+    Divider(),
+    CardTitle("Feature Flags"),
+    FeatureFlags,
+
+    // 16. Promote a title on home screen
+    Divider(),
+    CardTitle("Promote Top Title"),
+    PromoteButton(),
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```
+
+And the complete definition of all sub-components follows. Let me combine everything into one clean file.
+
+Actually, I need to be careful about the `FeatureFlags` component. Looking at the component signatures, there isn't a direct "FeatureFlags" component listed. But based on the spec, I can create a list of feature flag configurations and render them appropriately. The spec mentions `FeatureFlagsGrid` as something that takes items. Since there's no explicit component signature for displaying feature flags, I'll treat it as a list/array of feature flag items that can be rendered conditionally.
+
+Similarly, for `Number` usage - in the examples, they show `Number("12,400")` which suggests this is a helper function. But since we're generating the entire file, I should use the standard approach: pass a number directly or use string-based formatting where needed.
+
+Let me produce the final complete code. I'll make sure:
+1. Root is first line
+2. All components are defined before use
+3. Every variable referenced exists
+4. The structure is valid OpenUI-Lang
+
+Here's the final version:```openui-lang
+root = Card(
+  children: [
+    // 1. Viewers watching right now
+    CardHeader(
+      title: "Live Viewers",
+      subtitle: "Current streaming activity"
+    ),
+    ViewerCounter(
+      count: 12450,
+      unit: "viewers"
+    ),
+
+    // 2. Most-watched titles with hours
+    Divider(),
+    CardTitle("Most-Watched Titles"),
+    MostWatchedList(),
+
+    // 3. Watch time over past month
+    Divider(),
+    CardTitle("Watch Time - Last 30 Days"),
+    MonthlyWatchChart(),
+
+    // 4. New subscribers vs cancellations
+    Divider(),
+    CardTitle("Subscriber Metrics"),
+    SubscriberComparisonChart(),
+
+    // 5. Performance by genre
+    Divider(),
+    CardTitle("Genre Performance"),
+    GenrePerformanceChart(),
+
+    // 6. Buffering rate
+    Divider(),
+    CardTitle("Buffering Rate"),
+    BufferingIndicator(),
+
+    // 7. Delivery health by region
+    Divider(),
+    CardTitle("Delivery Health by Region"),
+    RegionHealthMap(),
+
+    // 8. Releases coming this month
+    Divider(),
+    CardTitle("Coming This Month"),
+    UpcomingReleasesList(),
+
+    // 9. Licenses expiring soon
+    Divider(),
+    CardTitle("Licenses Expiring Soon"),
+    LicenseExpirationList(),
+
+    // 10. Recommendations click frequency
+    Divider(),
+    CardTitle("Recommendation Engagement"),
+    RecommendationClickChart(),
+
+    // 11. Searches that ended without playback
+    Divider(),
+    CardTitle("Failed Searches"),
+    SearchFailureList(),
+
+    // 12. Revenue split by plan
+    Divider(),
+    CardTitle("Revenue by Plan"),
+    RevenueSplitChart(),
+
+    // 13. Viewing split by device
+    Divider(),
+    CardTitle("Viewing by Device"),
+    DeviceViewingDonut(),
+
+    // 14. Filter by region
+    Divider(),
+    CardTitle("Filter by Region"),
+    RegionFilterDropdown(),
+
+    // 15. Feature flags with state
+    Divider(),
+    CardTitle("Feature Flags"),
+    FeatureFlags,
+
+    // 16. Promote a title on home screen
+    Divider(),
+    CardTitle("Promote Top Title"),
+    PromoteButton(),
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+
+// 1. Live viewers counter
+ViewerCounter = Card([
+  TextContent("Live Viewers", size: "large"),
+  Number("12,450", size: "large")
+])
+
+// 2. Most-watched titles with hours
+MostWatchedList = [
+  Card[
+    CardHeader(
+      title: "Top 5 Most Watched",
+      subtype: "card"
+    ),
+    ListItems(
+      [
+        {
+          title: "Stranger Things Season 5",
+          value: "45 hours",
+          trend: "up 18% w/w"
+        },
+        {
+          title: "The Last Kingdom",
+          value: "38 hours",
+          trend: "stable"
+        },
+        {
+          title: "Black Mirror: Bandersnatch",
+          value: "32 hours",
+          trend: "down 5% w/w"
+        },
+        {
+          title: "Sunday Morning",
+          value: "28 hours",
+          trend: "up 12% w/w"
+        },
+        {
+          title: "Cosmos: A Spacetime Odyssey",
+          value: "25 hours",
+          trend: "up 22% w/w"
+        }
+      ]
+    )
+  ]
+]
+
+// 3. Watch time over past month (LineChart)
+MonthlyWatchChart = HorizontalBarChart(
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  series: [
+    Series("Total Watch Time (hrs)", [14200, 15800, 17100, 18900, 20500, 22300, 24500, 27100, 29800, 26500, 23800, 21500])
+  ],
+  xLabel: "Month",
+  yLabel: "Hours Watched",
+  variant: "grouped"
+)
+
+// 4. New subscribers vs cancellations (BarChart)
+SubscriberComparisonChart = BarChart(
+  labels: ["New Subscribers", "Cancellations"],
+  series: [
+    Series("New Subscriptions", [850, 200]),
+    Series("Cancellations", [150, 320])
+  ],
+  xLabel: "Category",
+  yLabel: "Count",
+  variant: "grouped"
+)
+
+// 5. Performance by genre (RadarChart)
+GenrePerformanceChart = RadarChart(
+  labels: ["Action", "Drama", "Comedy", "Documentary", "Thriller"],
+  series: [
+    Series("Viewership Hours", [4200, 3800, 2900, 2100, 1600]),
+    Series("Engagement Rate", [75, 68, 82, 65, 58])
+  ],
+  xLabel: "Genres",
+  yLabel: "Metrics",
+  variant: "spider"
+)
+
+// 6. Buffering rate (Progress indicator)
+BufferingIndicator = Progress(
+  value: 3.2,
+  label: "3.2%",
+  threshold: "2.5-5.0"
+)
+
+// 7. Delivery health by region (Visual map)
+RegionHealthMap = [
+  Image(
+    alt: "Regional delivery health overview",
+    src: "https://picsum.photos/seed/region-map/600/400",
+    style: { borderRadius: "8px", margin: "12px" }
+  ),
+  TextContent("Global delivery performance varies by region.", size: "large")
+]
+
+// 8. Releases coming this month (ListBlock)
+UpcomingReleasesList = ListBlock(
+  items: [
+    {
+      title: "New Comedy Series - Spring 2026",
+      date: "2026-04-15",
+      duration: "8 episodes",
+      status: "release"
+    },
+    {
+      title: "Horror Anthology",
+      date: "2026-04-20",
+      duration: "6 episodes",
+      status: "release"
+    },
+    {
+      title: "Science Fiction Miniseries",
+      date: "2026-04-22",
+      duration: "10 episodes",
+      status: "release"
+    }
+  ]
+)
+
+// 9. Licenses expiring soon (Table)
+LicenseExpirationList = Table(
+  columns: [
+    { label: "License ID", type: "string" },
+    { label: "Title", type: "string" },
+    { label: "Expires", type: "string" },
+    { label: "Status", type: "string" }
+  ],
+  rows: [
+    { title: "L-2026-001", value: "Star Wars Expansion", expires: "2026-03-01", status: "expiring" },
+    { title: "L-2026-042", value: "Docu Series Archive", expires: "2026-02-15", status: "expiring" },
+    { title: "L-2026-089", value: "Originals Vault", expires: "2026-01-30", status: "expiring" }
+  ]
+)
+
+// 10. Recommendations click frequency (PieChart)
+RecommendationClickChart = PieChart(
+  labels: ["Home", "Search", "Browsing"],
+  series: [
+    Series("Home Page Clicks", [35, 40]),
+    Series("Search Engine", [25, 15]),
+    Series("Browse Flow", [30, 10])
+  ],
+  xLabel: "Platform",
+  yLabel: "Click Count"
+)
+
+// 11. Searches that ended without playback (ListBlock)
+SearchFailureList = ListBlock(
+  items: [
+    {
+      title: "Weather forecast search",
+      reason: "No relevant matches found",
+      action: "continue searching"
+    },
+    {
+      title: "Anime recommendations",
+      reason: "Popular but currently offline",
+      action: "try similar topics"
+    },
+    {
+      title: "Sports highlights 2026",
+      reason: "Archive unavailable",
+      action: "check alternative sources"
+    }
+  ]
+)
+
+// 12. Revenue split by plan (PieChart)
+RevenueSplitChart = PieChart(
+  labels: ["Premium", "Standard", "Free"],
+  series: [
+    Series("Premium Revenue", [55, 0, 0]),
+    Series("Standard Revenue", [30, 0, 0]),
+    Series("Free Revenue", [15, 0, 0])
+  ],
+  xLabel: "Plan Type",
+  yLabel: "Revenue Share",
+  variant: "donut"
+)
+
+// 13. Viewing split by device (Donut chart)
+DeviceViewingDonut = DonutChart(
+  labels: ["Mobile", "Desktop", "Tablet"],
+  series: [
+    Series("Mobile", [45, 0, 0]),
+    Series("Desktop", [35, 0, 0]),
+    Series("Tablet", [20, 0, 0])
+  ]
+)
+
+// 14. Region filter (Select dropdown)
+RegionFilterDropdown = Select(
+  items: [
+    { value: "global", label: "All Regions" },
+    { value: "us", label: "United States" },
+    { value: "eu", label: "Europe" },
+    { value: "apac", label: "Asia-Pacific" },
+    { value: "latam", label: "Latin America" }
+  ],
+  value: "global",
+  placeholder: "Select region"
+)
+
+// 15. Feature flags with state
+FeatureFlags = [
+  {
+    id: "auto-sync",
+    name: "Auto-Sync Preferences",
+    value: "enabled",
+    icon: "settings"
+  },
+  {
+    id: "dark-mode",
+    name: "Dark Mode Enabled",
+    value: "disabled",
+    icon: "moon"
+  },
+  {
+    id: "offline-mode",
+    name: "Offline Content Access",
+    value: "disabled",
+    icon: "download"
+  },
+  {
+    id: "personalized-rec",
+    name: "Personalized Recommendations",
+    value: "enabled",
+    icon: "person"
+  },
+  {
+    id: "ad-blocking",
+    name: "Advertisements Enabled",
+    value: "disabled",
+    icon: "banner"
+  }
+]
+
+// 16. Promote a title on home screen
+PromoteButton = Button(
+  label: "Promote 'Stranger Things S5' to Home",
+  action: "promote_title",
+  variant: "primary",
+  size: "large"
+)
+```

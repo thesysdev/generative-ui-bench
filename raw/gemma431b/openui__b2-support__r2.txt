@@ -1,0 +1,26 @@
+root = Card([header, kpiRow, filterSection, ticketList, globalActions], "card", "column", "l")
+
+header = CardHeader("Support Lead Morning View", "Operational overview for today")
+
+kpiRow = Card([openTicketsKpi, responseTimeKpi], "sunk", "row", "m")
+
+openTicketsKpi = Card([openTicketsLabel, openTicketsValue], "clear", "column", "none")
+openTicketsLabel = TextContent("Open Tickets", "small")
+openTicketsValue = TextContent("142", "large-heavy")
+
+responseTimeKpi = Card([responseTimeLabel, responseTimeValue], "clear", "column", "none")
+responseTimeLabel = TextContent("Avg First Response", "small")
+responseTimeValue = TextContent("2.4h", "large-heavy")
+
+filterSection = Card([filterText, highPriorityBtn], "clear", "row", "m", "center", "between")
+filterText = TextContent("Filter view:", "small")
+highPriorityBtn = Button("High Priority Only", null, "outline", "normal", "small")
+
+ticketList = Table([ticketIdCol, ticketSubjectCol, ticketPriorityCol])
+
+ticketIdCol = Col("Ticket", ["#8821", "#8820", "#8819", "#8818", "#8817"], "string")
+ticketSubjectCol = Col("Subject", ["API Timeout Error", "Billing Dispute", "Login Loop", "Feature Request: Dark Mode", "Password Reset Fail"], "string")
+ticketPriorityCol = Col("Priority", ["High", "Medium", "High", "Low", "Medium"], "string")
+
+globalActions = Buttons([newTicketBtn])
+newTicketBtn = Button("Open New Ticket", null, "primary", "normal", "medium")

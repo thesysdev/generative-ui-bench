@@ -1,0 +1,153 @@
+thought
+root = Card([header, statusSummary, filters, portfolioTable, metricsSection, riskSection, blockersSection, actions])
+header = CardHeader("PMO Project Portfolio Review", "Strategic Q3 2024 Performance")
+statusSummary = Callout("info", "Portfolio Health", "Overall stable with 85% of projects on track, though resource constraints exist in DevOps.")
+filters = Buttons([quarterSelector, exportBtn])
+quarterSelector = Select("quarter", [q3, q2, q1], "Q3 2024")
+)
+q3 = SelectItem("q3-2024", "Q3 2024")
+q2 = SelectItem("q2-2024", "Q2 2024")
+q1 = SelectItem("q1-2024", "Q1 2024")
+exportBtn = Button("Export Review", null, "secondary")
+portfolioTable = Table([colName, colOwner, colDeadline, colHealth, colActions])
+colName = Col("Project", ["Cloud Migration", "Mobile App Redesign", "ERP Integration", "Data Warehouse"])
+colOwner = Col("Owner", ["Alice Chen", "Bob Smith", "Charlie Day", "Diana Prince"])
+colDeadline = Col("Deadline", ["2024-10-15", "2024-09-30", "2024-11-01", "2024-10-05"])
+colHealth = Col("Health", ["Healthy", "At Risk", "Critical", "Healthy"])
+colActions = Col("Actions", ["Request Resources", "Archive", "Archive", "Archive"])
+metricsSection = Card([budgetChart, utilizationChart, paceChart, overdueList], "sunk")
+budgetHeading = Heading("Budget vs Allocation", "h4")
+budgetChart = HorizontalBarChart(["Cloud", "Mobile", "ERP", "Data"], [spentSeries, allocSeries], "grouped", null, "$k")
+spentSeries = Series("Spent", [45, 80, 95, 30])
+allocSeries = Series("Allocated", [50, 90, 100, 40])
+utilizationHeading = Heading("Team Utilization", "h4")
+utilizationChart = RadialChart(["Dev", "QA", "PM", "Design"], [85, 92, 70, 65])
+paceHeading = Heading("Delivery Pace (Sprints)", "h4")
+paceChart = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [paceSeries], "natural", "Sprint", "Points")
+paceSeries = Series("Velocity", [45, 48, 40, 55, 52, 58])
+overdueHeading = Heading("Overdue Milestones", "h4")
+overdueList = ListBlock([m1, m2])
+m1 = ListItem("API Gateway Setup", "Cloud Migration - Overdue 5 days")
+m2 = ListItem("UI Component Library", "Mobile App - Overdue 2 days")
+riskSection = Card([riskTable, upcomingDeadlines], "sunk")
+riskHeading = Heading("Active Risks", "h4")
+riskTable = Table([colRisk, colProject, colSeverity])
+colRisk = Col("Risk", ["Resource Shortage", "Scope Creep", "Vendor Delay"])
+colProject = Col("Project", ["Mobile App", "ERP Integration", "Data Warehouse"])
+colSeverity = Col("Severity", ["High", "Medium", "Low"])
+upcomingHeading = Heading("Deadlines (Next 2 Weeks)", "h4")
+upcomingDeadlines = ListBlock([d1, d2])
+d1 = ListItem("UAT Start", "Mobile App - Oct 12")
+d2 = ListItem("Security Audit", "Cloud Migration - Oct 18")
+blockersSection = Card([blockList], "sunk")
+blockHeading = Heading("Blocked Work Items", "h4")
+blockList = ListBlock([b1, b2])
+b1 = ListItem("Database Schema", "ERP Integration - Waiting on DB team")
+b2 = ListItem("Design Approval", "Mobile App - Pending client feedback")
+actions = Buttons([requestResourceBtn, archiveBtn])
+requestResourceBtn = Button("Request Resources", null, "primary")
+archiveBtn = Button("Archive Project", null, "tertiary")
+resourceDialog = DialogBlock("Request Resources", "Resourceing Request", "Submit a request for additional headcount", [resourceForm])
+resourceForm = Form("res_req", resButtons, [projField, roleField, reasonField])
+projField = FormControl("Project", Input("proj", "Cloud Migration"))
+roleField = FormControl("Role", Select("role", [rDev, rQA], "Select Role"))
+rDev = SelectItem("dev", "Backend Engineer")
+rQA = SelectItem("qa", "QA Engineer")
+reasonField = FormControl("Reason", TextArea("reason", "Explain why..."))
+resButtons = Buttons([Button("Submit Request", null, "primary")])
+# Note: The above variables are structured for the logic. 
+# I must ensure resourceDialog and colActions/riskTable/overdueList/upcomingDeadlines/blockList 
+# are actually linked to the root. 
+# Re-linking the root to include all required elements.
+root = Card([header, statusSummary, filters, portfolioTable, metricsSection, riskSection, blockersSection, actions, resourceDialog])
+# Wait, the prompt says "root must be the FIRST line". 
+# Let's re-order correctly.
+
+root = Card([header, statusSummary, filters, portfolioTable, metricsSection, riskSection, blockersSection, actions, resourceDialog])
+header = CardHeader("PMO Project Portfolio Review", "Strategic Q3 2024 Performance")
+statusSummary = Callout("info", "Portfolio Health", "Overall stable with 85% of projects on track, though resource constraints exist in DevOps.")
+filters = Buttons([quarterSelector, exportBtn])
+quarterSelector = Select("quarter", [q3, q2, q1], "Q3 2024")
+q3 = SelectItem("q3-2024", "Q3 2024")
+q2 = SelectItem("q2-2024", "Q2 2024")
+q1 = SelectItem("q1-2024", "Q1 2024")
+exportBtn = Button("Export Review", null, "secondary")
+portfolioTable = Table([colName, colOwner, colDeadline, colHealth, colActions])
+colName = Col("Project", ["Cloud Migration", "Mobile App Redesign", "ERP Integration", "Data Warehouse"])
+colOwner = Col("Owner", ["Alice Chen", "Bob Smith", "Charlie Day", "Diana Prince"])
+colDeadline = Col("Deadline", ["2024-10-15", "2024-09-30", "2024-11-01", "2024-10-05"])
+colHealth = Col("Health", ["Healthy", "At Risk", "Critical", "Healthy"])
+colActions = Col("Actions", ["Request Resources", "Archive", "Archive", "Archive"])
+metricsSection = Card([budgetChart, utilizationChart, paceChart, overdueList], "sunk")
+budgetHeading = Heading("Budget vs Allocation", "h4")
+budgetChart = HorizontalBarChart(["Cloud", "Mobile", "ERP", "Data"], [spentSeries, allocSeries], "grouped", null, "$k")
+spentSeries = Series("Spent", [45, 80, 95, 30])
+allocSeries = Series("Allocated", [50, 90, 100, 40])
+utilizationHeading = Heading("Team Utilization", "h4")
+utilizationChart = RadialChart(["Dev", "QA", "PM", "Design"], [85, 92, 70, 65])
+paceHeading = Heading("Delivery Pace (Sprints)", "h4")
+paceChart = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [paceSeries], "natural", "Sprint", "Points")
+paceSeries = Series("Velocity", [45, 48, 40, 55, 52, 58])
+overdueHeading = Heading("Overdue Milestones", "h4")
+overdueList = ListBlock([m1, m2])
+m1 = ListItem("API Gateway Setup", "Cloud Migration - Overdue 5 days")
+m2 = ListItem("UI Component Library", "Mobile App - Overdue 2 days")
+riskSection = Card([riskTable, upcomingDeadlines], "sunk")
+riskHeading = Heading("Active Risks", "h4")
+riskTable = Table([colRisk, colProject, colSeverity])
+colRisk = Col("Risk", ["Resource Shortage", "Scope Creep", "Vendor Delay"])
+colProject = Col("Project", ["Mobile App", "ERP Integration", "Data Warehouse"])
+colSeverity = Col("Severity", ["High", "Medium", "Low"])
+upcomingHeading = Heading("Deadlines (Next 2 Weeks)", "h4")
+upcomingDeadlines = ListBlock([d1, d2])
+d1 = ListItem("UAT Start", "Mobile App - Oct 12")
+d2 = ListItem("Security Audit", "Cloud Migration - Oct 18")
+blockersSection = Card([blockList], "sunk")
+blockHeading = Heading("Blocked Work Items", "h4")
+blockList = ListBlock([b1, b2])
+b1 = ListItem("Database Schema", "ERP Integration - Waiting on DB team")
+b2 = ListItem("Design Approval", "Mobile App - Pending client feedback")
+actions = Buttons([requestResourceBtn, archiveBtn])
+requestResourceBtn = Button("Request Resources", null, "primary")
+archiveBtn = Button("Archive Project", null, "tertiary")
+resourceDialog = DialogBlock("Request Resources", "Resourceing Request", "Submit a request for additional headcount", [resourceForm])
+resourceForm = Form("res_req", resButtons, [projField, roleField, reasonField])
+projField = FormControl("Project", Input("proj", "Cloud Migration"))
+roleField = FormControl("Role", Select("role", [rDev, rQA], "Select Role"))
+rDev = SelectItem("dev", "Backend Engineer")
+rQA = SelectItem("qa", "QA Engineer")
+reasonField = FormControl("Reason", TextArea("reason", "Explain why..."))
+resButtons = Buttons([Button("Submit Request", null, "primary")])
+# Wait, I need to make sure resourceDialog is triggered by a button.
+# The DialogBlock takes a triggerLabel.
+# Let's fix requestResourceBtn to be the DialogBlock itself.
+# Actually the signature is: DialogBlock(triggerLabel, title, description?, content?, triggerVariant?)
+# So I should replace the button with the DialogBlock.
+resourceDialog = DialogBlock("Request Resources", "Resourceing Request", "Submit a request for additional headcount", [resourceForm])
+actions = Buttons([resourceDialog, archiveBtn])
+# Re-defining actions to be safe.
+actions = Buttons([resourceDialog, archiveBtn])
+# Re-checking reachability.
+# root -> header, statusSummary, filters, portfolioTable, metricsSection, riskSection, blockersSection, actions, resourceDialog.
+# filters -> quarterSelector, exportBtn.
+# portfolioTable -> colName, colOwner, colDeadline, colHealth, colActions.
+# metricsSection -> budgetChart, utilizationChart, paceChart, overdueList.
+# riskSection -> riskTable, upcomingDeadlines.
+# blockersSection -> blockList.
+# actions -> resourceDialog, archiveBtn.
+# resourceDialog -> resourceForm.
+# resourceForm -> projField, roleField, reasonField, resButtons.
+# resButtons -> Submit Button.
+# All reachable.
+# Wait, I forgot the budgetHeading, utilizationHeading, paceHeading, overdueHeading, upcomingHeading, blockHeading.
+# Let's re-verify the Card children.
+# metricsSection = Card([budgetChart, utilizationChart, paceChart, overdueList], "sunk") 
+# I missed the headings in the Card children in the draft. 
+# I will add them to the arrays.
+metricsSection = Card([budgetHeading, budgetChart, utilizationHeading, utilizationChart, paceHeading, paceChart, overdueHeading, overdueList], "sunk")
+riskSection = Card([riskHeading, riskTable, upcomingHeading, upcomingDeadlines], "sunk")
+blockersSection = Card([blockHeading, blockList], "sunk")
+# Final check on variables.
+# All good.
+root = Card([header, statusSummary, filters, portfolioTable, metricsSection, riskSection, blockersSection, actions, resourceDialog])
+# (I will output the final clean block now)

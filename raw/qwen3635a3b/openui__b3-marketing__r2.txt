@@ -1,0 +1,42 @@
+root = Card([header, dateRange, visitorsSection, conversionSection, trafficSection, campaignsSection, bestCampaign, emailSection, actions])
+
+header = CardHeader("Marketing Dashboard", "Weekly Overview")
+
+dateRange = FormControl("Date Range", dateSelect, "Select reporting period")
+dateSelect = Select("date_range", [range1, range7, range30, range90], "Last 30 days")
+range1 = SelectItem("1", "Last 1 day")
+range7 = SelectItem("7", "Last 7 days")
+range30 = SelectItem("30", "Last 30 days")
+range90 = SelectItem("90", "Last 90 days")
+
+visitorsSection = Card([visitorsTitle, visitorsChart], "sunk")
+visitorsTitle = Heading("Site Visitors (30 days)", "h3")
+visitorsChart = LineChart(["W1", "W2", "W3", "W4"], [visitorSeries], "natural", "Week", "Visitors")
+visitorSeries = Series("Site Visitors", [12450, 14200, 13800, 15600])
+
+conversionSection = Card([conversionTitle, conversionBadge, conversionDetail], "sunk")
+conversionTitle = Heading("Conversion Rate", "h3")
+conversionBadge = Badge("3.2%", "success")
+conversionDetail = TextContent("Up 0.4% from last period. Target: 3.0%")
+
+trafficSection = Card([trafficTitle, trafficPie], "sunk")
+trafficTitle = Heading("Top Traffic Sources", "h3")
+trafficPie = PieChart(["Organic Search", "Paid Search", "Social Media", "Direct", "Referral"], [42, 24, 18, 10, 6], "donut")
+
+campaignsSection = Card([campaignsTitle, campaignsTable], "sunk")
+campaignsTitle = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campName, campSpend, campConv, campStatus])
+campName = Col("Campaign", ["Summer Sale", "Brand Awareness", "Product Launch", "Retargeting", "Newsletter Promo"])
+campSpend = Col("Spend", ["$12,500", "$8,300", "$15,200", "$6,800", "$4,200"])
+campConv = Col("Conv. Rate", ["3.1%", "2.4%", "4.8%", "2.9%", "3.5%"])
+campStatus = Col("Status", ["Active", "Active", "Active", "Active", "Active"])
+
+bestCampaign = Callout("success", "🏆 Best Performing Campaign", "Product Launch leads with 4.8% conversion rate and $15,200 spend. ROI: 340%")
+
+emailSection = Card([emailTitle, emailGrowth], "sunk")
+emailTitle = Heading("Email Subscriber Growth", "h3")
+emailGrowth = TextContent("+1,240 new subscribers this month (+8.2% month-over-month). Total: 16,340")
+
+actions = Buttons([exportBtn, refreshBtn])
+exportBtn = Button("Export Report")
+refreshBtn = Button("Refresh Data", null, "secondary")

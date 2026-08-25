@@ -1,0 +1,33 @@
+thought
+root = Card([header, statsGrid, mainContent, pipelineSection, attritionSection, actions])
+header = CardHeader("Hiring Overview", "Real-time talent acquisition and workforce analytics")
+statsGrid = Card([headcount, openRolesCard, avgTimeCard, interviewsCard], "row", "m")
+headcountCard = Card([Heading("Total Headcount", "h3"), TextContent("142", "large-heavy")], "sunk")
+openRolesCard = Card([Heading("Open Roles", "h3"), TextContent("14", "large-heavy")], "sunk")
+avgTimeCard = Card([Heading("Avg Time to Hire", "h3"), TextContent("32 Days", "large-heavy")], "sunk")
+interviewsCard = Card([Heading("Interviews This Week", "h3"), TextContent("18", "large-heavy")], "sunk")
+mainContent = Card([deptChart, rolesTable], "row", "l")
+deptChart = Card([Heading("Headcount by Dept", "h4"), PieChart(deptLabels, deptValues, "donut")], "sunk")
+deptLabels = ["Engineering", "Sales", "Product", "HR", "Design"]
+deptValues = [55, 30, 25, 12, 10]
+rolesTable = Card([Heading("Open Roles", "h4"), Table([colRole, colDept, colPriority])], "sunk")
+colRole = Col("Position", ["Backend Engineer", "AE Executive", "Product Manager", "Talent Generalist", "UX Designer"])
+colDept = Col("Department", ["Engineering", "Sales", "Product", "HR", "Design"])
+colPriority = Col("Priority", ["High", "Medium", "High", "Low", "Medium"])
+pipelineSection = Card([Heading("Candidate Pipeline", "h4"), ListBlock(pipelineItems)], "sunk")
+attritionSection = Card([Heading("Attrition Trend (6M)", "h4"), LineChart(months, [attritionSeries], "natural", "Month", "%")], "sunk")
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+attritionSeries = Series("Attrition Rate", [2.1, 1.8, 2.5, 2.2, 1.9, 2.0])
+pipelineItems = [
+    ListItem("Screening", "12 candidates"),
+    ListItem("Technical Interview", "8 candidates"),
+    ListItem("Hiring Manager", "5 candidates"),
+    ListItem("Offer Extended", "2 candidates")
+]
+actions = Buttons([newRoleBtn, exportBtn], "row")
+newRoleBtn = Button("Open New Role", null, "primary")
+exportBtn = Button("Export Report", null, "secondary")
+headcount = TextContent("142 employees", "default")
+openRoles = TextContent("14 active vacancies", "default")
+avgTime = TextContent("32 days average", "default")
+interviews = TextContent("18 scheduled", "default")

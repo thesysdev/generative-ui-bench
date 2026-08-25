@@ -1,0 +1,197 @@
+root = Card([
+  header,
+  congestion,
+  transitPunctuality,
+  airQuality,
+  energyUse,
+  waterUse,
+  incidents,
+  emergencyVehicles,
+  parking,
+  publicEvents,
+  citizenReports,
+  serviceBacklog,
+  weather,
+  districtFocus,
+  dispatchCrew,
+  sendAlert,
+  roadworks,
+  infrastructureJobs,
+], "clear", "row", "xs")
+
+header = CardHeader("City Operations Center", "Real-time city monitoring dashboard")
+
+congestion = Card([
+  CardHeader("Congestion Level", "Current traffic conditions"),
+  BarChart(["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"], [
+    Series("Congestion", [82, 65, 73, 48, 55, 30]),
+  ], "grouped", "Traffic", "%"),
+  TextCallout("warning", "Downtown is at 82% capacity", "High vehicle density on main corridors"),
+], "sunk")
+
+transitPunctuality = Card([
+  CardHeader("Transit Punctuality", "On-time performance by route"),
+  SingleStackedBarChart(["Red Line", "Blue Line", "Green Line", "Yellow Line", "Orange Line"], [
+    Series("Punctuality", [92, 88, 95, 78, 84]),
+  ]),
+  TextCallout("info", "Red Line at 92% — above target threshold", "On time"),
+  TextCallout("warning", "Yellow Line at 78% — below threshold", "Delayed service"),
+], "sunk")
+
+airQuality = Card([
+  CardHeader("Air Quality by District", "PM2.5 and AQI readings"),
+  RadarChart(["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"], [
+    Series("PM2.5", [35, 28, 42, 22, 30, 18]),
+    Series("AQI", [120, 105, 145, 85, 110, 70]),
+  ]),
+  TextCallout("success", "Westend and Southpark air quality is good", "AQI under 100"),
+], "sunk")
+
+energyUse = Card([
+  CardHeader("Energy Use (Past Week)", "Kilowatt-hours by district"),
+  AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [
+    Series("Commercial", [1200, 1350, 1180, 1400, 1320, 980, 870]),
+    Series("Residential", [800, 850, 900, 880, 920, 750, 700]),
+    Series("Industrial", [2100, 2200, 2050, 2300, 2150, 1900, 1850]),
+  ], "linear", "Hours", "kWh"),
+], "sunk")
+
+waterUse = Card([
+  CardHeader("Water Use Today", "Gallons consumed by district"),
+  SingleStackedBarChart(["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"], [
+    Series("Residential", [45000, 38000, 42000, 35000, 40000, 30000]),
+    Series("Commercial", [32000, 28000, 30000, 25000, 29000, 22000]),
+    Series("Industrial", [55000, 50000, 58000, 48000, 52000, 45000]),
+  ]),
+  TextCallout("info", "Total today: 210,000 gallons", "30% above weekly average"),
+], "sunk")
+
+incidents = Card([
+  CardHeader("Open Incidents", "Location and severity"),
+  Table([
+    Col("District", ["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"]),
+    Col("Incident", ["Traffic accident on Main St", "Broken transit signal", "Streetlight outage", "Construction hazard", "Flooding in basement", "Vandalism near park"]),
+    Col("Severity", ["High", "Medium", "Low", "High", "Medium", "Low"]),
+  ]),
+  TextCallout("warning", "3 high-severity incidents requiring response", "1 traffic accident, 1 construction hazard, 1 flooding"),
+], "sunk")
+
+emergencyVehicles = Card([
+  CardHeader("Emergency Vehicle Deployments", "Active units on the ground"),
+  Table([
+    Col("Unit", ["Unit 101", "Unit 205", "Unit 312", "Unit 440", "Unit 589"]),
+    Col("Location", ["Downtown - Main St", "Midtown - 5th Ave", "Eastside - Park Rd", "Westend - Hill St", "Northgate - River Dr"]),
+    Col("Status", ["Responding", "En route", "Stationed", "On standby", "Deployed"]),
+  ]),
+  TextCallout("success", "2 units currently active on emergency response", "All units operational"),
+], "sunk")
+
+parking = Card([
+  CardHeader("Parking Availability Downtown", "Real-time spots", null, null, null),
+  SingleStackedBarChart(["Available", "Occupied", "Reserved"], [
+    Series("Total Spaces", [340, 280, 120]),
+  ]),
+  TextCallout("info", "120 reserved spots are still available", "80% of total capacity free"),
+], "sunk")
+
+publicEvents = Card([
+  CardHeader("Public Events This Weekend", "Citywide activities"),
+  Table([
+    Col("Event", ["Riverfront Festival", "Jazz Night at City Hall", "Community Cleanup", "Outdoor Movie Night", "Street Art Walk", "Farmers Market"]),
+    Col("Time", ["Sat 2PM-6PM", "Sat 7PM-9PM", "Sat 10AM-2PM", "Sun 1PM-5PM", "Sun 2PM-5PM", "Sat 9AM-12PM"]),
+    Col("Location", ["Riverfront Park", "City Hall", "Central Square", "Riverside Amphitheater", "Arts District", "Main Street Plaza"]),
+  ]),
+  TextCallout("info", "4 events this weekend", "Most are free"),
+], "sunk")
+
+citizenReports = Card([
+  CardHeader("Citizen Reports", "Incoming reports from the public"),
+  Table([
+    Col("Time", ["08:15 AM", "09:30 AM", "10:45 AM", "11:20 AM", "02:10 PM", "03:00 PM"]),
+    Col("District", ["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"]),
+    Col("Category", ["Traffic", "Noise", "Streetlight", "Construction", "Flooding", "Pothole"]),
+    Col("Severity", ["High", "Medium", "Low", "Medium", "High", "Low"]),
+  ]),
+  TextCallout("warning", "5 reports received in the last hour", "2 are high severity"),
+], "sunk")
+
+serviceBacklog = Card([
+  CardHeader("Service Request Backlog", "Pending requests in queue"),
+  BarChart(["Traffic", "Potholes", "Streetlights", "Sanitation", "Construction", "Utility"], [
+    Series("Open", [142, 238, 89, 56, 112, 78]),
+  ], "grouped", "Count", "requests"),
+  TextCallout("warning", "89 open requests need attention", "30 more than yesterday"),
+], "sunk")
+
+weather = Card([
+  CardHeader("Current Weather", "Conditions across the city"),
+  HorizontalBarChart(["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southpark"], [
+    Series("Temperature", [72, 74, 70, 68, 71, 69]),
+    Series("Humidity", [55, 60, 50, 45, 58, 52]),
+    Series("Wind", [8, 12, 6, 5, 10, 7]),
+  ], "grouped", "°F", "%"),
+  TextCallout("info", "Partly cloudy, 72°F downtown", "Wind at 8 mph"),
+], "sunk")
+
+districtFocus = Card([
+  CardHeader("District Focus", "Select a district to zoom in"),
+  Select("districtFocus", [
+    SelectItem("All", "All Districts"),
+    SelectItem("Downtown", "Downtown"),
+    SelectItem("Midtown", "Midtown"),
+    SelectItem("Eastside", "Eastside"),
+    SelectItem("Westend", "Westend"),
+    SelectItem("Northgate", "Northgate"),
+    SelectItem("Southpark", "Southpark"),
+  ], "Select a district to focus on"),
+  TextCallout("info", "Click a district to filter all views", "Shows district-specific data"),
+], "sunk")
+
+dispatchCrew = Card([
+  CardHeader("Dispatch Crew", "Send a crew to a location"),
+  Select("dispatchCrew", [
+    SelectItem("Downtown", "Downtown"),
+    SelectItem("Midtown", "Midtown"),
+    SelectItem("Eastside", "Eastside"),
+    SelectItem("Westend", "Westend"),
+    SelectItem("Northgate", "Northgate"),
+    SelectItem("Southpark", "Southpark"),
+  ], "Select a district"),
+  Buttons([
+    Button("Send Crew"),
+    Button("Confirm", null, "tertiary"),
+  ]),
+], "sunk")
+
+sendAlert = Card([
+  CardHeader("Send Public Alert", "Broadcast a message to all citizens"),
+  TextArea("alertMessage", "Type your alert message here", 4, null, null),
+  Buttons([
+    Button("Send Alert"),
+    Button("Clear", null, "tertiary"),
+  ]),
+], "sunk")
+
+roadworks = Card([
+  CardHeader("Roadworks This Month", "Planned construction and lane closures"),
+  Table([
+    Col("Street", ["Main St & 5th Ave", "River Rd & 12th St", "Park Ave & Oak Blvd", "Highway 9", "Broadway & 3rd St", "Elm St & 7th Ave"]),
+    Col("Start", ["Jan 5", "Jan 12", "Jan 20", "Jan 28", "Feb 3", "Feb 15"]),
+    Col("End", ["Jan 15", "Jan 25", "Feb 2", "Feb 10", "Feb 18", "Feb 28"]),
+    Col("Duration", ["10 days", "13 days", "10 days", "12 days", "15 days", "14 days"]),
+    Col("Impact", ["Full closure", "Lane closure", "Full closure", "Partial", "Full closure", "Lane closure"]),
+  ]),
+  TextCallout("warning", "5 roadworks in progress this month", "Most cause lane closures"),
+], "sunk")
+
+infrastructureJobs = Card([
+  CardHeader("Infrastructure Jobs Due for Maintenance", "Scheduled maintenance tasks"),
+  Table([
+    Col("Location", ["Water Pump Station A", "Bridge 12th St", "Power Grid Substation", "Dam Control Gate", "Signal Tower 7", "Water Treatment Plant"]),
+    Col("Task", ["Pump repair", "Reinforcement", "Transformer upgrade", "Gate seal replacement", "Signal calibration", "Filtration system"]),
+    Col("Priority", ["High", "High", "Medium", "Medium", "Low", "Low"]),
+    Col("Scheduled", ["Jan 8", "Jan 18", "Jan 25", "Feb 5", "Feb 14", "Feb 22"]),
+  ]),
+  TextCallout("warning", "3 high-priority jobs due in the next week", "Water Pump Station A and Bridge 12th St are urgent"),
+], "sunk")
+]

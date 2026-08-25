@@ -1,0 +1,57 @@
+
+
+root = Card([header, kpiRow, filterRow, ordersSection, chartSection, followUps], "card", "column", "l")
+
+header = CardHeader("Operations Desk", "Live overview — Monday, June 9")
+
+kpiRow = Card([ordersKpi, revenueKpi, aovKpi, refundKpi], "sunk", "row", "m", "stretch")
+
+ordersKpi = Card([ordersKpiLabel, ordersKpiValue], "clear", "column", "none")
+ordersKpiLabel = TextContent("Orders today", "small")
+ordersKpiValue = TextContent("147", "large-heavy")
+
+revenueKpi = Card([revenueKpiLabel, revenueKpiValue], "clear", "column", "none")
+revenueKpiLabel = TextContent("Revenue today", "small")
+revenueKpiValue = TextContent("$12,840", "large-heavy")
+
+aovKpi = Card([aovKpiLabel, aovKpiValue], "clear", "column", "none")
+aovKpiLabel = TextContent("Avg order value", "small")
+aovKpiValue = TextContent("$87.35", "large-heavy")
+
+refundKpi = Card([refundKpiLabel, refundKpiValue, refundProgress], "clear", "column", "xs")
+refundKpiLabel = TextContent("Refund rate (June)", "small")
+refundKpiValue = TextContent("4.2%", "large-heavy")
+refundProgress = Progress(4.2, "of 5% target")
+
+filterRow = Card([statusFilter, searchField], "clear", "row", "m", "center")
+
+statusFilter = FormControl("Status", statusSelect)
+statusSelect = Select("status_filter", [allStatus, pendingStatus, processingStatus, shippedStatus, fulfilledStatus, refundedStatus], "All statuses")
+allStatus = SelectItem("all", "All statuses")
+pendingStatus = SelectItem("pending", "Pending")
+processingStatus = SelectItem("processing", "Processing")
+shippedStatus = SelectItem("shipped", "Shipped")
+fulfilledStatus = SelectItem("fulfilled", "Fulfilled")
+refundedStatus = SelectItem("refunded", "Refunded")
+
+searchField = FormControl("Customer", searchInput)
+searchInput = Input("customer_search", "Search by name…")
+
+ordersSection = Card([ordersHeading, ordersTable], "sunk", "column", "s")
+ordersHeading = Heading("Recent orders", "h3")
+ordersTable = Table([orderCol, customerCol, totalCol, statusCol, actionCol])
+orderCol = Col("Order ID", ["#4821", "#4820", "#4819", "#4818", "#4817", "#4816"])
+customerCol = Col("Customer", ["Maya Chen", "James Okafor", "Lena Torres", "Ravi Patel", "Sofia Andersson", "Tom Nakamura"])
+totalCol = Col("Total", ["$124.00", "$67.50", "$203.99", "$45.00", "$89.99", "$152.30"])
+statusCol = Col("Status", ["Processing", "Pending", "Shipped", "Fulfilled", "Pending", "Processing"])
+actionCol = Col("", ["Fulfill", "Fulfill", "—", "—", "Fulfill", "Fulfill"])
+
+chartSection = Card([chartHeading, volumeChart], "sunk", "column", "s")
+chartHeading = Heading("Order volume — last 4 weeks", "h3")
+volumeChart = BarChart(["W22 (May 26)", "W23 (Jun 2)", "W24 (Jun 9)", "This week"], [volSeries], "grouped", "Week", "Orders")
+volSeries = Series("Orders", [412, 487, 523, 318])
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me all pending orders")
+fu2 = FollowUpItem("Export today's orders to CSV")
+fu3 = FollowUpItem("Flag orders over $200 for review")

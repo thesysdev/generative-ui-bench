@@ -1,0 +1,52 @@
+root = Card([header, metricsRow, regionCard, chartSection, incidentsSection, slowEndpointsSection, thresholdForm], "card", "column", "l")
+
+header = CardHeader("Service Health Dashboard", "Production East-1 • On-call rotation: Primary (Alex M.)")
+
+metricsRow = Card([uptimeCard, errorRateCard], "clear", "row", "l", "stretch", "between")
+
+uptimeCard = Card([uptimeHeader, uptimeText, uptimeBadge], "card", "column", "s")
+uptimeHeader = CardHeader("Quarterly Uptime", "SLA target: 99.9% availability")
+uptimeText = TextContent("99.98%", "large-heavy")
+uptimeBadge = Tag("Exceeding target", null, "sm", "success")
+
+errorRateCard = Card([errorHeader, errorVal, errorAlert], "card", "column", "s")
+errorHeader = CardHeader("Current Error Rate", "Last 5 minutes rolling average")
+errorVal = TextContent("0.02%", "large-heavy")
+errorAlert = Tag("Normal operational state", null, "sm", "info")
+
+regionCard = Card([regionHeader, regionButtons], "sunk", "column", "s")
+regionHeader = CardHeader("Region Filter", "Currently viewing all active regions")
+regionButtons = Buttons([regionAll, regionUsEast, regionUsWest, regionEuCentral])
+regionAll = Button("All Regions", null, "primary", "normal", "small")
+regionUsEast = Button("us-east-1", null, "secondary", "normal", "small")
+regionUsWest = Button("us-west-2", null, "secondary", "normal", "small")
+regionEuCentral = Button("eu-central-1", null, "secondary", "normal", "small")
+
+chartSection = Card([chartHeader, usageChart], "sunk", "column", "m")
+chartHeader = CardHeader("Resource Utilization", "CPU and Memory usage over the past 24 hours")
+usageChart = LineChart(["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "Now"], [cpuSeries, memSeries], "natural", "Time (UTC)", "Utilization (%)")
+cpuSeries = Series("CPU Usage %", [45, 42, 68, 85, 74, 58, 50])
+memSeries = Series("Memory Usage %", [60, 61, 65, 70, 72, 71, 69])
+
+incidentsSection = Card([incidentsHeader, incidentsTable, incidentAction], "sunk", "column", "m")
+incidentsHeader = CardHeader("Open Incidents", "Active alerts requiring engineer review")
+incidentsTable = Table([incidentIdCol, incidentServiceCol, incidentSeverityCol, incidentStatusCol])
+incidentIdCol = Col("Incident ID", ["INC-8492", "INC-8490", "INC-8485"])
+incidentServiceCol = Col("Service", ["Payment Gateway", "Auth Service", "Notification Worker"])
+incidentSeverityCol = Col("Severity", ["SEV-1 (Critical)", "SEV-2 (High)", "SEV-3 (Medium)"])
+incidentStatusCol = Col("Status", ["Investigating", "Monitoring", "Identified"])
+incidentAction = Buttons([ackButton])
+ackButton = Button("Acknowledge Selected Incident", null, "primary", "normal", "medium")
+
+slowEndpointsSection = Card([endpointsHeader, endpointsTable], "sunk", "column", "m")
+endpointsHeader = CardHeader("Slowest Endpoints", "Top 5 slow endpoints by p99 latency")
+endpointsTable = Table([epPathCol, epLatencyCol, epCallsCol])
+epPathCol = Col("Endpoint", ["/api/v2/checkout", "/api/v1/search", "/api/v3/analytics", "/api/v1/users/profile", "/api/v2/orders"])
+epLatencyCol = Col("P99 Latency (ms)", [1240, 980, 850, 720, 640])
+epCallsCol = Col("Req / min", [4200, 12500, 890, 3100, 5400])
+
+thresholdForm = Form("threshold-form", thresholdButtons, [thresholdField])
+thresholdField = FormControl("Set Error Rate Alert Threshold (%)", thresholdSlider, "Triggers pagerduty escalation if exceeded for >5 mins")
+thresholdSlider = Slider("error_threshold", "continuous", 0.1, 5.0, 0.1, [1.0], "Threshold")
+thresholdButtons = Buttons([saveThresholdBtn])
+saveThresholdBtn = Button("Update Threshold", null, "primary", "normal", "medium")

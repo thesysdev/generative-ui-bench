@@ -1,0 +1,59 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title: "Your Package",
+      subtitle: "Delivery Tracking"
+    ),
+    Image(
+      src: "https://picsum.photos/seed/delivery-box/300/200",
+      alt: "Package at delivery location",
+      width: 250,
+      height: 150
+    ),
+    TextContent(
+      text: "Currently in transit - en route to your city center",
+      size: "default"
+    ),
+    TextContent(
+      text: "Estimated delivery: April 5, 2026",
+      size: "default",
+      variant: "success"
+    ),
+    Button(
+      label: "Report Issue",
+      action: null,
+      variant: "primary",
+      size: "medium"
+    )
+  ],
+  direction: "row",
+  gap: "xl",
+  align: "center",
+  wrap: true
+)
+```
+
+Wait, I need to ensure every defined variable is referenced. The `Image` and `TextContent` components don't have variables assigned separately - they're inline in the children array. That's fine because they're part of the children list directly. However, I should check if there are any unnamed variables... Actually, looking at the rules, variables defined outside the Card() need to be referenced somewhere. The components defined inline in the children array don't count as "defined" in the traditional sense since they're not separate variable assignments.
+
+But wait - the rule says "Every variable (except root) MUST be referenced by at least one other variable." The Image and TextContent are direct children of Card, so they are referenced. The Button is also a direct child. So all good.
+
+However, I notice I'm using `variant: "primary"` on the Button but didn't specify that in the signature - let me check the Button signature again. Yes, Button takes `(label, action, variant?, type?)` - variant is optional, so "primary" is fine.
+
+Actually, looking more carefully at the requirements:
+1. Where the package is right now - I have an Image (location) and a descriptive TextContent
+2. Estimated delivery date - I have a TextContent with that info
+3. Way to report a problem - I have a Report Issue button
+
+This covers all three items. Let me verify the code is valid OpenUI-Lang and follows all rules:
+
+- root = Card(...) is the first line ✓
+- All components are properly referenced (they're in the children array)
+- No unused variables ✓
+- Required parameters are present ✓
+
+One thing - the Image component has required parameters like `src`, `alt`, etc. I provided those. The TextContent has `text` and optional `size`. I specified both. The Button has `label`, `action`, `variant`, `type` - all provided.
+
+The layout uses direction: "row" and gap: "xl" which is allowed. Align and wrap are set appropriately.
+
+This looks good! Let me submit.<|tool_call_start|>[openui_lang_code(root='root = Card(\n  children: [\n    CardHeader(\n      title: "Your Package",\n      subtitle: "Delivery Tracking"\n    ),\n    Image(\n      src: "https://picsum.photos/seed/delivery-box/300/200",\n      alt: "Package at delivery location",\n      width: 250,\n      height: 150\n    ),\n    TextContent(\n      text: "Currently in transit - en route to your city center",\n      size: "default"\n    ),\n    TextContent(\n      text: "Estimated delivery: April 5, 2026",\n      size: "default",\n      variant: "success"\n    ),\n    Button(\n      label: "Report Issue",\n      action: null,\n      variant: "primary",\n      type: "normal",\n      size: "medium"\n    )\n  ],\n  direction: "row",\n  gap: "xl",\n  align: "center",\n  wrap: true\n)')]<|tool_call_end|>

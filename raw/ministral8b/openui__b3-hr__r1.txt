@@ -1,0 +1,87 @@
+```openui-lang
+root = Card([header, currentHeadcount, openRoles, candidatePipeline, timeToHire, headcountSplit, interviewsThisWeek, attritionChart, newRoleButton])
+
+header = CardHeader("Hiring Overview", "Current hiring status and trends")
+
+currentHeadcount = Card([headcountValue, headcountChart], "sunk")
+headcountValue = Card([headcountNumber, headcountDescription])
+headcountNumber = TextContent("187", "large-heavy")
+headcountDescription = TextContent("Full-time employees across all departments")
+
+openRoles = Card([openRolesTitle, openRolesTable], "sunk")
+openRolesTitle = Heading("Open Roles", "h3")
+openRolesTable = Table([departmentCol, roleCol, priorityCol])
+departmentCol = Col("Department", ["Engineering", "Product", "Marketing", "Sales", "Support", "HR"], "string")
+roleCol = Col("Role", ["Senior Backend Engineer", "Product Designer", "Marketing Specialist", "Sales Account Manager", "Support Engineer", "HR Generalist"], "string")
+priorityCol = Col("Priority", ["High", "Medium", "Medium", "Low", "Medium", "Low"], "string")
+
+candidatePipeline = Card([pipelineTitle, pipelineChart], "sunk")
+pipelineTitle = Heading("Candidate Pipeline", "h3")
+pipelineChart = HorizontalBarChart(["Applied", "Screened", "Interviewing", "Offered", "Hired"], [pipelineSeries], "grouped", "Stage", "Candidates")
+pipelineSeries = Series("Count", [124, 87, 45, 28, 19])
+
+timeToHire = Card([timeToHireTitle, timeToHireValue], "sunk")
+timeToHireTitle = Heading("Average Time to Hire", "h3")
+timeToHireValue = TextContent("23 days", "large-heavy")
+
+headcountSplit = Card([splitTitle, splitChart], "sunk")
+splitTitle = Heading("Headcount by Department", "h3")
+splitChart = PieChart(["Engineering", "Product", "Marketing", "Sales", "Support", "HR"], [120, 35, 18, 7, 6, 1], "pie", "circular")
+
+interviewsThisWeek = Card([weeklyTitle, weeklyChart], "sunk")
+weeklyTitle = Heading("Interviews Scheduled This Week", "h3")
+weeklyChart = BarChart(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], [weeklySeries], "grouped", "Day", "Interviews")
+weeklySeries = Series("Count", [4, 6, 5, 7, 3, 2])
+
+attritionChart = Card([attritionTitle, attritionData], "sunk")
+attritionTitle = Heading("Attrition (Past 6 Months)", "h3")
+attritionData = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionSeries], "natural", "Month", "Attrition Rate (%)")
+attritionSeries = Series("Rate", [3.2, 2.8, 3.5, 4.1, 3.9, 4.7])
+
+newRoleButton = Card([newRoleCard])
+newRoleCard = Button("Open New Role", ["new_role_request"], "primary", "normal", "large")
+
+new_role_request = DialogBlock(
+    "Open New Role",
+    "Create Role",
+    "Fill out the details for the new position you want to hire for",
+    [newRoleForm],
+    "primary"
+)
+
+newRoleForm = Form("new-role", formButtons, [
+    roleNameField,
+    departmentField,
+    priorityField,
+    descriptionField
+])
+
+roleNameField = FormControl("Role Name", roleNameInput)
+roleNameInput = Input("role_name", "e.g. Senior Backend Engineer")
+
+departmentField = FormControl("Department", departmentSelect)
+departmentSelect = Select("department", [
+    departmentSelectItem("Engineering", "Engineering"),
+    departmentSelectItem("Product", "Product"),
+    departmentSelectItem("Marketing", "Marketing"),
+    departmentSelectItem("Sales", "Sales"),
+    departmentSelectItem("Support", "Support"),
+    departmentSelectItem("HR", "HR")
+], "Select department")
+
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [
+    prioritySelectItem("High", "High"),
+    prioritySelectItem("Medium", "Medium"),
+    prioritySelectItem("Low", "Low")
+], "Select priority")
+
+descriptionField = FormControl("Job Description", descriptionTextArea)
+descriptionTextArea = TextArea("description", "Describe the role and responsibilities", 5)
+
+formButtons = Buttons([submitNewRoleBtn])
+submitNewRoleBtn = Button("Create Role", null, "primary")
+
+departmentSelectItem = SelectItem
+prioritySelectItem = SelectItem
+```

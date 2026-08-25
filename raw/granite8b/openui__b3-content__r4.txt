@@ -1,0 +1,125 @@
+```openui
+root = Card(
+    [
+        draftsSection,
+        publishedThisWeekSection,
+        mostReadArticleSection,
+        readershipChartSection,
+        categoryFilter,
+        schedulePieceSection,
+        commentsAwaitingReplySection,
+        startNewDraftButton,
+    ],
+    "card",
+    "column",
+    "center",
+    "between",
+)
+
+draftsSection = Card(
+    [
+        CardHeader("Drafts", "status for each"),
+        Table([draftLabel, draftStatus]),
+        draftLabel = Col("Draft", ["Title 1", "Title 2", "Title 3"]),
+        draftStatus = Col("Status", ["Pending", "In Review", "Scheduled"]),
+    ],
+    "sunk",
+)
+
+publishedThisWeekSection = Card(
+    [
+        CardHeader("Published This Week", "list of pieces"),
+        ListBlock(
+            items=[
+                ListItem("Breaking News", "Covering the latest developments"),
+                ListItem("Tech Trends", "What's new in AI and gadgets"),
+                ListItem("Health Update", "Weekly wellness tips"),
+            ],
+            variant="number",
+        ),
+    ],
+    "clear",
+)
+
+mostReadArticleSection = Card(
+    [
+        CardHeader("Most-Read Article This Month", "highlight top performer"),
+        TextContent(
+            "The Ultimate Guide to Sustainable Living – 12,345 reads",
+            size="large",
+        ),
+    ],
+    "card",
+)
+
+readershipChartSection = Card(
+    [
+        CardHeader("Readership Over the Past 30 Days", "trend line"),
+        LineChart(
+            labels=["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+            series=[
+                Series(
+                    category="Daily Readers",
+                    values=[1200, 1500, 1300, 1600, 1700, 1800, 2000],
+                )
+            ],
+            xLabel="Day",
+            yLabel="Readers",
+            variant="linear",
+        ),
+    ],
+    "sunk",
+)
+
+categoryFilter = Card(
+    [
+        CardHeader("Narrow by Category", "filter options"),
+        Select(
+            name="category",
+            items=[SelectItem("Technology", "Technology"), SelectItem("Health", "Health"), SelectItem("Entertainment", "Entertainment")],
+            placeholder="Select a category",
+            size="medium",
+        ),
+    ],
+    "clear",
+)
+
+schedulePieceSection = Card(
+    [
+        CardHeader("Schedule a Piece", "title and publish date"),
+        Form(
+            name="scheduleForm",
+            buttons=Buttons([scheduleBtn]),
+            fields=[
+                FormControl(
+                    label="Title",
+                    input=Input(name="title", placeholder="Enter title"),
+                ),
+                FormControl(
+                    label="Publish Date",
+                    input=DatePicker(name="publishDate", mode="single"),
+                ),
+            ],
+        ),
+        scheduleBtn = Button("Schedule", null, "primary"),
+    ],
+    "card",
+)
+
+commentsAwaitingReplySection = Card(
+    [
+        CardHeader("Comments Awaiting Reply", "manage replies"),
+        ListBlock(
+            items=[
+                ListItem("UserA: Great article!", null, actionLabel="Reply"),
+                ListItem("UserB: Have a question about X?", null, actionLabel="Reply"),
+            ],
+            variant="image",
+        ),
+    ],
+    "sunk",
+)
+
+startNewDraftButton = Button("Start a New Draft", null, "primary")
+
+```

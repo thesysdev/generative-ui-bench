@@ -1,0 +1,88 @@
+root = Card([header, severitySum, incidents, resources, shelters, routes, weather, rescueStats, volunteers, donations, aidReqs, commChannels, roadsClosed, hospitals, tasks, resourceForm, broadcastForm, zoneFocus, sitRepForm], "card", "column", "m")
+
+header = CardHeader("Emergency Response Coordination Center", "Active Emergency Operations")
+
+severitySum = Callout("warning", "Overall Severity", "Critical — 3 zones at maximum severity; 2 zones at elevated")
+
+incidents = Table([zoneCol, severityCol])
+zoneCol = Col("Zone", ["Delta North", "Delta South", "East Ridge", "West Harbor", "Central District"])
+severityCol = Col("Severity", ["Critical", "Critical", "Elevated", "Critical", "Elevated"])
+
+resources = Card([resText], "sunk", "column", "s")
+resText = TextContent("Vehicles: 14 active | Personnel: 86 on duty | Supplies: 4,200 units")
+
+shelters = Table([shelterCol, capCol, occCol])
+shelterCol = Col("Shelter", ["Red Cross Center A", "St. Mary Gym", "Community Hall B", "East Ridge School"])
+capCol = Col("Capacity", [320, 180, 250, 140])
+occCol = Col("Occupancy", [298, 165, 210, 112])
+
+routes = Table([routeCol, statusCol])
+routeCol = Col("Route", ["Highway 9 North", "Bridge Road East", "Coastal Highway", "Mountain Pass"])
+statusCol = Col("Status", ["Open — Delayed", "Closed", "Open", "Restricted"])
+
+weather = Card([weatherText], "card", "column", "s")
+weatherText = TextContent("Forecast: Heavy rain and 45mph winds through tomorrow; clearing by hour 36. Temperature dropping to 38°F.")
+
+rescueStats = Card([rescueText, casualtyText], "card", "row", "m")
+rescueText = TextContent("Rescued: 1,247")
+casualtyText = TextContent("Casualties: 34")
+
+volunteers = Table([volCol, assignCol])
+volCol = Col("Volunteer", ["M. Chen", "A. Patel", "R. Okonkwo", "L. Nguyen", "J. Torres"])
+assignCol = Col("Assignment", ["Delta North Search", "Medical Triage", "West Harbor Evac", "Central Supply", "East Ridge Shelter"])
+
+donations = Table([donCol, qtyCol])
+donCol = Col("Item", ["Water (gal)", "Medical Kits", "Blankets", "Food Boxes"])
+qtyCol = Col("Quantity", [840, 320, 560, 410])
+
+aidReqs = Table([reqCol, zoneCol2, statusCol2])
+reqCol = Col("Request", ["Extra ambulances", "Generator fuel", "Child care staff", "Portable heaters"])
+zoneCol2 = Col("Zone", ["Delta South", "East Ridge", "West Harbor", "Central District"])
+statusCol2 = Col("Status", ["Awaiting", "Awaiting", "Awaiting", "Awaiting"])
+
+commChannels = Table([chanCol, upCol])
+chanCol = Col("Channel", ["Radio Net 1", "Satellite Link", "Cell Backup", "Emergency Web"])
+upCol = Col("Status", ["Up", "Up", "Down", "Up"])
+
+roadsClosed = Table([roadCol, reasonCol])
+roadCol = Col("Road", ["Oak Street Bridge", "River Road", "Main Street North"])
+reasonCol = Col("Reason", ["Flooding", "Debris", "Structural Damage"])
+
+hospitals = Table([hospCol, bedsCol])
+hospCol = Col("Hospital", ["Memorial General", "St. Luke East", "County Trauma"])
+bedsCol = Col("Free Beds", [12, 8, 3])
+
+tasks = Table([taskCol, assigneeCol])
+taskCol = Col("Task", ["Coordinate airlift", "Distribute blankets", "Check shelter A", "Contact families"])
+assigneeCol = Col("Assignee", ["J. Torres", "L. Nguyen", "M. Chen", "A. Patel"])
+
+resourceForm = Form("resource-request", resourceButtons, [resourceTypeField, resourceQtyField])
+resourceTypeField = FormControl("Resource Type", resourceTypeInput)
+resourceTypeInput = Input("resource_type", "e.g. Medical, Fuel, Water")
+resourceQtyField = FormControl("Quantity", resourceQtyInput)
+resourceQtyInput = Input("resource_qty", "e.g. 50", "number")
+resourceButtons = Buttons([resourceBtn])
+resourceBtn = Button("Request Resources")
+
+broadcastForm = Form("broadcast-update", broadcastButtons, [broadcastMsgField])
+broadcastMsgField = FormControl("Message", broadcastMsgInput)
+broadcastMsgInput = TextArea("broadcast_msg", "Enter update message...", 3)
+broadcastButtons = Buttons([broadcastBtn])
+broadcastBtn = Button("Broadcast Update")
+
+zoneFocus = Form("zone-focus", focusButtons, [zoneSelectField])
+zoneSelectField = FormControl("Select Zone", zoneSelectInput)
+zoneSelectInput = Select("zone_select", [deltaN, deltaS, eastR, westH, centralD], "Choose zone")
+deltaN = SelectItem("delta_north", "Delta North")
+deltaS = SelectItem("delta_south", "Delta South")
+eastR = SelectItem("east_ridge", "East Ridge")
+westH = SelectItem("west_harbor", "West Harbor")
+centralD = SelectItem("central_district", "Central District")
+focusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus Zone")
+
+sitRepForm = Form("sitrep-file", sitRepButtons, [sitRepField])
+sitRepField = FormControl("Situation Report", sitRepInput)
+sitRepInput = TextArea("sitrep_text", "Describe current situation, actions taken, and needs...", 4)
+sitRepButtons = Buttons([sitRepBtn])
+sitRepBtn = Button("File Report")

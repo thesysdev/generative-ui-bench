@@ -1,0 +1,152 @@
+Let me build a comprehensive personal banking home screen that covers all 11 requirements:
+
+1. Balances for checking, savings, and credit - I'll use a Table or Cards with balances
+2. Recent transactions with merchant and amount - Table
+3. Spending split by category this month - PieChart
+4. Bills due soon - ListBlock
+5. Progress toward vacation savings goal - Progress
+6. Current credit score - Badge/TextContent
+7. Move money between accounts with amount - Form
+8. Freeze credit line - Button/AlertDialog
+9. Pick a statement period - DatePicker/Select
+10. Manage alert triggers - DialogBlock with CheckBoxGroup
+11. Dispute a transaction - DialogBlock
+
+Let me design this carefully, making sure every component is referenced and reachable from root.
+
+I'll organize the screen into sections:
+- Header with greeting
+- Balances section (checking, savings, credit)
+- Credit score + spending pie chart
+- Recent transactions table
+- Bills due soon
+- Vacation savings progress
+- Quick actions: transfer money, freeze card, statement period, alerts, dispute
+
+Let me build this out:
+
+```
+root = Card([header, balancesSection, scoreAndSpending, transactionsSection, billsSection, savingsProgress, quickActions])
+```
+
+Let me define each section carefully.
+
+For balances, I'll use a Card with a Table showing the three accounts.
+
+For credit score, I'll use a Badge or TextContent.
+
+For spending, PieChart.
+
+For transactions, a Table.
+
+For bills, ListBlock.
+
+For savings progress, Progress.
+
+For transfer money, a Form.
+
+For freeze credit, AlertDialogBlock.
+
+For statement period, Select in a DialogBlock.
+
+For alerts, DialogBlock with CheckBoxGroup.
+
+For dispute, DialogBlock.
+
+Let me make sure I have all the components properly defined and referenced.
+
+Let me think about the layout more carefully. I want it to be a clean banking dashboard.
+
+I'll structure it as:
+1. CardHeader - greeting
+2. Balances card (sunk) - with table of accounts
+3. Two-column area: Credit score card + Spending pie chart
+4. Recent transactions table
+5. Bills due soon list
+6. Vacation savings progress
+7. Quick actions section with buttons/dialogs
+
+Let me code this up properly now.
+root = Card([header, balancesCard, scoreAndSpendingRow, transactionsCard, billsCard, savingsCard, actionsCard], "card", "column", "m")
+
+header = CardHeader("Good morning, Alex", "Here's your financial overview")
+
+balancesCard = Card([balancesHeading, balancesTable], "sunk")
+balancesHeading = Heading("Account Balances", "h3")
+balancesTable = Table([accountCol, balanceCol, typeCol])
+accountCol = Col("Account", ["Checking", "Savings", "Credit Card"])
+balanceCol = Col("Balance", ["$4,283.50", "$12,750.00", "-$1,842.37"])
+typeCol = Col("Type", ["Debit", "Savings", "Credit"])
+
+scoreAndSpendingRow = Card([scoreCard, spendingCard], "clear", "row", "m")
+
+scoreCard = Card([scoreHeading, scoreValue, scoreStatus], "sunk")
+scoreHeading = Heading("Credit Score", "h3")
+scoreValue = Heading("742", "h1")
+scoreStatus = Badge("Good", "secondary")
+
+spendingCard = Card([spendingHeading, spendingChart], "sunk")
+spendingHeading = Heading("Spending This Month", "h3")
+spendingChart = PieChart(["Food", "Transport", "Shopping", "Utilities", "Entertainment", "Other"], [420, 185, 310, 245, 150, 90], "donut")
+
+transactionsCard = Card([transactionsHeading, transactionsTable], "sunk")
+transactionsHeading = Heading("Recent Transactions", "h3")
+transactionsTable = Table([merchantCol, dateCol, amountCol, categoryCol])
+merchantCol = Col("Merchant", ["Whole Foods", "Uber", "Amazon", "Shell Gas", "Netflix", "Starbucks", "Target", "Gym Membership"])
+dateCol = Col("Date", ["Today", "Today", "Yesterday", "Yesterday", "Dec 18", "Dec 17", "Dec 16", "Dec 15"])
+amountCol = Col("Amount", ["-$67.43", "-$14.50", "-$89.99", "-$45.20", "-$15.99", "-$5.75", "-$123.40", "-$29.99"])
+categoryCol = Col("Category", ["Food", "Transport", "Shopping", "Transport", "Entertainment", "Food", "Shopping", "Health"])
+
+billsCard = Card([billsHeading, billsList], "sunk")
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock([bill1, bill2, bill3, bill4])
+bill1 = ListItem("Electric Bill", "Due Dec 22 — $142.50")
+bill2 = ListItem("Internet", "Due Dec 24 — $79.99")
+bill3 = ListItem("Phone Plan", "Due Dec 26 — $85.00")
+bill4 = ListItem("Car Insurance", "Due Dec 28 — $156.00")
+
+savingsCard = Card([savingsHeading, savingsProgress, savingsLabel], "sunk")
+savingsHeading = Heading("Vacation Savings Goal", "h3")
+savingsProgress = Progress(65, "$3,250 of $5,000")
+savingsLabel = TextContent("You're on track! Deposit $200/week to reach your goal by June.", "small")
+
+actionsCard = Card([actionsHeading, transferForm, actionButtonsRow], "sunk")
+actionsHeading = Heading("Quick Actions", "h3")
+
+transferForm = Form("transfer", transferButtons, [fromField, toField, amountField])
+fromField = FormControl("From Account", fromSelect)
+fromSelect = Select("from_account", [checkingOpt, savingsOpt], "Source account")
+checkingOpt = SelectItem("checking", "Checking ($4,283.50)")
+savingsOpt = SelectItem("savings", "Savings ($12,750.00)")
+toField = FormControl("To Account", toSelect)
+toSelect = Select("to_account", [toChecking, toSavings], "Destination account")
+toChecking = SelectItem("checking", "Checking")
+toSavings = SelectItem("savings", "Savings")
+amountField = FormControl("Amount", amountInput)
+amountInput = Input("amount", "$0.00", "text")
+transferButtons = Buttons([transferBtn, cancelTransferBtn])
+transferBtn = Button("Transfer", null, "primary", "normal", "small")
+cancelTransferBtn = Button("Cancel", null, "tertiary", "normal", "small")
+
+actionButtonsRow = Card([freezeBtn, statementBtn, alertsBtn, disputeBtn], "clear", "row", "s")
+freezeBtn = AlertDialogBlock("Freeze Credit Line", "Freeze Credit Line?", "This will temporarily block all new charges on your credit card. You can unfreeze anytime.", "Freeze", "Cancel", "destructive")
+statementBtn = DialogBlock("Statement Period", "Select Statement Period", "Choose the date range for your statement.", [statementPeriodContent], "outline")
+statementPeriodContent = Select("statement_period", [period1, period2, period3, period4], "Select period")
+period1 = SelectItem("nov", "November 1 – November 30")
+period2 = SelectItem("oct", "October 1 – October 31")
+period3 = SelectItem("sep", "September 1 – September 30")
+period4 = SelectItem("aug", "August 1 – August 31")
+alertsBtn = DialogBlock("Manage Alerts", "Alert Settings", "Choose which events trigger notifications.", [alertsContent], "outline")
+alertsContent = CheckBoxGroup("alert_triggers", [alert1, alert2, alert3, alert4, alert5])
+alert1 = CheckBoxItem("Large purchases", "Alert on purchases over $200", "large_purchase", true)
+alert2 = CheckBoxItem("Balance low", "Alert when checking drops below $500", "low_balance", true)
+alert3 = CheckBoxItem("New charge", "Alert on every credit card charge", "new_charge", false)
+alert4 = CheckBoxItem("Payment due", "Alert 3 days before bills are due", "payment_due", true)
+alert5 = CheckBoxItem("Credit score change", "Alert when credit score changes", "score_change", false)
+disputeBtn = DialogBlock("Dispute Transaction", "Dispute a Transaction", "Select the transaction you'd like to dispute.", [disputeContent], "outline")
+disputeContent = Select("dispute_txn", [txn1, txn2, txn3, txn4, txn5], "Select transaction")
+txn1 = SelectItem("wholefoods", "Whole Foods — $67.43 (Today)")
+txn2 = SelectItem("uber", "Uber — $14.50 (Today)")
+txn3 = SelectItem("amazon", "Amazon — $89.99 (Yesterday)")
+txn4 = SelectItem("shell", "Shell Gas — $45.20 (Yesterday)")
+txn5 = SelectItem("netflix", "Netflix — $15.99 (Dec 18)")

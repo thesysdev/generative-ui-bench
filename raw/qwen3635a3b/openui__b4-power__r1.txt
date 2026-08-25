@@ -1,0 +1,81 @@
+root = Card([header, regionSelector, metricsRow, capacityBar, generationSplit, demandForecast, priceEmissions, plantsTable, outagesList, maintenanceList, alertsSection, curtailmentActions], "card", "column", "m")
+
+header = CardHeader("Power Network Operator Console", "Real-time grid monitoring and control")
+
+regionSelector = FormControl("Focus Region", regionSelect)
+regionSelect = Select("region", [allRegions, northRegion, southRegion, eastRegion, westRegion, centralRegion], "All Regions")
+allRegions = SelectItem("all", "All Regions")
+northRegion = SelectItem("north", "North Region")
+southRegion = SelectItem("south", "South Region")
+eastRegion = SelectItem("east", "East Region")
+westRegion = SelectItem("west", "West Region")
+centralRegion = SelectItem("central", "Central Region")
+
+metricsRow = Card([loadDisplay, emissionsDisplay], "sunk", "row", "l")
+loadDisplay = TextContent("Current Load: 48,320 MW", "large-heavy")
+emissionsDisplay = TextContent("Emissions Today: 12,450 tCO₂", "large-heavy")
+
+capacityBar = Card([capacityHeading, capacityProgress, capacityPercent], "sunk", "column", "s")
+capacityHeading = Heading("Network Capacity Utilization", "h3")
+capacityProgress = Progress(78, "78% of 62,000 MW max capacity")
+capacityPercent = TextContent("13,680 MW headroom remaining", "default")
+
+generationSplit = Card([genSplitHeading, genPieChart], "sunk", "column", "s")
+genSplitHeading = Heading("Generation by Source", "h3")
+genPieChart = PieChart(["Coal", "Natural Gas", "Nuclear", "Wind", "Solar", "Hydro"], [14200, 12800, 9600, 5400, 3800, 2520], "pie")
+
+demandForecast = Card([forecastHeading, forecastChart], "sunk", "column", "s")
+forecastHeading = Heading("Demand Forecast — Next 24 Hours", "h3")
+forecastChart = LineChart(["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00"], [demandSeries], "natural", "Time", "MW")
+demandSeries = Series("Forecasted Demand", [42100, 39800, 38200, 37500, 40100, 44800, 47200, 48900, 49500, 51200, 50100, 46300])
+
+priceEmissions = Card([priceHeading, priceDisplay, emissionsDetail], "sunk", "row", "l")
+priceHeading = Heading("Market & Environmental", "h3")
+priceDisplay = TextContent("Current Price: $94.50 / MWh", "large")
+priceBadge = Badge("$94.50/MWh", "default")
+emissionsDetail = TextContent("CO₂ today: 12,450 tonnes | Rate: 258 t/h", "default")
+
+plantsTable = Card([plantsHeading, plantsTableComp], "sunk", "column", "s")
+plantsHeading = Heading("Power Plants — Output & Status", "h3")
+plantsTableComp = Table([plantName, plantOutput, plantStatus, plantType])
+plantName = Col("Plant", ["Northcoal-1", "Gaspeak A", "Nuclear Unit 3", "Wind Farm Alpha", "Solar Array Beta", "Hydro Dam West", "Gaspeak B", "Nuclear Unit 4", "Wind Farm Gamma", "Solar Array Delta"])
+plantOutput = Col("Output (MW)", [3200, 2800, 1200, 980, 1100, 2520, 2600, 1200, 1200, 900])
+plantStatus = Col("Status", [
+  "online", "online", "online", "online", "online",
+  "online", "online", "online", "maintenance", "online"
+])
+plantType = Col("Type", [
+  "Coal", "Gas", "Nuclear", "Wind", "Solar",
+  "Hydro", "Gas", "Nuclear", "Wind", "Solar"
+])
+
+outagesList = Card([outagesHeading, outagesListComp], "sunk", "column", "s")
+outagesHeading = Heading("Active Outages", "h3")
+outagesListComp = ListBlock([outage1, outage2, outage3])
+outage1 = ListItem("Transmission line trip — 230 kV North-East", "Affected: North Region | Duration: 2h 15m | Restoring: 18:30 UTC")
+outage2 = ListItem("Substation fault — 132 kV South-East", "Affected: East Region | Duration: 45m | Crew dispatched")
+outage3 = ListItem("Wind Farm Gamma maintenance shutdown", "Affected: West Region | Duration: 6h | Scheduled")
+
+maintenanceList = Card([maintHeading, maintListComp], "sunk", "column", "s")
+maintHeading = Heading("Planned Maintenance — This Month", "h3")
+maintListComp = ListBlock([maint1, maint2, maint3, maint4])
+maint1 = ListItem("Wind Farm Gamma — Turbine inspection", "Dec 15–18 | Est. loss: 1,200 MW")
+maint2 =ListItem("Gaspeak B — Gas turbine overhaul", "Dec 20–24 | Est. loss: 2,600 MW")
+maint3 = ListItem("Hydro Dam West — Spillway inspection", "Dec 22–23 | Est. loss: 800 MW")
+maint4 = ListItem("Northcoal-1 — Boiler tube replacement", "Dec 28–31 | Est. loss: 3,200 MW")
+
+alertsSection = Card([alertsHeading, alert1, alert2, alert3, alert4], "sunk", "column", "s")
+alertsHeading = Heading("Live Alerts", "h3")
+alert1 = Alert("Frequency deviation", "Grid frequency at 49.82 Hz — below 50.0 Hz threshold", "warning")
+alert2 = Alert("Load approaching limit", "System load at 78% of peak — monitor closely", "info")
+alert3 = Alert("Wind output dropping", "Wind Farm Alpha output fell 15% in last 30 min", "warning")
+alert4 = Alert("Price spike alert", "Real-time price exceeded $90/MWh at 14:00", "info")
+
+curtailmentActions = Card([curtailHeading, curtailButtons], "sunk", "column", "s")
+curtailHeading = Heading("Curtailment Control", "h3")
+curtailButtons = Buttons([curtailWind, curtailSolar, curtailGas, curtailAll, restoreAll])
+curtailWind = Button("Curtail Wind", ["curtail_wind"], "primary")
+curtailSolar = Button("Curtail Solar", ["curtail_solar"], "primary")
+curtailGas = Button("Curtail Gas", ["curtail_gas"], "primary")
+curtailAll = Button("Curtail All Renewables", ["curtail_all"], "destructive")
+restoreAll = Button("Restore All Curtailments", ["restore_all"], "secondary")

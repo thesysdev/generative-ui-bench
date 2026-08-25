@@ -1,0 +1,1183 @@
+Here is the comprehensive Smart City Operations Center unified dashboard, covering all real-time feeds, district filtering, telemetry, and emergency dispatch actions.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "districtFilterRow",
+          "kpiOverviewCard",
+          "tabsNavigation"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Municipal Operations & Emergency Command Hub",
+        "subtitle": "Real-time City Telemetry, Infrastructure, Public Safety & Dispatch"
+      },
+      {
+        "id": "districtFilterRow",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "children": [
+          "filterLabel",
+          "districtSelect"
+        ]
+      },
+      {
+        "id": "filterLabel",
+        "component": "Label",
+        "text": "Focus District / Sector:"
+      },
+      {
+        "id": "districtSelect",
+        "component": "Select",
+        "name": "selectedDistrict",
+        "placeholder": "All Districts (Citywide)",
+        "items": [
+          "optAll",
+          "optDowntown",
+          "optNorth",
+          "optWestEnd",
+          "optHarbor",
+          "optEastSide"
+        ]
+      },
+      {
+        "id": "optAll",
+        "component": "SelectItem",
+        "value": "all",
+        "label": "All Districts (Citywide View)"
+      },
+      {
+        "id": "optDowntown",
+        "component": "SelectItem",
+        "value": "downtown",
+        "label": "Downtown Central"
+      },
+      {
+        "id": "optNorth",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "North Industrial & Tech Corridor"
+      },
+      {
+        "id": "optWestEnd",
+        "component": "SelectItem",
+        "value": "west_end",
+        "label": "West End Residential"
+      },
+      {
+        "id": "optHarbor",
+        "component": "SelectItem",
+        "value": "harbor",
+        "label": "Harbor & Port Maritime District"
+      },
+      {
+        "id": "optEastSide",
+        "component": "SelectItem",
+        "value": "east_side",
+        "label": "Eastside Arts & University"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "summaryTable"
+        ]
+      },
+      {
+        "id": "summaryTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colCurrentStatus",
+          "colTrend",
+          "colStatusLevel"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Core Indicator",
+        "data": [
+          "Current Weather",
+          "Traffic Congestion Right Now",
+          "Transit Punctuality (Bus & Metro)",
+          "Downtown Parking Availability",
+          "Water Consumption Today",
+          "311 Service Request Backlog"
+        ]
+      },
+      {
+        "id": "colCurrentStatus",
+        "component": "Col",
+        "label": "Live Value",
+        "data": [
+          "72°F / 22°C · Partly Cloudy (Wind 8mph NE)",
+          "64% Index (Moderate Congestion / Peak Flow)",
+          "91.4% On-Time Performance (Target >90%)",
+          "1,420 of 6,500 Spaces Available (21.8% Free)",
+          "14.8M Gallons (92% of Daily Baseline Target)",
+          "342 Open Tickets (Avg Resolution: 4.2 hrs)"
+        ]
+      },
+      {
+        "id": "colTrend",
+        "component": "Col",
+        "label": "Status / Delta",
+        "data": [
+          "Precipitation Risk: 10%",
+          "+8% vs Last Hour",
+          "+1.2% vs Yesterday",
+          "-12% Availability in Core Commercial",
+          "-4% below normal seasonal peak",
+          "-18 cases cleared today"
+        ]
+      },
+      {
+        "id": "colStatusLevel",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "Normal",
+          "Elevated",
+          "Optimal",
+          "Constrained",
+          "Optimal",
+          "Under Control"
+        ]
+      },
+      {
+        "id": "tabsNavigation",
+        "component": "Tabs",
+        "items": [
+          "tabOperations",
+          "tabEnvironment",
+          "tabIncidents",
+          "tabEventsRoads",
+          "tabCitizenBacklog",
+          "tabActions"
+        ]
+      },
+      {
+        "id": "tabOperations",
+        "component": "TabItem",
+        "value": "ops",
+        "trigger": "Transit & Utilities",
+        "content": [
+          "opsHeader",
+          "energyChartHeader",
+          "energyLineChart",
+          "energySeries",
+          "opsSep",
+          "waterHeading",
+          "waterProgress"
+        ]
+      },
+      {
+        "id": "opsHeader",
+        "component": "CardHeader",
+        "title": "Citywide Energy & Resource Telemetry",
+        "subtitle": "7-Day Energy Load Breakdown & Daily Water Distribution"
+      },
+      {
+        "id": "energyChartHeader",
+        "component": "TextContent",
+        "text": "**Energy Consumption Over Past Week (MWh)**"
+      },
+      {
+        "id": "energyLineChart",
+        "component": "LineChart",
+        "labels": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun"
+        ],
+        "series": [
+          "energySeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Past 7 Days",
+        "yLabel": "Grid Draw (MWh)"
+      },
+      {
+        "id": "energySeries",
+        "component": "Series",
+        "category": "City Grid Load (MWh)",
+        "values": [
+          4120,
+          4250,
+          4390,
+          4310,
+          4480,
+          3890,
+          3720
+        ]
+      },
+      {
+        "id": "opsSep",
+        "component": "Separator"
+      },
+      {
+        "id": "waterHeading",
+        "component": "TextContent",
+        "text": "**Water Consumption Today (14.8M / 16.0M Daily Cap)**"
+      },
+      {
+        "id": "waterProgress",
+        "component": "Progress",
+        "value": 92,
+        "label": "92.5% of Daily Allocation"
+      },
+      {
+        "id": "tabEnvironment",
+        "component": "TabItem",
+        "value": "environment",
+        "trigger": "Air Quality by District",
+        "content": [
+          "aqiHeader",
+          "aqiBarChart",
+          "aqiSeries",
+          "aqiTable"
+        ]
+      },
+      {
+        "id": "aqiHeader",
+        "component": "CardHeader",
+        "title": "Air Quality Index (AQI) by District",
+        "subtitle": "US-AQI standard breakdown: 0-50 Good, 51-100 Moderate, 101-150 Unhealthy for Sensitive Groups"
+      },
+      {
+        "id": "aqiBarChart",
+        "component": "BarChart",
+        "labels": [
+          "Downtown",
+          "North Tech",
+          "West End",
+          "Harbor Port",
+          "Eastside Arts",
+          "South Suburbs"
+        ],
+        "series": [
+          "aqiSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Districts",
+        "yLabel": "AQI Score"
+      },
+      {
+        "id": "aqiSeries",
+        "component": "Series",
+        "category": "AQI",
+        "values": [
+          78,
+          94,
+          42,
+          112,
+          58,
+          36
+        ]
+      },
+      {
+        "id": "aqiTable",
+        "component": "Table",
+        "columns": [
+          "colAqiDistrict",
+          "colAqiScore",
+          "colAqiMainPollutant",
+          "colAqiCategory"
+        ]
+      },
+      {
+        "id": "colAqiDistrict",
+        "component": "Col",
+        "label": "District",
+        "data": [
+          "Harbor & Port",
+          "North Industrial Corridor",
+          "Downtown Central",
+          "Eastside Arts",
+          "West End Residential",
+          "South Suburbs"
+        ]
+      },
+      {
+        "id": "colAqiScore",
+        "component": "Col",
+        "label": "AQI Value",
+        "data": [
+          "112",
+          "94",
+          "78",
+          "58",
+          "42",
+          "36"
+        ]
+      },
+      {
+        "id": "colAqiMainPollutant",
+        "component": "Col",
+        "label": "Primary Pollutant",
+        "data": [
+          "PM2.5 / Diesel Exhaust",
+          "NO2 / Particulate",
+          "Ozone / PM10",
+          "Ozone",
+          "PM2.5",
+          "Pollen"
+        ]
+      },
+      {
+        "id": "colAqiCategory",
+        "component": "Col",
+        "label": "Health Advisory",
+        "data": [
+          "Unhealthy for Sensitive",
+          "Moderate",
+          "Moderate",
+          "Moderate",
+          "Good",
+          "Good"
+        ]
+      },
+      {
+        "id": "tabIncidents",
+        "component": "TabItem",
+        "value": "incidents",
+        "trigger": "Incidents & Emergency Fleet",
+        "content": [
+          "incidentsHeader",
+          "openIncidentsTable",
+          "fleetSep",
+          "fleetHeader",
+          "fleetTable"
+        ]
+      },
+      {
+        "id": "incidentsHeader",
+        "component": "CardHeader",
+        "title": "Active Incidents Log",
+        "subtitle": "Live tracking by sector, category, and severity"
+      },
+      {
+        "id": "openIncidentsTable",
+        "component": "Table",
+        "columns": [
+          "colIncId",
+          "colIncType",
+          "colIncLocation",
+          "colIncSeverity",
+          "colIncStatus"
+        ]
+      },
+      {
+        "id": "colIncId",
+        "component": "Col",
+        "label": "Incident #",
+        "data": [
+          "INC-8821",
+          "INC-8819",
+          "INC-8814",
+          "INC-8809"
+        ]
+      },
+      {
+        "id": "colIncType",
+        "component": "Col",
+        "label": "Type",
+        "data": [
+          "2-Vehicle Collision / Road Blockage",
+          "Water Main Pressure Drop",
+          "Power Transformer Fault",
+          "Traffic Signal Outage"
+        ]
+      },
+      {
+        "id": "colIncLocation",
+        "component": "Col",
+        "label": "Location / District",
+        "data": [
+          "5th Ave & Pine St (Downtown)",
+          "Industrial Way & Pier 4 (Harbor)",
+          "Elmwood Ave (North Sector)",
+          "Broadway & 12th (Eastside)"
+        ]
+      },
+      {
+        "id": "colIncSeverity",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "High (Priority 1)",
+          "Critical (Priority 1)",
+          "Medium (Priority 2)",
+          "Low (Priority 3)"
+        ]
+      },
+      {
+        "id": "colIncStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "EMS & Police On-Scene",
+          "Crew En Route",
+          "Technicians Dispatched",
+          "Scheduled for Dispatch"
+        ]
+      },
+      {
+        "id": "fleetSep",
+        "component": "Separator"
+      },
+      {
+        "id": "fleetHeader",
+        "component": "CardHeader",
+        "title": "Emergency Vehicle & Unit Deployments",
+        "subtitle": "Active GPS telemetry and operational readiness"
+      },
+      {
+        "id": "fleetTable",
+        "component": "Table",
+        "columns": [
+          "colUnitId",
+          "colUnitType",
+          "colUnitLoc",
+          "colUnitStatus"
+        ]
+      },
+      {
+        "id": "colUnitId",
+        "component": "Col",
+        "label": "Unit ID",
+        "data": [
+          "MEDIC-04",
+          "ENGINE-12",
+          "PATROL-31",
+          "PATROL-18",
+          "HAZMAT-02",
+          "UTIL-09"
+        ]
+      },
+      {
+        "id": "colUnitType",
+        "component": "Col",
+        "label": "Vehicle Class",
+        "data": [
+          "Advanced Life Support Ambulance",
+          "Heavy Fire Engine",
+          "Police Cruiser",
+          "Traffic Enforcement",
+          "Hazmat Response Truck",
+          "Water & Pipe Rapid Response"
+        ]
+      },
+      {
+        "id": "colUnitLoc",
+        "component": "Col",
+        "label": "Current Position / Deployment",
+        "data": [
+          "En route to 5th & Pine (Downtown)",
+          "Staged at Station 6 (Central)",
+          "On Patrol: Pier 4 / Harbor Blvd",
+          "Broadway & 12th Intersection",
+          "Station 2 (North Tech)",
+          "At Harbor Pier 4 Water Main Site"
+        ]
+      },
+      {
+        "id": "colUnitStatus",
+        "component": "Col",
+        "label": "Availability",
+        "data": [
+          "Busy - Incident",
+          "Available - Staged",
+          "Busy - Patrol",
+          "Busy - Traffic Control",
+          "Available - In Quarters",
+          "Busy - Maintenance"
+        ]
+      },
+      {
+        "id": "tabEventsRoads",
+        "component": "TabItem",
+        "value": "events_roads",
+        "trigger": "Events & Works",
+        "content": [
+          "eventsHeader",
+          "eventsTable",
+          "worksSep",
+          "roadworksHeader",
+          "roadworksTable",
+          "infraSep",
+          "infraHeader",
+          "infraTable"
+        ]
+      },
+      {
+        "id": "eventsHeader",
+        "component": "CardHeader",
+        "title": "Public Events This Weekend",
+        "subtitle": "Expected crowd densities, permits, and traffic control plans"
+      },
+      {
+        "id": "eventsTable",
+        "component": "Table",
+        "columns": [
+          "colEvName",
+          "colEvDate",
+          "colEvLocation",
+          "colEvEstAttendance",
+          "colEvTrafficImpact"
+        ]
+      },
+      {
+        "id": "colEvName",
+        "component": "Col",
+        "label": "Event",
+        "data": [
+          "Downtown Marathon & 10K",
+          "Harbor Food & Seafood Fest",
+          "Civic Symphony in the Park",
+          "Eastside Farmer's Market"
+        ]
+      },
+      {
+        "id": "colEvDate",
+        "component": "Col",
+        "label": "Schedule",
+        "data": [
+          "Saturday 06:30 - 13:00",
+          "Sat & Sun 11:00 - 20:00",
+          "Sunday 18:00 - 21:30",
+          "Sunday 08:00 - 14:00"
+        ]
+      },
+      {
+        "id": "colEvLocation",
+        "component": "Col",
+        "label": "Venue / Zone",
+        "data": [
+          "Civic Center to Waterfront Loop",
+          "Harbor Esplanade Pier 1-3",
+          "Memorial Park Amphitheater",
+          "Market Square (Eastside)"
+        ]
+      },
+      {
+        "id": "colEvEstAttendance",
+        "component": "Col",
+        "label": "Expected Turnout",
+        "data": [
+          "18,000 runners & spectators",
+          "12,000 visitors",
+          "5,500 attendees",
+          "3,200 visitors"
+        ]
+      },
+      {
+        "id": "colEvTrafficImpact",
+        "component": "Col",
+        "label": "Traffic Plan",
+        "data": [
+          "Rolling Street Closures Active",
+          "Designated Shuttle Routes",
+          "Perimeter Parking Active",
+          "1-Block Local Detour"
+        ]
+      },
+      {
+        "id": "worksSep",
+        "component": "Separator"
+      },
+      {
+        "id": "roadworksHeader",
+        "component": "CardHeader",
+        "title": "Roadworks Planned This Month",
+        "subtitle": "Active construction permits and scheduled lane closures"
+      },
+      {
+        "id": "roadworksTable",
+        "component": "Table",
+        "columns": [
+          "colRwProject",
+          "colRwSector",
+          "colRwSchedule",
+          "colRwImpact"
+        ]
+      },
+      {
+        "id": "colRwProject",
+        "component": "Col",
+        "label": "Project Scope",
+        "data": [
+          "Main St Resurfacing & Bike Lane",
+          "West Bridge Joint Replacement",
+          "North Expressway Sound Wall",
+          "Fiber Optic Conduit Trenching"
+        ]
+      },
+      {
+        "id": "colRwSector",
+        "component": "Col",
+        "label": "Location",
+        "data": [
+          "Main St (1st to 8th Ave)",
+          "West Bridge (Inbound Span)",
+          "Hwy 101 Northbound MP 14-16",
+          "Tech Park Way"
+        ]
+      },
+      {
+        "id": "colRwSchedule",
+        "component": "Col",
+        "label": "Timeline",
+        "data": [
+          "May 2 - May 16 (Nightly)",
+          "May 10 - May 22 (24/7)",
+          "May 15 - May 30 (Off-peak)",
+          "May 20 - May 24 (Daytime)"
+        ]
+      },
+      {
+        "id": "colRwImpact",
+        "component": "Col",
+        "label": "Lane Status",
+        "data": [
+          "Single lane closure 20:00-06:00",
+          "1 of 3 lanes closed continuously",
+          "Shoulder only / 45mph speed limit",
+          "Right turn lane diverted"
+        ]
+      },
+      {
+        "id": "infraSep",
+        "component": "Separator"
+      },
+      {
+        "id": "infraHeader",
+        "component": "CardHeader",
+        "title": "Infrastructure Maintenance Due",
+        "subtitle": "Inspection and service schedules for civic assets"
+      },
+      {
+        "id": "infraTable",
+        "component": "Table",
+        "columns": [
+          "colInfraAsset",
+          "colInfraType",
+          "colInfraDue",
+          "colInfraPriority"
+        ]
+      },
+      {
+        "id": "colInfraAsset",
+        "component": "Col",
+        "label": "Asset Name",
+        "data": [
+          "Storm Pump Station #4",
+          "Subway Ventilation Shaft B",
+          "Overhead High-Voltage Feeder 3",
+          "Reservoir Gate Valve Alpha"
+        ]
+      },
+      {
+        "id": "colInfraType",
+        "component": "Col",
+        "label": "Service Type",
+        "data": [
+          "Pump Impeller & Seal Overhaul",
+          "Air Filtration & Backup Generator",
+          "Insulator Thermal Scan & Trim",
+          "Hydraulic Actuator Calibration"
+        ]
+      },
+      {
+        "id": "colInfraDue",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "Overdue (3 Days)",
+          "Due in 2 Days",
+          "Due in 6 Days",
+          "Due in 11 Days"
+        ]
+      },
+      {
+        "id": "colInfraPriority",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "High",
+          "Medium",
+          "Medium",
+          "Routine"
+        ]
+      },
+      {
+        "id": "tabCitizenBacklog",
+        "component": "TabItem",
+        "value": "citizen",
+        "trigger": "Citizen Reports & 311 Backlog",
+        "content": [
+          "citizenHeader",
+          "liveReportsBlock",
+          "rep1",
+          "rep2",
+          "rep3",
+          "backlogSep",
+          "backlogHeader",
+          "backlogTable"
+        ]
+      },
+      {
+        "id": "citizenHeader",
+        "component": "CardHeader",
+        "title": "Live Citizen Reports Stream",
+        "subtitle": "Incoming reports via Mobile 311 App and Municipal Hotline"
+      },
+      {
+        "id": "liveReportsBlock",
+        "component": "ListBlock",
+        "variant": "number",
+        "items": [
+          "rep1",
+          "rep2",
+          "rep3"
+        ]
+      },
+      {
+        "id": "rep1",
+        "component": "ListItem",
+        "title": "Pothole Damaged Tire - Reported 2 mins ago",
+        "subtitle": "Corner of 4th Ave & Oak St (Downtown) · Ticket #311-9941 · Citizen photo attached",
+        "actionLabel": "Assign Crew"
+      },
+      {
+        "id": "rep2",
+        "component": "ListItem",
+        "title": "Fallen Tree Branch Blocking Sidewalk - Reported 8 mins ago",
+        "subtitle": "742 Evergreen Terrace (West End) · Ticket #311-9940 · Pedestrian hazard flagged",
+        "actionLabel": "Assign Crew"
+      },
+      {
+        "id": "rep3",
+        "component": "ListItem",
+        "title": "Streetlight Flickering Constantly - Reported 19 mins ago",
+        "subtitle": "Maple Blvd near Park Entrance (Eastside) · Ticket #311-9938",
+        "actionLabel": "Queue"
+      },
+      {
+        "id": "backlogSep",
+        "component": "Separator"
+      },
+      {
+        "id": "backlogHeader",
+        "component": "CardHeader",
+        "title": "Service Request Backlog by Department",
+        "subtitle": "Total: 342 active unresolved service orders"
+      },
+      {
+        "id": "backlogTable",
+        "component": "Table",
+        "columns": [
+          "colDept",
+          "colBacklogCount",
+          "colAvgAge",
+          "colSlaStatus"
+        ]
+      },
+      {
+        "id": "colDept",
+        "component": "Col",
+        "label": "Municipal Department",
+        "data": [
+          "Roads & Pavement",
+          "Street Lighting & Electrical",
+          "Parks & Urban Forestry",
+          "Sanitation & Illegal Dumping",
+          "Water & Stormwater"
+        ]
+      },
+      {
+        "id": "colBacklogCount",
+        "component": "Col",
+        "label": "Open Requests",
+        "data": [
+          "118",
+          "74",
+          "56",
+          "52",
+          "42"
+        ]
+      },
+      {
+        "id": "colAvgAge",
+        "component": "Col",
+        "label": "Average Age",
+        "data": [
+          "3.8 days",
+          "1.9 days",
+          "4.5 days",
+          "0.8 days",
+          "1.2 days"
+        ]
+      },
+      {
+        "id": "colSlaStatus",
+        "component": "Col",
+        "label": "SLA Compliance",
+        "data": [
+          "88% Within SLA",
+          "94% Within SLA",
+          "82% Within SLA",
+          "97% Within SLA",
+          "95% Within SLA"
+        ]
+      },
+      {
+        "id": "tabActions",
+        "component": "TabItem",
+        "value": "actions",
+        "trigger": "Dispatch & Public Alerts",
+        "content": [
+          "dispatchCard",
+          "alertActionCard"
+        ]
+      },
+      {
+        "id": "dispatchCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "dispatchHeader",
+          "dispatchForm"
+        ]
+      },
+      {
+        "id": "dispatchHeader",
+        "component": "CardHeader",
+        "title": "Dispatch Municipal Field Crew",
+        "subtitle": "Deploy emergency or maintenance teams directly to an incident or district"
+      },
+      {
+        "id": "dispatchForm",
+        "component": "Form",
+        "name": "crewDispatchForm",
+        "buttons": "dispatchBtnGroup",
+        "fields": [
+          "dispatchTypeControl",
+          "dispatchDistrictControl",
+          "dispatchIncidentControl",
+          "dispatchNotesControl"
+        ]
+      },
+      {
+        "id": "dispatchTypeControl",
+        "component": "FormControl",
+        "label": "Crew Type / Unit Selection",
+        "input": "dispatchTypeSelect"
+      },
+      {
+        "id": "dispatchTypeSelect",
+        "component": "Select",
+        "name": "crewType",
+        "placeholder": "Select unit type",
+        "items": [
+          "crewRoads",
+          "crewWater",
+          "crewElectric",
+          "crewTree",
+          "crewTraffic"
+        ]
+      },
+      {
+        "id": "crewRoads",
+        "component": "SelectItem",
+        "value": "pothole_asphalt",
+        "label": "Asphalt & Road Repair Crew (Truck #07)"
+      },
+      {
+        "id": "crewWater",
+        "component": "SelectItem",
+        "value": "water_rapid",
+        "label": "Water Main Rapid Response Team (#02)"
+      },
+      {
+        "id": "crewElectric",
+        "component": "SelectItem",
+        "value": "traffic_signals",
+        "label": "Signal & Electrical Field Techs (#04)"
+      },
+      {
+        "id": "crewTree",
+        "component": "SelectItem",
+        "value": "forestry",
+        "label": "Urban Forestry / Arborist Unit (#01)"
+      },
+      {
+        "id": "crewTraffic",
+        "component": "SelectItem",
+        "value": "traffic_control",
+        "label": "DOT Traffic Cone & Barrier Unit (#03)"
+      },
+      {
+        "id": "dispatchDistrictControl",
+        "component": "FormControl",
+        "label": "Target District",
+        "input": "dispatchDistrictSelect"
+      },
+      {
+        "id": "dispatchDistrictSelect",
+        "component": "Select",
+        "name": "targetDistrict",
+        "placeholder": "Select district",
+        "items": [
+          "dtOpt1",
+          "dtOpt2",
+          "dtOpt3",
+          "dtOpt4",
+          "dtOpt5"
+        ]
+      },
+      {
+        "id": "dtOpt1",
+        "component": "SelectItem",
+        "value": "downtown",
+        "label": "Downtown Central"
+      },
+      {
+        "id": "dtOpt2",
+        "component": "SelectItem",
+        "value": "north",
+        "label": "North Industrial"
+      },
+      {
+        "id": "dtOpt3",
+        "component": "SelectItem",
+        "value": "west_end",
+        "label": "West End Residential"
+      },
+      {
+        "id": "dtOpt4",
+        "component": "SelectItem",
+        "value": "harbor",
+        "label": "Harbor & Port"
+      },
+      {
+        "id": "dtOpt5",
+        "component": "SelectItem",
+        "value": "eastside",
+        "label": "Eastside Arts"
+      },
+      {
+        "id": "dispatchIncidentControl",
+        "component": "FormControl",
+        "label": "Link to Incident or Request ID",
+        "hint": "Optional: e.g. INC-8821 or 311-9941",
+        "input": "dispatchIncidentInput"
+      },
+      {
+        "id": "dispatchIncidentInput",
+        "component": "Input",
+        "name": "incidentRef",
+        "placeholder": "INC-XXXX / 311-XXXX"
+      },
+      {
+        "id": "dispatchNotesControl",
+        "component": "FormControl",
+        "label": "Crew Instructions & Priority Notes",
+        "input": "dispatchNotesArea"
+      },
+      {
+        "id": "dispatchNotesArea",
+        "component": "TextArea",
+        "name": "dispatchNotes",
+        "placeholder": "Enter exact coordinates, radio channel, and immediate instructions..."
+      },
+      {
+        "id": "dispatchBtnGroup",
+        "component": "Buttons",
+        "buttons": [
+          "dispatchSubmitBtn"
+        ]
+      },
+      {
+        "id": "dispatchSubmitBtn",
+        "component": "Button",
+        "label": "Dispatch Crew Now",
+        "variant": "primary"
+      },
+      {
+        "id": "alertActionCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "alertActionHeader",
+          "alertForm"
+        ]
+      },
+      {
+        "id": "alertActionHeader",
+        "component": "CardHeader",
+        "title": "Broadcast Public Safety & Traffic Alert",
+        "subtitle": "Transmits SMS, Mobile App notification, and Variable Message Signs (VMS)"
+      },
+      {
+        "id": "alertForm",
+        "component": "Form",
+        "name": "publicAlertForm",
+        "buttons": "alertBtnGroup",
+        "fields": [
+          "alertTitleControl",
+          "alertLevelControl",
+          "alertChannelsControl",
+          "alertMessageControl"
+        ]
+      },
+      {
+        "id": "alertTitleControl",
+        "component": "FormControl",
+        "label": "Alert Headline",
+        "input": "alertTitleInput"
+      },
+      {
+        "id": "alertTitleInput",
+        "component": "Input",
+        "name": "alertTitle",
+        "placeholder": "e.g. FLASH FLOOD WARNING / MAJOR ACCIDENT CLOSURE"
+      },
+      {
+        "id": "alertLevelControl",
+        "component": "FormControl",
+        "label": "Broadcast Severity Level",
+        "input": "alertRadioGroup"
+      },
+      {
+        "id": "alertRadioGroup",
+        "component": "RadioGroup",
+        "name": "alertSeverity",
+        "defaultValue": "advisory",
+        "items": [
+          "radAdvisory",
+          "radWarning",
+          "radEmergency"
+        ]
+      },
+      {
+        "id": "radAdvisory",
+        "component": "RadioItem",
+        "value": "advisory",
+        "label": "Public Advisory (General Information)",
+        "description": "App notifications and road signage"
+      },
+      {
+        "id": "radWarning",
+        "component": "RadioItem",
+        "value": "warning",
+        "label": "High Priority Warning",
+        "description": "App push, SMS opting-in, VMS, Transit screens"
+      },
+      {
+        "id": "radEmergency",
+        "component": "RadioItem",
+        "value": "emergency",
+        "label": "Critical Emergency Alert",
+        "description": "All channels including emergency sirens and broad broadcast"
+      },
+      {
+        "id": "alertChannelsControl",
+        "component": "FormControl",
+        "label": "Targeted Broadcast Channels",
+        "input": "alertChannelsCheck"
+      },
+      {
+        "id": "alertChannelsCheck",
+        "component": "CheckBoxGroup",
+        "name": "alertChannels",
+        "items": [
+          "chkSms",
+          "chkSigns",
+          "chkTransit"
+        ]
+      },
+      {
+        "id": "chkSms",
+        "component": "CheckBoxItem",
+        "name": "channel_sms",
+        "label": "Citizen SMS & Mobile Push",
+        "description": "Send push alerts to users in the affected zone",
+        "defaultChecked": true
+      },
+      {
+        "id": "chkSigns",
+        "component": "CheckBoxItem",
+        "name": "channel_vms",
+        "label": "Roadway Matrix Signs (VMS)",
+        "description": "Display message on overhead digital highway & arterial boards",
+        "defaultChecked": true
+      },
+      {
+        "id": "chkTransit",
+        "component": "CheckBoxItem",
+        "name": "channel_transit",
+        "label": "Transit Station Displays",
+        "description": "Broadcast banner on subway & bus stop digital screens",
+        "defaultChecked": true
+      },
+      {
+        "id": "alertMessageControl",
+        "component": "FormControl",
+        "label": "Alert Message Body",
+        "hint": "Keep clear and concise for road boards and mobile displays (max 160 chars recommended)",
+        "input": "alertMessageArea"
+      },
+      {
+        "id": "alertMessageArea",
+        "component": "TextArea",
+        "name": "alertMessage",
+        "placeholder": "Avoid 5th Ave between Pine and Elm due to emergency response. Use 8th Ave as detour."
+      },
+      {
+        "id": "alertBtnGroup",
+        "component": "Buttons",
+        "buttons": [
+          "broadcastAlertBtn"
+        ]
+      },
+      {
+        "id": "broadcastAlertBtn",
+        "component": "Button",
+        "label": "Transmit Public Alert",
+        "variant": "primary",
+        "type": "destructive"
+      }
+    ]
+  }
+}
+</a2ui-json>

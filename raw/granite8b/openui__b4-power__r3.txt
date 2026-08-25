@@ -1,0 +1,228 @@
+```openui-lang
+root = Card(
+    direction = "row",
+    gap = "xl",
+    wrap = true,
+    children = [
+        loadSection,
+        capacitySection,
+        generationSection,
+        plantSection,
+        outageSection,
+        forecastSection,
+        priceSection,
+        maintenanceSection,
+        alertsSection,
+        regionFocusSection,
+        curtailmentSection,
+        emissionsSection
+    ]
+)
+
+loadSection = Card(
+    variant = "clear",
+    children = [
+        TextContent("Current Load: 45,200 MW", size = "large"),
+        Callout(
+            variant = "info",
+            title = "Load Status",
+            description = "65% of network capacity utilized",
+            visible = true
+        )
+    ]
+)
+
+capacitySection = Card(
+    variant = "clear",
+    children = [
+        TextContent("Network Capacity: 70,000 MW", size = "default"),
+        Callout(
+            variant = "warning",
+            title = "Capacity Utilization",
+            description = "Capacity Utilization: 64.6%",
+            visible = true
+        )
+    ]
+)
+
+generationSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Generation Split by Source", size = "default"),
+        Table(
+            columns = [
+                Col("Source", ["Hydro", "Wind", "Coal", "Natural Gas", "Solar"], type = "string"),
+                Col("Share (%)", ["35", "25", "20", "15", "5"], type = "number")
+            ]
+        )
+    ]
+)
+
+plantSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Power Plants", size = "default"),
+        Table(
+            columns = [
+                Col("Plant", [], type = "string"),
+                Col("Output (MW)", [], type = "number"),
+                Col("Status", ["Online", "Offline", "Partial"], type = "string")
+            ]
+        )
+    ]
+)
+
+outageSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Outages", size = "default"),
+        Table(
+            columns = [
+                Col("Region", [], type = "string"),
+                Col("Affected Area", [], type = "string")
+            ]
+        )
+    ]
+)
+
+forecastSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("24‑Hour Demand Forecast", size = "default"),
+        LineChart(
+            labels = ["0h", "6h", "12h", "18h", "24h"],
+            series = [
+                Series("Forecast", [42000, 43000, 44000, 45000, 46000])
+            ],
+            variant = "natural",
+            xLabel = "Hours",
+            yLabel = "MW"
+        )
+    ]
+)
+
+priceSection = Card(
+    variant = "clear",
+    children = [
+        TextContent("Current Price: $45.20/MWh", size = "large"),
+        Callout(
+            variant = "info",
+            title = "Price Trend",
+            description = "Price stable over the last hour",
+            visible = true
+        )
+    ]
+)
+
+maintenanceSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Planned Maintenance This Month", size = "default"),
+        ListBlock(
+            items = [
+                ListItem("Plant A", "Scheduled for 2025-09-15 00:00 – 2025-09-16 23:59"),
+                ListItem("Plant B", "Scheduled for 2025-09-20 02:00 – 2025-09-21 01:00"),
+                ListItem("Transmission Line X", "Scheduled for 2025-09-25 08:00 – 2025-09-26 12:00")
+            ],
+            variant = "number"
+        )
+    ]
+)
+
+alertsSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Live Alerts", size = "default"),
+        ListBlock(
+            items = [
+                ListItem("High Voltage Spike", "Occurred at 2025-08-27 14:32 UTC, resolved."),
+                ListItem("Wind Turbine Failure", "Plant 3 offline, 150 MW reduction."),
+                ListItem("Outage in Region Y", "Affected 20,000 customers.")
+            ],
+            variant = "number"
+        )
+    ]
+)
+
+regionFocusSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Focus Region", size = "default"),
+        Buttons(
+            buttons = [
+                Button("Region A"),
+                Button("Region B"),
+                Button("Region C")
+            ],
+            direction = "row"
+        )
+    ]
+)
+
+curtailmentSection = Card(
+    variant = "card",
+    direction = "column",
+    gap = "m",
+    children = [
+        TextContent("Order Curtailment", size = "default"),
+        Form(
+            name = "curtailmentForm",
+            buttons = Buttons(
+                buttons = [
+                    Button("Submit Order", action = ["orderCurtailment"])
+                ]
+            ),
+            fields = [
+                FormControl(
+                    label = "Region",
+                    input = Select(
+                        name = "region",
+                        items = [
+                            SelectItem("Region A", "Region A"),
+                            SelectItem("Region B", "Region B"),
+                            SelectItem("Region C", "Region C")
+                        ],
+                        placeholder = "Select Region"
+                    )
+                ),
+                FormControl(
+                    label = "Curtailment MW",
+                    input = Input(
+                        name = "mw",
+                        type = "number",
+                        placeholder = "Enter MW to curtail"
+                    )
+                )
+            ]
+        )
+    ]
+)
+
+emissionsSection = Card(
+    variant = "clear",
+    children = [
+        TextContent("Emissions Today: 1,250,000 kg CO₂", size = "large"),
+        Callout(
+            variant = "warning",
+            title = "Emission Level",
+            description = "Above target by 5%",
+            visible = true
+        )
+    ]
+)
+
+```

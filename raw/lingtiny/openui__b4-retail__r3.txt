@@ -1,0 +1,111 @@
+root = Card([header, kpiRow, metricsRow, bestSellersRow, outOfStockRow, shiftRow, basketRow, returnsRow, promotionsRow, registersRow, actionsRow, reorderRow, viewStoreRow, comparisonRow], "clear")
+
+header = CardHeader("Store Console", "Daily Operations")
+
+kpis = Row([kpi1, kpi2, kpi3, kpi4], "row")
+kpi1 = CardHeader("Today Sales", "$4,280 / $5,000 target", "success")
+kpi2 = CardHeader("Foot Traffic", "187 visitors", "info")
+kpi3 = CardHeader("Best Sellers", "4 units sold", "success")
+kpi4 = CardHeader("Out of Stock", "3 items", "warning")
+
+metricsRow = Card([salesChart, footTrafficChart, bestSellersDetails, outOfStockDetails], "sunk")
+
+salesChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [salesSeries], "grouped", "Day", "Sales")
+salesSeries = Series("Today", [4280])
+
+footTrafficChart = BarChart(["8am", "10am", "12pm", "2pm", "4pm", "6pm"], [trafficSeries], "grouped", "Time", "Visitors")
+trafficSeries = Series("Today", [187])
+
+bestSellersDetails = ListBlock([
+    ListItem("Widget A", "4 units", null, "Top seller"),
+    ListItem("Widget B", "3 units", null, "Second"),
+    ListItem("Gadget X", "2 units", null, "Trending"),
+    ListItem("Sprocket Y", "1 unit", null, "New"),
+])
+
+outOfStockDetails = ListBlock([
+    ListItem("Widget C", "Out of stock", null, "Reorder needed"),
+    ListItem("Gadget Y", "Out of stock", null, "Reorder needed"),
+    ListItem("Part Z", "Out of stock", null, "Reorder needed"),
+])
+
+shiftRow = Card([shiftTable, activeEmployees], "sunk")
+shiftTable = Table([shiftCol, shiftCol2, shiftCol3], [
+    Col("Register", ["Register 1", "Register 2", "Register 3", "Register 4"]),
+    Col("Open", [true, true, false, true]),
+    Col("Staff", ["Alice", "Bob", "Carol", "Dave"]),
+])
+
+activeEmployees = ListBlock([
+    ListItem("Alice", "Register 1", null, "Open"),
+    ListItem("Bob", "Register 2", null, "Open"),
+    ListItem("Carol", "Register 3", null, "Closed"),
+    ListItem("Dave", "Register 4", null, "Open"),
+])
+
+basketRow = Card([basketChart, avgBasket], "sunk")
+basketChart = HorizontalBarChart(["Small", "Medium", "Large"], [basketSeries], "grouped", "Size", "Transactions")
+basketSeries = Series("Today", [120, 85, 42])
+avgBasket = TextCallout("neutral", "Average basket size", "$18.50")
+
+returnsRow = Card([returnsChart, returnsDetails], "sunk")
+returnsChart = HorizontalBarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [returnsSeries], "grouped", "Day", "Returns")
+returnsSeries = Series("Week", [12, 8, 15, 10, 7, 5, 3])
+returnsDetails = ListBlock([
+    ListItem("Widget A", "2 units", "Mon"),
+    ListItem("Gadget X", "1 unit", "Tue"),
+    ListItem("Sprocket Y", "3 units", "Wed"),
+    ListItem("Widget B", "1 unit", "Thu"),
+    ListItem("Gadget Y", "0 units", "Fri"),
+])
+
+promotionsRow = Card([promotionsChart, promotionsDetails], "sunk")
+promotionsChart = SingleStackedBarChart(["Promo 1", "Promo 2", "Promo 3"], [promoSeries], "stacked", "Name", "Units")
+promoSeries = Series("Week", [120, 85, 45])
+promotionsDetails = ListBlock([
+    ListItem("Promo 1", "50% of target", null, "On track"),
+    ListItem("Promo 2", "30% of target", null, "Slow"),
+    ListItem("Promo 3", "70% of target", null, "Good"),
+])
+
+actionsRow = Card([reorderBtn, viewStoreBtn], "sunk")
+reorderBtn = Button("Reorder Item", null, "primary")
+viewStoreBtn = Button("View Different Store", null, "secondary")
+
+reorderRow = Card([reorderForm], "sunk")
+reorderForm = Form("reorder", [
+    FormControl("Item to reorder", itemSelect, "Select item to reorder"),
+    FormControl("Quantity", quantitySlider, "How many units"),
+], [
+    Button("Confirm Reorder", null, "primary"),
+    Button("Cancel", null, "tertiary"),
+])
+
+viewStoreRow = Card([viewStoreForm], "sunk")
+viewStoreForm = Form("store", [
+    FormControl("Store", storeSelect, "Select a store"),
+    FormControl("Branch", branchSelect, "Select branch"),
+], [
+    Button("View Store", null, "primary"),
+    Button("Cancel", null, "tertiary"),
+])
+
+comparisonRow = Card([weekCompare], "sunk")
+weekCompare = Card([
+    Heading("This Week vs Last Week", "h3"),
+    ChartRow([thisWeekSeries, lastWeekSeries]),
+    ChartRow([thisWeekSales, lastWeekSales]),
+    ChartRow([thisWeekTraffic, lastWeekTraffic]),
+])
+
+chartRow = Row([thisWeekSeries, lastWeekSeries], "row")
+thisWeekSeries = Series("This Week", [120, 85, 45])
+lastWeekSeries = Series("Last Week", [95, 70, 35])
+
+chartRow2 = Row([thisWeekSales, lastWeekSales], "row")
+thisWeekSales = Series("Sales", [4280, 3800, 4100, 3900, 4500, 3500, 3200])
+lastWeekSales = Series("Sales", [3800, 3400, 3600, 3300, 3900, 3100, 2800])
+
+chartRow3 = Row([thisWeekTraffic, lastWeekTraffic], "row")
+thisWeekTraffic = Series("Traffic", [187, 165, 178, 190, 170, 195, 160])
+lastWeekTraffic = Series("Traffic", [150, 140, 155, 160, 145, 170, 130])

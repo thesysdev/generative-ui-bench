@@ -1,0 +1,32 @@
+```openui-lang
+root = Card([dashboardHeader, kpiSection, ticketsTable, filters, newTicketButton])
+
+dashboardHeader = CardHeader("Support Dashboard", "Morning Overview")
+
+kpiSection = Card([kpiTitle, openTickets, avgResponseTime], "sunk")
+kpiTitle = Heading("Key Metrics", "h3")
+openTickets = Card([openTicketsLabel, openTicketsValue], "card", "row", "s")
+openTicketsLabel = TextContent("Open Tickets", "small-heavy")
+openTicketsValue = TextContent("47", "large-heavy")
+avgResponseTime = Card([avgResponseLabel, avgResponseValue], "card", "row", "s")
+avgResponseLabel = TextContent("Avg First Response", "small-heavy")
+avgResponseValue = TextContent("2h 15m", "large-heavy")
+
+ticketsTable = Card([recentTicketsTitle, ticketsTableComponent], "sunk")
+recentTicketsTitle = Heading("Recent Tickets", "h4")
+ticketsTableComponent = Table([ticketColumns])
+ticketColumns = Col("Ticket Details", [
+    "Priority: High | User: jdoe | Subject: Payment Failed",
+    "Priority: Medium | User: smith | Subject: Account Login Issue",
+    "Priority: Low | User: johnson | Subject: Feature Request",
+    "Priority: High | User: brown | Subject: API Rate Limit Exceeded",
+    "Priority: Critical | User: admin | Subject: System Outage"
+], "string")
+
+filters = Card([filterLabel, filterButton], "sunk", "row", "l", "center")
+filterLabel = TextContent("Filter by Priority", "small")
+filterButton = Button("Show High Priority Only", null, "secondary")
+
+newTicketButton = Card([newTicketButtonComponent], "sunk")
+newTicketButtonComponent = Button("Open New Ticket", null, "primary")
+```

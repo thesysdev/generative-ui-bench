@@ -1,0 +1,163 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader("Café Mocha", "Daily Brew & Bites"),
+    
+    // Drinks section
+    Card(
+      children: [
+        TextContent("Our Signature Drinks", "Freshly brewed and expertly crafted"),
+        DrinksList(),
+      ],
+    ),
+    
+    // Food section
+    Card(
+      children: [
+        TextContent("Delicious Bites", "Handcrafted dishes for every craving"),
+        FoodList(),
+      ],
+    ),
+    
+    // Today's Special (called out)
+    Card(
+      children: [
+        TextContent("TODAY'S SPECIAL",
+          "🍄 Wild Mushroom Truffle Risotto",
+          "Featured dish of the day"),
+        PriceItem("Wild Mushroom Truffle Risotto", "$24.99"),
+        PriceItem("Maple Bacon Mac & Cheese", "$18.50"),
+        PriceItem("Spicy Chickpea Wrap", "$12.99"),
+      ],
+    ),
+    
+    // Vegetarian filter
+    Card(
+      children: [
+        Label("Show Vegetarian Only", "Toggle to filter menus for plant-based options"),
+        VegetarianToggle(),
+      ],
+    ),
+    
+    // Opening Hours
+    Card(
+      children: [
+        Heading("Opening Hours", "When we're serving up deliciousness"),
+        OpeningHours(),
+      ],
+    ),
+  ],
+  direction: "column",
+  gap: "xl",
+  align: "stretch",
+  wrap: true,
+)
+
+// Drink list component
+DrinksList = Card(
+  children: [
+    TextContent("Drinks", "Our beverage selection"),
+    DrinksRow("Espresso", "$3.50", true),
+    DrinksRow("Latte", "$4.25", true),
+    DrinksRow("Cappuccino", "$4.20", true),
+    DrinksRow("Americano", "$3.75", true),
+    DrinksRow("Mocha", "$3.95", true),
+    DrinksRow("Iced Caramel Latte", "$5.50", true),
+    DrinksRow("Affogato", "$6.75", true),
+    // Vegetarian flag for drinks
+    DrinksRow("Oat Milk Cold Brew", "$4.00", true),
+  ],
+)
+
+DrinksRow = Card(
+  children: [
+    TextContent("Item", "Coffee / Tea"),
+    TextContent("Price", "${price}"),
+    Checkbox(isVegetarian: true),
+  ],
+)
+
+// Food list component
+FoodList = Card(
+  children: [
+    TextContent("Food", "Main courses and appetizers"),
+    FoodRow("Classic Burger", "$14.99", true),
+    FoodRow("Veggie Panini", "$16.50", true),
+    FoodRow("Truffle Fries", "$8.99", false),
+    FoodRow("Grilled Salmon", "$22.99", false),
+    FoodRow("Quinoa Bowl", "$13.50", true),
+    FoodRow("Mushroom Pizza", "$15.00", true),
+    FoodRow("Chicken Salad", "$14.00", false),
+  ],
+)
+
+FoodRow = Card(
+  children: [
+    TextContent("Item", "Description"),
+    TextContent("Price", "${price}"),
+    Checkbox(isVegetarian: true),
+  ],
+)
+
+// Today's Special card (called out)
+TodaySpecial = Card(
+  children: [
+    TextContent("Today's Special", "Featured item of the day"),
+    Divider(decorative: true),
+    TextContent("✨ Wild Mushroom Truffle Risotto"),
+    TextContent("A creamy risotto infused with wild mushrooms and truffle oil, served with roasted parsley"),
+    PriceItem("Wild Mushroom Truffle Risotto", "$24.99"),
+    TextContent("Also try: Maple Bacon Mac & Cheese ($18.50)",
+      style: { color: "green" }),
+    TextContent("and Spicy Chickpea Wrap ($12.99)"),
+  ],
+)
+
+PriceItem = Card(
+  children: [
+    TextContent("Item", "Name"),
+    TextContent("Price", "Cost"),
+    TextContent("Vegetarian", "✓ Yes"),
+  ],
+)
+
+// Vegetarian toggle
+VegetarianToggle = Card(
+  children: [
+    TextContent("Vegetarian Only Filter"),
+    CheckboxGroup(
+      items: [
+        { label: "Yes, I want vegetarian options only", value: "vegetarianOnly" },
+        { label: "No, I want both regular and vegetarian", value: "allOptions" },
+      ],
+      value: "vegetarianOnly",
+    ),
+  ],
+)
+
+// Opening hours
+OpeningHours = Card(
+  children: [
+    Heading("Opening Hours", "When we're open to serve you"),
+    TimeFormat("9:00 AM", "5:00 PM"),
+    TextContent("Monday - Friday: 8:00 AM - 7:00 PM",
+      style: { fontSize: "small" }),
+    TextContent("Saturday: 9:00 AM - 6:00 PM",
+      style: { fontSize: "small" }),
+    TextContent("Sunday: Closed"),
+  ],
+)
+
+// Additional styling for variety
+Divider = HorizontalBarChart(
+  orientation: "horizontal",
+  decorations: [],
+  children: [
+    TextContent("---"),
+  ],
+)
+
+// Helper for checking vegetarian status
+isVegetarian = (item) => item.isVegetarian === true
+```

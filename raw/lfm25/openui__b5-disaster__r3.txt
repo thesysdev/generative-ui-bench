@@ -1,0 +1,564 @@
+```javascript
+root = Card(
+  children: [
+    // 1. Active incidents by zone with severity
+    IncidentList(),
+    
+    // 2. Overall severity summary
+    SeveritySummaryCard(),
+    
+    // 3. Vehicles, personnel and supplies
+    ResourcesTable(),
+    
+    // 4. Shelters with capacity and occupancy
+    SheltersTable(),
+    
+    // 5. Status of each evacuation route
+    RoutesStatus(),
+    
+    // 6. Weather forecast for next 48 hours
+    WeatherForecast(),
+    
+    // 7. People rescued and casualties
+    RescueSummaryCard(),
+    
+    // 8. Volunteers on duty with assignment
+    VolunteersTable(),
+    
+    // 9. Donations received
+    DonationsTable(),
+    
+    // 10. Aid requests awaiting action
+    AidRequestsTable(),
+    
+    // 11. Communication channels and status
+    ChannelsList(),
+    
+    // 12. Roads closed
+    ClosedRoadsList(),
+    
+    // 13. Nearby hospitals with free beds
+    HospitalBedsTable(),
+    
+    // 14. Open tasks with assignee
+    OpenTasksTable(),
+    
+    // 15. Way to request more resources
+    ResourceRequestForm(),
+    
+    // 16. Way to broadcast an update
+    BroadcastUpdateButton(),
+    
+    // 17. Way to focus on one zone
+    ZoneFocusSelector(),
+    
+    // 18. Way to file a situation report
+    SituationReportForm()
+  ],
+  variant = "card",
+  direction = "column",
+  gap = "s"
+)
+
+// 1. Active incidents by zone with severity
+IncidentList = Card([
+  CardHeader("Active Incidents by Zone", "Currently active emergencies"),
+  Spacer(),
+  
+  Card([
+    {
+      type: "Card",
+      children: [
+        { type: "CardHeader", subtitle: "Zone Alpha - High", title: "Zone Alpha" },
+        Card([
+          "Severity: 🔴 Critical",
+          "Incident ID: INC-2026-0415-01",
+          "Type: Structural Collapse",
+          "Status: Ongoing",
+          "Details: Building collapse at Main Street warehouse. 15 trapped persons."
+        ])
+      ]
+    },
+    {
+      type: "Card",
+      children: [
+        { type: "CardHeader", subtitle: "Zone Beta - Moderate", title: "Zone Beta" },
+        Card([
+          "Severity: 🟠 Major",
+          "Incident ID: INC-2026-0415-02",
+          "Type: Fire Hazard",
+          "Status: Resolving",
+          "Details: Chemical spill at Industrial Park. Air quality monitoring active."
+        ])
+      ]
+    },
+    {
+      type: "Card",
+      children: [
+        { type: "CardHeader", subtitle: "Zone Gamma - Low", title: "Zone Gamma" },
+        Card([
+          "Severity: 🟡 Minor",
+          "Incident ID: INC-2026-0415-03",
+          "Type: Power Outage",
+          "Status: Mitigated",
+          "Details: Local substation failure affecting 2000 residents."
+        ])
+      ]
+    }
+  ]),
+  Card([
+    { type: "CardHeader", subtitle: "Total Active Incidents", title: "Incident Count" },
+    Card([
+      "Critical: 2",
+      "Major: 1",
+      "Minor: 1",
+      "Total: 4"
+    ])
+  ])
+])
+
+// 2. Overall severity summary
+SeveritySummaryCard = Card([
+  CardHeader("Overall Severity Summary", "Current emergency landscape"),
+  Spacer(),
+  
+  Card([
+    { type: "CardHeader", title: "Severity Distribution", subtitle: "By Category" },
+    Card([
+      { key: "Critical", value: "3", color: "red" },
+      { key: "Major", value: "1", color: "orange" },
+      { key: "Minor", value: "1", color: "blue" }
+    ])
+  ]),
+  
+  Card([
+    { type: "CardHeader", title: "Resource Status", subtitle: "Available vs Required" },
+    Card([
+      { 
+        type: "TextContent", 
+        text: "Vehicles: 12/20 deployed\nPersonnel: 85/150 on duty\nSupplies: 45/60 units stocked",
+        size: "default"
+      } 
+    ])
+  ])
+])
+
+// 3. Vehicles, personnel and supplies
+ResourcesTable = Card([
+  Card([
+    { type: "Heading", text: "Vehicles & Personnel", level: "h2" },
+    Card([
+      "Medical Transport: 3 ambulances",
+      "Search & Rescue Teams: 5 units",
+      "Logistics Vans: 8"
+    ])
+  ]),
+  
+  Card([
+    { type: "Heading", text: "Personnel Deployed", level: "h2" },
+    Card([
+      "Engineers: 6",
+      "Electricians: 4",
+      "Medical Staff: 12",
+      "Security: 3"
+    ])
+  ]),
+  
+  Card([
+    { type: "Heading", text: "Supplies Available", level: "h2" },
+    Card([
+      "Water: 2,400 L (in storage)",
+      "Food Ration Packs: 600 units",
+      "First Aid Kits: 25 kits",
+      "Tent Shelter Supplies: 40 units"
+    ])
+  ])
+])
+
+// 4. Shelters with capacity and occupancy
+SheltersTable = Card([
+  Card([
+    { type: "Heading", text: "Shelters", level: "h2" },
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Zone Alpha - Alpha Shelter", 
+        subtitle: "" 
+      },
+      Card([
+        { type: "CardHeader", title: "Capacity", subtitle: "Occupied" },
+        Card([
+          "Total Capacity: 150",
+          "Current Occupancy: 98",
+          "Remaining: 52"
+        ])
+      })
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Zone Beta - Beta Shelter", 
+        subtitle: ""
+      },
+      Card([
+        { type: "CardHeader", title: "Capacity", subtitle: "Occupied" },
+        Card([
+          "Total Capacity: 80",
+          "Current Occupancy: 35",
+          "Remaining: 45"
+        ])
+      })
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Zone Gamma - Gamma Shelter", 
+        subtitle: ""
+      },
+      Card([
+        { type: "CardHeader", title: "Capacity", subtitle: "Occupied" },
+        Card([
+          "Total Capacity: 100",
+          "Current Occupancy: 75",
+          "Remaining: 25"
+        ])
+      })
+    ])
+  ])
+])
+
+// 5. Status of each evacuation route
+RoutesStatus = Card([
+  Card([
+    { type: "Heading", text: "Evacuation Route Status", level: "h2" },
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Route 1 - North Corridor", 
+        subtitle: ""
+      },
+      Card([
+        "Status: ✅ Operational",
+        "From: North Station → West Sector",
+        "To: Safe Zone North",
+        "ETA: 45 minutes",
+        "Transit: 150 persons"
+      ])
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Route 2 - East Passage", 
+        subtitle: ""
+      },
+      Card([
+        "Status: ⚠️ Delayed",
+        "From: East Gate → Central Hub",
+        "To: Central Relief Center",
+        "ETA: 90 minutes (traffic)",
+        "Transit: 82 persons"
+      ])
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Route 3 - South Exit", 
+        subtitle: ""
+      },
+      Card([
+        "Status: 🚧 Under Construction",
+        "From: South Terminal → Medical Camp",
+        "To: Medical Camp",
+        "ETA: 2 hours (construction)",
+        "Transit: 67 persons"
+      ])
+    ])
+  ])
+])
+
+// 6. Weather forecast for next 48 hours
+WeatherForecast = Card([
+  Card([
+    { type: "Heading", text: "48-Hour Weather Forecast", level: "h2" },
+    Card([
+      { type: "HorizonalBarChart", 
+        labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"],
+        series: [{ label: "Temperature (°C)", value: 28 }, 
+                 { label: "Precipitation", value: 65 }, 
+                 { label: "Wind Speed", value: 22 }],
+        xLabel: "Time",
+        yLabel: "Condition"
+      ]
+    ])
+  ])
+])
+
+// 7. People rescued and casualties
+RescueSummaryCard = Card([
+  Card([
+    { type: "Heading", text: "People Rescued & Casualties", level: "h2" },
+    Card([
+      "Rescued: 127",
+      "Casualties: 23",
+      "Total Victims: 150",
+      "Success Rate: 92%"
+    ])
+  ])
+])
+
+// 8. Volunteers on duty with assignment
+VolunteersTable = Card([
+  Card([
+    { type: "Heading", text: "Volunteers on Duty", level: "h2" },
+    Card([
+      "John M. - Zone Alpha - Logistics Coordination",
+      "Maria S. - Search & Rescue Lead",
+      "Prem S. - Medical Support",
+      "Liam K. - Communications",
+      "Aisha R. - Supply Chain",
+      "Carlos D. - Traffic Management"
+    ])
+  ])
+])
+
+// 9. Donations received
+DonationsTable = Card([
+  Card([
+    { type: "Heading", text: "Donations Received", level: "h2" },
+    Card([
+      { type: "CardHeader", title: "Total Value", subtitle: "" },
+      Card([
+        "USD $48,750",
+        "USD $12,300",
+        "USD $8,900"
+      ])
+    ]),
+    
+    Card([
+      { type: "CardHeader", title: "Recent Donations", subtitle: "" },
+      Card([
+        { 
+          type: "TextContent", 
+          text: "• Food Packages: 350 boxes ($2,100)",
+          size: "small"
+        },
+        { 
+          type: "TextContent", 
+          text: "• Water Purification Kit: 45 units ($1,800)",
+          size: "small"
+        },
+        { 
+          type: "TextContent", 
+          text: "• Portable Generators: 12 units ($4,500)",
+          size: "small"
+        }
+      ])
+    ])
+  ])
+])
+
+// 10. Aid requests awaiting action
+AidRequestsTable = Card([
+  Card([
+    { type: "Heading", text: "Aid Requests Awaiting Action", level: "h2" },
+    Card([
+      "Request ID: AR-001 - Medical Equipment",
+      "Status: Pending Review",
+      "Priority: High",
+      "Assigned To: Dr. Patel"
+    ]),
+    
+    Card([
+      "Request ID: AR-002 - Generator Units",
+      "Status: Pending Approval",
+      "Priority: Medium",
+      "Assigned To: Logistics Team"
+    ]),
+    
+    Card([
+      "Request ID: AR-003 - Tent Materials",
+      "Status: In Progress",
+      "Priority: High",
+      "Assigned To: Supply Chain"
+    ])
+  ])
+])
+
+// 11. Communication channels and whether up
+ChannelsList = Card([
+  Card([
+    { 
+      type: "CardHeader", 
+      title: "Communication Channels", 
+      subtitle: "Status" 
+    },
+    Card([
+      { 
+        type: "Callout", 
+        variant: "success", 
+        title: "Alert System", 
+        description: "✅ Active - Real-time notifications"
+      },
+      { 
+        type: "Callout", 
+        variant: "success", 
+        title: "Messaging Platform", 
+        description: "✅ Active - Team chat available"
+      },
+      { 
+        type: "Callout", 
+        variant: "warning", 
+        title: "Satellite Link", 
+        description: "⚠️ Degraded - Limited coverage"
+      }
+    ])
+  ])
+])
+
+// 12. Roads closed
+ClosedRoadsList = Card([
+  Card([
+    { type: "Heading", text: "Roads Closed", level: "h2" },
+    Card([
+      "Main Avenue (North-South) - Closed due to debris",
+      "East Highway (Exit 12) - Closed due to fire",
+      "West Bridge - Closed for repairs",
+      "Eastbound Route 405 - Closed for maintenance"
+    ])
+  ])
+])
+
+// 13. Nearby hospitals with free beds
+HospitalBedsTable = Card([
+  Card([
+    { type: "Heading", text: "Nearby Hospitals - Free Bed Availability", level: "h2" },
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "St. Mary's Hospital", 
+        subtitle: "Free Beds: 45"
+      },
+      Card([
+        "Emergency Room: 30 beds occupied / 45 free",
+        "General Ward: 25 beds occupied / 20 free",
+        "ICU: 10 beds occupied / 5 free"
+      ])
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "City General Clinic", 
+        subtitle: "Free Beds: 72"
+      },
+      Card([
+        "Emergency Room: 15 beds occupied / 72 free",
+        "Outpatient: 20 beds occupied / 50 free",
+        "Labor & Delivery: 5 beds occupied / 10 free"
+      ])
+    ]),
+    
+    Card([
+      { 
+        type: "CardHeader", 
+        title: "Riverside Care Center", 
+        subtitle: "Free Beds: 58"
+      },
+      Card([
+        "Emergency Room: 25 beds occupied / 58 free",
+        "Ward A: 18 beds occupied / 40 free",
+        "Ward B: 12 beds occupied / 30 free"
+      ])
+    ])
+  ])
+])
+
+// 14. Open tasks with assignee
+OpenTasksTable = Card([
+  Card([
+    { type: "Heading", text: "Open Tasks", level: "h2" },
+    Card([
+      "Assign Task: Coordinate relief supply distribution",
+      "Assignee: John M.",
+      "Priority: High",
+      "Due: 24 hours"
+    ]),
+    
+    Card([
+      "Assign Task: Set up temporary water purification",
+      "Assignee: Maria S.",
+      "Priority: Medium",
+      "Due: 36 hours"
+    ]),
+    
+    Card([
+      "Assign Task: Monitor evacuation route 2 traffic",
+      "Assignee: Prem S.",
+      "Priority: High",
+      "Due: 12 hours"
+    ]),
+    
+    Card([
+      "Assign Task: Repair damaged bridge access",
+      "Assignee: Carlos D.",
+      "Priority: Medium",
+      "Due: 48 hours"
+    ])
+  ])
+])
+
+// 15. Way to request more resources
+ResourceRequestForm = Card([
+  Card([
+    { type: "Heading", text: "Request Additional Resources", level: "h2" },
+    Card([
+      "Type of Resource:", 
+      "🌿 Medical Supplies", 
+      "🚚 Vehicles", 
+      "💧 Water", 
+      "🏥 Equipment"
+    ]),
+    Card([
+      "Quantity Needed:",
+      "Description:",
+      "Priority: Urgent/Medium/Low",
+      "Reason: Specific need"
+    ])
+  ])
+])
+
+// 16. Way to broadcast an update
+BroadcastUpdateButton = Button({
+  label: "📢 Broadcast Update",
+  action: "broadcast_update",
+  variant: "primary"
+})
+
+// 17. Way to focus on one zone
+ZoneFocusSelector = Card([
+  Card([
+    { type: "Heading", text: "Focus on Zone", level: "h2" },
+    Card([
+      "Select zone to prioritize response efforts",
+      "Available Zones: Alpha, Beta, Gamma"
+    ])
+  ])
+])
+
+// 18. Way to file a situation report
+SituationReportForm = Card([
+  Card([
+    { type: "Heading", text: "File Situation Report", level: "h2" },
+    Card([
+      "Location:", 
+      "Incident Reference:", 
+      "Date/Time:", 
+      "Summary:", 
+      "Required Actions:"
+    ])
+  ])
+])

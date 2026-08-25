@@ -1,0 +1,186 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title: "E-commerce Operations Dashboard",
+      subtitle: "Real-time order and revenue monitoring"
+    ),
+    Divider(decorative: true),
+    
+    // Section 1: Today's Orders & Revenue
+    Card(
+      children: [
+        MetricCard(
+          title: "Orders Placed Today",
+          value: "142",
+          icon: "clips-check"
+        ),
+        MetricCard(
+          title: "Revenue Today",
+          value: "$48,730.50",
+          icon: "money"
+        ),
+        MetricCard(
+          title: "Average Order Value",
+          value: "$342.15",
+          icon: "bar-chart"
+        ),
+        MetricCard(
+          title: "Order Volume (Past 4 Weeks)",
+          value: "1,284",
+          icon: "bars"
+        )
+      ]
+    ),
+    
+    Divider(),
+    
+    // Section 2: Recent Orders
+    Card(
+      children: [
+        CardHeader(
+          title: "Recent Orders",
+          subtitle: "Last 10 orders with key details"
+        ),
+        Table(
+          columns: [
+            Col("Order ID", type: "string"),
+            Col("Customer", type: "string"),
+            Col("Total Amount", type: "number"),
+            Col("Status", type: "string")
+          ],
+          data: [
+            {
+              "id": "ORD-20260412-001",
+              "customer": "Alice Johnson",
+              "total": 245.99,
+              "status": "completed"
+            },
+            {
+              "id": "ORD-20260412-002",
+              "customer": "Bob Martinez",
+              "total": 178.50,
+              "status": "processing"
+            },
+            {
+              "id": "ORD-20260412-003",
+              "customer": "Charlie Chen",
+              "total": 423.75,
+              "status": "shipped"
+            },
+            {
+              "id": "ORD-20260412-004",
+              "customer": "Diana Park",
+              "total": 189.00,
+              "status": "pending"
+            },
+            {
+              "id": "ORD-20260412-005",
+              "customer": "Eve Wilson",
+              "total": 567.40,
+              "status": "completed"
+            },
+            {
+              "id": "ORD-20260412-006",
+              "customer": "Frank Liu",
+              "total": 124.30,
+              "status": "refunded"
+            },
+            {
+              "id": "ORD-20260412-007",
+              "customer": "Grace Kim",
+              "total": 345.60,
+              "status": "processing"
+            },
+            {
+              "id": "ORD-20260412-008",
+              "customer": "Henry Lee",
+              "total": 210.25,
+              "status": "completed"
+            },
+            {
+              "id": "ORD-20260412-009",
+              "customer": "Isla Torres",
+              "total": 387.80,
+              "status": "shipped"
+            },
+            {
+              "id": "ORD-20260412-010",
+              "customer": "Jack Morris",
+              "total": 156.90,
+              "status": "pending"
+            }
+          ]
+        )
+      ]
+    ),
+    
+    Divider(),
+    
+    // Section 3: Filters & Controls
+    Card(
+      children: [
+        FilterPanel(
+          title: "Filter & Search",
+          children: [
+            SearchBar(
+              placeholder: "Search customers...",
+              value: ""
+            ),
+            StatusFilter(
+              title: "Status",
+              options: [
+                { value: "completed", label: "Completed" },
+                { value: "processing", label: "Processing" },
+                { value: "shipped", label: "Shipped" },
+                { value: "pending", label: "Pending" },
+                { value: "refunded", label: "Refunded" }
+              ]
+            )
+          ]
+        ),
+        RefundRateIndicator(
+          title: "Refund Rate (This Month)",
+          value: "8.2%",
+          icon: "bar-chart",
+          variant: "success"
+        ),
+        MarkOrderButton(
+          title: "Mark Order as Fulfilled",
+          action: "fulfill_order"
+        )
+      ]
+    ),
+    
+    // Footer / Summary
+    Card(
+      children: [
+        BottomRow(
+          children: [
+            MetricCard(
+              title: "Today's Orders",
+              value: "142",
+              size: "large"
+            ),
+            MetricCard(
+              title: "Today's Revenue",
+              value: "$48,730.50",
+              size: "large"
+            ),
+            MetricCard(
+              title: "Avg Order Value",
+              value: "$342.15",
+              size: "large"
+            ),
+            MetricCard(
+              title: "Order Volume (4 Weeks)",
+              value: "1,284",
+              size: "large"
+            )
+          ]
+        )
+      ]
+    )
+  ]
+)
+```

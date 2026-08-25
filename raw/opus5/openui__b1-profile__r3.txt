@@ -1,0 +1,53 @@
+root = Card([header, identity, tags, separator, bioHeading, bio, details, contactHeading, messageForm, followUps])
+
+header = CardHeader("Company Directory", "People / Engineering")
+
+identity = Card([avatar, identityText], "sunk", "row", "m", "center")
+avatar = Avatar("https://picsum.photos/seed/maya-okafor/200/200", "Portrait of Maya Okafor", "MO")
+identityText = Card([name, role, team], "clear", "column", "xs")
+name = Heading("Maya Okafor", "h2")
+role = TextContent("Staff Software Engineer, Platform Infrastructure", "large")
+team = TextContent("Berlin, Germany · CET (UTC+1) · Reports to Daniel Reyes", "small")
+
+tags = TagBlock(["Kubernetes", "Go", "Observability", "On-call lead", "Mentor"])
+
+separator = Separator("horizontal", true)
+
+bioHeading = Heading("About", "h3")
+bio = TextContent("Maya has spent the last six years building the deployment and reliability tooling that the rest of engineering runs on. She led the migration to multi-region clusters, keeps the incident-response playbooks honest, and is usually the first person to answer a question in #platform-help. Outside work she restores old bicycles and bakes an aggressive amount of sourdough.")
+
+details = Table([detailField, detailValue])
+detailField = Col("Detail", ["Email", "Slack", "Desk", "Started", "Availability"])
+detailValue = Col("Value", ["maya.okafor@company.com", "@maya", "Berlin HQ, 4th floor", "March 2019", "Mon–Thu, 09:00–17:00 CET"])
+
+contactHeading = Heading("Send Maya a message", "h3")
+messageForm = Form("message-maya", formButtons, [subjectField, topicField, urgencyField, bodyField])
+
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Quick question about deploy pipeline")
+
+topicField = FormControl("Topic", topicSelect, "Helps route your message to the right thread")
+topicSelect = Select("topic", [topicPlatform, topicIncident, topicMentoring, topicOther], "Choose a topic")
+topicPlatform = SelectItem("platform", "Platform / tooling question")
+topicIncident = SelectItem("incident", "Incident or on-call")
+topicMentoring = SelectItem("mentoring", "Mentoring or career chat")
+topicOther = SelectItem("other", "Something else")
+
+urgencyField = FormControl("Urgency", urgencyRadio)
+urgencyRadio = RadioGroup("urgency", [urgencyLow, urgencyNormal, urgencyHigh], "normal")
+urgencyLow = RadioItem("Whenever", "No reply needed this week", "low")
+urgencyNormal = RadioItem("Normal", "Reply within a day or two", "normal")
+urgencyHigh = RadioItem("Blocking", "Something is stuck right now", "high")
+
+bodyField = FormControl("Message", bodyInput, "Include links or ticket numbers if you have them")
+bodyInput = TextArea("body", "Hi Maya — I'm looking at the staging rollout and…", 5)
+
+formButtons = Buttons([sendBtn, slackBtn, cancelBtn])
+sendBtn = Button("Send message", null, "primary")
+slackBtn = Button("Message on Slack instead", null, "secondary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([followUpTeam, followUpOncall, followUpCalendar])
+followUpTeam = FollowUpItem("Show the rest of the Platform Infrastructure team")
+followUpOncall = FollowUpItem("Who is on call for platform this week?")
+followUpCalendar = FollowUpItem("Find a free 30 minutes with Maya")

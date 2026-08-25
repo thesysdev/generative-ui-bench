@@ -1,0 +1,13 @@
+root = Card([header, statusSection, incidentSection])
+header = CardHeader("Platform Status", "Service health for the platform team")
+
+statusSection = Card([uptimeLabel, uptimeValue, uptimeBadge, trendChart], "sunk")
+uptimeLabel = Heading("API uptime this month", "h3")
+uptimeValue = TextContent("99.98%", "large-heavy")
+uptimeBadge = Tag("Operational", null, null, "success")
+trendChart = LineChart(["W1", "W2", "W3", "W4"], [uptimeSeries], "linear", "Week", "Uptime %")
+uptimeSeries = Series("Uptime", [99.95, 99.99, 100, 99.98])
+
+incidentSection = Card([incidentHeading, incidentNote], "sunk")
+incidentHeading = Heading("Most recent incident", "h3")
+incidentNote = Callout("info", "Resolved", "Elevated API latency on October 12 was fully resolved within 41 minutes. All services are back to normal operation.")

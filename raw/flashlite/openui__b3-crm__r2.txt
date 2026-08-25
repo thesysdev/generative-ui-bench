@@ -1,0 +1,51 @@
+root = Card([header, metricsCard, renewalAlert, activitySection, contactsSection, followUpsSection, noteSection, logCallDialog])
+
+header = CardHeader("Acme Corp — Enterprise Account", "Managed by Sarah Jenkins")
+
+metricsCard = Card([dealValueBlock, dealStageBlock], "sunk", "row", "l", "center", "around")
+dealValueBlock = Card([dealValueTitle, dealValueText], "clear", "column", "xs")
+dealValueTitle = TextContent("Total Deal Value", "small")
+dealValueText = TextContent("**$245,000**", "large")
+
+dealStageBlock = Card([dealStageTitle, dealStageBadge], "clear", "column", "xs")
+dealStageTitle = TextContent("Current Deal Stage", "small")
+dealStageBadge = Badge("Negotiation", "default")
+
+renewalAlert = Alert("Renewal Approaching", "Renewal date is in 14 days (November 15, 2024). Immediate outreach recommended.", "warning")
+
+activitySection = Card([activityHeading, activityList], "sunk")
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([activity1, activity2, activity3])
+activity1 = ListItem("Email exchange regarding security review", "Yesterday at 4:15 PM")
+activity2 = ListItem("Demo call with engineering team", "3 days ago")
+activity3 = ListItem("Initial discovery meeting", "Oct 12, 2024")
+
+contactsSection = Card([contactsHeading, contactsTable], "sunk")
+contactsHeading = Heading("Key Contacts & Roles", "h3")
+contactsTable = Table([contactNameCol, contactRoleCol, contactEmailCol])
+contactNameCol = Col("Name", ["Jane Doe", "John Smith", "Alice Johnson"])
+contactRoleCol = Col("Role", ["Procurement Lead", "CTO", "Account Champion"])
+contactEmailCol = Col("Email", ["jane@acmectrl.com", "jsmith@acmectrl.com", "alice@acmectrl.com"])
+
+followUpsSection = Card([followUpsHeading, followUpsList], "sunk")
+followUpsHeading = Heading("Open Follow-ups", "h3")
+followUpsList = ListBlock([fu1, fu2])
+fu1 = ListItem("Send revised pricing matrix with volume discounts", "Due: Tomorrow, Oct 25")
+fu2 = ListItem("Schedule security compliance check with CTO", "Due: Oct 28")
+
+noteSection = Card([noteHeading, noteForm], "sunk")
+noteHeading = Heading("Jot a Quick Note", "h3")
+noteForm = Form("quick-note-form", noteButtons, [noteField])
+noteField = FormControl("Note Details", noteInput, "Type any quick notes from your interaction here")
+noteInput = TextArea("note_text", "Enter note text...", 3)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+logCallDialog = DialogBlock("Log a Call", "Log Interaction", "Record details of a phone call or meeting with the client.", [callForm], "outline")
+callForm = Form("log-call-form", callButtons, [callSubjectField, callNotesField])
+callSubjectField = FormControl("Call Subject", callSubjectInput)
+callSubjectInput = Input("subject", "e.g., Check-in call")
+callNotesField = FormControl("Call Summary", callNotesInput)
+callNotesInput = TextArea("summary", "Summary of discussion...", 4)
+callButtons = Buttons([submitCallBtn])
+submitCallBtn = Button("Submit Call Log", null, "primary")

@@ -1,0 +1,102 @@
+```openui
+root = Card([
+    draftsSection,
+    publishedSection,
+    mostReadSection,
+    readershipSection,
+    narrowByCategorySection,
+    scheduleSection,
+    commentsSection,
+    startDraftSection
+])
+
+draftsSection = Card([
+    CardHeader("Drafts", "Status for each draft"),
+    draftTable
+], "card")
+draftTable = Table([
+    draftNameCol,
+    draftStatusCol
+])
+draftNameCol = Col("Draft", ["Draft 1", "Draft 2", "Draft 3"])
+draftStatusCol = Col("Status", ["In Progress", "Review", "Completed"])
+
+publishedSection = Card([
+    CardHeader("Published Pieces", "This Week"),
+    publishedTable
+], "card")
+publishedTable = Table([
+    publishedNameCol,
+    publishedDateCol
+])
+publishedNameCol = Col("Article", ["Article A", "Article B", "Article C"])
+publishedDateCol = Col("Published", ["2023-10-01", "2023-10-03", "2023-10-05"])
+
+mostReadSection = Card([
+    CardHeader("Most-Read Article", "This Month"),
+    mostReadContent
+], "card")
+mostReadContent = TextContent("The most-read article this month is 'Tech Trends 2023'.")
+
+readershipSection = Card([
+    CardHeader("Readership Over 30 Days", null),
+    readershipChart
+], "card")
+readershipChart = LineChart([
+    "Day 1", "Day 10", "Day 20", "Day 30"
+], [
+    readershipSeries
+], "linear", "Day", "Readers")
+readershipSeries = Series("Readers", [1000, 1500, 2000, 1800])
+
+narrowByCategorySection = Card([
+    CardHeader("Narrow by Category", null),
+    narrowByCategoryForm
+], "card")
+narrowByCategoryForm = Form("narrow-category", formButtons, [
+    categorySelectField
+])
+categorySelectField = FormControl("Category", categorySelect)
+categorySelect = Select("category", [
+    categoryNews, categoryTech, categoryLifestyle
+], "Select a category")
+categoryNews = SelectItem("News", "News")
+categoryTech = SelectItem("Tech", "Technology")
+categoryLifestyle = SelectItem("Lifestyle", "Lifestyle")
+formButtons = Buttons([
+    applyFilterBtn
+])
+applyFilterBtn = Button("Apply Filter")
+
+scheduleSection = Card([
+    CardHeader("Schedule a Piece", null),
+    scheduleForm
+], "card")
+scheduleForm = Form("schedule-piece", scheduleButtons, [
+    titleField,
+    publishDateField
+])
+titleField = FormControl("Title", titleInput)
+titleInput = Input("title", "New Article Title")
+publishDateField = FormControl("Publish Date", publishDateInput)
+publishDateInput = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([
+    scheduleBtn
+])
+scheduleBtn = Button("Schedule")
+
+commentsSection = Card([
+    CardHeader("Comments Awaiting Reply", null),
+    commentsList
+], "card")
+commentsList = ListBlock([
+    commentsListItem
+], "image")
+commentsListItem = ListItem("Comment from John", "Urgent question about article", null, "Reply")
+
+startDraftSection = Card([
+    CardHeader("Start a New Draft", null),
+    startDraftButton
+], "card")
+startDraftButton = Button("Start New Draft", ["start", "draft"])
+```

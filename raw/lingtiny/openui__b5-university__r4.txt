@@ -1,0 +1,90 @@
+root = Card([overview, departments, courses, faculty, risk, scholarships, housing, events, alumni, focus, semester, waitlist, approveCourse, sendMessage], "sunk")
+overview = CardHeader("University Overview", "Comprehensive dashboard for the academic administrator")
+
+enrollment = CardHeader("Total Enrollment & 5-Year Trend", "Track enrollment growth across the last five academic years")
+enrollmentData = LineChart(["2020", "2021", "2022", "2023", "2024"], [enrollmentSeries], "natural", "Year", "Enrollment")
+enrollmentSeries = Series("Total Enrollment", [12500, 13100, 13800, 14200, 14800])
+
+applications = CardHeader("Applications by Program", "Breakdown of incoming applications across all programs")
+applicationsData = BarChart(["Computer Science", "Engineering", "Business", "Arts", "Science"], [appSeries], "grouped", "Program", "Applications")
+appSeries = Series("Applications", [3200, 2800, 2400, 1800, 3100])
+
+acceptance = CardHeader("Acceptance Rate", "Overall and program-level acceptance rates")
+acceptanceData = HorizontalBarChart(["Overall", "Computer Science", "Engineering", "Business", "Arts", "Science"], [accSeries], "grouped", "Program", "Acceptance Rate")
+accSeries = Series("Acceptance Rate", [72, 65, 60, 55, 80, 75])
+
+tuition = CardHeader("Tuition Revenue This Year", "Current year tuition income and comparison")
+tuitionData = BarChart(["FY 2023", "FY 2024"], [tuitionSeries], "grouped", "Fiscal Year", "Tuition Revenue ($)")
+tuitionSeries = Series("Tuition Revenue", [8500000, 9200000])
+
+courses = CardHeader("Course Offerings & Completion", "How full each course offering is")
+coursesData = SingleStackedBarChart(["CS 101", "CS 201", "MATH 101", "ENG 101", "PHYS 101", "CS 301", "MATH 201"], [courseSeries], "linear", "Course", "Completion Rate")
+courseSeries = Series("Completion Rate", [95, 88, 92, 85, 90, 78, 82])
+
+faculty = CardHeader("Teaching Load by Faculty Member", "Current semester teaching assignments")
+facultyData = HorizontalBarChart(["Dr. Smith", "Dr. Johnson", "Dr. Lee", "Dr. Patel", "Dr. Brown"], [facSeries], "grouped", "Faculty", "Load (Courses)")
+facSeries = Series("Teaching Load", [12, 8, 10, 7, 9])
+
+risk = CardHeader("Students at Academic Risk", "Students identified at risk of academic difficulty")
+riskData = BarChart(["High Risk", "Moderate Risk", "Low Risk"], [riskSeries], "grouped", "Category", "Number of Students")
+riskSeries = Series("Students at Risk", [45, 120, 310])
+
+scholarships = CardHeader("Scholarship Budget", "Scholarship budget utilization vs. total allocation")
+scholarshipsData = PieChart(["Fully Funded", "Partially Funded", "Not Funded"], [schSeries], "circular", "Scholarship Status")
+schSeries = Series("Budget Status", [850000, 120000, 50000])
+
+housing = CardHeader("Housing Occupancy", "Current housing occupancy rates")
+housingData = SingleStackedBarChart(["Dorm A", "Dorm B", "Dorm C", "Dorm D", "Dorm E"], [occSeries], "linear", "Dorm", "Occupancy Rate")
+occSeries = Series("Occupancy", [92, 85, 90, 78, 88])
+
+events = CardHeader("Campus Events This Month", "Upcoming campus events for the current month")
+eventsData = CardHeader("Campus Events This Month", "Upcoming campus events for the current month")
+eventsData = ListBlock([EventItem("Guest Lecture: AI in Education", "10/15", "14:00", "Student Center"), EventItem("Open House", "10/18", "10:00", "Main Hall"), EventItem("Seminar: Climate Change", "10/20", "16:00", "Science Building"), EventItem("Career Fair", "10/22", "09:00", "Student Center"), EventItem("Cultural Festival", "10/25", "11:00", "Main Hall")], "image")
+
+alumni = CardHeader("Alumni Giving Over the Past Four Years", "Alumni donation trends")
+alumniData = HorizontalBarChart(["2020", "2021", "2022", "2023"], [alumniSeries], "grouped", "Year", "Donations ($)")
+alumniSeries = Series("Alumni Donations", [1200000, 1350000, 1500000, 1650000])
+
+focus = CardHeader("Department Focus", "Focus on one department at a time")
+focusData = Select("Department Focus", [dept1, dept2, dept3, dept4, dept5], "Select a department to view")
+dept1 = SelectItem("Computer Science", "View CS department details")
+dept2 = SelectItem("Engineering", "View Engineering department details")
+dept3 = SelectItem("Business", "View Business department details")
+dept4 = SelectItem("Arts", "View Arts department details")
+dept5 = SelectItem("Science", "View Science department details")
+
+semester = CardHeader("This Semester vs. Last Semester", "Comparison of key metrics between semesters")
+semesterData = LineChart(["Fall 2023", "Spring 2024"], [semesterSeries], "linear", "Semester", "Enrollment")
+semesterSeries = Series("Enrollment", [14800, 15200])
+
+waitlist = CardHeader("Waitlisted Students Per Program", "Students waiting for program placement")
+waitlistData = BarChart(["Computer Science", "Engineering", "Business", "Arts", "Science"], [waitSeries], "grouped", "Program", "Waitlisted Students")
+waitSeries = Series("Waitlisted Students", [30, 25, 15, 10, 20])
+
+approveCourse = CardHeader("Approve a New Course", "Process for approving a new course offering")
+approveCourseData = CardHeader("Approve a New Course", "Process for approving a new course offering")
+approveCourseData = Form("new-course", approveCourseButtons, [courseNameField, courseDeptField, courseCreditsField, courseSemesterField])
+courseNameField = FormControl("Course name", courseNameInput, "e.g., CS 401 Advanced Algorithms")
+courseNameInput = Input("course_name", "CS 401 Advanced Algorithms")
+courseDeptField = FormControl("Department", courseDeptInput, "Select the department")
+courseDeptInput = Select("department", [dept1, dept2, dept3, dept4, dept5], "Choose a department")
+courseCreditsField = FormControl("Credits", courseCreditsInput, "3-4 credits")
+courseCreditsInput = Input("credits", "3", "number")
+courseSemesterField = FormControl("Semester", courseSemesterInput, "Fall or Spring")
+courseSemesterInput = Select("semester", ["Fall", "Spring"], "Select semester")
+approveCourseButtons = Buttons([approveBtn, cancelBtn])
+approveBtn = Button("Approve Course", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+sendMessage = CardHeader("Send Message to Student Group", "Process for sending a message to a student group")
+sendMessageData = CardHeader("Send Message to Student Group", "Process for sending a message to a student group")
+sendMessageData = Form("student-group", sendMessageButtons, [groupNameField, messageBodyField])
+groupNameField = FormControl("Group name", groupNameInput, "Enter the student group name")
+groupNameInput = Input("group_name", "Computer Science Club", "text")
+messageBodyField = FormControl("Message", messageBodyInput, "Type your message")
+messageBodyInput = TextArea("message", "Type your message here", 5, "text")
+sendMessageButtons = Buttons([sendBtn, cancelBtn])
+sendBtn = Button("Send Message", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+The root is a sunk card with all 16 children.

@@ -1,0 +1,271 @@
+Here is an asynchronous daily standup screen designed for a remote team, complete with member updates, blocker highlights, progress tracking for missing updates, and a quick-submission form.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "missingAlert",
+          "blockerCallout",
+          "tableHeading",
+          "standupTable",
+          "separator",
+          "postUpdateCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Daily Async Standup",
+        "subtitle": "Wednesday, October 25, 2023 • Engineering & Product Team"
+      },
+      {
+        "id": "missingAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Standup Progress: 4 of 6 Submitted",
+        "description": "2 teammates have not posted their update yet: Marcus Vance, Priya Patel."
+      },
+      {
+        "id": "blockerCallout",
+        "component": "Callout",
+        "variant": "warning",
+        "title": "Active Blockers (1)",
+        "description": "Elena Rostova is waiting on backend OAuth API specs for SSO integration."
+      },
+      {
+        "id": "tableHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Today's Updates"
+      },
+      {
+        "id": "standupTable",
+        "component": "Table",
+        "columns": [
+          "colTeammate",
+          "colStatus",
+          "colYesterday",
+          "colToday",
+          "colBlocker"
+        ]
+      },
+      {
+        "id": "colTeammate",
+        "component": "Col",
+        "label": "Teammate",
+        "type": "string",
+        "data": [
+          "Sarah Chen (Frontend)",
+          "Elena Rostova (Frontend)",
+          "David Kim (Backend)",
+          "Amina Zahir (Design)",
+          "Marcus Vance (DevOps)",
+          "Priya Patel (QA)"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "type": "string",
+        "data": [
+          "✅ Submitted",
+          "⚠️ Blocked",
+          "✅ Submitted",
+          "✅ Submitted",
+          "⏳ Pending",
+          "⏳ Pending"
+        ]
+      },
+      {
+        "id": "colYesterday",
+        "component": "Col",
+        "label": "Yesterday",
+        "type": "string",
+        "data": [
+          "Finalized billing checkout flow",
+          "Built SSO login UI components",
+          "Optimized search query latency by 40%",
+          "Created Figma prototypes for Settings v2",
+          "—",
+          "—"
+        ]
+      },
+      {
+        "id": "colToday",
+        "component": "Col",
+        "label": "Today's Plan",
+        "type": "string",
+        "data": [
+          "Refactoring payment webhook handlers",
+          "Hooking SSO endpoints into auth client",
+          "Reviewing PRs & migrating database indexes",
+          "Handoff meeting with mobile developers",
+          "—",
+          "—"
+        ]
+      },
+      {
+        "id": "colBlocker",
+        "component": "Col",
+        "label": "Blockers",
+        "type": "string",
+        "data": [
+          "None",
+          "Waiting on OAuth API spec docs",
+          "None",
+          "None",
+          "—",
+          "—"
+        ]
+      },
+      {
+        "id": "separator",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "postUpdateCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "formHeader",
+          "standupForm"
+        ]
+      },
+      {
+        "id": "formHeader",
+        "component": "CardHeader",
+        "title": "Post Your Standup Update",
+        "subtitle": "Share what you did, your goals for today, and flag any roadblocks"
+      },
+      {
+        "id": "standupForm",
+        "component": "Form",
+        "name": "async-standup-post",
+        "buttons": "formActions",
+        "fields": [
+          "memberField",
+          "yesterdayField",
+          "todayField",
+          "blockerField"
+        ]
+      },
+      {
+        "id": "memberField",
+        "component": "FormControl",
+        "label": "Select your profile",
+        "input": "memberSelect"
+      },
+      {
+        "id": "memberSelect",
+        "component": "Select",
+        "name": "teammate",
+        "placeholder": "Choose your name...",
+        "items": [
+          "optMarcus",
+          "optPriya",
+          "optOther"
+        ]
+      },
+      {
+        "id": "optMarcus",
+        "component": "SelectItem",
+        "value": "marcus_vance",
+        "label": "Marcus Vance (DevOps)"
+      },
+      {
+        "id": "optPriya",
+        "component": "SelectItem",
+        "value": "priya_patel",
+        "label": "Priya Patel (QA)"
+      },
+      {
+        "id": "optOther",
+        "component": "SelectItem",
+        "value": "other_teammate",
+        "label": "Edit an existing update..."
+      },
+      {
+        "id": "yesterdayField",
+        "component": "FormControl",
+        "label": "What did you accomplish yesterday?",
+        "input": "yesterdayInput"
+      },
+      {
+        "id": "yesterdayInput",
+        "component": "TextArea",
+        "name": "yesterday",
+        "placeholder": "Shipped CI/CD pipeline improvements, merged PR #412...",
+        "rows": 2
+      },
+      {
+        "id": "todayField",
+        "component": "FormControl",
+        "label": "What are you working on today?",
+        "input": "todayInput"
+      },
+      {
+        "id": "todayInput",
+        "component": "TextArea",
+        "name": "today",
+        "placeholder": "Upgrading Kubernetes cluster to v1.28, pairing on telemetry...",
+        "rows": 2
+      },
+      {
+        "id": "blockerField",
+        "component": "FormControl",
+        "label": "Any blockers?",
+        "hint": "Leave blank or type 'None' if you are unblocked.",
+        "input": "blockerInput"
+      },
+      {
+        "id": "blockerInput",
+        "component": "Input",
+        "name": "blockers",
+        "placeholder": "None",
+        "type": "text"
+      },
+      {
+        "id": "formActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitBtn",
+          "draftBtn"
+        ]
+      },
+      {
+        "id": "submitBtn",
+        "component": "Button",
+        "label": "Submit Today's Update",
+        "variant": "primary"
+      },
+      {
+        "id": "draftBtn",
+        "component": "Button",
+        "label": "Save as Draft",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

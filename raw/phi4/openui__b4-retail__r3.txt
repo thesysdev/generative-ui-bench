@@ -1,0 +1,69 @@
+```openui
+root = Card([salesTarget, footTraffic, bestSellers, outOfStock, todayShift, basketSize, weeklyReturns, promotionsStatus, registerStatus, reorderItem, viewOtherStore, weeklyComparison])
+
+salesTarget = Card([salesTargetHeader, salesTargetContent])
+salesTargetHeader = CardHeader("Sales Today", "Against Target")
+salesTargetContent = Table([targetLabel, salesValue, targetValue, status])
+targetLabel = Col("Target", ["Sales"])
+salesValue = Col("Today's Sales", ["$12,500"])
+targetValue = Col("Target", ["$15,000"])
+status = Col("Status", ["Behind"], "danger")
+
+footTraffic = Card([footTrafficHeader, footTrafficChart])
+footTrafficHeader = CardHeader("Foot Traffic", "Throughout the Day")
+footTrafficChart = LineChart(["Morning", "Afternoon", "Evening"], [trafficSeries], "natural", "Time of Day", "Visitors")
+trafficSeries = Series("Visitors", [200, 350, 150])
+
+bestSellers = Card([bestSellersHeader, bestSellersTable])
+bestSellersHeader = CardHeader("Best Sellers", "Units Sold")
+bestSellersTable = Table([productLabel, unitsLabel, unitsSold])
+productLabel = Col("Product", ["Product 1", "Product 2", "Product 3"])
+unitsLabel = Col("Units Sold", ["150", "120", "90"])
+
+outOfStock = Card([outOfStockHeader, outOfStockList])
+outOfStockHeader = CardHeader("Out of Stock", "Items")
+outOfStockList = ListBlock([item1, item2], "image")
+item1 = ListItem("Item 1", null, ["item1.jpg"])
+item2 = ListItem("Item 2", null, ["item2.jpg"])
+
+todayShift = Card([todayShiftHeader, todayShiftList])
+todayShiftHeader = CardHeader("Shift Today", "Staff")
+todayShiftList = ListBlock([staff1, staff2, staff3])
+staff1 = ListItem("John Doe", "Cashier")
+staff2 = ListItem("Jane Smith", "Stock")
+staff3 = ListItem("Jim Brown", "Manager")
+
+basketSize = Card([basketSizeHeader, avgBasketSize])
+basketSizeHeader = CardHeader("Average Basket Size", "Value")
+avgBasketSize = TextContent("$45.67", "large")
+
+weeklyReturns = Card([weeklyReturnsHeader, weeklyReturnsChart])
+weeklyReturnsHeader = CardHeader("Returns This Week", "Trend")
+weeklyReturnsChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [returnsSeries], "stacked", "Day", "Returns")
+returnsSeries = Series("Returns", [10, 15, 8, 20, 25, 18, 12])
+
+promotionsStatus = Card([promotionsHeader, promotionsTable])
+promotionsHeader = CardHeader("Promotions Status", "Performance")
+promotionsTable = Table([promoLabel, salesLabel, promoSales])
+promoLabel = Col("Promotion", ["Winter Sale", "Back to School"])
+salesLabel = Col("Sales", ["$5,000", "$3,200"])
+promoSales = Col("Target", ["$7,000", "$4,500"])
+
+registerStatus = Card([registerHeader, registerList])
+registerHeader = CardHeader("Register Status", "Open/Closed")
+registerList = ListBlock([register1, register2, register3], "image")
+register1 = ListItem("Register 1", "Open", ["register1.jpg"], "Close")
+register2 = ListItem("Register 2", "Closed", ["register2.jpg"], "Open")
+register3 = ListItem("Register 3", "Open", ["register3.jpg"], "Close")
+
+reorderItem = Button("Reorder Item")
+viewOtherStore = Button("View Another Store", ["view-store"])
+
+weeklyComparison = Card([weeklyComparisonHeader, weeklyComparisonChart])
+weeklyComparisonHeader = CardHeader("Weekly Comparison", "This Week vs. Last Week")
+weeklyComparisonChart = RadarChart(["Revenue", "Foot Traffic", "Returns"], [thisWeekSeries, lastWeekSeries])
+thisWeekSeries = Series("This Week", [35, 40, 15])
+lastWeekSeries = Series("Last Week", [30, 35, 20])
+
+actions = Buttons([reorderItem, viewOtherStore])
+```

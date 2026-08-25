@@ -1,0 +1,22 @@
+root = Card([header, taskFocus, statusSection, actionSection, followUps], "card", "column", "l")
+
+header = CardHeader("Deep Focus Mode", "One task at a time")
+
+taskFocus = Card([taskTitle, deadlineBadge, taskDescription], "sunk", "column", "m")
+taskTitle = Heading("Finalize Quarterly Financial Report", "h2")
+deadlineBadge = Badge("Due in 4 hours", "destructive")
+taskDescription = TextContent("Complete the analysis of Q3 revenue streams and draft the executive summary for the board meeting tomorrow morning.", "default")
+
+statusSection = Card([statusHeading, statusProgress, statusDetails], "clear", "column", "s")
+statusHeading = Heading("Current Progress", "h4")
+statusProgress = Progress(65, "65% Complete")
+statusDetails = TextContent("You have completed the data gathering and initial drafting. Only the final review and formatting remain.", "small")
+
+actionSection = Buttons([completeBtn, snoozeBtn], "row")
+completeBtn = Button("Mark as Completed", null, "primary", "normal", "large")
+snoozeBtn = Button("Snooze 15m", null, "secondary", "normal", "medium")
+
+followUps = FollowUpBlock([nextTask, timerTask, breakTask])
+nextTask = FollowUpItem("What is my next most urgent task?")
+timerTask = FollowUpItem("Start a 25-minute Pomodoro timer")
+breakTask = FollowUpItem("Schedule a 5-minute stretch break")

@@ -1,0 +1,27 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"l"},"children":["headerCard","pollAlert","optionsSection","submitSection"]}}
+{"op":"add","path":"/elements/headerCard","value":{"type":"CardHeader","props":{"title":"Friday Team Lunch Poll","subtitle":"Cast your vote for this week's team lunch outing"}}}
+{"op":"add","path":"/elements/pollAlert","value":{"type":"Alert","props":{"title":"Active Poll","description":"Voting closes on Thursday at 4:00 PM. Top choice wins!","variant":"info"}}}
+{"op":"add","path":"/elements/optionsSection","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"m"},"children":["questionTitle","restaurantList"]}}
+{"op":"add","path":"/elements/questionTitle","value":{"type":"Heading","props":{"text":"Where should we go for lunch on Friday?","level":"h3"}}}
+{"op":"add","path":"/elements/restaurantList","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"m"},"repeat":{"statePath":"/restaurants","key":"id"},"children":["restaurantItem"]}}
+{"op":"add","path":"/elements/restaurantItem","value":{"type":"Card","props":{"variant":"card","direction":"row","justify":"between","align":"center","gap":"m"},"children":["restaurantInfo","voteBtn"]}}
+{"op":"add","path":"/elements/restaurantInfo","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["restHeader","restDesc","restDetails"]}}
+{"op":"add","path":"/elements/restHeader","value":{"type":"Card","props":{"variant":"clear","direction":"row","align":"center","gap":"s"},"children":["restName","restBadge"]}}
+{"op":"add","path":"/elements/restName","value":{"type":"TextContent","props":{"text":{"$template":"**${name}**"},"size":"large"}}}
+{"op":"add","path":"/elements/restBadge","value":{"type":"Badge","props":{"text":{"$item":"cuisine"},"variant":"secondary"}}}
+{"op":"add","path":"/elements/restDesc","value":{"type":"TextContent","props":{"text":{"$item":"description"},"size":"small"}}}
+{"op":"add","path":"/elements/restDetails","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m"},"children":["restDistance","restPrice","restVotes"]}}
+{"op":"add","path":"/elements/restDistance","value":{"type":"Tag","props":{"text":{"$template":"📍 ${distance}"},"size":"sm","variant":"neutral"}}}
+{"op":"add","path":"/elements/restPrice","value":{"type":"Tag","props":{"text":{"$template":"💰 ${price}"},"size":"sm","variant":"neutral"}}}
+{"op":"add","path":"/elements/restVotes","value":{"type":"Tag","props":{"text":{"$template":"👍 ${votes} votes"},"size":"sm","variant":"info"}}}
+{"op":"add","path":"/elements/voteBtn","value":{"type":"Button","props":{"label":{"$cond":{"$state":"/selectedId","eq":{"$item":"id"}},"$then":"Voted ✓","$else":"Vote"},"variant":{"$cond":{"$state":"/selectedId","eq":{"$item":"id"}},"$then":"primary","$else":"secondary"}},"on":{"press":{"action":"setState","params":{"statePath":"/selectedId","value":{"$item":"id"}}}}}}
+{"op":"add","path":"/state/selectedId","value":"rest-1"}
+{"op":"add","path":"/state/restaurants","value":[]}
+{"op":"add","path":"/state/restaurants/0","value":{"id":"rest-1","name":"Tacos & Tequilas Taqueria","cuisine":"Mexican","description":"Authentic street tacos, fresh guacamole, and outdoor patio seating.","distance":"5 min walk","price":"$$","votes":6}}
+{"op":"add","path":"/state/restaurants/1","value":{"id":"rest-2","name":"Mamma Mia Trattoria","cuisine":"Italian","description":"Handcrafted pasta, wood-fired artisan pizza, and great lunch specials.","distance":"8 min walk","price":"$$$","votes":4}}
+{"op":"add","path":"/state/restaurants/2","value":{"id":"rest-3","name":"Bonsai Ramen & Bento","cuisine":"Japanese","description":"Rich tonkotsu ramen bowls, crispy karaage, and fresh bento combos.","distance":"3 min walk","price":"$$","votes":5}}
+{"op":"add","path":"/elements/submitSection","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["pollStatusText","pollButtons"]}}
+{"op":"add","path":"/elements/pollStatusText","value":{"type":"TextContent","props":{"text":"15 of 18 teammates have voted","size":"small"}}}
+{"op":"add","path":"/elements/pollButtons","value":{"type":"Buttons","props":{"buttons":["suggestBtn"]}}}
+{"op":"add","path":"/elements/suggestBtn","value":{"type":"Button","props":{"label":"Suggest Alternative","variant":"tertiary"}}}

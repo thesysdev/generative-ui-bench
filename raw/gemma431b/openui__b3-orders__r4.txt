@@ -1,0 +1,37 @@
+root = Card([header, kpiSection, filterSection, orderTableSection, analyticsSection, followUps])
+
+header = CardHeader("Operations Desk", "Real-time e-commerce monitoring")
+
+kpiSection = Card([revKpi, orderKpi, aovKpi, refundKpi], "card", "row", "m", "stretch", "between")
+revKpi = TextCallout("success", "Today's Revenue", "$12,450.00")
+orderKpi = TextCallout("info", "Orders Today", "142")
+aovKpi = TextCallout("neutral", "Avg Order Value", "$87.67")
+refundKpi = TextCallout("danger", "Monthly Refund Rate", "2.4%")
+
+filterSection = Card([searchField, statusFilter], "sunk", "row", "m")
+searchField = FormControl("Search Customer", searchInput)
+searchInput = Input("customer_search", "Search by name...")
+statusFilter = FormControl("Filter Status", statusSelect)
+statusSelect = Select("status_filter", [sPending, sShipped, sDelivered, sCancelled])
+sPending = SelectItem("pending", "Pending")
+sShipped = SelectItem("shipped", "Shipped")
+sDelivered = SelectItem("delivered", "Delivered")
+sCancelled = SelectItem("cancelled", "Cancelled")
+
+orderTableSection = Card([tableHeading, ordersTable], "card", "column", "s")
+tableHeading = Heading("Recent Orders", "h3")
+ordersTable = Table([idCol, customerCol, totalCol, statusCol, actionCol])
+idCol = Col("Order ID", ["#10245", "#10244", "#10243", "#10242", "#10241"], "string")
+customerCol = Col("Customer", ["Alice Johnson", "Bob Smith", "Charlie Brown", "Diana Prince", "Edward Norton"], "string")
+totalCol = Col("Total", ["$120.00", "$45.50", "$210.00", "$89.99", "$12.00"], "number")
+statusCol = Col("Status", ["Pending", "Shipped", "Pending", "Delivered", "Pending"], "string")
+actionCol = Col("Action", ["Fulfill", "Fulfill", "Fulfill", "Done", "Fulfill"], "action")
+
+analyticsSection = Card([chartHeading, volumeChart], "card", "column", "s")
+chartHeading = Heading("Order Volume (Last 4 Weeks)", "h3")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volSeries], "grouped", "Timeline", "Orders")
+volSeries = Series("Orders", [850, 920, 780, 1100])
+
+followUps = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Export today's report to CSV")
+f2 = FollowUpItem("View detailed refund analysis")

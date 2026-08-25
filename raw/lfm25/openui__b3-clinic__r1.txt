@@ -1,0 +1,59 @@
+```openui-lang
+root = Card(children: [
+  // Header
+  CardHeader(title="Clinic Day View", subtitle="Today's Schedule"),
+  
+  // Today's appointments table
+  Table(columns: [
+    { label: "Time", data: ["08:30", "09:45", "10:20", "11:55", "13:00", "14:30"], type: "string" },
+    { label: "Patient", data: ["Emily Chen", "David Park", "Lisa Wang", "Robert Lee", "Mia Rodriguez", "James O'Brien"], type: "string" },
+    { label: "Status", data: ["Confirmed", "Confirmed", "Confirmed", "Confirmed", "Confirmed", "Pending"], type: "string" }
+  ], labels: [], variants: ["table"]),
+  
+  // Expected patients count and no-show rate
+  TextContent(content: "Expected Patients: 6\n\nNo-Show Rate This Month: 8%", size: "large"),
+  
+  // Rooms availability
+  CardBlock(
+    subtitle: "Available Rooms",
+    children: [
+      TextContent("Room 201: ✅ Free\nRoom 202: 🟡 Busy\nRoom 203: 🟢 Free\nRoom 204: 🟡 Busy\nRoom 205: 🟢 Free"),
+      TextContent("Current capacity: 40 patients scheduled for 6 hours")
+    ]
+  ),
+  
+  // Next patient called out
+  Card(children: [
+    CardHeader(title="Next Patient", subtitle="Upcoming"),
+
+    Card(
+      title: "Next Patient",
+      text: "Dr. Emily Chen – 08:30 AM (Room 201)",
+      variant: "card",
+      children: []
+    ),
+
+    Button(
+      label: "Check In",
+      variant: "primary",
+      size: "medium",
+      action: "checkPatientIn"
+    )
+  ]),
+  
+  // Way to check a patient in
+  Button(
+    label: "Check In Patient",
+    action: "checkPatientIn",
+    variant: "primary",
+    size: "medium"
+  ),
+  
+  // Way to move to another day
+  Buttons(children: [
+    Button(label: "Today", variant: "primary"),
+    Button(label: "Tomorrow", variant: "primary"),
+    Button(label: "Previous", variant: "tertiary", style: "ghost")
+  ])
+])
+```

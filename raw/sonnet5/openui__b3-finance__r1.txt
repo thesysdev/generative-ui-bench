@@ -1,0 +1,36 @@
+root = Card([header, kpiSection, expensesSection, transactionsSection, controlsSection])
+header = CardHeader("Month-End Finance Overview", "March 2024")
+
+kpiSection = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Key Metrics", "h3")
+kpiTable = Table([kpiMetric, kpiValue])
+kpiMetric = Col("Metric", ["Cash on Hand", "Monthly Burn", "Months of Runway"])
+kpiValue = Col("Value", ["$1,842,300", "$186,500", "9.9 months"])
+
+expensesSection = Card([expensesHeading, expensesChart], "sunk")
+expensesHeading = Heading("Expenses by Category", "h3")
+expensesChart = PieChart(expenseLabels, expenseValues, "donut")
+expenseLabels = ["Payroll", "Software & Tools", "Marketing", "Office & Facilities", "Travel", "Professional Services"]
+expenseValues = [112000, 24500, 21800, 14200, 7600, 6400]
+
+transactionsSection = Card([transHeading, transTable], "sunk")
+transHeading = Heading("Transactions Above $10,000 (March 2024)", "h3")
+transTable = Table([transDate, transDesc, transCategory, transAmount])
+transDate = Col("Date", ["Mar 3", "Mar 8", "Mar 12", "Mar 18", "Mar 25"])
+transDesc = Col("Description", ["Payroll - Engineering", "AWS Cloud Infrastructure", "Series A Legal Fees", "Office Lease Q2 Payment", "Payroll - Sales & Marketing"])
+transCategory = Col("Category", ["Payroll", "Software & Tools", "Professional Services", "Office & Facilities", "Payroll"])
+transAmount = Col("Amount", ["$68,200", "$14,300", "$22,000", "$12,000", "$44,100"], "number")
+
+controlsSection = Card([controlsHeading, monthForm, downloadBtnGroup], "sunk")
+controlsHeading = Heading("Actions", "h3")
+monthForm = Form("month-select", monthFormButtons, [monthField])
+monthField = FormControl("Select Month", monthSelect)
+monthSelect = Select("month", [janOpt, febOpt, marOpt, aprOpt], "Choose a month", null, "mar")
+janOpt = SelectItem("jan", "January 2024")
+febOpt = SelectItem("feb", "February 2024")
+marOpt = SelectItem("mar", "March 2024")
+aprOpt = SelectItem("apr", "April 2024")
+monthFormButtons = Buttons([viewMonthBtn])
+viewMonthBtn = Button("View Month", null, "primary")
+downloadBtnGroup = Buttons([downloadBtn], "row")
+downloadBtn = Button("Download Statement", null, "secondary")

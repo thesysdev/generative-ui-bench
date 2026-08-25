@@ -1,0 +1,69 @@
+root = Card([header, viewersCard, mostWatchedTable, watchTimeChart, subChart, genreChart, bufferCard, deliveryTable, releasesBlock, licensesBlock, recCard, searchTable, revenuePie, devicePie, regionForm, flagsTable, promoForm], "card", "column", "l")
+
+header = CardHeader("Operations Room", "Streaming Operations Dashboard")
+viewersCard = Card([liveHeading, liveNumber, liveLabel], "clear")
+liveHeading = Heading("Viewers Watching Now", "h3")
+liveNumber = TextContent("42,831", "large-heavy")
+liveLabel = TextContent("Concurrent streams", "small")
+
+mostWatchedTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["Stranger Things", "The Crown", "Black Mirror", "Wednesday"])
+hoursCol = Col("Hours", [12450, 9820, 8740, 7600])
+
+watchTimeChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May"], [watchSeries], "natural", "Month", "Hours (M)")
+watchSeries = Series("Watch Time", [42, 48, 55, 61, 68])
+
+subChart = BarChart(["New Subs", "Cancellations"], [subSeries], "grouped", "Type", "Count")
+subSeries = Series("This Month", [4520, 1180])
+
+genreChart = HorizontalBarChart(["Drama", "Comedy", "Sci-Fi", "Reality", "Action"], [genreSeries], "grouped", "Genre", "Completion %")
+genreSeries = Series("Avg Completion", [78, 65, 82, 54, 71])
+
+bufferCard = Card([bufferProgress, bufferAlert], "clear")
+bufferProgress = Progress(2.4, "Buffering rate %")
+bufferAlert = Alert("Buffering elevated", "2.4% exceeds 2% threshold — investigate CDN", "warning")
+
+deliveryTable = Table([regionCol, statusCol])
+regionCol = Col("Region", ["US East", "US West", "EU Central", "APAC", "LATAM"])
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy"])
+
+releasesBlock = ListBlock([rel1, rel2, rel3])
+rel1 = ListItem("The Midnight Sun", "May 14")
+rel2 = ListItem("Crimson Tide", "May 22")
+rel3 = ListItem("Echoes of War", "May 28")
+
+licensesBlock = ListBlock([lic1, lic2])
+lic1 = ListItem("The Crown S4", "Expires May 10")
+lic2 = ListItem("Stranger Things S3", "Expires May 18")
+
+recCard = Card([recHeading, recProgress, recText], "clear")
+recHeading = Heading("Recommendation Clicks", "h3")
+recProgress = Progress(34, "Click-through %")
+recText = TextContent("Recommendations clicked 34% of the time", "default")
+
+searchTable = Table([searchCol, countCol])
+searchCol = Col("Search Term", ["Stranger Things", "The Crown", "Black Mirror", "Wednesday"])
+countCol = Col("No Playback", [420, 310, 280, 190])
+
+revenuePie = PieChart(["Basic", "Standard", "Premium", "Family"], [18, 35, 42, 5], "pie")
+
+devicePie = PieChart(["Smart TV", "Mobile", "Desktop", "Tablet", "Console"], [45, 28, 12, 8, 7], "pie")
+
+regionForm = Form("region-focus", regionButtons, [regionField])
+regionField = FormControl("Focus Region", regionSelect)
+regionSelect = Select("region", [usEast, euCentral, apac], "Select region")
+usEast = SelectItem("us-east", "US East")
+euCentral = SelectItem("eu-central", "EU Central")
+apac = SelectItem("apac", "APAC")
+regionButtons = Buttons([focusBtn])
+focusBtn = Button("Focus Region")
+
+flagsTable = Table([flagCol, stateCol])
+flagCol = Col("Feature Flag", ["New UI", "Live Chat", "4K HDR", "Offline Mode"])
+stateCol = Col("State", ["On", "Off", "On", "Off"])
+
+promoForm = Form("promo-form", promoButtons, [promoField])
+promoField = FormControl("Title to promote", promoInput)
+promoInput = Input("promo_title", "Stranger Things")
+promoButtons = Buttons([promoBtn])
+promoBtn = Button("Promote on Home")

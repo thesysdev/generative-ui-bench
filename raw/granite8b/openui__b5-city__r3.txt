@@ -1,0 +1,302 @@
+```openui-lang
+root = Card(
+    [
+        congestionCard,
+        transitPunctualityCard,
+        airQualityByDistrict,
+        energyUsePastWeek,
+        waterUseToday,
+        openIncidents,
+        emergencyVehiclesDeployment,
+        parkingDowntown,
+        publicEventsWeekend,
+        citizenReports,
+        serviceRequestBacklog,
+        currentWeather,
+        focusOnDistrict,
+        dispatchCrew,
+        sendPublicAlert,
+        roadworksPlannedMonth,
+        infrastructureJobsDue
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+congestionCard = Card(
+    [
+        Heading("Current Congestion", "h4"),
+        BarChart(
+            labels = ["Downtown", "Uptown", "Midtown", "Northside", "Southside"],
+            series = [
+                Series("Congestion Level", [0.8, 0.5, 0.3, 0.6, 0.4])
+            ],
+            variant = "grouped",
+            xLabel = "District",
+            yLabel = "Congestion Index (0‑1)"
+        )
+    ],
+    "sunk"
+)
+
+transitPunctualityCard = Card(
+    [
+        Heading("Transit Punctuality", "h4"),
+        LineChart(
+            labels = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"],
+            series = [
+                Series("On‑time %", [92, 95, 94, 93, 96, 97])
+            ],
+            variant = "linear",
+            xLabel = "Hour",
+            yLabel = "On‑time Percentage"
+        )
+    ],
+    "sunk"
+)
+
+airQualityByDistrict = Card(
+    [
+        Heading("Air Quality by District", "h4"),
+        RadarChart(
+            labels = ["Downtown", "Uptown", "Midtown", "Northside", "Southside"],
+            series = [
+                Series("PM2.5 µg/m³", [12, 9, 15, 11, 8]),
+                Series("NO₂ ppb", [45, 38, 52, 40, 35])
+            ]
+        )
+    ],
+    "sunk"
+)
+
+energyUsePastWeek = Card(
+    [
+        Heading("Energy Use – Past Week", "h4"),
+        AreaChart(
+            labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            series = [
+                Series("kWh", [850, 920, 870, 950, 980, 900, 880])
+            ],
+            variant = "linear",
+            xLabel = "Day",
+            yLabel = "Energy Consumption (kWh)"
+        )
+    ],
+    "sunk"
+)
+
+waterUseToday = Card(
+    [
+        Heading("Water Use – Today", "h4"),
+        PieChart(
+            labels = ["Residential", "Commercial", "Industrial", "Public"],
+            values = [45, 30, 15, 10],
+            variant = "donut",
+            appearance = "circular"
+        )
+    ],
+    "sunk"
+)
+
+openIncidents = Card(
+    [
+        Heading("Open Incidents", "h4"),
+        Table(
+            columns = [
+                Col("District", ["Downtown", "Uptown", "Midtown"]),
+                Col("Severity", ["Critical", "High", "Medium"]),
+                Col("Location", ["123 Main St", "456 Oak Ave", "789 Pine Rd"])
+            ]
+        )
+    ],
+    "sunk"
+)
+
+emergencyVehiclesDeployment = Card(
+    [
+        Heading("Emergency Vehicles Deployed", "h4"),
+        MapComponent(
+            "map",
+            coordinates = [
+                {"district": "Downtown", "lat": 40.7128, "lng": -74.0060},
+                {"district": "Uptown", "lat": 40.7580, "lng": -73.9850}
+            ]
+        )
+    ],
+    "sunk"
+)
+
+parkingDowntown = Card(
+    [
+        Heading("Parking Availability – Downtown", "h4"),
+        Gauge(
+            value = 0.62,
+            label = "Available Spaces (%)",
+            max = 100,
+            min = 0,
+            color = "green"
+        )
+    ],
+    "sunk"
+)
+
+publicEventsWeekend = Card(
+    [
+        Heading("Public Events – This Weekend", "h4"),
+        ListBlock(
+            items = [
+                ListItem("Concert", "City Plaza, Sat 18:00"),
+                ListItem("Festival", "Riverfront, Sun 10:00"),
+                ListItem("Market", "Downtown Square, Sun 12:00")
+            ],
+            variant = "image"
+        )
+    ],
+    "sunk"
+)
+
+citizenReports = Card(
+    [
+        Heading("Citizen Reports (Live)", "h4"),
+        TextContent(
+            "No reports yet.",
+            size = "large"
+        )
+    ],
+    "sunk"
+)
+
+serviceRequestBacklog = Card(
+    [
+        Heading("Service Request Backlog", "h4"),
+        Callout(
+            variant = "warning",
+            title = "Backlog",
+            description = "42 pending requests"
+        )
+    ],
+    "sunk"
+)
+
+currentWeather = Card(
+    [
+        Heading("Current Weather", "h4"),
+        Callout(
+            variant = "info",
+            title = "Weather",
+            description = "Sunny, 75°F, Light breeze"
+        )
+    ],
+    "sunk"
+)
+
+focusOnDistrict = Card(
+    [
+        Heading("Focus on District", "h4"),
+        Tabs(
+            items = [
+                TabItem(
+                    value = "downtown",
+                    trigger = "Downtown",
+                    content = [
+                        Heading("Downtown Focus", "h3"),
+                        CardHeader("District Overview", "Live data for Downtown")
+                    ]
+                ),
+                TabItem(
+                    value = "uptown",
+                    trigger = "Uptown",
+                    content = [
+                        Heading("Uptown Focus", "h3"),
+                        CardHeader("District Overview", "Live data for Uptown")
+                    ]
+                )
+            ]
+        )
+    ],
+    "clear"
+)
+
+dispatchCrew = Card(
+    [
+        Heading("Dispatch Crew", "h4"),
+        Form(
+            name = "dispatchForm",
+            buttons = Buttons([dispatchBtn]),
+            fields = [
+                FormControl(
+                    label = "District",
+                    input = Select(
+                        name = "district",
+                        items = [SelectItem("Downtown", "Downtown"), SelectItem("Uptown", "Uptown")],
+                        placeholder = "Select district"
+                    )
+                ),
+                FormControl(
+                    label = "Incident Type",
+                    input = Select(
+                        name = "type",
+                        items = [SelectItem("Fire", "Fire"), SelectItem("Medical", "Medical")],
+                        placeholder = "Select type"
+                    )
+                )
+            ]
+        )
+    ],
+    "sunk"
+)
+
+sendPublicAlert = Card(
+    [
+        Heading("Send Public Alert", "h4"),
+        Form(
+            name = "alertForm",
+            buttons = Buttons([sendAlertBtn]),
+            fields = [
+                FormControl(
+                    label = "Message",
+                    input = TextArea(
+                        name = "message",
+                        placeholder = "Enter alert message",
+                        rows = 2
+                    )
+                )
+            ]
+        )
+    ],
+    "sunk"
+)
+
+roadworksPlannedMonth = Card(
+    [
+        Heading("Roadworks Planned – This Month", "h4"),
+        Table(
+            columns = [
+                Col("District", ["Downtown", "Uptown", "Midtown"]),
+                Col("Location", ["Main St", "Oak Ave", "Pine Rd"]),
+                Col("Dates", ["2025‑08‑01 to 2025‑08‑15", "2025‑08‑10 to 2025‑08‑20", "2025‑08‑05 to 2025‑08‑12"])
+            ]
+        )
+    ],
+    "sunk"
+)
+
+infrastructureJobsDue = Card(
+    [
+        Heading("Infrastructure Jobs Due for Maintenance", "h4"),
+        ListBlock(
+            items = [
+                ListItem("Water Pipes", "Due 2025‑08‑20"),
+                ListItem("Traffic Lights", "Due 2025‑08‑25"),
+                ListItem("Sidewalks", "Due 2025‑08‑30")
+            ],
+            variant = "number"
+        )
+    ],
+    "sunk"
+)
+
+dispatchBtn = Button("Dispatch Crew")
+sendAlertBtn = Button("Send Alert")
+```

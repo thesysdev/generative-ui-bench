@@ -1,0 +1,24 @@
+root = Card([header, filters, search, metrics, orders, fulfillment], "clear")
+
+header = CardHeader("E-Commerce Operations Desk", "Orders dashboard")
+
+filters = Card([statusFilter, dateRange])
+statusFilter = Select("Order status filter", [allStatus, pending, shipped, delivered, refunded], "All orders")
+dateRange = Select("Date range", ["Today", "7 days", "30 days"], "Today")
+
+search = TextCallout("info", "Search by customer name", "Type to filter orders")
+
+metrics = Card([avgOrderValue, refundRate, orderVolume])
+avgOrderValue = TextCallout("success", "Average Order Value", "$42.50")
+refundRate = TextCallout("danger", "Refund Rate", "12.3%")
+orderVolume = TextCallout("info", "Order Volume (4 weeks)", "1,247 orders")
+
+orders = Card([orderTable])
+orderTable = Table([colId, colCustomer, colTotal, colStatus])
+colId = Col("Order ID", ["ORD-001", "ORD-002", "ORD-003", "ORD-004", "ORD-005"])
+colCustomer = Col("Customer", ["Jane Smith", "John Doe", "Alice Wang", "Bob Martinez", "Carol Lee"])
+colTotal = Col("Total", ["$89.99", "$142.50", "$32.00", "$210.00", "$45.75"])
+colStatus = Col("Status", ["Shipped", "Delivered", "Pending", "Refunded", "Shipped"])
+
+fulfillment = Card([fulfillBtn])
+fulfillBtn = Button("Mark order as fulfilled", null, "primary")

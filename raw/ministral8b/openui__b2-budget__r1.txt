@@ -1,0 +1,40 @@
+```openui-lang
+root = Card([budgetHeader, budgetSummary, spendingChart, largestExpense, monthSelector, addExpenseBtn])
+
+budgetHeader = CardHeader("Monthly Budget Check", "Track your spending vs. goals")
+
+budgetSummary = Card([totalSpent, budgetGoal, spendingDiff], "sunk")
+totalSpent = TextContent("Total spent this month", "large-heavy")
+budgetGoal = TextContent("Your budget goal", "large-heavy")
+spendingDiff = Card([spentValue, goalValue, diffIndicator], "card")
+spentValue = TextContent("$2,450", "large-heavy")
+goalValue = TextContent("Budget: $3,000", "large-heavy")
+diffIndicator = Callout("Under budget", "You're $550 below your goal!", "success")
+
+spendingChart = Card([chartTitle, pieChart], "sunk")
+chartTitle = Heading("Spending by Category", "h3")
+pieChart = PieChart(categories, values, "pie", "circular")
+
+categories = ["Housing", "Food", "Transport", "Entertainment", "Utilities", "Other"]
+values = [600, 450, 350, 250, 150, 200]
+
+largestExpense = Card([expenseTitle, expenseDetails], "sunk")
+expenseTitle = Heading("Largest Expense", "h3")
+expenseDetails = Card([largestExpenseText, expenseAmount, expenseDate], "card")
+largestExpenseText = TextContent("Your biggest spend this month was on:")
+expenseAmount = TextContent("Rent: $600", "large-heavy")
+expenseDate = TextContent("Paid on: 2023-10-15", "small")
+
+monthSelector = Card([monthLabel, monthPicker], "sunk")
+monthLabel = TextContent("Check another month:", "default")
+monthPicker = Select("month", [jan, feb, mar, apr, may, jun], "Select month")
+
+jan = SelectItem("January", "January 2023")
+feb = SelectItem("February", "February 2023")
+mar = SelectItem("March", "March 2023")
+apr = SelectItem("April", "April 2023")
+may = SelectItem("May", "May 2023")
+jun = SelectItem("June", "June 2023")
+
+addExpenseBtn = Button("Add an Expense", null, "primary")
+```

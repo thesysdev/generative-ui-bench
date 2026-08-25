@@ -1,0 +1,90 @@
+```openui-lang
+root = Card([header, viewerStats, topTitles, watchTimeTrend, subscriberNet, genrePerformance, bufferingRate, deliveryHealth, upcomingReleases, expiringLicenses, recommendationClicks, abandonedSearches, revenueSplit, deviceSplit, regionFocus, featureFlags, titlePromotion])
+
+header = CardHeader("Operations Room", "Real-time streaming metrics dashboard")
+
+viewerStats = Card([viewerCount, viewerDistribution], "sunk")
+viewerCount = Card([liveViewers], "sunk")
+liveViewers = TextContent("1,423,654 viewers currently watching")
+
+topTitles = Card([topTitlesHeader, topTitlesTable], "sunk")
+topTitlesHeader = Heading("Most-watched titles (last 24h)", "h3")
+topTitlesTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["The Last of Us", "Stranger Things", "The Mandalorian", "Breaking Bad", "Game of Thrones"])
+hoursCol = Col("Hours Watched", ["12,456", "9,872", "8,321", "7,654", "6,987"])
+
+watchTimeTrend = Card([watchTimeChart], "sunk")
+watchTimeChart = LineChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29"], [watchSeries], "natural", "Date", "Avg Hours Watched")
+watchSeries = Series("Daily", [18.2, 20.5, 22.1, 21.8, 23.4])
+
+subscriberNet = Card([subscriberNetChart], "sunk")
+subscriberNetChart = AreaChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29"], [subscribersSeries, cancellationsSeries], "linear", "Date", "Net Subscribers")
+subscribersSeries = Series("New Subscribers", [452, 510, 487, 532, 578])
+cancellationsSeries = Series("Cancellations", [123, 137, 142, 155, 168])
+
+genrePerformance = Card([genrePerformanceChart], "sunk")
+genrePerformanceChart = PieChart(["Action", "Drama", "Comedy", "Horror", "Sci-Fi"], [15, 30, 25, 10, 20], "pie", "circular")
+genreLabels = ["Action", "Drama", "Comedy", "Horror", "Sci-Fi"]
+genreValues = [15, 30, 25, 10, 20]
+
+bufferingRate = Card([bufferingRateChart], "sunk")
+bufferingRateChart = SingleStackedBarChart(["North America", "Europe", "Asia", "Latin America", "Africa"], [0.8, 1.2, 0.5, 1.8, 0.9])
+
+deliveryHealth = Card([deliveryHealthTable], "sunk")
+deliveryHealthTable = Table([regionCol, healthCol, latencyCol])
+regionCol = Col("Region", ["NA", "EU", "APAC", "LATAM", "AFR"])
+healthCol = Col("Delivery Health", ["99.7%", "98.5%", "99.2%", "97.9%", "98.8%"])
+latencyCol = Col("Avg Latency (ms)", ["120", "150", "180", "210", "250"])
+
+upcomingReleases = Card([upcomingReleasesHeader, releasesTable], "sunk")
+upcomingReleasesHeader = Heading("Releases this month", "h3")
+releasesTable = Table([titleReleaseCol, dateReleaseCol])
+titleReleaseCol = Col("Title", ["Dune: Part Two", "The Batman", "Barbie", "Oppenheimer", "Mission: Impossible 8"])
+dateReleaseCol = Col("Release Date", ["Feb 10", "Feb 15", "Feb 20", "Feb 25", "Feb 28"])
+
+expiringLicenses = Card([expiringLicensesHeader, licensesTable], "sunk")
+expiringLicensesHeader = Heading("Licenses expiring soon", "h3")
+licensesTable = Table([titleLicenseCol, expirationLicenseCol])
+titleLicenseCol = Col("Title", ["The Irishman", "1917", "The Father", "The Power of the Dog", "The Father"])
+expirationLicenseCol = Col("Expiration Date", ["Feb 12", "Feb 18", "Feb 22", "Feb 25", "Feb 27"])
+
+recommendationClicks = Card([recommendationClicksChart], "sunk")
+recommendationClicksChart = BarChart(["Home", "Search", "End of Episode", "Browse", "Watch History"], [recommendationSeries], "grouped", "Source", "Click Rate (%)")
+recommendationSeries = Series("Clicks", [45, 30, 25, 18, 12])
+
+abandonedSearches = Card([abandonedSearchesChart], "sunk")
+abandonedSearchesChart = RadarChart(["Action", "Drama", "Comedy", "Horror", "Sci-Fi"], [abandonSeries])
+abandonSeries = Series("Abandoned Searches", [12, 20, 15, 8, 10])
+
+revenueSplit = Card([revenueSplitChart], "sunk")
+revenueSplitChart = PieChart(["Basic Plan", "Premium Plan", "Family Plan", "Business Plan"], [45, 30, 15, 10], "donut", "circular")
+revenueLabels = ["Basic Plan", "Premium Plan", "Family Plan", "Business Plan"]
+revenueValues = [45, 30, 15, 10]
+
+deviceSplit = Card([deviceSplitChart], "sunk")
+deviceSplitChart = PieChart(["Smartphone", "Tablet", "Smart TV", "Desktop", "Other"], [40, 15, 25, 10, 10], "pie", "circular")
+deviceLabels = ["Smartphone", "Tablet", "Smart TV", "Desktop", "Other"]
+deviceValues = [40, 15, 25, 10, 10]
+
+regionFocus = Card([regionFocusHeader, regionFocusButtons], "sunk")
+regionFocusHeader = Heading("Focus on region", "h3")
+regionFocusButtons = Buttons([naBtn, euBtn, apacBtn, latamBtn, afrBtn])
+naBtn = Button("North America", null, null, null, "medium")
+euBtn = Button("Europe", null, null, null, "medium")
+apacBtn = Button("Asia-Pacific", null, null, null, "medium")
+latamBtn = Button("Latin America", null, null, null, "medium")
+afrBtn = Button("Africa", null, null, null, "medium")
+
+featureFlags = Card([featureFlagsHeader, featureFlagsTable], "sunk")
+featureFlagsHeader = Heading("Feature Flags", "h3")
+featureFlagsTable = Table([flagNameCol, flagStateCol])
+flagNameCol = Col("Feature", ["Personalized Recommendations", "Offline Mode", "Ad-Free Trial", "Kids Mode", "Live Chat"])
+flagStateCol = Col("State", ["Active", "Inactive", "Active", "Active", "Inactive"])
+
+titlePromotion = Card([titlePromotionHeader, titlePromotionButtons], "sunk")
+titlePromotionHeader = Heading("Promote title on home screen", "h3")
+titlePromotionButtons = Buttons([promoteLastOfUsBtn, promoteStrangerThingsBtn, promoteMandalorianBtn])
+promoteLastOfUsBtn = Button("The Last of Us", null, null, null, "large")
+promoteStrangerThingsBtn = Button("Stranger Things", null, null, null, "large")
+promoteMandalorianBtn = Button("The Mandalorian", null, null, null, "large")
+```

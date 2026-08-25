@@ -1,0 +1,54 @@
+root = Card([header, kpiRow, visitorsSection, sourcesSection, campaignsSection, bestCampaignCallout, subscriberSection, dateRangeSection, exportSection])
+header = CardHeader("Marketing Weekly Dashboard", "Week of Jun 3 - Jun 9")
+
+kpiRow = Card([conversionCard, visitorsSummaryTag], "clear", "row", "l")
+conversionCard = Card([conversionLabel, conversionProgress], "sunk")
+conversionLabel = TextContent("Conversion Rate", "small-heavy")
+conversionProgress = Progress(3.8, "3.8% of visitors converted")
+visitorsSummaryTag = Card([visitorsSummaryLabel, visitorsSummaryValue], "sunk")
+visitorsSummaryLabel = TextContent("Total Visitors (30d)", "small-heavy")
+visitorsSummaryValue = TextContent("128,450", "large-heavy")
+
+visitorsSection = Card([visitorsHeading, visitorsChart])
+visitorsHeading = Heading("Site Visitors — Last 30 Days", "h3")
+visitorsChart = AreaChart(visitorDays, [visitorSeries], "natural", "Day", "Visitors")
+visitorDays = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+visitorSeries = Series("Visitors", [3800,3950,4100,3700,4300,4600,4800,4200,4400,4750,5000,4900,5200,5400,5100,5300,5600,5800,5500,5700,6000,6200,5900,6100,6400,6600,6300,6500,6800,7000])
+
+sourcesSection = Card([sourcesHeading, sourcesChart, sourcesTable])
+sourcesHeading = Heading("Top 5 Traffic Sources", "h3")
+sourcesChart = PieChart(sourceLabels, sourceValues, "donut")
+sourceLabels = ["Organic Search", "Direct", "Social Media", "Referral", "Email"]
+sourceValues = [38, 24, 18, 12, 8]
+sourcesTable = Table([sourceCol, shareCol])
+sourceCol = Col("Source", ["Organic Search", "Direct", "Social Media", "Referral", "Email"])
+shareCol = Col("Share", ["38%", "24%", "18%", "12%", "8%"])
+
+campaignsSection = Card([campaignsHeading, campaignsTable])
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campaignNameCol, campaignStatusCol, campaignSpendCol])
+campaignNameCol = Col("Campaign", ["Summer Sale Blast", "Retargeting Q2", "Brand Awareness", "New Product Launch", "Referral Boost"])
+campaignStatusCol = Col("Status", ["Active", "Active", "Active", "Active", "Paused"])
+campaignSpendCol = Col("Spend", ["$4,200", "$2,850", "$3,600", "$5,100", "$1,200"])
+
+bestCampaignCallout = TextCallout("success", "Best Performing Campaign", "New Product Launch leads with a 6.2% conversion rate and $5,100 spend, generating the highest ROI of all active campaigns this week.")
+
+subscriberSection = Card([subscriberHeading, subscriberChart])
+subscriberHeading = Heading("Email Subscriber Growth — This Month", "h3")
+subscriberChart = LineChart(subscriberWeeks, [subscriberSeries], "natural", "Week", "Subscribers")
+subscriberWeeks = ["Week 1", "Week 2", "Week 3", "Week 4"]
+subscriberSeries = Series("Subscribers", [1200, 1450, 1680, 1950])
+
+dateRangeSection = Card([dateRangeHeading, dateRangeForm])
+dateRangeHeading = Heading("Change Date Range", "h3")
+dateRangeForm = Form("date-range-form", dateRangeButtons, [dateRangeField])
+dateRangeField = FormControl("Select Range", dateRangePicker)
+dateRangePicker = DatePicker("range", "range")
+dateRangeButtons = Buttons([applyRangeBtn])
+applyRangeBtn = Button("Apply Range", null, "primary")
+
+exportSection = Card([exportHeading, exportButtons], "clear", "row", "m", "center", "between")
+exportHeading = TextContent("Export this week's report", "default")
+exportButtons = Buttons([exportPdfBtn, exportCsvBtn])
+exportPdfBtn = Button("Export as PDF", null, "primary")
+exportCsvBtn = Button("Export as CSV", null, "secondary")

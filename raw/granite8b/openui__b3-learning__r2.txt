@@ -1,0 +1,115 @@
+```openui-lang
+root = Card(
+    [
+        CardHeader("Training Platform Analytics", "Weekly Overview"),
+        activeLearners,
+        courseCompletion,
+        avgQuizScore,
+        enrollmentRanking,
+        atRiskLearners,
+        cohortFilter,
+        engagementTrend,
+        messageCohortBtnGroup,
+    ],
+    "card",
+    "row",
+    "l",
+    align = "center",
+    justify = "between",
+    wrap = true,
+)
+
+activeLearners = Card(
+    [
+        Heading("Active Learners This Week", "h3"),
+        TextContent("1,842 learners", "large"),
+    ],
+    "sunk",
+)
+
+courseCompletion = Card(
+    [
+        Heading("Course Completion Rate", "h3"),
+        TextContent("78% completed", "large"),
+    ],
+    "sunk",
+)
+
+avgQuizScore = Card(
+    [
+        Heading("Average Quiz Score", "h3"),
+        TextContent("4.3 / 5", "large"),
+    ],
+    "sunk",
+)
+
+enrollmentRanking = Card(
+    [
+        Heading("Courses Ranked by Enrollment", "h3"),
+        Table(
+            [
+                Col("Rank", ["Rank"]),
+                Col("Course", ["Course Name"]),
+                Col("Enrollment", ["Enrollment"]),
+            ],
+        ),
+    ],
+    "sunk",
+)
+
+atRiskLearners = Card(
+    [
+        Heading("Learners at Risk of Dropping Out", "h3"),
+        TextContent("112 learners flagged", "large"),
+    ],
+    "sunk",
+)
+
+cohortFilter = Form(
+    "cohort-filter",
+    Buttons([filterSubmitBtn]),
+    [
+        FormControl(
+            "Select Cohort",
+            Select(
+                "cohort",
+                [
+                    SelectItem("All Cohorts", "All"),
+                    SelectItem("Cohort A", "cohort_a"),
+                    SelectItem("Cohort B", "cohort_b"),
+                    SelectItem("Cohort C", "cohort_c"),
+                ],
+                placeholder = "Choose a cohort",
+                value = "All",
+            ),
+        ),
+    ],
+)
+
+engagementTrend = Card(
+    [
+        Heading("Engagement Across Past Eight Weeks", "h3"),
+        LineChart(
+            ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"],
+            [engagementSeries],
+            "natural",
+            "Week",
+            "Engagement Score",
+        ),
+    ],
+    "sunk",
+)
+
+engagementSeries = Series("Engagement", [78, 85, 92, 88, 95, 90, 93, 96])
+
+messageCohortBtnGroup = Buttons(
+    [
+        Button("Message Cohort A"),
+        Button("Message Cohort B"),
+        Button("Message Cohort C"),
+    ],
+    direction = "row",
+)
+
+filterSubmitBtn = Button("Apply Filter")
+```

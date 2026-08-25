@@ -1,0 +1,83 @@
+```javascript
+root = Card([
+  // 1. Uptime this quarter
+  CardHeader("Uptime this quarter", "Current Service Uptime (Q2 2026)"),
+  TextContent("98.5%", "large"),
+  
+  // 2. CPU and memory usage over the past 24 hours
+  Card([
+    CardHeader("Resource Usage (24h)", "CPU & Memory Consumption"),
+    LineChart({
+      labels: ["Hour 0", "Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7"],
+      series: [
+        { name: "CPU (%)", values: [45.2, 46.8, 47.1, 44.9, 48.3, 42.1, 39.5, 37.2] },
+        { name: "Memory (%)", values: [62.5, 63.0, 61.8, 64.2, 60.9, 58.3, 55.1, 52.4] }
+      ],
+      xAxisLabel: "Time (hours)",
+      yAxisLabel: "Usage"
+    }, "variant": "grouped")
+  ]),
+  
+  // 3. Error rate right now
+  Card([
+    CardHeader("Current Error Rate", "Errors per minute (real-time)"),
+    TextContent("3.2", "large"),
+    Alert("High Error Rate", "Error rate exceeded threshold", "warning")
+  ]),
+  
+  // 4. Open incidents with severity for each
+  Card([
+    CardHeader("Open Incidents", "Active issues requiring attention"),
+    ListBlock([
+      { title: "Database connection pool exhaustion", severity: "critical", actionLabel: "Acknowledge" },
+      { title: "API timeout spikes", severity: "high", actionLabel: "Acknowledge" },
+      { title: "Cache miss rate anomaly", severity: "medium", actionLabel: "Acknowledge" },
+      { title: "Load balancer health check failure", severity: "critical", actionLabel: "Acknowledge" },
+      { title: "Database query slowdown", severity: "low", actionLabel: "Acknowledge" }
+    ], "variant": "number")
+  ]),
+  
+  // 5. Way to narrow to one region
+  TextContent("Filter by Region", "Select a region to focus on", "US East | US West | EU Central | AP South", "US-East"),
+  
+  // 6. The five slowest endpoints with latency for each
+  Card([
+    CardHeader("Slowest Endpoints (24h)", "Top 5 slowest endpoints by latency"),
+    Table({
+      columns: [
+        { label: "Endpoint", type: "string" },
+        { label: "Latency (ms)", type: "number" },
+        { label: "Status", type: "string" }
+      ],
+      rows: [
+        { endpoint: "GET /api/users", latency: 1420, status: "slow" },
+        { endpoint: "POST /api/orders", latency: 1180, status: "slow" },
+        { endpoint: "GET /api/products", latency: 1050, status: "slow" },
+        { endpoint: "PUT /api/inventory", latency: 980, status: "slow" },
+        { endpoint: "DELETE /api/sessions", latency: 910, status: "slow" }
+      ]
+    })
+  ]),
+  
+  // 7. Way to set an alert threshold
+  Card([
+    CardHeader("Alert Thresholds", "Configure monitoring thresholds"),
+    Form({
+      name: "Monitoring Settings",
+      fields: [
+        { label: "CPU Threshold (%)", type: "number", value: 80 },
+        { label: "Memory Threshold (%)", type: "number", value: 85 },
+        { label: "Error Rate Threshold (per minute)", type: "number", value: 10 }
+      ]
+    })
+  ]),
+  
+  // 8. Way to acknowledge an incident
+  Card([
+    CardHeader("Acknowledge Incidents", "Resolve active issues"),
+    Button("Acknowledge INC-001", "Acknowledge"),
+    Button("Acknowledge INC-002", "Acknowledge"),
+    Button("Acknowledge ALL", "Acknowledge All")
+  ])
+])
+```

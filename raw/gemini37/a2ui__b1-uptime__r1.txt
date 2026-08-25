@@ -1,0 +1,140 @@
+Here is the status page dashboard for the platform team covering the monthly API uptime and recent incident details.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "systemStatusBadge",
+          "uptimeSection",
+          "separator1",
+          "incidentSection"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Platform System Status",
+        "subtitle": "Real-time health and incident tracking"
+      },
+      {
+        "id": "systemStatusBadge",
+        "component": "Badge",
+        "text": "All Systems Operational",
+        "variant": "default"
+      },
+      {
+        "id": "uptimeSection",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "uptimeHeading",
+          "uptimeProgress",
+          "uptimeTable"
+        ]
+      },
+      {
+        "id": "uptimeHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Current API Uptime: 99.94% (This Month)"
+      },
+      {
+        "id": "uptimeProgress",
+        "component": "Progress",
+        "value": 99.94,
+        "label": "Monthly Target: 99.90% SLA"
+      },
+      {
+        "id": "uptimeTable",
+        "component": "Table",
+        "columns": [
+          "serviceCol",
+          "uptimeCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "serviceCol",
+        "component": "Col",
+        "label": "Service / Endpoint",
+        "data": [
+          "Core REST API",
+          "Authentication Gateway",
+          "Webhook Dispatcher"
+        ]
+      },
+      {
+        "id": "uptimeCol",
+        "component": "Col",
+        "label": "30-Day Uptime",
+        "data": [
+          "99.94%",
+          "99.99%",
+          "99.88%"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Current State",
+        "data": [
+          "Operational",
+          "Operational",
+          "Operational"
+        ]
+      },
+      {
+        "id": "separator1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "incidentSection",
+        "component": "Card",
+        "variant": "clear",
+        "children": [
+          "incidentHeading",
+          "incidentAlert",
+          "incidentDetails"
+        ]
+      },
+      {
+        "id": "incidentHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Most Recent Incident"
+      },
+      {
+        "id": "incidentAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "INC-842: Elevated Latency in API Gateway — Resolved",
+        "description": "Resolved on Oct 24, 2023 at 14:35 UTC (Duration: 23 mins). Traffic successfully rerouted and auto-scaling policies adjusted."
+      },
+      {
+        "id": "incidentDetails",
+        "component": "TextContent",
+        "size": "small",
+        "text": "**Summary Note:** A transient upstream network saturation caused response timeouts for ~2.1% of incoming API requests. Full service recovery was verified following gateway failover at 14:35 UTC."
+      }
+    ]
+  }
+}
+</a2ui-json>

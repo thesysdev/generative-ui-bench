@@ -1,0 +1,80 @@
+```openui
+root = Card([
+    balancesSection,
+    transactionsSection,
+    spendingSection,
+    billsSection,
+    savingsSection,
+    creditScoreSection,
+    actionsSection
+])
+
+balancesSection = Card([
+    CardHeader("Balances"),
+    table = Table([accountCol, balanceCol])
+])
+accountCol = Col("Account", ["Checking", "Savings", "Credit"])
+balanceCol = Col("Balance", ["$2,340.56", "$15,800.00", "$4,500.00"])
+
+transactionsSection = Card([
+    CardHeader("Recent Transactions"),
+    table = Table([merchantCol, amountCol])
+], "sunk")
+merchantCol = Col("Merchant", ["Starbucks", "Amazon", "Grocery Store"])
+amountCol = Col("Amount", ["-$4.75", "-$50.00", "-$76.23"])
+
+spendingSection = Card([
+    CardHeader("Spending by Category"),
+    pieChart = PieChart(["Groceries", "Dining", "Entertainment"], [120.00, 50.00, 30.00])
+])
+
+billsSection = Card([
+    CardHeader("Bills Due Soon"),
+    listBlock = ListBlock([
+        ListItem("Electricity Bill", "$120.00", null, "Pay Now"),
+        ListItem("Internet Bill", "$60.00", null, "Pay Now")
+    ])
+])
+
+savingsSection = Card([
+    CardHeader("Vacation Savings Goal"),
+    progress = Progress(75, "75% towards goal")
+])
+
+creditScoreSection = Card([
+    CardHeader("Credit Score"),
+    Card(["Your current credit score is 780"])
+])
+
+actionsSection = Card([
+    CardHeader("Actions"),
+    form = Form("account-actions", actionButtons, [
+        transferField = FormControl("Transfer Amount", transferInput),
+        transferInput = Input("amount", "", "number"),
+        fromAccountSelect = Select("from_account", [
+            SelectItem("Checking", "Checking"),
+            SelectItem("Savings", "Savings")
+        ], "Select from account"),
+        toAccountSelect = Select("to_account", [
+            SelectItem("Checking", "Checking"),
+            SelectItem("Savings", "Savings")
+        ], "Select to account"),
+        freezeCreditBtn = Button("Freeze Credit Line"),
+        statementPeriodSelect = Select("statement_period", [
+            SelectItem("Monthly", "Monthly"),
+            SelectItem("Quarterly", "Quarterly")
+        ], "Select Statement Period"),
+        manageAlertsBtn = Button("Manage Alerts"),
+        disputeTransactionBtn = Button("Dispute Transaction")
+    ])
+], "sunk")
+actionButtons = Buttons([
+    Button("Transfer", [["amount", "from_account", "to_account"]], "primary"),
+    freezeCreditBtn,
+    statementPeriodSelect,
+    manageAlertsBtn,
+    disputeTransactionBtn
+])
+```
+
+This code includes a comprehensive layout for a personal banking home screen, covering all the requested items using openui-lang components.

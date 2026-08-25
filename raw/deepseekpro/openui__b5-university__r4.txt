@@ -1,0 +1,116 @@
+root = Card([header, deptButtons, kpiRow, enrollmentSection, applicationsSection, courseFullnessSection, teachingLoadSection, atRiskSection, eventsSection, alumniGivingSection, semesterComparisonSection, waitlistSection, actionsRow], "card", "column", "l")
+
+header = CardHeader("University Administration Dashboard", "Current operational overview")
+
+deptButtons = Buttons([deptAll, deptEng, deptBus, deptArts])
+deptAll = Button("All Departments", null, "secondary", "normal", "small")
+deptEng = Button("Engineering", null, "secondary", "normal", "small")
+deptBus = Button("Business", null, "secondary", "normal", "small")
+deptArts = Button("Arts & Sciences", null, "secondary", "normal", "small")
+
+kpiRow = Card([kpiEnrollment, kpiAcceptance, kpiTuition, kpiScholarship, kpiHousing], "card", "row", "m", "stretch", "start", true)
+
+kpiEnrollment = Card([enrollHeader, enrollValue], "sunk", "column", "s", "start", "start", false)
+enrollHeader = CardHeader("Total Enrollment", "Fall 2024")
+enrollValue = TextContent("18,542", "large-heavy")
+
+kpiAcceptance = Card([acceptHeader, acceptProgress], "sunk", "column", "s", "start", "start", false)
+acceptHeader = CardHeader("Acceptance Rate")
+acceptProgress = Progress(68, "68%")
+
+kpiTuition = Card([tuitionHeader, tuitionValue], "sunk", "column", "s", "start", "start", false)
+tuitionHeader = CardHeader("Tuition Revenue", "FY 2024")
+tuitionValue = TextContent("$214.3M", "large-heavy")
+
+kpiScholarship = Card([scholarHeader, scholarProgress], "sunk", "column", "s", "start", "start", false)
+scholarHeader = CardHeader("Scholarship Budget Used")
+scholarProgress = Progress(82, "82% of $45M")
+
+kpiHousing = Card([housingHeader, housingProgress], "sunk", "column", "s", "start", "start", false)
+housingHeader = CardHeader("Housing Occupancy")
+housingProgress = Progress(94, "94%")
+
+enrollmentSection = Card([enrollSectionHeader, enrollmentChart], "clear", "column", "m")
+enrollSectionHeader = Heading("Enrollment Trend (5 Years)", "h3")
+enrollmentChart = LineChart(enrollYears, enrollSeries, "natural", "Year", "Students")
+enrollYears = ["2020", "2021", "2022", "2023", "2024"]
+enrollSeries = Series("Enrollment", [15234, 15987, 16420, 17105, 18542])
+
+applicationsSection = Card([appsSectionHeader, applicationsChart], "clear", "column", "m")
+appsSectionHeader = Heading("Applications by Program", "h3")
+applicationsChart = HorizontalBarChart(appPrograms, appSeries, null, "Programs", "Applications")
+appPrograms = ["Computer Science", "Business Admin", "Mechanical Eng", "Psychology", "Biology", "English"]
+appSeries = Series("Applications", [4210, 3980, 2450, 3120, 2870, 1540])
+
+courseFullnessSection = Card([cfSectionHeader, courseFullnessChart], "clear", "column", "m")
+cfSectionHeader = Heading("Course Offering Fullness", "h3")
+courseFullnessChart = HorizontalBarChart(courseNames, cfSeries, null, "Course", "Occupancy %")
+courseNames = ["CS 101", "MATH 201", "PHYS 301", "ECON 101", "PSY 210", "BIO 150"]
+cfSeries = Series("Occupancy", [97, 88, 92, 75, 81, 64])
+
+teachingLoadSection = Card([tlSectionHeader, teachingLoadTable], "clear", "column", "m")
+tlSectionHeader = Heading("Teaching Load by Faculty", "h3")
+teachingLoadTable = Table([tlFaculty, tlCourses, tlCredits, tlStudents])
+tlFaculty = Col("Faculty", ["Dr. Smith", "Dr. Johnson", "Prof. Lee", "Dr. Patel", "Prof. Garcia"])
+tlCourses = Col("Courses", ["3", "4", "2", "3", "4"])
+tlCredits = Col("Credit Hours", ["9", "12", "6", "9", "12"])
+tlStudents = Col("Students", ["142", "188", "96", "131", "205"])
+
+atRiskSection = Card([arSectionHeader, atRiskList], "clear", "column", "m")
+arSectionHeader = Heading("Students at Academic Risk", "h3")
+atRiskList = ListBlock([ar1, ar2, ar3, ar4])
+ar1 = ListItem("Jordan Lee", "CS major, GPA 1.8, on probation")
+ar2 = ListItem("Taylor Reed", "Business, 2 failed courses this term")
+ar3 = ListItem("Alex Kim", "Mechanical Eng, attendance < 50%")
+ar4 = ListItem("Morgan Chen", "Psychology, missing 3 major assignments")
+
+eventsSection = Card([evSectionHeader, eventsList], "clear", "column", "m")
+evSectionHeader = Heading("Campus Events This Month", "h3")
+eventsList = ListBlock([ev1, ev2, ev3, ev4, ev5])
+ev1 = ListItem("Fall Career Fair", "Oct 5, Student Union")
+ev2 = ListItem("Homecoming Weekend", "Oct 12-14")
+ev3 = ListItem("Guest Lecture: AI Ethics", "Oct 18, 4pm, Hall A")
+ev4 = ListItem("Theatre: 'Hamlet'", "Oct 22-24, Performing Arts Center")
+ev5 = ListItem("Research Symposium", "Oct 26, Science Building")
+
+alumniGivingSection = Card([agSectionHeader, alumniChart], "clear", "column", "m")
+agSectionHeader = Heading("Alumni Giving (Past 4 Years)", "h3")
+alumniChart = BarChart(givingYears, givingSeries, "grouped", "Year", "Total Gifts ($)")
+givingYears = ["2021", "2022", "2023", "2024"]
+givingSeries = Series("Gifts", [4200000, 4750000, 5100000, 5480000])
+
+semesterComparisonSection = Card([scSectionHeader, semesterTable], "clear", "column", "m")
+scSectionHeader = Heading("This Semester vs Last", "h3")
+semesterTable = Table([metricCol, thisTermCol, lastTermCol, changeCol])
+metricCol = Col("Metric", ["Enrollment", "Avg Class Size", "Retention Rate", "Avg GPA", "Credit Hours"])
+thisTermCol = Col("This Semester", ["18,542", "24", "89%", "3.12", "214,400"])
+lastTermCol = Col("Last Semester", ["17,105", "22", "91%", "3.08", "198,750"])
+changeCol = Col("Change", ["+8.4%", "+9.1%", "-2.2%", "+1.3%", "+7.9%"])
+
+waitlistSection = Card([wlSectionHeader, waitlistTable], "clear", "column", "m")
+wlSectionHeader = Heading("Waitlisted Students per Program", "h3")
+waitlistTable = Table([wlProgram, wlCount])
+wlProgram = Col("Program", ["Computer Science", "Business Admin", "Mechanical Eng", "Psychology", "Nursing"])
+wlCount = Col("Waitlisted", ["215", "98", "143", "76", "54"])
+
+actionsRow = Card([approveCourseDialog, sendMessageDialog], "card", "row", "m", "center", "start", false)
+
+approveCourseDialog = AlertDialogBlock("Approve New Course", "Approve Course Proposal", "New course: 'CS 450 – Advanced Machine Learning' proposed by Dr. Johnson. Approve for next semester?", "Approve", "Review Later", "outline")
+
+sendMessageDialog = DialogBlock("Send Message to Student Group", "Broadcast Message", "Select group and compose message", messageForm, "outline")
+messageForm = Form("broadcast-form", messageFormButtons, [groupField, subjectField, messageField])
+groupField = FormControl("To (Student Group)", groupSelect)
+groupSelect = Select("group", [groupAll, groupFresh, groupSoph, groupJunior, groupSenior, groupGrad], "Select group")
+groupAll = SelectItem("all", "All Students")
+groupFresh = SelectItem("fresh", "Freshmen")
+groupSoph = SelectItem("soph", "Sophomores")
+groupJunior = SelectItem("junior", "Juniors")
+groupSenior = SelectItem("senior", "Seniors")
+groupGrad = SelectItem("grad", "Graduate Students")
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Important announcement")
+messageField = FormControl("Message", messageTextarea)
+messageTextarea = TextArea("message", "Type your message...", 5)
+messageFormButtons = Buttons([sendBtn, cancelSendBtn])
+sendBtn = Button("Send", null, "primary", "normal", "medium")
+cancelSendBtn = Button("Cancel", null, "tertiary", "normal", "medium")

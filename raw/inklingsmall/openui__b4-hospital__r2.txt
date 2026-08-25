@@ -1,0 +1,85 @@
+root = Card([header, bedOccSection, erWait, admSection, deptSection, staffSection, criticalSection, dischargeSection, orSection, suppliesSection, actionsRow], "card", "column", "l")
+
+header = CardHeader("Hospital Operations Command", "Live command view — all units")
+
+bedOccTitle = Heading("Bed Occupancy", "h3")
+bedLabels = ["ICU", "Med-Surg", "Peds", "Ortho", "Cardio"]
+bedSeries = Series("Occupancy %", [92, 78, 65, 88, 81])
+bedChart = BarChart(bedLabels, [bedSeries], "grouped", "Ward", "%")
+bedOccSection = Card([bedOccTitle, bedChart], "sunk")
+
+erWait = Alert("ER Wait: 14 min", "Door-to-provider average is 14 minutes — within target.", "info")
+
+admissionsTitle = Heading("Admissions — Past 14 Days", "h3")
+admLabels = ["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12","W13","W14"]
+admSeries = Series("Admissions", [42,38,51,47,55,49,62,58,61,70,65,72,68,74])
+admChart = LineChart(admLabels, [admSeries], "linear", "Day", "Count")
+admSection = Card([admissionsTitle, admChart], "sunk")
+
+deptTitle = Heading("Patients per Department", "h3")
+deptLabels = ["Emergency", "Surgery", "Internal Med", "Neurology", "Oncology", "Orthopedics"]
+deptSeries = Series("Patients", [34, 28, 56, 19, 22, 31])
+deptChart = BarChart(deptLabels, [deptSeries], "grouped", "Department", "Count")
+deptSection = Card([deptTitle, deptChart], "sunk")
+
+staffTitle = Heading("Staff on Shift", "h3")
+staffNameCol = Col("Name", ["Dr. A. Reyes", "N. Patel, RN", "J. Kim, MD", "M. Osei, RN", "T. Nguyen, PA"])
+staffRoleCol = Col("Role", ["Attending", "Charge Nurse", "Resident", "Staff Nurse", "Physician Assistant"])
+staffTable = Table([staffNameCol, staffRoleCol])
+staffSection = Card([staffTitle, staffTable], "sunk")
+
+criticalTitle = Heading("Critical Patients — Called Out", "h3")
+criticalItem1 = TextCallout("danger", "ICU-4 — Sepsis", "BP 82/44, lactate 4.2 — attending called")
+criticalItem2 = TextCallout("danger", "ED-12 — Trauma", "Active hemorrhage, awaiting OR — resuscitation active")
+criticalItem3 = TextCallout("warning", "Med-7 — Respiratory", "SpO2 88% on 4L — rapid response notified")
+criticalSection = Card([criticalTitle, criticalItem1, criticalItem2, criticalItem3], "sunk")
+
+dischargeTitle = Heading("Patients Ready for Discharge", "h3")
+disch1 = ListItem("Med-3 — J. Alvarez", "Discharge meds verified, transport arranged")
+disch2 = ListItem("Ortho-1 — K. Patel", "Wound check complete, home PT ordered")
+disch3 = ListItem("Cardio-2 — L. Brooks", "Telemetry cleared, follow-up booked")
+dischargeList = ListBlock([disch1, disch2, disch3])
+dischargeSection = Card([dischargeTitle, dischargeList], "sunk")
+
+orTitle = Heading("OR Bookings — Today", "h3")
+orTimeCol = Col("Time", ["07:30", "09:15", "11:00", "13:30", "15:00"])
+orProcCol = Col("Procedure", ["CABG", "Hip Replacement", "Laparoscopy", "Spine Fusion", "C-Section"])
+orRoomCol = Col("Room", ["OR-1", "OR-2", "OR-1", "OR-3", "OR-2"])
+orTable = Table([orTimeCol, orProcCol, orRoomCol])
+orSection = Card([orTitle, orTable], "sunk")
+
+suppliesTitle = Heading("Supplies Running Low", "h3")
+sup1 = ListItem("N95 Masks", "Stock: 42 / Reorder at 200")
+sup2 = ListItem("IV Fluids — Normal Saline", "Stock: 18 bags / Reorder at 50")
+sup3 = ListItem("Oxygen Cannula (Adult)", "Stock: 9 / Reorder at 30")
+suppliesList = ListBlock([sup1, sup2, sup3])
+suppliesSection = Card([suppliesTitle, suppliesList], "sunk")
+
+incidentForm = Form("incident", incidentButtons, [incidentDesc, incidentSeverity])
+incidentDesc = FormControl("Description", Input("desc", "Brief description of event..."))
+sev1 = SelectItem("low", "Low")
+sev2 = SelectItem("moderate", "Moderate")
+sev3 = SelectItem("critical", "Critical")
+incidentSeverity = FormControl("Severity", Select("sev", [sev1, sev2, sev3]))
+incidentButtons = Buttons([incidentSubmit, incidentCancel])
+incidentSubmit = Button("Submit", null, "primary")
+incidentCancel = Button("Cancel", null, "tertiary")
+incidentDialog = DialogBlock("File Incident", "File Incident Report", "Describe the event, location, and severity.", [incidentForm], "destructive")
+
+dateCal = CalendarBlock("single", "2025-06-01", 1, "label")
+dateBtn = Button("Load Day")
+dateContent = Card([dateCal, dateBtn], "clear")
+dateDialog = DialogBlock("Select Date", "View Another Day", "Choose a date to review operations.", [dateContent])
+
+transferForm = Form("transfer", transferButtons, [transferPatient, transferDest])
+transferPatient = FormControl("Patient", Input("patient", "ID / Name"))
+dest1 = SelectItem("ICU-4", "ICU-4")
+dest2 = SelectItem("Med-Surg-2", "Med-Surg-2")
+dest3 = SelectItem("Peds-1", "Peds-1")
+transferDest = FormControl("Destination", Select("dest", [dest1, dest2, dest3]))
+transferButtons = Buttons([transferSubmit, transferCancel])
+transferSubmit = Button("Request", null, "primary")
+transferCancel = Button("Cancel", null, "tertiary")
+transferDialog = DialogBlock("Request Transfer", "Request Patient Transfer", "Select patient and destination unit.", [transferForm])
+
+actionsRow = Card([incidentDialog, dateDialog, transferDialog], "clear", "row", "m")

@@ -1,0 +1,85 @@
+root = Card([header, kpiSection, sessionSection, salesSection, opsTabs, actionsHeader, actionsRow])
+
+header = CardHeader("Live-Ops Command Center", "Real-time studio operations dashboard")
+
+kpiSection = Card([kpiHeading, kpiTable], "sunk")
+kpiHeading = Heading("Core Metrics", "h3")
+kpiTable = Table([kpiLabelCol, kpiValueCol])
+kpiLabelCol = Col("Metric", ["Players Online", "Daily Active Players", "Monthly Active Players", "Revenue Today", "Revenue Per User"])
+kpiValueCol = Col("Value", ["184,320", "1,240,500", "9,870,200", "$412,900", "$0.33"])
+
+sessionSection = Card([sessionHeading, sessionChart], "sunk")
+sessionHeading = Heading("Session Length — Past 14 Days", "h3")
+sessionChart = LineChart(sessionLabels, [sessionSeries], "natural", "Day", "Minutes")
+sessionLabels = ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","D13","D14"]
+sessionSeries = Series("Avg Session (min)", [28, 27, 29, 31, 30, 33, 35, 34, 32, 31, 33, 36, 37, 35])
+
+salesSection = Card([salesHeading, salesTable, inflationHeading, inflationChart], "sunk")
+salesHeading = Heading("Best-Selling Items", "h3")
+salesTable = Table([itemCol, unitsCol, revenueCol])
+itemCol = Col("Item", ["Starter Pack", "Battle Pass", "Legendary Skin: Phoenix", "Gem Bundle (500)", "XP Booster"])
+unitsCol = Col("Units Sold", [58200, 47100, 32900, 29800, 21400], "number")
+revenueCol = Col("Revenue", ["$291,000", "$470,900", "$658,000", "$149,000", "$64,200"])
+inflationHeading = Heading("In-Game Currency Inflation (Gold Supply Index)", "h3")
+inflationChart = LineChart(inflationLabels, [inflationSeries], "linear", "Week", "Supply Index")
+inflationLabels = ["W1","W2","W3","W4","W5","W6"]
+inflationSeries = Series("Gold Supply Index", [100, 104, 111, 119, 126, 138])
+
+opsTabs = Tabs([infraTab, moderationTab, eventsTab, experimentsTab])
+
+infraTab = TabItem("infra", "Infrastructure", [regionHeading, regionTable, crashHeading, crashChart])
+regionHeading = Heading("Server Regions & Health", "h3")
+regionTable = Table([regionCol, statusCol, playersCol, latencyCol])
+regionCol = Col("Region", ["US-East", "US-West", "EU-West", "EU-East", "Asia-Pacific", "South America"])
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Healthy", "Outage"])
+playersCol = Col("Players", [52100, 38900, 41200, 19800, 26700, 5600], "number")
+latencyCol = Col("Latency (ms)", [24, 31, 88, 29, 45, 210], "number")
+crashHeading = Heading("Crash Rate by App Version", "h3")
+crashChart = BarChart(crashLabels, [crashSeries], "grouped", "App Version", "Crash Rate %")
+crashLabels = ["4.8.1", "4.9.0", "4.9.1", "5.0.0-beta"]
+crashSeries = Series("Crash Rate", [0.8, 0.6, 1.9, 3.4])
+
+moderationTab = TabItem("moderation", "Events & Moderation", [eventsHeading, eventsList, reportsCallout, appealsCallout])
+eventsHeading = Heading("Live Events", "h3")
+eventsList = ListBlock([runningEvent, endingSoonEvent, upcomingEvent1, upcomingEvent2])
+runningEvent = ListItem("Double XP Weekend", "Running now — ends in 1d 4h")
+endingSoonEvent = ListItem("Summer Loot Crate", "Running now — ends in 6h")
+upcomingEvent1 = ListItem("Guild Wars Season 3", "Upcoming — starts in 2 days")
+upcomingEvent2 = ListItem("Halloween Skins Drop", "Upcoming — starts in 9 days")
+reportsCallout = TextCallout("warning", "Player Reports Awaiting Review", "312 reports queued, oldest submitted 6 hours ago")
+appealsCallout = TextCallout("info", "Ban Appeals Awaiting Review", "47 appeals pending, oldest submitted 2 days ago")
+
+experimentsTab = TabItem("experiments", "Experiments", [experimentsHeading, experimentsTable])
+experimentsHeading = Heading("Running Experiments", "h3")
+experimentsTable = Table([expNameCol, expVariantCol, expMetricCol, expResultCol])
+expNameCol = Col("Experiment", ["Onboarding Flow v2", "Onboarding Flow v2", "Dynamic Pricing", "Dynamic Pricing"])
+expVariantCol = Col("Variant", ["Control", "Treatment", "Control", "Treatment"])
+expMetricCol = Col("D1 Retention / ARPDAU", ["38.2%", "41.7%", "$0.29", "$0.34"])
+expResultCol = Col("Result", ["Baseline", "+3.5pp, significant", "Baseline", "+17%, significant"])
+
+actionsHeader = CardHeader("Actions", "Draft notes, focus a region, or ship a fix")
+
+actionsRow = Card([patchForm, regionFocusForm, hotfixDialog], "clear", "row", "l", null, null, true)
+
+patchForm = Form("patch-notes", patchButtons, [patchVersionField, patchNotesField])
+patchVersionField = FormControl("Target Version", patchVersionInput)
+patchVersionInput = Input("version", "5.0.1")
+patchNotesField = FormControl("Patch Notes", patchNotesInput, "Markdown supported")
+patchNotesInput = TextArea("notes", "- Fixed...\n- Balanced...", 6)
+patchButtons = Buttons([draftBtn, saveDraftBtn])
+draftBtn = Button("Generate Draft", null, "primary")
+saveDraftBtn = Button("Save Draft", null, "secondary")
+
+regionFocusForm = Form("region-focus", focusButtons, [regionSelectField])
+regionSelectField = FormControl("Focus Region", regionSelect)
+regionSelect = Select("region", [regUSEast, regUSWest, regEUWest, regEUEast, regAPAC, regSA], "Choose a region")
+regUSEast = SelectItem("us-east", "US-East")
+regUSWest = SelectItem("us-west", "US-West")
+regEUWest = SelectItem("eu-west", "EU-West")
+regEUEast = SelectItem("eu-east", "EU-East")
+regAPAC = SelectItem("apac", "Asia-Pacific")
+regSA = SelectItem("sa", "South America")
+focusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus Dashboard", null, "primary")
+
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Deploy hotfix to production?", "This will push the current hotfix build to all live regions immediately. This action cannot be undone.", "Ship Now", "Cancel", "destructive")

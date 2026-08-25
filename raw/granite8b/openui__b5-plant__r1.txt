@@ -1,0 +1,180 @@
+```openui-lang
+root = Card([
+    line1,
+    line2,
+    line3,
+    line4,
+    line5,
+    line6,
+    line7,
+    line8,
+    line9,
+    line10,
+    line11,
+    line12,
+    line13,
+    line14,
+    line15,
+    line16,
+    exportBtn
+], "card", "row", "l")
+
+overallEquipmentEffectiveness = CardHeader("Overall Equipment Effectiveness", "OEE")
+unitsProduced = CardHeader("Units Produced vs Target", "Today")
+productionLines = CardHeader("Production Lines", "Rate & Status")
+defectRate = CardHeader("Defect Rate (Last Month)", "Defects / 1k units")
+downtimeByCause = CardHeader("Downtime by Cause", "Hours")
+maintenanceDue = CardHeader("Machines Due for Maintenance", "Due Date")
+stockLevels = CardHeader("Stock Levels", "Units")
+supplierDeliveries = CardHeader("Supplier Deliveries This Week", "Qty")
+shiftOutput = CardHeader("Shift Output Comparison", "Units")
+safetyIncidents = CardHeader("Safety Incidents (Year) / Days Since Last", "Days")
+qualityHoldBatches = CardHeader("Batches on Quality Hold", "Count")
+energyUse = CardHeader("Energy Use Today", "kWh")
+openWorkOrders = CardHeader("Open Work Orders", "Priority")
+scheduleMaintenance = Card("Schedule Maintenance", "Machine → Date", "primary")
+focusOnLine = Card("Focus on Line", "Select Line", "secondary")
+andonAlerts = Card("Live Andon Alerts", "Real‑time", "info")
+exportBtn = Button("Export Shift Report", null, "primary")
+
+line1 = Card([
+    overallEquipmentEffectiveness,
+    unitsProduced,
+    productionLines,
+    defectRate,
+    downtimeByCause,
+    maintenanceDue,
+    stockLevels,
+    supplierDeliveries,
+    shiftOutput,
+    safetyIncidents,
+    qualityHoldBatches,
+    energyUse,
+    openWorkOrders,
+    scheduleMaintenance,
+    focusOnLine,
+    andonAlerts
+], "sunk", "row", "m")
+
+line2 = Card([
+    Card([
+        TextContent("OEE: 92.3%", "large"),
+        TextContent("Produced: 4,578 / Target: 5,000", "large")
+    ], null, null, null),
+    PieChart([
+        ["Operating", 92],
+        ["Availability", 3],
+        ["Performance", 5]
+    ], ["OEE"], "donut", "circular")
+], "clear", null, null, "center")
+
+line3 = Card([
+    Table([
+        Col("Line", ["A", "B", "C", "D"]),
+        Col("Rate (units/hr)", [1200, 1150, 1300, 1100]),
+        Col("Status", ["Good", "Warning", "Good", "Critical"])
+    ]),
+    BarChart([
+        ["Line A", 1200],
+        ["Line B", 1150],
+        ["Line C", 1300],
+        ["Line D", 1100]
+    ], null, "grouped")
+], "sunk", "column", "s")
+
+line4 = Card([
+    LineChart([
+        ["Day 1", 2.1],
+        ["Day 2", 1.8],
+        ["Day 3", 2.4],
+        ["Day 4", 2.0],
+        ["Day 5", 1.9],
+        ["Day 6", 2.3],
+        ["Day 7", 2.5]
+    ], null, "natural", "Day", "% Defects")
+], "clear", null, null, "stretch")
+
+line5 = Card([
+    BarChart([
+        ["Mechanical", 18],
+        ["Electrical", 12],
+        ["Scheduled", 24],
+        ["Unplanned", 46]
+    ], null, "stacked", "Cause", "Hours")
+], "sunk", "row", "xl")
+
+line6 = Card([
+    ListBlock([
+        ListItem("Machine 101", "Due 2025‑08‑20"),
+        ListItem("Machine 102", "Due 2025‑08‑22"),
+        ListItem("Machine 103", "Due 2025‑08‑19")
+    ], "image")
+], "clear", null, null, "baseline")
+
+line7 = Card([
+    Table([
+        Col("Material", ["Steel", "Resin", "Packaging"]),
+        Col("Stock", ["1,200", "850", "1,500"])
+    ])
+], "sunk", "column", "m")
+
+line8 = Card([
+    Table([
+        Col("Supplier", ["Acme Steel", "PolyFlow", "PackCo"]),
+        Col("Qty Due", ["500", "300", "200"])
+    ])
+], "clear", null, null, "between")
+
+line9 = Card([
+    BarChart([
+        ["Morning", 1,200],
+        ["Afternoon", 1,350],
+        ["Evening", 1,100]
+    ], null, "grouped")
+], "sunk", "row", "l")
+
+line10 = Card([
+    TextContent("Safety Incidents: 3 / Days since last: 45", "large")
+], "clear", null, null, "center")
+
+line11 = Card([
+    TextContent("Batches on Quality Hold: 7", "large")
+], "sunk", null, null, "stretch")
+
+line12 = Card([
+    TextContent("Energy Use Today: 5,432 kWh", "large")
+], "clear", null, null, "baseline")
+
+line13 = Card([
+    Table([
+        Col("WO #", ["WO-001", "WO-002", "WO-003"]),
+        Col("Priority", ["High", "Medium", "Low"])
+    ])
+], "sunk", "column", "s")
+
+line14 = Card([
+    Form("maintenance-form", Buttons([scheduleBtn]), [
+        FormControl("Machine", MachineSelect, "Select machine"),
+        FormControl("Date", DatePicker, "Select date")
+    ])
+], "clear", null, null, "evenly")
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+
+line15 = Card([
+    Tabs([
+        TabItem("Line A", "Line A", [LineFocusCard("A")]),
+        TabItem("Line B", "Line B", [LineFocusCard("B")]),
+        TabItem("Line C", "Line C", [LineFocusCard("C")]),
+        TabItem("Line D", "Line D", [LineFocusCard("D")])
+    ])
+], "sunk", null, null, "between")
+LineFocusCard = Card([Table([
+    Col("Rate (units/hr)", [1200]),
+    Col("Status", ["Good"])
+]), "focus", "row", "m"])
+
+line16 = Card([
+    Alert("Andon Alert: Line C – Sensor Offline", "Immediate attention required", "warning")
+], "info", null, null, "center")
+
+```

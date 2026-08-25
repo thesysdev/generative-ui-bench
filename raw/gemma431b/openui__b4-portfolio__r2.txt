@@ -1,0 +1,61 @@
+root = Card([header, healthSummary, portfolioControls, portfolioGrid, riskSection, resourceSection, deliverySection, footerActions])
+
+header = CardHeader("PMO Project Portfolio Review", "Q3 2024 Performance Dashboard")
+
+healthSummary = Callout("info", "Portfolio Health", "Overall portfolio is Stable with 85% of projects on track; 2 critical risks requiring immediate attention.")
+
+portfolioControls = Card([quarterSelect, exportBtn], "sunk", "row", "m", "start", "between")
+quarterSelect = FormControl("Review Period", qSelect)
+qSelect = Select("quarter", [q1, q2, q3, q4], "Select Quarter")
+q1 = SelectItem("q1", "Q1 2024")
+q2 = SelectItem("q2", "Q2 2024")
+q3 = SelectItem("q3", "Q3 2024")
+q4 = SelectItem("q4", "Q4 2024")
+exportBtn = Button("Export Review", null, "secondary", "normal", "small")
+
+portfolioGrid = Card([activeProjects, budgetChart, upcomingDeadlines], "clear", "column", "l")
+activeProjects = SectionBlock([projSection], true)
+projSection = SectionItem("active-projects", "Active Projects & Health", [projectTable])
+projectTable = Table([colProject, colOwner, colDeadline, colHealth])
+colProject = Col("Project", ["Cloud Migration", "Payment Gateway", "CRM Overhaul", "Mobile App v2"])
+colOwner = Col("Owner", ["Sarah K.", "James L.", "Maria G.", "Chen W."])
+colDeadline = Col("Deadline", ["Oct 12", "Nov 05", "Dec 20", "Oct 30"])
+colHealth = Col("Health", ["On Track", "At Risk", "On Track", "Delayed"])
+
+budgetChart = HorizontalBarChart(["Cloud Migration", "Payment Gateway", "CRM Overhaul", "Mobile App v2"], [budgetSeries], "grouped", "Project", "USD Spent")
+budgetSeries = Series("Budget Spent", [45000, 82000, 31000, 95000])
+
+upcomingDeadlines = SectionBlock([milestoneSection, blockedSection], true)
+milestoneSection = SectionItem("milestones", "Upcoming & Overdue Milestones", [overdueList, nextTwoWeeksList])
+overdueList = ListBlock([m1, m2], "image")
+m1 = ListItem("API Auth Layer", "Overdue by 4 days", ["https://picsum.photos/seed/warn/40/40"])
+m2 = ListItem("Database Schema Final", "Overdue by 12 days", ["https://picsum.photos/seed/warn/40/40"])
+nextTwoWeeksList = ListBlock([n1, n2], "number")
+n1 = ListItem("UAT Sign-off", "Due Oct 15")
+n2 = ListItem("Beta Launch", "Due Oct 22")
+
+blockedSection = SectionItem("blocked", "Blocked Work Items", [blockedList])
+blockedList = ListBlock([b1, b2], "image")
+b1 = ListItem("Frontend Integration", "Blocked by API instability", ["https://picsum.photos/seed/block/40/40"])
+b2 = ListItem("Security Audit", "Blocked by external vendor", ["https://picsum.photos/seed/block/40/40"])
+
+riskSection = Card([riskHeading, riskTable], "sunk", "column", "s")
+riskHeading = Heading("Risk Registry", "h3")
+riskTable = Table([riskName, riskSeverity])
+riskName = Col("Risk", ["Vendor Bankruptcy", "Scope Creep", "Key Person Departure"])
+riskSeverity = Col("Severity", ["Critical", "Medium", "High"])
+
+resourceSection = Card([resHeading, utilChart, requestResources], "sunk", "column", "m")
+resHeading = Heading("Resource Management", "h3")
+utilChart = RadarChart(["Frontend", "Backend", "QA", "DevOps", "Product"], [utilSeries])
+utilSeries = Series("Utilization %", [90, 110, 75, 85, 60])
+requestResources = Buttons([reqBtn])
+reqBtn = Button("Request Additional Personnel", null, "primary", "normal", "small")
+
+deliverySection = Card([delHeading, paceChart], "sunk", "column", "s")
+delHeading = Heading("Delivery Velocity", "h3")
+paceChart = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [velocitySeries], "natural", "Sprint", "Story Points")
+velocitySeries = Series("Completed Points", [120, 135, 110, 145, 150, 140])
+
+footerActions = Card([archiveBtn], "clear", "row", "none", "end")
+archiveBtn = Button("Archive Completed Project", null, "tertiary", "destructive", "small")

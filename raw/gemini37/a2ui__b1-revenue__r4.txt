@@ -1,0 +1,159 @@
+Here is a mid-morning store check-in dashboard comparing today's current revenue against yesterday at the same time.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "calloutStatus",
+          "kpiTable",
+          "hourlyTrend",
+          "actions"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Mid-Morning Store Check-In",
+        "subtitle": "As of 10:30 AM • Live Store Performance"
+      },
+      {
+        "id": "calloutStatus",
+        "component": "Callout",
+        "variant": "success",
+        "title": "+18.5% Ahead of Yesterday",
+        "description": "Revenue so far today is $1,840.00 compared to $1,552.00 at this exact time yesterday (+$288.00)."
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colToday",
+          "colYesterday",
+          "colVariance"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Revenue (So Far)",
+          "Completed Orders",
+          "Average Ticket",
+          "Items Sold"
+        ]
+      },
+      {
+        "id": "colToday",
+        "component": "Col",
+        "label": "Today (by 10:30 AM)",
+        "data": [
+          "$1,840.00",
+          "74",
+          "$24.86",
+          "128"
+        ]
+      },
+      {
+        "id": "colYesterday",
+        "component": "Col",
+        "label": "Yesterday (at 10:30 AM)",
+        "data": [
+          "$1,552.00",
+          "65",
+          "$23.88",
+          "109"
+        ]
+      },
+      {
+        "id": "colVariance",
+        "component": "Col",
+        "label": "Change",
+        "data": [
+          "+18.5%",
+          "+13.8%",
+          "+4.1%",
+          "+17.4%"
+        ]
+      },
+      {
+        "id": "hourlyTrend",
+        "component": "BarChart",
+        "labels": [
+          "7:00 AM",
+          "8:00 AM",
+          "9:00 AM",
+          "10:00 AM"
+        ],
+        "series": [
+          "seriesToday",
+          "seriesYesterday"
+        ],
+        "variant": "grouped",
+        "xLabel": "Hour",
+        "yLabel": "Revenue ($)"
+      },
+      {
+        "id": "seriesToday",
+        "component": "Series",
+        "category": "Today",
+        "values": [
+          210,
+          520,
+          690,
+          420
+        ]
+      },
+      {
+        "id": "seriesYesterday",
+        "component": "Series",
+        "category": "Yesterday",
+        "values": [
+          180,
+          430,
+          560,
+          382
+        ]
+      },
+      {
+        "id": "actions",
+        "component": "Buttons",
+        "buttons": [
+          "refreshBtn",
+          "detailsBtn"
+        ]
+      },
+      {
+        "id": "refreshBtn",
+        "component": "Button",
+        "label": "Refresh Data",
+        "variant": "primary"
+      },
+      {
+        "id": "detailsBtn",
+        "component": "Button",
+        "label": "View Register Details",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

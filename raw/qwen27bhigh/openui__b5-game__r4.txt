@@ -1,0 +1,94 @@
+
+
+root = Card([header, liveBadge, kpiSection, sessionSection, itemsSection, regionsSection, crashSection, eventsSection, reviewSection, inflationSection, experimentsSection, actionsSection], "card", "column", "m")
+
+header = CardHeader("Live-Ops Command Center", "Real-time game operations dashboard · Updated 12s ago")
+
+liveBadge = Tag("LIVE", "●", "sm", "danger")
+
+kpiSection = Card([kpiTable], "sunk", "column", "s")
+kpiTable = Table([kpiLabel, kpiValue, kpiDelta])
+kpiLabel = Col("Metric", ["Players Online", "DAU", "MAU", "Revenue Today", "Revenue Per User"])
+kpiValue = Col("Value", ["142,847", "312,400", "1,284,000", "$487,230", "$1.56"])
+kpiDelta = Col("Delta", ["+3.2% vs 1h ago", "+5.1% vs yesterday", "+12.4% vs last month", "+8.7% vs yesterday", "−0.3% vs yesterday"])
+
+sessionSection = Card([sessionHeading, sessionChart], "sunk", "column", "s")
+sessionHeading = Heading("Session Length – Past 2 Weeks", "h3")
+sessionChart = LineChart(sessionLabels, [sessionSeries], "natural", "Day", "Minutes")
+sessionLabels = ["W1D1", "W1D2", "W1D3", "W1D4", "W1D5", "W1D6", "W1D7", "W2D1", "W2D2", "W2D3", "W2D4", "W2D5", "W2D6", "W2D7"]
+sessionSeries = Series("Avg Session (min)", [28.4, 29.1, 31.2, 30.8, 27.5, 26.9, 29.3, 30.1, 31.5, 32.2, 31.8, 29.7, 28.9, 30.4])
+
+itemsSection = Card([itemsHeading, itemsTable], "sunk", "column", "s")
+itemsHeading = Heading("Best-Selling Items (24 h)", "h3")
+itemsTable = Table([itemName, itemUnits, itemRevenue])
+itemName = Col("Item", ["Dragon Blade +3", "Phoenix Wings", "Shadow Cloak", "Ancient Rune", "Golden Dragon Egg"])
+itemUnits = Col("Units Sold", ["4,218", "3,892", "2,741", "2,103", "1,856"])
+itemRevenue = Col("Revenue", ["$18,940", "$15,568", "$8,223", "$6,309", "$14,848"])
+
+regionsSection = Card([regionsHeading, regionsTable], "sunk", "column", "s")
+regionsHeading = Heading("Server Regions & Health", "h3")
+regionsTable = Table([regionName, regionPlayers, regionPing, regionHealth])
+regionName = Col("Region", ["NA-East", "NA-West", "EU-Central", "EU-West", "Asia-Pacific", "Oceania"])
+regionPlayers = Col("Players", ["42,103", "38,921", "31,456", "22,847", "45,230", "12,290"])
+regionPing = Col("Avg Ping (ms)", ["24", "31", "18", "22", "48", "62"])
+regionHealth = Col("Health", ["Operational", "Operational", "Degraded", "Operational", "Operational", "Under Maintenance"])
+
+crashSection = Card([crashHeading, crashChart], "sunk", "column", "s")
+crashHeading = Heading("Crash Rate by App Version", "h3")
+crashChart = BarChart(crashLabels, [crashSeries], "grouped", "Version", "Crash Rate (%)")
+crashLabels = ["v2.4.1", "v2.4.0", "v2.3.9", "v2.3.8", "v2.3.7"]
+crashSeries = Series("Crash Rate %", [0.12, 0.34, 0.89, 1.24, 0.67])
+
+eventsSection = Card([eventsHeading, eventsList], "sunk", "column", "s")
+eventsHeading = Heading("Live & Upcoming Events", "h3")
+eventsList = ListBlock([eventLive1, eventLive2, eventUp1, eventUp2])
+eventLive1 = ListItem("Dragon's Fury Raid – LIVE", "Started 2 h ago · 18,432 participants · Ends in 6 h")
+eventLive2 = ListItem("Double XP Weekend – LIVE", "Started 14 h ago · 42,100 participants · Ends in 10 h")
+eventUp1 = ListItem("Summer Fest – Upcoming", "Starts in 3 days · Registration open")
+eventUp2 = ListItem("Boss Rush: Season 4 – Upcoming", "Starts in 7 days · Preview available")
+
+reviewSection = Card([reviewHeading, reportCallout, appealCallout], "sunk", "column", "s")
+reviewHeading = Heading("Moderation Queue", "h3")
+reportCallout = Callout("warning", "Player Reports Awaiting Review", "147 reports in queue · 23 flagged high-priority · Oldest report: 4 h ago")
+appealCallout = Callout("info", "Ban Appeals Awaiting Review", "34 appeals in queue · 8 pending legal review · Avg wait: 1.2 days")
+
+inflationSection = Card([inflationHeading, inflationBar, inflationNote], "sunk", "column", "s")
+inflationHeading = Heading("In-Game Currency Inflation", "h3")
+inflationBar = Progress(72, "Gold supply index: 72% of target ceiling")
+inflationNote = TextContent("Gold inflow is running 18% above the 30-day average. Recommend capping dungeon drops or introducing a sink event within 48 h to prevent devaluation.", "small")
+
+experimentsSection = Card([experimentsHeading, experimentsTable], "sunk", "column", "s")
+experimentsHeading = Heading("Running A/B Experiments", "h3")
+experimentsTable = Table([expName, expMetric, expResult, expStatus])
+expName = Col("Experiment", ["New Onboarding Flow", "Battle Pass Tier 50 Reward"])
+expMetric = Col("Primary Metric", ["D7 Retention", "Purchase Conversion"])
+expResult = Col("Result", ["+4.2% vs control (p = 0.003)", "−1.1% vs control (p = 0.41)"])
+expStatus = Col("Status", ["Significant – ship", "Not significant – continue"])
+
+actionsSection = Card([actionsHeading, patchDialog, regionForm, hotfixDialog], "sunk", "column", "m")
+actionsHeading = Heading("Quick Actions", "h3")
+
+patchDialog = DialogBlock("Draft Patch Notes", "Draft Patch Notes", "Compose and save patch notes for the next build", [patchForm], "default")
+patchForm = Form("patch-notes", patchFormButtons, [patchTitleField, patchBodyField, patchVersionField])
+patchTitleField = FormControl("Patch Title", patchTitleInput)
+patchTitleInput = Input("patch_title", "e.g. v2.4.2 – Balance & Bug Fixes")
+patchBodyField = FormControl("Patch Notes Body", patchBodyArea, "List fixes, balance changes, new features")
+patchBodyArea = TextArea("patch_body", "• Fixed crash on EU-Central when entering raid\n• Reduced gold drop in Abyssal Cavern by 15%\n• New: Phoenix Wings cosmetic", 8)
+patchVersionField = FormControl("Target Version", patchVersionInput)
+patchVersionInput = Input("target_version", "v2.4.2")
+patchFormButtons = Buttons([savePatchBtn])
+savePatchBtn = Button("Save Draft", null, "primary")
+
+regionForm = Form("focus-region", regionFormButtons, [regionField])
+regionField = FormControl("Focus Region", regionSelect, "Dashboard will filter all metrics to this region")
+regionSelect = Select("region", [regionOpt1, regionOpt2, regionOpt3, regionOpt4, regionOpt5, regionOpt6], "Select a region")
+regionOpt1 = SelectItem("na-east", "NA-East")
+regionOpt2 = SelectItem("na-west", "NA-West")
+regionOpt3 = SelectItem("eu-central", "EU-Central")
+regionOpt4 = SelectItem("eu-west", "EU-West")
+regionOpt5 = SelectItem("apac", "Asia-Pacific")
+regionOpt6 = SelectItem("oceania", "Oceania")
+regionFormButtons = Buttons([focusBtn])
+focusBtn = Button("Focus Region", null, "primary")
+
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Ship Hotfix to All Regions", "This will deploy the hotfix build to all 6 regions immediately. Players will receive a forced update. This action cannot be undone.", "Confirm Ship", "Cancel", "destructive")

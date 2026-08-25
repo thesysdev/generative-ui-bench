@@ -1,0 +1,45 @@
+thought
+root = Card([header, filters, statsGrid, mainContent, actionSection, notificationSection, footer, followUp], "card", "column", "l")
+header = CardHeader("Creator Studio", "Cross-platform performance dashboard")
+filters = Card([platformFilter], "clear", "row", "m")
+platformFilter = FormControl("Filter by Platform", platformSelect)
+platformSelect = Select("platform", [all, insta, tiktok, yt, x], "All Platforms")
+all = SelectItem("all", "All Platforms")
+insta = SelectItem("insta", "Instagram")
+tiktok = SelectItem("tiktok", "TikTok")
+yt = SelectItem("yt", "YouTube")
+x = SelectItem("x", "X / Twitter")
+
+statsGrid = Card([followerStats, engagementStats, earningsStats, bestHour], "card", "row", "m")
+followerStats = Card([Heading("Total Followers", "h3"), TextContent("124,500", "large-heavy"), Tag("+4.2% this month", null, null, "success")], "sunk")
+engagementStats = Card([Heading("Engagement Rate", "h3"), TextContent("4.8%", "large-heavy"), Tag("Above avg", null, null, "info")], "sunk")
+earningsStats = Card([Heading("Monthly Earnings", "h3"), TextContent("$4,250", "large-heavy"), Tag("Target $5k", null, null, "secondary")], "sunk")
+bestHour = Card([Heading("Best Post Time", "h3"), TextContent("6:00 PM - 8:00 PM", "large-heavy"), Badge("Based on history")], "sunk")
+
+mainContent = Card([bestPosts, audienceSplit], "card", "row", "m")
+bestPosts = Card([Heading("Top Posts This Month", "h2"), Table([colTitle, colReach, colPlatform])], "card")
+colTitle = Col("Post Content", ["How to edit video", "Day in the life", "New setup tour"])
+colReach = Col("Reach", ["450k", "310k", "89k"])
+colPlatform = Col("Platform", ["TikTok", "YouTube", "Instagram"])
+audienceSplit = Card([Heading("Audience Split", "h2"), PieChart(platforms, counts, "donut")], "card")
+platforms = ["Instagram", "TikTok", "YouTube", "X"]
+counts = [45, 30, 15, 10]
+
+scheduledPosts = Card([Heading("Scheduled This Week", "h2"), ListBlock([post1, post2, post3])], "card")
+post1 = ListItem("New Vlog Intro", "Tuesday, 10:00 AM", null, "Edit")
+post2 = ListItem("Short Tutorial Clip", "Thursday, 6:00 PM", null, "Edit")
+post3 = ListItem("Product Review", "Saturday, 11:00 AM", null, "Edit")
+
+actionSection = Card([Heading("Schedule New Post", "h2"), Form("schedule-form", postButtons, [captionField, timeField, platformField])], "card")
+captionField = FormControl("Caption", TextArea("caption", "What's on your mind?", 3))
+timeField = FormControl("Date & Time", DatePicker("post_time", "single"))
+platformField = FormControl("Platform", Select("post_platform", [insta, tiktok, yt, x], "Select"))
+postButtons = Buttons([Button("Schedule Post", null, "primary"), Button("Draft", null, "tertiary")])
+
+notificationSection = Card([Heading("Notifications", "h2"), ListBlock([comments, collabs])], "card")
+comments = ListItem("12 Comments Waiting", "User @123: 'Great video!'", null, "Reply")
+collabs = ListItem("3 Collaboration Requests", "Brand-X wants a collab", null, "View")
+collabs2 = ListItem("Brand-Y inquiry", "Inquiry about deal", null, "Review")
+
+footer = Separator("horizontal", true)
+followUp = FollowUpBlock([FollowUpItem("Download detailed analytics"), FollowUpItem("View content calendar")])

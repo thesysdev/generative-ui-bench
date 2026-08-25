@@ -1,0 +1,148 @@
+```openui-lang
+root = Card([header, balancesSection, transactionsSection, spendingChart, billsSection, goalProgress, creditScore, transferSection, freezeCredit, statementPeriod, alertsSettings, disputeTransaction])
+
+header = CardHeader("My Accounts", "Welcome back, Alex")
+
+# Balances Section
+balancesSection = Card([balancesHeader, accountBalances, accountCards], "sunk")
+balancesHeader = Heading("Your Accounts", "h3")
+
+accountBalances = Card([checkingBalance, savingsBalance, creditBalance], "card", "column", "xl")
+checkingBalance = Card([checkingIcon, checkingText], "card", "row", "none", "center", "center")
+checkingIcon = Image("Checking balance", "https://picsum.photos/seed/checking/40/40")
+checkingText = Card([checkingLabel, checkingAmount], "card", "column", "none", "start")
+checkingLabel = TextContent("Checking", "small")
+checkingAmount = TextContent("$4,287.50", "small-heavy")
+
+savingsBalance = Card([savingsIcon, savingsText], "card", "row", "none", "center", "center")
+savingsIcon = Image("Savings balance", "https://picsum.photos/seed/savings/40/40")
+savingsText = Card([savingsLabel, savingsAmount], "card", "column", "none", "start")
+savingsLabel = TextContent("Savings", "small")
+savingsAmount = TextContent("$12,750.30", "small-heavy")
+
+creditBalance = Card([creditIcon, creditText], "card", "row", "none", "center", "center")
+creditIcon = Image("Credit balance", "https://picsum.photos/seed/credit/40/40")
+creditText = Card([creditLabel, creditAmount, creditLimit], "card", "column", "none", "start")
+creditLabel = TextContent("Credit Card", "small")
+creditAmount = TextContent("$3,421.89", "small-heavy")
+creditLimit = TextContent("Limit: $10,000", "small")
+
+accountCards = Card([checkingCard, savingsCard, creditCard], "card", "column", "xl")
+checkingCard = Card([checkingCardHeader, checkingCardBody], "card", "column")
+checkingCardHeader = CardHeader("Checking", "Available to spend")
+checkingCardBody = Card([checkingCardAmount], "card", "row", "none", "center", "center")
+checkingCardAmount = TextContent("$4,287.50", "large-heavy")
+
+savingsCard = Card([savingsCardHeader, savingsCardBody], "card", "column")
+savingsCardHeader = CardHeader("Savings", "Growing steadily")
+savingsCardBody = Card([savingsCardAmount], "card", "row", "none", "center", "center")
+savingsCardAmount = TextContent("$12,750.30", "large-heavy")
+
+creditCard = Card([creditCardHeader, creditCardBody], "card", "column")
+creditCardHeader = CardHeader("Credit Card", "Pay by 12/25")
+creditCardBody = Card([creditCardAmount, creditCardLimit], "card", "row", "none", "center", "center")
+creditCardAmount = TextContent("$3,421.89", "large-heavy")
+creditCardLimit = TextContent("Limit: $10,000", "small")
+
+# Transactions Section
+transactionsSection = Card([transactionsHeader, recentTransactions], "sunk")
+transactionsHeader = Heading("Recent Transactions", "h3")
+
+recentTransactions = ListBlock([transaction1, transaction2, transaction3, transaction4, transaction5], "number")
+transaction1 = ListItem("Starbucks", "$12.50", ["https://picsum.photos/seed/starbucks/80/60"], "Dispute")
+transaction2 = ListItem("Amazon", "$89.99", ["https://picsum.photos/seed/amazon/80/60"])
+transaction3 = ListItem("Netflix", "$14.99", ["https://picsum.photos/seed/netflix/80/60"])
+transaction4 = ListItem("Target", "$45.25", ["https://picsum.photos/seed/target/80/60"])
+transaction5 = ListItem("Uber", "$22.75", ["https://picsum.photos/seed/uber/80/60"], "Dispute")
+
+# Spending Chart Section
+spendingChart = Card([spendingHeader, spendingPieChart], "sunk")
+spendingHeader = Heading("This Month's Spending", "h3")
+
+spendingPieChart = PieChart(["Food", "Transport", "Entertainment", "Utilities", "Other"], [2500, 1800, 1200, 900, 1600], "pie", "circular")
+
+# Bills Section
+billsSection = Card([billsHeader, billsList], "sunk")
+billsHeader = Heading("Upcoming Bills", "h3")
+
+billsList = ListBlock([bill1, bill2, bill3], "number")
+bill1 = ListItem("Electricity", "Due 12/15", ["https://picsum.photos/seed/electricity/80/60"])
+bill2 = ListItem("Internet", "Due 12/20", ["https://picsum.photos/seed/internet/80/60"])
+bill3 = ListItem("Gym Membership", "Due 12/25", ["https://picsum.photos/seed/gym/80/60"])
+
+# Vacation Goal Section
+goalProgress = Card([goalHeader, goalProgressBar], "sunk")
+goalHeader = Heading("Vacation Savings Goal", "h3")
+
+goalProgressBar = Card([goalLabel, goalAmount, goalProgressVisual], "card", "row", "none", "center", "center")
+goalLabel = TextContent("Save for Paris Trip", "small")
+goalAmount = TextContent("$3,500", "small-heavy")
+goalProgressVisual = Progress(70, "$2,450 saved")
+
+# Credit Score Section
+creditScore = Card([scoreHeader, scoreValue], "sunk")
+scoreHeader = Heading("Your Credit Score", "h3")
+
+scoreValue = Card([scoreIcon, scoreNumber], "card", "row", "none", "center", "center")
+scoreIcon = Image("Credit score", "https://picsum.photos/seed/credit-score/40/40")
+scoreNumber = TextContent("789", "large-heavy")
+
+# Transfer Section
+transferSection = Card([transferHeader, transferForm], "sunk")
+transferHeader = Heading("Transfer Money", "h3")
+
+transferForm = Form("transfer-money", transferButtons, [transferField])
+transferField = FormControl("Amount", transferInput)
+transferInput = Input("amount", "Enter amount", "number", ["min:0.01", "max:100000"], "$1000.00")
+
+transferButtons = Buttons([transferBtn, cancelBtn])
+transferBtn = Button("Transfer", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+# Freeze Credit Section
+freezeCredit = Card([freezeHeader, freezeAction], "sunk")
+freezeHeader = Heading("Freeze Credit Line", "h3")
+freezeAction = Button("Freeze Credit Line", null, "destructive")
+
+# Statement Period Section
+statementPeriod = Card([periodHeader, periodSelector], "sunk")
+periodHeader = Heading("Change Statement Period", "h3")
+periodSelector = Select("statementPeriod", [monthlyOption, quarterlyOption, yearlyOption], "Select period", ["required"], "monthly")
+monthlyOption = SelectItem("Monthly", "Monthly statements")
+quarterlyOption = SelectItem("Quarterly", "Quarterly statements")
+yearlyOption = SelectItem("Yearly", "Yearly statements")
+
+# Alerts Settings Section
+alertsSettings = Card([alertsHeader, alertsForm], "sunk")
+alertsHeader = Heading("Alert Settings", "h3")
+
+alertsForm = Form("alert-settings", alertsButtons, [alertTypeField, alertAmountField, alertFrequencyField])
+alertTypeField = FormControl("Alert Type", alertTypeSelect)
+alertTypeSelect = Select("alertType", [balanceAlertOption, transactionAlertOption, lowBalanceAlertOption], "Select alert type", ["required"], "balance")
+
+alertAmountField = FormControl("Amount Threshold", alertAmountInput)
+alertAmountInput = Input("alertAmount", "$500", "number", ["min:0.01"], "$500")
+
+alertFrequencyField = FormControl("Frequency", alertFrequencySelect)
+alertFrequencySelect = Select("alertFrequency", [dailyOption, weeklyOption, monthlyOption], "Select frequency", ["required"], "daily")
+dailyOption = SelectItem("Daily", "Daily alerts")
+weeklyOption = SelectItem("Weekly", "Weekly alerts")
+monthlyOption = SelectItem("Monthly", "Monthly alerts")
+
+alertsButtons = Buttons([saveAlertsBtn])
+saveAlertsBtn = Button("Save Settings", null, "primary")
+
+# Dispute Transaction Section
+disputeTransaction = Card([disputeHeader, disputeForm], "sunk")
+disputeHeader = Heading("Dispute Transaction", "h3")
+
+disputeForm = Form("dispute-transaction", disputeButtons, [disputeReasonField])
+disputeReasonField = FormControl("Reason", disputeReasonSelect)
+disputeReasonSelect = Select("disputeReason", [fraudOption, incorrectOption, notRecognizedOption], "Select reason", ["required"], "incorrect")
+fraudOption = SelectItem("Fraud", "Fraudulent transaction")
+incorrectOption = SelectItem("Incorrect", "Incorrect charge")
+notRecognizedOption = SelectItem("Not Recognized", "Not recognized")
+
+disputeButtons = Buttons([submitDisputeBtn])
+submitDisputeBtn = Button("Submit Dispute", null, "primary")
+```

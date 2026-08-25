@@ -1,0 +1,299 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title: "Hub Operations Dashboard",
+      subtitle: "Today's Operational Status at JFK Hub"
+    ),
+    Divider(),
+    SectionBlock(
+      sections: [
+        SectionItem("On-Time Performance", "Today's OTP Metrics"),
+        SectionItem("Flights Today", "Active flights with details"),
+        SectionItem("Delayed Flights", "Flights experiencing delays"),
+        SectionItem("Recent Gate Changes", "Gate modifications since opening"),
+        SectionItem("Crew Availability", "Available crew members for reassignment"),
+        SectionItem("Weather Advisories", "Current weather conditions affecting operations"),
+        SectionItem("Passenger Load", "Average passenger load today"),
+        SectionItem("Connections at Risk", "Flights likely to miss connections"),
+        SectionItem("Rebooking Center", "Process to rebook affected passengers"),
+        SectionItem("Hub Comparison", "Switch to another hub view"),
+        SectionItem("Today's Cancellations", "Cancellations recorded today"),
+        SectionItem("Turnaround Time", "Average turnaround time metrics")
+      ],
+      isFoldable: true
+    ),
+    Divider(),
+    // Flight Details Table
+    Card(
+      children: [
+        CardHeader(
+          title: "Flight Schedule",
+          subtitle: "Live flight details with status"
+        ),
+        Spacer(),
+        Table(
+          columns: [
+            {"label": "Flight Number", "type": "string"},
+            {"label": "Route", "type": "string"},
+            {"label": "Gate", "type": "string"},
+            {"label": "Status", "type": "string"}
+          ],
+          data: [
+            {"flightNumber": "AH1234", "route": "JFK-BOS", "gate": "G22", "status": "On Time"},
+            {"flightNumber": "FL5678", "route": "JFK-LAX", "gate": "G15", "status": "On Time"},
+            {"flightNumber": "DL9012", "route": "JFK-EWR", "gate": "G08", "status": "Delayed"},
+            {"flightNumber": "BA4456", "route": "JFK-DFW", "gate": "G34", "status": "Delayed"},
+            {"flightNumber": "UA2010", "route": "JFK-ATS", "gate": "G01", "status": "On Time"},
+            {"flightNumber": "AA8899", "route": "JFK-CHO", "gate": "G21", "status": "Delayed"},
+            {"flightNumber": "TH2345", "route": "JFK-SFO", "gate": "G07", "status": "On Time"},
+            {"flightNumber": "KLM222", "route": "JFK-VIE", "gate": "G18", "status": "Delayed"}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Detailed Delayed Flights
+    Card(
+      children: [
+        CardHeader(
+          title: "Delayed Flights",
+          subtitle: "Flights experiencing operational issues"
+        ),
+        Spacer(),
+        Table(
+          columns: [
+            {"label": "Flight #", "type": "string"},
+            {"label": "Route", "type": "string"},
+            {"label": "Gate", "type": "string"},
+            {"label": "Delay Reason", "type": "string"},
+            {"label": "ETA Deviation", "type": "string"}
+          ],
+          data: [
+            {"flight": "DL9012", "route": "JFK-EWR", "gate": "G08", "reason": "Air traffic congestion", "delay": "+45min"},
+            {"flight": "BA4456", "route": "JFK-DFW", "gate": "G34", "reason": "Mechanical issue", "delay": "+60min"},
+            {"flight": "AA8899", "route": "JFK-ATS", "gate": "G21", "reason": "Weather delay", "delay": "+30min"}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Recent Gate Changes
+    Card(
+      children: [
+        CardHeader(
+          title: "Recent Gate Changes",
+          subtitle: "Modifications since opening"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "G22 → G25 (BOS)",
+              subtitle: "Gate change for AH1234",
+              content: [
+                {type: "TextContent", text: "Gate changed from G22 to G25 due to maintenance."},
+                {type: "Badge", text: "Active Change", variant: "info"}
+              ]
+            },
+            {
+              title: "G15 → G18 (LAX)",
+              subtitle: "Gate change for FL5678",
+              content: [
+                {type: "TextContent", text: "Gate moved to G18 after runway closure."},
+                {type: "Badge", text: "Active Change", variant: "warning"}
+              ]
+            },
+            {
+              title: "G08 → G02 (DFW)",
+              subtitle: "Gate adjustment for DL9012",
+              content: [
+                {type: "TextContent", text: "Gate shifted to G02 following equipment inspection."},
+                {type: "Badge", text: "Active Change", variant: "info"}
+              ]
+            }
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Crew Availability
+    Card(
+      children: [
+        CardHeader(
+          title: "Crew Availability",
+          subtitle: "Staff ready for reassignment"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            {type: "TextCallout", variant: "info", title: "Available Crew", description: "Total crew members available for shift reassignment."},
+            {type: "TextContent", text: "24 crew members currently available for redeployment."}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Weather Advisories
+    Card(
+      children: [
+        CardHeader(
+          title: "Weather Advisories",
+          subtitle: "Atmospheric conditions affecting operations"
+        ),
+        Spacer(),
+        Table(
+          columns: [
+            {"label": "Advisory", "type": "string"},
+            {"label": "Severity", "type": "string"},
+            {"label": "Impact", "type": "string"}
+          ],
+          data: [
+            {"advisory": "High winds (40 knots)", "severity": "moderate", "impact": "Reduced takeoff capacity"},
+            {"advisory": "Thunderstorms (EWR sector)", "severity": "high", "impact": "Ground stops expected"},
+            {"advisory": "Low visibility (ATC restriction)", "severity": "moderate", "impact": "Additive climb time"}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Passenger Load
+    Card(
+      children: [
+        CardHeader(
+          title: "Passenger Load",
+          subtitle: "Today's occupancy statistics"
+        ),
+        Spacer(),
+        SectionItem(
+          value: "Average Passenger Load: 84% capacity",
+          type: "TextContent",
+          size: "large"
+        ),
+        SectionItem(
+          value: "Peak load: 95% (AFC123)",
+          type: "TextContent",
+          size: "large"
+        )
+      ]
+    ),
+    Divider(),
+    // Connections at Risk
+    Card(
+      children: [
+        CardHeader(
+          title: "Connections at Risk",
+          subtitle: "Flights potentially missing connections"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "AH1234 (JFK→BOS)",
+              subtitle: "Risk: Missed connection to CHV",
+              content: [
+                {type: "TextContent", text: "Delayed by 45 minutes, may miss CHV departure."}
+              ]
+            },
+            {
+              title: "FL5678 (JFK→LAX)",
+              subtitle: "Risk: Gate conflict with subsequent flight",
+              content: [
+                {type: "TextContent", text: "Delay pushes arrival past required gate window."}
+              ]
+            },
+            {
+              title: "DL9012 (JFK→DFW)",
+              subtitle: "Risk: Reduced aircraft availability",
+              content: [
+                {type: "TextContent", text: "Only one B737 available, others in maintenance."}
+              ]
+            }
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Rebooking Center
+    Card(
+      children: [
+        CardHeader(
+          title: "Passenger Rebooking",
+          subtitle: "Reschedule affected travelers"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            {type: "Button", label: "Rebook Passengers", action: null, variant: "primary", size: "medium"},
+            {type: "Button", label: "View Options", action: null, variant: "secondary", size: "small"}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Hub Comparison
+    Card(
+      children: [
+        CardHeader(
+          title: "Compare Hubs",
+          subtitle: "Switch to another airport view"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            {type: "Button", label: "View Another Hub", action: null, variant: "tertiary", size: "large"}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Cancellations
+    Card(
+      children: [
+        CardHeader(
+          title: "Today's Cancellations",
+          subtitle: "Flights cancelled during operation hours"
+        ),
+        Spacer(),
+        Table(
+          columns: [
+            {"label": "Flight #", "type": "string"},
+            {"label": "Route", "type": "string"},
+            {"label": "Reason", "type": "string"},
+            {"label": "Count", "type": "number"}
+          ],
+          data: [
+            {"flight": "AH7890", "route": "JFK-ORD", "reason": "Cancelled (mechanical)", "count": 1},
+            {"flight": "FL3456", "route": "JFK-DFW", "reason": "Cancelled (cancellation request)", "count": 1},
+            {"flight": "DL1122", "route": "JFK-SFO", "reason": "Cancelled (weather)", "count": 1}
+          ]
+        )
+      ]
+    ),
+    Divider(),
+    // Turnaround Time
+    Card(
+      children: [
+        CardHeader(
+          title: "Average Turnaround Time",
+          subtitle: "Time from landing to next departure"
+        ),
+        Spacer(),
+        Table(
+          columns: [
+            {"label": "Metric", "type": "string"},
+            {"label": "Average", "type": "number"},
+            {"label": "Target", "type": "string"}
+          ],
+          data: [
+            {"metric": "First leg OTP", "average": 35, "target": "30min"},
+            {"metric": "Connecting flight OTP", "average": 62, "target": "48min"},
+            {"metric": "Final leg OTP", "average": 28, "target": "32min"}
+          ]
+        )
+      ]
+    )
+  ],
+  variant: "card"
+)
+```

@@ -1,0 +1,43 @@
+thought
+root = Card([header, filters, statsRow, draftsSection, publishedSection, commentsSection, scheduleSection])
+header = CardHeader("Content Studio", "Manage and track your editorial")
+filters = Card([categoryFilter, newDraftBtn], "clear", "row", "m")
+categoryFilter = FormControl("Filter by Category", categorySelect)
+categorySelect = Select("category", [catAll, catTech, catLife, catPolitics], "All Categories")
+catAll = SelectItem("all", "Show all categories", "all")
+catTech = SelectItem("tech", "Technology & gadgets", "tech")
+catLife = SelectItem("life", "Lifestyle & culture", "life")
+catPolitics = SelectItem("politics", "Politics & society", "politics")
+newDraftBtn = Button("+ New Draft", null, "primary")
+statsRow = Card([topArticle, readershipChart], "card", "row", "l")
+topArticle = Card([topTitle, topStats, Badge], "sunk")
+topTitle = Heading("Most Read (Month)", "h4")
+topStats = TextContent("The Future of AI in Journalism", "42,800 views")
+Badge = Badge("#1 Trending", null, null, "success")
+readershipChart = LineChart(days, [readershipSeries], "natural", "Day", "Views")
+days = ["1", "5", "10", "15", "20", "25", "30"]
+readershipSeries = Series("Daily Reads", [1200, 1900, 1500, 2100, 2800, 2400, 3100])
+draftsSection = Card([Heading("Active Drafts", "h3"), draftsTable])
+draftsTable = Table([colTitle, colStatus, colAction])
+colTitle = Col("Title", ["Market Trends 2024", "Remote Work Guide", "The Rise of Coffee"])
+colStatus = Col("Status", ["Draft", "In Review", "Draft"])
+colAction = Col("Action", ["Edit", "Edit", "Edit"], "action")
+publishedSection = Card([Heading("Published This Week", "h3"), publishedList])
+publishedList = ListBlock([
+    ListItem("Sustainable Living", "Published 2 days ago", null, "View"),
+    ListItem("Global Economy Update", "Published 4 days ago", null, "View"),
+    ListItem("Urban Gardening Secrets", "Published yesterday", null, "View")
+])
+commentsSection = Card([Heading("Comments Attention", "h3"), commentsList])
+commentsList = ListBlock([
+    ListItem("Great point on the third paragraph...", "By Sarah Doe", null, "Reply"),
+    ListItem("I disagree with the data here.", "By John Smith", null, "Reply")
+])
+scheduleSection = Card([Heading("Schedule New Piece", "h3"), scheduleForm])
+scheduleForm = Form("schedule-piece", scheduleButtons, [titleField, dateField])
+titleField = FormControl("Article Title", titleInput)
+titleInput = Input("title", "Enter catchy headline")
+dateField = FormControl("Publish Date", datePicker)
+datePicker = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")

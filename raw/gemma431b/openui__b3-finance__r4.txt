@@ -1,0 +1,38 @@
+root = Card([header, kpiRow, burnChart, expenseSection, largeTransactions, footer], "card", "column", "l")
+
+header = CardHeader("Finance Overview", "Month ending October 2023")
+
+kpiRow = Card([cashKpi, burnKpi, runwayKpi], "sunk", "row", "m")
+cashKpi = Card([cashLabel, cashValue], "clear", "column", "none")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$428,500", "large-heavy")
+
+burnKpi = Card([burnLabel, burnValue], "clear", "column", "none")
+burnLabel = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$32,000", "large-heavy")
+
+runwayKpi = Card([runwayLabel, runwayValue], "clear", "column", "none")
+runwayLabel = TextContent("Months of Runway", "small")
+runwayValue = TextContent("13.4", "large-heavy")
+
+burnChart = AreaChart(["Jun", "Jul", "Aug", "Sep", "Oct"], [burnSeries], "natural", "Month", "USD")
+burnSeries = Series("Burn Rate", [28000, 30000, 31000, 33000, 32000])
+
+expenseSection = Card([expenseHeading, expensePie], "sunk", "column", "m")
+expenseHeading = Heading("Expenses by Category", "h3")
+expensePie = PieChart(["Payroll", "AWS/Cloud", "Marketing", "Rent", "Software"], [18000, 7000, 4000, 2000, 1000], "donut")
+
+largeTransactions = Card([transHeading, transTable], "sunk", "column", "m")
+transHeading = Heading("Transactions > $10k", "h3")
+transTable = Table([transVendor, transAmount, transDate])
+transVendor = Col("Vendor", ["Amazon Web Services", "Stripe Payouts", "Health Insurance Co"])
+transAmount = Col("Amount", ["$12,400", "$15,000", "$11,200"])
+transDate = Col("Date", ["Oct 12", "Oct 15", "Oct 28"])
+
+footer = Card([monthSelector, actionButtons], "clear", "row", "l", "stretch", "between")
+monthSelector = Form("date-picker", null, [dateField])
+dateField = FormControl("Select Month", dateInput)
+dateInput = DatePicker("month_select", "single")
+
+actionButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")

@@ -1,0 +1,76 @@
+```openui-lang
+root = Card([storeHeader, statsRow, mainContent, footerButtons])
+storeHeader = CardHeader("Store Dashboard", "Daily Operations")
+
+statsRow = Card([todaySales, footTraffic, avgBasket], "sunk", "row", "l", "center")
+todaySales = Card([salesTitle, salesChart, salesTarget], "sunk")
+salesTitle = Heading("Today's Sales vs Target", "h3")
+salesChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [salesSeries], "grouped", "Day", "USD")
+salesSeries = Series("Actual", [1200, 1800, 2500, 3200, 4100, 5000, 6000])
+salesTarget = TextContent("Target: $5,000", "small")
+
+footTraffic = Card([trafficTitle, trafficChart])
+trafficTitle = Heading("Foot Traffic", "h3")
+trafficChart = LineChart(["8am", "10am", "12pm", "2pm", "4pm", "6pm", "8pm"], [trafficSeries], "natural", "Time", "Visitors")
+trafficSeries = Series("Visitors", [50, 120, 200, 180, 150, 220, 100])
+
+avgBasket = Card([basketTitle, basketValue])
+basketTitle = Heading("Avg Basket Size", "h3")
+basketValue = TextContent("$45.75", "large-heavy")
+
+mainContent = Card([bestSellers, stockStatus, staffShift, returnsWeek, promotions, registers, reorderButton, storeSwitcher, weeklyComparison], "sunk")
+bestSellers = Card([bestSellersTitle, bestSellersTable])
+bestSellersTitle = Heading("Best Sellers", "h3")
+bestSellersTable = Table([bestSellersColName, bestSellersColUnits])
+bestSellersColName = Col("Item", ["Wireless Headphones", "Smart Watch", "Bluetooth Speaker", "Laptop Backpack"])
+bestSellersColUnits = Col("Units Sold", [45, 32, 28, 22])
+
+stockStatus = Card([stockTitle, outOfStockItems])
+stockTitle = Heading("Out of Stock", "h3")
+outOfStockItems = ListBlock([outOfStockListItem1, outOfStockListItem2, outOfStockListItem3])
+outOfStockListItem1 = ListItem("Wireless Charger", "Restocking soon", ["https://picsum.photos/seed/charger/100/100"])
+outOfStockListItem2 = ListItem("Laptop Stand", "Backordered", ["https://picsum.photos/seed/stand/100/100"])
+outOfStockListItem3 = ListItem("Fitness Tracker", "In transit", ["https://picsum.photos/seed/tracker/100/100"])
+
+staffShift = Card([staffTitle, staffList])
+staffTitle = Heading("On Shift Today", "h3")
+staffList = ListBlock([shiftItem1, shiftItem2, shiftItem3])
+shiftItem1 = ListItem("Alex Johnson", "Manager", ["https://picsum.photos/seed/alex/50/50"], "Check-in")
+shiftItem2 = ListItem("Taylor Lee", "Cashier", ["https://picsum.photos/seed/taylor/50/50"], "Clock Out")
+shiftItem3 = ListItem("Marcus Chen", "Stock Clerk", ["https://picsum.photos/seed/marcus/50/50"], "Break")
+
+returnsWeek = Card([returnsTitle, returnsChart])
+returnsTitle = Heading("Returns This Week", "h3")
+returnsChart = PieChart(["Defective", "Wrong Size", "Customer Change", "Other"], [15, 25, 30, 30])
+
+promotions = Card([promotionsTitle, promoTable])
+promotionsTitle = Heading("Promotions", "h3")
+promoTable = Table([promoColName, promoColSales, promoColDiscount])
+promoColName = Col("Promotion", ["Summer Sale", "Back to School", "Black Friday"])
+promoColSales = Col("Sales", ["$12,500", "$8,200", "$5,700"])
+promoColDiscount = Col("Discount", ["20%", "15%", "30%"])
+
+registers = Card([registersTitle, registerStatuses])
+registersTitle = Heading("Register Status", "h3")
+registerStatuses = Table([registerColName, registerColStatus])
+registerColName = Col("Register", ["R1", "R2", "R3", "R4"])
+registerColStatus = Col("Status", ["Open", "Open", "Closed", "Open"])
+
+reorderButton = Button("Reorder Stock", null, "primary", "normal", "medium")
+storeSwitcher = DialogBlock("Switch Store", "Select Store", "Choose another location to view", [storeSwitcherContent])
+storeSwitcherContent = Card([storeSwitcherList])
+storeSwitcherList = ListBlock([storeItem1, storeItem2, storeItem3])
+storeItem1 = ListItem("Main Store", "Downtown Branch", ["https://picsum.photos/seed/downtown/100/100"], "View")
+storeItem2 = ListItem("North Branch", "Northside Mall", ["https://picsum.photos/seed/north/100/100"], "View")
+storeItem3 = ListItem("South Branch", "Southside Plaza", ["https://picsum.photos/seed/south/100/100"], "View")
+
+weeklyComparison = Card([comparisonTitle, comparisonChart])
+comparisonTitle = Heading("This Week vs Last Week", "h3")
+comparisonChart = BarChart(["Sales", "Foot Traffic", "Returns"], [thisWeek, lastWeek], "grouped", "Metric", "Change")
+thisWeek = Series("This Week", [14500, 2500, 120])
+lastWeek = Series("Last Week", [12000, 2200, 90])
+
+footerButtons = Buttons([reportsButton, alertsButton], "row")
+reportsButton = Button("View Reports", null, "secondary", "normal", "medium")
+alertsButton = Button("View Alerts", null, "secondary", "normal", "medium")
+```

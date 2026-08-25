@@ -1,0 +1,47 @@
+root = Card([header, statsRow, mainGrid, footer], "card", "column", "l")
+
+header = CardHeader("Clinic Daily Dashboard", "Monday, October 23rd")
+
+statsRow = Card([expectedPatients, noShowRate, roomStatus], "sunk", "row", "m")
+expectedPatients = TextCallout("info", "Expected Patients", "42 patients scheduled for today")
+noShowRate = TextCallout("warning", "Monthly No-Show Rate", "12.4% (↑ 2% from last month)")
+roomStatus = TextCallout("success", "Available Rooms", "Rooms 2, 4, and 7 are currently vacant")
+
+mainGrid = Card([leftCol, rightCol], "clear", "row", "l")
+
+leftCol = Card([scheduleHeading, appointmentTable, checkInSection], "card", "column", "m")
+scheduleHeading = Heading("Today's Schedule", "h3")
+appointmentTable = Table([timeCol, patientCol, statusCol])
+timeCol = Col("Time", ["08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM"], "string")
+patientCol = Col("Patient", ["Sarah Jenkins", "Michael Chen", "Elena Rodriguez", "David Wilson", "Linda Blair"], "string")
+statusCol = Col("Status", ["In Room 1", "Arrived", "Scheduled", "Scheduled", "Scheduled"], "string")
+
+checkInSection = Card([checkInHeading, checkInForm], "sunk", "column", "s")
+checkInHeading = Heading("Patient Check-In", "h4")
+checkInForm = Form("check-in", checkInButtons, [patientSearchField])
+patientSearchField = FormControl("Patient Name/ID", searchInput, "Search for patient to check in")
+searchInput = Input("patient_search", "Enter name...")
+checkInButtons = Buttons([checkInBtn])
+checkInBtn = Button("Check In Patient", null, "primary")
+
+rightCol = Card([nowHeading, nextPatientCallout, roomList, dateNav], "card", "column", "m")
+nowHeading = Heading("Current Status", "h3")
+nextPatientCallout = Card([calloutText, calloutBtn], "sunk", "column", "s")
+calloutText = TextContent("Next Patient: **Michael Chen**", "large-heavy")
+calloutBtn = Button("Call to Room 2", null, "primary", "normal", "small")
+
+roomList = ListBlock([room1, room2, room3], "image")
+room1 = ListItem("Room 1", "Occupied - Sarah Jenkins")
+room2 = ListItem("Room 2", "Available", ["https://picsum.photos/seed/room/100/100"])
+room3 = ListItem("Room 3", "Cleaning in progress")
+
+dateNav = Card([navHeading, navButtons], "clear", "column", "s")
+navHeading = TextContent("Change Date", "small")
+navButtons = Buttons([prevDay, todayBtn, nextDay])
+prevDay = Button("← Yesterday", null, "secondary", "normal", "small")
+todayBtn = Button("Today", null, "outline", "normal", "small")
+nextDay = Button("Tomorrow →", null, "secondary", "normal", "small")
+
+footer = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("View patient medical history")
+followUp2 = FollowUpItem("Generate end-of-day report")

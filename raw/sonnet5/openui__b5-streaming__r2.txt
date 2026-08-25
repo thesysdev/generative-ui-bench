@@ -1,0 +1,83 @@
+root = Card([header, sections])
+header = CardHeader("Streaming Operations Room", "Real-time platform health and content performance")
+sections = SectionBlock([sec1, sec2, sec3, sec4, sec5], true)
+
+sec1 = SectionItem("live", "Live Overview", [metricLive, bufferingProgress, recoProgress, searchCallout])
+sec2 = SectionItem("content", "Content Performance", [titlesTable, watchTrend, genreRadar])
+sec3 = SectionItem("subs", "Subscribers & Revenue", [subsChart, revenuePie, devicePie])
+sec4 = SectionItem("infra", "Infrastructure & Delivery", [regionTable, regionForm, flagsTable])
+sec5 = SectionItem("pipeline", "Content Pipeline & Rights", [releasesList, licenseTable, promoteForm])
+
+metricLive = Card([liveHeading, liveValue, liveBadge], "sunk", "row", "m", "center", "between")
+liveHeading = TextContent("Viewers watching now", "small")
+liveValue = TextContent("1,284,320", "large-heavy")
+liveBadge = Badge("LIVE", "destructive")
+
+bufferingProgress = Progress(2.3, "Buffering rate (target under 3%)")
+recoProgress = Progress(34.6, "Recommendation click-through rate")
+searchCallout = TextCallout("warning", "Searches without playback", "18.2% of searches this week ended without a play, up 2 points from last week")
+
+titlesTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["Skyline Heist", "The Last Signal", "Comet Season 2", "Northbound", "Velvet Court", "Midnight Ledger"])
+hoursCol = Col("Hours Watched (M)", [42.3, 38.1, 31.7, 27.4, 22.9, 19.6], "number")
+
+watchTrend = AreaChart(weekLabels, [watchSeries], "natural", "Week", "Hours (M)")
+weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+watchSeries = Series("Watch Hours (M)", [210, 225, 238, 251])
+
+genreRadar = RadarChart(genreLabels, [genreSeries])
+genreLabels = ["Drama", "Comedy", "Action", "Documentary", "Sci-Fi", "Reality"]
+genreSeries = Series("Engagement Score", [82, 74, 88, 65, 79, 70])
+
+subsChart = BarChart(monthLabels, [newSubsSeries, cancelSeries], "grouped", "Month", "Accounts")
+monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+newSubsSeries = Series("New Subscribers", [120000, 132000, 128000, 145000, 151000, 149000])
+cancelSeries = Series("Cancellations", [58000, 61000, 64000, 59000, 62000, 67000])
+
+revenuePie = PieChart(planLabels, planValues, "donut")
+planLabels = ["Premium", "Standard", "Basic", "Family"]
+planValues = [42, 31, 15, 12]
+
+devicePie = PieChart(deviceLabels, deviceValues, "pie")
+deviceLabels = ["Smart TV", "Mobile", "Web", "Tablet", "Game Console"]
+deviceValues = [48, 27, 14, 7, 4]
+
+regionTable = Table([regionCol, latencyCol, statusCol])
+regionCol = Col("Region", ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East"])
+latencyCol = Col("Avg Latency (ms)", [45, 62, 88, 97, 110], "number")
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Watch"])
+
+regionForm = Form("region-focus", regionFormButtons, [regionField])
+regionField = FormControl("Focus dashboard on a region", regionSelect)
+regionSelect = Select("region", [regionNA, regionEU, regionAPAC, regionLATAM, regionMEA], "Choose a region")
+regionNA = SelectItem("na", "North America")
+regionEU = SelectItem("eu", "Europe")
+regionAPAC = SelectItem("apac", "Asia Pacific")
+regionLATAM = SelectItem("latam", "Latin America")
+regionMEA = SelectItem("mea", "Middle East")
+regionFormButtons = Buttons([regionApplyBtn])
+regionApplyBtn = Button("Apply focus", null, "primary")
+
+flagsTable = Table([flagNameCol, flagStateCol])
+flagNameCol = Col("Feature Flag", ["4K Adaptive Bitrate", "AI Recommendations v2", "Offline Downloads Plus", "Watch Party", "Dynamic Intros"])
+flagStateCol = Col("State", ["Enabled", "Enabled", "Beta", "Disabled", "Enabled"])
+
+releasesList = ListBlock([release1, release2, release3])
+release1 = ListItem("Horizon Falling", "New original series - premieres June 5")
+release2 = ListItem("The Quiet War", "Feature film - premieres June 14")
+release3 = ListItem("Comet Season 3", "Returning series - premieres June 22")
+
+licenseTable = Table([licenseTitleCol, expiryCol, ownerCol])
+licenseTitleCol = Col("Title", ["Classic Heist Trilogy", "Sunset Boulevard Reruns", "Anime Vault Pack 4"])
+expiryCol = Col("Expires", ["June 30, 2025", "July 8, 2025", "July 15, 2025"])
+ownerCol = Col("Rights Holder", ["Meridian Studios", "Golden Era Media", "Nova Anime Co."])
+
+promoteForm = Form("promote-title", promoteButtons, [promoteField])
+promoteField = FormControl("Select title to promote on home screen", promoteSelect)
+promoteSelect = Select("title", [promo1, promo2, promo3, promo4], "Choose a title")
+promo1 = SelectItem("skyline-heist", "Skyline Heist")
+promo2 = SelectItem("last-signal", "The Last Signal")
+promo3 = SelectItem("horizon-falling", "Horizon Falling")
+promo4 = SelectItem("comet-s3", "Comet Season 3")
+promoteButtons = Buttons([promoteBtn])
+promoteBtn = Button("Promote to home screen", null, "primary")

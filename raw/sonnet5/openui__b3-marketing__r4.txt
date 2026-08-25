@@ -1,0 +1,43 @@
+root = Card([header, controls, kpiCards, visitorsSection, trafficSection, campaignsSection, bestCampaign, subscriberSection])
+
+header = CardHeader("Marketing Weekly Dashboard", "Overview of site performance and campaigns")
+
+controls = Card([dateRangeForm, exportBtn], "sunk", "row", "m", "center", "between")
+dateRangeForm = Form("date_range", dateRangeButtons, [dateField])
+dateField = FormControl("Date range", dateInput)
+dateInput = DatePicker("range", "range")
+dateRangeButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary", "normal", "small")
+exportBtn = Button("Export Report", null, "secondary")
+
+kpiCards = Card([conversionCallout, subscriberCallout], "clear", "row", "l")
+conversionCallout = TextCallout("info", "Conversion Rate", "3.8% this week, up from 3.4% last week")
+subscriberCallout = TextCallout("success", "Email Subscribers", "+1,240 new subscribers this month (+8.2%)")
+
+visitorsSection = Card([visitorsHeading, visitorsChart], "sunk")
+visitorsHeading = Heading("Site Visitors — Last 30 Days", "h3")
+visitorsChart = AreaChart(visitorDates, [visitorSeries], "natural", "Date", "Visitors")
+visitorDates = ["Oct 12", "Oct 15", "Oct 18", "Oct 21", "Oct 24", "Oct 27", "Oct 30", "Nov 2", "Nov 5", "Nov 8"]
+visitorSeries = Series("Visitors", [8200, 8600, 9100, 8900, 9500, 10200, 9800, 10600, 11200, 10800])
+
+trafficSection = Card([trafficHeading, trafficChart], "sunk")
+trafficHeading = Heading("Top 5 Traffic Sources", "h3")
+trafficChart = PieChart(trafficLabels, trafficValues, "donut")
+trafficLabels = ["Organic Search", "Paid Social", "Direct", "Email", "Referral"]
+trafficValues = [38, 24, 18, 12, 8]
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "sunk")
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campaignName, campaignStatus, campaignSpend, campaignConv])
+campaignName = Col("Campaign", ["Fall Sale Blast", "Retargeting Q4", "Brand Awareness", "Holiday Teaser", "Newsletter Boost"])
+campaignStatus = Col("Status", ["Active", "Active", "Active", "Active", "Active"])
+campaignSpend = Col("Spend", ["$4,200", "$2,850", "$1,900", "$3,100", "$980"])
+campaignConv = Col("Conversions", ["312", "198", "74", "221", "156"])
+
+bestCampaign = Callout("success", "Best Performing Campaign", "Fall Sale Blast leads with 312 conversions at $13.46 cost per conversion — 22% higher ROI than the account average")
+
+subscriberSection = Card([subscriberHeading, subscriberChart], "sunk")
+subscriberHeading = Heading("Email Subscriber Growth — This Month", "h3")
+subscriberChart = LineChart(subDates, [subSeries], "natural", "Week", "Subscribers")
+subDates = ["Week 1", "Week 2", "Week 3", "Week 4"]
+subSeries = Series("New Subscribers", [260, 310, 340, 330])

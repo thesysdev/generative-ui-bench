@@ -1,0 +1,177 @@
+Here is the package delivery tracking interface showing current location, estimated delivery date, and a reporting tool for delivery issues.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "deliveryBanner",
+          "currentStatusCallout",
+          "trackingSteps",
+          "actionSection"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Delivery Tracking",
+        "subtitle": "Tracking #TRK-849201938 • Express Ground"
+      },
+      {
+        "id": "deliveryBanner",
+        "component": "Alert",
+        "title": "Estimated Delivery Date",
+        "description": "Thursday, October 24, 2024 (by 7:00 PM)",
+        "variant": "info"
+      },
+      {
+        "id": "currentStatusCallout",
+        "component": "Callout",
+        "variant": "neutral",
+        "title": "Current Package Location",
+        "description": "Regional Sorting Facility — Chicago, IL (Scanned In Transit on Oct 23 at 08:42 AM)"
+      },
+      {
+        "id": "trackingSteps",
+        "component": "Steps",
+        "items": [
+          "step1",
+          "step2",
+          "step3",
+          "step4"
+        ]
+      },
+      {
+        "id": "step1",
+        "component": "StepsItem",
+        "title": "Order Processed",
+        "details": "Oct 21, 2:15 PM — Austin, TX"
+      },
+      {
+        "id": "step2",
+        "component": "StepsItem",
+        "title": "In Transit (Current Location)",
+        "details": "Oct 23, 8:42 AM — Chicago, IL Regional Hub"
+      },
+      {
+        "id": "step3",
+        "component": "StepsItem",
+        "title": "Out for Delivery",
+        "details": "Expected Oct 24, 8:00 AM — Local Courier"
+      },
+      {
+        "id": "step4",
+        "component": "StepsItem",
+        "title": "Delivered",
+        "details": "Estimated by Oct 24, 7:00 PM — Front Door"
+      },
+      {
+        "id": "actionSection",
+        "component": "DialogBlock",
+        "triggerLabel": "Report a Problem",
+        "triggerVariant": "destructive",
+        "title": "Report Delivery Issue",
+        "description": "Let us know if your package is delayed, damaged, or has an incorrect address.",
+        "content": [
+          "issueForm"
+        ]
+      },
+      {
+        "id": "issueForm",
+        "component": "Form",
+        "name": "report-delivery-issue",
+        "buttons": "dialogButtons",
+        "fields": [
+          "issueTypeField",
+          "detailsField"
+        ]
+      },
+      {
+        "id": "issueTypeField",
+        "component": "FormControl",
+        "label": "Reason for report",
+        "input": "issueSelect",
+        "hint": "Select the primary issue with this shipment"
+      },
+      {
+        "id": "issueSelect",
+        "component": "Select",
+        "name": "issue_type",
+        "placeholder": "Select an issue...",
+        "items": [
+          "optDelay",
+          "optDamage",
+          "optAddress",
+          "optLost"
+        ]
+      },
+      {
+        "id": "optDelay",
+        "component": "SelectItem",
+        "label": "Package is severely delayed",
+        "value": "delayed"
+      },
+      {
+        "id": "optDamage",
+        "component": "SelectItem",
+        "label": "Damaged in transit",
+        "value": "damaged"
+      },
+      {
+        "id": "optAddress",
+        "component": "SelectItem",
+        "label": "Incorrect delivery address",
+        "value": "wrong_address"
+      },
+      {
+        "id": "optLost",
+        "component": "SelectItem",
+        "label": "Marked delivered but not received",
+        "value": "not_received"
+      },
+      {
+        "id": "detailsField",
+        "component": "FormControl",
+        "label": "Additional Information",
+        "input": "detailsInput"
+      },
+      {
+        "id": "detailsInput",
+        "component": "TextArea",
+        "name": "issue_details",
+        "placeholder": "Provide any relevant details to help our support team resolve this quickly...",
+        "rows": 4
+      },
+      {
+        "id": "dialogButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitIssueBtn"
+        ]
+      },
+      {
+        "id": "submitIssueBtn",
+        "component": "Button",
+        "label": "Submit Report",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

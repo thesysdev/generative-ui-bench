@@ -1,0 +1,68 @@
+root = Card([header, meta, countdown, sep1, agendaHeading, agenda, sep2, speakersHeading, speakers, sep3, ticketsHeading, tickets, ticketNote, sep4, registerHeading, registerForm, followUps])
+
+header = CardHeader("SignalConf 2025", "Thursday, June 12, 2025 · Pier 27 Pavilion, San Francisco")
+
+meta = Card([tagDate, tagVenue, tagFormat, tagSeats], "clear", "row", "s", "center", "start", true)
+tagDate = Tag("June 12, 2025", null, "md", "info")
+tagVenue = Tag("Pier 27 Pavilion, SF", null, "md", "neutral")
+tagFormat = Tag("In person + livestream", null, "md", "neutral")
+tagSeats = Tag("62 seats left", null, "md", "warning")
+
+countdown = Card([countdownText, countdownBar], "sunk")
+countdownText = TextContent("**38 days remaining** until doors open at 08:30.", "large-heavy")
+countdownBar = Progress(79, "Registration window: 79% elapsed")
+
+sep1 = Separator("horizontal")
+
+agendaHeading = Heading("Agenda", "h3")
+agenda = Table([agendaTime, agendaSession, agendaRoom])
+agendaTime = Col("Time", ["08:30", "09:15", "10:00", "11:00", "12:15", "13:30", "15:00", "16:30", "18:00"])
+agendaSession = Col("Session", ["Doors open & coffee", "Opening keynote: Signals at Scale", "Designing resilient pipelines", "Workshop: streaming in practice", "Lunch & sponsor floor", "Panel: the cost of real time", "Lightning talks (6 × 8 min)", "Closing keynote: What comes next", "Rooftop reception"])
+agendaRoom = Col("Room", ["Atrium", "Main Hall", "Main Hall", "Studio B", "Atrium", "Main Hall", "Studio B", "Main Hall", "Rooftop"])
+
+sep2 = Separator("horizontal")
+
+speakersHeading = Heading("Speakers", "h3")
+speakers = ListBlock([spk1, spk2, spk3, spk4, spk5, spk6])
+spk1 = ListItem("Dr. Amara Okonkwo", "Principal engineer at Northwind Data; opens the day on scaling event systems past a trillion messages.")
+spk2 = ListItem("Luis Moreno", "Staff SRE at Cadence; explains how to keep pipelines standing when a region disappears.")
+spk3 = ListItem("Priya Raghunathan", "Creator of the Riverbed stream toolkit; runs the hands-on afternoon workshop.")
+spk4 = ListItem("Tom Ekelund", "CFO turned platform lead at Halst; argues about what real time actually costs a business.")
+spk5 = ListItem("Mei Lin Chao", "Research lead at Orbit Labs; presents new work on low-latency inference at the edge.")
+spk6 = ListItem("Grace Adeyemi", "Author of *Boring Infrastructure*; closes the conference on what the next five years demand.")
+
+sep3 = Separator("horizontal")
+
+ticketsHeading = Heading("Tickets", "h3")
+tickets = Table([tierName, tierPrice, tierIncludes, tierStatus])
+tierName = Col("Tier", ["Livestream", "Standard", "Workshop", "Patron"])
+tierPrice = Col("Price", ["$49", "$329", "$549", "$1,200"])
+tierIncludes = Col("Includes", ["All talks streamed live + recordings", "Full day on site, lunch, recordings", "Standard + Studio B workshop seat", "Standard + reception table & speaker dinner"])
+tierStatus = Col("Availability", ["Open", "62 left", "9 left", "Sold out"])
+ticketNote = TextCallout("info", "Early-bird pricing ends May 15", "Prices rise by $80 across all paid tiers after that date. Group orders of five or more get 15% off automatically at checkout.")
+
+sep4 = Separator("horizontal")
+
+registerHeading = Heading("Register", "h3")
+registerForm = Form("signalconf-register", formButtons, [nameField, emailField, tierField, workshopField])
+nameField = FormControl("Full name", nameInput)
+nameInput = Input("name", "Jane Smith")
+emailField = FormControl("Email", emailInput, "Your ticket and venue details are sent here.")
+emailInput = Input("email", "jane@company.com", "email")
+tierField = FormControl("Ticket tier", tierSelect)
+tierSelect = Select("tier", [optStream, optStandard, optWorkshop], "Choose a tier")
+optStream = SelectItem("livestream", "Livestream — $49")
+optStandard = SelectItem("standard", "Standard — $329")
+optWorkshop = SelectItem("workshop", "Workshop — $549")
+workshopField = FormControl("Extras", extras)
+extras = CheckBoxGroup("extras", [extraDinner, extraUpdates])
+extraDinner = CheckBoxItem("Rooftop reception", "Free with any on-site ticket, but we need a headcount.", "reception", true)
+extraUpdates = CheckBoxItem("Agenda updates", "Occasional email when sessions or rooms change.", "updates", false)
+formButtons = Buttons([submitBtn, holdBtn])
+submitBtn = Button("Complete registration", null, "primary")
+holdBtn = Button("Hold my seat for 24h", null, "secondary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me hotels near Pier 27")
+fu2 = FollowUpItem("What is covered in the streaming workshop?")
+fu3 = FollowUpItem("I need an invoice for a group of six")

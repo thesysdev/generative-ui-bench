@@ -1,0 +1,282 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "Power Network Console",
+      subtitle: "Real-time operations dashboard"
+    ),
+    
+    // 1. Current electricity load on the network
+    Row([
+      Card(
+        children: [
+          TextContent(
+            text: "Total Network Load: 42.3 MW",
+            size: "large"
+          ),
+          Spacer(),
+          TextContent(
+            text: "Network Capacity: 60.0 MW",
+            size: "large"
+          )
+        ]
+      ),
+      Card(
+        children: [
+          TextContent(
+            text: "Load Factor: 70.5%",
+            size: "default"
+          ),
+          Spacer(),
+          TextContent(
+            text: "Status: Operating within capacity limits",
+            size: "small"
+          )
+        ]
+      )
+    ],
+    
+    // 2. How close the network is to capacity
+    Row([
+      Card(
+        children: [
+          TextContent(
+            text: "Load vs Capacity: 70.5% utilization",
+            size: "large"
+          ),
+          Spacer(),
+          TextContent(
+            text: "Remaining Headroom: 17.7 MW",
+            size: "large"
+          )
+        ]
+      ),
+      Card(
+        children: [
+          Progress(value: 70.5, label: "Load Percentage"),
+          Spacer(),
+          TextContent(
+            text: "Capacity Remaining: 17.7 MW",
+            size: "default"
+          )
+        ]
+      )
+    ],
+    
+    // 3. Generation split by source
+    Card(
+      children: [
+        Heading(level: "h3", text: "Generation Split by Source"),
+        Table([
+          Col(
+            label: "Source",
+            data: ["Solar", "Wind", "Gas", "Hydro", "Nuclear"],
+            type: "string"
+          ),
+          Col(
+            label: "Output (MW)",
+            data: ["15.2", "28.7", "45.3", "12.1", "18.9"],
+            type: "number"
+          ),
+          Col(
+            label: "Share %",
+            data: ["25%", "38%", "60%", "20%", "22%"],
+            type: "string"
+          )
+        ])
+      ]
+    ),
+    
+    // 4. Each plant with output and status
+    Card(
+      children: [
+        Heading(level: "h3", text: "Plant Details"),
+        ListBlock([
+          ListItem(
+            title: "Alpha Plant",
+            subtitle: "Renewable hydro",
+            actionLabel: "View"
+          ),
+          ListItem(
+            title: "Beta Power Station",
+            subtitle: "Natural gas combined cycle",
+            actionLabel: "View"
+          ),
+          ListItem(
+            title: "Gamma Wind Farm",
+            subtitle: "Offshore wind",
+            actionLabel: "View"
+          ),
+          ListItem(
+            title: "Delta Solar Park",
+            subtitle: "PV capacity",
+            actionLabel: "View"
+          ),
+          ListItem(
+            title: "Epsilon Pump Station",
+            subtitle: "Battery storage",
+            actionLabel: "View"
+          )
+        ])
+      ]
+    ),
+    
+    // 5. Outages with affected region for each
+    Card(
+      children: [
+        Heading(level: "h3", text: "Current Outages"),
+        ListBlock([
+          ListItem(
+            text: "North Sector – Transformer failure in Region A",
+            style: "negative"
+          ),
+          ListItem(
+            text: "South Valley – Line surge affecting Region B",
+            style: "negative"
+          ),
+          ListItem(
+            text: "East Coast – Battery backup overload in Region C",
+            style: "negative"
+          ),
+          ListItem(
+            text: "West Plains – Cable breakage in Region D",
+            style: "negative"
+          )
+        ])
+      ]
+    ),
+    
+    // 6. Demand forecast for the next 24 hours
+    Card(
+      children: [
+        Heading(level: "h3", text: "Demand Forecast (Next 24h)"),
+        HorizontalBarChart(
+          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10"],
+          series: [
+            Series("Load Prediction", [35, 38, 40, 42, 44, 46, 48, 50, 52, 55]),
+            Series("Peak Load", [58, 62, 65, 68, 70, 73, 75, 77, 79, 82])
+          ],
+          xLabel: "Time",
+          yLabel: "MW",
+          variant: "grouped"
+        )
+      ]
+    ),
+    
+    // 7. Current price per megawatt hour
+    Card(
+      children: [
+        TextContent(
+          text: "Market Price: $78.50 per MWh",
+          size: "large"
+        ),
+        Spacer(),
+        TextContent(
+          text: "Price Trend (24h): Stable with minor fluctuations",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // 8. Maintenance planned this month
+    Card(
+      children: [
+        Heading(level: "h3", text: "Maintenance Schedule (This Month)"),
+        ListBlock([
+          FollowUpItem(text: "Alpha Plant – Turbine inspection – Week 2"),
+          FollowUpItem(text: "Beta Power Station – Gas compressor servicing – Week 3"),
+          FollowUpItem(text: "Delta Solar Park – Inverter calibration – Week 4"),
+          FollowUpItem(text: "Grid reinforcement upgrades – Week 1–2")
+        ])
+      ]
+    ),
+    
+    // 9. Live alerts as they arrive
+    Card(
+      children: [
+        Heading(level: "h3", text: "Live Alerts"),
+        ListBlock([
+          Alert(
+            variant: "warning",
+            title: "Overload detected in North Sector",
+            description: "Network load exceeded 80% threshold in Region A"
+          ),
+          Alert(
+            variant: "error",
+            title: "Equipment failure",
+            description: "Transformer tripped in South Valley – maintenance scheduled"
+          ),
+          Alert(
+            variant: "info",
+            title: "Wind farm efficiency update",
+            description: "Gamma Wind Farm output increased by 5%"
+          )
+        ])
+      ]
+    ),
+    
+    // 10. Way to focus on one region
+    Card(
+      children: [
+        Heading(level: "h3", text: "Region Focus Filter"),
+        Divider(decorative: true),
+        Box(
+          overflow: "hidden",
+          id: "region-filter",
+          label: "Select Region to Center View",
+          style: "bg-white p-3 rounded-lg shadow-sm"
+        )
+      ]
+    ),
+    
+    // 11. Way to order curtailment
+    Card(
+      children: [
+        Heading(level: "h3", text: "Curtailment Ordering"),
+        Card({
+          children: [
+            Dropdown(
+              options: [
+                { value: "By Priority", label: "Priority-based" },
+                { value: "By Impact", label: "Impact-based" },
+                { value: "By Energy Type", label: "Energy-type sorted" }
+              ],
+              selectedIndex: 0,
+              onChange: null
+            ),
+            TextContent(
+              text: "Sort curtailment list by: ",
+              size: "default"
+            ),
+            Spacer(),
+            TextContent(
+              text: "Current order: Normal",
+              size: "small"
+            )
+          ]
+        })
+      ]
+    ),
+    
+    // 12. Emissions today
+    Card(
+      children: [
+        Heading(level: "h3", text: "Today's Emissions"),
+        TextContent(
+          text: "Carbon Footprint: 12,450 tonnes CO₂",
+          size: "large"
+        ),
+        Spacer(),
+        TextContent(
+          text: "Breakdown: 45% Fossil fuel, 30% Renewables, 15% Nuclear, 10% Other",
+          size: "small"
+        )
+      ]
+    )
+  ],
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```

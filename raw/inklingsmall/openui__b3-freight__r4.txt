@@ -1,0 +1,39 @@
+root = Card([header, searchSection, delayCallout, statsRow, shipmentsTable, carrierChart, volumeChart, flagSection, refreshFooter], "card", "column", "l")
+
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment tracking")
+
+searchSection = Card([searchLabel, searchInput], "clear")
+searchLabel = TextContent("Search by route")
+searchInput = Input("route_search", "e.g. NYC → CHI")
+
+delayCallout = Callout("warning", "Delayed Shipments", "2 shipments delayed: LAX → SEA (ETA Jun 14 14:30) and ATL → DEN (ETA Jun 15 16:00).")
+
+statsRow = Card([onTimeStat, avgCostStat, refreshStat], "sunk", "row", "m")
+onTimeStat = TextContent("On-time % this month: 92%")
+avgCostStat = TextContent("Avg cost / shipment: $1,240")
+refreshStat = TextContent("Last refreshed: Jun 13, 09:42 AM")
+
+shipmentsTable = Table([routeCol, originCol, destCol, etaCol, statusCol])
+routeCol = Col("Route", ["NYC → CHI", "LAX → SEA", "ORD → MIA", "BOS → DCA", "ATL → DEN"])
+originCol = Col("Origin", ["NYC", "LAX", "ORD", "BOS", "ATL"])
+destCol = Col("Destination", ["CHI", "SEA", "MIA", "DCA", "DEN"])
+etaCol = Col("ETA", ["Jun 14 08:00", "Jun 14 14:30", "Jun 15 11:00", "Jun 14 09:15", "Jun 15 16:00"])
+statusCol = Col("Status", ["In Transit", "Delayed", "In Transit", "In Transit", "Delayed"])
+
+carrierChart = PieChart(carrierLabels, carrierValues, "donut")
+carrierLabels = ["FedEx", "UPS", "DHL", "XPO"]
+carrierValues = [42, 28, 18, 12]
+
+volumeChart = LineChart(weekLabels, [volumeSeries], "linear", "Week", "Shipments")
+weekLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+volumeSeries = Series("Volume", [320, 340, 310, 380, 400, 390, 420, 410])
+
+flagSection = Card([flagHeading, flagForm], "clear")
+flagHeading = Heading("Flag a shipment", "h3")
+flagForm = Form("flag-shipment", flagButtons, [flagControl])
+flagControl = FormControl("Shipment ID", flagInput)
+flagInput = Input("flag_id", "e.g. SHP-772")
+flagButtons = Buttons([flagBtn])
+flagBtn = Button("Flag shipment")
+
+refreshFooter = TextContent("Numbers last refreshed: Jun 13, 09:42 AM — next update in 15 min")

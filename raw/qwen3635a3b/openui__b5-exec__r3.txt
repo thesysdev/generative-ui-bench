@@ -1,0 +1,110 @@
+
+
+root = Card([quarterSelector, regionSelector, header, kpis, revenueChart, costsChart, budgetChart, headcountChart, salesMetrics, risksTable, initiativesTable, boardItems, actions])
+
+quarterSelector = Buttons([q1Btn, q2Btn, q3Btn, q4Btn], "row")
+q1Btn = Button("Q1 2024", null, "tertiary")
+q2Btn = Button("Q2 2024", null, "tertiary")
+q3Btn = Button("Q3 2024", null, "tertiary")
+q4Btn = Button("Q4 2024", null, "primary")
+
+regionSelector = Buttons([allRegion, naRegion, euRegion, apRegion], "row")
+allRegion = Button("All Regions", null, "primary")
+naRegion = Button("North America", null, "tertiary")
+euRegion = Button("Europe", null, "tertiary")
+apRegion = Button("Asia Pacific", null, "tertiary")
+
+header = CardHeader("CEO Quarterly Command View", "Q4 2024 — Final Results")
+
+kpis = Card([revCard, costCard, profitCard, runwayCard, winRateCard, npsCard], "sunk", "row", "l")
+
+revCard = Card([revLabel, revValue], "card", "column", "s")
+revLabel = TextContent("Revenue", "small")
+revValue = TextContent("$42.3M", "large-heavy")
+
+costCard = Card([costLabel, costValue], "card", "column", "s")
+costLabel = TextContent("Total Costs", "small")
+costValue = TextContent("$38.1M", "large-heavy")
+
+profitCard = Card([profitLabel, profitValue, profitMargin], "card", "column", "s")
+profitLabel = TextContent("Profit", "small")
+profitValue = TextContent("$4.2M", "large-heavy")
+profitMargin = TextContent("10.0% margin", "small")
+
+runwayCard = Card([runwayLabel, runwayValue], "card", "column", "s")
+runwayLabel = TextContent("Months of Runway", "small")
+runwayValue = TextContent("14 months", "large-heavy")
+
+winRateCard = Card([winLabel, winValue, winBadge], "card", "column", "s")
+winLabel = TextContent("Win Rate", "small")
+winValue = TextContent("23.4%", "large-heavy")
+winBadge = Badge("Above target", "success")
+
+npsCard = Card([npsLabel, npsValue, npsBar], "card", "column", "s")
+npsLabel = TextContent("Net Promoter Score", "small")
+npsValue = TextContent("52", "large-heavy")
+npsBar = Progress(52, "NPS Score")
+
+revenueChart = Card([revChartTitle, revLine], "sunk")
+revChartTitle = Heading("Revenue Trend — 4 Quarters", "h3")
+revLine = LineChart(["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024"], [revSeries], "natural", "Quarter", "Revenue ($M)")
+revSeries = Series("Revenue", [38.2, 39.8, 41.1, 42.3])
+
+costsChart = Card([costChartTitle, costLine], "sunk")
+costChartTitle = Heading("Costs Trend — 4 Quarters", "h3")
+costLine = LineChart(["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024"], [costSeries], "natural", "Quarter", "Costs ($M)")
+costSeries = Series("Total Costs", [35.4, 36.8, 37.5, 38.1])
+
+budgetChart = Card([budgetTitle, budgetBar], "sunk")
+budgetTitle = Heading("Budget vs Plan by Department", "h3")
+budgetBar = BarChart(["Engineering", "Sales", "Marketing", "Operations", "G&A"], [budgetActual, budgetPlan], "grouped", "Department", "Amount ($M)")
+budgetActual = Series("Actual", [12.4, 8.2, 5.1, 6.8, 5.6])
+budgetPlan = Series("Plan", [12.0, 8.5, 5.0, 6.5, 5.5])
+
+headcountChart = Card([hcTitle, hcBar], "sunk")
+hcTitle = Heading("Headcount by Department", "h3")
+hcBar = HorizontalBarChart(["Engineering", "Sales", "Marketing", "Operations", "G&A"], [120, 45, 28, 32, 22], "grouped", "Department", "Employees")
+
+salesMetrics = Card([salesTitle, pipelineCard, churnCard, customerCard], "sunk", "row", "l")
+salesTitle = Heading("Sales & Customers", "h3")
+
+pipelineCard = Card([pipeLabel, pipeValue], "card", "column", "s")
+pipeLabel = TextContent("Sales Pipeline Value", "small")
+pipeValue = TextContent("$128.5M", "large-heavy")
+
+churnCard = Card([churnLabel, churnValue], "card", "column", "s")
+churnLabel = TextContent("Churn Rate", "small")
+churnValue = TextContent("2.1%", "large-heavy")
+
+customerCard = Card([custLabel, custValue], "card", "column", "s")
+custLabel = TextContent("Total Customers", "small")
+custValue = TextContent("847", "large-heavy")
+
+risksTable = Card([risksTitle, risksTableComp], "sunk")
+risksTitle = Heading("Top Risks", "h3")
+risksTableComp = Table([riskName, riskLevel, riskOwner, riskMitigation])
+riskName = Col("Risk", ["Customer concentration: Top 3 clients = 42% of revenue", "Key engineer departure risk in Q1", "EU regulatory changes — GDPR enforcement", "Competitor price war in SMB segment"])
+riskLevel = Col("Level", ["High", "Medium", "High", "Medium"])
+riskOwner = Col("Owner", ["Sarah Chen, CEO", "David Park, CTO", "Maria Lopez, GC", "James Wright, VP Sales"])
+riskMitigation = Col("Mitigation", ["Diversify top-10 pipeline", ["Offer retention packages", "Strengthen employer brand"], ["Monitor legislative drafts", "Engage EU policy team"], ["Differentiate on support & SLAs", "Launch value-tier plan"]])
+
+initiativesTable = Card([initTitle, initTable], "sunk")
+initTitle = Heading("Strategic Initiatives", "h3")
+initTable = Table([initName, initStatus, initOwner, initProgress])
+initName = Col("Initiative", ["Enterprise GTM expansion", "Product v3.0 launch", "APAC market entry", "AI-powered analytics module"])
+initStatus = Col("Status", ["On track", "At risk", "On track", "Delayed"])
+initOwner = Col("Owner", ["James Wright", "David Park", ["Li Wei, APAC Lead", "Sarah Chen"], "Priya Sharma, VP Product"])
+initProgress = Col("Progress", ["68%", "42%", "55%", "30%"])
+
+boardItems = Card([boardTitle, boardList], "sunk")
+boardTitle = Heading("Next Board Meeting — Action Items", "h3")
+boardList = ListBlock([board1, board2, board3, board4, board5])
+board1 = ListItem("Approve Series B term sheet", "Due: Dec 15 — Sarah Chen")
+board2 = ListItem("Review Q1 2025 budget & headcount plan", "Due: Dec 20 — CFO")
+board3 = ListItem("Decision on European subsidiary formation", "Due: Jan 5 — Maria Lopez")
+board4 = ListItem("Update on key customer retention actions", "Due: Dec 18 — Sarah Chen")
+board5 = ListItem("Board seat candidate introductions", "Due: Jan 10 — Sarah Chen")
+
+actions = Buttons([exportBtn, refreshBtn])
+exportBtn = Button("Export Full Pack (PDF)", null, "primary")
+refreshBtn = Button("Refresh Data", null, "secondary")

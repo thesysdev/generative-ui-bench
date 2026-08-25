@@ -1,0 +1,118 @@
+```openui
+root = Card([
+    cardHeader,
+    revenueSection,
+    costsSection,
+    profitSection,
+    trendsSection,
+    budgetSection,
+    headcountSection,
+    risksSection,
+    initiativesSection,
+    financialSummarySection,
+    pipelineSection,
+    customerSection,
+    meetingItemsSection,
+    controlsSection
+])
+
+cardHeader = CardHeader("Quarterly Command View", "Q1 2023")
+
+revenueSection = Card([revenueHeading, revenueKpi])
+revenueHeading = Heading("Revenue", "h3")
+revenueKpi = Tag("Current Quarter Revenue: $1,200,000", null, null, "success")
+
+costsSection = Card([costsHeading, costsKpi])
+costsHeading = Heading("Costs", "h3")
+costsKpi = Tag("Current Quarter Costs: $850,000", null, null, "warning")
+
+profitSection = Card([profitHeading, profitKpi])
+profitHeading = Heading("Profit", "h3")
+profitKpi = Tag("Current Quarter Profit: $350,000", null, null, "success")
+
+trendsSection = Card([
+    trendsHeading,
+    revenueTrend,
+    costsTrend
+], "sunk")
+trendsHeading = Heading("Trends Over Four Quarters", "h3")
+revenueTrend = LineChart(["Q1 2022", "Q2 2022", "Q3 2022", "Q4 2022"], [revenueSeries], "linear", "Quarter", "USD")
+revenueSeries = Series("Revenue", [1000000, 1100000, 1200000, 1300000])
+costsTrend = LineChart(["Q1 2022", "Q2 2022", "Q3 2022", "Q4 2022"], [costsSeries], "linear", "Quarter", "USD")
+costsSeries = Series("Costs", [750000, 800000, 820000, 850000])
+
+budgetSection = Card([budgetHeading, budgetTable])
+budgetHeading = Heading("Budget by Department", "h3")
+budgetTable = Table([departmentCol, budgetCol, planCol, varianceCol])
+departmentCol = Col("Department", ["Sales", "Marketing", "R&D", "Operations"])
+budgetCol = Col("Budget", ["$500,000", "$300,000", "$200,000", "$400,000"])
+planCol = Col("Plan", ["$520,000", "$290,000", "$210,000", "$390,000"])
+varianceCol = Col("Variance", ["-$20,000", "$10,000", "-$10,000", "$10,000"])
+
+headcountSection = Card([headcountHeading, headcountTable])
+headcountHeading = Heading("Headcount by Department", "h3")
+headcountTable = Table([departmentCol, headcountCol])
+headcountCol = Col("Headcount", ["120", "80", "60", "100"])
+
+risksSection = Card([risksHeading, risksTable])
+risksHeading = Heading("Top Risks", "h3")
+risksTable = Table([riskCol, ownerCol])
+riskCol = Col("Risk", ["Supplier Dependency", "Regulatory Changes", "Market Competition"])
+ownerCol = Col("Owner", ["John Doe", "Jane Smith", "Emily Johnson"])
+
+initiativesSection = Card([initiativesHeading, initiativesTable])
+initiativesHeading = Heading("Strategic Initiatives", "h3")
+initiativesTable = Table([initiativeCol, statusCol])
+initiativeCol = Col("Initiative", ["New Product Launch", "Market Expansion"])
+statusCol = Col("Status", ["In Progress", "Planned"])
+
+financialSummarySection = Card([
+    financialHeading,
+    runwayTag,
+    pipelineTag,
+    winRateTag,
+    customerTag,
+    npsTag
+])
+financialHeading = Heading("Financial Summary", "h3")
+runwayTag = Tag("Runway: 18 months", null, null, "info")
+pipelineTag = Tag("Pipeline Value: $2,000,000", null, null, "info")
+winRateTag = Tag("Win Rate: 75%", null, null, "info")
+customerTag = Tag("Customer Count: 500", null, null, "info")
+churnTag = Tag("Churn Rate: 5%", null, null, "warning")
+npsTag = Tag("NPS: 45", null, null, "info")
+
+pipelineSection = Card([pipelineHeading, pipelineTable])
+pipelineHeading = Heading("Sales Pipeline", "h3")
+pipelineTable = Table([stageCol, valueCol])
+stageCol = Col("Stage", ["Prospect", "Negotiation", "Closed Won"])
+valueCol = Col("Value", ["$500,000", "$700,000", "$800,000"])
+
+customerSection = Card([customerHeading, customerTable])
+customerHeading = Heading("Customer Metrics", "h3")
+customerTable = Table([metricCol, valueCol])
+metricCol = Col("Metric", ["Customer Count", "Churn Rate"])
+valueCol = Col("Value", ["500", "5%"])
+
+meetingItemsSection = Card([meetingHeading, meetingList])
+meetingHeading = Heading("Next Board Meeting Items", "h3")
+meetingList = ListBlock([
+    ListItem("Review Q1 Performance", "Discuss revenue and cost trends"),
+    ListItem("Strategic Planning", "Outline initiatives for Q2"),
+    ListItem("Talent Acquisition", "Discuss hiring needs for Q2")
+])
+
+controlsSection = Card([controlsHeading, quarterSelector, regionSelector, exportButton])
+controlsHeading = Heading("Controls", "h3")
+quarterSelector = Select("quarter", [
+    SelectItem("Q1 2023", "Select Q1 2023"),
+    SelectItem("Q2 2023", "Select Q2 2023"),
+    SelectItem("Q3 2023", "Select Q3 2023")
+])
+regionSelector = Select("region", [
+    SelectItem("North America", "Select North America"),
+    SelectItem("Europe", "Select Europe"),
+    SelectItem("Asia", "Select Asia")
+])
+exportButton = Button("Export Pack", null, "primary")
+```

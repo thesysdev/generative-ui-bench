@@ -1,0 +1,106 @@
+```openui-lang
+root = Card([header, statusRow, mainContent, alertsBlock, controlsBlock])
+header = CardHeader("Power Network Console", "Real-time monitoring and control")
+statusRow = Card([loadIndicator, capacityGauge, priceDisplay], "sunk")
+loadIndicator = Card([loadChart, loadValue], "card")
+loadChart = HorizontalBarChart(["Current Load"], [loadSeries], "grouped", "Load", "MW")
+loadSeries = Series("Load", [currentLoad])
+loadValue = CardHeader("Current Load", formatNumber(currentLoad, 2) + " MW")
+capacityGauge = Card([capacityText, capacityBar], "card")
+capacityText = TextContent("Network Capacity")
+capacityBar = Progress(capacityPercentage, formatNumber(capacityPercentage, 1) + "%")
+priceDisplay = Card([priceText, priceChart], "card")
+priceText = CardHeader("Price", "$" + formatNumber(currentPrice, 2) + "/MWh")
+priceChart = LineChart(["Hour"], [priceSeries], "linear", "Hour", "$/MWh")
+priceSeries = Series("Price", [currentPrice])
+
+mainContent = Card([generationSplit, plantsSection, outagesSection, forecastSection, emissionsSection], "sunk")
+generationSplit = Card([splitHeading, splitChart], "card")
+splitHeading = Heading("Generation Split", "h3")
+splitChart = PieChart(generationSources, generationValues, "pie")
+
+plantsSection = Card([plantsHeading, plantsTable], "card")
+plantsHeading = Heading("Power Plants", "h3")
+plantsTable = Table([plantCol, outputCol, statusCol])
+plantCol = Col("Plant", plantNames)
+outputCol = Col("Output (MW)", plantOutputs)
+statusCol = Col("Status", plantStatuses)
+
+outagesSection = Card([outagesHeading, outagesTable], "card")
+outagesHeading = Heading("Current Outages", "h3")
+outagesTable = Table([regionCol, outageCol])
+regionCol = Col("Region", outageRegions)
+outageCol = Col("Affected Areas", outageAffected)
+
+forecastSection = Card([forecastHeading, forecastChart], "card")
+forecastHeading = Heading("24h Demand Forecast", "h3")
+forecastChart = AreaChart(forecastHours, [forecastSeries], "natural", "Hour", "MW")
+forecastSeries = Series("Forecast", forecastValues)
+
+emissionsSection = Card([emissionsHeading, emissionsChart], "card")
+emissionsHeading = Heading("Today's Emissions", "h3")
+emissionsChart = SingleStackedBarChart(["Today"], [emissionsToday])
+
+alertsBlock = Card([alertsHeading, alertsList], "card")
+alertsHeading = Heading("Live Alerts", "h3")
+alertsList = ListBlock(alertItems, "image")
+alertItems = [alert1, alert2, alert3]
+alert1 = ListItem("Grid Instability", "Substation 4", ["🚨"], "View Details")
+alert2 = ListItem("Line Overload", "Region A", ["🔌"], "Investigate")
+alert3 = ListItem("Weather Alert", "Coastal", ["☔"], "Monitor")
+
+controlsBlock = Card([regionSelector, curtailmentButton], "card")
+regionSelector = Card([regionLabel, regionDropdown], "sunk")
+regionLabel = TextContent("Focus Region")
+regionDropdown = Select("region", regionOptions, "Select Region")
+regionOptions = [regionOption1, regionOption2, regionOption3]
+regionOption1 = SelectItem("All", "All Regions")
+regionOption2 = SelectItem("North", "Northern Substations")
+regionOption3 = SelectItem("South", "Southern Grid")
+curtailmentButton = Card([curtailmentHeading, curtailmentForm], "sunk")
+curtailmentHeading = Heading("Order Curtailment", "h3")
+curtailmentForm = Form("curtailment-request", curtailmentButtons, [plantSelect, durationSelect])
+plantSelect = FormControl("Select Plant", plantSelectInput)
+plantSelectInput = Select("plant", plantOptions, "Choose Plant")
+plantOptions = [plantOption1, plantOption2, plantOption3]
+plantOption1 = SelectItem("Plant A", "Plant A")
+plantOption2 = SelectItem("Plant B", "Plant B")
+plantOption3 = SelectItem("Plant C", "Plant C")
+durationSelect = FormControl("Duration (hours)", durationInput)
+durationInput = Slider("duration", "discrete", 1, 24, 1, 8, "Duration", [], 8)
+curtailmentButtons = Buttons([submitCurtailment, cancelCurtailment])
+submitCurtailment = Button("Submit Curtailment", null, "primary")
+cancelCurtailment = Button("Cancel", null, "tertiary")
+
+maintenanceSection = Card([maintenanceHeading, maintenanceTable], "card")
+maintenanceHeading = Heading("Scheduled Maintenance", "h3")
+maintenanceTable = Table([plantCol, startCol, endCol])
+plantCol = Col("Plant", maintenancePlants)
+startCol = Col("Start", maintenanceStarts)
+endCol = Col("End", maintenanceEnds)
+
+# Data definitions
+currentLoad = 12500
+capacity = 15000
+capacityPercentage = (currentLoad / capacity) * 100
+currentPrice = 32.50
+generationSources = ["Coal", "Gas", "Wind", "Solar", "Hydro"]
+generationValues = [35, 25, 20, 15, 5]
+plantNames = ["Plant A", "Plant B", "Plant C", "Plant D", "Plant E"]
+plantOutputs = [1200, 950, 800, 1100, 750]
+plantStatuses = ["Online", "Online", "Maintenance", "Online", "Online"]
+plantStatuses = ["Online", "Online", "Maintenance", "Online", "Online"]
+outageRegions = ["Region A", "Region B", "Region C"]
+outageAffected = ["Substation 4", "Line 7", "Transformer 3"]
+forecastHours = ["00:00", "06:00", "12:00", "18:00"]
+forecastValues = [11000, 10500, 12000, 13000]
+emissionsToday = [450]
+maintenancePlants = ["Plant B", "Plant D", "Plant E"]
+maintenanceStarts = ["08:00", "14:00", "10:00"]
+maintenanceEnds = ["12:00", "18:00", "16:00"]
+
+# Helper function (simulated)
+formatNumber = (num, decimals) => {
+    return num.toFixed(decimals);
+}
+```

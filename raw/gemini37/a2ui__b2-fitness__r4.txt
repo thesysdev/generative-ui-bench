@@ -1,0 +1,255 @@
+Here is a daily summary dashboard for your fitness app, featuring today's step goal progress, calories burned, a 7-day workout history chart, and a form to log new workouts.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "kpiTable",
+          "stepProgress",
+          "separator1",
+          "chartHeading",
+          "weeklyWorkoutChart",
+          "workoutSeries",
+          "separator2",
+          "logWorkoutHeading",
+          "logWorkoutForm"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Daily Activity & Fitness",
+        "subtitle": "Today's summary and weekly overview"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colCurrent",
+          "colGoal",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Steps",
+          "Calories Burned",
+          "Active Time"
+        ]
+      },
+      {
+        "id": "colCurrent",
+        "component": "Col",
+        "label": "Today",
+        "data": [
+          "8,420 steps",
+          "620 kcal",
+          "48 mins"
+        ]
+      },
+      {
+        "id": "colGoal",
+        "component": "Col",
+        "label": "Daily Goal",
+        "data": [
+          "10,000 steps",
+          "500 kcal",
+          "45 mins"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "84.2% completed",
+          "Goal met (+120 kcal)",
+          "Goal met (+3 mins)"
+        ]
+      },
+      {
+        "id": "stepProgress",
+        "component": "Progress",
+        "label": "Step Goal (8,420 / 10,000 steps)",
+        "value": 84
+      },
+      {
+        "id": "separator1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "chartHeading",
+        "component": "Heading",
+        "text": "Workouts Over Past 7 Days",
+        "level": "h3"
+      },
+      {
+        "id": "weeklyWorkoutChart",
+        "component": "BarChart",
+        "labels": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+          "Sun"
+        ],
+        "series": [
+          "workoutSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Day of Week",
+        "yLabel": "Duration (minutes)"
+      },
+      {
+        "id": "workoutSeries",
+        "component": "Series",
+        "category": "Active Minutes",
+        "values": [
+          45,
+          60,
+          30,
+          50,
+          0,
+          75,
+          48
+        ]
+      },
+      {
+        "id": "separator2",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "logWorkoutHeading",
+        "component": "Heading",
+        "text": "Log a New Workout",
+        "level": "h3"
+      },
+      {
+        "id": "logWorkoutForm",
+        "component": "Form",
+        "name": "log_workout",
+        "buttons": "formActions",
+        "fields": [
+          "activityField",
+          "durationField",
+          "caloriesField"
+        ]
+      },
+      {
+        "id": "activityField",
+        "component": "FormControl",
+        "label": "Workout Type",
+        "input": "activitySelect"
+      },
+      {
+        "id": "activitySelect",
+        "component": "Select",
+        "name": "activity_type",
+        "placeholder": "Select an activity",
+        "items": [
+          "optRunning",
+          "optCycling",
+          "optStrength",
+          "optSwimming",
+          "optWalking"
+        ]
+      },
+      {
+        "id": "optRunning",
+        "component": "SelectItem",
+        "value": "running",
+        "label": "Running"
+      },
+      {
+        "id": "optCycling",
+        "component": "SelectItem",
+        "value": "cycling",
+        "label": "Cycling"
+      },
+      {
+        "id": "optStrength",
+        "component": "SelectItem",
+        "value": "strength",
+        "label": "Strength Training"
+      },
+      {
+        "id": "optSwimming",
+        "component": "SelectItem",
+        "value": "swimming",
+        "label": "Swimming"
+      },
+      {
+        "id": "optWalking",
+        "component": "SelectItem",
+        "value": "walking",
+        "label": "Brisk Walking"
+      },
+      {
+        "id": "durationField",
+        "component": "FormControl",
+        "label": "Duration (minutes)",
+        "input": "durationInput"
+      },
+      {
+        "id": "durationInput",
+        "component": "Input",
+        "name": "duration",
+        "placeholder": "e.g. 30",
+        "type": "number"
+      },
+      {
+        "id": "caloriesField",
+        "component": "FormControl",
+        "label": "Calories Burned (kcal)",
+        "input": "caloriesInput",
+        "hint": "Estimated or from your fitness tracker"
+      },
+      {
+        "id": "caloriesInput",
+        "component": "Input",
+        "name": "calories",
+        "placeholder": "e.g. 250",
+        "type": "number"
+      },
+      {
+        "id": "formActions",
+        "component": "Buttons",
+        "buttons": [
+          "saveWorkoutBtn"
+        ]
+      },
+      {
+        "id": "saveWorkoutBtn",
+        "component": "Button",
+        "label": "Save Workout",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

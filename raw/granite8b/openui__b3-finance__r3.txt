@@ -1,0 +1,62 @@
+```openui
+root = Card([
+    header,
+    kpiSection,
+    expenseSection,
+    topTransactions,
+    controls
+], "card")
+
+header = CardHeader("Month‑End Finance", "Current Period")
+
+kpiSection = Card([
+    cashOnHand,
+    monthlyBurn,
+    monthsRunway
+], "sunk")
+
+cashOnHand = TextContent("$128,400", "large")
+monthlyBurn = TextContent("$12,300", "large")
+monthsRunway = TextContent("10.8 months", "large")
+
+expenseSection = Card([
+    expenseTable,
+    expenseBar
+], "sunk")
+
+expenseTable = Table([
+    catCol,
+    amountCol
+])
+catCol = Col("Category", ["Personnel", "Rent", "Marketing", "Supplies"])
+amountCol = Col("Amount", ["$45,000", "$12,000", "$8,000", "$5,000"])
+
+expenseBar = HorizontalBarChart([
+    "Personnel",
+    "Rent",
+    "Marketing",
+    "Supplies"
+], [
+    Series("Personnel", [45000]),
+    Series("Rent", [12000]),
+    Series("Marketing", [8000]),
+    Series("Supplies", [5000])
+], "grouped", "Category", "USD")
+
+topTransactions = Card([
+    TextContent("Transactions > $10,000 this month:", "small"),
+    transactionList
+], "sunk")
+transactionList = ListBlock([
+    ListItem("Equipment purchase", "$12,750", []),
+    ListItem("Large client invoice", "$15,300", []),
+    ListItem("Refund", "-$9,200", [])
+], "number")
+
+controls = Buttons([
+    monthSelector,
+    downloadBtn
+], "row")
+monthSelector = Button("Select month", ["month", "2024-07"], "secondary")
+downloadBtn = Button("Download statement", null, "primary")
+```

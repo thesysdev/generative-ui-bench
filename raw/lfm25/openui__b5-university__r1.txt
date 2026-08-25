@@ -1,0 +1,295 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Total enrollment and 5-year movement
+    EnrollmentTrend([
+      yearData: [
+        { year: 2019, count: 85000 },
+        { year: 2020, count: 87000 },
+        { year: 2021, count: 89000 },
+        { year: 2022, count: 91000 },
+        { year: 2023, count: 94000 }
+      ],
+      currentYear: 2024,
+      currentCount: 96000
+    ]),
+    
+    // 2. Applications by program
+    ApplicationsByProgram([
+      program: "Computer Science",
+      applications: 3200,
+      accepted: 1800,
+      rejection: 1400
+    ], [
+      program: "Engineering",
+      applications: 2800,
+      accepted: 1500,
+      rejection: 1300
+    ], [
+      program: "Business Administration",
+      applications: 2600,
+      accepted: 1100,
+      rejection: 1500
+    ], [
+      program: "Liberal Arts",
+      applications: 2200,
+      accepted: 900,
+      rejection: 1300
+    ], [
+      program: "Nursing",
+      applications: 1800,
+      accepted: 750,
+      rejection: 1050
+    ], [
+      program: "Education",
+      applications: 1700,
+      accepted: 700,
+      rejection: 1000
+    ]),
+    
+    // 3. Acceptance rate
+    AcceptanceRate({
+      overall: 35.5,
+      byProgram: {
+        Computer Science: 42.3,
+        Engineering: 33.1,
+        Business Administration: 29.8,
+        Liberal Arts: 28.5,
+        Nursing: 38.2,
+        Education: 31.0
+      }
+    }),
+    
+    // 4. Tuition revenue this year
+    TuitionRevenue({
+      amount: 45200000,
+      currency: "USD",
+      breakdown: {
+        online: 21000000,
+        oncampus: 16000000,
+        research: 10200000
+      }
+    }),
+    
+    // 5. How full each course offering is
+    CourseOfferings([
+      course: "CS101 - Intro to Programming",
+      capacity: 150,
+      enrolled: 142,
+      filled: true
+    ], [
+      course: "MATH201 - Calculus III",
+      capacity: 120,
+      enrolled: 115,
+      filled: true
+    ], [
+      course: "BUS302 - Marketing Analytics",
+      capacity: 100,
+      enrolled: 88,
+      filled: true
+    ], [
+      course: "ENG401 - Creative Writing",
+      capacity: 80,
+      enrolled: 65,
+      filled: false
+    ], [
+      course: "PHYS201 - Quantum Mechanics",
+      capacity: 60,
+      enrolled: 52,
+      filled: false
+    ], [
+      course: "HIST301 - World History",
+      capacity: 90,
+      enrolled: 78,
+      filled: true
+    ]),
+    
+    // 6. Teaching load by faculty member
+    TeachingLoad([
+      faculty: "Dr. Alice Chen",
+      courses: 5,
+      studentsPerCourse: 45
+    ], [
+      faculty: "Prof. Bob Martinez",
+      courses: 4,
+      studentsPerCourse: 40
+    ], [
+      faculty: "Dr. Carol Nguyen",
+      courses: 3,
+      studentsPerCourse: 32
+    ], [
+      faculty: "Prof. David Kim",
+      courses: 7,
+      studentsPerCourse: 35
+    ], [
+      faculty: "Ms. Lisa Park",
+      courses: 2,
+      studentsPerCourse: 25
+    ]),
+    
+    // 7. Students at academic risk
+    AcademicRiskStudents([
+      students: 340,
+      percentage: 18.2,
+      atRiskLevels: {
+        low: 185,
+        medium: 135,
+        high: 20
+      }
+    ]),
+    
+    // 8. Scholarship budget used vs total
+    ScholarshipBudget({
+      totalBudget: 25000000,
+      spentThisYear: 18750000,
+      remaining: 6250000,
+      distribution: {
+        merit: 12000000,
+        need: 6000000,
+        diversity: 4000000
+      }
+    }),
+    
+    // 9. Housing occupancy
+    HousingOccupancy({
+      totalBeds: 12000,
+      occupied: 10800,
+      occupancyRate: 90.0,
+      vacancies: 1200
+    }),
+    
+    // 10. Campus events this month
+    CampusEvents([
+      event: "Spring Tech Conference",
+      date: "2024-05-15",
+      attendance: 450,
+      location: "Main Hall"
+    ], [
+      event: "Wellness Week Launch",
+      date: "2024-05-22",
+      attendance: 300,
+      location: "Gymnasium"
+    ], [
+      event: "Faculty Research Symposium",
+      date: "2024-05-28",
+      attendance: 250,
+      location: "Library Auditorium"
+    ]),
+    
+    // 11. Alumni giving over past four years
+    AlumniGiving([
+      year: 2020,
+      amount: 420000,
+      donors: 85
+    ], [
+      year: 2021,
+      amount: 385000,
+      donors: 78
+    ], [
+      year: 2022,
+      amount: 410000,
+      donors: 92
+    ], [
+      year: 2023,
+      amount: 455000,
+      donors: 108
+    ]),
+    
+    // 12. Way to focus on one department (Tabs)
+    DepartmentFilter([
+      tabs: [
+        { value: "Computer Science", trigger: "cs", content: "Computer Science Dashboard" },
+        { value: "Engineering", trigger: "eng", content: "Engineering Dashboard" },
+        { value: "Business", trigger: "bus", content: "Business Dashboard" },
+        { value: "Arts & Sciences", trigger: "arts", content: "Arts & Sciences Dashboard" },
+        { value: "Graduate Programs", trigger: "grad", content: "Graduate Programs Dashboard" }
+      ]
+    ]),
+    
+    // 13. This semester compared with last
+    SemesterComparison({
+      current: {
+        enrollment: 96000,
+        applications: 24500,
+        accepted: 8400,
+        revenue: 45200000
+      },
+      previous: {
+        enrollment: 92000,
+        applications: 21800,
+        accepted: 7200,
+        revenue: 39800000
+      },
+      changes: {
+        enrollment: "+4.35%",
+        applications: "+12.5%",
+        acceptanceRate: "+1.2 pts",
+        revenue: "+13.9%"
+      }
+    }),
+    
+    // 14. Waitlist students per program
+    WaitlistPerProgram([
+      program: "Computer Science",
+      waitlist: 87
+    ], [
+      program: "Engineering",
+      waitlist: 63
+    ], [
+      program: "Business Administration",
+      waitlist: 56
+    ], [
+      program: "Liberal Arts",
+      waitlist: 42
+    ], [
+      program: "Nursing",
+      waitlist: 38
+    ], [
+      program: "Education",
+      waitlist: 31
+    ]),
+    
+    // 15. Way to approve a new course
+    NewCourseApproval([
+      courseName: "AI Ethics (New)",
+      facultyProposed: "Dr. Sarah Lin",
+      deadline: "2024-06-30",
+      status: "pending_approval",
+      reviewer: "Dean's Office"
+    ]),
+    
+    // 16. Way to send a message to a student group
+    SendMessageToGroup([
+      group: "Undergraduate Students",
+      subject: "Upcoming Fall Semester Schedule",
+      recipients: "all_undergrads",
+      sender: "Academic Affairs"
+    ])
+  ],
+  direction: "column",
+  gap: "s",
+  align: "stretch",
+  wrap: true
+)
+```
+
+This screen covers all 16 required items:
+
+1. **Total enrollment & 5-year trend** - `EnrollmentTrend` showing yearly counts from 2019-2024 with current 2024 figure
+2. **Applications by program** - `ApplicationsByProgram` comparing CS, Engineering, Business, Liberal Arts, Nursing, Education
+3. **Acceptance rate** - `AcceptanceRate` with overall and by-program percentages
+4. **Tuition revenue this year** - `TuitionRevenue` with $45.2M and breakdown
+5. **Course offering capacity/fullness** - `CourseOfferings` showing 6 courses with capacity vs enrolled
+6. **Teaching load by faculty** - `TeachingLoad` with 5 faculty members and their course loads
+7. **Students at academic risk** - `AcademicRiskStudents` showing 340 at-risk students (18.2%)
+8. **Scholarship budget** - `ScholarshipBudget` with $25M total, $18.75M spent
+9. **Housing occupancy** - `HousingOccupancy` with 12K beds, 90% occupancy
+10. **Campus events this month** - `CampusEvents` with 3 events in May 2024
+11. **Alumni giving (past 4 years)** - `AlumniGiving` with annual amounts 2020-2023
+12. **Department filter** - `DepartmentFilter` with tabs for different departments
+13. **This semester vs last** - `SemesterComparison` showing growth metrics
+14. **Waitlist per program** - `WaitlistPerProgram` with waitlist counts for each major
+15. **Approve new course** - `NewCourseApproval` with pending AI Ethics course
+16. **Send message to student group** - `SendMessageToGroup` for Undergraduate Students
+
+All components are defined as references and properly connected under the root Card. The layout uses column direction with sufficient spacing for readability.

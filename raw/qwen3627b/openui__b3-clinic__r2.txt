@@ -1,0 +1,395 @@
+Let me build a comprehensive clinic receptionist's day view. I need to cover all 7 requirements:
+
+1. Today's appointments with times and patient names
+2. How many patients are expected
+3. No-show rate this month
+4. Which rooms are free right now
+5. The next patient called out
+6. A way to check a patient in
+7. A way to move to another day
+
+Let me plan the layout:
+- Header with clinic name and day navigation (covers #7)
+- Stats row: expected patients (#2), no-show rate (#3), free rooms (#4)
+- Next patient called out prominently (#5)
+- Appointments list/table (#1)
+- Check-in form (#6)
+
+Let me structure this carefully with all components properly referenced.
+
+Layout:
+- Card (root) with column direction
+  - CardHeader - clinic title
+  - Card (stats row) with row direction - showing expected patients, no-show rate, free rooms
+  - Card (next patient) - prominent callout
+  - Card (appointments table) - today's appointments
+  - Card (check-in section) - form to check in
+  - PaginationBlock or buttons for day navigation
+
+Let me build this out:
+
+For the appointments table, I'll use a Table with columns for Time, Patient Name, Room, Status.
+
+For expected patients, I can use a Badge or Tag.
+
+For no-show rate, I can use a Progress or a Badge with warning variant.
+
+For free rooms, I can use TagBlock or a ListBlock.
+
+For next patient, I can use a Callout or Alert.
+
+For check-in, I'll use a Form with Input for patient name and Buttons.
+
+For day navigation, I'll use Buttons with "Previous Day" and "Next Day".
+
+Let me code this up carefully, making sure every variable is referenced.
+
+```
+root = Card([header, dayNav, statsRow, nextPatient, appointments, checkInSection])
+```
+
+Let me define each piece:
+
+header = CardHeader("Clinic Reception Dashboard", "Today's Overview")
+
+dayNav = Buttons([prevDay, todayBtn, nextDay])
+prevDay = Button("← Previous Day")
+todayBtn = Button("Today")
+nextDay = Button("Next Day →")
+
+statsRow = Card([expectedLabel, expectedBadge, noShowLabel, noShowRate, roomsLabel, roomsTags], "sunk", "row", "m", "start", "between")
+
+Wait, let me think about stats more carefully. I want three stat cards side by side.
+
+Actually, let me use a simpler approach - a Card with row direction containing text and badges.
+
+For free rooms, I can use TagBlock.
+
+Let me reconsider the layout more carefully:
+
+root = Card([header, dayNav, statsCard, nextPatientCard, appointmentsCard, checkInCard])
+
+header = CardHeader("Maple Street Clinic", "Reception Dashboard")
+
+dayNav = Buttons([prevDay, todayBtn, nextDay])
+
+statsCard = Card([expectedPatients, noShowStat, roomsStatus], "sunk", "row", "m", "start", "between")
+
+For expected patients, I can create a small card or just use Heading + Badge.
+
+Let me use a different approach for stats - each stat as its own mini-card:
+
+statExpected = Card([expectedHeading, expectedBadge], "card")
+expectedHeading = Heading("Expected Today", "h4")
+expectedBadge = Badge("24 patients", "default")
+
+Hmm, but Badge doesn't have a large variant. Let me use TextContent instead.
+
+Actually, let me use a simpler approach with TextContent and Tags.
+
+Let me restructure:
+
+statsCard = Card([expectedStat, noShowStat, roomsStat], "sunk", "row", "m", "center", "between")
+
+expectedStat = Card([expectedTitle, expectedValue], "card", "column", "none", "center", "center")
+expectedTitle = TextContent("Expected Today", "small-heavy")
+expectedValue = TextContent("24 patients", "large-heavy")
+
+noShowStat = Card([noShowTitle, noShowValue], "card", "column", "none", "center", "center")
+noShowTitle = TextContent("No-Show Rate", "small-heavy")
+noShowValue = TextContent("8.2%", "large-heavy")
+
+roomsStat = Card([roomsTitle, roomsValue], "card", "column", "none", "center", "center")
+roomsTitle = TextContent("Rooms Free", "small-heavy")
+roomsValue = TextContent("3 of 8", "large-heavy")
+
+This is getting complex. Let me simplify.
+
+For next patient called out, I'll use a Callout with variant "info".
+
+For appointments, I'll use a Table.
+
+For check-in, I'll use a Form.
+
+Let me write this out fully now, being very careful about references.
+
+Actually, I realize I need to be careful about the Card children - they need to be the right component types. Let me check what Card accepts:
+
+Card(children: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps | Tabs | Carousel | SectionBlock | DialogBlock | DrawerBlock | AlertDialogBlock | Heading | Blockquote | InlineCode | Alert | Badge | Avatar | Progress | PaginationBlock | CalendarBlock | ListBlock | FollowUpBlock)[])
+
+So Card can contain other Cards? No, Card is not in the list. Let me re-read...
+
+Actually, Card IS in the list? Let me check again...
+
+Card(children: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps | Tabs | Carousel | SectionBlock | DialogBlock | DrawerBlock | AlertDialogBlock | Heading | Blockquote | InlineCode | Alert | Badge | Avatar | Progress | PaginationBlock | CalendarBlock | ListBlock | FollowUpBlock)[])
+
+Card is NOT in the children list. So I can't nest Cards. That's a significant constraint.
+
+So I need to use Heading, TextContent, Badge, Alert, Callout, Table, TagBlock, Form, Buttons, etc. directly in the root Card.
+
+Let me redesign:
+
+root = Card([header, dayNav, statsSection, nextPatient, appointments, checkInSection])
+
+Where:
+- header = CardHeader(...)
+- dayNav = Buttons(...)
+- statsSection = ... hmm, I can't use Card for grouping. I can use Buttons? No.
+
+Actually wait, let me re-read. The root is a Card. Can I use other components for grouping?
+
+Looking at the available components, I don't see a generic grouping component other than Card. But Card can't be nested.
+
+Hmm, let me look at Carousel - it takes children too. But that's for horizontal scrolling.
+
+Let me look at Tabs - it takes TabItem content.
+
+Actually, I think the approach is to just put everything directly in the root Card's children array, using separators and headings to organize visually.
+
+Let me restructure:
+
+root = Card([
+  header,
+  dayNav,
+  Separator(),
+  expectedHeading,
+  expectedBadge,
+  noShowHeading,
+  noShowProgress,
+  roomsHeading,
+  roomsTags,
+  Separator(),
+  nextPatientHeading,
+  nextPatientCallout,
+  Separator(),
+  appointmentsHeading,
+  appointmentsTable,
+  Separator(),
+  checkInHeading,
+  checkInForm
+])
+
+That's a lot of direct children but it should work. Let me define each.
+
+Actually, I realize I should use TextCallout for stats since it has variant, title, and description.
+
+Or I could use Alert for the next patient.
+
+Let me plan this more carefully:
+
+1. Today's appointments - Table with Time, Patient Name, Room, Status columns
+2. Expected patients - Badge or TextContent
+3. No-show rate - Progress or TextContent
+4. Free rooms - TagBlock
+5. Next patient - Alert or Callout
+6. Check-in - Form
+7. Day navigation - Buttons
+
+Let me write the code:
+
+root = Card([header, dayNav, sep1, expectedStat, noShowStat, roomsStat, sep2, nextHeading, nextPatient, sep3, apptHeading, apptTable, sep4, checkInHeading, checkInForm])
+
+header = CardHeader("Maple Street Clinic", "Reception Dashboard — Monday, January 13, 2025")
+
+dayNav = Buttons([prevDay, todayBtn, nextDay])
+prevDay = Button("← Previous Day")
+todayBtn = Button("Today", null, "primary")
+nextDay = Button("Next Day →")
+
+sep1 = Separator("horizontal", true)
+
+expectedStat = TextCallout("info", "Expected Today", "24 patients scheduled")
+noShowStat = TextCallout("warning", "No-Show Rate", "8.2% this month (down from 11.5% last month)")
+roomsStat = TextCallout("success", "Rooms Free Now", "3 of 8 rooms available")
+
+sep2 = Separator("horizontal", true)
+
+nextHeading = Heading("Next Patient to Call", "h3")
+nextPatient = Alert("Call Now", "Sarah Mitchell — Room 3, Dr. Chen — 10:30 AM", "info")
+
+sep3 = Separator("horizontal", true)
+
+apptHeading = Heading("Today's Appointments", "h3")
+apptTable = Table([timeCol, patientCol, roomCol, doctorCol, statusCol])
+timeCol = Col("Time", ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"])
+patientCol = Col("Patient", ["James Wilson", "Maria Garcia", "Robert Johnson", "Emily Davis", "Michael Brown", "Sarah Mitchell", "David Lee", "Jennifer Taylor", "William Anderson", "Lisa Thomas", "Christopher Martinez", "Amanda White", "Daniel Harris", "Jessica Clark", "Matthew Lewis", "Ashley Robinson", "Andrew Walker", "Stephanie Hall", "Joshua Allen", "Nicole Young", "Ryan King", "Megan Wright", "Brandon Scott", "Lauren Green"])
+roomCol = Col("Room", ["1", "2", "3", "4", "1", "3", "2", "4", "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4"])
+doctorCol = Col("Doctor", ["Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams"])
+statusCol = Col("Status", ["Checked In", "Checked In", "Checked In", "In Room", "In Room", "Called", "Waiting", "Waiting", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+sep4 = Separator("horizontal", true)
+
+checkInHeading = Heading("Check In Patient", "h3")
+checkInForm = Form("checkin", checkInButtons, [nameField, dobField])
+nameField = FormControl("Patient Name", nameInput, "Search by name to find the appointment")
+nameInput = Input("patient_name", "Type patient name...")
+dobField = FormControl("Date of Birth", dobInput, "Optional - helps verify identity")
+dobInput = Input("dob", "MM/DD/YYYY")
+checkInButtons = Buttons([checkInBtn, cancelBtn])
+checkInBtn = Button("Check In", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+Wait, I need to make sure the TextCallout arguments are correct. Let me check:
+
+TextCallout(variant?: "neutral" | "info" | "warning" | "success" | "danger", title?: string, description?: string)
+
+So positional: variant, title, description. All optional.
+
+expectedStat = TextCallout("info", "Expected Today", "24 patients scheduled")
+
+That looks right.
+
+For Alert:
+Alert(title: string, description: string, variant?: "default" | "destructive" | "info" | "success" | "warning")
+
+nextPatient = Alert("Call Now", "Sarah Mitchell — Room 3, Dr. Chen — 10:30 AM", "info")
+
+That looks right.
+
+For Form:
+Form(name: string, buttons: Buttons, fields: (FormControl)[])
+
+checkInForm = Form("checkin", checkInButtons, [nameField, dobField])
+
+That looks right.
+
+For FormControl:
+FormControl(label: string, input: Input | TextArea | Select | DatePicker | Slider | CheckBoxGroup | RadioGroup, hint?: string)
+
+nameField = FormControl("Patient Name", nameInput, "Search by name to find the appointment")
+
+That looks right.
+
+Now let me verify all variables are referenced:
+- root ✓ (entry point)
+- header ✓ (in root children)
+- dayNav ✓ (in root children)
+- prevDay ✓ (in dayNav)
+- todayBtn ✓ (in dayNav)
+- nextDay ✓ (in dayNav)
+- sep1 ✓ (in root children)
+- expectedStat ✓ (in root children)
+- noShowStat ✓ (in root children)
+- roomsStat ✓ (in root children)
+- sep2 ✓ (in root children)
+- nextHeading ✓ (in root children)
+- nextPatient ✓ (in root children)
+- sep3 ✓ (in root children)
+- apptHeading ✓ (in root children)
+- apptTable ✓ (in root children)
+- timeCol ✓ (in apptTable)
+- patientCol ✓ (in apptTable)
+- roomCol ✓ (in apptTable)
+- doctorCol ✓ (in apptTable)
+- statusCol ✓ (in apptTable)
+- sep4 ✓ (in root children)
+- checkInHeading ✓ (in root children)
+- checkInForm ✓ (in root children)
+- nameField ✓ (in checkInForm)
+- nameInput ✓ (in nameField)
+- dobField ✓ (in checkInForm)
+- dobInput ✓ (in dobField)
+- checkInButtons ✓ (in checkInForm)
+- checkInBtn ✓ (in checkInButtons)
+- cancelBtn ✓ (in checkInButtons)
+
+All variables are referenced. 
+
+Now let me also add a TagBlock for rooms to make it more visually interesting. Actually, I already have roomsStat as a TextCallout. Let me add a TagBlock for the free rooms.
+
+Actually, let me replace roomsStat with a combination of TextContent and TagBlock:
+
+roomsTitle = TextContent("Rooms Free Now", "small-heavy")
+roomsTags = TagBlock(["Room 1", "Room 5", "Room 7"])
+
+Hmm, but I need to make sure these are in the root children. Let me adjust:
+
+Actually, let me keep it simple with the TextCallout approach for stats. But I could add the TagBlock for more detail.
+
+Let me also add a CalendarBlock for the day navigation requirement. Wait, the requirement says "a way to move to another day" - Buttons with Previous/Next should suffice, but a CalendarBlock could be nice too.
+
+Actually, let me add a CalendarBlock for better day navigation.
+
+Let me revise:
+
+root = Card([header, dayNav, sep1, expectedStat, noShowStat, roomsStat, sep2, nextHeading, nextPatient, sep3, apptHeading, apptTable, sep4, checkInHeading, checkInForm])
+
+I think this covers all 7 requirements. Let me double-check:
+
+1. Today's appointments with times and patient names - ✓ apptTable
+2. How many patients are expected - ✓ expectedStat
+3. No-show rate this month - ✓ noShowStat
+4. Which rooms are free right now - ✓ roomsStat
+5. The next patient called out - ✓ nextPatient
+6. A way to check a patient in - ✓ checkInForm
+7. A way to move to another day - ✓ dayNav
+
+All covered. Let me finalize the code.
+
+Wait, I should also consider adding the TagBlock for rooms to make it more detailed. Let me add it after roomsStat:
+
+roomsDetail = TagBlock(["Room 1", "Room 5", "Room 7"])
+
+And update root to include it.
+
+Actually, let me keep it clean and not over-complicate. The current design covers all requirements well.
+
+One more thing - let me make sure the Table columns have the same number of entries. I have 24 appointments, so each column needs 24 entries. Let me count:
+
+timeCol: 24 entries ✓
+patientCol: 24 entries ✓
+roomCol: 24 entries ✓
+doctorCol: 24 entries ✓
+statusCol: 24 entries ✓
+
+Good.
+
+Let me also add a CalendarBlock for day navigation to make it more complete:
+
+calBlock = CalendarBlock("single", "2025-01-13", 1, "label")
+
+And add it to root.
+
+Actually, CalendarBlock has these args:
+CalendarBlock(mode?: "single" | "multiple" | "range", defaultMonth?: string, numberOfMonths?: number, captionLayout?: "label" | "dropdown")
+
+calBlock = CalendarBlock("single", "2025-01", 1, "label")
+
+Let me add this after the header for better day navigation.
+
+Final structure:
+root = Card([header, calBlock, dayNav, sep1, expectedStat, noShowStat, roomsStat, sep2, nextHeading, nextPatient, sep3, apptHeading, apptTable, sep4, checkInHeading, checkInForm])
+
+This is good. Let me write the final code.
+root = Card([header, calBlock, dayNav, sep1, expectedStat, noShowStat, roomsStat, sep2, nextHeading, nextPatient, sep3, apptHeading, apptTable, sep4, checkInHeading, checkInForm])
+header = CardHeader("Maple Street Clinic", "Reception Dashboard — Monday, January 13, 2025")
+calBlock = CalendarBlock("single", "2025-01", 1, "label")
+dayNav = Buttons([prevDay, todayBtn, nextDay])
+prevDay = Button("← Previous Day")
+todayBtn = Button("Today", null, "primary")
+nextDay = Button("Next Day →")
+sep1 = Separator("horizontal", true)
+expectedStat = TextCallout("info", "Expected Today", "24 patients scheduled")
+noShowStat = TextCallout("warning", "No-Show Rate", "8.2% this month (down from 11.5% last month)")
+roomsStat = TextCallout("success", "Rooms Free Now", "3 of 8 rooms available")
+sep2 = Separator("horizontal", true)
+nextHeading = Heading("Next Patient to Call", "h3")
+nextPatient = Alert("Call Now", "Sarah Mitchell — Room 3, Dr. Williams — 10:30 AM", "info")
+sep3 = Separator("horizontal", true)
+apptHeading = Heading("Today's Appointments", "h3")
+apptTable = Table([timeCol, patientCol, roomCol, doctorCol, statusCol])
+timeCol = Col("Time", ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"])
+patientCol = Col("Patient", ["James Wilson", "Maria Garcia", "Robert Johnson", "Emily Davis", "Michael Brown", "Sarah Mitchell", "David Lee", "Jennifer Taylor", "William Anderson", "Lisa Thomas", "Christopher Martinez", "Amanda White", "Daniel Harris", "Jessica Clark", "Matthew Lewis", "Ashley Robinson", "Andrew Walker", "Stephanie Hall", "Joshua Allen", "Nicole Young", "Ryan King", "Megan Wright", "Brandon Scott", "Lauren Green"])
+roomCol = Col("Room", ["1", "2", "3", "4", "1", "3", "2", "4", "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4"])
+doctorCol = Col("Doctor", ["Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams", "Dr. Chen", "Dr. Patel", "Dr. Williams"])
+statusCol = Col("Status", ["Checked In", "Checked In", "Checked In", "In Room", "In Room", "Called", "Waiting", "Waiting", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+sep4 = Separator("horizontal", true)
+checkInHeading = Heading("Check In Patient", "h3")
+checkInForm = Form("checkin", checkInButtons, [nameField, dobField])
+nameField = FormControl("Patient Name", nameInput, "Search by name to find the appointment")
+nameInput = Input("patient_name", "Type patient name...")
+dobField = FormControl("Date of Birth", dobInput, "Optional — helps verify identity")
+dobInput = Input("dob", "MM/DD/YYYY")
+checkInButtons = Buttons([checkInBtn, cancelBtn])
+checkInBtn = Button("Check In", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

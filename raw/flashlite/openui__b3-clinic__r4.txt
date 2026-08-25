@@ -1,0 +1,51 @@
+root = Card([header, metricsRow, mainContent, dateControls])
+
+header = CardHeader("Clinic Reception", "Day View • Wednesday, October 24")
+
+metricsRow = Card([expectedCard, noShowCard, roomsCard], "clear", "row", "m", "stretch", "between")
+
+expectedCard = Card([expectedHeading, expectedValue], "sunk", "column", "xs", "center", "center")
+expectedHeading = Heading("Expected Today", "h4")
+expectedValue = TextContent("42", "large-heavy")
+
+noShowCard = Card([noShowHeading, noShowValue], "sunk", "column", "xs", "center", "center")
+noShowHeading = Heading("No-Show Rate", "h4")
+noShowValue = TextContent("4.2%", "large-heavy")
+
+roomsCard = Card([roomsHeading, roomsValue], "sunk", "column", "xs", "center", "center")
+roomsHeading = Heading("Rooms Free Now", "h4")
+roomsValue = TextContent("Room 2, Room 4", "large-heavy")
+
+mainContent = Card([currentCallout, appointmentSection, checkInForm], "clear", "column", "l")
+
+currentCallout = Callout("info", "Next Patient Called Out", "John Doe (Room 1) - General Checkup")
+
+appointmentSection = Card([apptHeading, apptTable], "card", "column", "m")
+apptHeading = Heading("Today's Schedule", "h3")
+apptTable = Table([timeCol, patientCol, statusCol])
+timeCol = Col("Time", ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM"])
+patientCol = Col("Patient Name", ["John Doe", "Jane Smith", "Robert Johnson", "Emily Davis"])
+statusCol = Col("Status", ["In Room", "Waiting", "Arrived", "Scheduled"])
+
+checkInForm = Form("checkin-form", formButtons, [patientField, roomField])
+patientField = FormControl("Check In Patient", patientSelect, "Select patient from waiting list")
+patientSelect = Select("patient_name", [p1, p2, p3], "Choose patient")
+p1 = SelectItem("Jane Smith", "Jane Smith - 09:30 AM")
+p2 = SelectItem("Robert Johnson", "Robert Johnson - 10:00 AM")
+p3 = SelectItem("Emily Davis", "Emily Davis - 10:30 AM")
+
+roomField = FormControl("Assign Room", roomSelect, "Select available room")
+roomSelect = Select("room_number", [r1, r2], "Choose room")
+r1 = SelectItem("Room 2", "Room 2")
+r2 = SelectItem("Room 4", "Room 4")
+
+formButtons = Buttons([checkInBtn])
+checkInBtn = Button("Check In & Assign Room", null, "primary")
+
+dateControls = Card([dateHeading, datePickerForm], "clear", "row", "m", "center", "between")
+dateHeading = Heading("Jump to Date", "h3")
+datePickerForm = Form("date-form", dateButtons, [dateField])
+dateField = FormControl("Select Date", dateInput)
+dateInput = DatePicker("target_date", "single")
+dateButtons = Buttons([dateBtn])
+dateBtn = Button("Go to Day", null, "secondary")

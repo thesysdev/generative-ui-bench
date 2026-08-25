@@ -1,0 +1,70 @@
+root = Card([header, kpiRow, chartsRow, criticalAlert, staffSection, dischargeSection, orSection, suppliesSection, actionsRow], "card", "column", "m", "start", "start", false)
+
+header = CardHeader("Hospital Operations Command Center", "Real-time overview — St. Mary's General Hospital")
+
+kpiRow = Card([bedCard, erCard], "sunk", "row", "m", "start", "start", false)
+
+bedCard = Card([bedHeading, bedProgress, bedTag], "card", "column", "xs", "start", "start", false)
+bedHeading = Heading("Bed Occupancy", "h4")
+bedProgress = Progress(87, "87% full (218/250 beds)")
+bedTag = Tag("High", null, "sm", "warning")
+
+erCard = Card([erHeading, erWait, erTag], "card", "column", "xs", "start", "start", false)
+erHeading = Heading("ER Wait Time", "h4")
+erWait = TextContent("Current wait: **42 minutes** — 8 patients triaged", "default")
+erTag = Tag("Elevated", null, "sm", "danger")
+
+chartsRow = Card([admissionsCard, deptCard], "sunk", "row", "m", "start", "start", false)
+
+admissionsCard = Card([admissionsHeader, admissionsChart], "card", "column", "s", "start", "start", false)
+admissionsHeader = Heading("Admissions — Past 14 Days", "h3")
+admissionsChart = LineChart(["Jan 1", "Jan 2", "Jan 3", "Jan 4", "Jan 5", "Jan 6", "Jan 7", "Jan 8", "Jan 9", "Jan 10", "Jan 11", "Jan 12", "Jan 13", "Jan 14"], [admSeries, disSeries], "linear", "Date", "Patients")
+admSeries = Series("Admissions", [18, 22, 19, 25, 31, 28, 20, 17, 23, 29, 34, 26, 21, 19])
+disSeries = Series("Discharges", [15, 18, 21, 20, 25, 22, 19, 16, 20, 24, 28, 23, 20, 18])
+
+deptCard = Card([deptHeader, deptChart], "card", "column", "s", "start", "start", false)
+deptHeader = Heading("Patients by Department", "h3")
+deptChart = HorizontalBarChart(["Emergency", "ICU", "Cardiology", "Orthopedics", "Pediatrics", "Neurology", "Oncology", "General Med"], [deptSeries], "grouped", "Patients", "Department")
+deptSeries = Series("Patients", [24, 32, 18, 15, 12, 9, 14, 42])
+
+criticalAlert = Callout("danger", "Critical Patients — Immediate Attention Required", "3 patients in critical condition: **Maria Gonzalez** (ICU Bed 12 — sepsis), **James O'Brien** (ICU Bed 5 — cardiac arrest recovery), **Aisha Patel** (ICU Bed 8 — respiratory failure). All under Level 1 monitoring.")
+
+staffSection = Card([staffHeader, staffTable], "card", "column", "s", "start", "start", false)
+staffHeader = Heading("Staff On Shift — Current Rotation", "h3")
+staffTable = Table([staffName, staffRole, staffDept, staffShift])
+staffName = Col("Name", ["Dr. Sarah Chen", "Dr. Michael Torres", "Nurse Angela Brooks", "Nurse David Kim", "Dr. Lisa Wang", "Nurse Rachel Green", "Dr. Robert Hayes", "Nurse Tom Nguyen", "Dr. Priya Sharma", "Nurse Jessica Lee", "Dr. Alan Foster", "Nurse Maria Santos"])
+staffRole = Col("Role", ["Attending Physician", "ER Physician", "RN — ICU", "RN — Emergency", "Surgeon", "RN — OR", "Anesthesiologist", "RN — Pediatrics", "ICU Fellow", "RN — Cardiology", "Orthopedic Surgeon", "RN — General Med"])
+staffDept = Col("Department", ["ICU", "Emergency", "ICU", "Emergency", "Surgery", "Surgery", "Surgery", "Pediatrics", "ICU", "Cardiology", "Orthopedics", "General Med"])
+staffShift = Col("Shift", ["07:00–19:00", "19:00–07:00", "07:00–19:00", "07:00–19:00", "07:00–19:00", "07:00–19:00", "07:00–19:00", "19:00–07:00", "07:00–19:00", "07:00–19:00", "07:00–19:00", "19:00–07:00"])
+
+dischargeSection = Card([dischargeHeader, dischargeList], "card", "column", "s", "start", "start", false)
+dischargeHeader = Heading("Patients Ready for Discharge", "h3")
+dischargeList = ListBlock([discharge1, discharge2, discharge3, discharge4, discharge5], "number")
+discharge1 = ListItem("Robert Williams — Room 312", "General Surgery — Post-op day 3, vitals stable", null, "Process Discharge")
+discharge2 = ListItem("Linda Martinez — Room 205", "Cardiology — Angioplasty recovery, cleared by cardiology", null, "Process Discharge")
+discharge3 = ListItem("Thomas Anderson — Room 418", "Orthopedics — Hip replacement day 5, PT goals met", null, "Process Discharge")
+discharge4 = ListItem("Susan Clark — Room 109", "General Med — Pneumonia, afebrile 48h, O2 sat normal", null, "Process Discharge")
+discharge5 = ListItem("Kevin Park — Room 321", "Pediatrics — Asthma exacerbation, nebulizer weaned", null, "Process Discharge")
+
+orSection = Card([orHeader, orTable], "card", "column", "s", "start", "start", false)
+orHeader = Heading("Today's Operating Room Bookings", "h3")
+orTable = Table([orTime, orRoom, orProcedure, orSurgeon, orStatus])
+orTime = Col("Time", ["07:30", "08:00", "09:00", "10:30", "11:00", "13:00", "14:00", "15:30"])
+orRoom = Col("OR Room", ["OR-1", "OR-3", "OR-2", "OR-1", "OR-4", "OR-3", "OR-2", "OR-1"])
+orProcedure = Col("Procedure", ["Total Knee Replacement", "Appendectomy", "CABG x3", "Hip Arthroscopy", "Craniotomy — Tumor", "Cholecystectomy", "Spinal Fusion L4-L5", "Robotic Prostatectomy"])
+orSurgeon = Col("Surgeon", ["Dr. Foster", "Dr. Torres", "Dr. Wang", "Dr. Foster", "Dr. Wang", "Dr. Torres", "Dr. Hayes", "Dr. Sharma"])
+orStatus = Col("Status", ["In Progress", "In Progress", "In Progress", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+suppliesSection = Card([suppliesHeader, suppliesCallout, suppliesTable], "card", "column", "s", "start", "start", false)
+suppliesHeader = Heading("Supplies Running Low", "h3")
+suppliesCallout = TextCallout("warning", "Restock Alert", "5 supply categories below reorder threshold. Procurement notified.")
+suppliesTable = Table([supplyItem, supplyCurrent, supplyMin, supplyLocation])
+supplyItem = Col("Item", ["Nitrile Gloves (M)", "IV Catheter 18G", "Surgical Masks N95", "Wound Dressing 4x4", "Saline 0.9% 500mL"])
+supplyCurrent = Col("Current Stock", ["120 boxes", "85 units", [200], "45 packs", "60 bags"])
+supplyMin = Col("Min Threshold", ["200 boxes", "150 units", "300", "100 packs", "100 bags"])
+supplyLocation = Col("Location", ["Central Supply", "Central Supply", "All Units", "Central Supply", "Pharmacy"])
+
+actionsRow = Buttons([incidentBtn, dateBtn, transferBtn], "row")
+incidentBtn = Button("File Incident Report", null, "secondary", "normal", "medium")
+dateBtn = Button("View Another Day", null, "secondary", "normal", "medium")
+transferBtn = Button("Request Patient Transfer", null, "secondary", "normal", "medium")

@@ -1,0 +1,87 @@
+The user wants a freelancer's invoice view with:
+1. Amount due and currency
+2. Due date
+3. A way to pay now
+
+Let me design a clean invoice screen with these elements. I'll use a Card as root, with appropriate components to display invoice information clearly.
+
+Let me plan the structure:
+- CardHeader for invoice title
+- A section showing amount due prominently (maybe a Callout or Badge)
+- Due date displayed
+- A pay now button
+
+Let me think about the layout:
+- root = Card with children in column direction
+- CardHeader with invoice title and number
+- Amount section - maybe a TextContent or Callout for the amount due
+- Due date - TextContent
+- Pay button - Buttons with a primary button
+
+Let me build this out:
+
+root = Card([header, amountSection, detailsSection, paySection], "card", "column", "m", "start", "start")
+
+header = CardHeader("Invoice", "INV-2024-0042")
+
+amountSection - show the amount due prominently
+amountCallout = Callout("info", "Amount Due", "$2,450.00 USD")
+
+detailsSection - show due date and other details
+dueDate = TextContent("Due Date: January 15, 2025")
+
+paySection - pay now button
+payBtn = Button("Pay Now", null, "primary", "normal", "large")
+payButtons = Buttons([payBtn])
+
+Let me refine this to make it look more like a proper invoice. I should include more invoice-like details to make it realistic and professional.
+
+Let me think about a better structure:
+- CardHeader: Invoice title
+- Amount due prominently displayed
+- Due date
+- Maybe a small table with line items
+- Pay now button
+
+Let me build this:
+
+root = Card([header, amountSection, detailsCard, paySection], "card", "column", "m", "start", "start")
+
+
+- CardHeader("Invoice #INV-2024-0042")
+- Callout("info", "Amount Due", "$2,450.00 USD")
+- Card with due date and client details
+- Buttons with "Pay Now" primary button
+
+I'm building a professional invoice layout with the header showing the invoice number, a prominent amount due callout, a details card containing the due date and client information, and a pay section with a primary action button. I need to verify the Callout signature—it takes variant, title, and description as parameters, so Callout("info", "Amount Due", "$2,450.00 USD") should work correctly.
+
+Now I'm structuring the layout with a CardHeader for the invoice number, a Card containing the amount due callout and due date, a details section with line items in a table, and a pay button section. The root Card will wrap everything in a column layout.
+
+I'm adding a status badge showing "Unpaid" and refining the structure to ensure all components are properly nested and the visual hierarchy makes sense for an invoice display. I need to verify the Badge component signature—it takes text and an optional variant. I'll use "destructive" for the unpaid status to make it stand out. Now I'm finalizing the complete structure with all the invoice components properly organized.
+root = Card([header, statusRow, amountCard, detailsCard, paySection], "card", "column", "m", "start", "start")
+
+header = CardHeader("Invoice #INV-2024-0042")
+
+statusRow = Card([statusBadge], "clear", "row", "none", "start", "start")
+statusBadge = Badge("Unpaid", "destructive")
+
+amountCard = Card([amountCallout, dueDateRow], "sunk", "column", "m", "start", "start")
+amountCallout = Callout("info", "Amount Due", "$2,450.00 USD")
+dueDateRow = Card([dueLabel, dueDate], "clear", "row", "s", "center", "start")
+dueLabel = TextContent("Due Date:", "small")
+dueDate = TextContent("January 15, 2025", "small-heavy")
+
+detailsCard = Card([detailsHeading, itemsTable], "sunk", "column", "m", "start", "start")
+detailsHeading = Heading("Line Items", "h3")
+itemsTable = Table([itemCol, descCol, qtyCol, rateCol, totalCol])
+itemCol = Col("Item", ["Website Redesign", "SEO Optimization", "Content Writing"])
+descCol = Col("Description", ["Homepage & 5 inner pages", "Keyword research & on-page SEO", "10 blog posts (800 words each)"])
+qtyCol = Col("Qty", [1, 1, 10])
+rateCol = Col("Rate", ["$1,200.00", "$450.00", "$80.00"])
+totalCol = Col("Amount", ["$1,200.00", "$450.00", "$800.00"])
+
+paySection = Card([payHeading, payButtons], "clear", "column", "m", "start", "center")
+payHeading = TextContent("Ready to settle this invoice?", "default")
+payButtons = Buttons([payBtn, reminderBtn], "row")
+payBtn = Button("Pay Now", null, "primary", "normal", "large")
+reminderBtn = Button("Send Reminder", null, "secondary", "normal", "large")

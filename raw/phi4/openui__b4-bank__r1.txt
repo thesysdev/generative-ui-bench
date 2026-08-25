@@ -1,0 +1,98 @@
+```openui
+root = Card([
+    balancesSection,
+    transactionsSection,
+    spendingSection,
+    billsSection,
+    savingsGoalSection,
+    creditScoreSection,
+    actionsSection
+])
+
+balancesSection = Card([
+    headingBalances,
+    checkingBalance,
+    savingsBalance,
+    creditBalance
+])
+headingBalances = Heading("Account Balances", "h3")
+checkingBalance = TextContent("$5,240.67", "large")
+savingsBalance = TextContent("$15,870.22", "large")
+creditBalance = TextContent("$8,000.00 of $10,000.00 (80%)", "large")
+
+transactionsSection = Card([
+    headingTransactions,
+    recentTransactions
+])
+headingTransactions = Heading("Recent Transactions", "h3")
+recentTransactions = Table([
+    transactionMerchant,
+    transactionAmount
+])
+transactionMerchant = Col("Merchant", ["Coffee Shop", "Grocery Store", "Online Retailer"])
+transactionAmount = Col("Amount", ["-$4.75", "-$76.42", "-$120.00"])
+
+spendingSection = Card([
+    headingSpending,
+    spendingPieChart
+])
+headingSpending = Heading("Spending by Category", "h3")
+spendingPieChart = PieChart(["Food", "Entertainment", "Utilities"], [1200, 300, 450])
+
+billsSection = Card([
+    headingBills,
+    upcomingBills
+])
+headingBills = Heading("Bills Due Soon", "h3")
+upcomingBills = ListBlock([
+    billItem1,
+    billItem2
+], "image")
+billItem1 = ListItem("Electricity", null, ["electric-icon"], "Due: April 15")
+billItem2 = ListItem("Internet", null, ["internet-icon"], "Due: April 18")
+
+savingsGoalSection = Card([
+    headingSavingsGoal,
+    savingsProgress
+])
+headingSavingsGoal = Heading("Vacation Savings Goal", "h3")
+savingsProgress = Progress(7500, "Target: $10,000")
+
+creditScoreSection = Card([
+    headingCreditScore,
+    currentCreditScore
+])
+headingCreditScore = Heading("Credit Score", "h3")
+currentCreditScore = TextContent("Credit Score: 780", "large")
+
+actionsSection = Card([
+    transferFunds,
+    freezeCreditLine,
+    selectStatementPeriod,
+    manageAlerts,
+    disputeTransaction
+])
+transferFunds = Form("transfer-funds", transferButtons, [fromAccountSelect, toAccountSelect, amountInput])
+fromAccountSelect = Select("from_account", [account1, account2, account3], "From account")
+account1 = SelectItem("Checking", "Checking")
+account2 = SelectItem("Savings", "Savings")
+account3 = SelectItem("Credit", "Credit")
+toAccountSelect = Select("to_account", [account1, account2, account3], "To account")
+amountInput = Input("amount", "Enter amount")
+transferButtons = Buttons([transferBtn, cancelBtn])
+transferBtn = Button("Transfer", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+freezeCreditLine = Button("Freeze Credit Line", null, "destructive")
+selectStatementPeriod = Form("statement-period", periodButtons, [periodSelect])
+periodSelect = Select("period", [periodM, periodQ, periodY], "Select statement period")
+periodM = SelectItem("Monthly", "Monthly")
+periodQ = SelectItem("Quarterly", "Quarterly")
+periodY = SelectItem("Yearly", "Yearly")
+periodButtons = Buttons([confirmBtn, cancelBtn])
+confirmBtn = Button("Confirm", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+manageAlerts = Button("Manage Alerts", null, "secondary")
+disputeTransaction = Button("Dispute Transaction", null, "tertiary")
+```

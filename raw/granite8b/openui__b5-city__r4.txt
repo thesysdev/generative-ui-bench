@@ -1,0 +1,412 @@
+```openui-lang
+root = Card(
+    [
+        Header,
+        CongestionSection,
+        TransitSection,
+        AirQualitySection,
+        EnergySection,
+        WaterSection,
+        IncidentsSection,
+        EmergencyVehiclesSection,
+        ParkingSection,
+        EventsSection,
+        CitizenReportsSection,
+        BacklogSection,
+        WeatherSection,
+        DistrictSelector,
+        DispatchCrew,
+        SendPublicAlert,
+        RoadworksSection,
+        MaintenanceJobsSection,
+    ],
+    "card",
+    "column",
+    "m",
+    "center",
+    "between",
+    wrap = true
+)
+
+Header = CardHeader("City Operations Center", "Real-time Urban Monitoring")
+
+CongestionSection = Card(
+    [
+        CongestionTitle,
+        CongestionChart,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+CongestionTitle = Heading("Current Congestion", "h3")
+CongestionChart = LineChart(
+    ["District A", "District B", "District C", "District D"],
+    [congestionSeries],
+    "natural",
+    "District",
+    "Congestion Level"
+)
+congestionSeries = Series("Congestion", [0.45, 0.32, 0.55, 0.28])
+
+TransitSection = Card(
+    [
+        TransitTitle,
+        TransitChart,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+TransitTitle = Heading("Transit Punctuality", "h3")
+TransitChart = BarChart(
+    ["Metro", "Bus", "Tram", "Rail"],
+    [transitSeries],
+    "grouped",
+    "Mode",
+    "Punctuality (%)"
+)
+transitSeries = Series("Punctuality", [92, 88, 94, 90])
+
+AirQualitySection = Card(
+    [
+        AirQualityTitle,
+        AirQualityTable,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+AirQualityTitle = Heading("Air Quality by District", "h3")
+AirQualityTable = Table(
+    [
+        districtCol,
+        pm25Col,
+        pm10Col,
+        o3Col,
+    ]
+)
+districtCol = Col("District", ["North", "South", "East", "West"], "string")
+pm25Col = Col("PM2.5 (µg/m³)", ["12", "15", "10", "14"], "number")
+pm10Col = Col("PM10 (µg/m³)", ["30", "28", "32", "29"], "number")
+o3Col = Col("O₃ (ppb)", ["45", "38", "42", "40"], "number")
+
+EnergySection = Card(
+    [
+        EnergyTitle,
+        EnergyLineChart,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+EnergyTitle = Heading("Energy Use (Past Week)", "h3")
+EnergyLineChart = LineChart(
+    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    [energySeries],
+    "natural",
+    "Day",
+    "kWh"
+)
+energySeries = Series("Energy Consumption", [120, 130, 125, 135, 140, 110, 115])
+
+WaterSection = Card(
+    [
+        WaterTitle,
+        WaterBarChart,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+WaterTitle = Heading("Water Use (Today)", "h3")
+WaterBarChart = BarChart(
+    ["Residential", "Commercial", "Industrial"],
+    [waterSeries],
+    "stacked",
+    "Category",
+    "m³"
+)
+waterSeries = Series("Water Consumption", [350, 200, 150])
+
+IncidentsSection = Card(
+    [
+        IncidentsTitle,
+        IncidentsList,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+IncidentsTitle = Heading("Open Incidents", "h3")
+IncidentsList = ListBlock(
+    [
+        incident1,
+        incident2,
+        incident3,
+    ],
+    "number"
+)
+incident1 = ListItem(
+    "Traffic Accident",
+    "Severity: High",
+    ["Map Marker"],
+    "View Details"
+)
+incident2 = ListItem(
+    "Power Outage",
+    "Severity: Medium",
+    ["Map Marker"],
+    "View Details"
+)
+incident3 = ListItem(
+    "Water Leak",
+    "Severity: Low",
+    ["Map Marker"],
+    "View Details"
+)
+
+EmergencyVehiclesSection = Card(
+    [
+        VehiclesTitle,
+        VehiclesMap,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+VehiclesTitle = Heading("Emergency Vehicle Deployments", "h3")
+VehiclesMap = Image(
+    "Emergency Vehicle Map",
+    src = "https://example.com/emergency-vehicles-map.png"
+)
+
+ParkingSection = Card(
+    [
+        ParkingTitle,
+        ParkingAvailability,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+ParkingTitle = Heading("Downtown Parking Availability", "h3")
+ParkingAvailability = Table(
+    [
+        districtCol,
+        spacesCol,
+    ]
+)
+spacesCol = Col("Available Spaces", ["420", "380", "410", "390"], "number")
+
+EventsSection = Card(
+    [
+        EventsTitle,
+        EventsTable,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+EventsTitle = Heading("Public Events (Weekend)", "h3")
+EventsTable = Table(
+    [
+        dateCol,
+        eventCol,
+        locationCol,
+    ]
+)
+dateCol = Col("Date", ["Sat 10 AM", "Sun 2 PM"], "string")
+eventCol = Col("Event", ["Festival", "Concert"], "string")
+locationCol = Col("Location", ["Central Park", "City Hall"], "string")
+
+CitizenReportsSection = Card(
+    [
+        ReportsTitle,
+        LiveReports,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+ReportsTitle = Heading("Citizen Reports (Live)", "h3")
+LiveReports = ListBlock(
+    [
+        report1,
+        report2,
+        report3,
+    ],
+    "number"
+)
+report1 = ListItem("Traffic jam near Main St.", "Submitted 2 mins ago", [], "View")
+report2 = ListItem("Broken streetlight on 5th Ave.", "Submitted 5 mins ago", [], "View")
+report3 = ListItem("Noise complaint at 10 PM last night.", "Submitted 10 mins ago", [], "View")
+
+BacklogSection = Card(
+    [
+        BacklogTitle,
+        BacklogChart,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+BacklogTitle = Heading("Service Request Backlog", "h3")
+BacklogChart = SingleStackedBarChart(
+    ["Electrical", "Plumbing", "Road", "Others"],
+    [backlogValues]
+)
+backlogValues = [120, 85, 150, 60]
+
+WeatherSection = Card(
+    [
+        WeatherTitle,
+        WeatherInfo,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+WeatherTitle = Heading("Current Weather", "h3")
+WeatherInfo = TextContent(
+    "Sunny. Temperature 22°C, Humidity 45%, Wind 12 km/h.",
+    size = "large"
+)
+
+DistrictSelector = Card(
+    [
+        SelectorTitle,
+        DistrictDropdown,
+    ],
+    "clear",
+    direction = "row",
+    gap = "s"
+)
+SelectorTitle = Heading("Focus on District", "h3")
+DistrictDropdown = Select(
+    "district",
+    [
+        SelectItem("North", "North"),
+        SelectItem("South", "South"),
+        SelectItem("East", "East"),
+        SelectItem("West", "West"),
+    ],
+    placeholder = "Select District"
+)
+
+DispatchCrew = Card(
+    [
+        DispatchTitle,
+        DispatchForm,
+    ],
+    "clear",
+    direction = "row",
+    gap = "s"
+)
+DispatchTitle = Heading("Dispatch Crew", "h3")
+DispatchForm = Form(
+    "dispatch",
+    formButtons,
+    [
+        crewLocationField,
+        crewTypeField,
+    ]
+)
+crewLocationField = FormControl(
+    "Location",
+    locationInput,
+    "Enter incident location"
+)
+locationInput = Input("location", placeholder = "e.g., Main St & 5th Ave")
+crewTypeField = FormControl(
+    "Crew Type",
+    crewSelect,
+    "Select crew"
+)
+crewSelect = Select(
+    "crew_type",
+    [
+        SelectItem("Road Crew", "Road Crew"),
+        SelectItem("Electrical", "Electrical"),
+        SelectItem("Plumbing", "Plumbing"),
+    ],
+    placeholder = "Select Crew Type"
+)
+formButtons = Buttons([dispatchBtn, cancelBtn])
+dispatchBtn = Button("Dispatch Crew", "dispatch", "primary")
+cancelBtn = Button("Cancel", "cancel", "tertiary")
+
+SendPublicAlert = Card(
+    [
+        AlertTitle,
+        AlertForm,
+    ],
+    "clear",
+    direction = "row",
+    gap = "s"
+)
+AlertTitle = Heading("Send Public Alert", "h3")
+AlertForm = Form(
+    "alert",
+    alertButtons,
+    [
+        alertMessageField,
+    ]
+)
+alertMessageField = FormControl(
+    "Message",
+    alertTextarea,
+    "Compose your alert message"
+)
+alertTextarea = TextArea(
+    "alert_message",
+    placeholder = "e.g., Road closure ahead due to construction.",
+    rows = 4
+)
+alertButtons = Buttons([sendBtn, cancelBtn])
+sendBtn = Button("Send Alert", "send", "primary")
+cancelBtn = Button("Cancel", "cancel", "tertiary")
+
+RoadworksSection = Card(
+    [
+        RoadworksTitle,
+        RoadworksList,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+RoadworksTitle = Heading("Road Works (This Month)", "h3")
+RoadworksList = ListBlock(
+    [
+        work1,
+        work2,
+        work3,
+    ],
+    "number"
+)
+work1 = ListItem("Renovate Main St.", "Duration: 2 weeks", [], "Details")
+work2 = ListItem("Repair 5th Ave.", "Duration: 1 week", [], "Details")
+work3 = ListItem("Bridge maintenance on River Blvd.", "Duration: 3 weeks", [], "Details")
+
+MaintenanceJobsSection = Card(
+    [
+        MaintenanceTitle,
+        MaintenanceTable,
+    ],
+    "sunk",
+    direction = "row",
+    gap = "s"
+)
+MaintenanceTitle = Heading("Infrastructure Jobs (Due)", "h3")
+MaintenanceTable = Table(
+    [
+        itemCol,
+        dueDateCol,
+        descriptionCol,
+    ]
+)
+itemCol = Col("Infrastructure Item", ["Water Pipes", "Electrical Grid", "Sidewalks"], "string")
+dueDateCol = Col("Due Date", ["2025-09-15", "2025-09-20", "2025-09-25"], "string")
+descriptionCol = Col("Description", ["Repair leaks", "Upgrade transformers", "Resurface"], "string")
+```

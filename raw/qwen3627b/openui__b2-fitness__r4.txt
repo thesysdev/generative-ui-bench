@@ -1,0 +1,57 @@
+root = Card([header, todayCard, weeklyCard, logCard, followUps], "card", "column", "m")
+
+header = CardHeader("Daily Summary", "Monday, June 16")
+
+todayCard = Card([stepsSection, calSection], "sunk", "column", "m")
+
+stepsSection = Card([stepsHeading, stepsRow], "clear", "column", "s")
+stepsHeading = Heading("Steps Today", "h3")
+stepsRow = Card([stepsProgress, stepsTag], "clear", "row", "s", "start", "start")
+stepsProgress = Progress(78, "8,234 / 10,500")
+stepsTag = Tag("78% complete", null, null, "info")
+
+calSection = Card([calHeading, calBody], "clear", "column", "s")
+calHeading = Heading("Calories Burned", "h3")
+calBody = Card([calValue, calBadge], "clear", "row", "s", "start", "center")
+calValue = TextContent("487 kcal", "large-heavy")
+calBadge = Badge("Active burn", "secondary")
+
+weeklyCard = Card([chartHeader, chart], "sunk", "column", "m")
+chartHeader = CardHeader("Workouts This Week", "Duration in minutes")
+chart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [durationSeries, intensitySeries], "natural", "Day", "Minutes")
+durationSeries = Series("Duration (min)", [35, 45, 0, 30, 50, 60, 0])
+intensitySeries = Series("Avg HR (bpm)", [132, 145, 0, 128, 152, 140, 0])
+
+logCard = Card([formHeader, workoutForm], "sunk", "column", "m")
+formHeader = CardHeader("Log a Workout", "Record your session")
+workoutForm = Form("log-workout", formButtons, [typeField, durationField, intensityField, notesField])
+
+typeField = FormControl("Workout Type", typeSelect, "What did you do?")
+typeSelect = Select("workout_type", [runItem, cycleItem, liftItem, yogaItem, swimItem, hiitItem], "Select type")
+runItem = SelectItem("run", "Running")
+cycleItem = SelectItem("cycle", "Cycling")
+liftItem = SelectItem("lift", "Strength Training")
+yogaItem = SelectItem("yoga", "Yoga")
+swimItem = SelectItem("swim", "Swimming")
+hiitItem = SelectItem("hiit", "HIIT")
+
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", "45", "number")
+
+intensityField = FormControl("Intensity", intensityRadio)
+intensityRadio = RadioGroup("intensity", [lowItem, modItem, highItem])
+lowItem = RadioItem("Low", "Easy, conversational pace", "low")
+modItem = RadioItem("Moderate", "Breathing heavier", "moderate")
+highItem = RadioItem("High", "Hard, can't hold a conversation", "high")
+
+notesField = FormControl("Notes", notesArea)
+notesArea = TextArea("notes", "How did it feel?", 3)
+
+formButtons = Buttons([saveBtn, clearBtn])
+saveBtn = Button("Save Workout", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+
+followUps = FollowUpBlock([viewHistoryItem, setGoalItem, shareItem])
+viewHistoryItem = FollowUpItem("View my workout history")
+setGoalItem = FollowUpItem("Update my daily step goal")
+shareItem = FollowUpItem("Share today's summary with friends")

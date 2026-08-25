@@ -1,0 +1,30 @@
+root = Card([header, metricsGrid, trendCard, topProductsCard, actionButtons])
+
+header = CardHeader("Monthly Sales Check", "Founder Dashboard • Current Period")
+
+metricsGrid = Card([revenueCard, conversionCard], "clear", "row", "m", "stretch", "between")
+
+revenueCard = Card([revenueTitle, revenueValue, revenueBadge], "sunk", "column", "xs")
+revenueTitle = Heading("Revenue This Month", "h3")
+revenueValue = TextContent("## $48,250", "large-heavy")
+revenueBadge = Tag("12% vs last month", null, "sm", "success")
+
+conversionCard = Card([conversionTitle, conversionValue, conversionBadge], "sunk", "column", "xs")
+conversionTitle = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("## 3.8%", "large-heavy")
+conversionBadge = Tag("+0.5% vs avg", null, "sm", "success")
+
+trendCard = Card([trendHeader, trendChart], "card", "column", "m")
+trendHeader = CardHeader("Revenue Trend", "Last six months performance")
+trendChart = LineChart(["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"], [revenueSeries], "natural", "Month", "Revenue ($)")
+revenueSeries = Series("Monthly Revenue", [32000, 35000, 31000, 39000, 43000, 48250])
+
+topProductsCard = Card([productsHeader, productsTable], "card", "column", "m")
+productsHeader = CardHeader("Top Performing Products", "Best-selling items by units sold")
+productsTable = Table([productCol, unitsCol, shareCol])
+productCol = Col("Product Name", ["Enterprise Suite", "Pro Subscription", "Starter Pack"])
+unitsCol = Col("Units Sold", ["1,240", "850", "410"])
+shareCol = Col("Revenue Share", ["55%", "30%", "15%"])
+
+actionButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Numbers (CSV)")

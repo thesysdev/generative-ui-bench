@@ -1,0 +1,42 @@
+```openui-lang
+root = Card([header, statsSummary, appointmentsSection, roomStatus, nextPatient, controls])
+
+header = CardHeader("Clinic Reception Dashboard", "Today's schedule overview")
+
+statsSummary = Card([expectedPatients, noShowRate], "sunk")
+expectedPatients = CardHeader("Expected Patients", "Today")
+expectedCount = TextContent(toString(expectedPatientsToday), "large-heavy")
+noShowRate = CardHeader("No-Show Rate", "This Month")
+noShowRateValue = TextContent(noShowRateMonth + "%", "large-heavy", "danger")
+
+appointmentsSection = CardHeader("Today's Appointments")
+appointmentsList = ListBlock(appointmentItems, "number")
+appointmentItems = [appointment1, appointment2, appointment3, appointment4, appointment5]
+
+appointment1 = ListItem("Dr. Smith", "10:00 AM", null, "Check In")
+appointment2 = ListItem("Dr. Johnson", "11:30 AM", null, "Check In")
+appointment3 = ListItem("Dr. Lee", "2:15 PM", null, "Check In")
+appointment4 = ListItem("Dr. Patel", "3:45 PM", null, "Check In")
+appointment5 = ListItem("Dr. Brown", "4:30 PM", null, "Check In")
+
+roomStatus = CardHeader("Available Rooms")
+rooms = TagBlock(["Room A", "Room C", "Room E"], null, null, "success")
+
+nextPatient = CardHeader("Next Patient")
+nextPatientInfo = TextContent("Dr. Johnson - 11:30 AM", "large-heavy")
+
+controls = Buttons([checkInBtn, moveDayBtn])
+checkInBtn = Button("Check In Patient", null, "primary")
+moveDayBtn = Button("Change Day", null, "secondary")
+
+// Data values (hoisted for streaming)
+expectedPatientsToday = 12
+noShowRateMonth = 5
+appointmentItems = [
+    ListItem("John Doe", "10:00 AM", null, "Check In"),
+    ListItem("Sarah Johnson", "11:30 AM", null, "Check In"),
+    ListItem("Michael Chen", "2:15 PM", null, "Check In"),
+    ListItem("Emily Davis", "3:45 PM", null, "Check In"),
+    ListItem("David Wilson", "4:30 PM", null, "Check In")
+]
+```

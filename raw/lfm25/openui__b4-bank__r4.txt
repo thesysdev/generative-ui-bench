@@ -1,0 +1,103 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Account Balances
+    CardHeader("Account Summary", "Your Financial Overview"),
+    Card([
+      BalanceCard("Checking", "Checking Account", 12450.75),
+      BalanceCard("Savings", "Savings Account", 34210.50),
+      BalanceCard("Credit", "Credit Line", 8500.25)
+    ]),
+    
+    // 2. Recent Transactions
+    CardHeader("Recent Transactions", "Latest Activity"),
+    TransactionList([
+      Transaction(item: "Grocery Store", merchant: "Whole Foods", amount: "-45.67", date: "2026-05-15"),
+      Transaction(item: "Gas Station", merchant: "Shell", amount: "+28.34", date: "2026-05-14"),
+      Transaction(item: "Electric Bill", merchant: "PowerCo", amount: "-125.80", date: "2026-05-13"),
+      Transaction(item: "Amazon", merchant: "Amazon.com", amount: "-89.99", date: "2026-05-12"),
+      Transaction(item: "Dinner", merchant: "Bistro", amount: "+42.15", date: "2026-05-11")
+    ]),
+    
+    // 3. Spending Split by Category (this month)
+    CardHeader("Spending by Category", "This Month"),
+    CategoryChart([
+      Category("Food & Dining", 3200.45),
+      Category("Transportation", 850.20),
+      Category("Shopping", 470.35),
+      Category("Utilities", 210.80),
+      Category("Entertainment", 185.40)
+    ]),
+    
+    // 4. Bills Due Soon
+    CardHeader("Bills Due Soon", "Upcoming Payments"),
+    BillsList([
+      Billing(item: "Electric Bill", dueDate: "2026-05-18", amount: 125.80),
+      Billing(item: "Internet", dueDate: "2026-05-22", amount: 65.40),
+      Billing(item: "Streaming Service", dueDate: "2026-05-25", amount: 19.95)
+    ]),
+    
+    // 5. Vacation Savings Progress
+    CardHeader("Vacation Fund", "Savings Goal"),
+    ProgressBar(value: 68, label: "68%", target: 100),
+    ProgressInfo({
+      current: 68410.00,
+      goal: 100000.00,
+      percentage: "68%"
+    }),
+    
+    // 6. Credit Score
+    CardHeader("Credit Score", "Credit Health"),
+    CreditScoreItem(value: 720, rating: "Good", color: "green"),
+    
+    // 7. Move Money Between Accounts
+    CardHeader("Transfer Funds", "Move Money"),
+    TransferPanel([
+      TransferForm(
+        fromAccount: "Checking",
+        toAccount: "Savings",
+        amount: 2500,
+        submit: "Transfer Now"
+      )
+    ]),
+    
+    // 8. Freeze Credit Line
+    CardHeader("Freeze Credit", "Security Options"),
+    ToggleComponent(button: "Freeze Credit Line", label: "Freeze Credit Line"),
+    
+    // 9. Manage Alerts
+    CardHeader("Alerts", "Notification Settings"),
+    AlertSettings({
+      emailNotifications: true,
+      pushNotifications: true,
+      smsAlerts: false,
+      customThresholds: []
+    }),
+    
+    // 10. Dispute Transaction
+    CardHeader("Dispute Transaction", "Resolution"),
+    DisputeForm([
+      disputeItem: {
+        id: "txn_001",
+        merchant: "Whole Foods",
+        amount: -45.67,
+        reason: "Unauthorized charge",
+        status: "under_review"
+      }
+    ]),
+    
+    // 11. Pick Statement Period
+    CardHeader("Statement Period", "Reporting"),
+    PeriodSelector([
+      Period("Month-to-Date", "May 2026"),
+      Period("Last 3 Months", "April-June 2026"),
+      Period("Custom Range", "Select dates")
+    ])
+  ],
+  variant: "card",
+  direction: "column",
+  gap: "xl",
+  align: "center",
+  wrap: true
+)
+```

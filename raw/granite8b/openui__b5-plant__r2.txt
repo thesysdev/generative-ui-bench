@@ -1,0 +1,180 @@
+```openui-lang
+root = Card([
+    header,
+    oeeSection,
+    productionSection,
+    lineDetails,
+    defectRateChart,
+    downtimeChart,
+    maintenanceDue,
+    inventorySection,
+    supplierDeliveries,
+    shiftComparison,
+    safetySection,
+    qualityHold,
+    energySection,
+    workOrders,
+    scheduleMaintenance,
+    focusLine,
+    andonAlerts,
+    exportShiftReport
+], "card", "row", "l")
+
+header = CardHeader("Factory Floor Supervisor Console", "Live production dashboard")
+
+oeeSection = Card([
+    oeeHeading,
+    oeeValue
+], "sunk")
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = TextContent("92.5%", "large")
+
+productionSection = Card([
+    unitsProducedHeading,
+    unitsProducedValue,
+    todayTargetValue
+], "sunk")
+unitsProducedHeading = Heading("Units Produced Today", "h3")
+unitsProducedValue = TextContent("3,412 units", "large")
+todayTargetValue = TextContent("vs Target: 3,500 units", "default")
+
+lineDetails = Card([
+    lineTable
+], "sunk")
+lineTable = Table([
+    lineLabel,
+    lineRate,
+    lineStatus
+])
+lineLabel = Col("Production Line", ["Line A", "Line B", "Line C", "Line D"])
+lineRate = Col("Rate (units/h)", [145, 138, 152, 140])
+lineStatus = Col("Status", ["Operational", "Warning", "Operational", "Operational"])
+
+defectRateChart = RadarChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"], [seriesDefectRate])
+seriesDefectRate = Series("Defect Rate", [2.1, 1.9, 2.3, 2.0, 1.8])
+
+downtimeChart = BarChart(["Mechanical", "Electrical", "Operator", "Scheduled", "Other"], [seriesDowntime], "grouped")
+seriesDowntime = Series("Hours", [12, 8, 4, 6, 2])
+
+maintenanceDue = ListBlock(items=[dueItem1, dueItem2, dueItem3], variant="image")
+dueItem1 = ListItem("Machine 101", "Next Friday", ["image001"])
+dueItem2 = ListItem("Machine 203", "Next Monday", ["image002"])
+dueItem3 = ListItem("Machine 407", "Tomorrow", ["image003"])
+
+inventorySection = Card([
+    inventoryTable
+], "sunk")
+inventoryTable = Table([
+    invLabel,
+    invSteel,
+    invResin,
+    invPackaging
+])
+invLabel = Col("Inventory", ["Item", "Stock"])
+invSteel = Col("Steel (tons)", ["150", "units"])
+invResin = Col("Resin (kg)", ["2,300", "units"])
+invPackaging = Col("Packaging (boxes)", ["8,500", "units"])
+
+supplierDeliveries = Table([
+    supLabel,
+    supDate,
+    supName,
+    supQty
+])
+supLabel = Col("Supplier Deliveries This Week", ["Supplier", "Date", "Items", "Qty"])
+supDate = Col("Delivery Date", ["Today", "Tomorrow", "Next Wed"])
+supName = Col("Supplier", ["Acme Steel", "PolyCo", "PackMaster"])
+supQty = Col("Quantity", ["500", "1,200", "300"])
+
+shiftComparison = Card([
+    shiftGraph
+], "sunk")
+shiftGraph = LineChart(["Morning", "Afternoon", "Evening"], [seriesShiftA, seriesShiftB, seriesShiftC], "natural", "Units Produced", "Shift")
+seriesShiftA = Series("Shift A", [1_200, 1_300, 1_150])
+seriesShiftB = Series("Shift B", [1_150, 1_250, 1_200])
+seriesShiftC = Series("Shift C", [1_100, 1_180, 1_220])
+
+safetySection = Card([
+    safetyIncidents,
+    daysSinceLast
+], "sunk")
+safetyIncidents = TextContent("Safety Incidents This Year: 4", "large")
+daysSinceLast = TextContent("Days Since Last Incident: 32", "large")
+
+qualityHold = Card([
+    holdTable
+], "sunk")
+holdTable = Table([
+    holdLabel,
+    holdBatch,
+    holdReason
+])
+holdLabel = Col("Batches on Quality Hold", ["Batch ID", "Reason"])
+holdBatch = Col("Batch", ["B-20230815", "B-20230820"])
+holdReason = Col("Reason", ["Defective resin", "Packaging issue"])
+
+energySection = Card([
+    energyUsage
+], "sunk")
+energyUsage = TextContent("Energy Use Today: 18,450 kWh", "large")
+
+workOrders = Table([
+    woLabel,
+    woPriority,
+    woStatus
+])
+woLabel = Col("Open Work Orders", ["Order ID", "Priority", "Status"])
+woPriority = Col("Priority", ["High", "Medium", "Low"])
+woStatus = Col("Status", ["Pending", "In Progress", "Completed"])
+
+scheduleMaintenance = Form("schedule-maintenance", maintenanceButtons, [
+    maintenanceForm
+])
+maintenanceForm = FormControl("Machine", machineSelect, "Select a machine")
+machineSelect = Select("machine", [machineA, machineB, machineC], "Choose machine")
+machineA = SelectItem("Machine 101", "Machine 101")
+machineB = SelectItem("Machine 203", "Machine 203")
+machineC = SelectItem("Machine 407", "Machine 407")
+maintenanceForm2 = FormControl("Date", dateInput, "Select maintenance date")
+dateInput = DatePicker("maintenance_date", "single")
+maintenanceButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+
+focusLine = Tabs(items=[lineTabA, lineTabB, lineTabC])
+lineTabA = TabItem("Line A", "Line A", [lineAContent])
+lineTabB = TabItem("Line B", "Line B", [lineBContent])
+lineTabC = TabItem("Line C", "Line C", [lineCContent])
+lineAContent = CardHeader("Line A Details", "Detailed view for Line A")
+lineBContent = CardHeader("Line B Details", "Detailed view for Line B")
+lineCContent = CardHeader("Line C Details", "Detailed view for Line C")
+
+andonAlerts = Card([
+    andonList
+], "sunk")
+andonList = ListBlock(items=[andonItem1, andonItem2], variant="number")
+andonItem1 = ListItem("Line B - Minor fault", null, null, "Alert: Minor fault detected")
+andonItem2 = ListItem("Line D - Power surge", null, null, "Alert: Power surge on Line D")
+
+exportShiftReport = Button("Export Shift Report", null, "secondary", "normal")
+
+root = Card([
+    header,
+    oeeSection,
+    productionSection,
+    lineDetails,
+    defectRateChart,
+    downtimeChart,
+    maintenanceDue,
+    inventorySection,
+    supplierDeliveries,
+    shiftComparison,
+    safetySection,
+    qualityHold,
+    energySection,
+    workOrders,
+    scheduleMaintenance,
+    focusLine,
+    andonAlerts,
+    exportShiftReport
+], "card", "row", "l")
+```

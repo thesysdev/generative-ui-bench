@@ -1,0 +1,66 @@
+```openui
+root = Card([loadStatus, capacityStatus, generationSplit, plantDetails, outages, forecast, price, maintenance, alerts, regionFocus, curtailmentOrder, emissions])
+
+loadStatus = Card([loadHeading, loadValue])
+loadHeading = Heading("Current Load", "h3")
+loadValue = TextContent("1,234 MW", "large")
+
+capacityStatus = Card([capacityHeading, capacityBar])
+capacityHeading = Heading("Capacity Utilization", "h3")
+capacityBar = Progress(75)  # Assuming 75% of capacity is used
+
+generationSplit = Card([splitHeading, generationTable])
+splitHeading = Heading("Generation Split", "h3")
+generationTable = Table([sourceCol, percentageCol])
+sourceCol = Col("Source", ["Coal", "Natural Gas", "Nuclear", "Renewables"])
+percentageCol = Col("Percentage", [30, 25, 20, 25])
+
+plantDetails = Card([detailsHeading, plantTable])
+detailsHeading = Heading("Plant Details", "h3")
+plantTable = Table([plantNameCol, outputCol, statusCol])
+plantNameCol = Col("Plant Name", ["Plant A", "Plant B", "Plant C"])
+outputCol = Col("Output (MW)", [500, 600, 550])
+statusCol = Col("Status", ["Operational", "Operational", "Maintenance"])
+
+outages = Card([outagesHeading, outagesList])
+outagesHeading = Heading("Outages", "h3")
+outagesList = ListBlock([outage1, outage2])
+outage1 = ListItem("Region X", "Power outage due to storm")
+outage2 = ListItem("Region Y", "Scheduled maintenance")
+
+forecast = Card([forecastHeading, forecastChart])
+forecastHeading = Heading("Demand Forecast", "h3")
+forecastChart = LineChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [forecastSeries])
+forecastSeries = Series("Demand", [1000, 1200, 1100, 1300, 1250])
+
+price = Card([priceHeading, priceValue])
+priceHeading = Heading("Current Price", "h3")
+priceValue = TextContent("$50/MWh", "large")
+
+maintenance = Card([maintenanceHeading, maintenanceList])
+maintenanceHeading = Heading("Planned Maintenance", "h3")
+maintenanceList = ListBlock([maintenance1, maintenance2])
+maintenance1 = ListItem("Plant A", "April 10-12")
+maintenance2 = ListItem("Plant B", "April 15")
+
+alerts = Card([alertsHeading, alertsList])
+alertsHeading = Heading("Live Alerts", "h3")
+alertsList = ListBlock([alert1, alert2])
+alert1 = ListItem("Alert 1", "High wind speed at Plant C")
+alert2 = ListItem("Alert 2", "Unexpected drop in output at Plant B")
+
+regionFocus = Card([regionHeading, regionSelect])
+regionHeading = Heading("Focus on Region", "h3")
+regionSelect = Select("region_focus", [region1, region2, region3], "Choose a region")
+region1 = SelectItem("Region X", "Region X")
+region2 = SelectItem("Region Y", "Region Y")
+region3 = SelectItem("Region Z", "Region Z")
+
+curtailmentOrder = Card([curtailmentHeading, curtailmentButton])
+curtailmentHeading = Heading("Order Curtailment", "h3")
+curtailmentButton = Button("Order Curtailment", null, "destructive")
+
+emissions = Card([emissionsHeading, emissionsValue])
+emissionsHeading = Heading("Today's Emissions", "h3")
+emissionsValue = TextContent("1,200 tonnes CO2", "large")
+```

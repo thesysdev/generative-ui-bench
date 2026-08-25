@@ -1,0 +1,44 @@
+root = Card([header, locationCard, etaCallout, progressBar, deliverySteps, trackingEvents, reportDialog], "card", "column", "m")
+
+header = CardHeader("Track Your Package", "TRK-2024-78392")
+
+locationCard = Card([locationHeading, locationText, locationTag], "sunk")
+locationHeading = Heading("Current Location", "h3")
+locationText = TextContent("Your package is at the **Chicago, IL Distribution Center** and is being sorted for outbound delivery.", "default")
+locationTag = Tag("In Transit", null, "md", "info")
+
+etaCallout = TextCallout("success", "Estimated Delivery", "Tomorrow, January 15, 2025 by 8:00 PM")
+
+progressBar = Progress(75, "75% delivered")
+
+deliverySteps = Steps([step1, step2, step3, step4])
+step1 = StepsItem("Order Confirmed", "Jan 12 — Package picked up from seller in Los Angeles, CA")
+step2 = StepsItem("In Transit", "Jan 13 — Arrived at Phoenix, AZ sorting facility")
+step3 = StepsItem("In Transit", "Jan 14 — Arrived at Chicago, IL distribution center (current)")
+step4 = StepsItem("Out for Delivery", "Estimated Jan 15 — Package will be on the delivery truck")
+
+trackingEvents = Card([eventsHeading, eventList], "sunk")
+eventsHeading = Heading("Recent Activity", "h3")
+eventList = ListBlock([event1, event2, event3, event4])
+event1 = ListItem("Package sorted at Chicago, IL", "Jan 14, 6:42 AM", null, null)
+event2 = ListItem("Departed Memphis, TN hub", "Jan 13, 11:15 PM", null, null)
+event3 = ListItem("Arrived at Phoenix, AZ facility", "Jan 13, 3:28 PM", null, null)
+event4 = ListItem("Picked up by carrier", "Jan 12, 2:00 PM", null, null)
+
+reportDialog = DialogBlock("Report a Problem", "Report a Delivery Issue", "Tell us what's going on with your delivery.", [reportForm])
+
+reportForm = Form("delivery-issue", reportButtons, [issueTypeField, issueDescField, issueUploadField])
+issueTypeField = FormControl("What's the issue?", issueTypeSelect)
+issueTypeSelect = Select("issue_type", [typeDelay, typeDamage, typeLost, typeWrong, typeOther], "Select an issue type")
+typeDelay = SelectItem("delay", "Delivery is delayed")
+typeDamage = SelectItem("damage", "Package is damaged")
+typeLost = SelectItem("lost", "Package appears lost")
+typeWrong = SelectItem("wrong_address", "Delivered to wrong address")
+typeOther = SelectItem("other", "Other issue")
+issueDescField = FormControl("Describe the problem", issueDescArea, "Be as specific as possible")
+issueDescArea = TextArea("description", "Please describe what happened...", 4)
+issueUploadField = FormControl("Attach a photo (optional)", uploadInput)
+uploadInput = Input("photo", "Upload image", null)
+reportButtons = Buttons([submitReport, cancelReport])
+submitReport = Button("Submit Report", null, "primary")
+cancelReport = Button("Cancel", null, "tertiary")

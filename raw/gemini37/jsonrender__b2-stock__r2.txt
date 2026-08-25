@@ -1,0 +1,25 @@
+{"op":"add","path":"/root","value":"mainCard"}
+{"op":"add","path":"/elements/mainCard","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"m"},"children":["header","warningBanner","searchFilterSection","inventoryList"]}}
+{"op":"add","path":"/elements/header","value":{"type":"CardHeader","props":{"title":"Low Inventory Monitor","subtitle":"Real-time tracking of SKUs at or below safety stock levels"}}}
+{"op":"add","path":"/elements/warningBanner","value":{"type":"Alert","props":{"title":"Restock Required","description":"Global replenishment threshold set to 15 units. Items below this limit require immediate purchase order generation.","variant":"warning"}}}
+{"op":"add","path":"/elements/searchFilterSection","value":{"type":"Card","props":{"variant":"sunk","direction":"row","gap":"m","align":"center","justify":"between"},"children":["searchInputWrapper","globalThresholdBadge"]}}
+{"op":"add","path":"/elements/searchInputWrapper","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"children":["searchInput"]}}
+{"op":"add","path":"/elements/searchInput","value":{"type":"Input","props":{"name":"search","placeholder":"Search low stock SKUs or item names...","value":{"$bindState":"/searchQuery"}}}}
+{"op":"add","path":"/state/searchQuery","value":""}
+{"op":"add","path":"/elements/globalThresholdBadge","value":{"type":"Tag","props":{"text":"Warning Threshold: ≤ 15 units","variant":"danger","size":"md"}}}
+{"op":"add","path":"/elements/inventoryList","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"repeat":{"statePath":"/inventoryItems","key":"id"},"children":["itemRow"]}}
+{"op":"add","path":"/elements/itemRow","value":{"type":"Card","props":{"variant":"sunk","direction":"row","gap":"m","align":"center","justify":"between"},"children":["itemInfo","stockDetails","actionSection"]}}
+{"op":"add","path":"/elements/itemInfo","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"none"},"children":["itemName","itemSkuCategory"]}}
+{"op":"add","path":"/elements/itemName","value":{"type":"TextContent","props":{"text":{"$template":"**${name}**"},"size":"default"}}}
+{"op":"add","path":"/elements/itemSkuCategory","value":{"type":"TextContent","props":{"text":{"$template":"SKU: `${sku}` • Category: ${category}"},"size":"small"}}}
+{"op":"add","path":"/elements/stockDetails","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs","align":"center"},"children":["stockRemainingBadge","thresholdText"]}}
+{"op":"add","path":"/elements/stockRemainingBadge","value":{"type":"Badge","props":{"text":{"$template":"${remainingUnits} left in stock"},"variant":"destructive"}}}
+{"op":"add","path":"/elements/thresholdText","value":{"type":"TextContent","props":{"text":{"$template":"Trigger Threshold: ${reorderThreshold} units"},"size":"small"}}}
+{"op":"add","path":"/elements/actionSection","value":{"type":"Buttons","props":{"buttons":["reorderBtn"]}}}
+{"op":"add","path":"/elements/reorderBtn","value":{"type":"Button","props":{"label":"Create Restock Order","variant":"primary","size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/lastReorderedItem","value":{"$item":"name"}}}}}}
+{"op":"add","path":"/state/inventoryItems","value":[]}
+{"op":"add","path":"/state/inventoryItems/0","value":{"id":"sku-101","name":"Organic Fair-Trade Espresso Beans (1kg)","sku":"COF-ET-101","category":"Beverages","remainingUnits":3,"reorderThreshold":15}}
+{"op":"add","path":"/state/inventoryItems/1","value":{"id":"sku-102","name":"Oat Milk Barista Edition (1L)","sku":"MLK-OAT-204","category":"Dairy Alternatives","remainingUnits":5,"reorderThreshold":15}}
+{"op":"add","path":"/state/inventoryItems/2","value":{"id":"sku-103","name":"Biodegradable Takeaway Cups (12oz)","sku":"PKG-CUP-012","category":"Packaging","remainingUnits":8,"reorderThreshold":20}}
+{"op":"add","path":"/state/inventoryItems/3","value":{"id":"sku-104","name":"Single Origin Matcha Powder (250g)","sku":"TEA-MTC-505","category":"Tea & Specialty","remainingUnits":2,"reorderThreshold":10}}
+{"op":"add","path":"/state/inventoryItems/4","value":{"id":"sku-105","name":"Vanilla Cane Syrup (750ml)","sku":"SYR-VAN-008","category":"Syrups & Flavoring","remainingUnits":4,"reorderThreshold":12}}

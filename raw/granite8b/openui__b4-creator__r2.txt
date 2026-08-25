@@ -1,0 +1,221 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        followerSection,
+        engagementSection,
+        bestPostsSection,
+        audienceSplitSection,
+        postsScheduledSection,
+        bestHourSection,
+        commentsWaitingSection,
+        earningsSection,
+        collaborationRequestsSection,
+        schedulePostSection,
+        platformFilterSection,
+        actions,
+    ],
+    "card",
+    "column",
+    "stretch",
+    "center",
+    wrap = true
+)
+
+header = CardHeader("Creator Studio Dashboard", "Overview")
+
+followerSection = Card(
+    [
+        followerCount,
+        followerGrowth,
+    ],
+    "sunk"
+)
+
+followerCount = TextContent(
+    "Followers: 124,500",
+    "large"
+)
+
+followerGrowth = TextContent(
+    "Growth (last 30 days): +3,200",
+    "large"
+)
+
+engagementSection = Card(
+    [
+        engagementRate,
+    ],
+    "sunk"
+)
+
+engagementRate = TextContent(
+    "Engagement Rate: 7.4%",
+    "large"
+)
+
+bestPostsSection = Card(
+    [
+        bestPostsTable,
+    ],
+    "sunk"
+)
+
+bestPostsTable = Table([
+    Col("Post", ["Sunshine Pic", "Cooking Demo", "Travel Vlog"]),
+    Col("Reach", ["85,000", "72,300", "61,400"]),
+    Col("Likes", ["12,400", "9,800", "8,200"]),
+])
+
+audienceSplitSection = Card(
+    [
+        audienceSplitChart,
+    ],
+    "sunk"
+)
+
+audienceSplitChart = PieChart(
+    labels = ["Instagram", "TikTok", "YouTube", "Twitter"],
+    values = [60, 25, 10, 5],
+    variant = "donut"
+)
+
+postsScheduledSection = Card(
+    [
+        postsScheduledList,
+    ],
+    "sunk"
+)
+
+postsScheduledList = ListBlock(
+    items = [
+        ListItem("Sunrise Photo", actionLabel = "View"),
+        ListItem("Recipe Video", actionLabel = "View"),
+        ListItem("Weekend Trip", actionLabel = "View"),
+    ],
+    variant = "image"
+)
+
+bestHourSection = Card(
+    [
+        bestHourInfo,
+    ],
+    "sunk"
+)
+
+bestHourInfo = TextContent(
+    "Best hour to post: 7 PM (based on historical engagement)",
+    "large"
+)
+
+commentsWaitingSection = Card(
+    [
+        commentsWaitingList,
+    ],
+    "sunk"
+)
+
+commentsWaitingList = ListBlock(
+    items = [
+        ListItem("UserA: Loved the colors! 👍", actionLabel = "Reply"),
+        ListItem("UserB: Can you do a tutorial next week? 📅", actionLabel = "Reply"),
+        ListItem("UserC: Great editing! 🎞️", actionLabel = "Reply"),
+    ],
+    variant = "image"
+)
+
+earningsSection = Card(
+    [
+        earningsInfo,
+    ],
+    "sunk"
+)
+
+earningsInfo = TextContent(
+    "Earnings this month: $4,200",
+    "large"
+)
+
+collaborationRequestsSection = Card(
+    [
+        collaborationRequestsList,
+    ],
+    "sunk"
+)
+
+collaborationRequestsList = ListBlock(
+    items = [
+        ListItem("BrandX: Sponsored post request", actionLabel = "Accept"),
+        ListItem("CreatorY: Collaboration proposal", actionLabel = "Reply"),
+        ListItem("MediaZ: Interview invitation", actionLabel = "Decline"),
+    ],
+    variant = "image"
+)
+
+schedulePostSection = Card(
+    [
+        schedulePostForm,
+    ],
+    "sunk"
+)
+
+schedulePostForm = Form(
+    "schedule_post",
+    buttons = schedulePostButtons,
+    fields = [
+        captionField,
+        timeField,
+    ]
+)
+
+captionField = FormControl(
+    "Caption",
+    input = TextArea("name", placeholder = "Write your post caption here", rows = 3),
+    hint = "Brief description or call‑to‑action"
+)
+
+timeField = FormControl(
+    "Post time",
+    input = DatePicker("name", mode = "single", rules = [2025, 8, 22]),
+    hint = "Select the date and time for the scheduled post"
+)
+
+schedulePostButtons = Buttons(
+    [
+        submitBtn,
+        cancelBtn,
+    ],
+    direction = "row"
+)
+
+submitBtn = Button("Schedule Post", action = ["schedule", "post"], variant = "primary")
+cancelBtn = Button("Cancel", action = ["cancel"], variant = "tertiary")
+
+platformFilterSection = Card(
+    [
+        platformFilterToggle,
+    ],
+    "sunk"
+)
+
+platformFilterToggle = SwitchGroup(
+    name = "platform_filter",
+    items = [
+        SwitchItem(label = "All Platforms", name = "all", defaultChecked = true),
+        SwitchItem(label = "Instagram Only", name = "instagram", defaultChecked = false),
+        SwitchItem(label = "TikTok Only", name = "tiktok", defaultChecked = false),
+    ],
+    variant = "outline"
+)
+
+actions = Buttons(
+    [
+        refreshBtn,
+        exportBtn,
+    ],
+    direction = "row"
+)
+
+refreshBtn = Button("Refresh Data", action = ["refresh"], variant = "secondary")
+exportBtn = Button("Export Dashboard", action = ["export"], variant = "tertiary")
+```

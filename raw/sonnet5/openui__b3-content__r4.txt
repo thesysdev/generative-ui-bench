@@ -1,0 +1,56 @@
+root = Card([header, statsRow, filterSection, readershipSection, mostReadSection, draftsSection, scheduleSection, commentsSection, newDraftBtn])
+
+header = CardHeader("Content Studio", "Editorial overview and workflow")
+
+statsRow = Card([publishedThisWeek, avgReadTime], "sunk", "row", "l")
+publishedThisWeek = Callout("success", "Published this week", "6 pieces went live since Monday")
+avgReadTime = Callout("info", "Engagement", "Avg. read time is up 12% vs last week")
+
+filterSection = Card([filterHeading, categoryFilter], "sunk")
+filterHeading = Heading("Narrow by category", "h4")
+categoryFilter = FormControl("Category", categorySelect)
+categorySelect = Select("category", [catAll, catTech, catCulture, catBusiness, catOpinion], "All categories")
+catAll = SelectItem("all", "All categories")
+catTech = SelectItem("tech", "Technology")
+catCulture = SelectItem("culture", "Culture")
+catBusiness = SelectItem("business", "Business")
+catOpinion = SelectItem("opinion", "Opinion")
+
+readershipSection = Card([readershipHeading, readershipChart], "sunk")
+readershipHeading = Heading("Readership — last 30 days", "h4")
+readershipChart = LineChart(readershipLabels, [readershipSeries], "natural", "Day", "Readers")
+readershipLabels = ["D1","D3","D5","D7","D9","D11","D13","D15","D17","D19","D21","D23","D25","D27","D29"]
+readershipSeries = Series("Readers", [3200, 3450, 3100, 3800, 4200, 4050, 4600, 4300, 4800, 5100, 4950, 5400, 5600, 5300, 5900])
+
+mostReadSection = Card([mostReadHeading, mostReadArticle], "sunk")
+mostReadHeading = Heading("Most-read article this month", "h4")
+mostReadArticle = ListBlock([mostReadItem], "image")
+mostReadItem = ListItem("The Future of Remote Newsrooms", "42,300 reads · Technology", ["https://picsum.photos/seed/newsroom/400/300"], "View")
+
+draftsSection = Card([draftsHeading, draftsTable], "sunk")
+draftsHeading = Heading("Drafts", "h4")
+draftsTable = Table([draftTitleCol, draftAuthorCol, draftStatusCol])
+draftTitleCol = Col("Title", ["AI in the Newsroom", "City Budget Deep Dive", "Interview: Local Chef Rising Star", "Streaming Wars 2.0", "Opinion: Four-Day Work Week"])
+draftAuthorCol = Col("Author", ["J. Alvarez", "M. Chen", "R. Osei", "T. Novak", "S. Blake"])
+draftStatusCol = Col("Status", ["In review", "Needs edit", "Ready to publish", "Draft", "Needs edit"])
+
+scheduleSection = Card([scheduleHeading, scheduleForm], "sunk")
+scheduleHeading = Heading("Schedule a piece", "h4")
+scheduleForm = Form("schedule-piece", scheduleButtons, [scheduleTitleField, schedulePublishDateField])
+scheduleTitleField = FormControl("Title", scheduleTitleInput)
+scheduleTitleInput = Input("title", "Enter piece title")
+schedulePublishDateField = FormControl("Publish date", schedulePublishDate)
+schedulePublishDate = DatePicker("publish_date", "single")
+scheduleButtons = Buttons([scheduleSubmitBtn, scheduleCancelBtn])
+scheduleSubmitBtn = Button("Schedule", null, "primary")
+scheduleCancelBtn = Button("Cancel", null, "tertiary")
+
+commentsSection = Card([commentsHeading, commentsList], "sunk")
+commentsHeading = Heading("Comments awaiting reply", "h4")
+commentsList = ListBlock([comment1, comment2, comment3])
+comment1 = ListItem("Great breakdown on the AI piece!", "Left by reader_23 on \"AI in the Newsroom\"", null, "Reply")
+comment2 = ListItem("Can you clarify the budget numbers?", "Left by localvoter on \"City Budget Deep Dive\"", null, "Reply")
+comment3 = ListItem("Loved the chef interview, more like this please", "Left by foodie_88 on \"Interview: Local Chef Rising Star\"", null, "Reply")
+
+newDraftBtn = Buttons([startDraftButton])
+startDraftButton = Button("Start new draft", null, "primary", "normal", "large")

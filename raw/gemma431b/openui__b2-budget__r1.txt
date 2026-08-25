@@ -1,0 +1,36 @@
+root = Card([header, budgetOverview, categoryBreakdown, topExpense, navigation, addExpenseAction], "card", "column", "l")
+
+header = CardHeader("Monthly Budget Check", "October 2023")
+
+budgetOverview = Card([progressText, budgetProgress], "sunk", "column", "s")
+progressText = TextContent("Total Spent: **$2,450** / $3,000", "large-heavy")
+budgetProgress = Progress(82, "82% of budget used")
+
+categoryBreakdown = Card([catHeading, catChart], "clear", "column", "m")
+catHeading = Heading("Spending by Category", "h3")
+catChart = PieChart(["Housing", "Food", "Transport", "Entertainment", "Utilities"], [1200, 500, 300, 250, 200], "donut")
+
+topExpense = Callout("warning", "Largest Expense", "Your payment to 'City Apartments' for $1,200 was your highest spend this month.")
+
+navigation = Card([navText, monthPicker], "clear", "row", "m", "center", "between")
+navText = TextContent("Change period:", "small")
+monthPicker = Buttons([prevMonth, nextMonth])
+prevMonth = Button("September", null, "secondary", "normal", "small")
+nextMonth = Button("November", null, "secondary", "normal", "small")
+
+addExpenseAction = DialogBlock("Add Expense", "Log a new transaction", "Enter the details of your spending below.", [expenseForm], "primary")
+
+expenseForm = Form("add-expense", formButtons, [amountField, categoryField, dateField])
+amountField = FormControl("Amount", amountInput)
+amountInput = Input("amount", "0.00", "number")
+categoryField = FormControl("Category", categorySelect)
+categorySelect = Select("category", [catHousing, catFood, catTrans, catEnt], "Select category")
+catHousing = SelectItem("housing", "Housing")
+catFood = SelectItem("food", "Food")
+catTrans = SelectItem("transport", "Transport")
+catEnt = SelectItem("entertainment", "Entertainment")
+dateField = FormControl("Date", datePicker)
+datePicker = DatePicker("date", "single")
+formButtons = Buttons([saveBtn, cancelBtn])
+saveBtn = Button("Save Expense", null, "primary")
+cancelBtn = Button("Cancel", null, "ghost")

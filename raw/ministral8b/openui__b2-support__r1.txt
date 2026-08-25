@@ -1,0 +1,32 @@
+```openui-lang
+root = Card([header, stats, ticketsList, filters, newTicketButton], "card", "column", "m", "start", "center")
+
+header = CardHeader("Support Dashboard", "Morning view")
+
+stats = Card([openTickets, avgResponseTime], "sunk")
+openTickets = Card([openTicketsCount, openTicketsLabel], "sunk", "row", "m", "center", "center")
+openTicketsCount = TextContent("12", "large-heavy")
+openTicketsLabel = TextContent("Open Tickets", "small", "neutral")
+
+avgResponseTime = Card([avgResponseTimeValue, avgResponseTimeLabel], "sunk", "row", "m", "center", "center")
+avgResponseTimeValue = TextContent("3h 45m", "large-heavy")
+avgResponseTimeLabel = TextContent("Avg. First Response", "small", "neutral")
+
+ticketsList = Card([recentTicketsHeader, recentTicketsTable], "sunk")
+recentTicketsHeader = CardHeader("Recent Tickets")
+
+recentTicketsTable = Table([ticketColumns])
+ticketColumns = [
+    Col("Priority", ["High", "Medium", "Low", "High", "Medium"], "string"),
+    Col("Subject", ["Payment failed", "Account access", "Feature request", "Billing issue", "Password reset"], "string"),
+    Col("Status", ["Open", "Open", "Open", "Open", "Open"], "string"),
+    Col("Created", ["2h ago", "4h ago", "1d ago", "6h ago", "12h ago"], "string")
+]
+
+filters = Card([highPriorityFilter], "sunk", "row", "m", "end")
+highPriorityFilter = Button("Show High Priority Only", null, "secondary")
+
+newTicketButton = Card([newTicketButtonCard], "sunk", "column", "m", "center", "center")
+newTicketButtonCard = Card([newTicketButtonLabel], "sunk", "row", "m", "center", "center")
+newTicketButtonLabel = TextContent("Open New Ticket", "large-heavy")
+```

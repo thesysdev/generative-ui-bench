@@ -1,0 +1,59 @@
+root = Card([header, missingCallout, blockedAlert, updatesSection, yourUpdateForm, followUps], "card", "column", "m")
+
+header = CardHeader("Async Standup", "Friday, June 20, 2025")
+
+missingCallout = TextCallout("warning", "2 updates missing", "Leo Martinez and Kai Tanaka haven't posted yet. Send them a reminder?")
+
+blockedAlert = Alert("2 teammates blocked", "Marcus Johnson and Emma Wilson flagged blockers. Check in with them today.", "warning")
+
+updatesSection = SectionBlock([sarahItem, marcusItem, aishaItem, emmaItem], false)
+
+sarahItem = SectionItem("sarah", "Sarah Chen", [sarahStatus, sarahYesterday, sarahToday])
+sarahStatus = Tag("On track", null, "sm", "success")
+sarahYesterday = TextContent("**Yesterday:** Completed API integration tests, pushed 3 bug fixes to staging, and updated the deployment runbook.")
+sarahToday = TextContent("**Today:** Code review on the auth module PR, then sprint planning prep with the backend team.")
+
+marcusItem = SectionItem("marcus", "Marcus Johnson", [marcusStatus, marcusYesterday, marcusToday, marcusBlocker])
+marcusStatus = Tag("Blocked", null, "sm", "danger")
+marcusYesterday = TextContent("**Yesterday:** Set up the new CI/CD pipeline and configured staging environment.")
+marcusToday = TextContent("**Today:** Cannot proceed with deployment until I get database credentials.")
+marcusBlocker = Callout("error", "Blocker", "Waiting on DevOps for DB access credentials. Escalated to Priya in #devops-help.")
+
+aishaItem = SectionItem("aisha", "Aisha Patel", [aishaStatus, aishaYesterday, aishaToday])
+aishaStatus = Tag("On track", null, "sm", "success")
+aishaYesterday = TextContent("**Yesterday:** Delivered wireframes for the dashboard redesign and ran stakeholder review.")
+aishaToday = TextContent("**Today:** User testing sessions (2 booked) and iterating on navigation patterns based on feedback.")
+
+emmaItem = SectionItem("emma", "Emma Wilson", [emmaStatus, emmaYesterday, emmaToday, emmaBlocker])
+emmaStatus = Tag("Blocked", null, "sm", "danger")
+emmaYesterday = TextContent("**Yesterday:** Started implementing the push notification service and integrated the SDK.")
+emmaToday = TextContent("**Today:** Blocked on missing API documentation for the third-party provider.")
+emmaBlocker = Callout("error", "Blocker", "Push notification vendor hasn't published v2 API docs. Vendor support ticket #4892 is open.")
+
+yourUpdateForm = Form("standup-update", formButtons, [updateField, statusField, blockersField])
+
+updateField = FormControl("Your update", updateArea, "Cover yesterday's work and today's plan.")
+updateArea = TextArea("update", "Yesterday I completed…\nToday I'll focus on…", 5)
+
+statusField = FormControl("Progress status", statusSelect)
+statusSelect = Select("status", [onTrackOpt, blockedOpt, offTrackOpt], "How's your progress?")
+onTrackOpt = SelectItem("on-track", "On track")
+blockedOpt = SelectItem("blocked", "Blocked")
+offTrackOpt = SelectItem("off-track", "Off track")
+
+blockersField = FormControl("Any blockers?", blockerGroup, "Select all that apply.")
+blockerGroup = CheckBoxGroup("blockers", [noBlockerItem, waitingItem, helpItem], null, ["none"])
+noBlockerItem = CheckBoxItem("None", "I'm unblocked and moving forward", "none", true)
+waitingItem = CheckBoxItem("Waiting on someone", "Blocked by another team member or external dependency", "waiting")
+helpItem = CheckBoxItem("Need help", "I'd like someone to pair with me or review my work", "help")
+
+formButtons = Buttons([postBtn, clearBtn])
+postBtn = Button("Post update", null, "primary")
+clearBtn = Button("Clear", null, "tertiary")
+
+followUps = FollowUpBlock([remindLeo, remindKai, unblockMarcus, unblockEmma, viewBoard])
+remindLeo = FollowUpItem("Remind Leo Martinez to post their update")
+remindKai = FollowUpItem("Remind Kai Tanaka to post their update")
+unblockMarcus = FollowUpItem("Jump in #devops-help to help Marcus with DB credentials")
+unblockEmma = FollowUpItem("Check vendor ticket #4892 status for Emma")
+viewBoard = FollowUpItem("View the full sprint board")

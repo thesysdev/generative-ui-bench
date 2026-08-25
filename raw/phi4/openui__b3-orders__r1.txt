@@ -1,0 +1,48 @@
+```openui-lang
+root = Card([header, ordersSection, revenueSection, recentOrdersSection, filtersSection, chartsSection, actionsSection])
+
+header = CardHeader("E-commerce Operations Desk")
+
+ordersSection = Card([ordersHeading, ordersCount])
+ordersHeading = Heading("Orders Placed Today")
+ordersCount = TextContent("Orders Today: 45")
+
+revenueSection = Card([revenueHeading, revenue])
+revenueHeading = Heading("Revenue Today")
+revenue = TextContent("Revenue: $12,345")
+
+averageOrderValueSection = Card([averageHeading, averageOrderValue])
+averageHeading = Heading("Average Order Value")
+averageOrderValue = TextContent("Average: $275")
+
+recentOrdersSection = Card([recentOrdersHeading, recentOrdersTable])
+recentOrdersHeading = Heading("Recent Orders")
+recentOrdersTable = Table([orderIdCol, customerCol, totalCol, statusCol])
+orderIdCol = Col("Order ID", ["ORD123", "ORD124", "ORD125"])
+customerCol = Col("Customer", ["Alice", "Bob", "Charlie"])
+totalCol = Col("Total", ["$150", "$200", "$250"])
+statusCol = Col("Status", ["Pending", "Shipped", "Delivered"])
+
+filtersSection = Card([statusFilter, customerSearch])
+statusFilter = FormControl("Filter by Status", statusSelect)
+statusSelect = Select("status_filter", [allStatus, pendingStatus, shippedStatus, deliveredStatus], "Select Status")
+allStatus = SelectItem("All", "All Orders")
+pendingStatus = SelectItem("Pending", "Pending")
+shippedStatus = SelectItem("Shipped", "Shipped")
+deliveredStatus = SelectItem("Delivered", "Delivered")
+
+customerSearch = FormControl("Search by Customer", customerInput)
+customerInput = Input("customer_name", null, "text")
+
+refundRateSection = Card([refundHeading, refundRate])
+refundHeading = Heading("Refund Rate This Month")
+refundRate = TextContent("Refund Rate: 2.5%")
+
+orderVolumeSection = Card([volumeHeading, volumeChart])
+volumeHeading = Heading("Order Volume in the Past Four Weeks")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries])
+volumeSeries = Series("Orders", [100, 120, 130, 150])
+
+actionsSection = Buttons([fulfillBtn])
+fulfillBtn = Button("Mark Order Fulfilled", ["mark_as_fulfilled"], "primary")
+```

@@ -1,0 +1,27 @@
+thought
+root = Card([header, stats, filters, ordersTable, volumeChart], "card", "column", "l")
+header = CardHeader("E-commerce Operations Desk", "Real-time monitoring")
+stats = Card([orderCount, revenueStat, aovStat, refundRate], "card", "row", "m")
+orderCount = Card([TextContent("142", "large-heavy"), TextContent("Orders Today", "default")])
+revenueStat = Card([TextContent("$12,450", "large-heavy"), TextContent("Revenue Today", "default")])
+aovStat = Card([TextContent("$87.68", "large-heavy"), TextContent("Avg Order Value", "default")])
+refundRate = Card([TextContent("2.4%", "large-heavy"), TextContent("Monthly Refund Rate", "default")])
+filters = Card([searchField, statusFilter], "card", "row", "s")
+searchField = FormControl("Search Customer", Input("search", "e.g. Jane Doe", "text"))
+statusFilter = FormControl("Filter by Status", Select("status", [all, pending, shipped, cancelled], "All Statuses"))
+all = SelectItem("all", "All Statuses")
+pending = SelectItem("pending", "Pending")
+shipped = SelectItem("shipped", "Shipped")
+cancelled = SelectItem("cancelled", "Cancelled")
+ordersTable = Card([Heading("Recent Orders", "h3"), Table([colID, colCust, colTotal, colStatus, colAction])], "card", "column", "s")
+colID = Col("ID", ["#ORD-9921", "#ORD-9922", "#ORD-9923", "#ORD-9924"])
+colCust = Col("Customer", ["Alice Smith", "Bob Jones", "Charlie Brown", "Diana Prince"])
+colTotal = Col("Total", [120.00, 85.50, 310.00, 45.00])
+colStatus = Col("Status", ["Shipped", "Pending", "Shipped", "Cancelled"])
+colAction = Col("Action", ["", "", "", ""])
+volumeChart = Card([Heading("Order Volume (Last 4 Weeks)", "h3"), LineChart(labels, [volumeSeries], "natural", "Week", "Orders")], "card", "column", "s")
+labels = ["Week 1", "Week 2", "Week 3", "Week 4"]
+volumeSeries = Series("Orders", [840, 920, 780, 950])
+fulfillBtn = Button("Mark Fulfilled", null, "primary", "normal", "small")
+# Note: In a real app, colAction would contain the button per row, 
+# but for this schema, we represent the action capability.

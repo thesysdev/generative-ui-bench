@@ -1,0 +1,78 @@
+```openui
+root = Card([header, bedOccupancy, currentErWait, admissionsChart, patientsPerDept, staffOnShift, criticalPatients, patientsReadyForDischarge, operatingRoomBookings, suppliesRunningLow, incidentForm, daySelector, transferRequest])
+
+header = CardHeader("Hospital Operations Command View", "Overview")
+
+bedOccupancy = Card([heading, bedInfo])
+heading = Heading("Bed Occupancy", "h3")
+bedInfo = Table([dept, bedsOccupied, bedsAvailable])
+dept = Col("Department", ["ICU", "General", "Pediatrics"])
+bedsOccupied = Col("Occupied Beds", ["12", "45", "20"])
+bedsAvailable = Col("Available Beds", ["3", "5", "10"])
+
+currentErWait = Card([heading, erWaitInfo])
+heading = Heading("Current ER Wait", "h3")
+erWaitInfo = Card([count, time])
+count = TextContent("Waiting Patients: 8", "large")
+time = TextContent("Average Wait Time: 45 mins", "large")
+
+admissionsChart = Card([heading, chart])
+heading = Heading("Admissions Over Past Two Weeks", "h3")
+chart = BarChart(["Week 1", "Week 2"], [admissionsSeries])
+admissionsSeries = Series("Admissions", [150, 175])
+
+patientsPerDept = Card([heading, deptTable])
+heading = Heading("Patients Per Department", "h3")
+deptTable = Table([dept, patientCount])
+dept = Col("Department", ["ICU", "General", "Pediatrics"])
+patientCount = Col("Patients", ["15", "75", "30"])
+
+staffOnShift = Card([heading, staffList])
+heading = Heading("Staff On Shift", "h3")
+staffList = Table([role, name, dept])
+role = Col("Role", ["Nurse", "Doctor", "Technician"])
+name = Col("Name", ["Alice", "Bob", "Charlie"])
+dept = Col("Department", ["ICU", "General", "Pediatrics"])
+
+criticalPatients = Card([heading, callouts])
+heading = Heading("Critical Patients", "h3")
+callouts = TextCallout("info", "Critical Patients", ["John Doe - ICU", "Jane Smith - General"])
+
+patientsReadyForDischarge = Card([heading, list])
+heading = Heading("Patients Ready for Discharge", "h3")
+list = ListBlock([patientItem1, patientItem2])
+patientItem1 = ListItem("John Doe", "Room 101", null, "Discharge")
+patientItem2 = ListItem("Jane Smith", "Room 102", null, "Discharge")
+
+operatingRoomBookings = Card([heading, bookingsList])
+heading = Heading("Today's Operating Room Bookings", "h3")
+bookingsList = ListBlock([bookingItem1, bookingItem2])
+bookingItem1 = ListItem("Surgery 1", "9:00 AM - 11:00 AM", null, "View")
+bookingItem2 = ListItem("Surgery 2", "12:00 PM - 2:00 PM", null, "View")
+
+suppliesRunningLow = Card([heading, lowSupplies])
+heading = Heading("Supplies Running Low", "h3")
+lowSupplies = ListBlock([supplyItem1, supplyItem2])
+supplyItem1 = ListItem("N95 Masks", "In Stock: 50", null, "Order More")
+supplyItem2 = ListItem("IV Bags", "In Stock: 20", null, "Order More")
+
+incidentForm = Form("incident-report", formButtons, [descriptionField])
+descriptionField = FormControl("Incident Description", incidentInput)
+incidentInput = TextArea("description", "Describe the incident", 3, null, "An incident occurred in the ER")
+formButtons = Buttons([submitIncidentBtn])
+submitIncidentBtn = Button("File Incident", null, "destructive")
+
+daySelector = Card([heading, calendar])
+heading = Heading("Select Another Day", "h3")
+calendar = CalendarBlock("single", "2023-10-01", 1, "label")
+
+transferRequest = Card([heading, transferForm])
+heading = Heading("Request Patient Transfer", "h3")
+transferForm = Form("transfer-request", transferButtons, [patientField, reasonField])
+patientField = FormControl("Patient Name", transferInput)
+transferInput = Input("patient_name", "John Doe")
+reasonField = FormControl("Transfer Reason", reasonInput)
+reasonInput = TextArea("reason", "Explain the reason for transfer", 2, null, "John needs specialized care")
+transferButtons = Buttons([requestTransferBtn])
+requestTransferBtn = Button("Request Transfer", null, "primary")
+```

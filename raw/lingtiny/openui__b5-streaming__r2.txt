@@ -1,0 +1,304 @@
+root = Card([
+  header,
+  overview,
+  viewersSection,
+  watchTime,
+  subscriptions,
+  genrePerformance,
+  buffering,
+  deliveryHealth,
+  releases,
+  licenses,
+  recommendations,
+  searches,
+  revenue,
+  viewing,
+  regionFocus,
+  featureFlags,
+  promoteTitle,
+], "clear", "row", "l")
+
+header = CardHeader("Operations Room — Streaming Service Dashboard", "Live monitoring of key metrics")
+
+overview = Card([
+  heading,
+  kpiGrid,
+  kpiDetails,
+])
+heading = Heading("Dashboard Summary", "h2")
+kpiGrid = Row([
+  ViewerKPI,
+  WatchTimeKPI,
+  SubKPI,
+  BufferingKPI,
+  ReleaseKPI,
+  LicenseKPI,
+  ClickKPI,
+  SearchKPI,
+  RevenueKPI,
+  ViewingKPI,
+], "row", "m")
+ViewerKPI = Card([
+  CardHeader("Viewers Now", "Active viewers right now"),
+  Progress(7842, "78.4%"),
+])
+WatchTimeKPI = Card([
+  CardHeader("Watch Time (Past Month)", "Total hours streamed"),
+  Progress(12840, "82.1%"),
+])
+SubKPI = Card([
+  CardHeader("Subscribers", "New vs. Cancellations"),
+  Row([
+    NewSub,
+    CancelledSub,
+  ], "row", "m"),
+])
+NewSub = Card([
+  Tag("New Subscribers", null, null, "success"),
+  Progress(2340, "2,340"),
+])
+CancelledSub = Card([
+  Tag("Cancellations", null, null, "danger"),
+  Progress(-480, "-480"),
+])
+BufferingKPI = Card([
+  CardHeader("Buffering Rate", "Current buffering percentage"),
+  Progress(4.2, "4.2%"),
+])
+ReleaseKPI = Card([
+  CardHeader("New Releases", "This month"),
+  Progress(12, "12 releases"),
+])
+LicenseKPI = Card([
+  CardHeader("Licenses Expiring", "Soon"),
+  Progress(3, "3 licenses"),
+])
+ClickKPI = Card([
+  CardHeader("Recommendation Clicks", "Click-through rate"),
+  Progress(12, "12.0%"),
+])
+SearchKPI = Card([
+  CardHeader("Searches (No Playback)", "Ended without playback"),
+  Progress(8, "8 searches"),
+])
+RevenueKPI = Card([
+  CardHeader("Revenue", "By plan"),
+  Progress(654000, "$654K"),
+])
+ViewingKPI = Card([
+  CardHeader("Viewing by Device", "Device split"),
+  Progress(52, "52%"),
+])
+
+viewersSection = Card([
+  CardHeader("Viewers Watching Right Now", "Live active viewers"),
+  viewersList,
+])
+viewersList = ListBlock([
+  ListItem("Alice K. — USA", "Watching: The Last of Us"),
+  ListItem("Bob M. — UK", "Watching: Squid Game"),
+  ListItem("Carol J. — Japan", "Watching: Breaking Bad"),
+  ListItem("David R. — Germany", "Watching: Dark"),
+  ListItem("Eva S. — France", "Watching: Succession"),
+  ListItem("Frank L. — Brazil", "Watching: The Bear"),
+  ListItem("Grace T. — Canada", "Watching: Arcane"),
+  ListItem("Henry W. — Australia", "Watching: True Detective"),
+  ListItem("Iris N. — India", "Watching: The Crown"),
+  ListItem("Jack P. — Mexico", "Watching: Dune"),
+], "image")
+
+watchTime = Card([
+  CardHeader("Watch Time — Past Month", "Cumulative hours streamed"),
+  watchTimeChart,
+  watchTimeBreakdown,
+])
+watchTimeChart = LineChart(["W1", "W2", "W3", "W4"], [watchTimeSeries], "linear", "Week", "Hours")
+watchTimeSeries = Series("Watch Time", [18200, 21400, 24600, 28400])
+watchTimeBreakdown = Card([
+  CardHeader("Watch Time by Day of Week", "Average hours per day"),
+  Table([
+    Col("Day", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]),
+    Col("Avg Hours", [5.2, 4.8, 6.1, 5.5, 4.9, 7.2, 5.0]),
+  ]),
+])
+
+subscriptions = Card([
+  CardHeader("New Subscribers vs. Cancellations", "Net subscriber change"),
+  subTable,
+])
+subTable = Table([
+  Col("Week", ["Week 1", "Week 2", "Week 3", "Week 4"]),
+  Col("New Subs", [120, 145, 130, 160]),
+  Col("Cancellations", [-30, -45, -35, -50]),
+  Col("Net", [90, 100, 95, 110]),
+])
+
+genrePerformance = Card([
+  CardHeader("Performance by Genre", "Engagement metrics per genre"),
+  genreChart,
+])
+genreChart = HorizontalBarChart(
+  ["Action", "Comedy", "Drama", "Sci-Fi", "Fantasy", "Horror", "Documentary", "Animation"],
+  [
+    Series("Watch Hours", [18200, 14500, 21000, 12400, 8900, 6700, 5200, 3800]),
+    Series("Clicks", [1200, 980, 1400, 750, 540, 420, 310, 220]),
+  ],
+  "grouped",
+  "Genre",
+  "Hours / Clicks",
+)
+
+buffering = Card([
+  CardHeader("Buffering Rate", "Current buffering percentage"),
+  bufferingChart,
+])
+bufferingChart = HorizontalBarChart(
+  ["Region", "Buffering %", "Avg Latency"],
+  [
+    Series("North America", [3.8, 120]),
+    Series("Europe", [4.1, 135]),
+    Series("Asia Pacific", [5.2, 150]),
+    Series("South America", [2.9, 95]),
+    Series("Africa", [6.1, 165]),
+  ],
+  "grouped",
+  "Region",
+  "Buffering % / Latency",
+)
+
+deliveryHealth = Card([
+  CardHeader("Delivery Health by Region", "Region-level network health"),
+  deliveryChart,
+])
+deliveryChart = HorizontalBarChart(
+  ["Region", "Uptime %", "Packet Loss %", "Latency"],
+  [
+    Series("North America", [99.8, 0.2, 25]),
+    Series("Europe", [99.9, 0.1, 30]),
+    Series("Asia Pacific", [99.7, 0.3, 35]),
+    Series("South America", [99.6, 0.4, 40]),
+    Series("Africa", [99.5, 0.5, 45]),
+  ],
+  "grouped",
+  "Region",
+  "Uptime / Latency",
+)
+
+releases = Card([
+  CardHeader("New Releases This Month", "Upcoming title releases"),
+  releasesList,
+])
+releasesList = ListBlock([
+  ListItem("The Last of Us — Season 2", "Premieres Dec 15"),
+  ListItem("Squid Game — New Series", "Premieres Dec 20"),
+  ListItem("Breaking Bad — Final Season", "Premieres Jan 5"),
+  ListItem("Dark — Season 4", "Premieres Jan 12"),
+  ListItem("Succession — Season 5", "Premieres Jan 18"),
+  ListItem("Arcane — Part II", "Premieres Feb 1"),
+], "image")
+
+licenses = Card([
+  CardHeader("Licenses Expiring Soon", "Active license expiration timeline"),
+  licenseTable,
+])
+licenseTable = Table([
+  Col("Title", ["The Last of Us", "Squid Game", "Breaking Bad", "Dark", "Succession", "Arcane"]),
+  Col("Expires", ["Dec 20", "Jan 15", "Jan 28", "Feb 10", "Mar 5", "Mar 20"]),
+  Col("Status", ["Active", "Active", "Active", "Active", "Active", "Active"]),
+])
+
+recommendations = Card([
+  CardHeader("Recommendation Clicks", "How often recommendations get clicked"),
+  recChart,
+])
+recChart = HorizontalBarChart(
+  ["Category", "Click Rate"],
+  [
+    Series("Action", [12.5]),
+    Series("Comedy", [10.2]),
+    Series("Drama", [14.8]),
+    Series("Sci-Fi", [8.7]),
+    Series("Fantasy", [11.3]),
+    Series("Horror", [15.2]),
+    Series("Documentary", [6.1]),
+    Series("Animation", [9.8]),
+  ],
+  "grouped",
+  "Category",
+  "Click Rate %",
+)
+
+searches = Card([
+  CardHeader("Searches That Ended Without Playback", "Search-to-playback drop-off"),
+  searchTable,
+])
+searchTable = Table([
+  Col("Search Term", ["The Last of Us", "Squid Game", "Breaking Bad", "Dark", "Succession", "Arcane", "Dune", "The Bear"]),
+  Col("Failed", [1, 2, 1, 3, 0, 1, 2, 1]),
+  Col("Succeeded", [4, 3, 5, 2, 6, 4, 3, 5]),
+])
+
+revenue = Card([
+  CardHeader("Revenue Split by Plan", "Revenue breakdown"),
+  revenueChart,
+])
+revenueChart = PieChart(
+  ["Premium", "Ad-supported", "Free", "Trial"],
+  [420000, 180000, 70000, 54000],
+  "donut",
+  "circular",
+)
+
+viewing = Card([
+  CardHeader("Viewing Split by Device", "Device type distribution"),
+  deviceChart,
+])
+deviceChart = HorizontalBarChart(
+  ["Device", "Viewing %", "Avg Watch Time"],
+  [
+    Series("Smart TV", [45, 4.2]),
+    Series("Mobile", [30, 2.8]),
+    Series("Desktop", [15, 3.5]),
+    Series("Tablet", [10, 3.0]),
+  ],
+  "grouped",
+  "Device",
+  "Viewing % / Avg Watch",
+)
+
+regionFocus = Card([
+  CardHeader("Region Focus", "Select a region to focus on"),
+  regionSelector,
+])
+regionSelector = Row([
+  RegionBtn("North America", "NA"),
+  RegionBtn("Europe", "EU"),
+  RegionBtn("Asia Pacific", "APAC"),
+  RegionBtn("South America", "LATAM"),
+  RegionBtn("Africa", "AFR"),
+], "row", "m")
+RegionBtn = Button(label, action, "secondary")
+
+featureFlags = Card([
+  CardHeader("Feature Flags", "Current feature flags and their states"),
+  flagsTable,
+])
+flagsTable = Table([
+  Col("Flag", ["enable_v2_feature", "dark_mode", "new_ui", "beta_streaming", "notify_users", "auto_translate"]),
+  Col("State", ["enabled", "disabled", "enabled", "beta", "enabled", "disabled"]),
+])
+
+promoteTitle = Card([
+  CardHeader("Promote Title on Home Screen", "Featured title promotion"),
+  promoteSection,
+])
+promoteSection = Row([
+  PromoteCard("The Last of Us", "Top-rated drama. Stream now."),
+  PromoteCard("Squid Game", "Viral hit. Limited time offer."),
+], "row", "m")
+PromoteCard = Card([
+  CardHeader(title, subtitle),
+  Progress(value, "Value"),
+])
+
+  return root

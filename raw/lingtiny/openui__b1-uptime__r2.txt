@@ -1,0 +1,28 @@
+root = Card([uptimeSection, incidentSection], "sunk")
+uptimeSection = CardHeader("API Uptime This Month", "Current uptime percentage for the API")
+uptimeCard = Card([uptimeValue, uptimeLabel], "sunk")
+uptimeValue = TextCallout("neutral", "99.97%", "99.97% uptime over the past 30 days")
+uptimeLabel = TextCallout("info", "Uptime", "99.97% uptime — 0.03% downtime")
+incidentSection = CardHeader("Most Recent Incident", "Details on the latest incident and its resolution")
+incidentCard = Card([incidentTitle, incidentDetails], "sunk")
+incidentTitle = TextCallout("warning", "Incident: Database Connection Timeout", "A database connection timeout occurred on 2024-01-15 at 14:30 UTC. The issue was caused by an unexpected spike in query load.")
+incidentDetails = Card([incidentTimeline, incidentResolution], "sunk")
+incidentTimeline = CardHeader("Timeline", "Key events during the incident")
+incidentTimelineItems = [
+    TextCallout("warning", "14:30 UTC", "Database connection timeout detected"),
+    TextCallout("info", "14:45 UTC", "Incident escalated to on-call engineer"),
+    TextCallout("info", "15:15 UTC", "Connection pool scaled to 2× capacity"),
+    TextCallout("success", "15:30 UTC", "Connection pool restored to normal capacity"),
+    TextCallout("success", "15:45 UTC", "Incident resolved — service restored"),
+]
+incidentResolution = CardHeader("Resolution", "What happened and how it was fixed")
+incidentResolutionItems = [
+    TextCallout("info", "Root Cause", "A sudden surge in read queries overwhelmed the primary database connection pool"),
+    TextCallout("info", "Action Taken", "Auto-scaled connection pool to 2× capacity and added read replica failover"),
+    TextCallout("success", "Outcome", "Full service restoration; no data loss reported"),
+]
+incidentSummary = CardHeader("Summary", "The incident was resolved within 1 hour and 15 minutes")
+incidentSummaryItems = [
+    TextCallout("success", "Duration", "1 hour 15 minutes"),
+    TextCallout("success", "Impact", "Minimal — no customer-facing data loss"),
+]

@@ -1,0 +1,50 @@
+root = Card([header, blockerAlert, summaryCard, updateSection, formSection])
+header = CardHeader("Daily Async Standup", "Wednesday, October 24, 2024")
+
+blockerAlert = Callout("error", "1 Teammate Blocked", "Alex Rivera is currently blocked waiting on API credentials from DevOps.")
+
+summaryCard = Card([summaryTitle, summaryProgress, summaryMeta], "sunk", "column", "s")
+summaryTitle = Heading("Team Participation", "h4")
+summaryProgress = Progress(75, "6 of 8 updates submitted (2 missing)")
+summaryMeta = TagBlock(["Missing: @elena_r", "Missing: @marcus_k", "Due by 10:00 AM PST"])
+
+updateSection = Card([updatesHeading, updateTabs], "clear", "column", "m")
+updatesHeading = Heading("Today's Updates", "h3")
+
+updateTabs = Tabs([allTab, blockedTab])
+
+allTab = TabItem("all", "All Updates (6)", [listAll])
+listAll = ListBlock([item1, item2, item3, item4, item5, item6])
+
+item1 = ListItem("Alex Rivera (Product Designer)", "Blocked: Waiting on DevOps for staging credentials. Yesterday: Finalized checkout flow mocks.", null, "Blocked")
+item2 = ListItem("Sarah Chen (Frontend Lead)", "Working on: Checkout redesign integration. Completed: Fixed nav bar regressions.", null, "On Track")
+item3 = ListItem("Devon Taylor (Backend Eng)", "Working on: Stripe webhook resilience & retries. No blockers.", null, "On Track")
+item4 = ListItem("Priya Patel (Mobile Dev)", "Working on: iOS release build v2.4.0 testing. Reviewed 3 PRs yesterday.", null, "On Track")
+item5 = ListItem("Liam O'Connor (QA Engineer)", "Working on: E2E test coverage for payment flow. Regression suite passing.", null, "On Track")
+item6 = ListItem("Maya Lin (Data Scientist)", "Working on: Funnel drop-off analytics pipeline. Syncing with growth team.", null, "On Track")
+
+blockedTab = TabItem("blocked", "Blocked (1)", [listBlocked])
+listBlocked = ListBlock([item1])
+
+formSection = Card([formHeader, standupForm], "card", "column", "m")
+formHeader = CardHeader("Post Your Update", "Share what you did, what you're doing, and any blockers")
+
+standupForm = Form("submit-standup", formButtons, [yesterdayField, todayField, blockerField, moodField])
+yesterdayField = FormControl("What did you accomplish yesterday?", yesterdayInput)
+yesterdayInput = TextArea("yesterday", "E.g., Completed authentication PR, resolved ticket #402", 2)
+
+todayField = FormControl("What are you working on today?", todayInput)
+todayInput = TextArea("today", "E.g., Integrating new user dashboard components", 2)
+
+blockerField = FormControl("Any blockers or help needed?", blockerInput, "Leave empty if you're clear")
+blockerInput = Input("blockers", "None", "text")
+
+moodField = FormControl("Status / Focus Area", statusSelect)
+statusSelect = Select("status", [optTrack, optBlocked, optOoo], "Select status")
+optTrack = SelectItem("track", "🟢 On Track")
+optBlocked = SelectItem("blocked", "🔴 Blocked")
+optOoo = SelectItem("ooo", "🟡 Partial / OOO")
+
+formButtons = Buttons([submitBtn, draftBtn])
+submitBtn = Button("Submit Update", null, "primary")
+draftBtn = Button("Save Draft", null, "secondary")

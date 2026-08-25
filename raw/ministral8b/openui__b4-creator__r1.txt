@@ -1,0 +1,156 @@
+```openui-lang
+root = Card([platformFilter, statsHeader, followerStats, engagementRate, bestPosts, audienceSplit, scheduledPosts, optimalPostTime, repliesWaiting, earnings, collaborationRequests, schedulePostForm])
+
+platformFilter = Card(
+    [platformBtn],
+    "sunk",
+    "row",
+    "l",
+    "center"
+)
+platformBtn = Button("All Platforms", null, "secondary", "normal", "medium")
+
+statsHeader = CardHeader("Creator Studio Dashboard", "Cross-platform analytics")
+
+followerStats = Card(
+    [followerCount, followerGrowth],
+    "sunk",
+    "column"
+)
+followerCount = Card(
+    [Tag("124,500", null, null, "success"), TextContent("Total followers", "large-heavy")],
+    "card"
+)
+followerGrowth = LineChart(
+    ["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 30"],
+    [followerSeries],
+    "natural",
+    "Date",
+    "Followers"
+)
+followerSeries = Series("Growth", [115000, 118000, 120000, 122500, 124500])
+
+engagementRate = Card(
+    [engagementRateValue, engagementRateChart],
+    "sunk",
+    "column"
+)
+engagementRateValue = Card(
+    [Tag("4.2%", null, null, "success"), TextContent("Engagement rate", "large-heavy")],
+    "card"
+)
+engagementRateChart = PieChart(
+    ["Likes", "Comments", "Shares"],
+    [42, 18, 40],
+    "donut"
+)
+
+bestPosts = Card(
+    [bestPostsHeader, postTable],
+    "sunk"
+)
+bestPostsHeader = Heading("Top Posts This Month", "h3")
+postTable = Table([postColumns])
+postColumns = [
+    Col("Post", ["📸 Beach Sunset", "🎥 Behind the Scenes", "📚 Book Recommendation"], "string"),
+    Col("Reach", ["18,400", "12,700", "9,800"], "number"),
+    Col("Platform", ["Instagram", "TikTok", "Twitter"], "string")
+]
+
+audienceSplit = Card(
+    [audienceSplitHeader, audiencePie],
+    "sunk"
+)
+audienceSplitHeader = Heading("Audience Distribution", "h3")
+audiencePie = PieChart(
+    ["Instagram", "TikTok", "Twitter", "YouTube", "LinkedIn"],
+    [45, 30, 15, 8, 2],
+    "pie"
+)
+
+scheduledPosts = Card(
+    [scheduledPostsHeader, postCalendar],
+    "sunk"
+)
+scheduledPostsHeader = Heading("Scheduled This Week", "h3")
+postCalendar = CalendarBlock("single", "2024-01-20", 1)
+
+optimalPostTime = Card(
+    [optimalPostTimeHeader, timeChart],
+    "sunk"
+)
+optimalPostTimeHeader = Heading("Best Posting Time", "h3")
+timeChart = RadarChart(
+    ["6am", "9am", "12pm", "3pm", "6pm", "9pm"],
+    [optimalSeries]
+)
+optimalSeries = Series("Engagement", [0.3, 0.7, 0.9, 0.8, 0.6, 0.4])
+
+repliesWaiting = Card(
+    [repliesWaitingHeader, repliesCount],
+    "sunk"
+)
+repliesWaitingHeader = Heading("Pending Replies", "h3")
+repliesCount = Tag("14", null, null, "danger")
+
+earnings = Card(
+    [earningsHeader, earningsChart],
+    "sunk"
+)
+earningsHeader = Heading("Monthly Earnings", "h3")
+earningsChart = BarChart(
+    ["Affiliate", "Sponsored", "Merchandise", "Subscriptions"],
+    [earningsSeries],
+    "grouped",
+    "Source",
+    "USD"
+)
+earningsSeries = Series("Amount", [3200, 1800, 950, 450])
+
+collaborationRequests = Card(
+    [collaborationRequestsHeader, requestsTable],
+    "sunk"
+)
+collaborationRequestsHeader = Heading("Collaboration Requests", "h3")
+requestsTable = Table([requestColumns])
+requestColumns = [
+    Col("Creator", ["@techguru", "@fitnesspro", "@travelblogger"], "string"),
+    Col("Platform", ["Instagram", "TikTok", "Twitter"], "string"),
+    Col("Status", ["Pending", "Pending", "Approved"], "string")
+]
+
+schedulePostForm = Card(
+    [schedulePostHeader, postForm],
+    "sunk"
+)
+schedulePostHeader = Heading("Schedule New Post", "h3")
+postForm = Form(
+    "schedule-post",
+    scheduleButtons,
+    [postCaptionField, postTimeField]
+)
+postCaptionField = FormControl(
+    "Caption",
+    postCaptionInput,
+    "Add a creative caption"
+)
+postCaptionInput = TextArea(
+    "caption",
+    "Write your caption here...",
+    4,
+    ["required", "min:10", "max:200"]
+)
+postTimeField = FormControl(
+    "Scheduled Time",
+    postTimePicker,
+    "Select when to publish"
+)
+postTimePicker = DatePicker(
+    "post_time",
+    "single",
+    ["required"]
+)
+scheduleButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

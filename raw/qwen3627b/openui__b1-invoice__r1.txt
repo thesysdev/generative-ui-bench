@@ -1,0 +1,27 @@
+The user wants a freelancer's invoice view for a client. I need to build a single screen that shows:
+1. The amount due and currency
+2. The due date
+3. A way to pay now
+
+Let me design this as a clean invoice view with all these elements clearly visible.
+
+I'll structure it as:
+- A card with invoice details
+- Amount due prominently displayed
+- Due date clearly shown
+- A "Pay Now" button
+
+Let me build this out with proper openui-lang syntax.
+root = Card([invoiceHeader, invoiceDetails, paySection])
+invoiceHeader = CardHeader("Invoice #INV-2024-0847", "From: Alex Rivera — Freelance Developer")
+invoiceDetails = Card([amountDisplay, dueDateDisplay, invoiceTable], "sunk")
+amountDisplay = Heading("Amount Due: $2,450.00", "h2")
+dueDateDisplay = TextContent("Due Date: January 31, 2025", "default")
+invoiceTable = Table([descCol, hoursCol, rateCol, totalCol])
+descCol = Col("Description", ["UI/UX Design & Prototyping", "Frontend Development (React)", "API Integration & Testing", "Project Management & Communication"])
+hoursCol = Col("Hours", ["12", "48", "20", "8"])
+rateCol = Col("Rate", ["$75/hr", "$65/hr", "$70/hr", "$50/hr"])
+totalCol = Col("Total", ["$900.00", "$3,120.00", "$1,400.00", "$400.00"])
+paySection = Card([payText, payButton], "clear")
+payText = TextContent("Review the invoice above and click below to make your payment securely.", "default")
+payButton = Button("Pay Now — $2,450.00", null, "primary", "normal", "large")

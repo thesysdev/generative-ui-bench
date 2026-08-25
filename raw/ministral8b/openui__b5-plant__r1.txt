@@ -1,0 +1,196 @@
+```openui-lang
+root = Card([
+    header,
+    oeeSection,
+    productionSection,
+    linesSection,
+    defectChart,
+    downtimeChart,
+    maintenanceSection,
+    inventorySection,
+    deliveriesSection,
+    shiftComparison,
+    safetySection,
+    qualityHoldSection,
+    energySection,
+    workOrdersSection,
+    maintenanceForm,
+    lineFocusSection,
+    alertsSection,
+    exportButton
+])
+
+header = CardHeader("Factory Floor Supervisor Console", "Real-time production monitoring and control")
+
+oeeSection = Card([
+    CardHeader("Overall Equipment Effectiveness"),
+    oeeValue,
+    oeeDetails
+], "sunk")
+oeeValue = TextContent("92.7%", "large-heavy")
+oeeDetails = Card([
+    TextContent("Availability: 95.3%"),
+    TextContent("Performance: 97.1%"),
+    TextContent("Quality: 98.5%")
+])
+
+productionSection = Card([
+    CardHeader("Production vs Target"),
+    productionChart,
+    targetComparison
+], "sunk")
+productionChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri"], [
+    Series("Produced", [1250, 1420, 1380, 1500, 1480]),
+    Series("Target", [1300, 1450, 1400, 1550, 1500])
+], "grouped", "Day", "Units")
+targetComparison = TextContent("Today's target: 1500 units • Current: 1480 units • 98.7% complete")
+
+linesSection = Card([
+    CardHeader("Production Lines"),
+    linesTable
+], "sunk")
+linesTable = Table([lineNameCol, rateCol, statusCol])
+lineNameCol = Col("Line", ["Line A", "Line B", "Line C", "Line D"])
+rateCol = Col("Rate (units/hr)", ["120", "105", "98", "112"])
+statusCol = Col("Status", ["Running", "Maintenance", "Running", "Idle"])
+
+defectChart = Card([
+    CardHeader("Defect Rate (Past Month)"),
+    defectPie
+], "sunk")
+defectPie = PieChart(["Visual", "Functional", "Material", "Assembly"], [15, 30, 25, 30], "pie")
+
+downtimeChart = Card([
+    CardHeader("Downtime Breakdown"),
+    downtimePie
+], "sunk")
+downtimePie = PieChart(["Mechanical", "Electrical", "Human Error", "Other"], [40, 25, 20, 15], "donut")
+
+maintenanceSection = Card([
+    CardHeader("Maintenance Schedule"),
+    maintenanceTable
+], "sunk")
+maintenanceTable = Table([machineCol, dateCol, priorityCol])
+machineCol = Col("Machine", ["Press 3", "Robotic Arm 7", "Conveyor B2", "Lathe 12"])
+dateCol = Col("Due Date", ["2023-11-15", "2023-11-18", "2023-11-20", "2023-11-22"])
+priorityCol = Col("Priority", ["High", "Medium", "Low", "High"])
+
+inventorySection = Card([
+    CardHeader("Inventory Levels"),
+    inventoryTable
+], "sunk")
+inventoryTable = Table([itemCol, stockCol, thresholdCol])
+itemCol = Col("Item", ["Steel Sheets", "Resin", "Packaging"])
+stockCol = Col("Stock", ["4500 kg", "1200 L", "3200 units"])
+thresholdCol = Col("Threshold", ["5000 kg", "1500 L", "3500 units"])
+
+deliveriesSection = Card([
+    CardHeader("Supplier Deliveries (This Week)"),
+    deliveriesList
+], "sunk")
+deliveriesList = ListBlock([
+    ListItem("Steel Supplier", "1000 kg • ETA: 11/14", ["steel-icon.png"], "Track"),
+    ListItem("Resin Co.", "800 L • ETA: 11/15", ["resin-icon.png"], "Track"),
+    ListItem("Packaging Co.", "500 units • ETA: 11/16", ["box-icon.png"], "Track")
+])
+
+shiftComparison = Card([
+    CardHeader("Shift Output Comparison"),
+    shiftChart
+], "sunk")
+shiftChart = BarChart(["Morning", "Afternoon", "Night"], [
+    Series("Units", [1250, 1300, 1180]),
+    Series("Defects", [12, 15, 10])
+], "grouped", "Shift", "Units/Defects")
+
+safetySection = Card([
+    CardHeader("Safety Performance"),
+    safetyStats
+], "sunk")
+safetyStats = Card([
+    TextContent("Incidents this year: 3"),
+    TextContent("Days since last incident: 45"),
+    Badge("Safety First", null, null, "success")
+])
+
+qualityHoldSection = Card([
+    CardHeader("Quality Hold Batches"),
+    qualityHoldTable
+], "sunk")
+qualityHoldTable = Table([batchCol, reasonCol, actionCol])
+batchCol = Col("Batch", ["B23-1104", "B23-1105", "B23-1106"])
+reasonCol = Col("Reason", ["Visual Defect", "Functional Test", "Material Issue"])
+actionCol = Col("Action", ["Inspection", "Re-test", "Reject"])
+
+energySection = Card([
+    CardHeader("Energy Usage (Today)"),
+    energyStats
+], "sunk")
+energyStats = Card([
+    TextContent("Total: 45,200 kWh"),
+    TextContent("Cost: $3,616"),
+    Progress(78, "78% of daily target")
+])
+
+workOrdersSection = Card([
+    CardHeader("Open Work Orders"),
+    workOrdersTable
+], "sunk")
+workOrdersTable = Table([orderCol, priorityCol, machineCol, descriptionCol])
+orderCol = Col("Order #", ["WO-23-45", "WO-23-46", "WO-23-47"])
+priorityCol = Col("Priority", ["High", "Medium", "Low"])
+machineCol = Col("Machine", ["Press 3", "Conveyor B2", "Lathe 12"])
+descriptionCol = Col("Description", ["Belt replacement", "Alignment check", "Lubrication"])
+
+maintenanceForm = Card([
+    CardHeader("Schedule Maintenance"),
+    maintenanceFormContent
+], "sunk")
+maintenanceFormContent = Form("maintenance-schedule", maintenanceButtons, [
+    machineField,
+    dateField,
+    priorityField
+])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [
+    SelectItem("Press 3", "Press 3"),
+    SelectItem("Robotic Arm 7", "Robotic Arm 7"),
+    SelectItem("Conveyor B2", "Conveyor B2"),
+    SelectItem("Lathe 12", "Lathe 12")
+])
+dateField = FormControl("Scheduled Date", datePicker)
+datePicker = DatePicker("date", "single", null, "2023-12-01")
+priorityField = FormControl("Priority", priorityRadio)
+priorityRadio = RadioGroup("priority", [
+    RadioItem("High", "Critical maintenance", "high"),
+    RadioItem("Medium", "Routine", "medium"),
+    RadioItem("Low", "Preventative", "low")
+])
+maintenanceButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+lineFocusSection = Card([
+    CardHeader("Focus on Line"),
+    lineFocusSelect
+], "sunk")
+lineFocusSelect = Select("focus_line", [
+    SelectItem("Line A", "Line A"),
+    SelectItem("Line B", "Line B"),
+    SelectItem("Line C", "Line C"),
+    SelectItem("Line D", "Line D")
+])
+
+alertsSection = Card([
+    CardHeader("Live Andon Alerts"),
+    alertsList
+], "sunk")
+alertsList = ListBlock([
+    ListItem("Line B", "Electrical fault detected", ["warning-icon.png"], "Acknowledge"),
+    ListItem("Conveyor B2", "Speed below threshold", ["warning-icon.png"], "Investigate"),
+    ListItem("Press 3", "Temperature too high", ["warning-icon.png"], "Check sensors")
+])
+
+exportButton = Buttons([exportBtn], "row")
+exportBtn = Button("Export Shift Report", null, "secondary")
+```

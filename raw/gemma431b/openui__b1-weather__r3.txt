@@ -1,0 +1,27 @@
+root = Card([header, currentSection, forecastSection, sunSection, followUps], "card", "column", "m")
+
+header = CardHeader("Morning Brief", "Bengaluru, India")
+
+currentSection = Card([tempDisplay, conditionBadge, weatherDetails], "sunk", "column", "s")
+tempDisplay = Heading("24°C", "h1")
+conditionBadge = Badge("Partly Cloudy", "info")
+weatherDetails = TextContent("A mild morning with a light breeze. Perfect for a walk before the workday begins.")
+
+forecastSection = Card([forecastHeading, forecastChart, forecastTable], "card", "column", "m")
+forecastHeading = Heading("3-Day Outlook", "h3")
+forecastChart = LineChart(["Today", "Tomorrow", "Wednesday"], [tempSeries], "natural", "Day", "Temperature (°C)")
+tempSeries = Series("High Temp", [26, 28, 27])
+forecastTable = Table([dayCol, tempCol, condCol])
+dayCol = Col("Day", ["Today", "Tomorrow", "Wednesday"], "string")
+tempCol = Col("Temp", ["26° / 19°", "28° / 21°", "27° / 20°"], "string")
+condCol = Col("Condition", ["Sunny", "Cloudy", "Light Rain"], "string")
+
+sunSection = Card([sunTimes], "clear", "row", "m")
+sunTimes = ListBlock([sunriseItem, sunsetItem], "image")
+sunriseItem = ListItem("Sunrise", "06:12 AM")
+sunsetItem = ListItem("Sunset", "06:24 PM")
+
+followUps = FollowUpBlock([weekForecast, clothingAdvice, humidityCheck])
+weekForecast = FollowUpItem("Show 7-day forecast")
+clothingAdvice = FollowUpItem("What should I wear today?")
+humidityCheck = FollowUpItem("Check humidity levels")

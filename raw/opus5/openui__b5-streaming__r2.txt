@@ -1,0 +1,156 @@
+root = Card([header, liveStrip, regionFocus, sep1, topTitlesHeading, topTitles, watchTimeHeading, watchTimeChart, growthHeading, growthChart, growthNote, genreHeading, genreChart, sep2, qualityHeading, bufferAlert, bufferChart, deliveryTable, sep3, scheduleHeading, releaseList, licenseHeading, licenseAlert, licenseTable, sep4, discoveryHeading, recProgress, recNote, deadSearchTable, sep5, splitHeading, revenueChart, deviceHeading, deviceChart, sep6, flagsHeading, flagsForm, promoteHeading, promoteNote, promoteDialog, followUps])
+
+header = CardHeader("Streaming Operations Room", "Live service health — Tue 14:20 UTC")
+
+liveStrip = Card([liveCount, liveTag, liveTrend], "sunk", "column", "s")
+liveCount = TextContent("**2,418,730** viewers watching right now", "large-heavy")
+liveTag = Tag("+6.2% vs same time yesterday", "trending-up", "md", "success")
+liveTrend = LineChart(liveHours, [liveSeries], "natural", "Hour (UTC)", "Concurrent viewers (k)")
+liveHours = ["06", "08", "10", "12", "14", "16", "18", "20", "22", "00"]
+liveSeries = Series("Concurrent viewers", [880, 1040, 1180, 1520, 2419, 2610, 3180, 3940, 3510, 2280])
+
+regionFocus = Form("region-focus", regionButtons, [regionField])
+regionField = FormControl("Region focus", regionSelect, "Applies to every panel on this screen")
+regionSelect = Select("region", [rGlobal, rNa, rEu, rLatam, rApac, rMena], "Global (all regions)")
+rGlobal = SelectItem("global", "Global (all regions)")
+rNa = SelectItem("na", "North America")
+rEu = SelectItem("eu", "Europe")
+rLatam = SelectItem("latam", "Latin America")
+rApac = SelectItem("apac", "Asia Pacific")
+rMena = SelectItem("mena", "Middle East & Africa")
+regionButtons = Buttons([applyRegion, resetRegion])
+applyRegion = Button("Apply region filter", null, "primary")
+resetRegion = Button("Reset to global", null, "tertiary")
+
+sep1 = Separator("horizontal")
+
+topTitlesHeading = Heading("Most-watched titles — last 24h", "h3")
+topTitles = Table([titleCol, hoursCol, viewersCol, deltaCol])
+titleCol = Col("Title", ["Nightfall Harbor S2", "The Quiet Orbit", "Chef's Table: Lagos", "Ironwood", "Paper Kingdoms S1", "Last Train to Vela"], "string")
+hoursCol = Col("Hours watched", [1842000, 1310500, 968400, 742900, 610300, 498100], "number")
+viewersCol = Col("Unique viewers", [612000, 488000, 402500, 291000, 244600, 210800], "number")
+deltaCol = Col("Change", ["+18%", "+4%", "+31%", "-6%", "+2%", "-11%"], "string")
+
+watchTimeHeading = Heading("Watch time — past 30 days", "h3")
+watchTimeChart = AreaChart(monthLabels, [watchSeries], "natural", "Date", "Hours watched (millions)")
+monthLabels = ["Mar 1", "Mar 4", "Mar 7", "Mar 10", "Mar 13", "Mar 16", "Mar 19", "Mar 22", "Mar 25", "Mar 28", "Mar 30"]
+watchSeries = Series("Hours watched", [38.2, 36.9, 41.4, 44.1, 40.8, 39.5, 46.2, 49.8, 47.3, 52.6, 55.1])
+
+growthHeading = Heading("New subscribers vs cancellations", "h3")
+growthChart = BarChart(growthWeeks, [signupSeries, cancelSeries], "grouped", "Week", "Accounts")
+growthWeeks = ["Week 1", "Week 2", "Week 3", "Week 4"]
+signupSeries = Series("New subscribers", [128400, 141900, 136200, 158700])
+cancelSeries = Series("Cancellations", [72300, 69800, 81400, 74100])
+growthNote = TextContent("Net adds for the month: **+267,600**. Churn ticked up in Week 3 alongside the price change in LATAM.", "small")
+
+genreHeading = Heading("Performance by genre", "h3")
+genreChart = RadarChart(genreLabels, [genreShare, genreCompletion])
+genreLabels = ["Drama", "Comedy", "Documentary", "Thriller", "Kids", "Sports"]
+genreShare = Series("Share of watch time (%)", [28, 21, 12, 18, 13, 8])
+genreCompletion = Series("Completion rate (%)", [71, 64, 58, 76, 82, 49])
+
+sep2 = Separator("horizontal")
+
+qualityHeading = Heading("Playback quality & delivery", "h3")
+bufferAlert = Alert("Buffering above target in APAC", "Global rebuffer rate is 0.94% against a 0.70% target, driven by the Singapore and Mumbai edges.", "warning")
+bufferChart = LineChart(bufferHours, [bufferSeries], "step", "Hour (UTC)", "Rebuffer rate (%)")
+bufferHours = ["06", "08", "10", "12", "14", "16", "18", "20", "22", "00"]
+bufferSeries = Series("Rebuffer rate", [0.42, 0.48, 0.51, 0.66, 0.94, 1.12, 1.34, 1.08, 0.77, 0.55])
+deliveryTable = Table([regionCol, uptimeCol, startTimeCol, errorCol, healthCol])
+regionCol = Col("Region", ["North America", "Europe", "Latin America", "Asia Pacific", "Middle East & Africa"], "string")
+uptimeCol = Col("CDN uptime (%)", [99.98, 99.95, 99.81, 99.42, 99.72], "number")
+startTimeCol = Col("Start time (ms)", [740, 810, 1120, 1580, 1290], "number")
+errorCol = Col("Playback errors (%)", [0.21, 0.28, 0.44, 0.91, 0.57], "number")
+healthCol = Col("Status", ["Healthy", "Healthy", "Watch", "Degraded", "Watch"], "string")
+
+sep3 = Separator("horizontal")
+
+scheduleHeading = Heading("Releases coming this month", "h3")
+releaseList = ListBlock([rel1, rel2, rel3, rel4, rel5], "number")
+rel1 = ListItem("Nightfall Harbor S2 — Finale", "Apr 4 · Global · 190 territories · marketing locked", null, "View plan")
+rel2 = ListItem("Ironwood: Origins (Film)", "Apr 9 · Global except JP · dubs pending in 3 languages", null, "View plan")
+rel3 = ListItem("Paper Kingdoms S2", "Apr 15 · Global · QC pass 2 of 3 complete", null, "View plan")
+rel4 = ListItem("Live: Continental Cup Semi-final", "Apr 21 · EU + LATAM · capacity test scheduled Apr 18", null, "View plan")
+rel5 = ListItem("Chef's Table: Lagos — Special", "Apr 28 · Global · artwork awaiting approval", null, "View plan")
+
+licenseHeading = Heading("Licenses expiring soon", "h3")
+licenseAlert = Alert("Three titles expire within 14 days", "Renewal decisions for the Vela catalogue are due Friday or the titles drop from all regions.", "destructive")
+licenseTable = Table([licTitleCol, licRegionCol, licDateCol, licHoursCol, licStatusCol])
+licTitleCol = Col("Title", ["Last Train to Vela", "Vela: Aftermath", "Hollow Coast", "Midnight Archive S1", "The Quiet Orbit (JP)"], "string")
+licRegionCol = Col("Region", ["Global", "Global", "Europe", "North America", "Asia Pacific"], "string")
+licDateCol = Col("Expires", ["Apr 6", "Apr 6", "Apr 12", "Apr 24", "May 2"], "string")
+licHoursCol = Col("30d hours", [498100, 302700, 188400, 421300, 256900], "number")
+licStatusCol = Col("Decision", ["Due Friday", "Due Friday", "In negotiation", "Renew approved", "Not renewing"], "string")
+
+sep4 = Separator("horizontal")
+
+discoveryHeading = Heading("Discovery & search", "h3")
+recProgress = Progress(31, "Recommendation click-through — 31% of rows surfaced lead to a play")
+recNote = TextContent("Click-through is up 2.4 points month over month; the 'Because you watched' row carries 44% of all recommendation plays.", "small")
+deadSearchTable = Table([queryCol, searchCountCol, zeroCol, reasonCol])
+queryCol = Col("Search query", ["ironwood 2", "premier league live", "the office", "nightfall harbour", "anime dubbed", "vela sequel"], "string")
+searchCountCol = Col("Searches (7d)", [41200, 38700, 33900, 28400, 24100, 19800], "number")
+zeroCol = Col("Ended without playback (%)", [88, 96, 99, 62, 71, 84], "number")
+reasonCol = Col("Likely cause", ["Not yet released", "No rights in region", "Not in catalogue", "Spelling variant", "Filter too narrow", "Title retired"], "string")
+
+sep5 = Separator("horizontal")
+
+splitHeading = Heading("Revenue split by plan", "h3")
+revenueChart = PieChart(planLabels, planValues, "donut", "circular")
+planLabels = ["Premium 4K", "Standard", "Basic", "Ad-supported", "Mobile-only"]
+planValues = [41.2, 26.8, 12.4, 14.1, 5.5]
+
+deviceHeading = Heading("Viewing split by device", "h3")
+deviceChart = SingleStackedBarChart(deviceLabels, deviceValues)
+deviceLabels = ["Smart TV", "Mobile", "Tablet", "Web", "Console"]
+deviceValues = [52, 23, 9, 10, 6]
+
+sep6 = Separator("horizontal")
+
+flagsHeading = Heading("Feature flags", "h3")
+flagsForm = Form("feature-flags", flagsButtons, [flagsField])
+flagsField = FormControl("Active rollouts", flagsGroup, "Changes apply to the selected region within two minutes")
+flagsGroup = CheckBoxGroup("flags", [flagAv1, flagAutoplay, flagRecs, flagOffline, flagAds, flagUi])
+flagAv1 = CheckBoxItem("AV1 encoding", "Enabled — 68% of eligible devices", "flag_av1", true)
+flagAutoplay = CheckBoxItem("Autoplay next episode", "Enabled — global", "flag_autoplay", true)
+flagRecs = CheckBoxItem("Recommendation model v4", "Enabled — 25% holdout running", "flag_recs_v4", true)
+flagOffline = CheckBoxItem("Offline downloads on web", "Disabled — pending DRM review", "flag_offline_web", false)
+flagAds = CheckBoxItem("Pause-screen ads", "Disabled — legal sign-off outstanding in EU", "flag_pause_ads", false)
+flagUi = CheckBoxItem("Redesigned home rows", "Enabled — APAC only", "flag_home_rows", true)
+flagsButtons = Buttons([saveFlags, revertFlags])
+saveFlags = Button("Save flag state", null, "primary")
+revertFlags = Button("Revert changes", null, "tertiary")
+
+promoteHeading = Heading("Home screen promotion", "h3")
+promoteNote = TextContent("The hero slot is currently held by **Nightfall Harbor S2** until Apr 4 at 09:00 UTC.", "small")
+promoteDialog = DialogBlock("Promote a title", "Promote to home screen", "Place a title in the hero slot for the selected region.", [promoteForm], "default")
+promoteForm = Form("promote-title", promoteButtons, [promoteTitleField, promoteSlotField, promoteRegionField, promoteWindowField, promoteWeightField, promoteCopyField])
+promoteTitleField = FormControl("Title", promoteTitleSelect)
+promoteTitleSelect = Select("title", [ptHarbor, ptOrbit, ptIronwood, ptPaper, ptChef], "Choose a title")
+ptHarbor = SelectItem("harbor", "Nightfall Harbor S2")
+ptOrbit = SelectItem("orbit", "The Quiet Orbit")
+ptIronwood = SelectItem("ironwood", "Ironwood: Origins")
+ptPaper = SelectItem("paper", "Paper Kingdoms S2")
+ptChef = SelectItem("chef", "Chef's Table: Lagos")
+promoteSlotField = FormControl("Placement", promoteSlotRadio)
+promoteSlotRadio = RadioGroup("slot", [slotHero, slotRow, slotBillboard], "hero")
+slotHero = RadioItem("Hero banner", "Full-width slot at the top of home", "hero")
+slotRow = RadioItem("Trending row", "First card in the trending carousel", "row")
+slotBillboard = RadioItem("Billboard", "Mid-page promotional block", "billboard")
+promoteRegionField = FormControl("Target regions", promoteRegionSelect, "Leave as global to promote everywhere")
+promoteRegionSelect = Select("promote_region", [rGlobal, rNa, rEu, rLatam, rApac, rMena], "Global (all regions)")
+promoteWindowField = FormControl("Run window", promoteDates)
+promoteDates = DatePicker("window", "range")
+promoteWeightField = FormControl("Ranking weight", promoteSlider, "Higher weight outranks algorithmic picks")
+promoteSlider = Slider("weight", "discrete", 0, 100, 5, [70], "Weight")
+promoteCopyField = FormControl("Promo copy", promoteCopy)
+promoteCopy = TextArea("copy", "The finale everyone is waiting for — streaming Apr 4.", 3)
+promoteButtons = Buttons([schedulePromo, cancelPromo])
+schedulePromo = Button("Schedule promotion", null, "primary")
+cancelPromo = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3, fu4])
+fu1 = FollowUpItem("Why is the APAC rebuffer rate climbing?")
+fu2 = FollowUpItem("Draft the renewal case for the Vela catalogue")
+fu3 = FollowUpItem("Compare Week 3 cancellations by plan")
+fu4 = FollowUpItem("Show searches with no playback for APAC only")

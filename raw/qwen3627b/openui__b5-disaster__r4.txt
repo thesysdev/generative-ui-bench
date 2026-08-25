@@ -1,0 +1,211 @@
+This is a comprehensive emergency response coordination center dashboard. I need to build a single screen that covers all 18 items. Let me plan the layout:
+
+1. Active incidents by zone with severity - Table or ListBlock
+2. Overall severity summary - Charts (PieChart or SingleStackedBarChart)
+3. Vehicles, personnel, supplies available - Table or stats
+4. Shelters with capacity and occupancy - Table
+5. Status of each evacuation route - ListBlock with status tags
+6. Weather forecast for next 48 hours - Table or chart
+7. People rescued and casualties - Stats/Callout
+8. Volunteers on duty with assignment - Table
+9. Donations received - Stats/Table
+10. Aid requests awaiting action - ListBlock or Table
+11. Communication channels status - ListBlock with status
+12. Roads closed - ListBlock
+13. Nearby hospitals with free beds - Table
+14. Open tasks with assignee - Table
+15. Request more resources form - Form with type and quantity
+16. Broadcast update - Form with message
+17. Focus on one zone - Select or Buttons
+18. File situation report - DialogBlock or Form
+
+Let me structure this as a comprehensive dashboard with multiple sections. I'll use Tabs to organize the content into logical groups, or use a long scrolling Card with sections.
+
+Given the amount of content, I'll use a Card with multiple sections. Let me organize:
+
+Top section:
+- Header with zone selector (item 17)
+- Overall severity summary (item 2)
+- Key stats: rescued/casualties (item 7), donations (item 9)
+
+Main content areas using Tabs or Sections:
+Tab 1: Incidents & Zones - active incidents (1), shelters (4), evacuation routes (5)
+Tab 2: Resources - vehicles/personnel/supplies (3), volunteers (8), hospitals (13)
+
+
+Tab 3: Operations - aid requests (10), tasks (14), roads closed (12)
+Tab 4: Communications - channels (11), weather (6)
+Tab 5: Actions - request resources (15), broadcast (16), situation report (18)
+
+I'll use Tabs to keep this organized and manageable. Now I'll build out the full implementation.
+root = Card([header, zoneSelector, severitySummary, keyStats, mainTabs])
+
+header = CardHeader("Emergency Response Coordination Center", "Real-time operational dashboard — Last updated: 2 min ago")
+
+zoneSelector = Card([zoneLabel, zoneButtons], "sunk")
+zoneLabel = Heading("Focus Zone", "h4")
+zoneButtons = Buttons([allZonesBtn, zoneABtn, zoneBBtn, zoneCBtn, zoneDBtn])
+allZonesBtn = Button("All Zones", null, "primary")
+zoneABtn = Button("Zone A — North", null, "secondary")
+zoneBBtn = Button("Zone B — East", null, "secondary")
+zoneCBtn = Button("Zone C — South", null, "secondary")
+zoneDBtn = Button("Zone D — West", null, "secondary")
+
+severitySummary = Card([severityHeading, severityChart], "sunk")
+severityHeading = Heading("Overall Severity Distribution", "h4")
+severityChart = PieChart(["Critical", "High", "Medium", "Low"], [12, 28, 45, 33], "donut")
+
+keyStats = Card([rescuedStat, casualtyStat, donationStat], "sunk")
+rescuedStat = Callout("success", "People Rescued", "1,847 individuals evacuated to safety")
+casualtyStat = Callout("error", "Casualties", "23 confirmed — 8 fatal, 15 injured")
+donationStat = Callout("info", "Donations Received", "$2.4M in funds, 14,200 supply units")
+
+mainTabs = Tabs([tabIncidents, tabResources, tabOperations, tabActions])
+
+tabIncidents = TabItem("incidents", "Incidents & Zones", [incidentsTable, sheltersTable, evacuationRoutes])
+tabResources = TabItem("resources", "Resources & Personnel", [availabilityTable, volunteersTable, hospitalsTable])
+tabOperations = TabItem("operations", "Operations", [aidRequests, tasksTable, roadsClosed])
+tabActions = TabItem("actions", "Actions & Comms", [weatherTable, channelsList, resourceForm, broadcastForm, situationReportDialog])
+
+incidentsTable = Table([incZoneCol, incTypeCol, incSeverityCol, incTimeCol, incAffectedCol])
+incZoneCol = Col("Zone", ["Zone A", "Zone A", "Zone B", "Zone C", "Zone C", "Zone C", "Zone D", "Zone D", "Zone A", "Zone B", "Zone D", "Zone A"])
+incTypeCol = Col("Incident Type", ["Flood", "Flood", "Fire", "Landslide", "Flood", "Structural Collapse", "Fire", "Gas Leak", "Flood", "Fire", "Flood", "Power Outage"])
+incSeverityCol = Col("Severity", ["Critical", "High", "Critical", "High", "Medium", "Critical", "High", "Medium", "Medium", "High", "Low", "Low"])
+incTimeCol = Col("Reported", ["06:12", "06:15", "07:03", "07:45", "08:10", "08:22", "09:01", "09:30", "10:15", "10:45", "11:00", "11:30"])
+incAffectedCol = Col("Affected", ["~320", "~45", "~180", "~120", "~200", "~60", "~95", "~40", "~150", "~70", "~25", "~500"])
+
+sheltersTable = Table([shelterNameCol, shelterCapacityCol, shelterOccupancyCol, shelterStatusCol])
+shelterNameCol = Col("Shelter", ["Community Center Alpha", "High School Gym B", "Convention Hall C", "Church Hall D", "Sports Complex E", "Library Annex F"])
+shelterCapacityCol = Col("Capacity", [500, 350, 800, 200, 600, 150])
+shelterOccupancyCol = Col("Occupancy", [423, 298, 612, 187, 445, 132])
+shelterStatusCol = Col("Status", ["85% Full", "85% Full", "77% Full", "94% Full", "74% Full", "88% Full"])
+
+evacuationRoutes = Card([evacHeading, evacList], "sunk")
+evacHeading = Heading("Evacuation Routes Status", "h4")
+evacList = ListBlock([route1, route2, route3, route4, route5, route6], "image")
+route1 = ListItem("Route 1 — Highway North", "OPEN — Primary evacuation corridor", null, "Route Details")
+route2 = ListItem("Route 2 — River Road", "CLOSED — Flooded at mile marker 12", null, "Route Details")
+route3 = ListItem("Route 3 — Mountain Pass", "RESTRICTED — Landslide risk, single lane only", null, "Route Details")
+route4 = ListItem("Route 4 — Coastal Highway", "OPEN — Congested, 2hr delay expected", null, "Route Details")
+route5 = ListItem("Route 5 — Bridge Crossing", "CLOSED — Structural damage reported", null, "Route Details")
+route6 = ListItem("Route 6 — Forest Trail", "OPEN — Emergency vehicles only", null, "Route Details")
+
+availabilityTable = Table([resourceTypeCol, resourceAvailableCol, resourceDeployedCol, resourceStatusCol])
+resourceTypeCol = Col("Resource Type", ["Emergency Vehicles", "Ambulances", "Fire Trucks", "Personnel (Total)", "Search & Rescue Teams", "Water Trucks", "Generators", "Tents", "Blankets", "MRE Packs"])
+resourceAvailableCol = Col("Available", [45, 12, 8, 320, 14, 6, 22, 150, 5000, 12000])
+resourceDeployedCol = Col("Deployed", [32, 9, 6, 245, 11, 4, 15, 98, 3200, 8500])
+resourceStatusCol = Col("Status", ["71% deployed", "75% deployed", "75% deployed", "77% deployed", "79% deployed", "67% deployed", "68% deployed", "65% deployed", "64% deployed", "71% deployed"])
+
+volunteersTable = Table([volNameCol, volRoleCol, volAssignmentCol, volStatusCol])
+volNameCol = Col("Volunteer", ["Maria Chen", "James Wilson", "Aisha Patel", "Robert Kim", "Sarah Johnson", "David Martinez", "Emily Brown", "Michael Lee", "Jennifer Garcia", "Thomas Wright", "Lisa Anderson", "Carlos Ruiz"])
+volRoleCol = Col("Role", ["Medic", "Driver", "Coordinator", "Search & Rescue", "Communications", "Logistics", "Medic", "Driver", "Search & Rescue", "Coordinator", "Communications", "Logistics"])
+volAssignmentCol = Col("Assignment", ["Shelter Alpha", "Route 1 Transport", "Zone A Command", "Zone B Search", "Radio Ops", "Supply Depot", "Shelter Gamma", "Route 4 Transport", "Zone C Search", "Zone D Command", "Radio Ops", "Supply Depot"])
+volStatusCol = Col("Status", ["On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty", "On Duty"])
+
+hospitalsTable = Table([hospitalNameCol, hospitalBedsCol, hospitalFreeCol, hospitalSpecialtyCol])
+hospitalNameCol = Col("Hospital", ["General Hospital North", "City Medical Center", "St. Mary's Hospital", "Regional Trauma Center", "Community Health Clinic"])
+hospitalBedsCol = Col("Total Beds", [450, 380, 220, 520, 120])
+hospitalFreeCol = Col("Free Beds", [87, 42, 156, 31, 88])
+hospitalSpecialtyCol = Col("Specialty", ["General", "Trauma", "General", "Trauma/Burn", "General/Pediatric"])
+
+aidRequests = Card([aidHeading, aidList], "sunk")
+aidHeading = Heading("Aid Requests Awaiting Action", "h4")
+aidList = ListBlock([aid1, aid2, aid3, aid4, aid5], "number")
+aid1 = ListItem("Medical supplies — Zone C", "Urgent — 3 hospitals requesting IV fluids, bandages, antibiotics", null, "Dispatch")
+aid2 = ListItem("Food delivery — Shelter D", "High — 187 people, current stock lasts 6 hours", null, "Dispatch")
+aid3 = ListItem("Sandbags — Zone A riverbank", "Medium — Preventing flood spread to residential area", null, "Dispatch")
+aid4 = ListItem("Generator fuel — Shelter Alpha", "High — Backup power needed for 423 occupants", null, "Dispatch")
+aid5 = ListItem("Evacuation buses — Zone B", "Critical — 180 people need transport, Route 5 closed", null, "Dispatch")
+
+tasksTable = Table([taskNameCol, taskAssigneeCol, taskPriorityCol, taskStatusCol])
+taskNameCol = Col("Task", ["Deploy additional search teams to Zone C", "Coordinate shelter overflow protocol", "Establish temporary bridge at Route 5", "Restock medical supplies at all shelters", "Activate backup communication network", "Assess structural damage Zone C buildings", "Distribute emergency blankets", "Coordinate with National Guard"])
+taskAssigneeCol = Col("Assignee", ["Maria Chen", "Aisha Patel", "Robert Kim", "Sarah Johnson", "Emily Brown", "David Martinez", "Lisa Anderson", "Michael Lee"])
+taskPriorityCol = Col("Priority", ["Critical", "High", "Critical", "High", "Medium", "High", "Medium", "Critical"])
+taskStatusCol = Col("Status", ["In Progress", "Pending", "In Progress", "Assigned", "In Progress", "Assigned", "In Progress", "Assigned"])
+
+roadsClosed = Card([roadsHeading, roadsList], "sunk")
+roadsHeading = Heading("Roads Closed", "h4")
+roadsList = ListBlock([road1, road2, road3, road4, road5], "number")
+road1 = ListItem("River Road — Mile 10-14", "Flooding — Expected reopen: 24-48 hours", null, "Details")
+road2 = ListItem("Bridge Crossing (Route 5)", "Structural damage — Indefinite closure", null, "Details")
+road3 = ListItem("Pine Street — Downtown Zone C", "Landslide debris — Crews dispatched", null, "Details")
+road4 = ListItem("Elm Avenue — Zone A North", "Downed power lines — Electrical hazard", null, "Details")
+road5 = ListItem("Harbor Drive — Zone B Coast", "Erosion risk — Restricted access", null, "Details")
+
+weatherTable = Table([weatherTimeCol, weatherConditionCol, weatherTempCol, windCol, precipCol])
+weatherTimeCol = Col("Time", ["Now", "+6h", "+12h", "+18h", "+24h", "+30h", "+36h", "+42h", "+48h"])
+weatherConditionCol = Col("Condition", ["Heavy Rain", "Heavy Rain", "Moderate Rain", "Light Rain", "Cloudy", "Partly Cloudy", "Clear", "Clear", "Partly Cloudy"])
+weatherTempCol = Col("Temp (°F)", [62, 60, 58, 57, 56, 55, 54, 56, 58])
+windCol = Col("Wind (mph)", [25, 22, 18, 14, 10, 8, 6, 7, 9])
+precipCol = Col("Precip (%)", [95, 90, 75, 55, 30, 15, 5, 5, 20])
+
+channelsList = Card([channelsHeading, channelsBlock], "sunk")
+channelsHeading = Heading("Communication Channels", "h4")
+channelsBlock = ListBlock([ch1, ch2, ch3, ch4, ch5, ch6], "number")
+ch1 = ListItem("Radio Network (VHF)", "UP — All frequencies operational", null, "Status")
+ch2 = ListItem("Satellite Phone", "UP — 3 units active", null, "Status")
+ch3 = ListItem("Cellular Network", "DEGRADED — Zone A/B partial coverage", null, "Status")
+ch4 = ListItem("Emergency Broadcast System", "UP — Ready to transmit", null, "Status")
+ch5 = ListItem("Internet/Email", "UP — Stable via backup fiber", null, "Status")
+ch6 = ListItem("Amateur Radio (HAM)", "UP — 8 operators active", null, "Status")
+
+resourceForm = Form("resource-request", resourceButtons, [resourceTypeField, resourceQtyField, resourceZoneField, resourcePriorityField])
+resourceTypeField = FormControl("Resource Type", resourceTypeSelect)
+resourceTypeSelect = Select("res_type", [resMed, resFood, resWater, resVehicle, resPersonnel, resShelter, resPower], "Select resource type")
+resMed = SelectItem("medical", "Medical Supplies")
+resFood = SelectItem("food", "Food")
+resWater = SelectItem("water", "Water")
+resVehicle = SelectItem("vehicle", "Vehicles")
+resPersonnel = SelectItem("personnel", "Personnel")
+resShelter = SelectItem("shelter", "Shelter Materials")
+resPower = SelectItem("power", "Power/Generators")
+resourceQtyField = FormControl("Quantity", resourceQtyInput)
+resourceQtyInput = Input("res_qty", "e.g. 50 units", "number")
+resourceZoneField = FormControl("Target Zone", resourceZoneSelect)
+resourceZoneSelect = Select("res_zone", [zoneA, zoneB, zoneC, zoneD, zoneAll], "Select zone")
+zoneA = SelectItem("A", "Zone A — North")
+zoneB = SelectItem("B", "Zone B — East")
+zoneC = SelectItem("C", "Zone C — South")
+zoneD = SelectItem("D", "Zone D — West")
+zoneAll = SelectItem("all", "All Zones")
+resourcePriorityField = FormControl("Priority", resourcePriorityRadio)
+resourcePriorityRadio = RadioGroup("res_priority", [priCrit, priHigh, priMed], "urgency")
+priCrit = RadioItem("Critical — Immediate", "Deploy within 1 hour", "critical")
+priHigh = RadioItem("High — Urgent", "Deploy within 4 hours", "high")
+priMed = RadioItem("Medium — Standard", "Deploy within 12 hours", "medium")
+resourceButtons = Buttons([submitResourceBtn, cancelResourceBtn])
+submitResourceBtn = Button("Submit Request", null, "primary")
+cancelResourceBtn = Button("Cancel", null, "tertiary")
+
+broadcastForm = Form("broadcast-update", broadcastButtons, [broadcastMsgField, broadcastChannelField])
+broadcastMsgField = FormControl("Message", broadcastMsgInput)
+broadcastMsgInput = TextArea("broadcast_msg", "Enter your emergency broadcast message...", 4)
+broadcastChannelField = FormControl("Broadcast Channel", broadcastChannelSelect)
+broadcastChannelSelect = Select("broadcast_channel", [bcRadio, bcEBS, bcAll], "Select channel")
+bcRadio = SelectItem("radio", "Emergency Broadcast System")
+bcEBS = SelectItem("ebs", "Radio Network + EBS")
+bcAll = SelectItem("all", "All Channels")
+broadcastButtons = Buttons([submitBroadcastBtn, cancelBroadcastBtn])
+submitBroadcastBtn = Button("Broadcast Update", null, "primary")
+cancelBroadcastBtn = Button("Cancel", null, "tertiary")
+
+situationReportDialog = DialogBlock("File Situation Report", "Situation Report (SITREP)", "Submit a formal situation report for the current operational period", [sitrepForm])
+sitrepForm = Form("sitrep", sitrepButtons, [sitrepZoneField, sitrepSummaryField, sitrepInjuriesField, sitrepDestructionField, sitrepNeedsField])
+sitrepZoneField = FormControl("Zone", sitrepZoneSelect)
+sitrepZoneSelect = Select("sitrep_zone", [sitA, sitB, sitC, sitD, sitAll], "Select zone")
+sitA = SelectItem("A", "Zone A")
+sitB = SelectItem("B", "Zone B")
+sitC = SelectItem("C", "Zone C")
+sitD = SelectItem("D", "Zone D")
+sitAll = SelectItem("all", "All Zones")
+sitrepSummaryField = FormControl("Situation Summary", sitrepSummaryInput)
+sitrepSummaryInput = TextArea("sitrep_summary", "Describe current situation...", 4)
+sitrepInjuriesField = FormControl("Injuries Reported", sitrepInjuriesInput)
+sitrepInjuriesInput = Input("sitrep_injuries", "Number", "number")
+sitrepDestructionField = FormControl("Property Destruction Estimate", sitrepDestructionInput)
+sitrepDestructionInput = Input("sitrep_destruction", "$ estimated damage")
+sitrepNeedsField = FormControl("Immediate Needs", sitrepNeedsInput)
+sitrepNeedsInput = TextArea("sitrep_needs", "List critical needs...", 3)
+sitrepButtons = Buttons([submitSitrepBtn, cancelSitrepBtn])
+submitSitrepBtn = Button("Submit SITREP", null, "primary")
+cancelSitrepBtn = Button("Cancel", null, "tertiary")

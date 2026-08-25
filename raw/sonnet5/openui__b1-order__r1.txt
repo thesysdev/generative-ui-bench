@@ -1,0 +1,37 @@
+root = Card([header, currentLocation, etaCallout, trackingSteps, reportSection])
+
+header = CardHeader("Track Your Delivery", "Order #A38291-US")
+
+currentLocation = Card([locationHeading, locationDetail, locationTag], "sunk")
+locationHeading = Heading("Current Location", "h4")
+locationDetail = TextContent("Package is at the Columbus, OH distribution facility, last scanned 2 hours ago.", "default")
+locationTag = TagBlock(["In Transit", "Columbus, OH"])
+
+etaCallout = Callout("info", "Estimated Delivery", "Thursday, June 12 by 8:00 PM")
+
+trackingSteps = Steps([stepShipped, stepTransit, stepOutForDelivery, stepDelivered])
+stepShipped = StepsItem("Shipped", "Package picked up from seller warehouse in Dallas, TX on June 9.")
+stepTransit = StepsItem("In Transit", "Currently moving through Columbus, OH distribution facility.")
+stepOutForDelivery = StepsItem("Out for Delivery", "Expected to be loaded onto delivery vehicle June 12, morning.")
+stepDelivered = StepsItem("Delivered", "Not yet delivered.")
+
+reportSection = Card([reportHeading, reportText, reportDialog], "sunk")
+reportHeading = Heading("Having an issue?", "h4")
+reportText = TextContent("If something looks wrong with this delivery, let us know and our support team will follow up.", "default")
+reportDialog = DialogBlock("Report a Problem", "Report a Delivery Problem", "Tell us what's wrong and we'll investigate right away.", [reportForm], "destructive")
+
+reportForm = Form("report-issue", reportButtons, [issueTypeField, orderIdField, detailsField])
+issueTypeField = FormControl("Issue type", issueTypeSelect)
+issueTypeSelect = Select("issue_type", [optDelayed, optDamaged, optMissing, optWrongItem, optOther], "Select an issue")
+optDelayed = SelectItem("delayed", "Delivery delayed")
+optDamaged = SelectItem("damaged", "Package damaged")
+optMissing = SelectItem("missing", "Package missing")
+optWrongItem = SelectItem("wrong_item", "Wrong item received")
+optOther = SelectItem("other", "Other")
+orderIdField = FormControl("Order number", orderIdInput)
+orderIdInput = Input("order_id", "A38291-US", "text", null, "A38291-US")
+detailsField = FormControl("Describe the problem", detailsTextArea, "Include any relevant details, e.g. photos will be requested via email.")
+detailsTextArea = TextArea("details", "Describe what happened...", 4)
+reportButtons = Buttons([submitReportBtn, cancelReportBtn])
+submitReportBtn = Button("Submit Report", null, "primary")
+cancelReportBtn = Button("Cancel", null, "tertiary")

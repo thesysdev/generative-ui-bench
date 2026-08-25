@@ -1,0 +1,32 @@
+
+
+root = Card([header, kpiRow, trendSection, productsSection, conversionSection, downloadSection])
+
+header = CardHeader("Monthly Sales Check", "June 2025")
+
+kpiRow = Card([revenueKpi, conversionKpi], "sunk", "row", "m", "stretch", "between")
+
+revenueKpi = Card([revenueLabel, revenueValue], "clear")
+revenueLabel = TextContent("Revenue this month", "small")
+revenueValue = TextContent("$48,200", "large-heavy")
+
+conversionKpi = Card([conversionLabel, conversionValue], "clear")
+conversionLabel = TextContent("Conversion rate", "small")
+conversionValue = TextContent("4.7%", "large-heavy")
+
+trendSection = Card([trendHeading, trendChart], "sunk")
+trendHeading = Heading("Revenue — last 6 months", "h3")
+trendChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [revSeries], "natural", "Month", "USD")
+revSeries = Series("Revenue", [32400, 35100, 38700, 41200, 44800, 48200])
+
+productsSection = Card([productsHeading, productsTable], "sunk")
+productsHeading = Heading("Top 3 best-sellers", "h3")
+productsTable = Table([productCol, unitsCol])
+productCol = Col("Product", ["Wireless Earbuds Pro", "USB-C Hub 8-in-1", "Laptop Stand Aluminum"])
+unitsCol = Col("Units sold", [1240, 980, 760])
+
+conversionSection = Card([convNote], "clear")
+convNote = TextCallout("info", "Conversion", "4.7% of 10,260 site visits converted to a purchase this month, up from 4.1% in May.")
+
+downloadSection = Buttons([downloadBtn])
+downloadBtn = Button("Download full report (CSV)", null, "primary")

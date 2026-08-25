@@ -1,0 +1,21 @@
+thought
+root = Card([header, controls, metrics, charts, transactions], "card")
+header = CardHeader("Finance Overview", "Month-end report for October 2023")
+controls = Card([monthSelector, downloadBtn], "clear", "row", "m")
+monthSelector = FormControl("Select Month", Select("month", [oct, sep, aug], "October 2023"))
+oct = SelectItem("oct-2023", "October 2023")
+sep = SelectItem("sep-2023", "September 2023")
+aug = SelectItem("aug-2023", "August 2023")
+downloadBtn = Button("Download Statement", null, "secondary")
+metrics = Card([cashCard, burnCard, runwayCard], "card", "row", "l")
+cashCard = Card([CardHeader("Cash on Hand", ""), TextContent("$1,240,500", "large-heavy")], "sunk")
+burnCard = Card([CardHeader("Monthly Burn", ""), TextContent("$125,000", "large-heavy")], "sunk")
+runwayCard = Card([CardHeader("Runway", ""), TextContent("9.9 Months", "large-heavy")], "sunk")
+charts = Card([expenseChart], "card", "column", "m")
+expenseChart = Card([Heading("Expenses by Category", "h3"), PieChart(labels, values, "donut")])
+labels = ["R&D", "Marketing", "Sales", "Operations", "Other"]
+values = [65000, 25000, 15000, 10000, 10000]
+transactions = Card([Heading("Large Transactions (>$10k)", "h3"), Table([colDate, colVendor, colAmount])])
+colDate = Col("Date", ["2023-10-04", "2023-10-12", "2023-10-25"])
+colVendor = Col("Vendor", ["AWS Web Services", "Google Ads", "We Office Lease"])
+colAmount = Col("Amount", ["12400, 25500, 12000], "number")

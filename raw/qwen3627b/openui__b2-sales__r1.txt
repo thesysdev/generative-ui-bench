@@ -1,0 +1,28 @@
+root = Card([header, revenueCard, trendCard, productsCard, conversionCard, actions], "card", "column", "m")
+
+header = CardHeader("Monthly Sales Check", "December 2024")
+
+revenueCard = Card([revenueHeading, revenueAmount], "sunk")
+revenueHeading = Heading("Revenue This Month", "h3")
+revenueAmount = TextContent("$127,400", "large-heavy")
+
+trendCard = Card([trendHeading, trendChart], "sunk")
+trendHeading = Heading("Revenue Trend (6 Months)", "h3")
+trendChart = LineChart(monthLabels, [revenueSeries], "natural", "Month", "Revenue (USD)")
+monthLabels = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+revenueSeries = Series("Revenue", [98200, 105800, 112300, 98700, 119600, 127400])
+
+productsCard = Card([productsHeading, productsTable], "sunk")
+productsHeading = Heading("Top 3 Best-Selling Products", "h3")
+productsTable = Table([productCol, unitsCol, revenueCol])
+productCol = Col("Product", ["Widget Pro", "Starter Kit", "Premium Bundle"])
+unitsCol = Col("Units Sold", [1247, 983, 642])
+revenueCol = Col("Revenue", ["$62,350", "$49,150", "$38,520"])
+
+conversionCard = Card([conversionHeading, conversionBadge, conversionBar], "sunk")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionBadge = Badge("3.8%", "default")
+conversionBar = Progress(38, "3.8% of visitors purchased")
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download Report")

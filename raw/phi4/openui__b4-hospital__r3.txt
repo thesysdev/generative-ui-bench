@@ -1,0 +1,121 @@
+```openui
+root = Card([
+    bedOccupancySection,
+    erWaitSection,
+    admissionsChartSection,
+    patientsPerDeptSection,
+    staffOnShiftSection,
+    criticalPatientsSection,
+    dischargeSection,
+    orBookingsSection,
+    suppliesSection,
+    incidentReportSection,
+    dayNavigationSection,
+    patientTransferSection
+])
+
+bedOccupancySection = Card([
+    CardHeader("Bed Occupancy", "Current Status"),
+    bedOccupancyChart
+])
+bedOccupancyChart = PieChart(["Occupied", "Available"], [70, 30], "donut")
+
+erWaitSection = Card([
+    CardHeader("ER Wait Time", "Current Queue"),
+    erWaitChart
+])
+erWaitChart = HorizontalBarChart(["Now"], [25], "grouped")
+
+admissionsChartSection = Card([
+    CardHeader("Admissions Over Two Weeks", "Trend Analysis"),
+    admissionsLineChart
+])
+admissionsLineChart = LineChart(["Week 1", "Week 2"], [
+    Series("Admissions", [120, 150])
+])
+
+patientsPerDeptSection = Card([
+    CardHeader("Patients Per Department", "Current Distribution"),
+    patientsPerDeptTable
+])
+patientsPerDeptTable = Table([
+    Col("Department", ["ER", "Surgery", "ICU"]),
+    Col("Patients", [80, 45, 20])
+])
+
+staffOnShiftSection = Card([
+    CardHeader("Staff On Shift", "Roles & Assignments"),
+    staffOnShiftTable
+])
+staffOnShiftTable = Table([
+    Col("Name", ["Alice", "Bob", "Charlie"]),
+    Col("Role", ["Nurse", "Doctor", "Surgeon"]),
+    Col("Department", ["ER", "Surgery", "ICU"])
+])
+
+criticalPatientsSection = Card([
+    CardHeader("Critical Patients", "Immediate Attention"),
+    criticalPatientsCallout
+])
+criticalPatientsCallout = Callout("critical", "John Doe - Critical", "Requires immediate surgery")
+
+dischargeSection = Card([
+    CardHeader("Patients Ready for Discharge", "Today's List"),
+    dischargeListBlock
+])
+dischargeListBlock = ListBlock([
+    ListItem("Jane Smith", "Room 203"),
+    ListItem("Michael Johnson", "Room 105")
+])
+
+orBookingsSection = Card([
+    CardHeader("Operating Room Bookings", "Today"),
+    orBookingsListBlock
+])
+orBookingsListBlock = ListBlock([
+    ListItem("Surgery 1 - 9:00 AM", "Dr. Smith"),
+    ListItem("Surgery 2 - 11:00 AM", "Dr. Doe")
+])
+
+suppliesSection = Card([
+    CardHeader("Low Supplies", "Critical Inventory"),
+    suppliesListBlock
+])
+suppliesListBlock = ListBlock([
+    ListItem("Surgical Gloves", "Low Stock"),
+    ListItem("Sterile Drapes", "Low Stock")
+])
+
+incidentReportSection = Card([
+    CardHeader("File an Incident", null),
+    incidentForm
+])
+incidentForm = Form("incident-report", incidentFormButtons, [
+    incidentField
+])
+incidentField = FormControl("Description", incidentTextArea)
+incidentTextArea = TextArea("incident_description", "Describe the incident...")
+incidentFormButtons = Buttons([submitIncidentBtn])
+submitIncidentBtn = Button("Submit Incident", null, "primary")
+
+dayNavigationSection = Card([
+    CardHeader("View Another Day", null),
+    dayNavigationButtons
+])
+dayNavigationButtons = Buttons([
+    Button("Previous Day", null, "secondary"),
+    Button("Next Day", null, "secondary")
+], "row")
+
+patientTransferSection = Card([
+    CardHeader("Request Patient Transfer", null),
+    transferForm
+])
+transferForm = Form("patient-transfer", transferFormButtons, [
+    transferField
+])
+transferField = FormControl("Transfer Details", transferTextArea)
+transferTextArea = TextArea("transfer_details", "Enter transfer details...")
+transferFormButtons = Buttons([submitTransferBtn])
+submitTransferBtn = Button("Request Transfer", null, "primary")
+```

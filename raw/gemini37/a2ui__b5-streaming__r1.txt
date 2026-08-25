@@ -1,0 +1,1051 @@
+Here is the complete Operations Room monitoring and management screen for your streaming service.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "opsHeader",
+          "liveOpsAlert",
+          "regionFilterForm",
+          "tabsContainer"
+        ]
+      },
+      {
+        "id": "opsHeader",
+        "component": "CardHeader",
+        "title": "Global Streaming Operations Center",
+        "subtitle": "Real-time telemetry, audience engagement, content lifecycle & operational controls"
+      },
+      {
+        "id": "liveOpsAlert",
+        "component": "Alert",
+        "title": "Delivery & Platform Status: Optimal",
+        "description": "Global CDN re-routing active. Global rebuffering rate steady at nominal target (0.34%).",
+        "variant": "success"
+      },
+      {
+        "id": "regionFilterForm",
+        "component": "Form",
+        "name": "region_focus_form",
+        "buttons": "regionActionBtns",
+        "fields": [
+          "regionSelectControl"
+        ]
+      },
+      {
+        "id": "regionSelectControl",
+        "component": "FormControl",
+        "label": "Operational Region Focus (14)",
+        "hint": "Filter live telemetry, delivery health, and user metrics by broadcast region",
+        "input": "regionDropdown"
+      },
+      {
+        "id": "regionDropdown",
+        "component": "Select",
+        "name": "selected_region",
+        "placeholder": "Select operational region...",
+        "items": [
+          "regionAll",
+          "regionNA",
+          "regionEU",
+          "regionAPAC",
+          "regionLATAM"
+        ]
+      },
+      {
+        "id": "regionAll",
+        "component": "SelectItem",
+        "value": "global",
+        "label": "All Regions (Global)"
+      },
+      {
+        "id": "regionNA",
+        "component": "SelectItem",
+        "value": "na",
+        "label": "North America (NA-EAST / NA-WEST)"
+      },
+      {
+        "id": "regionEU",
+        "component": "SelectItem",
+        "value": "eu",
+        "label": "Europe (EU-CENTRAL / EU-WEST)"
+      },
+      {
+        "id": "regionAPAC",
+        "component": "SelectItem",
+        "value": "apac",
+        "label": "Asia-Pacific (APAC-SOUTH / APAC-EAST)"
+      },
+      {
+        "id": "regionLATAM",
+        "component": "SelectItem",
+        "value": "latam",
+        "label": "Latin America (LATAM-SOUTH)"
+      },
+      {
+        "id": "regionActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "applyRegionBtn",
+          "resetRegionBtn"
+        ]
+      },
+      {
+        "id": "applyRegionBtn",
+        "component": "Button",
+        "label": "Apply Region Focus",
+        "variant": "primary"
+      },
+      {
+        "id": "resetRegionBtn",
+        "component": "Button",
+        "label": "Reset View",
+        "variant": "secondary"
+      },
+      {
+        "id": "tabsContainer",
+        "component": "Tabs",
+        "items": [
+          "tabLiveAudience",
+          "tabContentCatalog",
+          "tabInfrastructure",
+          "tabOpsControls"
+        ]
+      },
+      {
+        "id": "tabLiveAudience",
+        "component": "TabItem",
+        "value": "live_audience",
+        "trigger": "Live & Audience Analytics",
+        "content": [
+          "liveOverviewCard",
+          "watchTrendCard",
+          "subscribersCard",
+          "discoveryCard"
+        ]
+      },
+      {
+        "id": "liveOverviewCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "liveKpiHeader",
+          "liveKpiTable",
+          "deviceSplitTitle",
+          "deviceSplitChart"
+        ]
+      },
+      {
+        "id": "liveKpiHeader",
+        "component": "CardHeader",
+        "title": "Live Streaming & Audience Distribution",
+        "subtitle": "Real-time active concurrency and client device split"
+      },
+      {
+        "id": "liveKpiTable",
+        "component": "Table",
+        "columns": [
+          "liveKpiLabelCol",
+          "liveKpiValCol",
+          "liveKpiTrendCol"
+        ]
+      },
+      {
+        "id": "liveKpiLabelCol",
+        "component": "Col",
+        "label": "Telemetry Indicator",
+        "data": [
+          "Viewers Watching Right Now (1)",
+          "Recommendation Click-Through Rate (10)",
+          "Zero-Playback Searches (Ended without playback) (11)"
+        ]
+      },
+      {
+        "id": "liveKpiValCol",
+        "component": "Col",
+        "label": "Current Metric",
+        "data": [
+          "4,821,390 concurrent viewers",
+          "28.6% CTR",
+          "4.2% of total search queries"
+        ]
+      },
+      {
+        "id": "liveKpiTrendCol",
+        "component": "Col",
+        "label": "Status vs Benchmark",
+        "data": [
+          "+12.4% vs peak window",
+          "+3.1% lift (ML v4 ranker)",
+          "Normal (threshold < 5.0%)"
+        ]
+      },
+      {
+        "id": "deviceSplitTitle",
+        "component": "Heading",
+        "text": "Viewing Split by Device (13)",
+        "level": "h4"
+      },
+      {
+        "id": "deviceSplitChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Smart TV / OTT (Living Room)",
+          "Mobile iOS / Android",
+          "Desktop Web",
+          "Gaming Consoles",
+          "Tablets"
+        ],
+        "values": [
+          54,
+          24,
+          11,
+          7,
+          4
+        ]
+      },
+      {
+        "id": "watchTrendCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "watchTrendHeader",
+          "watchTimeMonthChart"
+        ]
+      },
+      {
+        "id": "watchTrendHeader",
+        "component": "CardHeader",
+        "title": "Watch Time Over the Past Month (3)",
+        "subtitle": "Daily total hours streamed (Millions of Hours)"
+      },
+      {
+        "id": "watchTimeMonthChart",
+        "component": "AreaChart",
+        "variant": "natural",
+        "labels": [
+          "Day 1-5",
+          "Day 6-10",
+          "Day 11-15",
+          "Day 16-20",
+          "Day 21-25",
+          "Day 26-30"
+        ],
+        "series": [
+          "watchTimeSeries"
+        ],
+        "xLabel": "Past 30 Days (5-Day Intervals)",
+        "yLabel": "Million Hours Streamed"
+      },
+      {
+        "id": "watchTimeSeries",
+        "component": "Series",
+        "category": "Streamed Hours (M)",
+        "values": [
+          62.4,
+          68.1,
+          74.9,
+          71.3,
+          85.7,
+          92.4
+        ]
+      },
+      {
+        "id": "subscribersCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "subsHeader",
+          "subsComparisonChart"
+        ]
+      },
+      {
+        "id": "subsHeader",
+        "component": "CardHeader",
+        "title": "Subscriber Dynamics: New vs. Cancellations (4)",
+        "subtitle": "Weekly acquisition against churn (in thousands)"
+      },
+      {
+        "id": "subsComparisonChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "labels": [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4"
+        ],
+        "series": [
+          "newSubsSeries",
+          "churnSubsSeries"
+        ],
+        "xLabel": "Billing Cycle Weeks",
+        "yLabel": "Subscribers (k)"
+      },
+      {
+        "id": "newSubsSeries",
+        "component": "Series",
+        "category": "New Subscribers",
+        "values": [
+          142,
+          168,
+          155,
+          194
+        ]
+      },
+      {
+        "id": "churnSubsSeries",
+        "component": "Series",
+        "category": "Cancellations",
+        "values": [
+          38,
+          42,
+          36,
+          41
+        ]
+      },
+      {
+        "id": "discoveryCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "discoveryHeader",
+          "revPlanChart"
+        ]
+      },
+      {
+        "id": "discoveryHeader",
+        "component": "CardHeader",
+        "title": "Revenue Split by Plan (12)",
+        "subtitle": "Subscription tier gross distribution"
+      },
+      {
+        "id": "revPlanChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "labels": [
+          "Premium 4K HDR ($22.99)",
+          "Standard HD Ad-Free ($15.99)",
+          "Standard With Ads ($7.99)",
+          "Family Multi-Home ($29.99)"
+        ],
+        "values": [
+          42,
+          31,
+          19,
+          8
+        ]
+      },
+      {
+        "id": "tabContentCatalog",
+        "component": "TabItem",
+        "value": "content_catalog",
+        "trigger": "Content & Programming",
+        "content": [
+          "mostWatchedCard",
+          "genrePerformanceCard",
+          "upcomingReleasesCard",
+          "expiringLicensesCard"
+        ]
+      },
+      {
+        "id": "mostWatchedCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "mostWatchedHeader",
+          "mostWatchedChart"
+        ]
+      },
+      {
+        "id": "mostWatchedHeader",
+        "component": "CardHeader",
+        "title": "Most-Watched Titles with Hours (2)",
+        "subtitle": "Top streamed titles ranked by total viewing hours this cycle"
+      },
+      {
+        "id": "mostWatchedChart",
+        "component": "HorizontalBarChart",
+        "variant": "grouped",
+        "labels": [
+          "Chronicles of Solaris (S3)",
+          "Cyber Horizon: Tokyo",
+          "The Midnight Court",
+          "Champions Cup Live",
+          "Underground Symphony",
+          "Cosmic Odyssey: Deep Space"
+        ],
+        "series": [
+          "mostWatchedSeries"
+        ],
+        "xLabel": "Viewing Hours (Millions)",
+        "yLabel": "Title"
+      },
+      {
+        "id": "mostWatchedSeries",
+        "component": "Series",
+        "category": "Hours Streamed (M)",
+        "values": [
+          48.6,
+          39.2,
+          33.8,
+          27.4,
+          22.1,
+          18.5
+        ]
+      },
+      {
+        "id": "genrePerformanceCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "genreHeader",
+          "genreRadar"
+        ]
+      },
+      {
+        "id": "genreHeader",
+        "component": "CardHeader",
+        "title": "Performance by Genre (5)",
+        "subtitle": "Multi-axis engagement index (Hours, Completion %, Repeat Views, Share Rate)"
+      },
+      {
+        "id": "genreRadar",
+        "component": "RadarChart",
+        "labels": [
+          "Sci-Fi & Fantasy",
+          "Crime Thriller",
+          "Live Sports",
+          "Comedy",
+          "Documentary",
+          "Animation & Anime"
+        ],
+        "series": [
+          "genreEngagementSeries",
+          "genreCompletionSeries"
+        ]
+      },
+      {
+        "id": "genreEngagementSeries",
+        "component": "Series",
+        "category": "Engagement Score",
+        "values": [
+          92,
+          84,
+          88,
+          65,
+          72,
+          81
+        ]
+      },
+      {
+        "id": "genreCompletionSeries",
+        "component": "Series",
+        "category": "Completion Rate %",
+        "values": [
+          88,
+          79,
+          94,
+          70,
+          68,
+          85
+        ]
+      },
+      {
+        "id": "upcomingReleasesCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "upcomingHeader",
+          "upcomingTable"
+        ]
+      },
+      {
+        "id": "upcomingHeader",
+        "component": "CardHeader",
+        "title": "Releases Coming This Month (8)",
+        "subtitle": "Scheduled premieres and ingest readiness"
+      },
+      {
+        "id": "upcomingTable",
+        "component": "Table",
+        "columns": [
+          "relDateCol",
+          "relTitleCol",
+          "relTypeCol",
+          "relStatusCol"
+        ]
+      },
+      {
+        "id": "relDateCol",
+        "component": "Col",
+        "label": "Release Date",
+        "data": [
+          "Nov 12, 2025",
+          "Nov 18, 2025",
+          "Nov 24, 2025",
+          "Nov 28, 2025"
+        ]
+      },
+      {
+        "id": "relTitleCol",
+        "component": "Col",
+        "label": "Title & Season",
+        "data": [
+          "Echoes of the Wasteland (Original Movie)",
+          "Kingdom of Secrets (Season 2)",
+          "European Champions League Semi-Final",
+          "Neon Tokyo: Origins (Anime Series)"
+        ]
+      },
+      {
+        "id": "relTypeCol",
+        "component": "Col",
+        "label": "Format",
+        "data": [
+          "4K Dolby Vision / Atmos",
+          "4K HDR10+",
+          "1080p60 Ultra-Low Latency",
+          "4K HDR"
+        ]
+      },
+      {
+        "id": "relStatusCol",
+        "component": "Col",
+        "label": "Ingest / QC State",
+        "data": [
+          "CDN Replicated (Ready)",
+          "Audio Dubbing QC In Progress",
+          "Live Ingest Line Tested",
+          "Master Ingest Complete"
+        ]
+      },
+      {
+        "id": "expiringLicensesCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "expiringHeader",
+          "expiringTable"
+        ]
+      },
+      {
+        "id": "expiringHeader",
+        "component": "CardHeader",
+        "title": "Licenses Expiring Soon (9)",
+        "subtitle": "Window expiries requiring renewal or catalog takedown notice"
+      },
+      {
+        "id": "expiringTable",
+        "component": "Table",
+        "columns": [
+          "licTitleCol",
+          "licOwnerCol",
+          "licDaysCol",
+          "licActionCol"
+        ]
+      },
+      {
+        "licTitleCol",
+        "id": "licTitleCol",
+        "component": "Col",
+        "label": "Licensed Content",
+        "data": [
+          "Velocity Drift: Tokyo (2018)",
+          "Detective Brooks: Case Files",
+          "Bistro Paris Classics Collection",
+          "Great Oceans Wildlife Trilogy"
+        ]
+      },
+      {
+        "id": "licOwnerCol",
+        "component": "Col",
+        "label": "Licensor / Studio",
+        "data": [
+          "Apex Pictures",
+          "Nordic TV Distribution",
+          "Studio Lumiere",
+          "Terra Media Group"
+        ]
+      },
+      {
+        "id": "licDaysCol",
+        "component": "Col",
+        "label": "Expires In",
+        "data": [
+          "6 Days (Nov 15)",
+          "11 Days (Nov 20)",
+          "18 Days (Nov 27)",
+          "26 Days (Dec 05)"
+        ]
+      },
+      {
+        "id": "licActionCol",
+        "component": "Col",
+        "label": "Ops Action",
+        "data": [
+          "Renewal Pending Signature",
+          "Scheduled for Deprecation",
+          "Renewal in Legal Review",
+          "Auto-Takedown Scheduled"
+        ]
+      },
+      {
+        "id": "tabInfrastructure",
+        "component": "TabItem",
+        "value": "infrastructure",
+        "trigger": "QoE & Delivery Health",
+        "content": [
+          "qosSummaryCard",
+          "deliveryHealthCard"
+        ]
+      },
+      {
+        "id": "qosSummaryCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "qosHeader",
+          "bufferingRateText",
+          "bufferingRateProgress",
+          "qosTable"
+        ]
+      },
+      {
+        "id": "qosHeader",
+        "component": "CardHeader",
+        "title": "Playback QoE & Buffering Metrics",
+        "subtitle": "Global Quality of Experience telemetry across active client sessions"
+      },
+      {
+        "id": "bufferingRateText",
+        "component": "TextContent",
+        "text": "**Buffering Rate (6):** **0.34%** (SLA Target: < 0.50% of total session playtime spent buffering)",
+        "size": "default"
+      },
+      {
+        "id": "bufferingRateProgress",
+        "component": "Progress",
+        "value": 34,
+        "label": "Global Buffer Impact: 0.34% (Safe threshold)"
+      },
+      {
+        "id": "qosTable",
+        "component": "Table",
+        "columns": [
+          "qoeMetricCol",
+          "qoeValueCol",
+          "qoeSlaCol"
+        ]
+      },
+      {
+        "id": "qoeMetricCol",
+        "component": "Col",
+        "label": "QoE Factor",
+        "data": [
+          "Startup Time (Time to First Frame)",
+          "Playback Bitrate Average",
+          "Frame Drop Rate",
+          "Fatal Playback Failure Rate"
+        ]
+      },
+      {
+        "id": "qoeValueCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "820 ms",
+          "14.8 Mbps (4K Streams)",
+          "0.02%",
+          "0.008%"
+        ]
+      },
+      {
+        "id": "qoeSlaCol",
+        "component": "Col",
+        "label": "Target SLA",
+        "data": [
+          "< 1,200 ms",
+          "> 12.0 Mbps",
+          "< 0.10%",
+          "< 0.050%"
+        ]
+      },
+      {
+        "id": "deliveryHealthCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "deliveryHeader",
+          "deliveryTable"
+        ]
+      },
+      {
+        "id": "deliveryHeader",
+        "component": "CardHeader",
+        "title": "Delivery Health by Region (7)",
+        "subtitle": "CDN edge server performance, egress throughput, and latency per region"
+      },
+      {
+        "id": "deliveryTable",
+        "component": "Table",
+        "columns": [
+          "edgeRegionCol",
+          "edgeThroughputCol",
+          "edgeCacheHitCol",
+          "edgeLatencyCol",
+          "edgeStatusCol"
+        ]
+      },
+      {
+        "id": "edgeRegionCol",
+        "component": "Col",
+        "label": "Edge Region",
+        "data": [
+          "North America East (us-east)",
+          "North America West (us-west)",
+          "Europe Central (eu-central)",
+          "Asia Pacific (ap-northeast)",
+          "Latin America (sa-east)"
+        ]
+      },
+      {
+        "id": "edgeThroughputCol",
+        "component": "Col",
+        "label": "Egress",
+        "data": [
+          "18.4 Tbps",
+          "14.1 Tbps",
+          "21.6 Tbps",
+          "16.8 Tbps",
+          "6.2 Tbps"
+        ]
+      },
+      {
+        "id": "edgeCacheHitCol",
+        "component": "Col",
+        "label": "Edge Cache Hit",
+        "data": [
+          "98.8%",
+          "99.1%",
+          "98.4%",
+          "97.9%",
+          "96.8%"
+        ]
+      },
+      {
+        "id": "edgeLatencyCol",
+        "component": "Col",
+        "label": "P95 TTFB",
+        "data": [
+          "18 ms",
+          "21 ms",
+          "16 ms",
+          "24 ms",
+          "38 ms"
+        ]
+      },
+      {
+        "id": "edgeStatusCol",
+        "component": "Col",
+        "label": "Health Status",
+        "data": [
+          "Operational (Healthy)",
+          "Operational (Healthy)",
+          "Operational (Healthy)",
+          "Operational (Healthy)",
+          "Degraded CDN Edge (Mitigated)"
+        ]
+      },
+      {
+        "id": "tabOpsControls",
+        "component": "TabItem",
+        "value": "ops_controls",
+        "trigger": "Platform Controls & Flags",
+        "content": [
+          "promoteTitleCard",
+          "featureFlagsCard"
+        ]
+      },
+      {
+        "id": "promoteTitleCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "promoteHeader",
+          "promoteForm"
+        ]
+      },
+      {
+        "id": "promoteHeader",
+        "component": "CardHeader",
+        "title": "Promote Title on Home Screen (16)",
+        "subtitle": "Pin featured hero billboard, set carousel override, and target user segments"
+      },
+      {
+        "id": "promoteForm",
+        "component": "Form",
+        "name": "home_promotion_form",
+        "buttons": "promoteActionBtns",
+        "fields": [
+          "promoteTitleControl",
+          "promoteSlotControl",
+          "promoteBadgeControl"
+        ]
+      },
+      {
+        "id": "promoteTitleControl",
+        "component": "FormControl",
+        "label": "Title to Promote",
+        "hint": "Search catalog title, series ID, or live broadcast event",
+        "input": "promoteTitleInput"
+      },
+      {
+        "id": "promoteTitleInput",
+        "component": "Input",
+        "name": "target_title",
+        "placeholder": "e.g. Chronicles of Solaris (S3) or Live Champions Cup"
+      },
+      {
+        "id": "promoteSlotControl",
+        "component": "FormControl",
+        "label": "Promotion Placement Slot",
+        "input": "promoteSlotSelect"
+      },
+      {
+        "id": "promoteSlotSelect",
+        "component": "Select",
+        "name": "placement_slot",
+        "placeholder": "Select home screen slot...",
+        "items": [
+          "slotHero",
+          "slotTrending",
+          "slotTopTen",
+          "slotSpotlight"
+        ]
+      },
+      {
+        "id": "slotHero",
+        "component": "SelectItem",
+        "value": "hero_billboard",
+        "label": "Top Hero Billboard (Global 1st Viewport)"
+      },
+      {
+        "id": "slotTrending",
+        "component": "SelectItem",
+        "value": "trending_row_1",
+        "label": "Trending Now - Position #1"
+      },
+      {
+        "id": "slotTopTen",
+        "component": "SelectItem",
+        "value": "top_ten_spotlight",
+        "label": "Today's Top 10 Showcase"
+      },
+      {
+        "id": "slotSpotlight",
+        "component": "SelectItem",
+        "value": "curators_pick",
+        "label": "Curator's Spotlight Row"
+      },
+      {
+        "id": "promoteBadgeControl",
+        "component": "FormControl",
+        "label": "Overlay Callout Badge",
+        "input": "promoteBadgeInput"
+      },
+      {
+        "id": "promoteBadgeInput",
+        "component": "Input",
+        "name": "badge_text",
+        "placeholder": "e.g. NEW SEASON TODAY | WATCH LIVE IN 4K"
+      },
+      {
+        "id": "promoteActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "publishPromoBtn",
+          "previewPromoBtn"
+        ]
+      },
+      {
+        "id": "publishPromoBtn",
+        "component": "Button",
+        "label": "Publish Promotion to Home Screen",
+        "variant": "primary"
+      },
+      {
+        "id": "previewPromoBtn",
+        "component": "Button",
+        "label": "Preview on Test Devices",
+        "variant": "secondary"
+      },
+      {
+        "id": "featureFlagsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "flagsHeader",
+          "flagsTable",
+          "flagsToggleGroup"
+        ]
+      },
+      {
+        "id": "flagsHeader",
+        "component": "CardHeader",
+        "title": "Feature Flags with State for Each (15)",
+        "subtitle": "Active runtime configuration toggles and rollout states"
+      },
+      {
+        "id": "flagsTable",
+        "component": "Table",
+        "columns": [
+          "flagNameCol",
+          "flagKeyCol",
+          "flagRolloutCol",
+          "flagStatusCol"
+        ]
+      },
+      {
+        "id": "flagNameCol",
+        "component": "Col",
+        "label": "Feature Flag Name",
+        "data": [
+          "AV1 Codec Auto-Negotiation",
+          "Ultra-Low Latency Live Pipeline",
+          "AI Personalized Thumbnail Generator",
+          "Skip Intro Auto-Detection v3",
+          "Interactive Watch Party Sync"
+        ]
+      },
+      {
+        "id": "flagKeyCol",
+        "component": "Col",
+        "label": "Flag Identifier",
+        "data": [
+          "core.player.av1_auto_enable",
+          "live.pipeline.ull_hls_dash",
+          "discovery.ai.thumbnails_v4",
+          "playback.audio.skip_intro_v3",
+          "social.sync.watch_party_rtc"
+        ]
+      },
+      {
+        "id": "flagRolloutCol",
+        "component": "Col",
+        "label": "Rollout %",
+        "data": [
+          "100% (All devices)",
+          "45% (Phased Canary)",
+          "80% (Production A/B)",
+          "100% (Global)",
+          "15% (Beta Tier)"
+        ]
+      },
+      {
+        "id": "flagStatusCol",
+        "component": "Col",
+        "label": "State",
+        "data": [
+          "ACTIVE / ENABLED",
+          "CANARY ACTIVE",
+          "A/B TEST ACTIVE",
+          "ACTIVE / ENABLED",
+          "RESTRICTED BETA"
+        ]
+      },
+      {
+        "id": "flagsToggleGroup",
+        "component": "SwitchGroup",
+        "name": "quick_toggle_flags",
+        "variant": "card",
+        "items": [
+          "switchAv1",
+          "switchUll",
+          "switchAiThumbs",
+          "switchSkipIntro",
+          "switchWatchParty"
+        ]
+      },
+      {
+        "id": "switchAv1",
+        "component": "SwitchItem",
+        "name": "flag_av1",
+        "label": "AV1 Codec Auto-Negotiation",
+        "description": "State: Enabled (100% rollout)",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchUll",
+        "component": "SwitchItem",
+        "name": "flag_ull",
+        "label": "Ultra-Low Latency Live Pipeline",
+        "description": "State: Canary Enabled (45% rollout)",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchAiThumbs",
+        "component": "SwitchItem",
+        "name": "flag_ai_thumbs",
+        "label": "AI Personalized Thumbnail Generator",
+        "description": "State: Enabled (80% rollout)",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchSkipIntro",
+        "component": "SwitchItem",
+        "name": "flag_skip_intro",
+        "label": "Skip Intro Auto-Detection v3",
+        "description": "State: Enabled (100% rollout)",
+        "defaultChecked": true
+      },
+      {
+        "id": "switchWatchParty",
+        "component": "SwitchItem",
+        "name": "flag_watch_party",
+        "label": "Interactive Watch Party Sync",
+        "description": "State: Restricted Beta (15% rollout)",
+        "defaultChecked": true
+      }
+    ]
+  }
+}
+</a2ui-json>

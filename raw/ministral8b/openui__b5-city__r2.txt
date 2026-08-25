@@ -1,0 +1,194 @@
+```openui-lang
+root = Card([
+    header,
+    mainDashboard,
+    districtFilter,
+    dispatchControls,
+    publicAlertForm,
+    incidentList,
+    citizenReports,
+    weatherNow,
+    roadworksSection,
+    maintenanceJobs
+])
+
+header = CardHeader("City Operations Center", "Real-time monitoring and management")
+
+mainDashboard = Card([
+    congestionStatus,
+    punctualityChart,
+    airQualityMap,
+    energyTrend,
+    waterUsage
+], "sunk")
+
+congestionStatus = Card([
+    CardHeader("Current Congestion", "Downtown"),
+    Callout("High", "Traffic on I-95 and Main St.", "warning"),
+    Progress(85, "85% of usual")
+], "card")
+
+punctualityChart = Card([
+    CardHeader("Transit Punctuality", "Real-time"),
+    LineChart(
+        ["7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM"],
+        [punctualitySeries],
+        "natural",
+        "Time of Day",
+        "Punctuality (%)"
+    )
+], "card")
+punctualitySeries = Series("Bus/Subway", [88, 92, 95, 89, 90, 87, 91, 85])
+
+airQualityMap = Card([
+    CardHeader("Air Quality by District", "PM2.5 Levels"),
+    HorizontalBarChart(
+        ["Downtown", "Northside", "Eastside", "Westside", "Southside"],
+        [airQualitySeries],
+        "grouped",
+        "District",
+        "µg/m³"
+    )
+], "card")
+airQualitySeries = Series("Current AQI", [42, 28, 35, 52, 22])
+
+energyTrend = Card([
+    CardHeader("Energy Use (Past Week)", "kWh"),
+    AreaChart(
+        ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        [energySeries],
+        "linear",
+        "Day",
+        "Energy Consumption"
+    )
+], "card")
+energySeries = Series("Total Usage", [12500, 11800, 12200, 13000, 12700, 14000, 13500])
+
+waterUsage = Card([
+    CardHeader("Water Use Today", "Gallons"),
+    SingleStackedBarChart(
+        ["Residential", "Commercial", "Industrial", "Leakage"],
+        [1500000, 800000, 400000, 120000]
+    )
+], "card")
+
+districtFilter = Card([
+    CardHeader("Focus District", "Select a district to zoom in"),
+    Select("focusDistrict", [
+        districtOption("Downtown", "downtown"),
+        districtOption("Northside", "northside"),
+        districtOption("Eastside", "eastside"),
+        districtOption("Westside", "westside"),
+        districtOption("Southside", "southside")
+    ], "Select district", null, null, "medium")
+], "sunk")
+
+districtOption = SelectItem("Downtown", "downtown")
+
+dispatchControls = Card([
+    CardHeader("Dispatch Crew", "Select service and location"),
+    FormControl("Service Type", dispatchServiceSelect),
+    FormControl("Location", dispatchLocationSelect),
+    Buttons([dispatchButton]),
+    TextContent("Dispatches go to: Emergency Response Team")
+], "sunk")
+
+dispatchServiceSelect = Select("serviceType", [
+    serviceOption("Fire", "fire"),
+    serviceOption("Police", "police"),
+    serviceOption("Medical", "medical"),
+    serviceOption("Plumbing", "plumbing"),
+    serviceOption("Road Repair", "roadrepair")
+], "Select service", null, null, "medium")
+serviceOption = SelectItem("Fire", "fire")
+
+dispatchLocationSelect = Select("location", [
+    locationOption("Downtown", "downtown"),
+    locationOption("Northside", "northside"),
+    locationOption("Eastside", "eastside"),
+    locationOption("Westside", "westside"),
+    locationOption("Southside", "southside")
+], "Select location", null, null, "medium")
+locationOption = SelectItem("Downtown", "downtown")
+
+dispatchButton = Button("Dispatch Now", null, "primary")
+
+publicAlertForm = Card([
+    CardHeader("Send Public Alert", "Broadcast to all channels"),
+    FormControl("Message", alertMessageText),
+    Buttons([alertButton]),
+    TextContent("Alerts will be sent to: SMS, Email, Push Notifications")
+], "sunk")
+
+alertMessageText = TextArea("alertMessage", "Enter your alert message here...", 3, null, "Type your urgent message")
+
+alertButton = Button("Send Alert", null, "primary")
+
+incidentList = Card([
+    CardHeader("Open Incidents", "Real-time updates"),
+    ListBlock(incidentItems, "image"),
+    TextCallout("Severity", "Green: Minor | Yellow: Moderate | Red: Critical")
+], "sunk")
+
+incidentItems = [
+    incidentItem("Road Blockage", "Main St & 5th Ave", "Downtown", "yellow", "https://picsum.photos/seed/roadblock/100/100"),
+    incidentItem("Water Leak", "Eastside Industrial", "Eastside", "red", "https://picsum.photos/seed/leak/100/100"),
+    incidentItem("Power Outage", "Northside Residential", "Northside", "yellow", "https://picsum.photos/seed/outage/100/100"),
+    incidentItem("Traffic Accident", "Westside Highway", "Westside", "red", "https://picsum.photos/seed/accident/100/100")
+]
+
+incidentItem = ListItem("Road Blockage", "Main St & 5th Ave", ["https://picsum.photos/seed/roadblock/100/100"], "Reported")
+
+citizenReports = Card([
+    CardHeader("Live Citizen Reports", "Real-time updates"),
+    ListBlock(citizenReportItems, null),
+    Button("Clear All", null, "tertiary", "normal")
+], "sunk")
+
+citizenReportItems = [
+    citizenReport("Pothole on Maple St", "Downtown", "https://picsum.photos/seed/pothole/50/50"),
+    citizenReport("Littering on Riverfront", "Downtown", "https://picsum.photos/seed/litter/50/50"),
+    citizenReport("Broken Streetlight", "Northside", "https://picsum.photos/seed/light/50/50")
+]
+
+citizenReport = ListItem("Pothole on Maple St", "Downtown", ["https://picsum.photos/seed/pothole/50/50"])
+
+weatherNow = Card([
+    CardHeader("Current Weather", "Downtown"),
+    Image("Weather Conditions", "https://picsum.photos/seed/weather/400/200"),
+    Card([
+        Tag("Temperature: 72°F", null, null, "neutral"),
+        Tag("Humidity: 68%", null, null, "neutral"),
+        Tag("Wind: 8 mph", null, null, "neutral"),
+        Tag("Conditions: Partly Cloudy", null, null, "neutral")
+    ], "sunk")
+], "sunk")
+
+roadworksSection = Card([
+    CardHeader("Roadworks This Month", "Planned maintenance"),
+    Table(roadworksTable)
+], "sunk")
+
+roadworksTable = [
+    roadworksCol("Location", ["Main St", "5th Ave", "Riverfront Dr"]),
+    roadworksCol("Start Date", ["2023-10-15", "2023-10-20", "2023-10-25"]),
+    roadworksCol("End Date", ["2023-10-22", "2023-10-25", "2023-10-30"]),
+    roadworksCol("Status", ["Ongoing", "Upcoming", "Ongoing"])
+]
+
+roadworksCol = Col("Location", ["Main St", "5th Ave", "Riverfront Dr"])
+
+maintenanceJobs = Card([
+    CardHeader("Infrastructure Jobs", "Upcoming maintenance"),
+    ListBlock(maintenanceJobItems, "image")
+], "sunk")
+
+maintenanceJobItems = [
+    maintenanceJob("Water Pipeline", "Downtown", "2023-10-18", "https://picsum.photos/seed/waterpipe/100/100"),
+    maintenanceJob("Streetlights", "Northside", "2023-10-22", "https://picsum.photos/seed/light/100/100"),
+    maintenanceJob("Sidewalks", "Eastside", "2023-10-28", "https://picsum.photos/seed/sidewalk/100/100")
+]
+
+maintenanceJob = ListItem("Water Pipeline", "Downtown", ["https://picsum.photos/seed/waterpipe/100/100"], "2023-10-18")
+
+```

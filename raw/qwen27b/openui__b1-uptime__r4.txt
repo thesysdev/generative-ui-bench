@@ -1,0 +1,14 @@
+
+
+root = Card([header, uptimeSection, incidentSection, followUp])
+header = CardHeader("Platform Status", "API uptime & incident summary — this month")
+uptimeSection = Card([uptimeLabel, uptimeBar, uptimeDetail], "sunk")
+uptimeLabel = Heading("API Uptime", "h3")
+uptimeBar = Progress(99.97, "99.97% — target: 99.95%")
+uptimeDetail = TextContent("Measured over the last 30 days. All regions reporting nominal.", "small")
+incidentSection = Card([incidentHeading, incidentCallout], "sunk")
+incidentHeading = Heading("Most Recent Incident", "h3")
+incidentCallout = Callout("warning", "Degraded latency in us-east-1", "On June 12 at 04:32 UTC, elevated p99 latency was observed in us-east-1 due to a DNS propagation delay. The issue was resolved at 05:14 UTC (42 min total). No data loss. A post-mortem is scheduled for June 14.")
+followUp = FollowUpBlock([viewFullLog, viewPostMortem])
+viewFullLog = FollowUpItem("Show full incident timeline")
+viewPostMortem = FollowUpItem("Draft the post-mortem summary")

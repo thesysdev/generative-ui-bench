@@ -1,0 +1,42 @@
+root = Card([header, countdown, agendaSection, speakerSection, ticketSection, registrationSection, followUp])
+
+header = CardHeader("NexGen AI Summit 2024", "Exploring the Frontier of Intelligence")
+headerDetails = TextContent("📅 November 15-17, 2024 | 📍 San Francisco Convention Center", "default")
+headerGroup = Card([header, headerDetails], "clear", "column", "s")
+
+countdown = Alert("Counting Down!", "Only 12 days remaining until the summit begins!", "info")
+
+agendaSection = Card([agendaHeading, agendaTable], "sunk", "column", "m")
+agendaHeading = Heading("Event Agenda", "h3")
+agendaTable = Table([timeCol, sessionCol, roomCol])
+timeCol = Col("Time", ["09:00 AM", "11:00 AM", "01:30 PM", "03:00 PM"], "string")
+sessionCol = Col("Session", ["Opening Keynote", "Panel: Ethics in AI", "Workshop: LLM Tuning", "Closing Remarks"], "string")
+roomCol = Col("Location", ["Grand Ballroom", "Hall A", "Lab 2", ["Grand Ballroom"]], "string")
+
+speakerSection = Card([speakerHeading, speakerList], "clear", "column", "m")
+speakerHeading = Heading("Featured Speakers", "h3")
+speakerList = ListBlock([speaker1, speaker2, speaker3], "image")
+speaker1 = ListItem("Dr. Aris Thorne", "Chief Scientist at NeuralCore", ["https://picsum.photos/seed/aris/100/100"])
+speaker2 = ListItem("Sarah Jenkins", "Author of 'The Algorithmic Age'", ["https://picsum.photos/seed/sarah/100/100"])
+speaker3 = ListItem("Marcus Vane", "Lead Engineer, OpenMind AI", ["https://picsum.photos/seed/marcus/100/100"])
+
+ticketSection = Card([ticketHeading, ticketTiers], "sunk", "column", "m")
+ticketHeading = Heading("Ticket Tiers", "h3")
+ticketTiers = Table([tierCol, priceCol, featureCol])
+tierCol = Col("Tier", ["Early Bird", "General Admission", "VIP Pass"], "string")
+priceCol = Col("Price", ["$299", "$499", "$899"], "string")
+featureCol = Col("Access", ["Standard", "Standard", "All-Access + Dinner"], "string")
+
+registrationSection = Card([regHeading, regForm], "card", "column", "l")
+regHeading = Heading("Reserve Your Spot", "h3")
+regForm = Form("registration-form", regButtons, [nameField, emailField])
+nameField = FormControl("Full Name", nameInput, "As it should appear on your badge")
+nameInput = Input("full_name", "Enter your name")
+emailField = FormControl("Email Address", emailInput, "We'll send the ticket here")
+emailInput = Input("email", "email@example.com", "email")
+regButtons = Buttons([submitBtn])
+submitBtn = Button("Complete Registration", null, "primary")
+
+followUp = FollowUpBlock([faqItem, hotelItem])
+faqItem = FollowUpItem("View detailed FAQ")
+hotelItem = FollowUpItem("See recommended hotels")

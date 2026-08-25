@@ -1,0 +1,129 @@
+```openui-lang
+// Define all referenced components first for clarity and streaming
+
+// Search input
+searchInput = Input("search_route", placeholder="Enter route")
+
+// Flag shipment button (action will be handled by app logic)
+flagBtn = Button("Flag Shipment", action=["flag", "{{ shipmentId }}"], variant="tertiary")
+
+// Refresh timestamp
+refreshTime = TextContent("Last refreshed: {{ lastRefreshed }}", size="small")
+
+// Shipment list
+shipments = [
+  Shipment(id="s1", origin="NYC", destination="CHI", eta="2024-08-22", status="On Time"),
+  Shipment(id="s2", origin="LAX", destination="SEA", eta="2024-08-23", status="Delayed"),
+  Shipment(id="s3", origin="SFO", destination="DFW", eta="2024-08-20", status="On Time"),
+  Shipment(id="s4", origin="ORD", destination="LAX", eta="2024-08-21", status="Delayed"),
+  Shipment(id="s5", origin="PHX", destination="DEN", eta="2024-08-19", status="On Time")
+]
+
+// Filter for delayed shipments
+delayedShipments = [s for s in shipments if s.status == "Delayed"]
+
+// On-time percentage calculation
+totalShipments = len(shipments)
+onTimeShipments = sum(1 for s in shipments if s.status == "On Time")
+onTimePct = round((onTimeShipments / totalShipments) * 100, 1)
+
+// Volume data (mocked for illustration)
+carrierVolumes = {
+  "FedEx": 120,
+  "UPS": 85,
+  "DHL": 45,
+  "USPS": 30
+}
+totalVolume = sum(carrierVolumes.values())
+
+// Average cost per shipment (mocked)
+averageCost = 45.75
+
+// Weekly volume across past two months (mocked)
+weeklyVolumes = {
+  "2024-07-01": 100,
+  "2024-07-08": 110,
+  "2024-07-15": 95,
+  "2024-07-22": 105,
+  "2024-07-29": 120,
+  "2024-08-05": 130,
+  "2024-08-12": 115,
+  "2024-08-19": 125,
+  "2024-08-26": 140
+}
+
+// Last refreshed timestamp (mocked)
+lastRefreshed = "2024-08-20 14:32 UTC"
+
+// Now build the root Card structure
+
+root = Card(
+  [
+    // Header
+    CardHeader("Logistics Coordinator Board", "Current Status & Insights"),
+    
+    // Search bar
+    TextContent("Search by route:", size="small"),
+    searchInput,
+    
+    // Shipment list section
+    Card(
+      [
+        CardHeader("Shipments In Transit", null),
+        Table(
+          [
+            Col("Origin", [s.origin for s in shipments]),
+            Col("Destination", [s.destination for s in shipments]),
+            Col("ETA", [s.eta for s in shipments]),
+            Col("Status", [s.status for s in shipments])
+          ]
+        ),
+        // Highlight delayed shipments
+        TextCallout(
+          variant="warning",
+          title="Delayed Shipments",
+          description=f"There are {len(delayedShipments)} delayed shipments."
+        ),
+        // On-time percentage
+        TextContent(f"On-Time Percentage: {onTimePct}%", size="large"),
+        
+        // Volume split by carrier
+        Table(
+          [
+            Col("Carrier", list(carrierVolumes.keys())),
+            Col("Volume", list(carrierVolumes.values()))
+          ]
+        ),
+        // Average cost per shipment
+        TextContent(f"Average Cost per Shipment: ${averageCost:.2f}", size="large"),
+        
+        // Weekly volume chart (past two months)
+        LineChart(
+          list(weeklyVolumes.keys())[:10],  // limit to recent weeks
+          [Series("Volume", list(weeklyVolumes.values()))],
+          "natural",
+          "Week",
+          "Volume"
+        ),
+        
+        // Flag shipment button (applies to each row, but presented once)
+        flagBtn,
+        
+        // Refresh timestamp
+        refreshTime
+      ],
+      "sunk",
+      "column",
+      "center",
+      "between",
+      false
+    )
+  ],
+  "card",
+  "column",
+  "m",
+  "center",
+  "between",
+  true
+)
+```

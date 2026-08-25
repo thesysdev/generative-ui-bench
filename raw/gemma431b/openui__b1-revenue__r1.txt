@@ -1,0 +1,24 @@
+root = Card([header, summaryCard, trendSection, inventoryAlert, quickActions], "card", "column", "m")
+
+header = CardHeader("Store Dashboard", "Mid-morning check-in • 10:42 AM")
+
+summaryCard = Card([revMetric, comparisonMetric], "sunk", "row", "l", "between")
+revMetric = Card([revLabel, revValue])
+revLabel = TextContent("Today's Revenue", "small")
+revValue = TextContent("$1,240.50", "large-heavy")
+comparisonMetric = Card([compLabel, compValue])
+compLabel = TextContent("vs. Yesterday", "small")
+compValue = Badge("↑ 12.4%", "success")
+
+trendSection = Card([trendHeading, revenueChart], "clear", "column", "s")
+trendHeading = Heading("Revenue Velocity", "h3")
+revenueChart = AreaChart(["6am", "7am", "8am", "9am", "10am"], [todaySeries, yesterdaySeries], "natural", "Time", "USD")
+todaySeries = Series("Today", [120, 340, 610, 980, 1240])
+yesterdaySeries = Series("Yesterday", [100, 280, 550, 820, 1100])
+
+inventoryAlert = Alert("Low Stock Warning", "Organic Coffee Beans are below 5kg", "warning")
+
+quickActions = Buttons([refreshBtn, reportBtn, staffBtn])
+refreshBtn = Button("Refresh Data", null, "primary")
+reportBtn = Button("Detailed Report", null, "secondary")
+staffBtn = Button("Staff Schedule", null, "secondary")

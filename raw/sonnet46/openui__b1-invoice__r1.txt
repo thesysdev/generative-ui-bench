@@ -1,0 +1,44 @@
+root = Card([invoiceHeader, separator1, summaryRow, separator2, lineItemsSection, separator3, totalSection, separator4, dueDateAlert, payBtn], "card", "column", "m")
+
+invoiceHeader = CardHeader("Invoice #INV-2047", "Issued by Alex Rivera · Issued on June 1, 2025")
+
+separator1 = Separator("horizontal", true)
+
+summaryRow = Card([amountBadge, currencyBadge], "clear", "row", "s")
+amountBadge = Card([amountLabel, amountValue], "sunk", "column", "xs")
+amountLabel = TextContent("Amount Due", "small")
+amountValue = TextContent("$4,750.00", "large-heavy")
+currencyBadge = Card([currencyLabel, currencyValue], "sunk", "column", "xs")
+currencyLabel = TextContent("Currency", "small")
+currencyValue = TextContent("USD · US Dollar", "large-heavy")
+
+separator2 = Separator("horizontal", true)
+
+lineItemsSection = Card([lineItemsHeading, lineItemsTable], "clear", "column", "s")
+lineItemsHeading = Heading("Line Items", "h3")
+lineItemsTable = Table([descCol, qtyCol, rateCol, amountCol])
+descCol = Col("Description", ["Brand Identity Design", "Website Redesign (5 pages)", "SEO Consultation", "Project Management"])
+qtyCol = Col("Qty", [1, 5, 3, 1])
+rateCol = Col("Rate (USD)", ["$800.00", "$450.00", "$200.00", "$350.00"])
+amountCol = Col("Amount (USD)", ["$800.00", "$2,250.00", "$600.00", "$350.00"])
+
+separator3 = Separator("horizontal", true)
+
+totalSection = Card([subtotalRow, taxRow, totalRow], "sunk", "column", "xs")
+subtotalRow = Card([subtotalLabel, subtotalValue], "clear", "row", "l")
+subtotalLabel = TextContent("Subtotal")
+subtotalValue = TextContent("$4,000.00")
+taxRow = Card([taxLabel, taxValue], "clear", "row", "l")
+taxLabel = TextContent("Tax (18.75%)")
+taxValue = TextContent("$750.00")
+totalRow = Card([totalLabel, totalValue], "clear", "row", "l")
+totalLabel = TextContent("Total Due", "large-heavy")
+totalValue = TextContent("$4,750.00", "large-heavy")
+
+separator4 = Separator("horizontal", true)
+
+dueDateAlert = Alert("Payment Due by June 15, 2025", "Please complete payment before the due date to avoid a late fee of 1.5% per month.", "warning")
+
+payBtn = Buttons([payNowBtn, downloadBtn])
+payNowBtn = Button("Pay Now — $4,750.00", null, "primary")
+downloadBtn = Button("Download Invoice PDF", null, "secondary")

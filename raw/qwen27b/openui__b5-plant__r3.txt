@@ -1,0 +1,126 @@
+
+
+root = Card([header, andonSection, kpiRow, productionRow, analyticsRow, opsRow, maintenanceSection, formSection, actionsSection], "card", "column", "l")
+
+header = CardHeader("Factory Floor Console", "Live overview — Shift B · 14:32")
+
+andonSection = Card([andonTitle, andonAlert1, andonAlert2], "sunk", "column", "s")
+andonTitle = Heading("Live Andon Alerts", "h3")
+andonAlert1 = Alert("Line 3 — Vibration threshold exceeded", "Machine CNC-07 has exceeded vibration limits. Operator notified.", "warning")
+andonAlert2 = Alert("Line 1 — Material shortage", "Resin hopper at 12% capacity. Refill scheduled in 20 min.", "destructive")
+
+kpiRow = Card([oeeCard, targetCard, safetyCard], "card", "row", "m")
+
+oeeCard = Card([oeeHeading, oeeValue, oeeProgress], "sunk", "column", "s")
+oeeHeading = Heading("Overall Equipment Effectiveness", "h3")
+oeeValue = TextContent("**82.4%**", "large-heavy")
+oeeProgress = Progress(82.4, "Availability 94% · Performance 91% · Quality 97%")
+
+targetCard = Card([targetHeading, targetValue, targetProgress], "sunk", "column", "s")
+targetHeading = Heading("Units Produced vs Target", "h3")
+targetValue = TextContent("**4,280 / 5,000**", "large-heavy")
+targetProgress = Progress(85.6, "85.6% of daily target met")
+
+safetyCard = Card([safetyHeading, safetyValue, safetyBadge], "sunk", "column", "s")
+safetyHeading = Heading("Safety", "h3")
+safetyValue = TextContent("**3 incidents** this year", "default")
+safetyBadge = Tag("47 days since last incident", null, null, "success")
+
+productionRow = Card([linesCard, defectCard, downtimeCard], "card", "row", "m")
+
+linesCard = Card([linesHeading, linesTable], "sunk", "column", "s")
+linesHeading = Heading("Production Lines", "h3")
+linesTable = Table([colLine, colRate, colStatus])
+colLine = Col("Line", ["Line 1 — Injection Molding", "Line 2 — CNC Machining", "Line 3 — Assembly", "Line 4 — Painting"])
+colRate = Col("Rate (units/hr)", [142, 88, 210, 64])
+colStatus = Col("Status", ["Running", "Running", "Warning", "Stopped"])
+
+defectCard = Card([defectHeading, defectChart], "sunk", "column", "s")
+defectHeading = Heading("Defect Rate — Past Month", "h3")
+defectChart = LineChart(["W1", "W2", "W3", "W4"], [defectSeries], "natural", "Week", "%")
+defectSeries = Series("Defect %", [2.8, 2.4, 3.1, 2.1])
+
+downtimeCard = Card([downtimeHeading, downtimeChart], "sunk", "column", "s")
+downtimeHeading = Heading("Downtime by Cause", "h3")
+downtimeChart = PieChart(["Changeover", "Mechanical", "Material", "Electrical", "Other"], [35, 28, 20, 12, 5], "donut")
+
+analyticsRow = Card([shiftCard, energyCard, stockCard], "card", "row", "m")
+
+shiftCard = Card([shiftHeading, shiftChart], "sunk", "column", "s")
+shiftHeading = Heading("Shift Output Comparison", "h3")
+shiftChart = BarChart(["Shift A", "Shift B", "Shift C"], [shiftSeriesA, shiftSeriesB], "grouped", "Shift", "Units")
+shiftSeriesA = Series("This week", [1650, 1420, 1200])
+shiftSeriesB = Series("Last week", [1580, 1510, 1150])
+
+energyCard = Card([energyHeading, energyChart], "sunk", "column", "s")
+energyHeading = Heading("Energy Use Today", "h3")
+energyChart = AreaChart(["06:00", "08:00", "10:00", "12:00", "14:00", "16:00"], [energySeries], "natural", "Hour", "kWh")
+energySeries = Series("kWh", [120, 245, 310, 280, 295, 180])
+
+stockCard = Card([stockHeading, stockChart], "sunk", "column", "s")
+stockHeading = Heading("Material Stock Levels", "h3")
+stockChart = HorizontalBarChart(["Steel (tonnes)", "Resin (kg)", "Packaging (units)"], [stockSeries], "grouped", "Material", "Stock % of capacity")
+stockSeries = Series("Current stock", [62, 38, 81])
+
+opsRow = Card([maintCard, supplierCard, qualityCard], "card", "row", "m")
+
+maintCard = Card([maintHeading, maintTable], "sunk", "column", "s")
+maintHeading = Heading("Machines Due for Maintenance", "h3")
+maintTable = Table([colMachine, colType, colDue])
+colMachine = Col("Machine", ["CNC-07", "Press-02", "Robot-11"])
+colType = Col("Type", ["Preventive", "Corrective", "Preventive"])
+colDue = Col("Due", ["Tomorrow", "In 3 days", "In 7 days"])
+
+supplierCard = Card([supplierHeading, supplierTable], "sunk", "column", "s")
+supplierHeading = Heading("Supplier Deliveries This Week", "h3")
+supplierTable = Table([colSupplier, colItem, colEta])
+colSupplier = Col("Supplier", ["MetalWorks Ltd", "PolyChem", "PackPro"])
+colItem = Col("Item", ["Steel coil ×4", "Resin pellets ×2t", "Cartons ×5000"])
+colEta = Col("ETA", ["Thu 09:00", "Fri 14:00", "Mon 07:00"])
+
+qualityCard = Card([qualityHeading, qualityTable], "sunk", "column", "s")
+qualityHeading = Heading("Batches on Quality Hold", "h3")
+qualityTable = Table([colBatch, colLine2, colReason])
+colBatch = Col("Batch", ["B-2025-0412", "B-2025-0415"])
+colLine2 = Col("Line", ["Line 1", "Line 3"])
+colReason = Col("Reason", ["Dimensional variance", "Surface defect"])
+
+maintenanceSection = Card([woHeading, woTable], "sunk", "column", "s")
+woHeading = Heading("Open Work Orders", "h3")
+woTable = Table([colWO, colDesc, colPriority, colAssignee])
+colWO = Col("WO #", ["WO-1042", "WO-1043", "WO-1044", "WO-1045"])
+colDesc = Col("Description", ["Replace spindle bearing", "Calibrate vision system", "Repair conveyor belt", "Update firmware PLC-3"])
+colPriority = Col("Priority", ["High", "Medium", "High", "Low"])
+colAssignee = Col("Assignee", ["J. Torres", "M. Chen", "A. Patel", "Unassigned"])
+
+formSection = Card([formHeading, maintForm], "sunk", "column", "s")
+formHeading = Heading("Schedule Maintenance", "h3")
+maintForm = Form("schedule-maintenance", formButtons, [machineField, dateField, notesField])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [m1, m2, m3, m4], "Select machine")
+m1 = SelectItem("CNC-07", "CNC-07")
+m2 = SelectItem("Press-02", "Press-02")
+m3 = SelectItem("Robot-11", "Robot-11")
+m4 = SelectItem("PLC-03", "PLC-03")
+dateField = FormControl("Scheduled date", datePicker)
+datePicker = DatePicker("date", "single")
+notesField = FormControl("Notes", notesInput)
+notesInput = TextArea("notes", "Optional notes for technician", 3)
+formButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+
+actionsSection = Card([focusTabs, exportBtn], "card", "row", "m")
+
+focusTabs = Card([focusHeading, lineTabs], "sunk", "column", "s")
+focusHeading = Heading("Focus on a Line", "h3")
+lineTabs = Tabs([tab1, tab2, tab3, tab4])
+tab1 = TabItem("line1", "Line 1", [tab1Text])
+tab1Text = TextContent("Injection Molding — 142 units/hr · Running\nOEE: 88% · Defect rate: 1.2% · Next changeover: 16:00")
+tab2 = TabItem("line2", "Line 2", [tab2Text])
+tab2Text = TextContent("CNC Machining — 88 units/hr · Running\nOEE: 79% · Defect rate: 2.8% · Tool change in 45 min")
+tab3 = TabItem("line3", "Line 3", [tab3Text])
+tab3Text = TextContent("Assembly — 210 units/hr · Warning\nOEE: 74% · Defect rate: 3.4% · Vibration alert active")
+tab4 = TabItem("line4", "Line 4", [tab4Text])
+tab4Text = TextContent("Painting — 64 units/hr · Stopped\nOEE: 52% · Defect rate: 1.8% · Awaiting booth purge")
+
+exportBtn = Button("Export Shift Report", null, "secondary")

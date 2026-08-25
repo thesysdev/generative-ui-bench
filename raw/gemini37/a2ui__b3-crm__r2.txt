@@ -1,0 +1,611 @@
+Here is the sales account page for your sales representative dashboard.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "renewalAlert",
+          "summaryMetricsCard",
+          "quickActionsCard",
+          "accountTabsCard"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Acme Global Enterprises",
+        "subtitle": "Account Owner: Sarah Jenkins • Account ID: ACME-8842"
+      },
+      {
+        "id": "renewalAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "Contract Renewal Approaching (Due: Nov 15, 2024)",
+        "description": "Annual contract expires in 18 days. Renewal probability is high, but executive sign-off is pending."
+      },
+      {
+        "id": "summaryMetricsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "stageInfoCard",
+          "dealValueCard",
+          "renewalDateCard"
+        ]
+      },
+      {
+        "id": "stageInfoCard",
+        "component": "Card",
+        "variant": "card",
+        "weight": 1,
+        "children": [
+          "stageLabel",
+          "stageBadge",
+          "stageProgress"
+        ]
+      },
+      {
+        "id": "stageLabel",
+        "component": "Label",
+        "text": "Current Deal Stage"
+      },
+      {
+        "id": "stageBadge",
+        "component": "Badge",
+        "text": "Negotiation / Proposal Review",
+        "variant": "default"
+      },
+      {
+        "id": "stageProgress",
+        "component": "Progress",
+        "label": "Pipeline Stage 4 of 5 (80%)",
+        "value": 80
+      },
+      {
+        "id": "dealValueCard",
+        "component": "Card",
+        "variant": "card",
+        "weight": 1,
+        "children": [
+          "dealValueLabel",
+          "dealValueAmount",
+          "dealValueSubtext"
+        ]
+      },
+      {
+        "id": "dealValueLabel",
+        "component": "Label",
+        "text": "Total Deal Value"
+      },
+      {
+        "id": "dealValueAmount",
+        "component": "Heading",
+        "text": "$240,000 ARR",
+        "level": "h2"
+      },
+      {
+        "id": "dealValueSubtext",
+        "component": "TextContent",
+        "size": "small",
+        "text": "Expansion: +$65k vs previous contract"
+      },
+      {
+        "id": "renewalDateCard",
+        "component": "Card",
+        "variant": "card",
+        "weight": 1,
+        "children": [
+          "renewalLabel",
+          "renewalDateText",
+          "renewalTag"
+        ]
+      },
+      {
+        "id": "renewalLabel",
+        "component": "Label",
+        "text": "Renewal Target Date"
+      },
+      {
+        "id": "renewalDateText",
+        "component": "Heading",
+        "text": "November 15, 2024",
+        "level": "h3"
+      },
+      {
+        "id": "renewalTag",
+        "component": "Tag",
+        "text": "18 Days Remaining",
+        "variant": "warning"
+      },
+      {
+        "id": "quickActionsCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "logCallDialog",
+          "jotNoteDialog"
+        ]
+      },
+      {
+        "id": "logCallDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "📞 Log a Call",
+        "triggerVariant": "default",
+        "title": "Log Sales Call",
+        "description": "Record outcome and discussion points from your recent customer interaction.",
+        "content": [
+          "callForm"
+        ]
+      },
+      {
+        "id": "callForm",
+        "component": "Form",
+        "name": "log-call-form",
+        "buttons": "callFormButtons",
+        "fields": [
+          "callContactField",
+          "callOutcomeField",
+          "callNotesField"
+        ]
+      },
+      {
+        "id": "callContactField",
+        "component": "FormControl",
+        "label": "Contact Person",
+        "input": "callContactSelect"
+      },
+      {
+        "id": "callContactSelect",
+        "component": "Select",
+        "name": "call_contact",
+        "placeholder": "Select a contact",
+        "items": [
+          "contactOpt1",
+          "contactOpt2",
+          "contactOpt3"
+        ]
+      },
+      {
+        "id": "contactOpt1",
+        "component": "SelectItem",
+        "value": "elena_rostova",
+        "label": "Elena Rostova (VP of Engineering)"
+      },
+      {
+        "contactOpt2": "SelectItem",
+        "id": "contactOpt2",
+        "component": "SelectItem",
+        "value": "marcus_vance",
+        "label": "Marcus Vance (Procurement Lead)"
+      },
+      {
+        "id": "contactOpt3",
+        "component": "SelectItem",
+        "value": "david_chen",
+        "label": "David Chen (Chief Technology Officer)"
+      },
+      {
+        "id": "callOutcomeField",
+        "component": "FormControl",
+        "label": "Call Outcome",
+        "input": "callOutcomeSelect"
+      },
+      {
+        "id": "callOutcomeSelect",
+        "component": "Select",
+        "name": "call_outcome",
+        "placeholder": "Choose outcome",
+        "items": [
+          "outcome1",
+          "outcome2",
+          "outcome3"
+        ]
+      },
+      {
+        "id": "outcome1",
+        "component": "SelectItem",
+        "value": "connected",
+        "label": "Connected - Positive Discussion"
+      },
+      {
+        "id": "outcome2",
+        "component": "SelectItem",
+        "value": "left_voicemail",
+        "label": "Left Voicemail"
+      },
+      {
+        "id": "outcome3",
+        "component": "SelectItem",
+        "value": "needs_followup",
+        "label": "Connected - Action Required"
+      },
+      {
+        "id": "callNotesField",
+        "component": "FormControl",
+        "label": "Call Summary & Notes",
+        "input": "callNotesInput",
+        "hint": "Highlight any objections or agreed pricing"
+      },
+      {
+        "id": "callNotesInput",
+        "component": "TextArea",
+        "name": "call_notes",
+        "placeholder": "Enter detailed call summary...",
+        "rows": 3
+      },
+      {
+        "id": "callFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveCallBtn"
+        ]
+      },
+      {
+        "id": "saveCallBtn",
+        "component": "Button",
+        "label": "Save Call Record",
+        "variant": "primary"
+      },
+      {
+        "id": "jotNoteDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "📝 Jot Quick Note",
+        "triggerVariant": "secondary",
+        "title": "Add Account Note",
+        "description": "Capture quick observations, deal insights, or stakeholder feedback.",
+        "content": [
+          "noteForm"
+        ]
+      },
+      {
+        "id": "noteForm",
+        "component": "Form",
+        "name": "jot-note-form",
+        "buttons": "noteFormButtons",
+        "fields": [
+          "noteCategoryField",
+          "noteTextField"
+        ]
+      },
+      {
+        "id": "noteCategoryField",
+        "component": "FormControl",
+        "label": "Note Topic",
+        "input": "noteCategorySelect"
+      },
+      {
+        "id": "noteCategorySelect",
+        "component": "Select",
+        "name": "note_category",
+        "placeholder": "Select category",
+        "items": [
+          "cat1",
+          "cat2",
+          "cat3"
+        ]
+      },
+      {
+        "id": "cat1",
+        "component": "SelectItem",
+        "value": "deal_strategy",
+        "label": "Deal Strategy & Pricing"
+      },
+      {
+        "id": "cat2",
+        "component": "SelectItem",
+        "value": "stakeholder",
+        "label": "Stakeholder Intelligence"
+      },
+      {
+        "id": "cat3",
+        "component": "SelectItem",
+        "value": "technical",
+        "label": "Security / Technical Requirements"
+      },
+      {
+        "id": "noteTextField",
+        "component": "FormControl",
+        "label": "Note Content",
+        "input": "noteTextInput"
+      },
+      {
+        "id": "noteTextInput",
+        "component": "TextArea",
+        "name": "note_content",
+        "placeholder": "Jot your note here...",
+        "rows": 4
+      },
+      {
+        "id": "noteFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveNoteBtn"
+        ]
+      },
+      {
+        "id": "saveNoteBtn",
+        "component": "Button",
+        "label": "Post Note",
+        "variant": "primary"
+      },
+      {
+        "id": "accountTabsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "accountTabs"
+        ]
+      },
+      {
+        "id": "accountTabs",
+        "component": "Tabs",
+        "items": [
+          "activityTab",
+          "contactsTab",
+          "followupsTab",
+          "inlineNoteTab"
+        ]
+      },
+      {
+        "id": "activityTab",
+        "component": "TabItem",
+        "value": "activity",
+        "trigger": "Recent Activity (Chronological)",
+        "content": [
+          "activityIntro",
+          "activitySteps"
+        ]
+      },
+      {
+        "id": "activityIntro",
+        "component": "TextContent",
+        "size": "small",
+        "text": "Ordered chronologically from most recent interactions to oldest."
+      },
+      {
+        "id": "activitySteps",
+        "component": "Steps",
+        "items": [
+          "act1",
+          "act2",
+          "act3",
+          "act4"
+        ]
+      },
+      {
+        "id": "act1",
+        "component": "StepsItem",
+        "title": "Today, 11:30 AM — Pricing Negotiation Call",
+        "details": "Spoke with Marcus Vance. Discussed a 3-year term discount structure and multi-seat enterprise bundling."
+      },
+      {
+        "id": "act2",
+        "component": "StepsItem",
+        "title": "Yesterday, 3:15 PM — Security Compliance Review Sent",
+        "details": "Delivered completed SOC-2 Type II audit report and DPA documentation to David Chen."
+      },
+      {
+        "id": "act3",
+        "component": "StepsItem",
+        "title": "Oct 24, 2024 — Executive Demo with VP of Engineering",
+        "details": "Conducted live platform demonstration with Elena Rostova and 4 senior engineering leads. Feedback was very positive."
+      },
+      {
+        "id": "act4",
+        "component": "StepsItem",
+        "title": "Oct 18, 2024 — Inbound Expansion Request",
+        "details": "Account reached out to evaluate expanding from 50 seats to company-wide 300 seat enterprise license."
+      },
+      {
+        "id": "contactsTab",
+        "component": "TabItem",
+        "value": "contacts",
+        "trigger": "Key Contacts",
+        "content": [
+          "contactsTable"
+        ]
+      },
+      {
+        "id": "contactsTable",
+        "component": "Table",
+        "columns": [
+          "colContactName",
+          "colContactRole",
+          "colContactEmail",
+          "colContactDecisionRole"
+        ]
+      },
+      {
+        "id": "colContactName",
+        "component": "Col",
+        "label": "Name",
+        "type": "string",
+        "data": [
+          "David Chen",
+          "Elena Rostova",
+          "Marcus Vance",
+          "Priya Sharma"
+        ]
+      },
+      {
+        "id": "colContactRole",
+        "component": "Col",
+        "label": "Title / Department",
+        "type": "string",
+        "data": [
+          "Chief Technology Officer",
+          "VP of Engineering",
+          "Procurement Director",
+          "Legal & Compliance Lead"
+        ]
+      },
+      {
+        "id": "colContactEmail",
+        "component": "Col",
+        "label": "Email",
+        "type": "string",
+        "data": [
+          "dchen@acme.com",
+          "erostova@acme.com",
+          "mvance@acme.com",
+          "psharma@acme.com"
+        ]
+      },
+      {
+        "id": "colContactDecisionRole",
+        "component": "Col",
+        "label": "Buying Role",
+        "type": "string",
+        "data": [
+          "Executive Sponsor",
+          "Technical Champion",
+          "Economic Buyer",
+          "Contract Reviewer"
+        ]
+      },
+      {
+        "id": "followupsTab",
+        "component": "TabItem",
+        "value": "followups",
+        "trigger": "Open Follow-ups",
+        "content": [
+          "followupsTable"
+        ]
+      },
+      {
+        "id": "followupsTable",
+        "component": "Table",
+        "columns": [
+          "colTaskName",
+          "colTaskDueDate",
+          "colTaskAssignee",
+          "colTaskPriority"
+        ]
+      },
+      {
+        "id": "colTaskName",
+        "component": "Col",
+        "label": "Follow-Up Action",
+        "type": "string",
+        "data": [
+          "Send revised Master Services Agreement (MSA) with redlines",
+          "Schedule final pricing confirmation sync with Marcus",
+          "Confirm IT SSO integration requirements",
+          "Deliver Q4 expansion ROI calculation deck"
+        ]
+      },
+      {
+        "id": "colTaskDueDate",
+        "component": "Col",
+        "label": "Due Date",
+        "type": "string",
+        "data": [
+          "Tomorrow (Oct 29)",
+          "Thursday (Oct 31)",
+          "Nov 04, 2024",
+          "Nov 08, 2024"
+        ]
+      },
+      {
+        "id": "colTaskAssignee",
+        "component": "Col",
+        "label": "Assignee",
+        "type": "string",
+        "data": [
+          "Sarah Jenkins",
+          "Sarah Jenkins",
+          "Alex (Solutions Eng)",
+          "Sarah Jenkins"
+        ]
+      },
+      {
+        "id": "colTaskPriority",
+        "component": "Col",
+        "label": "Priority",
+        "type": "string",
+        "data": [
+          "High",
+          "High",
+          "Medium",
+          "Medium"
+        ]
+      },
+      {
+        "id": "inlineNoteTab",
+        "component": "TabItem",
+        "value": "quicknotes",
+        "trigger": "Quick Scratchpad",
+        "content": [
+          "inlineNoteHeader",
+          "inlineNoteForm"
+        ]
+      },
+      {
+        "id": "inlineNoteHeader",
+        "component": "CardHeader",
+        "title": "Rep Scratchpad",
+        "subtitle": "Jot inline account notes or quick reminders during calls"
+      },
+      {
+        "id": "inlineNoteForm",
+        "component": "Form",
+        "name": "scratchpad-form",
+        "buttons": "scratchpadButtons",
+        "fields": [
+          "scratchpadField"
+        ]
+      },
+      {
+        "id": "scratchpadField",
+        "component": "FormControl",
+        "label": "Note",
+        "input": "scratchpadInput",
+        "hint": "Auto-saves to account timeline"
+      },
+      {
+        "id": "scratchpadInput",
+        "component": "TextArea",
+        "name": "scratchpad_body",
+        "placeholder": "Type quick notes here...",
+        "rows": 4
+      },
+      {
+        "id": "scratchpadButtons",
+        "component": "Buttons",
+        "buttons": [
+          "saveScratchpadBtn"
+        ]
+      },
+      {
+        "id": "saveScratchpadBtn",
+        "component": "Button",
+        "label": "Save to Account",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

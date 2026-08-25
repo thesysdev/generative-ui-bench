@@ -1,0 +1,67 @@
+root = Card([header, kpiSection, chartsSection, openRolesSection, pipelineSection, interviewsSection, attritionSection, newRoleSection])
+
+header = CardHeader("Hiring Overview", "HR dashboard — updated today")
+
+kpiSection = Card([headcountCard, tthCard], "clear", "row", "l")
+headcountCard = Card([headcountLabel, headcountValue], "sunk")
+headcountLabel = TextContent("Current Headcount", "small")
+headcountValue = TextContent("482", "large-heavy")
+tthCard = Card([tthLabel, tthValue], "sunk")
+tthLabel = TextContent("Avg. Time to Hire", "small")
+tthValue = TextContent("34 days", "large-heavy")
+
+chartsSection = Card([deptHeading, deptChart], "clear", "row", "l")
+deptHeading = Heading("Headcount by Department", "h3")
+deptChart = PieChart(deptLabels, deptValues, "donut")
+deptLabels = ["Engineering", "Sales", "Marketing", "Support", "Product", "Finance"]
+deptValues = [180, 110, 60, 75, 40, 17]
+
+openRolesSection = Card([openRolesHeading, openRolesTable])
+openRolesHeading = Heading("Open Roles", "h3")
+openRolesTable = Table([roleCol, deptCol, locationCol, statusCol])
+roleCol = Col("Role", ["Senior Backend Engineer", "Account Executive", "Product Designer", "Customer Support Specialist", "Data Analyst", "Marketing Manager"])
+deptCol = Col("Department", ["Engineering", "Sales", "Product", "Support", "Engineering", "Marketing"])
+locationCol = Col("Location", ["Remote", "New York", "Remote", "Austin", "Remote", "London"])
+statusCol = Col("Status", ["Interviewing", "Screening", "New", "Interviewing", "Offer Stage", "New"])
+
+pipelineSection = Card([pipelineHeading, pipelineChart])
+pipelineHeading = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = BarChart(pipelineLabels, [pipelineSeries], "grouped", "Stage", "Candidates")
+pipelineLabels = ["Applied", "Screening", "Interview", "Offer", "Hired"]
+pipelineSeries = Series("Candidates", [340, 128, 64, 21, 9])
+
+interviewsSection = Card([interviewsHeading, interviewsList])
+interviewsHeading = Heading("Interviews Scheduled This Week", "h3")
+interviewsList = ListBlock([interview1, interview2, interview3, interview4], "number")
+interview1 = ListItem("Priya Nair — Senior Backend Engineer", "Tue 10:00 AM · Final round")
+interview2 = ListItem("Marcus Lee — Account Executive", "Tue 2:30 PM · Hiring manager screen")
+interview3 = ListItem("Sofia Alvarez — Product Designer", "Wed 11:00 AM · Portfolio review")
+interview4 = ListItem("Daniel Kim — Data Analyst", "Thu 9:00 AM · Technical interview")
+
+attritionSection = Card([attritionHeading, attritionChart])
+attritionHeading = Heading("Attrition — Past 6 Months", "h3")
+attritionChart = LineChart(attritionLabels, [attritionSeries], "natural", "Month", "Employees Departed")
+attritionLabels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]
+attritionSeries = Series("Departures", [7, 5, 9, 6, 4, 8])
+
+newRoleSection = Card([newRoleHeading, newRoleDialog], "sunk")
+newRoleHeading = Heading("Open a New Role", "h3")
+newRoleDialog = DialogBlock("Open New Role", "New Role Request", "Fill in the details to open a new requisition", [newRoleForm], "default")
+newRoleForm = Form("new-role", newRoleButtons, [titleField, deptField, locationField, notesField])
+titleField = FormControl("Job Title", titleInput)
+titleInput = Input("title", "e.g. Senior Frontend Engineer")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [deptEng, deptSales, deptMkt, deptSupport, deptProduct, deptFinance], "Select department")
+deptEng = SelectItem("engineering", "Engineering")
+deptSales = SelectItem("sales", "Sales")
+deptMkt = SelectItem("marketing", "Marketing")
+deptSupport = SelectItem("support", "Support")
+deptProduct = SelectItem("product", "Product")
+deptFinance = SelectItem("finance", "Finance")
+locationField = FormControl("Location", locationInput)
+locationInput = Input("location", "e.g. Remote, Austin")
+notesField = FormControl("Notes", notesTextArea, "Optional context for recruiting")
+notesTextArea = TextArea("notes", "Reason for opening role, priority, etc.")
+newRoleButtons = Buttons([submitRoleBtn, cancelRoleBtn])
+submitRoleBtn = Button("Submit Request", null, "primary")
+cancelRoleBtn = Button("Cancel", null, "tertiary")

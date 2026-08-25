@@ -1,0 +1,77 @@
+root = Card([header, reportForm, sep0, metricsTable, sep1, signupsHeader, signupsChart, sep2, planHeader, planChart, sep3, topCustomersHeader, topCustomersTable, sep4, atRiskHeader, atRiskList, sep5, failedHeader, failedList, sep6, adoptionHeader, adoptionChart, sep7, seatUtilization, sep8, inviteAdmin], "card", "column", "m")
+
+header = CardHeader("SaaS Admin Overview", "Acme Corp")
+
+reportForm = Form("report-period", reportButtons, [periodField])
+reportButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary")
+periodField = FormControl("Reporting period", periodSelect)
+periodSelect = Select("period", [p30, p90, p365], "Last 30 days")
+p30 = SelectItem("30", "Last 30 days")
+p90 = SelectItem("90", "Last 90 days")
+p365 = SelectItem("365", "Last 12 months")
+
+sep0 = Separator()
+
+metricsTable = Table([metricCol, valueCol])
+metricCol = Col("Metric", ["Monthly Recurring Revenue", "Annual Recurring Revenue", "Churn This Month", "Current NPS"])
+valueCol = Col("Value", ["$48,320", "$579,840", "2.1%", "72"])
+
+sep1 = Separator()
+
+signupsHeader = CardHeader("New Signups (Past 90 Days)")
+signupsChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12"], [signupSeries], "natural", "Week", "Signups")
+signupSeries = Series("Signups", [120, 145, 132, 160, 175, 190, 210, 205, 225, 240, 255, 270])
+
+sep2 = Separator()
+
+planHeader = CardHeader("Customers by Plan")
+planChart = PieChart(["Free", "Basic", "Pro", "Enterprise"], [720, 400, 320, 160], "donut")
+
+sep3 = Separator()
+
+topCustomersHeader = CardHeader("Top 10 Customers by Spend")
+topCustomersTable = Table([customerCol, seatsCol, spendCol])
+customerCol = Col("Customer", ["Acme Corp", "Globex", "Initech", "Hooli", "Stark Industries", "Wayne Enterprises", "Umbrella Corp", "Soylent Corp", "Massive Dynamic", "Cyberdyne Systems"])
+seatsCol = Col("Seats", [120, 85, 64, 52, 48, 40, 35, 30, 28, 25])
+spendCol = Col("Monthly Spend", ["$4,800", "$3,400", "$2,560", "$2,080", "$1,920", "$1,600", "$1,400", "$1,200", "$1,120", "$1,000"])
+
+sep4 = Separator()
+
+atRiskHeader = CardHeader("Accounts at Risk")
+atRiskList = ListBlock([atRisk1, atRisk2, atRisk3, atRisk4, atRisk5])
+atRisk1 = ListItem("Globex", "No admin login in 30 days")
+atRisk2 = ListItem("Initech", "Threatened downgrade in support ticket")
+atRisk3 = ListItem("Soylent Corp", "Payment issues for 2 consecutive months")
+atRisk4 = ListItem("Umbrella Corp", "Key champion left the company")
+atRisk5 = ListItem("Hooli", "Feature usage dropped 70% this quarter")
+
+sep5 = Separator()
+
+failedHeader = CardHeader("Failed Payments")
+failedList = ListBlock([fail1, fail2, fail3, fail4, fail5])
+fail1 = ListItem("Stark Industries", "Invoice #1042 - $2,080", null, "Retry")
+fail2 = ListItem("Cyberdyne Systems", "Invoice #1043 - $1,000", null, "Retry")
+fail3 = ListItem("Massive Dynamic", "Invoice #1044 - $1,120", null, "Retry")
+fail4 = ListItem("Wayne Enterprises", "Invoice #1045 - $1,600", null, "Retry")
+fail5 = ListItem("Umbrella Corp", "Invoice #1046 - $1,400", null, "Retry")
+
+sep6 = Separator()
+
+adoptionHeader = CardHeader("Adoption of Newest Features")
+adoptionChart = BarChart(["AI Assistant", "Custom Reports", "API Access"], [adoptionSeries], "grouped", "Feature", "Adoption %")
+adoptionSeries = Series("Adoption %", [35, 52, 18])
+
+sep7 = Separator()
+
+seatUtilization = Progress(68, "68% of licensed seats used (816 / 1,200)")
+
+sep8 = Separator()
+
+inviteAdmin = DialogBlock("Invite Admin", "Invite another admin", "Enter the email of the person you want to make an admin.", [inviteForm], "primary")
+inviteForm = Form("invite-admin", inviteButtons, [emailField])
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send Invite", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")
+emailField = FormControl("Email", emailInput)
+emailInput = Input("email", "colleague@company.com", "email")

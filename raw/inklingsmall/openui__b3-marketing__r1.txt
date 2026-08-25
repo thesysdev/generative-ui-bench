@@ -1,0 +1,42 @@
+root = Card([header, visitorSection, conversionRate, sourcesSection, campaignsSection, bestCampaign, dateRangeSection, emailSection, exportSection], "card", "column", "l")
+
+header = CardHeader("Marketing Weekly Dashboard", "Weekly performance overview")
+
+visitorSection = Card([visitorHeading, visitorChart], "card", "column", "m")
+visitorHeading = Heading("Site Visitors — Last 30 Days", "h3")
+visitorChart = AreaChart(["W1", "W2", "W3", "W4"], [visitorSeries], "linear", "Week", "Visitors")
+visitorSeries = Series("Visitors", [12400, 15600, 14200, 18900])
+
+conversionRate = Card([conversionHeading, conversionValue, conversionSub], "sunk", "column", "m")
+conversionHeading = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("3.8%", "large-heavy")
+conversionSub = TextContent("Up 0.4pp from last month", "small")
+
+sourcesSection = Card([sourcesHeading, sourcesChart], "card", "column", "m")
+sourcesHeading = Heading("Top 5 Traffic Sources", "h3")
+sourcesChart = PieChart(["Organic Search", "Direct", "Social", "Referral", "Paid Ads"], [42, 18, 15, 12, 13], "donut")
+
+campaignsSection = Card([campaignsHeading, campaignsTable], "card", "column", "m")
+campaignsHeading = Heading("Running Campaigns", "h3")
+campaignsTable = Table([campNameCol, campSpendCol])
+campNameCol = Col("Campaign", ["Spring Sale", "Brand Awareness", "Retargeting", "Email Blast"])
+campSpendCol = Col("Spend", ["$4,200", "$2,800", "$1,500", "$950"])
+
+bestCampaign = Callout("success", "Best Performing Campaign: Spring Sale", "Highest ROI at 4.2x. Revenue $12,300 on $4,200 spend.")
+
+dateRangeSection = Card([dateHeading, dateSelect], "clear", "column", "m")
+dateHeading = Heading("Change Date Range", "h3")
+dateSelect = Select("date_range", [opt30, opt7, opt90], "Select range")
+opt30 = SelectItem("30d", "Last 30 days")
+opt7 = SelectItem("7d", "Last 7 days")
+opt90 = SelectItem("90d", "Last 90 days")
+
+emailSection = Card([emailHeading, emailChart, emailNote], "sunk", "column", "m")
+emailHeading = Heading("Email Subscriber Growth — This Month", "h3")
+emailChart = LineChart(["W1", "W2", "W3", "W4"], [emailSeries], "linear", "Week", "New Subs")
+emailSeries = Series("New Subs", [320, 410, 380, 520])
+emailNote = TextContent("+28% vs last month (1,630 new subscribers)", "small")
+
+exportSection = Card([exportHeading, exportBtn], "clear", "column", "m")
+exportHeading = Heading("Export Report", "h3")
+exportBtn = Button("Export Report")

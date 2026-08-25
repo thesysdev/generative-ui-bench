@@ -1,0 +1,56 @@
+root = Card([header, categoryFilter, statsGrid, contentGrid, scheduleSection, commentSection, footerActions], "clear", "column", "l")
+
+header = CardHeader("Editorial Content Studio", "Manage your publication pipeline")
+
+categoryFilter = Buttons([catAll, catTech, catCulture, catPolitics, catHealth], "row")
+catAll = Button("All Categories", null, "primary", "normal", "small")
+catTech = Button("Technology", null, "secondary", "normal", "small")
+catCulture = Button("Culture", null, "secondary", "normal", "small")
+catPolitics = Button("Politics", null, "secondary", "normal", "small")
+catHealth = Button("Health", null, "secondary", "normal", "small")
+
+statsGrid = Card([readershipChart, topArticle], "sunk", "row", "m")
+readershipChart = Card([chartHeading, readershipLine], "clear", "column", "s")
+chartHeading = Heading("30-Day Readership", "h4")
+readershipLine = LineChart(["Day 1", "Day 5", "Day 10", "Day 15", "Day 20", "Day 25", "Day 30"], [trafficSeries], "natural", "Day", "Views")
+trafficSeries = Series("Daily Views", [12000, 15000, 11000, 19000, 22000, 18000, 25000])
+
+topArticle = Card([topHeading, topArticleCard], "clear", "column", "s")
+topHeading = Heading("Most Read (Month)", "h4")
+topArticleCard = ListBlock([topItem], "image")
+topItem = ListItem("The Future of Generative AI", "1.2M Views", ["https://picsum.photos/seed/ai/200/200"])
+
+contentGrid = Card([draftsSection, publishedSection], "clear", "row", "m")
+
+draftsSection = Card([draftsHeading, draftsList], "sunk", "column", "s")
+draftsHeading = Heading("Current Drafts", "h3")
+draftsList = ListBlock([d1, d2, d3], "number")
+d1 = ListItem("Quantum Computing 101", "Status: Researching", null, "Edit")
+d2 = ListItem("Urban Gardening Tips", "Status: First Draft", null, "Edit")
+d3 = ListItem("The Remote Work Shift", "Status: Review", null, "Edit")
+
+publishedSection = Card([pubHeading, pubList], "sunk", "column", "s")
+pubHeading = Heading("Published This Week", "h3")
+pubList = ListBlock([p1, p2, p3], "image")
+p1 = ListItem("10 Best Coffee Shops", "Published Mon", ["https://picsum.photos/seed/coffee/200/200"])
+p2 = ListItem("Climate Change Report", "Published Wed", ["https://picsum.photos/seed/earth/200/200"])
+p3 = ListItem("Interview with CEO X", "Published Fri", ["https://picsum.photos/seed/ceo/200/200"])
+
+scheduleSection = Card([schedHeading, schedForm], "card", "column", "m")
+schedHeading = Heading("Schedule New Piece", "h3")
+schedForm = Form("schedule-form", schedButtons, [titleField, dateField])
+titleField = FormControl("Article Title", titleInput)
+titleInput = Input("title", "Enter headline...")
+dateField = FormControl("Publish Date", datePicker)
+datePicker = DatePicker("pub_date", "single")
+schedButtons = Buttons([schedSubmit])
+schedSubmit = Button("Schedule Publication", null, "primary")
+
+commentSection = Card([commHeading, commList], "card", "column", "m")
+commHeading = Heading("Awaiting Reply", "h3")
+commList = ListBlock([c1, c2], "number")
+c1 = ListItem("User: @techie_99", "Is this compatible with v2.0?", null, "Reply")
+c2 = ListItem("User: @reader_jane", "I disagree with the third point...", null, "Reply")
+
+footerActions = Buttons([newDraftBtn], "row")
+newDraftBtn = Button("Create New Draft", null, "primary", "normal", "large")

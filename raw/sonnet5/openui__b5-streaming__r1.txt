@@ -1,0 +1,84 @@
+root = Card([header, viewersNow, tabs])
+header = CardHeader("Streaming Operations Room", "Live platform health, content and growth metrics")
+
+viewersNow = TextCallout("info", "3.2M viewers watching right now", "Peak today: 4.1M concurrent at 9:00 PM ET")
+
+tabs = Tabs([tabOverview, tabContent, tabOps])
+
+tabOverview = TabItem("overview", "Overview", [watchTimeTrend, subsVsCancel, revenueByPlan, deviceSplit])
+tabContent = TabItem("content", "Content", [mostWatchedTitles, genrePerformance, releasesThisMonth, licensesExpiring, recommendationCTR, searchesNoPlayback])
+tabOps = TabItem("ops", "Infrastructure & Controls", [bufferingRate, deliveryHealth, regionFocusForm, featureFlags, promoteForm])
+
+watchTimeTrend = AreaChart(watchWeeks, [watchSeries], "natural", "Week", "Hours (M)")
+watchWeeks = ["Wk1", "Wk2", "Wk3", "Wk4"]
+watchSeries = Series("Watch hours (millions)", [412, 438, 401, 465])
+
+subsVsCancel = BarChart(watchWeeks, [newSubsSeries, cancelSeries], "grouped", "Week", "Accounts")
+newSubsSeries = Series("New subscribers", [58200, 61400, 54900, 67300])
+cancelSeries = Series("Cancellations", [21300, 19800, 23100, 20500])
+
+revenueByPlan = PieChart(planLabels, planValues, "donut")
+planLabels = ["Basic", "Standard", "Premium", "Premium+"]
+planValues = [1200000, 3400000, 2900000, 1800000]
+
+deviceSplit = SingleStackedBarChart(deviceLabels, deviceValues)
+deviceLabels = ["Mobile", "Smart TV", "Web", "Tablet", "Console"]
+deviceValues = [34, 41, 12, 8, 5]
+
+mostWatchedTitles = HorizontalBarChart(titleLabels, [titleSeries])
+titleLabels = ["The Last Signal", "Crimson Tide Rewritten", "Bakery Wars", "Nightfall Chronicles S3", "Quiet Harbor"]
+titleSeries = Series("Hours watched (M)", [82, 74, 61, 58, 49])
+
+genrePerformance = BarChart(genreLabels, [genreSeries], "grouped", "Genre", "Hours (M)")
+genreLabels = ["Drama", "Comedy", "Documentary", "Sci-Fi", "Reality"]
+genreSeries = Series("Watch hours (M)", [210, 165, 98, 187, 142])
+
+releasesThisMonth = ListBlock([release1, release2, release3, release4])
+release1 = ListItem("Nightfall Chronicles S4", "Drama · Releases June 4")
+release2 = ListItem("Sunset Grillhouse", "Documentary · Releases June 11")
+release3 = ListItem("Rally Point", "Action · Releases June 18")
+release4 = ListItem("Little Bakery Wars: Holiday Special", "Comedy · Releases June 26")
+
+licensesExpiring = Table([licTitle, licExpiry, licRegion])
+licTitle = Col("Title", ["Crimson Tide Rewritten", "The Long Drive", "Harbor Nights", "Quiet Harbor"])
+licExpiry = Col("Expires", ["June 15", "June 22", "July 1", "July 5"])
+licRegion = Col("Region", ["NA", "EU", "APAC", "Global"])
+
+recommendationCTR = Progress(24, "Recommendation click-through rate")
+searchesNoPlayback = Progress(17, "Searches ending without playback")
+
+bufferingRate = Progress(2, "Buffering rate")
+
+deliveryHealth = Table([regionCol, statusCol, latencyCol, uptimeCol])
+regionCol = Col("Region", ["North America", "Europe", "APAC", "LATAM", "Middle East/Africa"])
+statusCol = Col("Status", ["Healthy", "Healthy", "Degraded", "Healthy", "Investigating"])
+latencyCol = Col("Latency (ms)", [42, 55, 118, 67, 142])
+uptimeCol = Col("Uptime %", ["99.98", "99.95", "99.61", "99.90", "99.42"])
+
+regionFocusForm = Form("region-focus", regionFocusButtons, [regionFocusField])
+regionFocusField = FormControl("Focus region", regionSelect)
+regionSelect = Select("region", [regNA, regEU, regAPAC, regLATAM, regMEA], "Choose a region")
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("apac", "APAC")
+regLATAM = SelectItem("latam", "LATAM")
+regMEA = SelectItem("mea", "Middle East/Africa")
+regionFocusButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Apply focus", null, "primary")
+
+featureFlags = SwitchGroup("feature_flags", [flag1, flag2, flag3, flag4, flag5])
+flag1 = SwitchItem("New recommendation engine", "ML-based ranking v3", "rec_engine_v3", true)
+flag2 = SwitchItem("4K upscaling beta", "AI upscale for legacy titles", "upscale_beta", false)
+flag3 = SwitchItem("Social watch parties", "Synced group viewing", "watch_parties", true)
+flag4 = SwitchItem("Ad-supported tier", "Lower-cost tier with ads", "ad_tier", true)
+flag5 = SwitchItem("Offline downloads v2", "Improved download manager", "downloads_v2", false)
+
+promoteForm = Form("promote-title", promoteButtons, [promoteField])
+promoteField = FormControl("Title to promote", promoteSelect)
+promoteSelect = Select("title", [pt1, pt2, pt3, pt4], "Choose a title")
+pt1 = SelectItem("last_signal", "The Last Signal")
+pt2 = SelectItem("crimson_tide", "Crimson Tide Rewritten")
+pt3 = SelectItem("bakery_wars", "Bakery Wars")
+pt4 = SelectItem("nightfall", "Nightfall Chronicles S3")
+promoteButtons = Buttons([promoteBtn])
+promoteBtn = Button("Promote to home screen", null, "primary")

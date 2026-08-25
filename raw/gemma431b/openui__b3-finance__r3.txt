@@ -1,0 +1,35 @@
+root = Card([header, kpiSection, spendingSection, highValueTransactions, footer], "card", "column", "l")
+
+header = CardHeader("Finance Overview", "Month Ending October 2023")
+
+kpiSection = Card([cashKpi, burnKpi, runwayKpi], "sunk", "row", "m")
+cashKpi = Card([cashLabel, cashValue], "clear", "column", "none")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$1,240,000", "large-heavy")
+
+burnKpi = Card([burnLabel, burnValue], "clear", "column", "none")
+burnLabel = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$85,000", "large-heavy")
+
+runwayKpi = Card([runwayLabel, runwayValue], "clear", "column", "none")
+runwayLabel = TextContent("Runway", "small")
+runwayValue = TextContent("14.5 Months", "large-heavy")
+
+spendingSection = Card([spendingHeading, expenseChart], "clear", "column", "m")
+spendingHeading = Heading("Expenses by Category", "h3")
+expenseChart = PieChart(expenseLabels, expenseValues, "donut")
+expenseLabels = ["Payroll", "AWS/Cloud", "Marketing", "Rent", "Legal"]
+expenseValues = [55000, 12000, 8000, 6000, 4000]
+
+highValueTransactions = Card([txHeading, txTable], "clear", "column", "m")
+txHeading = Heading("High Value Transactions (>$10k)", "h3")
+txTable = Table([txDate, txVendor, txAmount])
+txDate = Col("Date", ["Oct 02", "Oct 12", "Oct 25"])
+txVendor = Col("Vendor", ["AWS Inc.", "Global Talent Agency", "Office Lease Co"])
+txAmount = Col("Amount", ["$12,400", "$25,000", "$11,000"], "number")
+
+footer = Card([datePickerField, actionButtons], "clear", "row", "l", "start", "between")
+datePickerField = FormControl("Select Month", monthPicker)
+monthPicker = DatePicker("finance_month", "single")
+actionButtons = Buttons([downloadBtn])
+downloadBtn = Button("Download Statement", null, "primary")

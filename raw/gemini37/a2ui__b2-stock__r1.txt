@@ -1,0 +1,186 @@
+Here is a low-inventory warning dashboard screen designed for store managers to search items, monitor critical stock levels against warning thresholds, and trigger reorders.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "thresholdAlert",
+          "searchSection",
+          "inventoryTable",
+          "bulkActions"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Low Inventory Alerts",
+        "subtitle": "Review depleted inventory, verify warning thresholds, and place reorders"
+      },
+      {
+        "id": "thresholdAlert",
+        "component": "Alert",
+        "title": "Warning Trigger Threshold",
+        "description": "Alert triggered automatically when available inventory falls below 15 units (or custom safety stock level).",
+        "variant": "warning"
+      },
+      {
+        "id": "searchSection",
+        "component": "FormControl",
+        "label": "Search Inventory",
+        "hint": "Filter by item name, SKU, or category",
+        "input": "searchInput"
+      },
+      {
+        "id": "searchInput",
+        "component": "Input",
+        "name": "inventory_search",
+        "placeholder": "e.g., Organic Whole Milk, SKU-409..."
+      },
+      {
+        "id": "inventoryTable",
+        "component": "Table",
+        "columns": [
+          "colSku",
+          "colItem",
+          "colCategory",
+          "colRemaining",
+          "colThreshold",
+          "colStatus",
+          "colAction"
+        ]
+      },
+      {
+        "id": "colSku",
+        "component": "Col",
+        "label": "SKU",
+        "data": [
+          "SKU-1042",
+          "SKU-8831",
+          "SKU-2094",
+          "SKU-5521",
+          "SKU-3108"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colItem",
+        "component": "Col",
+        "label": "Item Name",
+        "data": [
+          "Organic Whole Milk (1 Gal)",
+          "Artisan Sourdough Loaf",
+          "Cold Brew Coffee (32oz)",
+          "Greek Yogurt Cups (Pack of 4)",
+          "Almond Butter (16oz)"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colCategory",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Dairy",
+          "Bakery",
+          "Beverages",
+          "Dairy",
+          "Pantry"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colRemaining",
+        "component": "Col",
+        "label": "Remaining Units",
+        "data": [
+          "3 units",
+          "4 units",
+          "6 units",
+          "8 units",
+          "11 units"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colThreshold",
+        "component": "Col",
+        "label": "Alert Threshold",
+        "data": [
+          "15 units",
+          "12 units",
+          "20 units",
+          "15 units",
+          "15 units"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Urgency",
+        "data": [
+          "Critical (80% below)",
+          "Critical (66% below)",
+          "Urgent (70% below)",
+          "Low (46% below)",
+          "Low (26% below)"
+        ],
+        "type": "string"
+      },
+      {
+        "id": "colAction",
+        "component": "Col",
+        "label": "Reorder Action",
+        "data": [
+          "Reorder (50 units)",
+          "Reorder (30 units)",
+          "Reorder (40 units)",
+          "Reorder (45 units)",
+          "Reorder (25 units)"
+        ],
+        "type": "action"
+      },
+      {
+        "id": "bulkActions",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "reorderAllBtn",
+          "adjustThresholdBtn"
+        ]
+      },
+      {
+        "id": "reorderAllBtn",
+        "component": "Button",
+        "label": "Reorder All Flagged Items",
+        "variant": "primary"
+      },
+      {
+        "id": "adjustThresholdBtn",
+        "component": "Button",
+        "label": "Configure Warning Thresholds",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

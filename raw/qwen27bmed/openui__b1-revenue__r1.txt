@@ -1,0 +1,18 @@
+
+
+root = Card([header, revenueToday, comparison, chartSection])
+header = CardHeader("Morning Check-in", "Tuesday, June 10 · 11:00 AM")
+revenueToday = Card([revenueLabel, revenueAmount, revenueBadge], "sunk", "column", "s", "center")
+revenueLabel = TextContent("Revenue so far today", "small-heavy")
+revenueAmount = TextContent("$1,847", "large-heavy")
+revenueBadge = Tag("+18.2% vs yesterday", null, "md", "success")
+comparison = Card([yesterdayLabel, yesterdayAmount, deltaText], "sunk", "column", "s", "center")
+yesterdayLabel = TextContent("Yesterday at 11:00 AM", "small")
+yesterdayAmount = TextContent("$1,562", "default")
+deltaText = TextContent("+$285 ahead of yesterday's pace", "small-heavy")
+chartSection = Card([chartHeading, chart], "sunk", "column", "s")
+chartHeading = Heading("Hourly pace", "h3")
+chart = LineChart(chartLabels, [todaySeries, yesterdaySeries], "linear", "Hour", "USD")
+chartLabels = ["8 AM", "9 AM", "10 AM", "11 AM"]
+todaySeries = Series("Today", [312, 428, 503, 604])
+yesterdaySeries = Series("Yesterday", [280, 395, 441, 446])

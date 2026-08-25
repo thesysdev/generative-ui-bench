@@ -1,0 +1,85 @@
+```openui-lang
+root = Card([header, budgetSummary, spendingBreakdown, largestExpense, monthSelector, addExpense])
+
+header = CardHeader("Monthly Budget Check", "Track your spending against goals")
+
+budgetSummary = Card([budgetTitle, budgetChart], "sunk")
+budgetTitle = Heading("Total Spending vs Budget", "h3")
+budgetChart = BarChart(
+    ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    [spendingSeries, budgetSeries],
+    "grouped",
+    "Month",
+    "Amount ($)"
+)
+spendingSeries = Series("Actual Spending", [2500, 3100, 2800, 3500, 4200, 4800])
+budgetSeries = Series("Budget", [3000, 3200, 3000, 3500, 3800, 4000])
+
+spendingBreakdown = Card([breakdownTitle, breakdownChart], "sunk")
+breakdownTitle = Heading("Spending by Category", "h3")
+breakdownChart = PieChart(
+    ["Housing", "Groceries", "Transport", "Entertainment", "Utilities", "Healthcare", "Misc"],
+    [800, 600, 450, 300, 250, 150, 700],
+    "pie"
+)
+
+largestExpense = Card([expenseTitle, expenseItem], "sunk")
+expenseTitle = Heading("Largest Expense", "h3")
+expenseItem = Card(
+    [
+        CardHeader("Groceries", "Market Street Groceries • $650"),
+        Tag("Groceries", null, null, "danger"),
+        TextContent("This month's largest expense was your grocery bill from Market Street Groceries.")
+    ],
+    "card"
+)
+
+monthSelector = Card(
+    [
+        Heading("Select Month", "h3"),
+        Select("month", [monthItems], "Select month", null, "May", "medium")
+    ],
+    "sunk"
+)
+monthItems = [
+    SelectItem("Jan", "January"),
+    SelectItem("Feb", "February"),
+    SelectItem("Mar", "March"),
+    SelectItem("Apr", "April"),
+    SelectItem("May", "May"),
+    SelectItem("Jun", "June"),
+    SelectItem("Jul", "July"),
+    SelectItem("Aug", "August"),
+    SelectItem("Sep", "September"),
+    SelectItem("Oct", "October"),
+    SelectItem("Nov", "November"),
+    SelectItem("Dec", "December")
+]
+
+addExpense = Card(
+    [
+        Heading("Add Expense", "h3"),
+        FormControl("Expense", expenseForm),
+        Buttons([submitExpense])
+    ],
+    "sunk"
+)
+expenseForm = Form("expense-entry", addExpenseButtons, [categoryField, amountField, descriptionField])
+categoryField = FormControl("Category", categorySelect)
+categorySelect = Select("category", [categoryItems], "Select category", null, "Groceries", "medium")
+categoryItems = [
+    SelectItem("groceries", "Groceries"),
+    SelectItem("housing", "Housing"),
+    SelectItem("transport", "Transport"),
+    SelectItem("entertainment", "Entertainment"),
+    SelectItem("utilities", "Utilities"),
+    SelectItem("healthcare", "Healthcare"),
+    SelectItem("misc", "Miscellaneous")
+]
+amountField = FormControl("Amount ($)", amountInput)
+amountInput = Input("amount", "100", "number", null, "$100")
+descriptionField = FormControl("Description", descriptionInput)
+descriptionInput = Input("description", "Market Street Groceries", "text")
+addExpenseButtons = Buttons([submitExpense])
+submitExpense = Button("Add Expense", null, "primary")
+```

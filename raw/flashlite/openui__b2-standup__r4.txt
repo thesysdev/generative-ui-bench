@@ -1,0 +1,39 @@
+root = Card([headerCard, alertSection, updatesSection, missingSection, formCard, followUp])
+
+headerCard = CardHeader("Async Standup", "Today: October 24, 2023")
+
+alertSection = Alert("Blocked Teammates", "Sarah Connor is blocked on API credentials.", "warning")
+
+updatesSection = Card([updatesHeading, updatesList], "sunk")
+updatesHeading = Heading("Teammate Status Updates", "h3")
+updatesList = ListBlock([update1, update2, update3])
+
+update1 = ListItem("Alice Smith", "Working on UI polish and animations.", null, "On Track")
+update2 = ListItem("Bob Jones", "Finished database migration. Starting testing.", null, "On Track")
+update3 = ListItem("Sarah Connor", "Blocked waiting for staging API credentials from DevOps.", null, "Blocked")
+
+missingSection = Card([missingHeading, missingProgress], "sunk")
+missingHeading = Heading("Participation Tracker", "h3")
+missingProgress = Progress(60, "3 of 5 updates received (2 missing)")
+
+formCard = Card([formHeading, standupForm], "card")
+formHeading = Heading("Post Your Update", "h3")
+standupForm = Form("standup_form", formButtons, [nameField, statusField, blockedField])
+
+nameField = FormControl("Your Name", nameInput)
+nameInput = Input("name", "Enter your name")
+
+statusField = FormControl("Today's Progress", statusText)
+statusText = TextArea("status", "What did you do / What will you do?", 3)
+
+blockedField = FormControl("Are you blocked?", blockedSelect)
+blockedSelect = Select("blocked", [blockedNo, blockedYes], "Select status")
+blockedNo = SelectItem("no", "No, all good")
+blockedYes = SelectItem("yes", "Yes, I am blocked")
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary")
+
+followUp = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("Remind missing teammates")
+fu2 = FollowUpItem("View past standups")

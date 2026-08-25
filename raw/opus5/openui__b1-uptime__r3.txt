@@ -1,0 +1,24 @@
+root = Card([header, uptimeSection, incidentSection, followUps])
+
+header = CardHeader("Platform Status", "API availability — March 2025")
+
+uptimeSection = Card([uptimeHeading, uptimeTag, uptimeProgress, uptimeNote, uptimeTable], "sunk")
+uptimeHeading = Heading("Current uptime this month", "h3")
+uptimeTag = Tag("99.982% — meeting SLA", null, "lg", "success")
+uptimeProgress = Progress(99.982, "API uptime (target 99.90%)")
+uptimeNote = TextContent("Measured across all public API endpoints from 1–27 March. Total downtime so far: **7m 12s** against an error budget of 43m 12s.", "small")
+uptimeTable = Table([svcCol, uptimeCol, budgetCol])
+svcCol = Col("Service", ["REST API", "GraphQL API", "Webhooks", "Auth"])
+uptimeCol = Col("Uptime", ["99.982%", "99.971%", "99.995%", "100.000%"], "string")
+budgetCol = Col("Budget used", ["17%", "27%", "5%", "0%"], "string")
+
+incidentSection = Card([incidentHeading, incidentAlert, incidentDetail, incidentTags], "sunk")
+incidentHeading = Heading("Most recent incident", "h3")
+incidentAlert = Alert("INC-2418 — Elevated 5xx on REST API", "Resolved 19 March 2025 at 14:32 UTC, 41 minutes after detection.", "success")
+incidentDetail = TextContent("A bad connection-pool config rolled out with release `v2.14.3` caused intermittent 502s on roughly 3% of REST API requests starting 13:51 UTC. The release was rolled back at 14:26 UTC and error rates returned to baseline by 14:32 UTC. A pool-saturation alert and a canary gate have since been added.", "default")
+incidentTags = TagBlock(["Severity: SEV-2", "Duration: 41m", "Rolled back", "Postmortem published"])
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show the full INC-2418 postmortem")
+fu2 = FollowUpItem("Compare uptime to February 2025")
+fu3 = FollowUpItem("List all incidents from the last 90 days")

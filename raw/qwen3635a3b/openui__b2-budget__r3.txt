@@ -1,0 +1,20 @@
+
+
+root = Card([header, monthNav, budgetSection, chartSection, largestExpense, addExpense], "column", "m", "l")
+header = CardHeader("Budget Check", "June 2024")
+monthNav = Buttons([prevBtn, currentBtn, nextBtn], "row")
+prevBtn = Button("← May", ["month:may"])
+currentBtn = Button("June 2024", ["month:june"])
+nextBtn = Button("July →", ["month:july"])
+budgetSection = Card([budgetTitle, budgetProgress, budgetNumbers], "sunk", "column", "s")
+budgetTitle = Heading("Monthly Budget", "h3")
+budgetProgress = Progress(72, "72% of budget used")
+budgetNumbers = TextContent("$2,160 of $3,000 spent this month", "small")
+chartSection = Card([chartTitle, categoryChart], "sunk", "column", "s")
+chartTitle = Heading("Spending by Category", "h3")
+categoryChart = HorizontalBarChart(categories, seriesData)
+categories = ["Rent", "Groceries", "Utilities", "Transportation", "Dining", "Entertainment"]
+seriesData = [expenseSeries]
+expenseSeries = Series("Spent", [1200, 450, 180, 200, 220, 110])
+largestExpense = Callout("warning", "Largest Expense", "Rent — $1,200 on June 1st. This is 55% of your total spending.")
+addExpense = Button("+ Add Expense", ["action:add-expense"], "primary")

@@ -1,0 +1,260 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Revenue header
+    CardHeader("Quarterly Executive Dashboard", "CEO Quarterly Command View"),
+    
+    // 2. Revenue visualization
+    Card(
+      children: [
+        CardHeader("Revenue Overview", "Total and Trend"),
+        ChartRow([
+          Chart(
+            labels: ["Q1", "Q2", "Q3", "Q4"],
+            series: [{ name: "Revenue", data: [320000, 385000, 420000, 510000] }],
+            xLabel: "Quarter",
+            yLabel: "Revenue ($)",
+            variant: "grouped"
+          ),
+          Chart(
+            labels: ["Q1", "Q2", "Q3", "Q4"],
+            series: [{ name: "Revenue Growth %", data: [25.0, 25.3, 26.1, 27.8] }],
+            xLabel: "Quarter",
+            yLabel: "% Change",
+            variant: "grouped"
+          )
+        ]),
+        TextContent("Revenue grew 58% QoQ ending Q4", size: "large")
+      ]
+    ),
+    
+    // 3. Costs visualization
+    Card(
+      children: [
+        CardHeader("Costs Overview", "Expense Breakdown"),
+        Chart(
+          labels: ["Q1", "Q2", "Q3", "Q4"],
+          series: [{ name: "Costs", data: [180000, 210000, 245000, 275000] }],
+          xLabel: "Quarter",
+          yLabel: "Costs ($)",
+          variant: "grouped"
+        ),
+        Chart(
+          labels: ["Q1", "Q2", "Q3", "Q4"],
+          series: [{ name: "Cost Reduction %", data: [-5.0, -4.2, -3.5, -2.8] }],
+          xLabel: "Quarter",
+          yLabel: "% Reduction",
+          variant: "grouped"
+        ),
+        TextContent("Costs decreased 32% YoY", size: "large")
+      ]
+    ),
+    
+    // 4. Profit calculation
+    Card(
+      children: [
+        CardHeader("Profit Summary", "Net Results"),
+        TextContent("Profit: $215,000 (Q4)", size: "large"),
+        TextContent("Gross Margin: 42%", size: "small")
+      ]
+    ),
+    
+    // 5. Revenue over 4 quarters (more detailed)
+    Card(
+      children: [
+        CardHeader("Revenue Trajectory (4 Quarters)", "Detailed Quarterly Performance"),
+        Chart(
+          labels: ["Q1", "Q2", "Q3", "Q4"],
+          series: [{ name: "Revenue", data: [320000, 385000, 420000, 510000] }],
+          xAxis: "Quarter",
+          yAxis: "Revenue ($)",
+          variant: "horizontalbar"
+        )
+      ]
+    ),
+    
+    // 6. Costs over 4 quarters
+    Card(
+      children: [
+        CardHeader("Cost Trends (4 Quarters)", "Expense Movement"),
+        Chart(
+          labels: ["Q1", "Q2", "Q3", "Q4"],
+          series: [{ name: "Costs", data: [180000, 210000, 245000, 275000] }],
+          xAxis: "Quarter",
+          yAxis: "Costs ($)",
+          variant: "horizontalbar"
+        )
+      ]
+    ),
+    
+    // 7. Budget by department vs plan
+    Card(
+      children: [
+        CardHeader("Department Budget vs Plan", "Resource Allocation"),
+        ListItem("Engineering", "Planned: $450K, Actual: $380K", 380000),
+        ListItem("Sales", "Planned: $600K, Actual: $650K", 650000),
+        ListItem("Marketing", "Planned: $300K, Actual: $280K", 280000),
+        ListItem("Operations", "Planned: $250K, Actual: $240K", 240000),
+        ListItem("R&D", "Planned: $200K, Actual: $220K", 220000),
+        TextContent("Overall variance: -6.5% below budget", size: "medium")
+      ]
+    ),
+    
+    // 8. Headcount by department
+    Card(
+      children: [
+        CardHeader("Headcount by Department", "Team Sizes"),
+        ListItem("Engineering", "45 employees",
+        TextContent("Senior Engineers: 20", size: "medium"))
+        ListItem("Sales", "60 employees",
+        TextContent("Account Executives: 35", size: "medium"))
+        ListItem("Marketing", "25 employees",
+        TextContent("Marketers: 15", size: "medium"))
+        ListItem("Operations", "30 employees",
+        TextContent("Support Staff: 15", size: "medium"))
+        TextContent("Total: 170 employees", size: "small")
+      ]
+    ),
+    
+    // 9. Top risks with owners
+    Card(
+      children: [
+        CardHeader("Top Risks & Owners", "Critical Issues"),
+        ListItem("Market Volatility", "Owner: CFO",
+        TextContent("Macroeconomic shifts affecting demand", size: "medium"))
+        ListItem("Supply Chain Delays", "Owner: COO",
+        TextContent("Port congestion and vendor reliability", size: "medium"))
+        ListItem("Regulatory Changes", "Owner: Legal",
+        TextContent("New compliance requirements", size: "medium"))
+        ListItem("Talent Retention", "Owner: HR Director",
+        TextContent("High turnover in senior roles", size: "medium"))
+        TextContent("Mitigation strategies in progress", size: "small")
+      ]
+    ),
+    
+    // 10. Strategic initiatives with status
+    Card(
+      children: [
+        CardHeader("Strategic Initiatives", "Key Programs"),
+        ListItem("AI Product Launch", "In Progress",
+        TextContent("Phase 1 development complete, beta testing ongoing", size: "medium"))
+        ListItem("Market Expansion", "Planning",
+        TextContent("Entering 3 new regions", size: "medium"))
+        ListItem("Customer Success Platform", "Completed",
+        TextContent("Launched Q2, adoption metrics strong", size: "medium"))
+        ListItem("Sustainability Initiative", "Pending",
+        TextContent("Carbon-neutral roadmap design", size: "medium"))
+        TextContent("Track progress weekly", size: "small")
+      ]
+    ),
+    
+    // 11. Months of runway
+    Card(
+      children: [
+        CardHeader("Runway Analysis", "Cash Position"),
+        TextContent("Current Runway: 8 months",
+        TextContent("At current burn rate", size: "small"))
+      ]
+    ),
+    
+    // 12. Sales pipeline value
+    Card(
+      children: [
+        CardHeader("Sales Pipeline", "Opportunities"),
+        TextContent("Total Pipeline Value: $1.2M",
+        TextContent("Closed Won: 28 deals", size: "medium"))
+        ListItem("Q1 Opportunities", "Q1-Spring",
+        TextContent("12 opportunities, avg. $75K each", size: "small"))
+        ListItem("Q2 Opportunities", "Q2-Summer",
+        TextContent("18 opportunities, avg. $90K each", size: "small"))
+        ListItem("Q3 Opportunities", "Q3-Fall",
+        TextContent("22 opportunities, avg. $80K each", size: "small"))
+        TextContent("Projected Q4 close: $680K", size: "medium")
+      ]
+    ),
+    
+    // 13. Win rate
+    Card(
+      children: [
+        CardHeader("Win Rate", "Conversion Metrics"),
+        TextContent("Win Rate: 78%",
+        TextContent("vs Industry Average: 65%", size: "medium"))
+      ]
+    ),
+    
+    // 14. Customer count and churn
+    Card(
+      children: [
+        CardHeader("Customers & Churn", "Health Metrics"),
+        TextContent("Active Customers: 1,240",
+        TextContent("Churn Rate: 4.2% monthly",
+        TextContent("Average Contract Value: $24K", size: "medium"))
+      ]
+    ),
+    
+    // 15. Items for next board meeting
+    Card(
+      children: [
+        CardHeader("Board Meeting Agenda", "Discussion Items"),
+        ListItem("Budget Review", "Q4 spending alignment",
+        TextContent("Finalize department allocations", size: "medium"))
+        ListItem("Pipeline Health", "Quarterly forecast",
+        TextContent("Review pipeline conversion rates", size: "medium"))
+        ListItem("Risk Mitigation", "Emerging threats",
+        TextContent("Action items for risk register", size: "medium"))
+        ListItem("Hiring Plan", "Next-quarter staffing",
+        TextContent("Target: +20 engineering hires", size: "medium"))
+        TextContent("Prepare presentation slides", size: "small")
+      ]
+    ),
+    
+    // 16. Quarter selector
+    Card(
+      children: [
+        Controls({
+          options: [
+            { value: "Q1", label: "Q1 2024", active: true },
+            { value: "Q2", label: "Q2 2024" },
+            { value: "Q3", label: "Q3 2024" },
+            { value: "Q4", label: "Q4 2024" }
+          ],
+          current: "Q4"
+        })
+      ]
+    ),
+    
+    // 17. Region filter
+    Card(
+      children: [
+        Controls({
+          options: [
+            { value: "All", label: "All Regions" },
+            { value: "North", label: "North America" },
+            { value: "South", label: "Latin America" },
+            { value: "East", label: "Europe" },
+            { value: "West", label: "Asia-Pacific" }
+          ],
+          selected: "All"
+        })
+      ]
+    ),
+    
+    // 18. Export pack
+    Card(
+      children: [
+        Controls({
+          action: "Export Dashboard Pack",
+          label: "Download Full Report"
+        })
+      ]
+    ),
+  ],
+  gap: "xl",
+  direction: "row",
+  wrap: true,
+  variant: "card",
+  align: "center",
+  justify: "center",
+  wrap: true
+)
+```

@@ -1,0 +1,13 @@
+root = Card([header, statusCallout, kpiTable, comparisonChart, hourlyTrend])
+header = CardHeader("Morning Check-in", "10:24 AM · Shop dashboard")
+statusCallout = Callout("success", "Ahead of yesterday", "Revenue so far today is pacing 12% above the same time yesterday.")
+kpiTable = Table([metricCol, valueCol, deltaCol])
+metricCol = Col("Metric", ["Revenue so far today", "Revenue yesterday (same time)", "Difference"])
+valueCol = Col("Value", ["$3,842", "$3,431", "+$411"])
+deltaCol = Col("Δ vs yesterday", ["—", "—", "+12%"])
+comparisonChart = HorizontalBarChart(["Today (so far)", "Yesterday (same time)"], [revenueSeries], "grouped", "Period", "USD")
+revenueSeries = Series("Revenue", [3842, 3431])
+hourlyTrend = LineChart(hours, [todaySeries, yesterdaySeries], "linear", "Hour", "USD")
+hours = ["7am", "8am", "9am", "10am"]
+todaySeries = Series("Today", [820, 1450, 2310, 3842])
+yesterdaySeries = Series("Yesterday", [710, 1290, 2050, 3431])

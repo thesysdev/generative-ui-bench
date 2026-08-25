@@ -1,0 +1,75 @@
+```openui-lang
+lastRefreshed = "2023-11-15 09:45 AM"
+shipmentsInTransit = [
+    { origin: "New York", destination: "Los Angeles", eta: "Nov 17", status: "On time" },
+    { origin: "Chicago", destination: "Seattle", eta: "Nov 18", status: "Delayed" },
+    { origin: "Miami", destination: "Dallas", eta: "Nov 16", status: "On time" },
+    { origin: "Denver", destination: "Houston", eta: "Nov 19", status: "Delayed" },
+    { origin: "Boston", destination: "San Francisco", eta: "Nov 17", status: "On time" }
+]
+
+delayedShipments = [
+    { origin: "Chicago", destination: "Seattle", eta: "Nov 18", delayReason: "Weather" },
+    { origin: "Denver", destination: "Houston", eta: "Nov 19", delayReason: "Equipment" }
+]
+
+onTimePercentage = 89
+carrierSplit = [
+    { carrier: "FedEx", percentage: 45 },
+    { carrier: "UPS", percentage: 30 },
+    { carrier: "DHL", percentage: 20 },
+    { carrier: "Trucking Co.", percentage: 5 }
+]
+
+averageCost = "$128.42"
+weeklyVolume = [
+    { week: "Oct 16", volume: 1245 },
+    { week: "Oct 23", volume: 1432 },
+    { week: "Oct 30", volume: 1567 },
+    { week: "Nov 06", volume: 1689 },
+    { week: "Nov 13", volume: 1823 },
+    { week: "Nov 20", volume: 1956 }
+]
+
+root = Card([header, searchBar, refreshTime, shipmentsSection, delayedAlert, statsSection, volumeChart, flagButton], "card", "column", "m", "start", "start")
+
+header = CardHeader("Logistics Dashboard", "Real-time shipment tracking")
+
+searchBar = Card([searchInput], "sunk", "row", "s")
+searchInput = Input("route-search", "Search by route...", "text", null, "NYC-LAX")
+
+refreshTime = TextContent("Last updated: " + lastRefreshed, "small")
+
+shipmentsSection = Card([shipmentsTitle, shipmentsTable], "sunk", "column", "m")
+shipmentsTitle = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([shipmentColOrigin, shipmentColDest, shipmentColETA, shipmentColStatus, shipmentColAction])
+shipmentColOrigin = Col("Origin", [shipment.origin for shipment in shipmentsInTransit])
+shipmentColDest = Col("Destination", [shipment.destination for shipment in shipmentsInTransit])
+shipmentColETA = Col("ETA", [shipment.eta for shipment in shipmentsInTransit])
+shipmentColStatus = Col("Status", [shipment.status for shipment in shipmentsInTransit])
+shipmentColAction = Col("Action", ["", "", "", "", ""])
+
+delayedAlert = Callout("warning", "Delayed Shipments", "2 out of 5 shipments delayed. Average delay: 2 days")
+
+statsSection = Card([statsTitle, onTimeCard, costCard, carrierChart], "sunk", "column", "m")
+statsTitle = Heading("Key Metrics", "h3")
+onTimeCard = Card([onTimeTitle, onTimeValue], "sunk", "column", "m")
+onTimeTitle = TextContent("On-time percentage this month", "small-heavy")
+onTimeValue = TextContent(str(onTimePercentage) + "%", "large-heavy")
+costCard = Card([costTitle, costValue], "sunk", "column", "m")
+costTitle = TextContent("Average cost per shipment", "small-heavy")
+costValue = TextContent("$" + averageCost, "large-heavy")
+
+carrierChart = Card([carrierTitle, carrierPie], "sunk", "column", "m")
+carrierTitle = TextContent("Volume by Carrier", "small-heavy")
+carrierPie = PieChart([carrier.carrier for carrier in carrierSplit], [carrier.percentage for carrier in carrierSplit], "donut")
+
+volumeChart = Card([volumeTitle, volumeLine], "sunk", "column", "m")
+volumeTitle = TextContent("Weekly Volume (Past 2 Months)", "small-heavy")
+volumeLine = LineChart(["Oct 16", "Oct 23", "Oct 30", "Nov 06", "Nov 13", "Nov 20"], [volume.volume for volume in weeklyVolume], "natural", "Week", "Shipments")
+
+flagButton = Button("Flag Shipment", ["flag-shipment"], "secondary")
+
+shipmentColAction.data = ["", "", "", "", ""]
+shipmentColAction.type = "action"
+```

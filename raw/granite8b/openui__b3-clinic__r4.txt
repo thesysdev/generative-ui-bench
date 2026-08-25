@@ -1,0 +1,81 @@
+```openui-lang
+root = Card([
+    header,
+    appointmentsSection,
+    statsSection,
+    nextPatientSection,
+    actionsSection
+], "card", "column", "m")
+
+header = CardHeader("Clinic Receptionist Dashboard", "Today")
+
+appointmentsSection = Card([
+    todayAppointments,
+    roomsFreeNow
+], "sunk")
+
+todayAppointments = Table([
+    colTime,
+    colPatientName
+], "Appointments")
+
+colTime = Col("Time", [
+    "09:00 - 09:15",
+    "10:00 - 10:15",
+    "11:00 - 11:15",
+    "12:00 - 12:15",
+    "13:00 - 13:15",
+    "14:00 - 14:15",
+    "15:00 - 15:15"
+])
+
+colPatientName = Col("Patient", [
+    "Alice Johnson",
+    "Bob Smith",
+    "Charlie Brown",
+    "Diana Prince",
+    "Eve Adams",
+    "Frank Miller",
+    "Grace Lee"
+])
+
+roomsFreeNow = ListBlock([
+    listItemRoom1,
+    listItemRoom2,
+    listItemRoom3
+], "image")
+
+listItemRoom1 = ListItem("Room 101", "Free", ["images/room-101.png"], "Check availability")
+listItemRoom2 = ListItem("Room 102", "Free", ["images/room-102.png"], "Check availability")
+listItemRoom3 = ListItem("Room 103", "Free", ["images/room-103.png"], "Check availability")
+
+statsSection = Card([
+    expectedPatients,
+    noShowRate
+], "sunk")
+
+expectedPatients = TextContent("Expected patients today: 7", "large")
+noShowRate = Callout("warning", "No-show rate this month: 12%", null)
+
+nextPatientSection = Card([
+    nextPatient
+], "sunk")
+
+nextPatient = TextContent("Next patient called out: Diana Prince (12:00 - 12:15)", "large")
+
+actionsSection = Buttons([
+    checkInBtn,
+    nextDayBtn
+])
+
+checkInBtn = Button("Check in patient", ["checkIn", "patientId"], "primary")
+nextDayBtn = Button("Next day", ["nextDay"], "secondary")
+
+root = Card([
+    header,
+    appointmentsSection,
+    statsSection,
+    nextPatientSection,
+    actionsSection
+], "card", "column", "m")
+```

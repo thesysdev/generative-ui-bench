@@ -1,0 +1,42 @@
+```openui-lang
+root = Card([statusHeader, uptimeChart, incidentSummary, platformStatus])
+
+statusHeader = CardHeader("Platform Status", "Monitoring API uptime and incidents")
+
+uptimeChart = Card(
+    [ChartTitle, UptimeBar],
+    "sunk",
+    "column",
+    "l",
+    "center"
+)
+
+ChartTitle = Heading("API Uptime (This Month)", "h3")
+UptimeBar = SingleStackedBarChart(
+    ["Current Month"],
+    [99.8]
+)
+
+incidentSummary = Card(
+    [IncidentTitle, IncidentDetails, ResolutionTime],
+    "sunk",
+    "column",
+    "l"
+)
+
+IncidentTitle = Heading("Recent Incident", "h4")
+IncidentDetails = TextContent(
+    "Unplanned downtime on primary region servers caused API latency spikes. Affecting 30% of requests for 12 minutes."
+)
+ResolutionTime = TextContent("Resolved: 2024-02-15 14:30 UTC")
+
+platformStatus = Card(
+    [StatusIndicator, StatusMessage],
+    "sunk",
+    "column",
+    "l"
+)
+
+StatusIndicator = Tag("Operational", null, null, "success")
+StatusMessage = TextContent("All systems are stable after recent incident resolution.")
+```

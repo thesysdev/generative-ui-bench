@@ -1,0 +1,62 @@
+root = Card([accountHeader, metricsSection, dealStage, activityList, contactsList, followUpsList, noteSection, renewalSection, callLogSection], "sunk")
+
+accountHeader = CardHeader("Acme Corp — Account Overview", "Owner: Jordan Lee | Account ID: ACME-2024-001")
+
+metricsSection = CardHeader("Deal Metrics", "Total value, stage, and pipeline health")
+metrics = Card([valueLabel, valueNum, stageLabel, stageInfo])
+valueLabel = TextContent("Total Deal Value", size: "small")
+valueNum = TextContent("$2,450,000")
+stageLabel = TextContent("Current Stage: Negotiation", size: "small")
+stageInfo = TextContent("In progress — 3 items in review")
+
+dealStage = CardHeader("Deal Stage", "Current pipeline status")
+dealStageContent = Card([stageTag, stageProgress])
+stageTag = Tag("Negotiation", null, null, "info")
+stageProgress = Progress(65, "65% through pipeline")
+
+activityList = CardHeader("Recent Activity", "Last 10 entries")
+activityItems = [
+    {label: "Deal Updated", time: "Today, 2:30 PM", desc: "Price adjusted to $2.45M"},
+    {label: "Call Scheduled", time: "Yesterday", desc: "Follow-up call with client"},
+    {label: "Contract Signed", time: "2 days ago", desc: "Signed with Beta Corp"},
+    {label: "Proposal Sent", time: "3 days ago", desc: "Quote for $1.2M delivered"},
+    {label: "Meeting Scheduled", time: "4 days ago", desc: "Discovery call with Enterprise"},
+    {label: "Invoice Issued", time: "1 week ago", desc: "Invoice #INV-2024-0042"},
+    {label: "NDA Signed", time: "1 week ago", desc: "Non-disclosure agreement completed"},
+    {label: "Proposal Drafted", time: "2 weeks ago", desc: "Initial quote prepared"},
+    {label: "Demo Completed", time: "3 weeks ago", desc: "Product demo delivered"},
+    {label: "First Contact", time: "3 weeks ago", desc: "Initial outreach sent"},
+]
+
+contactsList = CardHeader("Contacts", "Team members with roles")
+contactsItems = [
+    {label: "Jordan Lee", role: "Account Executive", email: "jordan@acme.com"},
+    {label: "Sarah Kim", role: "Sales Manager", email: "sarah@acme.com"},
+    {label: "David Park", role: "Technical Lead", email: "david@acme.com"},
+    {label: "Lisa Chen", role: "Finance", email: "lisa@acme.com"},
+    {label: "Mike Torres", role: "Legal", email: "mike@acme.com"},
+]
+
+followUpsList = CardHeader("Open Follow-Ups", "Items with due dates")
+followUpItems = [
+    {label: "Beta Corp Check-in", due: "2024-12-15", status: "Upcoming", desc: "Review proposal response"},
+    {label: "Enterprise Demo", due: "2024-12-20", status: "Upcoming", desc: "Final presentation to Enterprise"},
+    {label: "NDA Follow-up", due: "2024-12-22", status: "Overdue", desc: "Client requested additional terms"},
+]
+
+noteSection = CardHeader("Add a Note", "Log a quick message")
+noteForm = Form("note-form", [noteInput], [submitNoteBtn, clearNoteBtn])
+noteInput = TextArea("note", "Enter a note or comment...", rows: 3, placeholder: "Type your note here...")
+submitNoteBtn = Button("Submit Note", null, "primary")
+clearNoteBtn = Button("Clear", null, "tertiary")
+
+renewalSection = CardHeader("Renewal Date", "Check upcoming renewals")
+renewalInfo = Card([renewalTag, renewalWarning])
+renewalTag = Tag("Renewal: Jan 15, 2025", null, null, "warning")
+renewalWarning = TextContent("⚠ Renewal is 15 days away. Review contract terms.", size: "small")
+
+callLogSection = CardHeader("Log a Call", "Record call details")
+callForm = Form("call-form", [callInput], [submitCallBtn, clearCallBtn])
+callInput = TextArea("call", "Call notes", rows: 3, placeholder: "Describe the call...")
+submitCallBtn = Button("Log Call", null, "primary")
+clearCallBtn = Button("Clear", null, "tertiary")

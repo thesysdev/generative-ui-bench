@@ -1,0 +1,76 @@
+root = Card([
+  header,
+  statusRow,
+  mainContent,
+  alertsRow,
+  actionsRow,
+], "sunk")
+
+header = CardHeader("Service Health Dashboard", "On-call engineer view")
+
+statusRow = Card([uptime, cpuMem, errorRate], "row")
+uptime = Card([uptimeTitle, uptimeValue, uptimeBadge], "card")
+uptimeTitle = Heading("Uptime (Q1 2024)", "h3")
+uptimeValue = TextContent("99.97%", size: "large")
+uptimeBadge = Tag("On Track", null, null, "success")
+cpuMem = Card([cpuTitle, cpuValue, memTitle, memValue], "card")
+cpuTitle = TextCallout("warning", "CPU", "82%")
+cpuValue = TextContent("82%", size: "large")
+memTitle = TextCallout("info", "Memory", "64%")
+memValue = TextContent("64%", size: "large")
+errorRate = Card([errorTitle, errorValue, errorBadge], "card")
+errorTitle = TextCallout("danger", "Error Rate", "2.3%")
+errorValue = TextContent("2.3%", size: "large")
+errorBadge = Tag("High", null, null, "danger")
+
+mainContent = Card([regionPicker, chartArea, slowEndpoints], "row")
+regionPicker = Card([regionLabel, regionPickerButtons], "card")
+regionLabel = TextCallout("neutral", "Region", "US East")
+regionPickerButtons = Buttons([regionUS, regionEU], "row")
+regionUS = Tag("US East", null, null, "info")
+regionEU = Tag("EU West", null, null, "ghost")
+chartArea = Card([chartTitle, chartHeader, chartBody], "card")
+chartTitle = Heading("CPU & Memory (24h)", "h3")
+chartHeader = HorizontalBarChart(labels, cpuSeries, memSeries, "Hour", "Usage %")
+chartBody = HorizontalBarChart(labels, cpuSeries, memSeries, "Hour", "Usage %")
+labels = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]
+cpuSeries = Series("CPU", [65, 72, 68, 82, 91, 88, 75, 70, 62, 55, 58, 60])
+memSeries = Series("Memory", [45, 50, 48, 55, 62, 60, 52, 48, 42, 38, 40, 43])
+slowEndpoints = Card([slowTitle, slowTable], "card")
+slowTitle = Heading("5 Slowest Endpoints", "h3")
+slowTable = Table([slowCol1, slowCol2, slowCol3, slowCol4, slowCol5])
+slowCol1 = Col("Endpoint", ["api/users", "api/orders", "api/products", "api/inventory", "api/payments"])
+slowCol2 = Col("Latency (ms)", [120, 240, 350, 520, 780])
+slowCol3 = Col("Status", ["200", "200", "200", "200", "200"])
+slowCol4 = Col("Calls (1h)", [1200, 3400, 1500, 800, 2100])
+slowCol5 = Col("Error", ["0", "0", "0", "0", "0"])
+
+alertsRow = Card([incidentList, ackButtons], "row")
+incidentList = Card([incidentTitle, incidentListBody], "card")
+incidentTitle = Heading("Open Incidents", "h3")
+incidentListBody = ListBlock([incident1, incident2, incident3, incident4, incident5])
+incident1 = ListItem("Payment gateway timeout", "Critical", null, "Acknowledge")
+incident2 = ListItem("Database connection pool exhausted", "High", null, "Acknowledge")
+incident3 = ListItem("CDN latency spike", "Medium", null, "Acknowledge")
+incident4 = ListItem("SSL certificate renewal needed", "Low", null, "Acknowledge")
+incident5 = ListItem("Monitoring agent restart required", "Medium", null, "Acknowledge")
+ackButtons = Buttons([ackAll, ackOne], "row")
+ackAll = Button("Acknowledge All", null, "primary")
+ackOne = Button("Acknowledge Selected", null, "secondary")
+
+alertsRow = Card([thresholdSetting, thresholdAlert], "row")
+thresholdSetting = Card([thresholdLabel, thresholdControls], "card")
+thresholdLabel = TextCallout("neutral", "Alert Threshold", "Error rate: 3%")
+thresholdControls = Form("threshold", [thresholdSlider], [submitBtn, resetBtn])
+thresholdSlider = Slider("Error rate", "continuous", 0.5, 10, 0.1, "Error rate %", 0.5)
+submitBtn = Button("Apply", null, "primary")
+resetBtn = Button("Reset", null, "tertiary")
+thresholdAlert = Alert("Threshold Set", "Alert threshold updated to 3% error rate", "success")
+
+root = Card([
+  header,
+  statusRow,
+  mainContent,
+  alertsRow,
+  actionsRow,
+], "sunk")

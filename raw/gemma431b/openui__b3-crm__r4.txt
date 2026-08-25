@@ -1,0 +1,42 @@
+root = Card([header, kpiRow, statusSection, activitySection, contactsSection, followUpsSection, interactionSection], "card", "column", "l")
+
+header = CardHeader("Acme Corp", "Account managed by Sarah Jenkins")
+
+kpiRow = Card([valueCard, renewalCard], "clear", "row", "m")
+valueCard = Card([TextContent("Total Deal Value", "small"), TextContent("$450,000", "large-heavy")], "sunk", "column", "none")
+renewalCard = Card([TextContent("Renewal Date", "small"), TextContent("Oct 12, 2024", "large-heavy"), renewalWarning], "sunk", "column", "none")
+renewalWarning = Callout("warning", "Renewal Approaching", "This account expires in less than 30 days.")
+
+statusSection = Card([statusHeading, stageProgress], "clear", "column", "s")
+statusHeading = Heading("Deal Pipeline", "h3")
+stageProgress = Progress(65, "Stage: Negotiation (65% to Close)")
+
+activitySection = Card([activityHeading, activityList], "sunk", "column", "m")
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([act1, act2, act3], "image")
+act1 = ListItem("Q3 Review Call", "Completed on Sep 1, 2024", null, "View Recording")
+act2 = ListItem("Proposal Sent", "Sent via Email on Aug 24, 2024", null, "View Doc")
+act3 = ListItem("Introductory Meeting", "Initial discovery call on Aug 10, 2024", null, "View Notes")
+
+contactsSection = Card([contactsHeading, contactsTable], "clear", "column", "m")
+contactsHeading = Heading("Key Contacts", "h3")
+contactsTable = Table([contactName, contactRole, contactEmail])
+contactName = Col("Name", ["John Doe", "Jane Smith", "Mike Ross"])
+contactRole = Col("Role", ["CTO", "Procurement Lead", "IT Manager"])
+contactEmail = Col("Email", ["john@acme.com", "jane@acme.com", "mike@acme.com"])
+
+followUpsSection = Card([followHeading, followList], "sunk", "column", "m")
+followHeading = Heading("Open Follow-ups", "h3")
+followList = ListBlock([f1, f2], "number")
+f1 = ListItem("Send updated pricing", "Due: Sep 15, 2024")
+f2 = ListItem("Schedule technical deep-dive", "Due: Sep 20, 2024")
+
+interactionSection = Card([interactHeading, noteForm, callAction], "clear", "column", "l")
+interactHeading = Heading("Quick Actions", "h3")
+noteForm = Form("quick-note", noteButtons, [noteField])
+noteField = FormControl("Add a note", noteInput)
+noteInput = TextArea("note_text", "Type your account update here...")
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+callAction = Buttons([logCallBtn])
+logCallBtn = Button("Log a Call", null, "secondary")

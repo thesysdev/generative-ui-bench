@@ -1,0 +1,56 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Header - Daily fitness summary title
+    CardHeader("Daily Fitness Summary", "Your activity overview for today"),
+    
+    // 2. Step count today vs daily goal
+    Card([
+      CardHeader("Step Count", "Today's activity"),
+      TextContent(
+        `Steps: <span style="color:green">12,450</span> / <span style="color:gray">15,000</span>`,
+        size: "large"
+      ),
+      Divider()
+    ]),
+    
+    // 3. Calories burned
+    Card([
+      CardHeader("Calories Burned", "Energy Expenditure"),
+      TextContent(
+        `Total: <span style="color:green">2,380 kcal</span>`,
+        size: "large"
+      ),
+      Divider()
+    ]),
+    
+    // 4. Weekly workout progress - past 7 days
+    Card([
+      CardHeader("Weekly Workout Progress", "Last 7 days"),
+      Table({
+        columns: [
+          { label: "Day", data: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] },
+          { label: "Workout", data: ["Running", "Cycling", "Gym", "Yoga", "Swimming", "Rest", "HIIT"] },
+          { label: "Duration (min)", data: ["45", "60", "30", "40", "35", "20", "50"] },
+          { label: "Calories", data: ["850", "920", "680", "540", "650", "300", "900"] }
+        ]
+      })
+    ]),
+    
+    // 5. Log new workout - interactive form
+    Form(
+      name: "log_workout",
+      buttons: [
+        Button("Log Workout", null, "primary"),
+        Button("Back", null, "secondary")
+      ],
+      fields: [
+        FormControl("date", Input("date", "When did you work out?")),
+        FormControl("type", Select(["Walk", "Run", "Cycle", "Swim", "Yoga"])),
+        FormControl("duration", Input("duration", "Duration in minutes")),
+        FormControl("calories", Input("calories", "Calories burned during workout."))
+      ]
+    )
+  ]
+)
+```

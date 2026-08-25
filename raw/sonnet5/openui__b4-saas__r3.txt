@@ -1,0 +1,77 @@
+root = Card([header, controlsRow, metricsSection, signupsSection, planSection, topCustomersSection, atRiskSection, failedPaymentsSection, adoptionSection, utilizationSection])
+
+header = CardHeader("Admin Overview", "SaaS metrics and account health")
+
+controlsRow = Card([periodForm, inviteDialog], "clear", "row", "m", "center", "between")
+
+periodForm = Form("period_form", periodButtons, [periodField])
+periodField = FormControl("Reporting period", periodSelect)
+periodSelect = Select("period", [p7, p30, p90, pYTD], "Select period", null, "30d", "medium")
+p7 = SelectItem("7d", "Last 7 days")
+p30 = SelectItem("30d", "Last 30 days")
+p90 = SelectItem("90d", "Last 90 days")
+pYTD = SelectItem("ytd", "Year to date")
+periodButtons = Buttons([applyPeriodBtn])
+applyPeriodBtn = Button("Apply", null, "primary")
+
+inviteDialog = DialogBlock("Invite admin", "Invite a new admin", "Send an invite to add a teammate as admin", [inviteForm], "default")
+inviteForm = Form("invite_admin", inviteButtons, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Email address", inviteEmailInput)
+inviteEmailInput = Input("email", "colleague@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("role", [roleAdmin, roleBilling], "Select role")
+roleAdmin = SelectItem("admin", "Admin")
+roleBilling = SelectItem("billing", "Billing admin")
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send invite", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")
+
+metricsSection = Card([metricsHeader, metricsTable], "sunk")
+metricsHeader = CardHeader("Key metrics")
+metricsTable = Table([metricName, metricValue])
+metricName = Col("Metric", ["MRR", "ARR", "Churn this month", "NPS"])
+metricValue = Col("Value", ["$482,300", "$5,787,600", "2.1%", "68"])
+
+signupsSection = Card([signupsHeader, signupsChart], "sunk")
+signupsHeader = CardHeader("New signups", "Last 90 days")
+signupsChart = AreaChart(signupLabels, [signupSeries], "natural", "Week", "Signups")
+signupLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12", "W13"]
+signupSeries = Series("New signups", [42, 38, 51, 47, 60, 55, 63, 58, 70, 66, 72, 80, 75])
+
+planSection = Card([planHeader, planChart], "sunk")
+planHeader = CardHeader("Customers by plan")
+planChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Starter", "Growth", "Business", "Enterprise"]
+planValues = [420, 310, 150, 45]
+
+topCustomersSection = Card([topCustomersHeader, topCustomersTable], "sunk")
+topCustomersHeader = CardHeader("Largest customers", "Top 10 by spend")
+topCustomersTable = Table([custName, custSeats, custSpend])
+custName = Col("Customer", ["Acme Corp", "Globex", "Initech", "Umbrella Inc", "Hooli", "Stark Industries", "Wayne Enterprises", "Wonka Industries", "Soylent Corp", "Massive Dynamic"])
+custSeats = Col("Seats", [320, 280, 245, 210, 195, 180, 165, 150, 140, 130], "number")
+custSpend = Col("Monthly spend", ["$18,400", "$16,100", "$14,200", "$12,800", "$11,900", "$10,700", "$9,800", "$8,900", "$8,200", "$7,600"])
+
+atRiskSection = Card([atRiskHeader, atRiskList], "sunk")
+atRiskHeader = CardHeader("Accounts at risk")
+atRiskList = ListBlock([riskItem1, riskItem2, riskItem3, riskItem4])
+riskItem1 = ListItem("Initech", "Usage dropped 40% in last 30 days")
+riskItem2 = ListItem("Umbrella Inc", "Support tickets unresolved for 14 days")
+riskItem3 = ListItem("Hooli", "Contract renewal in 15 days, no response")
+riskItem4 = ListItem("Soylent Corp", "Key champion left the company")
+
+failedPaymentsSection = Card([failedHeader, failedList], "sunk")
+failedHeader = CardHeader("Failed payments")
+failedList = ListBlock([failedItem1, failedItem2, failedItem3])
+failedItem1 = ListItem("Wayne Enterprises", "Card declined - $9,800 due", null, "Retry")
+failedItem2 = ListItem("Wonka Industries", "Insufficient funds - $8,900 due", null, "Retry")
+failedItem3 = ListItem("Massive Dynamic", "Expired card - $7,600 due", null, "Retry")
+
+adoptionSection = Card([adoptionHeader, adoptionChart], "sunk")
+adoptionHeader = CardHeader("Feature adoption", "Three newest features")
+adoptionChart = BarChart(featureLabels, [adoptionSeries], "grouped", "Feature", "Adoption %")
+featureLabels = ["AI Assistant", "Bulk Export", "Custom Roles"]
+adoptionSeries = Series("Adoption", [34, 58, 22])
+
+utilizationSection = Card([utilizationHeader, utilizationProgress], "sunk")
+utilizationHeader = CardHeader("Seat utilization")
+utilizationProgress = Progress(78, "78% of purchased seats active")

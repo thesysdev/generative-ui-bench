@@ -1,0 +1,71 @@
+```openui-lang
+root = Card([
+    header,
+    statusFilter,
+    customerSearch,
+    todayStats,
+    recentOrders,
+    refundRate,
+    orderVolumeTrend,
+    fulfillOrderBtn
+], "card", "row", "l")
+
+header = CardHeader("E‑Commerce Operations Desk", "Today's Dashboard")
+
+statusFilter = Form("statusFilter", fulfillBtns, [
+    statusSelector
+])
+statusSelector = FormControl("Filter by status", selectStatus, "Choose a status")
+selectStatus = Select("status", [
+    SelectItem("Pending", "Pending"),
+    SelectItem("Processing", "Processing"),
+    SelectItem("Shipped", "Shipped"),
+    SelectItem("Delivered", "Delivered"),
+    SelectItem("Cancelled", "Cancelled")
+], "All")
+
+customerSearch = FormControl("Search customer", textSearch, "Find orders by customer name")
+textSearch = Input("customer_name", "e.g. John Doe")
+
+todayStats = Card([
+    ordersToday,
+    revenueToday,
+    avgOrderValue
+], "sunk")
+ordersToday = TextContent("Orders placed today: 42", "large")
+revenueToday = TextContent("Revenue today: $12,345", "large")
+avgOrderValue = TextContent("Average order value: $293", "large")
+
+recentOrders = Table([
+    colId,
+    colCustomer,
+    colTotal,
+    colStatus
+])
+colId = Col("Order ID", ["12345", "12346", "12347"])
+colCustomer = Col("Customer", ["Acme Corp", "Beta Ltd", "Gamma Inc"])
+colTotal = Col("Total", ["$128.00", "$245.50", "$310.75"])
+colStatus = Col("Status", ["Pending", "Processing", "Shipped"])
+
+refundRate = TextContent("Refund rate this month: 4.2%", "large")
+
+orderVolumeTrend = BarChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4"],
+    [series1, series2, series3, series4],
+    "grouped",
+    "Week",
+    "Order Volume"
+)
+series1 = Series("Week 1", [120, 130, 110, 115])
+series2 = Series("Week 2", [125, 140, 115, 120])
+series3 = Series("Week 3", [135, 150, 120, 125])
+series4 = Series("Week 4", [140, 160, 130, 130])
+
+fulfillOrderBtn = Button("Mark as Fulfilled", fulfilledAction, "primary")
+fulfilledAction = (order_id) => {
+    // Simulate fulfillment action (e.g., send request to backend)
+    console.log(`Order ${order_id} marked as fulfilled.`)
+}
+
+fulfillBtns = Buttons([fulfillOrderBtn], "column")
+```

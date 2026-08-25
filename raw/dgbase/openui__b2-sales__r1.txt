@@ -1,0 +1,16 @@
+thought
+root = Card([header, statsRow, trendSection, productTable, actions])
+header = CardHeader("Monthly Sales Overview", "Performance tracking for the current month")
+statsRow = Card([revenueCard, conversionCard], "card", "row", "m")
+revenueCard = Card([Heading("Revenue This Month"), TextContent("$42,500", "large-heavy")], "sunk")
+conversionCard = Card([Heading("Conversion Rate"), TextContent("3.8%", "large-heavy")], "sunk")
+trendSection = Card([Heading("6-Month Revenue Trend", "h3"), MonthlyLineChart(months, [revSeries], "natural", "Month", "USD")], "sunk")
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+revSeries = Series("Revenue", [31000, 34000, 32000, 39000, 41000, 42500])
+productTable = Card([Heading("Top 3 Products", "h3"), Table([colProduct, colUnits])], "sunk")
+colProduct = Col("Product Name", ["SaaS Pro", "Enterprise Plan", "Starter Tier"])
+colUnits = Col("Units Sold", [1240, 450, 890])
+actions = Buttons([downloadBtn, refreshBtn], "row")
+downloadBtn = Button("Download CSV", null, "primary")
+refreshBtn = Button("Refresh Data", null, "tertiary")
+MonthlyLineChart = (l, s, v, x, y) => LineChart(l, s, v, x, y)

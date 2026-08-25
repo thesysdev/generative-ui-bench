@@ -1,0 +1,109 @@
+```openui
+root = Card([
+    analyticsOverview,
+    cohortFilter,
+    engagementChart,
+    messageCohortButton
+])
+
+analyticsOverview = Card([
+    activeLearnersSection,
+    completionRateSection,
+    averageQuizScoreSection,
+    enrollmentRankingSection,
+    atRiskLearnersSection
+])
+
+activeLearnersSection = Card([
+    activeLearnersHeading,
+    activeLearnersValue
+])
+activeLearnersHeading = Heading("Active Learners This Week", "h3")
+activeLearnersValue = TextContent("452", "large")
+
+completionRateSection = Card([
+    completionRateHeading,
+    completionRateValue
+])
+completionRateHeading = Heading("Course Completion Rate", "h3")
+completionRateValue = TextContent("87%", "large")
+
+averageQuizScoreSection = Card([
+    averageQuizScoreHeading,
+    averageQuizScoreValue
+])
+averageQuizScoreHeading = Heading("Average Quiz Score", "h3")
+averageQuizScoreValue = TextContent("78%", "large")
+
+enrollmentRankingSection = Card([
+    enrollmentRankingHeading,
+    enrollmentRankingTable
+])
+enrollmentRankingHeading = Heading("Courses Ranked by Enrollment", "h3")
+enrollmentRankingTable = Table([
+    courseNameCol,
+    enrollmentCountCol
+])
+courseNameCol = Col("Course", ["Intro to AI", "Data Science 101", "Advanced ML"])
+enrollmentCountCol = Col("Enrollment", [1200, 950, 870])
+
+atRiskLearnersSection = Card([
+    atRiskLearnersHeading,
+    atRiskLearnersList
+])
+atRiskLearnersHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskLearnersList = ListBlock([
+    riskLearner1,
+    riskLearner2,
+    riskLearner3
+], "image")
+riskLearner1 = ListItem("John Doe", "2 weeks inactive", [avatar1])
+riskLearner2 = ListItem("Jane Smith", "Missed 3 quizzes", [avatar2])
+riskLearner3 = ListItem("Sam Johnson", "No activity in last week", [avatar3])
+avatar1 = Image("John Doe", "https://example.com/avatar1.jpg")
+avatar2 = Image("Jane Smith", "https://example.com/avatar2.jpg")
+avatar3 = Image("Sam Johnson", "https://example.com/avatar3.jpg")
+
+cohortFilter = Form("cohort-filter", filterButtons, [
+    cohortSelectField
+])
+cohortSelectField = FormControl("Select Cohort", cohortSelect)
+cohortSelect = Select("cohort", [
+    cohortA,
+    cohortB,
+    cohortC
+])
+cohortA = SelectItem("Cohort A", "Cohort A")
+cohortB = SelectItem("Cohort B", "Cohort B")
+cohortC = SelectItem("Cohort C", "Cohort C")
+filterButtons = Buttons([applyFilterButton])
+applyFilterButton = Button("Apply")
+
+engagementChart = Card([
+    engagementHeading,
+    engagementLineChart
+])
+engagementHeading = Heading("Engagement Over Past 8 Weeks", "h3")
+engagementLineChart = LineChart([
+    week1,
+    week2,
+    week3,
+    week4,
+    week5,
+    week6,
+    week7,
+    week8
+], [engagementSeries], "linear", "Week", "Engagement Score")
+week1 = "W1"
+week2 = "W2"
+week3 = "W3"
+week4 = "W4"
+week5 = "W5"
+week6 = "W6"
+week7 = "W7"
+week8 = "W8"
+engagementSeries = Series("Engagement", [65, 70, 75, 80, 78, 82, 85, 90])
+
+messageCohortButton = Button("Message Cohort", null, "secondary")
+
+```

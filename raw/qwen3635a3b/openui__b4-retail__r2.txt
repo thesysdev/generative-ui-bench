@@ -1,0 +1,81 @@
+
+
+root = Card([header, salesSection, trafficSection, bestSellersSection, stockSection, staffSection, basketSection, returnsSection, promosSection, registersSection, reorderSection, storeSection, comparisonSection], "card", "column", "l")
+
+header = CardHeader("Store Manager Console", "Daily Operations Dashboard — Main Street")
+
+salesSection = Card([salesHeading, salesProgress, salesKpis], "sunk")
+salesHeading = Heading("Sales Today", "h3")
+salesProgress = Progress(72, "72% of $10,000 daily target")
+salesKpis = TextContent("**$7,240.00** earned today vs. **$10,000** target — **$2,760** to go")
+
+trafficSection = Card([trafficHeading, trafficChart], "sunk")
+trafficHeading = Heading("Foot Traffic", "h3")
+trafficChart = LineChart(["8AM","9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM"], [trafficSeries], "natural", "Hour", "Visitors")
+trafficSeries = Series("Visitors", [12, 28, 45, 62, 78, 85, 72, 58, 41, 22])
+
+bestSellersSection = Card([bestHeading, bestChart], "sunk")
+bestHeading = Heading("Top 6 Best Sellers", "h3")
+bestChart = BarChart(["Organic Milk", "Sourdough Bread", "Free Range Eggs", "Avocado", "Greek Yogurt", "Coffee Beans"], [bestSeries], "grouped", "Product", "Units Sold")
+bestSeries = Series("Units", [145, 132, 118, 98, 87, 76])
+
+stockSection = Card([stockHeading, stockTable], "sunk")
+stockHeading = Heading("Out of Stock — 5 Items", "h3")
+stockTable = Table([stockName, stockCategory, stockDays])
+stockName = Col("Item", ["Whole Milk 1Gal", "Chicken Breast", "Bananas", "Ground Coffee", "Paper Towels"])
+stockCategory = Col("Category", ["Dairy", "Meat", "Produce", "Beverages", "Household"])
+stockDays = Col("Days Out", [3, 1, 5, 2, 7])
+
+staffSection = Card([staffHeading, staffList], "sunk")
+staffHeading = Heading("On Shift Today — 4 Staff", "h3")
+staffList = ListBlock([staff1, staff2, staff3, staff4], "number")
+staff1 = ListItem("Sarah Chen", "Store Manager — 6AM to 2PM", null, null)
+staff2 = ListItem("Mike Torres", "Cashier — 8AM to 4PM", null, null)
+staff3 = ListItem("Emma Wilson", "Stock Clerk — 7AM to 3PM", null, null)
+staff4 = ListItem("James Park", "Baker — 5AM to 1PM", null, null)
+
+basketSection = Card([basketContent], "sunk")
+basketContent = TextContent("**Average Basket Size: $47.82** — up 3.2% from yesterday. Median: $38.50. 152 transactions today.")
+
+returnsSection = Card([returnsCallout], "sunk")
+returnsCallout = TextCallout("warning", "Returns This Week", "23 items returned — $1,240.60 total. Top reason: wrong size (8 items).")
+
+promosSection = Card([promosHeading, promosChart], "sunk")
+promosHeading = Heading("Active Promotions", "h3")
+promosChart = BarChart(["Buy 2 Get 1", "20% Off Dairy", "Loyalty Points Double", "Weekend Special"], [promoSeries], "grouped", "Promotion", "Revenue ($)")
+promoSeries = Series("Revenue", [2340, 1890, 1560, 980])
+
+registersSection = Card([regHeading, regList], "sunk")
+regHeading = Heading("Register Status — 3 of 4 Open", "h3")
+regList = ListBlock([reg1, reg2, reg3, reg4], "number")
+reg1 = ListItem("Register 1 — Front Entrance", "Open — 45 transactions — $3,420.00", null, null)
+reg2 = ListItem("Register 2 — Back Entrance", "Open — 38 transactions — $2,890.00", null, null)
+reg3 = ListItem("Register 3 — Self-Checkout", "Closed — Cash drawer jam", null, null)
+reg4 = ListItem("Register 4 — Customer Service", "Open — 29 transactions — $930.00", null, null)
+
+reorderSection = Card([reorderHeading, reorderForm], "sunk")
+reorderHeading = Heading("Quick Reorder", "h3")
+reorderForm = Form("reorder-form", reorderButtons, [itemSelect, qtyInput])
+itemSelect = FormControl("Select Item", selectItems)
+selectItems = Select("item", [item1, item2, item3, item4], "Choose item to reorder")
+item1 = SelectItem("whole-milk", "Whole Milk 1Gal")
+item2 = SelectItem("chicken-breast", "Chicken Breast")
+item3 = SelectItem("bananas", "Bananas")
+item4 = SelectItem("paper-towels", "Paper Towels")
+qtyInput = FormControl("Quantity", qtyNumber)
+qtyNumber = Input("qty", "24", "number")
+reorderButtons = Buttons([reorderSubmit])
+reorderSubmit = Button("Place Reorder")
+
+storeSection = Card([storeHeading, storeButtons], "sunk")
+storeHeading = Heading("View Another Store", "h3")
+storeButtons = Buttons([store1, store2, store3])
+store1 = Button("Downtown Flagship")
+store2 = Button("Westside Mall")
+store3 = Button("Airport Terminal")
+
+comparisonSection = Card([compHeading, compChart], "sunk")
+compHeading = Heading("This Week vs Last Week", "h3")
+compChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [thisWeek, lastWeek], "grouped", "Day", "Sales ($)")
+thisWeek = Series("This Week", [12400, 13200, 11800, 14100, 15600, 18900, 16200])
+lastWeek = Series("Last Week", [11200, 12100, 10900, 13400, 14800, 17200, 15100])

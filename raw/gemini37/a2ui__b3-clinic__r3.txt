@@ -1,0 +1,388 @@
+Here is a clinic receptionist day view dashboard incorporating real-time schedule management, key operational metrics, room status, and patient check-in workflows.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "dateNavRow",
+          "nextPatientAlert",
+          "kpisCard",
+          "roomStatusCard",
+          "appointmentsHeader",
+          "appointmentsTable",
+          "checkInDialog"
+        ],
+        "gap": "m"
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Front Desk Reception — Daily Schedule",
+        "subtitle": "Dr. Sarah Jenkins & Associates Clinic"
+      },
+      {
+        "id": "dateNavRow",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "children": [
+          "navButtons",
+          "quickDatePick"
+        ]
+      },
+      {
+        "id": "navButtons",
+        "component": "Buttons",
+        "buttons": [
+          "prevDayBtn",
+          "todayBtn",
+          "nextDayBtn"
+        ]
+      },
+      {
+        "id": "prevDayBtn",
+        "component": "Button",
+        "label": "← Previous Day",
+        "variant": "secondary",
+        "size": "small"
+      },
+      {
+        "id": "todayBtn",
+        "component": "Button",
+        "label": "Today (Oct 24, 2024)",
+        "variant": "primary",
+        "size": "small"
+      },
+      {
+        "id": "nextDayBtn",
+        "component": "Button",
+        "label": "Next Day →",
+        "variant": "secondary",
+        "size": "small"
+      },
+      {
+        "id": "quickDatePick",
+        "component": "DatePicker",
+        "name": "selectedDate",
+        "mode": "single"
+      },
+      {
+        "id": "nextPatientAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Next Patient Up: Robert Vance (10:15 AM)",
+        "description": "Checked in & waiting in Lobby Area B • Assigned to Exam Room 2 with Dr. Sarah Jenkins"
+      },
+      {
+        "id": "kpisCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "metricCol",
+          "statCol",
+          "contextCol"
+        ]
+      },
+      {
+        "id": "metricCol",
+        "component": "Col",
+        "label": "Operational Metric",
+        "data": [
+          "Expected Patients Today",
+          "Checked In / Arrived",
+          "No-Show Rate (This Month)",
+          "Completed Appointments"
+        ]
+      },
+      {
+        "id": "statCol",
+        "component": "Col",
+        "label": "Count / Rate",
+        "data": [
+          "24 Patients",
+          "8 Patients",
+          "4.2%",
+          "6 Patients"
+        ]
+      },
+      {
+        "id": "contextCol",
+        "component": "Col",
+        "label": "Status Details",
+        "data": [
+          "10 remaining to arrive",
+          "2 currently in waiting room",
+          "Down 1.1% from last month (target < 5%)",
+          "Average consult duration: 18 min"
+        ]
+      },
+      {
+        "id": "roomStatusCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "roomHeading",
+          "roomTags"
+        ]
+      },
+      {
+        "id": "roomHeading",
+        "component": "CardHeader",
+        "title": "Room Availability (Right Now)",
+        "subtitle": "3 of 5 clinical rooms available for immediate intake"
+      },
+      {
+        "id": "roomTags",
+        "component": "TagBlock",
+        "tags": [
+          "● Room 1 (FREE)",
+          "● Room 2 (Occupied - Dr. Jenkins)",
+          "● Room 3 (FREE)",
+          "● Room 4 (FREE)",
+          "● Triage A (Occupied - Nurse Rivera)"
+        ]
+      },
+      {
+        "id": "appointmentsHeader",
+        "component": "CardHeader",
+        "title": "Today's Patient Schedule",
+        "subtitle": "Real-time list of appointments, check-in status, and assigned rooms"
+      },
+      {
+        "id": "appointmentsTable",
+        "component": "Table",
+        "columns": [
+          "colTime",
+          "colPatient",
+          "colDoctor",
+          "colRoom",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colTime",
+        "component": "Col",
+        "label": "Time",
+        "data": [
+          "09:00 AM",
+          "09:30 AM",
+          "10:00 AM",
+          "10:15 AM",
+          "10:45 AM",
+          "11:15 AM",
+          "11:45 AM"
+        ]
+      },
+      {
+        "id": "colPatient",
+        "component": "Col",
+        "label": "Patient Name",
+        "data": [
+          "Eleanor Davis",
+          "Marcus Wright",
+          "Clara Gomez",
+          "Robert Vance",
+          "Anita Patel",
+          "David Kim",
+          "Hannah Scott"
+        ]
+      },
+      {
+        "id": "colDoctor",
+        "component": "Col",
+        "label": "Provider",
+        "data": [
+          "Dr. Jenkins",
+          "Dr. Jenkins",
+          "Dr. Patel",
+          "Dr. Jenkins",
+          "Dr. Patel",
+          "Dr. Jenkins",
+          "Dr. Jenkins"
+        ]
+      },
+      {
+        "id": "colRoom",
+        "component": "Col",
+        "label": "Assigned Room",
+        "data": [
+          "Room 1",
+          "Room 2",
+          "Room 4",
+          "Room 2",
+          "Room 3",
+          "Room 1",
+          "Room 4"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Completed",
+          "In Consult",
+          "Checked In (Waiting)",
+          "Next Up",
+          "Expected",
+          "Expected",
+          "Expected"
+        ]
+      },
+      {
+        "id": "checkInDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "Check In Arriving Patient",
+        "triggerVariant": "default",
+        "title": "Patient Check-In",
+        "description": "Confirm arrival, verify details, and assign an available examination room.",
+        "content": [
+          "checkInForm"
+        ]
+      },
+      {
+        "id": "checkInForm",
+        "component": "Form",
+        "name": "patientCheckInForm",
+        "buttons": "formActions",
+        "fields": [
+          "patientSelectField",
+          "copayField",
+          "roomSelectField"
+        ]
+      },
+      {
+        "id": "patientSelectField",
+        "component": "FormControl",
+        "label": "Select Arriving Patient",
+        "input": "patientSelect",
+        "hint": "Only scheduled patients for today are shown"
+      },
+      {
+        "id": "patientSelect",
+        "component": "Select",
+        "name": "patientId",
+        "placeholder": "Choose patient...",
+        "items": [
+          "pat1",
+          "pat2",
+          "pat3"
+        ]
+      },
+      {
+        "id": "pat1",
+        "component": "SelectItem",
+        "value": "anita_patel",
+        "label": "Anita Patel (10:45 AM - Dr. Patel)"
+      },
+      {
+        "id": "pat2",
+        "component": "SelectItem",
+        "value": "david_kim",
+        "label": "David Kim (11:15 AM - Dr. Jenkins)"
+      },
+      {
+        "id": "pat3",
+        "component": "SelectItem",
+        "value": "hannah_scott",
+        "label": "Hannah Scott (11:45 AM - Dr. Jenkins)"
+      },
+      {
+        "id": "copayField",
+        "component": "FormControl",
+        "label": "Copay Collection",
+        "input": "copayInput",
+        "hint": "Enter amount collected ($0 if exempt/prepaid)"
+      },
+      {
+        "id": "copayInput",
+        "component": "Input",
+        "name": "copayAmount",
+        "type": "text",
+        "placeholder": "$25.00"
+      },
+      {
+        "id": "roomSelectField",
+        "component": "FormControl",
+        "label": "Assign to Available Room",
+        "input": "roomSelect"
+      },
+      {
+        "id": "roomSelect",
+        "component": "Select",
+        "name": "assignedRoom",
+        "placeholder": "Select free room...",
+        "items": [
+          "room1Opt",
+          "room3Opt",
+          "room4Opt",
+          "lobbyOpt"
+        ]
+      },
+      {
+        "id": "room1Opt",
+        "component": "SelectItem",
+        "value": "room_1",
+        "label": "Exam Room 1 (Available)"
+      },
+      {
+        "id": "room3Opt",
+        "component": "SelectItem",
+        "value": "room_3",
+        "label": "Exam Room 3 (Available)"
+      },
+      {
+        "id": "room4Opt",
+        "component": "SelectItem",
+        "value": "room_4",
+        "label": "Exam Room 4 (Available)"
+      },
+      {
+        "id": "lobbyOpt",
+        "component": "SelectItem",
+        "value": "waiting_lobby",
+        "label": "Waiting Room Lobby"
+      },
+      {
+        "id": "formActions",
+        "component": "Buttons",
+        "buttons": [
+          "confirmCheckInBtn"
+        ]
+      },
+      {
+        "id": "confirmCheckInBtn",
+        "component": "Button",
+        "label": "Complete Check-In",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

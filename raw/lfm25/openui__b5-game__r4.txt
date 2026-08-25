@@ -1,0 +1,399 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title="Live Ops Dashboard",
+      subtitle="Game Studio Real-Time Metrics"
+    ),
+    
+    // 1. Players Online Right Now
+    SectionBlock(
+      sections: [
+        {
+          value: "Online Players",
+          trigger: "online-count",
+          content: [
+            Div(
+              id: "online-count",
+              text: "🟢 **Online Players**: 42,847",
+              style: { backgroundColor: "var(--green-500)", color: "white" }
+            )
+          ]
+        },
+        {
+          value: "Peak Today",
+          trigger: "peak-today",
+          content: [
+            Div(text: "🔥 **Today Peak**: 58,203 players"),
+            Div(text: "📈 Increase: +4.2% vs yesterday")
+          ]
+        }
+      ]
+    ),
+    
+    // 2. Daily and Monthly Active Players
+    SectionBlock(
+      sections: [
+        {
+          value: "Active Players",
+          trigger: "active-daily",
+          content: [
+            Div(text: "📊 **Daily Active**: 38,421"),
+            Div(text: "📊 **Monthly Active**: 62,105"),
+            Div(text: "Monthly growth: +8.7% MoM")
+          ]
+        }
+      ]
+    ),
+    
+    // 3. Revenue Today
+    SectionBlock(
+      sections: [
+        {
+          value: "Revenue Today",
+          trigger: "revenue-today",
+          content: [
+            Div(
+              id: "revenue-today",
+              text: "💰 **Today's Revenue**: $145,892",
+              style: { fontSize: "large", marginBottom: "0.5rem" }
+            ),
+            Div(text: "🦄 **Projected YTD**: $2.4M | Target: $2.5M")
+          ]
+        }
+      ]
+    ),
+    
+    // 4. Revenue Per User
+    SectionBlock(
+      sections: [
+        {
+          value: "Revenue Per User",
+          trigger: "revenue-per-user",
+          content: [
+            Div(text: "💎 **$48.23** per user today"),
+            Div(text: "📈 YoY growth: +12.4%")
+          ]
+        }
+      ]
+    ),
+    
+    // 5. Session Length Over Past Two Weeks
+    SectionBlock(
+      sections: [
+        {
+          value: "Session Duration",
+          trigger: "session-length",
+          content: [
+            Chart(
+              type: "bar",
+              labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+              series: [
+                {
+                  category: "Session Length (min)",
+                  values: [45, 52, 48, 55, 60, 40, 35]
+                }
+              ],
+              xAxisTitle: "Day of Week",
+              yAxisTitle: "Avg. Session Duration",
+              variant: "grouped"
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 6. Best-Selling Items with Units
+    SectionBlock(
+      sections: [
+        {
+          value: "Top Sellers",
+          trigger: "top-sellers",
+          content: [
+            Table(
+              columns: [
+                { label: "Item", type: "string" },
+                { label: "Units Sold", type: "number" },
+                { label: "Revenue", type: "number" }
+              ],
+              rows: [
+                { 
+                  item: "Premium Skin - Neon Blaze", 
+                  units: "18,492", 
+                  rev: "$234,567" 
+                },
+                { 
+                  item: "Vault Access Pass", 
+                  units: "12,876", 
+                  rev: "$156,432" 
+                },
+                { 
+                  item: "Seasonal Bundle", 
+                  units: "8,945", 
+                  rev: "$89,123" 
+                },
+                { 
+                  item: "Exclusive Art Pack", 
+                  units: "5,342", 
+                  rev: "$67,890" 
+                },
+                { 
+                  item: "Battle Pass Tier 3", 
+                  units: "9,210", 
+                  rev: "$78,345" 
+                }
+              ]
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 7. Server Regions and Health
+    SectionBlock(
+      sections: [
+        {
+          value: "Server Health",
+          trigger: "server-regions",
+          content: [
+            CardBlock(
+              children: [
+                Div(text: "🌍 **Global Distribution**"),
+                Div(text: "North America: 32,100 | EU: 28,450 | Asia-Pacific: 25,600 | Australia: 18,300"),
+                Div(
+                  id: "region-health",
+                  text: "⚠️ **Overall Health: 94.2%** (Target: >95%)"
+                )
+              ]
+            ),
+            Div(
+              id: "region-detail",
+              text: "Each region tracked individually with latency, uptime, and player density."
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 8. Crash Rate by App Version
+    SectionBlock(
+      sections: [
+        {
+          value: "Crash Rates",
+          trigger: "crash-rates",
+          content: [
+            Chart(
+              type: "pie",
+              labels: ["v2.4.1", "v2.4.2", "v2.5.0", "v2.6.0"],
+              series: [
+                { category: "v2.4.1", value: "1.2%" },
+                { category: "v2.4.2", value: "0.8%" },
+                { category: "v2.5.0", value: "1.5%" },
+                { category: "v2.6.0", value: "0.3%" }
+              ],
+              title: "Crash Rate by Version"
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 9. Live Events Running and Upcoming
+    SectionBlock(
+      sections: [
+        {
+          value: "Live Events",
+          trigger: "live-events",
+          content: [
+            Div(text: "🎉 **Currently Live**:"),
+            Div(text: "• Event: Winter Festival (Live until Dec 31) - 15K participants"),
+            Div(text: "• Event: Speedrun Challenge (Ongoing) - 3K active"),
+            Div(text: "• Live Hub: New Map Launch - 8K views")
+          ]
+        },
+        {
+          value: "Upcoming Events",
+          trigger: "upcoming-events",
+          content: [
+            Div(text: "⏰ **Next 24 hours**:"),
+            Div(text: "• Launch Day Celebration (Tomorrow) - 20K expected attendees"),
+            Div(text: "• Community Tourney (Dec 3-5) - Global participation")
+          ]
+        }
+      ]
+    ),
+    
+    // 10. Player Reports Awaiting Review
+    SectionBlock(
+      sections: [
+        {
+          value: "Report Queue",
+          trigger: "player-reports",
+          content: [
+            Div(text: "🔍 **Pending Reviews** (12 total)"),
+            Div(text: "• Report #PR-0842: Cheating behavior in multiplayer"),
+            Div(text: "• Report #PR-0871: Bug in inventory system"),
+            Div(text: "• Report #PR-0913: Anti-cheat false positive"),
+            Div(
+              id: "report-list",
+              text: "View all pending reports →"
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 11. Ban Appeals Awaiting Review
+    SectionBlock(
+      sections: [
+        {
+          value: "Ban Appeals",
+          trigger: "ban-appeals",
+          content: [
+            Div(text: "🛡️ **Pending Appeals** (8 total)"),
+            Div(text: "• Appeal #BA-0123: Suspended for excessive toxicity"),
+            Div(text: "• Appeal #BA-0456: Repeated spam violations"),
+            Div(text: "• Appeal #BA-0789: Disputed ban from admin team"),
+            Div(
+              id: "appeal-list",
+              text: "See full appeal details →"
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 12. In-Game Currency Inflation
+    SectionBlock(
+      sections: [
+        {
+          value: "Currency Inflation",
+          trigger: "currency-inflation",
+          content: [
+            Div(text: "📈 **Inflation Index**: 3.2% (up 0.8% MoM)"),
+            Div(text: "💵 Gold: +4.1%, Gems: +2.7%, Credits: +1.9%"),
+            Div(
+              id: "inflation-chart",
+              text: "Inflation trend over last 30 days"
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 13. Results of Two Running Experiments
+    SectionBlock(
+      sections: [
+        {
+          value: "Experiment Results",
+          trigger: "experiments",
+          content: [
+            Card(
+              children: [
+                Div(
+                  id: "exp-1",
+                  text: "🧪 **A/B Testing: New Matchmaking Algorithm**",
+                  style: { backgroundColor: "#f0f8ff", padding: "1rem" }
+                ),
+                Div(text: "✅ Result: 7.3% increase in match success rate | p-value: 0.02"),
+                Div(text: "💡 Insight: Better load times drove engagement")
+              ]
+            ),
+            Card(
+              children: [
+                Div(
+                  id: "exp-2",
+                  text: "🧪 **A/B Testing: Reward System Redesign**",
+                  style: { backgroundColor: "#e8f5e9", padding: "1rem" }
+                ),
+                Div(text: "✅ Result: 12.1% higher DAU with new rewards | p-value: 0.001"),
+                Div(text: "💡 Insight: Gamification boosted retention")
+              ]
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 14. Draft Patch Notes
+    SectionBlock(
+      sections: [
+        {
+          value: "Draft Patch Notes",
+          trigger: "patch-notes",
+          content: [
+            Card(
+              children: [
+                Div(id: "patch-title", text: "Patch Notes v2.6.1 – Live Ops Update"),
+                Div(text: "### Changes\n- Added new seasonal skins\n- Fixed login timeout bug\n- Balanced enemy difficulty\n- Updated economy systems"),
+                Div(
+                  id: "patch-actions",
+                  text: "✏️ **Edit Draft →** (Open editor)"
+                )
+              ]
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 15. Focus on One Region
+    SectionBlock(
+      sections: [
+        {
+          value: "Region Filter",
+          trigger: "region-filter",
+          content: [
+            Dropdown(
+              id: "region-select",
+              options: [
+                { label: "North America", value: "na" },
+                { label: "Europe", value: "eu" },
+                { label: "Asia-Pacific", value: "apac" },
+                { label: "Australia", value: "au" }
+              ],
+              selected: "all",
+              onChange: (val) => {
+                updateRegionFocus(val);
+              }
+            )
+          ]
+        }
+      ]
+    ),
+    
+    // 16. Ship Hotfix
+    SectionBlock(
+      sections: [
+        {
+          value: "Ship Hotfix",
+          trigger: "ship-hotfix",
+          content: [
+            Div(
+              id: "hotfix-btn",
+              text: "🚀 **Create Hotfix**",
+              style: { color: "var(--red-500)" }
+            ),
+            Div(
+              id: "hotfix-details",
+              text: "Select affected servers, set priority, and deploy."
+            ),
+            Button(
+              label: "Deploy Hotfix",
+              action: "deploy-hotfix",
+              variant: "primary",
+              style: { backgroundColor: "#333", color: "white" }
+            ),
+            Button(
+              label: "Rollback Plan",
+              action: "rollback",
+              variant: "secondary"
+            )
+          ]
+        }
+      ]
+    ),
+  ]
+)
+```

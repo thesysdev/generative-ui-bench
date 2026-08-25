@@ -1,0 +1,36 @@
+thought
+root = Card([header, statsRow, chartsRow, tablesRow, operationsSection, moderationSection, actions], "card", "column", "l")
+
+header = CardHeader("Live-Ops Command Center", "Real-time game performance and moderation")
+
+statsRow = Card([onlineStatus, activePlayers, revenueToday, rpuMetric], "card", "row", "m")
+onlineStatus = Callout("success", "Players Online", "142,508 currently active")
+activePlayers = Callout("info", "Active Users", "DAU: 842,000 (+12% vs yesterday) | MAU: 4,210,000")
+revenueToday = Callout("success", "Revenue Today", "$124,900.50")
+rpuMetric = Callout("neutral", "ARPU", "$1.48 per user")
+
+chartsRow = Card([sessionTrend, crashRates, inflationChart, experimentResults], "card", "row", "m")
+sessionTrend = Card([Heading("Session Length (14d)", "h4"), LineChart(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"], [Series("Avg Min", [32.5, 31.0, 33.5, 34.2, 30.1, 29.5, 31.2, 35.5, 36.0, 34.5, 33.0, 32.1, 38.5, 39.2])], "natural", "Day", "Minutes")
+crashRates = Card([Heading("Crash Rate by Version", "h4"), BarChart(["v1.2.0", "v1.2.1", "v1.3.0-beta"], [Series("Crash %", [0.04, 0.12, 1.85])], "grouped", "Version", "%")])
+inflationChart = Card([Heading("Currency Inflation (Gold / Gems)", "h4"), RadialChart(["Gold", "Gems"], [75, 15])])
+experimentResults = Card([Heading("Active Experiments", "h4"), MarkDownRenderer("Exp A: 20% XP Weekend\nResult: +5% Retention\n\nExp B: New Store UI\nResult: -2% Conversion Rate")])
+
+tablesRow = Card([topSellers, regionHealth, liveEvents], "card", "row", "m")
+topSellers = Card([Heading("Best-Selling Items", "h4"), Table([Col("Item", ["Dragon Skin", "Battle Pass", "Gems Pack 1000"]), Col("Units Sold", [12400, 45000, 89000])])])
+regionHealth = Card([Heading("Server Region Health", "h4"), Table([Col("Region", ["US-East", "EU-West", "Asia-S", "SA"]), Col("Status", ["99.9%", "98.5%", "92.1%", "99.9%"])])])
+liveEvents = Card([Heading("Events", "h4"), ListBlock([ListItem("Summer Festival", "Live Now - Ends in 2d"), ListItem("Winter Preview", "Upcoming - Starts in 5d")])])
+
+operationsSection = SectionBlock([regionFilter, patchNotesDraft, hotfixBtn], "ops")
+regionFilter = FormControl("Focus Region", Select("region_focus", [SelectItem("all", "Global"), SelectItem("us", "North America"), SelectItem("eu", "Europe"), SelectItem("as", "Asia")]), "all")
+patchNotesDraft = Card([Heading("Draft Patch Notes", "h4"), Form("patch_notes", Buttons([Button("Save Draft", null, "secondary"), Button("Publish", null, "primary")]), [FormControl("Content", TextArea("notes", 5, "Enter bug fixes and features here...])])])
+hotfixBtn = Button("SHIP EMERGENCY HOTFIX", null, "destructive", "large")
+
+moderationSection = SectionBlock([playerReports, banAppeals], "moderation")
+playerReports = Card([Heading("Player Reports", "h4"), ListBlock([ListItem("User#4421", "Reported for toxic behavior"), ListItem("User#9902", "Reported for cheating")])])
+banAppeals = Card([Heading("Ban Appeals", "h4"), ListBlock([ListItem("User#1120", "Appeal for 24h ban"), ListItem("User#8831", "Appeal for Perm ban")])])])
+
+ops = SectionItem("ops", "Operations", [regionFilter, patchNotesDraft, hotfixBtn])
+mod = SectionItem("mod", "Moderation", [playerReports, banAppeals])
+operationsSection = SectionBlock([ops, mod])
+
+actions = FollowUpBlock([FollowUpItem("Check server logs"), FollowUpItem("Export daily report"), FollowUpItem("View CDN status")])

@@ -1,0 +1,95 @@
+```openui
+root = Card([
+    bedOccupancyCard,
+    erWaitCard,
+    admissionsCard,
+    patientsPerDeptCard,
+    staffOnShiftCard,
+    criticalPatientsCard,
+    readyForDischargeCard,
+    operatingRoomBookingsCard,
+    suppliesAlertCard,
+    incidentFormCard,
+    dateNavigationCard,
+    transferRequestCard
+])
+
+bedOccupancyCard = Card([bedOccupancyHeader, bedOccupancyChart], "sunk")
+bedOccupancyHeader = CardHeader("Bed Occupancy", "Real-time data")
+bedOccupancyChart = PieChart(["Available", "Occupied", "Reserved"], [80, 15, 5])
+
+erWaitCard = Card([erWaitHeader, erWaitNumber], "sunk")
+erWaitHeader = CardHeader("Emergency Room Wait Time", "Current wait")
+erWaitNumber = TextContent("Current wait time: 25 min", "large")
+
+admissionsCard = Card([admissionsHeader, admissionsLineChart], "sunk")
+admissionsHeader = CardHeader("Admissions Over 2 Weeks", "Recent trends")
+admissionsLineChart = LineChart(["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"], [admissionsSeries])
+
+admissionsSeries = Series("Admissions", [5, 7, 6, 9, 8, 10, 11, 8, 9, 10, 12, 11, 13, 12])
+
+patientsPerDeptCard = Card([patientsPerDeptHeader, patientsPerDeptTable], "sunk")
+patientsPerDeptHeader = CardHeader("Patients Per Department", "Current status")
+patientsPerDeptTable = Table([deptColumn, patientCountColumn])
+deptColumn = Col("Department", ["Cardiology", "Neurology", "Orthopedics", "Oncology"])
+patientCountColumn = Col("Patients", [22, 18, 15, 25])
+
+staffOnShiftCard = Card([staffOnShiftHeader, staffOnShiftList], "sunk")
+staffOnShiftHeader = CardHeader("Staff On Shift", "Current shift")
+staffOnShiftList = ListBlock([cardiologyStaff, neurologyStaff, orthopedicsStaff, oncologyStaff])
+cardiologyStaff = ListItem("Cardiology", "Dr. A, Nurse B")
+neurologyStaff = ListItem("Neurology", "Dr. C, Nurse D")
+orthopedicsStaff = ListItem("Orthopedics", "Dr. E, Nurse F")
+oncologyStaff = ListItem("Oncology", "Dr. G, Nurse H")
+
+criticalPatientsCard = Card([criticalPatientsHeader, criticalPatientsCallout], "sunk")
+criticalPatientsHeader = CardHeader("Critical Patients", "Immediate attention required")
+criticalPatientsCallout = Callout("critical", "3 Critical Patients", "Immediate care needed")
+
+readyForDischargeCard = Card([readyForDischargeHeader, readyForDischargeList], "sunk")
+readyForDischargeHeader = CardHeader("Patients Ready for Discharge", "Awaiting paperwork")
+readyForDischargeList = ListBlock([patient1, patient2, patient3])
+patient1 = ListItem("John Doe", "Room 101")
+patient2 = ListItem("Jane Smith", "Room 102")
+patient3 = ListItem("Jim Brown", "Room 103")
+
+operatingRoomBookingsCard = Card([operatingRoomBookingsHeader, operatingRoomBookingsTable], "sunk")
+operatingRoomBookingsHeader = CardHeader("Today's Operating Room Bookings", "Scheduled operations")
+operatingRoomBookingsTable = Table([timeColumn, procedureColumn, patientColumn])
+timeColumn = Col("Time", ["09:00", "11:00", "14:00", "16:00"])
+procedureColumn = Col("Procedure", ["Surgery 1", "Surgery 2", "Surgery 3", "Surgery 4"])
+patientColumn = Col("Patient", ["Patient A", "Patient B", "Patient C", "Patient D"])
+
+suppliesAlertCard = Card([suppliesAlertHeader, suppliesAlertBadge], "sunk")
+suppliesAlertHeader = CardHeader("Supplies Running Low", "Stock alert")
+suppliesAlertBadge = Tag("Low on gloves and masks", null, null, "danger")
+
+incidentFormCard = Card([incidentFormHeader, incidentForm], "sunk")
+incidentFormHeader = CardHeader("File an Incident", "Report an issue")
+incidentForm = Form("incident-report", incidentFormButtons, [incidentDescriptionField])
+incidentDescriptionField = FormControl("Description", incidentInput)
+incidentInput = TextArea("incident_description", "Describe the incident")
+incidentFormButtons = Buttons([submitIncidentBtn])
+submitIncidentBtn = Button("Submit", null, "primary")
+
+dateNavigationCard = Card([dateNavigationHeader, dateNavigationButtons], "sunk")
+dateNavigationHeader = CardHeader("View Another Day", "Select date")
+dateNavigationButtons = Buttons([prevDayBtn, nextDayBtn])
+prevDayBtn = Button("< Previous Day")
+nextDayBtn = Button("Next Day >")
+
+transferRequestCard = Card([transferRequestHeader, transferRequestForm], "sunk")
+transferRequestHeader = CardHeader("Request a Patient Transfer", "Initiate transfer")
+transferRequestForm = Form("transfer-request", transferRequestButtons, [patientNameField, destinationField, reasonField])
+patientNameField = FormControl("Patient Name", transferInput)
+transferInput = Input("patient_name", null)
+destinationField = FormControl("Destination Department", transferSelect)
+transferSelect = Select("destination", [transferDestCard, transferDestNeuro, transferDestOrtho])
+transferDestCard = SelectItem("Cardiology", "Cardiology")
+transferDestNeuro = SelectItem("Neurology", "Neurology")
+transferDestOrtho = SelectItem("Orthopedics", "Orthopedics")
+reasonField = FormControl("Reason for Transfer", transferTextArea)
+transferTextArea = TextArea("reason")
+transferRequestButtons = Buttons([sendTransferBtn])
+sendTransferBtn = Button("Request Transfer", null, "primary")
+```

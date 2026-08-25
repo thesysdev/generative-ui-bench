@@ -1,0 +1,73 @@
+```openui-lang
+root = Card([
+  // Item 3: Today's date
+  CardHeader("Async Standup - 2026-04-05", "Remote Team Daily Sync"),
+  
+  // Item 1: Each teammate with today's status update
+  ListBlock([
+    {
+      children: [
+        Card([
+          CardHeader("Alice Chen", "Software Engineer"),
+          TextContent("✅ Finished API integration", "Success"),
+          TextCallout("info", "Backend tasks completed", "On track")
+        ]),
+        {
+          children: [
+            Card([
+              CardHeader("Bob Martinez", "Frontend Developer"),
+              TextContent("⚠️ Delayed UI polish", "At risk"),
+              TextCallout("warning", "Needs QA approval", "Blocked")
+            ]),
+            Card([
+              CardHeader("Carol Davis", "DevOps Engineer"),
+              TextContent("✅ Deployments successful", "All good"),
+              TextCallout("success", "Deployment complete", "Done")
+            ])
+          ]
+        },
+        {
+          children: [
+            Card([
+              CardHeader("David Kim", "Backend Engineer"),
+              TextContent("🐛 Database issues unresolved", "Blocked"),
+              TextCallout("warning", "Investigation needed", "Blocked")
+            ]),
+            Card([
+              CardHeader("Eva Johnson", "QA Lead"),
+              TextContent("🔍 Testing phase ongoing", "In progress"),
+              TextCallout("neutral", "Monitoring", "None")
+            ])
+          ]
+        }
+      ]
+    }
+  ]),
+  
+  // Item 2: Anyone blocked called out
+  Card([
+    CardHeader("🔴 Blocked Work", "Items requiring attention"),
+    TextCallout("warning", "Blocked Work", "Needs help"),
+    TextContent("Backend API rate limiting implementation"),
+    Button("Need Help", null, "secondary"),
+    TextContent("Database migration schema update"),
+    Button("Escalate", null, "primary")
+  ]),
+  
+  // Item 4: Way to post your own update
+  Card([
+    TextCallout("neutral", "Your Turn", "Share your update"),
+    Form({
+      name: "my-update",
+      buttons: [["post", null, "primary"]],
+      fields: [
+        {type: "text", label: "Title", input: Input("title", "Title")},
+        {type: "text", label: "Details", input: Input("details", "Details")}
+      ]
+    })
+  ]),
+  
+  // Item 5: How many updates are still missing
+  Progress([value: 2, label: "Pending Updates"])
+])
+```

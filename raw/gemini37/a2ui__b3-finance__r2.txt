@@ -1,0 +1,412 @@
+Here is the startup month-end finance overview screen with key financial metrics, expense breakdown, high-value transaction log, month selector, and statement download action.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "controlsCard",
+          "kpiCard",
+          "expenseSection",
+          "transactionsSection",
+          "followUps"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Month-End Financial Overview",
+        "subtitle": "Financial performance, runway health, and major disbursements"
+      },
+      {
+        "id": "controlsCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "monthFilterForm",
+          "actionButtons"
+        ]
+      },
+      {
+        "id": "monthFilterForm",
+        "component": "Form",
+        "name": "month_selector_form",
+        "buttons": "filterBtnContainer",
+        "fields": [
+          "monthField"
+        ]
+      },
+      {
+        "id": "monthField",
+        "component": "FormControl",
+        "label": "Reporting Period",
+        "input": "monthSelect",
+        "hint": "Select statement cycle"
+      },
+      {
+        "id": "monthSelect",
+        "component": "Select",
+        "name": "selected_period",
+        "placeholder": "October 2024",
+        "items": [
+          "optOct24",
+          "optSep24",
+          "optAug24",
+          "optJul24"
+        ]
+      },
+      {
+        "id": "optOct24",
+        "component": "SelectItem",
+        "value": "2024-10",
+        "label": "October 2024 (Current)"
+      },
+      {
+        "id": "optSep24",
+        "component": "SelectItem",
+        "value": "2024-09",
+        "label": "September 2024"
+      },
+      {
+        "id": "optAug24",
+        "component": "SelectItem",
+        "value": "2024-08",
+        "label": "August 2024"
+      },
+      {
+        "id": "optJul24",
+        "component": "SelectItem",
+        "value": "2024-07",
+        "label": "July 2024"
+      },
+      {
+        "id": "filterBtnContainer",
+        "component": "Buttons",
+        "buttons": [
+          "applyPeriodBtn"
+        ]
+      },
+      {
+        "id": "applyPeriodBtn",
+        "component": "Button",
+        "label": "View Period",
+        "variant": "secondary"
+      },
+      {
+        "id": "actionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "downloadPdfBtn",
+          "downloadCsvBtn"
+        ]
+      },
+      {
+        "id": "downloadPdfBtn",
+        "component": "Button",
+        "label": "Download Statement (PDF)",
+        "variant": "primary"
+      },
+      {
+        "id": "downloadCsvBtn",
+        "component": "Button",
+        "label": "Export Raw CSV",
+        "variant": "tertiary"
+      },
+      {
+        "id": "kpiCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpiHeader",
+          "kpiTable",
+          "runwayProgressAlert"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "1. Cash & Runway Summary"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiColMetric",
+          "kpiColCurrent",
+          "kpiColChange",
+          "kpiColStatus"
+        ]
+      },
+      {
+        "id": "kpiColMetric",
+        "component": "Col",
+        "label": "Key Metric",
+        "data": [
+          "Cash on Hand",
+          "Monthly Net Burn",
+          "Runway Remaining"
+        ]
+      },
+      {
+        "id": "kpiColCurrent",
+        "component": "Col",
+        "label": "Current Period",
+        "data": [
+          "$1,840,000",
+          "$115,000 / mo",
+          "16.0 Months"
+        ]
+      },
+      {
+        "id": "kpiColChange",
+        "component": "Col",
+        "label": "MoM Delta",
+        "data": [
+          "-$115,000 (-5.9%)",
+          "+$7,500 (+7.0%)",
+          "-1.0 Month"
+        ]
+      },
+      {
+        "id": "kpiColStatus",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "Healthy",
+          "Within Budget",
+          "Target > 12 mo"
+        ]
+      },
+      {
+        "id": "runwayProgressAlert",
+        "component": "Alert",
+        "title": "Runway Health: 16 Months",
+        "description": "Safe operating window. Next fundraising target planned for Q2 next year.",
+        "variant": "success"
+      },
+      {
+        "id": "expenseSection",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "expenseHeader",
+          "expenseChart",
+          "expenseTable"
+        ]
+      },
+      {
+        "id": "expenseHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "2. Expenses Split by Category ($115,000 Total)"
+      },
+      {
+        "id": "expenseChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "appearance": "circular",
+        "labels": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Sales & Marketing",
+          "Software & Subscriptions",
+          "Legal & Professional",
+          "Office & Admin"
+        ],
+        "values": [
+          68000,
+          18500,
+          12500,
+          8200,
+          5300,
+          2500
+        ]
+      },
+      {
+        "id": "expenseTable",
+        "component": "Table",
+        "columns": [
+          "expCatCol",
+          "expAmtCol",
+          "expPctCol"
+        ]
+      },
+      {
+        "id": "expCatCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Sales & Marketing",
+          "Software & Subscriptions",
+          "Legal & Professional",
+          "Office & Admin"
+        ]
+      },
+      {
+        "id": "expAmtCol",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "$68,000",
+          "$18,500",
+          "$12,500",
+          "$8,200",
+          "$5,300",
+          "$2,500"
+        ]
+      },
+      {
+        "id": "expPctCol",
+        "component": "Col",
+        "label": "% of Total Burn",
+        "data": [
+          "59.1%",
+          "16.1%",
+          "10.9%",
+          "7.1%",
+          "4.6%",
+          "2.2%"
+        ]
+      },
+      {
+        "id": "transactionsSection",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "txHeader",
+          "txCallout",
+          "txTable"
+        ]
+      },
+      {
+        "id": "txHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "3. Large Transactions (> $10,000)"
+      },
+      {
+        "id": "txCallout",
+        "component": "TextCallout",
+        "variant": "info",
+        "title": "Audit Flagging",
+        "description": "3 transactions exceeded the $10,000 executive reporting threshold during October 2024."
+      },
+      {
+        "id": "txTable",
+        "component": "Table",
+        "columns": [
+          "txDateCol",
+          "txVendorCol",
+          "txCategoryCol",
+          "txAmountCol",
+          "txApprovedByCol"
+        ]
+      },
+      {
+        "id": "txDateCol",
+        "component": "Col",
+        "label": "Date",
+        "data": [
+          "Oct 31, 2024",
+          "Oct 15, 2024",
+          "Oct 03, 2024"
+        ]
+      },
+      {
+        "id": "txVendorCol",
+        "component": "Col",
+        "label": "Vendor / Payee",
+        "data": [
+          "Rippling (Monthly Payroll)",
+          "Amazon Web Services (AWS)",
+          "Google Ads & Marketing"
+        ]
+      },
+      {
+        "id": "txCategoryCol",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Payroll & Benefits",
+          "Cloud Infrastructure",
+          "Sales & Marketing"
+        ]
+      },
+      {
+        "id": "txAmountCol",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "$68,000.00",
+          "$18,450.22",
+          "$11,200.00"
+        ]
+      },
+      {
+        "id": "txApprovedByCol",
+        "component": "Col",
+        "label": "Approver",
+        "data": [
+          "CEO (Auto-rule)",
+          "CTO",
+          "Head of Growth"
+        ]
+      },
+      {
+        "id": "followUps",
+        "component": "FollowUpBlock",
+        "items": [
+          "followUp1",
+          "followUp2",
+          "followUp3"
+        ]
+      },
+      {
+        "id": "followUp1",
+        "component": "FollowUpItem",
+        "text": "Simulate hiring 3 engineers on runway"
+      },
+      {
+        "id": "followUp2",
+        "component": "FollowUpItem",
+        "text": "Compare AWS spending vs previous quarter"
+      },
+      {
+        "id": "followUp3",
+        "component": "FollowUpItem",
+        "text": "Send financial summary to board members"
+      }
+    ]
+  }
+}
+</a2ui-json>

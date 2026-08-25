@@ -1,0 +1,57 @@
+thought
+root = Card([header, balances, transactions, spending, bills, goal, creditScore, actions, settings])
+
+header = CardHeader("Welcome back, Alex", "Here is your financial snapshot today")
+
+balances = Card([balanceHeader, checking, savings, credit], "card", "row", "m")
+balanceHeader = Heading("Account Balances", "h3")
+checking = TextContent("Checking: $4,250.15", "large-heavy")
+savings = =TextContent("Savings: $12,800.00", "large-heavy")
+creditCard = TextContent("Credit Card: -$1,120.40", "large-heavy")
+
+transactions = Card([transHeader, transTable], "card", "column")
+transHeader = Heading("Recent Transactions", "h3")
+transTable = Table([merchantCol, amountCol, actionCol])
+merchantCol = Col("Merchant", ["Starbucks", "Whole Foods", "Apple Store", "Shell Gas", "Netflix"])
+amountCol = Col("Amount", ["-$6.50", "-$84.20", "-$1,299.00", "-$45.00", "-$15.99"])
+actionCol = Col("Action", ["Dispute", "Dispute", "Dispute", "Dispute", "Dispute"])
+
+spending = Card([spendHeader, spendChart], "card", "row")
+spendHeader = Heading("Spending by Category", "h3")
+spendChart = PieChart(["Food", "Tech", "Transport", "Entertainment", "Other"], [450, 1300, 200, 60, 150], "donut")
+
+bills = Card([billHeader, billList], "card")
+billHeader = Heading("Bills Due Soon", "h3")
+billList = ListBlock([bill1, bill2, bill3])
+bill1 = ListItem("Rent", "Due in 3 days", null, "$1,800")
+bill2 = ListItem("Electric", "Due in 7 days", null, "$112")
+bill3 = ListItem("Internet", "Due in 12 days", null, "$80")
+
+goal = Card([goalHeader, goalProgress], "card")
+goalHeader = Heading("Vacation Savings", "h3")
+goalProgress = Progress(6500, "Japan Trip ($6,500 / $10,000)")
+
+creditScore = Card([scoreHeader, scoreBadge], "card")
+scoreHeader = Heading("Credit Score", "h3")
+scoreBadge = Badge("785 - Excellent", "success")
+
+actions = Card([actionHeader, transferForm, freezeBtn], "card", "column")
+actionHeader = Heading("Quick Actions", "h3")
+transferForm = Form("transfer-money", transferBtns, [fromField, toField, amountField])
+fromField = FormControl("From", Select("from", [optChecking, optSavings], "Select Account"))
+optChecking = SelectItem("checking", "Checking")
+optSavings = SelectItem("savings", "Savings")
+toField = FormControl("To", Select("to", [optChecking, optSavings], "Select Account"))
+amountField = FormControl("Amount", Input("amount", "0.00", "number"))
+transferBtns = Buttons([Button("Transfer Money", null, "primary")])
+freezeBtn = Button("Freeze Credit Card", null, "destructive")
+
+settings = Card([settingsHeader, statementSelect, alertToggle], "card")
+settingsHeader = Heading("Settings", "h3")
+statementSelect = FormControl("Statement Period", Select("period", [optMonth, optQuarter, optYear], "Last 30 days"))
+optMonth = SelectItem("30", "Last 30 Days")
+optQuarter = SelectItem("90", "Last 90 Days")
+optYear = SelectItem("365", "Last Year")
+alertToggle = FormControl("Manage Alerts", SwitchGroup("alerts", [alertLarge, alertLow]))
+alertLarge = SwitchItem("Large Purchase", "Notify for >$500", "large", true)
+alertLow = SwitchItem("Low Balance", "Notify when < $100", "low_bal", false)

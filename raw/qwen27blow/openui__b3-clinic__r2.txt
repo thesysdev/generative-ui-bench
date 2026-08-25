@@ -1,0 +1,53 @@
+
+
+root = Card([header, statsRow, nextPatient, roomsSection, apptsSection, checkInSection, dateNav])
+
+header = CardHeader("Tuesday, 17 June 2025", "Reception Dashboard")
+
+statsRow = Card([expectedPatients, noShowRate], "clear", "row", "m", "center", "between")
+
+expectedPatients = Card([epLabel, epValue], "sunk", "column", "xs", "center")
+epLabel = TextContent("Expected today", "small")
+epValue = TextContent("24", "large-heavy")
+
+noShowRate = Card([nsLabel, nsValue], "sunk", "column", "xs", "center")
+nsLabel = TextContent("No-show rate (June)", "small")
+nsValue = TextContent("8.2%", "large-heavy")
+
+nextPatient = Callout("info", "Next patient called", "Dr. Okafor — Room 3, 10:45 AM")
+
+roomsSection = Card([roomsHeading, roomsTags], "clear", "column", "xs")
+roomsHeading = Heading("Rooms available now", "h3")
+roomsTags = TagBlock(["Room 1", "Room 4", "Room 6"])
+
+apptsSection = Card([apptsHeading, apptsTable], "clear", "column", "s")
+apptsHeading = Heading("Today's appointments", "h3")
+apptsTable = Table([colTime, colPatient, colDoctor, colRoom, colStatus])
+colTime = Col("Time", ["08:30", "09:00", "09:30", "10:00", "10:45", "11:15", "11:45", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"])
+colPatient = Col("Patient", ["A. Mensah", "J. Osei", "K. Boateng", "L. Adjei", "Dr. Okafor", "S. Asante", "M. Darko", "P. Owusu", "R. Addo", "T. Appiah", "V. Amankwah", "W. Frimpong", "Y. Gyasi", "Z. Kwartey", "B. Nkrumah", "C. Asiedu"])
+colDoctor = Col("Doctor", ["Dr. Mensah", "Dr. Mensah", "Dr. Osei", "Dr. Okafor", "Dr. Okafor", "Dr. Okafor", "Dr. Osei", "Dr. Mensah", "Dr. Mensah", "Dr. Okafor", "Dr. Osei", "Dr. Okafor", "Dr. Mensah", "Dr. Okafor", "Dr. Osei", "Dr. Mensah"])
+colRoom = Col("Room", ["1", "2", "3", "5", "3", "4", "2", "1", "2", "3", "4", "5", "1", "3", "4", "2"])
+colStatus = Col("Status", ["Done", "Done", "Done", "In progress", "Called", "In progress", "Done", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+checkInSection = Card([checkInHeading, checkInForm], "sunk", "column", "s")
+checkInHeading = Heading("Check in a patient", "h3")
+checkInForm = Form("check-in", formButtons, [patientNameField, appointmentTimeField, roomField])
+patientNameField = FormControl("Patient name", nameInput)
+nameInput = Input("patient_name", "Type or scan name…")
+appointmentTimeField = FormControl("Appointment time", timeInput)
+timeInput = Input("appt_time", "e.g. 10:45")
+roomField = FormControl("Assign room", roomSelect)
+roomSelect = Select("room", [room1, room4, room6], "Available rooms")
+room1 = SelectItem("1", "Room 1")
+room4 = SelectItem("4", "Room 4")
+room6 = SelectItem("6", "Room 6")
+formButtons = Buttons([checkInBtn, cancelBtn])
+checkInBtn = Button("Check in", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+dateNav = Card([dateNavLabel, dateNavButtons], "clear", "row", "m", "center", "between")
+dateNavLabel = TextContent("Navigate days", "small")
+dateNavButtons = Buttons([prevDayBtn, todayBtn, nextDayBtn])
+prevDayBtn = Button("← Previous day", null, "secondary")
+todayBtn = Button("Today", null, "primary")
+nextDayBtn = Button("Next day →", null, "secondary")

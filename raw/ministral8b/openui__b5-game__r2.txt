@@ -1,0 +1,99 @@
+```openui-lang
+root = Card([header, statsRow, metricsCard, eventsCard, regionsCard, crashCard, reportsCard, currencyCard, experimentsCard, patchNotesCard, hotfixCard], "card", "column", "l")
+
+header = CardHeader("Live-Ops Dashboard", "Monitoring and operations for [Game Name]")
+
+statsRow = Card([onlinePlayers, dpuCard, rpuCard], "sunk", "row", "xl", "center", "start")
+onlinePlayers = Card([playerCount, playerChart], "sunk", "column", "m")
+playerCount = CardHeader("Players Online Now", "1,245")
+playerChart = LineChart(["Jan 1", "Jan 2", "Jan 3", "Jan 4"], [onlineSeries], "natural", "Day", "Players", "success")
+onlineSeries = Series("Online", [872, 1245, 987, 1523])
+
+dpuCard = Card([dailyActive, monthlyActive], "sunk", "column", "m")
+dailyActive = CardHeader("Daily Active Players", "12,456")
+monthlyActive = CardHeader("Monthly Active Players", "45,231")
+
+rpuCard = Card([revenueToday, rpuValue], "sunk", "column", "m")
+revenueToday = CardHeader("Revenue Today", "$12,456.78")
+rpuValue = CardHeader("Revenue Per User", "$0.99")
+
+metricsCard = Card([sessionLength, topItems], "sunk", "column", "m")
+sessionLength = Card([lengthChart, lengthHeading], "sunk", "column", "m")
+lengthHeading = CardHeader("Session Length (Last 2 Weeks)", "avg: 45m")
+lengthChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [sessionSeries], "natural", "Day", "Minutes")
+sessionSeries = Series("Sessions", [42, 45, 48, 50, 52, 60, 55])
+
+topItems = Card([topItemsHeading, itemsTable], "sunk", "column", "m")
+topItemsHeading = CardHeader("Top Selling Items", "Last 7 Days")
+itemsTable = Table([itemNameCol, unitsCol])
+itemNameCol = Col("Item", ["Rare Sword", "Epic Armor", "Legendary Helmet", "Cursed Amulet", "Mythic Gauntlets"])
+unitsCol = Col("Units Sold", ["1,245", "876", "654", "432", "321"])
+
+eventsCard = Card([liveEvents, upcomingEvents], "sunk", "column", "m")
+liveEvents = Card([liveEventsHeading, liveEventsList], "sunk", "column", "m")
+liveEventsHeading = CardHeader("Live Events", "2 Active")
+liveEventsList = ListBlock([eventItem1, eventItem2])
+eventItem1 = ListItem("Cosmic Festival", "Ends in 12h", ["https://picsum.photos/seed/cosmic/100/100"], "View")
+eventItem2 = ListItem("Newt’s Nest", "Ends in 3d", ["https://picsum.photos/seed/nest/100/100"], "View")
+
+upcomingEvents = Card([upcomingEventsHeading, upcomingEventsList], "sunk", "column", "m")
+upcomingEventsHeading = CardHeader("Upcoming Events", "2 Scheduled")
+upcomingEventsList = ListBlock([eventItem3, eventItem4])
+eventItem3 = ListItem("Dragon Hunt", "Starts in 2d", ["https://picsum.photos/seed/dragon/100/100"], "View")
+eventItem4 = ListItem("Winter Solstice", "Starts in 5d", ["https://picsum.photos/seed/solstice/100/100"], "View")
+
+regionsCard = Card([regionsHeading, regionsTable], "sunk", "column", "m")
+regionsHeading = CardHeader("Server Regions", "12 Total")
+regionsTable = Table([regionNameCol, healthCol, focusCol])
+regionNameCol = Col("Region", ["NA East", "NA West", "EU West", "EU East", "Asia", "Australia"])
+healthCol = Col("Health", ["✅ 99%", "⚠️ 87%", "✅ 100%", "⚠️ 82%", "✅ 95%", "✅ 98%"])
+focusCol = Col("Focus", ["null", "null", "null", "null", "null", "null"])
+
+crashCard = Card([crashHeading, crashChart], "sunk", "column", "m")
+crashHeading = CardHeader("Crash Rate by Version", "Last 24h")
+crashChart = BarChart(["v1.2.3", "v1.2.4", "v1.2.5", "v1.2.6"], [crashSeries], "grouped", "Version", "Crash Rate (%)")
+crashSeries = Series("Crash Rate", [3.2, 1.8, 0.9, 2.5])
+
+reportsCard = Card([reportsHeading, reportsTable], "sunk", "column", "m")
+reportsHeading = CardHeader("Player Reports", "123 Pending")
+reportsTable = Table([reportTypeCol, reportCountCol])
+reportTypeCol = Col("Type", ["Toxic Behavior", "Cheating", "Bug Report", "Exploit"])
+reportCountCol = Col("Count", ["87", "23", "11", "2"])
+
+banAppealsCard = Card([appealsHeading, appealsTable], "sunk", "column", "m")
+appealsHeading = CardHeader("Ban Appeals", "45 Pending")
+appealsTable = Table([appealTypeCol, appealCountCol])
+appealTypeCol = Col("Type", ["Temporary Ban", "Permanent Ban", "Account Lock"])
+appealCountCol = Col("Count", ["32", "10", "3"])
+
+currencyCard = Card([currencyHeading, currencyChart], "sunk", "column", "m")
+currencyHeading = CardHeader("In-Game Currency Inflation", "Last 30 Days")
+currencyChart = LineChart(["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"], [currencySeries], "natural", "Day", "Gold per Silver")
+currencySeries = Series("Inflation Rate", [0.98, 0.99, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28])
+
+experimentsCard = Card([experimentsHeading, experimentTable], "sunk", "column", "m")
+experimentsHeading = CardHeader("Running Experiments", "2 Active")
+experimentTable = Table([experimentNameCol, experimentStatusCol, experimentResultCol])
+experimentNameCol = Col("Experiment", ["New UI", "Loot Box A/B"])
+experimentStatusCol = Col("Status", ["Ongoing", "Ongoing"])
+experimentResultCol = Col("Result", ["+3.2% engagement", "-1.8% revenue"])
+
+patchNotesCard = Card([patchNotesSection, draftPatchNotes], "sunk", "column", "m")
+patchNotesSection = CardHeader("Draft Patch Notes", "Edit below")
+draftPatchNotes = TextArea("notes", "Fix critical crash in combat system. Add new mount for level 50+ players. Update UI for better visibility.", 10, null, "Patch notes for next update")
+
+hotfixCard = Card([hotfixSection, hotfixForm], "sunk", "column", "m")
+hotfixSection = CardHeader("Emergency Hotfix", "Ship a hotfix to all regions")
+hotfixForm = Form("hotfix-request", hotfixButtons, [hotfixField])
+hotfixField = FormControl("Hotfix Description", hotfixInput)
+hotfixInput = Input("hotfix", "Fix server crash on login", "text")
+hotfixButtons = Buttons([hotfixBtn])
+hotfixBtn = Button("Ship Hotfix", null, "primary")
+
+focusRegionCard = Card([focusRegionSection, focusRegionForm], "sunk", "column", "m")
+focusRegionSection = CardHeader("Focus Region", "Select a region to monitor")
+focusRegionForm = Select("region", focusRegionItems, "Select a region", null, null, "medium")
+focusRegionItems = [SelectItem("NA East", "NA East"), SelectItem("NA West", "NA West"), SelectItem("EU West", "EU West"), SelectItem("EU East", "EU East"), SelectItem("Asia", "Asia"), SelectItem("Australia", "Australia")]
+
+regionFocusBtn = Button("Focus Region", null, "secondary", "normal")
+```

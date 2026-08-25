@@ -1,0 +1,280 @@
+```openui-lang
+root = Card([
+  // Header
+  CardHeader(
+    title="Hospital Operations Command",
+    subtitle="Real-time operational dashboard"
+  ),
+  
+  // 1. Bed Occupancy
+  Card([
+    CardHeader("Bed Occupancy", "Current bed utilization"),
+    StatCard(
+      label="Total Beds",
+      value="$142",
+      unit=""
+    ),
+    StatCard(
+      label="Occupied",
+      value="78%",
+      unit="%"
+    ),
+    StatCard(
+      label="Available",
+      value="22",
+      unit="rooms"
+    )
+  ]),
+  
+  // 2. Current ER Wait
+  Card([
+    CardHeader("ER Wait Time", "Emergency Room queue"),
+    ErWashboard(
+      label="Current Wait",
+      value="34 min",
+      unit="minutes"
+    ),
+    ErWashboard(
+      label="Average Wait",
+      value="45 minutes",
+      unit="minutes"
+    ),
+    ErWashboard(
+      label="Busy Periods",
+      value="23 instances today",
+      unit="count"
+    )
+  ]),
+  
+  // 3. Admissions over past two weeks
+  Card([
+    CardHeader("Admissions (Last 2 Weeks)", "Daily admission trends"),
+    Chart(
+      labels=["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      series=[{
+        label="Admissions",
+        data=[25, 32, 28, 35, 40, 27, 31]
+      }],
+      xLabel="Day",
+      yLabel="Count",
+      variant="bar"
+    )
+  ]),
+  
+  // 4. Patients per department
+  Card([
+    CardHeader("Patients by Department", "Distribution across units"),
+    TableColumn({
+      label="Department",
+      data=["ICU", "General Ward", "Surgery", "Pediatrics", "LOB"],
+      colSpan=2
+    }),
+    TableRow([{
+      title="ICU",
+      subtitle="18",
+      image={src:"https://picsum.photos/seed/icu/100/80", alt="ICU Unit"}
+    }),
+    TableRow([{
+      title="General Ward",
+      subtitle="52",
+      image={src:"https://picsum.photos/seed/ward/100/80", alt="General Ward"}
+    }]),
+    TableRow([{
+      title="Surgery",
+      subtitle="15",
+      image={src:"https://picsum.photos/seed/surgery/100/80", alt="Surgery Unit"}
+    }]),
+    TableRow([{
+      title="Pediatrics",
+      subtitle="9",
+      image={src:"https://picsum.photos/seed/pediatric/100/80", alt="Pediatrics"}
+    }]),
+    TableRow([{
+      title="LOB",
+      subtitle="48",
+      image={src:"https://picsum.photos/seed/lob/100/80", alt="Laboratory & Observation"}
+    }])
+  ]),
+  
+  // 5. Staff on shift with role
+  Card([
+    CardHeader("Staff On Shift", "Current personnel assignments"),
+    ListItem(
+      value="Dr. Smith",
+      subtitle="Attending Physician",
+      actionLabel="View Details"
+    ),
+    ListItem(
+      value="Nurse Lee",
+      subtitle="ICU Nurse Lead",
+      actionLabel="Details"
+    ),
+    ListItem(
+      value="Tech Patel",
+      subtitle="OR Assistant",
+      actionLabel="Schedule"
+    ),
+    ListItem(
+      value="RN Chen",
+      subtitle="Medical Respiratory",
+      actionLabel="Status"
+    )
+  ]),
+  
+  // 6. Critical patients called out
+  Card([
+    CardHeader("Critical Patients", "Urgent care status"),
+    ListItem(
+      value="Mr. A. Johnson",
+      subtitle="Heart Failure",
+      critical=true,
+      severity="high"
+    ),
+    ListItem(
+      value="Ms. R. Davis",
+      subtitle="Severe Trauma",
+      critical=true,
+      severity="critical"
+    ),
+    ListItem(
+      value="Dr. K. Williams",
+      subtitle="Stroke Risk",
+      critical=true,
+      severity="high"
+    ),
+    ListItem(
+      value="Patient 402",
+      subtitle="Respiratory Failure",
+      critical=false,
+      severity="medium"
+    )
+  ]),
+  
+  // 7. Patients ready for discharge
+  Card([
+    CardHeader("Discharge Ready", "Eligible for release"),
+    NumberCard(
+      label="Count",
+      value="87",
+      unit="patients"
+    ),
+    ListItem(
+      value="Ms. L. Wong",
+      subtitle="Post-op recovery",
+      status="ready"
+    ),
+    ListItem(
+      value="Mr. T. Okonkwo",
+      subtitle="Stabilized",
+      status="ready"
+    ),
+    ListItem(
+      value="Mrs. M. Garcia",
+      subtitle="Vaccination complete",
+      status="ready"
+    )
+  ]),
+  
+  // 8. Today's OR bookings
+  Card([
+    CardHeader("OR Bookings (Today)", "Scheduled surgeries"),
+    HtmlBlock(
+      html="
+        <ul>
+          <li>Cholecystectomy - Dr. Smith - 09:00 AM</li>
+          <li>Appendectomy - Dr. Miller - 11:30 AM</li>
+          <li>Knee replacement - Dr. Kim - 02:00 PM</li>
+          <li>Colonoscopy - Dr. Ochoa - 04:30 PM</li>
+          <li>Cardiac bypass - Dr. Patel - 05:00 PM</li>
+        </ul>
+      "
+    )
+  ]),
+  
+  // 9. Supplies running low
+  Card([
+    CardHeader("Supply Alerts", "Critical inventory levels"),
+    Alert(
+      title="Low Stock Warning",
+      description="Several critical supplies below threshold",
+      variant="warning"
+    ),
+    ListItem(
+      value="Elective Surgery Kit",
+      subtitle="2 left",
+      action="Reorder"
+    ),
+    ListItem(
+      value="MRI Contrast Agent",
+      subtitle="0 remaining",
+      action="Order"
+    ),
+    ListItem(
+      value="Blood Products - Type B",
+      subtitle="15 vials",
+      action="Request"
+    )
+  ]),
+  
+  // 10. Incident reporting
+  Card([
+    CardHeader("Incident Report", "File a new incident"),
+    Form(
+      name="incident_report",
+      fields=[
+        FormControl(label="Description", input="text"),
+        FormControl(label="Category", selectItems=["Equipment", "Medication", "Safety", "Infusion"]),
+        FormControl(label="Severity", options=["minor", "moderate", "critical"]),
+        FormControl(label="Reporter", input="text"),
+        Button(label="Submit Incident", action="report_incident")
+      ]
+    ),
+    Button(
+      label="Report Incident",
+      variant="primary",
+      action="file_incident"
+    )
+  ]),
+  
+  // 11. View another day
+  Card([
+    CardHeader("Date Viewer", "Change to another day"),
+    Button(
+      label="Previous Day",
+      variant="secondary",
+      action="go_date_prev"
+    ),
+    Button(
+      label="Next Day",
+      variant="secondary",
+      action="go_date_next"
+    ),
+    Button(
+      label="Week Summary",
+      variant="tertiary",
+      action="show_week_summary"
+    )
+  ]),
+  
+  // 12. Request patient transfer
+  Card([
+    CardHeader("Transfer Request", "Move patient between units"),
+    Form(
+      name="transfer_request",
+      fields=[
+        FormControl(label="Patient ID", input="text"),
+        FormControl(label="From Department", selectItems=["ICU", "General Ward", "Surgery", "Pediatrics", "LOB"]),
+        FormControl(label="To Department", selectItems=["ICU", "General Ward", "Surgery", "Pediatrics", "LOB"]),
+        FormControl(label="Reason", input="text"),
+        FormControl(label="Priority", selectItems=["standard", "urgent", "emergency"]),
+        Button(label="Create Transfer", action="request_transfer")
+      ]
+    ),
+    Button(
+      label="Request Transfer",
+      variant="primary",
+      action="submit_transfer"
+    )
+  ])
+])
+```

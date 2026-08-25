@@ -1,0 +1,62 @@
+root = Card([header, ticketSummary, recentTickets, priorityFilter, newTicketButton], "sunk")
+header = CardHeader("Morning Support View", "Today's overview")
+ticketSummary = Card([openCount, avgResponseTime], "sunk")
+openCount = CardHeader("Open Tickets", "12 tickets currently open")
+avgResponseTime = CardHeader("Avg First-Response Time", "2.4 hours")
+recentTickets = CardHeader("Recent Tickets", "Top 5 by priority")
+recentTicketItems = [
+  {priority: "critical", title: "Login failure on mobile", time: "10 min ago"},
+  {priority: "critical", title: "Data sync error", time: "25 min ago"},
+  {priority: "high", title: "Payment gateway timeout", time: "40 min ago"},
+  {priority: "high", title: "UI glitch on dashboard", time: "1 hr ago"},
+  {priority: "medium", title: "Missing feature request", time: "2 hr ago"},
+]
+recentTicketRows = [
+  {priority: "critical", title: "Login failure on mobile", time: "10 min ago"},
+  {priority: "critical", title: "Data sync error", time: "25 min ago"},
+  {priority: "high", title: "Payment gateway timeout", time: "40 min ago"},
+  {priority: "high", title: "UI glitch on dashboard", time: "1 hr ago"},
+  {priority: "medium", title: "Missing feature request", time: "2 hr ago"},
+]
+priorityFilter = CardHeader("Priority Filter", "Filter by ticket priority")
+priorityFilterItems = [
+  {label: "Show All", action: "all"},
+  {label: "High Priority", action: "high"},
+  {label: "Critical Priority", action: "critical"},
+]
+newTicketButton = CardHeader("New Ticket", "Create a new support ticket")
+newTicketButton = CardHeader("New Ticket", "Create a new support ticket", null, [
+  CardHeader("Create New Ticket", "Start a new support request"),
+])
+newTicketForm = Form("new-ticket", [
+  FormControl("Subject", subjectInput, "Enter a subject for the ticket"),
+  FormControl("Category", categorySelect, "Select a category"),
+  FormControl("Priority", prioritySelect, "Select priority level"),
+  FormControl("Description", descriptionTextArea, "Describe the issue in detail"),
+], [
+  Button("Submit Ticket", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+subjectInput = Input("subject", "Enter a subject", "text")
+categorySelect = Select("category", [
+  SelectItem("Account", "Account"),
+  SelectItem("Billing", "Billing"),
+  SelectItem("Technical", "Technical"),
+  SelectItem("Feature", "Feature"),
+], "Choose a category")
+prioritySelect = Select("priority", [
+  SelectItem("Critical", "Critical"),
+  SelectItem("High", "High"),
+  SelectItem("Medium", "Medium"),
+  SelectItem("Low", "Low"),
+], "Choose a priority")
+descriptionTextArea = TextArea("description", "Describe the issue in detail", rows=5)
+newTicketForm = Form("new-ticket", [
+  FormControl("Subject", subjectInput, "Enter a subject for the ticket"),
+  FormControl("Category", categorySelect, "Select a category"),
+  FormControl("Priority", prioritySelect, "Select priority level"),
+  FormControl("Description", descriptionTextArea, "Describe the issue in detail"),
+], [
+  Button("Submit Ticket", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])

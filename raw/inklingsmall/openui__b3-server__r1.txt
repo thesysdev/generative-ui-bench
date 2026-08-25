@@ -1,0 +1,54 @@
+root = Card([header, uptimeSection, chartsSection, errorRateBanner, incidentsSection, regionSection, endpointsSection, thresholdSection, ackSection], "card", "column", "l")
+
+header = CardHeader("Service Health — On-Call", "Engineering view • Updated 2m ago")
+
+uptimeSection = Card([uptimeHeading, uptimeValue], "sunk")
+uptimeHeading = Heading("Uptime This Quarter", "h3")
+uptimeValue = TextContent("99.97%", "large-heavy")
+
+chartsSection = Card([chartsHeading, cpuMemoryChart], "card")
+chartsHeading = Heading("CPU & Memory — Past 24 Hours", "h3")
+cpuMemoryChart = LineChart(chartLabels, [cpuSeries, memSeries], "natural", "Hour", "Usage %")
+chartLabels = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"]
+cpuSeries = Series("CPU %", [34, 42, 38, 55, 48, 62, 58])
+memSeries = Series("Memory %", [62, 65, 64, 71, 68, 74, 72])
+
+errorRateBanner = Callout("error", "Error Rate — Right Now", "0.42% over the last 5 minutes (threshold 0.5%)")
+
+incidentsSection = Card([incidentsHeading, incidentsList], "sunk")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsList = ListBlock([incident1, incident2, incident3], "number")
+incident1 = ListItem("DB-Cluster-01 timeout", "Critical — 14 min open", null, "Investigate")
+incident2 = ListItem("Cache eviction spike", "Warning — 42 min open", null, "Review")
+incident3 = ListItem("Latency degradation EU-W", "Info — 3 min open", null, "Monitor")
+
+regionSection = Card([regionHeading, regionForm], "card")
+regionHeading = Heading("Filter by Region", "h3")
+regionForm = Form("region-filter", regionButtons, [regionField])
+regionField = FormControl("Region", regionSelect)
+regionSelect = Select("region", [regionEU, regionUS, regionAPAC, regionGlobal], "All regions")
+regionEU = SelectItem("eu-west", "EU West")
+regionUS = SelectItem("us-east", "US East")
+regionAPAC = SelectItem("apac", "APAC")
+regionGlobal = SelectItem("global", "Global")
+regionButtons = Buttons([regionApplyBtn])
+regionApplyBtn = Button("Apply Filter", null, "primary")
+
+endpointsSection = Card([endpointsHeading, slowTable], "sunk")
+endpointsHeading = Heading("Five Slowest Endpoints", "h3")
+slowTable = Table([endpointCol, latencyCol])
+endpointCol = Col("Endpoint", ["/api/v2/search", "/api/v1/export", "/api/v3/reports", "/auth/token", "/billing/invoice"], "string")
+latencyCol = Col("Latency (ms)", [1240, 980, 890, 720, 650], "number")
+
+thresholdSection = Card([thresholdHeading, thresholdForm], "card")
+thresholdHeading = Heading("Alert Threshold", "h3")
+thresholdForm = Form("threshold-set", thresholdButtons, [thresholdField])
+thresholdField = FormControl("Latency threshold (ms)", thresholdSlider)
+thresholdSlider = Slider("threshold", "continuous", 100, 2000, 50, [500], "Set limit")
+thresholdButtons = Buttons([thresholdSaveBtn])
+thresholdSaveBtn = Button("Save Threshold", null, "primary")
+
+ackSection = Card([ackHeading, ackButtons], "sunk")
+ackHeading = Heading("Incident Acknowledgment", "h3")
+ackButtons = Buttons([ackBtn])
+ackBtn = Button("Acknowledge Incident", null, "primary")

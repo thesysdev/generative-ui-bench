@@ -1,0 +1,25 @@
+root = Card([header, kpiGrid, trendSection, productSection, actions], "card", "column", "l")
+
+header = CardHeader("Monthly Sales Check", "Performance overview for current period")
+
+kpiGrid = Card([revKpi, convKpi], "sunk", "row", "m")
+revKpi = Card([revLabel, revValue], "clear", "column", "none")
+revLabel = TextContent("Revenue This Month", "small")
+revValue = TextContent("$42,850", "large-heavy")
+convKpi = Card([convLabel, convValue], "clear", "column", "none")
+convLabel = TextContent("Conversion Rate", "small")
+convValue = TextContent("3.24%", "large-heavy")
+
+trendSection = Card([trendHeading, trendChart], "sunk", "column", "m")
+trendHeading = Heading("6-Month Revenue Trend", "h3")
+trendChart = AreaChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [revSeries], "natural", "Month", "USD")
+revSeries = Series("Revenue", [31000, 34500, 32000, 38000, 41000, 42850])
+
+productSection = Card([prodHeading, prodTable], "sunk", "column", "m")
+prodHeading = Heading("Top 3 Best-Sellers", "h3")
+prodTable = Table([prodName, prodUnits])
+prodName = Col("Product", ["Quantum Headphones", "Ergo Keyboard", "Smart Watch v2"], "string")
+prodUnits = Col("Units Sold", ["1,240", "890", "710"], "number")
+
+actions = Buttons([downloadBtn])
+downloadBtn = Button("Download Sales Report", null, "primary")

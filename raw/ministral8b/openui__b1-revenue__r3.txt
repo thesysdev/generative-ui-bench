@@ -1,0 +1,34 @@
+```openui-lang
+root = Card([header, todayRevenue, comparison, stockAlert, actions])
+
+header = CardHeader("Morning Check-In", "Quick daily overview")
+
+todayRevenue = Card([revenueTitle, cardRevenue, revenueChart], "sunk")
+revenueTitle = Heading("Today's Revenue", "h3")
+cardRevenue = Card([amountText, currencySymbol], "card")
+amountText = TextContent("1,285.67", "large-heavy")
+currencySymbol = TextContent("USD", "small", null, "neutral")
+revenueChart = SingleStackedBarChart(["Morning"], [1285.67])
+
+comparison = Card([comparisonTitle, comparisonChart], "sunk")
+comparisonTitle = Heading("Yesterday Comparison", "h3")
+comparisonChart = HorizontalBarChart(
+    ["Today", "Yesterday"],
+    [todaySeries, yesterdaySeries],
+    "grouped",
+    "Day", "Revenue (USD)"
+)
+todaySeries = Series("Today", [1285.67])
+yesterdaySeries = Series("Yesterday", [1142.99])
+
+stockAlert = Callout(
+    "Low Stock Alert",
+    "You're down to 15 units of 'Premium Coffee Beans'",
+    "warning"
+)
+
+actions = Buttons([printReportBtn, restockBtn, closeBtn])
+printReportBtn = Button("Print Daily Report", null, "primary")
+restockBtn = Button("Restock Alerts", null, "secondary")
+closeBtn = Button("Close", null, "tertiary")
+```

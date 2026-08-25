@@ -1,0 +1,387 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Players online right now
+    CardHeader(
+      title="Online Players",
+      subtitle="Current Active Count"
+    ),
+    OnlineCount = TextContent(
+      text="284",
+      size="large"
+    ),
+
+    // 2. Daily and monthly active players
+    Card(
+      children: [
+        CardHeader(
+          title="DAU / MAU",
+          subtitle="Active Users"
+        ),
+        row: [
+          Col(
+            label="Daily Active (DAU)",
+            data: ["32,450"],
+            type: "number"
+          ),
+          Col(
+            label="Monthly Active (MAU)",
+            data: ["89,200"],
+            type: "number"
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 3. Revenue today
+    Card(
+      children: [
+        CardHeader(
+          title="Today's Revenue",
+          subtitle="Revenue Today"
+        ),
+        RowRevenue = [
+          Col(
+            label="Revenue",
+            data: "$42,380",
+            type: "number"
+          ),
+          Col(
+            label="Growth vs Yesterday",
+            data: "+12.5%",
+            type: "string"
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 4. Revenue per user
+    Card(
+      children: [
+        CardHeader(
+          title="Revenue Per User (ARPU)",
+          subtitle="Average Revenue Per User"
+        ),
+        RowRevenuePerUser = [
+          Col(
+            label="Revenue per User",
+            data: "$142.30",
+            type: "number"
+          ),
+          Col(
+            label="YoY Growth",
+            data: "+8.3%",
+            type: "string"
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 5. Session length over past two weeks
+    Card(
+      children: [
+        CardHeader(
+          title="Session Length (2 Weeks)",
+          subtitle="Avg Sessions by Region"
+        ),
+        SessionStats = TextContent(
+          text="Average session: 48 minutes\nTotal sessions: 12,340\nPeak session: 92 minutes",
+          size: "default"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 6. Best-selling items with units
+    Card(
+      children: [
+        CardHeader(
+          title="Top Selling Items",
+          subtitle="Best Sellers"
+        ),
+        BestSellers = [
+          CardItem(
+            key: "Items",
+            value: [
+              {
+                type: "Card",
+                children: [
+                  CardHeader(
+                    title="Vitality Potions",
+                    subtitle="1,240 sold",
+                    color: "primary"
+                  ),
+                  HighestSeller = TextContent(
+                    text="#1",
+                    size: "large"
+                  )
+                ]
+              },
+              {
+                type: "Card",
+                children: [
+                  CardHeader(
+                    title="Energy Drinks",
+                    subtitle="980 sold",
+                    color: "primary"
+                  ),
+                  HighestSeller = TextContent(
+                    text="#2",
+                    size: "large"
+                  )
+                ]
+              },
+              {
+                type: "Card",
+                children: [
+                  CardHeader(
+                    title="Health Boosts",
+                    subtitle="760 sold",
+                    color: "primary"
+                  ),
+                  HighestSeller = TextContent(
+                    text="#3",
+                    size: "large"
+                  )
+                ]
+              }
+            ]
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 7. Server regions and health
+    Card(
+      children: [
+        CardHeader(
+          title="Server Regions",
+          subtitle="Health Status"
+        ),
+        Regions = [
+          RegionItem(
+            name: "NA Primary",
+            health: "green",
+            score: 98,
+            load: 87%
+          ),
+          RegionItem(
+            name: "EU West",
+            health: "yellow",
+            score: 82,
+            load: 74%
+          ),
+          RegionItem(
+            name: "APAC East",
+            health: "red",
+            score: 65,
+            load: 91%
+          ),
+          RegionItem(
+            name: "Latin America",
+            health: "green",
+            score: 95,
+            load: 68%
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 8. Crash rate by app version
+    Card(
+      children: [
+        CardHeader(
+          title="Crash Rate by Version",
+          subtitle="Stability Metrics"
+        ),
+        CrashSummary = TextContent(
+          text="Version 2.1.0: 0.3%\nVersion 2.0.5: 0.8%\nVersion 2.2.1: 0.1%",
+          size: "default"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 9. Live events running and upcoming
+    Card(
+      children: [
+        CardHeader(
+          title="Live Events",
+          subtitle="Ongoing & Upcoming"
+        ),
+        Events = [
+          EventItem(
+            id: "event-001",
+            name: "Battle Pass Week 4",
+            status: "live",
+            start: "2026-06-15",
+            end: "2026-06-21"
+          ),
+          EventItem(
+            id: "event-002",
+            name: "New MMO Expansion",
+            status: "upcoming",
+            start: "2026-06-22",
+            end: "2026-07-05"
+          ),
+          EventItem(
+            id: "event-003",
+            name: "Community Showcase",
+            status: "live",
+            start: "2026-06-18",
+            end: "2026-06-20"
+          )
+        ]
+      ],
+      variant: "card"
+    ),
+
+    // 10. Player reports awaiting review
+    Card(
+      children: [
+        CardHeader(
+          title="Player Reports",
+          subtitle="Pending Review"
+        ),
+        ReportsQueue = TextContent(
+          text="5 reports awaiting moderation\n[High Priority: 2] [Medium: 2] [Low: 1]\nAll in queue for review"
+        ),
+        ReportCount = TextContent(
+          text="5",
+          size: "large"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 11. Ban appeals awaiting review
+    Card(
+      children: [
+        CardHeader(
+          title="Ban Appeals",
+          subtitle="Waiting for Review"
+        ),
+        AppealsQueue = TextContent(
+          text="4 appeals pending approval\n[Rejected: 1] [Approved: 1] [Reviewed: 2]\nTotal: 4"
+        ),
+        AppealCount = TextContent(
+          text="4",
+          size: "large"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 12. In-game currency inflation
+    Card(
+      children: [
+        CardHeader(
+          title="Currency Inflation",
+          subtitle="Value Trends"
+        ),
+        InflationChart = TextContent(
+          text="Inflated: +18%\nBase value: $5.00\nCurrent: $6.15\nGrowth: 3.2% weekly",
+          size: "default"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 13. Results of two running experiments
+    Card(
+      children: [
+        ExperimentItem(
+          id: "exp-1",
+          name: "Session Timer Optimization",
+          status: "active",
+          metric: "↑ +15% engagement",
+          change: "+12.5%"
+        ),
+        ExperimentItem(
+          id: "exp-2",
+          name: "Procedural Quest Generation",
+          status: "active",
+          metric: "↓ +8% completion",
+          change: "-8.2%"
+        ),
+        ExperimentsList = TextContent(
+          text="Experiment 1: Session Timer Optimization (Active)\n→ Engagement +15%\nExperiment 2: Procedural Quest Generation (Active)\n→ Completion ↓ 8.2%\nBoth running concurrently"
+        ),
+        ExperimentCount = TextContent(
+          text="2",
+          size: "large"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 14. Draft patch notes
+    Card(
+      children: [
+        CardHeader(
+          title="Draft Patch Notes",
+          subtitle="Create & Publish"
+        ),
+        PatchNoteForm = Form(
+          name: "patch-notes",
+          buttons: Buttons([
+            Button(label="Save Draft", action: null, variant: "primary"),
+            Button(label="Publish", action: null, variant: "primary")
+          ]),
+          fields: [
+            FormControl(label="Title", input: Text(""))
+          ]
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 15. Focus on one region
+    Card(
+      children: [
+        CardHeader(
+          title="Region Focus",
+          subtitle="Drill Down"
+        ),
+        RegionFilter = TextContent(
+          text="Dropdown to select region: NA Primary, EU West, APAC East, Latin America",
+          size: "default"
+        ),
+        SelectedRegion = TextContent(
+          text="NA Primary (selected)",
+          size: "large"
+        )
+      ],
+      variant: "card"
+    ),
+
+    // 16. Ship a hotfix
+    Card(
+      children: [
+        CardHeader(
+          title="Ship Hotfix",
+          subtitle="Deploy Emergency Fix"
+        ),
+        HotfixFlow = [
+          Button(label="Prepare Hotfix", action: null, direction: "row"),
+          Button(label="Validate & Deploy", action: null, direction: "row"),
+          Button(label="Monitor Impact", action: null, direction: "row")
+        ],
+        HotfixStatus = TextContent(
+          text="🆚 Preparing hotfix deployment...",
+          size: "large"
+        )
+      ],
+      variant: "card"
+    ]
+  ],
+  direction: "row",
+  gap: "xl",
+  wrap: true
+)
+```

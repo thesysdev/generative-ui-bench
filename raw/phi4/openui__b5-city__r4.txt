@@ -1,0 +1,111 @@
+```openui
+root = Card([
+    congestionSection,
+    transitSection,
+    airQualitySection,
+    energyUseSection,
+    waterUseSection,
+    incidentsSection,
+    emergencyVehiclesSection,
+    parkingSection,
+    eventsSection,
+    citizenReportsSection,
+    serviceRequestSection,
+    weatherSection,
+    districtFocusSection,
+    dispatchSection,
+    alertSection,
+    roadworksSection,
+    maintenanceSection
+])
+
+congestionSection = Card([congestionHeading, congestionChart], "sunk")
+congestionHeading = Heading("Current Congestion", "h3")
+congestionChart = RadarChart(["Main St", "Broadway", "3rd Ave", "Elm St"], [congestionSeries])
+congestionSeries = Series("Traffic", [80, 60, 70, 50])
+
+transitSection = Card([transitHeading, transitChart], "sunk")
+transitHeading = Heading("Transit Punctuality", "h3")
+transitChart = HorizontalBarChart(["Bus", "Tram", "Subway"], [transitSeries])
+transitSeries = Series("On-time %", [95, 88, 92])
+
+airQualitySection = Card([airQualityHeading, airQualityChart], "sunk")
+airQualityHeading = Heading("Air Quality by District", "h3")
+airQualityChart = PieChart(["Downtown", "Midtown", "Uptown"], [50, 30, 20], "donut")
+
+energyUseSection = Card([energyUseHeading, energyUseChart], "sunk")
+energyUseHeading = Heading("Energy Use (Last Week)", "h3")
+energyUseChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energyUseSeries], "natural")
+energyUseSeries = Series("kWh", [2000, 2100, 2050, 2200, 2300, 1950, 1800])
+
+waterUseSection = Card([waterUseHeading, waterUseChart], "sunk")
+waterUseHeading = Heading("Water Use (Today)", "h3")
+waterUseChart = RadialChart(["Residential", "Commercial", "Industrial"], [300, 150, 75])
+
+incidentsSection = Card([incidentsHeading, incidentsTable], "sunk")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsTable = Table([incidentLocation, incidentSeverity])
+incidentLocation = Col("Location", ["Downtown", "Midtown", "Uptown"])
+incidentSeverity = Col("Severity", ["High", "Medium", "Low"])
+
+emergencyVehiclesSection = Card([emergencyVehiclesHeading, emergencyVehiclesMap], "sunk")
+emergencyVehiclesHeading = Heading("Emergency Vehicles Deployed", "h3")
+emergencyVehiclesMap = Image("Emergency vehicles map", "emergency_vehicles_map.png")
+
+parkingSection = Card([parkingHeading, parkingChart], "sunk")
+parkingHeading = Heading("Parking Availability (Downtown)", "h3")
+parkingChart = BarChart(["Lot A", "Lot B", "Garage C"], [parkingSeries])
+parkingSeries = Series("Available Spots", [20, 50, 10])
+
+eventsSection = Card([eventsHeading, eventsList], "sunk")
+eventsHeading = Heading("Public Events (This Weekend)", "h3")
+eventsList = ListBlock(["Festival", "Concert", "Sports Game"])
+
+citizenReportsSection = Card([citizenReportsHeading, citizenReportsList], "sunk")
+citizenReportsHeading = Heading("Citizen Reports", "h3")
+citizenReportsList = ListBlock(["Report 1", "Report 2", "Report 3"])
+
+serviceRequestSection = Card([serviceRequestHeading, serviceRequestChart], "sunk")
+serviceRequestHeading = Heading("Service Request Backlog", "h3")
+serviceRequestChart = SingleStackedBarChart(["Plumbing", "Electrical", "Roadworks"], [50, 30, 20])
+
+weatherSection = Card([weatherHeading, weatherImage], "sunk")
+weatherHeading = Heading("Current Weather", "h3")
+weatherImage = Image("Weather icon", "weather_icon.png")
+
+districtFocusSection = Form("district-focus", focusButtons, [districtSelect])
+districtSelect = FormControl("Select District", districtInput)
+districtInput = Select("district", [district1, district2, district3], "Choose a district")
+district1 = SelectItem("Downtown", "Downtown")
+district2 = SelectItem("Midtown", "Midtown")
+district3 = SelectItem("Uptown", "Uptown")
+focusButtons = Buttons([focusBtn])
+focusBtn = Button("Focus")
+
+dispatchSection = Form("dispatch-crew", dispatchButtons, [crewSelect])
+crewSelect = FormControl("Select Crew", crewInput)
+crewInput = Select("crew", [crew1, crew2, crew3], "Choose a crew")
+crew1 = SelectItem("Crew A", "Crew A")
+crew2 = SelectItem("Crew B", "Crew B")
+crew3 = SelectItem("Crew C", "Crew C")
+dispatchButtons = Buttons([dispatchBtn])
+dispatchBtn = Button("Dispatch")
+
+alertSection = Form("public-alert", alertButtons, [alertMessage])
+alertMessage = FormControl("Alert Message", alertInput)
+alertInput = TextArea("alert_message", "Type your message here", 3, null, 100)
+alertButtons = Buttons([alertBtn])
+alertBtn = Button("Send Alert")
+
+roadworksSection = Card([roadworksHeading, roadworksTable], "sunk")
+roadworksHeading = Heading("Planned Roadworks (This Month)", "h3")
+roadworksTable = Table([roadworksLocation, roadworksDate])
+roadworksLocation = Col("Location", ["Main St", "Broadway", "3rd Ave"])
+roadworksDate = Col("Date", ["10th", "15th", "20th"])
+
+maintenanceSection = Card([maintenanceHeading, maintenanceTable], "sunk")
+maintenanceHeading = Heading("Infrastructure Maintenance", "h3")
+maintenanceTable = Table([maintenanceLocation, maintenanceDueDate])
+maintenanceLocation = Col("Location", ["Bridge", "Tunnel", "Overpass"])
+maintenanceDueDate = Col("Due Date", ["15th", "18th", "25th"])
+```

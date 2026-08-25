@@ -1,0 +1,179 @@
+```openui-lang
+root = Card([
+  CardHeader("Marketing Weekly Dashboard", "Executive overview - Last 30 days"),
+  
+  // 1. Site visitors over the last 30 days
+  Card([
+    Heading("Site Visitors (Last 30 Days)", "Daily visitor count trend"),
+    HorizontalBarChart(
+      labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
+      series: [
+        Series("Visitors", [1200, 1350, 1400, 1250, 1500, 1600, 1700, 1550, 1800, 1950, 2100, 2200, 2000, 2250, 2400, 2600, 2700, 2550, 2900, 3100, 3200, 2800, 3000, 3300, 3500, 3400, 3800, 4100, 4400, 4200, 4600, 4900, 5100])
+      ],
+      xLabel: "Day",
+      yLabel: "Visitors"
+    ),
+    CardHeader("Visitor Summary", "Total and average metrics"),
+    TextContent("Total Visitors: 35,480\nAverage Daily: 1,175\nPeak Day: 5,100"),
+    Card([ListBlock(
+      ListItem("Total Visitors", "35,480", "large"),
+      ListItem("Avg Daily", "1,175", "large"),
+      ListItem("Monthly Total", "423,600", "large")
+    )])
+  ]),
+  
+  // 2. Conversion rate
+  Card([
+    Heading("Conversion Rate", "Overall conversion rate"),
+    Progress(value: 24, label: "24%"),
+    TextContent("Conversion Rate: 24%\n(Visitors → Customers)",
+    CardHeader("Detailed Breakdown", "By source and stage"),
+    Table([
+      {
+        "Col": { "label": "Source", "data": ["Organic Search", "Direct", "Social Media", "Referral", "Paid Ads"] },
+        "Col": { "label": "Share", "data": ["32%", "28%", "20%", "12%", "10%"] }
+      },
+      {
+        "Col": { "label": "Source", "data": "Organic Search" },
+        "Col": { "label": "Share", "data": "32%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Direct" },
+        "Col": { "label": "Share", "data": "28%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Social Media" },
+        "Col": { "label": "Share", "data": "20%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Referral" },
+        "Col": { "label": "Share", "data": "12%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Paid Ads" },
+        "Col": { "label": "Share", "data": "10%" }
+      }
+    ])
+  ]),
+  
+  // 3. Top 5 traffic sources with share
+  Card([
+    Heading("Top Traffic Sources", "Traffic distribution"),
+    Table([
+      {
+        "Col": { "label": "Source", "data": "Organic Search" },
+        "Col": { "label": "Share", "data": "32%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Direct" },
+        "Col": { "label": "Share", "data": "28%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Social Media" },
+        "Col": { "label": "Share", "data": "20%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Referral" },
+        "Col": { "label": "Share", "data": "12%" }
+      },
+      {
+        "Col": { "label": "Source", "data": "Paid Ads" },
+        "Col": { "label": "Share", "data": "10%" }
+      }
+    ]),
+    CardHeader("Click Through Rates", "CTR by source"),
+    TextContent("Organic: 4.2% | Direct: 3.8% | Social: 2.9% | Ref: 1.5% | Paid: 1.2%")
+  ]),
+  
+  // 4. Running campaigns with spend
+  Card([
+    Heading("Running Campaigns", "Active campaigns and spend"),
+    ListBlock([
+      {
+        "Col": { "label": "Campaign", "data": "Summer Sale 2024" },
+        "Col": { "label": "Spend", "data": "$48,200"},
+        "Col": { "label": "Status", "data": "Active" }
+      },
+      {
+        "Col": { "label": "Campaign", "data": "Winter Promotion" },
+        "Col": { "label": "Spend", "data": "$31,500"},
+        "Col": { "label": "Status", "data": "Active" }
+      },
+      {
+        "Col": { "label": "Campaign", "data": "New Year Blast" },
+        "Col": { "label": "Spend", "data": "$22,800"},
+        "Col": { "label": "Status", "data": "Paused" }
+      },
+      {
+        "Col": { "label": "Campaign", "data": "Spring Launch" },
+        "Col": { "label": "Spend", "data": "$15,400"},
+        "Col": { "label": "Status", "data": "Active" }
+      },
+      {
+        "Col": { "label": "Campaign", "data": "Back to School" },
+        "Col": { "label": "Spend", "data": "$18,900"},
+        "Col": { "label": "Status", "data": "Active" }
+      }
+    ])
+  ]),
+  
+  // 5. Best performing campaign
+  Card([
+    Heading("Best Performing Campaign", "Top ROI campaign"),
+    Divider(),
+    Card({
+      "Col": { "label": "Campaign", "data": "Summer Sale 2024" },
+      "Col": { "label": "Spend", "data": "$48,200"},
+      "Col": { "label": "ROI", "data": "185%" },
+      "Col": { "label": "Visitors", "data": "12,450"},
+      "Col": { "label": "Conversions", "data": "3,810"}
+    }),
+    CardHeader("Why It Wins", "Key drivers"),
+    TextContent("Highest conversions (12,450)\nHighest spend efficiency (185% ROI)\nStrong organic + paid mix")
+  ]),
+  
+  // 6. Date range selector
+  Card([
+    Heading("Date Range", "Filter period"),
+    Separator(),
+    Buttons([
+      Button("Custom", "Custom Range"),
+      Button("Today", "This Week"),
+      Button("Last 30 Days", "Last 30 Days"),
+      Button("All Time", "All History")
+    ], "card")
+  ]),
+  
+  // 7. Email subscriber growth
+  Card([
+    Heading("Email Subscriber Growth", "Month-over-month growth"),
+    Progress(value: 15, label: "15%"),
+    TextContent("Subscribers: +15% this month\nGrowth rate: 15%",
+    CardHeader("Channel Breakdown", "Acquisition channels"),
+    Table([
+      {
+        "Col": { "label": "Channel", "data": "Newsletter signups" },
+        "Col": { "label": "Growth", "data": "+40%" }
+      },
+      {
+        "Col": { "label": "Channel", "data": "Web form" },
+        "Col": { "label": "Growth", "data": "+25%" }
+      },
+      {
+        "Col": { "label": "Channel", "data": "Social media" },
+        "Col": { "label": "Growth", "data": "+18%" }
+      },
+      {
+        "Col": { "label": "Channel", "data": "Partner integrations" },
+        "Col": { "label": "Growth", "data": "+12%" }
+      }
+    ])
+  ]),
+  
+  // 8. Export button
+  Card([
+    Heading("Export Report", "Download as PDF"),
+    Button("Export PDF", null, "primary")
+  ])
+])
+```

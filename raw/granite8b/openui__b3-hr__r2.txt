@@ -1,0 +1,62 @@
+```openui-lang
+root = Card([
+    header,
+    currentHeadcount,
+    openRolesTable,
+    pipelineCandidates,
+    avgTimeToHire,
+    headcountByDept,
+    interviewsThisWeek,
+    attritionLast6Months,
+    newRoleButton
+], "card", "row", "l")
+
+header = CardHeader("Hiring Overview", "Current Snapshot")
+
+currentHeadcount = TextContent("Current Headcount: 415", "large")
+
+openRolesTable = Table([
+    roleDeptCol,
+    roleTitleCol
+])
+roleDeptCol = Col("Department", ["Engineering", "Marketing", "HR", "Finance"])
+roleTitleCol = Col("Open Roles", ["2 Software Engineers", "1 Marketing Specialist", "1 HR Coordinator", "1 Financial Analyst"])
+
+pipelineCandidates = Card([
+    pipelineTitle,
+    pipelineChart
+], "sunk")
+pipelineTitle = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = BarChart(["Referred", "Screened", "Interviewed", "Offered", "Hired"], [
+    Series("Current Pipeline", [120, 80, 50, 30, 20])
+], "grouped", "Stage", "Number of Candidates")
+
+avgTimeToHire = TextContent("Average Time to Hire: 42 days", "large")
+
+headcountByDept = PieChart(["Engineering", "Marketing", "HR", "Finance"], [120, 80, 50, 65], "donut")
+
+interviewsThisWeek = Card([
+    interviewsTitle,
+    interviewsList
+], "sunk")
+interviewsTitle = Heading("Interviews Scheduled This Week", "h3")
+interviewsList = ListBlock([
+    interviewItem1,
+    interviewItem2,
+    interviewItem3
+], "number")
+interviewItem1 = ListItem("Alice (Eng) - Backend", "Mar 12, 10 AM")
+interviewItem2 = ListItem("Bob (Mktg) - Brand", "Mar 13, 2 PM")
+interviewItem3 = ListItem("Carol (HR) - Culture Fit", "Mar 14, 11 AM")
+
+attritionLast6Months = Card([
+    attritionTitle,
+    attritionBar
+], "sunk")
+attritionTitle = Heading("Attrition Over Past 6 Months", "h3")
+attritionBar = HorizontalBarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [
+    Series("Attrition Rate (%)", [3, 2.5, 4, 3.5, 2, 3.2])
+], "grouped", "Month", "Attrition Rate (%)")
+
+newRoleButton = Button("Open New Role", ["new", "role"], "primary")
+```

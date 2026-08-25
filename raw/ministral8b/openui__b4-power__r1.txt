@@ -1,0 +1,67 @@
+```openui-lang
+root = Card([header, statusRow, mainContent, alerts, footer])
+
+header = CardHeader("Power Network Console", "Real-time operations dashboard")
+
+statusRow = Card([loadCard, capacityCard, priceCard], "card", "row", "m", "center", "between")
+loadCard = Card([loadValue, loadGraph], "sunk", "column", "xs", "center")
+loadValue = CardHeader("Current Load", "12,450 MW")
+loadGraph = LineChart(["00:00", "06:00", "12:00", "18:00"], [loadSeries], "natural", "Time", "MW")
+loadSeries = Series("Load", [8500, 11200, 14800, 12900])
+
+capacityCard = Card([capacityValue, capacityBar], "sunk", "column", "xs", "center")
+capacityValue = CardHeader("Capacity Utilization", "87.2%")
+capacityBar = Progress(87.2, "Capacity")
+
+priceCard = Card([priceValue], "sunk", "column", "xs", "center")
+priceValue = CardHeader("Spot Price", "$42.75/MWh")
+
+mainContent = Card([generationSplit, plantsSection, outagesSection, forecastSection, emissionsSection], "card", "column", "m", "start")
+generationSplit = Card([splitChart, splitTags], "sunk")
+splitChart = PieChart(["Solar", "Wind", "Gas", "Hydro", "Nuclear"], [3200, 4800, 2500, 1200, 2800], "pie", "circular")
+splitTags = TagBlock(["Primary", "Secondary", "Tertiary"])
+
+plantsSection = Card([plantsHeader, plantsTable], "sunk")
+plantsHeader = CardHeader("Power Plants")
+plantsTable = Table([plantNameCol, outputCol, statusCol])
+plantNameCol = Col("Plant", ["Sunpeak Solar", "WindHill Farm", "GasCo Gen1", "HydroDam", "NucCore"], "string")
+outputCol = Col("Output (MW)", ["3200", "4800", "2500", "1200", "2800"], "number")
+statusCol = Col("Status", ["Online", "Online", "Maintenance", "Online", "Online"], "string")
+
+outagesSection = Card([outagesHeader, outagesTable], "sunk")
+outagesHeader = CardHeader("Current Outages")
+outagesTable = Table([regionCol, durationCol, impactCol])
+regionCol = Col("Region", ["Northeast", "Midwest", "Southeast"], "string")
+durationCol = Col("Duration", ["1h", "30m", "45m"], "string")
+impactCol = Col("Impact", ["250 MW", "180 MW", "120 MW"], "string")
+
+forecastSection = Card([forecastHeader, forecastChart], "sunk")
+forecastHeader = CardHeader("24-Hour Demand Forecast")
+forecastChart = AreaChart(["00:00", "06:00", "12:00", "18:00", "24:00"], [forecastSeries], "natural", "Time", "MW")
+forecastSeries = Series("Forecast", [9500, 11000, 15000, 13000, 10500])
+
+emissionsSection = Card([emissionsValue], "sunk")
+emissionsValue = CardHeader("Today's Emissions", "487.2 tCO₂")
+
+alerts = Card([alertsHeader, alertsList], "sunk")
+alertsHeader = CardHeader("Live Alerts")
+alertsList = ListBlock([alert1, alert2, alert3])
+alert1 = ListItem("High Wind Damage", "Northeast", null, "View")
+alert2 = ListItem("Transformer Overload", "Midwest", null, "View")
+alert3 = ListItem("Line Outage", "Southeast", null, "View")
+
+footer = Card([regionSelector, curtailmentBtn], "card", "row", "m", "center", "between")
+regionSelector = Dropdown("Region Focus", ["All", "Northeast", "Midwest", "Southeast"], "All")
+curtailmentBtn = Button("Order Curtailment", null, "primary")
+
+maintenance = Card([maintenanceHeader, maintenanceTable], "card", "column", "xs", "center", "start", true)
+maintenanceHeader = CardHeader("Scheduled Maintenance", "This Month")
+maintenanceTable = Table([plantCol, dateCol, durationCol])
+plantCol = Col("Plant", ["GasCo Gen2", "HydroDam Unit 3"], "string")
+dateCol = Col("Date", ["2023-11-15", "2023-11-20"], "string")
+durationCol = Col("Duration", ["4h", "6h"], "string")
+
+// Helper components
+loadSeries = Series("Load", [8500, 11200, 14800, 12900])
+forecastSeries = Series("Forecast", [9500, 11000, 15000, 13000, 10500])
+```

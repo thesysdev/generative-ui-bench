@@ -1,0 +1,58 @@
+root = Card([cashSection, burnSection, runwaySection, expensesSection, highTxSection, monthSelector, downloadBtn], "sunk")
+
+cashSection = CardHeader("Cash on Hand", "Current liquidity position")
+burnSection = CardHeader("Monthly Burn", "Cash consumption this month")
+runwaySection = CardHeader("Months of Runway", "How long until cash runs out")
+expensesSection = CardHeader("Expenses by Category", "Spending breakdown")
+highTxSection = CardHeader("Transactions Above $10,000", "Large withdrawals")
+monthSelector = CardHeader("Month Selection", "Choose a different period")
+downloadBtn = CardHeader("Download Statement", "Export as CSV")
+
+cash = Card([cashLabel, cashValue, cashStatus])
+cashLabel = TextContent("Cash on Hand", "size: large")
+cashValue = TextContent("$245,300", "size: large")
+cashStatus = Tag("Healthy", null, null, "success")
+
+burn = Card([burnLabel, burnValue, burnStatus])
+burnLabel = TextContent("Monthly Burn", "size: large")
+burnValue = TextContent("$18,450", "size: large")
+burnStatus = Tag("High", null, null, "danger")
+
+runway = Card([runwayLabel, runwayValue, runwayStatus])
+runwayLabel = TextContent("Months of Runway", "size: large")
+runwayValue = TextContent("3.2", "size: large")
+runwayStatus = Tag("Good", null, null, "success")
+
+expenses = Card([expensesLabel, expensesChart])
+expensesLabel = TextContent("Expenses by Category", "size: large")
+expensesChart = PieChart(
+    labels: ["Engineering", "Sales", "Marketing", "Operations", "Legal", "HR"],
+    values: [45000, 32000, 18000, 35000, 12000, 8500]
+)
+
+highTx = Card([highTxLabel, highTxList])
+highTxLabel = TextContent("Transactions Above $10,000", "size: large")
+highTxList = ListBlock([
+    ListItem("Client X - Server Setup", "24,500", null, "2024-01-15"),
+    ListItem("Partner Y - Migration", "15,200", null, "2024-01-18"),
+    ListItem("Contractor Z - Design", "12,800", null, "2024-01-22"),
+])
+
+monthSelector = Card([monthLabel, monthNav])
+monthLabel = TextContent("Select a Month", "size: large")
+monthNav = Tabs([
+    TabItem(value: "Jan 2024", trigger: "Jan 2024", content: [monthDetails]),
+    TabItem(value: "Feb 2024", trigger: "Feb 2024", content: [monthDetails]),
+    TabItem(value: "Mar 2024", trigger: "Mar 2024", content: [monthDetails]),
+])
+monthDetails = Card([monthName, monthTotal, monthStatus])
+monthName = TextContent("January 2024", "size: large")
+monthTotal = TextContent("$18,450", "size: large")
+monthStatus = Tag("Above target", null, null, "warning")
+
+downloadBtn = Card([downloadLabel, downloadAction])
+downloadLabel = TextContent("Download Statement", "size: large")
+downloadAction = Buttons([
+    Button("Export CSV", null, "primary"),
+    Button("Export PDF", null, "secondary"),
+])

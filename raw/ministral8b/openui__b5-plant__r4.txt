@@ -1,0 +1,185 @@
+```openui-lang
+root = Card([header, statsRow, oeeCard, productionCard, linesCard, defectsChart, downtimeChart, maintenanceCard, inventoryCard, deliveriesCard, shiftsCard, safetyCard, holdCard, energyCard, workOrdersCard, maintenanceForm, focusLine, alerts, exportBtn], "card", "column", "xl")
+
+header = CardHeader("Factory Floor Supervisor Console", "Real-time production monitoring")
+
+statsRow = Card([oeeStatus, productionStatus], "sunk", "row", "xl", "center", "space-between")
+
+oeeStatus = Card([oeeValue, oeeTrend], "sunk", "column", "none")
+oeeValue = Card([Tag("OEE", null, null, "info"), Tag(str(oeeValue), "%", null, "success")], "sunk", "row", "none", "center")
+oeeTrend = Progress(oeeTrendValue, "Target: 85%")
+
+productionStatus = Card([unitsValue, targetValue], "sunk", "column", "none")
+unitsValue = Card([Tag("Units Produced", null, null, "info"), Tag(str(unitsProduced), "/", null)], "sunk", "row", "none", "center")
+targetValue = Card([Tag("Target", null, null, "info"), Tag(str(todayTarget), null, null, "success")], "sunk", "row", "none", "center")
+
+oeeCard = Card([oeeChart, oeeDetails], "sunk")
+oeeChart = PieChart(["Availability", "Performance", "Quality"], [oeeAvailability, oeePerformance, oeeQuality], "pie")
+oeeDetails = Table([oeeColLabels, oeeColValues])
+oeeColLabels = Col("Metric", ["Availability", "Performance", "Quality"])
+oeeColValues = Col("Value", [str(oeeAvailability)+"%", str(oeePerformance)+"%", str(oeeQuality)+"%"])
+
+productionCard = Card([productionChart, productionDetails], "sunk")
+productionChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri"], [productionSeries], "natural", "Day", "Units")
+productionSeries = Series("Production", [unitsProducedMon, unitsProducedTue, unitsProducedWed, unitsProducedThu, unitsProducedFri])
+productionDetails = Table([productionColLabels, productionColValues])
+productionColLabels = Col("Metric", ["Today", "Target", "Variance"])
+productionColValues = Col("Value", [str(unitsProduced), str(todayTarget), str(unitsProduced-targetValue)+" ("+str((unitsProduced-targetValue)/todayTarget*100)+"%)"])
+
+linesCard = Card([linesTable, lineActions], "sunk")
+linesTable = Table([lineColLabels, lineColValues])
+lineColLabels = Col("Line", ["Status", "Rate (pc/h)", "Defects"])
+lineColValues = Col("Value", [["Line 1", line1Status, line1Rate, line1Defects],
+                              ["Line 2", line2Status, line2Rate, line2Defects],
+                              ["Line 3", line3Status, line3Rate, line3Defects]])
+lineActions = Buttons([focusLine1, focusLine2, focusLine3], "column")
+
+defectsChart = Card([defectsTitle, defectsChart], "sunk")
+defectsTitle = Heading("Defect Rate (Past Month)", "h4")
+defectsChart = AreaChart(["Week 1", "Week 2", "Week 3", "Week 4"], [defectSeries], "natural", "Week", "Defects")
+defectSeries = Series("Defects", [defectWeek1, defectWeek2, defectWeek3, defectWeek4])
+
+downtimeChart = Card([downtimeTitle, downtimeChart], "sunk")
+downtimeTitle = Heading("Downtime by Cause", "h4")
+downtimeChart = PieChart(["Mechanical", "Electrical", "Human Error", "Other"], [downtimeMechanical, downtimeElectrical, downtimeHuman, downtimeOther], "pie")
+
+maintenanceCard = Card([maintenanceTitle, maintenanceTable, maintenanceAlert], "sunk")
+maintenanceTitle = Heading("Machines Due for Maintenance", "h4")
+maintenanceTable = Table([maintenanceColLabels, maintenanceColValues])
+maintenanceColLabels = Col("Machine", ["Next Due", "Hours Since Last"])
+maintenanceColValues = Col("Value", [["Press 1", "2023-11-15", "120"],
+                                    ["Extruder 2", "2023-11-18", "85"],
+                                    ["Cooler 3", "2023-11-20", "150"]])
+maintenanceAlert = Alert("Maintenance Overdue", "3 machines are past due", "warning")
+
+inventoryCard = Card([inventoryTitle, inventoryTable], "sunk")
+inventoryTitle = Heading("Inventory Levels", "h4")
+inventoryTable = Table([inventoryColLabels, inventoryColValues])
+inventoryColLabels = Col("Material", ["Stock", "Target"])
+inventoryColValues = Col("Value", [["Steel", str(steelStock)+" tons", str(steelTarget)+" tons"],
+                                   ["Resin", str(resinStock)+" kg", str(resinTarget)+" kg"],
+                                   ["Packaging", str(packagingStock)+" units", str(packagingTarget)+" units"]])
+
+deliveriesCard = Card([deliveriesTitle, deliveriesTable], "sunk")
+deliveriesTitle = Heading("Supplier Deliveries This Week", "h4")
+deliveriesTable = Table([deliveriesColLabels, deliveriesColValues])
+deliveriesColLabels = Col("Supplier", ["Material", "ETA", "Quantity"])
+deliveriesColValues = Col("Value", [["Acme Steel", "Steel", "2023-11-15", "50 tons"],
+                                    ["PlasticCo", "Resin", "2023-11-16", "1200 kg"],
+                                    ["Packaging Inc", "Boxes", "2023-11-17", "5000 units"]])
+
+shiftsCard = Card([shiftsTitle, shiftsTable], "sunk")
+shiftsTitle = Heading("Shift Production Comparison", "h4")
+shiftsTable = Table([shiftsColLabels, shiftsColValues])
+shiftsColLabels = Col("Shift", ["Units", "Target", "Variance"])
+shiftsColValues = Col("Value", [["Morning", str(morningUnits), str(morningTarget), str(morningVariance)],
+                               ["Afternoon", str(afternoonUnits), str(afternoonTarget), str(afternoonVariance)],
+                               ["Night", str(nightUnits), str(nightTarget), str(nightVariance)]])
+
+safetyCard = Card([safetyTitle, safetyStats], "sunk")
+safetyTitle = Heading("Safety Performance", "h4")
+safetyStats = Card([safetyIncidents, daysSafe], "sunk", "row", "none", "center")
+safetyIncidents = Card([Tag("Incidents This Year", null, null, "danger"), Tag(str(safetyIncidents), null, null)], "sunk", "row", "none", "center")
+daysSafe = Card([Tag("Days Since Last", null, null, "success"), Tag(str(daysSinceLast), null, null)], "sunk", "row", "none", "center")
+
+holdCard = Card([holdTitle, holdTable], "sunk")
+holdTitle = Heading("Batches on Quality Hold", "h4")
+holdTable = Table([holdColLabels, holdColValues])
+holdColLabels = Col("Batch", ["Reason", "Hold Time"])
+holdColValues = Col("Value", [["Batch 452", "Visual Defects", "3h"],
+                              ["Batch 453", "Dimension Issues", "1h"],
+                              ["Batch 454", "Material Error", "2h"]])
+
+energyCard = Card([energyTitle, energyChart], "sunk")
+energyTitle = Heading("Energy Use Today", "h4")
+energyChart = BarChart(["Morning", "Afternoon", "Night"], [energySeries], "grouped", "Shift", "kWh")
+energySeries = Series("Energy", [energyMorning, energyAfternoon, energyNight])
+
+workOrdersCard = Card([workOrdersTitle, workOrdersTable], "sunk")
+workOrdersTitle = Heading("Open Work Orders", "h4")
+workOrdersTable = Table([workOrdersColLabels, workOrdersColValues])
+workOrdersColLabels = Col("Order", ["Priority", "Machine", "Description"])
+workOrdersColValues = Col("Value", [["WO-123", "High", "Press 1 Alignment", "Critical"],
+                                    ["WO-124", "Medium", "Extruder 2 Cleaning", "Scheduled"],
+                                    ["WO-125", "Low", "Cooler 3 Filter", "Routine"]])
+
+maintenanceForm = DialogBlock("Schedule Maintenance", "Maintenance Scheduling", "Select machine and date for maintenance", maintenanceContent, "primary")
+maintenanceContent = Form("maintenance-schedule", maintenanceButtons, [machineField, dateField])
+machineField = FormControl("Machine", machineSelect)
+machineSelect = Select("machine", [machine1, machine2, machine3], "Select machine")
+machine1 = SelectItem("Press 1", "Press 1")
+machine2 = SelectItem("Extruder 2", "Extruder 2")
+machine3 = SelectItem("Cooler 3", "Cooler 3")
+dateField = FormControl("Scheduled Date", datePicker)
+datePicker = DatePicker("date", "single")
+maintenanceButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule Maintenance", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+focusLine = DialogBlock("Focus Line", "Select Production Line", "Choose a line to monitor in detail", focusContent, "primary")
+focusContent = Form("focus-line", focusButtons, [lineSelect])
+lineSelect = FormControl("Production Line", lineSelector)
+lineSelector = Select("line", [line1, line2, line3], "Select line")
+line1 = SelectItem("Line 1", "Line 1")
+line2 = SelectItem("Line 2", "Line 2")
+line3 = SelectItem("Line 3", "Line 3")
+focusButtons = Buttons([focusBtn, cancelBtn])
+
+alerts = Card([alert1, alert2, alert3], "sunk", "column", "none")
+alert1 = Callout("warning", "Line 2 Stopped", "Production halted - check press alignment")
+alert2 = Callout("info", "Defect Spike", "Defects increased 25% in last hour")
+alert3 = Callout("success", "Quality Hold Cleared", "Batch 452 passed inspection")
+
+exportBtn = Button("Export Shift Report", ["export", "shift_report"], "primary")
+
+# Data values
+oeeValue = 82.3
+oeeTrendValue = 82.3
+unitsProduced = 3250
+todayTarget = 3500
+oeeAvailability = 95.2
+oeePerformance = 87.1
+oeeQuality = 80.5
+unitsProducedMon = 3000
+unitsProducedTue = 3250
+unitsProducedWed = 3300
+unitsProducedThu = 3100
+unitsProducedFri = 3400
+line1Status = "Running"
+line1Rate = 120
+line1Defects = 2
+line2Status = "Stopped"
+line2Rate = 0
+line2Defects = 0
+line3Status = "Running"
+line3Rate = 115
+line3Defects = 3
+defectWeek1 = 12
+defectWeek2 = 15
+defectWeek3 = 18
+defectWeek4 = 20
+downtimeMechanical = 35
+downtimeElectrical = 20
+downtimeHuman = 30
+downtimeOther = 15
+steelStock = 250
+steelTarget = 300
+resinStock = 4500
+resinTarget = 5000
+packagingStock = 4800
+packagingTarget = 5000
+morningUnits = 1200
+morningTarget = 1300
+morningVariance = "100 (-8%)"
+afternoonUnits = 1150
+afternoonTarget = 1200
+afternoonVariance = "1100 (-4%)"
+nightUnits = 900
+nightTarget = 1000
+nightVariance = "900 (-10%)"
+safetyIncidents = 2
+daysSinceLast = 45
+energyMorning = 15000
+energyAfternoon = 14000
+energyNight = 12000
+```

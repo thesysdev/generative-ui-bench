@@ -1,0 +1,90 @@
+```typescript
+root = Card([
+  // Header
+  CardHeader("Daily Fitness Summary", "Your activity overview for today"),
+  
+  // 1. Step count today against daily goal
+  Card([
+    CardHeader("Steps Today", "Daily Step Count"),
+    TextContent("10,482 steps", "large"),
+    CardHeader("Goal", "Today's Target"),
+    TextContent("9,000 steps", "large"),
+    Divider(decorative=true),
+    TextContent(`✅ ${Math.round(((10482 / 9000) * 100)).toFixed(1)}% of goal completed`, "small")
+  ]),
+  
+  // 2. Calories burned
+  Card([
+    CardHeader("Calories Burned", "Energy Expenditure"),
+    TextContent("$342.5", "large"),
+    TextCallout("success", "Strong effort!", "Excellent burn today!"),
+    Divider(decorative=true)
+  ]),
+  
+  // 3. How workouts went over the past week
+  Card([
+    CardHeader("Workouts This Week", "Past 7 Days"),
+    Table([
+      {
+        "Day": "Monday",
+        "Workout": "Running",
+        "Duration (min)": 45,
+        "Calories": 85
+      },
+      {
+        "Day": "Tuesday",
+        "Workout": "Strength Training",
+        "Duration (min)": 30,
+        "Calories": 60
+      },
+      {
+        "Day": "Wednesday",
+        "Workout": "Yoga",
+        "Duration (min)": 40,
+        "Calories": 40
+      },
+      {
+        "Day": "Thursday",
+        "Workout": "Cycling",
+        "Duration (min)": 50,
+        "Calories": 95
+      },
+      {
+        "Day": "Friday",
+        "Workout": "HIIT",
+        "Duration (min)": 35,
+        "Calories": 75
+      },
+      {
+        "Day": "Saturday",
+        "Workout": "Swimming",
+        "Duration (min)": 55,
+        "Calories": 110
+      },
+      {
+        "Day": "Sunday",
+        "Workout": "Rest",
+        "Duration (min)": 0,
+        "Calories": 0
+      }
+    ], 
+    columns: [
+      { label: "Day", type: "string" },
+      { label: "Workout", type: "string" },
+      { label: "Duration (min)", type: "number" },
+      { label: "Calories", type: "number" }
+    ]
+  ]),
+  
+  // 4. Way to log a new workout
+  Card([
+    CardHeader("Log a New Workout", "Record Activity"),
+    Form("add_workout", ["submit"], [
+      FormControl("workout_type", "select", ["Running", "Cycling", "Strength", "Yoga", "Swimming"]),
+      FormControl("duration_min", "number", 0, "large"),
+      FormControl("calories_burned", "number", 0, "large"),
+      Button("Log Workout", null, "primary")
+    ])
+  ])
+]);
+```

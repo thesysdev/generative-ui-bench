@@ -1,0 +1,650 @@
+Here is a comprehensive personal banking home screen incorporating all requested features:
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "topHeader",
+          "accountBalancesTable",
+          "creditScoreAndGoalCard",
+          "mainTabs",
+          "securityAndAlertsCard"
+        ]
+      },
+      {
+        "id": "topHeader",
+        "component": "CardHeader",
+        "title": "Welcome Back, Alex",
+        "subtitle": "Overview & Personal Banking Hub"
+      },
+      {
+        "id": "accountBalancesTable",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "balancesTitle",
+          "balancesTable"
+        ]
+      },
+      {
+        "id": "balancesTitle",
+        "component": "Heading",
+        "level": "h3",
+        "text": "1. Account Balances"
+      },
+      {
+        "id": "balancesTable",
+        "component": "Table",
+        "columns": [
+          "colAccount",
+          "colNumber",
+          "colBalance",
+          "colAvail"
+        ]
+      },
+      {
+        "id": "colAccount",
+        "component": "Col",
+        "label": "Account",
+        "data": [
+          "Total Checking",
+          "High-Yield Savings",
+          "Premier Credit Card"
+        ]
+      },
+      {
+        "id": "colNumber",
+        "component": "Col",
+        "label": "Account #",
+        "data": [
+          "•••• 4821",
+          "•••• 9032",
+          "•••• 1154"
+        ]
+      },
+      {
+        "id": "colBalance",
+        "component": "Col",
+        "label": "Current Balance",
+        "data": [
+          "$8,450.20",
+          "$24,180.55",
+          "-$1,240.80"
+        ]
+      },
+      {
+        "id": "colAvail",
+        "component": "Col",
+        "label": "Available",
+        "data": [
+          "$8,450.20",
+          "$24,180.55",
+          "$18,759.20 limit"
+        ]
+      },
+      {
+        "id": "creditScoreAndGoalCard",
+        "component": "Card",
+        "variant": "sunk",
+        "children": [
+          "insightsHeader",
+          "creditScoreBadge",
+          "creditScoreText",
+          "vacationGoalHeading",
+          "vacationProgressBar",
+          "vacationGoalText"
+        ]
+      },
+      {
+        "id": "insightsHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Credit Health & Savings Target"
+      },
+      {
+        "id": "creditScoreBadge",
+        "component": "Badge",
+        "text": "Credit Score: 785 (Excellent)",
+        "variant": "default"
+      },
+      {
+        "id": "creditScoreText",
+        "component": "TextContent",
+        "size": "small",
+        "text": "Updated 3 days ago. Next score update in 27 days."
+      },
+      {
+        "id": "vacationGoalHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Vacation Savings Goal ($3,750 / $5,000)"
+      },
+      {
+        "id": "vacationProgressBar",
+        "component": "Progress",
+        "value": 75,
+        "label": "75% funded"
+      },
+      {
+        "id": "vacationGoalText",
+        "component": "TextContent",
+        "size": "small",
+        "text": "$1,250 remaining to hit target by July 2025."
+      },
+      {
+        "id": "mainTabs",
+        "component": "Tabs",
+        "items": [
+          "tabTrans",
+          "tabSpend",
+          "tabBills",
+          "tabTransfer"
+        ]
+      },
+      {
+        "id": "tabTrans",
+        "component": "TabItem",
+        "value": "transactions",
+        "trigger": "Recent Activity & Disputes",
+        "content": [
+          "periodSelectControl",
+          "transactionsTable",
+          "disputeCard"
+        ]
+      },
+      {
+        "id": "periodSelectControl",
+        "component": "FormControl",
+        "label": "Statement Period",
+        "hint": "Filter activity by billing or calendar cycle",
+        "input": "periodSelect"
+      },
+      {
+        "id": "periodSelect",
+        "component": "Select",
+        "name": "statement_period",
+        "placeholder": "Current Billing Cycle (May 1 - May 31, 2025)",
+        "items": [
+          "periodCurrent",
+          "periodLast",
+          "periodPrior"
+        ]
+      },
+      {
+        "id": "periodCurrent",
+        "component": "SelectItem",
+        "value": "current",
+        "label": "May 1 - May 31, 2025 (Current)"
+      },
+      {
+        "id": "periodLast",
+        "component": "SelectItem",
+        "value": "apr_2025",
+        "label": "Apr 1 - Apr 30, 2025"
+      },
+      {
+        "id": "periodPrior",
+        "component": "SelectItem",
+        "value": "mar_2025",
+        "label": "Mar 1 - Mar 31, 2025"
+      },
+      {
+        "id": "transactionsTable",
+        "component": "Table",
+        "columns": [
+          "colTxDate",
+          "colMerchant",
+          "colCategory",
+          "colTxAmount"
+        ]
+      },
+      {
+        "id": "colTxDate",
+        "component": "Col",
+        "label": "Date",
+        "data": [
+          "May 24",
+          "May 23",
+          "May 22",
+          "May 21",
+          "May 19"
+        ]
+      },
+      {
+        "id": "colMerchant",
+        "component": "Col",
+        "label": "Merchant",
+        "data": [
+          "Whole Foods Market",
+          "Delta Air Lines",
+          "Uber Technologies",
+          "Netflix Subscription",
+          "Blue Bottle Coffee"
+        ]
+      },
+      {
+        "id": "colCategory",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Groceries",
+          "Travel",
+          "Transportation",
+          "Entertainment",
+          "Dining"
+        ]
+      },
+      {
+        "id": "colTxAmount",
+        "component": "Col",
+        "label": "Amount",
+        "data": [
+          "-$142.50",
+          "-$420.00",
+          "-$28.40",
+          "-$19.99",
+          "-$7.25"
+        ]
+      },
+      {
+        "id": "disputeCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "disputeHeader",
+          "disputeForm"
+        ]
+      },
+      {
+        "id": "disputeHeader",
+        "component": "CardHeader",
+        "title": "Dispute a Transaction",
+        "subtitle": "Select an unauthorized or incorrect charge to submit for review"
+      },
+      {
+        "id": "disputeForm",
+        "component": "Form",
+        "name": "dispute_form",
+        "buttons": "disputeButtons",
+        "fields": [
+          "disputeTxField",
+          "disputeReasonField"
+        ]
+      },
+      {
+        "id": "disputeTxField",
+        "component": "FormControl",
+        "label": "Select Charge",
+        "input": "disputeTxSelect"
+      },
+      {
+        "id": "disputeTxSelect",
+        "component": "Select",
+        "name": "disputed_transaction",
+        "placeholder": "Choose transaction to dispute",
+        "items": [
+          "dispItem1",
+          "dispItem2",
+          "dispItem3"
+        ]
+      },
+      {
+        "id": "dispItem1",
+        "component": "SelectItem",
+        "value": "tx_delta",
+        "label": "May 23 - Delta Air Lines ($420.00)"
+      },
+      {
+        "id": "dispItem2",
+        "component": "SelectItem",
+        "value": "tx_wholefoods",
+        "label": "May 24 - Whole Foods Market ($142.50)"
+      },
+      {
+        "id": "dispItem3",
+        "component": "SelectItem",
+        "value": "tx_uber",
+        "label": "May 22 - Uber Technologies ($28.40)"
+      },
+      {
+        "id": "disputeReasonField",
+        "component": "FormControl",
+        "label": "Reason for Dispute",
+        "input": "disputeReasonInput"
+      },
+      {
+        "id": "disputeReasonInput",
+        "component": "TextArea",
+        "name": "dispute_reason",
+        "placeholder": "e.g., Charged incorrect amount, unrecognized vendor, or duplicate charge."
+      },
+      {
+        "id": "disputeButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnSubmitDispute"
+        ]
+      },
+      {
+        "id": "btnSubmitDispute",
+        "component": "Button",
+        "label": "Submit Dispute Claim",
+        "variant": "secondary"
+      },
+      {
+        "id": "tabSpend",
+        "component": "TabItem",
+        "value": "spending",
+        "trigger": "Spending Breakdown",
+        "content": [
+          "spendHeader",
+          "spendChart"
+        ]
+      },
+      {
+        "id": "spendHeader",
+        "component": "CardHeader",
+        "title": "May Spending Split",
+        "subtitle": "Total spent this month: $2,845.00"
+      },
+      {
+        "id": "spendChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "labels": [
+          "Housing & Utilities",
+          "Groceries & Food",
+          "Travel & Transport",
+          "Entertainment",
+          "Shopping & Misc"
+        ],
+        "values": [
+          1250,
+          620,
+          480,
+          195,
+          300
+        ]
+      },
+      {
+        "id": "tabBills",
+        "component": "TabItem",
+        "value": "bills",
+        "trigger": "Bills Due Soon",
+        "content": [
+          "billsAlert",
+          "billsTable"
+        ]
+      },
+      {
+        "id": "billsAlert",
+        "component": "Alert",
+        "title": "Upcoming Auto-pay Notices",
+        "description": "3 bills due within the next 10 days totaling $1,615.00",
+        "variant": "info"
+      },
+      {
+        "id": "billsTable",
+        "component": "Table",
+        "columns": [
+          "colBillName",
+          "colDueDate",
+          "colBillAmount",
+          "colBillStatus"
+        ]
+      },
+      {
+        "id": "colBillName",
+        "component": "Col",
+        "label": "Biller",
+        "data": [
+          "Electric Utility Co.",
+          "City Water & Gas",
+          "Fiber Internet"
+        ]
+      },
+      {
+        "id": "colDueDate",
+        "component": "Col",
+        "label": "Due Date",
+        "data": [
+          "May 28, 2025",
+          "May 30, 2025",
+          "June 3, 2025"
+        ]
+      },
+      {
+        "id": "colBillAmount",
+        "component": "Col",
+        "label": "Amount Due",
+        "data": [
+          "$135.00",
+          "$80.00",
+          "$70.00"
+        ]
+      },
+      {
+        "id": "colBillStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Auto-pay Scheduled",
+          "Auto-pay Scheduled",
+          "Manual Pay Required"
+        ]
+      },
+      {
+        "id": "tabTransfer",
+        "component": "TabItem",
+        "value": "transfer",
+        "trigger": "Move Money",
+        "content": [
+          "transferHeader",
+          "transferForm"
+        ]
+      },
+      {
+        "id": "transferHeader",
+        "component": "CardHeader",
+        "title": "Internal Transfer",
+        "subtitle": "Instantly transfer funds between your linked accounts"
+      },
+      {
+        "id": "transferForm",
+        "component": "Form",
+        "name": "money_transfer",
+        "buttons": "transferButtons",
+        "fields": [
+          "fromAccountField",
+          "toAccountField",
+          "amountField"
+        ]
+      },
+      {
+        "id": "fromAccountField",
+        "component": "FormControl",
+        "label": "From Account",
+        "input": "fromAccountSelect"
+      },
+      {
+        "id": "fromAccountSelect",
+        "component": "Select",
+        "name": "source_account",
+        "placeholder": "Select source account",
+        "items": [
+          "srcChecking",
+          "srcSavings"
+        ]
+      },
+      {
+        "id": "srcChecking",
+        "component": "SelectItem",
+        "value": "checking",
+        "label": "Checking (•••• 4821) - $8,450.20"
+      },
+      {
+        "id": "srcSavings",
+        "component": "SelectItem",
+        "value": "savings",
+        "label": "Savings (•••• 9032) - $24,180.55"
+      },
+      {
+        "id": "toAccountField",
+        "component": "FormControl",
+        "label": "To Account",
+        "input": "toAccountSelect"
+      },
+      {
+        "id": "toAccountSelect",
+        "component": "Select",
+        "name": "destination_account",
+        "placeholder": "Select destination account",
+        "items": [
+          "destChecking",
+          "destSavings",
+          "destCredit"
+        ]
+      },
+      {
+        "id": "destChecking",
+        "component": "SelectItem",
+        "value": "checking",
+        "label": "Checking (•••• 4821)"
+      },
+      {
+        "id": "destSavings",
+        "component": "SelectItem",
+        "value": "savings",
+        "label": "Savings (•••• 9032)"
+      },
+      {
+        "id": "destCredit",
+        "component": "SelectItem",
+        "value": "credit",
+        "label": "Premier Credit Card (•••• 1154)"
+      },
+      {
+        "id": "amountField",
+        "component": "FormControl",
+        "label": "Transfer Amount ($)",
+        "hint": "Transfers within your accounts are processed immediately",
+        "input": "amountInput"
+      },
+      {
+        "id": "amountInput",
+        "component": "Input",
+        "name": "amount",
+        "type": "number",
+        "placeholder": "0.00"
+      },
+      {
+        "id": "transferButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnTransferSubmit"
+        ]
+      },
+      {
+        "id": "btnTransferSubmit",
+        "component": "Button",
+        "label": "Confirm & Move Funds",
+        "variant": "primary"
+      },
+      {
+        "id": "securityAndAlertsCard",
+        "component": "Card",
+        "variant": "card",
+        "children": [
+          "secHeader",
+          "freezeSwitchGroup",
+          "alertsSwitchGroup"
+        ]
+      },
+      {
+        "id": "secHeader",
+        "component": "CardHeader",
+        "title": "Card Controls & Alert Preferences",
+        "subtitle": "Manage instant card freeze and notification triggers"
+      },
+      {
+        "id": "freezeSwitchGroup",
+        "component": "SwitchGroup",
+        "name": "card_controls",
+        "items": [
+          "freezeSwitch"
+        ]
+      },
+      {
+        "id": "freezeSwitch",
+        "component": "SwitchItem",
+        "name": "freeze_credit_line",
+        "label": "Freeze Premier Credit Line (•••• 1154)",
+        "description": "Instantly block new charges, cash advances, and digital wallet purchases",
+        "defaultChecked": false
+      },
+      {
+        "id": "alertsSwitchGroup",
+        "component": "SwitchGroup",
+        "name": "alert_triggers",
+        "variant": "sunk",
+        "items": [
+          "alertSwitchLargeTx",
+          "alertSwitchLowBal",
+          "alertSwitchIntl",
+          "alertSwitchBills"
+        ]
+      },
+      {
+        "id": "alertSwitchLargeTx",
+        "component": "SwitchItem",
+        "name": "alert_large_tx",
+        "label": "Large Transaction Alerts",
+        "description": "Notify for any single purchase over $250.00",
+        "defaultChecked": true
+      },
+      {
+        "id": "alertSwitchLowBal",
+        "component": "SwitchItem",
+        "name": "alert_low_balance",
+        "label": "Low Balance Warning",
+        "description": "Trigger alert if Checking falls below $500.00",
+        "defaultChecked": true
+      },
+      {
+        "id": "alertSwitchIntl",
+        "component": "SwitchItem",
+        "name": "alert_intl_card",
+        "label": "International & Card-Not-Present Alerts",
+        "description": "Notify on foreign transactions or online purchases",
+        "defaultChecked": true
+      },
+      {
+        "id": "alertSwitchBills",
+        "component": "SwitchItem",
+        "name": "alert_bill_reminders",
+        "label": "Upcoming Bill Reminders",
+        "description": "Send alerts 3 days prior to scheduled due date",
+        "defaultChecked": true
+      }
+    ]
+  }
+}
+</a2ui-json>

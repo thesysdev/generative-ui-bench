@@ -1,0 +1,136 @@
+```openui-lang
+root = Card([
+    header,
+    congestion,
+    transit,
+    airQuality,
+    energyWeek,
+    waterToday,
+    incidents,
+    emergencyVehicles,
+    parkingDowntown,
+    publicEvents,
+    citizenReports,
+    serviceBacklog,
+    weather,
+    districtSelector,
+    dispatchCrew,
+    publicAlert,
+    roadworksMonth,
+    infrastructureJobs
+], "card", "row", "l")
+
+header = CardHeader("City Operations Center", "Live Dashboard")
+
+congestion = Card([
+    TextContent("Congestion (Real‑time): 78%"),
+    BarChart(["Severe", "Moderate", "Mild"], [30, 45, 25], "grouped", "Area", "Congestion Level")
+], "sunk")
+
+transit = Card([
+    TextContent("Transit Punctuality (Last 24h): 92% on‑time"),
+    LineChart(["08:00", "12:00", "16:00", "20:00"], [90, 93, 91, 94], "linear", "Time", "Punctuality %")
+], "clear")
+
+airQuality = Card([
+    TextContent("Air Quality by District (PM2.5 µg/m³):"),
+    Table([districts, pm2_5])
+], "sunk")
+districts = Col("District", ["District A", "District B", "District C", "District D"])
+pm2_5 = Col("PM2.5", [12, 8, 15, 5])
+
+energyWeek = Card([
+    TextContent("Energy Use (Past Week): $1,245,000"),
+    AreaChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [180, 210, 190, 185, 215, 200, 195], "natural", "Day", "Energy (kWh)")
+], "clear")
+
+waterToday = Card([
+    TextContent("Water Use (Today): 4,567 m³"),
+    HorizontalBarChart(["Residential", "Commercial", "Industrial"], [3, 1, 0.5], "grouped", "Water Sources", "Usage (m³)")
+], "sunk")
+
+incidents = Card([
+    TextContent("Open Incidents:"),
+    Table([incidentId, location, severity])
+], "clear")
+incidentId = Col("ID", ["INC001", "INC002", "INC003"])
+location = Col("Location", ["River Blvd", "Main St", "Park Ave"])
+severity = Col("Severity", ["Critical", "High", "Medium"])
+
+emergencyVehicles = Card([
+    TextContent("Emergency Vehicles Deployed (Current): 7"),
+    ImageBlock(src="https://picsum.photos/seed/emergency/800/500", alt="Emergency Vehicles")
+], "sunk")
+
+parkingDowntown = Card([
+    TextContent("Parking Availability Downtown (Now): 42% available"),
+    Progress(value=42, label="Available")
+], "clear")
+
+publicEvents = Card([
+    TextContent("Public Events This Weekend:"),
+    ListBlock(items=[event1, event2], variant="image")
+], "sunk")
+event1 = ListItem(title="Festival", subtitle="Saturday 10 AM – 6 PM", image=["https://picsum.photos/seed/festival/400/200"], actionLabel="Details")
+event2 = ListItem(title="Market Day", subtitle="Sunday 9 AM – 4 PM", image=["https://picsum.photos/seed/market/400/200"], actionLabel="Details")
+
+citizenReports = Card([
+    TextContent("Citizen Reports (Live Stream):"),
+    FollowUpBlock(items=[report1, report2])
+], "clear")
+report1 = FollowUpItem(text="Road pothole near 5th St")
+report2 = FollowUpItem(text="Noise complaint from Elm Ave")
+
+serviceBacklog = Card([
+    TextContent("Service Request Backlog: 237 pending"),
+    Badge(text="237", variant="default")
+], "sunk")
+
+weather = Card([
+    TextContent("Current Weather: 22°C, Partly Cloudy"),
+    ImageBlock(src="https://picsum.photos/seed/weather/800/500", alt="Current Weather")
+], "clear")
+
+districtSelector = Card([
+    TextContent("Focus on District:"),
+    Select(name="district", items=[districtA, districtB, districtC, districtD], placeholder="Select District", size="medium")
+], "sunk")
+districtA = SelectItem(value="A", label="District A")
+districtB = SelectItem(value="B", label="District B")
+districtC = SelectItem(value="C", label="District C")
+districtD = SelectItem(value="D", label="District D")
+
+dispatchCrew = Card([
+    TextContent("Dispatch Crew to Incident:"),
+    Form(name="dispatch", buttons=dispatchButtons, fields=[crewField])
+], "clear")
+crewField = FormControl(label="Incident ID", input=Input(name="incident_id", placeholder="INCXXX"))
+dispatchButtons = Buttons([dispatchBtn, cancelBtn])
+dispatchBtn = Button("Dispatch", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+publicAlert = Card([
+    TextContent("Send Public Alert:"),
+    Form(name="alert", buttons=alertButtons, fields=[alertMsg])
+], "clear")
+alertMsg = FormControl(label="Message", input=TextArea(name="message", placeholder="Alert details..."))
+alertButtons = Buttons([sendAlert, closeAlert])
+sendAlert = Button("Send Alert", null, "primary")
+closeAlert = Button("Cancel", null, "tertiary")
+
+roadworksMonth = Card([
+    TextContent("Roadworks Planned This Month:"),
+    Table([roadworkId, location, duration])
+], "sunk")
+roadworkId = Col("ID", ["RW001", "RW002", "RW003"])
+location = Col("Location", ["Highway 1", "Main St", "Bridge Rd"])
+duration = Col("Duration", ["2 weeks", "1 week", "3 weeks"])
+
+infrastructureJobs = Card([
+    TextContent("Infrastructure Jobs Due for Maintenance:"),
+    Table([jobId, type, dueDate])
+], "clear")
+jobId = Col("ID", ["JOB001", "JOB002", "JOB003"])
+type = Col("Type", ["Pipes", "Powerlines", "Roads"])
+dueDate = Col("Due", ["2025-09-15", "2025-09-20", "2025-09-25"])
+```

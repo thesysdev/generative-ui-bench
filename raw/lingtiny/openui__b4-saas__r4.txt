@@ -1,0 +1,251 @@
+root = Card([
+  header,
+  statusBar,
+  revenueSection,
+  churnSection,
+  signupsSection,
+  planSplitSection,
+  topCustomersSection,
+  riskSection,
+  paymentsSection,
+  adoptionSection,
+  npsSection,
+  periodSection,
+  seatUtilSection,
+  inviteSection,
+  actions,
+])
+
+header = CardHeader("SaaS Admin Overview", "Live dashboard — last 12 months")
+statusBar = CardHeader("Status", "All systems operational")
+
+revenueSection = Card([
+  heading,
+  kpis,
+  revenueChart,
+  revenueTrend,
+])
+heading = Heading("Monthly & Annual Revenue", "h3")
+kpis = Table([
+  Col("Metric", ["MRR", "ARR", "Churn Rate", "New Signups (90d)", "Plan Mix"]),
+  Col("Value", ["$142,800", "$1,680,000", "3.2%", "248", "Enterprise: 42%, Pro: 35%, Starter: 23%"]),
+])
+revenueChart = HorizontalBarChart(
+  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  [
+    Series("MRR", [112000, 118000, 124000, 129000, 131000, 135000, 138000, 140000, 142000, 143000, 145000, 142800]),
+    Series("ARR", [1400000, 1440000, 1480000, 1520000, 1560000, 1600000, 1640000, 1680000, 1720000, 1760000, 1800000, 1680000]),
+  ],
+  "grouped",
+  "Month",
+  "USD",
+)
+revenueTrend = LineChart(
+  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  [
+    Series("MRR", [112000, 118000, 124000, 129000, 131000, 135000, 138000, 140000, 142000, 143000, 145000, 142800]),
+  ],
+  "linear",
+  "Month",
+  "USD",
+)
+
+churnSection = Card([
+  heading,
+  churnKpis,
+  churnChart,
+])
+heading = Heading("Churn This Month", "h3")
+churnKpis = Table([
+  Col("Metric", ["Churn Rate", "Customers Lost", "Retention Rate"]),
+  Col("Value", ["3.2%", "16", "96.8%"]),
+])
+churnChart = HorizontalBarChart(
+  ["Enterprise", "Pro", "Starter"],
+  [
+    Series("Churn", [1.5, 2.8, 4.0]),
+  ],
+  "grouped",
+  "Plan",
+  "%",
+)
+
+signupsSection = Card([
+  heading,
+  signupKpis,
+  signupsChart,
+])
+heading = Heading("New Signups (Past 90 Days)", "h3")
+signupKpis = Table([
+  Col("Metric", ["Signups", "Avg. Days to First Login", "Day 7 Retention"]),
+  Col("Value", ["248", "4.2 days", "61%"]),
+])
+signupsChart = HorizontalBarChart(
+  ["Week 1", "Week 2", "Week 3", "Week 4"],
+  [
+    Series("Signups", [62, 71, 68, 57]),
+  ],
+  "grouped",
+  "Week",
+  "Count",
+)
+
+planSplitSection = Card([
+  heading,
+  planSplitKpis,
+  planSplitChart,
+])
+heading = Heading("Customers by Plan", "h3")
+planSplitKpis = Table([
+  Col("Plan", ["Count", "MRR", "Share"]),
+  Col("Value", ["1,247", "$142,800", "42%"]),
+])
+planSplitChart = PieChart(
+  ["Enterprise", "Pro", "Starter"],
+  [1247, 620, 420],
+  "pie",
+)
+
+topCustomersSection = Card([
+  heading,
+  topCustomers,
+])
+heading = Heading("Top 10 Customers", "h3")
+topCustomers = Table([
+  Col("Customer", ["Name", "Seats", "Spend", "Growth"]),
+  Col("Value", [
+    "Acme Corp", "120", "$48,000", "+12%",
+    "TechNova", "85", "$32,000", "+8%",
+    "DataFlow", "64", "$24,000", "+5%",
+    "CloudBase", "52", "$20,000", "+15%",
+    "InnovateX", "48", "$18,000", "+3%",
+    "ScaleUp", "40", "$16,000", "+22%",
+    "BrightEdge", "36", "$14,000", "+7%",
+    "FastTrack", "30", "$12,000", "+18%",
+    "SecureNet", "28", "$10,000", "+10%",
+    "GlobalOps", "24", "$9,000", "+4%",
+  ]),
+])
+
+riskSection = Card([
+  heading,
+  riskKpis,
+  riskTable,
+])
+heading = Heading("Accounts at Risk", "h3")
+riskKpis = Table([
+  Col("Metric", ["At-Risk Accounts", "High Churn Risk", "Low Engagement"]),
+  Col("Value", ["23", "11", "47"]),
+])
+riskTable = Table([
+  Col("Account", ["Reason", "Severity"]),
+  Col("Value", [
+    "Acme Corp", "Inactivity (30d)", "High",
+    "TechNova", "Payment failure", "Medium",
+    "DataFlow", "Feature adoption gap", "Medium",
+    "CloudBase", "Support ticket backlog", "Low",
+    "InnovateX", "Contract expiry", "High",
+  ]),
+])
+
+paymentsSection = Card([
+  heading,
+  paymentKpis,
+  paymentChart,
+  retryButtons,
+])
+heading = Heading("Failed Payments", "h3")
+paymentKpis = Table([
+  Col("Metric", ["Failed", "Retry Rate", "Resolved"]),
+  Col("Value", ["8", "78%", "6"]),
+])
+paymentChart = HorizontalBarChart(
+  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  [
+    Series("Failed", [3, 2, 4, 2, 5, 3, 4, 2, 3, 2, 1, 2]),
+  ],
+  "grouped",
+  "Month",
+  "Count",
+)
+retryButtons = Buttons([
+  Button("Retry Acme Corp", null, "primary"),
+  Button("Retry TechNova", null, "primary"),
+  Button("Retry DataFlow", null, "secondary"),
+])
+
+adoptionSection = Card([
+  heading,
+  adoptionKpis,
+  adoptionChart,
+])
+heading = Heading("Feature Adoption (Newest)", "h3")
+adoptionKpis = Table([
+  Col("Feature", ["Adoption", "Users"]),
+  Col("Value", ["AI Assistant", "128"]),
+  Col("Value", ["Automated Billing", "94"]),
+  Col("Value", ["API Gateway", "112"]),
+])
+adoptionChart = RadarChart(
+  ["AI Assistant", "Automated Billing", "API Gateway"],
+  [
+    Series("Adoption", [85, 72, 90]),
+  ],
+)
+
+npsSection = Card([
+  heading,
+  npsKpis,
+  npsGauge,
+])
+heading = Heading("Current NPS", "h3")
+npsKpis = Table([
+  Col("Metric", ["NPS", "Trend", "Last Updated"]),
+  Col("Value", ["42", "+3", "Today"]),
+])
+npsGauge = Progress(42, "NPS Score")
+
+periodSection = Card([
+  heading,
+  periodSelect,
+])
+heading = Heading("Reporting Period", "h3")
+periodSelect = Select("period", [
+  SelectItem("Last 12 months", "12m"),
+  SelectItem("Last 90 days", "90d"),
+  SelectItem("Last 6 months", "6m"),
+  SelectItem("This month", "current"),
+], "Choose period")
+
+seatUtilSection = Card([
+  heading,
+  seatUtilKpis,
+  seatUtilChart,
+])
+heading = Heading("Seat Utilization", "h3")
+seatUtilKpis = Table([
+  Col("Metric", ["Total Seats", "Utilization", "Available"]),
+  Col("Value", ["2,450", "78%", "540"]),
+])
+seatUtilChart = SingleStackedBarChart(
+  ["Enterprise", "Pro", "Starter"],
+  [
+    Series("Seats", [1200, 800, 450]),
+  ],
+  "grouped",
+  "Plan",
+  "Seats",
+)
+
+inviteSection = Card([
+  heading,
+  inviteAction,
+])
+heading = Heading("Invite Admin", "h3")
+inviteAction = Buttons([
+  Button("Send Invite", null, "primary"),
+  Button("Copy Invite Link", null, "secondary"),
+])
+
+actions = CardHeader("Actions", "Quick actions")
+</rewrite>

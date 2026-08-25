@@ -1,0 +1,16 @@
+root = Card([header, uptimeSection, incidentSection, footer])
+header = CardHeader("Platform Status", "API Service Health")
+
+uptimeSection = Card([uptimeHeading, uptimeProgress, uptimeStats], "sunk")
+uptimeHeading = Heading("Uptime This Month", "h3")
+uptimeProgress = Progress(99.94, "API Uptime — March 2024")
+uptimeStats = TagBlock(["99.94% uptime", "26m total downtime", "SLA target: 99.9%"])
+
+incidentSection = Card([incidentHeading, incidentAlert, incidentDetails], "sunk")
+incidentHeading = Heading("Most Recent Incident", "h3")
+incidentAlert = Alert("Elevated API Latency", "Resolved — response times returned to normal after a database connection pool exhaustion issue was mitigated.", "warning")
+incidentDetails = TextContent("**Incident:** Elevated latency on `/v1/orders` and `/v1/users` endpoints, peaking at 2.4s average response time.\n\n**Resolved:** March 18, 2024 at 3:47 PM UTC (duration: 22 minutes)\n\n**Root cause:** Database connection pool exhaustion under high traffic load.", "default")
+
+footer = FollowUpBlock([followUp1, followUp2])
+followUp1 = FollowUpItem("Show full incident history")
+followUp2 = FollowUpItem("View uptime for the last 90 days")

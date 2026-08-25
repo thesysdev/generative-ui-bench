@@ -1,0 +1,496 @@
+root = Card([
+  header,
+  statusBar,
+  balancesSection,
+  recentTransactions,
+  spendingSplit,
+  billsDue,
+  vacationGoal,
+  creditScore,
+  transferControls,
+  freezeControls,
+  statementPeriod,
+  alertsManagement,
+  disputeControls,
+], "sunk")
+
+header = CardHeader("Personal Banking Home", "Your financial dashboard")
+statusBar = CardHeader("Checking: $3,240 | Savings: $12,580 | Credit: $720K", null)
+balancesSection = Card([
+  balanceHeading,
+  balanceKpis,
+  balanceChart,
+])
+balanceHeading = Heading("Account Balances", "h3")
+balanceKpis = Table([
+  Col("Account", [
+    "Checking",
+    "Savings",
+    "Credit",
+  ]),
+  Col("Balance", [
+    "$3,240.00",
+    "$12,580.00",
+    "$720,000.00",
+  ]),
+  Col("Type", [
+    "Checking",
+    "Savings",
+    "Credit Card",
+  ]),
+])
+balanceChart = SingleStackedBarChart(
+  ["Checking", "Savings", "Credit"],
+  [3240, 12580, 720000],
+)
+
+recentTransactions = Card([
+  transactionsHeading,
+  recentTransactionList,
+])
+transactionsHeading = Heading("Recent Transactions", "h3")
+recentTransactionList = ListBlock(
+  [
+    ListItem(
+      "Amazon.com — Groceries",
+      "-$84.32",
+      null,
+      "2024-01-15",
+    ),
+    ListItem(
+      "Starbucks Coffee",
+      "-$5.98",
+      null,
+      "2024-01-15",
+    ),
+    ListItem(
+      "Walmart — Household",
+      "-$127.45",
+      null,
+      "2024-01-14",
+    ),
+    ListItem(
+      "Netflix Subscription",
+      "-$14.99",
+      null,
+      "2024-01-14",
+    ),
+    ListItem(
+      "Local Gas Station",
+      "-45.00",
+      null,
+      "2024-01-13",
+    ),
+    ListItem(
+      "Target — Electronics",
+      "-$199.99",
+      null,
+      "2024-01-13",
+    ),
+    ListItem(
+      "Restaurant Eats",
+      "-$32.75",
+      null,
+      "2024-01-12",
+    ),
+    ListItem(
+      "Uber Ride",
+      "-18.50",
+      null,
+      "2024-01-12",
+    ),
+    ListItem(
+      "PetSmart — Food",
+      "-22.50",
+      null,
+      "2024-01-11",
+    ),
+    ListItem(
+      "Electric Company",
+      "-85.00",
+      null,
+      "2024-01-11",
+    ),
+  ],
+  "image"
+)
+
+spendingSplit = Card([
+  spendingHeading,
+  spendingChart,
+])
+spendingHeading = Heading("Spending Split — This Month", "h3")
+spendingChart = HorizontalBarChart(
+  ["Groceries", "Dining", "Transportation", "Shopping", "Entertainment", "Utilities", "Other"],
+  [
+    { category: "Groceries", values: [340, 280, 120, 80, 60, 100, 40] },
+    { category: "Dining", values: [120, 250, 80, 140, 90, 60, 30] },
+    { category: "Transportation", values: [200, 180, 160, 200, 100, 80, 50] },
+    { category: "Shopping", values: [400, 350, 420, 380, 200, 150, 90] },
+    { category: "Entertainment", values: [80, 120, 90, 150, 200, 70, 40] },
+    { category: "Utilities", values: [100, 95, 110, 105, 90, 120, 60] },
+    { category: "Other", values: [50, 60, 45, 70, 30, 85, 55] },
+  ],
+  "Week",
+  "Spent",
+)
+
+billsDue = Card([
+  billsHeading,
+  billsList,
+])
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock(
+  [
+    ListItem(
+      "Electric Company — $85.00",
+      "Due: Jan 18",
+      null,
+      "2024-01-18",
+    ),
+    ListItem(
+      "Water & Sewer — $42.50",
+      "Due: Jan 20",
+      null,
+      "2024-01-20",
+    ),
+    ListItem(
+      "Internet — $59.99",
+      "Due: Jan 22",
+      null,
+      "2024-01-22",
+    ),
+    ListItem(
+      "Car Payment — $340.00",
+      "Due: Jan 25",
+      null,
+      "2024-01-25",
+    ),
+    ListItem(
+      "Mobile Phone — $69.99",
+      "Due: Jan 28",
+      null,
+      "2024-01-28",
+    ),
+  ],
+  "image"
+)
+
+vacationGoal = Card([
+  vacationHeading,
+  vacationProgress,
+])
+vacationHeading = Heading("Vacation Savings Goal", "h3")
+vacationProgress = Progress(
+  7200,
+  "Total: $10,000 — $7,200 saved",
+)
+
+creditScore = Card([
+  creditHeading,
+  creditScoreValue,
+])
+creditHeading = Heading("Credit Score", "h3")
+creditScoreValue = Badge("720", "success")
+
+transferControls = Card([
+  transferHeading,
+  transferForm,
+])
+transferHeading = Heading("Move Money Between Accounts", "h3")
+transferForm = Form("transfer", [transferBtn], [
+  FormControl("From Account", fromSelect, "Select source account"),
+  FormControl("To Account", toSelect, "Select destination account"),
+  FormControl("Amount", amountSlider, "Enter transfer amount"),
+])
+fromSelect = Select("from", [
+  SelectItem("Checking", "Checking"),
+  SelectItem("Savings", "Savings"),
+  SelectItem("Credit", "Credit Card"),
+], "Select source")
+toSelect = Select("to", [
+  SelectItem("Checking", "Checking"),
+  SelectItem("Savings", "Savings"),
+  SelectItem("Credit", "Credit Card"),
+], "Select destination")
+amountSlider = Slider("amount", "continuous", 1, 5000, 100, "Transfer amount ($)", "Enter amount to transfer", [1, 10, 100])
+transferBtn = Button("Move Money", null, "primary")
+
+freezeControls = Card([
+  freezeHeading,
+  freezeForm,
+])
+freezeHeading = Heading("Freeze Credit Line", "h3")
+freezeForm = Form("freeze", [freezeBtn], [
+  FormControl("Freeze amount", freezeSlider, "How much to freeze"),
+])
+freezeSlider = Slider("freeze", "continuous", 0, 5000, 1000, "Freeze amount ($)", "Set freeze limit", [1, 1000, 5000])
+freezeBtn = Button("Freeze Credit", null, "tertiary")
+
+statementPeriod = Card([
+  statementHeading,
+  periodSelect,
+])
+statementHeading = Heading("Statement Period", "h3")
+periodSelect = Select("period", [
+  SelectItem("January 2024", "January 2024"),
+  SelectItem("December 2023", "December 2023"),
+  SelectItem("November 2023", "November 2023"),
+  SelectItem("October 2023", "October 2023"),
+  SelectItem("September 2023", "September 2023"),
+], "Select period")
+
+alertsManagement = Card([
+  alertsHeading,
+  alertsList,
+])
+alertsHeading = Heading("Alert Management", "h3")
+alertsList = ListBlock(
+  [
+    ListItem(
+      "Overdraft Warning",
+      "Alert when balance drops below $500",
+      null,
+      null,
+    ),
+    ListItem(
+      "Large Transaction Alert",
+      "Notify for any single transaction over $1,000",
+      null,
+      null,
+    ),
+    ListItem(
+      "Bill Payment Reminder",
+      "7 days before each bill due date",
+      null,
+      null,
+    ),
+    ListItem(
+      "Low Balance Alert",
+      "Alert when checking balance falls below $1,000",
+      null,
+      null,
+    ),
+    ListItem(
+      "Spending Cap Warning",
+      "Alert when category spending exceeds $500",
+      null,
+      null,
+    ),
+    ListItem(
+      "Credit Score Drop Alert",
+      "Notify if credit score drops below 680",
+      null,
+      null,
+    ),
+  ],
+  "image"
+)
+
+disputeControls = Card([
+  disputeHeading,
+  disputeForm,
+])
+disputeHeading = Heading("Dispute a Transaction", "h3")
+disputeForm = Form("dispute", [disputeBtn], [
+  FormControl("Transaction ID", disputeInput, "Enter transaction ID"),
+  FormControl("Dispute reason", disputeSelect, "Select reason"),
+  FormControl("Additional details", disputeTextArea, "Provide supporting info"),
+])
+disputeInput = Input("transaction", "Enter transaction ID", "text")
+disputeSelect = Select("reason", [
+  SelectItem("Duplicate charge", "Duplicate charge"),
+  SelectItem("Incorrect amount", "Incorrect amount"),
+  SelectItem("Item not received", "Item not received"),
+  SelectItem("Wrong date", "Wrong date"),
+  SelectItem("Other", "Other"),
+], "Select reason")
+disputeTextArea = TextArea("details", "Provide additional details", 4, "text")
+disputeBtn = Button("Submit Dispute", null, "primary")
+
+I need to fix the `Card` arguments to use proper positional arguments. Let me also fix the `HorizontalBarChart` - it takes `labels`, `series`, `variant`, `xLabel`, `yLabel`. The `SingleStackedBarChart` takes `labels`, `values`. Let me also fix the `Table` usage - it takes `columns` where each `Col` has `label` and `data`.
+
+Let me also fix the `Form` - it takes `name`, `buttons`, `fields`.
+
+Let me re-examine and fix all the issues:
+
+1. `SingleStackedBarChart` takes `labels` and `values` as arrays - need to fix
+2. `Table` takes `columns` - need to fix
+3. `HorizontalBarChart` takes `labels`, `series`, `variant`, `xLabel`, `yLabel` - need to fix
+4. `Form` takes `name`, `buttons`, `fields` - need to fix
+5. `Select` takes `name`, `items`, `placeholder`, `rules`, `value` - need to fix
+6. `Slider` takes `name`, `variant`, `min`, `max`, `step`, `defaultValue`, `label`, `rules` - need to fix
+
+Let me also reconsider the `LineChart` - it takes `labels`, `series`, `variant`, `xLabel`, `yLabel`. The `Series` takes `category` and `values`.
+
+I think the best approach is to restructure some of the charts to use proper arrays.
+
+For `spendingSplit` chart, I'll use a simple approach.
+
+Let me rewrite the whole thing properly:</think>root = Card([
+  header,
+  statusBar,
+  balancesSection,
+  recentTransactions,
+  spendingSplit,
+  billsDue,
+  vacationGoal,
+  creditScore,
+  transferControls,
+  freezeControls,
+  statementPeriod,
+  alertsManagement,
+  disputeControls,
+], "sunk")
+
+header = CardHeader("Personal Banking Home", "Your financial dashboard")
+statusBar = CardHeader("Checking: $3,240 | Savings: $12,580 | Credit: $720K", null)
+
+balancesSection = Card([
+  balanceHeading,
+  balanceKpis,
+  balanceChart,
+])
+balanceHeading = Heading("Account Balances", "h3")
+balanceKpis = Table([
+  Col("Account", ["Checking", "Savings", "Credit"]),
+  Col("Balance", ["$3,240.00", "$12,580.00", "$720,000.00"]),
+  Col("Type", ["Checking", "Savings", "Credit Card"]),
+])
+balanceChart = SingleStackedBarChart(["Checking", "Savings", "Credit"], [3240, 12580, 720000])
+
+recentTransactions = Card([
+  transactionsHeading,
+  recentTransactionList,
+])
+transactionsHeading = Heading("Recent Transactions", "h3")
+recentTransactionList = ListBlock(
+  [
+    ListItem("Amazon.com — Groceries", "-$84.32", null, "2024-01-15"),
+    ListItem("Starbucks Coffee", "-$5.98", null, "2024-01-15"),
+    ListItem("Walmart — Household", "-$127.45", null, "2024-01-14"),
+    ListItem("Netflix Subscription", "-$14.99", null, "2024-01-14"),
+    ListItem("Local Gas Station", "-$45.00", null, "2024-01-13"),
+    ListItem("Target — Electronics", "-$199.99", null, "2024-01-13"),
+    ListItem("Restaurant Eats", "-$32.75", null, "2024-01-12"),
+    ListItem("Uber Ride", "-$18.50", null, "2024-01-12"),
+    ListItem("PetSmart — Food", "-$22.50", null, "2024-01-11"),
+    ListItem("Electric Company", "-$85.00", null, "2024-01-11"),
+  ],
+  "image"
+)
+
+spendingSplit = Card([
+  spendingHeading,
+  spendingChart,
+])
+spendingHeading = Heading("Spending Split — This Month", "h3")
+spendingChart = HorizontalBarChart(
+  ["Groceries", "Dining", "Transportation", "Shopping", "Entertainment", "Utilities", "Other"],
+  [
+    { category: "Groceries", values: [340, 280, 120, 80, 60, 100, 40] },
+    { category: "Dining", values: [120, 250, 80, 140, 90, 60, 30] },
+    { category: "Transportation", values: [200, 180, 160, 200, 100, 80, 50] },
+    { category: "Shopping", values: [400, 350, 420, 380, 200, 150, 90] },
+    { category: "Entertainment", values: [80, 120, 90, 150, 200, 70, 40] },
+    { category: "Utilities", values: [100, 95, 110, 105, 90, 120, 60] },
+    { category: "Other", values: [50, 60, 45, 70, 30, 85, 55] },
+  ],
+  "grouped",
+  "Spent",
+)
+
+billsDue = Card([
+  billsHeading,
+  billsList,
+])
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock(
+  [
+    ListItem("Electric Company — $85.00", "Due: Jan 18", null, "2024-01-18"),
+    ListItem("Water & Sewer — $42.50", "Due: Jan 20", null, "2024-01-20"),
+    ListItem("Internet — $59.99", "Due: Jan 22", null, "2024-01-22"),
+    ListItem("Car Payment — $340.00", "Due: Jan 25", null, "2024-01-25"),
+    ListItem("Mobile Phone — $69.99", "Due: Jan 28", null, "2024-01-28"),
+  ],
+  "image"
+)
+
+vacationGoal = Card([
+  vacationHeading,
+  vacationProgress,
+])
+vacationHeading = Heading("Vacation Savings Goal", "h3")
+vacationProgress = Progress(7200, "Total: $10,000 — $7,200 saved")
+
+creditScore = Card([
+  creditHeading,
+  creditScoreValue,
+])
+creditHeading = Heading("Credit Score", "h3")
+creditScoreValue = Badge("720", "success")
+
+transferControls = Card([
+  transferHeading,
+  transferForm,
+])
+transferHeading = Heading("Move Money Between Accounts", "h3")
+transferForm = Form("transfer", [transferBtn], [
+  FormControl("From Account", fromSelect, "Select source account"),
+  FormControl("To Account", toSelect, "Select destination account"),
+  FormControl("Amount", amountSlider, "Enter transfer amount"),
+])
+fromSelect = Select("from", [SelectItem("Checking", "Checking"), SelectItem("Savings", "Savings"), SelectItem("Credit", "Credit Card")], "Select source")
+toSelect = Select("to", [SelectItem("Checking", "Checking"), SelectItem("Savings", "Savings"), SelectItem("Credit", "Credit Card")], "Select destination")
+amountSlider = Slider("amount", "continuous", 1, 5000, 100, "Transfer amount ($)", "Enter amount to transfer", [1, 1000, 5000])
+transferBtn = Button("Move Money", null, "primary")
+
+freezeControls = Card([
+  freezeHeading,
+  freezeForm,
+])
+freezeHeading = Heading("Freeze Credit Line", "h3")
+freezeForm = Form("freeze", [freezeBtn], [
+  FormControl("Freeze amount", freezeSlider, "How much to freeze"),
+])
+freezeSlider = Slider("freeze", "continuous", 0, 5000, 1000, "Freeze amount ($)", "Set freeze limit", [1, 1000, 5000])
+freezeBtn = Button("Freeze Credit", null, "tertiary")
+
+statementPeriod = Card([
+  statementHeading,
+  periodSelect,
+])
+statementHeading = Heading("Statement Period", "h3")
+periodSelect = Select("period", [SelectItem("January 2024", "January 2024"), SelectItem("December 2023", "December 2023"), SelectItem("November 2023", "November 2023"), SelectItem("October 2023", "October 2023"), SelectItem("September 2023", "September 2023")], "Select period")
+
+alertsManagement = Card([
+  alertsHeading,
+  alertsList,
+])
+alertsHeading = Heading("Alert Management", "h3")
+alertsList = ListBlock(
+  [
+    ListItem("Overdraft Warning", "Alert when balance drops below $500", null, null),
+    ListItem("Large Transaction Alert", "Notify for any single transaction over $1,000", null, null),
+    ListItem("Bill Payment Reminder", "7 days before each bill due date", null, null),
+    ListItem("Low Balance Alert", "Alert when checking balance falls below $1,000", null, null),
+    ListItem("Spending Cap Warning", "Alert when category spending exceeds $500", null, null),
+    ListItem("Credit Score Drop Alert", "Notify if credit score drops below 680", null, null),
+  ],
+  "image"
+)
+
+disputeControls = Card([
+  disputeHeading,
+  disputeForm,
+])
+disputeHeading = Heading("Dispute a Transaction", "h3")
+disputeForm = Form("dispute", [disputeBtn], [
+  FormControl("Transaction ID", disputeInput, "Enter transaction ID"),
+  FormControl("Dispute reason", disputeSelect, "Select reason"),
+  FormControl("Additional details", disputeTextArea, "Provide supporting info"),
+])
+disputeInput = Input("transaction", "Enter transaction ID", "text")
+disputeSelect = Select("reason", [SelectItem("Duplicate charge", "Duplicate charge"), SelectItem("Incorrect amount", "Incorrect amount"), SelectItem("Item not received", "Item not received"), SelectItem("Wrong date", "Wrong date"), SelectItem("Other", "Other")], "Select reason")
+disputeTextArea = TextArea("details", "Provide additional details", 4, "text")
+disputeBtn = Button("Submit Dispute", null, "primary")

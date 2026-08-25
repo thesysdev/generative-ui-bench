@@ -1,0 +1,830 @@
+Here is the comprehensive SaaS Admin Overview dashboard covering all 13 requirements in a clean, structured interface.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "headerRow",
+          "topKpiSection",
+          "retentionAndUtilCard",
+          "growthAndPlansCard",
+          "featureAdoptionCard",
+          "topCustomersCard",
+          "riskAndBillingTabsCard"
+        ]
+      },
+      {
+        "id": "headerRow",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "justify": "between",
+        "align": "center",
+        "children": [
+          "titleGroup",
+          "headerControls"
+        ]
+      },
+      {
+        "id": "titleGroup",
+        "component": "CardHeader",
+        "title": "Executive SaaS Overview",
+        "subtitle": "Real-time metrics, accounts health, and operational diagnostics"
+      },
+      {
+        "id": "headerControls",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "children": [
+          "periodSelect",
+          "inviteAdminDialog"
+        ]
+      },
+      {
+        "id": "periodSelect",
+        "component": "Select",
+        "name": "reporting_period",
+        "placeholder": "Select Period",
+        "value": "last_90_days",
+        "items": [
+          "opt30",
+          "opt90",
+          "optYTD",
+          "opt12M"
+        ]
+      },
+      {
+        "id": "opt30",
+        "component": "SelectItem",
+        "value": "last_30_days",
+        "label": "Last 30 Days"
+      },
+      {
+        "id": "opt90",
+        "component": "SelectItem",
+        "value": "last_90_days",
+        "label": "Last 90 Days"
+      },
+      {
+        "id": "optYTD",
+        "component": "SelectItem",
+        "value": "ytd",
+        "label": "Year to Date"
+      },
+      {
+        "id": "opt12M",
+        "component": "SelectItem",
+        "value": "last_12_months",
+        "label": "Last 12 Months"
+      },
+      {
+        "id": "inviteAdminDialog",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Invite Admin",
+        "triggerVariant": "default",
+        "title": "Invite New Administrator",
+        "description": "Send an invite email with role-based access permissions to your SaaS console.",
+        "content": [
+          "inviteForm"
+        ]
+      },
+      {
+        "id": "inviteForm",
+        "component": "Form",
+        "name": "invite_admin_form",
+        "buttons": "inviteActionButtons",
+        "fields": [
+          "adminEmailControl",
+          "adminRoleControl"
+        ]
+      },
+      {
+        "id": "adminEmailControl",
+        "component": "FormControl",
+        "label": "Work Email",
+        "input": "adminEmailInput",
+        "hint": "Must match company domain SSO"
+      },
+      {
+        "id": "adminEmailInput",
+        "component": "Input",
+        "name": "email",
+        "placeholder": "colleague@company.com",
+        "type": "email"
+      },
+      {
+        "id": "adminRoleControl",
+        "component": "FormControl",
+        "label": "Role & Permissions",
+        "input": "adminRoleSelect"
+      },
+      {
+        "id": "adminRoleSelect",
+        "component": "Select",
+        "name": "role",
+        "placeholder": "Select Role",
+        "value": "billing_admin",
+        "items": [
+          "roleSuper",
+          "roleBilling",
+          "roleViewer"
+        ]
+      },
+      {
+        "id": "roleSuper",
+        "component": "SelectItem",
+        "value": "super_admin",
+        "label": "Super Admin (Full Access)"
+      },
+      {
+        "id": "roleBilling",
+        "component": "SelectItem",
+        "value": "billing_admin",
+        "label": "Finance & Billing Admin"
+      },
+      {
+        "id": "roleViewer",
+        "component": "SelectItem",
+        "value": "read_only",
+        "label": "Read-Only Auditor"
+      },
+      {
+        "id": "inviteActionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "submitInviteBtn"
+        ]
+      },
+      {
+        "id": "submitInviteBtn",
+        "component": "Button",
+        "label": "Send Invitation",
+        "variant": "primary"
+      },
+      {
+        "id": "topKpiSection",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "children": [
+          "mrrCard",
+          "arrCard",
+          "churnCard",
+          "npsCard"
+        ]
+      },
+      {
+        "id": "mrrCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "xs",
+        "children": [
+          "mrrLabel",
+          "mrrValue",
+          "mrrBadge"
+        ]
+      },
+      {
+        "id": "mrrLabel",
+        "component": "TextContent",
+        "text": "Monthly Recurring Revenue",
+        "size": "small"
+      },
+      {
+        "id": "mrrValue",
+        "component": "Heading",
+        "text": "$482,500",
+        "level": "h2"
+      },
+      {
+        "id": "mrrBadge",
+        "component": "Badge",
+        "text": "+8.4% MoM",
+        "variant": "default"
+      },
+      {
+        "id": "arrCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "xs",
+        "children": [
+          "arrLabel",
+          "arrValue",
+          "arrBadge"
+        ]
+      },
+      {
+        "id": "arrLabel",
+        "component": "TextContent",
+        "text": "Annual Recurring Revenue",
+        "size": "small"
+      },
+      {
+        "id": "arrValue",
+        "component": "Heading",
+        "text": "$5,790,000",
+        "level": "h2"
+      },
+      {
+        "id": "arrBadge",
+        "component": "Badge",
+        "text": "Target: $6.2M EOY",
+        "variant": "secondary"
+      },
+      {
+        "id": "churnCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "xs",
+        "children": [
+          "churnLabel",
+          "churnValue",
+          "churnBadge"
+        ]
+      },
+      {
+        "id": "churnLabel",
+        "component": "TextContent",
+        "text": "Churn (This Month)",
+        "size": "small"
+      },
+      {
+        "id": "churnValue",
+        "component": "Heading",
+        "text": "1.2%",
+        "level": "h2"
+      },
+      {
+        "id": "churnBadge",
+        "component": "Badge",
+        "text": "-0.3% vs benchmark",
+        "variant": "outline"
+      },
+      {
+        "id": "npsCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "xs",
+        "children": [
+          "npsLabel",
+          "npsValue",
+          "npsBadge"
+        ]
+      },
+      {
+        "id": "npsLabel",
+        "component": "TextContent",
+        "text": "Current NPS",
+        "size": "small"
+      },
+      {
+        "id": "npsValue",
+        "component": "Heading",
+        "text": "+58",
+        "level": "h2"
+      },
+      {
+        "id": "npsBadge",
+        "component": "Badge",
+        "text": "Excellent (74% Promoters)",
+        "variant": "default"
+      },
+      {
+        "id": "retentionAndUtilCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "utilHeader",
+          "utilProgress",
+          "utilBreakdown"
+        ]
+      },
+      {
+        "id": "utilHeader",
+        "component": "CardHeader",
+        "title": "Overall Seat Utilization",
+        "subtitle": "Active paid seats currently assigned across all organizations"
+      },
+      {
+        "id": "utilProgress",
+        "component": "Progress",
+        "value": 78,
+        "label": "78% Allocated & Active (14,196 / 18,200 total provisioned seats)"
+      },
+      {
+        "id": "utilBreakdown",
+        "component": "SingleStackedBarChart",
+        "labels": [
+          "Active Used (78%)",
+          "Assigned Idle (14%)",
+          "Unallocated Capacity (8%)"
+        ],
+        "values": [
+          78,
+          14,
+          8
+        ]
+      },
+      {
+        "id": "growthAndPlansCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "row",
+        "gap": "l",
+        "children": [
+          "signupsCol",
+          "plansCol"
+        ]
+      },
+      {
+        "id": "signupsCol",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "signupsHeader",
+          "signupsChart"
+        ]
+      },
+      {
+        "id": "signupsHeader",
+        "component": "CardHeader",
+        "title": "New Signups (Past 90 Days)",
+        "subtitle": "Weekly trend of new team signups (1,480 total)"
+      },
+      {
+        "id": "signupsChart",
+        "component": "LineChart",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4",
+          "W5",
+          "W6",
+          "W7",
+          "W8",
+          "W9",
+          "W10",
+          "W11",
+          "W12"
+        ],
+        "series": [
+          "signupsSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Trailing Weeks",
+        "yLabel": "Signups"
+      },
+      {
+        "id": "signupsSeries",
+        "component": "Series",
+        "category": "New Signups",
+        "values": [
+          82,
+          94,
+          108,
+          115,
+          120,
+          118,
+          134,
+          142,
+          139,
+          156,
+          178,
+          194
+        ]
+      },
+      {
+        "id": "plansCol",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "plansHeader",
+          "plansPieChart"
+        ]
+      },
+      {
+        "id": "plansHeader",
+        "component": "CardHeader",
+        "title": "Customer Split by Plan",
+        "subtitle": "Distribution of 2,410 active paying organizations"
+      },
+      {
+        "id": "plansPieChart",
+        "component": "PieChart",
+        "variant": "donut",
+        "labels": [
+          "Enterprise (18%)",
+          "Pro Scale (44%)",
+          "Team Starter (38%)"
+        ],
+        "values": [
+          434,
+          1060,
+          916
+        ]
+      },
+      {
+        "id": "featureAdoptionCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "featuresHeader",
+          "featuresChart"
+        ]
+      },
+      {
+        "id": "featuresHeader",
+        "component": "CardHeader",
+        "title": "Adoption of 3 Newest Features",
+        "subtitle": "Percentage of active accounts utilizing newly shipped capabilities"
+      },
+      {
+        "id": "featuresChart",
+        "component": "HorizontalBarChart",
+        "labels": [
+          "AI Workflow Automation (v2.4)",
+          "Real-time BI Webhooks (v2.3)",
+          "Granular Custom RBAC (v2.2)"
+        ],
+        "series": [
+          "featureAdoptionSeries"
+        ],
+        "xLabel": "Adoption Rate (%)",
+        "yLabel": "Feature"
+      },
+      {
+        "id": "featureAdoptionSeries",
+        "component": "Series",
+        "category": "% Accounts Active",
+        "values": [
+          64,
+          48,
+          82
+        ]
+      },
+      {
+        "id": "topCustomersCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "topCustomersHeader",
+          "topCustomersTable"
+        ]
+      },
+      {
+        "id": "topCustomersHeader",
+        "component": "CardHeader",
+        "title": "Top 10 Largest Customers",
+        "subtitle": "Ranked by annual contract value and seat commitment"
+      },
+      {
+        "id": "topCustomersTable",
+        "component": "Table",
+        "columns": [
+          "colRank",
+          "colCompany",
+          "colPlan",
+          "colSeats",
+          "colSpend",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colRank",
+        "component": "Col",
+        "label": "#",
+        "type": "string",
+        "data": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      },
+      {
+        "id": "colCompany",
+        "component": "Col",
+        "label": "Customer Name",
+        "type": "string",
+        "data": [
+          "Starlight Tech Inc.",
+          "Apex Global Logistics",
+          "Nordic Financial Corp",
+          "Acuity Health Systems",
+          "Vanguard Media Group",
+          "HyperScale Cloud Labs",
+          "Zephyr Retail Networks",
+          "Crestline Energy",
+          "Prime Robotics AG",
+          "Solstice Software"
+        ]
+      },
+      {
+        "id": "colPlan",
+        "component": "Col",
+        "label": "Plan Tier",
+        "type": "string",
+        "data": [
+          "Enterprise Custom",
+          "Enterprise Plus",
+          "Enterprise Custom",
+          "Enterprise Plus",
+          "Enterprise",
+          "Enterprise",
+          "Enterprise",
+          "Enterprise",
+          "Pro Scale",
+          "Enterprise"
+        ]
+      },
+      {
+        "id": "colSeats",
+        "component": "Col",
+        "label": "Active Seats",
+        "type": "number",
+        "data": [
+          1450,
+          1120,
+          980,
+          840,
+          720,
+          650,
+          580,
+          520,
+          490,
+          460
+        ]
+      },
+      {
+        "id": "colSpend",
+        "component": "Col",
+        "label": "Annual Spend (ARR)",
+        "type": "string",
+        "data": [
+          "$246,000",
+          "$189,500",
+          "$164,000",
+          "$142,800",
+          "$122,400",
+          "$108,000",
+          "$96,500",
+          "$88,200",
+          "$79,400",
+          "$74,000"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Contract Status",
+        "type": "string",
+        "data": [
+          "Multi-year Auto-renew",
+          "Active (Renewing Q4)",
+          "Multi-year Auto-renew",
+          "Active (Renewing Q1)",
+          "Active (Renewing Q3)",
+          "Multi-year Auto-renew",
+          "Active (Renewing Q2)",
+          "Active (Renewing Q4)",
+          "Active (Monthly)",
+          "Active (Renewing Q3)"
+        ]
+      },
+      {
+        "id": "riskAndBillingTabsCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "opsTabs"
+        ]
+      },
+      {
+        "id": "opsTabs",
+        "component": "Tabs",
+        "items": [
+          "riskTabItem",
+          "failedPaymentsTabItem"
+        ]
+      },
+      {
+        "id": "riskTabItem",
+        "component": "TabItem",
+        "value": "accounts_at_risk",
+        "trigger": "Accounts At Risk (4)",
+        "content": [
+          "riskAlert",
+          "riskTable"
+        ]
+      },
+      {
+        "id": "riskAlert",
+        "component": "Alert",
+        "variant": "warning",
+        "title": "4 Accounts Identified with Health Score < 40",
+        "description": "CSM follow-up required within 48 hours to prevent churn at renewal."
+      },
+      {
+        "id": "riskTable",
+        "component": "Table",
+        "columns": [
+          "riskColAccount",
+          "riskColARR",
+          "riskColScore",
+          "riskColReason",
+          "riskColOwner"
+        ]
+      },
+      {
+        "id": "riskColAccount",
+        "component": "Col",
+        "label": "Account",
+        "type": "string",
+        "data": [
+          "OmniCore Labs",
+          "Breeze Analytics",
+          "Cascade Retail",
+          "Silverline Dynamics"
+        ]
+      },
+      {
+        "id": "riskColARR",
+        "component": "Col",
+        "label": "ARR at Risk",
+        "type": "string",
+        "data": [
+          "$42,000",
+          "$28,500",
+          "$19,200",
+          "$14,000"
+        ]
+      },
+      {
+        "id": "riskColScore",
+        "component": "Col",
+        "label": "Health Score",
+        "type": "string",
+        "data": [
+          "28 / 100",
+          "34 / 100",
+          "37 / 100",
+          "39 / 100"
+        ]
+      },
+      {
+        "id": "riskColReason",
+        "component": "Col",
+        "label": "Risk Factor & Reason",
+        "type": "string",
+        "data": [
+          "Executive sponsor departed + 65% drop in MAU",
+          "Repeated blocker support tickets on API limits",
+          "Low seat utilization (18%) with renewal in 30 days",
+          "SSO integration stalled during onboarding"
+        ]
+      },
+      {
+        "id": "riskColOwner",
+        "component": "Col",
+        "label": "Assigned CSM",
+        "type": "string",
+        "data": [
+          "Sarah Jenkins",
+          "Marcus Vance",
+          "Sarah Jenkins",
+          "Elena Rostova"
+        ]
+      },
+      {
+        "id": "failedPaymentsTabItem",
+        "component": "TabItem",
+        "value": "failed_payments",
+        "trigger": "Failed Payments (3)",
+        "content": [
+          "billingAlert",
+          "failedPaymentsTable"
+        ]
+      },
+      {
+        "id": "billingAlert",
+        "component": "Alert",
+        "variant": "destructive",
+        "title": "3 Uncollected Invoices ($18,450 Total)",
+        "description": "Dunning rules active. Use one-click charge retries or update payment methods below."
+      },
+      {
+        "id": "failedPaymentsTable",
+        "component": "Table",
+        "columns": [
+          "failColOrg",
+          "failColAmount",
+          "failColAttempts",
+          "failColReason",
+          "failColAction"
+        ]
+      },
+      {
+        "failColOrg": "",
+        "id": "failColOrg",
+        "component": "Col",
+        "label": "Organization",
+        "type": "string",
+        "data": [
+          "Veritas Logistics",
+          "BluePeak Media",
+          "Kestrel Security"
+        ]
+      },
+      {
+        "id": "failColAmount",
+        "component": "Col",
+        "label": "Amount",
+        "type": "string",
+        "data": [
+          "$8,200.00",
+          "$6,450.00",
+          "$3,800.00"
+        ]
+      },
+      {
+        "id": "failColAttempts",
+        "component": "Col",
+        "label": "Attempts",
+        "type": "string",
+        "data": [
+          "2 of 4",
+          "3 of 4",
+          "1 of 4"
+        ]
+      },
+      {
+        "id": "failColReason",
+        "component": "Col",
+        "label": "Decline Reason",
+        "type": "string",
+        "data": [
+          "card_expired (Visa ending 4291)",
+          "insufficient_funds (Corporate ACH)",
+          "generic_decline (MasterCard 9012)"
+        ]
+      },
+      {
+        "id": "failColAction",
+        "component": "Col",
+        "label": "Retry Recovery",
+        "type": "action",
+        "data": [
+          "Retry Charge Now",
+          "Retry Charge Now",
+          "Retry Charge Now"
+        ]
+      }
+    ]
+  }
+}
+</a2ui-json>

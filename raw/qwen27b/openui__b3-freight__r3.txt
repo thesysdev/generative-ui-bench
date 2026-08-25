@@ -1,0 +1,39 @@
+
+
+root = Card([header, refreshed, searchRow, kpiRow, delayedAlert, shipmentsSection, carrierSection, volumeSection])
+
+header = CardHeader("Logistics Coordinator Board", "Live shipment tracking & performance")
+refreshed = TextContent("*Last refreshed: 2025-01-15 09:42 UTC*", "small")
+
+searchRow = Card([searchInput, searchBtn], "clear", "row", "s", "center")
+searchInput = Input("route_search", "Search by origin or destination…", "text")
+searchBtn = Button("Search", null, "primary", "normal", "small")
+
+kpiRow = Card([onTimeCard, costCard], "clear", "row", "m", "stretch")
+onTimeCard = Card([onTimeLabel, onTimeBar], "sunk", "column", "xs")
+onTimeLabel = TextContent("**On-time this month**", "small-heavy")
+onTimeBar = Progress(91.3, "91.3% on-time")
+costCard = Card([costLabel, costValue], "sunk", "column", "xs")
+costLabel = TextContent("**Avg cost / shipment**", "small-heavy")
+costValue = TextContent("$1,247", "large-heavy")
+
+delayedAlert = Alert("3 shipments delayed", "MIA→LHR, FRA→NRT, and SYD→LAX are running behind schedule. See table below for details.", "warning")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable, flagBtn], "sunk", "column", "m")
+shipmentsHeading = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([colId, colOrigin, colDest, colEta, colStatus])
+colId = Col("ID", ["SHP-4821", "SHP-4822", "SHP-4823", "SHP-4824", "SHP-4825", "SHP-4826", "SHP-4827", "SHP-4828"])
+colOrigin = Col("Origin", ["MIA", "FRA", "SIN", "JFK", "HKG", "LHR", "SYD", "AMS"])
+colDest = Col("Destination", ["LHR", "NRT", "LAX", "SYD", "SIN", "MIA", "LAX", "JFK"])
+colEta = Col("ETA", ["Jan 18 14:00", "Jan 19 08:30", "Jan 17 22:15", "Jan 20 06:00", "Jan 18 11:45", "Jan 17 16:30", "Jan 21 03:00", "Jan 19 20:00"])
+colStatus = Col("Status", ["Delayed", "Delayed", "On track", "On track", "On track", "On track", "Delayed", "On track"])
+flagBtn = Button("Flag selected shipment", null, "secondary", "normal", "small")
+
+carrierSection = Card([carrierHeading, carrierChart], "sunk", "column", "m")
+carrierHeading = Heading("Volume by Carrier", "h3")
+carrierChart = PieChart(["Maersk", "DHL Freight", "FedEx", "UPS", "DB Schenker"], [34, 27, 18, 12, 9], "donut")
+
+volumeSection = Card([volumeHeading, volumeChart], "sunk", "column", "m")
+volumeHeading = Heading("Weekly Volume — Past 8 Weeks", "h3")
+volumeChart = AreaChart(["W40", "W41", "W42", "W43", "W44", "W45", "W46", "W47"], [volSeries], "natural", "Week", "Shipments")
+volSeries = Series("Shipments", [142, 158, 131, 167, 174, 189, 162, 195])

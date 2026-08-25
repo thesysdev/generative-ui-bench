@@ -1,0 +1,56 @@
+root = Card([header, kpis, filterSection, ticketsSection, newTicketBtn], "card", "column", "m")
+
+header = CardHeader("Support Dashboard", "Morning overview — June 15, 2025")
+
+kpis = Card([openTicketsKpi, responseTimeKpi], "card", "row", "m")
+
+openTicketsKpi = Card([openLabel, openCount], "sunk", "column", "none")
+openLabel = TextContent("Open Tickets", "small")
+openCount = TextContent("47", "large-heavy")
+
+responseTimeKpi = Card([responseLabel, responseTime], "sunk", "column", "none")
+responseLabel = TextContent("Avg First Response", "small")
+responseTime = TextContent("4m 32s", "large-heavy")
+
+filterSection = Card([filterHeading, filterSwitch], "card", "column", "xs")
+filterHeading = Heading("Filter", "h3")
+filterSwitch = SwitchGroup("priority_filter", [highOnlySwitch], "clear")
+highOnlySwitch = SwitchItem("High Priority Only", "Show only high-priority tickets", "high_only", false)
+
+ticketsSection = Card([ticketsHeading, ticketsTable], "card", "column", "m")
+ticketsHeading = Heading("Recent Tickets", "h3")
+
+ticketsTable = Table([idCol, subjectCol, priorityCol, statusCol, createdCol])
+idCol = Col("ID", ["#4892", "#4891", "#4890", "#4889", "#4888"])
+subjectCol = Col("Subject", ["Payment failed on checkout", "Cannot reset password", "API rate limit exceeded", "Dashboard loading slowly", "Invoice missing tax details"])
+priorityCol = Col("Priority", ["High", "Medium", "High", "Low", "Medium"])
+statusCol = Col("Status", ["Open", "Open", "In Progress", "Open", "Open"])
+createdCol = Col("Created", ["6 min ago", "23 min ago", "41 min ago", "1 hr ago", "2 hrs ago"])
+
+newTicketBtn = DialogBlock("New Ticket", "Create Support Ticket", "Fill in the details below to submit a new ticket.", [newTicketForm], "primary")
+
+newTicketForm = Form("new-ticket", formButtons, [subjectField, priorityField, categoryField, descriptionField])
+
+subjectField = FormControl("Subject", subjectInput)
+subjectInput = Input("subject", "Brief description of the issue")
+
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [lowOpt, mediumOpt, highOpt, criticalOpt], "Select priority level")
+lowOpt = SelectItem("low", "Low")
+mediumOpt = SelectItem("medium", "Medium")
+highOpt = SelectItem("high", "High")
+criticalOpt = SelectItem("critical", "Critical")
+
+categoryField = FormControl("Category", categorySelect)
+categorySelect = Select("category", [billingCat, technicalCat, accountCat, otherCat], "Select category")
+billingCat = SelectItem("billing", "Billing & Payments")
+technicalCat = SelectItem("technical", "Technical Issue")
+accountCat = SelectItem("account", "Account & Access")
+otherCat = SelectItem("other", "Other")
+
+descriptionField = FormControl("Description", descArea)
+descArea = TextArea("description", "Provide detailed information about the issue...", 5)
+
+formButtons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Submit Ticket", null, "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")

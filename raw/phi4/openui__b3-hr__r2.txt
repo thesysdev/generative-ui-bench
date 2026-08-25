@@ -1,0 +1,48 @@
+```openui
+root = Card([
+    headcountSection,
+    openRolesSection,
+    pipelineSection,
+    timeToHireSection,
+    headcountSplitSection,
+    interviewsSection,
+    attritionSection,
+    actions
+])
+
+headcountSection = Card([headcountHeader, headcountValue], "card")
+headcountHeader = Heading("Current Headcount", "h3")
+headcountValue = TextContent("1,200 employees", "large")
+
+openRolesSection = Card([openRolesHeader, openRolesTable], "sunk")
+openRolesHeader = Heading("Open Roles", "h3")
+openRolesTable = Table([roleCol, deptCol, countCol])
+roleCol = Col("Role", ["Software Engineer", "Data Analyst", "Product Manager"])
+deptCol = Col("Department", ["Engineering", "Data", "Product"])
+countCol = Col("Open", ["5", "3", "2"])
+
+pipelineSection = Card([pipelineHeader, pipelineChart], "card")
+pipelineHeader = Heading("Candidates Pipeline", "h3")
+pipelineChart = BarChart(["Applied", "Screening", "Interview", "Offer", "Hired"], [pipelineSeries])
+pipelineSeries = Series("Candidates", [120, 80, 40, 20, 10])
+
+timeToHireSection = Card([timeToHireHeader, timeToHireValue], "sunk")
+timeToHireHeader = Heading("Average Time to Hire", "h3")
+timeToHireValue = TextContent("42 days", "large")
+
+headcountSplitSection = Card([headcountSplitHeader, headcountSplitChart], "card")
+headcountSplitHeader = Heading("Headcount by Department", "h3")
+headcountSplitChart = PieChart(["Engineering", "Sales", "Product", "HR"], [400, 300, 300, 200])
+
+interviewsSection = Card([interviewsHeader, interviewsValue], "sunk")
+interviewsHeader = Heading("Interviews Scheduled This Week", "h3")
+interviewsValue = TextContent("12 interviews", "large")
+
+attritionSection = Card([attritionHeader, attritionChart], "card")
+attritionHeader = Heading("Attrition Over 6 Months", "h3")
+attritionChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun"], [attritionSeries])
+attritionSeries = Series("Employees", [2, 3, 1, 4, 5, 2])
+
+actions = Buttons([newRoleBtn])
+newRoleBtn = Button("Open New Role", null, "primary")
+```

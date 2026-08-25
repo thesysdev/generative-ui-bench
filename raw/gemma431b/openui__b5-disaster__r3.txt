@@ -1,0 +1,95 @@
+root = Card([header, topRow, mainGrid, resourceSection, logisticsSection, operationalSection, footer], "clear", "column", "l")
+
+header = CardHeader("Emergency Response Coordination Center", "Real-time Operational Dashboard")
+
+topRow = Card([summaryStats, weatherChart, zoneFocus], "card", "row", "m")
+
+summaryStats = Card([rescueStat, casualtyStat, donationStat], "sunk", "row", "m")
+rescueStat = TextCallout("info", "Rescued", "1,240 people")
+casualtyStat = TextCallout("danger", "Casualties", "42 confirmed")
+donationStat = TextCallout("success", "Donations", "$420,000 USD")
+
+weatherChart = LineChart(["0h", "12h", "24h", "36h", "48h"], [tempSeries, rainSeries], "natural", "Time", "Value")
+tempSeries = Series("Temp (°C)", [22, 25, 21, 18, 19])
+rainSeries = Series("Precip (%)", [10, 40, 80, 30, 10])
+
+zoneFocus = Card([zoneLabel, zoneSelect], "sunk", "column", "xs")
+zoneLabel = TextContent("Focus Zone", "small-heavy")
+zoneSelect = Select("zone_focus", [z1, z2, z3, z4], "All Zones", null, "All Zones", "medium")
+z1 = SelectItem("north", "North Sector")
+z2 = SelectItem("south", "South Sector")
+z3 = SelectItem("east", "East Sector")
+z4 = SelectItem("west", "West Sector")
+
+mainGrid = Card([incidentsTab, resourcesTab, logisticsTab], "card", "column", "none")
+incidentsTab = Tabs([incidentsItem, resourceItem, logisticsItem])
+incidentsItem = TabItem("incidents", "Active Incidents", [incidentTable, routeTable, roadList])
+resourceItem = TabItem("resources", "Resource Status", [availTable, shelterTable, hospitalTable])
+logisticsItem = TabItem("logistics", "Logistics & Comms", [commsTable, volunteerTable, aidTable])
+
+incidentTable = Table([incZone, incSev])
+incZone = Col("Zone", ["North", "East", "South", "West"])
+incSev = Col("Severity", ["Critical", "High", "Medium", "Low"], "string")
+
+routeTable = Table([routeName, routeStatus])
+routeName = Col("Evacuation Route", ["Route A-1", "Route B-4", "Route C-2"])
+routeStatus = Col("Status", ["Clear", "Congested", "Blocked"])
+
+roadList = ListBlock([r1, r2], "image")
+r1 = ListItem("Highway 101", "Closed due to flooding", ["https://picsum.photos/seed/road1/100/100"])
+r2 = ListItem("Bridge St", "Closed for structural repair", ["https://picsum.photos/seed/road2/100/100"])
+
+availTable = Table([resType, resCount])
+resType = Col("Resource", ["Ambulances", "Fire Trucks", "Rescue Teams", "Water Pallets"])
+resCount = Col("Available", ["12", "8", "15", "400"], "number")
+
+shelterTable = Table([shName, shCap, shOcc])
+shName = Col("Shelter", ["City Gym", "East High", "St. Marys"])
+shCap = Col("Capacity", ["500", "300", "200"], "number")
+shOcc = Col("Occupancy", ["410", "120", "180"], "number")
+
+hospitalTable = Table([hospName, hospBeds])
+hospName = Col("Hospital", ["General Hospital", "Mercy Clinic", "North Medical"])
+hospBeds = Col("Free Beds", ["14", "2", "28"], "number")
+
+commsTable = Table([chanName, chanStatus])
+chanName = Col("Channel", ["Satellite", "VHF Radio", "LTE Network", "Fiber"])
+chanStatus = Col("Status", ["Up", "Up", "Degraded", "Up"])
+
+volunteerTable = Table([volName, volAssign])
+volName = Col("Volunteer", ["Alice Smith", "Bob Jones", "Charlie Day"])
+volAssign = Col("Assignment", ["Triage", "Logistics", "Search & Rescue"])
+
+aidTable = Table([aidReq, aidStatus])
+aidReq = Col("Request", ["Blankets (500)", "Medical Kits (20)", "Bottled Water (1k)"])
+aidStatus = Col("Status", ["Pending", "Processing", "Pending"])
+
+resourceSection = Card([resHeading, resForm], "sunk", "column", "m")
+resHeading = Heading("Resource Request", "h3")
+resForm = Form("res-req", resButtons, [resTypeField, resQtyField])
+resTypeField = FormControl("Resource Type", resTypeInput)
+resTypeInput = Input("type", "e.g. Oxygen Tanks")
+resQtyField = FormControl("Quantity", resQtyInput)
+resQtyInput = Input("qty", "0", "number")
+resButtons = Buttons([resSubmit])
+resSubmit = Button("Submit Request", null, "primary")
+
+logisticsSection = Card([broadcastHeading, broadcastForm], "sunk", "column", "m")
+broadcastHeading = Heading("Broadcast Update", "h3")
+broadcastForm = Form("broadcast", bcastButtons, [bcastMsgField])
+bcastMsgField = FormControl("Message", bcastInput)
+bcastInput = TextArea("msg", "Enter emergency broadcast message...", 3)
+bcastButtons = Buttons([bcastSubmit])
+bcastSubmit = Button("Broadcast Now", null, "primary")
+
+operationalSection = Card([opsHeading, tasksTable, reportBtn], "sunk", "column", "m")
+opsHeading = Heading("Operational Tasks", "h3")
+tasksTable = Table([taskDesc, taskAssign])
+taskDesc = Col("Task", ["Deploy Sandbags Zone A", "Verify Shelter C Power", "Coordinate Air Lift"])
+taskAssign = Col("Assignee", ["Team Alpha", "Eng. Sarah", "Cmdr. Miller"])
+reportBtn = Buttons([sitRepBtn])
+sitRepBtn = Button("File Situation Report", null, "secondary")
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Filter incidents by Critical severity")
+f2 = FollowUpItem("Generate resource gap analysis")

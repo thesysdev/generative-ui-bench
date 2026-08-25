@@ -1,0 +1,87 @@
+root = Card([header, kpiSection, revenueSection, churnSection, signupsSection, planSection, topCustomersSection, atRiskSection, failedPaymentsSection, adoptionSection, npsSection, periodSection, seatUtilSection, inviteSection], "clear")
+
+header = CardHeader("SaaS Admin Overview", "December 2024")
+
+kpiSection = Card([kpisHeading, kpiCards], "sunk")
+kpisHeading = Heading("Key Metrics", "h3")
+kpis = Table([kpiName, kpiValue])
+kpiName = Col("Metric", ["MRR", "ARR", "Churn Rate", "New Signups (90d)", "NPS", "Seat Utilization"])
+kpiValue = Col("Value", ["$128,400", "$197,800", "2.1%", "342", "72", "87%"])
+
+revenueSection = Card([revenueHeading, mrrChart, arrChart, churnChart], "sunk")
+revenueHeading = Heading("Revenue Overview", "h3")
+mrrChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [mrrSeries], "linear", "Month", "MRR")
+mrrSeries = Series("MRR", [110000, 112000, 115000, 118000, 120000, 122000, 124000, 126000, 128000, 129000, 130000, 131000])
+arrChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [arrSeries], "linear", "Month", "ARR")
+arrSeries = Series("ARR", [185000, 187000, 189000, 192000, 194000, 196000, 198000, 200000, 203000, 205000, 207000, 209000])
+churnChart = HorizontalBarChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [churnSeries], "grouped", "Month", "Churn %")
+churnSeries = Series("Churn %", [1.8, 2.0, 1.9, 2.2, 2.1, 2.0, 2.3, 2.1, 2.0, 2.2, 2.1, 2.1])
+
+churnSection = Card([churnHeading, churnTable, churnDetail], "sunk")
+churnHeading = Heading("Churn This Month", "h3")
+churnTable = Table([churnCol, churnValue])
+churnCol = Col("Customer", "Churn Rate")
+churnValue = Col("Value", ["2.1%", "2.1%", "2.1%"])
+churnDetail = TextCallout("neutral", "Churn rate is within the 30-day rolling average of 2.0%", "info")
+
+signupsSection = Card([signupsHeading, signupsChart, signupsDetail], "sunk")
+signupsHeading = Heading("New Signups (Past 90 Days)", "h3")
+signupsChart = HorizontalBarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [signupSeries], "grouped", "Week", "Signups")
+signupSeries = Series("Signups", [45, 52, 68, 77])
+signupsDetail = TextCallout("info", "342 new customers in the last 90 days", "info")
+
+planSection = Card([planHeading, planChart, planBreakdown], "sunk")
+planHeading = Heading("Customers by Plan", "h3")
+planChart = PieChart(["Pro", "Enterprise", "Starter", "Free"], [312, 148, 210, 80], "circular")
+planBreakdown = TextCallout("neutral", "Pro: 312, Enterprise: 148, Starter: 210, Free: 80", "info")
+
+topCustomersSection = Card([topCustomersHeading, topCustomersTable, topCustomersDetail], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h3")
+topCustomersTable = Table([topCustomerCol, topCustomerValue, topCustomerSpend])
+topCustomerCol = Col("Customer", "Seats", "Spend")
+topCustomerValue = Col("Value", ["Alice Corp", "12", "$48,200"], ["Bob Inc", "8", "$31,500"], ["Carol LLC", "15", "$52,800"], ["Dave Co", "6", "$24,100"], ["Eve Ltd", "10", "$38,900"], ["Frank Inc", "9", "$35,200"], ["Grace LLC", "7", "$29,600"], ["Hank Co", "11", "$41,300"], ["Ivy LLC", "5", "$22,400"])
+topCustomersDetail = TextCallout("info", "Top customers by seats and spend", "info")
+
+atRiskSection = Card([atRiskHeading, atRiskTable, atRiskDetail], "sunk")
+atRiskHeading = Heading("Accounts at Risk", "h3")
+atRiskTable = Table([atRiskCol, atRiskReason])
+atRiskCol = Col("Account", "Reason")
+atRiskReason = Col("Value", ["Alice Corp - missed 2 payments", "Bob Inc - billing inquiry", "Carol LLC - contract renewal", "Dave Co - low engagement", "Eve Ltd - support ticket unresolved", "Frank Inc - plan downgrade", "Grace LLC - account inactivity", "Hank Co - payment failure", "Ivy LLC - SLA breach", "Jack Inc - data loss"])
+atRiskDetail = TextCallout("danger", "10 accounts at risk. 4 require immediate intervention.", "danger")
+
+failedPaymentsSection = Card([failedPaymentsHeading, failedPaymentsTable, failedPaymentsRetry], "sunk")
+failedPaymentsHeading = Heading("Failed Payments", "h3")
+failedPaymentsTable = Table([failedPaymentsCol, failedPaymentsStatus, failedPaymentsRetryBtn])
+failedPaymentsCol = Col("Customer", "Amount", "Status")
+failedPaymentsRetryBtn = Col("Action", ["Alice Corp", "$480", "Pending"], ["Bob Inc", "$310", "Pending"], ["Carol LLC", "$520", "Failed"], ["Dave Co", "$240", "Pending"], ["Eve Ltd", "$380", "Failed"])
+failedPaymentsRetry = Button("Retry Payment", null, "primary")
+
+adoptionSection = Card([adoptionHeading, adoptionChart], "sunk")
+adoptionHeading = Heading("Feature Adoption (Newest 3)", "h3")
+adoptionChart = HorizontalBarChart(["Feature A", "Feature B", "Feature C"], [adoptionSeries], "grouped", "Feature", "Adoption %")
+adoptionSeries = Series("Adoption %", [45, 32, 28])
+
+npsSection = Card([npsHeading, npsScore, npsDetail], "sunk")
+npsHeading = Heading("Current NPS", "h3")
+npsScore = Progress(72, "NPS Score")
+npsDetail = TextCallout("info", "NPS score is 72 (excellent)", "info")
+
+periodSection = Card([periodHeading, periodSelect], "sunk")
+periodHeading = Heading("Reporting Period", "h3")
+periodSelect = Select("period", [
+    SelectItem("Last 30 days", "30d"),
+    SelectItem("Last 90 days", "90d"),
+    SelectItem("Last 12 months", "12m"),
+    SelectItem("Year to date", "ytd"),
+], "Select a period", "info")
+
+seatUtilSection = Card([seatUtilHeading, seatUtilChart, seatUtilDetail], "sunk")
+seatUtilHeading = Heading("Seat Utilization", "h3")
+seatUtilChart = SingleStackedBarChart(["All", "Sales", "Support", "Engineering", "Finance", "Marketing"], [utilSeries], "grouped", "Team", "Utilization %")
+utilSeries = Series("Utilization %", [75, 82, 68, 90, 71, 65])
+seatUtilDetail = TextCallout("neutral", "87% of total seats are in use across the company", "info")
+
+inviteSection = Card([inviteHeading, inviteInput, inviteBtn], "sunk")
+inviteHeading = Heading("Invite Admin", "h3")
+inviteInput = Input("email", "admin@example.com", "email")
+inviteBtn = Button("Send Invitation", null, "primary")

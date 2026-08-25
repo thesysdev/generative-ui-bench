@@ -1,0 +1,48 @@
+root = Card([header, overviewRow, renewalAlert, activitySection, contactsSection, followUpsSection, noteSection, logCallSection])
+
+header = CardHeader("Acme Corporation", "Owner: Sarah Chen")
+
+overviewRow = Card([dealValueCard, dealStageCard], "sunk", "row", "l")
+dealValueCard = TextCallout("neutral", "Total Deal Value", "$248,500")
+dealStageCard = TextCallout("info", "Current Stage", "Negotiation")
+
+renewalAlert = Callout("warning", "Renewal approaching", "Contract renews on Nov 15, 2025 — 12 days from now")
+
+activitySection = Card([activityHeading, activityList], "sunk")
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([act1, act2, act3, act4])
+act1 = ListItem("Call with Sarah Chen", "Discussed pricing options — Oct 28, 2025")
+act2 = ListItem("Email sent: Proposal v2", "Oct 26, 2025")
+act3 = ListItem("Meeting: Demo walkthrough", "Oct 22, 2025")
+act4 = ListItem("Deal stage updated to Negotiation", "Oct 20, 2025")
+
+contactsSection = Card([contactsHeading, contactsTable], "sunk")
+contactsHeading = Heading("Contacts", "h3")
+contactsTable = Table([contactName, contactRole, contactEmail])
+contactName = Col("Name", ["Sarah Chen", "Mike Torres", "Linda Park"])
+contactRole = Col("Role", ["VP Sales", "IT Director", "Procurement Lead"])
+contactEmail = Col("Email", ["sarah@acme.com", "mike@acme.com", "linda@acme.com"])
+
+followUpsSection = Card([followUpsHeading, followUpsTable], "sunk")
+followUpsHeading = Heading("Open Follow-ups", "h3")
+followUpsTable = Table([followUpTask, followUpDue])
+followUpTask = Col("Task", ["Send updated contract", "Schedule legal review call", "Confirm budget approval"])
+followUpDue = Col("Due Date", ["Nov 1, 2025", "Nov 3, 2025", "Nov 5, 2025"])
+
+noteSection = Card([noteHeading, noteForm], "sunk")
+noteHeading = Heading("Add a Note", "h3")
+noteForm = Form("add-note", noteButtons, [noteField])
+noteField = FormControl("Note", noteInput)
+noteInput = TextArea("note", "Type your note here...", 4)
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary")
+
+logCallSection = Card([logCallHeading, logCallForm], "sunk")
+logCallHeading = Heading("Log a Call", "h3")
+logCallForm = Form("log-call", logCallButtons, [callDateField, callNotesField])
+callDateField = FormControl("Call Date", callDatePicker)
+callDatePicker = DatePicker("call_date", "single")
+callNotesField = FormControl("Call Summary", callNotesInput)
+callNotesInput = TextArea("call_notes", "Summary of the call...", 3)
+logCallButtons = Buttons([logCallBtn])
+logCallBtn = Button("Log Call", null, "primary")

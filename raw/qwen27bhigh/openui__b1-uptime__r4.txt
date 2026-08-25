@@ -1,0 +1,13 @@
+
+
+root = Card([header, uptimeSection, incidentSection, followUp])
+header = CardHeader("Platform Status", "API Uptime & Incident Summary — June 2025")
+uptimeSection = Card([uptimeLabel, uptimeBar, uptimeDetail], "sunk", "column", "s")
+uptimeLabel = Heading("API Uptime This Month", "h3")
+uptimeBar = Progress(99.97, "99.97% uptime (target: 99.95% SLA)")
+uptimeDetail = TextContent("Measured across all API endpoints over the last 30 days. The SLA target of 99.95% was met.", "small")
+incidentSection = Card([incidentHeading, incidentCallout], "sunk", "column", "s")
+incidentHeading = Heading("Most Recent Incident", "h3")
+incidentCallout = Callout("warning", "INC-2025-0614 — Elevated 5xx errors on /v2/orders", "Between 14:22 UTC and 14:47 UTC on June 14, a misconfigured autoscaling rule caused intermittent 502 responses on the /v2/orders endpoint. The issue was resolved by rolling back the offending deployment. No data loss occurred. Postmortem is scheduled for June 18.")
+followUp = FollowUpBlock([fu1])
+fu1 = FollowUpItem("Show full incident timeline and affected endpoints")

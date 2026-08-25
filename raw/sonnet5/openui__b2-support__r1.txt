@@ -1,0 +1,20 @@
+root = Card([header, statsRow, ticketsSection, filterActions, newTicketAction])
+header = CardHeader("Support Morning View", "Ticket status as of this morning")
+statsRow = Card([openTicketsStat, avgResponseStat], "sunk", "row", "l")
+openTicketsStat = TextCallout("info", "Open Tickets", "23 tickets currently open")
+avgResponseStat = TextCallout("neutral", "Avg First Response Time", "1h 42m")
+
+ticketsSection = Card([ticketsHeading, ticketsTable], "clear")
+ticketsHeading = Heading("5 Most Recent Tickets", "h3")
+ticketsTable = Table([colId, colSubject, colPriority, colStatus])
+colId = Col("Ticket ID", ["#4821", "#4820", "#4819", "#4818", "#4817"])
+colSubject = Col("Subject", ["Login fails on mobile app", "Invoice discrepancy for March", "Feature request: dark mode", "Password reset not working", "API rate limit questions"])
+colPriority = Col("Priority", ["High", "Medium", "Low", "High", "Medium"])
+colStatus = Col("Status", ["Open", "Open", "Pending", "Open", "Open"])
+
+filterActions = Buttons([highPriorityBtn, allTicketsBtn])
+highPriorityBtn = Button("Show high priority only", null, "secondary")
+allTicketsBtn = Button("Show all tickets", null, "tertiary")
+
+newTicketAction = Buttons([newTicketBtn])
+newTicketBtn = Button("Open new ticket", null, "primary")

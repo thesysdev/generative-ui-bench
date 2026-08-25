@@ -1,0 +1,49 @@
+```openui
+root = Card([
+  monthlyRevenue, annualRevenue, churn, newSignups, customerSplit, topCustomers, atRiskAccounts, failedPayments, featureAdoption, currentNPS, reportingPeriod, seatUtilization, inviteAdmin
+])
+
+monthlyRevenue = CardHeader("Monthly Recurring Revenue", "Last 30 days")
+annualRevenue = CardHeader("Annual Recurring Revenue", "Projected for the year")
+churn = Callout("churn", "Churn This Month", "5% of users left this month", "warning")
+newSignups = CardHeader("New Signups", "Over the past 90 days")
+customerSplit = PieChart(["Basic", "Pro", "Enterprise"], [150, 45, 5], "pie", "Customer Split by Plan")
+topCustomers = Table([customerName, seats, spend])
+customerName = Col("Customer", ["Acme Corp", "Beta LLC", "Gamma Inc", "Delta Systems", "Epsilon Ltd", "Zeta Co", "Eta LLC", "Theta Inc", "Iota Corp", "Kappa LLC"])
+seats = Col("Seats", [50, 200, 75, 120, 30, 45, 60, 90, 25, 80])
+spend = Col("Spend", ["$10,000", "$50,000", "$12,000", "$24,000", "$5,000", "$9,000", "$15,000", "$18,000", "$4,000", "$16,000"])
+atRiskAccounts = Card([
+  atRiskHeader, atRiskTable
+])
+atRiskHeader = CardHeader("Accounts At Risk", "With reasons")
+atRiskTable = Table([accountId, reason])
+accountId = Col("Account ID", ["1001", "1005", "1010", "1015"])
+reason = Col("Reason", ["Low usage", "Delayed payment", "Inactive for 30 days", "Usage below plan"])
+failedPayments = Card([
+  failedPaymentsHeader, failedPaymentsList
+])
+failedPaymentsHeader = CardHeader("Failed Payments", "With retry options")
+failedPaymentsList = Buttons([retryPayment1, retryPayment2, retryPayment3, retryPayment4])
+retryPayment1 = Button("Retry Payment 1001", null, "secondary")
+retryPayment2 = Button("Retry Payment 1005", null, "secondary")
+retryPayment3 = Button("Retry Payment 1010", null, "secondary")
+retryPayment4 = Button("Retry Payment 1015", null, "secondary")
+featureAdoption = Card([
+  featureAdoptionHeader, featureAdoptionChart
+])
+featureAdoptionHeader = CardHeader("Adoption of New Features", "Last 30 days")
+featureAdoptionChart = BarChart(["Feature A", "Feature B", "Feature C"], [featureASeries, featureBseries, featureCseries], "grouped", "Feature", "Adoption %")
+featureASeries = Series("Feature A", [75, 65, 85])
+featureBseries = Series("Feature B", [60, 70, 80])
+featureCseries = Series("Feature C", [50, 55, 65])
+currentNPS = CardHeader("Current NPS", "Net Promoter Score")
+reportingPeriod = DatePicker("reportingPeriod", "single", null, ["Last 30 days"])
+seatUtilization = CardHeader("Seat Utilization", "Across the company")
+inviteAdmin = DialogBlock("Invite Admin", "Invite Another Admin", null, [inviteForm])
+inviteForm = Form("admin-invite", inviteFormButtons, [emailField])
+emailField = FormControl("Admin Email", adminEmailInput)
+adminEmailInput = Input("email", null, "email")
+inviteFormButtons = Buttons([sendInvite, cancelInvite])
+sendInvite = Button("Send Invite", null, "primary")
+cancelInvite = Button("Cancel", null, "tertiary")
+```

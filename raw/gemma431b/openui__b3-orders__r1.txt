@@ -1,0 +1,39 @@
+root = Card([header, kpiGrid, filters, ordersSection, analyticsSection, followUps])
+
+header = CardHeader("Operations Desk", "Real-time store performance")
+
+kpiGrid = Card([kpiOrders, kpiRevenue, kpiAov, kpiRefunds], "card", "row", "m", "stretch", "between", false)
+kpiOrders = TextCallout("info", "Orders Today", "1,248")
+kpiRevenue = TextCallout("success", "Revenue Today", "$42,150.00")
+kpiAov = TextCallout("neutral", "Avg Order Value", "$33.78")
+kpiRefunds = TextCallout("danger", "Monthly Refund Rate", "2.4%")
+
+filters = Card([searchField, statusFilter], "sunk", "row", "m", "start", "start", false)
+searchField = FormControl("Customer Search", searchInput)
+searchInput = Input("customer_search", "Search by name...")
+statusFilter = FormControl("Filter Status", statusSelect)
+statusSelect = Select("status_filter", [sPending, sShipped, sDelivered, sCancelled], "All Statuses")
+sPending = SelectItem("pending", "Pending")
+sShipped = SelectItem("shipped", "Shipped")
+sDelivered = SelectItem("delivered", "Delivered")
+sCancelled = SelectItem("cancelled", "Cancelled")
+
+ordersSection = Card([ordersHeading, ordersTable], "clear", "column", "s")
+ordersHeading = Heading("Recent Orders", "h3")
+ordersTable = Table([colId, colCustomer, colTotal, colStatus, colAction])
+colId = Col("Order ID", ["#8821", "#8820", "#8819", "#8818", "#8817"])
+colCustomer = Col("Customer", ["Alice Johnson", "Bob Smith", "Charlie Davis", "Diana Prince", "Edward Norton"])
+colTotal = Col("Total", ["$120.00", "$45.50", "$210.00", "$12.99", "$88.00"])
+colStatus = Col("Status", ["Pending", "Shipped", "Pending", "Delivered", "Pending"])
+colAction = Col("Action", ["Fulfill", "Fulfill", "Fulfill", "View", "Fulfill"], "action")
+
+fulfillAction = AlertDialogBlock("Fulfill", "Mark as Fulfilled", "Are you sure you want to mark this order as fulfilled?", "Confirm", "Cancel", "primary")
+
+analyticsSection = Card([analyticsHeading, volumeChart], "sunk", "column", "m")
+analyticsHeading = Heading("Order Volume Trend", "h3")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volSeries], "grouped", "Timeline", "Orders")
+volSeries = Series("Orders", [3100, 2850, 3400, 3210])
+
+followUps = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("Export today's report to CSV")
+fu2 = FollowUpItem("View detailed refund analytics")

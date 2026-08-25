@@ -1,0 +1,339 @@
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "fitness-summary",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "fitness-summary",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "dailyGoalAlert",
+          "metricsTable",
+          "stepProgressLabel",
+          "stepProgressBar",
+          "divider1",
+          "weeklyHeading",
+          "weeklyChart",
+          "divider2",
+          "logWorkoutHeading",
+          "logWorkoutForm"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Daily Fitness Summary",
+        "subtitle": "Thursday, October 24 • Great momentum today!"
+      },
+      {
+        "id": "dailyGoalAlert",
+        "component": "Alert",
+        "title": "Step Goal in Reach",
+        "description": "You are only 1,580 steps away from hitting your 10,000-step target.",
+        "variant": "info"
+      },
+      {
+        "id": "metricsTable",
+        "component": "Table",
+        "columns": [
+          "colMetric",
+          "colCurrent",
+          "colTarget",
+          "colStatus"
+        ]
+      },
+      {
+        "id": "colMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Steps Today",
+          "Active Calories",
+          "Active Time",
+          "Distance"
+        ]
+      },
+      {
+        "id": "colCurrent",
+        "component": "Col",
+        "label": "Current",
+        "data": [
+          "8,420 steps",
+          "620 kcal",
+          "48 mins",
+          "6.1 km"
+        ]
+      },
+      {
+        "id": "colTarget",
+        "component": "Col",
+        "label": "Daily Goal",
+        "data": [
+          "10,000 steps",
+          "600 kcal",
+          "45 mins",
+          "7.0 km"
+        ]
+      },
+      {
+        "id": "colStatus",
+        "component": "Col",
+        "label": "Goal Status",
+        "data": [
+          "84% (In Progress)",
+          "103% (Goal Met)",
+          "107% (Goal Met)",
+          "87% (In Progress)"
+        ]
+      },
+      {
+        "id": "stepProgressLabel",
+        "component": "TextContent",
+        "text": "**Step Progress:** 8,420 / 10,000 steps",
+        "size": "small"
+      },
+      {
+        "id": "stepProgressBar",
+        "component": "Progress",
+        "value": 84,
+        "label": "84% completed"
+      },
+      {
+        "id": "divider1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "weeklyHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Past 7 Days Workout Breakdown (Minutes Active)"
+      },
+      {
+        "id": "weeklyChart",
+        "component": "BarChart",
+        "labels": [
+          "Fri",
+          "Sat",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Today"
+        ],
+        "series": [
+          "cardioSeries",
+          "strengthSeries"
+        ],
+        "variant": "stacked",
+        "xLabel": "Day",
+        "yLabel": "Minutes"
+      },
+      {
+        "id": "cardioSeries",
+        "component": "Series",
+        "category": "Cardio / Running",
+        "values": [
+          30,
+          45,
+          20,
+          35,
+          40,
+          25,
+          30
+        ]
+      },
+      {
+        "id": "strengthSeries",
+        "component": "Series",
+        "category": "Strength / HIIT",
+        "values": [
+          20,
+          0,
+          30,
+          20,
+          0,
+          35,
+          18
+        ]
+      },
+      {
+        "id": "divider2",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "logWorkoutHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Log a New Workout"
+      },
+      {
+        "id": "logWorkoutForm",
+        "component": "Form",
+        "name": "workout_log",
+        "buttons": "formActionButtons",
+        "fields": [
+          "activityTypeField",
+          "durationField",
+          "caloriesField",
+          "intensityField"
+        ]
+      },
+      {
+        "id": "activityTypeField",
+        "component": "FormControl",
+        "label": "Activity Type",
+        "input": "activityTypeSelect"
+      },
+      {
+        "id": "activityTypeSelect",
+        "component": "Select",
+        "name": "activity_type",
+        "placeholder": "Select an activity",
+        "items": [
+          "optRunning",
+          "optCycling",
+          "optStrength",
+          "optHIIT",
+          "optYoga",
+          "optWalking"
+        ]
+      },
+      {
+        "id": "optRunning",
+        "component": "SelectItem",
+        "label": "Outdoor Running",
+        "value": "running"
+      },
+      {
+        "id": "optCycling",
+        "component": "SelectItem",
+        "label": "Cycling",
+        "value": "cycling"
+      },
+      {
+        "id": "optStrength",
+        "component": "SelectItem",
+        "label": "Strength Training",
+        "value": "strength"
+      },
+      {
+        "id": "optHIIT",
+        "component": "SelectItem",
+        "label": "HIIT Session",
+        "value": "hiit"
+      },
+      {
+        "id": "optYoga",
+        "component": "SelectItem",
+        "label": "Yoga / Mobility",
+        "value": "yoga"
+      },
+      {
+        "id": "optWalking",
+        "component": "SelectItem",
+        "label": "Brisk Walk",
+        "value": "walking"
+      },
+      {
+        "id": "durationField",
+        "component": "FormControl",
+        "label": "Duration (minutes)",
+        "input": "durationInput"
+      },
+      {
+        "id": "durationInput",
+        "component": "Input",
+        "name": "duration_mins",
+        "type": "number",
+        "placeholder": "e.g. 30"
+      },
+      {
+        "id": "caloriesField",
+        "component": "FormControl",
+        "label": "Estimated Calories Burned (kcal)",
+        "input": "caloriesInput",
+        "hint": "Optional — leave blank to auto-calculate based on duration"
+      },
+      {
+        "id": "caloriesInput",
+        "component": "Input",
+        "name": "calories_burned",
+        "type": "number",
+        "placeholder": "e.g. 240"
+      },
+      {
+        "id": "intensityField",
+        "component": "FormControl",
+        "label": "Perceived Exertion",
+        "input": "intensityRadio"
+      },
+      {
+        "id": "intensityRadio",
+        "component": "RadioGroup",
+        "name": "intensity",
+        "items": [
+          "intLight",
+          "intModerate",
+          "intHard"
+        ]
+      },
+      {
+        "id": "intLight",
+        "component": "RadioItem",
+        "label": "Light",
+        "description": "Easy conversational pace",
+        "value": "light"
+      },
+      {
+        "id": "intModerate",
+        "component": "RadioItem",
+        "label": "Moderate",
+        "description": "Challenging but sustainable",
+        "value": "moderate"
+      },
+      {
+        "id": "intHard",
+        "component": "RadioItem",
+        "label": "Vigorous / Max",
+        "description": "High heart rate, near peak effort",
+        "value": "hard"
+      },
+      {
+        "id": "formActionButtons",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "saveWorkoutBtn",
+          "resetFormBtn"
+        ]
+      },
+      {
+        "id": "saveWorkoutBtn",
+        "component": "Button",
+        "label": "Save Workout",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFormBtn",
+        "component": "Button",
+        "label": "Clear",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

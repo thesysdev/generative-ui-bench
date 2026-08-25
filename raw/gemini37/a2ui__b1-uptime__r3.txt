@@ -1,0 +1,142 @@
+Here is the platform status page displaying the monthly API uptime, system health, and the most recent incident resolution details.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "systemStatusBadge",
+          "uptimeAlert",
+          "kpiTable",
+          "uptimeProgress",
+          "separator",
+          "incidentHeading",
+          "recentIncidentCallout",
+          "actionButtons"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Platform Health & Status",
+        "subtitle": "Live systems monitoring — Platform Engineering"
+      },
+      {
+        "id": "systemStatusBadge",
+        "component": "Badge",
+        "text": "All Core Systems Operational",
+        "variant": "default"
+      },
+      {
+        "id": "uptimeAlert",
+        "component": "Alert",
+        "variant": "success",
+        "title": "Current Month API Availability",
+        "description": "Production API has maintained 99.94% uptime during the current billing cycle (target SLA: 99.90%)."
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "serviceCol",
+          "uptimeCol",
+          "statusCol"
+        ]
+      },
+      {
+        "id": "serviceCol",
+        "component": "Col",
+        "label": "Service",
+        "data": [
+          "Public API Gateway",
+          "Authentication Service",
+          "Core Data Ingestion",
+          "Webhook Dispatcher"
+        ]
+      },
+      {
+        "id": "uptimeCol",
+        "component": "Col",
+        "label": "MTD Uptime",
+        "data": [
+          "99.94%",
+          "99.99%",
+          "99.91%",
+          "99.88%"
+        ]
+      },
+      {
+        "id": "statusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Healthy",
+          "Healthy",
+          "Healthy",
+          "Healthy"
+        ]
+      },
+      {
+        "id": "uptimeProgress",
+        "component": "Progress",
+        "label": "Month-to-Date SLA Target Progress (99.94% achieved)",
+        "value": 99.94
+      },
+      {
+        "id": "separator",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "incidentHeading",
+        "component": "Heading",
+        "text": "Most Recent Incident",
+        "level": "h3"
+      },
+      {
+        "id": "recentIncidentCallout",
+        "component": "Callout",
+        "variant": "neutral",
+        "title": "INC-4102: API Gateway Latency Spike (Resolved)",
+        "description": "A database connection pool exhaustion caused elevated 504 Gateway Timeouts for roughly 18 minutes. Root cause mitigated via horizontal pod autoscaling and pool re-allocation. Resolved: Oct 24, 2024 at 14:32 UTC."
+      },
+      {
+        "id": "actionButtons",
+        "component": "Buttons",
+        "buttons": [
+          "historyBtn",
+          "subscribeBtn"
+        ]
+      },
+      {
+        "id": "historyBtn",
+        "component": "Button",
+        "label": "View Incident Archive",
+        "variant": "secondary"
+      },
+      {
+        "id": "subscribeBtn",
+        "component": "Button",
+        "label": "Subscribe to Updates",
+        "variant": "primary"
+      }
+    ]
+  }
+}
+</a2ui-json>

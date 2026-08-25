@@ -1,0 +1,152 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title: "Admin Overview",
+      subtitle: "SaaS Company Dashboard"
+    ),
+    Section(
+      title: "Financial Metrics",
+      children: [
+        Accordion(
+          items: [
+            { value: "monthly_recurring_revenue", trigger: "monthly_rmr", content: [MrrCard()] },
+            { value: "annual_recurring_revenue", trigger: "annual_rmr", content: [ArrCard()] },
+            { value: "churn_this_month", trigger: "churn_today", content: [ChurnCard()] },
+            { value: "new_signups_90d", trigger: "new_signups", content: [SignupCard()] }
+          ]
+        )
+      ]
+    ),
+    Section(
+      title: "Customer Insights",
+      children: [
+        TableCard(
+          columns: [
+            { label: "Plan", type: "string" },
+            { label: "Customers", type: "number" },
+            { label: "Seats", type: "number" },
+            { label: "Spend ($)", type: "number" }
+          ],
+          data: [
+            { plan: "Enterprise", customers: 45, seats: 450, spend: 450000 },
+            { plan: "Professional", customers: 78, seats: 780, spend: 78000 },
+            { plan: "Starter", customers: 156, seats: 1560, spend: 15000 },
+            { plan: "Developer", customers: 32, seats: 320, spend: 3200 },
+            { plan: "Team", customers: 56, seats: 560, spend: 5600 }
+          ]
+        ),
+        TableCard(
+          columns: [
+            { label: "Customer ID", type: "string" },
+            { label: "Seats", type: "number" },
+            { label: "Spend ($)", type: "number" }
+          ],
+          data: [
+            { id: "CUST-1001", seats: 50, spend: 60000 },
+            { id: "CUST-1002", seats: 75, spend: 90000 },
+            { id: "CUST-1003", seats: 30, spend: 3000 },
+            { id: "CUST-1004", seats: 60, spend: 7500 },
+            { id: "CUST-1005", seats: 40, spend: 4000 }
+          ]
+        ),
+        ListBlock(
+          items: [
+            { text: "Acme Corp", type: "tag", variant: "info" },
+            { text: "Globex Inc", type: "tag", variant: "warning" },
+            { text: "Synthetix", type: "tag", variant: "success" }
+          ]
+        )
+      ]
+    ),
+    Section(
+      title: "Operations",
+      children: [
+        ChartCard(
+          type: "bar",
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+          series: [
+            {
+              category: "Feature Alpha",
+              values: [85, 92, 88, 95, 90, 98, 92, 94]
+            },
+            {
+              category: "Feature Beta",
+              values: [70, 75, 80, 85, 82, 88, 90, 87]
+            },
+            {
+              category: "Feature Gamma",
+              values: [90, 88, 92, 95, 91, 93, 96, 94]
+            }
+          ],
+          xLabel: "Month",
+          yLabel: "Adoption Score"
+        ),
+        MetricCard(
+          title: "NPS Score",
+          value: "42",
+          subtype: "default",
+          color: "#4CAF50"
+        )
+      ]
+    ),
+    Section(
+      title: "Account Health",
+      children: [
+        ListBlock(
+          items: [
+            { text: "Account A - Churned", variant: "warning", action: "retry_payment" },
+            { text: "Account B - At Risk", variant: "warning", action: "review" },
+            { text: "Account C - Healthy", variant: "success" }
+          ]
+        )
+      ]
+    ),
+    Section(
+      title: "Failed Payments",
+      children: [
+        ListBlock(
+          items: [
+            { text: "Payment #P-001 - Failed", variant: "danger", action: "retry" },
+            { text: "Payment #P-002 - Failed", variant: "danger", action: "retry" },
+            { text: "Payment #P-003 - Failed", variant: "danger", action: "retry" }
+          ]
+        )
+      ]
+    ),
+    Section(
+      title: "Seat Utilization",
+      children: [
+        CardHeader(
+          title: "Seat Utilization",
+          subtitle: "Current capacity vs usage"
+        ),
+        TableCard(
+          columns: [
+            { label: "Team", type: "string" },
+            { label: "Total Seats", type: "number" },
+            { label: "Used Seats", type: "number" },
+            { label: "Utilization %", type: "number" }
+          ],
+          data: [
+            { team: "Engineering", total: 120, used: 108, percent: 90 },
+            { team: "Product", total: 85, used: 72, percent: 85 },
+            { team: "Sales", total: 60, used: 48, percent: 80 },
+            { team: "Support", total: 40, used: 35, percent: 88 }
+          ]
+        )
+      ]
+    ),
+    Section(
+      title: "Invite Admin",
+      children: [
+        Button(
+          label: "Add Another Admin",
+          variant: "primary",
+          action: "invite_admin"
+        )
+      ]
+    )
+  ]
+)
+```

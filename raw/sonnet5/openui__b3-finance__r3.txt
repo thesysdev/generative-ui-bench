@@ -1,0 +1,50 @@
+root = Card([header, kpiRow, expenseSection, transactionsSection, controlsSection])
+
+header = CardHeader("Month-End Finance Review", "October 2024")
+
+kpiRow = Card([kpiCash, kpiBurn, kpiRunway], "clear", "row", "l")
+kpiCash = Card([cashHeading, cashValue, cashSub], "sunk")
+cashHeading = TextContent("Cash on Hand", "small")
+cashValue = TextContent("$1,842,300", "large-heavy")
+cashSub = Tag("As of Oct 31", null, "sm", "info")
+
+kpiBurn = Card([burnHeading, burnValue, burnSub], "sunk")
+burnHeading = TextContent("Monthly Burn", "small")
+burnValue = TextContent("$186,400", "large-heavy")
+burnSub = Tag("+4% vs last month", null, "sm", "warning")
+
+kpiRunway = Card([runwayHeading, runwayValue, runwaySub], "sunk")
+runwayHeading = TextContent("Months of Runway", "small")
+runwayValue = TextContent("9.9 months", "large-heavy")
+runwaySub = Tag("Healthy", null, "sm", "success")
+
+expenseSection = Card([expenseHeading, expenseChart, expenseTags], "clear")
+expenseHeading = Heading("Expenses by Category", "h3")
+expenseChart = PieChart(expenseLabels, expenseValues, "donut")
+expenseLabels = ["Payroll", "Cloud Infra", "Marketing", "Office & Ops", "Software Tools", "Other"]
+expenseValues = [98000, 42000, 21000, 12500, 8900, 4000]
+expenseTags = TagBlock(["Payroll 52%", "Infra 22%", "Marketing 11%", "Ops 7%", "Tools 5%", "Other 3%"])
+
+transactionsSection = Card([txHeading, txTable], "clear")
+txHeading = Heading("Transactions Above $10,000", "h3")
+txTable = Table([txDate, txDesc, txCategory, txAmount])
+txDate = Col("Date", ["Oct 3", "Oct 7", "Oct 12", "Oct 15", "Oct 21", "Oct 28"])
+txDesc = Col("Description", ["Payroll Run - Eng Team", "AWS Infrastructure", "Series A Legal Fees", "Q4 Ad Campaign - Google", "Office Lease Payment", "Payroll Run - Sales Team"])
+txCategory = Col("Category", ["Payroll", "Cloud Infra", "Professional Services", "Marketing", "Office & Ops", "Payroll"])
+txAmount = Col("Amount", ["$62,400", "$38,200", "$24,000", "$15,800", "$12,500", "$41,900"], "number")
+
+controlsSection = Card([controlsHeading, monthForm, downloadRow], "sunk")
+controlsHeading = Heading("Report Controls", "h3")
+monthForm = Form("month_select", monthFormButtons, [monthField])
+monthField = FormControl("Select month to view", monthSelect, "Switch to any prior closed month")
+monthSelect = Select("month", [m1, m2, m3, m4, m5], "Choose a month", null, "oct2024")
+m1 = SelectItem("oct2024", "October 2024")
+m2 = SelectItem("sep2024", "September 2024")
+m3 = SelectItem("aug2024", "August 2024")
+m4 = SelectItem("jul2024", "July 2024")
+m5 = SelectItem("jun2024", "June 2024")
+monthFormButtons = Buttons([viewBtn])
+viewBtn = Button("View month", null, "primary")
+
+downloadRow = Buttons([downloadBtn])
+downloadBtn = Button("Download statement (PDF)", null, "secondary")

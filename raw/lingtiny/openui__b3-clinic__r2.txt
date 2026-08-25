@@ -1,0 +1,33 @@
+root = Card([header, summary, appointments, rooms, nextPatient, checkIn, moveDay, actions], "sunk")
+header = CardHeader("Today's Clinic Day View", "Receptionist dashboard")
+summary = Card([patientCount, noShowRate, nextCalled, freeRooms], "sunk")
+patientCount = CardHeader("Patients Expected Today", "12 scheduled")
+noShowRate = CardHeader("No-Show Rate This Month", "8 patients did not show up")
+nextCalled = CardHeader("Next Patient Called", "Maria Lopez - 10:30 AM")
+freeRooms = CardHeader("Free Rooms Available", "4 rooms open")
+appointments = CardHeader("Today's Appointments", "8 scheduled")
+appointmentRows = [
+  {time: "08:00 AM", patient: "John Smith", room: "Room 1"},
+  {time: "09:15 AM", patient: "Maria Lopez", room: "Room 3"},
+  {time: "10:00 AM", patient: "David Chen", room: "Room 2"},
+  {time: "11:00 AM", patient: "Sarah Wilson", room: "Room 4"},
+  {time: "01:30 PM", patient: "James Brown", room: "Room 1"},
+  {time: "02:00 PM", patient: "Emily Davis", room: "Room 3"},
+  {time: "03:15 PM", patient: "Robert Kim", room: "Room 2"},
+  {time: "04:00 PM", patient: "Lisa Anderson", room: "Room 4"},
+]
+apptTable = Table([
+  Col("Time", ["08:00 AM", "09:15 AM", "10:00 AM", "11:00 AM", "01:30 PM", "02:00 PM", "03:15 PM", "04:00 PM"]),
+  Col("Patient", ["John Smith", "Maria Lopez", "David Chen", "Sarah Wilson", "James Brown", "Emily Davis", "Robert Kim", "Lisa Anderson"]),
+  Col("Room", ["Room 1", "Room 3", "Room 2", "Room 4", "Room 1", "Room 3", "Room 2", "Room 4"]),
+])
+freeRoomsTable = Table([
+  Col("Room", ["Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6"]),
+  Col("Status", ["Free", "Free", "Free", "Free", "Occupied", "Occupied"]),
+])
+nextPatient = CardHeader("Next Patient Called", "Maria Lopez - 10:30 AM")
+checkIn = CardHeader("Check Patient In", "Scan QR or enter name")
+moveDay = CardHeader("Move to Another Day", "Select a date")
+actions = Buttons([checkInBtn, moveDayBtn], "column")
+checkInBtn = Button("Check Patient In", null, "primary")
+moveDayBtn = Button("Move to Another Day", null, "secondary")

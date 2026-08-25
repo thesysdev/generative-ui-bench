@@ -1,0 +1,50 @@
+root = Card([header, filterCard, activeLearnersCard, completionCard, quizCard, engagementCard, coursesCard, atRiskSection, messageBtn], "card", "column", "m")
+
+header = CardHeader("Training Platform Analytics", "Real-time overview of learner performance and engagement")
+
+filterCard = Card([filterHeading, filterForm], "sunk", "column", "m")
+filterHeading = Heading("Cohort Filter", "h3")
+filterForm = Form("cohort-filter", filterButtons, [cohortField])
+filterButtons = Buttons([applyFilterBtn])
+applyFilterBtn = Button("Apply Filter", null, "primary", "normal", "small")
+cohortField = FormControl("Select Cohort", cohortSelect)
+cohortSelect = Select("cohort", [opt1, opt2, opt3, opt4, opt5], "Choose a cohort to filter by")
+opt1 = SelectItem("all", "All Cohorts")
+opt2 = SelectItem("frontend-basics", "Frontend Basics (Jan)")
+opt3 = SelectItem("data-science", "Data Science Intro (Feb)")
+opt4 = SelectItem("ux-design", "UX Design Fundamentals (Mar)")
+opt5 = SelectItem("python-intermediate", "Python Intermediate (Apr)")
+
+activeLearnersCard = Card([activeLearnersHeading, activeLearnersValue], "sunk", "column", "none")
+activeLearnersHeading = Heading("Active Learners This Week", "h4")
+activeLearnersValue = Heading("1,247", "h1")
+
+completionCard = Card([completionHeading, completionValue], "sunk", "column", "none")
+completionHeading = Heading("Course Completion Rate", "h4")
+completionValue = Heading("73.5%", "h1")
+
+quizCard = Card([quizHeading, quizValue], "sunk", "column", "none")
+quizHeading = Heading("Average Quiz Score", "h4")
+quizValue = Heading("81.2%", "h1")
+
+engagementCard = Card([engagementHeading, engagementChart], "sunk", "column", "m")
+engagementHeading = Heading("Engagement — Past 8 Weeks", "h3")
+engagementChart = AreaChart(weekLabels, [engagementSeries], "natural", "Week", "Sessions")
+weekLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+engagementSeries = Series("Sessions", [1240, 1380, 1150, 1520, 1680, 1450, 1720, 1890])
+
+coursesCard = Card([coursesHeading, coursesChart], "sunk", "column", "m")
+coursesHeading = Heading("Courses Ranked by Enrollment", "h3")
+coursesChart = HorizontalBarChart(courseNames, [courseSeries], "grouped", "Enrollment", "Course")
+courseNames = ["Frontend Basics", "Data Science Intro", "UX Design Fundamentals", "Python Intermediate", "Advanced React", "Cloud Computing 101", "Machine Learning A-Z", "Mobile App Dev"]
+courseSeries = Series("Enrollment", [482, 395, 341, 287, 256, 198, 174, 143])
+
+atRiskSection = Card([atRiskHeading, atRiskTable], "sunk", "column", "m")
+atRiskHeading = Heading("Learners at Risk of Dropping Out", "h3")
+atRiskTable = Table([atRiskName, atRiskCourse, atRiskLastActive, atRiskLevel])
+atRiskName = Col("Learner", ["Maria Chen", "James Okafor", "Sofia Reyes", "Liam Patel", "Aisha Mohammed", "Ethan Kim", "Priya Sharma"])
+atRiskCourse = Col("Course", ["Data Science Intro", "Frontend Basics", "UX Design Fundamentals", "Python Intermediate", "Advanced React", "Cloud Computing 101", "Machine Learning A-Z"])
+atRiskLastActive = Col("Last Active", ["6 days ago", "8 days ago", "5 days ago", "7 days ago", "9 days ago", "10 days ago", "6 days ago"])
+atRiskLevel = Col("Risk", ["High", "High", "Medium", "High", "Critical", "Critical", "High"])
+
+messageBtn = Button("Message Selected Cohort", null, "secondary", "normal", "medium")

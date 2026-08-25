@@ -1,0 +1,105 @@
+```openui-lang
+root = Card([header, statsDashboard, eventsSection, reportsSection, experimentsSection, patchNotesSection, serverFocusSection, hotfixSection])
+
+header = CardHeader("Live-Ops Dashboard", "Real-time game metrics and operations")
+
+statsDashboard = Card([playersOnline, activePlayers, revenueMetrics, sessionLength, topItems], "sunk")
+playersOnline = Card([playerCount, regionSelector], "card")
+playerCount = Card([onlinePlayers, regionHealth], "card")
+onlinePlayers = CardHeader("Players Online", "1,423 (Peak: 1,650)")
+regionHealth = TagBlock(["North America: Healthy", "Europe: Healthy", "Asia: Degraded", "South America: Warning"])
+
+activePlayers = Card([dailyActive, monthlyActive], "card")
+dailyActive = Card([activePlayersText, activePlayersGraph], "card")
+activePlayersText = CardHeader("Daily Active Players", "87,245")
+activePlayersGraph = LineChart(["Jan 1", "Jan 2", "Jan 3", "Jan 4", "Jan 5"], [seriesDailyActive], "natural", "Day", "Players")
+
+monthlyActive = Card([monthlyActiveText, monthlyActiveGraph], "card")
+monthlyActiveText = CardHeader("Monthly Active Players", "245,678")
+monthlyActiveGraph = AreaChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29"], [seriesMonthlyActive], "natural", "Day", "Players")
+
+revenueMetrics = Card([revenueToday, revenuePerUser], "card")
+revenueToday = CardHeader("Revenue Today", "$12,456.78")
+revenuePerUser = CardHeader("Revenue Per User", "$0.14")
+
+sessionLength = Card([sessionChart], "card")
+sessionChart = LineChart(["Week 1", "Week 2"], [seriesSessionLength], "natural", "Week", "Minutes")
+
+topItems = Card([bestSellingItems], "card")
+bestSellingItems = Table([itemName, itemUnits])
+itemName = Col("Item", ["Dragon Sword", "Royal Armor", "Elixir of Life", "Ancient Artifact"])
+itemUnits = Col("Units Sold", ["4,231", "2,876", "1,543", "987"])
+
+eventsSection = Card([liveEvents, upcomingEvents], "sunk")
+liveEvents = Card([liveEvent1, liveEvent2], "card")
+liveEvent1 = CardHeader("Dragon Hunt", "Ongoing - 3 days left")
+liveEvent2 = CardHeader("Royal Tournament", "Ongoing - 2 days left")
+
+upcomingEvents = Card([event1, event2, event3], "card")
+event1 = CardHeader("Mythic Quests", "Starts in 2 days")
+event2 = CardHeader("New Zone Unlock", "Starts in 5 days")
+event3 = CardHeader("Cosmetic Drop Event", "Starts in 7 days")
+
+reportsSection = Card([playerReports, banAppeals], "sunk")
+playerReports = Card([reportCount, reportDetails], "card")
+reportCount = CardHeader("Player Reports", "142 awaiting review")
+reportDetails = Table([reportType, reportCountData])
+reportType = Col("Type", ["Cheating", "Toxicity", "Bug Report", "Abuse"])
+reportCountData = Col("Count", ["45", "67", "23", "8"])
+
+banAppeals = Card([appealCount, appealDetails], "card")
+appealCount = CardHeader("Ban Appeals", "28 awaiting review")
+appealDetails = Table([appealStatus, appealCountData])
+appealStatus = Col("Status", ["Pending", "Approved", "Denied"])
+appealCountData = Col("Count", ["22", "5", "1"])
+
+experimentsSection = Card([experimentResults], "sunk")
+experimentResults = Card([experiment1, experiment2], "card")
+experiment1 = CardHeader("New UI Layout", "Conversion Rate: 12.5% (+3.2%)")
+experiment2 = CardHeader("Loot Drop Change", "Engagement: 18.7% (+2.1%)")
+
+patchNotesSection = Card([patchNotesForm], "sunk")
+patchNotesForm = Form("patch-notes", patchNotesButtons, [patchNotesTextArea])
+patchNotesTextArea = FormControl("Patch Notes", patchNotesInput, "Draft your patch notes here")
+patchNotesInput = TextArea("notes", "Type your patch notes...", 10)
+patchNotesButtons = Buttons([savePatchNotesBtn])
+savePatchNotesBtn = Button("Save Draft", null, "primary")
+
+serverFocusSection = Card([serverRegionSelector], "sunk")
+serverRegionSelector = Form("region-focus", regionFocusButtons, [regionSelect])
+regionSelect = FormControl("Focus Region", regionDropdown)
+regionDropdown = Select("region", [regionNA, regionEU, regionAS], "Select a region")
+regionNA = SelectItem("North America", "North America")
+regionEU = SelectItem("Europe", "Europe")
+regionAS = SelectItem("Asia", "Asia")
+regionFocusButtons = Buttons([focusRegionBtn])
+focusRegionBtn = Button("Focus Region", null, "primary")
+
+hotfixSection = Card([hotfixForm], "sunk")
+hotfixForm = Form("hotfix-ship", hotfixButtons, [hotfixDetails])
+hotfixDetails = FormControl("Hotfix Details", hotfixTextArea)
+hotfixTextArea = TextArea("hotfix", "Describe the hotfix...", 5)
+hotfixButtons = Buttons([shipHotfixBtn])
+shipHotfixBtn = Button("Ship Hotfix", null, "destructive")
+
+serverHealth = Card([serverRegions], "sunk")
+serverRegions = Table([regionName, regionStatus, regionCrashRate])
+regionName = Col("Region", ["North America", "Europe", "Asia", "South America"])
+regionStatus = Col("Health", ["Healthy", "Healthy", "Degraded", "Warning"])
+regionCrashRate = Col("Crash Rate", ["0.3%", "0.7%", "1.2%", "0.5%"])
+
+crashRateByVersion = Card([versionCrashRates], "sunk")
+versionCrashRates = Table([versionName, crashRate, playerCount])
+versionName = Col("App Version", ["1.2.3", "1.2.4", "1.2.5", "1.2.6"])
+crashRate = Col("Crash Rate", ["0.8%", "1.5%", "0.4%", "2.1%"])
+playerCount = Col("Players", ["12,345", "8,765", "5,432", "3,210"])
+
+currencyInflation = Card([inflationMetrics], "sunk")
+inflationMetrics = Table([currencyType, inflationRate], "card")
+currencyType = Col("Currency", ["Gold", "Silver", "Crystal"])
+inflationRate = Col("Inflation Rate", ["1.2%", "0.8%", "0.5%"])
+
+seriesDailyActive = Series("Daily Active Players", [85234, 87245, 89123, 90456, 91234])
+seriesMonthlyActive = Series("Monthly Active Players", [220000, 230000, 240000, 245000, 245678])
+seriesSessionLength = Series("Session Length", [34.5, 36.2, 35.8, 37.1, 38.3])
+```

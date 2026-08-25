@@ -1,0 +1,51 @@
+```openui-lang
+// Define data for the day view
+appointments = [
+  { patient: "Alice Johnson", time: "09:00" },
+  { patient: "Bob Smith", time: "10:30" },
+  { patient: "Carol Lee", time: "12:00" },
+  { patient: "David Kim", time: "14:00" },
+  { patient: "Eve Martinez", time: "15:30" }
+]
+expectedPatients = 5
+noShowRate = 12 // percent
+freeRooms = ["Room 101", "Room 102"]
+nextPatient = "Frank Wu" // next patient to be called out
+patientToCheckIn = "Alice Johnson"
+
+// Component definitions
+appointmentsSection = CardHeader("Today's Appointments", "Appointments")
+appointmentsList = ListBlock(items=[
+  ListItem(title: appointments[i].patient, subtitle: appointments[i].time)
+  for i in range(0, length(appointments))
+], variant: "image")
+expectedPatientsSection = CardHeader("Patients Expected", "Expected")
+expectedPatientsLabel = TextContent(text: "Expected: " + expectedPatients, size: "large")
+noShowRateSection = CardHeader("No‑Show Rate", "No‑Show")
+noShowRateLabel = TextContent(text: "No‑Show Rate: " + noShowRate + "%", size: "large")
+freeRoomsSection = CardHeader("Free Rooms", "Free Rooms")
+freeRoomsList = ListBlock(items=[
+  ListItem(title: freeRooms[i])
+  for i in range(0, length(freeRooms))
+], variant: "number")
+nextPatientSection = CardHeader("Next Patient", "Next Patient")
+nextPatientLabel = TextContent(text: "Next patient: " + nextPatient, size: "large")
+checkInButton = Button("Check In " + patientToCheckIn, action: ["patient", patientToCheckIn], variant: "primary")
+nextDayButton = Button("Next Day", action: ["day", "next"], variant: "secondary")
+
+// Assemble the root Card with all sections
+root = Card([
+  appointmentsSection,
+  appointmentsList,
+  expectedPatientsSection,
+  expectedPatientsLabel,
+  noShowRateSection,
+  noShowRateLabel,
+  freeRoomsSection,
+  freeRoomsList,
+  nextPatientSection,
+  nextPatientLabel,
+  checkInButton,
+  nextDayButton
+], variant: "clear", direction: "column", gap: "l")
+```

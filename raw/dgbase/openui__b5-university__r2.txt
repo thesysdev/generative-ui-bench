@@ -1,0 +1,53 @@
+thought
+root = Card([header, deptFilter, statsRow, enrollmentChart, programData, facultyLoad, riskSection, actionsSection], "card", "column", "l")
+
+header = CardHeader("University Administration Dashboard", "Academic Year 2023-2024")
+
+deptFilter = Card([TextContent("Filter by Department:", "small"), Select("dept_filter", [deptAll, deptEng, deptSci, deptArts, deptBus], "All Departments")], "row", "m")
+deptAll = SelectItem("all", "All Departments")
+deptEng = SelectItem("eng", "Engineering")
+deptSci = SelectItem("sci", "Natural Sciences")
+deptArts = SelectItem("arts", "Liberal Arts")
+deptBus = SelectItem("bus", "Business School")
+
+statsRow = Card([enrollmentBadge, acceptanceBadge, revenueBadge, scholarshipBadge], "card", "row", "m")
+enrollmentBadge = Callout("info", "Enrollment", "24,500 (+4% vs last year)", "Total active students")
+acceptanceBadge = Callout("success", "Acceptance Rate", "68.2%", "Based on current cycle")
+revenueBadge = Callout("info", "Tuition Revenue", "$142.5M", "Current year projected")
+scholarshipBadge = Callout("warning", "Scholarships", "$18.2M / $25M", "Budget used vs allocated")
+
+enrollmentChart = Card([Heading("Enrollment Trend (5 Years)", "h3"), LineChart(["2019", "2020", "2021", "2022", "2023"], [enrollmentSeries], "natural", "Year", "Students")], "sunk")
+enrollmentSeries = Series("Total Enrollment", [21000, 19500, 22100, 23800, 24500])
+
+programData = Card([Heading("Program Performance & Waitlists", "h3"), Table([colProg, colApps, colWait])], "sunk")
+colProg = Col("Program", ["Computer Science", "Biology", "Mechanical Engineering", "Marketing", "Nursing"])
+colApps = Col("Applications", [1200, 850, 950, 600, 720])
+colWait = Col("Waitlist", [340, 12, 85, 0, 110])
+
+facultyLoad = Card([Heading("Teaching Load & Course Occupancy", "h3"), HorizontalBarChart([colFaculty, colLoad], "grouped", "", "Hours / %")], "sunk")
+colFaculty = Col("Faculty Member", ["Dr. Smith", "Dr. Jones", "Dr. Chen", "Dr. Garcia", "Dr. Taylor"])
+colLoad = Col("Occupancy %", [95, 70, 85, 60, 92])
+
+riskSection = Card([Heading("Student Alerts & Housing", "h3"), SectionBlock([riskItem, housingItem])], "sunk")
+riskItem = SectionItem("risk", "Students at Academic Risk", TextContent("142 students currently below 2.0 GPA threshold."))
+housingItem = SectionItem("housing", "Housing Occupancy", TextContent("94% occupancy. 120 beds available in North Dorm."))
+
+actionsSection = Card([Heading("Quick Actions & Events", "h3"), Tabs([eventTab, alumniTab, actionTab, messageTab])], "sunk")
+eventTab = TabItem("events", "Campus Events", ListBlock([ev1, ev2, ev3]))
+ev1 = ListItem("Fall Career Fair", "Oct 12 - Student Union")
+ev2 = ListItem("Guest Lecture: AI", "Oct 15 - Auditorium B")
+ev3 = ListItem("Alumni Mix-up", "Oct 20 - Main Hall")
+
+alumniTab = TabItem("alumni", "Alumni Giving (4Y)", LineChart(["2020", "2021", "2022", "2023"], [givingSeries], "linear", "Year", "$M"))
+givingSeries = Series("Donations", [4.2, 3.8, 5.1, 6.8])
+
+actionTab = TabItem("actions", "Course Management", DialogBlock("Approve New Course", "Review and approve new curriculum entries", Form("course_form", Buttons([Button("Approve", null, "primary")]), [courseName, deptField]), "default"))
+courseName = FormControl("Course Name", Input("course_name", "CS501: Advanced Quantum"))
+deptField = FormControl("Department", Select("dept", [deptEng, deptSci, deptArts], "Select Dept"))
+
+messageTab = TabItem("message", "Message Students", Form("msg_form", Buttons([Button("Send Message", null, "primary")]), [targetGroup, msgBody]))
+targetGroup = FormControl("Target Group", RadioGroup("group", [g1, g2, g3], "Select group"))
+msgBody = FormControl("Message Content", TextArea("body", 4, "Type message here..."))
+g1 = RadioItem("Undergrad Seniors", "Final year students", "senior")
+g2 = RadioItem("Grad Students", "PhD and Masters", "grad")
+g3 = RadioItem("International", "Visa holding students", "intl")

@@ -1,0 +1,147 @@
+```openui-lang
+root = Card([
+    header,
+    activeProjectsSection,
+    overdueMilestonesSection,
+    budgetSection,
+    teamUtilizationSection,
+    risksSection,
+    upcomingDeadlinesSection,
+    deliveryPaceSection,
+    blockedWorkItemsSection,
+    healthSummary,
+    quarterSelector,
+    projectActionsButtons
+], "card", "column", "m", "center", "between", true)
+
+header = CardHeader("Project Portfolio Review", "Current Quarter")
+
+activeProjectsSection = Card([
+    activeProjectsHeading,
+    activeProjectsTable
+], "sunk")
+
+activeProjectsHeading = Heading("Active Projects", "h3")
+activeProjectsTable = Table([
+    projOwnerCol,
+    projDeadlineCol,
+    projHealthCol
+])
+projOwnerCol = Col("Owner", ["Feature Team", "Data Analytics", "Mobile App"])
+projDeadlineCol = Col("Deadline", ["2024-12-15", "2024-11-30", "2024-10-20"])
+projHealthCol = Col("Health", ["Green", "Yellow", "Red"])
+
+overdueMilestonesSection = Card([
+    overdueMilestonesHeading,
+    overdueMilestonesList
+], "sunk")
+overdueMilestonesHeading = Heading("Overdue Milestones", "h3")
+overdueMilestonesList = ListBlock([
+    ListItem("Milestone X – Feature Set A", "Missed by 3 days"),
+    ListItem("Milestone Y – API Integration", "Missed by 5 days")
+], "number")
+
+budgetSection = Card([
+    budgetHeading,
+    budgetTable
+], "sunk")
+budgetHeading = Heading("Budget vs Allocation", "h3")
+budgetTable = Table([
+    projNameCol,
+    spentCol,
+    allocatedCol
+])
+projNameCol = Col("Project", ["Feature Team", "Data Analytics", "Mobile App"])
+spentCol = Col("Spent", ["$120,000", "$95,000", "$80,000"])
+allocatedCol = Col("Allocated", ["$150,000", "$100,000", "$90,000"])
+
+teamUtilizationSection = Card([
+    utilizationHeading,
+    utilizationChart
+], "sunk")
+utilizationHeading = Heading("Team Utilization", "h3")
+utilizationChart = BarChart([
+    "Team A",
+    "Team B",
+    "Team C"
+], [
+    Series("Utilization", [85, 78, 92])
+], "grouped", "Team", "Utilization (%)")
+
+risksSection = Card([
+    risksHeading,
+    risksTable
+], "sunk")
+risksHeading = Heading("Risks", "h3")
+risksTable = Table([
+    projRiskCol,
+    severityCol
+])
+projRiskCol = Col("Risk", ["Data Security", "Integration Delay", "Resource Shortage"])
+severityCol = Col("Severity", ["High", "Medium", "Low"])
+
+upcomingDeadlinesSection = Card([
+    upcomingDeadlinesHeading,
+    upcomingDeadlinesTable
+], "sunk")
+upcomingDeadlinesHeading = Heading("Deadlines in Next 2 Weeks", "h3")
+upcomingDeadlinesTable = Table([
+    projNameCol2,
+    deadlineCol2
+])
+projNameCol2 = Col("Project", ["Feature Team", "Mobile App"])
+deadlineCol2 = Col("Deadline", ["2024-10-10", "2024-10-15"])
+
+deliveryPaceSection = Card([
+    paceHeading,
+    paceChart
+], "sunk")
+paceHeading = Heading("Delivery Pace (Last 6 sprints)", "h3")
+paceChart = LineChart([
+    "Sprint 1",
+    "Sprint 2",
+    "Sprint 3",
+    "Sprint 4",
+    "Sprint 5",
+    "Sprint 6"
+], [
+    Series("Velocity", [8, 10, 9, 7, 6, 8])
+], "linear", "Sprint", "Story Points")
+
+blockedWorkItemsSection = Card([
+    blockedHeading,
+    blockedList
+], "sunk")
+blockedHeading = Heading("Blocked Work Items", "h3")
+blockedList = ListBlock([
+    ListItem("Feature A – UI Mockups pending", null),
+    ListItem("API B – External vendor delay", null)
+], "image")
+
+healthSummary = Card([
+    summaryText
+], "clear")
+summaryText = TextContent("Portfolio health: **Mixed** – 2 green, 1 yellow, 1 red.", "large")
+
+quarterSelector = Card([
+    selectorHeading,
+    quarterButtons
+], "sunk")
+selectorHeading = Heading("Select Quarter", "h3")
+quarterButtons = Buttons([
+    Button("Q1", null, "primary"),
+    Button("Q2", null, "secondary"),
+    Button("Q3", null, "tertiary"),
+    Button("Q4", null, "outline")
+])
+
+projectActionsButtons = Buttons([
+    exportBtn,
+    requestPeopleBtn,
+    archiveBtn
+], "column")
+exportBtn = Button("Export Review", null, "primary")
+requestPeopleBtn = Button("Request More People", null, "secondary")
+archiveBtn = Button("Archive Finished Project", null, "tertiary")
+
+```

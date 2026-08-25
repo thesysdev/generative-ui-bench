@@ -1,0 +1,135 @@
+```openui-lang
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title: "E-Commerce Operations Dashboard",
+      subtitle: "Daily Operational Metrics"
+    ),
+    
+    // Key Metrics Row
+    Card([
+      {
+        component: CardHeader,
+        title: "Orders Today",
+        subtitle: "",
+        children: []
+      },
+      {
+        component: CardHeader,
+        title: "Revenue Today",
+        subtitle: "",
+        children: []
+      },
+      {
+        component: CardHeader,
+        title: "Average Order Value",
+        subtitle: "",
+        children: []
+      },
+      {
+        component: CardHeader,
+        title: "Refund Rate (This Month)",
+        subtitle: "",
+        children: []
+      }
+    ]),
+    
+    // Recent Orders Table
+    Card({
+      component: Table,
+      columns: [
+        { label: "Order ID", type: "string" },
+        { label: "Customer", type: "string" },
+        { label: "Total", type: "number" },
+        { label: "Status", type: "string" }
+      ],
+      data: [
+        { id: "ORDER-2026-0315-001", customer: "Alice Johnson", total: 245.99, status: "completed" },
+        { id: "ORDER-2026-0315-002", customer: "Bob Smith", total: 178.50, status: "pending" },
+        { id: "ORDER-2026-0315-003", customer: "Carol Davis", total: 342.00, status: "completed" },
+        { id: "ORDER-2026-0315-004", customer: "David Wilson", total: 89.75, status: "shipped" },
+        { id: "ORDER-2026-0315-005", customer: "Emma Taylor", total: 156.25, status: "pending" }
+      ]
+    }),
+    
+    // Filter Controls
+    Card([
+      {
+        component: TabItem(
+          value: "orders",
+          trigger: "orders",
+          content: [
+            Card([
+              CardHeader(
+                title: "Filter by Status",
+                subtitle: ""
+              ),
+              Dropdown([
+                Label("Order Status"),
+                Options: [
+                  { value: "all", label: "All Orders" },
+                  { value: "completed", label: "Completed" },
+                  { value: "pending", label: "Pending" },
+                  { value: "shipped", label: "Shipped" },
+                  { value: "cancelled", label: "Cancelled" }
+                ]
+              ], 
+              items: [
+                { variant: "select", value: "all", label: "All" },
+                { variant: "select", value: "completed", label: "Completed" },
+                { variant: "select", value: "pending", label: "Pending" },
+                { variant: "select", value: "shipped", label: "Shipped" },
+                { variant: "select", value: "cancelled", label: "Cancelled" }
+              ]
+            )}
+          ]
+        )
+      },
+      {
+        component: TextCallout(
+          variant: "neutral",
+          title: "Search Customers",
+          description: "Search by customer name",
+          children: [
+            Input(
+              label: "Customer Name",
+              placeholder: "Search customers..."
+            )
+          ]
+        )
+      }
+    ]),
+    
+    // Order Volume Last 4 Weeks
+    Card({
+      component: HorizontalBarChart,
+      columns: [
+        { label: "Week", type: "string" },
+        { label: "Orders Count", type: "number" }
+      ],
+      data: [
+        { label: "Week 1", value: 45 },
+        { label: "Week 2", value: 38 },
+        { label: "Week 3", value: 52 },
+        { label: "Week 4", value: 47 }
+      ]
+    }),
+    
+    // Actions - Mark Order Fulfilled
+    Card({
+      component: Button(
+        label: "Mark Order as Fulfilled",
+        action: null,
+        variant: "primary",
+        size: "medium"
+      )
+    })
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "stretch",
+  wrap: true
+)
+```

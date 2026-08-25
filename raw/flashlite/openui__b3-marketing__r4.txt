@@ -1,0 +1,56 @@
+root = Card([header, metricsRow, bestCampaignAlert, chartsSection, campaignsSection, exportSection, followUps])
+
+header = CardHeader("Marketing Weekly Dashboard", "Performance overview for the last 30 days")
+
+metricsRow = Card([visitorsMetric, conversionMetric, subscribersMetric], "sunk", "row", "l", "stretch", "between")
+visitorsMetric = Card([visitorsTitle, visitorsValue, visitorsBadge], "clear", "column", "xs")
+visitorsTitle = Heading("Site Visitors", "h4")
+visitorsValue = TextContent("48,291", "large-heavy")
+visitorsBadge = Badge("+12% vs last month", "default")
+
+conversionMetric = Card([convTitle, convValue, convBadge], "clear", "column", "xs")
+convTitle = Heading("Conversion Rate", "h4")
+convValue = TextContent("3.42%", "large-heavy")
+convBadge = Badge("+0.4% vs last month", "default")
+
+subscribersMetric = Card([subTitle, subValue, subBadge], "clear", "column", "xs")
+subTitle = Heading("Email Subscribers", "h4")
+subValue = TextContent("12,450", "large-heavy")
+subBadge = Badge("+850 this month", "default")
+
+bestCampaignAlert = Alert("Top Performing Campaign", "Summer Sale Blast is currently leading with a 5.8% conversion rate and $4,200 in attributed revenue.", "success")
+
+chartsSection = Card([chartsHeader, chartsGrid], "clear", "column", "l")
+chartsHeader = Heading("Traffic & Growth Trends", "h3")
+chartsGrid = Card([trendCard, sourcesCard], "sunk", "row", "l", "stretch", "between")
+
+trendCard = Card([trendTitle, lineChart], "clear", "column", "m")
+trendTitle = Heading("Daily Visitors (Last 30 Days)", "h4")
+lineChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [visitorSeries], "natural", "Week", "Visitors")
+visitorSeries = Series("Visitors", [10200, 11800, 12900, 13391])
+
+sourcesCard = Card([sourcesTitle, pieChart], "clear", "column", "m")
+sourcesTitle = Heading("Top 5 Traffic Sources", "h4")
+pieChart = PieChart(["Organic Search", "Paid Ads", "Social Media", "Email", "Referral"], [40, 25, 15, 12, 8], "donut", "circular")
+
+campaignsSection = Card([campaignsHeader, campaignsTable], "clear", "column", "m")
+campaignsHeader = Heading("Running Campaigns & Spend", "h3")
+campaignsTable = Table([campName, campStatus, campSpend, campROI])
+campName = Col("Campaign Name", ["Summer Sale Blast", "Product Launch V2", "Retargeting Q3", "Newsletter Sponsor"])
+campStatus = Col("Status", ["Active", "Active", "Active", "Paused"])
+campSpend = Col("Spend", ["$1,200", "$3,500", "$800", "$500"])
+campROI = Col("ROI", ["4.2x", "2.8x", "3.1x", "1.5x"])
+
+exportSection = Card([exportHeader, dateForm], "sunk", "column", "m")
+exportHeader = Heading("Report Controls & Export", "h3")
+dateForm = Form("export-form", exportButtons, [dateField])
+dateField = FormControl("Change Date Range", datePicker, "Select the period for reporting")
+datePicker = DatePicker("date_range", "range")
+exportButtons = Buttons([exportBtn, resetBtn])
+exportBtn = Button("Export Report (CSV)", null, "primary")
+resetBtn = Button("Reset Filters", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me a breakdown of paid ad channels")
+fu2 = FollowUpItem("Compare email subscriber growth with last quarter")
+fu3 = FollowUpItem("Draft a summary email for stakeholders")

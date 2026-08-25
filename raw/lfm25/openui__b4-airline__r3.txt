@@ -1,0 +1,381 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. On-time performance today
+    CardHeader(
+      title="Today's On-Time Performance",
+      subtitle="Operational Metrics"
+    ),
+    Card(
+      children: [
+        TextContent(
+          "98.7%",
+          size: "large"
+        ),
+        TextContent(
+          "Current schedule adherence for today",
+          size: "small"
+        )
+      ]
+    ),
+
+    // 2. Flights with number, route, gate and status
+    Card(
+      children: [
+        TextContent(
+          "Active Flights Today",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "FL123 - JFK → LAX",
+              subtitle: "Gate 34B | ON TIME",
+              actionLabel: "View Details"
+            },
+            {
+              title: "FL456 - ORD → MIA",
+              subtitle: "Gate 12C | DELAYED +45min",
+              actionLabel: "Details"
+            },
+            {
+              title: "FL789 - SFO → CHI",
+              subtitle: "Gate 8A | ON TIME",
+              actionLabel: "View Details"
+            },
+            {
+              title: "FL101 - ATL → DUB",
+              subtitle: "Gate 22E | DELAYED +30min",
+              actionLabel: "Details"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 3. Delayed flights called out
+    Card(
+      children: [
+        TextContent(
+          "Delayed Flights (Action Required)",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "FL456 - ORD → MIA",
+              route: "ORD to MIA",
+              gate: "12C",
+              status: "DELAYED",
+              delayMinutes: 45,
+              action: "Rebook"
+            },
+            {
+              title: "FL789 - SFO → CHI",
+              route: "SFO to CHI",
+              gate: "8A",
+              status: "DELAYED",
+              delayMinutes: 30,
+              action: "Rebook"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 4. Recent gate changes
+    Card(
+      children: [
+        TextContent(
+          "Recent Gate Changes",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "Gate 34B ← CHANGED TO FL123",
+              changeTime: "2 hours ago",
+              impact: "High impact flight delayed"
+            },
+            {
+              title: "Gate 12C ← SWAPPED FROM FL456",
+              changeTime: "3 hours ago",
+              impact: "Medium impact flight now on backup plane"
+            },
+            {
+              title: "Gate 8A ← REOPENED FOR FL789",
+              changeTime: "5 hours ago",
+              impact: "Positive update"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 5. Crews available for reassignment
+    Card(
+      children: [
+        TextContent(
+          "Available Crews for Reassignment",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "Crew Alpha Team (15 pilots)",
+              role: "Long-haul",
+              availability: "On standby",
+              link: "crew-alpha"
+            },
+            {
+              title: "Crew Beta Squad (8 captains)",
+              role: "Regional",
+              availability: "Ready to deploy",
+              link: "crew-beta"
+            },
+            {
+              title: "Crew Gamma Unit (22flight)",
+              role: "Short-haul",
+              availability: "Available",
+              link: "crew-gamma"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 6. Weather advisories at the hub
+    Card(
+      children: [
+        TextContent(
+          "Weather Advisories",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "Thunderstorms - Terminal B",
+              severity: "high",
+              impact: "Ground delays expected",
+              advisory: "Expect additional holding patterns"
+            },
+            {
+              title: "Low visibility - Runway 27",
+              severity: "moderate",
+              impact: "Reduced takeoff capacity",
+              advisory: "Consider flight rerouting"
+            },
+            {
+              title: "Wind gusts - East wing",
+              severity: "low",
+              impact: "Minimal disruption",
+              advisory: "Monitor conditions"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 7. Average passenger load today
+    Card(
+      children: [
+        TextContent(
+          "Average Passenger Load Today",
+          size: "large"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            TextContent(
+              "92.4 passengers per flight",
+              size: "large"
+            ),
+            TextContent(
+              "Average load across 47 active flights",
+              size: "small"
+            )
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 8. Connections at risk of being missed
+    Card(
+      children: [
+        TextContent(
+          "Connections at Risk",
+          size: "large"
+        ),
+        Spacer(),
+        ListBlock(
+          items: [
+            {
+              title: "Flight FL456 (ORD→MIA) - 340 passengers",
+              riskLevel: "high",
+              reason: "Delay exceeds 60 minutes"
+            },
+            {
+              title: "Flight FL789 (SFO→CHI) - 210 passengers",
+              riskLevel: "high",
+              reason: "Delay exceeds 45 minutes"
+            },
+            {
+              title: "Flight FL101 (ATL→DUB) - 180 passengers",
+              riskLevel: "medium",
+              reason: "Potential gate conflict after repair"
+            }
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 9. Way to rebook affected passengers
+    Card(
+      children: [
+        TextContent(
+          "Rebook Affected Passengers",
+          size: "large"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            TextContent(
+              "Select flights and apply rebooking rules",
+              size: "large"
+            ),
+            HoverOverItems([
+              {
+                title: "FL456 - ORD → MIA",
+                action: "Rebook via Portal",
+                url: "https://rebook.example/fl456"
+              },
+              {
+                title: "FL789 - SFO → CHI",
+                action: "Rebook via Portal",
+                url: "https://rebook.example/fl789"
+              },
+              {
+                title: "FL101 - ATL → DUB",
+                action: "Rebook via Portal",
+                url: "https://rebook.example/fl101"
+              }
+            ]),
+            Button(
+              label="Apply Rebooking",
+              variant: "primary",
+              size: "medium"
+            )
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 10. Way to look at a different hub
+    Card(
+      children: [
+        TextContent(
+          "Compare Other Hubs",
+          size: "large"
+        ),
+        Spacer(),
+        Divider(decorative: true),
+        Card(
+          children: [
+            TextContent(
+              "Hub Operations Comparison",
+              size: "large"
+            ),
+            HoverOverItems([
+              {
+                title: "Hub A (Home Base)",
+                stats: "98.7% OT, 92.4 passengers avg, 23 pending rebooks"
+              },
+              {
+                title: "Hub B (Alternative)",
+                stats: "95.2% OT, 88.1 passengers avg, 18 pending rebooks"
+              },
+              {
+                title: "Hub C (Regional)",
+                stats: "97.0% OT, 85.3 passengers avg, 12 pending rebooks"
+              }
+            ])
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 11. Cancellations today
+    Card(
+      children: [
+        TextContent(
+          "Cancellations Today",
+          size: "large"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            TextContent(
+              "3 flights cancelled",
+              size: "large"
+            ),
+            TextContent(
+              "Affected passengers: ~540",
+              size: "small"
+            )
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    ),
+
+    // 12. Average turnaround time
+    Card(
+      children: [
+        TextContent(
+          "Average Turnaround Time",
+          size: "large"
+        ),
+        Spacer(),
+        Card(
+          children: [
+            TextContent(
+              "28 minutes",
+              size: "large"
+            ),
+            TextContent(
+              "Typical gate-to-departure time across fleet",
+              size: "small"
+            )
+          ],
+          variant: "card",
+          gap: "xs"
+        )
+      ]
+    )
+  ]
+)
+```

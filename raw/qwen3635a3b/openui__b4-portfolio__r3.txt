@@ -1,0 +1,78 @@
+root = Card([header, health, projects, milestones, budget, utilization, risks, deadlines, velocity, blocked, actions, quarter])
+
+header = CardHeader("Portfolio Review", "Q3 2024 — PMO Overview")
+
+health = Alert("Portfolio Health: At Risk", "Two critical path projects are behind schedule; budget variance is within tolerance at +3.2%.", "warning")
+
+projects = Table([projectName, projectOwner, projectDeadline, projectHealth])
+projectName = Col("Project", ["Phoenix Platform", "Cloud Migration", "API Gateway", "Data Pipeline", "Mobile App"])
+projectOwner = Col("Owner", ["Sarah Chen", "Marcus Webb", "Aisha Patel", "Tom Nguyen", "Lisa Park"])
+projectDeadline = Col("Deadline", ["Nov 15", "Dec 1", "Oct 30", "Dec 20", "Nov 30"])
+projectHealth = Col("Health", ["Red", "Amber", "Green", "Amber", "Green"])
+
+milestones = ListBlock([m1, m2, m3, m4])
+m1 = ListItem("Phoenix Platform — Core API", "Due Aug 30 (45 days overdue)", null, "View")
+m2 = ListItem("Cloud Migration — Phase 2", "Due Sep 15 (28 days overdue)", null, "View")
+m3 = ListItem("Data Pipeline — ETL v2", "Due Oct 1 (14 days overdue)", null, "View")
+m4 = ListItem("Mobile App — Beta Release", "Due Oct 20 (3 days overdue)", null, "View")
+
+budget = BarChart(["Phoenix", "Cloud", "API", "Data", "Mobile"], [budgetSeries], "stacked", "Project", "Budget ($K)")
+budgetSeries = Series("Spent / Allocated", [180, 240, 120, 160, 90])
+
+utilization = HorizontalBarChart(["Eng", "Design", "QA", "DevOps", "PM"], [utilSeries], "grouped", "Team", "Utilization %")
+utilSeries = Series("Avg Utilization", [94, 87, 72, 91, 68])
+
+risks = Table([riskName, riskSeverity, riskOwner, riskStatus])
+riskName = Col("Risk", ["Phoenix scope creep", "Cloud vendor delay", "API key rotation gap", "Data pipeline capacity", "Mobile store review delay"])
+riskSeverity = Col("Severity", ["Critical", "High", "Medium", "High", "Low"])
+riskOwner = Col("Owner", ["Sarah Chen", "Marcus Webb", "Aisha Patel", "Tom Nguyen", "Lisa Park"])
+riskStatus = Col("Status", ["Escalated", "Mitigating", "Monitoring", "Mitigating", "Open"])
+
+deadlines = ListBlock([d1, d2, d3, d4, d5])
+d1 = ListItem("API Gateway — Security Audit", "Oct 28", null, "View")
+d2 = ListItem("Phoenix Platform — UAT Start", "Oct 30", null, "View")
+d3 = ListItem("Mobile App — Beta Build", "Nov 1", null, "View")
+d4 = ListItem("Cloud Migration — Phase 2 Go-Live", "Dec 1", null, "View")
+d5 = ListItem("Data Pipeline — UAT Signoff", "Dec 20", null, "View")
+
+velocity = LineChart(["S1", "S2", "S3", "S4", "S5", "S6"], [velocitySeries], "natural", "Sprint", "Story Points")
+velocitySeries = Series("Velocity", [42, 48, 45, 52, 50, 38])
+
+blocked = ListBlock([b1, b2, b3])
+b1 = ListItem("Phoenix — Auth service dependency", "Blocked by external vendor 12 days", null, "Escalate")
+b2 = ListItem("Cloud — Staging environment outage", "Resolved — unblocked Oct 18", null, "View")
+b3 = ListItem("Data Pipeline — Infra approval", "Awaiting change board Oct 25", null, "Escalate")
+
+actions = Buttons([exportBtn, archiveBtn, requestBtn])
+exportBtn = Button("Export Review PDF")
+archiveBtn = Button("Archive Phoenix Platform")
+requestBtn = Button("Request Resources")
+
+quarter = Select("quarter", [q2, q3, q4, q5], "Q3 2024")
+q2 = SelectItem("Q2", "Q2 2024")
+q3 = SelectItem("Q3", "Q3 2024")
+q4 = SelectItem("Q4", "Q4 2024")
+q5 = SelectItem("Q1", "Q1 2025")
+
+// Dialogs for actions
+archiveDialog = AlertDialogBlock("Archive Phoenix Platform", "Archive Project", "This will move Phoenix Platform to archived status. All active milestones will be closed. This action can be undone.", "Archive", "Cancel", "destructive")
+resourceDialog = DialogBlock("Request Resources", "Request Additional Resources", "Submit a request to allocate additional team members to a project.", [resourceForm])
+resourceForm = Form("resource-request", resourceButtons, [projSelect, roleField, countField])
+projSelect = FormControl("Project", projOption)
+projOption = Select("project", [optPhoenix, optCloud, optAPI, optData, optMobile], "Select a project")
+optPhoenix = SelectItem("phoenix", "Phoenix Platform")
+optCloud = SelectItem("cloud", "Cloud Migration")
+optAPI = SelectItem("api", "API Gateway")
+optData = SelectItem("data", "Data Pipeline")
+optMobile = SelectItem("mobile", "Mobile App")
+roleField = FormControl("Role Needed", roleSelect)
+roleSelect = Select("role", [optDev, optQA, optPM, optDevOps], "Select role")
+optDev = SelectItem("dev", "Developer")
+optQA = SelectItem("qa", "QA Engineer")
+optPM = SelectItem("pm", "Project Manager")
+optDevOps = SelectItem("devops", "DevOps Engineer")
+countField = FormControl("Headcount", countInput)
+countInput = Input("headcount", "2", "number")
+resourceButtons = Buttons([submitReqBtn, cancelReqBtn])
+submitReqBtn = Button("Submit Request", null, "primary")
+cancelReqBtn = Button("Cancel", null, "tertiary")

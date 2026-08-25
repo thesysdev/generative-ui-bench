@@ -1,0 +1,109 @@
+```openui-lang
+root = Card([mainHeader, viewerStats, topTitles, watchTimeChart, subscriberNet, genrePerformance, bufferingRate, regionHealth, upcomingReleases, expiringLicenses, recommendations, abandonedSearches, revenueSplit, deviceSplit, regionFocus, featureFlags, promotionTool], "card", "column", "m")
+
+mainHeader = CardHeader("Operations Room", "Live streaming metrics dashboard")
+
+viewerStats = Card([viewerCount, liveViewers, avgSession], "sunk")
+viewerCount = CardHeader("Current Viewers", "1,248,762 watching now")
+liveViewers = Card([TextContent("Live streams active: 42"), TextContent("Peak concurrent: 1,892,345")], "row", "row", "s", "center")
+avgSession = TextContent("Average session length: 47m 22s")
+
+topTitles = Card([CardHeader("Top Titles"), topTitlesTable], "sunk")
+topTitlesTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["The Last Dance", "Stranger Things S4", "The Mandalorian S2", "Tiger King", "The Queen's Gambit"])
+hoursCol = Col("Hours Watched", ["12,456", "9,872", "8,345", "7,654", "6,432"], "number")
+
+watchTimeChart = Card([CardHeader("Watch Time Trend"), watchTimeLine], "sunk")
+watchTimeLine = LineChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29", "Feb 5"], [
+    Series("Total Hours", [12456, 15678, 18923, 21345, 23456, 25678]),
+    Series("New Users", [3456, 4567, 5678, 6789, 7890, 8901])
+], "natural", "Date", "Hours Watched")
+
+subscriberNet = Card([CardHeader("Subscriber Growth"), netSubsChart], "sunk")
+netSubsChart = BarChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29", "Feb 5"], [
+    Series("New Subscribers", [456, 567, 678, 789, 890, 901]),
+    Series("Cancellations", [123, 145, 167, 189, 210, 231])
+], "grouped", "Date", "Count")
+
+genrePerformance = Card([CardHeader("Performance by Genre"), genreChart], "sunk")
+genreChart = PieChart(["Drama", "Comedy", "Action", "Documentary", "Animation"], [45, 30, 15, 8, 2], "pie")
+genreDetails = Table([genreCol, watchCol, revCol])
+genreCol = Col("Genre", ["Drama", "Comedy", "Action", "Documentary", "Animation"])
+watchCol = Col("Hours Watched", ["12,456", "9,872", "8,345", "7,654", "6,432"], "number")
+revCol = Col("Revenue Share", ["42%", "30%", "18%", "9%", "1%"])
+
+bufferingRate = Card([CardHeader("Buffering Rate"), bufferingStat, bufferingChart], "sunk")
+bufferingStat = TextContent("Current: 1.2% (↓0.3% from last week)")
+bufferingChart = LineChart(["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29", "Feb 5"], [
+    Series("Buffering Rate", [1.8, 1.5, 1.2, 1.0, 0.9, 0.8])
+], "natural", "Date", "Buffering Rate (%)")
+
+regionHealth = Card([CardHeader("Delivery Health"), regionTable], "sunk")
+regionTable = Table([regionCol, latencyCol, errorsCol])
+regionCol = Col("Region", ["NA", "EMEA", "APAC", "LATAM", "Japan"])
+latencyCol = Col("Avg Latency (ms)", ["56", "89", "123", "78", "45"], "number")
+errorsCol = Col("Error Rate (%)", ["0.1", "0.2", "0.3", "0.15", "0.05"], "number")
+
+upcomingReleases = Card([CardHeader("Releases This Month"), releaseTable], "sunk")
+releaseTable = Table([releaseCol, dateCol, genreCol])
+releaseCol = Col("Title", ["The Night Agent", "The Last of Us", "Barbie", "Oppenheimer", "Dune: Part Two"])
+dateCol = Col("Release Date", ["Feb 15", "Feb 22", "Feb 29", "Mar 1", "Mar 15"])
+genreCol = Col("Genre", ["Crime Thriller", "Action", "Comedy", "Biopic", "Sci-Fi"])
+
+expiringLicenses = Card([CardHeader("Licenses Expiring Soon"), licenseTable], "sunk")
+licenseTable = Table([titleCol, expiryCol, ownerCol])
+titleCol = Col("Title", ["The Social Network", "Inception", "The Dark Knight", "Mad Max: Fury Road", "Interstellar"])
+expiryCol = Col("Expiry Date", ["Feb 10", "Feb 15", "Feb 20", "Feb 25", "Mar 5"])
+ownerCol = Col("Owner", ["Paramount", "Warner Bros.", "DC", "Warner Bros.", "Paramount"])
+
+recommendations = Card([CardHeader("Recommendation CTR"), recChart], "sunk")
+recChart = BarChart(["Homepage", "Search", "End of Episode", "Browse"], [
+    Series("CTR (%)", [12.5, 8.7, 15.3, 9.1])
+], "grouped", "Source", "Click-Through Rate (%)")
+
+abandonedSearches = Card([CardHeader("Abandoned Searches"), searchTable], "sunk")
+searchTable = Table([searchCol, countCol, reasonCol])
+searchCol = Col("Search Term", ["best horror movies", "new comedy shows", "sci-fi series 2023", "documentaries about space", "anime recommendations"])
+countCol = Col("Count", ["456", "321", "298", "187", "145"], "number")
+reasonCol = Col("Reason", ["No results", "Too many", "Irrelevant", "No playback", "Language"])
+
+revenueSplit = Card([CardHeader("Revenue by Plan"), revenueChart], "sunk")
+revenueChart = PieChart(["Premium", "Standard", "Basic", "Free Trial"], [65, 25, 8, 2], "pie")
+revenueDetails = Table([planCol, revCol, usersCol])
+planCol = Col("Plan", ["Premium", "Standard", "Basic", "Free Trial"])
+revCol = Col("Revenue Share", ["65%", "25%", "8%", "2%"])
+usersCol = Col("User Count", ["1,245,678", "876,543", "321,456", "98,765"])
+
+deviceSplit = Card([CardHeader("Viewing by Device"), deviceChart], "sunk")
+deviceChart = PieChart(["Smart TV", "Mobile", "Laptop", "Desktop", "Game Console"], [35, 40, 15, 8, 2], "pie")
+
+regionFocus = Card([CardHeader("Focus Region"), regionSelector, regionMetrics], "sunk")
+regionSelector = Buttons([Button("NA", null, "primary"), Button("EMEA"), Button("APAC"), Button("LATAM"), Button("Japan")], "row")
+regionMetrics = Card([TextContent("Selected: North America"), TextContent("Current Viewers: 678,901"), TextContent("Buffering Rate: 0.8%")], "column", "column", "m")
+
+featureFlags = Card([CardHeader("Feature Flags"), flagTable], "sunk")
+flagTable = Table([flagCol, stateCol, toggleCol])
+flagCol = Col("Feature", ["Personalized Recommendations", "Ad-Skipping", "Offline Viewing", "Live Chat", "Parental Controls"])
+stateCol = Col("Status", ["Enabled", "Disabled", "Enabled", "Disabled", "Enabled"])
+toggleCol = Col("Toggle", [Button("Toggle", null, "small"), Button("Toggle", null, "small"), Button("Toggle", null, "small"), Button("Toggle", null, "small"), Button("Toggle", null, "small")])
+
+promotionTool = Card([CardHeader("Promote Title"), promotionForm], "sunk")
+promotionForm = Form("promote-title", promotionButtons, [titleSelect, durationSelect, prioritySelect])
+titleSelect = FormControl("Select Title", titleDropdown)
+titleDropdown = Select("title", [
+    SelectItem("The Last Dance", "The Last Dance"),
+    SelectItem("Stranger Things S4", "Stranger Things S4"),
+    SelectItem("The Mandalorian S2", "The Mandalorian S2"),
+    SelectItem("Tiger King", "Tiger King"),
+    SelectItem("The Queen's Gambit", "The Queen's Gambit")
+], "Choose a title")
+durationSelect = FormControl("Duration (days)", durationInput)
+durationInput = Input("duration", "7", "number")
+prioritySelect = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [
+    SelectItem("High", "High"),
+    SelectItem("Medium", "Medium"),
+    SelectItem("Low", "Low")
+], "Choose priority")
+promotionButtons = Buttons([Button("Promote", null, "primary"), Button("Cancel", null, "tertiary")])
+```

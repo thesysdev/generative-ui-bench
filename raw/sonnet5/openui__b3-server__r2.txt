@@ -1,0 +1,57 @@
+root = Card([header, uptimeCard, usageCard, errorCard, filterCard, incidentsCard, endpointsCard, thresholdCard, followUp])
+
+header = CardHeader("Service Health", "On-call dashboard — live status")
+
+uptimeCard = Card([uptimeHeading, uptimeProgress, uptimeNote], "sunk")
+uptimeHeading = Heading("Uptime this quarter", "h3")
+uptimeProgress = Progress(99.92, "Q3 uptime")
+uptimeNote = TextContent("99.92% uptime over the last 90 days, within SLA target of 99.9%.", "small")
+
+usageCard = Card([usageHeading, usageChart], "sunk")
+usageHeading = Heading("CPU & Memory — Past 24 Hours", "h3")
+usageChart = LineChart(usageLabels, [cpuSeries, memSeries], "natural", "Hour", "Percent")
+usageLabels = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]
+cpuSeries = Series("CPU %", [42, 39, 37, 41, 55, 68, 72, 74, 70, 63, 58, 47])
+memSeries = Series("Memory %", [61, 60, 59, 62, 65, 70, 73, 75, 74, 71, 68, 64])
+
+errorCard = Card([errorHeading, errorCallout], "sunk")
+errorHeading = Heading("Error Rate", "h3")
+errorCallout = TextCallout("warning", "Current error rate: 2.4%", "Slightly above the 2% baseline; monitoring for further spikes.")
+
+filterCard = Card([filterHeading, regionForm], "sunk")
+filterHeading = Heading("Narrow by Region", "h3")
+regionForm = Form("region-filter", regionButtons, [regionField])
+regionField = FormControl("Region", regionSelect)
+regionSelect = Select("region", [regionAll, regionUS, regionEU, regionAPAC], "Select a region")
+regionAll = SelectItem("all", "All Regions")
+regionUS = SelectItem("us", "US-East")
+regionEU = SelectItem("eu", "EU-West")
+regionAPAC = SelectItem("apac", "APAC-South")
+regionButtons = Buttons([applyRegionBtn])
+applyRegionBtn = Button("Apply Filter", null, "primary")
+
+incidentsCard = Card([incidentsHeading, incidentsList], "sunk")
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsList = ListBlock([incident1, incident2, incident3])
+incident1 = ListItem("Elevated latency on checkout-api", "Severity: Critical — Region: US-East", null, "Acknowledge")
+incident2 = ListItem("Intermittent 500s on auth-service", "Severity: High — Region: EU-West", null, "Acknowledge")
+incident3 = ListItem("Cache miss spike on product-search", "Severity: Medium — Region: APAC-South", null, "Acknowledge")
+
+endpointsCard = Card([endpointsHeading, endpointsTable], "sunk")
+endpointsHeading = Heading("Five Slowest Endpoints", "h3")
+endpointsTable = Table([endpointCol, latencyCol])
+endpointCol = Col("Endpoint", ["/api/checkout/process", "/api/search/query", "/api/auth/refresh", "/api/orders/history", "/api/inventory/sync"], "string")
+latencyCol = Col("Latency (ms)", [842, 617, 511, 478, 402], "number")
+
+thresholdCard = Card([thresholdHeading, thresholdForm], "sunk")
+thresholdHeading = Heading("Set Alert Threshold", "h3")
+thresholdForm = Form("alert-threshold", thresholdButtons, [thresholdField])
+thresholdField = FormControl("Error rate threshold (%)", thresholdSlider, "Trigger an alert when error rate exceeds this value")
+thresholdSlider = Slider("threshold", "continuous", 0, 10, 0.1, [2.5], "Error rate threshold")
+thresholdButtons = Buttons([saveThresholdBtn])
+saveThresholdBtn = Button("Save Threshold", null, "primary")
+
+followUp = FollowUpBlock([followUp1, followUp2, followUp3])
+followUp1 = FollowUpItem("Show incident history for the past week")
+followUp2 = FollowUpItem("Compare CPU usage across regions")
+followUp3 = FollowUpItem("View detailed logs for checkout-api")

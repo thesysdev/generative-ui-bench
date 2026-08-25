@@ -1,0 +1,93 @@
+root = Card([networkHeader, loadSection, capacitySection, generationSection, plantsSection, outagesSection, forecastSection, priceSection, maintenanceSection, alertsSection, regionFocus, curtailmentOrder, emissionsSection], "sunk")
+
+networkHeader = CardHeader("Power Network Operator Console", "Real-time monitoring of the national grid")
+
+loadSection = Card([loadHeading, loadKpis, loadChart], "sunk")
+loadHeading = Heading("Current Electricity Load", "h3")
+loadKpis = Table([loadKpiName, loadKpiValue])
+loadKpiName = Col("Metric", ["Total Load (MW)", "Network Capacity (MW)", "Load Factor"])
+loadKpiValue = Col("Value", ["4,820", "5,000", "96.4%"])
+loadChart = LineChart(["Now", "1h", "2h", "3h", "4h", "5h", "6h"], [loadSeries], "natural", "MW", "Load")
+loadSeries = Series("Load", [4820, 4750, 4680, 4710, 4790, 4810, 4780])
+
+capacitySection = Card([capacityHeading, capacityGauge, capacityStatus], "sunk")
+capacityHeading = Heading("Network Capacity Status", "h3")
+capacityGauge = Progress(96.4, "Load Factor")
+capacityStatus = Tag("Near Capacity", null, null, "warning")
+
+generationSection = Card([generationHeading, generationChart, generationSources], "sunk")
+generationHeading = Heading("Generation Split by Source", "h3")
+generationChart = PieChart(["Generation Sources"], [genSeries], "pie")
+genSeries = Series("Generation", [3200, 1200, 800, 400])
+generationSources = TagBlock(["Solar", "Wind", "Hydro", "Natural Gas"])
+
+plantsSection = Card([plantsHeading, plantsTable], "sunk")
+plantsHeading = Heading("Power Plants — Output & Status", "h3")
+plantsTable = Table([plantCol, plantOutput, plantStatus])
+plantCol = Col("Plant", ["Name", "Output (MW)", "Status"])
+plantOutput = Col("Output", ["Hornsby", "Werris Creek", "Tully", "Lismore", "Ballarat", "Gundagai"])
+plantStatus = Col("Status", ["Online", "Online", "Online", "Maintenance", "Online", "Offline"])
+
+outagesSection = Card([outagesHeading, outagesTable], "sunk")
+outagesHeading = Heading("Outages & Affected Regions", "h3")
+outagesTable = Table([outageCol, outageRegion, outageDuration])
+outageCol = Col("Outage", ["Region", "Duration"])
+outageRegion = Col("Region", ["Northern Region", "Southern Region", "Coastal Zone", "Central Valley"])
+outageDuration = Col("Duration", ["2h", "1h", "3h", "4h"])
+
+forecastSection = Card([forecastHeading, forecastChart], "sunk")
+forecastHeading = Heading("Demand Forecast (Next 24 Hours)", "h3")
+forecastChart = LineChart(["12h", "18h", "24h", "30h", "36h", "42h"], [forecastSeries], "linear", "MW", "Demand")
+forecastSeries = Series("Demand Forecast", [4600, 4900, 5100, 4800, 4400, 4200])
+
+priceSection = Card([priceHeading, priceChart], "sunk")
+priceHeading = Heading("Current Price per MWh", "h3")
+priceChart = HorizontalBarChart(["Price Levels"], [priceSeries], "grouped", "MW", "Price")
+priceSeries = Series("Price", [120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5])
+
+maintenanceSection = Card([maintenanceHeading, maintenanceList], "sunk")
+maintenanceHeading = Heading("Maintenance Planned This Month", "h3")
+maintenanceList = ListBlock([m1, m2, m3, m4], "image")
+m1 = ListItem("Hornsby Substation", "Scheduled maintenance", null, "Planned")
+m2 = ListItem("Werris Creek", "Generator upgrade", null, "Planned")
+m3 = ListItem("Tully Transformer", "Inspection", null, "Planned")
+m4 = ListItem("Lismore Switchyard", "Reliability check", null, "Planned")
+
+alertsSection = Card([alertsHeading, alertsList], "sunk")
+alertsHeading = Heading("Live Alerts", "h3")
+alertsList = ListBlock([a1, a2, a3, a4], "image")
+a1 = ListItem("Voltage Anomaly", "Northern Region", null, "Alert")
+a2 = ListItem("Frequency Drop", "Southern Region", null, "Warning")
+a3 = ListItem("Line Overload", "Central Valley", null, "Alert")
+a4 = ListItem("Generator Failure", "Werris Creek", null, "Critical")
+
+regionFocus = Card([regionFocusHeading, regionFocusContent], "sunk")
+regionFocusHeading = Heading("Region Focus", "h3")
+regionFocusContent = Form("region-select", [regionSelect], [
+    FormControl("Select Region", regionSelect, "Choose a region to focus on"),
+    Select("region", [
+        SelectItem("Northern Region", "Northern Region"),
+        SelectItem("Southern Region", "Southern Region"),
+        SelectItem("Coastal Zone", "Coastal Zone"),
+        SelectItem("Central Valley", "Central Valley"),
+        SelectItem("Eastern Network", "Eastern Network"),
+        SelectItem("Western Network", "Western Network"),
+    ], "Select a region"),
+    Button("Apply Focus", null, "primary"),
+    Button("Reset Focus", null, "tertiary"),
+])
+
+curtailmentOrder = Card([curtailmentHeading, curtailmentList], "sunk")
+curtailmentHeading = Heading("Curtailment Order", "h3")
+curtailmentList = ListBlock([c1, c2, c3, c4], "image")
+c1 = ListItem("Reduce Hornsby Output", "100 MW", null, "Order")
+c2 = ListItem("Reduce Werris Creek Output", "80 MW", null, "Order")
+c3 = ListItem("Reduce Tully Output", "60 MW", null, "Order")
+c4 = ListItem("Reduce Lismore Output", "40 MW", null, "Order")
+
+emissionsSection = Card([emissionsHeading, emissionsChart], "sunk")
+emissionsHeading = Heading("Emissions Today", "h3")
+emissionsChart = BarChart(["Emission Sources"], [emissionsSeries], "grouped", "Source", "CO2 (tonnes)")
+emissionsSeries = Series("Emissions", [2450, 1800, 950, 1200])
+
+The screen covers all 12 items: current load (loadSection), capacity proximity (capacitySection), generation split (generationSection), plant output and status (plantsSection), outages with affected regions (outagesSection), demand forecast for next 24 hours (forecastSection), price per MWh (priceSection), maintenance planned this month (maintenanceSection), live alerts (alertsSection), region focus (regionFocus), curtailment ordering (curtailmentOrder), and emissions today (emissionsSection).

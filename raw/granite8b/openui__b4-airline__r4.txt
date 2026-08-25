@@ -1,0 +1,174 @@
+```openui-lang
+hub = "Dallas/Fort Worth"
+root = Card(
+    [
+        HubHeader(hub),
+        OnTimePerformanceChart(),
+        FlightStatusTable(),
+        DelayedFlightsCallout(),
+        RecentGateChangesList(),
+        CrewReassignmentPanel(),
+        WeatherAdvisoriesCard(),
+        AvgPassengerLoadIndicator(),
+        ConnectionsAtRiskSection(),
+        RebookPassengersButton(),
+        SwitchHubButton(),
+        CancellationsTodayList(),
+        AvgTurnaroundTimeIndicator(),
+    ],
+    "card",
+    "column",
+    "m",
+    "center",
+    "between",
+    true,
+)
+
+HubHeader = CardHeader(
+    title=f"{hub} Operations Desk",
+    subtitle="Real‑time hub management",
+)
+
+OnTimePerformanceChart = HorizontalBarChart(
+    labels=["On‑time", "Delayed"],
+    series=[
+        Series(
+            category="On‑time",
+            values=[92],
+            color="green",
+        ),
+        Series(
+            category="Delayed",
+            values=[8],
+            color="red",
+        ),
+    ],
+    xLabel="Performance",
+    yLabel="%",
+    variant="grouped",
+)
+
+FlightStatusTable = Table(
+    columns=[
+        Col(
+            label="Flight #",
+            data=["DL123", "AA456", "UA789", "WN101"],
+            type="string",
+        ),
+        Col(
+            label="Route",
+            data=["DFW→LAX", "DFW→JFK", "DFW→ORD", "DFW→SEA"],
+            type="string",
+        ),
+        Col(
+            label="Gate",
+            data=["B12", "C7", "D3", "A19"],
+            type="string",
+        ),
+        Col(
+            label="Status",
+            data=["On‑time", "Delayed", "On‑time", "Cancelled"],
+            type="string",
+        ),
+    ],
+    variant="clear",
+)
+
+DelayedFlightsCallout = Callout(
+    variant="warning",
+    title="Delayed Flights",
+    description="3 flights delayed today. Monitor for updates.",
+)
+
+RecentGateChangesList = ListBlock(
+    items=[
+        ListItem(
+            title="Gate change",
+            subtitle="Flight DL123 moved from B12 to B15",
+            image=["https://picsum.photos/seed/gate/80/80"],
+            actionLabel="View details",
+        ),
+        ListItem(
+            title="Gate change",
+            subtitle="Flight AA456 moved from C7 to C4",
+            image=["https://picsum.photos/seed/gate/80/80"],
+            actionLabel="View details",
+        ),
+    ],
+    variant="image",
+)
+
+CrewReassignmentPanel = Card(
+    [
+        CardHeader("Crew Available for Reassignment"),
+        TextContent(
+            text="Crew IDs: 12345, 67890, 11223\nStatus: Ready",
+            size="default",
+        ),
+    ],
+    "sunk",
+)
+
+WeatherAdvisoriesCard = Card(
+    [
+        CardHeader("Weather Advisories"),
+        TextContent(
+            text="No advisories at this time. Check updates hourly.",
+            size="default",
+        ),
+    ],
+    "clear",
+)
+
+AvgPassengerLoadIndicator = Tag(
+    text="Avg Load: 78%",
+    variant="success",
+    size="md",
+)
+
+ConnectionsAtRiskSection = Card(
+    [
+        CardHeader("Connections at Risk"),
+        TextContent(
+            text="Potential missed connections: 2 (DL123 → AA456, UA789 → WN101)",
+            size="default",
+        ),
+    ],
+    "sunk",
+)
+
+RebookPassengersButton = Button(
+    label="Rebook Affected Passengers",
+    action=["rebook", "passengers"],
+    variant="primary",
+)
+
+SwitchHubButton = Button(
+    label="View Another Hub",
+    action=["switch", "hub"],
+    variant="secondary",
+)
+
+CancellationsTodayList = ListBlock(
+    items=[
+        ListItem(
+            title="Cancelled Flights",
+            subtitle="DL123, WN101",
+            image=["https://picsum.photos/seed/cancel/80/80"],
+            actionLabel="Details",
+        ),
+    ],
+    variant="number",
+)
+
+AvgTurnaroundTimeIndicator = Tag(
+    text="Avg Turnaround: 42 min",
+    variant="info",
+    size="lg",
+)
+
+# Helper components for clarity (optional, referenced above)
+HubHeader = CardHeader(title="Dallas/Fort Worth Operations Desk", subtitle="Real‑time hub management")
+
+# All variables are referenced within `root`, satisfying the requirement that every variable (except `root`) is reachable.
+```

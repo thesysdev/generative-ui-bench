@@ -1,0 +1,71 @@
+root = Card([header, metricsRow, middleSection, bottomSection, newRoleDrawer], "card", "column", "l")
+
+header = CardHeader("HR Hiring Overview", "Talent Acquisition & Workforce Metrics")
+
+metricsRow = Card([headcountCard, timeCard, interviewsCard], "card", "row", "m")
+headcountCard = Card([headcountTitle, headcountValue, headcountSub], "sunk", "column", "xs")
+headcountTitle = TextContent("Current Headcount", "small")
+headcountValue = TextContent("248", "large-heavy")
+headcountSub = TextContent("+12 net increase YTD", "small")
+
+timeCard = Card([timeTitle, timeValue, timeSub], "sunk", "column", "xs")
+timeTitle = TextContent("Avg Time to Hire", "small")
+timeValue = TextContent("38 days", "large-heavy")
+timeSub = TextContent("-4 days vs last quarter", "small")
+
+interviewsCard = Card([interviewsTitle, interviewsValue, interviewsSub], "sunk", "column", "xs")
+interviewsTitle = TextContent("Interviews This Week", "small")
+interviewsValue = TextContent("34", "large-heavy")
+interviewsSub = TextContent("Across all open positions", "small")
+
+middleSection = Card([rolesCard, pipelineCard], "card", "row", "m")
+
+rolesCard = Card([rolesHeading, rolesTable], "card", "column", "s")
+rolesHeading = Heading("Open Roles", "h3")
+rolesTable = Table([roleCol, deptCol, priorityCol])
+roleCol = Col("Role", ["Senior Frontend Dev", "Product Manager", "Data Engineer", "HR Business Partner"])
+deptCol = Col("Department", ["Engineering", "Product", "Data", "People Ops"])
+priorityCol = Col("Priority", ["High", "Medium", "High", "Low"])
+
+pipelineCard = Card([pipelineHeading, pipelineChart], "card", "column", "s")
+pipelineHeading = Heading("Candidates by Pipeline Stage", "h3")
+pipelineChart = HorizontalBarChart(["Applied", "Phone Screen", "Tech/Case", "Onsite", "Offer"], [pipelineSeries], "grouped", "Candidates", "Stage")
+pipelineSeries = Series("Candidates", [142, 68, 28, 12, 5])
+
+bottomSection = Card([splitCard, attritionCard, actionRow], "card", "column", "m")
+
+splitCard = Card([splitHeading, splitChart], "card", "column", "s")
+splitHeading = Heading("Headcount Split by Department", "h3")
+splitChart = PieChart(["Engineering", "Product", "Sales", "Marketing", "Operations", "People Ops"], [95, 35, 60, 30, 18, 10], "donut", "circular")
+
+attritionCard = Card([attritionHeading, attritionChart], "card", "column", "s")
+attritionHeading = Heading("Attrition Over Past 6 Months", "h3")
+attritionChart = LineChart(["Nov", "Dec", "Jan", "Feb", "Mar", "Apr"], [attritionSeries], "linear", "Month", "Departures")
+attritionSeries = Series("Departures", [3, 5, 2, 4, 3, 2])
+
+actionRow = Card([actionPrompt, openRoleBtn], "card", "row", "between", "center")
+actionPrompt = TextContent("Need to expand your team?", "default")
+openRoleBtn = DrawerBlock("Open New Role", "Create New Position", "Fill out the details below to request a new headcount and open a role.", [roleForm])
+
+roleForm = Form("new-role-form", formButtons, [titleField, deptField, levelField, hiringManagerField])
+titleField = FormControl("Role Title", titleInput)
+titleInput = Input("title", "e.g. Senior Backend Engineer")
+deptField = FormControl("Department", deptSelect)
+deptSelect = Select("department", [deptEng, deptProd, deptSales, deptMkt], "Select department")
+deptEng = SelectItem("engineering", "Engineering")
+deptProd = SelectItem("product", "Product")
+deptSales = SelectItem("sales", "Sales")
+deptMkt = SelectItem("marketing", "Marketing")
+levelField = FormControl("Level", levelSelect)
+levelSelect = Select("level", [levelL3, levelL4, levelL5, levelL6], "Select seniority")
+levelL3 = SelectItem("l3", "L3 - Mid")
+levelL4 = SelectItem("l4", "L4 - Senior")
+levelL5 = SelectItem("l5", "L5 - Staff")
+levelL6 = SelectItem("l6", "L6 - Director")
+hiringManagerField = FormControl("Hiring Manager Email", managerInput)
+managerInput = Input("manager", "manager@company.com", "email")
+
+formButtons = Buttons([submitRoleBtn])
+submitRoleBtn = Button("Submit Request", null, "primary")
+
+newDrawer = DrawerBlock("Open New Role", "Create New Position", "Fill out the details below to request a new headcount and open a role.", [roleForm])

@@ -1,0 +1,50 @@
+```openui-lang
+root = Card([header, refreshTime, transitSection, delayedSection, metricsSection, volumeChart, searchBar, flagSection])
+
+header = CardHeader("Logistics Dashboard", "Real-time shipment tracking and analytics")
+
+refreshTime = TextContent("Last updated: ", null, "small")
+refreshTime = refreshTime + "2024-02-20 14:30:00"
+
+transitSection = Card([transitHeading, shipmentTable], "sunk")
+transitHeading = Heading("Shipments in Transit", "h3")
+
+shipmentTable = Table([shipmentColumns])
+shipmentColumns = [
+    Col("Origin", ["New York", "Los Angeles", "Chicago", "Seattle", "Miami", "Houston"]),
+    Col("Destination", ["London", "Tokyo", "Berlin", "Sydney", "Paris", "Dubai"]),
+    Col("ETA", ["2024-02-22", "2024-02-23", "2024-02-21", "2024-02-24", "2024-02-25", "2024-02-26"]),
+    Col("Status", ["In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "Delayed"])
+]
+
+delayedSection = Card([delayedHeading, delayedShipments], "warning")
+delayedHeading = Heading("Delayed Shipments", "h3")
+delayedShipments = TextContent("NY → London (ETA: 2024-02-24, delay: 1 day), LA → Tokyo (ETA: 2024-02-25, delay: 2 days)")
+
+metricsSection = Card([onTimeMetric, costMetric], "sunk")
+onTimeMetric = TextContent("On-time this month: ", null, "large-heavy") + "87%"
+costMetric = TextContent("Avg. cost per shipment: ", null, "large-heavy") + "$1,245"
+
+volumeChart = Card([volumeHeading, carrierChart], "sunk")
+volumeHeading = Heading("Volume by Carrier", "h3")
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "TNT", "Other"], [45, 30, 15, 5, 5], "pie")
+
+searchBar = Card([searchInput], "sunk")
+searchInput = Input("route-search", "Search by route...", "text")
+
+flagSection = Card([flagHeading, flagButtons], "sunk")
+flagHeading = Heading("Shipment Actions", "h3")
+flagButtons = Buttons([flagBtn], "column")
+flagBtn = Button("Flag Shipment", ["flag_shipment"], "primary")
+
+weeklyVolume = Card([volumeHeading2, weeklyChart], "sunk")
+volumeHeading2 = Heading("Weekly Volume (Past 2 Months)", "h3")
+weeklyChart = BarChart(
+    ["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Feb 5", "Feb 12", "Feb 19"],
+    [series1, series2],
+    "grouped",
+    "Week", "Shipments"
+)
+series1 = Series("Jan", [1200, 1300, 1100, 1400, 1500, 1600, 1700])
+series2 = Series("Feb", [1600, 1700, 1800, 1900, 2000, 2100, 2200])
+```

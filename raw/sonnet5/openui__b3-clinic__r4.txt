@@ -1,0 +1,43 @@
+root = Card([header, dayNav, statsRow, nextPatientCallout, appointmentsSection, roomsSection, checkinSection])
+
+header = CardHeader("Front Desk – Day View", "Tuesday, June 11")
+
+dayNav = Buttons([prevDayBtn, todayBtn, nextDayBtn])
+prevDayBtn = Button("Previous day", null, "secondary")
+todayBtn = Button("Jump to today", null, "tertiary")
+nextDayBtn = Button("Next day", null, "secondary")
+
+statsRow = Card([expectedStat, noShowStat], "sunk", "row", "l")
+expectedStat = TextCallout("info", "Patients expected today", "18 appointments scheduled")
+noShowStat = TextCallout("warning", "No-show rate this month", "12% (9 of 76 appointments)")
+
+nextPatientCallout = Callout("info", "Next patient called", "Maria Gonzalez — please proceed to Room 2")
+
+appointmentsSection = Card([apptHeading, apptTable], "sunk")
+apptHeading = Heading("Today's Appointments", "h3")
+apptTable = Table([timeCol, nameCol, doctorCol, statusCol])
+timeCol = Col("Time", ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "1:00 PM", "1:30 PM", "2:00 PM"])
+nameCol = Col("Patient", ["Maria Gonzalez", "James Lee", "Ava Patel", "Robert Kim", "Sofia Martins", "Liam Chen", "Olivia Brooks", "Noah Davis", "Emma Wilson"])
+doctorCol = Col("Doctor", ["Dr. Alvarez", "Dr. Chen", "Dr. Alvarez", "Dr. Singh", "Dr. Chen", "Dr. Alvarez", "Dr. Singh", "Dr. Chen", "Dr. Alvarez"])
+statusCol = Col("Status", ["Called", "Waiting", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"])
+
+roomsSection = Card([roomsHeading, roomsTags], "sunk")
+roomsHeading = Heading("Room Availability", "h3")
+roomsTags = TagBlock(["Room 1 – Occupied", "Room 2 – In use (Maria Gonzalez)", "Room 3 – Free", "Room 4 – Free", "Room 5 – Occupied", "Room 6 – Free"])
+
+checkinSection = Card([checkinHeading, checkinForm], "sunk")
+checkinHeading = Heading("Check In a Patient", "h3")
+checkinForm = Form("checkin", checkinButtons, [patientField, roomField])
+patientField = FormControl("Patient", patientSelect)
+patientSelect = Select("patient", [p1, p2, p3, p4], "Select patient")
+p1 = SelectItem("james-lee", "James Lee - 9:30 AM")
+p2 = SelectItem("ava-patel", "Ava Patel - 10:00 AM")
+p3 = SelectItem("robert-kim", "Robert Kim - 10:30 AM")
+p4 = SelectItem("sofia-martins", "Sofia Martins - 11:00 AM")
+roomField = FormControl("Assign room", roomSelect)
+roomSelect = Select("room", [r3, r4, r6], "Choose a free room")
+r3 = SelectItem("room-3", "Room 3")
+r4 = SelectItem("room-4", "Room 4")
+r6 = SelectItem("room-6", "Room 6")
+checkinButtons = Buttons([checkinBtn])
+checkinBtn = Button("Check in", null, "primary")

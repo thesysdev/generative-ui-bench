@@ -1,0 +1,55 @@
+```openui-lang
+daysRemaining = 14
+root = Card([
+    header,
+    agenda,
+    speakers,
+    ticketTiers,
+    registrationForm,
+    daysRemainingBadge
+], "clear", "column", "m", "center", "between")
+
+header = CardHeader(
+    "FutureTech Conference 2025",
+    "October 15–17, 2025 • New York Convention Center"
+)
+
+agenda = Card([
+    Heading("Agenda", "h3"),
+    Table([timeCol, sessionCol]),
+], "sunk")
+timeCol = Col("Time", ["09:00 – 10:00", "10:30 – 11:30", "14:00 – 15:00", "16:00 – 17:00"])
+sessionCol = Col("Session", ["Keynote: AI in Business", "Breakout: Cloud Security", "Panel: Future of Work", "Closing Remarks"])
+
+speakers = Card([
+    Heading("Featured Speakers", "h3"),
+    ListBlock([
+        ListItem("Dr. Maya Patel", "AI Researcher & Industry Leader"),
+        ListItem("James Liu", "Head of Cloud Engineering, Google"),
+        ListItem("Sofia Gomez", "Founder, FutureTech Labs"),
+        ListItem("Alex Chen", "Chief Innovation Officer, IBM")
+    ], "image")
+], "sunk")
+
+ticketTiers = Card([
+    Heading("Ticket Tiers", "h3"),
+    Table([tierCol, priceCol]),
+], "sunk")
+tierCol = Col("Tier", ["Early Bird", "Standard", "VIP"])
+priceCol = Col("Price", ["$499", "$599", "$799"])
+
+registrationForm = Form("registerForm", buttons, [
+    nameField,
+    emailField,
+    submitBtn
+])
+nameField = FormControl("Full name", nameInput)
+nameInput = Input("name", placeholder: "Jane Doe")
+emailField = FormControl("Work email", emailInput, "We only use this to confirm your spot.")
+emailInput = Input("email", placeholder: "jane@company.com", type: "email")
+buttons = Buttons([submitBtn, cancelBtn])
+submitBtn = Button("Register Now", action: ["register", "submit"], variant: "primary")
+cancelBtn = Button("Cancel", action: ["register", "cancel"], variant: "tertiary")
+
+daysRemainingBadge = Tag("Days Remaining", null, null, "info")
+```

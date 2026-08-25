@@ -1,0 +1,82 @@
+root = Card([header, topGrid, middleGrid, bottomGrid, footer], "clear", "column", "l")
+
+header = CardHeader("Hospital Operations Command Center", "Real-time Facility Status")
+
+topGrid = Card([occupancyCard, erWaitCard, criticalAlerts], "clear", "row", "m", "stretch", "between")
+
+occupancyCard = Card([occHeading, occProgress], "card", "column", "s")
+occHeading = Heading("Bed Occupancy", "h4")
+occProgress = Progress(87, "87% Capacity")
+
+erWaitCard = Card([erHeading, erWaitText], "card", "column", "s")
+erHeading = Heading("ER Wait Time", "h4")
+erWaitText = TextContent("Current Average: 142 mins", "large-heavy")
+
+criticalAlerts = Card([critHeading, critList], "card", "column", "s")
+critHeading = Heading("Critical Patients", "h4")
+critList = ListBlock([p1, p2], "image")
+p1 = ListItem("James Wilson", "ICU - Bed 402", null, "Urgent")
+p2 = ListItem("Maria Garcia", "Cardiac - Bed 112", null, "Urgent")
+
+middleGrid = Card([admissionsSection, deptSection, staffSection], "clear", "row", "m", "stretch")
+
+admissionsSection = Card([admHeading, admChart], "card", "column", "s")
+admHeading = Heading("Admissions Trend", "h4")
+admChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [admSeries], "natural", "Day", "Patients")
+admSeries = Series("Admissions", [42, 38, 55, 61, 48, 30, 28, 45, 40, 58, 65, 50, 32, 25])
+
+deptSection = Card([deptHeading, deptChart], "card", "column", "s")
+deptHeading = Heading("Patients by Dept", "h4")
+deptChart = HorizontalBarChart(["ER", "ICU", "Surgical", "Pediatrics", "Maternity"], [deptSeries], "grouped", "Dept", "Count")
+deptSeries = Series("Current Patients", [112, 45, 88, 62, 34])
+
+staffSection = Card([staffHeading, staffTable], "card", "column", "s")
+staffHeading = Heading("Staff on Shift", "h4")
+staffTable = Table([staffName, staffRole])
+staffName = Col("Staff Member", ["Dr. Aris", "Nurse Kelly", "Dr. Chen", "Nurse Sarah", "Dr. Miller"])
+staffRole = Col("Role", ["Chief Surgeon", "Charge Nurse", "ER Attending", "Triage Nurse", "Neurologist"])
+
+bottomGrid = Card([dischargeSection, orSection, supplySection], "clear", "row", "m", "stretch")
+
+dischargeSection = Card([disHeading, disList], "card", "column", "s")
+disHeading = Heading("Ready for Discharge", "h4")
+disList = ListBlock([d1, d2, d3], "number")
+d1 = ListItem("Robert Low", "Room 201")
+d2 = ListItem("Linda Reed", "Room 305")
+d3 = ListItem("Kevin Hart", "Room 104")
+
+orSection = Card([orHeading, orTable], "card", "column", "s")
+orHeading = Heading("OR Bookings", "h4")
+orTable = Table([orTime, orProc])
+orTime = Col("Time", ["08:00", "10:30", "13:00", "15:30"])
+orProc = Col("Procedure", ["Appendectomy", "Hip Replace", "Knee Scope", "Gallbladder"])
+
+supplySection = Card([supHeading, supList], "card", "column", "s")
+supHeading = Heading("Low Supplies", "h4")
+supList = TagBlock(["Sterile Gauze", "Saline 500ml", "N95 Masks", "Surgical Gloves (L)"])
+
+footer = Card([datePicker, actionButtons], "clear", "row", "l", "stretch", "between")
+
+datePicker = DrawerBlock("Change Date", "Select Operation Date", "Pick a date to view historical or scheduled data", [calBlock])
+calBlock = CalendarBlock("single")
+
+actionButtons = Buttons([incidentBtn, transferBtn])
+incidentBtn = DialogBlock("File Incident", "Incident Report", "Provide details regarding the clinical or operational incident", [incidentForm])
+transferBtn = DialogBlock("Request Transfer", "Patient Transfer", "Request internal or external patient transfer", [transferForm])
+
+incidentForm = Form("incident-report", incButtons, [incDesc])
+incDesc = FormControl("Description", incText)
+incText = TextArea("desc", "Describe the incident...")
+incButtons = Buttons([incSubmit])
+incSubmit = Button("Submit Report", null, "primary")
+
+transferForm = Form("transfer-req", transButtons, [transPat, transDest])
+transPat = FormControl("Patient ID", transInput)
+transInput = Input("pat_id", "Enter Patient ID")
+transDest = FormControl("Destination", transSelect)
+transSelect = Select("dest", [dest1, dest2, dest3], "Select Ward")
+dest1 = SelectItem("icu", "ICU")
+dest2 = SelectItem("surg", "Surgical")
+dest3 = SelectItem("ped", "Pediatrics")
+transButtons = Buttons([transSubmit])
+transSubmit = Button("Request Transfer", null, "primary")

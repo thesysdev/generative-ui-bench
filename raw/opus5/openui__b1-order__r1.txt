@@ -1,0 +1,58 @@
+root = Card([header, statusTags, locationCallout, tracking, journey, etaSection, problemHeading, problemForm, followUps])
+
+header = CardHeader("Order #DK-48219 — Wireless Headphones", "Carrier: Northline Express · Tracking 1Z9X84720558")
+
+statusTags = TagBlock(["In transit", "On time", "Signature not required"])
+
+locationCallout = Callout("info", "Currently in Oakland, CA", "Scanned at the Oakland Regional Sort Facility today at 6:42 AM. The package has left the facility and is loaded for line-haul to your local delivery station.")
+
+tracking = Table([scanTime, scanLocation, scanStatus])
+scanTime = Col("Time", ["Today, 6:42 AM", "Today, 1:15 AM", "Yesterday, 8:30 PM", "Mar 11, 4:05 PM"])
+scanLocation = Col("Location", ["Oakland, CA", "Oakland, CA", "Sacramento, CA", "Reno, NV"])
+scanStatus = Col("Status", ["Departed sort facility", "Arrived at sort facility", "In transit", "Shipment picked up"])
+
+journey = Steps([step1, step2, step3, step4])
+step1 = StepsItem("Picked up", "Reno, NV — Mar 11, 4:05 PM. Package accepted from the seller.")
+step2 = StepsItem("In transit", "Sacramento, CA — Mar 12, 8:30 PM. Moving through the carrier network.")
+step3 = StepsItem("At Oakland sort facility (current)", "Oakland, CA — Today, 6:42 AM. Departed and heading to your local delivery station in San Jose, CA.")
+step4 = StepsItem("Out for delivery", "Expected early morning on the delivery date, once it reaches the San Jose station.")
+
+etaSection = Card([etaHeading, etaText, etaProgress, etaTable], "sunk")
+etaHeading = Heading("Estimated delivery", "h3")
+etaText = TextContent("**Thursday, March 14** between **12:00 PM and 4:00 PM** — delivered to 2184 Kestrel Lane, San Jose, CA 95126.", "large")
+etaProgress = Progress(72, "72% of the route completed — 1 stop remaining before your delivery station")
+etaTable = Table([etaLabel, etaValue])
+etaLabel = Col("Detail", ["Estimated arrival", "Delivery window", "Last updated", "Delivery method"])
+etaValue = Col("Value", ["Thursday, March 14", "12:00 PM – 4:00 PM", "Today, 6:42 AM", "Leave at front door"])
+
+problemHeading = Heading("Report a problem with this delivery", "h3")
+
+problemForm = Form("delivery-issue", problemButtons, [issueField, dateField, descField, contactField, updatesField])
+issueField = FormControl("What went wrong?", issueSelect, "Pick the option that best matches your situation")
+issueSelect = Select("issue_type", [issueLate, issueLost, issueDamaged, issueWrongAddress, issueMissingItems, issueOther], "Choose an issue type")
+issueLate = SelectItem("late", "Package is late or stuck")
+issueLost = SelectItem("lost", "Marked delivered but not received")
+issueDamaged = SelectItem("damaged", "Package arrived damaged")
+issueWrongAddress = SelectItem("wrong_address", "Delivered to the wrong address")
+issueMissingItems = SelectItem("missing_items", "Items missing from the package")
+issueOther = SelectItem("other", "Something else")
+dateField = FormControl("When did you notice the problem?", issueDate)
+issueDate = DatePicker("noticed_on", "single")
+descField = FormControl("Describe what happened", issueDesc, "Include anything the driver or carrier told you")
+issueDesc = TextArea("description", "e.g. The tracking has not updated since the Oakland scan two days ago.", 4)
+contactField = FormControl("Contact email", contactInput, "We will send the claim reference here")
+contactInput = Input("email", "you@example.com", "email")
+updatesField = FormControl("Notifications", updateChecks)
+updateChecks = CheckBoxGroup("notify", [notifySms, notifyCarrier])
+notifySms = CheckBoxItem("Text me updates", "Send SMS alerts as the claim progresses", "sms", true)
+notifyCarrier = CheckBoxItem("Contact the carrier for me", "Northline Express will open a trace on the package", "carrier", true)
+
+problemButtons = Buttons([submitIssue, callSupport, cancelIssue])
+submitIssue = Button("Submit report", null, "primary")
+callSupport = Button("Chat with support", null, "secondary")
+cancelIssue = Button("Cancel", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Can I change the delivery address?")
+fu2 = FollowUpItem("Hold this package at a pickup point instead")
+fu3 = FollowUpItem("Notify me when it is out for delivery")

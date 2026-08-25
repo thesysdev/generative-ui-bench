@@ -1,0 +1,112 @@
+```openui
+root = Card([
+    onTimePerformance,
+    flightsList,
+    delayedFlightsCallout,
+    recentGateChanges,
+    crewsAvailable,
+    weatherAdvisories,
+    avgPassengerLoad,
+    connectionsAtRisk,
+    rebookOption,
+    viewDifferentHub,
+    cancellationsToday,
+    avgTurnaroundTime
+])
+
+onTimePerformance = Card([
+    onTimeHeading,
+    onTimePercent
+], "sunk")
+
+onTimeHeading = Heading("On-Time Performance Today", "h3")
+onTimePercent = TextContent("95%", "large-heavy")
+
+flightsList = Card([
+    flightsHeader,
+    flightsTable
+], "sunk")
+
+flightsHeader = CardHeader("Flights Today")
+flightsTable = Table([flightNumberCol, routeCol, gateCol, statusCol])
+flightNumberCol = Col("Flight Number", ["AB123", "CD456", "EF789"])
+routeCol = Col("Route", ["NYC-LAX", "SFO-SEA", "MIA-LHR"])
+gateCol = Col("Gate", ["12A", "34B", "56C"])
+statusCol = Col("Status", ["On Time", "Delayed", "On Time"])
+
+delayedFlightsCallout = Callout("warning", "Delayed Flights", "3 flights delayed due to weather")
+
+recentGateChanges = Card([
+    gateChangesHeader,
+    gateChangesList
+], "sunk")
+
+gateChangesHeader = CardHeader("Recent Gate Changes")
+gateChangesList = ListBlock([
+    gateChangeItem1,
+    gateChangeItem2
+], "image")
+
+gateChangeItem1 = ListItem("Flight AB123", "Gate changed to 12B")
+gateChangeItem2 = ListItem("Flight CD456", "Gate changed to 34C")
+
+crewsAvailable = Card([
+    crewsHeader,
+    crewsTable
+], "sunk")
+
+crewsHeader = CardHeader("Crews Available")
+crewsTable = Table([crewNameCol, roleCol])
+crewNameCol = Col("Name", ["John Doe", "Jane Smith"])
+roleCol = Col("Role", ["Pilot", "Flight Attendant"])
+
+weatherAdvisories = Card([
+    weatherHeader,
+    weatherContent
+], "sunk")
+
+weatherHeader = CardHeader("Weather Advisories")
+weatherContent = MarkDownRenderer("### Weather Update\n\n- Light rain expected. Delays possible.")
+
+avgPassengerLoad = Card([
+    loadHeading,
+    loadValue
+], "sunk")
+
+loadHeading = Heading("Average Passenger Load Today", "h3")
+loadValue = TextContent("82%", "large-heavy")
+
+connectionsAtRisk = Card([
+    riskHeading,
+    riskList
+], "sunk")
+
+riskHeading = Heading("Connections at Risk", "h3")
+riskList = ListBlock([
+    riskItem1,
+    riskItem2
+], "number")
+
+riskItem1 = ListItem("Flight AB123 to EF789", "Risk of missing connection due to delay")
+riskItem2 = ListItem("Flight CD456 to GH012", "Risk of missing connection due to weather")
+
+rebookOption = Button("Rebook Affected Passengers", null, "primary")
+
+viewDifferentHub = Button("View Another Hub", null, "secondary")
+
+cancellationsToday = Card([
+    cancellationsHeader,
+    cancellationsCount
+], "sunk")
+
+cancellationsHeader = CardHeader("Cancellations Today")
+cancellationsCount = TextContent("2 flights", "large-heavy")
+
+avgTurnaroundTime = Card([
+    turnaroundHeading,
+    turnaroundValue
+], "sunk")
+
+turnaroundHeading = Heading("Average Turnaround Time", "h3")
+turnaroundValue = TextContent("45 minutes", "large-heavy")
+```

@@ -1,0 +1,93 @@
+root = Card([overview, departmentFocus, semesterCompare, waitlistOverview, courseApproval, messageGroup, actions], "clear")
+
+overview = CardHeader("University Overview", "Comprehensive dashboard")
+
+kpiRow = Card([totalEnrollment, fiveYearTrend, acceptanceRate, tuitionRevenue])
+
+totalEnrollment = TextCallout("success", "12,847", "Total enrollment")
+fiveYearTrend = LineChart(["2020", "2021", "2022", "2023", "2024"], [enrollmentSeries], "natural", "Year", "Students")
+enrollmentSeries = Series("Enrollment", [10200, 10800, 11300, 11900, 12847])
+acceptanceRate = TextCallout("info", "82%", "Acceptance rate")
+tuitionRevenue = TextCallout("success", "$4.2M", "Tuition revenue")
+
+programApplications = Card([programsChart, acceptanceRate])
+
+programsChart = HorizontalBarChart(["CS", "Engineering", "Business", "Arts", "Science"], [progSeries], "grouped", "Program", "Applications")
+progSeries = Series("Applications", [4200, 3100, 2800, 1900, 1600])
+
+courseCapacity = Card([courseChart, teachingLoad])
+
+courseChart = SingleStackedBarChart(["2024", "2025"], [courseSeries])
+courseSeries = Series("Course Capacity", [850, 920])
+teachingLoad = Card([facultyLoad, atRiskStudents])
+
+facultyLoad = HorizontalBarChart(["Prof. Adams", "Prof. Baker", "Prof. Chen", "Prof. Davis", "Prof. Evans"], [facultySeries], "grouped", "Faculty", "Teaching Load (hrs)")
+facultySeries = Series("Teaching Load", [140, 135, 120, 115, 110])
+
+atRiskStudents = Card([atRiskChart, scholarshipBudget])
+
+atRiskChart = PieChart(["Critical", "At Risk", "On Track"], [riskSeries])
+riskSeries = Series("Students", [120, 340, 8200])
+scholarshipBudget = TextCallout("warning", "$1.2M", "Scholarship budget used")
+
+housingOccupancy = Card([housingChart, campusEvents])
+
+housingChart = SingleStackedBarChart(["Fall 2024", "Spring 2025"], [housingSeries])
+housingSeries = Series("Housing", [820, 880])
+campusEvents = Card([eventList])
+
+eventList = ListBlock([
+  { label: "Spring Fling", icon: "🎉" },
+  { label: "Academic Seminar Series", icon: "📚" },
+  { label: "Career Fair", icon: "💼" },
+  { label: "Winter Wellness Day", icon: "💚" },
+  { label: "Cultural Festival", icon: "🎭" }
+])
+
+alumniGiving = Card([alumniChart])
+
+alumniChart = LineChart(["2021", "2022", "2023", "2024"], [alumniSeries], "natural", "Year", "Giving ($K)")
+alumniSeries = Series("Giving", [1200, 1450, 1680, 1920])
+
+departmentFocus = CardHeader("Department Focus", "Navigate by department")
+deptSelect = Select("Department", [deptItem], "Select a department")
+deptItem = SelectItem("Computer Science", "CS")
+deptItem2 = SelectItem("Engineering", "Engineering")
+deptItem3 = SelectItem("Business", "Business")
+deptItem4 = SelectItem("Arts", "Arts")
+deptItem5 = SelectItem("Science", "Science")
+
+semesterCompare = CardHeader("Semester Comparison", "Current vs Last")
+semesterCompare = HorizontalBarChart(["Fall 2024", "Spring 2025"], [semesterSeries], "grouped", "Semester", "Enrollment")
+semesterSeries = Series("Enrollment", [12400, 12600])
+
+waitlistOverview = CardHeader("Waitlist Status", "Per program")
+waitlistChart = HorizontalBarChart(["CS", "Engineering", "Business", "Arts", "Science"], [waitlistSeries], "grouped", "Program", "Waitlist")
+waitlistSeries = Series("Waitlist", [120, 95, 60, 30, 15])
+
+courseApproval = CardHeader("Course Approval", "Submit new course request")
+courseApproval = Form("course-approval", [submitBtn], [courseName, courseDept, courseCredits, courseSem])
+
+courseName = FormControl("Course name", courseInput, "e.g., Data Science 401")
+courseInput = Input("course", "Data Science 401")
+courseDept = FormControl("Department", deptSelect, "Select department")
+courseCredits = FormControl("Credits", creditSlider, "3-6 credits")
+creditSlider = Slider("credit", "continuous", 3, 6, 1, "Credits")
+courseSem = FormControl("Semester", semesterSelect, "Fall or Spring")
+semesterSelect = Select("semester", [semesterItem], "Select semester")
+semesterItem = SelectItem("Fall 2025", "Fall 2025")
+submitBtn = Button("Submit Course Request", null, "primary")
+
+messageGroup = CardHeader("Message to Student Group", "Send communication")
+messageGroup = Form("message-send", [submitBtn], [groupSelect, messageBody])
+
+groupSelect = FormControl("Group", groupSelectItems, "Select group")
+groupSelectItems = [SelectItem("Engineering Club", "Engineering Club"), SelectItem("Student Government", "Student Government")]
+messageBody = FormControl("Message", messageInput, "Type your message")
+messageInput = TextArea("message", "Type your message here...", 5, null, null)
+
+actions = Buttons([deptFocusBtn, semesterBtn, courseApprovalBtn, messageBtn])
+deptFocusBtn = Button("Focus Department", null, "primary")
+semesterBtn = Button("Compare Semesters", null, "secondary")
+courseApprovalBtn = Button("Submit Course", null, "primary")
+messageBtn = Button("Send Message", null, "secondary")

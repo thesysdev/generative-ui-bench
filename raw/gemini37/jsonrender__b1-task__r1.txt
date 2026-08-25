@@ -1,0 +1,37 @@
+{"op":"add","path":"/root","value":"focusView"}
+{"op":"add","path":"/elements/focusView","value":{"type":"Card","props":{"variant":"card","direction":"column","gap":"l"},"children":["headerCard","taskCard","notesCard","actionGroup"]}}
+{"op":"add","path":"/elements/headerCard","value":{"type":"Card","props":{"variant":"clear","direction":"row","justify":"between","align":"center"},"children":["titleGroup","urgencyBadge"]}}
+{"op":"add","path":"/elements/titleGroup","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["mainHeading","focusSubtitle"]}}
+{"op":"add","path":"/elements/mainHeading","value":{"type":"Heading","props":{"text":"Deep Focus Session","level":"h2"},"children":[]}}
+{"op":"add","path":"/elements/focusSubtitle","value":{"type":"TextContent","props":{"text":"Eliminate distractions and tackle your highest priority item.","size":"small"},"children":[]}}
+{"op":"add","path":"/elements/urgencyBadge","value":{"type":"Badge","props":{"text":"High Priority","variant":"destructive"},"children":[]}}
+{"op":"add","path":"/elements/taskCard","value":{"type":"Card","props":{"variant":"sunk","direction":"column","gap":"m"},"children":["statusCallout","taskDetailsRow","separator1","progressSection"]}}
+{"op":"add","path":"/elements/statusCallout","value":{"type":"Callout","props":{"variant":{"$cond":{"$state":"/task/completed"},"$then":"success","$else":"warning"},"title":{"$cond":{"$state":"/task/completed"},"$then":"Task Completed! 🎉","$else":"In Progress • Immediate Attention Required"},"description":{"$cond":{"$state":"/task/completed"},"$then":"Great work! You finished your top focus goal ahead of deadline.","$else":"Deadline approaching in 2 hours. Focus strictly on this deliverable."}},"children":[]}}
+{"op":"add","path":"/state/task","value":{}}
+{"op":"add","path":"/state/task/title","value":"Finalize Q3 Security Audit & Compliance Report"}
+{"op":"add","path":"/state/task/deadline","value":"Today, 5:00 PM EST (in 2 hours)"}
+{"op":"add","path":"/state/task/status","value":"In Progress"}
+{"op":"add","path":"/state/task/progress","value":75}
+{"op":"add","path":"/state/task/completed","value":false}
+{"op":"add","path":"/elements/taskDetailsRow","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"s"},"children":["taskTitle","metaRow"]}}
+{"op":"add","path":"/elements/taskTitle","value":{"type":"Heading","props":{"text":{"$state":"/task/title"},"level":"h3"},"children":[]}}
+{"op":"add","path":"/elements/metaRow","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","wrap":true,"align":"center"},"children":["deadlineTag","statusTag","categoryTag"]}}
+{"op":"add","path":"/elements/deadlineTag","value":{"type":"Tag","props":{"text":{"$template":"⏰ Due: ${/task/deadline}"},"variant":"danger","size":"md"},"children":[]}}
+{"op":"add","path":"/elements/statusTag","value":{"type":"Tag","props":{"text":{"$cond":{"$state":"/task/completed"},"$then":"Status: Done","$else":"Status: In Progress"}},"variant":{"$cond":{"$state":"/task/completed"},"$then":"success","$else":"warning"},"size":"md"},"children":[]}}
+{"op":"add","path":"/elements/categoryTag","value":{"type":"Tag","props":{"text":"Engineering / Compliance","variant":"neutral","size":"md"},"children":[]}}
+{"op":"add","path":"/elements/separator1","value":{"type":"Separator","props":{"orientation":"horizontal"},"children":[]}}
+{"op":"add","path":"/elements/progressSection","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["progressLabel","progressBar"]}}
+{"op":"add","path":"/elements/progressLabel","value":{"type":"TextContent","props":{"text":{"$cond":{"$state":"/task/completed"},"$then":"**Progress: 100% complete**","$else":"**Progress: 75% complete** (3 of 4 sub-checks finished)"},"size":"small"},"children":[]}}
+{"op":"add","path":"/elements/progressBar","value":{"type":"Progress","props":{"value":{"$cond":{"$state":"/task/completed"},"$then":100,"$else":75},"label":"Task Completion"},"children":[]}}
+{"op":"add","path":"/elements/notesCard","value":{"type":"Card","props":{"variant":"clear","direction":"column","gap":"xs"},"children":["stepsHeader","taskSteps"]}}
+{"op":"add","path":"/elements/stepsHeader","value":{"type":"TextContent","props":{"text":"**Remaining Sub-tasks:**","size":"default"},"children":[]}}
+{"op":"add","path":"/elements/taskSteps","value":{"type":"Steps","props":{"items":["step1","step2","step3"]},"children":[]}}
+{"op":"add","path":"/elements/step1","value":{"type":"StepsItem","props":{"title":"Vulnerability scan verification","details":"Completed • All medium and high CVEs patched."},"children":[]}}
+{"op":"add","path":"/elements/step2","value":{"type":"StepsItem","props":{"title":"Sign-off on access logs review","details":"Completed • Audited IAM policy alterations for Q3."},"children":[]}}
+{"op":"add","path":"/elements/step3","value":{"type":"StepsItem","props":{"title":"Export & submit executive summary PDF","details":"Pending final signature from lead auditor."},"children":[]}}
+{"op":"add","path":"/elements/actionGroup","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"m","justify":"between","align":"center"},"children":["completeButtonCard","resetButtonCard"]}}
+{"op":"add","path":"/elements/completeButtonCard","value":{"type":"Card","props":{"variant":"clear"},"visible":{"$state":"/task/completed","not":true},"children":["markDoneBtn"]}}
+{"op":"add","path":"/elements/markDoneBtn","value":{"type":"Button","props":{"label":"✓ Mark Task as Done","variant":"primary","size":"large"},"on":{"press":{"action":"setState","params":{"statePath":"/task/completed","value":true}}},"children":[]}}
+{"op":"add","path":"/elements/resetButtonCard","value":{"type":"Card","props":{"variant":"clear","direction":"row","gap":"s","align":"center"},"visible":{"$state":"/task/completed","eq":true},"children":["doneBadge","reopenBtn"]}}
+{"op":"add","path":"/elements/doneBadge","value":{"type":"Tag","props":{"text":"Task Finished!","variant":"success","size":"lg"},"children":[]}}
+{"op":"add","path":"/elements/reopenBtn","value":{"type":"Button","props":{"label":"Reopen Task","variant":"tertiary","size":"medium"},"on":{"press":{"action":"setState","params":{"statePath":"/task/completed","value":false}}},"children":[]}}

@@ -1,0 +1,75 @@
+```openui-lang
+root = Card(children = [salesVsTarget, footTraffic, bestSellers, outOfStock, onShift, avgBasketSize, returnsThisWeek, promotionMetrics, registerStatus, reorderItem, viewOtherStore, weekComparison], "card", "row", "l")
+
+salesVsTarget = CardHeader("Sales vs Target", "Today")
+salesVsTargetContent = Card(children = [salesVsTargetBarChart, salesVsTargetText], "clear")
+salesVsTargetBarChart = BarChart(["Actual", "Target"], [salesSeries], "grouped", "Metric", "Sales ($)")
+salesSeries = Series("Sales", [120000, 150000])
+salesVsTargetText = TextContent("Actual sales: $120k | Target: $150k", "large")
+
+footTraffic = CardHeader("Foot Traffic", "Through Day")
+footTrafficContent = Card(children = [footTrafficLineChart, footTrafficText], "clear")
+footTrafficLineChart = LineChart(["Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5"], [footTrafficSeries], "linear", "Hour", "Visitors")
+footTrafficSeries = Series("Foot Traffic", [500, 750, 1000, 900, 650])
+footTrafficText = TextContent("Peak at Hour 3 with 1000 visitors", "default")
+
+bestSellers = CardHeader("Best Sellers", "Units Sold")
+bestSellersContent = Card(children = [bestSellersTable], "clear")
+bestSellersTable = Table(columns = [bestSellersColName, bestSellersColUnits])
+bestSellersColName = Col("Product", ["Laptop", "Smartphone", "Headphones"])
+bestSellersColUnits = Col("Units Sold", [450, 320, 210])
+
+outOfStock = CardHeader("Out of Stock", "Items")
+outOfStockContent = Card(children = [outOfStockList], "clear")
+outOfStockList = ListBlock(items = [outOfStockItem1, outOfStockItem2], variant = "image")
+outOfStockItem1 = ListItem(title = "Coffee Beans", subtitle = "Roasted Fresh", image = [1])
+outOfStockItem2 = ListItem(title = "Wiper Blades", subtitle = "Summer", image = [2])
+
+onShift = CardHeader("On Shift Today", "Staff")
+onShiftContent = Card(children = [onShiftText], "clear")
+onShiftText = TextContent("Manager: Alice Smith | Cashier: Bob Lee | Stock Associate: Carol Kim", "default")
+
+avgBasketSize = CardHeader("Average Basket Size", "Items per Transaction")
+avgBasketSizeContent = Card(children = [avgBasketSizeText], "clear")
+avgBasketSizeText = TextContent("Average basket size: 3.4 items", "large")
+
+returnsThisWeek = CardHeader("Returns This Week", "Count")
+returnsThisWeekContent = Card(children = [returnsThisWeekBarChart, returnsThisWeekText], "clear")
+returnsThisWeekBarChart = BarChart(["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"], [returnsSeries], "grouped", "Day", "Returns")
+returnsSeries = Series("Returns", [12, 8, 15, 10, 5])
+returnsThisWeekText = TextContent("Total returns: 50 units", "default")
+
+promotionMetrics = CardHeader("Promotion Performance", "Metrics")
+promotionMetricsContent = Card(children = [promotionMetricsTable], "clear")
+promotionMetricsTable = Table(columns = [promoColName, promoColRevenue, promoColUnits])
+promoColName = Col("Promotion", ["Summer Sale", "Clearance", "Loyalty"])
+promoColRevenue = Col("Revenue ($)", [20000, 15000, 8000])
+promoColUnits = Col("Units Sold", [250, 180, 120])
+
+registerStatus = CardHeader("Register Status", "Open/Closed")
+registerStatusContent = Card(children = [registerStatusTable], "clear")
+registerStatusTable = Table(columns = [regColName, regColStatus])
+regColName = Col("Register", ["Reg 1", "Reg 2", "Reg 3"])
+regColStatus = Col("Open?", [true, false, true])
+
+reorderItem = CardHeader("Reorder Item", "Action")
+reorderItemContent = Card(children = [reorderForm], "clear")
+reorderForm = Form(name = "reorder_form", buttons = reorderButtons, fields = [reorderField])
+reorderField = FormControl(label = "Item to Reorder", input = reorderInput)
+reorderInput = Input(name = "reorder_item", placeholder = "Enter item ID")
+reorderButtons = Buttons(buttons = [reorderSubmit, reorderCancel], direction = "row")
+reorderSubmit = Button("Reorder", action = ["reorder", "item_selected"])
+reorderCancel = Button("Cancel", action = ["cancel"])
+
+viewOtherStore = CardHeader("View Other Store", "Action")
+viewOtherStoreContent = Card(children = [viewOtherStoreButtons], "clear")
+viewOtherStoreButtons = Buttons(buttons = [storeA, storeB], direction = "row")
+storeA = Button("Store A", action = ["view_store", "A"])
+storeB = Button("Store B", action = ["view_store", "B"])
+
+weekComparison = CardHeader("This Week vs Last Week", "Comparison")
+weekComparisonContent = Card(children = [weekComparisonBarChart, weekComparisonText], "clear")
+weekComparisonBarChart = BarChart(["Metric", "This Week", "Last Week"], [comparisonSeries], "grouped", "Metric", "Value")
+comparisonSeries = Series("Sales", [120000, 115000])
+weekComparisonText = TextContent("Sales up 3% this week", "large")
+```

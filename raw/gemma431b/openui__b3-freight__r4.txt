@@ -1,0 +1,46 @@
+root = Card([header, kpiRow, alerts, mainGrid, footer], "clear", "column", "l")
+
+header = CardHeader("Logistics Control Center", "Real-time Shipment Coordination")
+
+kpiRow = Card([onTimeKpi, costKpi, refreshText], "sunk", "row", "m", "center", "between")
+onTimeKpi = Card([onTimeLabel, onTimeValue], "card", "column", "none", "center")
+onTimeLabel = TextContent("On-Time Delivery", "small")
+onTimeValue = TextContent("92.4%", "large-heavy")
+costKpi = Card([costLabel, costValue], "card", "column", "none", "center")
+costLabel = TextContent("Avg. Cost / Shipment", "small")
+costValue = TextContent("$412.50", "large-heavy")
+refreshText = TextContent("Last refreshed: 2 mins ago", "small")
+
+alerts = Alert("Delayed Shipments", "4 shipments are currently behind schedule and require attention", "warning")
+
+mainGrid = Card([searchSection, dataSection, analyticsSection], "clear", "column", "l")
+
+searchSection = Card([searchField, searchBtn], "sunk", "row", "m", "center", "end")
+searchField = FormControl("Route Search", searchInput, "e.g. CHI -> NYC")
+searchInput = Input("route_search", "Enter origin or destination...")
+searchBtn = Buttons([doSearch])
+doSearch = Button("Filter Routes", null, "primary", "normal", "small")
+
+dataSection = Card([shipmentHeading, shipmentTable, actionBtn], "card", "column", "m")
+shipmentHeading = Heading("Active Shipments in Transit", "h3")
+shipmentTable = Table([colOrigin, colDest, colEta, colStatus])
+colOrigin = Col("Origin", ["Chicago, IL", "Seattle, WA", "Austin, TX", "Miami, FL", "Denver, CO"])
+colDest = Col("Destination", ["New York, NY", "Tokyo, JP", "London, UK", "Toronto, CA", "Phoenix, AZ"])
+colEta = Col("ETA", ["Oct 24, 14:00", "Oct 26, 09:00", "Oct 25, 18:00", "Oct 24, 11:00", "Oct 27, 08:00"])
+colStatus = Col("Status", ["In Transit", "Delayed", "Customs", "Delayed", "In Transit"])
+actionBtn = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment for Review", null, "secondary", "normal", "small")
+
+analyticsSection = Card([chartsHeading, carrierChart, volumeChart], "card", "column", "l")
+chartsHeading = Heading("Network Analytics", "h3")
+carrierChart = Card([carrierLabel, carrierPie], "sunk", "column", "s")
+carrierLabel = TextContent("Volume Split by Carrier", "small-heavy")
+carrierPie = PieChart(["FedEx", "UPS", "DHL", "Maersk"], [450, 320, 180, 110], "donut")
+volumeChart = Card([volumeLabel, volumeLine], "sunk", "column", "s")
+volumeLabel = TextContent("Weekly Volume (Past 8 Weeks)", "small-heavy")
+volumeLine = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "natural", "Week", "Shipments")
+volSeries = Series("Total Volume", [1200, 1150, 1300, 1450, 1380, 1500, 1620, 1580])
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("View detailed delay report")
+f2 = FollowUpItem("Optimize carrier distribution")

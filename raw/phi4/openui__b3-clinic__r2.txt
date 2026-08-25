@@ -1,0 +1,55 @@
+```openui-lang
+root = Card([
+  appointmentsSection,
+  statsSection,
+  roomStatusSection,
+  nextPatientSection,
+  actionsSection
+])
+
+appointmentsSection = Card([
+  appointmentsHeader,
+  appointmentsList
+], "sunk", "column")
+appointmentsHeader = Heading("Today's Appointments", "h3")
+appointments = [
+  { name: "John Doe", time: "9:00 AM" },
+  { name: "Jane Smith", time: "10:00 AM" },
+  { name: "Alice Johnson", time: "11:00 AM" }
+]
+appointmentsList = ListBlock([
+  ListItem(appointments[0].name, null, null, appointments[0].time),
+  ListItem(appointments[1].name, null, null, appointments[1].time),
+  ListItem(appointments[2].name, null, null, appointments[2].time)
+], "number")
+
+statsSection = Card([
+  statsHeader,
+  expectedPatients,
+  noShowRate
+], "sunk", "column")
+statsHeader = Heading("Clinic Stats", "h3")
+expectedPatients = Alert("Expected Patients Today", "15 patients", "info")
+noShowRate = Callout("no-show", "No-Show Rate", "10% this month", true)
+
+roomStatusSection = Card([
+  roomStatusHeader,
+  freeRooms
+], "sunk", "column")
+roomStatusHeader = Heading("Room Status", "h3")
+freeRooms = TextContent("Free Rooms: 2")
+
+nextPatientSection = Card([
+  nextPatientHeader,
+  nextPatient
+], "sunk", "column")
+nextPatientHeader = Heading("Next Patient", "h3")
+nextPatient = TextContent("Next Patient: John Doe at 9:00 AM")
+
+actionsSection = Card([
+  checkInButton,
+  changeDayButton
+], "sunk", "column")
+checkInButton = Button("Check In Patient", null, "primary")
+changeDayButton = Button("Change Day", null, "secondary")
+```

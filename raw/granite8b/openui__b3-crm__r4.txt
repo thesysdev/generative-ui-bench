@@ -1,0 +1,59 @@
+```openui
+root = Card([
+    header,
+    dealInfo,
+    activityLog,
+    contactsList,
+    followUps,
+    noteSection,
+    renewalWarning,
+    callLogButton
+], "clear", "column", "m", "center", "between")
+
+header = CardHeader("Sales Rep Account", "Rep: John Doe | Owner: Jane Smith")
+
+dealInfo = Card([
+    TextContent("Total Deal Value: $250,000", "large"),
+    TextContent("Current Stage: Negotiation", "large")
+], "sunk")
+
+activityLog = Card([
+    TextContent("Recent Activity:", "small-heavy"),
+    ListBlock(items=[
+        ListItem("Proposal sent on 2024-07-15", null, null, "View details"),
+        ListItem("Client feedback received on 2024-07-20", null, null, "View details")
+    ], "number")
+], "clear")
+
+contactsList = Card([
+    TextContent("Key Contacts:", "small-heavy"),
+    ListBlock(items=[
+        ListItem("Alice Johnson | Sales Lead", null, null, "View profile"),
+        ListItem("Bob Smith | Decision Maker", null, null, "View profile")
+    ], "image")
+], "clear")
+
+followUps = Card([
+    TextContent("Open Follow‑Ups:", "small-heavy"),
+    ListBlock(items=[
+        ListItem("Email reminder due 2024-08-01", null, null, "Mark complete"),
+        ListItem("Call prospect due 2024-08-05", null, null, "Mark complete")
+    ], "number")
+], "clear")
+
+noteSection = Card([
+    TextContent("Jot a Note:", "small-heavy"),
+    TextArea(name="note", placeholder="Add your note here", rows=4, value="Note goes here")
+], "sunk")
+
+renewalWarning = Card([
+    TextContent("Renewal Date: 2024-12-15", "large"),
+    Callout(
+        variant="warning",
+        title="Renewal Approaching",
+        description="Renewal is within 30 days. Please follow up with the client."
+    )
+], "clear")
+
+callLogButton = Button("Log a Call", action=["log", "call"], variant="primary")
+```

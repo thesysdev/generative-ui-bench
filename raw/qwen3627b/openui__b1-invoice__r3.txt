@@ -1,0 +1,39 @@
+The user wants a freelancer's invoice view. Let me plan the components:
+
+1. Amount due and currency - I'll show this prominently with a large text or badge
+2. Due date - Show as text
+3. A way to pay now - A button
+
+Let me think about the layout:
+- Card as root
+- CardHeader for the invoice title
+- The amount due prominently displayed
+- Due date info
+- A "Pay Now" button
+
+Let me build this out with a clean, professional invoice look.
+root = Card([invoiceHeader, amountSection, dueDateSection, clientDetails, lineItems, totalSection, payActions])
+invoiceHeader = CardHeader("Invoice", "INV-2025-0042")
+amountSection = Card([amountLabel, amountValue], "sunk")
+amountLabel = TextContent("Amount Due", "small-heavy")
+amountValue = TextContent("$2,450.00 USD", "large-heavy")
+dueDateSection = Card([dueLabel, dueValue], "sunk")
+dueLabel = TextContent("Due Date", "small-heavy")
+dueValue = TextContent("June 30, 2025", "large")
+clientDetails = Card([clientHeading, clientTable], "sunk")
+clientHeading = Heading("Billed To", "h3")
+clientTable = Table([clientField, clientValue])
+clientField = Col("Field", ["Name", "Company", "Email", "Address"])
+clientValue = Col("Value", ["Sarah Mitchell", "Brightside Studios", "sarah@brightside.studio", "42 Maple Ave, Portland, OR"])
+lineItems = Card([itemsHeading, itemsTable], "sunk")
+itemsHeading = Heading("Services", "h3")
+itemsTable = Table([itemDesc, itemQty, itemRate, itemTotal])
+itemDesc = Col("Description", ["Brand identity design", "Logo development", "Brand guidelines document", "Social media kit"])
+itemQty = Col("Qty", ["10", "8", "1", "5"])
+itemRate = Col("Rate", ["$120", "$150", "$500", "$100"])
+itemTotal = Col("Total", ["$1,200", "$1,200", "$500", "$500"])
+totalSection = Card([totalLabel, totalValue], "sunk")
+totalLabel = TextContent("Total", "small-heavy")
+totalValue = TextContent("$2,450.00 USD", "large-heavy")
+payActions = Buttons([payBtn])
+payBtn = Button("Pay Now", null, "primary", "normal", "large")

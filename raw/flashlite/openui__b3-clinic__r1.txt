@@ -1,0 +1,37 @@
+root = Card([header, metricsCard, mainContent, actionButtons, followUps])
+
+header = CardHeader("Clinic Reception Desk", "Daily Operations • Monday, Oct 23, 2023")
+
+metricsCard = Card([expectedMetric, noShowMetric, roomsMetric], "sunk", "row", "l", "center", "around")
+expectedMetric = Card([expectedHeading, expectedValue], "clear", "column", "none", "center")
+expectedHeading = Heading("Expected Today", "h4")
+expectedValue = TextContent("42", "large-heavy")
+
+noShowMetric = Card([noShowHeading, noShowValue], "clear", "column", "none", "center")
+noShowHeading = Heading("Monthly No-Show Rate", "h4")
+noShowValue = TextContent("4.2%", "large-heavy")
+
+roomsMetric = Card([roomsHeading, roomsValue], "clear", "column", "none", "center")
+roomsHeading = Heading("Rooms Free Now", "h4")
+roomsValue = TextContent("Room 2, Room 4", "large-heavy")
+
+mainContent = Card([currentCallout, apptSection], "clear", "column", "l")
+
+currentCallout = Callout("info", "Next Patient Called Out", "Please direct John Doe to Consultation Room 1.")
+
+apptSection = Card([apptHeading, apptTable], "card", "column", "m")
+apptHeading = Heading("Today's Appointments", "h3")
+apptTable = Table([timeCol, patientCol, statusCol, roomCol])
+timeCol = Col("Time", ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM"])
+patientCol = Col("Patient Name", ["John Doe", "Jane Smith", "Robert Johnson", "Emily Davis"])
+statusCol = Col("Status", ["In Room 1", "Waiting", "Scheduled", "Scheduled"])
+roomCol = Col("Room", ["Room 1", "-", "-", "-"])
+
+actionButtons = Buttons([checkInBtn, changeDayBtn], "row")
+checkInBtn = Button("Check In Patient", null, "primary")
+changeDayBtn = Button("Move to Another Day", null, "secondary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show walk-in queue")
+fu2 = FollowUpItem("View doctor schedules")
+fu3 = FollowUpItem("Print daily manifest")

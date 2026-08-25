@@ -1,0 +1,25 @@
+root = Card([header, stepsCard, caloriesCard, weeklyCard, logCard], "card", "column", "l")
+
+header = CardHeader("Daily Summary", "Today's fitness overview")
+
+stepsCard = Card([stepsText, stepsProgress], "sunk")
+stepsText = TextContent("Steps today: 8,432 / 10,000 goal")
+stepsProgress = Progress(84, "Daily goal")
+
+caloriesCard = Card([caloriesText], "sunk")
+caloriesText = TextContent("Calories burned: 2,340 kcal")
+
+weeklyCard = Card([weeklyHeading, weeklyChart], "sunk")
+weeklyHeading = Heading("Workouts this week", "h3")
+weeklyChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [workoutSeries], "linear", "Day", "Minutes")
+workoutSeries = Series("Duration", [45, 30, 60, 20, 50, 40, 55])
+
+logCard = Card([logHeading, logForm], "sunk")
+logHeading = Heading("Log a new workout", "h3")
+logForm = Form("log-workout", logButtons, [typeField, durationField])
+typeField = FormControl("Workout type", typeInput, "e.g., Run, Cycle, Swim")
+typeInput = Input("workout_type", "Run")
+durationField = FormControl("Duration (minutes)", durationInput)
+durationInput = Input("duration", "30", "number")
+logButtons = Buttons([saveBtn])
+saveBtn = Button("Save workout", null, "primary")

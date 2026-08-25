@@ -1,0 +1,63 @@
+thought
+root = Card([header, statsGrid, riskAlert, positionsTable, exposureChart, marketMovers, watchlist, ordersList, newsSection, economySection, strategySection, actionSection], "card", "column", "l")
+
+header = CardHeader("Global Trading Desk", "Market Open • Oct 24, 2024")
+
+statsGrid = Card([portfolioVal, pnlToday, varMetric, marginUsage], "card", "row", "m")
+portfolioVal = Card([TextContent("Total Portfolio Value", "$2,482,900.00", "large-heavy")])
+pnlToday = Card([TextContent("PnL Today", "+$42,150 (1.72%)", "large")])
+varMetric = Card([TextContent("Value at Risk (95%)", "-$18,400")])
+marginUsage = Card([Progress(65, "Margin in Use: 65%")])
+
+riskAlert = Alert("Risk Limit Warning", "Technology sector exposure is at 88% of maximum limit", "warning")
+
+positionsTable = Card([Heading("Active Positions", "h3"), Table([colTicker, colSize, colEntry, colPrice])], "card")
+colTicker = Col("Ticker", ["AAPL", "TSLA", "NVDA", "BTC/USD", "GOLD"])
+colSize = Col("Size", [1500, 400, 800, 12, 500])
+colEntry = Col("Entry", [175.20, 240.10, 120.50, 62000.00, 1950.00])
+colPrice = Col("Current", [231.45, 218.40, 140.25, 67400.00, 2730.10])
+
+exposureChart = Card([Heading("Exposure by Sector", "h3"), HorizontalBarChart([sectorLabels], [sectorSeries], "grouped", null, "USD Millions")], "card")
+sectorLabels = ["Tech", "Energy", "Finance", "Crypto", "Commodities"]
+sectorSeries = Series("Exposure", [850, 420, 310, 150, 210])
+
+marketMovers = Card([Heading("Top Movers", "h3"), Table([movTicker, movChange, movType])], "card")
+movTicker = Col("Asset", ["NVDA", "TSLA", "AMD", "GOOGL"])
+movChange = Col("% Change", ["+4.2%", "-3.1%", "+1.8%", "-0.5%"])
+movType = Col("Type", ["Gainer", "Loser", "Gainer", "Loser"])
+
+watchlist = Card([Heading("Watchlist", "h3"), ListBlock([watch1, watch2, watch3])], "card")
+watch1 = ListItem("MSFT", "$425.10", null, "Trade")
+watch2 = ListItem("ETH", "$2450.50", null, "Trade")
+watch3 = ListItem("AMD", "$175.20", null, "Trade")
+
+ordersList = Card([Heading("Working Orders", "h3"), ListBlock([order1, order2])], "card")
+order1 = ListItem("AAPL", "Limit Buy 500 @ 230.00", null, "Cancel")
+order2 = ListItem("BTC/USD", "Market Sell 0.5 @ 67400", null, "Cancel")
+
+newsSection = Card([Heading("Market Headlines", "h3"), ListBlock([news1, news2])], "card")
+news1 = ListItem("Fed signals potential rate pause in Q4", "Sentiment: Positive")
+news2 = ListItem("Oil prices dip as supply concerns ease", "Sentiment: Neutralish")
+
+economySection = Card([Heading("Economic Releases (This Week)", "h3"), ListBlock([eco1, eco2])], "card")
+eco1 = ListItem("Oct 25: US Initial Jobless Claims", "8:30 AM EST")
+eco2 = ListItem("Oct 30: US GDP Data Estimate", "8:30 AM EST")
+
+strategySection = Card([Heading("Strategy Performance YTD", "h3"), Table([stratName, stratReturn, stratDrawdown])], "card")
+stratName = Col("Strategy", ["Trend Following", "Mean Reversion", "Hedge"])
+stratReturn = Col("Return", ["12.5%", "-2.2%", "+4.1%"])
+stratDrawdown = Col("Max Drawdown", ["-4.2%", "-1.5%", "-1.2%"])
+
+actionSection = Card([Heading("Quick Actions", "h3"), Card([timeframe, rebalanceBtn, orderForm], "card", "row", "m")], "card")
+timeframe = FormControl("Timeframe", Select("tf", [t1h, t1d, t1w]))
+t1h = SelectItem("1H", "1 Hour")
+t1d = SelectItem("1D", "Day")
+t1w = SelectItem("1W", "Week")
+rebalanceBtn = Button("Rebalance Portfolio", null, "secondary")
+orderForm = Form("order-entry", orderButtons, [tickerField, sideField, qtyField])
+tickerField = FormControl("Ticker", Input("ticker", "AAPL"))
+sideField = FormControl("Side", RadioGroup("side", [sBuy, sSell], "Buy"))
+sBuy = RadioItem("Buy", "Long", "buy")
+sSell = RadioItem("Sell", "Short", "sell")
+qtyField = FormControl("Quantity", Input("qty", "100", "number"))
+orderButtons = Buttons([Button("Place Order", null, "primary")])

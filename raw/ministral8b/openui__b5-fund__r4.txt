@@ -1,0 +1,119 @@
+```openui-lang
+root = Card([workspaceHeader, dashboardGrid])
+
+workspaceHeader = CardHeader("Morning Trading Workspace", "Welcome, [Trader Name] | " + $currentDate)
+
+dashboardGrid = Card([portfolioSection, pnlSection, positionsSection, exposureSection, riskSection,
+                     moversSection, watchlistSection, ordersSection, marginSection,
+                     headlinesSection, economicSection, strategiesSection, drawdownSection,
+                     limitsSection, rebalanceBtn, orderForm, timeframeSelector], "card", "column", "m")
+
+portfolioValue = Card([portfolioHeading, portfolioValueDisplay], "sunk")
+portfolioHeading = Heading("Portfolio Value", "h3")
+portfolioValueDisplay = TextContent("$24,893,456.78", "large-heavy")
+
+pnlSection = Card([pnlHeading, pnlValue, pnlChange], "sunk")
+pnlHeading = Heading("Today's P&L", "h3")
+pnlValue = TextContent("$124,567.89", "large-heavy")
+pnlChange = TextCallout("+0.51%", "Change from close", "success")
+
+positionsSection = Card([positionsHeading, positionsTable], "sunk")
+positionsHeading = Heading("Positions", "h3")
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentPriceCol])
+tickerCol = Col("Ticker", ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"])
+sizeCol = Col("Size", ["1,200", "850", "500", "300", "1,500"])
+entryCol = Col("Entry", ["$145.23", "$250.12", "$2,800.00", "$3,400.00", "$700.00"])
+currentPriceCol = Col("Current", ["$152.34", "$255.67", "$2,850.75", "$3,450.12", "$720.50"])
+
+exposureSection = Card([exposureHeading, exposureChart], "sunk")
+exposureHeading = Heading("Sector Exposure", "h3")
+exposureChart = PieChart(["Tech", "Healthcare", "Consumer", "Finance", "Industrials"],
+                         [45, 25, 15, 10, 5], "donut", "circular")
+
+riskSection = Card([varHeading, varValue], "sunk")
+varHeading = Heading("Value at Risk (1d)", "h3")
+varValue = TextContent("-$345,678.90", "large-heavy")
+
+moversSection = Card([moversHeading, gainersTable, losersTable], "sunk")
+moversHeading = Heading("Today's Movers", "h3")
+gainersTable = Table([tickerCol, pctChangeCol])
+gainersTable = Table([tickerCol, pctChangeCol], ["GAINERS"])
+tickerCol = Col("Ticker", ["NVDA", "TSM", "META"])
+pctChangeCol = Col("Change", ["+6.2%", "+3.8%", "+2.1%"])
+
+losersTable = Table([tickerCol, pctChangeCol], ["LOSERS"])
+tickerCol = Col("Ticker", ["JPM", "BAC", "WFC"])
+pctChangeCol = Col("Change", ["-1.8%", "-0.9%", "-0.5%"])
+
+watchlistSection = Card([watchlistHeading, watchlistTable], "sunk")
+watchlistHeading = Heading("Watched Instruments", "h3")
+watchlistTable = Table([tickerCol, currentPriceCol])
+tickerCol = Col("Ticker", ["COIN", "BTC", "ETH", "XRP"])
+currentPriceCol = Col("Price", ["$24,567.89", "$62,345.67", "$3,456.78", "$0.98"])
+
+ordersSection = Card([ordersHeading, ordersTable], "sunk")
+ordersHeading = Heading("Working Orders", "h3")
+ordersTable = Table([tickerCol, sideCol, quantityCol, priceCol])
+tickerCol = Col("Ticker", ["AAPL", "GOOGL"])
+sideCol = Col("Side", ["BUY", "SELL"])
+quantityCol = Col("Qty", ["100", "50"])
+priceCol = Col("Price", ["$152.34", "$2,850.75"])
+
+marginSection = Card([marginHeading, marginValue], "sunk")
+marginHeading = Heading("Margin in Use", "h3")
+marginValue = TextContent("$8,765,432.00", "large-heavy")
+
+headlinesSection = Card([headlinesHeading, headlinesTable], "sunk")
+headlinesHeading = Heading("Market Headlines", "h3")
+headlinesTable = Table([headlineCol, sentimentCol])
+headlineCol = Col("Headline", ["Fed signals potential rate cut", "Tech stocks dip on earnings", "Oil prices rise on geopolitical tensions"])
+sentimentCol = Col("Sentiment", ["Neutral", "Negative", "Positive"])
+
+economicSection = Card([economicHeading, economicTable], "sunk")
+economicHeading = Heading("Economic Releases This Week", "h3")
+economicTable = Table([eventCol, impactCol])
+eventCol = Col("Event", ["CPI Report", "Jobs Report", "Fed Meeting Minutes"])
+impactCol = Col("Impact", ["High", "High", "Medium"])
+
+strategiesSection = Card([strategiesHeading, strategiesTable], "sunk")
+strategiesHeading = Heading("Strategy Returns (YTD)", "h3")
+strategiesTable = Table([strategyCol, returnCol])
+strategyCol = Col("Strategy", ["Equities", "Fixed Income", "Alternatives"])
+returnCol = Col("Return", ["+12.5%", "+3.8%", "+8.2%"])
+
+drawdownSection = Card([drawdownHeading, drawdownChart], "sunk")
+drawdownHeading = Heading("Drawdown (Past Year)", "h3")
+drawdownChart = LineChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+                         [drawdownSeries], "natural", "Month", "Drawdown (%)")
+drawdownSeries = Series("Portfolio", [0.0, -0.5, -1.2, -2.8, -3.5, -2.1, -1.8, -0.9])
+
+limitsSection = Card([limitsHeading, limitsTable], "sunk")
+limitsSection = Card([limitsHeading, limitsTable], "sunk")
+limitsHeading = Heading("Risk Limits", "h3")
+limitsTable = Table([limitCol, statusCol])
+limitCol = Col("Limit", ["Max Drawdown", "Single Position", "Sector Exposure"])
+statusCol = Col("Status", ["OK", "OK", "Warn"])
+
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary")
+
+orderForm = Form("order-entry", orderButtons, [tickerField, sideField, quantityField])
+tickerField = FormControl("Ticker", tickerInput)
+tickerInput = Input("ticker", "AAPL", "Enter ticker symbol")
+sideField = FormControl("Side", sideRadio)
+sideRadio = RadioGroup("side", [buyOption, sellOption])
+buyOption = RadioItem("Buy", "Buy position", "buy")
+sellOption = RadioItem("Sell", "Sell position", "sell")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", "100", "Enter quantity")
+orderButtons = Buttons([placeOrderBtn, cancelOrderBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+cancelOrderBtn = Button("Cancel", null, "tertiary")
+
+timeframeSelector = Card([timeframeHeading, timeframeButtons], "sunk")
+timeframeHeading = Heading("Timeframe", "h3")
+timeframeButtons = Buttons([minuteBtn, hourBtn, dayBtn, weekBtn], "column")
+minuteBtn = Button("1M", null, null, null, "small")
+hourBtn = Button("1H", null, null, null, "small")
+dayBtn = Button("1D", null, null, null, "small", true)
+weekBtn = Button("1W", null, null, null, "small")
+```

@@ -1,0 +1,69 @@
+root = Card([header, statsRow, nextPatientCallout, separator1, appointmentsSection, separator2, roomsSection, separator3, checkInSection, separator4, dayNav], "card", "column", "m")
+
+header = CardHeader("Clinic Reception — Today's Dashboard", "Monday, January 13, 2025")
+
+statsRow = Card([expectedPatients, noShowRate, roomsFree], "sunk", "row", "m", "start", "start")
+
+expectedPatients = Card([expLabel, expValue], "card", "column", "none")
+expLabel = TextContent("Patients Expected Today", "small")
+expValue = Heading("24", "h1")
+
+noShowRate = Card([nsLabel, nsValue, nsBadge], "card", "column", "s")
+nsLabel = TextContent("No-Show Rate (This Month)", "small")
+nsValue = Heading("8.2%", "h1")
+nsBadge = Badge("↑ 1.3% vs last month", "destructive")
+
+roomsFree = Card([rfLabel, rfValue, rfDetail], "card", "column", "none")
+rfLabel = TextContent("Rooms Free Now", "small")
+rfValue = Heading("3 / 6", "h1")
+rfDetail = TextCallout("info", null, "Rooms 2, 4, 6 available")
+
+nextPatientCallout = Alert("🔔 Next Patient to Call", "Sarah Mitchell — Room 3 — 9:30 AM — Annual Physical", "info")
+
+separator1 = Separator("horizontal", true)
+
+appointmentsSection = Card([aptHeading, aptTable], "sunk", "column", "s")
+aptHeading = Heading("Today's Appointments", "h3")
+aptTable = Table([timeCol, patientCol, roomCol, typeCol, statusCol])
+timeCol = Col("Time", ["8:00 AM", "8:15 AM", "8:30 AM", "9:00 AM", "9:15 AM", "9:30 AM", "9:45 AM", "10:00 AM", "10:30 AM", "10:45 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:15 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:15 PM", "3:30 PM", "4:00 PM", "4:30 PM"], "string")
+patientCol = Col("Patient", ["James Wilson", "Maria Garcia", "Robert Chen", "Emily Johnson", "David Kim", "Sarah Mitchell", "Lisa Thompson", "Michael Brown", "Jennifer Davis", "Thomas Anderson", "Patricia Moore", "Christopher Lee", "Amanda White", "Daniel Harris", "Jessica Martin", "Matthew Clark", "Ashley Rodriguez", "Andrew Lewis", "Stephanie Walker", "Joshua Hall", "Nicole Allen", "Ryan Young", "Lauren King", "Brandon Wright"], "string")
+roomCol = Col("Room", ["1", "2", "3", "1", "2", "3", "4", "1", "2", "3", "4", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "6", "1", "2"], "string")
+typeCol = Col("Type", ["Follow-up", "Vaccination", "Annual Physical", "Consultation", "Lab Review", "Annual Physical", "Follow-up", "Referral", "Consultation", "Follow-up", "Vaccination", "Annual Physical", "Consultation", "Lab Review", "Follow-up", "Referral", "Vaccination", "Consultation", "Annual Physical", "Follow-up", "Lab Review", "Referral", "Vaccination", "Consultation"], "string")
+statusCol = Col("Status", ["Completed", "Completed", "In Progress", "Waiting", "Waiting", "Next Up", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled", "Scheduled"], "string")
+
+separator2 = Separator("horizontal", true)
+
+roomsSection = Card([roomHeading, roomTags], "sunk", "column", "s")
+roomHeading = Heading("Room Availability", "h3")
+roomTags = Card([r1, r2, r3, r4, r5, r6], "clear", "row", "s", "start", "start")
+r1 = Tag("Room 1 — Occupied", null, "md", "danger")
+r2 = Tag("Room 2 — Free", null, "md", "success")
+r3 = Tag("Room 3 — Occupied", null, "md", "danger")
+r4 = Tag("Room 4 — Free", null, "md", "success")
+r5 = Tag("Room 5 — Occupied", null, "md", "danger")
+r6 = Tag("Room 6 — Free", null, "md", "success")
+
+separator3 = Separator("horizontal", true)
+
+checkInSection = Card([checkInHeading, checkInForm], "sunk", "column", "s")
+checkInHeading = Heading("Check In Patient", "h3")
+checkInForm = Form("checkin-form", checkInButtons, [nameField, dobField, reasonField])
+nameField = FormControl("Patient Name", nameInput, "Start typing to search")
+nameInput = Input("patient_name", "Enter patient name...", "text")
+dobField = FormControl("Date of Birth", dobPicker, "Verify identity")
+dobPicker = DatePicker("dob", "single")
+reasonField = FormControl("Reason for Visit", reasonSelect, "Optional")
+reasonSelect = Select("reason", [reasonCheckup, reasonFollowup, reasonUrgent, reasonVaccination], "Select reason...")
+reasonCheckup = SelectItem("checkup", "Routine Checkup")
+reasonFollowup = SelectItem("followup", "Follow-up Visit")
+reasonUrgent = SelectItem("urgent", "Urgent / Same-day")
+reasonVaccination = SelectItem("vaccination", "Vaccination")
+checkInButtons = Buttons([checkInBtn, cancelBtn])
+checkInBtn = Button("Check In", null, "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")
+
+separator4 = Separator("horizontal", true)
+
+dayNav = Card([navHeading, calendarBlock], "clear", "column", "s")
+navHeading = Heading("Navigate to Another Day", "h3")
+calendarBlock = CalendarBlock("single", "2025-01", 1, "label")

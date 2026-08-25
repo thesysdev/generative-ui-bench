@@ -1,0 +1,69 @@
+```openui
+root = Card([loadStatus, capacityStatus, generationSplit, plantOverview, outages, demandForecast, currentPrice, maintenanceSchedule, liveAlerts, regionFocus, curtailmentControl, emissions]
+
+loadStatus = Card([loadLabel, loadValue], "card", "row", "m")
+loadLabel = TextContent("Current Load")
+loadValue = TextContent("2,500 MW", "large-heavy")
+
+capacityStatus = Card([capacityLabel, capacityBar], "card", "row", "m")
+capacityLabel = TextContent("Load to Capacity")
+capacityBar = Progress(75, "75%")
+
+generationSplit = Card([generationLabel, generationChart], "card", "column", "s")
+generationLabel = TextContent("Generation Split")
+generationChart = PieChart(["Coal", "Solar", "Wind", "Hydro"], [40, 25, 20, 15], "donut")
+
+plantOverview = Card([plantHeading, plantList], "sunk", "column")
+plantHeading = Heading("Power Plants", "h3")
+plantList = ListBlock([plant1, plant2, plant3])
+
+plant1 = ListItem("Plant A", "Operational", ["img1"], "View Details")
+plant2 = ListItem("Plant B", "Under Maintenance", ["img2"], "View Details")
+plant3 = ListItem("Plant C", "Offline", ["img3"], "View Details")
+
+outages = Card([outageLabel, outageList], "card", "column", "s")
+outageLabel = TextContent("Outages")
+outageList = ListBlock([outage1, outage2])
+
+outage1 = ListItem("Region X", "High Voltage", null, "More Info")
+outage2 = ListItem("Region Y", "Transmission Fault", null, "More Info")
+
+demandForecast = Card([forecastLabel, forecastChart], "card", "column", "s")
+forecastLabel = TextContent("Demand Forecast")
+forecastChart = LineChart(["Now", "1h", "2h", "3h", "12h"], [forecastSeries], "linear", "Time", "MW")
+forecastSeries = Series("Forecast", [2500, 2600, 2700, 2800, 2900])
+
+currentPrice = Card([priceLabel, priceValue], "card", "row", "m")
+priceLabel = TextContent("Current Price")
+priceValue = TextContent("$50/MWh", "large-heavy")
+
+maintenanceSchedule = Card([maintenanceLabel, maintenanceList], "card", "column", "s")
+maintenanceLabel = TextContent("Scheduled Maintenance")
+maintenanceList = ListBlock([maintenance1, maintenance2])
+
+maintenance1 = ListItem("Plant A", "2023-10-15", null, "Details")
+maintenance2 = ListItem("Plant C", "2023-10-20", null, "Details")
+
+liveAlerts = Card([alertsLabel, alertsList], "card", "column", "s")
+alertsLabel = TextContent("Live Alerts")
+alertsList = ListBlock([alert1, alert2])
+
+alert1 = ListItem("Alert: Region X", "Voltage Spike", null, "Details")
+alert2 = ListItem("Alert: Region Y", "Frequency Drop", null, "Details")
+
+regionFocus = Card([focusLabel, focusSelect], "card", "column", "s")
+focusLabel = TextContent("Focus on Region")
+focusSelect = Select("region_focus", [region1, region2, region3], "Choose a region")
+
+region1 = SelectItem("Region X", "Region X")
+region2 = SelectItem("Region Y", "Region Y")
+region3 = SelectItem("Region Z", "Region Z")
+
+curtailmentControl = Card([curtailmentLabel, curtailmentButton], "card", "row", "m")
+curtailmentLabel = TextContent("Curtailment Control")
+curtailmentButton = Button("Order Curtailment")
+
+emissions = Card([emissionsLabel, emissionsValue], "card", "row", "m")
+emissionsLabel = TextContent("Emissions Today")
+emissionsValue = TextContent("500 tons", "large-heavy")
+```

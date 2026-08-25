@@ -1,0 +1,239 @@
+root = Card(
+  children: [
+    CardHeader(
+      title: "Power Network Console",
+      subtitle: "Real-time operations monitoring"
+    ),
+    Divider(decorative: true),
+    
+    // Item 1: Current electricity load
+    TextContent(
+      text: "Current Network Load: 78.3 GW",
+      size: "large"
+    ),
+    Card(
+      children: [
+        TextContent(
+          text: "Load vs Capacity: 78.3 MW / 100 GW",
+          size: "small"
+        ),
+        TextContent(
+          text: "Utilization: 78.3%",
+          size: "small"
+        )
+      ]
+    ),
+    
+    // Item 2: How close to capacity
+    TextContent(
+      text: "Network is at 78.3% of capacity threshold",
+      size: "small"
+    ),
+    
+    // Item 3: Generation split by source
+    CardHeader("Generation Split by Source", variant: "card"),
+    TextContent(
+      text: "Solar: 35%, Wind: 28%, Hydro: 22%, Gas: 15%, Other: 10%",
+      size: "large"
+    ),
+    Table([
+      {
+        col: { label: "Source", data: "Solar" },
+        col: { label: "Output (GW)", data: "18.2" }
+      },
+      {
+        col: { label: "Source", data: "Wind" },
+        col: { label: "Output (GW)", data: "15.6" }
+      },
+      {
+        col: { label: "Source", data: "Hydro" },
+        col: { label: "Output (GW)", data: "12.4" }
+      },
+      {
+        col: { label: "Source", data: "Gas" },
+        col: { label: "Output (GW)", data: "7.0" }
+      },
+      {
+        col: { label: "Source", data: "Other" },
+        col: { label: "Output (GW)", data: "7.1" }
+      }
+    ]),
+    
+    // Item 4: Each plant with output and status
+    CardHeader("Plant Operations", variant: "card"),
+    TextContent(
+      text: "All plants showing normal operation",
+      size: "small"
+    ),
+    ListBlock([
+      ListItem(
+        title: "Plant Alpha",
+        subtitle: "Status: Operating normally",
+        actionLabel: "View Details"
+      ),
+      ListItem(
+        title: "Plant Beta",
+        subtitle: "Status: Normal",
+        actionLabel: "View Details"
+      ),
+      ListItem(
+        title: "Plant Gamma",
+        subtitle: "Status: Slightly reduced output due to maintenance",
+        actionLabel: "View Details"
+      )
+    ]),
+    
+    // Item 5: Outages with affected region
+    CardHeader("Outages", variant: "card"),
+    TextContent(
+      text: "No active outages reported",
+      size: "small"
+    ),
+    ListBlock([
+      ListItem(
+        title: "Region North",
+        subtitle: "Affected: Central substation",
+        actionLabel: "Details"
+      ),
+      ListItem(
+        title: "Region South",
+        subtitle: "Affected: Coastal transmission line",
+        actionLabel: "Details"
+      )
+    ]),
+    
+    // Item 6: Demand forecast for next 24 hours
+    CardHeader("Demand Forecast (Next 24h)", variant: "card"),
+    TextContent(
+      text: "Predicted peak: 102.5 GW by hour 18",
+      size: "large"
+    ),
+    TextContent(
+      text: "Hourly demand curve expected to rise steadily",
+      size: "small"
+    ),
+    Chart(
+      labels: ["Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7", "Hour 8", "Hour 9", "Hour 10", "Hour 11", "Hour 12", "Hour 13", "Hour 14", "Hour 15", "Hour 16", "Hour 17", "Hour 18"],
+      series: [
+        {
+          category: "Forecast",
+          values: [45, 52, 58, 65, 72, 80, 88, 95, 105, 110, 115, 120, 125, 130, 135, 140]
+        }
+      ],
+      xLabel: "Time",
+      yLabel: "MW",
+      variant: "grouped"
+    ),
+    
+    // Item 7: Current price per MWh
+    CardHeader("Electricity Price", variant: "card"),
+    TextContent(
+      text: "Current price: $128/MWh",
+      size: "large"
+    ),
+    TextContent(
+      text: "Price updated: 2026-04-05 14:30 UTC",
+      size: "small"
+    ),
+    
+    // Item 8: Maintenance planned this month
+    CardHeader("Planned Maintenance", variant: "card"),
+    TextContent(
+      text: "3 projects scheduled for May",
+      size: "large"
+    ),
+    ListBlock([
+      ListItem(
+        title: "Project A - Transformer replacement",
+        subtitle: "April 20-25, 2026",
+        actionLabel: "Schedule"
+      ),
+      ListItem(
+        title: "Project B - Cable inspection",
+        subtitle: "May 5-10, 2026",
+        actionLabel: "Schedule"
+      ),
+      ListItem(
+        title: "Project C - Substation upgrade",
+        subtitle: "May 15-20, 2026",
+        actionLabel: "Schedule"
+      )
+    ]),
+    
+    // Item 9: Live alerts
+    CardHeader("Live Alerts", variant: "card"),
+    TextContent(
+      text: "No critical alerts at this moment",
+      size: "small"
+    ),
+    ListBlock([
+      ListItem(
+        title: "Alert #101",
+        description: "Transformer overload detected in Region North",
+        variant: "neutral"
+      ),
+      ListItem(
+        title: "Alert #102",
+        description: "Minor voltage fluctuation in Region West",
+        variant: "warning"
+      )
+    ]),
+    
+    // Item 10: Focus on one region
+    CardHeader("Region Filter", variant: "card"),
+    TextContent(
+      text: "Use dropdown to select a region for detailed view",
+      size: "small"
+    ),
+    Dropdown(
+      options: [
+        { value: "North", label: "North" },
+        { value: "South", label: "South" },
+        { value: "East", label: "East" },
+        { value: "West", label: "West" }
+      ]
+    ),
+    
+    // Item 11: Order curtailment
+    CardHeader("Curtailment Priority", variant: "card"),
+    TextContent(
+      text: "Curtailment queue (sorted by priority)",
+      size: "large"
+    ),
+    ListBlock([
+      ListItem(
+        title: "Priority 1 - Emergency shutdown (Q1)",
+        description: "Emergency protection scheme activated",
+        order: 1
+      ),
+      ListItem(
+        title: "Priority 2 - Routine deferral (Q2)",
+        description: "Scheduled maintenance impact",
+        order: 2
+      ),
+      ListItem(
+        title: "Priority 3 - Optional reduction (Q3)",
+        description: "Lowering output during low demand periods",
+        order: 3
+      )
+    ]),
+    
+    // Item 12: Emissions today
+    CardHeader("Today's Emissions", variant: "card"),
+    TextContent(
+      text: "CO₂ emitted: 185,000 tonnes",
+      size: "large"
+    ),
+    TextContent(
+      text: "Emissions breakdown: Solar (40%), Wind (35%), Hydro (20%), Gas (5%)",
+      size: "small"
+    ),
+    
+    Divider(orientations: "vertical", decorative: true)
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "m",
+  align: "stretch",
+  wrap: true
+)

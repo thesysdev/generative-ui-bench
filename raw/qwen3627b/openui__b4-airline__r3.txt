@@ -1,0 +1,107 @@
+root = Card([hubHeader, kpiCard, weatherAdvisory, delayedCallout, activeFlightsCard, connectionsCard, gateChangesCard, crewsCard, cancellationsCard, rebookSection], "card", "column", "m")
+
+hubHeader = CardHeader("ATL Hub Operations Desk", "Thursday, December 19, 2024 — 14:32 EST")
+
+kpiCard = Card([onTimeProgress, turnaroundText, loadProgress, cancellationsBadge], "sunk", "row", "m")
+
+onTimeProgress = Progress(87, "On-Time Performance")
+turnaroundText = TextContent("Avg Turnaround: **28 min**", "default")
+loadProgress = Progress(74, "Avg Passenger Load")
+cancellationsBadge = Badge("12 Cancellations", "destructive")
+
+weatherAdvisory = Callout("warning", "Weather Advisory", "Winter storm warning in effect for ATL metro area. Light snow expected 16:00–22:00 EST. Runway friction may decrease below 0.3. De-icing operations active at Gates A1–A12.")
+
+delayedCallout = Callout("error", "14 Flights Delayed", "Delays averaging 47 minutes across 14 departures. Primary cause: weather and cascating crew constraints. 3 flights at risk of cancellation if delays exceed 2 hours.")
+
+activeFlightsCard = Card([activeFlightsHeader, flightsTable], "sunk")
+
+activeFlightsHeader = Heading("Active Flights", "h3")
+
+flightsTable = Table([flightCol, routeCol, gateCol, statusCol])
+
+flightCol = Col("Flight", ["DL1024", "AA2187", "UA543", "DL891", "SW3210", "DL1567", "AA402", "UA778", "DL2099", "SW1845", "DL3301", "AA910"])
+routeCol = Col("Route", ["ATL → LAX", "ATL → JFK", "ATL → ORD", "ATL → SFO", "ATL → MIA", "ATL → BOS", "ATL → DFW", "ATL → DEN", "ATL → SEA", "ATL → PHX", "ATL → DTW", "ATL → MCO"])
+gateCol = Col("Gate", ["A7", "B12", "C3", "A15", "D8", "B5", "C11", "A22", "D14", "B19", "C7", "A3"])
+statusCol = Col("Status", ["On Time", "Delayed +52m", "On Time", "Delayed +31m", "Boarding", "Delayed +67m", "On Time", "Delayed +18m", "On Time", "Delayed +44m", "On Time", "Delayed +23m"])
+
+connectionsCard = Card([connectionsHeader, connectionsList], "sunk")
+
+connectionsHeader = Heading("Connections at Risk", "h3")
+
+connectionsList = ListBlock([conn1, conn2, conn3, conn4, conn5], "number")
+
+conn1 = ListItem("DL1024 → DL402 (LAX)", "Passenger J. Martinez — 38 min connection, now 12 min", null, "Rebook")
+conn2 = ListItem("AA2187 → AA1156 (JFK)", "Passenger S. Chen — 45 min connection, now 21 min", null, "Rebook")
+conn3 = ListItem("DL1567 → DL881 (BOS)", "Passenger R. Okonkwo — 42 min connection, now 15 min", null, "Rebook")
+conn4 = ListItem("SW3210 → SW2290 (MIA)", "Passenger L. Patel — 50 min connection, now 28 min", null, "Rebook")
+conn5 = ListItem("UA543 → UA612 (ORD)", "Passenger K. Johansson — 35 min connection, now 10 min", null, "Rebook")
+
+gateChangesCard = Card([gateChangesHeader, gateChangesTable], "sunk")
+
+gateChangesHeader = Heading("Recent Gate Changes", "h3")
+
+gateChangesTable = Table([gcFlight, gcOld, gcNew, gcTime])
+
+gcFlight = Col("Flight", ["DL891", "AA402", "UA778", "SW1845", "DL3301"])
+gcOld = Col("Old Gate", ["A10", "C9", "A18", "B16", "C5"])
+gcNew = Col("New Gate", ["A15", "C11", "A22", "B19", "C7"])
+gcTime = Col("Changed At", ["14:15", "14:08", "13:52", "13:41", "13:28"])
+
+crewsCard = Card([crewsHeader, crewsTable], "sunk")
+
+crewsHeader = Heading("Crews Available for Reassignment", "h3")
+
+crewsTable = Table([crewId, crewType, crewLocation, crewStatus])
+
+crewId = Col("Crew ID", ["CRW-4421", "CRW-3089", "CRW-5517", "CRW-2204", "CRW-6633"])
+crewType = Col("Type", ["Flight Crew (B737)", "Flight Crew (A320)", "Cabin Crew (B737)", "Flight Crew (A321)", "Cabin Crew (A320)"])
+crewLocation = Col("Location", ["ATL Gate B3", "ATL Gate D1", "ATL Gate A9", "ATL Gate C14", "ATL Gate B7"])
+crewStatus = Col("Available Until", ["16:30", "15:45", "17:00", "16:15", "18:00"])
+
+cancellationsCard = Card([cancellationsHeader, cancellationsTable], "sunk")
+
+cancellationsHeader = Heading("Cancellations Today", "h3")
+
+cancellationsTable = Table([cxnFlight, cxnRoute, cxnReason, cxnTime])
+
+cxnFlight = Col("Flight", ["DL7712", "AA3301", "UA1099", "DL5544", "SW4401", "DL2210"])
+cxnRoute = Col("Route", ["ATL → MSP", "ATL → CLT", "ATL → IAH", "ATL → PDX", "ATL → STL", "ATL → RSW"])
+cxnReason = Col("Reason", ["Weather", "Weather", "Crew", "Weather", "Equipment", "Weather"])
+cxnTime = Col("Cancelled At", ["11:20", "12:05", "12:48", "13:10", "13:35", "14:02"])
+
+rebookSection = DialogBlock("Rebook Affected Passengers", "Rebook Passengers", "Select flights and open seats to rebook passengers with missed connections.", [rebookIntro, rebookForm])
+
+rebookIntro = TextContent("Use the form below to search for available seats on alternate flights for passengers at risk of missing connections.", "default")
+
+rebookForm = Form("rebook-passengers", rebookButtons, [paxField, fromFlightField, toFlightField, classField, notesField])
+
+paxField = FormControl("Passenger Name", paxInput)
+paxInput = Input("passenger_name", "e.g. Martinez, J.")
+
+fromFlightField = FormControl("Current Flight", fromSelect)
+fromSelect = Select("from_flight", [f1, f2, f3, f4, f5], "Select delayed flight")
+f1 = SelectItem("DL1024", "DL1024 — ATL → LAX (Delayed +52m)")
+f2 = SelectItem("AA2187", "AA2187 — ATL → JFK (Delayed +31m)")
+f3 = SelectItem("DL1567", "DL1567 — ATL → BOS (Delayed +67m)")
+f4 = SelectItem("SW3210", "SW3210 — ATL → MIA (Delayed +44m)")
+f5 = SelectItem("UA543", "UA543 — ATL → ORD (Delayed +18m)")
+
+toFlightField = FormControl("Alternate Flight", toSelect)
+toSelect = Select("to_flight", [t1, t2, t3, t4], "Select alternate flight")
+t1 = SelectItem("DL1026", "DL1026 — ATL → LAX dep 17:00 (4 seats)")
+t2 = SelectItem("AA2189", "AA2189 — ATL → JFK dep 17:30 (2 seats)")
+t3 = SelectItem("DL1569", "DL1569 — ATL → BOS dep 18:00 (6 seats)")
+t4 = SelectItem("SW3212", "SW3212 — ATL → MIA dep 16:45 (3 seats)")
+
+classField = FormControl("Cabin Class", classRadio)
+classRadio = RadioGroup("cabin_class", [eco, bus, fclass], "eco")
+eco = RadioItem("Economy", "Economy cabin", "eco")
+bus = RadioItem("Business", "Business cabin", "bus")
+fclass = RadioItem("First", "First cabin", "fclass")
+
+notesField = FormControl("Notes", notesArea)
+notesArea = TextArea("notes", "Special handling instructions...", 3)
+
+rebookButtons = Buttons([submitRebook, cancelRebook])
+submitRebook = Button("Submit Rebooking", null, "primary")
+cancelRebook = Button("Cancel", null, "tertiary")

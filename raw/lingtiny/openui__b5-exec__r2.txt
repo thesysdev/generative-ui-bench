@@ -1,0 +1,240 @@
+root = Card([
+  header,
+  revenueKPI,
+  costKPI,
+  profitKPI,
+  revenueQuarterChart,
+  costQuarterChart,
+  budgetByDept,
+  headcountByDept,
+  topRisks,
+  strategicInitiatives,
+  runway,
+  salesPipeline,
+  winRate,
+  customerMetrics,
+  nps,
+  boardMeetingItems,
+  quarterSelector,
+  regionFocus,
+  exportButton,
+])
+
+header = CardHeader("CEO Quarterly Command View", "Q1 2025 — Executive Dashboard")
+
+revenueKPI = CardHeader("Revenue", "Q1 2025: $4.8M")
+costKPI = CardHeader("Costs", "Q1 2025: $3.2M")
+profitKPI = CardHeader("Profit", "Q1 2025: $1.6M")
+
+revenueQuarterChart = LineChart(
+  ["Q1", "Q2", "Q3", "Q4"],
+  [
+    Series("Revenue", [4800000, 5200000, 5600000, 6100000]),
+    Series("Costs", [3200000, 3400000, 3500000, 3800000]),
+  ],
+  "linear",
+  "Quarter",
+  "USD"
+)
+
+costQuarterChart = LineChart(
+  ["Q1", "Q2", "Q3", "Q4"],
+  [
+    Series("Costs", [3200000, 3400000, 3500000, 3800000]),
+    Series("Revenue", [4800000, 5200000, 5600000, 6100000]),
+  ],
+  "linear",
+  "Quarter",
+  "USD"
+)
+
+budgetByDept = CardHeader("Budget: Department vs. Plan", "Q1 2025")
+
+budgetDeptChart = HorizontalBarChart(
+  ["Engineering", "Sales", "Marketing", "Operations", "R&D", "Support"],
+  [
+    Series("Budget", [1200000, 900000, 600000, 500000, 400000, 300000]),
+    Series("Plan", [1100000, 850000, 580000, 480000, 380000, 290000]),
+  ],
+  "grouped",
+  "Department",
+  "USD"
+)
+
+headcountByDept = CardHeader("Headcount by Department", "Q1 2025")
+
+headcountDeptChart = HorizontalBarChart(
+  ["Engineering", "Sales", "Marketing", "Operations", "R&D", "Support"],
+  [
+    Series("Headcount", [145, 82, 65, 90, 58, 120]),
+  ],
+  "grouped",
+  "Department",
+  "Employees"
+)
+
+topRisks = CardHeader("Top Risks", "Risk Register — Q1 2025")
+
+risksList = ListBlock(
+  [
+    ListItem(
+      "Customer churn exceeds target",
+      "Churn rate at 6.2% vs. 4.5% target. Owner: Jane Chen",
+      null,
+      "Churn > 4.5%"
+    ),
+    ListItem(
+      "Key vendor dependency risk",
+      "Single-source vendor for critical component. Owner: Michael Torres",
+      null,
+      "Single-source"
+    ),
+    ListItem(
+      "Regulatory change in target market",
+      "New compliance requirements expected Q2. Owner: Sarah Kim",
+      null,
+      "Regulatory"
+    ),
+    ListItem(
+      "Talent retention in engineering",
+      "Engineering turnover at 18% vs. 12% target. Owner: David Park",
+      null,
+      "Engineering attrition"
+    ),
+  ],
+  "image"
+)
+
+strategicInitiatives = CardHeader("Strategic Initiatives", "Q1 2025 Status")
+
+initiativesList = ListBlock(
+  [
+    ListItem(
+      "Product v2.0 Launch",
+      "On track. Milestone: beta by end of quarter. Owner: Lisa Wong",
+      null,
+      "In Progress"
+    ),
+    ListItem(
+      "Market expansion — APAC",
+      "At risk. Missing key customer benchmarks. Owner: Raj Patel",
+      null,
+      "At Risk"
+    ),
+    ListItem(
+      "AI Integration Roadmap",
+      "On track. R&D team has delivered 3 of 5 milestones. Owner: Lisa Wong",
+      null,
+      "On Track"
+    ),
+    ListItem(
+      "Enterprise Sales Pipeline",
+      "Behind plan. Only 40% of targets achieved. Owner: Michael Torres",
+      null,
+      "Behind Plan"
+    ),
+    ListItem(
+      "Customer Retention Program",
+      "On track. 92% retention rate vs. 88% target. Owner: Sarah Kim",
+      null,
+      "On Track"
+    ),
+  ],
+  "image"
+)
+
+runway = CardHeader("Months of Runway", "Q1 2025")
+
+runwayMetrics = Table([
+  Col("Metric", ["Cash on Hand", "Runway (months)", "Burn Rate", "Runway (months)"]),
+  Col("Value", ["$12.5M", "14.2 months", "$850K/month", "14.2 months"]),
+])
+
+salesPipeline = CardHeader("Sales Pipeline Value", "Q1 2025")
+
+pipelineValue = Table([
+  Col("Stage", ["Prospect", "Qualified", "Proposal", "Negotiation", "Closed Won"]),
+  Col("Value ($M)", ["$8.2M", "$5.1M", "$3.4M", "$2.0M", "$1.5M"]),
+])
+
+winRate = CardHeader("Win Rate", "Q1 2025")
+
+winRateMetrics = Table([
+  Col("Metric", ["Win Rate", "Deals Won", "Deals Lost", "Conversion Rate"]),
+  Col("Value", ["32.5%", "48", "82", "28.4%"]),
+])
+
+customerMetrics = CardHeader("Customer Count & Churn", "Q1 2025")
+
+customerMetricsTable = Table([
+  Col("Metric", ["Total Customers", "New Customers", "Churned Customers", "Churn Rate"]),
+  Col("Value", ["1,247", "186", "43", "3.4%"]),
+])
+
+nps = CardHeader("NPS Score", "Q1 2025")
+
+npsScore = TextCallout("neutral", "Net Promoter Score", "NPS: +42. Industry average: +35.")
+
+boardMeetingItems = CardHeader("Next Board Meeting Items", "Q1 2025")
+
+boardItems = ListBlock(
+  [
+    ListItem(
+      "Q1 Revenue vs. Plan",
+      "Revenue at 98% of plan. Q2 forecast: $5.4M. Owner: Jane Chen",
+      null,
+      "On Track"
+    ),
+    ListItem(
+      "Engineering Team Expansion",
+      "Hiring 12 engineers for Q2. Budget: $1.2M. Owner: David Park",
+      null,
+      "On Track"
+    ),
+    ListItem(
+      "APAC Market Expansion",
+      "New office in Singapore. Phase 1 launch Q2. Owner: Raj Patel",
+      null,
+      "At Risk"
+    ),
+    ListItem(
+      "Customer Retention Program",
+      "New loyalty program launched. NPS improved 5 points. Owner: Sarah Kim",
+      null,
+      "On Track"
+    ),
+    ListItem(
+      "Product v2.0 Beta",
+      "Beta testing completed. 340 users. Owner: Lisa Wong",
+      null,
+      "On Track"
+    ),
+  ],
+  "image"
+)
+
+quarterSelector = CardHeader("Quarter Selector", "Change the quarter view")
+
+quarterButtons = Buttons(
+  [
+    Button("Q1 2025", null, "primary"),
+    Button("Q2 2025", null, "tertiary"),
+    Button("Q3 2025", null, "tertiary"),
+    Button("Q4 2025", null, "tertiary"),
+  ],
+  "row"
+)
+
+regionFocus = CardHeader("Region Focus", "Focus on one region")
+
+regionButtons = Buttons(
+  [
+    Button("All Regions", null, "tertiary"),
+    Button("North America", null, "secondary"),
+    Button("Europe", null, "secondary"),
+    Button("Asia Pacific", null, "secondary"),
+  ],
+  "row"
+)
+
+exportButton = Button("Export Report Pack", null, "tertiary")

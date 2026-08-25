@@ -1,0 +1,88 @@
+root = Card([header, metricsRow, generationRow, plantsRow, forecastRow, priceEmissionsRow, outagesRow, maintenanceRow, alertsRow, controlsRow], "card", "column", "l")
+
+header = CardHeader("Grid Operations Console", "Real-time network control center")
+
+metricsRow = Card([loadCard, capacityCard, priceCard, emissionsCard], "sunk", "row", "m")
+
+loadCard = Card([loadTitle, loadValue])
+loadTitle = TextContent("Current Load", "small")
+loadValue = TextContent("42,380 MW", "large-heavy")
+
+capacityCard = Card([capacityTitle, capacityProgress, capacityNote])
+capacityTitle = TextContent("Near Capacity", "small")
+capacityProgress = Progress(87, "87% of 48,500 MW peak")
+capacityNote = TextContent("Critical margin: 6,120 MW", "small")
+
+priceCard = Card([priceTitle, priceValue])
+priceTitle = TextContent("Spot Price", "small")
+priceValue = TextContent("$87.40 / MWh", "large-heavy")
+
+emissionsCard = Card([emissionsTitle, emissionsValue])
+emissionsTitle = TextContent("Emissions Today", "small")
+emissionsValue = TextContent("14,200 t CO₂", "large-heavy")
+
+generationRow = Card([genCard, capDetailCard], "card", "row", "l")
+
+genCard = Card([genTitle, pieChart])
+genTitle = Heading("Generation Split", "h3")
+pieChart = PieChart(genLabels, genValues, "donut")
+genLabels = ["Natural Gas", "Nuclear", "Wind", "Solar", "Hydro", "Coal"]
+genValues = [38, 22, 18, 12, 7, 3]
+
+capDetailCard = Card([capTitle, capText, capProgress])
+capTitle = Heading("Network Load vs Capacity", "h3")
+capText = TextContent("Current load is 42,380 MW against 48,500 MW peak.", "default")
+capProgress = Progress(87, "87% loaded")
+
+plantsRow = Card([plantsTitle, plantsTable], "card")
+plantsTitle = Heading("Plant Output & Status", "h3")
+plantsTable = Table([plantName, plantOutput, plantStatus])
+plantName = Col("Plant", ["Northfield NG", "Riverdale Nuc", "East Wind F", "South Solar", "West Hydro"])
+plantOutput = Col("Output (MW)", [12400, 9400, 7600, 5200, 3100])
+plantStatus = Col("Status", ["Online", "Online", "Online", "Derated", "Online"])
+
+forecastRow = Card([forecastTitle, forecastChart], "card")
+forecastTitle = Heading("Demand Forecast (Next 24h)", "h3")
+forecastChart = LineChart(forecastLabels, [forecastSeries], "linear", "Hour", "MW")
+forecastLabels = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+forecastSeries = Series("Forecast (MW)", [42380, 39800, 41200, 48500, 51200, 49800, 46500, 44200])
+
+priceEmissionsRow = Card([priceDetail, emissionsDetail], "sunk", "row", "m")
+priceDetail = Card([priceDetailTitle, priceDetailValue])
+priceDetailTitle = TextContent("Current Price", "small")
+priceDetailValue = TextContent("$87.40 / MWh", "large-heavy")
+emissionsDetail = Card([emissionsDetailTitle, emissionsDetailValue])
+emissionsDetailTitle = TextContent("Emissions Today", "small")
+emissionsDetailValue = TextContent("14,200 t CO₂", "large-heavy")
+
+outagesRow = Card([outagesTitle, outagesList], "card")
+outagesTitle = Heading("Active Outages", "h3")
+outagesList = ListBlock([outage1, outage2])
+outage1 = ListItem("North Valley Substation", "North Region — 1,200 MW lost", null, "Critical")
+outage2 = ListItem("East Coast Tie", "East Region — 800 MW lost", null, "Warning")
+
+maintenanceRow = Card([maintTitle, maintList], "card")
+maintTitle = Heading("Planned Maintenance This Month", "h3")
+maintList = ListBlock([maint1, maint2, maint3])
+maint1 = ListItem("Riverdale Nuc", "Cooling pump overhaul — 14th")
+maint2 = ListItem("East Wind F", "Gearbox inspection — 22nd")
+maint3 = ListItem("South Solar", "Inverter service — 29th")
+
+alertsRow = Card([alertsTitle, alert1, alert2, alert3], "sunk")
+alertsTitle = Heading("Live Alerts", "h3")
+alert1 = Alert("Frequency deviation", "Grid frequency at 49.82 Hz — automatic response active", "warning")
+alert2 = Alert("Line overload", "East Coast Tie at 102% thermal limit", "destructive")
+alert3 = Alert("New outage", "North Valley Substation trip reported at 14:03", "info")
+
+controlsRow = Card([regionControl, curtailControl], "card", "row", "l")
+regionControl = Card([regionTitle, regionSelect])
+regionTitle = Heading("Focus Region", "h3")
+regionSelect = Select("region", [regionN, regionE, regionS, regionW], "Select region")
+regionN = SelectItem("north", "North")
+regionE = SelectItem("east", "East")
+regionS = SelectItem("south", "South")
+regionW = SelectItem("west", "West")
+
+curtailControl = Card([curtailTitle, curtailBtn])
+curtailTitle = Heading("Curtailment Order", "h3")
+curtailBtn = Button("Order curtailment", ["curtail_order"], "destructive")

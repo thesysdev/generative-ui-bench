@@ -1,0 +1,50 @@
+```openui
+root = Card([shipmentsSection, delayedSection, onTimeSection, volumeSection, searchSection, costSection, weeklyVolumeSection, flagSection, refreshSection])
+
+shipmentsSection = Card([shipmentsHeader, shipmentsTable])
+shipmentsHeader = Heading("Shipments in Transit", "h2")
+shipmentsTable = Table([shipmentOrigin, shipmentDestination, shipmentEta, shipmentStatus])
+shipmentOrigin = Col("Origin", ["New York", "Los Angeles", "Chicago"])
+shipmentDestination = Col("Destination", ["London", "Tokyo", "Paris"])
+shipmentEta = Col("ETA", ["April 10", "April 12", "April 11"])
+shipmentStatus = Col("Status", ["In Transit", "In Transit", "In Transit"])
+
+delayedSection = Card([delayedHeader, delayedList])
+delayedHeader = Heading("Delayed Shipments", "h2")
+delayedList = ListBlock([delayedItem1, delayedItem2])
+delayedItem1 = ListItem("NY to London", "Delayed due to weather", null, "View Details")
+delayedItem2 = ListItem("LA to Tokyo", "Delayed due to customs", null, "View Details")
+
+onTimeSection = Card([onTimeHeader, onTimeValue])
+onTimeHeader = Heading("On-Time Performance", "h2")
+onTimeValue = TextContent("On-time percentage this month: 94%", "large")
+
+volumeSection = Card([volumeHeader, volumeChart])
+volumeHeader = Heading("Volume Split by Carrier", "h2")
+volumeChart = PieChart(["FedEx", "UPS", "DHL"], [45000, 30000, 25000])
+
+searchSection = Card([searchHeader, searchBar])
+searchHeader = Heading("Search by Route", "h2")
+searchBar = Form("routeSearch", searchButtons, [searchInput])
+searchInput = Input("route", placeholder="Enter origin and destination")
+searchButtons = Buttons([searchButton])
+searchButton = Button("Search")
+
+costSection = Card([costHeader, costValue])
+costHeader = Heading("Average Cost per Shipment", "h2")
+costValue = TextContent("$200 per shipment", "large")
+
+weeklyVolumeSection = Card([volumeHeader, volumeChart])
+volumeHeader = Heading("Weekly Volume (Last 2 Months)", "h2")
+volumeChart = LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"], [volumeSeries])
+volumeSeries = Series("Shipments", [4000, 4500, 4200, 4800, 4600, 4700, 5000, 4900])
+
+flagSection = Card([flagHeader, flagButton])
+flagHeader = Heading("Flag a Shipment", "h2")
+flagButton = Button("Flag Shipment", ["flagAction"], "destructive")
+
+refreshSection = Card([refreshHeader, refreshValue])
+refreshHeader = Heading("Data Refreshed", "h2")
+refreshValue = TextContent("Last updated at 3:45 PM", "small")
+
+```

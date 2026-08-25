@@ -1,0 +1,152 @@
+```openui-lang
+root = Card(
+    [
+        regionSelector,
+        loadAndCapacity,
+        generationSplit,
+        plantDetails,
+        outages,
+        demandForecast,
+        pricePerMWh,
+        maintenancePlan,
+        liveAlerts,
+        emissionsToday,
+    ],
+    "card",
+    "column",
+    "m",
+    "center",
+    "between",
+    wrap = true
+)
+
+regionSelector = Heading("Focus Region", "h3")
+loadAndCapacity = Card(
+    [
+        loadLabel,
+        loadValue,
+        capacityLabel,
+        capacityValue,
+        utilizationBar,
+    ],
+    "sunk"
+)
+loadLabel = TextContent("Current Load:", "large")
+loadValue = TextContent("125 GW", "large")
+capacityLabel = TextContent("Network Capacity:", "large")
+capacityValue = TextContent("200 GW", "large")
+utilizationBar = HorizontalBarChart(
+    ["Load", "Capacity"],
+    [
+        Series("Load", [125]),
+        Series("Capacity", [200]),
+    ],
+    "grouped",
+    "MW",
+    "MW"
+)
+
+generationSplit = PieChart(
+    ["Solar", "Wind", "Coal", "Gas", "Hydro"],
+    [30, 45, 15, 10, 5],
+    variant = "donut"
+)
+
+plantDetails = Table(
+    [
+        Col("Plant", ["Plant A", "Plant B", "Plant C"], "string"),
+        Col("Output (MW)", [120, 80, 50], "number"),
+        Col("Status", ["Online", "Offline", "Online"], "string"),
+    ]
+)
+
+outages = ListBlock(
+    items = [
+        ListItem(
+            title = "South Region",
+            subtitle = "Outage: Transformer failure",
+            image = null,
+            actionLabel = null
+        ),
+        ListItem(
+            title = "North Region",
+            subtitle = "Outage: Line break",
+            image = null,
+            actionLabel = null
+        ),
+    ],
+    variant = "image"
+)
+
+demandForecast = LineChart(
+    ["Hour 1", "Hour 2", "...", "Hour 24"],
+    [130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 185, 180, 175, 170, 165, 160, 155, 150, 145, 140, 135],
+    "linear",
+    "Hour",
+    "MW"
+)
+
+pricePerMWh = TextContent("Current Price: $45/MWh", "large")
+
+maintenancePlan = Card(
+    [
+        maintenanceLabel,
+        maintenanceItems,
+    ],
+    "sunk"
+)
+maintenanceLabel = TextContent("Planned Maintenance This Month", "large")
+maintenanceItems = Table(
+    [
+        Col("Plant", ["Plant D", "Plant E"], "string"),
+        Col("Date", ["2025-08-15", "2025-09-01"], "date"),
+        Col("Notes", ["Transformer upgrade", "Generator overhaul"], "string"),
+    ]
+)
+
+liveAlerts = Card(
+    [
+        alertsLabel,
+        alertList,
+    ],
+    "sunk"
+)
+alertsLabel = TextContent("Live Alerts", "large")
+alertList = ListBlock(
+    items = [
+        ListItem(
+            title = "Alert 1: High Load",
+            subtitle = "Load approaching 90% capacity",
+            image = null,
+            actionLabel = null
+        ),
+        ListItem(
+            title = "Alert 2: Outage in East Region",
+            subtitle = "Scheduled maintenance",
+            image = null,
+            actionLabel = null
+        ),
+    ],
+    variant = "image"
+)
+
+emissionsToday = TextContent("Emissions Today: 12,000 tCO2", "large")
+
+focusOnRegionButton = Button("Focus on Region", null, "secondary")
+orderCurtailmentButton = Button("Order Curtailment", null, "primary")
+
+root.children = [
+    loadAndCapacity,
+    generationSplit,
+    plantDetails,
+    outages,
+    demandForecast,
+    pricePerMWh,
+    maintenancePlan,
+    liveAlerts,
+    emissionsToday,
+    focusOnRegionButton,
+    orderCurtailmentButton,
+    regionSelector,
+]
+```

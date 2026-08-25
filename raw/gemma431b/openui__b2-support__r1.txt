@@ -1,0 +1,21 @@
+root = Card([header, kpiGrid, filterSection, ticketTable, actionFooter], "card", "column", "l")
+
+header = CardHeader("Support Lead Dashboard", "Morning Overview - Oct 24, 2023")
+
+kpiGrid = Card([openTickets, responseTime], "sunk", "row", "m")
+openTickets = TextCallout("info", "Open Tickets", "142 tickets pending review")
+responseTime = TextCallout("success", "Avg First Response", "1.2 hours (↓ 12%)")
+
+filterSection = Card([filterLabel, filterButtons], "clear", "row", "s", "center", "between")
+filterLabel = TextContent("Filter View:", "small-heavy")
+filterButtons = Buttons([highPriorityBtn, allTicketsBtn])
+highPriorityBtn = Button("High Priority Only", null, "primary", "normal", "small")
+allTicketsBtn = Button("Show All", null, "secondary", "normal", "small")
+
+ticketTable = Table([ticketId, ticketSubject, ticketPriority])
+ticketId = Col("Ticket", ["#8842", "#8841", "#8840", "#8839", "#8838"], "string")
+ticketSubject = Col("Subject", ["Payment Gateway Timeout", "Login Loop on iOS", "API Rate Limit Error", "Account Recovery Request", "UI Glitch in Dashboard"], "string")
+ticketPriority = Col("Priority", ["High", "Critical", "Medium", "Low", "High"], "string")
+
+actionFooter = Card([newTicketBtn], "clear", "row", "none", "end")
+newTicketBtn = Button("Create New Ticket", null, "primary", "normal", "large")

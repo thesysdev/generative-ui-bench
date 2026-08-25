@@ -1,0 +1,175 @@
+The user wants a comprehensive store manager's daily console. Let me plan out all 12 items:
+
+1. Sales today against target - Progress bar or KPI
+2. Foot traffic through the day - Line chart or bar chart
+3. Best sellers with units - Table
+4. Items out of stock - Alert or ListBlock
+5. Who is on shift today - ListBlock or Table
+6. Average basket size - KPI/Badge
+7. Returns this week - KPI or Alert
+8. How each running promotion is doing - Table or Callout
+9. Each register and whether it is open - Table with status
+10. A way to reorder an item - Form or Dialog
+11. A way to view a different store - Select or Dialog
+12. This week compared with last week - Bar chart or Table
+
+Let me build this out carefully, making sure every component is referenced and connected to root.
+
+I'll structure it as:
+- CardHeader for the store name
+- Top KPI row: Sales vs target, Average basket size, Returns this week
+- Charts row: Foot traffic, Week comparison
+- Tables: Best sellers, Out of stock, Shift staff, Promotions, Registers
+- Forms/Dialogs: Reorder item, Switch store
+
+Let me be very careful about the positional arguments and make sure everything is properly referenced.
+
+Let me plan the layout:
+
+```
+root = Card([
+  header,
+  storeSelector,
+  kpiCard,
+  chartsCard,
+  bestSellersCard,
+  outOfStockCard,
+  shiftCard,
+  promotionsCard,
+  registersCard,
+  reorderDialog
+])
+```
+
+Let me build this step by step.
+
+For the KPI card, I'll use a Card with gap containing several KPI-like elements. I can use Tags or Badges for quick stats, and a Progress for sales vs target.
+
+For foot traffic, a LineChart or BarChart.
+
+For best sellers, a Table.
+
+For out of stock, an Alert or ListBlock.
+
+For shift staff, a ListBlock or Table.
+
+For average basket size, a Tag or Badge.
+
+For returns this week, a Callout or Alert.
+
+For promotions, a Table.
+
+For registers, a Table with status indicators.
+
+For reorder, a DialogBlock with a Form.
+
+For view different store, a DialogBlock or Select in a Form.
+
+For week comparison, a BarChart.
+
+Let me write this out now, being very careful about all the positional arguments.
+root = Card([header, kpiRow, chartsRow, bestSellersCard, outOfStockCard, shiftCard, promotionsCard, registersCard, reorderDialog, switchStoreDialog], "card", "column", "m", "start", "start")
+
+header = CardHeader("Store Manager Dashboard", "Today — March 15, 2025")
+
+kpiRow = Card([salesProgress, avgBasket, returnsCallout], "sunk", "row", "m", "center", "start")
+
+salesProgress = Progress(78, "Sales vs Target: $12,480 / $16,000")
+
+avgBasket = Card([avgBasketLabel, avgBasketValue], "clear", "column", "none", "center", "center")
+avgBasketLabel = TextContent("Avg Basket Size", "small")
+avgBasketValue = TextContent("$67.42", "large-heavy")
+
+returnsCallout = Callout("warning", "Returns This Week", "34 returns ($2,180) — up 12% from last week")
+
+chartsRow = Card([trafficChart, weekComparisonChart], "sunk", "row", "m", "start", "start")
+
+trafficChart = Card([trafficHeading, trafficLineChart], "clear", "column", "s", "start", "start")
+trafficHeading = Heading("Foot Traffic", "h4")
+trafficLineChart = LineChart(["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm"], [trafficSeries], "natural", "Hour", "Customers")
+trafficSeries = Series("Customers", [12, 28, 45, 62, 89, 95, 78, 71, 64, 82, 98, 54])
+
+weekComparisonChart = Card([weekCompHeading, weekCompBarChart], "clear", "column", "s", "start", "start")
+weekCompHeading = Heading("This Week vs Last Week", "h4")
+weekCompBarChart = BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [thisWeekSeries, lastWeekSeries], "grouped", "Day", "Sales ($)")
+thisWeekSeries = Series("This Week", [11200, 13400, 12800, 14100, 16200, 18900, 15600])
+lastWeekSeries = Series("Last Week", [10800, 12100, 11900, 13200, 15400, 17800, 14900])
+
+bestSellersCard = Card([bestSellersHeading, bestSellersTable], "sunk", "column", "s", "start", "start")
+bestSellersHeading = Heading("Best Sellers Today", "h4")
+bestSellersTable = Table([bsName, bsCategory, bsUnits, bsRevenue])
+bsName = Col("Product", ["Wireless Earbuds", "Cotton T-Shirt", "Running Shoes", "Coffee Maker", "Backpack", "Sunglasses", "Phone Case", "Water Bottle"])
+bsCategory = Col("Category", ["Electronics", "Apparel", "Footwear", "Appliances", "Accessories", "Accessories", "Electronics", "Accessories"])
+bsUnits = Col("Units Sold", [142, 98, 67, 54, 48, 41, 38, 35])
+bsRevenue = Col("Revenue", ["$4,260", ["$1,960", "$2,346", "$3,240", "$1,452", "$1,674", "$1,218", "$1,140"]])
+
+outOfStockCard = Card([oosHeading, oosAlert, oosTable], "sunk", "column", "s", "start", "start")
+oosHeading = Heading("Out of Stock", "h4")
+oosAlert = Alert("Restock Needed", "6 items currently out of stock", "destructive")
+oosTable = Table([oosName, oosCategory, oosLastSold])
+oosName = Col("Product", ["Bluetooth Speaker", "Yoga Mat", "Desk Lamp", "Travel Mug", "Hiking Boots", "Wireless Mouse"])
+oosCategory = Col("Category", ["Electronics", "Fitness", ["Home", "Kitchen", "Footwear", "Electronics"]])
+oosLastSold = Col("Last Sold", ["2h ago", "4h ago", "1d ago", "5h ago", "3h ago", "1h ago"])
+
+shiftCard = Card([shiftHeading, shiftList], "sunk", "column", "s", "start", "start")
+shiftHeading = Heading("Staff on Shift", "h4")
+shiftList = ListBlock([shift1, shift2, shift3, shift4, shift5, shift6, shift7], "number")
+shift1 = ListItem("Maria Chen", "Floor Manager — 8:00 AM – 4:00 PM", null, null)
+shift2 = ListItem("James Wilson", "Cashier — 8:00 AM – 4:00 PM", null, null)
+shift3 = ListItem("Aisha Patel", "Cashier — 8:00 AM – 4:00 PM", null, null)
+shift4 = ListItem("Carlos Rivera", "Sales Associate — 10:00 AM – 6:00 PM", null, null)
+shift5 = ListItem("Emma Thompson", "Sales Associate — 10:00 AM – 6:00 PM", null, null)
+shift6 = ListItem("David Kim", "Stock Clerk — 2:00 PM – 10:00 PM", null, null)
+shift7 = ListItem("Sophie Laurent", "Cashier — 2:00 PM – 10:00 PM", null, null)
+
+promotionsCard = Card([promoHeading, promoTable], "sunk", "column", "s", "start", "start")
+promoHeading = Heading("Active Promotions", "h4")
+promoTable = Table([promoName, promoDiscount, promoRedemptions, promoRevenue])
+promoName = Col("Promotion", ["Spring Sale", "Buy 2 Get 1", "Weekend Special", "Loyalty Reward", "Clearance"])
+promoDiscount = Col("Discount", ["20% off", ["33% off", "15% off", "$10 off $50+", "50% off"]])
+promoRedemptions = Col("Redemptions", [89, 64, 47, 38, 112])
+promoRevenue = Col("Revenue Impact", ["+$3,420", "+$2,890", "+$1,650", "+$1,240", "+$4,100"])
+
+registersCard = Card([regHeading, regTable], "sunk", "column", "s", "start", "start")
+regHeading = Heading("Register Status", "h4")
+regTable = Table([regId, regStatus, regOperator, regSales])
+regId = Col("Register", ["REG-01", "REG-02", "REG-03", "REG-04", "REG-05", "REG-06"])
+regStatus = Col("Status", ["Open", "Open", "Open", "Closed", "Open", "Open"])
+regOperator = Col("Operator", ["James Wilson", "Aisha Patel", "Sophie Laurent", "—", "Maria Chen", "Emma Thompson"])
+regSales = Col("Today's Sales", ["$3,240", "$2,890", "$1,650", "$0", "$2,410", "$2,290"])
+
+reorderDialog = DialogBlock("Reorder Item", "Reorder Stock", "Select the item and quantity to reorder from the supplier", [reorderForm], "secondary")
+
+reorderForm = Form("reorder", reorderButtons, [reorderItemField, reorderQtyField, reorderPriorityField])
+reorderItemField = FormControl("Item", reorderItemSelect)
+reorderItemSelect = Select("item", [ri1, ri2, ri3, ri4, ri5, ri6], "Choose item to reorder")
+ri1 = SelectItem("bluetooth-speaker", "Bluetooth Speaker")
+ri2 = SelectItem("yoga-mat", "Yoga Mat")
+ri3 = SelectItem("desk-lamp", "Desk Lamp")
+ri4 = SelectItem("travel-mug", "Travel Mug")
+ri5 = SelectItem("hiking-boots", "Hiking Boots")
+ri6 = SelectItem("wireless-mouse", "Wireless Mouse")
+reorderQtyField = FormControl("Quantity", reorderQtyInput)
+reorderQtyInput = Input("quantity", "Enter quantity", "number")
+reorderPriorityField = FormControl("Priority", reorderPriorityRadio)
+reorderPriorityRadio = RadioGroup("priority", [priStandard, priUrgent, priCritical], "standard")
+priStandard = RadioItem("Standard", "3-5 business days", "standard")
+priUrgent = RadioItem("Urgent", "1-2 business days", "urgent")
+priCritical = RadioItem("Critical", "Next day delivery", "critical")
+reorderButtons = Buttons([reorderSubmit, reorderCancel])
+reorderSubmit = Button("Submit Reorder", null, "primary")
+reorderCancel = Button("Cancel", null, "tertiary")
+
+switchStoreDialog = DialogBlock("Switch Store", "View Another Store", "Select a store location to view its dashboard", [switchStoreForm], "ghost")
+
+switchStoreForm = Form("switch-store", switchStoreButtons, [storeSelectField])
+storeSelectField = FormControl("Store Location", storeSelect)
+storeSelect = Select("store", [st1, st2, st3, st4, st5], "Choose a store")
+st1 = SelectItem("downtown", "Downtown Flagship")
+st2 = SelectItem("mall", "Westfield Mall")
+st3 = SelectItem("suburb", "Suburban Plaza")
+st4 = SelectItem("airport", "Airport Terminal")
+st5 = SelectItem("highstreet", "High Street Branch")
+switchStoreButtons = Buttons([switchSubmit, switchCancel])
+switchSubmit = Button("Load Store", null, "primary")
+switchCancel = Button("Cancel", null, "tertiary")

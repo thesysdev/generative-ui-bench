@@ -1,0 +1,219 @@
+```openui
+root = Card(
+  [
+    activeIncidentsSection,
+    severitySummary,
+    resourcesSection,
+    sheltersSection,
+    evacuationRoutesSection,
+    weatherForecastSection,
+    rescueSummary,
+    volunteersSection,
+    donationsReceived,
+    aidRequests,
+    communicationStatus,
+    roadsClosedSection,
+    hospitalsSection,
+    openTasks,
+    requestResourcesForm,
+    broadcastUpdateForm,
+    focusOnZoneForm,
+    fileSitRepForm
+  ]
+)
+
+activeIncidentsSection = Card(
+  [
+    activeIncidentsHeader,
+    activeIncidentsTable
+  ]
+)
+activeIncidentsHeader = CardHeader("Active Incidents by Zone", "Severity Levels")
+activeIncidentsTable = Table([zoneCol, severityCol])
+zoneCol = Col("Zone", ["North", "South", "East", "West"])
+severityCol = Col("Severity", ["High", "Medium", "Low", "Critical"])
+
+severitySummary = Card([severitySummaryHeader, severityChart])
+severitySummaryHeader = CardHeader("Overall Severity Summary", "Quick Overview")
+severityChart = PieChart(["Low", "Medium", "High", "Critical"], [10, 5, 2, 1])
+
+resourcesSection = Card(
+  [
+    resourcesHeader,
+    vehicles,
+    personnel,
+    supplies
+  ]
+)
+resourcesHeader = CardHeader("Resources Available", "Vehicles, Personnel & Supplies")
+vehicles = Card([vehiclesHeader, vehiclesTable])
+vehiclesHeader = Heading("Vehicles", "h4")
+vehiclesTable = Table([typeCol, quantityCol])
+typeCol = Col("Type", ["Ambulance", "Fire Truck", "Police Car"])
+quantityCol = Col("Quantity", [5, 3, 10])
+personnel = Card([personnelHeader, personnelTable])
+personnelHeader = Heading("Personnel", "h4")
+personnelTable = Table([roleCol, quantityCol])
+roleCol = Col("Role", ["Paramedic", "Engineer", "Officer"])
+personnelQuantityCol = Col("Quantity", [15, 10, 8])
+supplies = Card([suppliesHeader, suppliesTable])
+suppliesHeader = Heading("Supplies", "h4")
+suppliesTable = Table([itemCol, quantityCol])
+itemCol = Col("Item", ["First Aid Kits", "Food Packs", "Water Bottles"])
+quantityCol = Col("Quantity", [200, 500, 1000])
+
+sheltersSection = Card(
+  [
+    sheltersHeader,
+    sheltersTable
+  ]
+)
+sheltersHeader = CardHeader("Shelters", "Capacity & Occupancy")
+sheltersTable = Table([nameCol, capacityCol, occupancyCol])
+nameCol = Col("Name", ["Shelter A", "Shelter B", "Shelter C"])
+capacityCol = Col("Capacity", [100, 150, 200])
+occupancyCol = Col("Occupancy", [80, 120, 180])
+
+evacuationRoutesSection = Card(
+  [
+    routesHeader,
+    routesTable
+  ]
+)
+routesHeader = CardHeader("Evacuation Routes", "Status")
+routesTable = Table([routeCol, statusCol])
+routeCol = Col("Route", ["Route 1", "Route 2", "Route 3"])
+statusCol = Col("Status", ["Open", "Congested", "Closed"])
+
+weatherForecastSection = Card(
+  [
+    weatherHeader,
+    weatherChart
+  ]
+)
+weatherHeader = CardHeader("Weather Forecast", "Next 48 Hours")
+weatherChart = LineChart(["Now", "12h", "24h", "36h", "48h"],
+  [temperatureSeries, windSeries],
+  "linear",
+  "Time",
+  "Conditions")
+temperatureSeries = Series("Temperature", [20, 22, 19, 21, 23])
+windSeries = Series("Wind Speed", [5, 10, 7, 6, 8])
+
+rescueSummary = Card(
+  [
+    rescueHeader,
+    peopleRescued,
+    casualties
+  ]
+)
+rescueHeader = CardHeader("Rescue Summary", "People & Casualties")
+peopleRescued = Card([peopleHeader, peopleCount])
+peopleHeader = Heading("People Rescued", "h4")
+peopleCount = TextContent("255", "large")
+casualties = Card([casualtiesHeader, casualtiesCount])
+casualtiesHeader = Heading("Casualties", "h4")
+casualtiesCount = TextContent("12", "large")
+
+volunteersSection = Card(
+  [
+    volunteersHeader,
+    volunteersTable
+  ]
+)
+volunteersHeader = CardHeader("Volunteers", "Assignments")
+volunteersTable = Table([nameCol, assignmentCol])
+nameCol = Col("Name", ["Alice", "Bob", "Charlie"])
+assignmentCol = Col("Assignment", ["Shelter A", "Route 1", "Medical Aid"])
+
+donationsReceived = Card(
+  [
+    donationsHeader,
+    donationsTable
+  ]
+)
+donationsHeader = CardHeader("Donations Received", "Total Amount and Type")
+donationsTable = Table([typeCol, amountCol])
+typeCol = Col("Type", ["Money", "Clothes", "Food"])
+amountCol = Col("Amount", ["$5000", "200 Packs", "300 Meals"])
+
+aidRequests = Card(
+  [
+    aidRequestsHeader,
+    aidRequestsTable
+  ]
+)
+aidRequestsHeader = CardHeader("Aid Requests", "Awaiting Action")
+aidRequestsTable = Table([idCol, descriptionCol])
+idCol = Col("Request ID", ["RQ001", "RQ002", "RQ003"])
+descriptionCol = Col("Description", ["Need water bottles", "More paramedics", "Electric generators"])
+
+communicationStatus = Card(
+  [
+    communicationHeader,
+    communicationTable
+  ]
+)
+communicationHeader = CardHeader("Communication Channels", "Status")
+communicationTable = Table([channelCol, statusCol])
+channelCol = Col("Channel", ["Radio", "Satellite", "Internet"])
+statusCol = Col("Status", ["Up", "Down", "Up"])
+
+roadsClosedSection = Card(
+  [
+    roadsHeader,
+    roadsTable
+  ]
+)
+roadsHeader = CardHeader("Roads Closed", "List of Closed Roads")
+roadsTable = Table([roadCol, reasonCol])
+roadCol = Col("Road", ["Main St", "3rd Ave", "Highway 5"])
+reasonCol = Col("Reason", ["Flooded", "Blocked", "Under Repair"])
+
+hospitalsSection = Card(
+  [
+    hospitalsHeader,
+    hospitalsTable
+  ]
+)
+hospitalsHeader = CardHeader("Nearby Hospitals", "Free Beds")
+hospitalsTable = Table([nameCol, freeBedsCol])
+nameCol = Col("Name", ["General Hospital", "City Clinic", "Eastside Medical"])
+freeBedsCol = Col("Free Beds", [20, 5, 10])
+
+openTasks = Card(
+  [
+    tasksHeader,
+    tasksTable
+  ]
+)
+tasksHeader = CardHeader("Open Tasks", "Assignee")
+tasksTable = Table([taskCol, assigneeCol])
+taskCol = Col("Task", ["Distribute supplies", "Evacuate Zone 2", "Check shelters"])
+assigneeCol = Col("Assignee", ["Team A", "Team B", "Team C"])
+
+requestResourcesForm = Form("request-resources", requestResourcesButtons, [resourceTypeField, quantityField])
+resourceTypeField = FormControl("Resource Type", resourceTypeSelect)
+resourceTypeSelect = Select("resource_type", [water, food, medicalSupplies], "Select a resource type")
+water = SelectItem("Water", "Water Bottles")
+food = SelectItem("Food", "Food Packs")
+medicalSupplies = SelectItem("Medical Supplies", "First Aid Kits")
+quantityField = FormControl("Quantity", quantityInput)
+quantityInput = Input("quantity", "100", "number")
+requestResourcesButtons = Buttons([submitResourceRequest])
+
+broadcastUpdateForm = Form("broadcast-update", broadcastButtons, [messageField])
+messageField = FormControl("Message", messageInput)
+messageInput = TextArea("message", "Broadcast your update here")
+broadcastButtons = Buttons([submitBroadcast])
+
+focusOnZoneForm = Form("focus-zone", focusButtons, [zoneField])
+zoneField = FormControl("Zone", zoneInput)
+zoneInput = Input("zone", "Select a zone")
+focusButtons = Buttons([submitFocus])
+
+fileSitRepForm = Form("file-sitrep", sitRepButtons, [sitRepField])
+sitRepField = FormControl("Situation Report", sitRepInput)
+sitRepInput = TextArea("situation_report", "Describe the situation")
+sitRepButtons = Buttons([submitSitRep])
+```

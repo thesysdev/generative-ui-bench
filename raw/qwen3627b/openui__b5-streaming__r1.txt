@@ -1,0 +1,167 @@
+This is a comprehensive streaming service operations dashboard. Let me plan out all 16 items:
+
+1. Viewers watching right now - a big number/KPI display
+2. Most-watched titles with hours - a table
+3. Watch time over past month - a line chart
+4. New subscribers vs cancellations - a bar chart
+5. Performance by genre - a horizontal bar chart or radar chart
+6. Buffering rate - a progress bar or gauge
+7. Delivery health by region - a table or chart
+8. Releases coming this month - a list or table
+9. Licenses expiring soon - a table with alerts
+10. Recommendation click rate - a stat/badge
+11. Searches without playback - a stat/table
+12. Revenue split by plan - a pie chart
+13. Viewing split by device - a pie chart or stacked bar
+14. Focus on one region - a select/dropdown filter
+15. Feature flags with state - a switch group
+16. Promote a title on home screen - a dialog or form
+
+Let me build this step by step, making sure every component is referenced and connected to root.
+
+I'll structure it as:
+- CardHeader for the ops room title
+- Region selector (item 14)
+- KPI cards row: current viewers (1), buffering rate (6), rec click rate (10), search drop-off (11)
+- Charts section: watch time (3), subs vs cancels (4), genre performance (5)
+- Tables: most-watched (2), delivery health (7), upcoming releases (8), licenses (9)
+- Revenue and device charts (12, 13)
+- Feature flags (15)
+- Promote title action (16)
+
+Let me write this out carefully, making sure every variable is defined and referenced.
+root = Card([opsHeader, regionSelector, kpiRow, watchTimeSection, subsSection, genreSection, mostWatchedSection, deliverySection, releasesSection, licensesSection, recSearchSection, revenueDeviceSection, featureFlagsSection, promoteSection])
+
+opsHeader = CardHeader("Streaming Operations Room", "Real-time monitoring dashboard")
+
+regionSelector = FormControl("Focus Region", regionSelect)
+regionSelect = Select("region", [allRegions, northAmerica, europe, asia, latinAmerica], "Select a region to filter metrics", null, "all")
+allRegions = SelectItem("all", "All Regions")
+northAmerica = SelectItem("na", "North America")
+europe = SelectItem("eu", "Europe")
+asia = SelectItem("asia", "Asia Pacific")
+latinAmerica = SelectItem("latam", "Latin America")
+
+kpiRow = Card([currentViewers, bufferingRate, recClickRate, searchDropoff], "sunk")
+
+currentViewers = Card([viewersLabel, viewersValue], "clear")
+viewersLabel = TextContent("Live Viewers Now", "small-heavy")
+viewersValue = Heading("142,847", "h1")
+
+bufferingRate = Card([bufferLabel, bufferValue, bufferBar], "clear")
+bufferLabel = TextContent("Buffering Rate", "small-heavy")
+bufferValue = Badge("1.2%", "secondary")
+bufferBar = Progress(1.2)
+
+recClickRate = Card([recLabel, recValue], "clear")
+recLabel = TextContent("Rec Click Rate", "small-heavy")
+recValue = Badge("34.7%", "secondary")
+
+searchDropoff = Card([searchLabel, searchValue], "clear")
+searchLabel = TextContent("Searches w/o Playback", "small-heavy")
+searchValue = Badge("28.3%", "destructive")
+
+watchTimeSection = Card([watchTimeHeader, watchTimeChart], "sunk")
+watchTimeHeader = Heading("Watch Time — Past 30 Days", "h3")
+watchTimeChart = AreaChart(watchTimeLabels, [watchTimeSeries], "natural", "Day", "Hours (M)")
+watchTimeLabels = ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20", "D21", "D22", "D23", "D24", "D25", "D26", "D27", "D28", "D29", "D30"]
+watchTimeSeries = Series("Hours Watched", [4.2, 4.5, 4.8, 5.1, 5.4, 6.2, 6.8, 4.6, 4.9, 5.2, 5.5, 5.8, 6.1, 6.9, 7.2, 5.0, 5.3, 5.6, 5.9, 6.3, 7.0, 7.4, 5.1, 5.4, 5.7, 6.0, 6.4, 7.1, 7.5, 7.8])
+
+subsSection = Card([subsHeader, subsChart], "sunk")
+subsHeader = Heading("New Subscribers vs Cancellations", "h3")
+subsChart = BarChart(subsLabels, [subsSeries, cancelsSeries], "grouped", "Week", "Count")
+subsLabels = ["W1", "W2", "W3", "W4"]
+subsSeries = Series("New Subscribers", [12400, 14200, 13800, 15600])
+cancelsSeries = Series("Cancellations", [3200, 2900, 3100, 2800])
+
+genreSection = Card([genreHeader, genreChart], "sunk")
+genreHeader = Heading("Performance by Genre", "h3")
+genreChart = HorizontalBarChart(genreLabels, [genreSeries], "grouped", "Genre", "Avg Watch Hours")
+genreLabels = ["Sci-Fi", "Drama", "Comedy", "Thriller", "Horror", "Romance", "Documentary", "Animation"]
+genreSeries = Series("Avg Hours", [4.2, 3.8, 2.9, 3.5, 2.1, 1.8, 3.1, 2.6])
+
+mostWatchedSection = Card([mostWatchedHeader, mostWatchedTable], "sunk")
+mostWatchedHeader = Heading("Most-Watched Titles", "h3")
+mostWatchedTable = Table([titleCol, hoursCol, rankCol])
+titleCol = Col("Title", ["The Last Frontier", "Midnight Protocol", "Echoes of Tomorrow", "Crimson Tide Rising", "Neon Shadows", "The Silent Garden", "Dark Matter", "Velocity", "Broken Compass", "Starlight"])
+hoursCol = Col("Hours Watched", [2840000, 2650000, 2310000, 2180000, 1950000, 1820000, 1740000, 1620000, 1510000, 1430000])
+rankCol = Col("Rank", ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10"])
+
+deliverySection = Card([deliveryHeader, deliveryTable], "sunk")
+deliveryHeader = Heading("Delivery Health by Region", "h3")
+deliveryTable = Table([regionCol, latencyCol, uptimeCol, statusCol])
+regionCol = Col("Region", ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East", "Africa"])
+latencyCol = Col("Avg Latency (ms)", [42, 58, 95, 110, 135, 168])
+uptimeCol = Col("Uptime %", [99.97, 99.94, 99.89, 99.82, 99.75, 99.68])
+statusCol = Col("Status", ["Healthy", "Healthy", "Warning", "Warning", "Degraded", "Degraded"])
+
+releasesSection = Card([releasesHeader, releasesList], "sunk")
+releasesHeader = Heading("Releases Coming This Month", "h3")
+releasesList = ListBlock([rel1, rel2, rel3, rel4, rel5])
+rel1 = ListItem("The Last Frontier S3E1", "Jan 5 — Sci-Fi Drama", null, "View Details")
+rel2 = ListItem("Neon Shadows S2E4", "Jan 8 — Cyberpunk Thriller", null, "View Details")
+rel3 = ListItem("Echoes of Tomorrow: The Film", "Jan 12 — Sci-Fi Feature", null, "View Details")
+rel4 = ListItem("Midnight Protocol S1E7", "Jan 15 — Tech Thriller", null, "View Details")
+rel5 = ListItem("The Silent Garden S2E1", "Jan 22 — Mystery Drama", null, "View Details")
+
+licensesSection = Card([licensesHeader, licensesTable, licensesAlert], "sunk")
+licensesHeader = Heading("Licenses Expiring Soon", "h3")
+licensesTable = Table([licenseTitle, licenseExpiry, licenseType])
+licenseTitle = Col("Title", ["Crimson Tide Rising", "Dark Matter S1", "Velocity", "The Great Expedition"])
+licenseExpiry = Col("Expires", ["Jan 3", "Jan 7", "Jan 14", "Jan 20"])
+licenseType = Col("Type", ["Exclusive", "Non-exclusive", "Exclusive", "Non-exclusive"])
+licensesAlert = Alert("Renewal Required", "4 titles have licenses expiring within 21 days", "warning")
+
+recSearchSection = Card([recSearchHeader, recSearchContent], "sunk")
+recSearchHeader = Heading("Recommendation & Search Metrics", "h3")
+recSearchContent = Card([recDetail, searchDetail], "clear")
+recDetail = Card([recDetailLabel, recDetailValue, recDetailBar], "clear")
+recDetailLabel = TextContent("Recommendation Click Rate", "small-heavy")
+recDetailValue = Heading("34.7%", "h2")
+recDetailBar = Progress(34.7)
+searchDetail = Card([searchDetailLabel, searchDetailValue, searchDetailBar], "clear")
+searchDetailLabel = TextContent("Searches Ending Without Playback", "small-heavy")
+searchDetailValue = Heading("28.3%", "h2")
+searchDetailBar = Progress(28.3)
+
+revenueDeviceSection = Card([revenueDeviceHeader, revenueChart, deviceChart], "sunk")
+revenueDeviceHeader = Heading("Revenue & Device Split", "h3")
+revenueChart = PieChart(revenueLabels, revenueValues, "donut", "circular")
+revenueLabels = ["Premium", "Standard", "Basic", "Ad-Supported"]
+revenueValues = [42, 28, 18, 12]
+deviceChart = PieChart(deviceLabels, deviceValues, "pie", "circular")
+deviceLabels = ["Mobile", "TV", "Desktop", "Tablet"]
+deviceValues = [38, 32, 22, 8]
+
+featureFlagsSection = Card([flagsHeader, flagsGroup], "sunk")
+flagsHeader = Heading("Feature Flags", "h3")
+flagsGroup = SwitchGroup("flags", [flag1, flag2, flag3, flag4, flag5, flag6], "card")
+flag1 = SwitchItem("Adaptive Bitrate v2", "Next-gen ABR algorithm", "abr_v2", true)
+flag2 = SwitchItem("Social Watch Party", "Co-viewing feature", "watch_party", true)
+flag3 = SwitchItem("Offline Downloads v3", "Improved encryption", "downloads_v3", false)
+flag4 = SwitchItem("AI Recommendations", "ML-powered suggestions", "ai_recs", true)
+flag5 = SwitchItem("Live Sports Integration", "Live event streaming", "live_sports", false)
+flag6 = SwitchItem("Parental Controls v2", "Enhanced restrictions", "parental_v2", true)
+
+promoteSection = Card([promoteHeader, promoteDialog], "sunk")
+promoteHeader = Heading("Promote Title on Home Screen", "h3")
+promoteDialog = DialogBlock("Promote Title", "Feature a Title", "Select a title to pin to the home screen carousel", [promoteContent])
+promoteContent = Form("promote-form", promoteButtons, [promoteTitleField, promotePositionField, promoteDurationField])
+promoteTitleField = FormControl("Title", promoteTitleSelect)
+promoteTitleSelect = Select("title", [promo1, promo2, promo3, promo4, promo5], "Select a title")
+promo1 = SelectItem("last_frontier", "The Last Frontier S3")
+promo2 = SelectItem("neon_shadows", "Neon Shadows S2")
+promo3 = SelectItem("echoes_film", "Echoes of Tomorrow: The Film")
+promo4 = SelectItem("midnight_protocol", "Midnight Protocol S1")
+promo5 = SelectItem("silent_garden", "The Silent Garden S2")
+promotePositionField = FormControl("Carousel Position", promotePosSelect)
+promotePosSelect = Select("position", [pos1, pos2, pos3, pos4], "Where to place it")
+pos1 = SelectItem("1", "Position 1 (Top)")
+pos2 = SelectItem("2", "Position 2")
+pos3 = SelectItem("3", "Position 3")
+pos4 = SelectItem("4", "Position 4")
+promoteDurationField = FormControl("Duration (days)", promoteDurationInput)
+promoteDurationInput = Input("duration", "7", "number")
+promoteButtons = Buttons([promoteSubmit, promoteCancel])
+promoteSubmit = Button("Promote Now", null, "primary")
+promoteCancel = Button("Cancel", null, "tertiary")

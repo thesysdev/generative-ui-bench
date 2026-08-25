@@ -1,0 +1,226 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title="Logistics Board",
+      subtitle="Shipments Overview"
+    ),
+    Separator(),
+    
+    // Section 1: Shipments in Transit
+    Card(
+      children: [
+        TextContent(
+          "Active Shipments",
+          size: "default"
+        ),
+        Table(
+          columns: [
+            { label: "ID", data: [] },
+            { label: "Origin", data: [] },
+            { label: "Destination", data: [] },
+            { label: "ETA", data: [] },
+            { label: "Status", data: [] }
+          ],
+          data: [
+            { id: "SHIP-001", origin: "New York", destination: "Chicago", eta: "2026-04-15", status: "In Transit" },
+            { id: "SHIP-002", origin: "Los Angeles", destination: "Houston", eta: "2026-04-20", status: "In Transit" },
+            { id: "SHIP-003", origin: "Chicago", destination: "Denver", eta: "2026-04-18", status: "In Transit" },
+            { id: "SHIP-004", origin: "Miami", destination: "Orlando", eta: "2026-04-22", status: "In Transit" }
+          ]
+        )
+      ]
+    ),
+    
+    // Section 2: Delayed Shipments
+    Card(
+      children: [
+        TextContent(
+          "Delayed Shipments",
+          size: "default"
+        ),
+        Divider(decorative: true),
+        Card(
+          children: [
+            TextContent(
+              "Shipments experiencing delays this period.",
+              style: "text-warning"
+            ),
+            Table(
+              columns: [
+                { label: "ID", data: [] },
+                { label: "Route", data: [] },
+                { label: "Original ETA", data: [] },
+                { label: "Current ETA", data: [] },
+                { label: "Delay Reason", data: [] },
+                { label: "Status", data: [] }
+              ],
+              data: [
+                { id: "SHIP-005", route: "NYC → Chicago", original_eta: "2026-04-10", current_eta: "2026-04-25", reason: "Weather delay", status: "Delayed" },
+                { id: "SHIP-006", route: "LA → Houston", original_eta: "2026-04-12", current_eta: "2026-05-01", reason: "Port congestion", status: "Delayed" }
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // Section 3: On-Time Percentage This Month
+    Card(
+      children: [
+        TextContent(
+          "On-Time Performance",
+          size: "default"
+        ),
+        Divider(),
+        MetricCard(
+          title: "This Month On-Time %",
+          value: "94%",
+          unit: "percent",
+          icon: "check-circle"
+        ),
+        TextContent(
+          "89% of shipments delivered within scheduled ETA this month."
+        )
+      ]
+    ),
+    
+    // Section 4: Volume Split by Carrier
+    Card(
+      children: [
+        TextContent(
+          "Volume by Carrier",
+          size: "default"
+        ),
+        Divider(),
+        Table(
+          columns: [
+            { label: "Carrier", data: [] },
+            { label: "Shipments", data: [] },
+            { label: "Percentage", data: [] }
+          ],
+          data: [
+            { carrier: "FedEx", count: 45, pct: "42%" },
+            { carrier: "UPS", count: 38, pct: "34%" },
+            { carrier: "DHL", count: 27, pct: "24%" },
+            { carrier: "Other", count: 30, pct: "12%" }
+          ]
+        )
+      ]
+    ),
+    
+    // Section 5: Search by Route
+    Card(
+      children: [
+        TextContent(
+          "Search by Route",
+          size: "default"
+        ),
+        Divider(),
+        Input(
+          label: "Route filter...",
+          placeholder: "e.g., NYC→Chicago",
+          value: ""
+        ),
+        Card(
+          children: [
+            TextContent(
+              "Results will update as you type...",
+              style: "text-muted"
+            ),
+            Divider()
+          ]
+        )
+      ]
+    ),
+    
+    // Section 6: Average Cost Per Shipment
+    Card(
+      children: [
+        TextContent(
+          "Average Cost per Shipment",
+          size: "default"
+        ),
+        Divider(),
+        StatCard(
+          title: "Avg Cost",
+          value: "$245.50",
+          unit: "USD",
+          color: "primary"
+        ),
+        TextContent(
+          "Based on 60 shipments processed this month."
+        )
+      ]
+    ),
+    
+    // Section 7: Weekly Volume Past Two Months
+    Card(
+      children: [
+        TextContent(
+          "Weekly Volume (Past 2 Months)",
+          size: "default"
+        ),
+        Divider(),
+        Table(
+          columns: [
+            { label: "Week", data: [] },
+            { label: "Shipments", data: [] },
+            { label: "Cumulative", data: [] }
+          ],
+          data: [
+            { week: "Mar 1-7", count: 28, cumulative: "112" },
+            { week: "Mar 8-14", count: 32, cumulative: "144" },
+            { week: "Mar 15-21", count: 35, cumulative: "179" },
+            { week: "Mar 22-28", count: 29, cumulative: "208" },
+            { week: "Apr 1-7", count: 31, cumulative: "239" },
+            { week: "Apr 8-14", count: 27, cumulative: "266" }
+          ]
+        )
+      ]
+    ),
+    
+    // Section 8: Flag a Shipment
+    Card(
+      children: [
+        TextContent(
+          "Flag Shipment",
+          size: "default"
+        ),
+        Divider(),
+        Card(
+          children: [
+            TextContent(
+              "Click below to flag any active shipment for priority handling.",
+              style: "text-warning"
+            ),
+            Button(
+              label: "Flag Shipment",
+              variant: "tertiary",
+              size: "medium"
+            )
+          ]
+        )
+      ]
+    ),
+    
+    // Section 9: Last Refreshed Timestamp
+    Card(
+      children: [
+        TextContent(
+          "Data Freshness",
+          size: "small"
+        ),
+        Divider(),
+        TextContent(
+          "Last updated: 2026-04-17 09:30 UTC",
+          style: "text-muted"
+        )
+      ]
+    )
+  ],
+  variant: "card",
+  direction: "column",
+  gap: "xl"
+)
+```

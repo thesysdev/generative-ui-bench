@@ -1,0 +1,37 @@
+```openui-lang
+root = Card([weatherHeader, currentConditions, forecastSection, sunTimesSection])
+
+weatherHeader = CardHeader("Morning Weather Brief", "Bengaluru")
+
+currentConditions = Card(
+    [currentTemp, conditionsText, humidity, feelsLike, weatherIcon],
+    "sunk"
+)
+currentTemp = TextContent("28°C", "large-heavy")
+conditionsText = TextContent("Partly Cloudy", "default")
+humidity = TextContent("Humidity: 72%", "small")
+feelsLike = TextContent("Feels like: 29°C", "small")
+weatherIcon = Image("Weather icon for partly cloudy", "https://openweathermap.org/img/wn/03d@2x.png")
+
+forecastSection = CardHeader("3-Day Outlook", "h3")
+forecastDays = [
+    forecastDay("Today", "30°C / 22°C", "Mostly Sunny", "https://openweathermap.org/img/wn/01d@2x.png"),
+    forecastDay("Tomorrow", "31°C / 23°C", "Scattered Clouds", "https://openweathermap.org/img/wn/03n@2x.png"),
+    forecastDay("Wed", "29°C / 21°C", "Partly Cloudy", "https://openweathermap.org/img/wn/02d@2x.png")
+]
+forecastCards = [forecastDayCard(day) for day in forecastDays]
+forecastDisplay = Card(forecastCards, "card", "column", "m")
+
+forecastDay = lambda day, temp, condition, icon: Card(
+    [TextContent(day, "large-heavy"), TextContent(temp, "small"), TextContent(condition, "small"), Image("Weather icon", icon)],
+    "sunk"
+)
+forecastDayCard = lambda day: Card([day], "card", "row", "s", "center", "center")
+
+sunTimesSection = Card(
+    [sunriseText, sunsetText],
+    "sunk"
+)
+sunriseText = TextContent("Sunrise: 06:12 AM", "default")
+sunsetText = TextContent("Sunset: 06:12 PM", "default")
+```

@@ -1,0 +1,70 @@
+```openui-lang
+root = Card([quarterSelector, regionFilter, overview, financialKpis, trends, budgetVsPlan, headcount, risks, initiatives, runway, pipeline, metrics, nps, boardItems, exportBtn])
+quarterSelector = CardHeader("Quarter", "Select quarter to view", "h4")
+quarterSelector = Card([quarterSelector], "sunk")
+quarterSelector = Card([quarterDropdown], "sunk")
+quarterDropdown = Select("quarter", ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024"], "Q3 2024", null, "medium")
+
+regionFilter = CardHeader("Region", "Filter by region", "h4")
+regionFilter = Card([regionFilter], "sunk")
+regionFilter = Card([regionDropdown], "sunk")
+regionDropdown = Select("region", ["All", "NA", "EMEA", "APAC", "LATAM"], "All", null, "medium")
+
+overview = Card([revenue, costs, profit], "sunk")
+revenue = Card([Tag("Revenue", null, null, "success"), "$128.4M"], "sunk")
+costs = Card([Tag("Costs", null, null, "warning"), "$87.2M"], "sunk")
+profit = Card([Tag("Profit", null, null, "success"), "$41.2M"], "sunk")
+
+financialKpis = Card([revenueKpi, costsKpi], "sunk")
+revenueKpi = Card([Heading("Revenue", "h4"), "$128.4M"], "sunk")
+costsKpi = Card([Heading("Costs", "h4"), "$87.2M"], "sunk")
+
+trends = Card([revenueTrend, costsTrend], "sunk")
+revenueTrend = Card([Heading("Revenue Trend", "h4"), revenueChart], "sunk")
+costsTrend = Card([Heading("Costs Trend", "h4"), costsChart], "sunk")
+revenueChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [revenueSeries], "natural", "Quarter", "USD")
+revenueSeries = Series("Revenue", [32.1, 38.7, 45.2, 52.4])
+costsChart = LineChart(["Q1", "Q2", "Q3", "Q4"], [costsSeries], "natural", "Quarter", "USD")
+costsSeries = Series("Costs", [25.8, 28.9, 31.5, 37.0])
+
+budgetVsPlan = Card([budgetTable], "sunk")
+budgetTable = Table([deptName, budgetActual, budgetPlan])
+deptName = Col("Department", ["R&D", "Sales", "Marketing", "Ops", "Admin"], "string")
+budgetActual = Col("Actual", ["$32.5M", "$28.9M", "$18.7M", "$12.3M", "$9.8M"], "string")
+budgetPlan = Col("Plan", ["$35.0M", "$30.0M", "$20.0M", "$12.0M", "$10.0M"], "string")
+
+headcount = Card([headcountTable], "sunk")
+headcountTable = Table([deptName, headcountActual])
+headcountActual = Col("Headcount", ["124", "87", "56", "32", "21"], "string")
+
+risks = Card([riskTable], "sunk")
+riskTable = Table([riskName, riskOwner, riskStatus])
+riskName = Col("Risk", ["Supply Chain", "Regulatory", "Tech Debt", "Market Shift"], "string")
+riskOwner = Col("Owner", ["VP Supply", "Legal", "CTO", "Head Strategy"], "string")
+riskStatus = Col("Status", ["Monitoring", "Active", "Critical", "Emerging"], "string")
+
+initiatives = Card([initiativeTable], "sunk")
+initiativeTable = Table([initiativeName, initiativeStatus, initiativeOwner])
+initiativeName = Col("Initiative", ["AI Integration", "Global Expansion", "Cost Optimization", "Customer Portal"], "string")
+initiativeStatus = Col("Status", ["In Progress", "Planning", "Completed", "Paused"], "string")
+initiativeOwner = Col("Owner", ["CTO", "COO", "CFO", "Head Product"], "string")
+
+runway = Card([Tag("Runway", null, null, "info"), "18 months"], "sunk")
+pipeline = Card([Tag("Pipeline", null, null, "info"), "$152.3M"], "sunk")
+winRate = Card([Tag("Win Rate", null, null, "info"), "62%"], "sunk")
+customerCount = Card([Tag("Customers", null, null, "info"), "4,213"], "sunk")
+churnRate = Card([Tag("Churn", null, null, "warning"), "3.1%"], "sunk")
+
+metrics = Card([runway, pipeline, winRate, customerCount, churnRate], "sunk")
+
+nps = Card([Tag("NPS", null, null, "success"), "68"], "sunk")
+
+boardItems = Card([boardItem1, boardItem2, boardItem3], "sunk")
+boardItem1 = ListItem("Regulatory compliance update", "New EU data laws require review", null, "Review")
+boardItem2 = ListItem("Supply chain contingency", "Vendor X delays critical component", null, "Plan B")
+boardItem3 = ListItem("AI integration roadmap", "Schedule sprint planning", null, "Schedule")
+
+exportBtn = Button("Export Full Pack", null, "primary", "normal", "large")
+
+regionFilter = Card([regionDropdown], "sunk")
+```

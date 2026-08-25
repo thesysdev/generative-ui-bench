@@ -1,0 +1,89 @@
+
+
+root = Card([header, hubSelector, kpiRow, weatherAlert, delayedCallout, flightsTable, gateChanges, crewsSection, connectionsSection, rebookSection, followUps])
+
+header = CardHeader("Hub Operations Desk — ATL", "Atlanta Hartsfield-Jackson • Live • 14:32 UTC")
+
+hubSelector = FormControl("Switch hub", hubSelect)
+hubSelect = Select("hub", [atl, dfw, ord, lax], "Select a hub")
+atl = SelectItem("ATL", "ATL — Atlanta")
+dfw = SelectItem("DFW", "DFW — Dallas/Fort Worth")
+ord = SelectItem("ORD", "ORD — Chicago O'Hare")
+lax = SelectItem("LAX", "LAX — Los Angeles")
+
+kpiRow = Card([otpKpi, cancelKpi, turnaroundKpi, loadKpi], "sunk", "row", "m", "stretch")
+
+otpKpi = Card([otpLabel, otpBar, otpValue], "clear", "column", "xs")
+otpLabel = TextContent("**On-Time Performance**", "small")
+otpBar = Progress(78, "On-time")
+otpValue = TextContent("78% of departures on time", "small")
+
+cancelKpi = Card([cancelLabel, cancelBadge], "clear", "column", "xs")
+cancelLabel = TextContent("**Cancellations Today**", "small")
+cancelBadge = Badge("6 cancelled", "destructive")
+
+turnaroundKpi = Card([turnaroundLabel, turnaroundValue], "clear", "column", "xs")
+turnaroundLabel = TextContent("**Avg Turnaround**", "small")
+turnaroundValue = TextContent("24 min", "large")
+
+loadKpi = Card([loadLabel, loadValue], "clear", "column", "xs")
+loadLabel = TextContent("**Avg Passenger Load**", "small")
+loadValue = TextContent("87.4%", "large")
+
+weatherAlert = Alert("Weather Advisory — Convective Activity", "Moderate-to-heavy rain cells moving through the terminal. Expect 15–30 min delays on all departures through 16:00. Icing not a factor.", "warning")
+
+delayedCallout = Callout("warning", "12 Flights Delayed > 30 min", "AA 1847, AA 2203, DL 441, DL 908, AA 556, DL 112, AA 3301, DL 77, AA 1902, DL 2045, AA 441, DL 663 — primary causes: weather and crew availability")
+
+flightsSection = Card([flightsHeading, flightsTable], "sunk")
+flightsHeading = Heading("Today's Flights", "h3")
+flightsTable = Table([colFlight, colRoute, colGate, colStatus])
+colFlight = Col("Flight", ["AA 1847", "AA 2203", "DL 441", "DL 908", "AA 556", "DL 112", "AA 3301", "DL 77", "AA 1902", "DL 2045", "AA 441", "DL 663"])
+colRoute = Col("Route", ["ATL → JFK", "ATL → LAX", "ATL → MCO", "ATL → SFO", "ATL → SEA", "ATL → BOS", "ATL → DEN", "ATL → ORD", "ATL → DFW", "ATL → MSP", "ATL → IAH", "ATL → PHX"])
+colGate = Col("Gate", ["B12", "C04", "A22", "D08", "B31", "A15", "C19", "B07", "D22", "A03", "C11", "B28"])
+colStatus = Col("Status", ["Delayed 45m", "Delayed 35m", "On Time", "Delayed 60m", "On Time", "Delayed 30m", "Cancelled", "On Time", "Delayed 40m", "On Time", "Delayed 55m", "On Time"])
+
+gateChanges = Card([gateChangesHeading, gateChangesTable], "sunk")
+gateChangesHeading = Heading("Recent Gate Changes", "h3")
+gateChangesTable = Table([gcFlight, gcFrom, gcTo, gcTime])
+gcFlight = Col("Flight", ["AA 1847", "DL 908", "AA 556", "DL 77"])
+gcFrom = Col("From Gate", ["B08", "D12", "B25", "B03"])
+gcTo = Col("To Gate", ["B12", "D08", "B31", "B07"])
+gcTime = Col("Changed At", ["13:45", "13:12", "12:58", "12:30"])
+
+crewsSection = Card([crewsHeading, crewsTable], "sunk")
+crewsHeading = Heading("Crews Available for Reassignment", "h3")
+crewsTable = Table([crewId, crewRole, crewAircraft, crewStatus])
+crewId = Col("Crew ID", ["CRW-4421", "CRW-7783", "CRW-1156", "CRW-9902"])
+crewRole = Col("Role", ["Pilot (Capt)", "Pilot (FO)", "Cabin (4)", "Cabin (6)"])
+crewAircraft = Col("Qualified", ["B737-800, A321", "B737-800, B767", "B737-800, A320", "A321, B767"])
+crewStatus = Col("Status", ["Available", "Available", "Available", "On Break"])
+
+connectionsSection = Card([connHeading, connTable], "sunk")
+connHeading = Heading("Connections at Risk", "h3")
+connTable = Table([connPax, connFrom, connTo, connTime, connRisk])
+connPax = Col("Passengers", ["14", "9", "22", "7"])
+connFrom = Col("Inbound Flight", ["AA 1847 → JFK", "DL 908 → SFO", "AA 1902 → DFW", "AA 441 → IAH"])
+connTo = Col("Outbound Flight", ["AA 2201 JFK→LAX", "DL 330 SFO→SEA", "DL 88 DFW→MSP", "AA 55 IAH→LAX"])
+connTime = Col("Connection Time", ["35 min", "28 min", "40 min", "25 min"])
+connRisk = Col("Risk Level", ["High", "Critical", "High", "Critical"])
+
+rebookSection = Card([rebookHeading, rebookForm], "sunk")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookForm = Form("rebook", rebookButtons, [flightField, paxField, prefField])
+flightField = FormControl("Affected flight", flightInput)
+flightInput = Input("flight", "e.g. AA 1847")
+paxField = FormControl("Passenger count", paxInput)
+paxInput = Input("pax_count", "Number of passengers", "number")
+prefField = FormControl("Rebooking preference", prefSelect)
+prefSelect = Select("preference", [prefSame, prefNext, prefAlt], "Preferred option")
+prefSame = SelectItem("same", "Same route, next available")
+prefNext = SelectItem("next", "Next day, same route")
+prefAlt = SelectItem("alt", "Alternate routing")
+rebookButtons = Buttons([rebookSubmit, rebookClear])
+rebookSubmit = Button("Submit Rebooking", null, "primary")
+rebookClear = Button("Clear", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me the full delay breakdown by cause")
+fu2 = FollowUpItem("Which crews can cover the cancelled AA 3301?")
+fu3 = FollowUpItem("What is the weather outlook for the next 2 hours?")

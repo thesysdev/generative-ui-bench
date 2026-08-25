@@ -1,0 +1,73 @@
+```openui-lang
+root = Card([header, healthSummary, activeProjects, overdueMilestones, budgetChart, teamUtilization, risksTable, upcomingDeadlines, deliveryPace, blockedItems, controls])
+
+header = CardHeader("Project Portfolio Review", "Q2 2024 • Viewing Q2 2024")
+healthSummary = TextCallout("neutral", "Portfolio health: 78% on track, 12% at risk, 10% completed", "Current quarter shows stable progress with two critical risks requiring attention")
+
+activeProjects = Card([projectsHeader, projectsTable], "sunk")
+projectsHeader = Heading("Active Projects", "h3")
+projectsTable = Table([ownerCol, deadlineCol, healthCol])
+ownerCol = Col("Owner", ["Sarah Chen", "Mike Patel", "Emily Rodriguez", "David Kim", "Priya Mehta"])
+deadlineCol = Col("Deadline", ["2024-06-30", "2024-07-15", "2024-08-10", "2024-09-01", "2024-08-25"])
+healthCol = Col("Health", ["Good", "Warning", "Critical", "Good", "Warning"], "string")
+
+overdueMilestones = Card([milestonesHeader, milestonesList], "sunk")
+milestonesHeader = Heading("Overdue Milestones", "h3")
+milestonesList = ListBlock([milestone1, milestone2, milestone3])
+milestone1 = ListItem("API Integration", "Delayed by 5 days", null, "View details")
+milestone2 = ListItem("Security Review", "Delayed by 3 days", null, "View details")
+milestone3 = ListItem("UI Mockups", "Delayed by 2 days", null, "View details")
+
+budgetChart = Card([budgetHeader, budgetVisual], "sunk")
+budgetHeader = Heading("Budget vs Allocation", "h3")
+budgetVisual = BarChart(["Project A", "Project B", "Project C", "Project D", "Project E"],
+                       [budgetSeries, budgetSeries2],
+                       "grouped", "Project", "USD (spent/allocated)")
+budgetSeries = Series("Spent", [85000, 120000, 60000, 95000, 70000])
+budgetSeries2 = Series("Allocated", [100000, 150000, 75000, 120000, 80000])
+
+teamUtilization = Card([utilizationHeader, utilizationChart], "sunk")
+utilizationHeader = Heading("Team Utilization", "h3")
+utilizationChart = RadarChart(["Dev Team", "QA Team", "Design Team", "PM Team"],
+                             [utilizationSeries])
+utilizationSeries = Series("Utilization %", [72, 85, 68, 90])
+
+risksTable = Card([risksHeader, risksList], "sunk")
+risksHeader = Heading("Open Risks", "h3")
+risksList = Table([riskProject, riskSeverity, riskDescription])
+riskProject = Col("Project", ["Project B", "Project C", "Project E", "Project A"])
+riskSeverity = Col("Severity", ["High", "Medium", "Low", "Medium"], "string")
+riskDescription = Col("Description", ["Vendor delay", "Resource conflict", "Scope change", "Tech debt"])
+
+upcomingDeadlines = Card([deadlinesHeader, deadlinesList], "sunk")
+deadlinesHeader = Heading("Next 14 Days Deadlines", "h3")
+deadlinesList = Table([deadlineDate, deadlineTask, deadlineOwner])
+deadlineDate = Col("Date", ["2024-06-20", "2024-06-22", "2024-06-25", "2024-06-28"])
+deadlineTask = Col("Task", ["API Contract Review", "Security Policy Submission", "UI Wireframes", "Database Schema"])
+deadlineOwner = Col("Owner", ["Mike", "Priya", "Sarah", "David"])
+
+deliveryPace = Card([paceHeader, paceChart], "sunk")
+paceHeader = Heading("Delivery Pace (Last 6 Sprints)", "h3")
+paceChart = LineChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"],
+                     [paceSeries],
+                     "natural", "Sprint", "Items Delivered")
+paceSeries = Series("Sprints", [12, 15, 10, 18, 14, 16])
+
+blockedItems = Card([blockedHeader, blockedList], "sunk")
+blockedHeader = Heading("Blocked Work Items", "h3")
+blockedList = Table([blockedTask, blockedReason, blockedOwner])
+blockedTask = Col("Task", ["Database Migration", "Third-Party API", "Security Audit", "Performance Tuning"])
+blockedReason = Col("Reason", ["Waiting on vendor", "Resource conflict", "Approval pending", "Tech issue"])
+blockedOwner = Col("Owner", ["David", "Mike", "Priya", "Emily"])
+
+controls = Card([quarterSelector, actions], "sunk")
+quarterSelector = Buttons([quarterBtn1, quarterBtn2, quarterBtn3, quarterBtn4], "row")
+quarterBtn1 = Button("Q1 2024", null, "secondary")
+quarterBtn2 = Button("Q2 2024", null, "primary")
+quarterBtn3 = Button("Q3 2024", null, "secondary")
+quarterBtn4 = Button("Q4 2024", null, "secondary")
+actions = Buttons([requestResourcesBtn, archiveProjectBtn, exportBtn], "row")
+requestResourcesBtn = Button("Request Resources", ["request_resources", "Project B"], "primary")
+archiveProjectBtn = Button("Archive Project", ["archive_project", "Project A"], "secondary")
+exportBtn = Button("Export Review", null, "tertiary")
+```

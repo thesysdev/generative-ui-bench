@@ -1,0 +1,262 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Total enrollment and 5-year movement (summary card)
+    summaryEnrollment = CardHeader(
+      title: "Total Enrollment (5-Year Trend)",
+      subtitle: "Overall student population growth"
+    ),
+    enrollmentChart = BarChart(
+      labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+      series: [["Total Enrolled", enrollmentValues]],
+      xLabel: "Year",
+      yLabel: "Students",
+      variant: "grouped"
+    ),
+    
+    // 2. Applications by program (table)
+    appsByProgram = Card(
+      children: [
+        Heading("Applications by Program"),
+        Table(
+          columns: [
+            {"label": "Program", "field": "program"},
+            {"label": "Applications", "field": "apps"}
+          ],
+          rows: [
+            { "program": "Computer Science", "apps": 420 },
+            { "program": "Engineering", "apps": 380 },
+            { "program": "Business Administration", "apps": 310 },
+            { "program": "Nursing", "apps": 290 },
+            { "program": "Liberal Arts", "apps": 250 },
+            { "program": "Education", "apps": 220 }
+          ]
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 3. Acceptance rate (stat card)
+    acceptanceRate = CardHeader(
+      title: "Acceptance Rate",
+      subtitle: "Annual ratio of accepted students"
+    ),
+    acceptanceStat = TextContent(
+      "78%",
+      size: "large",
+      style: "primary"
+    ),
+    
+    // 4. Tuition revenue this year (text card)
+    tuitionRevenue = CardHeader(
+      title: "Tuition Revenue (This Year)",
+      subtitle: "Income from academic fees"
+    ),
+    tuitionRevenueValue = TextContent(
+      "($4.2M)",
+      size: "large",
+      style: "primary"
+    ),
+    
+    // 5. How full each course offering is (table)
+    courseOfferings = Card(
+      children: [
+        Heading("Course Offerings & Capacity"),
+        Table(
+          columns: [
+            {"label": "Course", "field": "course_name"},
+            {"label": "Capacity", "field": "capacity"},
+            {"label": "Current Enrollment", "field": "enrollment"}
+          ],
+          rows: [
+            {"course_name": "CS 101 - Intro to Programming", "capacity": 150, "enrollment": 142},
+            {"course_name": "ENG 201 - Composition", "capacity": 180, "enrollment": 176},
+            {"course_name": "MATH 210 - Calculus II", "capacity": 200, "enrollment": 195},
+            {"course_name": "BUS 340 - Economics", "capacity": 160, "enrollment": 158},
+            {"course_name": "PHY 205 - Physics I", "capacity": 135, "enrollment": 130}
+          ]
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 6. Teaching load by faculty member (bar chart)
+    teachingLoad = Card(
+      children: [
+        Heading("Teaching Load by Faculty"),
+        BarChart(
+          labels: ["Dr. Lee", "Prof. Chen", "Dr. Patel", "Prof. Wang", "Dr. Rossi"],
+          series: [["Courses/Total Hours", ["5/40", "4/35", "3/45", "6/55", "4/38"]]],
+          xLabel: "Faculty Member",
+          yLabel: "Teaching Load",
+          variant: "grouped"
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 7. Students at academic risk (chart)
+    riskStudents = Card(
+      children: [
+        Heading("Students at Academic Risk"),
+        BarChart(
+          labels: ["First-Year", "Second-Year", "Third-Year", "Senior"],
+          series: [["At Risk (%)", ["12%", "8%", "5%", "3%"]]],
+          xLabel: "Academic Year",
+          yLabel: "Percentage at Risk",
+          variant: "grouped"
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 8. Scholarship budget used vs total (comparison card)
+    scholarshipBudget = Card(
+      children: [
+        Heading("Scholarship Budget Utilization"),
+        CardHeader(
+          title: "Scholarships Used vs Total",
+          subtitle: "Allocation comparison"
+        ),
+        Divider(decorative: true),
+        SideBySideComparison(
+          left: Card(
+            TextContent("Total Budget:", "total_budget", "currency"),
+            TextContent("Amount Used:", "amount_used", "currency")
+          ),
+          right: Card(
+            TextContent("Total Budget: $5.5M", "total_budget", "currency"),
+            TextContent("Amount Used: $3.8M", "amount_used", "currency")
+          )
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 9. Housing occupancy (progress indicator-style bar)
+    housingOccupancy = Card(
+      children: [
+        Heading("Housing Occupancy"),
+        Progress(
+          value: 87,
+          label: "87%",
+          variant: "semi_circular"
+        ),
+        TextContent("87% Full", size: "small", color: "green")
+      ],
+      variant: "card"
+    ),
+    
+    // 10. Campus events this month (list)
+    eventsThisMonth = Card(
+      children: [
+        Heading("Campus Events - This Month"),
+        ListBlock(
+          items: [
+            { "title": "Spring Career Fair", "time": "Oct 15-17" },
+            { "title": "Dean's Lecture Series", "time": "Oct 20" },
+            { "title": "Wellness Week Kickoff", "time": "Oct 22-26" },
+            { "title": "Art Exhibition Opening", "time": "Oct 25" },
+            { "title": "Sports Day Fundraiser", "time": "Oct 28" }
+          ]
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 11. Alumni giving over past 4 years (chart)
+    alumniGiving = Card(
+      children: [
+        Heading("Alumni Giving (Past 4 Years)"),
+        BarChart(
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          series: [["Donations", ["$120K", "€145K", "$180K", "$255K", "$320K"]]],
+          xLabel: "Year",
+          yLabel: "Total Donations ($)"
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 12. Focus on one department (tabs)
+    deptFilter = Card(
+      children: [
+        Heading("Department Filter"),
+        Tabs(
+          items: [
+            { "item": "Computer Science", "label": "Computer Science" },
+            { "item": "Engineering", "label": "Engineering" },
+            { "item": "Business", "label": "Business Administration" },
+            { "item": "Arts & Sciences", "label": "Arts & Sciences" }
+          ]
+        ),
+        // Show selected department content - we'll use a conditional approach
+        Separator(),
+        // Placeholder for department-specific content (shown based on selection)
+        Card({
+          children: [
+            Heading({ title: "Selected Department Overview", variant: "card" })
+          ]
+        })
+      ],
+      variant: "card"
+    ),
+    
+    // 13. This semester vs last (comparison view)
+    semCompared = Card(
+      children: [
+        Heading("This Semester vs Last Semester"),
+        Table(
+          columns: [
+            {"label": "Category", "field": "category"},
+            {"label": "Value This Term", "field": "this_term"},
+            {"label": "Value Last Term", "field": "last_term"}
+          ],
+          rows: [
+            { "category": "Teaching Hours", "this_term": "48", "last_term": "42" },
+            { "category": "Student Retention", "this_term": "89%", "last_term": "84%" },
+            { "category": "Research Grants", "this_term": "$850K", "last_term": "$720K" },
+            { "category": "Class Size Average", "this_term": "18", "last_term": "22" }
+          ]
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 14. Waitlist per program (chart)
+    waitlist = Card(
+      children: [
+        Heading("Waitlist Status by Program"),
+        BarChart(
+          labels: ["Computer Science", "Engineering", "Business", "Nursing"],
+          series: [["Waitlist Position", ["15", "8", "12", "22"]]],
+          xLabel: "Program",
+          yLabel: "Waitlist Position"
+        )
+      ],
+      variant: "card"
+    ),
+    
+    // 15. Approve new course (button)
+    approveCourse = Button(
+      label: "Approve New Course",
+      action: "approve_new_course",
+      variant: "primary",
+      size: "large"
+    ),
+    
+    // 16. Send message to student group (button)
+    messageGroup = Button(
+      label: "Send Message to Student Group",
+      action: "message_student_group",
+      variant: "secondary",
+      size: "medium"
+    )
+  ],
+  variant: "card",
+  direction: "row",
+  gap: "xl",
+  align: "stretch",
+  wrap: true
+)
+```

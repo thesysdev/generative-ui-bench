@@ -1,0 +1,39 @@
+```openui
+root = Card([budgetHeader, totalSpentSection, spendingByCategorySection, largestExpenseSection, navigationSection, addAction])
+budgetHeader = CardHeader("Budget Overview", "Current Month")
+totalSpentSection = Card([
+    Card([budgetHeading, totalSpentChart]), 
+    Card([budgetStatus])
+])
+budgetHeading = Heading("Total Spent", "h3")
+totalSpentChart = BarChart(["Budget", "Spent"], [budgetSeries, spentSeries], "stacked", "Category", "Amount")
+budgetSeries = Series("Budget", [1200])
+spentSeries = Series("Spent", [950])
+budgetStatus = Tag("Under budget", null, null, "success")
+spendingByCategorySection = Card([
+    Card([categoryHeading, categoryChart])])
+categoryHeading = Heading("Spending by Category", "h3")
+categoryChart = PieChart(["Food", "Utilities", "Entertainment"], [400, 300, 250])
+largestExpenseSection = Card([
+    Card([largestExpenseHeader, largestExpenseItem])])
+largestExpenseHeader = Heading("Largest Expense", "h4")
+largestExpenseItem = Callout("success", "Rent", "Amount: $800")
+navigationSection = Card([
+    Card([changeMonthButton, addExpenseButton])])
+changeMonthButton = Button("Change Month")
+addExpenseButton = Button("Add Expense", null, "primary")
+addAction = DialogBlock("Add Expense", "Enter new expense details", [expenseForm], "secondary")
+expenseForm = Form("new-expense", expenseFormButtons, [
+    FormControl("Category", expenseCategorySelect),
+    FormControl("Amount", expenseAmountInput),
+    FormControl("Date", expenseDatePicker)
+])
+expenseCategorySelect = Select("category", [foodItem, utilitiesItem, entertainmentItem], "Select category")
+foodItem = SelectItem("Food", "Food and groceries")
+utilitiesItem = SelectItem("Utilities", "Utilities bills")
+entertainmentItem = SelectItem("Entertainment", "Entertainment expenses")
+expenseAmountInput = Input("amount", "", "number")
+expenseDatePicker = DatePicker("date", "single")
+expenseFormButtons = Buttons([submitExpenseBtn])
+submitExpenseBtn = Button("Submit Expense", null, "primary")
+```

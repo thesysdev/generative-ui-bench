@@ -1,0 +1,57 @@
+root = Card([header, filtersForm, kpiHeading, kpiSection, trendsHeading, revenueChart, costsChart, budgetHeading, budgetChart, headcountChart, riskHeading, risksTable, initiativesTable, boardHeading, boardItems])
+
+header = CardHeader("Quarterly Command View", "Q4 2024 · Company-wide")
+
+filtersForm = Form("filters", filterButtons, [quarterField, regionField])
+quarterField = FormControl("Quarter", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select quarter", null, "q4")
+q1 = SelectItem("q1", "Q1 2024")
+q2 = SelectItem("q2", "Q2 2024")
+q3 = SelectItem("q3", "Q3 2024")
+q4 = SelectItem("q4", "Q4 2024")
+regionField = FormControl("Region focus", regionSelect)
+regionSelect = Select("region", [regAll, regNA, regEU, regAPAC], "All regions", null, "all")
+regAll = SelectItem("all", "All regions")
+regNA = SelectItem("na", "North America")
+regEU = SelectItem("eu", "Europe")
+regAPAC = SelectItem("apac", "APAC")
+filterButtons = Buttons([applyBtn, exportBtn])
+applyBtn = Button("Apply filters", null, "primary")
+exportBtn = Button("Export board pack", null, "secondary")
+
+kpiHeading = Heading("Financial & Operating Snapshot", "h3")
+kpiSection = Table([kpiMetric, kpiValue])
+kpiMetric = Col("Metric", ["Revenue", "Costs", "Profit", "Runway (months)", "Sales Pipeline", "Win Rate", "Customers", "Churn Rate", "NPS"])
+kpiValue = Col("Value", ["$42.3M", "$31.8M", "$10.5M", "18", "$68.4M", "27%", "1,842", "2.1%", "54"])
+
+trendsHeading = Heading("Revenue & Cost Trends (4 Quarters)", "h3")
+quarterLabels = ["Q1", "Q2", "Q3", "Q4"]
+revenueSeries = Series("Revenue", [36.2, 38.5, 40.1, 42.3])
+revenueChart = BarChart(quarterLabels, [revenueSeries], "grouped", "Quarter", "USD (M)")
+costsSeries = Series("Costs", [28.4, 29.6, 30.5, 31.8])
+costsChart = LineChart(quarterLabels, [costsSeries], "natural", "Quarter", "USD (M)")
+
+budgetHeading = Heading("Budget & Headcount by Department", "h3")
+deptLabels = ["Sales", "Engineering", "Marketing", "Ops", "G&A"]
+actualSeries = Series("Actual", [8.2, 12.5, 5.1, 4.3, 3.2])
+planSeries = Series("Plan", [8.0, 12.0, 5.5, 4.0, 3.0])
+budgetChart = BarChart(deptLabels, [actualSeries, planSeries], "grouped", "Department", "USD (M)")
+headcountSeries = Series("Headcount", [145, 210, 62, 48, 35])
+headcountChart = HorizontalBarChart(deptLabels, [headcountSeries], "grouped", "Employees", "Department")
+
+riskHeading = Heading("Top Risks & Strategic Initiatives", "h3")
+risksTable = Table([riskName, riskOwner, riskSeverity])
+riskName = Col("Risk", ["Key account churn", "Supply chain delay", "Competitor price war", "Regulatory change (EU)"])
+riskOwner = Col("Owner", ["VP Sales", "COO", "CMO", "General Counsel"])
+riskSeverity = Col("Severity", ["High", "Medium", "High", "Medium"])
+
+initiativesTable = Table([initName, initStatus])
+initName = Col("Initiative", ["Enterprise expansion", "Platform migration", "APAC launch", "AI product line"])
+initStatus = Col("Status", ["On track", "At risk", "On track", "Delayed"])
+
+boardHeading = Heading("Next Board Meeting — Agenda Items", "h3")
+boardItems = ListBlock([boardItem1, boardItem2, boardItem3, boardItem4], "number")
+boardItem1 = ListItem("Approve FY25 budget", "Finance committee recommendation")
+boardItem2 = ListItem("Review APAC expansion plan", "Requires capital allocation decision")
+boardItem3 = ListItem("Discuss runway extension options", "Bridge financing vs. Series C")
+boardItem4 = ListItem("Executive compensation review", "Annual comp committee item")

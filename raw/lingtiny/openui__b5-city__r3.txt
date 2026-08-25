@@ -1,0 +1,131 @@
+root = Card([congestionSection, transitPunctualitySection, airQualitySection, energySection, waterSection, incidentsSection, emergencyVehiclesSection, parkingSection, publicEventsSection, citizenReportsSection, serviceRequestSection, weatherSection, districtFocus, dispatchCrew, sendAlert, roadworksSection, infrastructureJobs], "sunk")
+
+congestionSection = CardHeader("Congestion", "Current conditions")
+congestionContent = Card([congestionChart, congestionStatus])
+congestionChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [congestionSeries], "natural", "Time", "Cars/km")
+congestionSeries = Series("Congestion", [62, 71, 58, 65, 78, 45, 38])
+congestionStatus = Tag("High", null, null, "warning")
+
+transitPunctualitySection = CardHeader("Transit Punctuality", "On-time performance")
+transitPunctualityContent = Card([transitPunctualityChart, transitPunctualityStatus])
+transitPunctualityChart = HorizontalBarChart(["Metro", "Bus", "Tram", "Light Rail"], [transitSeries], "grouped", "Time", "Punctuality %")
+transitSeries = Series("Punctuality", [87, 72, 91, 68])
+transitPunctualityStatus = Tag("Below target", null, null, "warning")
+
+airQualitySection = CardHeader("Air Quality by District", "AQI readings")
+airQualityContent = Card([airQualityChart, airQualityStatus])
+airQualityChart = RadarChart(["Downtown", "Midtown", "Eastside", "Westend", "Northgate", "Southport"], [airQualitySeries], "circular")
+airQualitySeries = Series("AQI", [42, 58, 35, 61, 28, 47])
+airQualityStatus = Tag("Good", null, null, "success")
+
+energySection = CardHeader("Energy Use", "Past week consumption")
+energyContent = Card([energyChart, energyStatus])
+energyChart = SingleStackedBarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries])
+energySeries = Series("Energy", [1200, 1350, 1180, 1400, 1250, 1050, 980])
+energyStatus = Tag("Normal", null, null, "success")
+
+waterSection = CardHeader("Water Use Today", "Current consumption")
+waterContent = Card([waterChart, waterStatus])
+waterChart = BarChart(["District A", "District B", "District C", "District D"], [waterSeries], "grouped", "Time", "Gallons")
+waterSeries = Series("Water", [3200, 4100, 2800, 3600])
+waterStatus = Tag("Moderate", null, null, "warning")
+
+incidentsSection = CardHeader("Open Incidents", "Active incidents with location and severity")
+incidentsContent = Card([incidentsList])
+incidentsList = ListBlock([
+  {title: "Signal failure - Main St & 5th Ave", severity: "high", location: "Downtown"},
+  {title: "Road debris - Oak Blvd & 12th", severity: "medium", location: "Midtown"},
+  {title: "Water main break - Central District", severity: "high", location: "Westend"},
+  {title: "Bicycle lane closure - Park Ave", severity: "low", location: "Northgate"}
+])
+
+emergencyVehiclesSection = CardHeader("Emergency Vehicle Deployments", "Current active deployments")
+emergencyVehiclesContent = Card([emergencyVehiclesList])
+emergencyVehiclesList = ListBlock([
+  {title: "Ambulance - Eastside Hospital", severity: "critical", location: "Eastside"},
+  {title: "Fire truck - Northgate Station", severity: "medium", location: "Northgate"},
+  {title: "Rescue unit - Downtown", severity: "low", location: "Downtown"}
+])
+
+parkingSection = CardHeader("Parking Availability Downtown", "Current lots and rates")
+parkingContent = Card([parkingChart, parkingStatus])
+parkingChart = HorizontalBarChart(["Main St", "Oak Ave", "Central Plaza", "River Walk"], [parkingSeries], "grouped", "Time", "Free spots")
+parkingSeries = Series("Parking", [45, 22, 18, 30])
+parkingStatus = Tag("Moderate", null, null, "warning")
+
+publicEventsSection = CardHeader("Public Events This Weekend", "Community activities")
+publicEventsContent = Card([eventsList])
+eventsList = ListBlock([
+  {title: "Riverfront Music Festival", location: "Central Park", time: "10 AM - 8 PM"},
+  {title: "Community Farmers Market", location: "Downtown Square", time: "8 AM - 4 PM"},
+  {title: "Street Art Walk", location: "Eastside", time: "12 PM - 6 PM"}
+])
+
+citizenReportsSection = CardHeader("Citizen Reports", "Reports as they come in")
+citizenReportsContent = Card([reportsList])
+reportsList = ListBlock([
+  {title: "Flooding in Riverside", severity: "high", location: "Southport"},
+  {title: "Traffic accident on Highway 10", severity: "medium", location: "Midtown"},
+  {title: "Loud noise from construction", severity: "low", location: "Northgate"}
+])
+
+serviceRequestSection = CardHeader("Service Request Backlog", "Pending requests")
+serviceRequestContent = Card([serviceRequestList])
+serviceRequestList = ListBlock([
+  {title: "Streetlight replacement - Elm St", severity: "medium", location: "Downtown"},
+  {title: "Sidewalk repair - Oak Ave", severity: "low", location: "Midtown"},
+  {title: "Sewer line repair - Central District", severity: "high", location: "Westend"}
+])
+
+weatherSection = CardHeader("Current Weather", "Conditions")
+weatherContent = Card([weatherChart, weatherStatus])
+weatherChart = BarChart(["Downtown", "Midtown", "Eastside"], [weatherSeries], "grouped", "Time", "Temperature °C")
+weatherSeries = Series("Weather", [22, 24, 19])
+weatherStatus = Tag("Clear", null, null, "success")
+
+districtFocus = CardHeader("District Focus", "Select a district to view details")
+districtFocusContent = Card([districtFocusList])
+districtFocusList = ListBlock([
+  {title: "Downtown", subtitle: "High congestion, signal issues", action: "View details"},
+  {title: "Midtown", subtitle: "Moderate traffic, transit delays", action: "View details"},
+  {title: "Eastside", subtitle: "Air quality concerns", action: "View details"}
+])
+
+dispatchCrew = CardHeader("Dispatch Crew", "Request a crew for an incident")
+dispatchCrewContent = Card([dispatchCrewForm])
+dispatchCrewForm = Form("dispatch-request", [dispatchCrewBtn], [crewSelect, crewLocation])
+crewSelect = Select("crew_type", [crewS, crewM, crewL], "Select crew type")
+crewS = SelectItem("Fire Crew", "Fire crew", "fire")
+crewM = SelectItem("Ambulance Crew", "Ambulance crew", "ambulance")
+crewL = SelectItem("Rescue Crew", "Rescue crew", "rescue")
+crewLocation = Select("crew_location", [locD, locM, locE], "Select location")
+locD = SelectItem("Downtown", "Downtown", "downtown")
+locM = SelectItem("Midtown", "Midtown", "midtown")
+locE = SelectItem("Eastside", "Eastside", "eastside")
+dispatchCrewBtn = Button("Dispatch Crew", null, "primary")
+
+sendAlert = CardHeader("Send Public Alert", "Notify citizens of an emergency")
+sendAlertContent = Card([sendAlertForm])
+sendAlertForm = Form("send-alert", [alertBtn], [alertInput, alertRecipient])
+alertInput = TextArea("message", "Enter your alert message", 3, null, null)
+alertRecipient = Select("recipient", [recipS, recipM, recipE], "Select recipient")
+recipS = SelectItem("All Citizens", "All citizens", "all")
+recipM = SelectItem("Downtown District", "Downtown", "downtown")
+recipE = SelectItem("Eastside District", "Eastside", "eastside")
+alertBtn = Button("Send Alert", null, "primary")
+
+roadworksSection = CardHeader("Roadworks Planned This Month", "Construction and maintenance projects")
+roadworksContent = Card([roadworksList])
+roadworksList = ListBlock([
+  {title: "Main St widening - Phase 1", location: "Downtown", start: "Jan 15", end: "Feb 20"},
+  {title: "Oak Ave resurfacing", location: "Midtown", start: "Feb 5", end: "Feb 25"},
+  {title: "Central District drainage", location: "Westend", start: "Mar 1", end: "Mar 31"}
+])
+
+infrastructureJobsSection = CardHeader("Infrastructure Jobs Due for Maintenance", "Upcoming maintenance tasks")
+infrastructureJobsContent = Card([jobsList])
+jobsList = ListBlock([
+  {title: "Streetlight replacement - Elm St", location: "Downtown", priority: "medium"},
+  {title: "Sidewalk repair - Oak Ave", location: "Midtown", priority: "low"},
+  {title: "Sewer line repair - Central District", location: "Westend", priority: "high"}
+])

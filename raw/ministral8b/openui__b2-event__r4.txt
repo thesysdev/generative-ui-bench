@@ -1,0 +1,49 @@
+```openui-lang
+root = Card([eventHeader, countdown, agendaSection, speakersSection, ticketsSection, registrationForm])
+
+eventHeader = Card([eventName, eventDetails], "card", "column", "l", "center", "center")
+eventName = Heading("Innovate 2024: The Future of AI", "h1")
+eventDetails = Card([venue, date], "sunk", "row", "m", "center", "between")
+venue = TextContent("San Francisco Convention Center")
+date = TextContent("October 15–17, 2024")
+
+countdown = Card([daysRemaining], "card", "column", "l", "center", "center")
+daysRemaining = TextContent("12 days until the event", "large-heavy")
+
+agendaSection = Card([agendaHeader, agendaItems], "sunk", "column", "m")
+agendaHeader = CardHeader("Agenda", "Full schedule")
+agendaItems = Card([morningSession, afternoonSession, eveningSession], "column", "none")
+morningSession = Card([Time("8:30 AM", "Keynote: AI in 2025"), Time("9:30 AM", "Break"), Time("10:00 AM", "Workshop: Model Training")], "column", "none")
+afternoonSession = Card([Time("1:00 PM", "Panel: Ethics in AI"), Time("2:30 PM", "Lunch"), Time("3:30 PM", "Hands-on Demo")], "column", "none")
+eveningSession = Card([Time("6:00 PM", "Networking Reception"), Time("7:00 PM", "Keynote: The Future")], "column", "none")
+
+Time = Card([timeText, sessionText], "row", "none", "xs", "start")
+timeText = TextContent("{}", "small-heavy")
+sessionText = TextContent("{}", "default")
+
+speakersSection = Card([speakersHeader, speakerList], "sunk", "column", "m")
+speakersHeader = CardHeader("Speakers", "Leading experts in AI")
+speakerList = ListBlock([speaker1, speaker2, speaker3, speaker4], "image")
+speaker1 = ListItem("Dr. Elena Carter", "Research Director at Meta AI", ["https://picsum.photos/seed/elena/100/100"], "View bio")
+speaker2 = ListItem("Raj Patel", "CEO of NeuralWorks", ["https://picsum.photos/seed/raj/100/100"], "View bio")
+speaker3 = ListItem("Dr. Mei Lin", "Professor at Stanford", ["https://picsum.photos/seed/mei/100/100"], "View bio")
+speaker4 = ListItem("Tom Hayes", "CTO of DeepMind", ["https://picsum.photos/seed/tom/100/100"], "View bio")
+
+ticketsSection = Card([ticketsHeader, ticketOptions], "sunk", "column", "m")
+ticketsHeader = CardHeader("Ticket Prices", "Early bird pricing available")
+ticketOptions = Table([tierCol, priceCol, descCol])
+tierCol = Col("Ticket Type", ["Early Bird", "Standard", "Last Minute"], "string")
+priceCol = Col("Price", ["$199", "$249", "$299"], "string")
+descCol = Col("Description", ["Book by Sept 1", "Book by Oct 1", "Book by Oct 14"], "string")
+
+registrationForm = Card([formHeader, formFields, submitBtn], "sunk", "column", "m")
+formHeader = CardHeader("Register Now", "Join us for the event!")
+formFields = Form("registration", formButtons, [nameField, emailField])
+nameField = FormControl("Full Name", nameInput)
+nameInput = Input("name", "Your full name", "text")
+emailField = FormControl("Email Address", emailInput, "We’ll send updates!")
+emailInput = Input("email", "your@email.com", "email")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Register Now", null, "primary")
+
+```

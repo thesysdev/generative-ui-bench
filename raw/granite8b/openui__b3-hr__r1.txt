@@ -1,0 +1,74 @@
+```openui-lang
+root = Card([
+    hiringOverviewHeader,
+    headcountSummary,
+    openRoles,
+    pipelineCandidates,
+    avgTimeToHire,
+    deptHeadcount,
+    interviewsThisWeek,
+    attritionSixMonths,
+    newRoleButton
+], "card", "row", "m")
+
+hiringOverviewHeader = CardHeader("Hiring Overview", "Current Metrics & Insights")
+
+headcountSummary = TextContent("Current Headcount: 245 employees", "large")
+
+openRoles = Table([
+    roleDeptCol,
+    roleTitleCol
+])
+roleDeptCol = Col("Department", ["Engineering", "Marketing", "Sales", "HR", "Finance"])
+roleTitleCol = Col("Open Roles", ["Software Engineer", "Marketing Manager", "Sales Lead", "Recruitment Specialist", "Financial Analyst"])
+
+pipelineCandidates = Card([
+    pipelineHeader,
+    pipelineData
+], "sunk")
+pipelineHeader = Heading("Pipeline Candidates", "h3")
+pipelineData = MarkDownRenderer(`
+| Stage            | Candidates |
+|------------------|------------|
+| Application      | 120        |
+| Interview        | 45         |
+| Offer            | 20         |
+| Hired            | 15         |
+`, "clear")
+
+avgTimeToHire = Callout("info", "Average Time to Hire", "42 days")
+
+deptHeadcount = Table([
+    deptCol,
+    countCol
+])
+deptCol = Col("Department", ["Engineering", "Marketing", "Sales", "HR", "Finance"])
+countCol = Col("Headcount", [120, 80, 70, 30, 45])
+
+interviewsThisWeek = Card([
+    weekHeader,
+    weekData
+], "sunk")
+weekHeader = Heading("Interviews Scheduled This Week", "h3")
+weekData = TextContent(`
+- Monday: 3 Engineering interviews
+- Tuesday: 2 Marketing interviews
+- Wednesday: 4 Sales interviews
+- Thursday: 2 HR interviews
+- Friday: 1 Finance interview
+`, "default")
+
+attritionSixMonths = Card([
+    attritionHeader,
+    attritionDetails
+], "sunk")
+attritionHeader = Heading("Attrition (Past 6 Months)", "h3")
+attritionDetails = MarkDownRenderer(`
+- Total Attrition: 12 employees
+- Industry Avg: 8%
+- Notes: Higher attrition in Sales (3 employees)
+`, "clear")
+
+newRoleButton = Button("Open New Role", null, "primary")
+
+```

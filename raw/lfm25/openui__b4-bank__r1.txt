@@ -1,0 +1,355 @@
+```openui-lang
+root = Card(
+  children: [
+    CardHeader(
+      title="Personal Banking Dashboard",
+      subtitle="Your financial overview",
+      variant="card"
+    ),
+    
+    // Account Balances
+    Card([
+      CardHeader(
+        title="Checking Account",
+        subtitle="Available balance",
+        variant="card"
+      ),
+      Card([
+        TextContent(
+          " $12,450.33",
+          size="large"
+        )
+      ]),
+      
+      Card([
+        TextContent(
+          " $58,780.45",
+          size="large"
+        ),
+        CardHeader(
+          title="Savings Account",
+          subtitle="Balance",
+          variant="card"
+        ),
+        Card([
+          TextContent(
+            " $24,320.18",
+            size="large"
+          )
+        ],
+        CardHeader(
+          title="Credit Line",
+          subtitle="Available credit",
+          variant="card"
+        ),
+        Card([
+          TextContent(
+            " $15,600.00",
+            size="large"
+          ),
+          Button(
+            label="Freeze Credit Line",
+            action="freeze_credit",
+            variant="secondary"
+          )
+        ])
+      ]),
+      
+      // Recent Transactions
+      Card([
+        CardHeader(
+          title="Recent Transactions",
+          subtitle="Last 5 activities",
+          variant="card"
+        ),
+        ListBlock([
+          {
+            title: "Grocery Store - Whole Foods",
+            subtitle: "March 15, 2026",
+            image: null,
+            actionLabel: "View"
+          },
+          {
+            title: "Electric Bill - PowerCo",
+            subtitle: "March 14, 2026",
+            image: null,
+            actionLabel: "View"
+          },
+          {
+            title: "Salary Deposit - Payroll",
+            subtitle: "March 13, 2026",
+            image: null,
+            actionLabel: "View"
+          },
+          {
+            title: "Amazon Order - Electronics",
+            subtitle: "March 12, 2026",
+            image: null,
+            actionLabel: "View"
+          },
+          {
+            title: "Dining Out - Bistro",
+            subtitle: "March 11, 2026",
+            image: null,
+            actionLabel: "View"
+          }
+        ], direction="row"),
+      ]),
+      
+      // Spending by Category (this month)
+      Card([
+        CardHeader(
+          title="Spending by Category",
+          subtitle="This Month",
+          variant="card"
+        ),
+        Table([
+          Col({
+            label: "Category",
+            data: ["Food & Dining", "Transportation", "Shopping", "Entertainment", "Utilities"],
+            type: "string"
+          }),
+          Col({
+            label: "Amount ($)",
+            data: ["$4,230.50", "$820.75", "$2,150.30", "$580.40", "$340.20"],
+            type: "number"
+          }),
+          Col({
+            label: "Status",
+            data: ["Completed", "Pending", "Completed", "Completed", "Pending"],
+            type: "string"
+          })
+        ], variant="table"),
+      ]),
+      
+      // Bills Due Soon
+      Card([
+        CardHeader(
+          title="Bills Due Soon",
+          subtitle="Upcoming payments",
+          variant="card"
+        ),
+        ListBlock([
+          {
+            title: "Internet Service - AT&T",
+            subtitle: "Due March 28, 2026",
+            actionLabel: "Pay"
+          },
+          {
+            title: "Netflix Subscription",
+            subtitle: "Due March 30, 2026",
+            actionLabel: "Pay"
+          },
+          {
+            title: "Gas Station - Shell",
+            subtitle: "Due April 5, 2026",
+            actionLabel: "Pay"
+          },
+          {
+            title: "Streaming Platform - Hulu",
+            subtitle: "Due April 7, 2026",
+            actionLabel: "Pay"
+          },
+          {
+            title: "Phone Plan - Verizon",
+            subtitle: "Due April 10, 2026",
+            actionLabel: "Pay"
+          }
+        ], direction="row"),
+      ]),
+      
+      // Vacation Savings Progress
+      Card([
+        CardHeader(
+          title="Vacation Savings Goal",
+          subtitle="Progress toward target",
+          variant="card"
+        ),
+        Progress([
+          value: 67,
+          label: "67%",
+          variant: "progress"
+        ]),
+        TextContent(
+          "Goal: $8,000\nCurrent: $5,360\nRemaining: $2,640",
+          size: "small"
+        ),
+      ]),
+      
+      // Credit Score
+      Card([
+        CardHeader(
+          title="Credit Score",
+          subtitle="Current rating",
+          variant="card"
+        ),
+        TextContent(
+          "720",
+          size: "large",
+          style: "mono"
+        ),
+        CardHeader(
+          title="Score Details",
+          subtitle: "Factors & Trends",
+          variant: "card"
+        ),
+        TextContent(
+          "Excellent - Strong payment history, low debt-to-income ratio",
+          size: "small"
+        ),
+      ]),
+      
+      // Money Transfer
+      Card([
+        CardHeader(
+          title="Transfer Funds",
+          subtitle="Move money between accounts",
+          variant: "card"
+        ),
+        TextContent(
+          "Amount: $(0)",
+          size: "large"
+        ),
+        Button(
+          label: "Transfer to Another Account",
+          action: "transfer_money",
+          variant: "primary",
+          size: "medium"
+        ),
+        Button(
+          label: "Transfer to Savings",
+          action: "transfer_to_savings",
+          variant: "secondary",
+          size: "medium"
+        ),
+        Button(
+          label: "Transfer to Checking",
+          action: "transfer_to_checking",
+          variant: "tertiary",
+          size: "small"
+        )
+      ]),
+      
+      // Freeze Credit Line
+      Card([
+        CardHeader(
+          title="Freeze Credit Line",
+          subtitle: "Prevent new charges",
+          variant: "card"
+        ),
+        TextContent(
+          "Status: Active",
+          size: "small"
+        ),
+        Button(
+          label: "Enable Freeze",
+          action: "enable_freeze",
+          variant: "primary",
+          size: "medium"
+        ),
+        Button(
+          label: "Disable Freeze",
+          action: "disable_freeze",
+          variant: "tertiary",
+          size: "small"
+        )
+      ]),
+      
+      // Statement Period Selector
+      Card([
+        CardHeader(
+          title="Statement Period",
+          subtitle: "Select reporting timeframe",
+          variant: "card"
+        ),
+        Select([
+          SelectItem("Last 30 days", null, null, "current"),
+          SelectItem("Last 90 days", null, null, "quarterly"),
+          SelectItem("Last 6 months", null, null, "annual"),
+          SelectItem("Custom Range", null, null, "specific")
+        ], direction: "row"),
+        Button(
+          label: "Save Selection",
+          action: "save_statement_period",
+          variant: "primary",
+          size: "medium"
+        )
+      ]),
+      
+      // Alert Management
+      Card([
+        CardHeader(
+          title="Alert Settings",
+          subtitle: "Configure notifications",
+          variant: "card"
+        ),
+        ListBlock([
+          {
+            title: "Transaction Alerts",
+            description: "Notify for large spending or overdrafts",
+            checkboxes: [{ checked: true, label: "Large Purchase" }, { checked: false, label: "Overdraft Warning" }, { checked: false, label: "Low Balance" }]
+          },
+          {
+            title: "Expense Notifications",
+            description: "Real-time spending updates",
+            checkboxes: [{ checked: true, label: "Daily Summary" }, { checked: true, label: "Category Changes" }, { checked: false, label: "Monthly Review" }]
+          },
+          {
+            title: "Account Activity",
+            description: "Immediate alerts for suspicious activity",
+            checkboxes: [{ checked: true, label: "Security Breach" }, { checked: false, label: "Unusual Transaction" }, { checked: false, label: "Payment Delays" }]
+          }
+        ], direction: "row"),
+      ]),
+      
+      // Dispute Transaction
+      Card([
+        CardHeader(
+          title="Dispute a Transaction",
+          subtitle: "Resolve unauthorized charges",
+          variant: "card"
+        ),
+        ListBlock([
+          {
+            title: "Pending Disputes",
+            description: "Transactions needing review",
+            items: [
+              {
+                text: "Whole Foods - $85.42 (Mar 15)",
+                actionLabel: "Dispute"
+              },
+              {
+                text: "Amazon - $129.99 (Mar 12)",
+                actionLabel: "Dispute"
+              },
+              {
+                text: "Electric Bill - $142.00 (Mar 14)",
+                actionLabel: "Dispute"
+              }
+            ]
+          }
+        ], direction: "row"),
+      ]),
+      
+      // Footer / Summary
+      Card([
+        CardHeader(
+          title="Quick Actions",
+          subtitle: "One-tap access",
+          variant: "card"
+        ),
+        ListBlock([
+          "View Statements",
+          "Add New Transaction",
+          "Set Budget Limits",
+          "Review Investments",
+          "Update Contact Info"
+        ], direction: "row"),
+      ])
+  ],
+  direction: "row",
+  gap: "xl",
+  align: "start",
+  wrap: true
+)
+```

@@ -1,0 +1,64 @@
+root = Card([header, otpSection, flightsSection, delayedCallout, gateSection, crewsSection, weatherAlert, loadSection, connectionsSection, rebookSection, hubSection, cancelSection, turnaroundSection], "card", "column", "l")
+
+header = CardHeader("Hub Operations Desk", "Atlanta ATL — Live Operations")
+
+otpSection = Card([otpHeading, otpValue, otpBar], "sunk")
+otpHeading = Heading("On-Time Performance Today", "h3")
+otpValue = TextContent("78.4%", "large-heavy")
+otpBar = Progress(78, "On-time %")
+
+flightsSection = Card([flightsHeading, flightsTable], "sunk")
+flightsHeading = Heading("Flights — Number, Route, Gate, Status", "h3")
+flightsTable = Table([flightNumCol, flightRouteCol, flightGateCol, flightStatusCol])
+flightNumCol = Col("Flight", ["AA101", "AA205", "AA312", "AA410", "AA522", "AA630", "AA745"])
+flightRouteCol = Col("Route", ["JFK-ATL", "ORD-ATL", "LAX-ATL", "ATL-MIA", "ATL-DFW", "ATL-BOS", "ATL-DEN"])
+flightGateCol = Col("Gate", ["T12", "A3", "B7", "T8", "A1", "C4", "B2"])
+flightStatusCol = Col("Status", ["On Time", "Delayed", "On Time", "Boarding", "Delayed", "On Time", "Cancelled"])
+
+delayedCallout = Callout("warning", "Delayed Flights", "AA205 (ORD) — 45 min delay · AA522 (DFW) — 30 min delay · AA630 (BOS) — 20 min delay")
+
+gateSection = Card([gateHeading, gateList], "clear")
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateList = ListBlock([gateItem1, gateItem2, gateItem3])
+gateItem1 = ListItem("AA312", "Moved to B7 from T2")
+gateItem2 = ListItem("AA745", "Moved to B2 from C9")
+gateItem3 = ListItem("AA101", "Moved to T12 from A5")
+
+crewsSection = Card([crewsHeading, crewsList], "sunk")
+crewsHeading = Heading("Crews Available for Reassignment", "h3")
+crewsList = ListBlock([crew1, crew2, crew3])
+crew1 = ListItem("Capt. Rivera", "B737 / 8 hrs available")
+crew2 = ListItem("Capt. Okonkwo", "A321 / 6 hrs available")
+crew3 = ListItem("Capt. Singh", "A319 / 4 hrs available")
+
+weatherAlert = Alert("Weather Advisory — ATL", "Thunderstorms expected 14:00–17:00. De-icing operations active. Expect 15–25 min delays.", "warning")
+
+loadSection = Card([loadHeading, loadValue, loadBar], "clear")
+loadHeading = Heading("Average Passenger Load Today", "h3")
+loadValue = TextContent("82.3%", "large-heavy")
+loadBar = Progress(82, "Load %")
+
+connectionsSection = Card([connHeading, connectionsTable], "clear")
+connHeading = Heading("Connections at Risk of Being Missed", "h3")
+connectionsTable = Table([connFlightCol, connRouteCol, connRiskCol])
+connFlightCol = Col("Flight", ["AA205", "AA522", "AA630"])
+connRouteCol = Col("Route", ["ORD-ATL", "ATL-DFW", "ATL-BOS"])
+connRiskCol = Col("Risk", ["High — 35 min delay", "Medium — 20 min delay", "Medium — 15 min delay"])
+
+rebookSection = Card([rebookHeading, rebookText, rebookBtn], "sunk")
+rebookHeading = Heading("Rebook Affected Passengers", "h3")
+rebookText = TextContent("AA205, AA522, and AA630 passengers can be rebooked to later departures or alternate routes.")
+rebookBtn = Button("Open Rebooking Tool", null, "primary")
+
+hubSection = Card([hubHeading, hubText, hubBtn], "clear")
+hubHeading = Heading("Look at a Different Hub", "h3")
+hubText = TextContent("Switch the operations view to another hub.")
+hubBtn = Button("Select Hub", null, "secondary")
+
+cancelSection = Card([cancelHeading, cancelValue], "sunk")
+cancelHeading = Heading("Cancellations Today", "h3")
+cancelValue = TextContent("3 flights cancelled", "large-heavy")
+
+turnaroundSection = Card([turnHeading, turnValue], "clear")
+turnHeading = Heading("Average Turnaround Time", "h3")
+turnValue = TextContent("42 min", "large-heavy")

@@ -1,0 +1,31 @@
+```openui-lang
+root = Card([header, statsSection, productsSection, conversionSection, downloadBtn], "card", "column", "m", "center", "start")
+
+header = CardHeader("Monthly Sales Dashboard", "Founder's overview")
+
+statsSection = Card([revenueValue, revenueTrend], "sunk")
+revenueValue = Card([revenueLabel, revenueAmount], "card", "column", "s")
+revenueLabel = TextContent("This month's revenue:", "default")
+revenueAmount = TextContent("$128,400", "large-heavy")
+
+revenueTrend = LineChart(
+    ["Jun", "May", "Apr", "Mar", "Feb", "Jan"],
+    [revenueSeries],
+    "natural",
+    "Month",
+    "Revenue ($)"
+)
+revenueSeries = Series("Revenue", [128400, 98200, 87600, 75300, 61200, 59800])
+
+productsSection = Card([productsTitle, productsTable], "sunk")
+productsTitle = Heading("Top 3 Products", "h3")
+productsTable = Table([productNameCol, unitsSoldCol])
+productNameCol = Col("Product", ["Wireless Headphones", "Smart Watch", "Portable Charger"])
+unitsSoldCol = Col("Units Sold", [423, 312, 289])
+
+conversionSection = Card([conversionTitle, conversionValue], "sunk")
+conversionTitle = Heading("Conversion Rate", "h3")
+conversionValue = TextContent("12.7%", "large-heavy")
+
+downloadBtn = Button("Download Numbers", ["download"], "primary")
+```

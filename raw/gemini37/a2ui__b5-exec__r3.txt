@@ -1,0 +1,722 @@
+Here is the executive quarterly command view configured with all 18 requirements in a structured, high-density dashboard.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "gap": "m",
+        "children": [
+          "topHeader",
+          "controlBar",
+          "kpiOverviewCard",
+          "tabsContainer",
+          "quickActions"
+        ]
+      },
+      {
+        "id": "topHeader",
+        "component": "CardHeader",
+        "title": "Executive Quarterly Command Center",
+        "subtitle": "Comprehensive performance, operational metrics, and governance oversight"
+      },
+      {
+        "id": "controlBar",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "gap": "m",
+        "align": "center",
+        "children": [
+          "quarterSelectControl",
+          "regionSelectControl",
+          "exportButtons"
+        ]
+      },
+      {
+        "id": "quarterSelectControl",
+        "component": "FormControl",
+        "label": "Fiscal Quarter",
+        "input": "quarterSelect",
+        "hint": "Change active reporting quarter"
+      },
+      {
+        "id": "quarterSelect",
+        "component": "Select",
+        "name": "quarter",
+        "items": [
+          "q1Opt",
+          "q2Opt",
+          "q3Opt",
+          "q4Opt"
+        ],
+        "value": "Q4-2024"
+      },
+      {
+        "id": "q1Opt",
+        "component": "SelectItem",
+        "value": "Q1-2024",
+        "label": "Q1 2024 (Audited)"
+      },
+      {
+        "id": "q2Opt",
+        "component": "SelectItem",
+        "value": "Q2-2024",
+        "label": "Q2 2024 (Audited)"
+      },
+      {
+        "id": "q3Opt",
+        "component": "SelectItem",
+        "value": "Q3-2024",
+        "label": "Q3 2024 (Audited)"
+      },
+      {
+        "id": "q4Opt",
+        "component": "SelectItem",
+        "value": "Q4-2024",
+        "label": "Q4 2024 (Current)"
+      },
+      {
+        "id": "regionSelectControl",
+        "component": "FormControl",
+        "label": "Regional Focus",
+        "input": "regionSelect",
+        "hint": "Filter view by geography"
+      },
+      {
+        "id": "regionSelect",
+        "component": "Select",
+        "name": "region",
+        "items": [
+          "regGlobal",
+          "regNA",
+          "regEMEA",
+          "regAPAC"
+        ],
+        "value": "global"
+      },
+      {
+        "id": "regGlobal",
+        "component": "SelectItem",
+        "value": "global",
+        "label": "Global (Consolidated)"
+      },
+      {
+        "id": "regNA",
+        "component": "SelectItem",
+        "value": "na",
+        "label": "North America"
+      },
+      {
+        "id": "regEMEA",
+        "component": "SelectItem",
+        "value": "emea",
+        "label": "EMEA"
+      },
+      {
+        "id": "regAPAC",
+        "component": "SelectItem",
+        "value": "apac",
+        "label": "APAC"
+      },
+      {
+        "id": "exportButtons",
+        "component": "Buttons",
+        "direction": "row",
+        "buttons": [
+          "exportPdfBtn",
+          "exportPackBtn"
+        ]
+      },
+      {
+        "id": "exportPdfBtn",
+        "component": "Button",
+        "label": "Export Board PDF",
+        "variant": "secondary"
+      },
+      {
+        "id": "exportPackBtn",
+        "component": "Button",
+        "label": "Export Executive Pack (.zip)",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiOverviewCard",
+        "component": "Card",
+        "variant": "card",
+        "gap": "s",
+        "children": [
+          "kpiHeader",
+          "coreKpisTable"
+        ]
+      },
+      {
+        "id": "kpiHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Executive Vital Signs & Commercial Health"
+      },
+      {
+        "id": "coreKpisTable",
+        "component": "Table",
+        "columns": [
+          "colMetricGroup",
+          "colMetricName",
+          "colMetricVal",
+          "colMetricTarget",
+          "colMetricStatus"
+        ]
+      },
+      {
+        "id": "colMetricGroup",
+        "component": "Col",
+        "label": "Category",
+        "data": [
+          "Financials",
+          "Financials",
+          "Financials",
+          "Liquidity",
+          "Sales & Growth",
+          "Sales & Growth",
+          "Retention",
+          "Customer Experience"
+        ]
+      },
+      {
+        "id": "colMetricName",
+        "component": "Col",
+        "label": "Indicator",
+        "data": [
+          "Quarterly Revenue (1)",
+          "Operating Costs (2)",
+          "Net Profit / EBITDA (3)",
+          "Runway (10)",
+          "Sales Pipeline Value (11)",
+          "Opportunity Win Rate (12)",
+          "Active Customers & Churn (13)",
+          "Net Promoter Score (NPS) (14)"
+        ]
+      },
+      {
+        "id": "colMetricVal",
+        "component": "Col",
+        "label": "Current Q4",
+        "data": [
+          "$48.2M",
+          "$36.8M",
+          "+$11.4M (23.6%)",
+          "28.4 Months",
+          "$142.5M",
+          "34.2%",
+          "1,420 accounts / 1.4% churn",
+          "+68 NPS"
+        ]
+      },
+      {
+        "id": "colMetricTarget",
+        "component": "Col",
+        "label": "Plan / Target",
+        "data": [
+          "$45.0M",
+          "$37.5M",
+          "+$7.5M (16.6%)",
+          "> 24 Months",
+          "$130.0M",
+          "30.0%",
+          "1,380 accounts / < 2.0%",
+          "+60 NPS"
+        ]
+      },
+      {
+        "id": "colMetricStatus",
+        "component": "Col",
+        "label": "Performance",
+        "data": [
+          "Ahead (+7.1%)",
+          "Under Budget (-1.8%)",
+          "Beat (+52.0%)",
+          "Comfortable",
+          "109% of quota",
+          "+4.2% YoY",
+          "Low Churn Risk",
+          "Industry Leading"
+        ]
+      },
+      {
+        "id": "tabsContainer",
+        "component": "Tabs",
+        "items": [
+          "tabFinancialTrends",
+          "tabOrgDept",
+          "tabStrategyRisks",
+          "tabBoardPrep"
+        ]
+      },
+      {
+        "id": "tabFinancialTrends",
+        "component": "TabItem",
+        "value": "trends",
+        "trigger": "Financial Trends (4-Quarter)",
+        "content": [
+          "finTrendsCard"
+        ]
+      },
+      {
+        "id": "finTrendsCard",
+        "component": "Card",
+        "variant": "clear",
+        "gap": "m",
+        "children": [
+          "chartHeader",
+          "revCostBarChart",
+          "financialCallout"
+        ]
+      },
+      {
+        "id": "chartHeader",
+        "component": "Heading",
+        "level": "h4",
+        "text": "4-Quarter Comparison: Revenue vs. Costs"
+      },
+      {
+        "id": "revCostBarChart",
+        "component": "BarChart",
+        "variant": "grouped",
+        "xLabel": "Fiscal Quarters",
+        "yLabel": "Amount ($M USD)",
+        "labels": [
+          "Q1-2024",
+          "Q2-2024",
+          "Q3-2024",
+          "Q4-2024"
+        ],
+        "series": [
+          "revenueSeries",
+          "costsSeries"
+        ]
+      },
+      {
+        "id": "revenueSeries",
+        "component": "Series",
+        "category": "Revenue ($M)",
+        "values": [
+          38.4,
+          41.2,
+          44.7,
+          48.2
+        ]
+      },
+      {
+        "id": "costsSeries",
+        "component": "Series",
+        "category": "Costs ($M)",
+        "values": [
+          32.1,
+          34.0,
+          35.5,
+          36.8
+        ]
+      },
+      {
+        "id": "financialCallout",
+        "component": "TextCallout",
+        "variant": "success",
+        "title": "Margin Expansion Summary",
+        "description": "Operating margins expanded from 16.4% in Q1 to 23.6% in Q4 driven by enterprise subscription scale and reduced cloud infrastructure per-seat unit costs."
+      },
+      {
+        "id": "tabOrgDept",
+        "component": "TabItem",
+        "value": "dept",
+        "trigger": "Departments & Headcount",
+        "content": [
+          "deptOrgCard"
+        ]
+      },
+      {
+        "id": "deptOrgCard",
+        "component": "Card",
+        "variant": "clear",
+        "gap": "m",
+        "children": [
+          "deptTableHeading",
+          "deptBudgetHeadcountTable"
+        ]
+      },
+      {
+        "id": "deptTableHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Department Budget Performance vs. Plan & Total Headcount"
+      },
+      {
+        "id": "deptBudgetHeadcountTable",
+        "component": "Table",
+        "columns": [
+          "deptColName",
+          "deptColBudgetPlan",
+          "deptColBudgetActual",
+          "deptColVariance",
+          "deptColHeadcount",
+          "deptColOpenReqs"
+        ]
+      },
+      {
+        "id": "deptColName",
+        "component": "Col",
+        "label": "Department",
+        "data": [
+          "Engineering & Product",
+          "Sales & Marketing",
+          "Customer Success & Ops",
+          "General & Administrative",
+          "Total Org"
+        ]
+      },
+      {
+        "id": "deptColBudgetPlan",
+        "component": "Col",
+        "label": "Budget Plan",
+        "data": [
+          "$16.2M",
+          "$13.0M",
+          "$5.1M",
+          "$3.2M",
+          "$37.5M"
+        ]
+      },
+      {
+        "id": "deptColBudgetActual",
+        "component": "Col",
+        "label": "Actual Spend",
+        "data": [
+          "$15.9M",
+          "$13.2M",
+          "$4.8M",
+          "$2.9M",
+          "$36.8M"
+        ]
+      },
+      {
+        "id": "deptColVariance",
+        "component": "Col",
+        "label": "Variance",
+        "data": [
+          "-$0.3M (-1.9%)",
+          "+$0.2M (+1.5%)",
+          "-$0.3M (-5.8%)",
+          "-$0.3M (-9.3%)",
+          "-$0.7M (-1.8%)"
+        ]
+      },
+      {
+        "id": "deptColHeadcount",
+        "component": "Col",
+        "label": "Headcount",
+        "data": [
+          "218",
+          "142",
+          "84",
+          "36",
+          "480 FTE"
+        ]
+      },
+      {
+        "id": "deptColOpenReqs",
+        "component": "Col",
+        "label": "Open Reqs",
+        "data": [
+          "12",
+          "8",
+          "4",
+          "2",
+          "26 Reqs"
+        ]
+      },
+      {
+        "id": "tabStrategyRisks",
+        "component": "TabItem",
+        "value": "strategy-risks",
+        "trigger": "Initiatives & Risk Matrix",
+        "content": [
+          "strategyRiskCard"
+        ]
+      },
+      {
+        "id": "strategyRiskCard",
+        "component": "Card",
+        "variant": "clear",
+        "gap": "m",
+        "children": [
+          "initiativesHeading",
+          "initiativesTable",
+          "risksHeading",
+          "risksTable"
+        ]
+      },
+      {
+        "id": "initiativesHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Strategic Initiatives & Execution Status"
+      },
+      {
+        "id": "initiativesTable",
+        "component": "Table",
+        "columns": [
+          "colInitName",
+          "colInitOwner",
+          "colInitTargetDate",
+          "colInitStatus",
+          "colInitProgress"
+        ]
+      },
+      {
+        "id": "colInitName",
+        "component": "Col",
+        "label": "Initiative",
+        "data": [
+          "AI Agent Platform Launch (v2)",
+          "APAC Commercial Expansion",
+          "FedRAMP High Certification",
+          "Self-Serve Tier Modernization"
+        ]
+      },
+      {
+        "id": "colInitOwner",
+        "component": "Col",
+        "label": "Lead Executive",
+        "data": [
+          "Elena Ramos (CTO)",
+          "Marcus Vance (CRO)",
+          "David Wu (CISO)",
+          "Sarah Jenkins (CPO)"
+        ]
+      },
+      {
+        "id": "colInitTargetDate",
+        "component": "Col",
+        "label": "Target Date",
+        "data": [
+          "Q1 2025",
+          "Q2 2025",
+          "Q3 2025",
+          "Q1 2025"
+        ]
+      },
+      {
+        "id": "colInitStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "On Track (Beta Active)",
+          "Behind (Hiring Delayed)",
+          "On Track (Audit in Progress)",
+          "Completed"
+        ]
+      },
+      {
+        "id": "colInitProgress",
+        "component": "Col",
+        "label": "Completion",
+        "data": [
+          "85%",
+          "40%",
+          "70%",
+          "100%"
+        ]
+      },
+      {
+        "id": "risksHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Top Enterprise Risks & Mitigation Owners"
+      },
+      {
+        "id": "risksTable",
+        "component": "Table",
+        "columns": [
+          "colRiskName",
+          "colRiskImpact",
+          "colRiskOwner",
+          "colRiskMitigation"
+        ]
+      },
+      {
+        "id": "colRiskName",
+        "component": "Col",
+        "label": "Identified Risk",
+        "data": [
+          "GPU Cloud Cluster Capacity Bottleneck",
+          "EMEA Regulatory Compliance Audit (EU AI Act)",
+          "Key Personnel Retention in Deep Learning Team",
+          "Sales Cycle Lengthening in Financial Sector"
+        ]
+      },
+      {
+        "id": "colRiskImpact",
+        "component": "Col",
+        "label": "Severity",
+        "data": [
+          "High",
+          "Medium",
+          "High",
+          "Medium"
+        ]
+      },
+      {
+        "id": "colRiskOwner",
+        "component": "Col",
+        "label": "Risk Owner",
+        "data": [
+          "VP Infrastructure (Alex Chen)",
+          "General Counsel (Rachel Adams)",
+          "Chief People Officer (Tanya Patel)",
+          "VP Enterprise Sales (Liam Scott)"
+        ]
+      },
+      {
+        "id": "colRiskMitigation",
+        "component": "Col",
+        "label": "Mitigation Strategy",
+        "data": [
+          "Secured multi-cloud reserved capacity contracts",
+          "External compliance counsel retainers engaged",
+          "Long-term equity refresh package proposed",
+          "Implemented pilot-to-production fast-track tiers"
+        ]
+      },
+      {
+        "id": "tabBoardPrep",
+        "component": "TabItem",
+        "value": "board",
+        "trigger": "Next Board Meeting Agenda",
+        "content": [
+          "boardCard"
+        ]
+      },
+      {
+        "id": "boardCard",
+        "component": "Card",
+        "variant": "clear",
+        "gap": "m",
+        "children": [
+          "boardAlert",
+          "boardHeading",
+          "boardMeetingSteps"
+        ]
+      },
+      {
+        "id": "boardAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Upcoming Board Meeting: Q4 & Annual Strategy",
+        "description": "Scheduled for Thursday, Feb 15, 2025 at 9:00 AM EST • Materials due to directors 5 business days prior."
+      },
+      {
+        "id": "boardHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Board Meeting Docket & Key Discussion Items"
+      },
+      {
+        "id": "boardMeetingSteps",
+        "component": "Steps",
+        "items": [
+          "boardItem1",
+          "boardItem2",
+          "boardItem3",
+          "boardItem4",
+          "boardItem5"
+        ]
+      },
+      {
+        "id": "boardItem1",
+        "component": "StepsItem",
+        "title": "1. CEO Quarterly Performance & Financial Close",
+        "details": "Present audited Q4 figures, annual revenue target beat, profit margin progress, and runway longevity (28.4 months)."
+      },
+      {
+        "id": "boardItem2",
+        "component": "StepsItem",
+        "title": "2. Annual FY2025 Operational Plan & Headcount Approval",
+        "details": "Review proposed departmental budgets ($165M FY25 plan) and strategic net-new hiring allocation across product and GTM."
+      },
+      {
+        "id": "boardItem3",
+        "component": "StepsItem",
+        "title": "3. Commercial Strategy & Pipeline Conversion",
+        "details": "Deep dive into $142.5M pipeline, 34.2% win rate mechanics, and global APAC expansion timelines."
+      },
+      {
+        "id": "boardItem4",
+        "component": "StepsItem",
+        "title": "4. Enterprise Risk Assessment & Governance",
+        "details": "Review GPU availability safeguards, retention strategies, and compliance milestones with designated executive risk owners."
+      },
+      {
+        "id": "boardItem5",
+        "component": "StepsItem",
+        "title": "5. Executive Session & Compensation Committee Report",
+        "details": "Closed door director session on executive performance incentives, equity grant schedules, and governance."
+      },
+      {
+        "id": "quickActions",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "children": [
+          "auditTagBlock",
+          "actionFooterButtons"
+        ]
+      },
+      {
+        "id": "auditTagBlock",
+        "component": "TagBlock",
+        "tags": [
+          "Status: Board-Ready",
+          "Financials: Audited",
+          "Runway: Healthy",
+          "Currency: USD"
+        ]
+      },
+      {
+        "id": "actionFooterButtons",
+        "component": "Buttons",
+        "buttons": [
+          "printViewBtn",
+          "shareExecBtn"
+        ]
+      },
+      {
+        "id": "printViewBtn",
+        "component": "Button",
+        "label": "Print View",
+        "variant": "tertiary"
+      },
+      {
+        "id": "shareExecBtn",
+        "component": "Button",
+        "label": "Share with E-Staff",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

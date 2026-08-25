@@ -1,0 +1,135 @@
+Let me build a comprehensive airline hub operations desk screen. I need to cover all 12 items:
+
+1. On-time performance today - a progress bar or badge
+2. Flights with number, route, gate and status - a table
+3. Delayed flights called out - a callout or alert
+4. Recent gate changes - a list or table
+5. Crews available for reassignment - a list
+6. Weather advisories at the hub - a callout
+7. Average passenger load today - a progress bar or badge
+8. Connections at risk of being missed - a list or table
+9. A way to rebook affected passengers - a form or button
+10. A way to look at a different hub - a select or button
+11. Cancellations today - a badge or callout
+12. Average turnaround time - a text or badge
+
+Let me design this as a comprehensive operations dashboard.
+
+I'll structure it with:
+- CardHeader for the hub title
+- KPI row with on-time performance, cancellations, average load, turnaround time
+- Weather advisory callout
+- Main flights table
+- Delayed flights alert
+- Gate changes section
+- Connections at risk section
+- Crews available section
+- Rebooking form
+- Hub selector
+
+Let me build this step by step, making sure all 12 items are covered.
+
+Let me plan the layout:
+
+Top section:
+- Hub header with selector (item 10)
+- KPI cards: on-time performance (1), cancellations (11), avg load (7), turnaround time (12)
+- Weather advisory (6)
+
+Middle section:
+- Flights table (2)
+- Delayed flights callout (3)
+
+Bottom section:
+- Gate changes (4)
+- Connections at risk (8)
+- Crews available (5)
+- Rebooking section (9)
+
+Let me code this up carefully, making sure every variable is referenced and all arguments are positional.
+root = Card([hubHeader, kpiRow, weatherAdvisory, flightsSection, delayedCallout, bottomRow, rebookSection], "card", "column", "m", "start", "start", false)
+
+hubHeader = Card("Hub Operations Desk", null, "row", "m", "center", "between", false)
+kpiRow = Card([otpCard, cancelCard, loadCard, turnaroundCard], "sunk", "row", "m", "start", "start", false)
+weatherAdvisory = Callout("warning", "Weather Advisory", "Thunderstorm cells moving in from the west. Expect 15-20 min delays on departures after 18:00. Runway 27L may close intermittently.")
+flightsSection = Card([flightsHeading, flightsTable], "card", "column", "s", "start", "start", false)
+delayedCallout = Callout("error", "Delayed Flights", "6 flights currently delayed. Total affected passengers: 847. Priority rebooking recommended.")
+bottomRow = Card([gateSection, connectionsSection, crewsSection], "card", "row", "m", "start", "start", false)
+rebookSection = Card([rebookHeading, rebookForm], "card", "column", "s", "start", "start", false)
+
+hubTitle = Heading("ATL — Hartsfield-Jackson International", "h1")
+hubSelector = FormControl("Select Hub", hubSelect)
+hubSelect = Select("hub", [atlOpt, laxOpt, ordOpt, dfwOpt, denOpt], "Choose hub", null, "ATL")
+atlOpt = SelectItem("ATL", "ATL — Hartsfield-Jackson")
+laxOpt = SelectItem("LAX", "LAX — Los Angeles Intl")
+ordOpt = SelectItem("ORD", "ORD — O'Hare Intl")
+dfwOpt = SelectItem("DFW", "DFW — Dallas/Fort Worth")
+denOpt = SelectItem("DEN", "DEN — Denver Intl")
+
+otpCard = Card([otpLabel, otpValue], "card", "column", "none", "center", "center", false)
+otpLabel = TextContent("On-Time Performance", "small")
+otpValue = TextContent("87.3%", "large-heavy")
+
+cancelCard = Card([cancelLabel, cancelValue], "card", "column", "none", "center", "center", false)
+cancelLabel = TextContent("Cancellations Today", "small")
+cancelValue = Badge("12", "destructive")
+
+loadCard = Card([loadLabel, loadValue], "card", "column", "none", "center", "center", false)
+loadLabel = TextContent("Avg Passenger Load", "small")
+loadValue = TextContent("82.4%", "large-heavy")
+
+turnaroundCard = Card([turnaroundLabel, turnaroundValue], "card", "column", "none", "center", "center", false)
+turnaroundLabel = TextContent("Avg Turnaround", "small")
+turnaroundValue = TextContent("38 min", "large-heavy")
+
+flightsHeading = Heading("Today's Flight Operations", "h2")
+flightsTable = Table([flightNumCol, routeCol, gateCol, statusCol])
+flightNumCol = Col("Flight #", ["DL1024", "AA318", "UA872", "SW4451", "DL2201", "AA1105", "UA338", "DL772", "SW1893", "AA402", "UA1204", "DL556"])
+routeCol = Col("Route", ["ATL→LAX", "ORD→ATL", "ATL→JFK", "ATL→MIA", "DFW→ATL", "ATL→BOS", "ATL→SEA", "SFO→ATL", "ATL→DEN", "ATL→PHX", "LAX→ATL", "ATL→MSP"])
+gateCol = Col("Gate", ["T-A12", "T-B7", "T-C3", "T-D15", "T-A8", "T-B22", "T-C11", "T-D3", "T-A19", "T-B5", "T-C8", "T-D12"])
+statusCol = Col("Status", ["On Time", "On Time", "Delayed", "On Time", "Delayed", "On Time", "Delayed", "On Time", "Delayed", "On Time", "Delayed", "Delayed"])
+
+gateSection = Card([gateHeading, gateList], "sunk", "column", "s", "start", "start", false)
+gateHeading = Heading("Recent Gate Changes", "h3")
+gateList = ListBlock([gateItem1, gateItem2, gateItem3, gateItem4], "number")
+gateItem1 = ListItem("DL1024", "T-A10 → T-A12", null, null)
+gateItem2 = ListItem("UA872", "T-C5 → T-C3", null, null)
+gateItem3 = ListItem("SW4451", "T-D12 → T-D15", null, null)
+gateItem4 = ListItem("AA1105", "T-B18 → T-B22", null, null)
+
+connectionsSection = Card([connHeading, connList], "sunk", "column", "s", "start", "start", false)
+connHeading = Heading("Connections at Risk", "h3")
+connList = ListBlock([connItem1, connItem2, connItem3, connItem4], "number")
+connItem1 = ListItem("DL1024 → DL450", "LAX 18:45, 22 min connection", null, null)
+connItem2 = ListItem("UA872 → UA612", "JFK 20:10, 18 min connection", null, null)
+connItem3 = ListItem("SW4451 → SW2201", "MIA 19:30, 15 min connection", null, null)
+connItem4 = ListItem("AA1105 → AA780", "BOS 21:00, 25 min connection", null, null)
+
+crewsSection = Card([crewHeading, crewList], "sunk", "column", "s", "start", "start", false)
+crewHeading = Heading("Crews Available for Reassignment", "h3")
+crewList = ListBlock([crewItem1, crewItem2, crewItem3, crewItem4], "number")
+crewItem1 = ListItem("Crew Alpha-7", "2x Captain, 4x FO, 6x FA — ATL, available 18:30", null, null)
+crewItem2 = ListItem("Crew Bravo-3", "1x Captain, 3x FO, 5x FA — ATL, available 19:00", null, null)
+crewItem3 = ListItem("Crew Delta-1", "2x Captain, 4x FO, 6x FA — ATL, available 20:15", null, null)
+crewItem4 = ListItem("Crew Echo-5", "1x Captain, 2x FO, 4x FA — ATL, available 21:00", null, null)
+
+rebookHeading = Heading("Rebook Affected Passengers", "h2")
+rebookForm = Form("rebook", rebookButtons, [flightField, newFlightField, passengerField, classField])
+flightField = FormControl("Delayed/Cancelled Flight", flightInput, "Enter flight number")
+flightInput = Input("flight", "DL2201", "text")
+newFlightField = FormControl("New Flight Assignment", newFlightSelect, "Select replacement flight")
+newFlightSelect = Select("new_flight", [flight1, flight2, flight3, flight4], "Choose replacement", null, null)
+flight1 = SelectItem("DL2203", "DL2203 — ATL→DFW 20:30")
+flight2 = SelectItem("DL2207", "DL2207 — ATL→DFW 22:15")
+flight3 = SelectItem("DL2211", "DL2211 — ATL→DFW 06:45+1")
+flight4 = SelectItem("AA1180", "AA1180 — ATL→DFW 21:00")
+passengerField = FormControl("Passenger Count", passengerInput)
+passengerInput = Input("passengers", "1", "number")
+classField = FormControl("Booking Class", classSelect)
+classSelect = Select("class", [ecoOpt, busOpt, firstOpt], "Select class", null, "eco")
+ecoOpt = SelectItem("eco", "Economy")
+busOpt = SelectItem("bus", "Business")
+firstOpt = SelectItem("first", "First Class")
+rebookButtons = Buttons([rebookBtn, cancelBtn])
+rebookBtn = Button("Rebook Passengers", null, "primary", "normal", "medium")
+cancelBtn = Button("Cancel", null, "tertiary", "normal", "medium")

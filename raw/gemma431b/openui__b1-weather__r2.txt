@@ -1,0 +1,27 @@
+root = Card([header, currentWeather, outlookSection, astroSection, followUps], "card", "column", "m")
+
+header = CardHeader("Morning Brief", "Bengaluru, India")
+
+currentWeather = Card([tempText, conditionBadge, currentDetails], "sunk", "column", "s")
+tempText = TextContent("24°C", "large-heavy")
+conditionBadge = Badge("Partly Cloudy", "info")
+currentDetails = TextContent("Humidity: 62% • Wind: 12 km/h NE", "small")
+
+outlookSection = Card([outlookHeading, forecastChart, forecastTable], "card", "column", "m")
+outlookHeading = Heading("3-Day Outlook", "h3")
+forecastChart = LineChart(["Today", "Tomorrow", "Wednesday"], [tempSeries], "natural", "Day", "°C")
+tempSeries = Series("Expected Temp", [26, 28, 25])
+forecastTable = Table([dayCol, tempCol, condCol])
+dayCol = Col("Day", ["Tue", "Wed", "Thu"], "string")
+tempCol = Col("High/Low", ["26°/21°", "28°/22°", "25°/20°"], "string")
+condCol = Col("Condition", ["Sunny", "Cloudy", "Rain"], "string")
+
+astroSection = Card([astroHeading, astroList], "clear", "column", "s")
+astroHeading = Heading("Solar Cycle", "h4")
+astroList = ListBlock([sunriseItem, sunsetItem], "image")
+sunriseItem = ListItem("Sunrise", "06:14 AM")
+sunsetItem = ListItem("Sunset", "06:28 PM")
+
+followUps = FollowUpBlock([updateFollow, dressFollow])
+updateFollow = FollowUpItem("Update location to Mysore")
+dressFollow = FollowUpItem("What should I wear today?")

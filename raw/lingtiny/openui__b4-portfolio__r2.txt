@@ -1,0 +1,121 @@
+root = Card([overview, projects, milestones, budget, utilization, risks, deadlines, pace, blocks, actions], "clear")
+overview = CardHeader("Project Portfolio Review", "Q1 2025 — Current Snapshot")
+
+projects = CardHeader("Active Projects", "Owner, deadline, and health status")
+projectList = [
+    { name: "Platform Migration", owner: "Alice Chen", deadline: "2025-02-15", health: "At Risk" },
+    { name: "API Gateway Redesign", owner: "Bob Martinez", deadline: "2025-01-28", health: "On Track" },
+    { name: "Data Lake Modernization", owner: "Carol Wu", deadline: "2025-03-01", health: "Delayed" },
+    { name: "Security Audit v2", owner: "Dave Kim", deadline: "2025-01-15", health: "On Track" },
+    { name: "Mobile App v3", owner: "Elena Rossi", deadline: "2025-02-28", health: "At Risk" },
+]
+projectCards = [
+    { name: "Platform Migration", owner: "Alice Chen", deadline: "2025-02-15", health: "At Risk" },
+    { name: "API Gateway Redesign", owner: "Bob Martinez", deadline: "2025-01-28", health: "On Track" },
+    { name: "Data Lake Modernization", owner: "Carol Wu", deadline: "2025-03-01", health: "Delayed" },
+    { name: "Security Audit v2", owner: "Dave Kim", deadline: "2025-01-15", health: "On Track" },
+    { name: "Mobile App v3", owner: "Elena Rossi", deadline: "2025-02-28", health: "At Risk" },
+]
+
+milestones = CardHeader("Overdue Milestones", "Milestones past their due date")
+overdueMilestones = [
+    { project: "Platform Migration", milestone: "User Authentication Module", due: "2025-01-10", status: "Critical" },
+    { project: "Data Lake Modernization", milestone: "Schema Migration", due: "2025-01-05", status: "Critical" },
+    { project: "API Gateway Redesign", milestone: "Rate Limiter Integration", due: "2025-01-08", status: "Warning" },
+]
+
+budget = CardHeader("Budget Spent vs. Allocation", "Per-project spend vs. planned budget")
+budgetItems = [
+    { project: "Platform Migration", spent: "45,000", allocated: "60,000", remaining: "15,000" },
+    { project: "API Gateway Redesign", spent: "22,000", allocated: "35,000", remaining: "13,000" },
+    { project: "Data Lake Modernization", spent: "55,000", allocated: "40,000", remaining: "-15,000" },
+    { project: "Security Audit v2", spent: "18,000", allocated: "25,000", remaining: "7,000" },
+    { project: "Mobile App v3", spent: "30,000", allocated: "40,000", remaining: "10,000" },
+]
+
+utilization = CardHeader("Team Utilization", "Work distribution across team members")
+utilizationItems = [
+    { name: "Alice Chen", pct: 88, role: "Backend Lead" },
+    { name: "Bob Martinez", pct: 76, role: "Frontend Lead" },
+    { name: "Carol Wu", pct: 92, role: "Data Engineer" },
+    { name: "Dave Kim", pct: 65, role: "Security Engineer" },
+    { name: "Elena Rossi", pct: 95, role: "Mobile Lead" },
+]
+
+risks = CardHeader("Risks & Severity", "Identified risks by severity level")
+riskItems = [
+    { risk: "Supply chain delay for platform migration", severity: "Critical" },
+    { risk: "Third-party API deprecation risk", severity: "High" },
+    { risk: "Key personnel burnout", severity: "High" },
+    { risk: "Integration testing gap", severity: "Medium" },
+    { risk: "Data compliance audit finding", severity: "Medium" },
+]
+
+deadlines = CardHeader("Deadlines — Next Two Weeks", "Upcoming delivery dates")
+nearDeadlines = [
+    { project: "Security Audit v2", due: "2025-01-15", status: "Overdue" },
+    { project: "API Gateway Redesign", due: "2025-01-28", status: "Overdue" },
+    { project: "Platform Migration", due: "2025-02-15", status: "Upcoming" },
+    { project: "Mobile App v3", due: "2025-02-28", status: "Upcoming" },
+    { project: "Data Lake Modernization", due: "2025-03-01", status: "Upcoming" },
+]
+
+pace = CardHeader("Delivery Pace", "Sprint velocity over the last six sprints")
+sprintData = [
+    { sprint: "Sprint 42", velocity: 42, tasks: 18 },
+    { sprint: "Sprint 41", velocity: 38, tasks: 16 },
+    { sprint: "Sprint 40", velocity: 45, tasks: 20 },
+    { sprint: "Sprint 39", velocity: 35, tasks: 14 },
+    { sprint: "Sprint 38", velocity: 40, tasks: 17 },
+    { sprint: "Sprint 37", velocity: 32, tasks: 13 },
+]
+
+blocks = CardHeader("Blocked Work Items", "Items currently blocked")
+blockedItems = [
+    { project: "Platform Migration", item: "Infrastructure provisioning", blocker: "Vendor delay", status: "Critical" },
+    { project: "Data Lake Modernization", item: "ETL pipeline setup", blocker: "Missing access token", status: "High" },
+    { project: "Mobile App v3", item: "Integration test environment", blocker: "CI/CD pipeline issue", status: "High" },
+]
+
+actions = CardHeader("Actions", "Quick actions for the portfolio")
+actionsList = [
+    { label: "View Quarterly Report", action: "quarterly" },
+    { label: "Request More Resources", action: "request" },
+    { label: "Export Review as PDF", action: "export" },
+    { label: "Archive Finished Project", action: "archive" },
+]
+
+quarter = CardHeader("Quarter Selector", "Switch between fiscal quarters")
+quarterOptions = [
+    { value: "Q1-2025", label: "Q1 2025" },
+    { value: "Q2-2025", label: "Q2 2025" },
+    { value: "Q3-2025", label: "Q3 2025" },
+    { value: "Q4-2025", label: "Q4 2025" },
+]
+
+request = CardHeader("Request More People", "Add team members to a project")
+requestForm = Form("request-people", [
+    { label: "Project", input: Select("project", [
+        SelectItem("Platform Migration", "Platform Migration"),
+        SelectItem("Data Lake Modernization", "Data Lake Modernization"),
+        SelectItem("Mobile App v3", "Mobile App v3"),
+    ], "Choose a project") },
+    { label: "Number of People", input: Slider("people", "continuous", 1, 10, 3, "Additional team members", null, null) },
+    { label: "Start Date", input: DatePicker("start-date", "single", null, null) },
+], [submitBtn, cancelBtn])
+submitBtn = Button("Submit Request", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+
+export = CardHeader("Export Review", "Download the current portfolio report")
+exportBtn = Button("Download PDF", null, "primary")
+
+archive = CardHeader("Archive Finished Project", "Move a completed project to archive")
+archiveForm = Form("archive-project", [
+    { label: "Project", input: Select("archive-project", [
+        SelectItem("Platform Migration", "Platform Migration"),
+        SelectItem("Data Lake Modernization", "Data Lake Modernization"),
+    ], "Choose a project") },
+    { label: "Archive Reason", input: TextArea("reason", "Why are you archiving this project?", 3, null, null) },
+], [submitBtn, cancelBtn])
+submitBtn = Button("Archive", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

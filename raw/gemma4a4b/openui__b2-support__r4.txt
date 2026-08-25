@@ -1,0 +1,31 @@
+root = Card([header, kpis, ticketActions, recentTickets, followUps], "card", "column", "xl")
+
+header = CardHeader("Support Command Center", "Morning Overview • Real-time Dashboard")
+
+kpis = Card([kpiGrid], "sunk", "row", "m")
+kpiGrid = [openTickets, responseTime, resolutionRate]
+openTickets = Card([openVal, openLabel], "clear", "column", "center")
+openVal = Heading("42", "h1")
+openLabel = TextContent("Open Tickets", "small")
+responseTime = Card([respVal, respLabel], "clear", "column", "center")
+respVal = Heading("1h 12m", "h1")
+respLabel = TextContent("Avg. First Response", "small")
+resolutionRate = Card([resVal, resLabel], "clear", "column", "center")
+resVal = Heading("98%", "h1")
+resLabel = TextContent("SLA Compliance", "small")
+
+ticketActions = Buttons([filterHighPriority, createNewTicket], "row")
+filterHighPriority = Button("Filter: High Priority Only", null, "secondary", "normal", "small")
+createNewTicket = Button("Open New Ticket", null, "primary", "normal", "small")
+
+recentTickets = Card([tableHeader, ticketTable], "card", "column", "l")
+tableHeader = Heading("Recent Tickets", "h3")
+ticketTable = Table([colID, colSubject, colPriority, colStatus])
+colID = Col("ID", ["#8821", "#8822", "#8823", "#8824", "#8825"])
+colSubject = Col("Subject", ["Login issue", "Payment failed", "API error", "UI bug", "Account sync"])
+colPriority = Col("Priority", ["High", "Critical", "Medium", "Low", "High"])
+colStatus = Col("Status", ["Open", "In Progress", "Pending", "Open", "Escalated"])
+
+followUps = FollowUpBlock([suggestAnalytics, suggestTeamStatus])
+suggestAnalytics = FollowUpItem("View detailed SLA reports")
+suggestTeamStatus = FollowUpItem("Check agent availability")

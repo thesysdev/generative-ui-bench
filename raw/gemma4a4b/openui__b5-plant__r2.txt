@@ -1,0 +1,77 @@
+root = Card([header, alerts, kpis, productionSection, maintenanceSection, inventorySection, qualitySection, workOrdersSection, footer])
+header = CardHeader("Factory Floor Supervisor Console", "Real-time Manufacturing Operations Overview")
+alerts = Card([alertsList, andonAlerts], "sunk", "column", "m")
+alertsList = Alert("Safety Alert", "1 Unresolved safety incident reported in Sector 4", "warning")
+andonAlerts = Card([andonTitle, andonItems], "clear", "row", "m")
+andonTitle = Heading("Live Andon Alerts", "h4")
+andonItems = ListBlock([
+    ListItem("Line 3: Jammed", "Conveyor Belt Sensor Error", null, "Investigate"),
+    ListItem("Line 1: Low Speed", "Material starvation - Resin hopper", null, "Check Feed")
+])
+kpis = Card([kpiGrid], "clear", "row", "m")
+kpiGrid = ListBlock([
+    ListItem("OEE (Overall Equipment Effectiveness)", "84.2%", null, "View"),
+    ListItem("Today's Output", "8,420 / 10,000 units", null, "View"),
+    ListItem("Energy Usage", "425 kWh", null, "View"),
+    ListItem("Days Since Last Incident", "142 Days", null, "View")
+])
+productionSection = Card([prodHeader, prodGrid], "card", "column", "m")
+prodHeader = CardHeader("Production Performance", "Line status and shift output")
+prodGrid = Card([lineStatus, shiftComparison, defectTrend], "clear", "row", "m")
+lineStatus = Card([lineList], "sunk", "column", "s")
+lineList = ListBlock([
+    ListItem("Line 1", "95 units/hr - Running", null, "Focus"),
+    ListItem("Line 2", "82 units/hr - Running", null, "Focus"),
+    ListItem("Line 3", "12 units/hr - Warning", null, "Focus"),
+    ListItem("Line 4", "0 units/hr - Stopped", null, "Focus")
+])
+shiftComparison = Card([shiftChart, defectChart], "clear", "column", "m")
+shiftChart = LineChart(["Shift A", "Shift B", "Shift C"], [shiftSeries], "natural", "Shift", "Units")
+shiftSeries = Series("Output", [2800, 3100, 2520])
+defectChart = PieChart(["Defects", "Pass"], [42, 8458], "donut")
+defectTrend = HorizontalBarChart(["Defects"], [defectSeries], "x", "Count")
+defectSeries = Series("Monthly Defects", [42])
+maintenanceSection = Card([maintHeader, maintGrid], "card", "column", "m")
+maintHeader = CardHeader("Maintenance & Scheduling", "Scheduled tasks and upcoming downtime")
+maintGrid = Card([maintList, scheduleForm], "clear", "row", "m")
+maintList = Card([maintTable], "sunk", "column", "s")
+maintTable = Table([maintCol1, maintCol2, maintCol3])
+maintCol1 = Col("Machine", ["Press 01", "Molder 04", "Extruder 02"])
+maintCol2 = Col("Issue", ["Hydraulic Leak", "Heating Element", "Belt Wear"])
+maintCol3 = Col("Status", ["Due Today", "Due in 2 Days", "Due in 5 Days"])
+scheduleForm = Form("maint-schedule", maintButtons, [maintMachine, maintDate])
+maintMachine = FormControl("Machine ID", maintMachineInput)
+maintMachineInput = Input("machine_id", "Select Machine")
+maintDate = FormControl("Scheduled Date", maintDatePicker)
+maintDatePicker = DatePicker("maint_date", "single")
+maintButtons = Buttons([maintSubmit])
+maintSubmit = Button("Schedule Maintenance", null, "primary")
+inventorySection = Card([invHeader, invGrid], "card", "column", "m")
+invHeader = CardHeader("Inventory & Deliveries", "Stock levels and incoming shipments")
+invGrid = Card([stockTable, deliveryList], "clear", "row", "m")
+stockTable = Table([stockCol1, stockCol2])
+stockCol1 = Col("Material", ["Steel", "Resin", "Packaging"])
+stockCol2 = Col("Stock Level", ["450kg", "120kg", "2000 units"])
+deliveryList = Card([deliveryListItems], "sunk", "column", "s")
+deliveryListItems = ListBlock([
+    ListItem("Supplier: SteelCo", "Delivery expected Tuesday", null),
+    ListItem("Supplier: PolyChem", "Delivery expected Thursday", null)
+])
+qualitySection = Card([qualHeader, qualGrid], "card", "column", "m")
+qualHeader = CardHeader("Quality & Work Orders", "Hold status and pending tasks")
+qualGrid = Card([holdList, workOrders], "clear", "row", "m")
+holdList = Card([holdItems], "sunk", "column", "s")
+holdItems = ListBlock([
+    ListItem("Batch #8821", "Moisture content too high", null, "Review"),
+    ListItem("Batch #8845", "Color mismatch", null, "Review")
+])
+workOrders = Card([woList], "sunk", "column", "s")
+woList = ListBlock([
+    ListItem("WO-441", "Priority: High - Assembly", null),
+    ListItem("WO-445", "Priority: Medium - Packaging", null),
+    ListItem("WO-449", "Priority: Low - Labeling", null)
+])
+footer = Card([footerActions], "clear", "row", "m")
+footerActions = Buttons([exportBtn, viewAllBtn])
+exportBtn = Button("Export Shift Report", null, "secondary")
+viewAllBtn = Button("View Full Dashboard", null, "tertiary")

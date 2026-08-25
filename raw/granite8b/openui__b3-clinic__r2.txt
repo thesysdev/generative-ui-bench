@@ -1,0 +1,111 @@
+```openui-lang
+root = Card(
+    [
+        header,
+        appointmentsTable,
+        statsSection,
+        roomStatus,
+        nextPatientCallout,
+        actions
+    ],
+    "card",
+    "column",
+    "center",
+    "between",
+    wrap = true
+)
+
+header = CardHeader("Clinic Receptionist Dashboard", "Today")
+
+appointmentsTable = Table(
+    [
+        colTime,
+        colPatient
+    ]
+)
+
+colTime = Col(
+    "Time",
+    [
+        "08:00 - Jane Doe",
+        "09:30 - John Smith",
+        "11:00 - Emily Johnson",
+        "13:00 - Michael Brown",
+        "15:30 - Sarah Davis"
+    ]
+)
+
+colPatient = Col(
+    "Patient",
+    [
+        "Doe, Jane",
+        "Smith, John",
+        "Johnson, Emily",
+        "Brown, Michael",
+        "Davis, Sarah"
+    ]
+)
+
+statsSection = Card(
+    [
+        expectedPatients,
+        noShowRate
+    ],
+    "clear"
+)
+
+expectedPatients = Callout(
+    "info",
+    "Expected Patients Today",
+    "5 patients"
+)
+
+noShowRate = Callout(
+    "warning",
+    "No‑Show Rate This Month",
+    "12% no‑show"
+)
+
+roomStatus = SectionBlock(
+    [
+        freeRoomSection
+    ],
+    isFoldable = false
+)
+
+freeRoomSection = SectionItem(
+    "Free Rooms",
+    "Free Rooms",
+    [
+        TextContent(
+            "Room A: Available\nRoom B: Available\nRoom C: Occupied\nRoom D: Available"
+        )
+    ]
+)
+
+nextPatientCallout = TextCallout(
+    "neutral",
+    "Next Patient",
+    "Emily Johnson at 11:00"
+)
+
+actions = Buttons(
+    [
+        checkInButton,
+        nextDayButton
+    ],
+    direction = "row"
+)
+
+checkInButton = Button(
+    "Check In",
+    action = ["check_in", "patient_id"],
+    variant = "primary"
+)
+
+nextDayButton = Button(
+    "Next Day",
+    action = ["next_day"],
+    variant = "secondary"
+)
+```

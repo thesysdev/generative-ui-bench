@@ -1,0 +1,345 @@
+root = Card([header, deptTabs, actionRow], "card", "column", "m")
+
+header = CardHeader("University Administrator Dashboard", "Fall 2024 — Real-time overview")
+
+deptTabs = Tabs([tabAll, tabEngineering, tabArts, tabBusiness])
+
+tabAll = TabItem("all", "All Departments", [overviewCard, enrollmentCard, applicationsCard, acceptanceCard, revenueCard, courseCard, facultyCard, riskCard, scholarshipCard, housingCard, eventsCard, alumniCard, comparisonCard, waitlistCard])
+
+tabEngineering = TabItem("engineering", "Engineering", [engOverview, engEnrollment, engApplications])
+
+tabArts = TabItem("arts", "Arts & Sciences", [artsOverview, artsEnrollment, artsApplications])
+
+tabBusiness = TabItem("business", "Business", [busOverview, busEnrollment, busApplications])
+
+actionRow = Card([approveDialog, messageDialog], "clear", "row", "m")
+
+approveDialog = DialogBlock("Approve New Course", "New Course Approval", "Submit details for a proposed course. The academic review board will evaluate within 5 business days.", [courseForm], "primary")
+
+messageDialog = DrawerBlock("Message Student Group", "Send Message", "Compose a message to a specific student group or the entire student body.", [messageForm])
+
+overviewCard = Card([overviewHeader, overviewGrid], "sunk")
+
+overviewHeader = Heading("Key Metrics", "h3")
+
+overviewGrid = Card([enrollKpi, acceptKpi, revenueKpi, housingKpi], "clear", "row", "m")
+
+enrollKpi = TextContent("**Total Enrollment**: 24,831 students", "large-heavy")
+
+acceptKpi = TextContent("**Acceptance Rate**: 68.4%", "large-heavy")
+
+revenueKpi = TextContent("**Tuition Revenue**: $182.6M", "large-heavy")
+
+housingKpi = TextContent("**Housing Occupancy**: 94.2%", "large-heavy")
+
+enrollmentCard = Card([enrollHeader, enrollChart], "sunk")
+
+enrollHeader = Heading("Enrollment Trend (5 Years)", "h3")
+
+enrollChart = LineChart(["2020", "2021", "2022", "2023", "2024"], [enrollSeries], "linear", "Year", "Students")
+
+enrollSeries = Series("Total Enrollment", [21450, 22180, 23050, 24120, 24831])
+
+applicationsCard = Card([appHeader, appTable], "sunk")
+
+appHeader = Heading("Applications by Program", "h3")
+
+appTable = Table([progName, progApps, progAccepted])
+
+progName = Col("Program", ["Computer Science", "Mechanical Engineering", "Business Administration", "Psychology", "Biology", "English Literature", "Mathematics", "Nursing"])
+
+progApps = Col("Applications", [3240, 1890, 4520, 2780, 2150, 1340, 1560, 2890])
+
+progAccepted = Col("Accepted", [1296, 1134, 3089, 1946, 1505, 938, 1092, 2312])
+
+acceptanceCard = Card([acceptHeader, acceptProgress], "sunk")
+
+acceptHeader = Heading("Acceptance Rate", "h3")
+
+acceptProgress = Progress(68.4, "Overall: 68.4% — 20,570 accepted of 30,080 applied")
+
+revenueCard = Card([revHeader, revBreakdown], "sunk")
+
+revHeader = Heading("Tuition Revenue — Fiscal Year 2024", "h3")
+
+revBreakdown = Table([revSource, revAmount, revPct])
+
+revSource = Col("Source", ["Undergraduate", "Graduate", "Online Programs", "Continuing Ed"])
+
+revAmount = Col("Revenue ($M)", [98.2, 54.8, 21.4, 8.2])
+
+revPct = Col("Share", ["53.8%", "30.0%", "11.7%", "4.5%"])
+
+courseCard = Card([courseHeader, courseTable], "sunk")
+
+courseHeader = Heading("Course Offering Capacity", "h3")
+
+courseTable = Table([courseName, courseEnrolled, courseCapacity, courseStatus])
+
+courseName = Col("Course", ["CS 101 Intro to CS", "ENG 201 Lit Survey", "MATH 301 Linear Algebra", "BIO 110 Gen Bio", "PSY 101 Psych Intro", "BUS 350 Marketing", "MECH 401 Thermodynamics", "NURS 220 Fundamentals"])
+
+courseEnrolled = Col("Enrolled", [48, 32, 28, 52, 61, 38, 18, 44])
+
+courseCapacity = Col("Capacity", [45, 35, 30, 50, 60, 40, 20, 45])
+
+courseStatus = Col("Status", ["107% — Over", "91%", "93%", "104% — Over", "102% — Over", "95%", "90%", "98%"])
+
+facultyCard = Card([facultyHeader, facultyTable], "sunk")
+
+facultyHeader = Heading("Teaching Load by Faculty", "h3")
+
+facultyTable = Table([facultyName, facultyCourses, facultyStudents, facultyDept])
+
+facultyName = Col("Faculty Member", ["Dr. Sarah Chen", "Prof. James Wilson", "Dr. Maria Garcia", "Prof. Robert Kim", "Dr. Emily Patel", "Prof. David Brown"])
+
+facultyCourses = Col("Courses", [4, 3, 5, 3, 4, 2])
+
+facultyStudents = Col("Total Students", [192, 105, 248, 98, 164, 72])
+
+facultyDept = Col("Department", ["Computer Science", "English", "Biology", "Business", "Psychology", "Mechanical Eng."])
+
+riskCard = Card([riskHeader, riskList], "sunk")
+
+riskHeader = Heading("Students at Academic Risk", "h3")
+
+riskList = ListBlock([risk1, risk2, risk3, risk4, risk5], "number")
+
+risk1 = ListItem("Jordan Martinez", "GPA 1.8 — CS major, 3 failing courses this semester", null, "Review")
+
+risk2 = ListItem("Aisha Johnson", "GPA 2.0 — Nursing, missed 12 lab sessions", null, "Review")
+
+risk3 = ListItem("Tyler O'Brien", "GPA 1.9 — Business, 2 courses on withdrawal", null, "Review")
+
+risk4 = ListItem("Priya Sharma", "GPA 2.1 — Psychology, academic probation since Spring 2024", null, "Review")
+
+risk5 = ListItem("Marcus Lee", "GPA 1.7 — Engineering, 4 incomplete grades", null, "Review")
+
+scholarshipCard = Card([scholarHeader, scholarBar], "sunk")
+
+scholarHeader = Heading("Scholarship Budget Utilization", "h3")
+
+scholarBar = SingleStackedBarChart(["Need-Based", "Merit-Based", "Athletic", "Other"], [42.5, 28.3, 15.8, 3.4])
+
+housingCard = Card([housingHeader, housingPie], "sunk")
+
+housingHeader = Heading("Housing Occupancy by Hall", "h3")
+
+housingPie = PieChart(["Maple Hall", "Oak Residence", "Pine Commons", "Riverside", "Unassigned"], [98, 95, 92, 96, 9], "donut", "circular")
+
+eventsCard = Card([eventsHeader, eventsList], "sunk")
+
+eventsHeader = Heading("Campus Events — November 2024", "h3")
+
+eventsList = ListBlock([evt1, evt2, evt3, evt4, evt5, evt6], "number")
+
+evt1 = ListItem("Homecoming Weekend", "Nov 2–3 — Main Quad & Athletics Complex", null, null)
+
+evt2 = ListItem("Career Fair", "Nov 7 — Student Union Ballroom, 120+ employers", null, null)
+
+evt3 = ListItem("International Food Festival", "Nov 12 — Outdoor Dining Area", null, null)
+
+evt4 = ListItem("Alumni Speaker Series: AI in Healthcare", "Nov 15 — Engineering Auditorium", null, null)
+
+evt5 = ListItem("Mental Health Awareness Week", "Nov 18–22 — Campus-wide", null, null)
+
+evt6 = ListItem("Fall Concert: University Symphony", "Nov 28 — Music Hall, 7 PM", null, null)
+
+alumniCard = Card([alumniHeader, alumniChart], "sunk")
+
+alumniHeader = Heading("Alumni Giving (4 Years)", "h3")
+
+alumniChart = BarChart(["2021", "2022", "2023", "2024"], [givingSeries], "grouped", "Year", "Donations ($M)")
+
+givingSeries = Series("Total Donations", [12.4, 14.1, 16.8, 19.3])
+
+comparisonCard = Card([compHeader, compTable], "sunk")
+
+compHeader = Heading("This Semester vs. Last Semester", "h3")
+
+compTable = Table([metricCol, thisSem, lastSem, changeCol])
+
+metricCol = Col("Metric", ["Enrollment", "Avg GPA", "Retention Rate", "Graduation Rate", "Job Placement"])
+
+thisSem = Col("Fall 2024", [24831, "3.12", "94.1%", "89.3%", "91.2%"])
+
+lastSem = Col("Fall 2023", [24120, "3.08", "93.5%", "88.7%", "90.4%"])
+
+changeCol = Col("Change", ["+2.9%", "+0.04", "+0.6%", "+0.6%", "+0.8%"])
+
+waitlistCard = Card([waitlistHeader, waitlistChart], "sunk")
+
+waitlistHeader = Heading("Waitlisted Students per Program", "h3")
+
+waitlistChart = HorizontalBarChart(["Computer Science", "Nursing", "Business Admin", "Psychology", "Biology", "Mechanical Eng.", "Mathematics", "English Lit."], [waitSeries], "grouped", "Waitlisted Students", "Students")
+
+waitSeries = Series("On Waitlist", [342, 198, 156, 89, 124, 67, 45, 38])
+
+engOverview = Card([engOvH, engOvGrid], "sunk")
+
+engOvH = Heading("Engineering — Overview", "h3")
+
+engOvGrid = Card([engEnroll, engAccept, engRevenue], "clear", "row", "m")
+
+engEnroll = TextContent("**Enrollment**: 6,240", "large-heavy")
+
+engAccept = TextContent("**Acceptance**: 60.0%", "large-heavy")
+
+engRevenue = TextContent("**Revenue**: $48.2M", "large-heavy")
+
+engEnrollment = Card([engEnH, engEnChart], "sunk")
+
+engEnH = Heading("Engineering Enrollment Trend", "h3")
+
+engEnChart = LineChart(["2020", "2021", "2022", "2023", "2024"], [engEnSeries], "linear", "Year", "Students")
+
+engEnSeries = Series("Engineering", [4800, 5120, 5480, 5890, 6240])
+
+engApplications = Card([engAppH, engAppTable], "sunk")
+
+engAppH = Heading("Applications by Engineering Program", "h3")
+
+engAppTable = Table([engProg, engProgApps, engProgAcc])
+
+engProg = Col("Program", ["Computer Science", "Mechanical Eng.", "Electrical Eng.", "Civil Eng.", "Chemical Eng."])
+
+engProgApps = Col("Applied", [3240, 1890, 1420, 980, 760])
+
+engProgAcc = Col("Accepted", [1296, 1134, 852, 588, 456])
+
+artsOverview = Card([artsOvH, artsOvGrid], "sunk")
+
+artsOvH = Heading("Arts & Sciences — Overview", "h3")
+
+artsOvGrid = Card([artsEnroll, artsAccept, artsRevenue], "clear", "row", "m")
+
+artsEnroll = TextContent("**Enrollment**: 8,920", "large-heavy")
+
+artsAccept = TextContent("**Acceptance**: 72.1%", "large-heavy")
+
+artsRevenue = TextContent("**Revenue**: $42.8M", "large-heavy")
+
+artsEnrollment = Card([artsEnH, artsEnChart], "sunk")
+
+artsEnH = Heading("Arts & Sciences Enrollment Trend", "h3")
+
+artsEnChart = LineChart(["2020", "2021", "2022", "2023", "2024"], [artsEnSeries], "linear", "Year", "Students")
+
+artsEnSeries = Series("Arts & Sciences", [7600, 7850, 8120, 8480, 8920])
+
+artsApplications = Card([artsAppH, artsAppTable], "sunk")
+
+artsAppH = Heading("Applications by Program", "h3")
+
+artsAppTable = Table([artsProg, artsProgApps, artsProgAcc])
+
+artsProg = Col("Program", ["Psychology", "Biology", "English Lit.", "Mathematics", "History"])
+
+artsProgApps = Col("Applied", [2780, 2150, 1340, 1560, 1120])
+
+artsProgAcc = Col("Accepted", [1946, 1505, 938, 1092, 784])
+
+busOverview = Card([busOvH, busOvGrid], "sunk")
+
+busOvH = Heading("Business — Overview", "h3")
+
+busOvGrid = Card([busEnroll, busAccept, busRevenue], "clear", "row", "m")
+
+busEnroll = TextContent("**Enrollment**: 5,480", "large-heavy")
+
+busAccept = TextContent("**Acceptance**: 68.3%", "large-heavy")
+
+busRevenue = TextContent("**Revenue**: $58.4M", "large-heavy")
+
+busEnrollment = Card([busEnH, busEnChart], "sunk")
+
+busEnH = Heading("Business Enrollment Trend", "h3")
+
+busEnChart = LineChart(["2020", "2021", "2022", "2023", "2024"], [busEnSeries], "linear", "Year", "Students")
+
+busEnSeries = Series("Business", [4200, 4520, 4890, 5180, 5480])
+
+busApplications = Card([busAppH, busAppTable], "sunk")
+
+busAppH = Heading("Applications by Program", "h3")
+
+busAppTable = Table([busProg, busProgApps, busProgAcc])
+
+busProg = Col("Program", ["Business Admin", "Finance", "Marketing", "Accounting", "Management"])
+
+busProgApps = Col("Applied", [4520, 2890, 1980, 2340, 1650])
+
+busProgAcc = Col("Accepted", [3089, 1968, 1356, 1591, 1130])
+
+courseForm = Form("new-course", courseFormButtons, [deptField, titleField, creditsField, descField, instructorField, capacityField])
+
+deptField = FormControl("Department", deptSelect)
+
+deptSelect = Select("department", [selCS, selME, selBUS, selPSY, selBIO, selENG], "Select department")
+
+selCS = SelectItem("cs", "Computer Science")
+
+selME = SelectItem("me", "Mechanical Engineering")
+
+selBUS = SelectItem("bus", "Business Administration")
+
+selPSY = SelectItem("psy", "Psychology")
+
+selBIO = SelectItem("bio", "Biology")
+
+selENG = SelectItem("eng", "English Literature")
+
+titleField = FormControl("Course Title & Code", titleInput)
+
+titleInput = Input("course_title", "e.g., CS 450 Machine Learning")
+
+creditsField = FormControl("Credit Hours", creditsInput)
+
+creditsInput = Input("credits", "3", "number")
+
+descField = FormControl("Course Description", descInput)
+
+descInput = TextArea("description", "Brief description of course content and prerequisites...", 4)
+
+instructorField = FormControl("Proposed Instructor", instructorInput)
+
+instructorInput = Input("instructor", "Full name")
+
+capacityField = FormControl("Expected Enrollment", capacityInput)
+
+capacityInput = Input("capacity", "30", "number")
+
+courseFormButtons = Buttons([submitCourse, cancelCourse])
+
+submitCourse = Button("Submit for Review", null, "primary")
+
+cancelCourse = Button("Cancel", null, "tertiary")
+
+messageForm = Form("student-message", messageFormButtons, [groupField, subjectField, bodyField])
+
+groupField = FormControl("Recipient Group", groupSelect)
+
+groupSelect = Select("group", [selAll, selFreshmen, selSeniors, selAthletes, selHonors], "Select group")
+
+selAll = SelectItem("all", "All Students")
+
+selFreshmen = SelectItem("freshmen", "Freshmen")
+
+selSeniors = SelectItem("seniors", "Seniors")
+
+selAthletes = SelectItem("athletes", "Student Athletes")
+
+selHonors = SelectItem("honors", "Honors Program")
+
+subjectField = FormControl("Subject", subjectInput)
+
+subjectInput = Input("subject", "Message subject line")
+
+bodyField = FormControl("Message", bodyInput)
+
+bodyInput = TextArea("body", "Write your message here...", 6)
+
+messageFormButtons = Buttons([sendMessage, cancelMessage])
+
+sendMessage = Button("Send Message", null, "primary")
+
+cancelMessage = Button("Cancel", null, "tertiary")

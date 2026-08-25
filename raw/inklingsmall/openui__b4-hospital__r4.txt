@@ -1,0 +1,76 @@
+root = Card([header, bedSection, erSection, admSection, deptSection, staffSection, criticalSection, dischargeSection, orSection, suppliesSection, actionsRow], "card", "column", "m")
+
+header = CardHeader("Hospital Operations Command", "Live command view — all wards")
+
+bedSection = Card([bedTitle, bedProgress, bedText], "sunk")
+bedTitle = Heading("Bed Occupancy", "h3")
+bedProgress = Progress(87, "87% occupied")
+bedText = TextContent("142 / 163 beds filled — 21 available", "small")
+
+erSection = Card([erTitle, erWait], "sunk")
+erTitle = Heading("Current ER Wait", "h3")
+erWait = Callout("warning", "ER Wait Time", "Average wait: 42 minutes — 8 patients queued")
+
+admLabels = ["W1 M", "W1 T", "W1 W", "W1 T", "W1 F", "W1 S", "W1 S", "W2 M", "W2 T", "W2 W", "W2 T", "W2 F", "W2 S", "W2 S"]
+admSeries = Series("Admissions", [12, 15, 11, 18, 22, 9, 14, 16, 19, 13, 21, 10, 15, 17])
+admChart = BarChart(admLabels, [admSeries], "grouped", "Day", "Admissions")
+admSection = Card([admTitle, admChart], "sunk")
+admTitle = Heading("Admissions — Past 2 Weeks", "h3")
+
+deptName = Col("Department", ["ICU", "Cardiology", "Orthopedics", "Neurology", "General Surgery", "Pediatrics", "OB/GYN"])
+deptCount = Col("Patients", [24, 31, 28, 19, 42, 15, 22])
+deptTable = Table([deptName, deptCount])
+deptSection = Card([deptTitle, deptTable], "sunk")
+deptTitle = Heading("Patients per Department", "h3")
+
+staff1 = ListItem("Dr. Elena Vasquez", "ICU — Attending")
+staff2 = ListItem("Marcus Chen, RN", "ER — Charge Nurse")
+staff3 = ListItem("Sarah Okonkwo", "Surgery — Scrub")
+staff4 = ListItem("Dr. James Park", "Cardiology — Fellow")
+staff5 = ListItem("Aisha Patel, RN", "Pediatrics — Staff")
+staffList = ListBlock([staff1, staff2, staff3, staff4, staff5])
+staffSection = Card([staffTitle, staffList], "sunk")
+staffTitle = Heading("Staff on Shift", "h3")
+
+criticalSection = Card([criticalTitle, criticalAlert], "sunk")
+criticalTitle = Heading("Critical Patients", "h3")
+criticalAlert = Alert("Critical — 3 patients in rapid response", "Room 302 (sepsis), Room 405 (cardiac arrest recovery), Room 118 (respiratory failure)", "destructive")
+
+d1 = ListItem("Patient 1042 — M. Rivera", "Cardiology — discharge orders signed")
+d2 = ListItem("Patient 0891 — L. Thompson", "Orthopedics — PT cleared")
+d3 = ListItem("Patient 1120 — J. Kim", "General — meds reconciled")
+dischargeList = ListBlock([d1, d2, d3])
+dischargeSection = Card([dischargeTitle, dischargeList], "sunk")
+dischargeTitle = Heading("Ready for Discharge", "h3")
+
+orTime = Col("Time", ["07:30", "09:15", "11:00", "13:30", "15:45"])
+orProc = Col("Procedure", ["CABG", "Spine Fusion", "Knee Arthroscopy", "Hysterectomy", "Nephrectomy"])
+orRoom = Col("Room", ["OR-1", "OR-2", "OR-1", "OR-3", "OR-2"])
+orTable = Table([orTime, orProc, orRoom])
+orSection = Card([orTitle, orTable], "sunk")
+orTitle = Heading("Today's OR Bookings", "h3")
+
+suppliesSection = Card([suppliesTitle, suppliesCallout], "sunk")
+suppliesTitle = Heading("Supplies Running Low", "h3")
+suppliesCallout = Callout("warning", "Low Stock Alert", "O2 sensors (4 left), sterile gloves (2 boxes), IV heparin (1 bag)")
+
+incidentInput = TextArea("desc", "Describe the event")
+incidentField = FormControl("Incident description", incidentInput)
+incidentButtons = Buttons([submitBtn])
+submitBtn = Button("Submit Incident", null, "primary")
+incidentForm = Form("incident", incidentButtons, [incidentField])
+incidentDialog = DialogBlock("File Incident", "File Incident", "Report a safety or operations event", [incidentForm], "destructive")
+
+calBlock = CalendarBlock("single")
+dayDialog = DialogBlock("View Another Day", "Select Date", "Browse operations for another day", [calBlock], "outline")
+
+transferInput = Input("patient_id", "1042")
+transferField = FormControl("Patient ID", transferInput)
+reasonText = TextArea("reason", "Medical need, capacity, etc.")
+transferReason = FormControl("Reason", reasonText)
+transferButtons = Buttons([transferBtn])
+transferBtn = Button("Request Transfer", null, "primary")
+transferForm = Form("transfer", transferButtons, [transferField, transferReason])
+transferDialog = DialogBlock("Request Transfer", "Request Transfer", "Initiate patient transfer", [transferForm], "secondary")
+
+actionsRow = Card([incidentDialog, dayDialog, transferDialog], "clear", "row", "l")

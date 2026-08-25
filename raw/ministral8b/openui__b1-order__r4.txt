@@ -1,0 +1,43 @@
+```openui-lang
+root = Card([trackingSection, deliveryInfo, problemReporting])
+
+trackingSection = CardHeader("Your Package Location", "Track your shipment in real-time")
+
+locationMap = Image("Package tracking map", "https://picsum.photos/800/400?random=1&sig=map")
+statusUpdate = TextContent("Your package is currently at the **Regional Sorting Center** in **Chicago, IL**. It will be processed within the next 2 hours.")
+
+deliveryInfo = Card([deliveryDate, estimatedTime], "sunk")
+deliveryDate = CardHeader("Estimated Delivery", "Delivery by **June 15, 2024**")
+estimatedTime = TextContent("Between **9:00 AM - 5:00 PM** (local time).")
+
+problemReporting = Card([reportProblem, contactInfo], "sunk")
+reportProblem = DialogBlock(
+    "Report Issue",
+    "Report a Problem with Your Delivery",
+    "Select the issue you're experiencing:",
+    [problemForm],
+    "destructive"
+)
+
+problemForm = Form("delivery-problem", problemButtons, [issueSelect, descriptionText])
+issueSelect = FormControl("Issue Type", issueDropdown)
+issueDropdown = Select("issue_type", [
+    SelectItem("Lost in Transit", "Package not received"),
+    SelectItem("Damaged", "Package arrived damaged"),
+    SelectItem("Wrong Address", "Delivered to wrong location"),
+    SelectItem("Late Delivery", "Package arrived late"]
+)
+descriptionText = FormControl("Additional Details", descriptionArea)
+descriptionArea = TextArea("description", "Describe the problem", 3, null, null)
+
+problemButtons = Buttons([submitIssue, cancelIssue])
+submitIssue = Button("Submit Report", null, "primary")
+cancelIssue = Button("Cancel", null, "secondary")
+
+contactInfo = Card([supportInfo, contactMethods])
+supportInfo = TextContent("Need further assistance? Contact our support team.")
+contactMethods = Buttons([phoneBtn, emailBtn, chatBtn])
+phoneBtn = Button("Call Support", "tel:+1-800-123-4567", null, null, "medium")
+emailBtn = Button("Email Support", "mailto:support@example.com", null, null, "medium")
+chatBtn = Button("Live Chat", null, null, null, "medium")
+```

@@ -1,0 +1,33 @@
+root = Card([header, statusCallout, locationSection, problemSection, followUps])
+
+header = CardHeader("Delivery Tracking", "Order #TRK-8942-US")
+
+statusCallout = Callout("info", "Out for Delivery", "Your package is on the vehicle and expected to arrive by 4:00 PM today.")
+
+locationSection = Card([locationHeading, stepsComp], "sunk")
+locationHeading = Heading("Package Journey", "h3")
+stepsComp = Steps([step1, step2, step3, step4])
+step1 = StepsItem("Order Placed", "Completed on Oct 24, 2023")
+step2 = StepsItem("Shipped from Warehouse", "Departed Chicago, IL on Oct 25")
+step3 = StepsItem("Out for Delivery", "Loaded onto local delivery vehicle at 8:30 AM")
+step4 = StepsItem("Delivered", "Estimated arrival today by 4:00 PM")
+
+problemSection = Card([problemHeading, problemForm], "sunk")
+problemHeading = Heading("Report an Issue", "h3")
+problemForm = Form("delivery-problem", formButtons, [issueField, descField])
+
+issueField = FormControl("What is the issue?", issueSelect)
+issueSelect = Select("issue_type", [opt1, opt2, opt3], "Select a problem")
+opt1 = SelectItem("damaged", "Package appears damaged")
+opt2 = SelectItem("missing", "Package not received")
+opt3 = SelectItem("delayed", "Delivery is delayed")
+
+descField = FormControl("Additional Details", descArea, "Please provide any relevant details")
+descArea = TextArea("description", "Describe the issue...", 3)
+
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Submit Report", null, "primary")
+
+followUps = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Contact driver")
+f2 = FollowUpItem("Change delivery address")

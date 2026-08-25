@@ -1,0 +1,57 @@
+```openui
+root = Card([congestionSection, transitSection, airQualitySection, energyUseSection, waterUseSection, incidentsSection, emergencyVehiclesSection, parkingSection, eventsSection, citizenReportsSection, serviceRequestSection, weatherSection, districtFocusButton, dispatchButton, publicAlertButton, roadworksSection, infrastructureSection])
+
+congestionSection = Card([Heading("Congestion", "h3"), HorizontalBarChart(["Time Slot 1", "Time Slot 2", "Time Slot 3"], [congestionSeries], "grouped", "Time", "Severity"), Heading("Downtown", "h4"), Image("City view", "https://picsum.photos/seed/congestion/800/500")], "sunk")
+congestionSeries = Series("Traffic", [45, 60, 30])
+
+transitSection = Card([Heading("Transit Punctuality", "h3"), PieChart(["Bus", "Tram", "Metro"], [90, 85, 95], "donut"), Heading("Details", "h4"), TextContent("Most routes are on time. Check updates for delays.")])
+
+airQualitySection = Card([Heading("Air Quality", "h3"), RadarChart(["District A", "District B", "District C"], [airQualitySeries]), Heading("By District", "h4"), ListBlock([districtA, districtB, districtC], "image")], "sunk")
+airQualitySeries = Series("Quality Index", [75, 60, 85])
+districtA = ListItem("District A", "Good", ["https://picsum.photos/seed/districtA/200/150"])
+districtB = ListItem("District B", "Moderate", ["https://picsum.photos/seed/districtB/200/150"])
+districtC = ListItem("District C", "Poor", ["https://picsum.photos/seed/districtC/200/150"])
+
+energyUseSection = Card([Heading("Energy Use", "h3"), LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [energySeries], "linear", "Day", "MWh"), Heading("Last Week", "h4")], "sunk")
+energySeries = Series("Usage", [120, 130, 125, 140, 135, 110, 100])
+
+waterUseSection = Card([Heading("Water Use", "h3"), SingleStackedBarChart(["Residential", "Commercial", "Industrial"], [waterSeries]), Heading("Today", "h4")], "sunk")
+waterSeries = Series("Water", [500, 300, 200])
+
+incidentsSection = Card([Heading("Open Incidents", "h3"), Table([incidentLocation, incidentSeverity]), incidentLocation = Col("Location", ["Downtown", "Suburb A", "District C"]), incidentSeverity = Col("Severity", ["High", "Medium", "Low"]), Heading("Details", "h4"), ListBlock([incident1, incident2, incident3])])
+incident1 = ListItem("Downtown", "High", ["https://picsum.photos/seed/incident1/200/150"], "Details")
+incident2 = ListItem("Suburb A", "Medium", ["https://picsum.photos/seed/incident2/200/150"], "Details")
+incident3 = ListItem("District C", "Low", ["https://picsum.photos/seed/incident3/200/150"], "Details")
+
+emergencyVehiclesSection = Card([Heading("Emergency Vehicle Deployment", "h3"), Image("Map with vehicles", "https://picsum.photos/seed/emergency/800/500")], "sunk")
+
+parkingSection = Card([Heading("Parking Availability", "h3"), HorizontalBarChart(["Downtown", "Suburb A", "District C"], [parkingSeries], "grouped", "Area", "Spots Available"), Heading("Downtown", "h4"), Image("Parking view", "https://picsum.photos/seed/parking/800/500")], "sunk")
+parkingSeries = Series("Available", [50, 20, 80])
+
+eventsSection = Card([Heading("Public Events This Weekend", "h3"), ListBlock([event1, event2, event3], "number")], "sunk")
+event1 = ListItem("Concert", "Central Park, Saturday 7 PM", ["https://picsum.photos/seed/event1/200/150"])
+event2 = ListItem("Farmers Market", "Main Street, Sunday 8 AM", ["https://picsum.photos/seed/event2/200/150"])
+event3 = ListItem("Art Fair", "Gallery District, Sunday 11 AM", ["https://picsum.photos/seed/event3/200/150"])
+
+citizenReportsSection = Card([Heading("Citizen Reports", "h3"), ListBlock([report1, report2], "number")], "sunk")
+report1 = ListItem("Pothole on Elm St", "Reported 10 mins ago", null)
+report2 = ListItem("Streetlight Outage", "Reported 20 mins ago", null)
+
+serviceRequestSection = Card([Heading("Service Request Backlog", "h3"), Table([requestType, requestCount]), requestType = Col("Type", ["Road Repair", "Lighting", "Trash Collection"]), requestCount = Col("Backlog", [15, 25, 10]), Heading("Details", "h4"), ListBlock([request1, request2], "image")])
+request1 = ListItem("Road Repair", "15 open requests", ["https://picsum.photos/seed/request1/200/150"])
+request2 = ListItem("Lighting", "25 open requests", ["https://picsum.photos/seed/request2/200/150"])
+
+weatherSection = Card([Heading("Current Weather", "h3"), Image("Weather icon", "https://picsum.photos/seed/weather/100/100"), TextContent("Sunny, 24°C", "large"), Heading("Details", "h4"), TextContent("Humidity: 50%, Wind: 10 km/h")])
+
+districtFocusButton = Button("Focus on District A", ["districtA"], "tertiary")
+dispatchButton = Button("Dispatch Crew", ["dispatchCrew"], "primary")
+publicAlertButton = Button("Send Public Alert", ["sendAlert"], "secondary")
+
+roadworksSection = Card([Heading("Roadworks Planned This Month", "h3"), ListBlock([roadwork1, roadwork2], "number")], "sunk")
+roadwork1 = ListItem("Main St Repaving", "April 5-10", ["https://picsum.photos/seed/roadwork1/200/150"])
+roadwork2 = ListItem("2nd Ave Expansion", "April 15-20", ["https://picsum.photos/seed/roadwork2/200/150"])
+
+infrastructureSection = Card([Heading("Infrastructure Jobs Due for Maintenance", "h3"), Table([jobType, dueDate]), jobType = Col("Type", ["Bridge Inspection", "Tunnel Lighting", "Floodgate Check"]), dueDate = Col("Due", ["April 15", "April 20", "April 25"]), Heading("Details", "h4"), ListBlock([job1, job2], "image")])
+job1 = ListItem("Bridge Inspection", "Due April 15", ["https://picsum.photos/seed/job1/200/150"])
+job2 = ListItem("Tunnel Lighting", "Due April 20", ["https://picsum.photos/seed/job2/200/150"])
+```

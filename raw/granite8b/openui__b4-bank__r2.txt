@@ -1,0 +1,173 @@
+```openui-lang
+root = Card([
+    header,
+    balances,
+    recentTransactions,
+    spendingByCategory,
+    billsDue,
+    vacationGoalProgress,
+    creditScore,
+    transferMoney,
+    freezeCreditLine,
+    statementPeriodPicker,
+    alertTriggersManager,
+    disputeTransaction
+], "clear", "column", "m", "center", "between", true)
+
+header = CardHeader("Personal Banking Home", "All your finances at a glance")
+
+balances = Card([
+    CheckingBalance,
+    SavingsBalance,
+    CreditBalance
+], "sunk")
+
+CheckingBalance = Heading("Checking: $1,254.67", "h3")
+SavingsBalance = Heading("Savings: $5,432.10", "h3")
+CreditBalance = Heading("Credit Line: $10,000.00 (Available: $7,500.00)", "h3")
+
+recentTransactions = Card([
+    Heading("Recent Transactions", "h4"),
+    TransactionList
+], "clear")
+
+TransactionList = ListBlock([
+    TransactionItem("Starbucks", "$23.45"),
+    TransactionItem("Grocery Store", "$89.12"),
+    TransactionItem("Netflix", "$15.99"),
+    TransactionItem("Utility Bill", "-$120.00")
+], "number")
+
+TransactionItem = ListItem(title: $merchant, subtitle: $amount)
+
+spendingByCategory = Card([
+    Heading("Spending This Month by Category", "h4"),
+    CategoryChart
+], "clear")
+
+CategoryChart = PieChart(categories: ["Food", "Transport", "Entertainment", "Utilities"], values: [1200, 300, 450, 600], variant: "donut", appearance: "circular")
+
+billsDue = Card([
+    Heading("Bills Due Soon", "h4"),
+    BillList
+], "sunk")
+
+BillList = ListBlock([
+    BillItem("Rent", "$1,200.00", "Due: 2025-09-01"),
+    BillItem("Phone Bill", "$45.00", "Due: 2025-09-05"),
+    BillItem("Student Loan", "$300.00", "Due: 2025-09-10")
+], "number")
+
+BillItem = ListItem(title: $title, subtitle: $amount + " • " + $due)
+
+vacationGoalProgress = Card([
+    Heading("Vacation Savings Goal", "h4"),
+    VacationProgress
+], "clear")
+
+VacationProgress = Progress(value: 0.72, label: "72% toward $5,000 goal", size: "lg", variant: "success")
+
+creditScore = Card([
+    Heading("Current Credit Score", "h4"),
+    CreditScoreDisplay
+], "sunk")
+
+CreditScoreDisplay = TextContent("Credit Score: 785", size: "large")
+
+transferMoney = Card([
+    Heading("Transfer Money", "h4"),
+    TransferForm
+], "clear")
+
+TransferForm = Form("transfer", transferButtons, [
+    TransferAmountInput
+])
+
+TransferAmountInput = FormControl("Amount to Transfer", amountInput, "Enter amount between $1 and $10,000")
+amountInput = Input("transfer_amount", type: "number", min: "1", max: "10000", value: "500")
+
+transferButtons = Buttons([
+    TransferSubmitButton,
+    TransferCancelButton
+])
+
+TransferSubmitButton = Button("Transfer", action: ["transfer", "submit"], variant: "primary")
+TransferCancelButton = Button("Cancel", action: ["transfer", "cancel"], variant: "tertiary")
+
+freezeCreditLine = Card([
+    Heading("Freeze Credit Line", "h4"),
+    FreezeCreditButton
+], "sunk")
+
+FreezeCreditButton = Button("Freeze Credit Line", action: ["credit", "freeze"], variant: "destructive", type: "normal")
+
+statementPeriodPicker = Card([
+    Heading("Select Statement Period", "h4"),
+    StatementPeriodPickerForm
+], "clear")
+
+StatementPeriodPickerForm = Form("statement_period", statementPeriodButtons, [
+    PeriodSelect
+])
+
+PeriodSelect = Select("period", [
+    PeriodItem("Last 30 days", "last_30"),
+    PeriodItem("Last 90 days", "last_90"),
+    PeriodItem("Custom range", "custom")
+], placeholder: "Choose period", size: "medium")
+
+PeriodItem = SelectItem(value: $value, label: $label)
+
+statementPeriodButtons = Buttons([
+    PickPeriodButton,
+    CancelPeriodSelection
+])
+
+PickPeriodButton = Button("Select", action: ["statement", "pick"], variant: "primary")
+CancelPeriodSelection = Button("Cancel", action: ["statement", "cancel"], variant: "tertiary")
+
+alertTriggersManager = Card([
+    Heading("Manage Alert Triggers", "h4"),
+    AlertTriggersForm
+], "sunk")
+
+AlertTriggersForm = Form("alerts", alertButtons, [
+    AlertTriggerSelector
+])
+
+AlertTriggerSelector = CheckboxGroup("alerts", [
+    AlertCheckbox("Low balance", "low_balance"),
+    AlertCheckbox("Large withdrawals", "large_withdrawal"),
+    AlertCheckbox("Foreign transactions", "foreign_txn")
+], value: ["low_balance", "large_withdrawal"])
+
+AlertCheckbox = CheckBoxItem(label: $label, description: $description, name: $name, defaultChecked: true)
+
+alertButtons = Buttons([
+    SaveAlertSettings,
+    CancelAlertSettings
+])
+
+SaveAlertSettings = Button("Save", action: ["alerts", "save"], variant: "primary")
+CancelAlertSettings = Button("Cancel", action: ["alerts", "cancel"], variant: "tertiary")
+
+disputeTransaction = Card([
+    Heading("Dispute a Transaction", "h4"),
+    DisputeForm
+], "clear")
+
+DisputeForm = Form("dispute", disputeButtons, [
+    DisputeDetailsInput
+])
+
+DisputeDetailsInput = FormControl("Transaction details", disputeTextInput, "Describe the issue")
+disputeTextInput = TextArea("dispute_details", placeholder: "Enter dispute details", rows: 4, value: "")
+
+disputeButtons = Buttons([
+    DisputeSubmitButton,
+    DisputeCancelButton
+])
+
+DisputeSubmitButton = Button("Submit Dispute", action: ["dispute", "submit"], variant: "primary")
+DisputeCancelButton = Button("Cancel", action: ["dispute", "cancel"], variant: "tertiary")
+```

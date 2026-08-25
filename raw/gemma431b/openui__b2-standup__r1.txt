@@ -1,0 +1,37 @@
+root = Card([header, statusSummary, blockedAlert, standupTabs, updateForm, followUps], "card", "column", "l")
+
+header = CardHeader("Async Standup", "Remote Engineering Team")
+statusSummary = Card([dateText, missingCount], "sunk", "row", "m", "between")
+dateText = TextContent("October 24, 2023", "default")
+missingCount = Badge("3 updates missing", "secondary")
+
+blockedAlert = Callout("warning", "Blockers Detected", "2 teammates are currently blocked on critical path items.")
+
+standupTabs = Tabs([devTab, designTab, productTab])
+devTab = TabItem("dev", "Engineering", [devList])
+designTab = TabItem("design", "Design", [designList])
+productTab = TabItem("product", "Product", [productList])
+
+devList = ListBlock([dev1, dev2, dev3], "image")
+dev1 = ListItem("Alex Rivera", "Completed API auth migration. Working on cache layer.", ["https://picsum.photos/seed/alex/100/100"])
+dev2 = ListItem("Sam Chen", "Blocked: Waiting for DB credentials from DevOps.", ["https://picsum.photos/seed/sam/100/100"], "Ping DevOps")
+dev3 = ListItem("Jordan Lee", "Refactoring state management. No blockers.", ["https://picsum.photos/seed/jordan/100/100"])
+
+designList = ListBlock([des1, des2], "image")
+des1 = ListItem("Maya Okafor", "Finalizing Figma mocks for onboarding flow.", ["https://picsum.photos/seed/maya/100/100"])
+des2 = ListItem("Leo Kim", "Blocked: Need feedback on the accessibility audit.", ["https://picsum.photos/seed/leo/100/100"], "Request Review")
+
+productList = ListBlock([prod1], "image")
+prod1 = ListItem("Sarah Jenkins", "Updating roadmap for Q4. Syncing with stakeholders.", ["https://picsum.photos/seed/sarah/100/100"])
+
+updateForm = Form("daily-update", formButtons, [statusField, blockerField])
+statusField = FormControl("What are you working on today?", statusInput)
+statusInput = TextArea("status", "I am working on...")
+blockerField = FormControl("Are you blocked?", blockerInput, "Mention who or what is holding you up")
+blockerInput = Input("blocker", "None")
+formButtons = Buttons([submitBtn])
+submitBtn = Button("Post Update", null, "primary")
+
+followUps = FollowUpBlock([fu1, fu2])
+fu1 = FollowUpItem("Remind missing teammates")
+fu2 = FollowUpItem("View yesterday's standup")

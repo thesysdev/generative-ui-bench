@@ -1,0 +1,146 @@
+```openui-lang
+root = Card(
+  children: [
+    /* 1. Bed occupancy */
+    statusCard = CardHeader("Bed Occupancy", "Current bed utilization"),
+    
+    /* 2. Current ER wait */
+    erWait = Card(
+      header="Emergency Room Wait",
+      body=TextContent("Current ER wait: 47 minutes", size="large")
+    ),
+    
+    /* 3. Admissions over the past two weeks */
+    admissions = Table(
+      columns: [
+        {label: "Date", data: ["Mar 15", "Mar 16", "Mar 17", "Mar 18", "Mar 19"]},
+        {label: "Admissions", data: [52, 48, 55, 49, 53]}
+      ],
+      type: "string"
+    ),
+    
+    /* 4. Patients per department */
+    deptPatients = Table(
+      columns: [
+        {label: "Department", data: ["Emergency", "ICU", "General Medicine", "Orthopedics"]},
+        {label: "Patients", data: [28, 19, 34, 14]}
+      ],
+      type: "string"
+    ),
+    
+    /* 5. Staff on shift with role */
+    staffShift = Card(
+      header="Staff On Shift",
+      body=[
+        CardHeader("Nursing Team A", "Medical-Surgical"),
+        ListItem("Nurses", "12 nurses"),
+        CardHeader("Physician Team B", "Specialists"),
+        ListItem("Doctors", "8 physicians"),
+        CardHeader("Support & Logistics", "Admin/Labeling"),
+        ListItem("Support", "5 staff members")
+      ]
+    ),
+    
+    /* 6. Critical patients called out */
+    criticalPatients = Callout(
+      variant: "warning",
+      title="Critical Patients",
+      description="5 critical patients require immediate attention"
+    ),
+    
+    /* 7. Patients ready for discharge */
+    dischargeReady = Card(
+      header="Patients Ready for Discharge",
+      body=TextContent("Total: 27 patients", size="large")
+    ),
+    dischargeItems = ListBlock([
+      {title: "Patient 123 - Post-operative"},
+      {title: "Patient 456 - Surgery recovery"},
+      {title: "Patient 789 - Chest care"},
+      {title: "Patient 012 - Wound healing"},
+      {title: "Patient 345 - Observation"}
+    ])
+    ),
+    
+    /* 8. Today's operating room bookings */
+    orBookings = Card(
+      header="Today's Operating Room Bookings",
+      body=Table(
+        columns: [
+          {label: "Case ID", data: ["OR-101", "OR-102", "OR-103"]},
+          {label: "Surgeon", data: ["Dr. Lee", "Dr. Patel", "Dr. Kim"]},
+          {label: "Procedure", data: ["CABG", "Thyroidectomy", "Knee Replacement"]}
+        ]
+      )
+    ),
+    
+    /* 9. Supplies running low */
+    lowSupplies = Card(
+      header="Low Supply Alerts",
+      body=[
+        Card(
+          header="Elective Surgery Kits",
+          body=TextContent("Only 12 left - restock needed", size="medium")
+        ),
+        Card(
+          header="Diagnostic Reagents",
+          body=TextContent("5 units remaining - critical supply", size="medium")
+        )
+      ]
+    ),
+    
+    /* 10. Incident filing */
+    incidentForm = Form(
+      name: "incident-report",
+      buttons: [
+        Button("File Incident", null, "primary")
+      ],
+      fields: [
+        FormControl(label: "Title", input: Text()),
+        FormControl(label: "Description", input: Text())
+      ]
+    ),
+    
+    /* 11. View another day */
+    dailyView = Card(
+      header="Daily Operations - Alternative Day",
+      body=[
+        CardHeader("Admissions (March 20)", "Previous day summary"),
+        Table(
+          columns: [
+            {label: "Time", data: ["08:00", "09:30", "11:00", "13:00", "15:30"]},
+            {label: "Admissions", data: [31, 29, 25, 28, 26]}
+          ],
+          type: "string"
+        ),
+        CardHeader("OR Schedule (March 21)", "Today's planned surgeries"),
+        Table(
+          columns: [
+            {label: "Procedure", data: ["Heart Valve", "Appendectomy", "Cholecystectomy"]},
+            {label: "Surgeon", data: ["Dr. Chen", "Dr. O'Brien", "Dr. Vasquez"]},
+            {label: "Duration", data: ["2h", "1.5h", "1h"]}
+          ]
+        )
+      ]
+    ),
+    
+    /* 12. Request patient transfer */
+    transferRequest = Form(
+      name: "transfer-request",
+      buttons: [
+        Button("Submit Transfer", null, "primary")
+      ],
+      fields: [
+        FormControl(label: "Patient Name", input: Text()),
+        FormControl(label: "Transfer Reason", input: Text()),
+        FormControl(label: "Destination Unit", input: Text())
+      ]
+    )
+  ],
+  direction: "row",
+  gap: "m",
+  wrap: true,
+  align: "stretch",
+  variant: "card"
+)
+```

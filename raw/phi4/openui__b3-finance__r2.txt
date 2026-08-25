@@ -1,0 +1,39 @@
+```openui
+root = Card([header, cashOnHand, monthlyBurn, runway, expensesByCategory, largeTransactions, changeMonth, downloadStatement])
+
+header = CardHeader("End-of-Month Finance Overview", "Current Financial Snapshot")
+
+cashOnHand = Card([cashHeading, cashValue], "sunk")
+cashHeading = Heading("Cash on Hand", "h3")
+cashValue = TextContent("$75,300", "large")
+
+monthlyBurn = Card([burnHeading, burnValue], "sunk")
+burnHeading = Heading("Monthly Burn", "h3")
+burnValue = TextContent("$25,000", "large")
+
+runway = Card([runwayHeading, runwayValue], "sunk")
+runwayHeading = Heading("Months of Runway", "h3")
+runwayValue = TextContent("3 months", "large")
+
+expensesByCategory = Card([expensesHeading, expensesTable], "sunk")
+expensesHeading = Heading("Expenses by Category", "h3")
+expensesTable = Table([categoryCol, amountCol])
+categoryCol = Col("Category", ["Salaries", "Marketing", "R&D", "Misc"])
+amountCol = Col("Amount", ["$15,000", "$5,000", "$3,000", "$2,000"])
+
+largeTransactions = Card([transactionsHeading, transactionsList], "sunk")
+transactionsHeading = Heading("Transactions Above $10,000", "h3")
+transactionsList = ListBlock([transaction1, transaction2], "image")
+transaction1 = ListItem("Office Rent", "New HQ lease", ["image1"], "View Details")
+transaction2 = ListItem("Tech Equipment", "New workstations", ["image2"], "View Details")
+
+changeMonth = DialogBlock("Change Month", "Select Month", null, [monthPicker])
+monthPicker = Select("month", [jan, feb, mar], "Select a month")
+jan = SelectItem("January", "January")
+feb = SelectItem("February", "February")
+mar = SelectItem("March", "March")
+
+downloadStatement = DialogBlock("Download Statement", "Download Monthly Financial Statement", null, [downloadBtn])
+downloadBtn = Button("Download CSV", null, "primary")
+
+```

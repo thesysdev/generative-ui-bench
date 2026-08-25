@@ -1,0 +1,115 @@
+```openui-lang
+root = Card([header, quarterSelector, regionFilter, mainContent, exportBtn])
+
+header = CardHeader("CEO Quarterly Command View", "Q" & quarter & " " & year)
+quarter = "$quarter"
+year = "$year"
+mainContent = Card([kpiRow, chartsRow, metricsRow, risksRow, initiativesRow, runwayRow, pipelineRow, customerRow, npsRow, boardItems], "card")
+
+kpiRow = Card([revenueCard, costsCard, profitCard], "row", "m", "center")
+revenueCard = Card([CardHeader("Revenue"), revenueValue, revenueTrend], "sunk")
+revenueValue = TextContent("$" & revenue & "M", "large-heavy")
+revenueTrend = TextCallout("▲" & revenueGrowth & "% YoY", null, "success")
+
+costsCard = Card([CardHeader("Costs"), costsValue, costsTrend], "sunk")
+costsValue = TextContent("$" & costs & "M", "large-heavy")
+costsTrend = TextCallout("▲" & costsGrowth & "% YoY", null, "warning")
+
+profitCard = Card([CardHeader("Profit"), profitValue, profitTrend], "sunk")
+profitValue = TextContent("$" & profit & "M", "large-heavy")
+profitTrend = TextCallout("▲" & profitGrowth & "% YoY", null, "success")
+
+chartsRow = Card([quarterlyChart, budgetChart], "row", "m", "center")
+quarterlyChart = Card([CardHeader("Revenue & Costs"), revenueLine, costsLine], "sunk")
+revenueLine = LineChart(quarters, [revenueSeries], "natural", "Quarter", "USD")
+costsLine = LineChart(quarters, [costsSeries], "natural", "Quarter", "USD")
+revenueSeries = Series("Revenue", [revenueQ1, revenueQ2, revenueQ3, revenueQ4])
+costsSeries = Series("Costs", [costsQ1, costsQ2, costsQ3, costsQ4])
+
+budgetChart = Card([CardHeader("Budget vs Plan"), budgetChartData], "sunk")
+budgetChartData = BarChart(departments, [budgetSeries, planSeries], "grouped", "Department", "USD")
+budgetSeries = Series("Actual", [budgetActual1, budgetActual2, budgetActual3, budgetActual4])
+planSeries = Series("Plan", [budgetPlan1, budgetPlan2, budgetPlan3, budgetPlan4])
+
+metricsRow = Card([headcountChart, runwayValue], "row", "m", "center")
+headcountChart = Card([CardHeader("Headcount by Department"), headcountData], "sunk")
+headcountData = RadarChart(departments, [headcountSeries])
+headcountSeries = Series("Headcount", [headcount1, headcount2, headcount3, headcount4])
+
+runwayValue = Card([CardHeader("Runway"), runwayText], "sunk")
+runwayText = TextContent(monthsRunway & " months", "large-heavy")
+
+risksRow = Card([risksTable], "sunk")
+risksTable = Table([riskCol, ownerCol])
+riskCol = Col("Risk", ["Supply Chain", "Regulatory", "Tech Debt", "Talent Shortage"])
+ownerCol = Col("Owner", ["VP Operations", "Legal", "CTO", "HR"])
+
+initiativesRow = Card([initiativesTable], "sunk")
+initiativesTable = Table([initiativeCol, statusCol])
+initiativeCol = Col("Initiative", ["AI Integration", "Global Expansion", "Cost Optimization", "Customer Portal"])
+statusCol = Col("Status", ["In Progress", "Planning", "Completed", "On Hold"])
+
+pipelineRow = Card([pipelineValue, winRateValue], "row", "m", "center")
+pipelineValue = Card([CardHeader("Pipeline Value"), TextContent("$" & pipelineValue & "M", "large-heavy")], "sunk")
+winRateValue = Card([CardHeader("Win Rate"), TextContent(winRate & "%", "large-heavy")], "sunk")
+
+customerRow = Card([customerCount, churnRate], "row", "m", "center")
+customerCount = Card([CardHeader("Customer Count"), TextContent(customers & "M", "large-heavy")], "sunk")
+churnRate = Card([CardHeader("Churn Rate"), TextCallout(churnRate & "%", null, churnRate < 5 ? "success" : "warning")], "sunk")
+
+npsRow = Card([npsValue], "sunk")
+npsValue = Card([CardHeader("NPS"), TextContent(npsScore & " / 100", "large-heavy")], "sunk")
+
+boardItems = Card([CardHeader("Board Items"), boardList], "sunk")
+boardList = ListBlock([boardItem1, boardItem2, boardItem3], "number")
+boardItem1 = ListItem("AI Integration Rollout", "Update on progress and timeline", null, "Review")
+boardItem2 = ListItem("Regulatory Compliance", "Review of recent changes and action items", null, "Discuss")
+boardItem3 = ListItem("Q3 Financial Review", "Deep dive into Q3 performance", null, "Present")
+
+quarterSelector = Card([CardHeader("Quarter Selector"), quarterDropdown], "sunk")
+quarterDropdown = Select("quarter", quartersOptions, "Select Quarter")
+quartersOptions = [SelectItem("Q1", "Q1"), SelectItem("Q2", "Q2"), SelectItem("Q3", "Q3"), SelectItem("Q4", "Q4")]
+
+regionFilter = Card([CardHeader("Region Filter"), regionDropdown], "sunk")
+regionDropdown = Select("region", regionsOptions, "All Regions")
+regionsOptions = [SelectItem("Global", "Global"), SelectItem("NA", "North America"), SelectItem("EMEA", "Europe, Middle East & Africa"), SelectItem("APAC", "Asia-Pacific")]
+
+exportBtn = Button("Export Full Pack", null, "primary", "normal")
+
+quarter = "Q3"
+year = "2024"
+revenue = 241.5
+costs = 128.9
+profit = 112.6
+revenueGrowth = 18.2
+costsGrowth = 12.5
+profitGrowth = 25.3
+quarters = ["Q1", "Q2", "Q3", "Q4"]
+revenueQ1 = 210.3
+revenueQ2 = 234.7
+revenueQ3 = 241.5
+revenueQ4 = 260.1
+costsQ1 = 115.2
+costsQ2 = 122.8
+costsQ3 = 128.9
+costsQ4 = 135.6
+departments = ["Sales", "Engineering", "Marketing", "Operations"]
+budgetActual1 = 45.2
+budgetActual2 = 48.7
+budgetActual3 = 52.1
+budgetActual4 = 55.9
+budgetPlan1 = 48.0
+budgetPlan2 = 50.5
+budgetPlan3 = 53.0
+budgetPlan4 = 56.0
+headcount1 = 120
+headcount2 = 125
+headcount3 = 130
+headcount4 = 135
+monthsRunway = 18
+pipelineValue = 387.2
+winRate = 68
+customers = 12.4
+churnRate = 4.1
+npsScore = 72
+```

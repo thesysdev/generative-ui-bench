@@ -1,0 +1,74 @@
+root = Card([header, kpiRow, kpiValue, stageBadge, renewalAlert, activitySection, activityHeading, activityList, contactsSection, contactsHeading, contactsTable, followUpsSection, followUpsHeading, followUpsList, noteSection, noteHeading, noteForm, logCallDialog], "card", "column", "m")
+
+header = CardHeader("Apex Industries", "Account owner: Sarah Chen")
+
+kpiRow = Card([kpiHeading, kpiValue], "sunk")
+kpiHeading = Heading("Deal Overview", "h3")
+kpiValue = TextContent("**Total Deal Value:** $487,500", "large-heavy")
+
+stageBadge = Badge("Negotiation", "default")
+
+renewalAlert = Alert("⚠ Renewal Approaching", "Contract renews on July 15, 2025 — 28 days away. Schedule renewal discussion.", "warning")
+
+activitySection = Card([activityHeading, activityList], "sunk")
+activityHeading = Heading("Recent Activity", "h3")
+activityList = ListBlock([activity1, activity2, activity3, activity4, activity5])
+
+activity1 = ListItem("Proposal sent to procurement", "Today, 2:30 PM — Sarah Chen", null, null)
+activity2 = ListItem("Discovery call completed", "Yesterday, 10:00 AM — Sarah Chen", null, null)
+activity3 = ListItem("Updated pricing for enterprise tier", "Jun 24, 3:15 PM — Mike Torres", null, null)
+activity4 = ListItem("Contract template shared", "Jun 22, 11:00 AM — Legal Team", null, null)
+activity5 = ListItem("Initial meeting with decision makers", "Jun 18, 9:00 AM — Sarah Chen", null, null)
+
+contactsSection = Card([contactsHeading, contactsTable], "sunk")
+contactsHeading = Heading("Key Contacts", "h3")
+contactsTable = Table([contactName, contactRole, contactEmail, contactPhone])
+
+contactName = Col("Name", ["James Whitfield", "Rachel Okonkwo", "David Park", "Lisa Moretti"])
+contactRole = Col("Role", ["VP of Engineering — Decision Maker", "Director of Procurement — Economic Buyer", "CTO — Champion", "Finance Manager — Influencer"])
+contactEmail = Col("Email", ["j.whitfield@apex.com", "r.okonkwo@apex.com", "d.park@apex.com", "l.moretti@apex.com"])
+contactPhone = Col("Phone", ["+1 415-555-0142", "+1 415-555-0198", "+1 415-555-0173", "+1 415-555-0161"])
+
+followUpsSection = Card([followUpsHeading, followUpsList], "sunk")
+followUpsHeading = Heading("Open Follow-Ups", "h3")
+followUpsList = ListBlock([followUp1, followUp2, followUp3, followUp4])
+
+followUp1 = ListItem("Send revised pricing proposal", "Due: Jun 28, 2025 — Overdue by 2 days", null, "Mark Done")
+followUp2 = ListItem("Schedule demo with engineering team", "Due: Jul 1, 2025 — 3 days left", null, "Mark Done")
+followUp3 = ListItem("Follow up on security questionnaire", "Due: Jul 5, 2025 — 7 days left", null, "Mark Done")
+followUp4 = ListItem("Prepare ROI analysis for CFO", "Due: Jul 10, 2025 — 12 days left", null, "Mark Done")
+
+noteSection = Card([noteHeading, noteForm], "sunk")
+noteHeading = Heading("Quick Note", "h3")
+noteForm = Form("quick-note", noteButtons, [noteField, noteTagField])
+
+noteField = FormControl("Note", noteTextArea)
+noteTextArea = TextArea("note", "Jot down anything about this account...", 4)
+
+noteTagField = FormControl("Tag", noteTagSelect)
+noteTagSelect = Select("note_tag", [tagGeneral, tagUrgent, tagFollowUp], "Select a tag")
+tagGeneral = SelectItem("general", "General")
+tagUrgent = SelectItem("urgent", "Urgent")
+tagFollowUp = SelectItem("followup", "Follow-up")
+
+noteButtons = Buttons([saveNoteBtn])
+saveNoteBtn = Button("Save Note", null, "primary", "normal", "small")
+
+logCallDialog = DialogBlock("📞 Log a Call", "Log Call", "Record details of your call with Apex Industries", [logCallForm], "default")
+logCallForm = Form("log-call", logCallButtons, [callDateField, callDurationField, callAttendeesField, callSummaryField])
+
+callDateField = FormControl("Call Date", callDatePicker)
+callDatePicker = DatePicker("call_date", "single")
+
+callDurationField = FormControl("Duration (minutes)", callDurationSlider)
+callDurationSlider = Slider("call_duration", "discrete", 1, 120, 5, [15], "Minutes")
+
+callAttendeesField = FormControl("Attendees", callAttendeesInput)
+callAttendeesInput = Input("call_attendees", "Comma-separated names")
+
+callSummaryField = FormControl("Summary", callSummaryArea)
+callSummaryArea = TextArea("call_summary", "What was discussed? Key decisions and next steps...", 5)
+
+logCallButtons = Buttons([saveCallBtn, cancelCallBtn])
+saveCallBtn = Button("Save Call Log", null, "primary", "normal", "small")
+cancelCallBtn = Button("Cancel", null, "tertiary", "normal", "small")

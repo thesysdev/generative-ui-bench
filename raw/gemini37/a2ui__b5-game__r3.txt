@@ -1,0 +1,980 @@
+Here is the comprehensive game studio Live-Ops Command Center dashboard covering all real-time metrics, server health, player moderation, economy, experiments, and incident response controls.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "l",
+        "children": [
+          "header",
+          "regionSelectorCard",
+          "kpiRowCard",
+          "opsTabs"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Aetheria Online — Live-Ops Command Center",
+        "subtitle": "Real-time telemetry, server telemetry, player economy, and emergency release controls"
+      },
+      {
+        "id": "regionSelectorCard",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "row",
+        "align": "center",
+        "justify": "between",
+        "gap": "m",
+        "children": [
+          "regionSelectControl",
+          "hotfixActionBlock"
+        ]
+      },
+      {
+        "id": "regionSelectControl",
+        "component": "FormControl",
+        "label": "Focus Region View",
+        "hint": "Filter live telemetry and routing",
+        "input": "regionSelectDropdown"
+      },
+      {
+        "id": "regionSelectDropdown",
+        "component": "Select",
+        "name": "target_region",
+        "placeholder": "All Global Regions (Aggregate)",
+        "items": [
+          "regAll",
+          "regNaEast",
+          "regNaWest",
+          "regEuCentral",
+          "regApacTokyo",
+          "regSaSaoPaulo"
+        ]
+      },
+      {
+        "id": "regAll",
+        "component": "SelectItem",
+        "value": "global",
+        "label": "Global (All Regions)"
+      },
+      {
+        "id": "regNaEast",
+        "component": "SelectItem",
+        "value": "na-east",
+        "label": "NA-East (Virginia)"
+      },
+      {
+        "id": "regNaWest",
+        "component": "SelectItem",
+        "value": "na-west",
+        "label": "NA-West (Oregon)"
+      },
+      {
+        "id": "regEuCentral",
+        "component": "SelectItem",
+        "value": "eu-central",
+        "label": "EU-Central (Frankfurt)"
+      },
+      {
+        "id": "regApacTokyo",
+        "component": "SelectItem",
+        "value": "apac-tokyo",
+        "label": "APAC (Tokyo)"
+      },
+      {
+        "id": "regSaSaoPaulo",
+        "component": "SelectItem",
+        "value": "sa-saopaulo",
+        "label": "SA (São Paulo)"
+      },
+      {
+        "id": "hotfixActionBlock",
+        "component": "AlertDialogBlock",
+        "triggerLabel": "🚨 Deploy Hotfix",
+        "triggerVariant": "destructive",
+        "title": "Ship Emergency Production Hotfix",
+        "description": "This will trigger OTA asset bundle sync or rolling server container reload for the selected target version/region.",
+        "confirmLabel": "Confirm & Ship Build",
+        "cancelLabel": "Abort"
+      },
+      {
+        "id": "kpiRowCard",
+        "component": "Card",
+        "variant": "card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "kpiHeading",
+          "kpiTable"
+        ]
+      },
+      {
+        "id": "kpiHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Live Player & Revenue Overview"
+      },
+      {
+        "id": "kpiTable",
+        "component": "Table",
+        "columns": [
+          "kpiColMetric",
+          "kpiColValue",
+          "kpiColBenchmark",
+          "kpiColStatus"
+        ]
+      },
+      {
+        "id": "kpiColMetric",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Players Online Right Now (CCU)",
+          "Daily Active Users (DAU)",
+          "Monthly Active Users (MAU)",
+          "Today's Net Revenue",
+          "Average Revenue Per User (ARPU)",
+          "Pending Moderation Queue"
+        ]
+      },
+      {
+        "id": "kpiColValue",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "142,850 CCU",
+          "1,240,000 DAU",
+          "8,650,000 MAU",
+          "$482,320",
+          "$0.39 / DAU",
+          "182 Total Cases"
+        ]
+      },
+      {
+        "id": "kpiColBenchmark",
+        "component": "Col",
+        "label": "Target / Period",
+        "data": [
+          "Peak: 165,000",
+          "+8.4% vs last week",
+          "+12.1% vs last month",
+          "Goal: $450,000/day",
+          "ARPPU: $9.45",
+          "SLA: < 2 hrs"
+        ]
+      },
+      {
+        "id": "kpiColStatus",
+        "component": "Col",
+        "label": "State",
+        "data": [
+          "🟢 Healthy",
+          "🟢 Growing",
+          "🟢 On Target",
+          "🟢 Exceeding (+7.1%)",
+          "🟢 Stable",
+          "🟡 Attention Needed"
+        ]
+      },
+      {
+        "id": "opsTabs",
+        "component": "Tabs",
+        "items": [
+          "tabTelemetry",
+          "tabMonetization",
+          "tabInfraOps",
+          "tabEventsModeration",
+          "tabPatchStudio"
+        ]
+      },
+      {
+        "id": "tabTelemetry",
+        "component": "TabItem",
+        "value": "telemetry",
+        "trigger": "📈 Telemetry & Health",
+        "content": [
+          "telemetryCard"
+        ]
+      },
+      {
+        "id": "telemetryCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "sessionChartHeading",
+          "sessionLengthChart",
+          "crashHeading",
+          "crashTable"
+        ]
+      },
+      {
+        "id": "sessionChartHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Average Session Length (Past 14 Days)"
+      },
+      {
+        "id": "sessionLengthChart",
+        "component": "LineChart",
+        "labels": [
+          "Day 1",
+          "Day 2",
+          "Day 3",
+          "Day 4",
+          "Day 5",
+          "Day 6",
+          "Day 7",
+          "Day 8",
+          "Day 9",
+          "Day 10",
+          "Day 11",
+          "Day 12",
+          "Day 13",
+          "Day 14"
+        ],
+        "series": [
+          "sessionSeries"
+        ],
+        "variant": "natural",
+        "xLabel": "Days Ago",
+        "yLabel": "Minutes"
+      },
+      {
+        "id": "sessionSeries",
+        "component": "Series",
+        "category": "Avg Session Duration (Mins)",
+        "values": [
+          28.4,
+          29.1,
+          27.8,
+          31.2,
+          35.6,
+          41.2,
+          39.8,
+          29.5,
+          30.1,
+          32.4,
+          33.0,
+          36.8,
+          43.5,
+          40.1
+        ]
+      },
+      {
+        "id": "crashHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Stability: Crash Rate by App Version"
+      },
+      {
+        "id": "crashTable",
+        "component": "Table",
+        "columns": [
+          "crashColVer",
+          "crashColPlatform",
+          "crashColSessions",
+          "crashColRate",
+          "crashColStatus"
+        ]
+      },
+      {
+        "id": "crashColVer",
+        "component": "Col",
+        "label": "App Version",
+        "data": [
+          "v2.4.1 (Latest Hotfix)",
+          "v2.4.0 (Main Release)",
+          "v2.3.9 (Legacy Active)",
+          "v2.5.0-rc2 (Staging QA)"
+        ]
+      },
+      {
+        "id": "crashColPlatform",
+        "component": "Col",
+        "label": "Platform",
+        "data": [
+          "PC / PS5 / Xbox / iOS / Android",
+          "PC / Consoles / Mobile",
+          "Mobile Stores (Catchup)",
+          "Internal Testing"
+        ]
+      },
+      {
+        "id": "crashColSessions",
+        "component": "Col",
+        "label": "Total Sessions",
+        "data": [
+          "1,840,120",
+          "452,190",
+          "38,900",
+          "4,120"
+        ]
+      },
+      {
+        "id": "crashColRate",
+        "component": "Col",
+        "label": "Crash-Free / Crash Rate",
+        "data": [
+          "0.08% (99.92% crash-free)",
+          "0.34% (99.66% crash-free)",
+          "0.12% (99.88% crash-free)",
+          "1.42% (98.58% crash-free)"
+        ]
+      },
+      {
+        "id": "crashColStatus",
+        "component": "Col",
+        "label": "Health",
+        "data": [
+          "🟢 Optimal",
+          "🟡 Acceptable",
+          "🟢 Stable",
+          "🔴 Active Blocker"
+        ]
+      },
+      {
+        "id": "tabMonetization",
+        "component": "TabItem",
+        "value": "monetization",
+        "trigger": "💎 Store & Economy",
+        "content": [
+          "monetizationCard"
+        ]
+      },
+      {
+        "id": "monetizationCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "itemsHeading",
+          "itemsTable",
+          "economyHeading",
+          "economyAlert",
+          "economyChart"
+        ]
+      },
+      {
+        "id": "itemsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Best-Selling Items (Past 24 Hours)"
+      },
+      {
+        "id": "itemsTable",
+        "component": "Table",
+        "columns": [
+          "itemColName",
+          "itemColType",
+          "itemColPrice",
+          "itemColUnits",
+          "itemColGross"
+        ]
+      },
+      {
+        "id": "itemColName",
+        "component": "Col",
+        "label": "Item Name",
+        "data": [
+          "Season 4 Battle Pass: Eclipse",
+          "Mythic Skin: Voidwalker Kai",
+          "Astral Shard Pouch (2,500 Gold)",
+          "Exclusive Mount: Solar Drake",
+          "XP Booster Pack (7 Days)"
+        ]
+      },
+      {
+        "id": "itemColType",
+        "component": "Col",
+        "label": "Type",
+        "data": [
+          "Battle Pass",
+          "Character Cosmetic",
+          "Currency Pack",
+          "Mount Cosmetic",
+          "Consumable"
+        ]
+      },
+      {
+        "id": "itemColPrice",
+        "component": "Col",
+        "label": "Price",
+        "data": [
+          "$9.99",
+          "1,800 Astral Shards (~$18)",
+          "$19.99",
+          "2,200 Astral Shards (~$22)",
+          "$4.99"
+        ]
+      },
+      {
+        "id": "itemColUnits",
+        "component": "Col",
+        "label": "Units Sold",
+        "data": [
+          "18,450 units",
+          "9,820 units",
+          "6,140 units",
+          "4,930 units",
+          "3,810 units"
+        ]
+      },
+      {
+        "id": "itemColGross",
+        "component": "Col",
+        "label": "Gross Revenue",
+        "data": [
+          "$184,315",
+          "$176,760 eqv.",
+          "$122,738",
+          "$108,460 eqv.",
+          "$19,011"
+        ]
+      },
+      {
+        "id": "economyHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "In-Game Currency Inflation & Faucet/Sink Telemetry"
+      },
+      {
+        "id": "economyAlert",
+        "component": "Alert",
+        "variant": "info",
+        "title": "Gold Inflation Rate: +2.1% MoM (Target: < 3.5%)",
+        "description": "Dungeon drop rate faucet is balanced by the recently introduced Auction House tax sink and repair fee mechanics."
+      },
+      {
+        "id": "economyChart",
+        "component": "BarChart",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4"
+        ],
+        "series": [
+          "faucetSeries",
+          "sinkSeries"
+        ],
+        "variant": "grouped",
+        "xLabel": "Trailing 4 Weeks",
+        "yLabel": "Billion Gold"
+      },
+      {
+        "id": "faucetSeries",
+        "component": "Series",
+        "category": "Gold Minted (Faucets: Quests/Drops)",
+        "values": [
+          42.5,
+          45.1,
+          48.3,
+          50.2
+        ]
+      },
+      {
+        "id": "sinkSeries",
+        "component": "Series",
+        "category": "Gold Burned (Sinks: Tax/Crafting/Repairs)",
+        "values": [
+          40.1,
+          43.8,
+          47.0,
+          49.1
+        ]
+      },
+      {
+        "id": "tabInfraOps",
+        "component": "TabItem",
+        "value": "infrastructure",
+        "trigger": "🌐 Server Regions & Experiments",
+        "content": [
+          "infraCard"
+        ]
+      },
+      {
+        "id": "infraCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "serverHeading",
+          "serverTable",
+          "expHeading",
+          "expTable"
+        ]
+      },
+      {
+        "id": "serverHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Server Fleet Health & Regional Status"
+      },
+      {
+        "id": "serverTable",
+        "component": "Table",
+        "columns": [
+          "srvColRegion",
+          "srvColCCU",
+          "srvColLatency",
+          "srvColCapacity",
+          "srvColHealth"
+        ]
+      },
+      {
+        "id": "srvColRegion",
+        "component": "Col",
+        "label": "Region",
+        "data": [
+          "NA-East (us-east-1)",
+          "NA-West (us-west-2)",
+          "EU-Central (eu-central-1)",
+          "APAC-Tokyo (ap-northeast-1)",
+          "SA-São Paulo (sa-east-1)"
+        ]
+      },
+      {
+        "id": "srvColCCU",
+        "component": "Col",
+        "label": "Active CCU",
+        "data": [
+          "52,140",
+          "31,200",
+          "41,850",
+          "12,410",
+          "5,250"
+        ]
+      },
+      {
+        "id": "srvColLatency",
+        "component": "Col",
+        "label": "Avg Latency (RTT)",
+        "data": [
+          "24ms",
+          "28ms",
+          "31ms",
+          "42ms",
+          "38ms"
+        ]
+      },
+      {
+        "id": "srvColCapacity",
+        "component": "Col",
+        "label": "Server Load / Pods",
+        "data": [
+          "68% (420 pods)",
+          "54% (260 pods)",
+          "73% (380 pods)",
+          "45% (110 pods)",
+          "39% (50 pods)"
+        ]
+      },
+      {
+        "id": "srvColHealth",
+        "component": "Col",
+        "label": "Health Status",
+        "data": [
+          "🟢 Healthy (99.99%)",
+          "🟢 Healthy (100%)",
+          "🟢 Healthy (99.98%)",
+          "🟢 Healthy (100%)",
+          "🟢 Healthy (99.99%)"
+        ]
+      },
+      {
+        "id": "expHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Live A/B Experiments (2 Active)"
+      },
+      {
+        "id": "expTable",
+        "component": "Table",
+        "columns": [
+          "expColName",
+          "expColSample",
+          "expColControl",
+          "expColVariant",
+          "expColOutcome"
+        ]
+      },
+      {
+        "id": "expColName",
+        "component": "Col",
+        "label": "Experiment",
+        "data": [
+          "EXP-104: Dynamic Matchmaking Fill (Skill vs Ping weighting)",
+          "EXP-105: FTUE Shop Onboarding Discount (50% first-purchase bundle)"
+        ]
+      },
+      {
+        "id": "expColSample",
+        "component": "Col",
+        "label": "Split / Sample",
+        "data": [
+          "50/50 Split (N = 340,000 matches)",
+          "50/50 New Users (N = 45,000 players)"
+        ]
+      },
+      {
+        "id": "expColControl",
+        "component": "Col",
+        "label": "Control (A)",
+        "data": [
+          "Queue: 48s | Leaver rate: 4.8%",
+          "D1 Conversion: 3.2% | D1 ARPU: $0.18"
+        ]
+      },
+      {
+        "id": "expColVariant",
+        "component": "Col",
+        "label": "Variant (B)",
+        "data": [
+          "Queue: 31s (-35%) | Leaver rate: 3.9% (-18%)",
+          "D1 Conversion: 5.9% (+84%) | D1 ARPU: $0.29 (+61%)"
+        ]
+      },
+      {
+        "id": "expColOutcome",
+        "component": "Col",
+        "label": "Significance",
+        "data": [
+          "✅ Stat-Sig (p < 0.01) — Rollout recommended",
+          "✅ Stat-Sig (p < 0.001) — Highly positive impact"
+        ]
+      },
+      {
+        "id": "tabEventsModeration",
+        "component": "TabItem",
+        "value": "events_moderation",
+        "trigger": "🛡️ Events & Moderation",
+        "content": [
+          "eventsModerationCard"
+        ]
+      },
+      {
+        "id": "eventsModerationCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "eventsHeading",
+          "eventsTable",
+          "modHeading",
+          "modTable"
+        ]
+      },
+      {
+        "id": "eventsHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Live Operations Events Schedule"
+      },
+      {
+        "id": "eventsTable",
+        "component": "Table",
+        "columns": [
+          "evColName",
+          "evColStatus",
+          "evColSchedule",
+          "evColMultiplier",
+          "evColAction"
+        ]
+      },
+      {
+        "id": "evColName",
+        "component": "Col",
+        "label": "Event Name",
+        "data": [
+          "Solar Eclipse Raid Boss Rush",
+          "Double Guild XP Weekend",
+          "PvP Season 4 Championship Qualifiers",
+          "Lunar Lantern Festival"
+        ]
+      },
+      {
+        "id": "evColStatus",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "🔥 Live (Ends in 14h)",
+          "🔥 Live (Ends in 2d)",
+          "⏳ Upcoming (Starts in 4d)",
+          "⏳ Upcoming (Starts in 11d)"
+        ]
+      },
+      {
+        "id": "evColSchedule",
+        "component": "Col",
+        "label": "Time Window",
+        "data": [
+          "May 12 - May 15",
+          "May 13 - May 16",
+          "May 19 - May 26",
+          "May 26 - Jun 08"
+        ]
+      },
+      {
+        "id": "evColMultiplier",
+        "component": "Col",
+        "label": "Active Buffs / Modes",
+        "data": [
+          "2.0x Boss Loot Drop Rate",
+          "2.0x Guild XP / Guild Quests",
+          "Ranked Elo Multiplier x1.5",
+          "Seasonal Map & Cosmetics Shop"
+        ]
+      },
+      {
+        "id": "evColAction",
+        "component": "Col",
+        "label": "Action",
+        "data": [
+          "Manage Triggers",
+          "Manage Triggers",
+          "Pre-load Assets",
+          "Draft Config"
+        ]
+      },
+      {
+        "id": "modHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Moderation Queues Awaiting Review"
+      },
+      {
+        "id": "modTable",
+        "component": "Table",
+        "columns": [
+          "modColType",
+          "modColPending",
+          "modColOldest",
+          "modColCategories",
+          "modColPriority"
+        ]
+      },
+      {
+        "id": "modColType",
+        "component": "Col",
+        "label": "Review Queue",
+        "data": [
+          "Player Reports",
+          "Ban Appeals",
+          "Automated Anti-Cheat Flags",
+          "Offensive Guild Names"
+        ]
+      },
+      {
+        "id": "modColPending",
+        "component": "Col",
+        "label": "Awaiting Review",
+        "data": [
+          "142 pending",
+          "40 pending",
+          "18 pending",
+          "6 pending"
+        ]
+      },
+      {
+        "id": "modColOldest",
+        "component": "Col",
+        "label": "Oldest Ticket",
+        "data": [
+          "1 hr 14 min",
+          "3 hr 20 min",
+          "12 min",
+          "45 min"
+        ]
+      },
+      {
+        "id": "modColCategories",
+        "component": "Col",
+        "label": "Top Category / Reasons",
+        "data": [
+          "Toxicity (62%), AFK/Griefing (28%), Exploit (10%)",
+          "False positive claims (Hardware ban appeal)",
+          "Memory injection / Speedhack detections",
+          "Profanity / TOS violation"
+        ]
+      },
+      {
+        "id": "modColPriority",
+        "component": "Col",
+        "label": "SLA Status",
+        "data": [
+          "🟡 Warning (Within SLA)",
+          "🟢 On Schedule",
+          "🔴 Urgent QA Review",
+          "🟢 Clean"
+        ]
+      },
+      {
+        "id": "tabPatchStudio",
+        "component": "TabItem",
+        "value": "patch_notes",
+        "trigger": "📝 Draft Patch Notes & Release",
+        "content": [
+          "patchCard"
+        ]
+      },
+      {
+        "id": "patchCard",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "patchHeading",
+          "patchForm"
+        ]
+      },
+      {
+        "id": "patchHeading",
+        "component": "Heading",
+        "level": "h3",
+        "text": "Patch Notes Editor & Distribution Channel"
+      },
+      {
+        "id": "patchForm",
+        "component": "Form",
+        "name": "patch_notes_form",
+        "buttons": "patchFormButtons",
+        "fields": [
+          "patchVerControl",
+          "patchTitleControl",
+          "patchChannelsControl",
+          "patchBodyControl"
+        ]
+      },
+      {
+        "id": "patchVerControl",
+        "component": "FormControl",
+        "label": "Target Version / Build Tag",
+        "hint": "Semantic versioning tag",
+        "input": "patchVerInput"
+      },
+      {
+        "id": "patchVerInput",
+        "component": "Input",
+        "name": "patch_version",
+        "placeholder": "e.g., v2.4.2-hotfix.1",
+        "value": "v2.4.2-hotfix.1"
+      },
+      {
+        "id": "patchTitleControl",
+        "component": "FormControl",
+        "label": "Patch Release Title",
+        "input": "patchTitleInput"
+      },
+      {
+        "id": "patchTitleInput",
+        "component": "Input",
+        "name": "patch_title",
+        "placeholder": "e.g., Stability Update & Matchmaking Balance Tuning",
+        "value": "Stability Hotfix & Matchmaking Latency Improvements"
+      },
+      {
+        "id": "patchChannelsControl",
+        "component": "FormControl",
+        "label": "Distribution Target Channels",
+        "input": "patchChannelsCheck"
+      },
+      {
+        "id": "patchChannelsCheck",
+        "component": "CheckBoxGroup",
+        "name": "channels",
+        "items": [
+          "chkInGameNews",
+          "chkDiscord",
+          "chkSteamPage",
+          "chkWebsite"
+        ]
+      },
+      {
+        "id": "chkInGameNews",
+        "component": "CheckBoxItem",
+        "name": "ingame",
+        "label": "In-Game MOTD & Newsfeed",
+        "description": "Push immediately to client home screen popup",
+        "defaultChecked": true
+      },
+      {
+        "id": "chkDiscord",
+        "component": "CheckBoxItem",
+        "name": "discord",
+        "label": "Discord Webhook Announcements",
+        "description": "Broadcast to #game-updates channel",
+        "defaultChecked": true
+      },
+      {
+        "id": "chkSteamPage",
+        "component": "CheckBoxItem",
+        "name": "steam",
+        "label": "Steam Community / Store Events",
+        "description": "Publish formatted Steam announcement",
+        "defaultChecked": true
+      },
+      {
+        "id": "chkWebsite",
+        "component": "CheckBoxItem",
+        "name": "web",
+        "label": "Official Web Portal",
+        "description": "Post to https://aetheria.game/news",
+        "defaultChecked": false
+      },
+      {
+        "id": "patchBodyControl",
+        "component": "FormControl",
+        "label": "Draft Patch Notes (Markdown Supported)",
+        "hint": "Include bug fixes, balance changes, and downtime schedule if any",
+        "input": "patchBodyTextArea"
+      },
+      {
+        "id": "patchBodyTextArea",
+        "component": "TextArea",
+        "name": "patch_markdown",
+        "placeholder": "### Bug Fixes\n- Fixed an issue causing memory leak in dungeon instances\n- Addressed PvP queue timeouts...",
+        "rows": 6,
+        "value": "### Summary of Changes (v2.4.2 Hotfix)\n- **Performance:** Resolved a client hitch during high-density raid particle renders.\n- **Matchmaking:** Rolled out latency-optimized matchmaking thresholds across NA and EU.\n- **Economy:** Corrected item tooltip for Solar Drake Mount saddle crafting requirement."
+      },
+      {
+        "id": "patchFormButtons",
+        "component": "Buttons",
+        "buttons": [
+          "btnPublishPatch",
+          "btnSaveDraft"
+        ]
+      },
+      {
+        "id": "btnPublishPatch",
+        "component": "Button",
+        "label": "Publish & Broadcast Patch Notes",
+        "variant": "primary"
+      },
+      {
+        "id": "btnSaveDraft",
+        "component": "Button",
+        "label": "Save as Draft",
+        "variant": "secondary"
+      }
+    ]
+  }
+}
+</a2ui-json>

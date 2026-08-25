@@ -1,0 +1,96 @@
+```openui-lang
+root = Card([header, viewerStats, trendingTitles, watchTimeChart, subscriberNet, genrePerformance, bufferingRate, regionHealth, releasesCalendar, licensesAlert, recommendationsClick, searchDropOff, revenueSplit, deviceSplit, regionFilter, featureFlags, titlePromotion], "card", "column", "l")
+
+header = CardHeader("Operations Room", "Real-time streaming analytics dashboard")
+
+viewerStats = Card([viewersLive, viewersByRegion], "sunk")
+viewersLive = CardHeader("Viewers Online Now", "12,453 active viewers")
+viewersByRegion = PieChart(["NA", "EMEA", "APAC", "LATAM"], [4200, 3800, 2500, 1953], "pie")
+
+trendingTitles = Card([trendingHeader, trendingTable])
+trendingHeader = CardHeader("Most-Watched Titles", "Past 24 hours")
+trendingTable = Table([titleCol, hoursCol])
+titleCol = Col("Title", ["The Last of Us", "Stranger Things", "Game of Thrones", "The Mandalorian", "Breaking Bad"])
+hoursCol = Col("Hours Watched", ["18,450", "15,200", "12,800", "10,500", "9,700"])
+
+watchTimeChart = Card([chartHeader, watchTimeLine], "sunk")
+chartHeader = CardHeader("Watch Time (Past Month)", "Total hours: 1,234,567")
+watchTimeLine = LineChart(["Week 1", "Week 2", "Week 3", "Week 4"], [watchSeries], "natural", "Week", "Hours Watched")
+watchSeries = Series("Total", [280000, 310000, 345000, 380000])
+
+subscriberNet = Card([subscribersHeader, netChart], "sunk")
+subscribersHeader = CardHeader("Subscribers vs. Cancellations", "Net: +1,245/month")
+netChart = AreaChart(["Jan", "Feb", "Mar", "Apr"], [subscribersSeries, cancellationsSeries], "linear", "Month", "Users")
+subscribersSeries = Series("Subscribers", [12000, 13500, 14200, 15000])
+cancellationsSeries = Series("Cancellations", [800, 950, 1100, 1250])
+
+genrePerformance = Card([genreHeader, genreBar], "sunk")
+genreHeader = CardHeader("Performance by Genre", "Total hours: 456,789")
+genreBar = BarChart(["Drama", "Action", "Comedy", "Horror", "Sci-Fi"], [genreSeries], "grouped", "Genre", "Hours Watched")
+genreSeries = Series("Hours", [150000, 120000, 80000, 60000, 50000])
+
+bufferingRate = Card([bufferHeader, bufferChart], "sunk")
+bufferHeader = CardHeader("Buffering Rate", "Current: 1.8%")
+bufferChart = RadarChart(["NA", "EMEA", "APAC", "LATAM"], [bufferSeries], null, null, "circular")
+bufferSeries = Series("Buffering Rate", [1.5, 2.2, 1.8, 2.5])
+
+regionHealth = Card([healthHeader, healthTable], "sunk")
+healthHeader = CardHeader("Delivery Health by Region", "Latency: 240ms")
+healthTable = Table([regionCol, latencyCol, uptimeCol])
+regionCol = Col("Region", ["NA", "EMEA", "APAC", "LATAM"])
+latencyCol = Col("Latency (ms)", ["220", "250", "280", "310"])
+uptimeCol = Col("Uptime (%)", ["99.98", "99.95", "99.97", "99.92"])
+
+releasesCalendar = Card([calendarHeader, releaseList], "sunk")
+calendarHeader = CardHeader("Releases This Month", "3 new titles")
+releaseList = ListBlock([releaseItem1, releaseItem2, releaseItem3])
+releaseItem1 = ListItem("The Night Agent", "Action Thriller", null, null)
+releaseItem2 = ListItem("Moon Knight", "Superhero", null, null)
+releaseItem3 = ListItem("The Batman", "Crime Drama", null, null)
+
+licensesAlert = Callout("warning", "License Alert", "3 licenses expiring in <7 days: 'The Dark Knight', 'Inception', 'The Social Network'")
+licensesAlert.$visible = true
+
+recommendationsClick = Card([clickHeader, clickChart], "sunk")
+clickHeader = CardHeader("Recommendation Clicks", "CTR: 12.5%")
+clickChart = SingleStackedBarChart(["Title 1", "Title 2", "Title 3", "Title 4"], [1500, 2200, 1800, 1100])
+
+searchDropOff = Card([dropHeader, dropTable], "sunk")
+dropHeader = CardHeader("Searches Without Playback", "Top 3 queries")
+dropTable = Table([queryCol, dropCol])
+queryCol = Col("Search Query", ["best horror movies", "sci-fi series 2023", "best action films"])
+dropCol = Col("Drop-off Rate", ["42%", "38%", "45%"])
+
+revenueSplit = Card([revenueHeader, revenuePie], "sunk")
+revenueHeader = CardHeader("Revenue Split by Plan", "Total: $4,567,890")
+revenuePie = PieChart(["Premium", "Standard", "Basic"], [2500000, 1500000, 567890], "pie")
+
+deviceSplit = Card([deviceHeader, devicePie], "sunk")
+deviceHeader = CardHeader("Viewing Split by Device", "Total: 12,453 viewers")
+devicePie = PieChart(["Smart TV", "Mobile", "PC", "Console"], [4200, 3800, 2500, 1953], "pie")
+
+regionFilter = Card([filterHeader, regionSelect], "sunk")
+filterHeader = CardHeader("Focus Region", "Filter analytics by region")
+regionSelect = Select("region_filter", [regionNA, regionEMEA, regionAPAC, regionLATAM], "Select region", null, "NA")
+regionNA = SelectItem("NA", "North America")
+regionEMEA = SelectItem("EMEA", "Europe, Middle East, Africa")
+regionAPAC = SelectItem("APAC", "Asia-Pacific")
+regionLATAM = SelectItem("LATAM", "Latin America")
+
+featureFlags = Card([flagsHeader, flagsTable], "sunk")
+flagsHeader = CardHeader("Feature Flags", "Toggle experimental features")
+flagsTable = Table([flagCol, statusCol])
+flagCol = Col("Feature", ["Personalized Recommendations", "Adaptive Bitrate", "Offline Mode", "Live Chat"])
+statusCol = Col("Status", ["Active", "Disabled", "Testing", "Deprecated"])
+
+titlePromotion = Card([promoteHeader, titleSelect], "sunk")
+promoteHeader = CardHeader("Promote Title", "Feature on home screen")
+titleSelect = Select("promote_title", [promoteOption1, promoteOption2, promoteOption3], "Select title", null, "The Last of Us")
+promoteOption1 = SelectItem("The Last of Us", "Action/Drama")
+promoteOption2 = SelectItem("Stranger Things", "Sci-Fi/Horror")
+promoteOption3 = SelectItem("Game of Thrones", "Fantasy/Drama")
+
+actions = Buttons([refreshBtn, settingsBtn], "column")
+refreshBtn = Button("Refresh", null, "primary")
+settingsBtn = Button("Settings", null, "secondary")
+```

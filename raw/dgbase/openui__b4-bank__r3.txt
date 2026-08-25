@@ -1,0 +1,48 @@
+thought
+root = Card([header, balancesRow, mainContent, transactionsSection, billsSection, goalSection, actionsSection])
+header = CardHeader("Welcome back, Alex", "Financial overview as of today") 
+
+balancesRow = Card([checkingBal, savingsBal, creditBal], "card", "row", "m")
+checkingBal = Card([Heading("Checking"), TextContent("$4,250.12", "large-heavy"), Tag("Primary", null, null, "info")], "sunk")
+savingsBal = Card([Heading("Savings"), TextContent("$12,800.00", "large-heavy"), Tag("High Yield", null, null, "success")], "sunk")
+creditBal = Card([Heading("Credit Card"), TextContent("$1,120.50", "large-heavy"), Badge("740 Score", "outline")], "sunk")
+
+mainContent = Card([spendingChart, transferMoney, alertSettings], "card", "column", "l")
+spendingChart = Card([Heading("Spending Split", "h3"), PieChart(["Food", "Rent", "Travel", "Travel", "Other"], [400, 1200, 800, 300, 200]), "donut")
+transferMoney = Card([Heading("Move Money", "h3"), Form("transfer-form", Buttons([moveBtn]), [sourceAcc, targetAcc, amountField])
+sourceAcc = FormControl("From", Select("from", [s1, s2], "Checking"))
+s1 = SelectItem("checking", "Main Checking")
+s2 = SelectItem("savings", "Emergency Fund")
+targetAcc = FormControl("To", Select("to", [s3, s4], "Savings"))
+s3 = SelectItem("savings", "Savings")
+s4 = SelectItem("credit", "Credit Card")
+amountField = FormControl("Amount", Input("amount", "0.00", "number"))
+moveBtn = Button("Transfer Funds", null, "primary")
+
+alertSettings = Card([Heading("Manage Alerts", "h3"), Form("alert-form", Buttons([saveBtn]), [largeAlert, smsAlert])])
+largeAlert = FormControl("Large Purchases", CheckBoxGroup("large", [a1, a2]))
+a1 = CheckBoxItem("Over $500", "Notify for big spends", "large", true)
+a2 = CheckBoxItem("International", "Notify for foreign transactions", "large")
+smsAlert = FormControl("SMS Alerts", CheckBoxGroup("sms", [s1, s2]))
+s1 = CheckBoxItem("Low Balance", "Text when under $100", "sms")
+s2 = CheckBoxItem("Fraud Alerts", "Suspicious activity", "sms")
+saveBtn = Button("Save Settings", null, "tertiary")
+
+transactionsSection = Card([Heading("Recent Transactions", "h3"), Table([colMerchant, colAmount, colAction])])
+colMerchant = Col("Merchant", ["Starbucks", "Apple Store", "Whole Foods", "Shell", "Netflix"])
+colAmount = Col("Amount", ["-$6.50", "-$999.00", "-$84.20", "-$45.00", "-$15.99"])
+colAction = Col("Action", ["Dispute", "Dispute", "Dispute", "Dispute", "Dispute"], "action")
+
+billsSection = Card([Heading("Bills Due Soon", "h3"), ListBlock([bill1, bill2, bill3])])
+bill1 = ListItem("Rent Payment", "Due in 2 days", null, "$1,200")
+bill2 = ListItem("Electric Bill", "Due in 5 days", null, "$112")
+bill3 = ListItem("Internet Subscription", "Due in 12 days", null, "$80")
+
+goalSection = Card([Heading("Vacation Goal", "h3"), Progress(65, "$3,250 of $5,000"), TextContent("$1,750 left to go for Hawaii trip!")])
+
+actionsSection = Card([freezeBtn, statementPicker], "card", "row", "m")
+freezeBtn = Button("Freeze Credit Card", null, "destructive")
+statementPicker = FormControl("Statement Period", Select("period", [p1, p2, p3], "Last Month"))
+p1 = SelectItem("month", "Last 30 Days")
+p2 = SelectItem("quarter", "Last 90 Days")
+p3 = SelectItem("custom", "Custom Range")

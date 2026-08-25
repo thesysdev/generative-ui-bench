@@ -1,0 +1,85 @@
+```openui-lang
+root = Card([dateHeader, missingUpdates, standupUpdates, newUpdateSection], "card")
+
+dateHeader = CardHeader(title, dateText, subtitle)
+title = "Async Standup"
+dateText = "📅 " + date
+
+date = "Today: " + $todayFormatted
+$todayFormatted = "Monday, June 10, 2024" // Placeholder for dynamic date
+
+missingUpdates = CardHeader(
+    "Missing Updates",
+    null,
+    "🔴 " + $missingCount + " teammate(s) still to update"
+)
+$missingCount = 3 // Placeholder for dynamic count
+
+standupUpdates = Card([teamMember1, teamMember2, teamMember3, teamMember4], "column", "m")
+teamMember1 = Card(
+    [
+        TagBlock([tagBlock1]),
+        TextContent(teamMember1Status),
+        Image("Team member photo", "https://picsum.photos/seed/team1/60/60")
+    ],
+    "sunk"
+)
+tagBlock1 = ["blocked: 🚧 backend API changes"]
+teamMember1Status = "🔹 Working on new API integration\n🔹 Blocked by: backend API changes\n🔹 Estimated completion: EOD"
+
+teamMember2 = Card(
+    [
+        TagBlock([tagBlock2]),
+        TextContent(teamMember2Status),
+        Image("Team member photo", "https://picsum.photos/seed/team2/60/60")
+    ],
+    "sunk"
+)
+tagBlock2 = ["on track"]
+teamMember2Status = "🔹 Completed user auth flow\n🔹 Testing in staging\n🔹 Ready for review"
+
+teamMember3 = Card(
+    [
+        TagBlock([tagBlock3]),
+        TextContent(teamMember3Status),
+        Image("Team member photo", "https://picsum.photos/seed/team3/60/60")
+    ],
+    "sunk"
+)
+tagBlock3 = []
+teamMember3Status = "🔹 Debugging intermittent DB lag\n🔹 Waiting on DB team confirmation\n🔹 No updates yet"
+
+teamMember4 = Card(
+    [
+        TagBlock([tagBlock4]),
+        TextContent(teamMember4Status),
+        Image("Team member photo", "https://picsum.photos/seed/team4/60/60")
+    ],
+    "sunk"
+)
+tagBlock4 = ["on track"]
+teamMember4Status = "🔹 Finalizing UI components\n🔹 All tests passing\n🔹 Ready for deployment"
+
+newUpdateSection = Card(
+    [
+        Heading("Your Update", "h3"),
+        Form(
+            "standup-update",
+            newUpdateButtons,
+            [updateInputField]
+        )
+    ],
+    "sunk"
+)
+
+updateInputField = FormControl("Status Update", updateInput)
+updateInput = TextArea(
+    "update",
+    "Share your progress, blockers, or plans for today...",
+    5,
+    ["minLength: 10", "maxLength: 300"]
+)
+
+newUpdateButtons = Buttons([submitUpdateBtn])
+submitUpdateBtn = Button("Post Update", null, "primary")
+```

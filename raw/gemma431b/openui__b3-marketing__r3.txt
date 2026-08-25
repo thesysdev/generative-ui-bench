@@ -1,0 +1,38 @@
+root = Card([header, dateControls, kpiGrid, trafficSection, campaignSection, growthSection, footer], "clear", "column", "l")
+
+header = CardHeader("Marketing Weekly Dashboard", "Performance metrics for the last 30 days")
+
+dateControls = Card([rangePicker, exportBtn], "sunk", "row", "m", "center", "between")
+rangePicker = DrawerBlock("Change Date Range", "Select a custom period for the dashboard", [dateField, submitDateBtn])
+dateField = FormControl("Date Range", dateInput)
+dateInput = DatePicker("range_picker", "range")
+submitDateBtn = Buttons([applyBtn])
+applyBtn = Button("Apply Range", null, "primary")
+exportBtn = Button("Export Report", null, "secondary", "normal", "small")
+
+kpiGrid = Card([convRate, bestCamp], "clear", "row", "m")
+convRate = Callout("success", "Conversion Rate", "Current rate is 3.42%, up 0.5% from last week")
+bestCamp = Callout("info", "Top Performer", "The 'Summer Sale 2024' campaign is driving the highest ROI")
+
+trafficSection = Card([trafficHeading, trafficChart], "card", "column", "s")
+trafficHeading = Heading("Top Traffic Sources", "h3")
+trafficChart = PieChart(["Organic Search", "Direct", "Social Media", "Referral", "Email"], [45, 25, 15, 10, 5], "donut")
+
+campaignSection = Card([campHeading, campTable], "card", "column", "s")
+campHeading = Heading("Active Campaigns", "h3")
+campTable = Table([campName, campSpend, campStatus])
+campName = Col("Campaign", ["Summer Sale 2024", "Brand Awareness", "Retargeting Q3", "Influencer Outreach"])
+campSpend = Col("Spend", ["$12,400", "$5,000", "$8,200", "$3,100"], "number")
+campStatus = Col("Status", ["Active", "Active", "Paused", "Active"])
+
+growthSection = Card([growthHeading, visitorTrend, emailGrowth], "card", "column", "m")
+growthHeading = Heading("Growth Trends", "h3")
+visitorTrend = LineChart(["Day 1", "Day 7", "Day 14", "Day 21", "Day 30"], [visitorSeries], "natural", "Day", "Visitors")
+visitorSeries = Series("Site Visitors", [1200, 1500, 1300, 1800, 2100])
+emailGrowth = Card([emailLabel, emailProgress], "sunk", "row", "s", "center", "start")
+emailLabel = TextContent("Email Subscriber Growth (Monthly Goal: 5,000)")
+emailProgress = Progress(78, "3,900 / 5,000")
+
+footer = FollowUpBlock([nextStep1, nextStep2])
+nextStep1 = FollowUpItem("Analyze conversion drop-off points")
+nextStep2 = FollowUpItem("Adjust budget for Retargeting Q3")

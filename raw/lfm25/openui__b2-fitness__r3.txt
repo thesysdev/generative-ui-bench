@@ -1,0 +1,70 @@
+root = Card([
+    # Header
+    CardHeader("Daily Fitness Summary", "Your progress for today"),
+    
+    # Step count today vs goal
+    Card(
+        [
+            CardHeader("Steps", "Today's Activity"),
+            TextContent("15,482 steps", size="large"),
+            TextCallout("info", "Today's step count", "Step count vs goal"),
+        ],
+        "row",
+        "xl"
+    ),
+    
+    # Calories burned
+    Card(
+        [
+            CardHeader("Calories Burned", "Energy Expenditure"),
+            TextContent("3,450 kcal", size="large"),
+            TextCallout("success", "Today's burn", "Calories burned"),
+        ],
+        "row",
+        "xl"
+    ),
+    
+    # Workouts over the past week
+    Card(
+        [
+            CardHeader("Workouts (Past Week)", "Activity Breakdown"),
+            Table([
+                Col("Date", ["2026-07-01", "2026-07-03", "2026-07-05", "2026-07-07", "2026-07-08"],
+                         [{"date": "2026-07-01"}, {"date": "2026-07-03"}, {"date": "2026-07-05"}, {"date": "2026-07-07"}, {"date": "2026-07-08"}]),
+                Col("Workout", [{"workout": "Running"}, {"workout": "Cycling"}, {"workout": "Strength Training"}, {"workout": "Swimming"}, {"workout": "Yoga"}]),
+                Col("Duration", [{"duration": "45 min"}, {"duration": "30 min"}, {"duration": "60 min"}, {"duration": "40 min"}, {"duration": "30 min"}]),
+                Col("Calories", [{"calories": "420"}, {"calories": "350"}, {"calories": "380"}, {"calories": "360"}, {"calories": "200"}]),
+            ],
+            Card(
+                TextCallout(
+                    "warning",
+                    "Weekly Progress",
+                    "Summary of recent activity"
+                ),
+                TextContent("Total: 8 sessions\nAverage: 36 min/session\nCalories: 1,900")
+            ),
+        ],
+        "row",
+        "xl"
+    ),
+    
+    # Log a new workout
+    Card(
+        [
+            TextCallout("neutral", "Log New Workout", "Add a workout"),
+            Form(
+                name="new_workout",
+                buttons=[
+                    Button("Save", "Log Workout", "primary"),
+                    Button("Cancel", "Done", "secondary")
+                ],
+                fields=[
+                    FormControl("type", "Type", "Select workout type"),
+                    FormControl("minutes", "Duration", "Minutes"),
+                    FormControl("calories", "Calories", "Burned"),
+                    FormControl("notes", "Details", "Optional notes"),
+                ]
+            )
+        ]
+    )
+], "card", "card", "row", "xl")

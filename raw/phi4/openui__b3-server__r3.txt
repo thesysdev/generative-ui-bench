@@ -1,0 +1,85 @@
+```plaintext
+root = Card([
+  uptimeSection, 
+  usageChart, 
+  errorRateAlert, 
+  incidentsSection, 
+  regionFilter, 
+  slowEndpointsSection, 
+  alertThresholdForm, 
+  acknowledgeIncidentForm
+])
+
+uptimeSection = Card([
+  Heading("Uptime This Quarter", "h3"),
+  TextContent("Uptime: 99.95%", "large")
+])
+
+usageChart = Card([
+  Heading("CPU and Memory Usage (Last 24h)", "h3"),
+  HorizontalBarChart(
+    ["12AM", "3AM", "6AM", "9AM", "12PM", "3PM", "6PM", "9PM"],
+    [cpuUsageSeries, memoryUsageSeries],
+    "grouped",
+    "Time",
+    "Usage"
+  )
+])
+cpuUsageSeries = Series("CPU Usage (%)", [10, 15, 20, 25, 30, 35, 40, 45])
+memoryUsageSeries = Series("Memory Usage (GB)", [4, 5, 6, 7, 8, 9, 10, 11])
+
+errorRateAlert = Card([
+  Heading("Current Error Rate", "h3"),
+  Alert("Error Rate: 0.5%", "Errors are within acceptable range", "info")
+])
+
+incidentsSection = Card([
+  Heading("Open Incidents", "h3"),
+  Table([
+    incidentCol1, 
+    incidentCol2, 
+    incidentCol3
+  ])
+])
+incidentCol1 = Col("Incident ID", ["INC123", "INC124", "INC125"])
+incidentCol2 = Col("Severity", ["High", "Medium", "Low"])
+incidentCol3 = Col("Status", ["Open", "Open", "Open"])
+
+regionFilter = Card([
+  Heading("Filter by Region", "h3"),
+  Select("region", [
+    regionItemUS, 
+    regionItemEU, 
+    regionItemASIA
+  ], "Select a region")
+])
+regionItemUS = SelectItem("US", "United States")
+regionItemEU = SelectItem("EU", "Europe")
+regionItemASIA = SelectItem("ASIA", "Asia & India")
+
+slowEndpointsSection = Card([
+  Heading("Slowest Endpoints", "h3"),
+  Table([
+    endpointCol1, 
+    endpointCol2
+  ])
+])
+endpointCol1 = Col("Endpoint", ["/api/v1/resource/1", "/api/v1/resource/2", "/api/v1/resource/3", "/api/v1/resource/4", "/api/v1/resource/5"])
+endpointCol2 = Col("Latency (ms)", [120, 150, 180, 200, 250])
+
+alertThresholdForm = Form("set-alert-threshold", formButtons, [
+  thresholdField
+])
+thresholdField = FormControl("Alert Threshold (%)", thresholdInput)
+thresholdInput = Input("threshold", "80", "number")
+formButtons = Buttons([submitThresholdBtn])
+submitThresholdBtn = Button("Set Threshold", null, "primary")
+
+acknowledgeIncidentForm = Form("acknowledge-incident", formButtons, [
+  incidentField
+])
+incidentField = FormControl("Incident ID", incidentInput)
+incidentInput = Input("incident_id", null)
+formButtons = Buttons([acknowledgeBtn])
+acknowledgeBtn = Button("Acknowledge Incident", null, "destructive")
+```

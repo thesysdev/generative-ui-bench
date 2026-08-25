@@ -1,0 +1,23 @@
+root = Card([header, statusGrid, incidentSection, footer], "card", "column", "l")
+
+header = CardHeader("Platform Status", "Real-time system health and incident reports")
+
+statusGrid = Card([uptimeStat, apiStatus], "sunk", "row", "m")
+
+uptimeStat = Card([uptimeHeading, uptimeValue, uptimeProgress], "clear", "column", "xs")
+uptimeHeading = TextContent("API Uptime (MTD)", "small")
+uptimeValue = TextContent("99.98%", "large-heavy")
+uptimeProgress = Progress(99.98, "99.98%")
+
+apiStatus = Card([statusHeading, statusBadge], "clear", "column", "xs")
+statusHeading = TextContent("Current Status", "small")
+statusBadge = Badge("Operational", "success")
+
+incidentSection = Card([incidentHeading, incidentCallout, incidentDetails], "card", "column", "m")
+incidentHeading = Heading("Recent Incident", "h3")
+incidentCallout = Callout("info", "Intermittent Latency in US-East-1", "Resolved: Oct 24, 14:20 UTC")
+incidentDetails = MarkDownRenderer("A networking glitch in the primary availability zone caused increased latency for 12% of requests. The team failed over to the secondary region and restored full performance within 45 minutes. Full post-mortem available in the engineering blog.", "clear")
+
+footer = FollowUpBlock([viewHistory, contactSupport])
+viewHistory = FollowUpItem("View historical uptime")
+contactSupport = FollowUpItem("Contact Platform Support")

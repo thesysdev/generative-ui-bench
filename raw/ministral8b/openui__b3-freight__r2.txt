@@ -1,0 +1,99 @@
+```openui-lang
+root = Card([
+    refreshTime,
+    searchBar,
+    transitShipments,
+    delayedAlert,
+    performanceMetrics,
+    carrierSplit,
+    weeklyVolumeChart,
+    flagButton
+])
+
+refreshTime = CardHeader(
+    "Last updated: " + currentTime,
+    "Data refreshed at " + lastRefresh
+)
+currentTime = "2:45 PM"
+lastRefresh = "August 15, 2023, 2:45 PM"
+
+searchBar = Card([
+    searchInput
+], "sunk")
+searchInput = Input(
+    "search",
+    "Search by route (e.g. NYC to LA)",
+    "text",
+    null,
+    "Route search..."
+)
+
+transitShipments = Card([
+    shipmentsHeader,
+    shipmentTable
+], "sunk")
+shipmentsHeader = CardHeader("Shipments in Transit", "Viewing 12 of 48 active shipments")
+
+shipmentTable = Table([
+    shipmentColHeaders,
+    shipmentRows
+])
+shipmentColHeaders = Col("Route", ["NYC→LA", "LA→NYC", "Chicago→Dallas", "Dallas→Chicago", "Seattle→Boston", "Boston→Seattle", "Denver→Miami", "Miami→Denver", "Atlanta→Portland", "Portland→Atlanta", "Houston→Phoenix", "Phoenix→Houston"])
+shipmentETA = Col("ETA", ["Aug 17", "Aug 18", "Aug 16", "Aug 17", "Aug 19", "Aug 18", "Aug 16", "Aug 17", "Aug 18", "Aug 19", "Aug 16", "Aug 17"])
+shipmentStatus = Col("Status", ["In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit", "In Transit"])
+shipmentRows = Col("Carrier", ["FedEx", "UPS", "DHL", "FedEx", "UPS", "DHL", "FedEx", "UPS", "DHL", "FedEx", "UPS", "DHL"])
+
+delayedAlert = Callout(
+    "warning",
+    "Delayed Shipments",
+    "3 shipments delayed beyond ETA. View details →"
+)
+
+performanceMetrics = Card([
+    onTimeMetric,
+    costMetric
+], "sunk")
+onTimeMetric = Card([
+    Tag("92%", null, null, "success"),
+    TextContent("On-time this month", "large-heavy")
+])
+costMetric = Card([
+    Tag("$185", null, null, "success"),
+    TextContent("Avg. cost per shipment", "large-heavy")
+])
+
+carrierSplit = Card([
+    carrierTitle,
+    carrierChart
+], "sunk")
+carrierTitle = Heading("Volume by Carrier", "h3")
+carrierChart = PieChart(
+    ["FedEx", "UPS", "DHL", "Other"],
+    [45, 35, 15, 5]
+)
+
+weeklyVolumeChart = Card([
+    volumeTitle,
+    volumeChart
+], "sunk")
+volumeTitle = Heading("Weekly Volume (Last 2 Months)", "h3")
+volumeChart = LineChart(
+    ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8"],
+    [volumeSeries],
+    "natural",
+    "Week",
+    "Shipments"
+)
+volumeSeries = Series("Volume", [120, 135, 142, 155, 160, 170, 185, 200])
+
+flagButton = Card([
+    flagShipmentBtn
+], "sunk")
+flagShipmentBtn = Button(
+    "Flag Shipment",
+    ["flag-shipment"],
+    "primary",
+    "normal",
+    "medium"
+)
+```

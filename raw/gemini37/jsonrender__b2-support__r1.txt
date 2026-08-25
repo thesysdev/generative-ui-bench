@@ -1,0 +1,62 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Card","props":{"direction":"column","gap":"l"},"children":["header-section","metrics-row","action-bar","tickets-section"]}}
+{"op":"add","path":"/elements/header-section","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"clear"},"children":["header-text","new-ticket-dialog"]}}
+{"op":"add","path":"/elements/header-text","value":{"type":"CardHeader","props":{"title":"Support Operations • Morning Pulse","subtitle":"Overview of queue volume, SLA targets, and critical incidents"}}}
+{"op":"add","path":"/elements/new-ticket-dialog","value":{"type":"DialogBlock","props":{"triggerLabel":"+ New Ticket","title":"Create Support Ticket","description":"Log a manual ticket on behalf of a customer or escalation.","content":["create-ticket-form"],"triggerVariant":"default"}}}
+{"op":"add","path":"/elements/create-ticket-form","value":{"type":"Form","props":{"name":"newTicket","buttons":"form-buttons","fields":["field-subject","field-priority","field-customer","field-notes"]}}}
+{"op":"add","path":"/elements/field-subject","value":{"type":"FormControl","props":{"label":"Subject / Issue Title","input":"input-subject"}}}
+{"op":"add","path":"/elements/input-subject","value":{"type":"Input","props":{"name":"subject","placeholder":"e.g., SSO authentication failing for Acme Corp"}}}
+{"op":"add","path":"/elements/field-customer","value":{"type":"FormControl","props":{"label":"Customer Name / Org","input":"input-customer"}}}
+{"op":"add","path":"/elements/input-customer","value":{"type":"Input","props":{"name":"customer","placeholder":"e.g., Sarah Lin (Acme Inc)"}}}
+{"op":"add","path":"/elements/field-priority","value":{"type":"FormControl","props":{"label":"Priority Level","input":"select-priority"}}}
+{"op":"add","path":"/elements/select-priority","value":{"type":"Select","props":{"name":"priority","placeholder":"Select priority","items":["p-urgent","p-high","p-medium","p-low"]}}}
+{"op":"add","path":"/elements/p-urgent","value":{"type":"SelectItem","props":{"value":"Urgent","label":"Urgent (P1)"}}}
+{"op":"add","path":"/elements/p-high","value":{"type":"SelectItem","props":{"value":"High","label":"High (P2)"}}}
+{"op":"add","path":"/elements/p-medium","value":{"type":"SelectItem","props":{"value":"Medium","label":"Medium (P3)"}}}
+{"op":"add","path":"/elements/p-low","value":{"type":"SelectItem","props":{"value":"Low","label":"Low (P4)"}}}
+{"op":"add","path":"/elements/field-notes","value":{"type":"FormControl","props":{"label":"Initial Details","input":"input-notes"}}}
+{"op":"add","path":"/elements/input-notes","value":{"type":"TextArea","props":{"name":"notes","placeholder":"Provide error codes, affected users, or replication steps...","rows":3}}}
+{"op":"add","path":"/elements/form-buttons","value":{"type":"Buttons","props":{"buttons":["submit-ticket-btn"]}}}
+{"op":"add","path":"/elements/submit-ticket-btn","value":{"type":"Button","props":{"label":"Create Ticket","variant":"primary"}}}
+{"op":"add","path":"/elements/metrics-row","value":{"type":"Card","props":{"direction":"row","gap":"m","variant":"clear"},"children":["metric-open","metric-sla","metric-high-priority"]}}
+{"op":"add","path":"/elements/metric-open","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["open-label","open-value","open-sub"]}}
+{"op":"add","path":"/elements/open-label","value":{"type":"TextContent","props":{"text":"Open Tickets","size":"small"}}}
+{"op":"add","path":"/elements/open-value","value":{"type":"Heading","props":{"text":"42","level":"h1"}}}
+{"op":"add","path":"/elements/open-sub","value":{"type":"TextContent","props":{"text":"↑ 6 received in last 2h • 8 unassigned","size":"small"}}}
+{"op":"add","path":"/elements/metric-sla","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["sla-label","sla-value","sla-sub"]}}
+{"op":"add","path":"/elements/sla-label","value":{"type":"TextContent","props":{"text":"Avg First-Response Time","size":"small"}}}
+{"op":"add","path":"/elements/sla-value","value":{"type":"Heading","props":{"text":"18m 45s","level":"h1"}}}
+{"op":"add","path":"/elements/sla-sub","value":{"type":"TextContent","props":{"text":"✓ 11m below target SLA (30m)","size":"small"}}}
+{"op":"add","path":"/elements/metric-high-priority","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"card"},"children":["hp-label","hp-value","hp-sub"]}}
+{"op":"add","path":"/elements/hp-label","value":{"type":"TextContent","props":{"text":"High / Urgent Queue","size":"small"}}}
+{"op":"add","path":"/elements/hp-value","value":{"type":"Heading","props":{"text":"5","level":"h1"}}}
+{"op":"add","path":"/elements/hp-sub","value":{"type":"TextContent","props":{"text":"Requires immediate triage","size":"small"}}}
+{"op":"add","path":"/elements/action-bar","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"sunk"},"children":["filter-toggles","view-indicator"]}}
+{"op":"add","path":"/elements/filter-toggles","value":{"type":"Buttons","props":{"buttons":["btn-filter-all","btn-filter-high"]}}}
+{"op":"add","path":"/elements/btn-filter-all","value":{"type":"Button","props":{"label":"All Recent (5)","variant":{"$cond":{"$state":"/filterHighOnly"},"$then":"secondary","$else":"primary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":false}}}}}
+{"op":"add","path":"/elements/btn-filter-high","value":{"type":"Button","props":{"label":"⚠️ High Priority Only","variant":{"$cond":{"$state":"/filterHighOnly"},"$then":"primary","$else":"secondary"},"size":"small"},"on":{"press":{"action":"setState","params":{"statePath":"/filterHighOnly","value":true}}}}}
+{"op":"add","path":"/elements/view-indicator","value":{"type":"Badge","props":{"text":{"$cond":{"$state":"/filterHighOnly"},"$then":"Filtering: High & Urgent","$else":"Showing: All 5 Recent"},"variant":{"$cond":{"$state":"/filterHighOnly"},"$then":"destructive","$else":"secondary"}}}}
+{"op":"add","path":"/state/filterHighOnly","value":false}
+{"op":"add","path":"/elements/tickets-section","value":{"type":"Card","props":{"direction":"column","gap":"m","variant":"clear"},"children":["all-tickets-list","high-tickets-list"]}}
+{"op":"add","path":"/elements/all-tickets-list","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly","not":true},"repeat":{"statePath":"/allRecentTickets","key":"id"},"children":["ticket-row"]}}
+{"op":"add","path":"/elements/high-tickets-list","value":{"type":"Card","props":{"direction":"column","gap":"s","variant":"clear"},"visible":{"$state":"/filterHighOnly","eq":true},"repeat":{"statePath":"/highPriorityTickets","key":"id"},"children":["ticket-row"]}}
+{"op":"add","path":"/elements/ticket-row","value":{"type":"Card","props":{"direction":"row","justify":"between","align":"center","variant":"card"},"children":["ticket-left","ticket-right"]}}
+{"op":"add","path":"/elements/ticket-left","value":{"type":"Card","props":{"direction":"column","gap":"xs","variant":"clear"},"children":["ticket-meta","ticket-title"]}}
+{"op":"add","path":"/elements/ticket-meta","value":{"type":"Card","props":{"direction":"row","gap":"s","align":"center","variant":"clear"},"children":["ticket-id-badge","ticket-customer","ticket-time"]}}
+{"op":"add","path":"/elements/ticket-id-badge","value":{"type":"Badge","props":{"text":{"$item":"id"},"variant":"outline"}}}
+{"op":"add","path":"/elements/ticket-customer","value":{"type":"TextContent","props":{"text":{"$item":"customer"},"size":"small-heavy"}}}
+{"op":"add","path":"/elements/ticket-time","value":{"type":"TextContent","props":{"text":{"$item":"createdAgo"},"size":"small"}}}
+{"op":"add","path":"/elements/ticket-title","value":{"type":"TextContent","props":{"text":{"$item":"subject"},"size":"default"}}}
+{"op":"add","path":"/elements/ticket-right","value":{"type":"Card","props":{"direction":"row","gap":"m","align":"center","variant":"clear"},"children":["ticket-priority-tag","ticket-status-badge"]}}
+{"op":"add","path":"/elements/ticket-priority-tag","value":{"type":"Tag","props":{"text":{"$item":"priority"},"variant":{"$item":"priorityVariant"},"size":"md"}}}
+{"op":"add","path":"/elements/ticket-status-badge","value":{"type":"Badge","props":{"text":{"$item":"status"},"variant":"secondary"}}}
+{"op":"add","path":"/state/allRecentTickets","value":[]}
+{"op":"add","path":"/state/allRecentTickets/0","value":{"id":"#TK-4091","customer":"Stripe Checkout Integration","createdAgo":"4 mins ago","subject":"Webhook signature verification failure in production EU-West","priority":"Urgent","priorityVariant":"danger","status":"Needs Triage"}}
+{"op":"add","path":"/state/allRecentTickets/1","value":{"id":"#TK-4090","customer":"Globex Corp (David K.)","createdAgo":"12 mins ago","subject":"SAML Single Sign-On returning 403 Forbidden for new members","priority":"High","priorityVariant":"warning","status":"In Progress"}}
+{"op":"add","path":"/state/allRecentTickets/2","value":{"id":"#TK-4089","customer":"FinTech Labs (Elena R.)","createdAgo":"22 mins ago","subject":"Data export CSV formatting error on international currency symbols","priority":"Medium","priorityVariant":"info","status":"Unassigned"}}
+{"op":"add","path":"/state/allRecentTickets/3","value":{"id":"#TK-4088","customer":"Nexus Cloud (Marcus V.)","createdAgo":"35 mins ago","subject":"Primary database connection timeout during scheduled sync","priority":"High","priorityVariant":"warning","status":"Investigating"}}
+{"op":"add","path":"/state/allRecentTickets/4","value":{"id":"#TK-4087","customer":"RetailWave (Chloe P.)","createdAgo":"48 mins ago","subject":"Update billing contact email and request copy of March receipt","priority":"Low","priorityVariant":"neutral","status":"Assigned"}}
+{"op":"add","path":"/state/highPriorityTickets","value":[]}
+{"op":"add","path":"/state/highPriorityTickets/0","value":{"id":"#TK-4091","customer":"Stripe Checkout Integration","createdAgo":"4 mins ago","subject":"Webhook signature verification failure in production EU-West","priority":"Urgent","priorityVariant":"danger","status":"Needs Triage"}}
+{"op":"add","path":"/state/highPriorityTickets/1","value":{"id":"#TK-4090","customer":"Globex Corp (David K.)","createdAgo":"12 mins ago","subject":"SAML Single Sign-On returning 403 Forbidden for new members","priority":"High","priorityVariant":"warning","status":"In Progress"}}
+{"op":"add","path":"/state/highPriorityTickets/2","value":{"id":"#TK-4088","customer":"Nexus Cloud (Marcus V.)","createdAgo":"35 mins ago","subject":"Primary database connection timeout during scheduled sync","priority":"High","priorityVariant":"warning","status":"Investigating"}}

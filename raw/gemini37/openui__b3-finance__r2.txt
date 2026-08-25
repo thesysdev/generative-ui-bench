@@ -1,0 +1,50 @@
+root = Card([header, controlsCard, kpiRow, chartsSection, txSection, followUps])
+header = CardHeader("Month-End Financial Overview", "October 2024 • Closing Statement")
+
+controlsCard = Card([monthSelectField, actionButtons], "sunk", "row", "m", "center", "between")
+monthSelectField = FormControl("Reporting Period", monthSelect)
+monthSelect = Select("month_period", [optOct, optSep, optAug, optJul], "Select month", null, "October 2024", "small")
+optOct = SelectItem("2024-10", "October 2024")
+optSep = SelectItem("2024-09", "September 2024")
+optAug = SelectItem("2024-08", "August 2024")
+optJul = SelectItem("2024-07", "July 2024")
+actionButtons = Buttons([downloadBtn, refreshBtn])
+downloadBtn = Button("Download Statement (PDF)", null, "primary", "normal", "small")
+refreshBtn = Button("Export CSV", null, "secondary", "normal", "small")
+
+kpiRow = Card([cashCard, burnCard, runwayCard], "clear", "row", "m")
+cashCard = Card([cashLabel, cashValue, cashChange], "card", "column", "xs")
+cashLabel = TextContent("Cash on Hand", "small")
+cashValue = Heading("$1,840,000", "h2")
+cashChange = Tag("-$85,000 vs last month", null, "sm", "warning")
+
+burnCard = Card([burnLabel, burnValue, burnChange], "card", "column", "xs")
+burnLabel = TextContent("Monthly Net Burn", "small")
+burnValue = Heading("$85,000", "h2")
+burnChange = Tag("-4.2% MoM burn rate", null, "sm", "success")
+
+runwayCard = Card([runwayLabel, runwayValue, runwayStatus], "card", "column", "xs")
+runwayLabel = TextContent("Runway Remaining", "small")
+runwayValue = Heading("21.6 Months", "h2")
+runwayStatus = Tag("Target: >18 Months", null, "sm", "success")
+
+chartsSection = Card([chartHeading, expenseBreakdownChart], "sunk", "column", "s")
+chartHeading = Heading("Expense Breakdown by Category", "h3")
+expenseBreakdownChart = PieChart(expenseCategories, expenseAmounts, "donut")
+expenseCategories = ["Engineering & Product", "Salaries & Payroll", "Cloud & Infra (AWS/GCP)", "Marketing & Growth", "G&A / Legal / Office"]
+expenseAmounts = [42000, 38000, 18500, 12400, 6100]
+
+txSection = Card([txHeading, txSub, txTable], "card", "column", "s")
+txHeading = Heading("Major Transactions (> $10,000)", "h3")
+txSub = TextContent("All vendor payments and capital transfers exceeding $10,000 processed during this billing cycle.", "small")
+txTable = Table([txDateCol, txDescCol, txCategoryCol, txAmountCol, txStatusCol])
+txDateCol = Col("Date", ["Oct 02, 2024", "Oct 15, 2024", "Oct 24, 2024", "Oct 28, 2024"])
+txDescCol = Col("Recipient / Description", ["Rippling Payroll Services", "Amazon Web Services (AWS)", "Deel Global Contractors", "Google Workspace & Ads"])
+txCategoryCol = Col("Category", ["Salaries & Payroll", "Cloud & Infra", "Engineering", "Marketing"])
+txAmountCol = Col("Amount", ["$38,000.00", "$14,850.00", "$21,400.00", "$10,250.00"])
+txStatusCol = Col("Status", ["Settled", "Settled", "Settled", "Settled"])
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("View September 2024 comparison")
+f2 = FollowUpItem("Generate 12-month runway projection")
+f3 = FollowUpItem("Drill down into Cloud & Infra spend")

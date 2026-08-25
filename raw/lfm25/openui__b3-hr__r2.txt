@@ -1,0 +1,48 @@
+root = Card({
+  children: [
+    // 1. Current headcount
+    TextContent(`Current Headcount: ${headcount}`),
+
+    // 2. Open roles with department for each
+    Card([CardHeader("Open Roles by Department"), {
+      children: openRoles.map(role => (
+        Card([CardHeader(role.department, "", "Role"), TextContent(role.name)]),
+      )),
+    ]),
+
+    // 3. Candidates at each pipeline stage
+    TextContent("Candidates by Pipeline Stage:",),
+    Table([
+      { col: "Stage", data: Object.keys(candidateStages) },
+      { col: "Count", data: Object.values(candidateStages) },
+    ]),
+
+    // 4. Average time to hire
+    TextContent(`Average Time to Hire: ${avgTimeToHire} days`),
+
+    // 5. Headcount split by department
+    TextContent("Headcount by Department:",),
+    Table([
+      { col: "Department", data: deptHeadcount.map(item => item.department) },
+      { col: "Count", data: deptHeadcount.map(item => item.count) },
+    ]),
+
+    // 6. Interviews scheduled this week
+    TextContent("Interviews Scheduled This Week:",),
+    ListBlock([
+      { title: "Monday 9 AM", description: "Final screening with Engineering leads" },
+      { title: "Wednesday 2 PM", description: "Technical assessment round" },
+      { title: "Friday 11 AM", description: "Culture fit interview" },
+    ]),
+
+    // 7. Attrition over the past six months
+    TextContent("Attrition (Past 6 Months):"),
+    PieChart({
+      labels: ["Engineering", "Product", "Design", "Data", "Marketing"],
+      values: attritionData.map(d => d.rate),
+    }),
+
+    // 8. Way to open a new role (DialogBlock)
+    newRoleForm,
+  ]
+})

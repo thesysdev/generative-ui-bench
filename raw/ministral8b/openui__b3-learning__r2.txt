@@ -1,0 +1,98 @@
+```openui-lang
+root = Card([cohortFilter, analyticsHeader, kpis, enrollmentChart, engagementChart, riskSection, cohortActions])
+
+cohortFilter = Card(
+    [cohortSelect, cohortMessageBtn],
+    "sunk",
+    "row",
+    "l",
+    "center",
+    "start"
+)
+cohortSelect = FormControl(
+    "Select Cohort",
+    cohortDropdown
+)
+cohortDropdown = Select(
+    "cohort_filter",
+    [
+        cohortOption("All Cohorts", "all"),
+        cohortOption("Spring 2024", "spring-2024"),
+        cohortOption("Summer 2024", "summer-2024"),
+        cohortOption("Fall 2024", "fall-2024")
+    ],
+    "Choose a cohort...",
+    null,
+    "all"
+)
+cohortMessageBtn = Button("Message Cohort", null, "secondary", "normal", "medium")
+
+analyticsHeader = CardHeader(
+    "Training Platform Analytics",
+    "Weekly overview for selected cohort"
+)
+
+kpis = Card(
+    [activeLearners, completionRate, avgScore],
+    "sunk",
+    "row",
+    "xl",
+    "center",
+    "start"
+)
+activeLearners = Card(
+    [Tag("1,245", null, "lg", "success"), TextContent("Active learners this week", "large")],
+    "card"
+)
+completionRate = Card(
+    [Tag("87%", null, "lg", "success"), TextContent("Course completion rate", "large")],
+    "card"
+)
+avgScore = Card(
+    [Tag("82/100", null, "lg", "success"), TextContent("Average quiz score", "large")],
+    "card"
+)
+
+enrollmentChart = Card(
+    [CardHeader("Courses by Enrollment", "Top 5 most popular"), horizontalBar],
+    "sunk"
+)
+horizontalBar = HorizontalBarChart(
+    ["Data Science", "Project Management", "Cybersecurity", "UX Design", "Cloud Architecture"],
+    [enrollmentSeries],
+    "grouped",
+    "Course Title",
+    "Learners"
+)
+enrollmentSeries = Series("Enrollment", [423, 312, 287, 245, 198])
+
+engagementChart = Card(
+    [CardHeader("Weekly Engagement", "Learners active this week"), lineChart],
+    "sunk"
+)
+lineChart = LineChart(
+    ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"],
+    [engagementSeries],
+    "natural",
+    "Week",
+    "Active Learners"
+)
+engagementSeries = Series("Engagement", [1245, 1382, 1421, 1503, 1602, 1587, 1498, 1320])
+
+riskSection = Card(
+    [CardHeader("Learners at Risk", "Below 50% course progress"), riskTable],
+    "sunk"
+)
+riskTable = Table([riskName, riskValue])
+riskName = Col("Learner", ["alex.j@company.com", "martha.k@company.com", "david.l@company.com", "sophia.m@company.com"])
+riskValue = Col("Progress", ["32%", "28%", "45%", "18%"])
+
+cohortActions = Buttons(
+    [exportBtn, shareBtn],
+    "row"
+)
+exportBtn = Button("Export Data", null, "primary", "normal", "medium")
+shareBtn = Button("Share Dashboard", null, "secondary", "normal", "medium")
+
+cohortOption = SelectItem
+```

@@ -1,0 +1,63 @@
+```openui-lang
+root = Card([
+    header,
+    drinksSection,
+    foodSection,
+    specialCallout,
+    vegFilterToggle,
+    openingHoursBlock,
+    vegOnlyIndicator
+])
+header = CardHeader("Cafe Menu", "Welcome to our menu")
+drinksSection = Card([
+    TextContent("Drinks", "large"),
+    drinksTable
+])
+foodSection = Card([
+    TextContent("Food", "large"),
+    foodTable
+])
+specialCallout = Callout("success", "Today's Special", "Mocha Latte – $4.50")
+vegFilterToggle = Button("Vegetarian Only", null, "secondary")
+openingHoursBlock = Card([
+    TextContent("Opening Hours", "small"),
+    TextContent("Mon–Fri: 7 am – 9 pm\nSat–Sun: 8 am – 10 pm", null)
+])
+vegOnlyIndicator = Tag("Vegetarian Filter", "info", "sm", "vegetarian")
+
+drinksTable = Table([
+    drinkNameCol,
+    drinkPriceCol
+])
+drinkNameCol = Col("Drink", ["Coffee", "Tea", "Mocha Latte", "Hot Chocolate"])
+drinkPriceCol = Col("Price", ["$2.50", "$1.80", "$4.50", "$3.20"])
+
+foodTable = Table([
+    foodNameCol,
+    foodPriceCol
+])
+foodNameCol = Col("Food", ["Croissant", "Avocado Toast", "Veggie Burger", "Quinoa Salad"])
+foodPriceCol = Col("Price", ["$3.00", "$5.50", "$7.00", "$6.50"])
+
+vegItems = [
+    "Coffee", "Tea", "Avocado Toast", "Veggie Burger", "Quinoa Salad"
+]
+vegOnlyTable = Table([
+    vegNameCol,
+    vegPriceCol
+])
+vegNameCol = Col("Vegetarian Drinks & Food", vegItems)
+vegPriceCol = Col("Price", ["$2.50", "$1.80", "$5.50", "$7.00", "$6.50"])
+
+vegFilterToggle.onClick = () => {
+    if (vegOnlyIndicator.text === "Vegetarian Filter") {
+        vegOnlyIndicator.text = "Vegetarian Hidden"
+        drinksSection.children = [TextContent("Vegetarian Drinks", "small"), vegOnlyTable]
+        foodSection.children = [TextContent("Vegetarian Food", "small"), vegOnlyTable]
+    } else {
+        vegOnlyIndicator.text = "Vegetarian Filter"
+        drinksSection.children = [TextContent("Drinks", "large"), drinksTable]
+        foodSection.children = [TextContent("Food", "large"), foodTable]
+    }
+}
+```

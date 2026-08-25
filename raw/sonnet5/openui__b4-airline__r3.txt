@@ -1,0 +1,56 @@
+root = Card([header, hubForm, kpiHeading, kpiTable, flightsHeading, flightsTable, delayedCallout, gateChangesHeading, gateChangesList, crewHeading, crewTable, crewActions, weatherCallout, connectionsHeading, connectionsTable, rebookHeading, rebookActions])
+
+header = CardHeader("Hub Operations Desk — Atlanta (ATL)", "Live snapshot as of 2:45 PM EST")
+
+hubForm = Form("hub_select", hubFormButtons, [hubField])
+hubField = FormControl("Look at a different hub", hubSelect, "Switch the desk view to another hub")
+hubSelect = Select("hub", [hubATL, hubORD, hubDFW, hubDEN, hubLAX], "Choose a hub", null, "ATL")
+hubATL = SelectItem("ATL", "Atlanta (ATL)")
+hubORD = SelectItem("ORD", "Chicago O'Hare (ORD)")
+hubDFW = SelectItem("DFW", "Dallas/Fort Worth (DFW)")
+hubDEN = SelectItem("DEN", "Denver (DEN)")
+hubLAX = SelectItem("LAX", "Los Angeles (LAX)")
+hubFormButtons = Buttons([viewHubBtn])
+viewHubBtn = Button("View hub", null, "primary")
+
+kpiHeading = Heading("Today's Key Metrics", "h3")
+kpiTable = Table([kpiMetric, kpiValue])
+kpiMetric = Col("Metric", ["On-time performance", "Average passenger load", "Cancellations today", "Average turnaround time"])
+kpiValue = Col("Value", ["78%", "84%", "6 flights", "42 min"])
+
+flightsHeading = Heading("Flight Board", "h3")
+flightsTable = Table([flightNumberCol, flightRouteCol, flightGateCol, flightStatusCol])
+flightNumberCol = Col("Flight", ["DL 1042", "DL 2187", "DL 3390", "DL 1755", "DL 4021", "DL 5588"])
+flightRouteCol = Col("Route", ["ATL–JFK", "ATL–ORD", "ATL–MIA", "ATL–LAX", "ATL–BOS", "ATL–DEN"])
+flightGateCol = Col("Gate", ["B12", "A5", "T8", "C22", "B15", "A9"])
+flightStatusCol = Col("Status", ["On Time", "Delayed 45m", "Boarding", "Delayed 20m", "On Time", "Cancelled"])
+
+delayedCallout = Callout("warning", "Delayed Flights", "DL 2187 to ORD is delayed 45 minutes (mechanical hold) and DL 1755 to LAX is delayed 20 minutes (ATC ground stop). Passengers on tight connections should be reviewed.")
+
+gateChangesHeading = Heading("Recent Gate Changes", "h3")
+gateChangesList = ListBlock([gateChange1, gateChange2, gateChange3])
+gateChange1 = ListItem("DL 2187 → ORD", "Moved from Gate A2 to Gate A5, 15 minutes ago")
+gateChange2 = ListItem("DL 3390 → MIA", "Moved from Gate T3 to Gate T8, 22 minutes ago")
+gateChange3 = ListItem("DL 4021 → BOS", "Moved from Gate B9 to Gate B15, 40 minutes ago")
+
+crewHeading = Heading("Crews Available for Reassignment", "h3")
+crewTable = Table([crewNameCol, crewRoleCol, crewBaseCol, crewAvailCol])
+crewNameCol = Col("Crew", ["Crew 118", "Crew 204", "Crew 087", "Crew 331"])
+crewRoleCol = Col("Role", ["Flight Deck", "Cabin Crew", "Cabin Crew", "Flight Deck"])
+crewBaseCol = Col("Base", ["ATL", "ATL", "ATL", "ATL"])
+crewAvailCol = Col("Available From", ["Now", "3:15 PM", "Now", "4:00 PM"])
+crewActions = Buttons([reassignCrewBtn])
+reassignCrewBtn = Button("Reassign crew", null, "secondary")
+
+weatherCallout = Callout("warning", "Weather Advisory at ATL", "Thunderstorms expected between 3:00 PM and 5:00 PM with possible ground stops. Expect rolling delays on departures and arrivals.")
+
+connectionsHeading = Heading("Connections at Risk", "h3")
+connectionsTable = Table([connPassengerCol, connArrivingCol, connDepartingCol, connTimeLeftCol])
+connPassengerCol = Col("Passenger", ["J. Alvarez", "R. Chen", "M. Osei", "L. Petrov"])
+connArrivingCol = Col("Arriving Flight", ["DL 2187 (ORD)", "DL 1755 (LAX)", "DL 2187 (ORD)", "DL 3390 (MIA)"])
+connDepartingCol = Col("Connecting Flight", ["DL 890 → SEA", "DL 445 → PHX", "DL 612 → CLT", "DL 990 → RDU"])
+connTimeLeftCol = Col("Time Left", ["18 min", "25 min", "12 min", "30 min"])
+
+rebookHeading = Heading("Rebooking", "h3")
+rebookActions = Buttons([rebookBtn])
+rebookBtn = Button("Rebook affected passengers", null, "primary")

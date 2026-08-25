@@ -1,0 +1,54 @@
+```openui-lang
+root = Card([
+    shipmentsInTransit,
+    delayedShipments,
+    onTimePercentage,
+    volumeByCarrier,
+    routeSearch,
+    averageCost,
+    weeklyVolume,
+    flagShipment,
+    lastRefreshed
+], "card", "column", "m")
+
+shipmentsInTransit = Table([
+    originCol,
+    destinationCol,
+    etaCol,
+    statusCol
+])
+originCol = Col("Origin", ["New York", "Los Angeles", "Chicago"])
+destinationCol = Col("Destination", ["Houston", "Miami", "Seattle"])
+etaCol = Col("ETA", ["2024-08-22", "2024-08-25", "2024-08-20"])
+statusCol = Col("Status", ["On Time", "Delayed", "On Time"])
+
+delayedShipments = Callout(
+    "warning",
+    "Delayed Shipments",
+    "The following shipments are delayed: Los Angeles → Miami (ETA 2024‑08‑25)."
+)
+
+onTimePercentage = Tag("On‑time: 92%", null, null, "success")
+
+volumeByCarrier = BarChart(["Carrier A", "Carrier B", "Carrier C"], [carrierSeries], "grouped", "Carrier", "Volume")
+carrierSeries = Series("Volume", [1200, 800, 1500])
+
+routeSearch = Form(
+    "route-search",
+    Buttons([searchBtn]),
+    [
+        searchInput
+    ]
+)
+searchBtn = Button("Search Route")
+searchInput = FormControl("Route", Input("route", placeholder="Enter route"))
+
+averageCost = TextContent("Average Cost per Shipment: $45.67", "large")
+
+weeklyVolume = LineChart(["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"], [weeklySeries], "linear", "Week", "Volume")
+weeklySeries = Series("Volume", [950, 1020, 1100, 980, 1150, 1080])
+
+flagShipment = Button("Flag Shipment", null, "secondary")
+
+lastRefreshed = Tag("Last refreshed: 2024‑08‑22 14:30", null, null, "neutral")
+```

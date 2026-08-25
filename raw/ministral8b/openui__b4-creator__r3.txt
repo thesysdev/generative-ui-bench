@@ -1,0 +1,53 @@
+```openui-lang
+root = Card([studioHeader, analyticsDashboard, platformFilter, postScheduler, pendingActions])
+
+studioHeader = CardHeader("Cross-Platform Studio", "Manage all your content in one place")
+
+analyticsDashboard = Card([followerStats, engagementStats, topPosts, audienceSplit, postingTimes, earnings, pendingCollabs], "sunk")
+followerStats = Card([followerCount, growthChart], "card")
+followerCount = Card([TextContent("Followers: 42,890", "large-heavy"), Tag("+1,245 this month", null, null, "success")], "card", "row", "m", "center")
+growthChart = LineChart(["W1", "W2", "W3", "W4"], [growthSeries], "natural", "Week", "Followers")
+growthSeries = Series("Growth", [38900, 41200, 43500, 45100])
+
+engagementStats = Card([engagementRate, engagementChart], "card")
+engagementRate = Card([TextContent("Engagement Rate: 8.2%", "large-heavy"), Tag("Top 20%", null, null, "success")], "card", "row", "m", "center")
+engagementChart = PieChart(["Likes", "Comments", "Shares", "Saves"], [85, 12, 3, 5], "pie")
+
+topPosts = Card([TextContent("Top Posts This Month"), postTable], "card")
+postTable = Table([postColumns])
+postColumns = [Col("Post", ["📸 Beach Sunset", "🎵 Music Cover", "📚 Book Recommendation"], "string"), Col("Reach", ["12,450", "8,920", "6,340"], "number"), Col("Platform", ["Instagram", "TikTok", "Twitter"], "string")]
+
+audienceSplit = Card([TextContent("Audience Split"), platformPie], "card")
+platformPie = PieChart(["Instagram", "TikTok", "Twitter", "YouTube", "Facebook"], [45, 30, 15, 8, 2], "pie")
+
+postingTimes = Card([TextContent("Best Posting Time"), bestHour], "card")
+bestHour = Card([TextContent("18:00 - 20:00", "large-heavy"), Tag("Highest engagement", null, null, "success")], "card", "row", "m", "center")
+
+earnings = Card([TextContent("Earnings This Month"), earningsChart], "card")
+earningsChart = BarChart(["Instagram", "TikTok", "Twitter", "YouTube"], [earningsSeries], "grouped", "Platform", "USD")
+earningsSeries = Series("Revenue", [2850, 1980, 1250, 850])
+
+pendingCollabs = Card([TextContent("Pending Collaboration Requests"), collabList], "card")
+collabList = ListBlock([collabItem1, collabItem2])
+collabItem1 = ListItem("Brand X", "Premium partnership", ["https://brandx.com/logo.png"], "Accept")
+collabItem2 = ListItem("Influencer Y", "Sponsored post", ["https://influencery.com/avatar.png"], "Accept")
+
+platformFilter = Card([TextContent("Filter by Platform"), platformSelector], "card")
+platformSelector = Select("platform_filter", [platformItems], "Select platform", null, null, "medium")
+platformItems = [SelectItem("all", "All Platforms"), SelectItem("instagram", "Instagram"), SelectItem("tiktok", "TikTok"), SelectItem("twitter", "Twitter"), SelectItem("youtube", "YouTube"), SelectItem("facebook", "Facebook")]
+
+postScheduler = Card([TextContent("Schedule New Post"), postForm], "card")
+postForm = Form("schedule-post", postButtons, [captionField, timeField])
+captionField = FormControl("Caption", captionInput)
+captionInput = TextArea("caption", "Write your engaging caption...", 4, null, "Your caption will appear here")
+timeField = FormControl("Posting Time", timePicker)
+timePicker = DatePicker("post_time", "single", null, null, "2023-11-15T18:00:00")
+postButtons = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule Post", null, "primary")
+
+pendingActions = Card([TextContent("Pending Actions"), actionsList], "card")
+actionsList = ListBlock([replyComments, reviewCollabs])
+replyComments = ListItem("3 New Comments", "Waiting for reply", ["💬"], "Reply All")
+reviewCollabs = ListItem("2 Collaboration Requests", "Pending approval", ["🤝"], "Review")
+
+```

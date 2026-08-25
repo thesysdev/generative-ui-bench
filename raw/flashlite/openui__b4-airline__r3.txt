@@ -1,0 +1,92 @@
+root = Card([header, metricsRow, alertsRow, hubSelectorSection, flightOpsSection, opsDetailsTabs, followup])
+
+header = CardHeader("Hub Operations Control Center", "Live status dashboard — Main Hub (JFK)")
+
+metricsRow = Card([otpCard, loadCard, turnaroundCard, cancellationsCard], "clear", "row", "m", "stretch", "between")
+otpCard = Card([otpHeader, otpVal], "sunk", "column", "xs")
+otpHeader = CardHeader("On-Time Performance")
+otpVal = TextContent("84.2%", "large-heavy")
+
+loadCard = Card([loadHeader, loadVal], "sunk", "column", "xs")
+loadHeader = CardHeader("Avg Passenger Load")
+loadVal = TextContent("88.6%", "large-heavy")
+
+turnaroundCard = Card([turnHeader, turnVal], "sunk", "column", "xs")
+turnHeader = CardHeader("Avg Turnaround")
+turnVal = TextContent("38 min", "large-heavy")
+
+cancellationsCard = Card([cancHeader, cancVal], "sunk", "column", "xs")
+cancHeader = CardHeader("Cancellations Today")
+cancVal = TextContent("3 flights", "large-heavy")
+
+alertsRow = Card([weatherCallout, delayAlert], "clear", "column", "s")
+weatherCallout = Callout("warning", "Weather Advisory", "High crosswinds reported on runway 22L. Arrival rates reduced by 15%.")
+delayAlert = Alert("Delayed Flights Active", "12 flights are currently delayed exceeding 30 minutes due to air traffic control pacing.", "warning")
+
+hubSelectorSection = Card([hubForm], "card", "column", "s")
+hubForm = Form("hub_selector", hubButtons, [hubControl])
+hubControl = FormControl("Switch Hub Location", hubSelect, "Select another operational hub to view.")
+hubSelect = Select("hub_id", [hubJfk, hubOrd, hubLax, hubAtl], "JFK - New York")
+hubJfk = SelectItem("jfk", "JFK - New York")
+hubOrd = SelectItem("ord", "ORD - Chicago O'Hare")
+hubLax = SelectItem("lax", "LAX - Los Angeles")
+hubAtl = SelectItem("atl", "ATL - Atlanta Hartsfield")
+hubButtons = Buttons([hubSubmitBtn])
+hubSubmitBtn = Button("Load Hub Data")
+
+flightOpsSection = Card([flightHeader, flightTable, gateChangesHeader, gateTable], "card", "column", "m")
+flightHeader = Heading("Active Flights Overview", "h2")
+flightTable = Table([fNumCol, fRouteCol, fGateCol, fStatusCol])
+fNumCol = Col("Flight", ["DL 412", "UA 881", "AA 122", "B6 901", "DL 220"])
+fRouteCol = Col("Route", ["JFK - LAX", "JFK - ORD", "JFK - LHR", "JFK - SFO", "JFK - MIA"])
+fGateCol = Col("Gate", ["B22", "C14", "A8", "B10", "C3"])
+fStatusCol = Col("Status", ["On Time", "Delayed", "On Time", "Gate Changed", "On Time"])
+
+gateChangesHeader = Heading("Recent Gate Changes", "h3")
+gateTable = Table([gFlightCol, gOldCol, gNewCol, gTimeCol])
+gFlightCol = Col("Flight", ["B6 901", "DL 330", "UA 411"])
+gOldCol = Col("Previous", ["B14", "C22", "A2"])
+gNewCol = Col("Current", ["B10", "C19", "A5"])
+gTimeCol = Col("Timestamp", ["14:22", "14:10", "13:55"])
+
+opsDetailsTabs = Tabs([crewTab, riskTab, rebookTab])
+
+crewTab = TabItem("crews", "Crews Available", [crewHeader, crewTable])
+crewHeader = Heading("Available Crews for Reassignment", "h3")
+crewTable = Table([cIdCol, cRoleCol, cBaseCol, cAvailCol])
+cIdCol = Col("Crew ID", ["CRW-102", "CRW-304", "CRW-512", "CRW-889"])
+cRoleCol = Col("Role", ["Narrowbody Captain", "Widebody First Officer", "Cabin Crew (Full)", "Narrowbody First Officer"])
+cBaseCol = Col("Base", ["JFK", "JFK", "JFK", "JFK"])
+cAvailCol = Col("Available In", ["15 min", "Ready", "30 min", "10 min"])
+
+riskTab = TabItem("risk", "Connections at Risk", [riskHeader, riskTable])
+riskHeader = Heading("Passengers with Tight Connections at Risk", "h3")
+riskTable = Table([rPaxCol, rInboundCol, rOutboundCol, rBufferCol])
+rPaxCol = Col("Passenger", ["Smith, J.", "Doe, A.", "Garcia, M.", "Johnson, R."])
+rInboundCol = Col("Inbound", ["DL 412 (Late)", "UA 881 (Late)", "B6 901 (Gate Chg)", "AA 122 (On Time)"])
+rOutboundCol = Col("Outbound", ["DL 771 (CDG)", "UA 142 (FRA)", "B6 431 (MCO)", "AA 990 (GRU)"])
+rBufferCol = Col("Connection Buffer", ["12 min", "8 min", "15 min", "18 min"])
+
+rebookTab = TabItem("rebook", "Passenger Rebooking", [rebookHeader, rebookForm])
+rebookHeader = Heading("Automated & Manual Rebooking Tool", "h3")
+rebookForm = Form("rebook_form", rebookButtons, [paxIdField, newFlightField, reasonField])
+paxIdField = FormControl("Passenger PNR / Ticket", paxInput, "Enter 6-character PNR code.")
+paxInput = Input("pnr", "e.g. K94XYZ", "text")
+newFlightField = FormControl("Assign New Flight", flightSelect, "Select alternative routing.")
+flightSelect = Select("new_flight", [alt1, alt2, alt3], "Select flight")
+alt1 = SelectItem("dl882", "DL 882 (Departing 18:30)")
+alt2 = SelectItem("dl904", "DL 904 (Departing 21:15)")
+alt3 = SelectItem("dl112", "DL 112 (Tomorrow 08:00)")
+reasonField = FormControl("Rebooking Reason", reasonSelect, "Categorize disruption cause.")
+reasonSelect = Select("reason", [rsn1, rsn2, rsn3], "Select reason")
+rsn1 = SelectItem("weather", "Weather Delay")
+rsn2 = SelectItem("missed_conn", "Missed Connection")
+rsn3 = SelectItem("air_traffic", "ATC Flow Control")
+rebookButtons = Buttons([rebookSubmitBtn])
+rebookSubmitBtn = Button("Confirm and Issue Boarding Pass", null, "primary")
+
+followup = FollowUpBlock([
+    FollowUpItem("Show delayed flights detail breakdown"),
+    FollowUpItem("Check weather radar for northeastern corridor"),
+    FollowUpItem("View crew duty hour limits for available teams")
+])

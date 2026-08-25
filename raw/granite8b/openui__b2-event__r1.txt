@@ -1,0 +1,76 @@
+```openui-lang
+daysRemaining = 45  // Example: 45 days from today
+now = "2025-08-01"
+eventDate = "2025-09-15"
+dateFormat = "YYYY-MM-DD"
+
+root = Card([
+    header,
+    agenda,
+    speakers,
+    ticketTiers,
+    registerForm,
+    daysRemainingIndicator
+], "clear", "column", "none", "center", "stretch")
+
+header = CardHeader(
+    title="Tech Summit 2025",
+    subtitle=f"September 15, 2025 | {getLocation(venue)}",
+    variant="sunk"
+)
+
+agenda = Table([
+    colTime = Col("Time", ["09:00 - 10:00", "10:30 - 12:00", "13:00 - 14:30", "15:00 - 17:00"]),
+    colSession = Col("Session", ["Opening Keynote", "Workshop 1", "Panel Discussion", "Closing Remarks"])
+], "card")
+
+speakers = ListBlock(items=[
+    ListItem(title="Alice Johnson", subtitle="CEO, TechCorp"),
+    ListItem(title="Bob Lee", subtitle="Lead Engineer, Innovate.io"),
+    ListItem(title="Carol Kim", subtitle="Product Manager, FutureWorks")
+], variant="image")
+
+ticketTiers = Table([
+    colTier = Col("Tier", ["Early Bird", "Standard", "VIP"]),
+    colPrice = Col("Price", ["$199", "$299", "$499"])
+], "card")
+
+registerForm = Form("registerForm", buttons=registerButtons, fields=[
+    nameField,
+    emailField
+])
+
+nameField = FormControl(
+    label="Full Name",
+    input=Input("name", "John Doe", placeholder="Enter your name")
+)
+
+emailField = FormControl(
+    label="Work Email",
+    input=Input("email", "john.doe@example.com", "email", placeholder="Enter your email")
+)
+
+registerButtons = Buttons([
+    submitBtn,
+    cancelBtn
+])
+
+submitBtn = Button("Register", action=["registerForm", "submit"], variant="primary")
+cancelBtn = Button("Cancel", action=["registerForm", "cancel"], variant="tertiary")
+
+daysRemainingIndicator = Card([
+    TextContent(
+        text=f"{daysRemaining} days until the event",
+        size="large"
+    )
+], "clear", "column", "none", "center", "stretch")
+
+function getLocation(venue) {
+    switch (venue) {
+        case "New York": return "New York City Convention Center"
+        case "Los Angeles": return "Los Angeles Convention Center"
+        case "Chicago": return "Chicago Convention Center"
+        default: return venue
+    }
+}
+```

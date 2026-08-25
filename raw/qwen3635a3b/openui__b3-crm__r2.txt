@@ -1,0 +1,57 @@
+
+
+```
+root = Card([header, dealInfo, activity, contacts, followUps, renewalSection, noteForm, callDialog])
+
+header = CardHeader("Acme Corporation", "Owned by Sarah Chen")
+
+dealInfo = Card([dealValue, dealStage], "sunk", "row", "m", "start", "between")
+dealValue = TextContent("Total Deal Value: $247,500", "large-heavy")
+dealStage = Badge("Proposal Sent", "outline")
+
+activity = ListBlock([act1, act2, act3, act4], "number")
+act1 = ListItem("Email sent: Pricing details attached", "Today, 10:30 AM")
+act2 = ListItem("Meeting: Product demo with CTO", "Yesterday, 2:00 PM")
+act3 = ListItem("Note added: Budget constraints noted", "Dec 15, 9:15 AM")
+act4 = ListItem("Call logged: Discussed implementation timeline", "Dec 12, 4:45 PM")
+
+contacts = ListBlock([c1, c2, c3, c4], "number")
+c1 = ListItem("James Rodriguez", "VP of Engineering", "Decision Maker")
+c2 = ListItem("Emily Park", "Director of IT", "Champion")
+c3 = ListItem("Marcus Thompson", "Procurement Lead", "Influencer")
+c4 = ListItem("Lisa Nguyen", "CTO", "Final Approver")
+
+followUps = ListBlock([fu1, fu2, fu3], "number")
+fu1 = ListItem("Send revised contract", "Due: Dec 22, 2024", "Urgent")
+fu2 = ListItem("Schedule security review call", "Due: Dec 28, 2024", "Important")
+fu3 = ListItem("Prepare case study deck", "Due: Jan 3, 2025", "Normal")
+
+renewalSection = Card([renewalHeading, renewalDate, renewalWarning], "sunk", "column", "m")
+renewalHeading = Heading("Contract Renewal", "h3")
+renewalDate = TextContent("Renewal Date: January 15, 2025")
+renewalWarning = Callout("warning", "Renewal Approaching", "The contract renews in 24 days. Please initiate renewal discussions this week.")
+
+noteForm = Card([noteHeading, noteFormComp], "sunk")
+noteHeading = Heading("Add a Note", "h3")
+noteFormComp = Form("account-note", noteButtons, [noteField])
+noteField = FormControl("Note", noteArea)
+noteArea = TextArea("note", "Type your note here...", 5)
+noteButtons = Buttons([noteSubmitBtn, noteCancelBtn])
+noteSubmitBtn = Button("Save Note", null, "primary")
+noteCancelBtn = Button("Clear", null, "tertiary")
+
+callDialog = DialogBlock("Log a Call", "Log a Call", "Record a phone conversation with a contact", [callForm])
+callForm = Form("log-call", callButtons, [callTypeField, phoneField, callNotesField])
+callTypeField = FormControl("Call Type", callTypeSelect)
+callTypeSelect = Select("call_type", [callInbound, callOutbound, callFollowUp], "Select type")
+callInbound = SelectItem("Inbound", "Inbound call")
+callOutbound = SelectItem("Outbound", "Outbound call")
+callFollowUp = SelectItem("Follow-up", "Follow-up call")
+phoneField = FormControl("Phone Number", phoneInput, "Optional if already on file")
+phoneInput = Input("phone", "(555) 123-4567", "text")
+callNotesField = FormControl("Call Notes", callNotesArea, "Summarize key discussion points")
+callNotesArea = TextArea("call_notes", "What was discussed?", 4)
+callButtons = Buttons([callSubmitBtn, callCancelBtn])
+callSubmitBtn = Button("Log Call", null, "primary")
+callCancelBtn = Button("Cancel", null, "tertiary")
+```

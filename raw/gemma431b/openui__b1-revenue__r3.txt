@@ -1,0 +1,26 @@
+root = Card([header, summarySection, performanceChart, inventoryAlert, footerActions], "card", "column", "m")
+
+header = CardHeader("Shop Dashboard", "Mid-Morning Check-in • 10:45 AM")
+
+summarySection = Card([revenueCard, comparisonCard], "clear", "row", "m")
+
+revenueCard = Card([revLabel, revValue], "sunk", "column", "xs")
+revLabel = TextContent("Revenue Today", "small")
+revValue = TextContent("$1,240.50", "large-heavy")
+
+comparisonCard = Card([compLabel, compValue, compBadge], "sunk", "column", "xs")
+compLabel = TextContent("vs. Yesterday", "small")
+compValue = TextContent("$1,080.00", "default")
+compBadge = Badge("↑ 14.8%", "success")
+
+performanceChart = Card([chartHeading, hourlyChart], "card", "column", "s")
+chartHeading = Heading("Sales Velocity", "h3")
+hourlyChart = BarChart(["6am", "7am", "8am", "9am", "10am"], [salesSeries], "grouped", "Time", "USD")
+salesSeries = Series("Revenue", [120, 210, 340, 410, 160])
+
+inventoryAlert = Callout("warning", "Low Stock Alert", "3 items are below the minimum threshold and may need restocking today.")
+
+footerActions = Buttons([refreshBtn, reportBtn, settingsBtn])
+refreshBtn = Button("Refresh Data", null, "primary", "normal", "small")
+reportBtn = Button("View Full Report", null, "secondary", "normal", "small")
+settingsBtn = Button("Store Settings", null, "tertiary", "normal", "small")

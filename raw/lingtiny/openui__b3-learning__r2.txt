@@ -1,0 +1,51 @@
+root = Card([activeLearners, completionRate, avgQuizScore, rankedCourses, atRiskLearners, cohortFilter, engagementChart, cohortMessage], "sunk")
+activeLearners = CardHeader("Active Learners This Week", "Current cohort size and trend")
+activeLearnersContent = Card([activeCount, activeTrend])
+activeCount = TextCallout("2,847 learners", "↑ 12% from last week", "success")
+activeTrend = Progress(78, "Active Learners")
+completionRate = CardHeader("Course Completion Rate", "Overall and by category")
+completionRateContent = Card([overallRate, categoryRate, completionTrend])
+overallRate = TextCallout("72%", "↑ 3% from last month", "success")
+categoryRate = TextCallout("65%", "Across all categories", "info")
+completionTrend = Progress(72, "Completion Rate")
+avgQuizScore = CardHeader("Average Quiz Score", "Across all participants")
+avgQuizScoreContent = Card([avgScore, scoreTrend, scoreBar])
+avgScore = TextCallout("7.8", "↑ 0.3 from last week", "success")
+scoreTrend = Progress(78, "Avg Quiz Score")
+scoreBar = HorizontalBarChart(["1-2", "3-4", "5-6", "7-8"], [scoreSeries], "grouped", "Score Range", "Participants")
+scoreSeries = Series("Score", [150, 320, 480, 750])
+rankedCourses = CardHeader("Courses Ranked by Enrollment", "Top 5 courses this week")
+rankedCoursesContent = Card([rankedList])
+rankedList = ListBlock([
+  ListItem("Data Science Fundamentals", "Enrolled: 1,240", actionLabel: "View details"),
+  ListItem("Machine Learning Essentials", "Enrolled: 980", actionLabel: "View details"),
+  ListItem("Cloud Architecture", "Enrolled: 875", actionLabel: "View details"),
+  ListItem("Cybersecurity Basics", "Enrolled: 760", actionLabel: "View details"),
+  ListItem("UI/UX Design", "Enrolled: 650", actionLabel: "View details"),
+])
+atRiskLearners = CardHeader("Learners at Risk of Dropping Out", "Identifying at-risk learners")
+atRiskLearnersContent = Card([atRiskCount, atRiskLearnersList])
+atRiskCount = TextCallout("412 learners", "↑ 8% from last week", "error")
+atRiskLearnersList = ListBlock([
+  ListItem("Maria Chen", "Missed 3 sessions, low engagement", actionLabel: "Message"),
+  ListItem("James Wilson", "Incomplete quiz, low score", actionLabel: "Message"),
+  ListItem("Sarah Patel", "Dropped off, no activity", actionLabel: "Message"),
+  ListItem("Alex Thompson", "Low completion, no activity", actionLabel: "Message"),
+])
+cohortFilter = CardHeader("Cohort Filter", "Narrow to one cohort")
+cohortFilterContent = Card([cohortSelect, cohortLabel])
+cohortSelect = Select("cohort", [cohortS1, cohortS2, cohortS3], "Select a cohort")
+cohortS1 = SelectItem("Spring 2024", "Spring 2024 Cohort")
+cohortS2 = SelectItem("Fall 2024", "Fall 2024 Cohort")
+cohortS3 = SelectItem("Winter 2025", "Winter 2025 Cohort")
+cohortLabel = TextCallout("Selected: Spring 2024 Cohort", "1,120 learners", "info")
+engagementChart = CardHeader("Engagement Over the Past 8 Weeks", "Weekly activity and participation")
+engagementChartContent = Card([engagementBar, engagementLine, engagementTrend])
+engagementBar = HorizontalBarChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "grouped", "Week", "Active Learners")
+engagementSeries = Series("Engagement", [420, 510, 480, 560, 620, 590, 680, 720])
+engagementLine = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engagementSeries], "linear", "Week", "Active Learners")
+engagementTrend = Progress(72, "Engagement Trend")
+cohortMessage = CardHeader("Message a Cohort", "Send a message to a specific cohort")
+cohortMessageContent = Card([messageInput, messageSend])
+messageInput = TextArea("message", "Enter your message here...", rows=4, placeholder="Type your message...")
+messageSend = Button("Send Message", null, "primary")

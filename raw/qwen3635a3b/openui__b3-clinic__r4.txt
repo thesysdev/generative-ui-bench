@@ -1,0 +1,37 @@
+
+
+```openui
+root = Card([header, statsRow, nextPatientAlert, appointmentsTable, roomsStatus, actions])
+
+header = CardHeader("Clinic Dashboard", "Receptionist View")
+
+statsRow = Card([expectedBadge, noshowBadge], "sunk", "row", "m")
+expectedBadge = Tag("18 patients expected", null, "md", "info")
+noshowBadge = Tag("6.2% no-show rate (this month)", null, "md", "warning")
+
+nextPatientAlert = Alert("Next patient called", "Sarah Johnson — Room 3 — Called at 9:02 AM", "info")
+
+appointmentsTable = Card([aptHeading, aptTable], "sunk")
+aptHeading = Heading("Today's Appointments", "h3")
+aptTable = Table([timeCol, patientCol, roomCol, statusCol])
+timeCol = Col("Time", ["8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM"])
+patientCol = Col("Patient", ["Sarah Johnson", "Michael Chen", "Emily Davis", "James Wilson", "Maria Garcia", "Robert Brown", "Lisa Anderson", "David Martinez", "Jennifer Taylor", "William Thomas", "Amanda White", "Christopher Lee", "Jessica Harris", "Daniel Clark", "Ashley Lewis"])
+roomCol = Col("Room", ["Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6", "Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6", "Room 1", "Room 2", "Room 3"])
+statusCol = Col("Status", ["Checked in", "Checked in", "In session", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in", "Checked in"])
+
+roomsStatus = Card([roomsHeading, roomsList], "sunk")
+roomsHeading = Heading("Room Status", "h3")
+roomsList = ListBlock([room1, room2, room3, room4, room5, room6], "number")
+room1 = ListItem("Room 1", "Occupied — Dr. Smith — Until 9:45 AM")
+room2 = ListItem("Room 2", "Occupied — Dr. Adams — Until 10:15 AM")
+room3 = ListItem("Room 3", "Free", "Free")
+room4 = ListItem("Room 4", "Occupied — Dr. Patel — Until 10:30 AM")
+room5 = ListItem("Room 5", "Free", "Free")
+room6 = ListItem("Room 6", "Occupied — Dr. Kim — Until 9:50 AM")
+
+actions = Card([checkInAction, dayNav], "sunk", "column", "m")
+checkInAction = Button("Check In Next Patient", ["check_in"], "primary", "normal", "large")
+dayNav = Buttons([prevDayBtn, nextDayBtn])
+prevDayBtn = Button("← Yesterday", ["prev_day"], "secondary")
+nextDayBtn = Button("Tomorrow →", ["next_day"], "secondary")
+```

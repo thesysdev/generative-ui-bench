@@ -1,0 +1,23 @@
+root = Card([header, timeBadge, revenueCard, comparisonCard, hourlyCard])
+
+header = CardHeader("Morning Check-In", "Shop dashboard")
+
+timeBadge = Badge("11:00 AM", "secondary")
+
+revenueCard = Card([revenueLabel, revenueAmount, revenueSubtext], "sunk")
+revenueLabel = TextContent("Revenue Today", "large-heavy")
+revenueAmount = TextContent("$1,247.50", "large")
+revenueSubtext = TextContent("As of 11:00 AM · 47 transactions", "small")
+
+comparisonCard = Card([comparisonRow], "card")
+comparisonRow = Card([comparisonIcon, comparisonText, comparisonBadge], "card", "row", "m")
+comparisonIcon = TextContent("📈", "default")
+comparisonText = TextContent("Yesterday at 11:00 AM", "default")
+comparisonBadge = Badge("+12.4%", "default")
+
+hourlyCard = Card([hourlyHeader, hourlyChart], "sunk")
+hourlyHeader = Heading("Hourly Revenue Comparison", "h3")
+hourlyChart = BarChart(["6AM", "7AM", "8AM", "9AM", "10AM", "11AM"], [todaySeries, yesterdaySeries], "grouped", "Hour", "Revenue (USD)")
+
+todaySeries = Series("Today", [45, 120, 285, 410, 312, 75])
+yesterdaySeries = Series("Yesterday", [30, 95, 240, 365, 290, 65])

@@ -1,0 +1,184 @@
+```openui-lang
+root = Card(
+    [
+        qvHeader,
+        quarterSelector,
+        regionSelector,
+        revenueCostProfit,
+        revenueCostSeries,
+        budgetByDept,
+        headcountByDept,
+        topRisks,
+        strategicInitiatives,
+        runway,
+        salesPipeline,
+        metricsSummary,
+        boardItems,
+        exportButton,
+    ],
+    "card",
+    "column",
+    "m",
+    "center",
+    "between",
+    wrap = true
+)
+
+qvHeader = CardHeader("Quarterly Command View", "Q3 2025")
+
+quarterSelector = Buttons(
+    [quarterPrev, quarterNext],
+    direction = "row",
+    gap = "s"
+)
+quarterPrev = Button("Previous Quarter", ["quarter", "prev"])
+quarterNext = Button("Next Quarter", ["quarter", "next"])
+
+regionSelector = Buttons(
+    [usBtn, euBtn],
+    direction = "row",
+    gap = "s"
+)
+usBtn = Button("US Region", null, "primary")
+euBtn = Button("EU Region", null, "secondary")
+
+revenueCostProfit = Card(
+    [
+        revHeader,
+        revValue,
+        costHeader,
+        costValue,
+        profitHeader,
+        profitValue,
+    ],
+    "sunk"
+)
+revHeader = Heading("Revenue", "h3")
+revValue = TextContent("$1,250,000", "large")
+costHeader = Heading("Costs", "h3")
+costValue = TextContent("$850,000", "large")
+profitHeader = Heading("Profit", "h3")
+profitValue = TextContent("$400,000", "large")
+
+revenueCostSeries = Card(
+    [
+        revSeries,
+        costSeries,
+    ],
+    "clear"
+)
+revSeries = LineChart(
+    ["Q1", "Q2", "Q3", "Q4"],
+    [revQ1, revQ2, revQ3, revQ4],
+    "natural",
+    "Quarter",
+    "USD"
+)
+revQ1 = Series("Revenue Q1", [1200000])
+revQ2 = Series("Revenue Q2", [1300000])
+revQ3 = Series("Revenue Q3", [1250000])
+revQ4 = Series("Revenue Q4", [1250000])
+costSeries = LineChart(
+    ["Q1", "Q2", "Q3", "Q4"],
+    [costQ1, costQ2, costQ3, costQ4],
+    "natural",
+    "Quarter",
+    "USD"
+)
+costQ1 = Series("Costs Q1", [800000])
+costQ2 = Series("Costs Q2", [850000])
+costQ3 = Series("Costs Q3", [850000])
+costQ4 = Series("Costs Q4", [900000])
+
+budgetByDept = Table([deptCol, budgetCol, planCol])
+deptCol = Col("Department", ["Finance", "Engineering", "Marketing", "HR"])
+budgetCol = Col("Budget", ["$500k", "$750k", "$300k", "$200k"])
+planCol = Col("Plan", ["$520k", "$720k", "$280k", "$210k"])
+
+headcountByDept = Table([deptCol2, headcountCol])
+deptCol2 = Col("Department", ["Finance", "Engineering", "Marketing", "HR"])
+headcountCol = Col("Headcount", ["120", "350", "80", "45"])
+
+topRisks = Card(
+    [
+        risk1,
+        risk2,
+        risk3,
+    ]
+)
+risk1 = TextCallout(
+    "Supply Chain Disruption",
+    "Owner: Supply Chain Lead",
+    variant = "warning"
+)
+risk2 = TextCallout(
+    "Regulatory Compliance",
+    "Owner: Legal Team",
+    variant = "danger"
+)
+risk3 = TextCallout(
+    "Market Shift",
+    "Owner: Market Analyst",
+    variant = "info"
+)
+
+strategicInitiatives = Card(
+    [
+        init1,
+        init2,
+        init3,
+    ]
+)
+init1 = Callout(
+    "Expand AI Services",
+    "Status: In Progress",
+    variant = "success"
+)
+init2 = Callout(
+    "Launch New Platform",
+    "Status: Planned",
+    variant = "info"
+)
+init3 = Callout(
+    "Enhance Customer Support",
+    "Status: Completed",
+    variant = "success"
+)
+
+runway = TextContent("Runway: 8 months", "large")
+
+salesPipeline = Card(
+    [
+        pipelineHeader,
+        pipelineValue,
+    ]
+)
+pipelineHeader = Heading("Sales Pipeline Value", "h4")
+pipelineValue = TextContent("$4,200,000", "large")
+
+metricsSummary = Card(
+    [
+        winRate,
+        custCount,
+        churn,
+        nps,
+    ]
+)
+winRate = TextCallout("Win Rate: 35%", null, variant = "success")
+custCount = TextCallout("Customer Count: 1,200", null, variant = "info")
+churn = TextCallout("Churn Rate: 4%", null, variant = "warning")
+nps = TextCallout("NPS: 68", null, variant = "success")
+
+boardItems = Card(
+    [
+        item1,
+        item2,
+        item3,
+    ]
+)
+item1 = TextContent("Q3 Financial Forecast", null)
+item2 = TextContent("Regional Market Expansion", null)
+item3 = TextContent("Operational Efficiency Initiatives", null)
+
+exportButton = Button("Export Pack", null, "secondary", "large")
+```

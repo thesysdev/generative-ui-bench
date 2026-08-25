@@ -1,0 +1,140 @@
+root = Card([header, kpiRow, chartsRow, tablesRow, eventsRow, moderationRow, experimentsRow, actionsRow], "card", "column", "m")
+
+header = CardHeader("Live Ops Command Center", "Real-time game operations dashboard — Updated 42s ago")
+
+kpiRow = Card([onlinePlayers, dauCard, mauCard, revenueCard, arpuCard], "card", "row", "m", "start", "start")
+
+onlinePlayers = Card([onlineHeading, onlineValue, onlineBadge], "card", "column", "none")
+onlineHeading = TextContent("Players Online Now", "small")
+onlineValue = TextContent("14,832", "large-heavy")
+onlineBadge = Badge("▲ 12%", "secondary")
+
+dauCard = Card([dauHeading, dauValue], "card", "column", "none")
+dauHeading = TextContent("Daily Active Players", "small")
+dauValue = TextContent("287,450", "large-heavy")
+
+mauCard = Card([mauHeading, mauValue], "card", "column", "none")
+mauHeading = TextContent("Monthly Active Players", "small")
+mauValue = TextContent("1,204,380", "large-heavy")
+
+revenueCard = Card([revHeading, revValue, revChange], "card", "column", "none")
+revHeading = TextContent("Revenue Today", "small")
+revValue = TextContent("$184,291", "large-heavy")
+revChange = Badge("+8.3% vs yesterday", "secondary")
+
+arpuCard = Card([arpuHeading, arpuValue], "card", "column", "none")
+arpuHeading = TextContent("Revenue Per User (ARPU)", "small")
+arpuValue = TextContent("$0.641", "large-heavy")
+
+chartsRow = Card([sessionChart, crashChart, inflationChart], "card", "column", "m")
+
+sessionChart = Card([sessionTitle, sessionLineChart], "card", "column", "s")
+sessionTitle = Heading("Avg Session Length — Past 14 Days", "h3")
+sessionLineChart = LineChart(["Jan 8", "Jan 9", "Jan 10", "Jan 11", "Jan 12", "Jan 13", "Jan 14", "Jan 15", "Jan 16", "Jan 17", "Jan 18", "Jan 19", "Jan 20", "Jan 21"], [sessionSeries], "natural", "Date", "Minutes")
+sessionSeries = Series("Avg Session (min)", [24.3, 25.1, 23.8, 26.4, 27.2, 28.9, 29.5, 27.1, 26.8, 25.4, 24.9, 26.2, 27.8, 28.4])
+
+crashChart = Card([crashTitle, crashBarChart], "card", "column", "s")
+crashTitle = Heading("Crash Rate by App Version", "h3")
+crashBarChart = BarChart(["v4.2.1", "v4.2.0", "v4.1.9", "v4.1.8", "v4.1.7", "v4.0.5"], [crashRateSeries], "grouped", "App Version", "Crash Rate (%)")
+crashRateSeries = Series("Crash Rate %", [0.8, 1.2, 1.5, 2.1, 3.4, 4.7])
+
+inflationChart = Card([inflationTitle, inflationGauge, inflationText], "card", "column", "s")
+inflationTitle = Heading("In-Game Currency Inflation", "h3")
+inflationGauge = Progress(67, "Inflation Index: 67% of baseline")
+inflationText = TextContent("Gold supply up 67% from launch baseline. Sink rate at 42%. Recommend increasing repair costs or adding prestige shop tiers.", "default")
+
+tablesRow = Card([bestSellersCard, serverHealthCard], "card", "column", "m")
+
+bestSellersCard = Card([bestSellersTitle, bestSellersTable], "card", "column", "s")
+bestSellersTitle = Heading("Best-Selling Items — Today", "h3")
+bestSellersTable = Table([bsItemCol, bsUnitsCol, bsRevenueCol])
+bsItemCol = Col("Item", ["Legendary Sword Skin", "Starter Bundle", "Battle Pass Tier 5", "Gacha Pull x10", "VIP Membership", "Emote Pack: Dragons"])
+bsUnitsCol = Col("Units Sold", [3842, 12054, 8921, 5673, 2104, 4318])
+bsRevenueCol = Col("Revenue ($)", [57630, 36162, 44605, 56730, 21040, 21590])
+
+serverHealthCard = Card([serverTitle, serverTable, serverAlert], "card", "column", "s")
+serverTitle = Heading("Server Region Health", "h3")
+serverTable = Table([regionCol, statusCol, latencyCol, loadCol])
+regionCol = Col("Region", ["US-East", "US-West", "EU-West", "EU-Central", "Asia-Pacific", "Brazil", "Oceania"])
+statusCol = Col("Health", ["Healthy", "Healthy", "Healthy", "Degraded", "Healthy", "Warning", "Healthy"])
+latencyCol = Col("Avg Latency (ms)", [42, 68, 51, 134, 89, 156, 98])
+loadCol = Col("Load (%)", [67, 72, 58, 91, 64, 88, 45])
+serverAlert = Alert("EU-Central Degraded", "Database replication lag detected. Failover in progress. ETA 8 minutes.", "warning")
+
+eventsRow = Card([liveEventsCard, upcomingEventsCard], "card", "column", "m")
+
+liveEventsCard = Card([liveEventsTitle, liveEventsList], "card", "column", "s")
+liveEventsTitle = Heading("Live Events Running", "h3")
+liveEventsList = ListBlock([event1, event2, event3], "image")
+event1 = ListItem("Dragon's Descent Raid", "Ends in 6h 23m • 14,203 participants • Reward pool: 89% claimed", null, "Refresh")
+event2 = ListItem("Double XP Weekend", "Ends in 1d 14h • All modes • Active across all regions", null, "Configure")
+event3 = ListItem("New Year Battle Pass", "Ends in 4d 8h • Tier 1-50 • 287K enrolled", null, "View Stats")
+
+upcomingEventsCard = Card([upcomingTitle, upcomingList], "card", "column", "s")
+upcomingTitle = Heading("Upcoming Events", "h3")
+upcomingList = ListBlock([upcoming1, upcoming2], "image")
+upcoming1 = ListItem("Valentine's Day Crossover", "Starts in 9d • Collab with Studio Nexus • Assets 78% ready", null, "Edit")
+upcoming2 = ListItem("Season 4 Launch", "Starts in 21d • New map, 3 heroes, ranked reset • Planning phase", null, "Edit")
+
+moderationRow = Card([reportsCard, appealsCard], "card", "column", "m")
+
+reportsCard = Card([reportsTitle, reportsBadge, reportsList], "card", "column", "s")
+reportsTitle = Heading("Player Reports Awaiting Review", "h3")
+reportsBadge = Badge("47 pending", "destructive")
+reportsList = ListBlock([report1, report2, report3], "number")
+report1 = ListItem("Harassment — Clan 'ShadowReapers'", "12 reports in 24h • 8 unique reporters • Auto-mute applied", null, "Review")
+report2 = ListItem("Exploit — Dungeon farming glitch", "5 reports • Confirmed on v4.2.0 • Patch queued", null, "Review")
+report3 = ListItem("Cheating — Aimbot in ranked", "3 reports • Evidence attached • Hardware ban recommended", null, "Review")
+
+appealsCard = Card([appealsTitle, appealsBadge, appealsList], "card", "column", "s")
+appealsTitle = Heading("Ban Appeals Awaiting Review", "h3")
+appealsBadge = Badge("13 pending", "destructive")
+appealsList = ListBlock([appeal1, appeal2], "number")
+appeal1 = ListItem("User #88421 — 30-day ban appeal", "Claims false positive for macro usage. Screenshot evidence submitted. Banned 4 days ago.", null, "Review")
+appeal2 = ListItem("User #91055 — Permanent ban appeal", "Toxic behavior escalation. 3 prior warnings. Refuses to accept penalty.", null, "Review")
+
+experimentsRow = Card([expTitle, exp1Card, exp2Card], "card", "column", "m")
+expTitle = Heading("Active Experiments", "h3")
+
+exp1Card = Card([exp1Header, exp1Metrics, exp1Status], "card", "column", "s")
+exp1Header = CardHeader("Experiment A/B: New Onboarding Flow", "Day 8 of 14 — 42% of target sample reached")
+exp1Metrics = Table([exp1Col, exp1Control, exp1Variant])
+exp1Col = Col("Metric", ["Day 3 Retention", "Tutorial Completion", "First Purchase Rate", "Avg Session Day 1"])
+exp1Control = Col("Control (50%)", ["34.2%", "78.5%", "12.1%", "22.4 min"])
+exp1Variant = Col("Variant (50%)", ["37.8%", "84.1%", "14.7%", "25.1 min"])
+exp1Status = Callout("success", "Variant Outperforming", "New onboarding shows +3.6% retention lift. Recommendation: promote variant to 100% at day 14.")
+
+exp2Card = Card([exp2Header, exp2Metrics, exp2Status], "card", "column", "s")
+exp2Header = CardHeader("Experiment A/B: Battle Pass Pricing", "Day 5 of 14 — 28% of target sample reached")
+exp2Metrics = Table([exp2Col, exp2Control, exp2Variant])
+exp2Col = Col("Metric", ["Purchase Rate", "Avg Revenue", "Tier Completion", "Churn at Day 7"])
+exp2Control = Col("Control — $9.99", ["8.4%", "$9.99", "62 tiers", "18.2%"])
+exp2Variant = Col("Variant — $14.99", ["6.1%", "$14.99", "58 tiers", "19.1%"])
+exp2Status = Callout("info", "Mixed Results", "Higher ARPU but lower conversion. Revenue-neutral at current sample. Continue monitoring.")
+
+actionsRow = Card([regionFocusCard, patchNotesDialog, hotfixDialog], "card", "row", "m")
+
+regionFocusCard = Card([regionTitle, regionSelect], "card", "column", "s")
+regionTitle = Heading("Focus on Region", "h3")
+regionSelect = Select("region_focus", [usEast, usWest, euWest, euCentral, asiaPac, brazil, oceania], "Select a region to filter dashboard")
+usEast = SelectItem("us-east", "US-East (Virginia)")
+usWest = SelectItem("us-west", "US-West (Oregon)")
+euWest = SelectItem("eu-west", "EU-West (Ireland)")
+euCentral = SelectItem("eu-central", "EU-Central (Frankfurt)")
+asiaPac = SelectItem("asia-pac", "Asia-Pacific (Singapore)")
+brazil = SelectItem("brazil", "Brazil (São Paulo)")
+oceania = SelectItem("oceania", "Oceania (Sydney)")
+
+patchNotesDialog = DialogBlock("Draft Patch Notes", "Draft Patch Notes", "Write and preview upcoming patch notes. Supports markdown formatting.", [patchNotesForm])
+patchNotesForm = Form("patch-notes", patchNotesButtons, [patchVersionField, patchSummaryField, patchChangesField])
+patchVersionField = FormControl("Version", patchVersionInput)
+patchVersionInput = Input("patch_version", "e.g. v4.3.0")
+patchSummaryField = FormControl("Summary", patchSummaryInput)
+patchSummaryInput = TextArea("patch_summary", "Brief summary of this patch...", 3)
+patchChangesField = FormControl("Changes", patchChangesInput)
+patchChangesInput = TextArea("patch_changes", "- New feature...\n- Bug fix...\n- Balance change...", 10)
+patchNotesButtons = Buttons([publishPatchBtn, previewPatchBtn])
+publishPatchBtn = Button("Publish Patch Notes", null, "primary")
+previewPatchBtn = Button("Preview", null, "secondary")
+
+hotfixDialog = AlertDialogBlock("Ship Hotfix", "Ship Hotfix Deployment", "This will deploy the hotfix to all regions. Players will be prompted to update. Estimated downtime: 2 minutes per region. This action cannot be undone.", "Deploy Now", "Cancel", "destructive")

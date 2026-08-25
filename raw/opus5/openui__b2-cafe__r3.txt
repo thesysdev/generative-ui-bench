@@ -1,0 +1,51 @@
+root = Card([header, special, filterNote, menuTabs, hoursSection, actions])
+
+header = CardHeader("The Copper Kettle", "Neighbourhood cafe · Est. 2014")
+
+special = Callout("success", "Today's Special — Maple Pecan Latte + Almond Croissant", "Espresso with maple syrup and toasted pecan, paired with a warm almond croissant. £6.50 for both, until 3pm or while stock lasts.")
+
+filterNote = TextContent("Vegetarian items are marked **(V)**. Open the *Vegetarian only* tab to see the full plant-friendly list.", "small")
+
+menuTabs = Tabs([drinksTab, foodTab, vegTab])
+
+drinksTab = TabItem("drinks", "Drinks", [drinksTable, drinksNote])
+drinksTable = Table([drinkName, drinkSize, drinkPrice])
+drinkName = Col("Drink", ["Filter Coffee", "Espresso", "Flat White", "Cappuccino", "Maple Pecan Latte (V)", "Chai Latte (V)", "Matcha Latte (V)", "Loose Leaf Tea", "Fresh Orange Juice (V)", "Hot Chocolate (V)"])
+drinkSize = Col("Size", ["12oz", "Double", "8oz", "12oz", "12oz", "12oz", "12oz", "Pot", "10oz", "12oz"])
+drinkPrice = Col("Price", ["£2.60", "£2.20", "£3.20", "£3.40", "£4.20", "£3.90", "£4.30", "£2.80", "£3.50", "£3.60"], "number")
+drinksNote = TextContent("Oat, soy and almond milk are free of charge. Extra espresso shot £0.60.", "small")
+
+foodTab = TabItem("food", "Food", [foodTable, foodNote])
+foodTable = Table([foodName, foodDesc, foodPrice])
+foodName = Col("Dish", ["Almond Croissant (V)", "Sourdough Toast & Jam (V)", "Avocado Smash (V)", "Halloumi & Pepper Wrap (V)", "Bacon Brioche Roll", "Chicken Caesar Sandwich", "Roast Tomato Soup (V)", "Carrot Cake (V)", "Brownie (V)"])
+foodDesc = Col("Description", ["Baked in-house each morning", "Two thick slices, cultured butter", "Chilli, lime, poached egg optional", "Grilled halloumi, romesco, rocket", "Smoked back bacon, brown sauce", "Free-range chicken, parmesan", "Basil oil, sourdough soldiers", "Cream cheese frosting", "Dark chocolate, sea salt"])
+foodPrice = Col("Price", ["£3.20", "£3.80", "£7.90", "£7.50", "£5.40", "£6.80", "£5.20", "£4.10", "£3.40"], "number")
+foodNote = TextContent("Kitchen serves hot food 8:00–14:30. Gluten-free bread available on request (+£0.50).", "small")
+
+vegTab = TabItem("veg", "Vegetarian only", [vegBadge, vegList])
+vegBadge = Tag("14 vegetarian items", null, "md", "success")
+vegList = ListBlock([vegD1, vegD2, vegD3, vegD4, vegD5, vegF1, vegF2, vegF3, vegF4, vegF5, vegF6])
+vegD1 = ListItem("Maple Pecan Latte", "Drink · £4.20 · today's special")
+vegD2 = ListItem("Chai Latte", "Drink · £3.90")
+vegD3 = ListItem("Matcha Latte", "Drink · £4.30")
+vegD4 = ListItem("Fresh Orange Juice", "Drink · £3.50")
+vegD5 = ListItem("Hot Chocolate", "Drink · £3.60")
+vegF1 = ListItem("Almond Croissant", "Food · £3.20")
+vegF2 = ListItem("Sourdough Toast & Jam", "Food · £3.80")
+vegF3 = ListItem("Avocado Smash", "Food · £7.90 · vegan without egg")
+vegF4 = ListItem("Halloumi & Pepper Wrap", "Food · £7.50")
+vegF5 = ListItem("Roast Tomato Soup", "Food · £5.20")
+vegF6 = ListItem("Carrot Cake", "Food · £4.10")
+
+hoursSection = Card([hoursHeading, hoursTable, hoursNote], "sunk")
+hoursHeading = Heading("Opening hours", "h3")
+hoursTable = Table([dayCol, openCol, kitchenCol])
+dayCol = Col("Day", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+openCol = Col("Cafe", ["7:30 – 16:00", "7:30 – 16:00", "7:30 – 16:00", "7:30 – 16:00", "7:30 – 17:00", "8:30 – 17:00", "9:00 – 15:00"])
+kitchenCol = Col("Kitchen", ["8:00 – 14:30", "8:00 – 14:30", "8:00 – 14:30", "8:00 – 14:30", "8:00 – 15:00", "9:00 – 15:00", "9:30 – 14:00"])
+hoursNote = TextContent("Last orders 30 minutes before closing. Closed on bank holidays.", "small")
+
+actions = Buttons([orderBtn, tableBtn, allergenBtn])
+orderBtn = Button("Order the special", null, "primary")
+tableBtn = Button("Book a table", null, "secondary")
+allergenBtn = Button("Allergen information", null, "tertiary")

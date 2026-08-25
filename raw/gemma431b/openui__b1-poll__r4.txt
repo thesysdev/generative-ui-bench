@@ -1,0 +1,29 @@
+root = Card([header, pollSection, currentStats, footer], "card", "column", "l")
+
+header = CardHeader("Team Lunch Poll", "Cast your vote for this Friday's outing")
+
+pollSection = Form("lunch-poll", pollButtons, [restaurantChoice])
+
+restaurantChoice = FormControl("Where should we go for lunch on Friday?", restaurantRadio, "Pick your favorite spot")
+
+restaurantRadio = RadioGroup("restaurant", [option1, option2, option3], "tacos")
+
+option1 = RadioItem("Taco Town", "Authentic street tacos and burritos", "tacos")
+option2 = RadioItem("Sushi Zen", "Fresh sashimi and specialty rolls", "sushi")
+option3 = RadioItem("Burger Barn", "Gourmet burgers and hand-cut fries", "burgers")
+
+pollButtons = Buttons([submitBtn])
+submitBtn = Button("Submit Vote", null, "primary")
+
+currentStats = Card([statsHeading, statsChart], "sunk", "column", "m")
+
+statsHeading = Heading("Current Standings", "h3")
+
+statsChart = BarChart(["Tacos", "Sushi", "Burgers"], [voteSeries], "grouped", "Restaurant", "Votes")
+
+voteSeries = Series("Votes", [12, 8, 5])
+
+footer = FollowUpBlock([suggestion1, suggestion2])
+
+suggestion1 = FollowUpItem("What are the dietary restrictions for the team?")
+suggestion2 = FollowUpItem("Suggest a new restaurant")

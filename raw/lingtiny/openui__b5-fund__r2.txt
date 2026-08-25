@@ -1,0 +1,184 @@
+root = Card([
+  header,
+  kpiRow,
+  portfolioSection,
+  positionsSection,
+  exposureSection,
+  varSection,
+  biggestSection,
+  instrumentsSection,
+  workingOrdersSection,
+  marginSection,
+  headlinesSection,
+  economicSection,
+  strategiesSection,
+  drawdownSection,
+  riskSection,
+  rebalanceSection,
+  placeOrderSection,
+  timeframeSection,
+], "sunk")
+
+header = CardHeader("Trading Desk Workspace", "Morning Overview")
+
+kpis = Table([
+  Col("Portfolio Value", [1284000]),
+  Col("P&L Today", [32450]),
+  Col("Unrealized P&L", [18700]),
+  Col("Margin Used", [45600]),
+  Col("Max Drawdown", [-18.2]),
+], "string")
+
+portfolioSection = Card([portfolioHeading, kpis], "sunk")
+portfolioHeading = Heading("Portfolio Summary", "h3")
+
+positionsSection = Card([positionsHeading, positionsTable], "sunk")
+positionsHeading = Heading("Positions", "h3")
+positionsTable = Table([
+  Col("Ticker", ["AAPL", "TSLA", "NVDA", "MSFT", "AMZN", "GOOGL", "META", "JPM"]),
+  Col("Size", [1500, 3200, 800, 2400, 1200, 600, 1000, 1800]),
+  Col("Entry Price", [172.50, 245.30, 475.20, 378.10, 178.90, 142.60, 322.80, 195.40]),
+  Col("Current Price", [174.20, 251.70, 488.50, 381.40, 180.30, 144.20, 330.10, 197.80]),
+], "string")
+
+exposureSection = Card([exposureHeading, exposureChart], "sunk")
+exposureHeading = Heading("Exposure by Sector", "h3")
+exposureChart = HorizontalBarChart(["Technology", "Financials", "Healthcare", "Energy", "Consumer", "Industrials"], [
+  Series("Tech", [38.2, 0]),
+  Series("Financials", [22.1, 0]),
+  Series("Healthcare", [15.8, 0]),
+  Series("Energy", [10.5, 0]),
+  Series("Consumer", [8.3, 0]),
+  Series("Industrials", [5.4, 0]),
+], "grouped", "Sector", "Exposure %")
+
+varSection = Card([varHeading, varChart], "sunk")
+varHeading = Heading("Value at Risk (VaR)", "h3")
+varChart = HorizontalBarChart(["1-Day", "5-Day", "10-Day"], [
+  Series("VaR (95%)", [2140, 3820, 5200]),
+], "grouped", "Horizon", "VaR $")
+
+biggestSection = Card([biggestHeading, biggestChart], "sunk")
+biggestHeading = Heading("Today's Biggest Gainers & Losers", "h3")
+biggestChart = HorizontalBarChart(["TSLA", "NVDA", "AAPL", "AMZN", "META", "GOOGL", "JPM", "MSFT"], [
+  Series("Gainers", [8.5, 5.2, 3.1, -1.2, -2.8, -4.1, -6.3, -7.5]),
+], "grouped", "Ticker", "Change %")
+
+instrumentsSection = Card([instrumentsHeading, instrumentsList], "sunk")
+instrumentsHeading = Heading("Instruments Being Watched", "h3")
+instrumentsList = ListBlock([
+  ListItem("AAPL", "Apple Inc.", "174.20"),
+  ListItem("TSLA", "Tesla Inc.", "251.70"),
+  ListItem("NVDA", "NVIDIA Corp.", "488.50"),
+  ListItem("MSFT", "Microsoft Corp.", "381.40"),
+  ListItem("AMZN", "Amazon.com Inc.", "180.30"),
+  ListItem("GOOGL", "Alphabet Inc.", "144.20"),
+  ListItem("META", "Meta Platforms", "330.10"),
+  ListItem("JPM", "JPMorgan Chase", "195.40"),
+], "image")
+
+workingOrdersSection = Card([ordersHeading, ordersList], "sunk")
+ordersHeading = Heading("Working Orders", "h3")
+ordersList = ListBlock([
+  ListItem("AAPL", "Buy", "1000 @ 174.20", "Limit"),
+  ListItem("TSLA", "Sell", "500 @ 251.70", "Limit"),
+  ListItem("NVDA", "Buy", "200 @ 488.50", "Market"),
+], "image")
+
+marginSection = Card([marginHeading, marginChart], "sunk")
+marginHeading = Heading("Margin in Use", "h3")
+marginChart = SingleStackedBarChart(["Available", "Used", "Margin"], [
+  Series("Available", [85000]),
+  Series("Used", [45600]),
+], "grouped", "Margin", "USD")
+
+headlinesSection = Card([headlinesHeading, headlinesList], "sunk")
+headlinesHeading = Heading("Market Headlines", "h3")
+headlinesList = ListBlock([
+  ListItem("Fed Signals Rate Hike", "Neutral", "neutral"),
+  ListItem("Nvidia Earnings Beat", "Positive", "success"),
+  ListItem("Oil Prices Surge", "Negative", "danger"),
+  ListItem("Tech Sector Rally Continues", "Positive", "success"),
+  ListItem("Credit Market Tightens", "Neutral", "neutral"),
+], "image")
+
+economicSection = Card([economicHeading, economicList], "sunk")
+economicHeading = Heading("Economic Releases This Week", "h3")
+economicList = ListBlock([
+  ListItem("CPI Print", "Wednesday", "info"),
+  ListItem("Retail Sales", "Thursday", "info"),
+  ListItem("Non-Farm Payrolls", "Friday", "info"),
+], "image")
+
+strategiesSection = Card([strategiesHeading, strategiesChart], "sunk")
+strategiesHeading = Heading("Strategy Returns This Year", "h3")
+strategiesChart = HorizontalBarChart(["Quant", "Trend", "Mean Reversion", "Momentum", "Arbitrage"], [
+  Series("Quant", [12.4]),
+  Series("Trend", [8.7]),
+  Series("Mean Reversion", [5.2]),
+  Series("Momentum", [15.1]),
+  Series("Arbitrage", [3.8]),
+], "grouped", "Strategy", "Return %")
+
+drawdownSection = Card([drawdownHeading, drawdownChart], "sunk")
+drawdownHeading = Heading("Drawdown Over the Past Year", "h3")
+drawdownChart = SingleStackedBarChart(["Drawdown %"], [
+  Series("12-Month", [-18.2]),
+], "grouped", "Period", "Drawdown")
+
+riskSection = Card([riskHeading, riskList], "sunk")
+riskHeading = Heading("Risk Limits Near Breach", "h3")
+riskList = ListBlock([
+  ListItem("Max Position Size", "85%", "danger"),
+  ListItem("Leverage Cap", "75%", "warning"),
+  ListItem("Sector Concentration", "38%", "warning"),
+  ListItem("Stop Loss Threshold", "90%", "danger"),
+], "image")
+
+rebalanceSection = Card([rebalanceHeading, rebalanceBtn], "sunk")
+rebalanceHeading = Heading("Rebalance", "h3")
+rebalanceBtn = Buttons([rebalanceBtnPrimary, rebalanceBtnSecondary], "column")
+rebalanceBtnPrimary = Button("Rebalance Portfolio", null, "primary")
+rebalanceBtnSecondary = Button("View Rebalance Plan", null, "tertiary")
+
+placeOrderSection = Card([placeOrderHeading, placeOrderForm], "sunk")
+placeOrderHeading = Heading("Place an Order", "h3")
+placeOrderForm = Form("place-order", [orderTicker, orderSide, orderQty], [
+  FormControl("Ticker", tickerInput, "Enter ticker symbol"),
+  FormControl("Side", sideSelect, "Buy or Sell"),
+  FormControl("Quantity", qtySlider, "Number of shares"),
+], "column")
+orderTicker = Input("ticker", "AAPL", "text", ["Enter ticker"])
+sideSelect = Select("side", [buyItem, sellItem], "Choose side")
+buyItem = SelectItem("Buy", "Buy")
+sellItem = SelectItem("Sell", "Sell")
+qtySlider = Slider("qty", "continuous", 1, 10000, 100, "Quantity", "Number of shares")
+
+timeframeSection = Card([timeframeHeading, timeframeSelect], "sunk")
+timeframeHeading = Heading("Timeframe", "h3")
+timeframeSelect = Select("timeframe", [hourly, daily, weekly, monthly], "Select timeframe")
+hourly = SelectItem("1H", "1 Hour")
+daily = SelectItem("1D", "1 Day")
+weekly = SelectItem("1W", "1 Week")
+monthly = SelectItem("1M", "1 Month")
+
+root = Card([
+  header,
+  kpis,
+  portfolioSection,
+  positionsSection,
+  exposureSection,
+  varSection,
+  biggestSection,
+  instrumentsSection,
+  workingOrdersSection,
+  marginSection,
+  headlinesSection,
+  economicSection,
+  strategiesSection,
+  drawdownSection,
+  riskSection,
+  rebalanceSection,
+  placeOrderSection,
+  timeframeSection,
+], "sunk")

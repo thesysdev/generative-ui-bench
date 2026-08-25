@@ -1,0 +1,210 @@
+root = Card([
+  header,
+  overview,
+  metrics,
+  bestPosts,
+  audienceSplit,
+  schedule,
+  bestHour,
+  comments,
+  earnings,
+  collaborations,
+  schedulePost,
+  platformFilter,
+], "sunk", "column", "m")
+
+header = CardHeader("Cross-Platform Creator Studio", "All-in-one dashboard for your content strategy")
+
+overview = Card([
+  title,
+  summary,
+  statusBadge,
+], "sunk")
+title = Heading("Studio Overview", "h2")
+summary = TextContent("Cross-platform creator studio. Track followers, engagement, reach, and more across all your channels in one place.")
+statusBadge = Tag("Live", null, null, "success")
+
+metrics = Card([
+  title,
+  kpiGrid,
+], "sunk")
+title = Heading("Key Metrics", "h3")
+kpiGrid = Stack(direction="row", gap="s", children=[
+  kpiFollower,
+  kpiEngagement,
+  kpiReach,
+  kpiEarnings,
+])
+kpiFollower = CardHeader("Followers", "Total followers across all platforms", null, [
+  Progress(74, "82% of goal"),
+  Badge("▲ +12%", null, null, "success"),
+])
+kpiEngagement = CardHeader("Engagement Rate", "Average engagement across all platforms", null, [
+  Progress(4.7, "4.7%"),
+  Badge("▲ +0.3%", null, null, "success"),
+])
+kpiReach = CardHeader("Reach", "Total impressions this month", null, [
+  Progress(89, "89% of goal"),
+  Badge("▲ +8%", null, null, "success"),
+])
+kpiEarnings = CardHeader("Earnings", "Total earnings this month", null, [
+  Progress(62, "$6,200"),
+  Badge("▲ +$800", null, null, "success"),
+])
+
+bestPosts = Card([
+  title,
+  bestPostsList,
+], "sunk")
+title = Heading("Best Posts This Month", "Top-performing content by reach")
+bestPostsList = ListBlock(variant="image", children=[
+  bestPost1,
+  bestPost2,
+  bestPost3,
+])
+bestPost1 = ListItem("How I Built My Cross-Platform Strategy", "Reached 124K impressions across 3 platforms", [
+  Badge("Reached 124K", null, null, "info"),
+  Badge("Top Post", null, null, "success"),
+])
+bestPost2 = ListItem("5 Tips for Creator Growth", "Reached 98K impressions", [
+  Badge("Reached 98K", null, null, "info"),
+  Badge("Top Post", null, null, "success"),
+])
+bestPost3 = ListItem("My Weekly Workflow", "Reached 76K impressions", [
+  Badge("Reached 76K", null, null, "info"),
+  Badge("Top Post", null, null, "success"),
+])
+
+audienceSplit = Card([
+  title,
+  audienceChart,
+], "sunk")
+title = Heading("Audience Split by Platform", "Where your followers come from")
+audienceChart = HorizontalBarChart(
+  labels=["Instagram", "TikTok", "YouTube", "Twitter/X", "LinkedIn"],
+  series=[
+    Series("Followers", [34000, 28000, 22000, 15000, 8000]),
+    Series("Engagement", [5.2, 4.8, 6.1, 3.9, 4.5]),
+  ],
+  variant="grouped",
+  xLabel="Platform",
+  yLabel="Followers",
+)
+
+schedule = Card([
+  title,
+  scheduleList,
+], "sunk")
+title = Heading("Posts Scheduled This Week", "Your content calendar")
+scheduleList = ListBlock(variant="number", children=[
+  scheduleItem1,
+  scheduleItem2,
+  scheduleItem3,
+  scheduleItem4,
+  scheduleItem5,
+])
+scheduleItem1 = ListItem("Instagram Reel", "How I built my cross-platform strategy", "10:00 AM", null, "Scheduled")
+scheduleItem2 = ListItem("TikTok Video", "5 tips for creator growth", "2:30 PM", null, "Scheduled")
+scheduleItem3 = ListItem("YouTube Short", "My weekly workflow", "6:00 PM", null, "Scheduled")
+scheduleItem4 = ListItem("Twitter/X Thread", "Audience growth tips", "9:00 AM", null, "Scheduled")
+scheduleItem5 = ListItem("LinkedIn Post", "Creator collaboration updates", "11:00 AM", null, "Scheduled")
+
+bestHour = Card([
+  title,
+  bestHourInfo,
+], "sunk")
+title = Heading("Best Time to Post", "Based on your audience history")
+bestHourInfo = TextCallout("warning", "Optimal Post Time", "Wednesday at 2:00 PM shows the highest engagement rate based on your historical data.")
+
+comments = Card([
+  title,
+  commentsList,
+], "sunk")
+title = Heading("Comments Waiting for a Reply", "Unread and pending responses")
+commentsList = ListBlock(variant="image", children=[
+  comment1,
+  comment2,
+  comment3,
+])
+comment1 = ListItem("Engagement on best post", "Comment from @creatorfan123 — reply needed", null, [
+  Badge("Urgent", null, null, "danger"),
+])
+comment2 = ListItem("Feedback on new strategy", "Comment from @strategy_lover — reply needed", null, [
+  Badge("Feedback", null, null, "info"),
+])
+comment3 = ListItem("Collaboration interest", "Comment from @trendsetter — reply needed", null, [
+  Badge("Collaboration", null, null, "success"),
+])
+
+earnings = Card([
+  title,
+  earningsInfo,
+], "sunk")
+title = Heading("Earnings This Month", "Revenue breakdown")
+earningsInfo = TextCallout("success", "Earnings Summary", "Total earnings: $6,200. Breakdown: $3,800 from sponsorships, $1,200 from affiliate links, $1,200 from product sales.")
+
+collaborations = Card([
+  title,
+  collabList,
+], "sunk")
+title = Heading("Pending Collaboration Requests", "Partnership opportunities")
+collabList = ListBlock(variant="image", children=[
+  collab1,
+  collab2,
+])
+collab1 = ListItem("New Brand Partnership", "Brand X wants to feature you in a campaign", null, [
+  Badge("Pending", null, null, "warning"),
+])
+collab2 = ListItem("Content Collaboration", "Brand Y wants a co-created series", null, [
+  Badge("Pending", null, null, "warning"),
+])
+
+schedulePost = Card([
+  title,
+  scheduleForm,
+], "sunk")
+title = Heading("Schedule a Post", "Create and schedule your next content")
+scheduleForm = Form("schedule-post-form", formButtons, [
+  captionField,
+  timeField,
+  platformField,
+])
+captionField = FormControl("Caption", captionInput, "Enter your post caption")
+captionInput = TextArea("caption", "Write your caption here...", 4, null, null)
+timeField = FormControl("Time", timeSelect, "Select the posting time")
+timeSelect = Select("time", [timeS, timeM, timeL], "Choose a time")
+timeS = SelectItem("6:00 AM", "6:00 AM")
+timeM = SelectItem("10:00 AM", "10:00 AM")
+timeL = SelectItem("2:00 PM", "2:00 PM")
+platformField = FormControl("Platform", platformSelect, "Select target platform")
+platformSelect = Select("platform", [platformS, platformT, platformY, platformX, platformL], "Choose a platform")
+platformS = SelectItem("Instagram", "Instagram")
+platformT = SelectItem("TikTok", "TikTok")
+platformY = SelectItem("YouTube", "YouTube")
+platformX = SelectItem("Twitter/X", "Twitter/X")
+platformL = SelectItem("LinkedIn", "LinkedIn")
+formButtons = Buttons([scheduleSubmitBtn, scheduleCancelBtn])
+scheduleSubmitBtn = Button("Schedule Post", null, "primary")
+scheduleCancelBtn = Button("Cancel", null, "tertiary")
+
+platformFilter = Card([
+  title,
+  filterInfo,
+], "sunk")
+title = Heading("Platform Filter", "Narrow everything to one platform")
+filterInfo = TextCallout("neutral", "Platform Filter", "Click a platform below to filter all metrics to that platform only.")
+
+root = Card([
+  header,
+  overview,
+  metrics,
+  bestPosts,
+  audienceSplit,
+  schedule,
+  bestHour,
+  comments,
+  earnings,
+  collaborations,
+  schedulePost,
+  platformFilter,
+], "sunk", "column", "m")

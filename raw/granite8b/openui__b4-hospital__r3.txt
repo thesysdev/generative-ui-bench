@@ -1,0 +1,100 @@
+```openui-lang
+root = Card([
+    header,
+    occupancy,
+    erWait,
+    admissions,
+    departmentPatients,
+    staffOnShift,
+    criticalPatients,
+    dischargeReady,
+    orBookings,
+    lowSupplies,
+    incidentButton,
+    otherDayButton,
+    transferRequestButton
+], "clear", "row", "l")
+
+header = CardHeader("Hospital Operations Command", "Real-time Dashboard")
+
+# 1. Bed occupancy
+occupancy = Card([
+    TextContent("Bed Occupancy: 68% (112/165 beds occupied)", "large"),
+    BarChart(["Occupied", "Available"], [occupiedSeries, availableSeries], "grouped", "Beds", "%")
+], "sunk")
+occupiedSeries = Series("Occupied", [112])
+availableSeries = Series("Available", [53])
+
+# 2. Current ER wait
+erWait = Card([
+    TextContent("Current ER Wait Time: 22 minutes", "large")
+], "sunk")
+
+# 3. Admissions over the past two weeks
+admissions = Card([
+    TextContent("Admissions (Last 14 days): 342 patients", "large"),
+    LineChart(["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"], [admissionSeries], "linear", "Day", "Admissions")
+], "sunk")
+admissionSeries = Series("Admissions", [45, 38, 52, 47, 60, 55, 48, 62, 50, 44, 58, 53, 49, 56])
+
+# 4. Patients per department
+departmentPatients = Card([
+    TextContent("Patients per Department", "large"),
+    Table([
+        Col("Department", ["Emergency", "Surgery", "Internal Medicine", "Pediatrics", "OB/GYN"]),
+        Col("Patients", [27, 41, 38, 25, 19])
+    ])
+], "sunk")
+
+# 5. Staff on shift with role for each
+staffOnShift = Card([
+    TextContent("Staff on Shift", "large"),
+    ListBlock([
+        ListItem("Dr. Alice Smith", "Intensivist", null, "Assign to patient"),
+        ListItem("Nurse Bob Lee", "ER Nurse", null, "Assist triage"),
+        ListItem("Dr. Carol Wang", "Surgeon", null, "OR Lead"),
+        ListItem("Tech Dave Kim", "Medical Tech", null, "Support OR")
+    ], "number")
+], "sunk")
+
+# 6. Critical patients called out
+criticalPatients = Card([
+    TextContent("Critical Patients Called Out: 5", "large"),
+    TagBlock(["Critical", "Severe", "High-Risk"])
+], "sunk")
+
+# 7. Patients ready for discharge
+dischargeReady = Card([
+    TextContent("Patients Ready for Discharge: 18", "large")
+], "sunk")
+
+# 8. Today's operating room bookings
+orBookings = Card([
+    TextContent("Today's OR Bookings", "large"),
+    Table([
+        Col("Time", ["08:00-10:00", "10:30-12:30", "13:00-15:00", "15:30-17:30"]),
+        Col("Procedure", ["C-Section", "Appendectomy", "Laparoscopy", "Thoracotomy"])
+    ])
+], "sunk")
+
+# 9. Supplies running low
+lowSupplies = Card([
+    TextContent("Supplies Running Low", "large"),
+    TagBlock(["Suture", "IV Fluids", "Gloves", "Gowns"])
+], "sunk")
+
+# 10. File an incident
+incidentButton = Button("File Incident", null, "primary")
+
+# 11. Look at another day
+otherDayButton = Button("View Previous Day", null, "secondary")
+
+# 12. Request a patient transfer
+transferRequestButton = Button("Request Patient Transfer", null, "tertiary")
+
+buttons = Buttons([
+    incidentButton,
+    otherDayButton,
+    transferRequestButton
+], direction = "row")
+```

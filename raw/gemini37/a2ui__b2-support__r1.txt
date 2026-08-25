@@ -1,0 +1,343 @@
+Here is a support lead morning dashboard designed to monitor open workload, track response performance, review recent tickets with priority filtering, and quickly create new tickets.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "children": [
+          "header",
+          "kpiSummary",
+          "slaAlert",
+          "tabContainer"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Support Lead Morning Overview",
+        "subtitle": "Daily queue health, SLA targets, and ticket triage"
+      },
+      {
+        "id": "kpiSummary",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Metric",
+        "data": [
+          "Open Tickets",
+          "Avg. First-Response Time",
+          "SLA Breach Risk (<1h remaining)"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "42 tickets",
+          "18m 30s",
+          "3 tickets"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Benchmark",
+        "data": [
+          "Target: < 50",
+          "Target: < 25m",
+          "High Priority"
+        ]
+      },
+      {
+        "id": "slaAlert",
+        "component": "Alert",
+        "title": "Queue Status",
+        "description": "Average first-response time is currently 18m 30s (healthy). 5 new tickets arrived in the last 30 minutes.",
+        "variant": "info"
+      },
+      {
+        "id": "tabContainer",
+        "component": "Tabs",
+        "items": [
+          "allRecentTab",
+          "highPriorityTab",
+          "createTicketTab"
+        ]
+      },
+      {
+        "id": "allRecentTab",
+        "component": "TabItem",
+        "value": "recent-all",
+        "trigger": "5 Most Recent Tickets",
+        "content": [
+          "recentTicketsTable"
+        ]
+      },
+      {
+        "id": "recentTicketsTable",
+        "component": "Table",
+        "columns": [
+          "ticketIdCol",
+          "ticketSubjectCol",
+          "ticketPriorityCol",
+          "ticketTimeCol"
+        ]
+      },
+      {
+        "id": "ticketIdCol",
+        "component": "Col",
+        "label": "Ticket ID",
+        "data": [
+          "TICK-1048",
+          "TICK-1047",
+          "TICK-1046",
+          "TICK-1045",
+          "TICK-1044"
+        ]
+      },
+      {
+        "id": "ticketSubjectCol",
+        "component": "Col",
+        "label": "Subject / Customer",
+        "data": [
+          "Payment gateway timeout on checkout (Stripe)",
+          "Cannot invite new members to organization",
+          "Password reset link expiring immediately",
+          "Typo in invoice address template",
+          "SSO login failure across enterprise workspace"
+        ]
+      },
+      {
+        "id": "ticketPriorityCol",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "High",
+          "Medium",
+          "Low",
+          "Low",
+          "High"
+        ]
+      },
+      {
+        "id": "ticketTimeCol",
+        "component": "Col",
+        "label": "Created",
+        "data": [
+          "8 mins ago",
+          "14 mins ago",
+          "21 mins ago",
+          "35 mins ago",
+          "42 mins ago"
+        ]
+      },
+      {
+        "id": "highPriorityTab",
+        "component": "TabItem",
+        "value": "high-priority-only",
+        "trigger": "High Priority Only",
+        "content": [
+          "highPriorityCallout",
+          "highPriorityTable"
+        ]
+      },
+      {
+        "id": "highPriorityCallout",
+        "component": "Callout",
+        "title": "Filtered Queue",
+        "description": "Showing only urgent & high-priority incidents requiring immediate lead review or escalation.",
+        "variant": "warning"
+      },
+      {
+        "id": "highPriorityTable",
+        "component": "Table",
+        "columns": [
+          "hpIdCol",
+          "hpSubjectCol",
+          "hpPriorityCol",
+          "hpCreatedCol"
+        ]
+      },
+      {
+        "id": "hpIdCol",
+        "component": "Col",
+        "label": "Ticket ID",
+        "data": [
+          "TICK-1048",
+          "TICK-1044",
+          "TICK-1039"
+        ]
+      },
+      {
+        "id": "hpSubjectCol",
+        "component": "Col",
+        "label": "Subject / Customer",
+        "data": [
+          "Payment gateway timeout on checkout (Stripe)",
+          "SSO login failure across enterprise workspace",
+          "Production webhook deliveries failing"
+        ]
+      },
+      {
+        "id": "hpPriorityCol",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "High",
+          "High",
+          "High"
+        ]
+      },
+      {
+        "id": "hpCreatedCol",
+        "component": "Col",
+        "label": "Created",
+        "data": [
+          "8 mins ago",
+          "42 mins ago",
+          "1 hour ago"
+        ]
+      },
+      {
+        "id": "createTicketTab",
+        "component": "TabItem",
+        "value": "new-ticket",
+        "trigger": "+ Open New Ticket",
+        "content": [
+          "newTicketForm"
+        ]
+      },
+      {
+        "id": "newTicketForm",
+        "component": "Form",
+        "name": "create_ticket_form",
+        "buttons": "formActions",
+        "fields": [
+          "requesterField",
+          "subjectField",
+          "priorityField",
+          "detailsField"
+        ]
+      },
+      {
+        "id": "requesterField",
+        "component": "FormControl",
+        "label": "Customer / Requester Email",
+        "input": "requesterInput"
+      },
+      {
+        "id": "requesterInput",
+        "component": "Input",
+        "name": "requester_email",
+        "placeholder": "customer@example.com",
+        "type": "email"
+      },
+      {
+        "id": "subjectField",
+        "component": "FormControl",
+        "label": "Issue Subject",
+        "input": "subjectInput"
+      },
+      {
+        "id": "subjectInput",
+        "component": "Input",
+        "name": "ticket_subject",
+        "placeholder": "Brief description of the problem",
+        "type": "text"
+      },
+      {
+        "id": "priorityField",
+        "component": "FormControl",
+        "label": "Priority Level",
+        "input": "prioritySelect"
+      },
+      {
+        "id": "prioritySelect",
+        "component": "Select",
+        "name": "priority",
+        "placeholder": "Select priority",
+        "items": [
+          "pLow",
+          "pMed",
+          "pHigh"
+        ]
+      },
+      {
+        "id": "pLow",
+        "component": "SelectItem",
+        "label": "Low - General question / Non-critical",
+        "value": "low"
+      },
+      {
+        "id": "pMed",
+        "component": "SelectItem",
+        "label": "Medium - Degraded functionality",
+        "value": "medium"
+      },
+      {
+        "id": "pHigh",
+        "component": "SelectItem",
+        "label": "High - Outage / Critical blocker",
+        "value": "high"
+      },
+      {
+        "id": "detailsField",
+        "component": "FormControl",
+        "label": "Ticket Description",
+        "hint": "Include steps to reproduce, workspace IDs, or error codes.",
+        "input": "detailsInput"
+      },
+      {
+        "id": "detailsInput",
+        "component": "TextArea",
+        "name": "ticket_details",
+        "placeholder": "Provide full context about the issue...",
+        "rows": 4
+      },
+      {
+        "id": "formActions",
+        "component": "Buttons",
+        "buttons": [
+          "submitTicketBtn",
+          "resetFormBtn"
+        ]
+      },
+      {
+        "id": "submitTicketBtn",
+        "component": "Button",
+        "label": "Create & Assign Ticket",
+        "variant": "primary"
+      },
+      {
+        "id": "resetFormBtn",
+        "component": "Button",
+        "label": "Clear Fields",
+        "variant": "tertiary"
+      }
+    ]
+  }
+}
+</a2ui-json>

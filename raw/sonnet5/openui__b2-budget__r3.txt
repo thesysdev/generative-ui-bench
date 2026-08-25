@@ -1,0 +1,60 @@
+root = Card([header, monthSection, budgetSection, categorySection, largestSection, addSection])
+
+header = CardHeader("Monthly Budget Check", "March 2024")
+
+monthSection = Card([monthLabel, monthControl], "sunk")
+monthLabel = TextContent("Viewing month", "small-heavy")
+monthControl = FormControl("Select month", monthSelect)
+monthSelect = Select("month", [janOpt, febOpt, marOpt, aprOpt], "Choose a month", null, "March 2024")
+janOpt = SelectItem("jan", "January 2024")
+febOpt = SelectItem("feb", "February 2024")
+marOpt = SelectItem("mar", "March 2024")
+aprOpt = SelectItem("apr", "April 2024")
+monthForm = Form("month-picker", monthButtons, [monthControl])
+monthButtons = Buttons([viewMonthBtn])
+viewMonthBtn = Button("View month", null, "primary")
+
+budgetSection = Card([budgetHeading, budgetProgress, budgetStats], "sunk")
+budgetHeading = Heading("Total Spent vs Budget", "h3")
+budgetProgress = Progress(78, "$2,340 of $3,000 spent")
+budgetStats = TextCallout("info", "On track", "You have $660 remaining with 9 days left in the month.")
+
+categorySection = Card([categoryHeading, categoryChart, categoryTable], "sunk")
+categoryHeading = Heading("Spending by Category", "h3")
+categoryChart = PieChart([groceries, dining, transport, utilities, entertainment, other], [620, 410, 280, 350, 190, 490], "donut")
+categoryTable = Table([catNames, catAmounts])
+catNames = Col("Category", ["Groceries", "Dining", "Transport", "Utilities", "Entertainment", "Other"])
+catAmounts = Col("Amount", ["$620", "$410", "$280", "$350", "$190", "$490"])
+
+groceries = "Groceries"
+dining = "Dining"
+transport = "Transport"
+utilities = "Utilities"
+entertainment = "Entertainment"
+other = "Other"
+
+largestSection = Card([largestHeading, largestCallout], "sunk")
+largestHeading = Heading("Largest Expense This Month", "h3")
+largestCallout = Callout("warning", "Rent Payment - $1,200", "Recorded on Mar 1st under Housing. This single expense makes up 51% of your total spending this month.")
+
+addSection = Card([addHeading, addExpenseDialog], "sunk")
+addHeading = Heading("Add a New Expense", "h3")
+addExpenseDialog = DialogBlock("Add Expense", "Add a New Expense", "Enter the details of your purchase", [expenseForm], "default")
+expenseForm = Form("add-expense", expenseButtons, [expenseNameField, expenseAmountField, expenseCategoryField, expenseDateField])
+expenseNameField = FormControl("Description", expenseNameInput)
+expenseNameInput = Input("description", "e.g. Coffee shop")
+expenseAmountField = FormControl("Amount", expenseAmountInput)
+expenseAmountInput = Input("amount", "0.00", "number")
+expenseCategoryField = FormControl("Category", expenseCategorySelect)
+expenseCategorySelect = Select("category", [catGroceries, catDining, catTransport, catUtilities, catEntertainment, catOther], "Choose a category")
+catGroceries = SelectItem("groceries", "Groceries")
+catDining = SelectItem("dining", "Dining")
+catTransport = SelectItem("transport", "Transport")
+catUtilities = SelectItem("utilities", "Utilities")
+catEntertainment = SelectItem("entertainment", "Entertainment")
+catOther = SelectItem("other", "Other")
+expenseDateField = FormControl("Date", expenseDatePicker)
+expenseDatePicker = DatePicker("date", "single")
+expenseButtons = Buttons([saveExpenseBtn, cancelExpenseBtn])
+saveExpenseBtn = Button("Save Expense", null, "primary")
+cancelExpenseBtn = Button("Cancel", null, "tertiary")

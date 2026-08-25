@@ -1,0 +1,28 @@
+thought
+root = Card([header, status, metricsSection, comparisonSection, actions])
+header = CardHeader("Morning Operations", "Real-time store performance")
+status = Callout("success", "High Performance", "Sales are currently 12% higher than yesterday morning.")
+metricsSection = Card([revenueCard, orderCard], "row", "m")
+comparisonSection = Card([comparisonHeading, chart], "sunk")
+actions = Buttons([refreshBtn, reportBtn])
+
+revenueCard = Card([revLabel, revAmount, revBadge], "column")
+revLabel = Text("Today's Revenue", "small")
+revAmount = TextContent("$4,280.50", "large-heavy")
+revBadge = Badge("+12% vs yesterday", "success")
+
+orderCard = Card([orderLabel, orderCount, orderBadge], "column")
+orderLabel = Text("Total Orders", "small")
+orderCount = TextContent("54", "large-heavy")
+orderBadge = Tag("+5 vs yesterday", null, "sm", "info")
+
+comparisonHeading = Heading("Revenue Trend", "h3")
+chart = LineChart(["6am", "7am", "8am", "9am", "10am", "11am"], [todaySeries, yesterdaySeries], "natural", "Time", "USD")
+todaySeries = Series("Today", [400, 600, 850, 1200, 900, 1330])
+yesterdaySeries = Series("Yesterday", [380, 550, 700, 1100, 850, 1100])
+
+refreshBtn = Button("Refresh Data", null, "primary")
+reportBtn = Button("Export Report", null, "secondary")
+
+// Helper for text consistency
+Text = (t, s) -> TextContent(t, s)

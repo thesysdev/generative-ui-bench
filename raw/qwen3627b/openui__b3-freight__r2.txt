@@ -1,0 +1,67 @@
+root = Card([header, lastRefreshed, kpisCard, searchSection, shipmentsSection, delayedSection, carrierSection, weeklySection, flagDialog], "card", "column", "m")
+
+header = CardHeader("Logistics Coordinator Board", "Real-time shipment tracking & performance overview")
+
+lastRefreshed = TextContent("Last refreshed: Jan 12, 2025 at 2:45 PM EST", "small")
+
+kpisCard = Card([kpisHeading, onTimeBadge, avgCostBadge], "sunk", "column", "s")
+kpisHeading = Heading("Key Metrics — January 2025", "h3")
+onTimeBadge = Badge("On-Time: 92.5%", "secondary")
+avgCostBadge = Badge("Avg Cost/Shipment: $1,247", "secondary")
+
+searchSection = Card([searchHeading, routeForm], "clear", "column", "s")
+searchHeading = Heading("Search by Route", "h3")
+routeForm = Form("route-search", searchButtons, [originField, destField])
+originField = FormControl("Origin City", originInput)
+originInput = Input("origin", "e.g. Los Angeles", "text")
+destField = FormControl("Destination City", destInput)
+destInput = Input("destination", "e.g. New York", "text")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search Route", null, "primary")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable], "sunk", "column", "s")
+shipmentsHeading = Heading("Shipments in Transit", "h3")
+shipmentsTable = Table([idCol, originCol, destCol, etaCol, statusCol])
+idCol = Col("Shipment ID", ["SHP-1042", "SHP-1043", "SHP-1044", "SHP-1045", "SHP-1046", "SHP-1047", "SHP-1048", "SHP-1049"])
+originCol = Col("Origin", ["Los Angeles, CA", "Chicago, IL", "Seattle, WA", "Denver, CO", "Phoenix, AZ", "Portland, OR", "San Francisco, CA", "Austin, TX"])
+destCol = Col("Destination", ["New York, NY", "Miami, FL", "Boston, MA", "Atlanta, GA", "Dallas, TX", "Philadelphia, PA", "Houston, TX", "Charlotte, NC"])
+etaCol = Col("ETA", ["Jan 15, 2025", "Jan 14, 2025", "Jan 16, 2025", "Jan 13, 2025", "Jan 15, 2025", "Jan 17, 2025", "Jan 14, 2025", "Jan 16, 2025"])
+statusCol = Col("Status", ["On Track", "Delayed", "On Track", "On Track", "Delayed", "On Track", "On Track", "In Warehouse"])
+
+delayedSection = Card([delayedHeading, delayedCallout, delayedList], "sunk", "column", "s")
+delayedHeading = Heading("Delayed Shipments", "h3")
+delayedCallout = Callout("warning", "2 Shipments Delayed", "Two shipments are currently running behind schedule. Review details below and flag for escalation if needed.")
+delayedList = ListBlock([delayed1, delayed2], "number")
+delayed1 = ListItem("SHP-1043 — Chicago → Miami", "ETA: Jan 14 · Delay reason: Weather · Expected delay: 1 day", null, "Flag Shipment")
+delayed2 = ListItem("SHP-1046 — Phoenix → Dallas", "ETA: Jan 15 · Delay reason: Carrier capacity · Expected delay: 2 days", null, "Flag Shipment")
+
+carrierSection = Card([carrierHeading, carrierChart], "sunk", "column", "s")
+carrierHeading = Heading("Volume Split by Carrier", "h3")
+carrierChart = PieChart(carrierLabels, carrierValues, "donut")
+carrierLabels = ["FedEx", "UPS", "DHL", "XPO Logistics"]
+carrierValues = [35, 28, 22, 15]
+
+weeklySection = Card([weeklyHeading, weeklyChart], "sunk", "column", "s")
+weeklyHeading = Heading("Weekly Volume — Past 8 Weeks", "h3")
+weeklyChart = LineChart(weeklyLabels, [weeklySeries], "natural", "Week", "Shipments")
+weeklyLabels = ["Nov 4", "Nov 11", "Nov 18", "Nov 25", "Dec 2", "Dec 9", "Dec 16", "Dec 23"]
+weeklySeries = Series("Shipments", [312, 328, 345, 361, 339, 355, 372, 389])
+
+flagDialog = DialogBlock("Flag a Shipment", "Flag Shipment for Escalation", "Submit a flag to prioritize or investigate a shipment.", [flagForm])
+flagForm = Form("flag-shipment", flagButtons, [flagIdField, flagReasonField, flagPriorityField])
+flagIdField = FormControl("Shipment ID", flagIdInput)
+flagIdInput = Input("flag_shipment_id", "e.g. SHP-1043", "text")
+flagReasonField = FormControl("Reason", flagReasonSelect)
+flagReasonSelect = Select("flag_reason", [reasonWeather, reasonCarrier, reasonCustoms, reasonOther], "Select reason")
+reasonWeather = SelectItem("weather", "Weather-related delay")
+reasonCarrier = SelectItem("carrier", "Carrier capacity issue")
+reasonCustoms = SelectItem("customs", "Customs hold")
+reasonOther = SelectItem("other", "Other")
+flagPriorityField = FormControl("Priority Level", flagPriorityRadio)
+flagPriorityRadio = RadioGroup("flag_priority", [priLow, priMedium, priHigh], "medium")
+priLow = RadioItem("Low", "Monitor, no action needed", "low")
+priMedium = RadioItem("Medium", "Review within 24 hours", "medium")
+priHigh = RadioItem("High", "Immediate escalation required", "high")
+flagButtons = Buttons([submitFlagBtn, cancelFlagBtn])
+submitFlagBtn = Button("Submit Flag", null, "primary")
+cancelFlagBtn = Button("Cancel", null, "tertiary")

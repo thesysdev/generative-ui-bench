@@ -1,0 +1,56 @@
+
+
+root = Card([header, filterForm, mostRead, readershipSection, draftsSection, publishedSection, commentsSection, scheduleSection, newDraftBtn], "card", "column", "l")
+
+header = CardHeader("Content Studio", "Your editorial dashboard at a glance")
+
+filterForm = Form("category-filter", filterBtns, [catField])
+catField = FormControl("Category", catSelect, "Narrow all sections below")
+catSelect = Select("category", [allOpt, techOpt, designOpt, bizOpt, lifeOpt], "All categories")
+allOpt = SelectItem("all", "All categories")
+techOpt = SelectItem("technology", "Technology")
+designOpt = SelectItem("design", "Design")
+bizOpt = SelectItem("business", "Business")
+lifeOpt = SelectItem("lifestyle", "Lifestyle")
+filterBtns = Buttons([applyBtn])
+applyBtn = Button("Apply filter", null, "primary", "normal", "small")
+
+mostRead = Callout("success", "Most-read this month", "\"The Creator Economy in 2025\" — 48,200 reads, up 32% vs. last month. Category: Business.")
+
+readershipSection = Card([readershipHeading, readershipChart], "sunk")
+readershipHeading = Heading("Readership — past 30 days", "h3")
+readershipChart = LineChart(["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","D13","D14","D15","D16","D17","D18","D19","D20","D21","D22","D23","D24","D25","D26","D27","D28","D29","D30"], [readsSeries], "natural", "Day", "Unique readers")
+readsSeries = Series("Unique readers", [2100, 2250, 2400, 2300, 2550, 2800, 3100, 2900, 2700, 2600, 2850, 3000, 3200, 3450, 3300, 3100, 2900, 3050, 3300, 3600, 3800, 4100, 4300, 4500, 4200, 3900, 3700, 4000, 4400, 4820])
+
+draftsSection = Card([draftsHeading, draftsTable], "sunk")
+draftsHeading = Heading("Drafts", "h3")
+draftsTable = Table([colTitle, colStatus, colCat])
+colTitle = Col("Title", ["The Future of Remote Work", "10 Design Trends for 2025", "How AI Changes Publishing", "Sustainable Fashion Guide", "The Creator Economy in 2025"])
+colStatus = Col("Status", ["In Review", "Drafting", "Editing", "In Review", "Published"])
+colCat = Col("Category", ["Technology", "Design", "Technology", "Lifestyle", "Business"])
+
+publishedSection = Card([publishedHeading, publishedList], "sunk")
+publishedHeading = Heading("Published this week", "h3")
+publishedList = ListBlock([pub1, pub2, pub3])
+pub1 = ListItem("Why Everyone's Talking About Spatial Computing", "Published Mon · Technology · 12,400 reads")
+pub2 = ListItem("A Deep Dive into Open Source AI Models", "Published Wed · Technology · 18,700 reads")
+pub3 = ListItem("The New Rules of Email Marketing", "Published Thu · Business · 9,300 reads")
+
+commentsSection = Card([commentsHeading, commentsList], "sunk")
+commentsHeading = Heading("Comments awaiting reply", "h3")
+commentsList = ListBlock([cmt1, cmt2, cmt3])
+cmt1 = ListItem("\"Great piece, but the data on page 3 seems outdated…\"", "On: Why Everyone's Talking About Spatial Computing · 2h ago")
+cmt2 = ListItem("\"Could you clarify the methodology behind the benchmarks?\"", "On: A Deep Dive into Open Source AI Models · 5h ago")
+cmt3 = ListItem("\"This changed how I think about deliverability. Thank you!\"", "On: The New Rules of Email Marketing · 1d ago")
+
+scheduleSection = Card([scheduleHeading, scheduleForm], "sunk")
+scheduleHeading = Heading("Schedule a piece", "h3")
+scheduleForm = Form("schedule-piece", scheduleBtns, [schedTitleField, schedDateField])
+schedTitleField = FormControl("Title", schedTitleInput)
+schedTitleInput = Input("title", "e.g. The Next Wave of Web3 Design")
+schedDateField = FormControl("Publish date", schedDatePicker, "When should this go live?")
+schedDatePicker = DatePicker("publish_date", "single")
+scheduleBtns = Buttons([scheduleBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+
+newDraftBtn = Button("Start a new draft", null, "primary", "normal", "large")

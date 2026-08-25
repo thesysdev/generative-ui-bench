@@ -1,0 +1,178 @@
+```openui-lang
+root = Card([
+    header,
+    occupancySection,
+    erStatus,
+    admissionsChart,
+    departmentStats,
+    staffShift,
+    criticalPatients,
+    dischargeReady,
+    orBookings,
+    suppliesAlert,
+    incidentForm,
+    dateSelector,
+    transferRequest
+])
+
+header = CardHeader("Hospital Operations Command Center", "Real-time overview of critical metrics")
+
+occupancySection = Card([
+    occupancyTitle,
+    occupancyChart,
+    occupancyDetails
+], "sunk")
+occupancyTitle = Heading("Bed Occupancy", "h3")
+occupancyChart = SingleStackedBarChart(["ICU", "Surgical", "Medical", "Pediatrics", "General"], [85, 72, 91, 68, 89])
+occupancyDetails = Table([bedType, available, occupied])
+bedType = Col("Bed Type", ["ICU", "Surgical", "Medical", "Pediatrics", "General"])
+available = Col("Available", ["5", "18", "9", "32", "11"])
+occupied = Col("Occupied", ["85", "72", "91", "68", "89"])
+
+erStatus = Card([
+    erTitle,
+    erWaitTime,
+    erStatusChart
+], "sunk")
+erTitle = Heading("Emergency Room Status", "h3")
+erWaitTime = TextContent("Current wait time: 47 minutes", "large-heavy")
+erStatusChart = RadarChart(["Triage", "Assessment", "Treatment", "Discharge"], [75, 88, 62, 95])
+
+admissionsChart = Card([
+    admissionsTitle,
+    admissionsLineChart
+], "sunk")
+admissionsTitle = Heading("Admissions Past 2 Weeks", "h3")
+admissionsLineChart = LineChart(
+    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    [admissionsSeries],
+    "natural",
+    "Day", "Admissions"
+)
+admissionsSeries = Series("Admissions", [12, 15, 18, 22, 25, 30, 28, 14, 17, 20, 23, 26, 32, 29])
+
+departmentStats = Card([
+    departmentsTitle,
+    departmentsPieChart
+], "sunk")
+departmentsTitle = Heading("Patients by Department", "h3")
+departmentsPieChart = PieChart(
+    ["Cardiology", "Oncology", "Neurology", "Orthopedics", "Gastroenterology", "Other"],
+    [35, 22, 18, 15, 9, 11]
+)
+
+staffShift = Card([
+    staffTitle,
+    staffTable
+], "sunk")
+staffTitle = Heading("Staff on Shift", "h3")
+staffTable = Table([role, name, status])
+role = Col("Role", ["Doctor", "Nurse", "Tech", "Admin", "Cleaning"])
+name = Col("Name", ["Dr. Smith", "Nurse Lee", "Tech Chen", "Admin Park", "Cleaning Team"])
+status = Col("Status", ["On Duty", "On Duty", "On Duty", "On Duty", "On Shift"])
+
+criticalPatients = Card([
+    criticalTitle,
+    criticalPatientsList
+], "sunk")
+criticalTitle = Heading("Critical Patients Called Out", "h3")
+criticalPatientsList = ListBlock([
+    criticalItem1,
+    criticalItem2,
+    criticalItem3
+])
+criticalItem1 = ListItem("Patient #412", "Trauma, ICU", ["critical"], "Check Status")
+criticalItem2 = ListItem("Patient #287", "Sepsis, Med-Surg", ["critical"], "Check Status")
+criticalItem3 = ListItem("Patient #195", "MI, CCU", ["critical"], "Check Status")
+
+dischargeReady = Card([
+    dischargeTitle,
+    dischargePatients
+], "sunk")
+dischargeTitle = Heading("Patients Ready for Discharge", "h3")
+dischargePatients = Table([patientId, name, room, doc])
+patientId = Col("ID", ["#321", "#456", "#789"])
+name = Col("Name", ["John Doe", "Jane Smith", "Robert Johnson"])
+room = Col("Room", ["5B", "3A", "7C"])
+doc = Col("Attending", ["Dr. Lee", "Dr. Chen", "Dr. Park"])
+
+orBookings = Card([
+    orTitle,
+    orBookingsTable
+], "sunk")
+orTitle = Heading("Today's OR Bookings", "h3")
+orBookingsTable = Table([time, procedure, surgeon, patient])
+time = Col("Time", ["08:00", "09:30", "11:00", "13:00"])
+procedure = Col("Procedure", ["Appendectomy", "C-Section", "Knee Replacement", "Cholecystectomy"])
+surgeon = Col("Surgeon", ["Dr. Brown", "Dr. White", "Dr. Black", "Dr. Gray"])
+patient = Col("Patient", ["#101", "#202", "#303", "#404"])
+
+suppliesAlert = Card([
+    suppliesTitle,
+    suppliesAlertList
+], "sunk", "row", "m")
+suppliesTitle = Heading("Supplies Running Low", "h3")
+suppliesAlertList = ListBlock([
+    suppliesItem1,
+    suppliesItem2,
+    suppliesItem3
+], "image")
+suppliesItem1 = ListItem("Sutures", "Critical", ["urgent"], "Order Now")
+suppliesItem2 = ListItem("IV Fluids", "Low", ["warning"], "Check Stock")
+suppliesItem3 = ListItem("Antibiotics", "Low", ["warning"], "Replenish")
+
+incidentForm = Card([
+    incidentTitle,
+    incidentFormContainer
+], "sunk")
+incidentTitle = Heading("File an Incident", "h3")
+incidentFormContainer = Form("incident-report", incidentButtons, [incidentType, description, location, priority])
+incidentType = FormControl("Incident Type", incidentSelect)
+incidentSelect = Select("type", [incidentType1, incidentType2, incidentType3], "Select Type")
+incidentType1 = SelectItem("Medical", "Medical")
+incidentType2 = SelectItem("Safety", "Safety")
+incidentType3 = SelectItem("Other", "Other")
+description = FormControl("Description", incidentTextArea, "Brief description of the incident")
+incidentTextArea = TextArea("description", "Describe the incident...", 4)
+location = FormControl("Location", incidentInput)
+incidentInput = Input("location", "Where did this occur?")
+priority = FormControl("Priority", incidentPriority)
+incidentPriority = RadioGroup("priority", [priorityHigh, priorityMedium, priorityLow])
+priorityHigh = RadioItem("High", "Urgent action needed", "high")
+priorityMedium = RadioItem("Medium", "Needs attention", "medium")
+priorityLow = RadioItem("Low", "Minor issue", "low")
+incidentButtons = Buttons([submitIncident, cancelIncident])
+submitIncident = Button("Report Incident", null, "primary")
+cancelIncident = Button("Cancel", null, "tertiary")
+
+dateSelector = Card([
+    dateTitle,
+    datePicker
+], "sunk")
+dateTitle = Heading("View Another Day", "h3")
+datePicker = CalendarBlock("single", "2023-10-15", 1)
+
+transferRequest = Card([
+    transferTitle,
+    transferFormContainer
+], "sunk")
+transferTitle = Heading("Request Patient Transfer", "h3")
+transferFormContainer = Form("transfer-request", transferButtons, [patientIdTransfer, fromDept, toDept, reason])
+patientIdTransfer = FormControl("Patient ID", transferInput)
+transferInput = Input("patient_id", "Enter patient ID")
+fromDept = FormControl("From Department", transferSelectFrom)
+transferSelectFrom = Select("from_department", [fromCardio, fromSurg, fromMed], "Select Department")
+fromCardio = SelectItem("Cardiology", "Cardiology")
+fromSurg = SelectItem("Surgical", "Surgical")
+fromMed = SelectItem("Medical", "Medical")
+toDept = FormControl("To Department", transferSelectTo)
+transferSelectTo = Select("to_department", [toICU, toPediatrics, toRecovery], "Select Department")
+toICU = SelectItem("ICU", "Intensive Care Unit")
+toPediatrics = SelectItem("Pediatrics", "Pediatrics")
+toRecovery = SelectItem("Recovery", "Recovery Room")
+reason = FormControl("Reason", transferTextArea, "Brief reason for transfer")
+transferTextArea = TextArea("reason", "Reason for transfer...", 3)
+transferButtons = Buttons([submitTransfer, cancelTransfer])
+submitTransfer = Button("Request Transfer", null, "primary")
+cancelTransfer = Button("Cancel", null, "tertiary")
+```

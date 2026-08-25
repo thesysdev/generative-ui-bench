@@ -1,0 +1,60 @@
+root = Card([header, refreshInfo, searchSection, delayedAlert, kpiRow, shipmentsSection, carrierSection, volumeSection, flagSection])
+
+header = CardHeader("Logistics Operations Board", "Live shipment tracking and performance")
+refreshInfo = TextContent("Last refreshed: Today at 2:45 PM EST", "small")
+
+searchSection = Card([searchHeading, searchForm], "sunk")
+searchHeading = Heading("Search by Route", "h3")
+searchForm = Form("route_search", searchButtons, [routeField])
+routeField = FormControl("Origin → Destination", routeInput)
+routeInput = Input("route", "e.g. Los Angeles to Chicago")
+searchButtons = Buttons([searchBtn])
+searchBtn = Button("Search", null, "primary")
+
+delayedAlert = Callout("warning", "3 Shipments Delayed", "SHP-1042 (Dallas → Atlanta), SHP-1056 (Seattle → Denver), and SHP-1071 (Miami → Boston) are behind schedule due to weather and carrier capacity issues.")
+
+kpiRow = Card([onTimeCard, avgCostCard], "sunk", "row", "l")
+onTimeCard = Card([onTimeHeading, onTimeProgress], "clear")
+onTimeHeading = TextContent("On-Time Delivery — This Month", "small-heavy")
+onTimeProgress = Progress(87, "87% on-time")
+avgCostCard = Card([avgCostHeading, avgCostValue], "clear")
+avgCostHeading = TextContent("Average Cost per Shipment", "small-heavy")
+avgCostValue = TextContent("$1,284", "large-heavy")
+
+shipmentsSection = Card([shipmentsHeading, shipmentsTable], "sunk")
+shipmentsHeading = Heading("Shipments In Transit", "h3")
+shipmentsTable = Table([colId, colOrigin, colDest, colEta, colStatus])
+colId = Col("Shipment ID", ["SHP-1038", "SHP-1042", "SHP-1049", "SHP-1056", "SHP-1063", "SHP-1071", "SHP-1078"])
+colOrigin = Col("Origin", ["Los Angeles", "Dallas", "New York", "Seattle", "Chicago", "Miami", "Phoenix"])
+colDest = Col("Destination", ["Chicago", "Atlanta", "Miami", "Denver", "Houston", "Boston", "Portland"])
+colEta = Col("ETA", ["Oct 12, 4:00 PM", "Oct 11, 9:00 AM", "Oct 13, 11:30 AM", "Oct 12, 2:00 PM", "Oct 12, 6:00 PM", "Oct 11, 3:00 PM", "Oct 13, 8:00 AM"])
+colStatus = Col("Status", ["On Time", "Delayed", "On Time", "Delayed", "On Time", "Delayed", "On Time"])
+
+carrierSection = Card([carrierHeading, carrierChart], "sunk")
+carrierHeading = Heading("Volume Split by Carrier", "h3")
+carrierChart = PieChart(carrierLabels, carrierValues, "donut")
+carrierLabels = ["FedEx Freight", "UPS Freight", "Schneider", "J.B. Hunt", "Old Dominion"]
+carrierValues = [320, 285, 210, 175, 140]
+
+volumeSection = Card([volumeHeading, volumeChart], "sunk")
+volumeHeading = Heading("Weekly Shipment Volume — Past 2 Months", "h3")
+volumeChart = BarChart(weekLabels, [volumeSeries], "grouped", "Week", "Shipments")
+weekLabels = ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5", "Wk 6", "Wk 7", "Wk 8"]
+volumeSeries = Series("Volume", [142, 158, 149, 167, 173, 161, 180, 176])
+
+flagSection = Card([flagHeading, flagForm], "sunk")
+flagHeading = Heading("Flag a Shipment", "h3")
+flagForm = Form("flag_shipment", flagButtons, [flagShipmentField, flagReasonField])
+flagShipmentField = FormControl("Shipment ID", flagSelect)
+flagSelect = Select("shipment_id", [ship1, ship2, ship3, ship4, ship5, ship6, ship7], "Choose a shipment")
+ship1 = SelectItem("SHP-1038", "SHP-1038 — LA to Chicago")
+ship2 = SelectItem("SHP-1042", "SHP-1042 — Dallas to Atlanta")
+ship3 = SelectItem("SHP-1049", "SHP-1049 — NY to Miami")
+ship4 = SelectItem("SHP-1056", "SHP-1056 — Seattle to Denver")
+ship5 = SelectItem("SHP-1063", "SHP-1063 — Chicago to Houston")
+ship6 = SelectItem("SHP-1071", "SHP-1071 — Miami to Boston")
+ship7 = SelectItem("SHP-1078", "SHP-1078 — Phoenix to Portland")
+flagReasonField = FormControl("Reason for Flag", flagReasonInput, "Describe the issue with this shipment")
+flagReasonInput = TextArea("reason", "e.g. Damaged goods, wrong route, extended delay...", 3)
+flagButtons = Buttons([flagBtn])
+flagBtn = Button("Flag Shipment", null, "primary", "destructive")

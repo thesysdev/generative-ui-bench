@@ -1,0 +1,66 @@
+root = Card([header, statusRow, blockedAlert, progress, updatesHeading, updatesList, missingNote, divider, postHeading, postForm, followUps])
+
+header = CardHeader("Async Standup — Engineering", "Thursday, June 12, 2025 · 08:00 UTC cutoff")
+
+statusRow = Card([dateTag, postedTag, blockedTag], "clear", "row", "s", "center", "start", true)
+dateTag = Tag("Thu, Jun 12, 2025", null, "md", "info")
+postedTag = Tag("5 of 8 posted", null, "md", "success")
+blockedTag = Tag("2 blocked", null, "md", "danger")
+
+blockedAlert = Alert("2 teammates are blocked", "Priya Nair is waiting on staging DB credentials. Marcus Webb is blocked on the design handoff for the billing modal. Both need an unblock before standup ends.", "destructive")
+
+progress = Progress(63, "Updates received: 5 of 8 (3 still missing)")
+
+updatesHeading = Heading("Today's updates", "h3")
+
+updatesList = ListBlock([u1, u2, u3, u4, u5, u6, u7, u8])
+u1 = ListItem("Priya Nair — Backend · BLOCKED", "Yesterday: finished migration scripts. Today: cannot run integration tests — waiting on staging DB credentials from infra. Needs: creds by 11:00 UTC.")
+u2 = ListItem("Marcus Webb — Frontend · BLOCKED", "Yesterday: shipped invoice list view. Today: paused on billing modal, design handoff still missing. Needs: final Figma spec from Dana.")
+u3 = ListItem("Dana Ortiz — Design", "Yesterday: wrapped billing modal states. Today: exporting specs for Marcus by 10:30, then usability notes for onboarding.")
+u4 = ListItem("Tomás Silva — Platform", "Yesterday: cut infra costs 12% by right-sizing workers. Today: rotating staging credentials, unblocking Priya first thing.")
+u5 = ListItem("Aiko Tanaka — QA", "Yesterday: closed 14 regression tickets. Today: writing test plan for release 4.2, no blockers.")
+u6 = ListItem("Sam Okafor — Backend · No update yet", "Last posted Wednesday. Expected topic: rate-limiter rollout.")
+u7 = ListItem("Lena Fischer — Data · No update yet", "Last posted Wednesday. Expected topic: churn dashboard refresh.")
+u8 = ListItem("Ravi Menon — Mobile · No update yet", "On call this week; update may arrive after the 08:00 UTC cutoff.")
+
+missingNote = TextCallout("warning", "3 updates still missing", "Sam Okafor, Lena Fischer and Ravi Menon have not posted yet. A reminder goes out automatically at 09:30 UTC.")
+
+divider = Separator("horizontal")
+
+postHeading = Heading("Post your update", "h3")
+
+postForm = Form("standup-update", formButtons, [nameField, yesterdayField, todayField, blockedField, blockerField, moodField])
+
+nameField = FormControl("Your name", nameSelect)
+nameSelect = Select("teammate", [optSam, optLena, optRavi, optOther], "Select yourself")
+optSam = SelectItem("sam", "Sam Okafor — Backend")
+optLena = SelectItem("lena", "Lena Fischer — Data")
+optRavi = SelectItem("ravi", "Ravi Menon — Mobile")
+optOther = SelectItem("other", "Someone else")
+
+yesterdayField = FormControl("What I did yesterday", yesterdayInput)
+yesterdayInput = TextArea("yesterday", "Shipped the rate-limiter behind a flag…", 3)
+
+todayField = FormControl("What I'm doing today", todayInput)
+todayInput = TextArea("today", "Rolling out to 10% of traffic and watching error rates…", 3)
+
+blockedField = FormControl("Am I blocked?", blockedRadio, "Blocked updates are flagged at the top of this screen")
+blockedRadio = RadioGroup("is_blocked", [notBlocked, isBlocked], "no")
+notBlocked = RadioItem("Not blocked", "Everything I need is available", "no")
+isBlocked = RadioItem("Blocked", "I need something from someone", "yes")
+
+blockerField = FormControl("What's blocking me (if any)", blockerInput)
+blockerInput = Input("blocker", "Waiting on staging DB credentials from Tomás")
+
+moodField = FormControl("Confidence in hitting this week's goal", moodSlider)
+moodSlider = Slider("confidence", "discrete", 1, 5, 1, [4], "1 = at risk, 5 = certain")
+
+formButtons = Buttons([submitBtn, remindBtn, skipBtn])
+submitBtn = Button("Post update", null, "primary")
+remindBtn = Button("Nudge the 3 missing teammates", null, "secondary")
+skipBtn = Button("Skip today", null, "tertiary")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Summarize this standup for the team channel")
+f2 = FollowUpItem("Draft a message to unblock Priya and Marcus")
+f3 = FollowUpItem("Show blocker trends for the past two weeks")

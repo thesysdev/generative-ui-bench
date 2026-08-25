@@ -1,0 +1,26 @@
+```openui
+root = Card([dateBanner, teamStatusSection, missingUpdates, submitUpdateForm])
+
+dateBanner = CardHeader("Async Standup - Today", "Team updates and blockers")
+teamStatusSection = Card([statusTitle, teamStatuses, blockersSection])
+statusTitle = Heading("Team Status Updates", "h3")
+teamStatuses = ListBlock(teamUpdates, "image")
+teamUpdates = [ 
+  ListItem("Alice", "Working on frontend", [avatar1], null),
+  ListItem("Bob", "Blocked by API", [avatar2], null),
+  ListItem("Charlie", "On PTO", [avatar3], null)
+]
+blockersSection = Callout("blocked", "Blockers", "Bob is blocked by API issues.")
+missingUpdates = TextContent("Updates missing: 2", "large")
+submitUpdateForm = Form("post-update", formButtons, [nameField, statusField, updateButton])
+nameField = FormControl("Name", nameInput)
+nameInput = Input("name", null, "text")
+statusField = FormControl("Status Update", statusInput)
+statusInput = TextArea("status", null, 3)
+updateButton = Button("Submit Update", null, "primary")
+formButtons = Buttons([updateButton])
+
+avatar1 = Image("Alice's avatar", "https://picsum.photos/id/1/800/500")
+avatar2 = Image("Bob's avatar", "https://picsum.photos/id/2/800/500")
+avatar3 = Image("Charlie's avatar", "https://picsum.photos/id/3/800/500")
+```

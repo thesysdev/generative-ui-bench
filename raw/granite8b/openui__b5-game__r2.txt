@@ -1,0 +1,155 @@
+```openui-lang
+root = Card(
+    [
+        livePlayers,
+        activePlayers,
+        revenueToday,
+        revenuePerUser,
+        sessionLength,
+        bestSellingItems,
+        serverHealth,
+        crashRate,
+        liveAndUpcomingEvents,
+        playerReports,
+        banAppeals,
+        currencyInflation,
+        experimentResults,
+        patchNotesDraft,
+        focusRegion,
+        shipHotfix
+    ],
+    "card",
+    "row",
+    "l"
+)
+
+livePlayers = CardHeader("Live Players", "Current Online")
+
+activePlayers = Card(
+    [
+        dailyActive,
+        monthlyActive
+    ],
+    "sunk"
+)
+
+dailyActive = TextContent("Daily Active Players: 12,345", "large")
+monthlyActive = TextContent("Monthly Active Players: 87,210", "large")
+
+revenueToday = CardHeader("Revenue Today", "Today's Earnings")
+
+revenueTodaySection = Card(
+    [
+        revenueValue,
+        revenuePerUserValue
+    ],
+    "sunk"
+)
+
+revenueValue = TextContent("Revenue: $98,765", "large")
+revenuePerUserValue = TextContent("Revenue Per User: $7.89", "large")
+
+sessionLength = CardHeader("Session Length (Last 2 Weeks)", "Average Session Duration")
+
+sessionLengthChart = LineChart(
+    ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"],
+    [Series("Session Length (min)", [45, 48, 50, 47, 52, 49, 46, 50, 48, 51, 53, 49, 47, 50])],
+    "natural",
+    "Day",
+    "Minutes"
+)
+
+bestSellingItems = CardHeader("Best‑Selling Items", "Top Items by Units Sold")
+
+bestSellingTable = Table([
+    Col("Item", ["Sword of Destiny", "Shield of Valor", "Health Potion"]),
+    Col("Units Sold", [1,245, 987, 3,210])
+])
+
+serverHealth = CardHeader("Server Health", "Region Status")
+
+serverHealthTable = Table([
+    Col("Region", ["NA", "EU", "APAC", "SA"]),
+    Col("Health", ["Good", "Fair", "Good", "Poor"]),
+    Col("Latency (ms)", [12, 34, 27, 45])
+])
+
+crashRate = CardHeader("Crash Rate by App Version", "Error Frequency")
+
+crashRateChart = BarChart(
+    ["v1.2.3", "v1.2.4", "v1.2.5", "v1.2.6"],
+    [Series("Crash Rate (%)", [0.8, 0.5, 0.3, 0.2])],
+    "grouped",
+    "App Version",
+    "Crash Rate (%)"
+)
+
+liveAndUpcomingEvents = CardHeader("Live & Upcoming Events", "Event Management")
+
+liveEvents = TextContent("Live Events: Battle Royale Week, Cosplay Contest", "large")
+upcomingEvents = TextContent("Upcoming Events: Lunar Festival (Starts in 3 days)", "large")
+
+playerReports = CardHeader("Player Reports Awaiting Review", "Moderation Queue")
+
+reportsCount = TextContent("Reports: 42 pending", "large")
+
+banAppeals = CardHeader("Ban Appeals Awaiting Review", "Appeals Queue")
+
+appealsCount = TextContent("Appeals: 17 pending", "large")
+
+currencyInflation = CardHeader("In‑Game Currency Inflation", "Economy Health")
+
+inflationValue = TextContent("Inflation Rate: +3.2% (last 30 days)", "large")
+
+experimentResults = CardHeader("Running Experiments", "A/B Test Summary")
+
+experiment1 = TextContent("Experiment 1: New UI Layout - Positive (+12% engagement)", "large")
+experiment2 = TextContent("Experiment 2: Loot Box Tweaks - Neutral (no impact)", "large")
+
+patchNotesDraft = CardHeader("Draft Patch Notes", "Change Log Editor")
+
+draftEditor = Form(
+    "patch-notes",
+    Buttons([saveBtn, discardBtn]),
+    [
+        titleField,
+        contentField
+    ]
+)
+
+titleField = FormControl("Patch Note Title", Input("title", "e.g., v1.2.7"))
+contentField = FormControl("Patch Note Content", TextArea("content", rows=5))
+
+saveBtn = Button("Save Draft", null, "primary")
+discardBtn = Button("Discard Changes", null, "tertiary")
+
+focusRegion = CardHeader("Focus on Region", "Region Filter")
+
+regionDropdown = Select(
+    "focus_region",
+    [
+        SelectItem("All", "All Regions"),
+        SelectItem("NA", "North America"),
+        SelectItem("EU", "Europe"),
+        SelectItem("APAC", "APAC")
+    ],
+    "Choose region"
+)
+
+shipHotfix = CardHeader("Ship Hotfix", "Patch Deployment")
+
+hotfixForm = Form(
+    "hotfix-deploy",
+    Buttons([deployBtn, cancelBtn]),
+    [
+        versionField,
+        changelogField
+    ]
+)
+
+versionField = FormControl("Hotfix Version", Input("version", "e.g., v1.2.7-hotfix"))
+changelogField = FormControl("Changelog", TextArea("changelog", rows=3))
+
+deployBtn = Button("Deploy Hotfix", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")
+```

@@ -1,0 +1,479 @@
+root = Card([incidentsSection, severitySummary, resourcesSection, sheltersSection, routesSection, weatherSection, rescuedSection, volunteersSection, donationsSection, aidRequestsSection, commChannelsSection, roadsSection, hospitalsSection, openTasksSection, requestResources, broadcastUpdate, focusZone, situationReport], "clear")
+
+incidentsSection = SectionBlock([
+  { value: "active-incidents", trigger: "Active Incidents", content: [
+    heading = Heading("Active Incidents by Zone", "h3"),
+    table = Table([col1, col2]),
+    col1 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col2 = Col("Severity", [3, 2, 4, 1, 3, 2, 1, 2])
+  ]},
+  { value: "incident-details", trigger: "Incident Details", content: [
+    heading = Heading("Incident Details", "h3"),
+    table = Table([col3, col4, col5]),
+    col3 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col4 = Col("Type", ["Fire", "Structural", "Chemical", "Medical", "Traffic", "Flood", "Power", "Gas"]),
+    col5 = Col("Status", ["Active", "Active", "Active", "Resolved", "Active", "Active", "Resolved", "Active"])
+  ]},
+  { value: "incident-actions", trigger: "Incident Actions", content: [
+    heading = Heading("Incident Actions", "h3"),
+    table = Table([col6, col7]),
+    col6 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col7 = Col("Action", ["Deploy units", "Evacuate", "Secure perimeter", "Medical response", "Reinforce", "Clear debris", "Establish command", "Deploy drones"])
+  ]}
+])
+
+severitySummary = Card([
+  heading = Heading("Overall Severity Summary", "h2"),
+  table = Table([col8, col9, col10]),
+  col8 = Col("Severity Level", ["Critical", "High", "Moderate", "Low"]),
+  col9 = Col("Count", [12, 18, 24, 31]),
+  col10 = Col("Percentage", ["18%", "25%", "32%", "25%"])
+])
+
+resourcesSection = Card([
+  heading = Heading("Resources Available", "h2"),
+  table = Table([col11, col12, col13]),
+  col11 = Col("Category", ["Vehicles", "Personnel", "Supplies"]),
+  col12 = Col("Count", [42, 187, 1250]),
+  col13 = Col("Status", ["Available", "Available", "Partial"])
+])
+
+sheltersSection = Card([
+  heading = Heading("Shelters", "h2"),
+  table = Table([col14, col15]),
+  col14 = Col("Shelter", ["Community Center", "School Gym", "Religious Hall", "School Gym", "Community Center", "Religious Hall", "School Gym", "Community Center"]),
+  col15 = Col("Capacity", [200, 150, 300, 100, 250, 200, 150, 300])
+])
+
+routesSection = Card([
+  heading = Heading("Evacuation Routes", "h2"),
+  table = Table([col16, col17]),
+  col16 = Col("Route", ["Route A", "Route B", "Route C", "Route D", "Route E", "Route F", "Route G", "Route H"]),
+  col17 = Col("Status", ["Open", "Open", "Closed", "Open", "Open", "Closed", "Open", "Open"])
+])
+
+weatherSection = Card([
+  heading = Heading("Weather Forecast", "h2"),
+  table = Table([col18, col19, col20]),
+  col18 = Col("Hour", ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]),
+  col19 = Col("Temperature", ["5°C", "4°C", "3°C", "4°C", "6°C", "7°C", "6°C", "5°C"]),
+  col20 = Col("Condition", ["Clear", "Clear", "Clear", "Clear", "Clear", "Clear", "Clear", "Clear"])
+])
+
+rescuedSection = Card([
+  heading = Heading("Rescued & Casualties", "h2"),
+  table = Table([col21, col22]),
+  col21 = Col("Category", ["Rescued", "Casualties", "Injured", "Lost"]),
+  col22 = Col("Count", [87, 12, 34, 5])
+])
+
+volunteersSection = Card([
+  heading = Heading("Volunteers on Duty", "h2"),
+  table = Table([col23, col24, col25]),
+  col23 = Col("Volunteer", ["Mike", "Sarah", "James", "Lisa", "Tom", "Anna", "David", "Rachel"]),
+  col24 = Col("Assignment", ["Search & Rescue", "Medical Support", "Transport", "Communications", "Logistics", "Reinforcement", "Medical Support", "Search & Rescue"]),
+  col25 = Col("Status", ["Active", "Active", "Active", "Active", "Active", "Active", "Active", "Active"])
+])
+
+donationsSection = Card([
+  heading = Heading("Donations Received", "h2"),
+  table = Table([col26, col27]),
+  col26 = Col("Donation Type", ["Food", "Water", "Medical", "Shelter", "Equipment", "Fuel"]),
+  col27 = Col("Quantity", [1200, 800, 450, 600, 200, 300])
+])
+
+aidRequestsSection = Card([
+  heading = Heading("Aid Requests", "h2"),
+  table = Table([col28, col29, col30]),
+  col28 = Col("Request", ["Water Distribution", "Medical Supplies", "Temporary Shelter", "Power Restoration", "Food Delivery", "Medical Support", "Shelter Supplies", "Communication Equipment"]),
+  col29 = Col("Priority", ["High", "High", "Medium", "Medium", "Low", "High", "Medium", "Low"]),
+  col30 = Col("Status", ["Pending", "Pending", "Pending", "Pending", "Pending", "Pending", "Pending", "Pending"])
+])
+
+commChannelsSection = Card([
+  heading = Heading("Communication Channels", "h2"),
+  table = Table([col31, col32]),
+  col31 = Col("Channel", ["Radio 1", "Radio 2", "Radio 3", "Radio 4", "Radio 5", "Radio 6", "Radio 7", "Radio 8"]),
+  col32 = Col("Status", ["Up", "Up", "Down", "Up", "Up", "Down", "Up", "Up"])
+])
+
+roadsSection = Card([
+  heading = Heading("Roads Closed", "h2"),
+  table = Table([col33, col34]),
+  col33 = Col("Road", ["Main St", "Highway 10", "Broadway", "River Rd", "Industrial Ave", "Park Ave", "County Line", "Valley Rd"]),
+  col34 = Col("Status", ["Closed", "Closed", "Open", "Closed", "Open", "Closed", "Open", "Closed"])
+])
+
+hospitalsSection = Card([
+  heading = Heading("Nearby Hospitals", "h2"),
+  table = Table([col35, col36, col37]),
+  col35 = Col("Hospital", ["Central General", "North Memorial", "South Clinic", "East Medical", "West Hospital", "Community Care", "Valley Health", "City Hospital"]),
+  col36 = Col("Free Beds", [45, 30, 20, 50, 35, 25, 40, 15]),
+  col37 = Col("Available", [12, 8, 5, 18, 10, 7, 15, 3])
+])
+
+openTasksSection = Card([
+  heading = Heading("Open Tasks", "h2"),
+  table = Table([col38, col39, col40]),
+  col38 = Col("Task", ["Deploy units to Harbor", "Establish command post", "Secure supply chain", "Medical triage", "Evacuate Northside", "Reinforce Shelter B", "Coordinate rescue", "Clear debris from Route A"]),
+  col39 = Col("Assignee", ["Mike", "Sarah", "James", "Lisa", "Tom", "Anna", "David", "Rachel"]),
+  col40 = Col("Priority", ["High", "High", "High", "Medium", "High", "Medium", "High", "Medium"])
+])
+
+requestResources = Card([
+  heading = Heading("Request More Resources", "h2"),
+  form = Form("resource-request", [typeSelect, qtySelect, submitBtn], [
+    FormControl("Resource Type", typeSelect, "Select a resource type"),
+    typeSelect = Select("resource_type", [typeA, typeB, typeC], "Choose resource type"),
+    typeA = SelectItem("Vehicles", "Vehicles"),
+    typeB = SelectItem("Personnel", "Personnel"),
+    typeC = SelectItem("Supplies", "Supplies"),
+    typeD = SelectItem("Medical Equipment", "Medical Equipment"),
+    typeE = SelectItem("Shelter Supplies", "Shelter Supplies"),
+    typeF = SelectItem("Communication Equipment", "Communication Equipment"),
+    typeG = SelectItem("Fuel", "Fuel"),
+    typeH = SelectItem("Food & Water", "Food & Water"),
+    FormControl("Quantity", qtySelect, "Enter quantity"),
+    qtySelect = Select("quantity", [qty1, qty2, qty3, qty4, qty5], "Choose quantity"),
+    qty1 = SelectItem("10", "10"),
+    qty2 = SelectItem("50", "50"),
+    qty3 = SelectItem("100", "100"),
+    qty4 = SelectItem("500", "500"),
+    qty5 = SelectItem("1000", "1000"),
+    submitBtn = Button("Submit Request", null, "primary")
+  ])
+])
+
+broadcastUpdate = Card([
+  heading = Heading("Broadcast Update", "h2"),
+  form = Form("broadcast", [messageInput, submitBtn], [
+    FormControl("Message", messageInput, "Enter your update message"),
+    messageInput = TextArea("broadcast_message", "Type your message here", 5, null, null),
+    submitBtn = Button("Broadcast", null, "primary")
+  ])
+])
+
+focusZone = Card([
+  heading = Heading("Focus on a Zone", "h2"),
+  form = Form("focus-zone", [zoneSelect, submitBtn], [
+    FormControl("Zone", zoneSelect, "Select a zone to focus"),
+    zoneSelect = Select("focus_zone", [zoneA, zoneB, zoneC, zoneD, zoneE], "Choose a zone"),
+    zoneA = SelectItem("Downtown", "Downtown"),
+    zoneB = SelectItem("Harbor", "Harbor"),
+    zoneC = SelectItem("Industrial", "Industrial"),
+    zoneD = SelectItem("Northside", "Northside"),
+    zoneE = SelectItem("Eastpark", "Eastpark"),
+    submitBtn = Button("Focus", null, "primary")
+  ])
+])
+
+situationReport = Card([
+  heading = Heading("File a Situation Report", "h2"),
+  form = Form("situation-report", [typeSelect, submitBtn], [
+    FormControl("Report Type", typeSelect, "Select report type"),
+    typeSelect = Select("report_type", [typeA, typeB, typeC], "Choose report type"),
+    typeA = SelectItem("Incident Report", "Incident Report"),
+    typeB = SelectItem("Weather Update", "Weather Update"),
+    typeC = SelectItem("Resource Request", "Resource Request"),
+    typeD = SelectItem("Safety Alert", "Safety Alert"),
+    typeE = SelectItem("Evacuation Update", "Evacuation Update"),
+    submitBtn = Button("Submit Report", null, "primary")
+  ])
+])
+
+heading = Heading
+table = Table
+col = Col
+select = Select
+selectItem = SelectItem
+textArea = TextArea
+button = Button
+form = Form
+formControl = FormControl
+input = Input
+carousel = Carousel
+alert = Alert
+badge = Badge
+tag = Tag
+progress = Progress
+avatar = Avatar
+dialog = DialogBlock
+drawer = DrawerBlock
+alertDialog = AlertDialogBlock
+steps = Steps
+step = StepsItem
+carouselItem = CarouselItem
+tab = TabItem
+accordion = Accordion
+accordionItem = AccordionItem
+horizontalBar = HorizontalBarChart
+verticalBar = BarChart
+line = LineChart
+area = AreaChart
+radar = RadarChart
+pie = PieChart
+radial = RadialChart
+scatter = ScatterChart
+scatterPoint = Point
+table = Table
+col = Col
+separator = Separator
+callout = Callout
+textCallout = TextCallout
+codeBlock = CodeBlock
+image = Image
+imageBlock = ImageBlock
+imageGallery = ImageGallery
+listBlock = ListBlock
+listItem = ListItem
+sectionBlock = SectionBlock
+sectionItem = SectionItem
+followUp = FollowUpBlock
+followUpItem = FollowUpItem
+pagination = PaginationBlock
+calendar = CalendarBlock
+badge = Badge
+tag = Tag
+progress = Progress
+avatar = Avatar
+
+
+incidentsSection = SectionBlock([
+  { value: "active-incidents", trigger: "Active Incidents", content: [
+    heading = Heading("Active Incidents by Zone", "h3"),
+    table = Table([col1, col2]),
+    col1 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col2 = Col("Severity", [3, 2, 4, 1, 3, 2, 1, 2])
+  ]},
+  { value: "incident-details", trigger: "Incident Details", content: [
+    heading = Heading("Incident Details", "h3"),
+    table = Table([col3, col4, col5]),
+    col3 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col4 = Col("Type", ["Fire", "Structural", "Chemical", "Medical", "Traffic", "Flood", "Power", "Gas"]),
+    col5 = Col("Status", ["Active", "Active", "Active", "Resolved", "Active", "Active", "Resolved", "Active"])
+  ]},
+  { value: "incident-actions", trigger: "Incident Actions", content: [
+    heading = Heading("Incident Actions", "h3"),
+    table = Table([col6, col7]),
+    col6 = Col("Zone", ["Downtown", "Harbor", "Industrial", "Northside", "Eastpark", "Southgate", "Westfield", "Oakwood"]),
+    col7 = Col("Action", ["Deploy units", "Evacuate", "Secure perimeter", "Medical response", "Reinforce", "Clear debris", "Establish command", "Deploy drones"])
+  ]}
+])
+
+severitySummary = Card([
+  heading = Heading("Overall Severity Summary", "h2"),
+  table = Table([col8, col9, col10]),
+  col8 = Col("Severity Level", ["Critical", "High", "Moderate", "Low"]),
+  col9 = Col("Count", [12, 18, 24, 31]),
+  col10 = Col("Percentage", ["18%", "25%", "32%", "25%"])
+])
+
+resourcesSection = Card([
+  heading = Heading("Resources Available", "h2"),
+  table = Table([col11, col12, col13]),
+  col11 = Col("Category", ["Vehicles", "Personnel", "Supplies"]),
+  col12 = Col("Count", [42, 187, 1250]),
+  col13 = Col("Status", ["Available", "Available", "Partial"])
+])
+
+sheltersSection = Card([
+  heading = Heading("Shelters", "h2"),
+  table = Table([col14, col15]),
+  col14 = Col("Shelter", ["Community Center", "School Gym", "Religious Hall", "School Gym", "Community Center", "Religious Hall", "School Gym", "Community Center"]),
+  col15 = Col("Capacity", [200, 150, 300, 100, 250, 200, 150, 300])
+])
+
+routesSection = Card([
+  heading = Heading("Evacuation Routes", "h2"),
+  table = Table([col16, col17]),
+  col16 = Col("Route", ["Route A", "Route B", "Route C", "Route D", "Route E", "Route F", "Route G", "Route H"]),
+  col17 = Col("Status", ["Open", "Open", "Closed", "Open", "Open", "Closed", "Open", "Open"])
+])
+
+weatherSection = Card([
+  heading = Heading("Weather Forecast", "h2"),
+  table = Table([col18, col19, col20]),
+  col18 = Col("Hour", ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]),
+  col19 = Col("Temperature", ["5°C", "4°C", "3°C", "4°C", "6°C", "7°C", "6°C", "5°C"]),
+  col20 = Col("Condition", ["Clear", "Clear", "Clear", "Clear", "Clear", "Clear", "Clear", "Clear"])
+])
+
+rescuedSection = Card([
+  heading = Heading("Rescued & Casualties", "h2"),
+  table = Table([col21, col22]),
+  col21 = Col("Category", ["Rescued", "Casualties", "Injured", "Lost"]),
+  col22 = Col("Count", [87, 12, 34, 5])
+])
+
+volunteersSection = Card([
+  heading = Heading("Volunteers on Duty", "h2"),
+  table = Table([col23, col24, col25]),
+  col23 = Col("Volunteer", ["Mike", "Sarah", "James", "Lisa", "Tom", "Anna", "David", "Rachel"]),
+  col24 = Col("Assignment", ["Search & Rescue", "Medical Support", "Transport", "Communications", "Logistics", "Reinforcement", "Medical Support", "Search & Rescue"]),
+  col25 = Col("Status", ["Active", "Active", "Active", "Active", "Active", "Active", "Active", "Active"])
+])
+
+donationsSection = Card([
+  heading = Heading("Donations Received", "h2"),
+  table = Table([col26, col27]),
+  col26 = Col("Donation Type", ["Food", "Water", "Medical", "Shelter", "Equipment", "Fuel"]),
+  col27 = Col("Quantity", [1200, 800, 450, 600, 200, 300])
+])
+
+aidRequestsSection = Card([
+  heading = Heading("Aid Requests", "h2"),
+  table = Table([col28, col29, col30]),
+  col28 = Col("Request", ["Water Distribution", "Medical Supplies", "Temporary Shelter", "Power Restoration", "Food Delivery", "Medical Support", "Shelter Supplies", "Communication Equipment"]),
+  col29 = Col("Priority", ["High", "High", "Medium", "Medium", "Low", "High", "Medium", "Low"]),
+  col30 = Col("Status", ["Pending", "Pending", "Pending", "Pending", "Pending", "Pending", "Pending", "Pending"])
+])
+
+commChannelsSection = Card([
+  heading = Heading("Communication Channels", "h2"),
+  table = Table([col31, col32]),
+  col31 = Col("Channel", ["Radio 1", "Radio 2", "Radio 3", "Radio 4", "Radio 5", "Radio 6", "Radio 7", "Radio 8"]),
+  col32 = Col("Status", ["Up", "Up", "Down", "Up", "Up", "Down", "Up", "Up"])
+])
+
+roadsSection = Card([
+  heading = Heading("Roads Closed", "h2"),
+  table = Table([col33, col34]),
+  col33 = Col("Road", ["Main St", "Highway 10", "Broadway", "River Rd", "Industrial Ave", "Park Ave", "County Line", "Valley Rd"]),
+  col34 = Col("Status", ["Closed", "Closed", "Open", "Closed", "Open", "Closed", "Open", "Closed"])
+])
+
+hospitalsSection = Card([
+  heading = Heading("Nearby Hospitals", "h2"),
+  table = Table([col35, col36, col37]),
+  col35 = Col("Hospital", ["Central General", "North Memorial", "South Clinic", "East Medical", "West Hospital", "Community Care", "Valley Health", "City Hospital"]),
+  col36 = Col("Free Beds", [45, 30, 20, 50, 35, 25, 40, 15]),
+  col37 = Col("Available", [12, 8, 5, 18, 10, 7, 15, 3])
+])
+
+openTasksSection = Card([
+  heading = Heading("Open Tasks", "h2"),
+  table = Table([col38, col39, col40]),
+  col38 = Col("Task", ["Deploy units to Harbor", "Establish command post", "Secure supply chain", "Medical triage", "Evacuate Northside", "Reinforce Shelter B", "Coordinate rescue", "Clear debris from Route A"]),
+  col39 = Col("Assignee", ["Mike", "Sarah", "James", "Lisa", "Tom", "Anna", "David", "Rachel"]),
+  col40 = Col("Priority", ["High", "High", "High", "Medium", "High", "Medium", "High", "Medium"])
+])
+
+requestResources = Card([
+  heading = Heading("Request More Resources", "h2"),
+  form = Form("resource-request", [typeSelect, qtySelect, submitBtn], [
+    FormControl("Resource Type", typeSelect, "Select a resource type"),
+    typeSelect = Select("resource_type", [typeA, typeB, typeC], "Choose resource type"),
+    typeA = SelectItem("Vehicles", "Vehicles"),
+    typeB = SelectItem("Personnel", "Personnel"),
+    typeC = SelectItem("Supplies", "Supplies"),
+    typeD = SelectItem("Medical Equipment", "Medical Equipment"),
+    typeE = SelectItem("Shelter Supplies", "Shelter Supplies"),
+    typeF = SelectItem("Communication Equipment", "Communication Equipment"),
+    typeG = SelectItem("Fuel", "Fuel"),
+    typeH = SelectItem("Food & Water", "Food & Water"),
+    FormControl("Quantity", qtySelect, "Enter quantity"),
+    qtySelect = Select("quantity", [qty1, qty2, qty3, qty4, qty5], "Choose quantity"),
+    qty1 = SelectItem("10", "10"),
+    qty2 = SelectItem("50", "50"),
+    qty3 = SelectItem("100", "100"),
+    qty4 = SelectItem("500", "500"),
+    qty5 = SelectItem("1000", "1000"),
+    submitBtn = Button("Submit Request", null, "primary")
+  ])
+])
+
+broadcastUpdate = Card([
+  heading = Heading("Broadcast Update", "h2"),
+  form = Form("broadcast", [messageInput, submitBtn], [
+    FormControl("Message", messageInput, "Enter your update message"),
+    messageInput = TextArea("broadcast_message", "Type your message here", 5, null, null),
+    submitBtn = Button("Broadcast", null, "primary")
+  ])
+])
+
+focusZone = Card([
+  heading = Heading("Focus on a Zone", "h2"),
+  form = Form("focus-zone", [zoneSelect, submitBtn], [
+    FormControl("Zone", zoneSelect, "Select a zone to focus"),
+    zoneSelect = Select("focus_zone", [zoneA, zoneB, zoneC, zoneD, zoneE], "Choose a zone"),
+    zoneA = SelectItem("Downtown", "Downtown"),
+    zoneB = SelectItem("Harbor", "Harbor"),
+    zoneC = SelectItem("Industrial", "Industrial"),
+    zoneD = SelectItem("Northside", "Northside"),
+    zoneE = SelectItem("Eastpark", "Eastpark"),
+    submitBtn = Button("Focus", null, "primary")
+  ])
+])
+
+situationReport = Card([
+  heading = Heading("File a Situation Report", "h2"),
+  form = Form("situation-report", [typeSelect, submitBtn], [
+    FormControl("Report Type", typeSelect, "Select report type"),
+    typeSelect = Select("report_type", [typeA, typeB, typeC], "Choose report type"),
+    typeA = SelectItem("Incident Report", "Incident Report"),
+    typeB = SelectItem("Weather Update", "Weather Update"),
+    typeC = SelectItem("Resource Request", "Resource Request"),
+    typeD = SelectItem("Safety Alert", "Safety Alert"),
+    typeE = SelectItem("Evacuation Update", "Evacuation Update"),
+    submitBtn = Button("Submit Report", null, "primary")
+  ])
+])
+
+heading = Heading
+table = Table
+col = Col
+select = Select
+selectItem = SelectItem
+textArea = TextArea
+button = Button
+form = Form
+formControl = FormControl
+input = Input
+carousel = Carousel
+alert = Alert
+badge = Badge
+tag = Tag
+progress = Progress
+avatar = Avatar
+dialog = DialogBlock
+drawer = DrawerBlock
+alertDialog = AlertDialogBlock
+steps = Steps
+step = StepsItem
+carouselItem = CarouselItem
+tab = TabItem
+accordion = Accordion
+accordionItem = AccordionItem
+horizontalBar = HorizontalBarChart
+verticalBar = BarChart
+line = LineChart
+area = AreaChart
+radar = RadarChart
+pie = PieChart
+radial = RadialChart
+scatter = ScatterChart
+scatterPoint = Point
+table = Table
+col = Col
+separator = Separator
+callout = Callout
+textCallout = TextCallout
+codeBlock = CodeBlock
+image = Image
+imageBlock = ImageBlock
+imageGallery = ImageGallery
+listBlock = ListBlock
+listItem = ListItem
+sectionBlock = SectionBlock
+sectionItem = SectionItem
+followUp = FollowUpBlock
+followUpItem = FollowUpItem
+pagination = PaginationBlock
+calendar = CalendarBlock
+badge = Badge
+tag = Tag
+progress = Progress
+avatar = Avatar
+
+
+root = Card([incidentsSection, severitySummary, resourcesSection, sheltersSection, routesSection, weatherSection, rescuedSection, volunteersSection, donationsSection, aidRequestsSection, commChannelsSection, roadsSection, hospitalsSection, openTasksSection, requestResources, broadcastUpdate, focusZone, situationReport], "clear")

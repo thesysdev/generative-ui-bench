@@ -1,0 +1,19 @@
+root = Card([header, statusGrid, incidentSection, followUp])
+
+header = CardHeader("Platform Status", "Real-time infrastructure health")
+
+statusGrid = Card([uptimeMetric, healthBadge], "sunk", "row", "m", "center", "between")
+
+uptimeMetric = Card([uptimeLabel, uptimeValue], "clear", "column", "none")
+uptimeLabel = TextContent("API Uptime (Current Month)", "small")
+uptimeValue = TextContent("99.98%", "large-heavy")
+
+healthBadge = Badge("Operational", "success")
+
+incidentSection = Card([incidentHeading, incidentDetails], "card", "column", "s")
+incidentHeading = Heading("Recent Incident", "h3")
+incidentDetails = Callout("info", "Degraded API Performance", "Intermittent latency spikes observed in us-east-1. Resolved via scaling the request gateway. Resolved: Oct 24, 14:20 UTC")
+
+followUp = FollowUpBlock([historyBtn, supportBtn])
+historyBtn = FollowUpItem("View full incident history")
+supportBtn = FollowUpItem("Contact Platform Support")

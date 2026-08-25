@@ -1,0 +1,19 @@
+root = Card([header, kpiRow, comparisonChart, insight])
+header = CardHeader("Good morning! ☀️", "Today's revenue snapshot as of 10:30 AM")
+kpiRow = Card([todayStat, yesterdayStat, changeStat], "sunk", "row", "l", "stretch", "between")
+todayStat = Card([todayLabel, todayValue], "clear")
+todayLabel = TextContent("Revenue Today (so far)", "small")
+todayValue = TextContent("$1,842", "large-heavy")
+yesterdayStat = Card([yesterdayLabel, yesterdayValue], "clear")
+yesterdayLabel = TextContent("Same Time Yesterday", "small")
+yesterdayValue = TextContent("$1,560", "large-heavy")
+changeStat = Card([changeLabel, changeBadge], "clear")
+changeLabel = TextContent("Change", "small")
+changeBadge = Badge("+18.1% vs yesterday", "default")
+
+comparisonChart = LineChart(hours, [todaySeries, yesterdaySeries], "natural", "Hour", "Revenue ($)")
+hours = ["7 AM", "8 AM", "9 AM", "10 AM"]
+todaySeries = Series("Today", [220, 610, 1120, 1842])
+yesterdaySeries = Series("Yesterday", [180, 520, 980, 1560])
+
+insight = Callout("success", "Ahead of yesterday's pace", "You're tracking $282 higher than this time yesterday — keep it up!")

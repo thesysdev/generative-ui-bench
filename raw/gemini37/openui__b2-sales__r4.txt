@@ -1,0 +1,38 @@
+root = Card([header, metricsRow, trendSection, productsSection, actionsRow, followUps], "card", "column", "m")
+header = CardHeader("Monthly Sales Check", "Executive summary for current month & 6-month historical trend")
+metricsRow = Card([revCard, convCard], "clear", "row", "m")
+
+revCard = Card([revTitle, revValue, revBadge], "sunk", "column", "xs")
+revTitle = Heading("Revenue (This Month)", "h4")
+revValue = TextContent("# $142,850", "large-heavy")
+revBadge = Badge("+12.4% vs last month", "secondary")
+
+convCard = Card([convTitle, convValue, convProgress], "sunk", "column", "xs")
+convTitle = Heading("Conversion Rate", "h4")
+convValue = TextContent("# 3.85%", "large-heavy")
+convProgress = Progress(77, "Target: 5.0% (Current: 3.85%)")
+
+trendSection = Card([trendHeading, trendChart], "sunk", "column", "s")
+trendHeading = Heading("6-Month Revenue Trajectory", "h3")
+trendChart = AreaChart(trendMonths, [trendSeries], "natural", "Month", "Revenue ($)")
+trendMonths = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]
+trendSeries = Series("Monthly Revenue", [98000, 105400, 118200, 112000, 127100, 142850])
+
+productsSection = Card([productsHeading, productsTable], "sunk", "column", "s")
+productsHeading = Heading("Top 3 Best-Selling Products", "h3")
+productsTable = Table([colRank, colProduct, colUnits, colRevenue, colShare])
+colRank = Col("#", ["1", "2", "3"])
+colProduct = Col("Product", ["Enterprise Annual Plan", "Pro Team Monthly", "Starter Growth Pack"])
+colUnits = Col("Units Sold", ["342 units", "890 units", "1,240 units"])
+colRevenue = Col("Gross Sales", ["$68,400", "$44,500", "$24,800"])
+colShare = Col("% of Total", ["47.9%", "31.2%", "17.4%"])
+
+actionsRow = Buttons([downloadCsvBtn, downloadPdfBtn, viewDetailsBtn], "row")
+downloadCsvBtn = Button("Download CSV", null, "primary")
+downloadPdfBtn = Button("Export PDF Report", null, "secondary")
+viewDetailsBtn = Button("View Detailed Breakdown", null, "tertiary")
+
+followUps = FollowUpBlock([fup1, fup2, fup3])
+fup1 = FollowUpItem("Show customer acquisition cost alongside conversion")
+fup2 = FollowUpItem("Compare this month's revenue to forecast")
+fup3 = FollowUpItem("Break down top products by acquisition channel")

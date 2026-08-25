@@ -1,0 +1,343 @@
+Here is the morning dashboard view for the support lead covering the open tickets count, average first-response time, recent tickets list with priority levels, filter for high-priority tickets, and an action to create a new ticket.
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "createSurface": {
+    "surfaceId": "main",
+    "catalogId": "thesys.dev:c1-openui"
+  }
+}
+</a2ui-json>
+
+<a2ui-json>
+{
+  "version": "v0.9",
+  "updateComponents": {
+    "surfaceId": "main",
+    "components": [
+      {
+        "id": "root",
+        "component": "Card",
+        "direction": "column",
+        "gap": "m",
+        "children": [
+          "header",
+          "topActions",
+          "kpiSummary",
+          "separator1",
+          "filterControls",
+          "ticketTableCard",
+          "quickActions"
+        ]
+      },
+      {
+        "id": "header",
+        "component": "CardHeader",
+        "title": "Support Lead Morning Brief",
+        "subtitle": "Daily shift overview & incoming ticket queue"
+      },
+      {
+        "id": "topActions",
+        "component": "Buttons",
+        "buttons": [
+          "newTicketModalBtn"
+        ]
+      },
+      {
+        "id": "newTicketModalBtn",
+        "component": "DialogBlock",
+        "triggerLabel": "+ Open New Ticket",
+        "triggerVariant": "default",
+        "title": "Create New Support Ticket",
+        "description": "Log an incoming customer inquiry or internal escalation.",
+        "content": [
+          "newTicketForm"
+        ]
+      },
+      {
+        "id": "newTicketForm",
+        "component": "Form",
+        "name": "createTicketForm",
+        "buttons": "formActionBtns",
+        "fields": [
+          "subjectField",
+          "priorityField",
+          "requesterField"
+        ]
+      },
+      {
+        "id": "subjectField",
+        "component": "FormControl",
+        "label": "Ticket Subject",
+        "input": "subjectInput"
+      },
+      {
+        "id": "subjectInput",
+        "component": "Input",
+        "name": "subject",
+        "placeholder": "e.g., SSO authentication failure"
+      },
+      {
+        "id": "priorityField",
+        "component": "FormControl",
+        "label": "Priority Level",
+        "input": "prioritySelect"
+      },
+      {
+        "id": "prioritySelect",
+        "component": "Select",
+        "name": "priority",
+        "placeholder": "Select priority",
+        "items": [
+          "optHigh",
+          "optMedium",
+          "optLow"
+        ]
+      },
+      {
+        "id": "optHigh",
+        "component": "SelectItem",
+        "value": "high",
+        "label": "High Priority"
+      },
+      {
+        "id": "optMedium",
+        "component": "SelectItem",
+        "value": "medium",
+        "label": "Medium Priority"
+      },
+      {
+        "id": "optLow",
+        "component": "SelectItem",
+        "value": "low",
+        "label": "Low Priority"
+      },
+      {
+        "id": "requesterField",
+        "component": "FormControl",
+        "label": "Requester Email",
+        "input": "requesterInput"
+      },
+      {
+        "id": "requesterInput",
+        "component": "Input",
+        "name": "requester_email",
+        "type": "email",
+        "placeholder": "client@company.com"
+      },
+      {
+        "id": "formActionBtns",
+        "component": "Buttons",
+        "buttons": [
+          "submitTicketBtn"
+        ]
+      },
+      {
+        "id": "submitTicketBtn",
+        "component": "Button",
+        "label": "Submit Ticket",
+        "variant": "primary"
+      },
+      {
+        "id": "kpiSummary",
+        "component": "Table",
+        "columns": [
+          "kpiMetricCol",
+          "kpiValueCol",
+          "kpiStatusCol"
+        ]
+      },
+      {
+        "id": "kpiMetricCol",
+        "component": "Col",
+        "label": "Shift Metric",
+        "data": [
+          "Open Tickets",
+          "Avg First-Response Time",
+          "SLA Breach Risk"
+        ]
+      },
+      {
+        "id": "kpiValueCol",
+        "component": "Col",
+        "label": "Current Value",
+        "data": [
+          "42 tickets",
+          "14 mins",
+          "2 tickets"
+        ]
+      },
+      {
+        "id": "kpiStatusCol",
+        "component": "Col",
+        "label": "Status",
+        "data": [
+          "Within target capacity",
+          "⚡ 6m faster than SLA (20m)",
+          "Requires lead attention"
+        ]
+      },
+      {
+        "id": "separator1",
+        "component": "Separator",
+        "orientation": "horizontal"
+      },
+      {
+        "id": "filterControls",
+        "component": "Card",
+        "variant": "sunk",
+        "direction": "column",
+        "gap": "xs",
+        "children": [
+          "filterHeading",
+          "filterSwitch"
+        ]
+      },
+      {
+        "id": "filterHeading",
+        "component": "Heading",
+        "level": "h4",
+        "text": "Queue Filters"
+      },
+      {
+        "id": "filterSwitch",
+        "component": "SwitchGroup",
+        "name": "queueFilters",
+        "items": [
+          "highPriorityOnlySwitch",
+          "unassignedOnlySwitch"
+        ]
+      },
+      {
+        "id": "highPriorityOnlySwitch",
+        "component": "SwitchItem",
+        "name": "highPriorityOnly",
+        "label": "High-Priority Only",
+        "description": "Narrow view to P1 & Urgent escalation tickets",
+        "defaultChecked": false
+      },
+      {
+        "id": "unassignedOnlySwitch",
+        "component": "SwitchItem",
+        "name": "unassignedOnly",
+        "label": "Unassigned Tickets",
+        "description": "Show tickets pending agent assignment",
+        "defaultChecked": false
+      },
+      {
+        "id": "ticketTableCard",
+        "component": "Card",
+        "variant": "clear",
+        "direction": "column",
+        "gap": "s",
+        "children": [
+          "tableHeader",
+          "recentTicketsTable"
+        ]
+      },
+      {
+        "id": "tableHeader",
+        "component": "Heading",
+        "level": "h3",
+        "text": "5 Most Recent Tickets"
+      },
+      {
+        "id": "recentTicketsTable",
+        "component": "Table",
+        "columns": [
+          "colTicketId",
+          "colSubject",
+          "colPriority",
+          "colRequester",
+          "colTime"
+        ]
+      },
+      {
+        "id": "colTicketId",
+        "component": "Col",
+        "label": "Ticket #",
+        "data": [
+          "#T-4102",
+          "#T-4101",
+          "#T-4100",
+          "#T-4099",
+          "#T-4098"
+        ]
+      },
+      {
+        "id": "colSubject",
+        "component": "Col",
+        "label": "Subject",
+        "data": [
+          "Production API gateway 502 errors",
+          "Unable to export billing invoices",
+          "SAML SSO sync failed for enterprise org",
+          "Password reset link expired",
+          "Webhook event payload formatting issue"
+        ]
+      },
+      {
+        "id": "colPriority",
+        "component": "Col",
+        "label": "Priority",
+        "data": [
+          "🔴 High",
+          "🟡 Medium",
+          "🔴 High",
+          "🟢 Low",
+          "🟡 Medium"
+        ]
+      },
+      {
+        "id": "colRequester",
+        "component": "Col",
+        "label": "Requester",
+        "data": [
+          "devops@acmecorp.com",
+          "finance@globex.io",
+          "it-admin@initech.com",
+          "sarah.k@partner.org",
+          "alex@startup.co"
+        ]
+      },
+      {
+        "id": "colTime",
+        "component": "Col",
+        "label": "Received",
+        "data": [
+          "4m ago",
+          "11m ago",
+          "19m ago",
+          "28m ago",
+          "35m ago"
+        ]
+      },
+      {
+        "id": "quickActions",
+        "component": "FollowUpBlock",
+        "items": [
+          "followUpTriageHigh",
+          "followUpAssignAll",
+          "followUpTeamShift"
+        ]
+      },
+      {
+        "id": "followUpTriageHigh",
+        "component": "FollowUpItem",
+        "text": "Auto-assign High priority tickets to on-call engineers"
+      },
+      {
+        "id": "followUpAssignAll",
+        "component": "FollowUpItem",
+        "text": "Export morning shift handoff report"
+      },
+      {
+        "id": "followUpTeamShift",
+        "component": "FollowUpItem",
+        "text": "View online agents and active workload balance"
+      }
+    ]
+  }
+}
+</a2ui-json>

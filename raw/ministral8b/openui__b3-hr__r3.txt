@@ -1,0 +1,56 @@
+```openui-lang
+root = Card([hrHeader, headcountStats, openRoles, pipelineChart, timeToHire, departmentSplit, interviewsWeek, attritionChart, newRoleButton])
+
+hrHeader = CardHeader("Hiring Overview", "Current hiring metrics and pipeline")
+
+headcountStats = Card([currentHeadcount, currentHeadcountValue], "sunk")
+currentHeadcount = Heading("Current Headcount", "h3")
+currentHeadcountValue = TextContent("128 employees", "large-heavy")
+
+openRoles = Card([openRolesTitle, rolesTable], "sunk")
+openRolesTitle = Heading("Open Roles", "h3")
+rolesTable = Table([roleColumns])
+roleColumns = [
+    Col("Department", ["Engineering", "Marketing", "Design", "Product", "Sales"]),
+    Col("Role", ["Senior Backend Engineer", "Marketing Manager", "UX Designer", "Product Owner", "Account Executive"]),
+    Col("Status", ["Open", "Open", "Open", "Open", "Open"])
+]
+
+pipelineChart = Card([pipelineTitle, pipelineChartComponent], "sunk")
+pipelineTitle = Heading("Candidate Pipeline", "h3")
+pipelineChartComponent = RadarChart(
+    ["Applied", "Screened", "Interview", "Offer", "Hired"],
+    [
+        Series("Current Count", [42, 28, 15, 7, 3]),
+        Series("Last Week", [38, 22, 12, 5, 2])
+    ]
+)
+
+timeToHire = Card([timeToHireTitle, timeToHireValue], "sunk")
+timeToHireTitle = Heading("Avg Time to Hire", "h3")
+timeToHireValue = TextContent("14 days", "large-heavy")
+
+departmentSplit = Card([departmentSplitTitle, departmentChart], "sunk")
+departmentSplitTitle = Heading("Headcount by Department", "h3")
+departmentChart = PieChart(
+    ["Engineering", "Product", "Marketing", "Design", "Sales", "Support"],
+    [42, 28, 15, 12, 7, 8]
+)
+
+interviewsWeek = Card([interviewsTitle, interviewsValue], "sunk")
+interviewsTitle = Heading("Interviews Scheduled This Week", "h3")
+interviewsValue = TextContent("18 interviews", "large-heavy")
+
+attritionChart = Card([attritionTitle, attritionChartComponent], "sunk")
+attritionTitle = Heading("Attrition (Past 6 Months)", "h3")
+attritionChartComponent = LineChart(
+    ["Month 1", "Month 2", "Month 3", "Month 4", "Month 5", "Month 6"],
+    [Series("Attrition Rate", [2.1, 1.8, 2.5, 1.9, 2.3, 1.7])],
+    "natural",
+    "Month", "Attrition Rate (%)"
+)
+
+newRoleButton = Card([newRoleTitle, newRoleButtonComponent], "sunk")
+newRoleTitle = Heading("Open New Role", "h3")
+newRoleButtonComponent = Button("Create New Role", null, "primary")
+```

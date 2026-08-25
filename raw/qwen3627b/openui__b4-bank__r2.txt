@@ -1,0 +1,98 @@
+Let me build a comprehensive personal banking home screen that covers all 11 requirements:
+
+1. Balances for checking, savings, and credit
+2. Recent transactions with merchant and amount
+3. Spending split by category this month
+4. Bills due soon
+5. Progress toward vacation savings goal
+6. Current credit score
+7. Transfer money between accounts with amount
+8. Freeze credit line
+9. Pick a statement period
+10. Manage alert triggers
+11. Dispute a transaction
+
+Let me plan the layout:
+- CardHeader for the bank branding
+- Section for balances (checking, savings, credit)
+- Section for recent transactions (table)
+- Section for spending by category (pie chart)
+- Section for bills due soon (list)
+- Section for vacation savings progress (progress bar)
+- Section for credit score (badge/callout)
+- Form for transferring money
+- Dialog/Alert for freezing credit line
+- Dialog for picking statement period
+- Dialog for managing alerts
+- Dialog for disputing a transaction
+
+Let me build this out carefully, making sure every variable is referenced and all arguments are positional.
+
+I need to be careful about:
+- Positional arguments only
+- Every defined variable must be reachable from root
+- Proper component signatures
+
+Let me structure this:
+
+root = Card([header, balancesSection, transactionsSection, spendingSection, billsSection, savingsSection, creditSection, transferForm, actions])
+
+Let me build each piece carefully.
+root = Card([header, balancesCard, transactionsCard, spendingCard, billsCard, savingsCard, creditCard, transferCard, quickActions], "card", "column", "m")
+header = CardHeader("My Banking", "Welcome back, Alex")
+balancesCard = Card([balancesHeading, balancesTable], "sunk")
+balancesHeading = Heading("Account Balances", "h3")
+balancesTable = Table([acctCol, balanceCol, statusCol])
+acctCol = Col("Account", ["Checking", "Savings", "Credit Card"])
+balanceCol = Col("Balance", ["$4,283.50", "$12,750.00", "-$1,247.83"])
+statusCol = Col("Status", ["Active", "Active", "Active"])
+transactionsCard = Card([txHeading, txTable], "sunk")
+txHeading = Heading("Recent Transactions", "h3")
+txTable = Table([txDateCol, txMerchantCol, txAmountCol, txCategoryCol])
+txDateCol = Col("Date", ["Today", "Yesterday", "Yesterday", "Jun 12", "Jun 11", "Jun 10"])
+txMerchantCol = Col("Merchant", ["Whole Foods Market", "Uber", "Netflix", "Starbucks", "Amazon", "Shell Gas"])
+txAmountCol = Col("Amount", ["-$87.42", "-$14.50", "-$15.99", "-$5.75", "-$234.99", "-$45.00"])
+txCategoryCol = Col("Category", ["Groceries", "Transport", "Entertainment", "Dining", "Shopping", "Fuel"])
+spendingCard = Card([spendHeading, spendChart], "sunk")
+spendHeading = Heading("Spending by Category — June", "h3")
+spendChart = PieChart(spendLabels, spendValues, "donut", "circular")
+spendLabels = ["Groceries", "Rent", "Transport", "Dining", "Entertainment", "Shopping", "Utilities", "Other"]
+spendValues = [620, 1500, 180, 210, 156, 430, 145, 98]
+billsCard = Card([billsHeading, billsList], "sunk")
+billsHeading = Heading("Bills Due Soon", "h3")
+billsList = ListBlock([bill1, bill2, bill3, bill4])
+bill1 = ListItem("Electric Bill", "Due Jun 15 — $142.30", null, "Pay Now")
+bill2 = ListItem("Internet", "Due Jun 18 — $79.99", null, "Pay Now")
+bill3 = ListItem("Water Bill", "Due Jun 20 — $45.60", null, "Pay Now")
+bill4 = ListItem("Student Loan", "Due Jun 25 — $312.00", null, "Pay Now")
+savingsCard = Card([savingsHeading, savingsProgress, savingsMeta], "sunk")
+savingsHeading = Heading("Vacation Savings Goal", "h3")
+savingsProgress = Progress(62, "62% — $3,100 of $5,000")
+savingsMeta = TextContent("On track! Add $200/month to hit your goal by September.", "small")
+creditCard = Card([creditHeading, creditScore, creditMeta], "sunk")
+creditHeading = Heading("Credit Score", "h3")
+creditScore = Badge("742 — Good", "default")
+creditMeta = TextContent("Score updated Jun 12. Keep utilization below 30% to maintain.", "small")
+transferCard = Card([transferHeading, transferForm], "sunk")
+transferHeading = Heading("Transfer Money", "h3")
+transferForm = Form("transfer", transferButtons, [fromField, toField, amountField])
+fromField = FormControl("From Account", fromSelect)
+fromSelect = Select("from_acct", [fromChecking, fromSavings], "Select source", null, null, "medium")
+fromChecking = SelectItem("checking", "Checking — $4,283.50")
+fromSavings = SelectItem("savings", "Savings — $12,750.00")
+toField = FormControl("To Account", toSelect)
+toSelect = Select("to_acct", [toChecking, toSavings], "Select destination", null, null, "medium")
+toChecking = SelectItem("checking", "Checking — $4,283.50")
+toSavings = SelectItem("savings", "Savings — $12,750.00")
+amountField = FormControl("Amount ($)", amountInput)
+amountInput = Input("amount", "0.00", "number")
+transferButtons = Buttons([transferSubmit, transferCancel])
+transferSubmit = Button("Transfer", null, "primary", "normal", "medium")
+transferCancel = Button("Cancel", null, "tertiary", "normal", "medium")
+quickActions = Card([actionsHeading, actionButtons], "sunk")
+actionsHeading = Heading("Quick Actions", "h3")
+actionButtons = Buttons([freezeBtn, statementBtn, alertsBtn, disputeBtn], "column")
+freezeBtn = Button("Freeze Credit Line")
+statementBtn = Button("Pick Statement Period")
+alertsBtn = Button("Manage Alert Triggers")
+disputeBtn = Button("Dispute a Transaction")

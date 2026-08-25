@@ -1,0 +1,53 @@
+root = Card([header, blockedAlert, coverage, coverageNote, divider, updatesHeading, updatesList, divider2, postHeading, postForm, followUps])
+
+header = CardHeader("Async Standup — Thursday, June 12, 2025", "Engineering · Distributed across 5 timezones")
+
+blockedAlert = Alert("2 teammates are blocked", "Priya Raman is waiting on staging DB credentials. Tomás Ferreira is blocked on the unreviewed auth PR (#4182).", "warning")
+
+coverage = Progress(63, "Standup coverage — 5 of 8 updates posted")
+coverageNote = TextContent("**3 updates still missing:** Ana Duarte, Kwame Mensah, Yuki Sato. Cutoff is 14:00 UTC.", "small")
+
+divider = Separator("horizontal")
+
+updatesHeading = Heading("Today's updates", "h3")
+
+updatesList = ListBlock([u1, u2, u3, u4, u5, u6, u7, u8])
+
+u1 = ListItem("Priya Raman — 🔴 Blocked", "Yesterday: finished billing webhook retries. Today: cannot deploy — waiting on staging DB credentials from infra.", null, "Unblock")
+u2 = ListItem("Tomás Ferreira — 🔴 Blocked", "Yesterday: opened auth refactor PR #4182. Today: idle until review lands; picking up small docs fixes meanwhile.", null, "Review PR")
+u3 = ListItem("Lena Kowalski — 🟢 On track", "Yesterday: shipped the new onboarding empty states. Today: wiring analytics events for the signup funnel.", null, "Reply")
+u4 = ListItem("Marcus Bell — 🟢 On track", "Yesterday: cut flaky test count from 14 to 3. Today: finishing CI parallelization, expect green pipeline by EOD.", null, "Reply")
+u5 = ListItem("Sofia Ilundáin — 🟡 At risk", "Yesterday: search indexing migration 60% done. Today: reindexing is slower than estimated, may slip to Friday.", null, "Reply")
+u6 = ListItem("Ana Duarte — ⚪ No update yet", "Last posted Wednesday. Timezone: UTC+1.", null, "Nudge")
+u7 = ListItem("Kwame Mensah — ⚪ No update yet", "Last posted Wednesday. Timezone: UTC+0.", null, "Nudge")
+u8 = ListItem("Yuki Sato — ⚪ No update yet", "Last posted Tuesday. Timezone: UTC+9.", null, "Nudge")
+
+divider2 = Separator("horizontal")
+
+postHeading = Heading("Post your update", "h3")
+
+postForm = Form("standup-update", formButtons, [yesterdayField, todayField, statusField, blockerField])
+
+yesterdayField = FormControl("What did you do yesterday?", yesterdayInput, "Keep it to the outcomes, not the hours.")
+yesterdayInput = TextArea("yesterday", "Shipped the retry queue and closed #4120…", 3)
+
+todayField = FormControl("What are you doing today?", todayInput)
+todayInput = TextArea("today", "Pairing with Lena on the funnel events…", 3)
+
+statusField = FormControl("Status", statusRadio)
+statusRadio = RadioGroup("status", [statusOk, statusRisk, statusBlocked], "on-track")
+statusOk = RadioItem("On track", "Work is moving as planned", "on-track")
+statusRisk = RadioItem("At risk", "Might slip — flag it early", "at-risk")
+statusBlocked = RadioItem("Blocked", "Cannot progress without help", "blocked")
+
+blockerField = FormControl("Blocker details", blockerInput, "Only needed if you selected Blocked or At risk. Name who can unblock you.")
+blockerInput = Input("blocker", "Waiting on staging DB credentials from @infra")
+
+formButtons = Buttons([submitBtn, remindBtn])
+submitBtn = Button("Post update", null, "primary")
+remindBtn = Button("Remind me at 13:00 UTC", null, "tertiary")
+
+followUps = FollowUpBlock([f1, f2, f3])
+f1 = FollowUpItem("Nudge the 3 teammates who haven't posted")
+f2 = FollowUpItem("Summarize this standup for the weekly report")
+f3 = FollowUpItem("Show blockers from the past 7 days")

@@ -1,0 +1,105 @@
+Let me build a comprehensive content studio dashboard that covers all 8 requirements:
+
+1. Drafts with status for each - I'll use a ListBlock or Table to show drafts with their statuses
+2. Pieces published this week - A table or list of recently published pieces
+3. Most-read article this month - A highlight/callout section
+4. Readership over the past 30 days - A LineChart showing daily readership
+5. A way to narrow by category - A Select or TagBlock for filtering
+6. A way to schedule a piece with title and publish date - A Form with title and date fields
+7. Comments awaiting reply - A ListBlock showing pending comments
+8. A way to start a new draft - A Button
+
+Let me plan the layout:
+- Root Card with column direction
+- Header section with CardHeader
+- Category filter (Select) and "New Draft" button side by side
+- Most-read article highlight (Callout or Badge)
+- Readership chart (LineChart)
+- Drafts section with statuses (Table)
+- Published this week (Table)
+- Comments awaiting reply (ListBlock)
+- Schedule a piece form (Form)
+
+Let me build this step by step, making sure every variable is referenced.
+
+I need to be careful about:
+- Positional arguments only
+- Every defined variable must be reachable from root
+- Realistic data
+
+Let me structure it:
+
+```
+root = Card([header, topBar, mostRead, readershipChart, draftsSection, publishedSection, commentsSection, scheduleForm])
+```
+
+Let me build this out carefully.
+root = Card([header, topBar, mostRead, readershipChart, draftsSection, publishedSection, commentsSection, scheduleForm])
+
+header = CardHeader("Content Studio", "Manage your editorial workflow")
+
+topBar = Card([categoryFilter, newDraftBtn], "clear", "row", "m", "start", "between")
+
+categoryFilter = Select("category", [catAll, catTech, catLifestyle, catBusiness, catCulture], "Filter by category")
+catAll = SelectItem("all", "All Categories")
+catTech = SelectItem("tech", "Technology")
+catLifestyle = SelectItem("lifestyle", "Lifestyle")
+catBusiness = SelectItem("business", "Business")
+catCulture = SelectItem("culture", "Culture")
+
+newDraftBtn = Button("Start New Draft", null, "primary")
+
+mostRead = Card([mostReadHeader, mostReadContent], "sunk")
+mostReadHeader = Heading("Most Read This Month", "h3")
+mostReadContent = Card([mostReadBadge, mostReadTitle, mostReadMeta], "clear", "column", "s")
+mostReadBadge = Badge("🔥 Top Performer", "default")
+mostReadTitle = TextContent("**The Future of Remote Work: What 2025 Holds**", "large-heavy")
+mostReadMeta = TextContent("24,891 reads · Technology · Published Dec 3", "small")
+
+readershipChart = Card([readershipHeader, readershipLine], "sunk")
+readershipHeader = Heading("Readership — Past 30 Days", "h3")
+readershipLine = LineChart(days, [dailyReads], "natural", "Day", "Reads")
+days = ["Nov 1", "Nov 2", "Nov 3", "Nov 4", "Nov 5", "Nov 6", "Nov 7", "Nov 8", "Nov 9", "Nov 10", "Nov 11", "Nov 12", "Nov 13", "Nov 14", "Nov 15", "Nov 16", "Nov 17", "Nov 18", "Nov 19", "Nov 20", "Nov 21", "Nov 22", "Nov 23", "Nov 24", "Nov 25", "Nov 26", "Nov 27", "Nov 28", "Nov 29", "Nov 30"]
+dailyReads = Series("Daily Reads", [420, 510, 380, 620, 710, 890, 1050, 920, 780, 650, 540, 680, 750, 830, 910, 1100, 1250, 1080, 960, 840, 720, 860, 940, 1020, 1180, 1340, 1420, 1290, 1150, 1080])
+
+draftsSection = Card([draftsHeader, draftsTable], "sunk")
+draftsHeader = Heading("Drafts", "h3")
+draftsTable = Table([draftTitle, draftCategory, draftAuthor, draftStatus])
+draftTitle = Col("Title", ["AI in Healthcare: A Deep Dive", "10 Morning Routines for Productivity", "Q4 Market Outlook", "The Rise of Indie Games", "Sustainable Fashion Guide"])
+draftCategory = Col("Category", ["Technology", "Lifestyle", "Business", "Culture", "Lifestyle"])
+draftAuthor = Col("Author", ["Sarah Chen", "Mike Torres", "Lisa Park", "James Wu", "Anna Kim"])
+draftStatus = Col("Status", ["In Progress", "Review", "In Progress", "Draft", "In Progress"])
+
+publishedSection = Card([publishedHeader, publishedTable], "sunk")
+publishedHeader = Heading("Published This Week", "h3")
+publishedTable = Table([pubTitle, pubDate, pubReads, pubCategory])
+pubTitle = Col("Title", ["The Future of Remote Work: What 2025 Holds", "Why Python Still Dominates Data Science", "Weekend Meal Prep: 5 Easy Recipes", "Breaking Into Tech Without a Degree"])
+pubDate = Col("Published", ["Dec 3", "Dec 2", "Dec 1", "Nov 30"])
+pubReads = Col("Reads", ["24,891", "12,403", "8,762", "6,215"])
+pubCategory = Col("Category", ["Technology", "Technology", "Lifestyle", "Business"])
+
+commentsSection = Card([commentsHeader, commentsList], "sunk")
+commentsHeader = Heading("Comments Awaiting Reply (5)", "h3")
+commentsList = ListBlock([comment1, comment2, comment3, comment4, comment5])
+comment1 = ListItem("Reply to @dev_jane", "\"Great article! Would love to hear your thoughts on edge computing implications.\"", null, "Reply")
+comment2 = ListItem("Reply to @foodie_mark", "\"I tried this recipe but substituted tofu — any tips for getting the same texture?\"", null, "Reply")
+comment3 = ListItem("Reply to @startup_sam", "\"The market analysis is spot on. Are you tracking the AI startup funding trends?\"", null, "Reply")
+comment4 = ListItem("Reply to @gamer_lisa", "\"Underrated indie game — the art style reminds me of Studio Ghibli.\"", null, "Reply")
+comment5 = ListItem("Reply to @wellness_alex", "\"Can you share the full list of supplements you mentioned in the podcast?\"", null, "Reply")
+
+scheduleForm = Card([scheduleHeader, scheduleFormInner], "sunk")
+scheduleHeader = Heading("Schedule a Piece", "h3")
+scheduleFormInner = Form("schedule-piece", scheduleButtons, [scheduleTitleField, scheduleDateField, scheduleCategoryField])
+scheduleTitleField = FormControl("Article Title", scheduleTitleInput, "The title of your piece")
+scheduleTitleInput = Input("schedule_title", "Enter article title...")
+scheduleDateField = FormControl("Publish Date", scheduleDatePicker)
+scheduleDatePicker = DatePicker("publish_date", "single")
+scheduleCategoryField = FormControl("Category", scheduleCatSelect)
+scheduleCatSelect = Select("schedule_category", [schedCatTech, schedCatLifestyle, schedCatBusiness, schedCatCulture], "Pick a category")
+schedCatTech = SelectItem("tech", "Technology")
+schedCatLifestyle = SelectItem("lifestyle", "Lifestyle")
+schedCatBusiness = SelectItem("business", "Business")
+schedCatCulture = SelectItem("culture", "Culture")
+scheduleButtons = Buttons([scheduleBtn, cancelBtn])
+scheduleBtn = Button("Schedule", null, "primary")
+cancelBtn = Button("Cancel", null, "tertiary")

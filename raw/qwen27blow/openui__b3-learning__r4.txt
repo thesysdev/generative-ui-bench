@@ -1,0 +1,46 @@
+
+
+root = Card([header, filterRow, kpiSection, engagementSection, coursesSection, atRiskSection, messageSection])
+
+header = CardHeader("Training Platform Analytics", "Weekly overview and cohort performance")
+
+filterRow = Card([cohortLabel, cohortSelect], "clear", "row", "m", "center")
+cohortLabel = TextContent("**Cohort:**", "small")
+cohortSelect = Select("cohort", [allCohorts, cohortA, cohortB, cohortC, cohortD], "All cohorts")
+allCohorts = SelectItem("all", "All cohorts")
+cohortA = SelectItem("q1", "Q1 Onboarding")
+cohortB = SelectItem("q2", "Q2 Mid-level")
+cohortC = SelectItem("q3", "Q3 Advanced")
+cohortD = SelectItem("leadership", "Leadership Track")
+
+kpiSection = Card([kpiTable], "sunk")
+kpiTable = Table([kpiMetric, kpiValue, kpiDelta])
+kpiMetric = Col("Metric", ["Active learners this week", "Course completion rate", "Average quiz score"])
+kpiValue = Col("Value", ["1,247", "78.3%", "82.6%"])
+kpiDelta = Col("Change vs last week", ["+12.4%", "+3.1%", "-1.8%"])
+
+engagementSection = Card([engagementHeading, engagementChart], "sunk")
+engagementHeading = Heading("Engagement — past 8 weeks", "h3")
+engagementChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [sessionsSeries, completionsSeries], "natural", "Week", "Count")
+sessionsSeries = Series("Sessions", [820, 910, 875, 1040, 1120, 1080, 1190, 1247])
+completionsSeries = Series("Completions", [310, 345, 328, 402, 438, 415, 460, 491])
+
+coursesSection = Card([coursesHeading, coursesChart], "sunk")
+coursesHeading = Heading("Courses ranked by enrollment", "h3")
+coursesChart = HorizontalBarChart(["Python Fundamentals", "Data Analysis with SQL", "UX Design Basics", "Agile Project Management", "Cloud Architecture", "Machine Learning Intro"], [enrollSeries], "grouped", "Course", "Enrolled")
+enrollSeries = Series("Enrolled learners", [452, 389, 341, 298, 256, 213])
+
+atRiskSection = Card([atRiskHeading, atRiskTable], "sunk")
+atRiskHeading = Heading("Learners at risk of dropping out", "h3")
+atRiskTable = Table([riskName, riskCourse, riskLastActive, riskScore, riskAction])
+riskName = Col("Learner", ["Maya Chen", "Jordan Ellis", "Priya Sharma", "Tom Okafor", "Lena Fischer"])
+riskCourse = Col("Course", ["Cloud Architecture", "Python Fundamentals", "Agile Project Management", "Data Analysis with SQL", "Machine Learning Intro"])
+riskLastActive = Col("Last active", ["12 days ago", "9 days ago", "14 days ago", "11 days ago", "16 days ago"])
+riskScore = Col("Risk score", ["87", "74", "91", "68", "82"])
+riskAction = Col("Action", ["Flagged", "Flagged", "Critical", "Monitor", "Flagged"])
+
+messageSection = Card([messageText, messageButtons], "clear", "row", "m", "center")
+messageText = TextContent("Send a nudge or announcement to the selected cohort:", "small")
+messageButtons = Buttons([messageBtn, broadcastBtn])
+messageBtn = Button("Message cohort", null, "primary")
+broadcastBtn = Button("Broadcast to all", null, "secondary")

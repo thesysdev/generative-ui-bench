@@ -1,0 +1,37 @@
+root = Card([header, dateControl, kpiRow, trafficSection, campaignSection, footer], "clear", "column", "l")
+
+header = CardHeader("Marketing Weekly Dashboard", "Performance overview for the last 30 days")
+
+dateControl = Card([rangePicker, exportBtn], "sunk", "row", "m", "start", "between")
+rangePicker = DrawerBlock("Change Date Range", "Select Period", [dateInput, applyBtn])
+dateInput = FormControl("Date Range", datePicker)
+datePicker = DatePicker("report_range", "range")
+applyBtn = Buttons([confirmDate])
+confirmDate = Button("Apply Range", null, "primary")
+exportBtn = Button("Export Report", null, "secondary", "normal", "small")
+
+kpiRow = Card([convRate, subGrowth], "card", "row", "m")
+convRate = TextCallout("info", "Conversion Rate", "3.42% (↑ 0.5% vs last week)")
+subGrowth = TextCallout("success", "Email Subscribers", "+1,240 new signups this month")
+
+trafficSection = Card([trafficHeading, trafficChart, trafficTable], "sunk", "column", "m")
+trafficHeading = Heading("Traffic Analysis", "h3")
+trafficChart = PieChart(["Google", "Facebook", "Direct", "LinkedIn", "Twitter"], [45, 25, 15, 10, 5], "donut")
+trafficTable = Table([sourceCol, shareCol])
+sourceCol = Col("Source", ["Google", "Facebook", "Direct", "LinkedIn", "Twitter"])
+shareCol = Col("Share", ["45%", "25%", "15%", "10%", "5%"])
+
+campaignSection = Card([campHeading, bestCamp, campTable], "sunk", "column", "m")
+campHeading = Heading("Campaign Performance", "h3")
+bestCamp = Callout("success", "Top Performer", "The 'Summer Sale 2024' campaign is exceeding targets with a 5.1% conversion rate.")
+campTable = Table([campNameCol, campSpendCol, campStatusCol])
+campNameCol = Col("Campaign", ["Summer Sale 2024", "Brand Awareness", "Retargeting Q3", "Influencer Push"])
+campSpendCol = Col("Spend", ["$12,400", "$5,000", "$8,200", "$3,100"])
+campStatusCol = Col("Status", ["Active", "Active", "Paused", "Active"])
+
+footer = Card([visitorTrend], "clear")
+visitorTrend = Card([trendHeading, trendChart], "card", "column", "m")
+trendHeading = Heading("Daily Site Visitors", "h4")
+trendChart = LineChart(days, [visitorSeries], "natural", "Day", "Visitors")
+days = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+visitorSeries = Series("Visitors", [1200, 1350, 1100, 1400, 1600, 1500, 1800, 1700, 1650, 1900, 2100, 2000, 1800, 1750, 1900, 2200, 2400, 2300, 2100, 2500, 2800, 2600, 2400, 2300, 2700, 2900, 3100, 3000, 2800, 3200])

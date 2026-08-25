@@ -1,0 +1,54 @@
+
+
+root = Card([header, kpiRow, filterForm, ordersSection, volumeSection, refundSection], "card", "column", "l")
+
+header = CardHeader("Operations Desk", "Real-time overview — June 12, 2025")
+
+kpiRow = Card([ordersKpi, revenueKpi, aovKpi, refundKpi], "clear", "row", "m")
+
+ordersKpi = Card([ordersKpiLabel, ordersKpiValue], "sunk", "column", "none")
+ordersKpiLabel = TextContent("Orders Today", "small")
+ordersKpiValue = TextContent("142", "large-heavy")
+
+revenueKpi = Card([revenueKpiLabel, revenueKpiValue], "sunk", "column", "none")
+revenueKpiLabel = TextContent("Revenue Today", "small")
+revenueKpiValue = TextContent("$18,430", "large-heavy")
+
+aovKpi = Card([aovKpiLabel, aovKpiValue], "sunk", "column", "none")
+aovKpiLabel = TextContent("Avg Order Value", "small")
+aovKpiValue = TextContent("$129.79", "large-heavy")
+
+refundKpi = Card([refundKpiLabel, refundKpiValue], "sunk", "column", "none")
+refundKpiLabel = TextContent("Refund Rate (Mo.)", "small")
+refundKpiValue = TextContent("3.2%", "large-heavy")
+
+filterForm = Form("order-filter", filterButtons, [statusField, searchField])
+statusField = FormControl("Status", statusSelect)
+statusSelect = Select("status", [allOpt, pendingOpt, processingOpt, shippedOpt, deliveredOpt, refundedOpt], "All statuses")
+allOpt = SelectItem("all", "All statuses")
+pendingOpt = SelectItem("pending", "Pending")
+processingOpt = SelectItem("processing", "Processing")
+shippedOpt = SelectItem("shipped", "Shipped")
+deliveredOpt = SelectItem("delivered", "Delivered")
+refundedOpt = SelectItem("refunded", "Refunded")
+searchField = FormControl("Customer", searchInput, "Filter by customer name")
+searchInput = Input("search", "e.g. Jane Smith…")
+filterButtons = Buttons([filterBtn])
+filterBtn = Button("Apply Filter", null, "primary")
+
+ordersSection = Card([ordersHeading, ordersTable], "sunk", "column", "m")
+ordersHeading = Heading("Recent Orders", "h3")
+ordersTable = Table([idCol, customerCol, totalCol, statusCol, actionCol])
+idCol = Col("Order ID", ["ORD-7841", "ORD-7840", "ORD-7839", "ORD-7838", "ORD-7837", "ORD-7836", "ORD-7835"])
+customerCol = Col("Customer", ["Jane Smith", "Marcus Lee", "Aisha Patel", "Tom Okafor", "Lena Fischer", "Raj Gupta", "Sofia Reyes"])
+totalCol = Col("Total", ["$249.99", "$89.50", "$412.00", "$67.25", "$156.80", "$334.40", "$120.00"])
+statusCol = Col("Status", ["Processing", "Shipped", "Pending", "Delivered", "Processing", "Shipped", "Pending"])
+actionCol = Col("Action", ["Mark Fulfilled", "Mark Fulfilled", "Mark Fulfilled", "—", "Mark Fulfilled", "Mark Fulfilled", "Mark Fulfilled"], "action")
+
+volumeSection = Card([volumeHeading, volumeChart], "sunk", "column", "m")
+volumeHeading = Heading("Order Volume — Past 4 Weeks", "h3")
+volumeChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [volumeSeries], "grouped", "Week", "Orders")
+volumeSeries = Series("Orders", [420, 485, 512, 534])
+
+refundSection = Card([refundCallout], "sunk", "column", "none")
+refundCallout = TextCallout("warning", "Refund Rate This Month", "18 of 562 orders refunded (3.2%). Top reason: damaged in transit (7 cases).")

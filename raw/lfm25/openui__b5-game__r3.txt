@@ -1,0 +1,279 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Players online right now
+    Card(
+      children: [
+        CardHeader(title="Players Online", subtitle="Currently Connected"),
+        TextContent("847 players are currently online across all servers."),
+        CardHeader(title="Today's New Signups", subtitle="New Players"),
+        TextContent("234 new players joined today."),
+      ]
+    ),
+    // 2. Daily and Monthly Active Players
+    Card(
+      children: [
+        CardHeader(title="Active Players",
+                  subtitle="Daily vs Monthly"),
+        Column(
+          columns: [
+            { label: "Daily Active Users (DAU)", value: "1,247", type: "number" },
+            { label: "Monthly Active Users (MAU)", value: "8,432", type: "number" }
+          ],
+          justify: "stretch"
+        )
+      ]
+    ),
+    // 3. Revenue today
+    Card(
+      children: [
+        CardHeader(title="Revenue Today",
+                   subtitle="Current Day Income"),
+        TextContent("$42,580 generated today"),
+        TextCallout(
+          variant: "success",
+          title: "Today's Revenue",
+          description: "Revenue from in-game purchases and subscriptions in the last 24 hours."
+        )
+      ]
+    ),
+    // 4. Revenue per user
+    Card(
+      children: [
+        CardHeader(title="Revenue Per User",
+                   subtitle="Average Revenue Generated per Player"),
+        TextContent("$5.94 per active user today"),
+        TextCallout(
+          variant: "success",
+          title: "Revenue Metric",
+          description: "Total daily revenue divided by unique players online."
+        )
+      ]
+    ),
+    // 5. Session length over past two weeks
+    Card(
+      children: [
+        CardHeader(title="Session Duration (Last 14 Days)",
+                   subtitle="Player Engagement"),
+        HorizontalBarChart(
+          labels: ["Oct 15", "Oct 16", "Oct 17", "Oct 18", "Oct 19", "Oct 20", "Oct 21", "Oct 22", "Oct 23", "Oct 24", "Oct 25", "Oct 26", "Oct 27", "Oct 28", "Oct 29"],
+          series: [
+            {
+              name: "Short Sessions (<15 min)",
+              values: [3200, 2800, 2900, 3300, 2700, 2600, 3000, 2500, 2800, 2400, 2200, 2300, 2100, 2000, 1900]
+            },
+            {
+              name: "Medium Sessions (15-60 min)",
+              values: [1800, 2100, 1950, 2000, 2200, 2100, 1950, 1800, 2000, 2500, 2300, 2150, 2050, 1850, 1750]
+            },
+            {
+              name: "Long Sessions (>60 min)",
+              values: [1500, 1600, 1700, 1900, 1400, 1300, 1450, 1350, 1100, 950, 900, 850, 700, 600, 550]
+            }
+          ],
+          xLabel: "Day",
+          yLabel: "Avg. Minutes"
+        )
+      ]
+    ),
+    // 6. Best-selling items with units
+    Card(
+      children: [
+        CardHeader(title="Top Selling Items",
+                   subtitle="Best-Selling Products"),
+        Table(
+          columns: [
+            { label: "Item Name", type: "string" },
+            { label: "Units Sold", type: "number" },
+            { label: "Price ($)", type: "number" }
+          ],
+          data: [
+            { text: "Dragon Blade", value: "124", price: 129.99 },
+            { text: "Nexus Shield", value: "89", price: 59.95 },
+            { text: "Energy Core", value: "156", price: 44.50 },
+            { text: "Elite Pack", value: "67", price: 199.00 },
+            { text: "Gemstone Set", value: "43", price: 35.00 }
+          ]
+        )
+      ]
+    ),
+    // 7. Server regions and health
+    Card(
+      children: [
+        CardHeader(title="Server Regions",
+                   subtitle="Health Status Across All Servers"),
+        Table(
+          columns: [
+            { label: "Region", type: "string" },
+            { label: "Status", type: "string" },
+            { label: "Uptime %", type: "number" },
+            { label: "Players", type: "number" }
+          ],
+          data: [
+            { text: "US-East", value: "green", valueNum: 92, players: 31240 },
+            { text: "EU-West", value: "yellow", valueNum: 78, players: 24500 },
+            { text: "APAC-South", value: "red", valueNum: 65, players: 19800 },
+            { text: "LA-North", value: "green", valueNum: 88, players: 27500 },
+            { text: "SA-South", value: "blue", valueNum: 72, players: 16500 }
+          ]
+        )
+      ]
+    ),
+    // 8. Crash rate by app version
+    Card(
+      children: [
+        CardHeader(title="Crash Rate by Version",
+                   subtitle="Stability Report"),
+        HorizontalBarChart(
+          labels: ["v2.1.0", "v2.0.5", "v1.9.3", "v2.1.1", "v2.0.0"],
+          series: [
+            {
+              name: "v2.1.0",
+              values: [0.8, 0.7, 0.6, 0.5, 0.4]  // percent
+            },
+            {
+              name: "v2.0.5",
+              values: [1.2, 1.1, 1.0, 0.9, 0.8]
+            },
+            {
+              name: "v1.9.3",
+              values: [1.8, 1.7, 1.6, 1.5, 1.4]
+            }
+          ],
+          xLabel: "App Version",
+          yLabel: "Crash Rate (%)"
+        )
+      ]
+    ),
+    // 9. Live events running and upcoming
+    Card(
+      children: [
+        CardHeader(title="Live Events",
+                   subtitle="Ongoing & Upcoming"),
+        Table(
+          columns: [
+            { label: "Event", type: "string" },
+            { label: "Type", type: "string" },
+            { label: "Status", type: "string" },
+            { label: "Start Time", type: "string" }
+          ],
+          data: [
+            { text: "Seasonal Battle Pass Launch", value: "Completed", status: "completed", time: "Nov 10–Nov 24" },
+            { text: "Summer Tournament Recap", value: "Ongoing", status: "active", time: "Nov 1–Nov 15" },
+            { text: "Community Craft Challenge", value: "Coming Soon", status: "upcoming", time: "Nov 20–Dec 5" },
+            { text: "Battle Pass Rewards Drop", value: "Completed", status: "completed", time: "Oct 28–Nov 3" }
+          ]
+        )
+      ]
+    ),
+    // 10. Player reports awaiting review
+    Card(
+      children: [
+        CardHeader(title="Player Reports",
+                   subtitle="Pending Review Queue"),
+        ListBlock(
+          items: [
+            { text: "Report #4421 – Exploit detected in inventory system", priority: "high" },
+            { text: "Report #4419 – Bug in quest gating", priority: "medium" },
+            { text: "Report #4408 – Spam bot activity", priority: "high" },
+            { text: "Report #4405 – Performance lag in multiplayer", priority: "medium" }
+          ]
+        )
+      ]
+    ),
+    // 11. Ban appeals awaiting review
+    Card(
+      children: [
+        CardHeader(title="Ban Appeals",
+                   subtitle="Pending Moderation"),
+        ListBlock(
+          items: [
+            { text: "Appeal #5512 – Player dispute resolution", status: "pending" },
+            { text: "Appeal #5509 – Account integrity violation", status: "pending" },
+            { text: "Appeal #5507 – Cheat software evidence", status: "pending" }
+          ]
+        )
+      ]
+    ),
+    // 12. In-game currency inflation
+    Card(
+      children: [
+        CardHeader(title="Currency Inflation",
+                   subtitle="In-Game Economy Analysis"),
+        TextContent(
+          "Gold inflation rate: +12.5% MoM\n\nRevenue growth outpaces purchasing power by 8%",
+          "informational"
+        )
+      ]
+    ),
+    // 13. Results of two running experiments
+    Card(
+      children: [
+        CardHeader(title="Experiment Results",
+                   subtitle="A/B Test Outcomes"),
+        Table(
+          columns: [
+            { label: "Experiment", type: "string" },
+            { label: "Group A", type: "string" },
+            { label: "Group B", type: "string" },
+            { label: "Result", type: "string" }
+          ],
+          data: [
+            { text: "User Retention Boost", value: "v1.2.0", valueNum: "18%" },
+            { text: "Monetization UX", value: "v1.1.1", valueNum: "+7%" }
+          ]
+        )
+      ]
+    ),
+    // 14. Draft patch notes
+    Card(
+      children: [
+        CardHeader(title="Draft Patch Notes",
+                   subtitle="Create & Publish"),
+        Form(
+          name: "Patch Title",
+          fields: [
+            { label: "Title", input: Input("patch_title", "", placeholder="Patch name") },
+            { label: "Description", input: Input("description", "", placeholder="What's new?") },
+            { label: "Version", select: Select("version", ["v2.3.0", "v2.4.0", "v2.5.0"]), options: ["v2.3.0", "v2.4.0", "v2.5.0"] }
+          ],
+          submit: Button("Save Patch Draft", "primary")
+        )
+      ]
+    ),
+    // 15. Focus on one region
+    Card(
+      children: [
+        CardHeader(title="Region Filter",
+                   subtitle="Focus on Specific Server Region"),
+        Select(
+          label: "Filter by Region",
+          options: ["US-East", "EU-West", "APAC-South", "LA-North", "SA-South"],
+          defaultValue: "US-East",
+          onChange: () => console.log("Region changed to:", this.options.findIndex(o => o === this.value))
+        ),
+        TextContent("All metrics will refresh to show data for the selected region.")
+      ]
+    ),
+    // 16. Ship a hotfix
+    Card(
+      children: [
+        CardHeader(title="Ship Hotfix",
+                   subtitle="Deploy Emergency Fix"),
+        Button(
+          label: "Deploy Hotfix",
+          action: "deploy_hotfix",
+          variant: "primary",
+          size: "large"
+        ),
+        Button(
+          label: "Roll Back Previous Version",
+          action: "rollback_version",
+          variant: "secondary",
+          size: "small"
+        )
+      ]
+    ]
+  ]
+)
+```

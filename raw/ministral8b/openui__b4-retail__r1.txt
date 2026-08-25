@@ -1,0 +1,47 @@
+```openui-lang
+root = Card([header, statsRow, salesTarget, footTraffic, bestSellers, stockStatus,
+             staffShift, basketSize, returnsWeek, promotions, registers, reorderBtn,
+             storeSwitcher, weeklyComparison])
+
+header = CardHeader("Store Dashboard", "Daily Console")
+
+statsRow = Card([salesTarget, footTraffic, basketSize, returnsWeek], "card", "row", "m", "center", "stretch")
+
+salesTarget = Card([todaySales, targetValue], "card", "column", "xs", "center")
+todaySales = Card([TextContent("Today's Sales"), TextContent("$12,456", null, "large-heavy")], "card", "column", "xs")
+targetValue = TextContent("Target: $15,000", null, "small")
+
+footTraffic = Card([TextContent("Foot Traffic"), LineChart(["8am", "12pm", "4pm", "8pm"], [trafficSeries])], "card", "column", "xs")
+trafficSeries = Series("Visitors", [120, 350, 280, 150])
+
+bestSellers = Card([CardHeader("Best Sellers"), Table([bestSellersCol1, bestSellersCol2])], "card")
+bestSellersCol1 = Col("Product", ["Organic Apples", "Whole Wheat Bread", "Yogurt (Vanilla)", "Eggs (Dozen)"])
+bestSellersCol2 = Col("Units Sold", [42, 38, 31, 27])
+
+stockStatus = Card([CardHeader("Out of Stock"), Table([stockCol1, stockCol2])], "card")
+stockCol1 = Col("Product", ["Almond Milk", "Chia Seeds", "Organic Bananas"])
+stockCol2 = Col("Status", ["Low", "Critical", "Warning"])
+
+staffShift = Card([CardHeader("Shift Staff"), Table([staffCol1, staffCol2])], "card")
+staffCol1 = Col("Employee", ["Sarah Johnson", "Michael Chen", "Emily Rodriguez"])
+staffCol2 = Col("Role", ["Manager", "Cashier", "Stock Clerk"])
+
+basketSize = Card([TextContent("Avg. Basket Size"), TextContent("$42.15", null, "large-heavy")], "card", "column", "xs")
+
+returnsWeek = Card([TextContent("Returns This Week"), TextContent("18", null, "large-heavy")], "card", "column", "xs")
+
+promotions = Card([CardHeader("Promotions"), Table([promoCol1, promoCol2, promoCol3])], "card")
+promoCol1 = Col("Promotion", ["Summer Sale", "Loyalty Discount", "New Arrivals"])
+promoCol2 = Col("Units Sold", [120, 85, 42])
+promoCol3 = Col("Revenue", ["$2,100", "$1,500", "$980"])
+
+registers = Card([CardHeader("Register Status"), Table([regCol1, regCol2])], "card")
+regCol1 = Col("Register", ["Reg 1", "Reg 2", "Reg 3", "Reg 4"])
+regCol2 = Col("Status", ["Open", "Closed", "Open", "Open"])
+
+reorderBtn = Button("Reorder Items", ["reorder"], "primary")
+storeSwitcher = Button("View Another Store", ["switch_store"], "secondary")
+
+weeklyComparison = Card([CardHeader("Weekly Comparison"), BarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [weeklySeries])], "card")
+weeklySeries = Series("Sales", [12500, 14200, 13800, 15000, 16000, 18000, 17500])
+```

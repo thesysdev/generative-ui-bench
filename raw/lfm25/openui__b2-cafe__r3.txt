@@ -1,0 +1,102 @@
+root = Card([
+  // 1. Header
+  CardHeader("Café Menu", "Daily menu and specials"),
+  
+  // 2. Drinks with prices
+  Card([
+    CardHeader("Beverages", "Hot & Cold Drinks"),
+    DrinksTable()
+  ]),
+  
+  // 3. Food with prices
+  Card([
+    CardHeader("Food", "Main Dishes & Snacks"),
+    FoodTable()
+  ]),
+  
+  // 4. Today's special called out
+  Card([
+    CardHeader("Today's Special", "Featured Offer"),
+    TodaySpecialCard()
+  ]),
+  
+  // 5. Vegetarian items only filter
+  Card([
+    CardHeader("Dietary Preferences", "Filter by meal type"),
+    VegetarianFilter()
+  ]),
+  
+  // 6. Opening hours
+  Card([
+    CardHeader("Opening Hours", "Our Schedule"),
+    OpeningHoursCard()
+  ])
+])
+
+// Drinks table with price column
+DrinksTable = Card([
+  CardHeader("Beverages", "Hot & Cold Drinks"),
+  Table({
+    columns: [
+      {"key": "Drink", "type": "string"},
+      {"key": "Price", "type": "number"}
+    ],
+    data: [
+      {"Drink": "Espresso", "Price": 3.50},
+      {"Drink": "Latte", "Price": 4.25},
+      {"Drink": "Mocha", "Price": 4.75},
+      {"Drink": "Iced Coffee", "Price": 3.95},
+      {"Drink": "Sparkling Water", "Price": 2.50}
+    ]
+  })
+])
+
+// Food table with price column
+FoodTable = Card([
+  CardHeader("Food", "Main Dishes & Snacks"),
+  Table({
+    columns: [
+      {"key": "Food", "type": "string"},
+      {"key": "Price", "type": "number"}
+    ],
+    data: [
+      {"Food": "Avocado Toast", "Price": 12.00},
+      {"Food": "Club Sandwich", "Price": 13.50},
+      {"Food": "Grilled Cheese", "Price": 10.50},
+      {"Food": "Veggie Burger", "Price": 14.00},
+      {"Food": "Salad Bowl", "Price": 9.99}
+    ]
+  })
+])
+
+// Today's special highlighted card
+TodaySpecialCard = Card([
+  CardHeader("Today's Special", "Featured Offer"),
+  TextContent("Chocolate Mocha Latte", "large", "featured"),
+  TextContent("Today's Special - Enjoy 10% off!", "small", "note")
+])
+
+// Vegetarian filter toggle
+VegetarianFilter = Card([
+  CardHeader("Dietary Preferences", "Filter by meal type"),
+  SwitchGroup({
+    items: [
+      {
+        value: "all",
+        trigger: "all",
+        content: []
+      },
+      {
+        value: "vegetarian",
+        trigger: "veg_only",
+        content: []
+      }
+    ]
+  })
+])
+
+// Opening hours card
+OpeningHoursCard = Card([
+  CardHeader("Opening Hours", "Our Schedule"),
+  TextContent("Mon-Fri: 7:00 AM - 2:00 PM\nSat-Sun: 8:00 AM - 8:00 PM", "large")
+])

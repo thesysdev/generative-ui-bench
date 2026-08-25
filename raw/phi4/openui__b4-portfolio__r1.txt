@@ -1,0 +1,63 @@
+```openui
+root = Card([projectSummary, activeProjects, overdueMilestones, budgetUtilization, teamUtilization, risks, upcomingDeadlines, deliveryPace, blockedItems, actions])
+
+projectSummary = Card([summaryHeader, healthSummary])
+summaryHeader = CardHeader("Project Portfolio Overview")
+healthSummary = TextContent("Overall Portfolio Health: Good", "large")
+
+activeProjects = Card([projectsHeader, projectsTable])
+projectsHeader = Heading("Active Projects", "h3")
+projectsTable = Table([projectNameCol, ownerCol, deadlineCol, healthCol])
+projectNameCol = Col("Project", ["Project A", "Project B", "Project C"])
+ownerCol = Col("Owner", ["Alice", "Bob", "Charlie"])
+deadlineCol = Col("Deadline", ["2023-11-15", "2023-12-01", "2023-11-30"])
+healthCol = Col("Health", ["Healthy", "At Risk", "Critical"])
+
+overdueMilestones = Card([milestonesHeader, milestonesTable])
+milestonesHeader = Heading("Overdue Milestones", "h3")
+milestonesTable = Table([projectCol, milestoneCol, overdueByCol])
+projectCol = Col("Project", ["Project A", "Project B"])
+milestoneCol = Col("Milestone", ["Design Complete", "Backend MVP"])
+overdueByCol = Col("Overdue By", ["3 days", "5 days"])
+
+budgetUtilization = Card([budgetHeader, budgetTable])
+budgetHeader = Heading("Budget Utilization", "h3")
+budgetTable = Table([projectCol, budgetSpentCol, budgetAllocatedCol, utilizationCol])
+budgetSpentCol = Col("Spent", ["$50k", "$75k"])
+budgetAllocatedCol = Col("Allocated", ["$100k", "$120k"])
+utilizationCol = Col("Utilization", ["50%", "62.5%"])
+
+teamUtilization = Card([teamHeader, teamTable])
+teamHeader = Heading("Team Utilization", "h3")
+teamTable = Table([teamMemberCol, utilizationCol])
+teamMemberCol = Col("Team Member", ["Dave", "Eve"])
+utilizationCol = Col("Utilization", ["80%", "70%"])
+
+risks = Card([risksHeader, risksTable])
+risksHeader = Heading("Risks", "h3")
+risksTable = Table([riskCol, severityCol])
+riskCol = Col("Risk", ["Dependency on vendor", "New tech adoption"])
+severityCol = Col("Severity", ["High", "Medium"])
+
+upcomingDeadlines = Card([deadlinesHeader, deadlinesTable])
+deadlinesHeader = Heading("Upcoming Deadlines", "h3")
+deadlinesTable = Table([projectCol, deadlineCol])
+deadlineCol = Col("Deadline", ["2023-11-20", "2023-11-22"])
+
+deliveryPace = Card([paceHeader, paceChart])
+paceHeader = Heading("Delivery Pace", "h3")
+paceChart = LineChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"], [paceSeries], "linear", "Sprint", "Stories")
+paceSeries = Series("Stories Completed", [10, 12, 9, 11, 13, 14])
+
+blockedItems = Card([blockedHeader, blockedTable])
+blockedHeader = Heading("Blocked Work Items", "h3")
+blockedTable = Table([projectCol, itemCol, blockerCol])
+itemCol = Col("Item", ["API Integration", "Frontend Refactor"])
+blockerCol = Col("Blocker", ["Awaiting API", "Design Approval"])
+
+actions = Buttons([changeQuarterBtn, requestPeopleBtn, exportReviewBtn, archiveProjectBtn])
+changeQuarterBtn = Button("View Different Quarter", null, "secondary")
+requestPeopleBtn = Button("Request More People", null, "tertiary")
+exportReviewBtn = Button("Export Review")
+archiveProjectBtn = Button("Archive Project", null, "destructive")
+```

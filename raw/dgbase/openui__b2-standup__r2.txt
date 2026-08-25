@@ -1,0 +1,19 @@
+thought
+root = Card([header, statusRow, blockedAlert, teamList, updateForm])
+header = CardHeader("Async Standup", "October 24, 2023")
+statusRow = Card([missingCount, completionProgress], "card", "row", "m")
+missingCount = Badge("3 updates remaining", null, null, "warning")
+completionProgress = Progress(72, "Team Participation 72%")
+blockedAlert = Callout("error", "Blockers Detected", "Alex is waiting on the API documentation from the backend team.")
+teamList = ListBlock([team1, team2, team3, team4], "image")
+updateForm = Form("new-update", formButtons, [nameField, statusField])
+nameField = FormControl("Your Name", Input("name", "John Doe"))
+statusField = FormControl("What are you working on?", TextArea("status", "Describe your progress, blockers, and plans."))
+formButtons = Buttons([submitBtn("Post Update", null, "primary"), Button("Draft", null, "tertiary")])
+
+team1 = ListItem("Sarah", "Finished the authentication module. Starting on UI components today.", ["https://picsum.photos/seed/sarah/100/100"])
+team2 = ListItem("Alex", "BLOCKED: Waiting for API credentials to finish the integration tests.", ["https://picsum.photos/seed/alex/100/100"])
+team3 = ListItem("Elena", "Reviewing pull requests for the dashboard feature. No blockers.", ["https://picsum.photos/seed/elena/100/100"])
+team4 = ListItem("Marcus", "Setting up the staging environment for load testing.", ["https://picsum.photos/seed/marcus/100/100"])
+
+submitBtn = (label, action, variant) => Button(label, action, variant)

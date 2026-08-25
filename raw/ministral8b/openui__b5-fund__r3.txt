@@ -1,0 +1,130 @@
+```openui-lang
+root = Card([workspaceHeader, portfolioSummary, positionsSection, exposureSection, riskMetrics, marketActivity, newsSection, economicCalendar, strategyPerformance, drawdownChart, riskAlerts, rebalanceBtn, orderForm, timeframeSelector])
+
+workspaceHeader = CardHeader("Morning Trading Workspace", "Daily market overview and portfolio management")
+
+portfolioSummary = Card([portfolioValue, pnlToday], "sunk")
+portfolioValue = CardHeader("Portfolio Value", "$12,456,789.23")
+pnlToday = Card([TextContent("Today's P&L: ", "large-heavy"), TextContent("+$187,423.56", "large-heavy", "success")], "card", "row", "none", "center")
+
+positionsSection = CardHeader("Positions", "Current market positions")
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentPriceCol])
+tickerCol = Col("Ticker", ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"])
+sizeCol = Col("Size", ["1500", "800", "2200", "1100", "450"])
+entryCol = Col("Entry Price", ["$185.23", "$262.10", "$145.67", "$3245.89", "$710.34"])
+currentPriceCol = Col("Current Price", ["$192.45", "$268.90", "$148.21", "$3250.12", "$725.67"])
+positionsSectionContent = Card([positionsTable, positionsSummary], "sunk")
+positionsSummary = TextContent("Total positions: 5 | Total notional: $12,456,789.23")
+
+exposureSection = CardHeader("Exposure by Sector", "Sector allocation")
+exposureChart = PieChart(["Tech", "Consumer", "Healthcare", "Industrials", "Financials"], [65, 15, 10, 8, 2], "pie", "circular")
+exposureSummary = Card([TextContent("Top sector: Tech (65%)"), TextContent("Highest concentration risk: Tech")], "sunk")
+
+riskMetrics = Card([varSection, marginSection], "sunk")
+varSection = Card([TextContent("Value at Risk (1d):"), TextContent("$289,456.78", "large-heavy", "danger")], "card", "row", "none", "center")
+marginSection = Card([TextContent("Margin in Use:"), TextContent("$5,678,901.23", "large-heavy")], "card", "row", "none", "center")
+
+marketActivity = Card([gainersLosers, watchedInstruments], "sunk")
+gainersLosers = Card([CardHeader("Today's Biggest Movers"), gainsTable, lossesTable], "sunk")
+gainsTable = Table([tickerCol2, changeCol2])
+gainsTableData = [
+    ["NVDA", "+12.45%"],
+    ["TSLA", "+8.76%"],
+    ["AMD", "+6.32%"]
+]
+tickerCol2 = Col("Ticker", ["NVDA", "TSLA", "AMD"])
+changeCol2 = Col("Change", ["+12.45%", "+8.76%", "+6.32%"])
+
+lossesTable = Table([tickerCol3, changeCol3])
+lossesTableData = [
+    ["BRK.B", "-5.23%"],
+    ["JPM", "-3.87%"],
+    ["V", "-2.98%"]
+]
+tickerCol3 = Col("Ticker", ["BRK.B", "JPM", "V"])
+changeCol3 = Col("Change", ["-5.23%", "-3.87%", "-2.98%"])
+
+watchedInstruments = CardHeader("Watched Instruments", "Current prices")
+watchedTable = Table([tickerCol4, priceCol])
+watchedTableData = [
+    ["BTC", "$68,456.78"],
+    ["ETH", "$3,890.12"],
+    ["SPY", "$456.78"],
+    ["GLD", "$198.45"]
+]
+tickerCol4 = Col("Ticker", ["BTC", "ETH", "SPY", "GLD"])
+priceCol = Col("Price", ["$68,456.78", "$3,890.12", "$456.78", "$198.45"])
+
+newsSection = CardHeader("Market Headlines", "Sentiment analysis")
+newsItems = [
+    Card([TextContent("Fed signals potential rate cut in June", "large-heavy"), TextContent("Bullish", "danger")], "sunk"),
+    Card([TextContent("Tech earnings beat expectations", "large-heavy"), TextContent("Bullish", "success")], "sunk"),
+    Card([TextContent("Oil prices dip on supply concerns", "large-heavy"), TextContent("Bearish", "warning")], "sunk")
+]
+
+economicCalendar = CardHeader("Economic Releases This Week", "Key events")
+economicEvents = Table([eventCol, dateCol, impactCol])
+eventCol = Col("Event", ["CPI Report", "Non-Farm Payrolls", "Fed Meeting Minutes", "Retail Sales"])
+dateCol = Col("Date", ["Jun 12", "Jun 14", "Jun 16", "Jun 15"])
+impactCol = Col("Impact", ["High", "High", "Medium", "Medium"])
+
+strategyPerformance = Card([strategyPerformanceTable], "sunk")
+strategyPerformanceTable = Table([strategyCol, returnCol])
+strategyPerformanceData = [
+    ["Alpha Strategy", "+14.23%"],
+    ["Beta Strategy", "+8.76%"],
+    ["Gamma Strategy", "+5.32%"]
+]
+strategyCol = Col("Strategy", ["Alpha Strategy", "Beta Strategy", "Gamma Strategy"])
+returnCol = Col("YTD Return", ["+14.23%", "+8.76%", "+5.32%"])
+
+drawdownChart = Card([CardHeader("Drawdown Over Past Year"), drawdownRadar], "sunk")
+drawdownRadar = RadialChart(["Q1", "Q2", "Q3", "Q4"], [1.2, 0.8, 1.0, 0.9])
+
+riskAlerts = Card([TextCallout("Risk Limits", "warning"), riskAlertsTable], "sunk")
+riskAlertsTable = Table([limitCol, statusCol])
+riskAlertsData = [
+    ["Max Sector Exposure", "Breach: +12%"],
+    ["Leverage Ratio", "Breach: 4.2x"],
+    ["Single Stock Limit", "OK"]
+]
+limitCol = Col("Risk Limit", ["Max Sector Exposure", "Leverage Ratio", "Single Stock Limit"])
+statusCol = Col("Status", ["Breach: +12%", "Breach: 4.2x", "OK"])
+
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary", "normal", "large")
+
+orderForm = CardHeader("Place New Order", "Enter details")
+orderFormContent = Form("new-order", orderButtons, [
+    orderTickerField,
+    orderSideField,
+    orderQuantityField,
+    orderPriceField
+])
+orderTickerField = FormControl("Ticker", orderTickerInput)
+orderTickerInput = Input("ticker", "AAPL")
+orderSideField = FormControl("Side", orderSideSelect)
+orderSideSelect = Select("side", [sideBuy, sideSell], "Choose")
+sideBuy = SelectItem("BUY", "Buy")
+sideSell = SelectItem("SELL", "Sell")
+orderQuantityField = FormControl("Quantity", orderQuantityInput)
+orderQuantityInput = Input("quantity", "100", "number")
+orderPriceField = FormControl("Price (optional)", orderPriceInput)
+orderPriceInput = Input("price", null, "number")
+orderButtons = Buttons([submitOrderBtn, cancelOrderBtn])
+submitOrderBtn = Button("Submit Order", null, "primary", "normal", "large")
+cancelOrderBtn = Button("Cancel", null, "tertiary", "normal", "large")
+
+timeframeSelector = CardHeader("Change Timeframe", "Select visualization period")
+timeframeButtons = Buttons([dailyBtn, weeklyBtn, monthlyBtn, yearlyBtn], "column")
+dailyBtn = Button("Daily", null, "secondary", "normal", "medium")
+weeklyBtn = Button("Weekly", null, "secondary", "normal", "medium")
+monthlyBtn = Button("Monthly", null, "secondary", "normal", "medium")
+yearlyBtn = Button("Yearly", null, "secondary", "normal", "medium")
+
+workingOrders = CardHeader("Working Orders", "Pending orders")
+ordersTable = Table([tickerCol5, sideCol, sizeCol2, priceCol2])
+tickerCol5 = Col("Ticker", ["GOOGL", "AMZN"])
+sideCol = Col("Side", ["BUY", "SELL"])
+sizeCol2 = Col("Size", ["300", "200"])
+priceCol2 = Col("Price", ["$147.89", "$3251.45"])
+```

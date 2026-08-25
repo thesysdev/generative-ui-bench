@@ -1,0 +1,128 @@
+```openui-lang
+root = Card([
+    header,
+    onlineStatus,
+    activePlayers,
+    revenueStats,
+    sessionLengthChart,
+    bestSellingItems,
+    serverHealth,
+    crashRate,
+    liveEvents,
+    reports,
+    appeals,
+    currencyInflation,
+    experiments,
+    patchNotesEditor,
+    regionFocus,
+    hotfixShipper,
+    ], "card", "row", "l")
+
+header = CardHeader("Live‑Ops Dashboard", "Live‑Ops Overview")
+
+onlineStatus = TextContent("Players Online Now: 12,345", "large")
+
+activePlayers = Table([
+    activeDailyCol,
+    activeMonthlyCol,
+    ], "Active Players")
+activeDailyCol = Col("Daily", ["75,000"], "number")
+activeMonthlyCol = Col("Monthly", ["210,000"], "number")
+
+revenueStats = Card([
+    revenueToday,
+    revenuePerUser,
+    ], "sunk")
+revenueToday = TextContent("Revenue Today: $98,765", "large")
+revenuePerUser = TextContent("Revenue Per User: $7.89", "large")
+
+sessionLengthChart = LineChart(["W1", "W2", "W3", "W4"], [sessionSeries], "natural", "Week", "Session Hours")
+sessionSeries = Series("Session Length (hrs)", [2.3, 2.7, 3.1, 2.9])
+
+bestSellingItems = Table([
+    itemLabel,
+    itemUnits,
+    ], "Best‑Selling Items")
+itemLabel = Col("Item", ["Battle Axe", "Elixir of Speed", "Legendary Armor"], "string")
+itemUnits = Col("Units Sold", ["12,300", "9,800", "4,500"], "number")
+
+serverHealth = Card([
+    serverRegions,
+    serverHealthDetails,
+    ], "clear")
+serverRegions = Heading("Server Regions", "h3")
+serverHealthDetails = TextContent([
+    "US‑East: ✅ Healthy (99.9%)",
+    "EU‑West: ✅ Healthy (99.8%)",
+    "AP‑South: ⚠️ Degraded (98.5%)",
+    "SA‑North: ✅ Healthy (99.9%)",
+    ], "small")
+
+crashRate = Card([
+    crashByVersion,
+    ], "sunk")
+crashByVersion = Table([
+    appVersion,
+    crashPercentage,
+    ], "Crash Rate by Version")
+appVersion = Col("Version", ["1.2.3", "1.2.4", "1.3.0"], "string")
+crashPercentage = Col("Crash Rate", ["0.45%", "0.30%", "0.20%"], "percent")
+
+liveEvents = Card([
+    runningEvents,
+    upcomingEvents,
+    ], "clear")
+runningEvents = TextContent("Running Events:", "default")
+upcomingEvents = TextContent("Upcoming Events:", "default")
+    // (place event titles and timestamps here)
+
+reports = Card([
+    awaitingReview,
+    ], "sunk")
+awaitingReview = TextContent("Player Reports Awaiting Review: 42", "large")
+
+appeals = Card([
+    awaitingAppeals,
+    ], "sunk")
+awaitingAppeals = TextContent("Ban Appeals Awaiting Review: 7", "large")
+
+currencyInflation = Card([
+    inflationChart,
+    ], "sunk")
+inflationChart = BarChart(["Week 1", "Week 2", "Week 3", "Week 4"], [inflationSeries], "stacked", "Week", "Inflation %")
+inflationSeries = Series("Currency Inflation", [1.2, 1.5, 1.8, 2.0])
+
+experiments = Card([
+    exp1,
+    exp2,
+    ], "clear")
+exp1 = TextContent("Experiment A: A/B Test of New Loot Table", "default")
+exp2 = TextContent("Experiment B: UI Layout Redesign", "default")
+
+patchNotesEditor = Form("draft-patch", patchButtons, [
+    patchTitle,
+    patchContent,
+    ])
+patchTitle = FormControl("Patch Title", Input("title", "Patch v1.2.5"))
+patchContent = FormControl("Patch Notes", TextArea("notes", "Enter patch notes here..."))
+
+regionFocus = Buttons([
+    focusUS,
+    focusEU,
+    focusAP,
+    focusSA,
+    ], "column")
+focusUS = Button("Focus on US‑East")
+focusEU = Button("Focus on EU‑West")
+focusAP = Button("Focus on AP‑South")
+focusSA = Button("Focus on SA‑North")
+
+hotfixShipper = Form("ship-hotfix", hotfixButtons, [
+    hotfixDescription,
+    ])
+hotfixDescription = FormControl("Hotfix Description", TextArea("hotfix", "Brief description of hotfix..."))
+hotfixButtons = Buttons([
+    shipNow,
+    ])
+shipNow = Button("Ship Hotfix", null, "primary")
+```

@@ -1,0 +1,52 @@
+root = Card([header, searchRow, statsRow, shipmentsTable, delayedCallouts, volumeSplit, weeklyVolume, flagSection, refreshNote], "card", "column", "l")
+
+header = CardHeader("Logistics Coordinator Board", "Live shipment tracking & operations")
+
+searchRow = Card([searchLabel, searchField, searchBtn], "clear", "row", "m")
+searchLabel = TextContent("Search by route", "small")
+searchField = Input("route_search", "Origin → Destination", "text")
+searchBtn = Button("Search")
+
+statsRow = Card([onTimeStat, avgCostStat], "clear", "row", "l")
+onTimeStat = Card([onTimeHeading, onTimeValue], "sunk")
+onTimeHeading = Heading("On-time %", "h3")
+onTimeValue = TextContent("94.2%", "large-heavy")
+avgCostStat = Card([avgCostHeading, avgCostValue], "sunk")
+avgCostHeading = Heading("Avg Cost / Ship", "h3")
+avgCostValue = TextContent("$142.50", "large-heavy")
+
+shipmentsTable = Card([shipmentsHeading, shipmentsTableData], "card")
+shipmentsHeading = Heading("Shipments in Transit", "h2")
+shipmentsTableData = Table([shipCol1, shipCol2, shipCol3, shipCol4, shipCol5])
+shipCol1 = Col("Shipment", ["S-1024", "S-1025", "S-1026", "S-1027", "S-1028"])
+shipCol2 = Col("Origin", ["Chicago", "Seattle", "Miami", "Portland", "Dallas"])
+shipCol3 = Col("Destination", ["Denver", "Phoenix", "Atlanta", "Austin", "Houston"])
+shipCol4 = Col("ETA", ["Jun 12 14:00", "Jun 13 09:30", "Jun 12 18:00", "Jun 14 11:00", "Jun 13 16:00"])
+shipCol5 = Col("Status", ["In Transit", "In Transit", "In Transit", "In Transit", "In Transit"])
+
+delayedCallouts = Card([delayedHeading, d1, d2, d3], "card")
+delayedHeading = Heading("Delayed Shipments", "h2")
+d1 = Callout("warning", "S-1029 — Chicago → Denver", "Delayed 6h. Weather delay at origin.")
+d2 = Callout("warning", "S-1031 — Seattle → Phoenix", "Delayed 3h. Customs hold.")
+d3 = Callout("warning", "S-1034 — Miami → Atlanta", "Delayed 8h. Mechanical issue.")
+
+volumeSplit = Card([volumeHeading, carrierChart], "card")
+volumeHeading = Heading("Volume by Carrier", "h2")
+carrierChart = PieChart(["FedEx", "UPS", "DHL", "USPS"], [320, 280, 150, 110], "donut")
+
+weeklyVolume = Card([weeklyHeading, volumeChart], "card")
+weeklyHeading = Heading("Weekly Volume (8 weeks)", "h2")
+volumeChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [volSeries], "linear", "Week", "Shipments")
+volSeries = Series("Shipments", [420, 380, 450, 410, 390, 460, 440, 480])
+
+flagSection = Card([flagHeading, flagForm], "card")
+flagHeading = Heading("Flag a Shipment", "h2")
+flagForm = Form("flag-shipment", flagButtons, [flagField, flagReason])
+flagField = FormControl("Shipment ID", flagInput)
+flagInput = Input("flag_id", "S-1024")
+flagReason = FormControl("Reason", flagText)
+flagText = TextArea("flag_reason", "Enter reason...", 3)
+flagButtons = Buttons([flagBtn])
+flagBtn = Button("Submit Flag", ["flag"], "primary")
+
+refreshNote = TextContent("Last refreshed: 2025-06-11 09:42 UTC", "small")

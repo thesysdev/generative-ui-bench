@@ -1,0 +1,45 @@
+```openui
+root = Card([uptimeSection, usageSection, errorSection, incidentsSection, regionFilter, slowEndpointsSection, alertThresholdSection, acknowledgeIncidentSection])
+
+uptimeSection = Card([uptimeHeading, uptimeValue])
+uptimeHeading = Heading("Uptime This Quarter", "h3")
+uptimeValue = TextContent("99.56%", "large")
+
+usageSection = Card([usageHeading, cpuChart, memoryChart])
+usageHeading = Heading("CPU & Memory Usage (Past 24h)", "h3")
+cpuChart = LineChart(["00", "06", "12", "18", "24"], [cpuSeries], "linear", "Time", "CPU (%)")
+cpuSeries = Series("CPU", [25, 30, 45, 50, 40])
+memoryChart = LineChart(["00", "06", "12", "18", "24"], [memorySeries], "linear", "Time", "Memory (%)")
+memorySeries = Series("Memory", [60, 65, 70, 75, 65])
+
+errorSection = Card([errorHeading, errorValue])
+errorHeading = Heading("Error Rate Now", "h3")
+errorValue = TextContent("0.5%", "large")
+
+incidentsSection = Card([incidentsHeading, incidentsList])
+incidentsHeading = Heading("Open Incidents", "h3")
+incidentsList = ListBlock([incident1, incident2], "image")
+incident1 = ListItem("Database Timeout", "Severity: High", ["db_timeout.png"], "View Details")
+incident2 = ListItem("API Latency", "Severity: Medium", ["api_latency.png"], "View Details")
+
+regionFilter = Card([regionHeading, regionSelect])
+regionHeading = Heading("Narrow to Region", "h3")
+regionSelect = Select("region", [us, eu, apac], "Select a Region")
+us = SelectItem("US", "United States")
+eu = SelectItem("EU", "Europe")
+apac = SelectItem("APAC", "Asia-Pacific")
+
+slowEndpointsSection = Card([slowEndpointsHeading, slowEndpointsTable])
+slowEndpointsHeading = Heading("Slowest Endpoints (Past 24h)", "h3")
+slowEndpointsTable = Table([endpointName, latency])
+endpointName = Col("Endpoint", ["User Login", "Data Sync", "Image Upload", "Report Gen", "File Download"])
+latency = Col("Latency (ms)", [300, 450, 500, 600, 650])
+
+alertThresholdSection = Card([alertThresholdHeading, alertSlider])
+alertThresholdHeading = Heading("Set Alert Threshold", "h3")
+alertSlider = Slider("alert_threshold", "continuous", 0, 100, 1, "Alert Threshold (%)", null, 50)
+
+acknowledgeIncidentSection = Card([acknowledgeHeading, acknowledgeButton])
+acknowledgeHeading = Heading("Acknowledge Incident", "h3")
+acknowledgeButton = Button("Acknowledge Selected Incidents", null, "tertiary")
+```

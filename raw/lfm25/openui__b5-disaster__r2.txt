@@ -1,0 +1,934 @@
+```openui-lang
+root = Card(
+  children: [
+    // 1. Active incidents by zone with severity
+    CardHeader(
+      title="Active Incidents",
+      subtitle="Current emergency response status by zone"
+    ),
+    IncidentList,
+    
+    // 2. Overall severity summary
+    SeveritySummary,
+    
+    // 3. Vehicles, personnel and supplies
+    ResourcesSection,
+    
+    // 4. Shelters with capacity and occupancy
+    SheltersSection,
+    
+    // 5. Evacuation routes status
+    EvacuationRoutes,
+    
+    // 6. Weather forecast for next 48 hours
+    WeatherForecast,
+    
+    // 7. People rescued and casualties
+    SummaryMetrics,
+    
+    // 8. Volunteers on duty with assignment
+    VolunteersSection,
+    
+    // 9. Donations received
+    DonationsSection,
+    
+    // 10. Aid requests awaiting action
+    AidRequests,
+    
+    // 11. Communication channels status
+    CommunicationChannels,
+    
+    // 12. Roads closed
+    ClosedRoads,
+    
+    // 13. Nearby hospitals with free beds
+    HospitalsNearby,
+    
+    // 14. Open tasks with assignee
+    OpenTasks,
+    
+    // 15. Request more resources
+    ResourceRequestForm,
+    
+    // 16. Broadcast update
+    BroadcastUpdate,
+    
+    // 17. Focus on one zone
+    ZoneFocusControl,
+    
+    // 18. File situation report
+    ReportForm
+  ],
+  variant = "card",
+  direction = "column",
+  gap = "s",
+  align = "stretch",
+  wrap = true
+)
+
+// 1. Active incidents by zone with severity
+IncidentList = Card([
+  CardHeader(
+    title="Active Incidents by Zone",
+    subtitle="Real-time incident tracking"
+  ),
+  IncidentTable,
+])
+
+IncidentTable = Card({
+  children: [
+    CardHeader(
+      title="Incidents",
+      subtitle="Filterable list of active incidents"
+    ),
+    FilterBar(),
+    IncidentRows
+  ]
+})
+
+FilterBar = Card([
+  HStack([
+    Button(label="All Zones"),
+    Button(label="Critical"),
+    Button(label="High"),
+    Button(label="Medium"),
+    Button(label="Low"),
+    Button(label="Custom"),
+    DropdownSelection(id="zoneFilter"),
+    DropdownSelection(id="severityFilter")
+  ])
+])
+
+IncidentRows = Card({
+  children: [
+    CardItem(zoneId = "Zone 1", severity = "critical", title = "Building A Fire", description = "Multiple floor fires reported in multi-story building"),
+    CardItem(zoneId = "Zone 2", severity = "high", title = "Flooding in Lower District", description = "Rising water levels trapped residents in basements"),
+    CardItem(zoneId = "Zone 3", severity = "medium", title = "Power Outage Crisis", description = "Extended blackout affecting 15,000 homes"),
+    CardItem(zoneId = "Zone 4", severity = "low", title = "Minor Structural Damage", description = "Collapsed wall in warehouse district – minor injuries"),
+    CardItem(zoneId = "Zone 5", severity = "critical", title = "Chemical Leak", description = "Hazardous material spill near industrial park – evacuation ongoing")
+  ]
+})
+
+// 2. Overall severity summary
+SeveritySummary = Card({
+  children: [
+    CardHeader(
+      title="Overall Severity Summary",
+      subtitle="Aggregate risk assessment"
+    ),
+    MetricsGrid
+  ]
+})
+
+MetricsGrid = Card({
+  children: [
+    MetricCard(
+      title = "Total Critical Incidents",
+      value = "12",
+      icon = "alarm-triangle",
+      color = "red"
+    ),
+    MetricCard(
+      title = "Total High-Severity Incidents",
+      value = "8",
+      icon = "warning-triangle",
+      color = "amber"
+    ),
+    MetricCard(
+      title = "Total Medium Incidents",
+      value = "5",
+      icon = "info-circle",
+      color = "green"
+    ),
+    MetricCard(
+      title = "Emergency Response Time (avg)",
+      value = "45 minutes",
+      icon = "clock",
+      color = "blue"
+    )
+  ]
+})
+
+// 3. Vehicles, personnel and supplies
+ResourcesSection = Card({
+  children: [
+    ResourcesHeader(),
+    PersonnelSection,
+    VehiclesSection,
+    SuppliesSection
+  ]
+})
+
+ResourcesHeader = CardHeader(
+  title = "Available Resources",
+  subtitle = "Personnel, equipment and logistical assets"
+)
+
+PersonnelSection = Card({
+  children: [
+    CardItem(
+      role = "Engineers",
+      count = 24,
+      title = "Engineering Team",
+      description = "Structural assessments and damage stabilization"
+    ),
+    CardItem(
+      role = "Medical Staff",
+      count = 18,
+      title = "Medical Responders",
+      description = "Field hospital support and triage"
+    ),
+    CardItem(
+      role = "Logistics",
+      count = 12,
+      title = "Logistics Coordinators",
+      description = "Supply distribution and transport management"
+    ),
+    CardItem(
+      role = "Security",
+      count = 8,
+      title = "Security Personnel",
+      description = "Perimeter security and crowd control"
+    )
+  ]
+})
+
+VehiclesSection = Card({
+  children: [
+    VehicleSummary(),
+    VehicleDetails()
+  ]
+})
+
+VehicleSummary = Card({
+  text = "Active vehicles on deployment",
+  subtext = "19 emergency response vehicles including ambulances, rescue trucks and logistics vans"
+})
+
+VehicleDetails = Card({
+  children: [
+    CardItem(
+      type = "ambulance",
+      count = 6,
+      location = "Zone 1 (near Building A)"
+    ),
+    CardItem(
+      type = "rescue_truck",
+      count = 5,
+      location = "Zone 2 (Lower District)" 
+    ),
+    CardItem(
+      type = "logistics_van",
+      count = 4,
+      location = "Central Hub"
+    )
+  ]
+})
+
+SuppliesSection = Card({
+  text = "Essential supplies distributed",
+  subgroupTitle = "Medical Kits",
+  medicalSubtitle = "Stockpile of trauma supplies and medications",
+  items = MedicalKitItems()
+})
+
+MedicalKitItems = Array([
+  { name = "Trauma Kit A", quantity = 42 },
+  { name = "Trauma Kit B", quantity = 28 },
+  { name = "Water Purification", quantity = 1500L },
+  { name = "Food Ration Pack", quantity = 850 }
+])
+
+// 4. Shelters with capacity and occupancy
+SheltersSection = Card({
+  children: [
+    CardHeader(
+      title = "Shelters",
+      subtitle = "Safe havens for displaced persons"
+    ),
+    ShelterTable
+  ]
+})
+
+ShelterTable = Card({
+  children: [
+    RowHeader("Location", "Capacity", "Occupancy", "Status"),
+    {
+      col1: {
+        key = "location",
+        value = "Zone 1 – North Park",
+        type = "zone",
+        color = "light-blue"
+      },
+      col2: {
+        key = "capacity",
+        value = "200",
+        type = "number"
+      },
+      col3: {
+        key = "occupancy",
+        value = "185",
+        type = "number"
+      },
+      col4: {
+        key = "status",
+        value = "Full",
+        icon = "populate"
+      }
+    },
+    {
+      col1: {
+        key = "location",
+        value = "Zone 2 – Riverside Camp",
+        type = "zone",
+        color = "light-green"
+      },
+      col2: {
+        key = "capacity",
+        value = "350",
+        type = "number"
+      },
+      col3: {
+        key = "occupancy",
+        value = "310",
+        type = "number"
+      },
+      col4: {
+        key = "status",
+        value = "Partially Full",
+        icon = "info"
+      }
+    },
+    {
+      col1: {
+        key = "location",
+        value = "Zone 3 – Eastside Refuge",
+        type = "zone",
+        color = "light-yellow"
+      },
+      col2: {
+        key = "capacity",
+        value = "180",
+        type = "number"
+      },
+      col3: {
+        key = "occupancy",
+        value = "145",
+        type = "number"
+      },
+      col4: {
+        key = "status",
+        value = "Under Capacity",
+        icon = "check"
+      }
+    },
+    {
+      col1: {
+        key = "location",
+        value = "Zone 4 – Central Shelter",
+        type = "zone",
+        color = "light-gray"
+      },
+      col2: {
+        key = "capacity",
+        value = "220",
+        type = "number"
+      },
+      col3: {
+        key = "occupancy",
+        value = "195",
+        type = "number"
+      },
+      col4: {
+        key = "status",
+        value = "Overcrowded",
+        icon = "warning"
+      }
+    }
+  ]
+})
+
+RowHeader = CardHeader(
+  title = "Shelters",
+  subtitle = "Capacity vs Occupancy"
+)
+
+// 5. Evacuation routes status
+EvacuationRoutes = Card({
+  children: [
+    CardHeader(
+      title = "Evacuation Routes",
+      subtitle = "Current movement status"
+    ),
+    RouteList
+  ]
+})
+
+RouteList = Card({
+  children: [
+    RouteItem(
+      route = "Route Alpha",
+      from = "Zone 1 → Zone 3",
+      status = "Active",
+      progress = 0.75
+    ),
+    RouteItem(
+      route = "Route Beta",
+      from = "Zone 2 → Zone 4",
+      status = "Delayed – Road closure at junction",
+      progress = 0.4
+    ),
+    RouteItem(
+      route = "Route Gamma",
+      from = "Zone 3 → Zone 5",
+      status = "Complete",
+      progress = 1.0
+    )
+  ]
+})
+
+// 6. Weather forecast for next 48 hours
+WeatherForecast = Card({
+  children: [
+    CardHeader(
+      title = "48-Hour Weather Forecast",
+      subtitle = "Environmental conditions affecting operations"
+    ),
+    ForecastTimeline()
+  ]
+})
+
+ForecastTimeline = Card({
+  children: [
+    CardItem(hours = "0-6", temp = "22°C", condition = "Partly cloudy", wind = "Light breeze"),
+    CardItem(hours = "6-12", temp = "25°C", condition = "Showers expected", wind = "Moderate"),
+    CardItem(hours = "12-18", temp = "28°C", condition = "Hot with humidity", wind = "Strong gusts"),
+    CardItem(hours = "18-24", temp = "26°C", condition = "Clear skies", wind = "Calm")
+  ]
+})
+
+// 7. People rescued and casualties
+SummaryMetrics = Card({
+  children: [
+    MetricCard(
+      title = "People Rescued",
+      value = "87",
+      icon = "people",
+      color = "green"
+    ),
+    MetricCard(
+      title = "Casualties (injured/died)",
+      value = "23",
+      icon = "headband",
+      color = "red"
+    ),
+    MetricCard(
+      title = "Evacuees Accounted For",
+      value = "156",
+      icon = "file-text",
+      color = "blue"
+    )
+  ]
+})
+
+// 8. Volunteers on duty with assignment
+VolunteersSection = Card({
+  children: [
+    CardHeader(
+      title = "Volunteers on Duty",
+      subtitle = "Staffed teams and assignments"
+    ),
+    VolunteerTable
+  ]
+})
+
+VolunteerTable = Card({
+  children: [
+    VolunteerRow(
+      name = "Maria Santos",
+      role = "Logistics Coordinator",
+      task = "Supply distribution",
+      zone = "Zone 1"
+    ),
+    VolunteerRow(
+      name = "James Wilson",
+      role = "Medical Support",
+      task = "Triage at Zone 2 field hospital",
+      zone = "Zone 2"
+    ),
+    VolunteerRow(
+      name = "Priya Patel",
+      role = "Communications",
+      task = "Channel monitoring",
+      zone = "Zone 3"
+    ),
+    VolunteerRow(
+      name = "Carlos Mendez",
+      role = "Transport Lead",
+      task = "Coordination of rescue vehicles",
+      zone = "Zone 4"
+    )
+  ]
+})
+
+// 9. Donations received
+DonationsSection = Card({
+  children: [
+    CardHeader(
+      title = "Donations Received",
+      subtitle = "Financial and material support"
+    ),
+    DonationList
+  ]
+})
+
+DonationList = Card({
+  children: [
+    ItemCard(
+      donor = "Red Cross",
+      amount = "$45,000",
+      currency = "USD",
+      date = "Today",
+      type = "monetary"
+    ),
+    ItemCard(
+      donor = "Humanitarian Foundation",
+      amount = "€12,000",
+      currency = "EUR",
+      date = "Yesterday",
+      type = "monetary"
+    ),
+    ItemCard(
+      donor = "Community Crowdfunding",
+      amount = "8,500 USD",
+      currency = "USD",
+      date = "Just now",
+      type = "monetary"
+    )
+  ]
+})
+
+// 10. Aid requests awaiting action
+AidRequests = Card({
+  children: [
+    CardHeader(
+      title = "Aid Requests",
+      subtitle = "Pending assistance needing approval"
+    ),
+    RequestList
+  ]
+})
+
+RequestList = Card({
+  children: [
+    RequestItem(
+      id = "req-001",
+      requester = "Local NGO",
+      description = "Additional water purification units for Zone 3",
+      priority = "high",
+      status = "pending",
+      deadline = "2026-06-15"
+    ),
+    RequestItem(
+      id = "req-002",
+      requester = "International Agency",
+      description = "Medical supplies for critical cases in Zone 5",
+      priority = "high",
+      status = "pending",
+      deadline = "2026-06-14"
+    ),
+    RequestItem(
+      id = "req-003",
+      requester = "Government Emergency Office",
+      description = "Portable generators for power restoration",
+      priority = "medium",
+      status = "pending",
+      deadline = "2026-06-13"
+    )
+  ]
+})
+
+// 11. Communication channels status
+CommunicationChannels = Card({
+  children: [
+    ChannelCard(
+      name = "Satellite Phone",
+      status = "active",
+      reliability = "high",
+      uptime = "99.8%"
+    ),
+    ChannelCard(
+      name = "Radio Network",
+      status = "degraded",
+      reliability = "medium",
+      uptime = "85%"
+    ),
+    ChannelCard(
+      name = "Social Media Updates",
+      status = "active",
+      reliability = "high",
+      engagement = "high"
+    ),
+    ChannelCard(
+      name = "Email Notifications",
+      status = "down",
+      reliability = "low",
+      uptime = "unavailable"
+    )
+  ]
+})
+
+ChannelCard = Card({
+  text = "${name}",
+  subtext = `${status} • ${reliability}`,
+  icon = getIconForName(name)
+})
+
+getIconForName = (name) => {
+  const icons = {
+    "Satellite Phone": "satellite",
+    "Radio Network": "radio",
+    "Social Media": "social",
+    "Email": "email"
+  };
+  return icons[name] || "notification";
+}
+
+// 12. Roads closed
+ClosedRoads = Card({
+  children: [
+    RoadClosureList()
+  ]
+})
+
+RoadClosureList = Card({
+  children: [
+    RoadItem(
+      road = "Main Street (Zone 1-2)",
+      reason = "Flooding",
+      distance = "2 km north of Zone 1",
+      impact = "High"
+    ),
+    RoadItem(
+      road = "River Highway (Zone 2-3)",
+      reason = "Landslide",
+      distance = "1 km east of Zone 2",
+      impact = "Critical"
+    ),
+    RoadItem(
+      road = "Industrial Park Access (Zone 4)",
+      reason = "Structural collapse",
+      distance = "3 km south of Zone 4",
+      impact = "Medium"
+    )
+  ]
+})
+
+RoadItem = Card({
+  text = "${road}",
+  details = `${reason} • Impact: ${impact}`,
+  icon = roadIcon(road)
+})
+
+roadIcon = (road) => {
+  const icons = {
+    "Main Street (Zone 1-2)": "water",
+    "River Highway (Zone 2-3)": "landslide",
+    "Industrial Park Access (Zone 4)": "crash"
+  };
+  return icons[road] || "road";
+}
+
+// 13. Nearby hospitals with free beds
+HospitalsNearby = Card({
+  children: [
+    HospitalList()
+  ]
+})
+
+HospitalList = Card({
+  children: [
+    HospitalItem(
+      name = "St. Mary's Hospital",
+      city = "Center",
+      freeBeds = 45,
+      capacity = 300,
+      status = "operational"
+    ),
+    HospitalItem(
+      name = "City General Hospital",
+      city = "West",
+      freeBeds = 62,
+      capacity = 250,
+      status = "partially_full"
+    ),
+    HospitalItem(
+      name = "Regional Medical Center",
+      city = "North",
+      freeBeds = 33,
+      capacity = 280,
+      status = "full"
+    )
+  ]
+})
+
+HospitalItem = Card({
+  text = "<b>${name}</b>",
+  subtext = `Free beds: ${freeBeds} / ${capacity}`,
+  icon = "health-care"
+})
+
+// 14. Open tasks with assignee
+OpenTasks = Card({
+  children: [
+    TaskList()
+  ]
+})
+
+TaskList = Card({
+  children: [
+    TaskItem(
+      id = "t-001",
+      title = "Secure remaining damaged infrastructure",
+      assignedTo = "Engineering Team",
+      priority = "high",
+      due = "2026-06-14"
+    ),
+    TaskItem(
+      id = "t-002",
+      title = "Coordinate medical supply delivery",
+      assignedTo = "Logistics Coordinators",
+      priority = "medium",
+      due = "2026-06-13"
+    ),
+    TaskItem(
+      id = "t-003",
+      title = "Expand shelter capacity in Zone 4",
+      assignedTo = "Volunteer Teams",
+      priority = "high",
+      due = "2026-06-15"
+    ),
+    TaskItem(
+      id = "t-004",
+      title = "Set up secondary evacuation route",
+      assignedTo = "Security Personnel",
+      priority = "medium",
+      due = "2026-06-14"
+    )
+  ]
+})
+
+TaskItem = Card({
+  text = `<strong>${title}</strong>`,
+  details = `Assigned to: ${assignedTo} • Priority: ${priority}`,
+  icon = getTaskIcon(priority)
+})
+
+getTaskIcon = (priority) => {
+  const icons = {
+    "high": "alert-warning",
+    "medium": "info",
+    "low": "success"
+  };
+  return icons[priority] || "info";
+}
+
+// 15. Request more resources
+ResourceRequestForm = Card({
+  children: [
+    ResourceRequestCard()
+  ]
+})
+
+ResourceRequestCard = Card({
+  label = "Request Additional Resources",
+  description = "Specify needed resources and quantities",
+  fields: [
+    Field(
+      name = "resource_type",
+      options = ["Ambulance", "Rescue Truck", "Medical Kit", "Water Supply", "Food Rations", "Tent", "Generator"],
+      required = true
+    ),
+    Field(
+      name = "quantity",
+      type = "number",
+      min = 1,
+      required = true
+    ),
+    Field(
+      name = "needed_by",
+      type = "date",
+      required = true
+    )
+  ],
+  submit = () => {
+    console.log("Resource request submitted:", resourceType, quantity, neededBy)
+  }
+})
+
+// 16. Broadcast update
+BroadcastUpdate = Card({
+  children: [
+    Button(
+      label = "Broadcast Update",
+      action = "send_broadcast",
+      variant = "primary"
+    ),
+    Button(
+      label = "Send Immediate Alert",
+      action = "send_alert",
+      variant = "primary"
+    )
+  ]
+})
+
+// 17. Focus on one zone
+ZoneFocusControl = Card({
+  children: [
+    ZoneSelector(),
+    ZoneDetailPanel(zoneId = "Zone 1")
+  ]
+})
+
+ZoneSelector = CardHeader(
+  title = "Focus on Zone",
+  subtitle = "Narrow view to specific area"
+)
+
+ZoneDetailPanel = Card({
+  text = "Select a zone to view detailed information",
+  children: [
+    Button(label = "All Zones"),
+    Button(label = "All Areas"),
+    Button(label = "All Roads")
+  ]
+})
+
+// 18. File situation report
+ReportForm = Card({
+  label = "File Situation Report",
+  subtext = "Document current status and priorities",
+  fields: [
+    Field(
+      name = "region",
+      type = "text",
+      placeholder = "Enter affected region"
+    ),
+    Field(
+      name = "incident_count",
+      type = "number",
+      placeholder = "Number of active incidents"
+    ),
+    Field(
+      name = "response_time",
+      type = "time",
+      placeholder = "Estimated response duration"
+    ),
+    Field(
+      name = "resources_needed",
+      type = "textarea",
+      placeholder = "Describe additional support required"
+    )
+  ],
+  submit = () => {
+    console.log("Situation report filed:", region, incidentCount, responseTime, resourceNeeded)
+  }
+})
+
+// Helper components
+IncidentRow = CardItem(
+  zoneId = "Zone 1",
+  severity = "critical",
+  title = "Building A Fire",
+  description = "Multiple floor fires reported in multi-story building"
+)
+
+IncidentItem = CardItem(
+  zoneId = "Zone 1",
+  severity = "high",
+  title = "Flooding in Lower District",
+  description = "Rising water levels trapped residents in basements"
+)
+
+MedicalKitItem = ({ name, quantity }) => (
+  <div className="kit-card">
+    <span className="icon">🏥</span>
+    <strong>{name}</strong> - {quantity}
+  </div>
+)
+
+VectorMap = CardHeader(
+  title = "Operational Map",
+  subtitle = "Visual representation of all active areas"
+)
+
+// Main root with all sections
+root = Card(
+  children: [
+    // Header
+    CardHeader(
+      title = "Emergency Response Coordination Center",
+      subtitle = "Real-time overview of ongoing operations"
+    ),
+    
+    // Incidents
+    IncidentList,
+    
+    // Severity Summary
+    SeveritySummary,
+    
+    // Resources
+    ResourcesSection,
+    
+    // Shelters
+    SheltersSection,
+    
+    // Evacuation Routes
+    EvacuationRoutes,
+    
+    // Weather
+    WeatherForecast,
+    
+    // Metrics
+    SummaryMetrics,
+    
+    // Volunteers
+    VolunteersSection,
+    
+    // Donations
+    DonationsSection,
+    
+    // Aid Requests
+    AidRequests,
+    
+    // Communication
+    CommunicationChannels,
+    
+    // Roads Closed
+    ClosedRoads,
+    
+    // Hospitals
+    HospitalsNearby,
+    
+    // Open Tasks
+    OpenTasks,
+    
+    // Resource Request
+    ResourceRequestForm,
+    
+    // Broadcast
+    BroadcastUpdate,
+    
+    // Zone Focus
+    ZoneFocusControl,
+    
+    // Report Form
+    ReportForm
+  ],
+  variant = "card",
+  direction = "column",
+  gap = "s",
+  align = "stretch",
+  wrap = true
+)
+```

@@ -1,0 +1,77 @@
+root = Card([header, periodSection, overviewMetrics, signupsSection, planSection, topCustomersSection, riskSection, failedPaymentsSection, adoptionSection, utilizationSection, inviteSection])
+
+header = CardHeader("Admin Overview", "Company performance snapshot")
+
+periodSection = Card([periodHeading, periodForm], "sunk")
+periodHeading = Heading("Reporting Period", "h4")
+periodForm = Form("reporting-period", periodButtons, [periodField])
+periodField = FormControl("Select range", periodSelect)
+periodSelect = Select("period", [periodMonth, periodQuarter, periodYear], "Choose a period", null, "This Month")
+periodMonth = SelectItem("month", "This Month")
+periodQuarter = SelectItem("quarter", "This Quarter")
+periodYear = SelectItem("year", "This Year")
+periodButtons = Buttons([applyBtn])
+applyBtn = Button("Apply", null, "primary")
+
+overviewMetrics = Table([metricCol, valueCol])
+metricCol = Col("Metric", ["MRR", "ARR", "Churn (This Month)", "Current NPS"])
+valueCol = Col("Value", ["$482,300", "$5,787,600", "2.4%", "58"])
+
+signupsSection = Card([signupsHeading, signupsChart], "sunk")
+signupsHeading = Heading("New Signups — Last 90 Days", "h4")
+signupsChart = AreaChart(signupLabels, [signupSeries], "natural", "Week", "Signups")
+signupLabels = ["Wk1", "Wk2", "Wk3", "Wk4", "Wk5", "Wk6", "Wk7", "Wk8", "Wk9", "Wk10", "Wk11", "Wk12", "Wk13"]
+signupSeries = Series("New Signups", [120, 135, 110, 142, 158, 149, 163, 171, 180, 175, 190, 205, 198])
+
+planSection = Card([planHeading, planChart], "sunk")
+planHeading = Heading("Customers by Plan", "h4")
+planChart = PieChart(planLabels, planValues, "donut")
+planLabels = ["Starter", "Pro", "Business", "Enterprise"]
+planValues = [420, 310, 150, 45]
+
+topCustomersSection = Card([topCustomersHeading, topCustomersTable], "sunk")
+topCustomersHeading = Heading("Top 10 Customers", "h4")
+topCustomersTable = Table([customerCol, seatsCol, spendCol])
+customerCol = Col("Customer", ["Acme Corp", "Globex Inc", "Initech", "Umbrella Co", "Stark Industries", "Wayne Enterprises", "Hooli", "Soylent Corp", "Massive Dynamic", "Wonka Industries"])
+seatsCol = Col("Seats", [420, 380, 310, 290, 265, 240, 210, 190, 175, 160], "number")
+spendCol = Col("Monthly Spend", ["$21,000", "$19,200", "$16,500", "$14,800", "$13,200", "$12,100", "$10,900", "$9,600", "$8,800", "$8,100"])
+
+riskSection = Card([riskHeading, riskList], "sunk")
+riskHeading = Heading("Accounts at Risk", "h4")
+riskList = ListBlock([risk1, risk2, risk3, risk4])
+risk1 = ListItem("Umbrella Co", "Usage dropped 65% in the last 30 days")
+risk2 = ListItem("Hooli", "Contract renewal overdue by 14 days")
+risk3 = ListItem("Soylent Corp", "Repeated support escalations, low CSAT")
+risk4 = ListItem("Wonka Industries", "Key admin left the company, no new logins")
+
+failedPaymentsSection = Card([failedHeading, failedTable], "sunk")
+failedHeading = Heading("Failed Payments", "h4")
+failedTable = Table([failedCustomerCol, failedAmountCol, failedReasonCol, failedRetryCol])
+failedCustomerCol = Col("Customer", ["Massive Dynamic", "Stark Industries", "Wayne Enterprises"])
+failedAmountCol = Col("Amount", ["$8,800", "$13,200", "$12,100"])
+failedReasonCol = Col("Reason", ["Card expired", "Insufficient funds", "Bank declined"])
+failedRetryCol = Col("Action", ["Retry", "Retry", "Retry"], "action")
+
+adoptionSection = Card([adoptionHeading, adoptionAI, adoptionWorkflows, adoptionInsights], "sunk")
+adoptionHeading = Heading("Adoption — Newest Features", "h4")
+adoptionAI = Progress(42, "AI Assistant")
+adoptionWorkflows = Progress(67, "Custom Workflows")
+adoptionInsights = Progress(28, "Insights Dashboard")
+
+utilizationSection = Card([utilizationHeading, utilizationProgress, utilizationNote], "sunk")
+utilizationHeading = Heading("Seat Utilization", "h4")
+utilizationProgress = Progress(78, "Seats Used Company-wide")
+utilizationNote = TextContent("3,120 of 4,000 licensed seats are currently active.", "small")
+
+inviteSection = DialogBlock("Invite Admin", "Invite a new admin", "Send an invitation to add another administrator to this workspace.", [inviteForm], "default")
+inviteForm = Form("invite-admin", inviteButtons, [inviteEmailField, inviteRoleField])
+inviteEmailField = FormControl("Email address", inviteEmailInput)
+inviteEmailInput = Input("email", "colleague@company.com", "email")
+inviteRoleField = FormControl("Role", inviteRoleSelect)
+inviteRoleSelect = Select("role", [roleAdmin, roleBilling, roleViewer], "Choose a role")
+roleAdmin = SelectItem("admin", "Full Admin")
+roleBilling = SelectItem("billing", "Billing Admin")
+roleViewer = SelectItem("viewer", "Viewer")
+inviteButtons = Buttons([sendInviteBtn, cancelInviteBtn])
+sendInviteBtn = Button("Send Invite", null, "primary")
+cancelInviteBtn = Button("Cancel", null, "tertiary")

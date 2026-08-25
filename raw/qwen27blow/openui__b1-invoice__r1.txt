@@ -1,0 +1,46 @@
+
+
+root = Card([header, amountSection, dueSection, separator, itemsSection, totalsSection, paySection, followUps])
+
+header = CardHeader("Invoice #INV-2025-0042", "Freelance Web Development Services")
+
+amountSection = Card([amountLabel, amountValue], "sunk")
+amountLabel = TextContent("Amount Due", "small")
+amountValue = TextContent("$4,850.00 USD", "large-heavy")
+
+dueSection = Card([dueLabel, dueValue], "sunk")
+dueLabel = TextContent("Due Date", "small")
+dueValue = TextContent("June 15, 2025", "default")
+
+separator = Separator("horizontal")
+
+itemsSection = Card([itemsHeading, itemsTable], "clear")
+itemsHeading = Heading("Line Items", "h3")
+itemsTable = Table([itemCol, descCol, hoursCol, rateCol, amountCol])
+itemCol = Col("Item", ["Landing page redesign", "CMS integration", "Performance optimization", "Content migration"])
+descCol = Col("Description", ["Figma to production build", "Headless CMS setup & API", "Core Web Vitals improvements", "38 blog posts migrated"])
+hoursCol = Col("Hours", ["12", "8", "5", "3"])
+rateCol = Col("Rate (USD/hr)", ["150", "150", "150", "150"])
+amountCol = Col("Amount (USD)", ["$1,800.00", "$1,200.00", "$750.00", "$450.00"])
+
+totalsSection = Card([subtotalRow, taxRow, totalRow], "sunk")
+subtotalRow = Card([subtotalLabel, subtotalValue], "clear", "row", null, null, "between")
+subtotalLabel = TextContent("Subtotal", "default")
+subtotalValue = TextContent("$4,850.00", "default")
+taxRow = Card([taxLabel, taxValue], "clear", "row", null, null, "between")
+taxLabel = TextContent("Tax (0%)", "default")
+taxValue = TextContent("$0.00", "default")
+totalRow = Card([totalLabel, totalValue], "clear", "row", null, null, "between")
+totalLabel = TextContent("Total Due", "small-heavy")
+totalValue = TextContent("$4,850.00 USD", "small-heavy")
+
+paySection = Card([payCallout, payButtons], "clear")
+payCallout = TextCallout("info", "Payment methods", "We accept credit card, bank transfer, and PayPal. Your payment is processed securely.")
+payButtons = Buttons([payNowBtn, scheduleBtn])
+payNowBtn = Button("Pay Now", null, "primary", "normal", "large")
+scheduleBtn = Button("Schedule Payment", null, "secondary", "normal", "large")
+
+followUps = FollowUpBlock([followUp1, followUp2, followUp3])
+followUp1 = FollowUpItem("Download invoice as PDF")
+followUp2 = FollowUpItem("Request a payment plan")
+followUp3 = FollowUpItem("Send a reminder to the client")

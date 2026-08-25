@@ -1,0 +1,67 @@
+root = Card([header, filterSection, kpiSection, engagementSection, coursesSection, riskSection, messageSection, followUps])
+
+header = CardHeader("Training Platform Analytics", "Cohort performance and engagement overview")
+
+filterSection = Card([filterHeading, cohortField], "sunk")
+filterHeading = Heading("Narrow to a cohort", "h4")
+cohortField = FormControl("Cohort", cohortSelect)
+cohortSelect = Select("cohort", [cohortAll, cohortA, cohortB, cohortC], "All cohorts")
+cohortAll = SelectItem("all", "All cohorts")
+cohortA = SelectItem("spring-24", "Spring 2024 Bootcamp")
+cohortB = SelectItem("summer-24", "Summer 2024 Associates")
+cohortC = SelectItem("fall-24", "Fall 2024 Enterprise")
+
+kpiSection = Card([activeLearnersCard, completionCard, quizScoreCard], "clear", "row", "l", "stretch", "start", true)
+
+activeLearnersCard = Card([activeLearnersLabel, activeLearnersValue, activeLearnersTag], "sunk")
+activeLearnersLabel = TextContent("Active learners this week", "small")
+activeLearnersValue = TextContent("1,284", "large-heavy")
+activeLearnersTag = Tag("+6.2% vs last week", null, "sm", "success")
+
+completionCard = Card([completionLabel, completionBar], "sunk")
+completionLabel = TextContent("Course completion rate", "small")
+completionBar = Progress(78, "78% of enrolled learners")
+
+quizScoreCard = Card([quizLabel, quizValue, quizTag], "sunk")
+quizLabel = TextContent("Average quiz score", "small")
+quizValue = TextContent("84.3%", "large-heavy")
+quizTag = Tag("Steady", null, "sm", "info")
+
+engagementSection = Card([engagementHeading, engagementChart], "sunk")
+engagementHeading = Heading("Engagement over the past 8 weeks", "h4")
+engagementChart = AreaChart(engagementLabels, [engagementSeries], "natural", "Week", "Active sessions")
+engagementLabels = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"]
+engagementSeries = Series("Sessions", [3120, 3350, 3480, 3290, 3610, 3800, 3705, 3950])
+
+coursesSection = Card([coursesHeading, coursesChart], "sunk")
+coursesHeading = Heading("Courses ranked by enrollment", "h4")
+coursesChart = HorizontalBarChart(courseLabels, [courseSeries], "grouped", "Enrollments", "Course")
+courseLabels = ["Intro to Data Analysis", "Product Management Basics", "Advanced Excel", "UX Research Fundamentals", "Leadership Essentials"]
+courseSeries = Series("Enrollments", [1420, 1180, 980, 860, 640])
+
+riskSection = Card([riskHeading, riskTable], "sunk")
+riskHeading = Heading("Learners at risk of dropping out", "h4")
+riskTable = Table([riskName, riskCohort, riskLastActive, riskProgress, riskStatus])
+riskName = Col("Learner", ["Maria Chen", "Devon Blake", "Priya Nair", "Jonas Kruger", "Aisha Malik"])
+riskCohort = Col("Cohort", ["Spring 2024", "Summer 2024", "Fall 2024", "Spring 2024", "Summer 2024"])
+riskLastActive = Col("Last Active", ["14 days ago", "9 days ago", "12 days ago", "18 days ago", "10 days ago"])
+riskProgress = Col("Progress", ["32%", "41%", "28%", "19%", "45%"])
+riskStatus = Col("Risk Level", ["High", "Medium", "High", "High", "Medium"])
+
+messageSection = Card([messageHeading, messageForm], "sunk")
+messageHeading = Heading("Message a cohort", "h4")
+messageForm = Form("message-cohort", messageButtons, [messageCohortField, messageSubjectField, messageBodyField])
+messageCohortField = FormControl("Cohort", messageCohortSelect)
+messageCohortSelect = Select("target_cohort", [cohortAll, cohortA, cohortB, cohortC], "Choose cohort")
+messageSubjectField = FormControl("Subject", messageSubjectInput)
+messageSubjectInput = Input("subject", "e.g. Reminder: complete your module")
+messageBodyField = FormControl("Message", messageBodyInput, "This will be sent to all learners in the selected cohort")
+messageBodyInput = TextArea("body", "Write your message here...", 5)
+messageButtons = Buttons([sendMessageBtn, saveDraftBtn])
+sendMessageBtn = Button("Send message", null, "primary")
+saveDraftBtn = Button("Save draft", null, "tertiary")
+
+followUps = FollowUpBlock([followUp1, followUp2, followUp3])
+followUp1 = FollowUpItem("Show detailed breakdown for at-risk learners")
+followUp2 = FollowUpItem("Compare completion rates across cohorts")
+followUp3 = FollowUpItem("Export engagement data as CSV")

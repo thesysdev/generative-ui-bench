@@ -1,0 +1,70 @@
+root = Card([
+  header,
+  budgetSummary,
+  categoryChart,
+  largestExpense,
+  monthSelector,
+  addExpenseSection,
+  followUp
+], "clear")
+
+header = CardHeader("Monthly Budget Check", "Track spending against your monthly budget")
+
+budgetSummary = CardHeader("Budget Overview", "Total spent vs. budget limit")
+totalSpent = CardHeader("Total Spent", "This month")
+budgetLimit = CardHeader("Budget Limit", "Monthly allowance")
+budgetProgress = Progress(87, "87% of budget used")
+
+categoryChart = CardHeader("Spending by Category", "How you distributed your spending")
+categoryData = [
+  { label: "Food", value: 320, color: "primary" },
+  { label: "Transport", value: 180, color: "secondary" },
+  { label: "Entertainment", value: 150, color: "tertiary" },
+  { label: "Utilities", value: 95, color: "success" },
+  { label: "Other", value: 105, color: "danger" },
+]
+categoryChart = HorizontalBarChart(
+  categoryData.map(d => d.label),
+  categoryData.map(d => d.value),
+  "grouped",
+  "Category",
+  "Amount"
+)
+
+largestExpense = CardHeader("Largest Expense", "The single biggest spend this month")
+largestExpenseItem = CardHeader("Groceries", 420)
+
+monthSelector = CardHeader("Select Month", "View a different month")
+monthOptions = [
+  { label: "January 2025", value: "january_2025" },
+  { label: "February 2025", value: "february_2025" },
+  { label: "March 2025", value: "march_2025" },
+  { label: "April 2025", value: "april_2025" },
+]
+monthSelector = Select("month", monthOptions, "Choose a month")
+
+addExpenseSection = CardHeader("Add an Expense", "Record a new spending entry")
+addExpenseForm = Form("add-expense", [
+  FormControl("Amount", sliderInput, "Enter the expense amount"),
+  FormControl("Category", categorySelect, "Select the category"),
+  FormControl("Description", textAreaInput, "Brief description"),
+], [
+  Button("Add Expense", null, "primary"),
+  Button("Cancel", null, "tertiary"),
+])
+
+sliderInput = Slider("amount", "continuous", 0, 1000, 1, "1", "Amount")
+categorySelect = Select("category", [
+  SelectItem("Food", "Food"),
+  SelectItem("Transport", "Transport"),
+  SelectItem("Entertainment", "Entertainment"),
+  SelectItem("Utilities", "Utilities"),
+  SelectItem("Other", "Other"),
+], "Select category")
+textAreaInput = TextArea("description", "Enter a brief description", 3, "Description")
+
+followUp = FollowUpBlock([
+  FollowUpItem("View previous months' trends"),
+  FollowUpItem("Set up budget alerts"),
+  FollowUpItem("Export spending report"),
+])

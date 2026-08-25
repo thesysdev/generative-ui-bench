@@ -1,0 +1,92 @@
+root = Card([topBar, mainGrid, riskSection, footer], "clear", "column", "l")
+
+topBar = Card([portfolioKpis, timeControls], "card", "row", "l", "stretch", "between")
+
+portfolioKpis = Card([portVal, pnlToday, marginUsed], "clear", "row", "m")
+portVal = TextContent("$4,280,500.00", "large-heavy")
+pnlToday = TextCallout("success", "Today's P&L", "+$12,450.20 (0.29%)")
+marginUsed = Badge("Margin: $840k / $2M", "secondary")
+
+timeControls = Buttons([t1, t2, t3])
+t1 = Button("1D", "Change timeframe to 1 Day", "secondary", "normal", "small")
+t2 = Button("1W", "Change timeframe to 1 Week", "primary", "normal", "small")
+t3 = Button("1M", "Change timeframe to 1 Month", "secondary", "normal", "small")
+
+mainGrid = Card([positionsTab, analysisTab, ordersTab], "sunk", "column", "none")
+positionsTab = Tabs([posTab, analysisTabItem, ordersTabItem])
+
+posTab = TabItem("positions", "Positions & Watchlist", [positionsTable, watchlist, orderForm])
+analysisTabItem = TabItem("analysis", "Risk & Analysis", [sectorChart, riskMetrics, strategyPerformance, drawdownChart])
+ordersTabItem = TabItem("orders", "Order Book", [workingOrders, rebalanceBtn])
+
+positionsTable = Table([tickerCol, sizeCol, entryCol, currentCol])
+tickerCol = Col("Ticker", ["AAPL", "TSLA", "NVDA", "MSFT", "AMD"], "string")
+sizeCol = Col("Size", ["1,200", "400", "800", "1,500", "2,000"], "number")
+entryCol = Col("Entry", ["175.20", "210.50", "420.10", "380.00", "140.20"], "number")
+currentCol = Col("Current", ["182.10", "235.10", "490.00", "395.10", "165.40"], "number")
+
+watchlist = Card([wlHeading, watchlistTable], "clear", "column", "s")
+wlHeading = Heading("Watchlist", "h4")
+watchlistTable = Table([wtTicker, wtPrice])
+wtTicker = Col("Instrument", ["BTC/USD", "EUR/USD", "GOLD", "SPY"], "string")
+wtPrice = Col("Last Price", ["64,200", "1.084", "2,320", "512.10"], "number")
+
+orderForm = Form("trade-entry", tradeButtons, [tickerInput, sideInput, qtyInput])
+tickerInput = FormControl("Ticker", tickerIn)
+tickerIn = Input("ticker", "e.g. AAPL")
+sideInput = FormControl("Side", sideSel)
+sideSel = Select("side", [buyOpt, sellOpt], "Select Side")
+buyOpt = SelectItem("buy", "Buy / Long")
+sellOpt = SelectItem("sell", "Sell / Short")
+qtyInput = FormControl("Quantity", qtyIn)
+qtyIn = Input("qty", "0", "number")
+tradeButtons = Buttons([placeOrderBtn])
+placeOrderBtn = Button("Place Order", null, "primary")
+
+analysisTabItemContent = [sectorChart, riskMetrics, strategyPerformance, drawdownChart]
+sectorChart = Card([sectorHeading, sectorPie], "clear", "column", "s")
+sectorHeading = Heading("Exposure by Sector", "h4")
+sectorPie = PieChart(["Tech", "Energy", "Healthcare", "Finance"], [45, 20, 15, 20], "donut")
+
+riskMetrics = Card([varKpi, limitAlert], "clear", "column", "s")
+varKpi = TextCallout("info", "Value at Risk (VaR)", "$42,000 (95% Confidence)")
+limitAlert = Alert("Risk Limit Warning", "Concentration in Tech is at 42% (Limit: 45%)", "warning")
+
+strategyPerformance = Card([stratHeading, stratChart], "clear", "column", "s")
+stratHeading = Heading("YTD Strategy Returns", "h4")
+stratChart = BarChart(["Trend", "Mean Rev", "Arbitrage", "Macro"], [stratSeries], "grouped", "Strategy", "Return %")
+stratSeries = Series("YTD %", [12.5, 8.2, 4.1, 15.8])
+
+drawdownChart = Card([ddHeading, ddLine], "clear", "column", "s")
+ddHeading = Heading("Annual Drawdown", "h4")
+ddLine = LineChart(["Jan", "Mar", "May", "Jul", "Sep", "Nov"], [ddSeries], "natural", "Month", "Drawdown %")
+ddSeries = Series("Peak-to-Trough", [-2, -5, -12, -8, -3, -1])
+
+ordersTabItemContent = [workingOrders, rebalanceBtn]
+workingOrders = Table([woTicker, woType, woPrice, woStatus])
+woTicker = Col("Ticker", ["AMD", "TSLA"], "string")
+woType = Col("Type", ["Limit Buy", "Stop Loss"], "string")
+woPrice = Col("Price", ["155.00", "220.00"], "number")
+woStatus = Col("Status", ["Pending", "Active"], "string")
+
+rebalanceBtn = Buttons([doRebalance])
+doRebalance = Button("Run Portfolio Rebalance", null, "secondary")
+
+riskSection = Card([headlines, econCal], "clear", "row", "l")
+headlines = Card([newsHeading, newsList], "sunk", "column", "s")
+newsHeading = Heading("Market Headlines", "h4")
+newsList = ListBlock([n1, n2, n3])
+n1 = ListItem("Fed signals cautious approach to rate cuts", "Sentiment: Neutral", null, "Read More")
+n2 = ListItem("Tech earnings beat expectations across board", "Sentiment: Bullish", null, "Read More")
+n3 = ListItem("Oil prices dip amid supply concerns", "Sentiment: Bearish", null, "Read More")
+
+econCal = Card([calHeading, calList], "sunk", "column", "s")
+calHeading = Heading("Economic Releases (Weekly)", "h4")
+calList = ListBlock([e1, e2, e3])
+e1 = ListItem("CPI Data", "Tuesday 08:30 AM", null)
+e2 = ListItem("Non-Farm Payrolls", "Friday 08:30 AM", null)
+e3 = ListItem("GDP Quarterly", "Thursday 09:00 AM", null)
+
+footer = FollowUpBlock([f1, f2])
+f1 = FollowUpItem("Analyze risk for NVDA position")
+f2 = FollowUpItem("Export daily P&L report")

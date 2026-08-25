@@ -1,0 +1,43 @@
+
+
+root = Card([header, daysBadge, agendaSection, speakersSection, ticketsSection, registerSection, followUps], "card", "column", "xl")
+header = CardHeader("DevSummit 2025", "March 15–16 · Moscone Center, San Francisco, CA")
+daysBadge = Callout("info", "59 days to go", "Doors open March 15, 2025 at 8:30 AM. Early-bird pricing ends February 1.")
+
+agendaSection = Card([agendaHeading, agendaTable], "sunk", "column", "m")
+agendaHeading = Heading("Day 1 Agenda", "h2")
+agendaTable = Table([timeCol, sessionCol, speakerCol])
+timeCol = Col("Time", ["9:00 AM", "10:00 AM", "11:30 AM", "1:00 PM", "3:00 PM", "5:00 PM"])
+sessionCol = Col("Session", ["Registration & Coffee", "Opening Keynote: The Future of AI Engineering", "Panel: Scaling Distributed Systems", "Workshop: Building with LLMs", "Lightning Talks", "Networking Reception"])
+speakerCol = Col("Speaker", ["All attendees", "Dr. Sarah Chen", "Marcus Webb, Priya Sharma", "James Okafor", "Various", "All attendees"])
+
+speakersSection = Card([speakersHeading, speakersList], "sunk", "column", "m")
+speakersHeading = Heading("Featured Speakers", "h2")
+speakersList = ListBlock([sp1, sp2, sp3, sp4])
+sp1 = ListItem("Dr. Sarah Chen", "AI researcher at DeepMind, specializing in multimodal foundation models")
+sp2 = ListItem("Marcus Webb", "CTO at Vercel, architect of the edge computing platform serving 20M+ sites")
+sp3 = ListItem("Priya Sharma", "Principal engineer at Stripe, leading payment infrastructure for 400K+ businesses")
+sp4 = ListItem("James Okafor", "Creator of the Tokio async runtime, now exploring Rust in embedded systems")
+
+ticketsSection = Card([ticketsHeading, ticketsTable], "sunk", "column", "m")
+ticketsHeading = Heading("Ticket Tiers", "h2")
+ticketsTable = Table([tierCol, priceCol, includesCol])
+tierCol = Col("Tier", ["Early Bird", "Standard", "VIP"])
+priceCol = Col("Price", ["$299", "$449", "$799"])
+includesCol = Col("Includes", ["Full access, workshop materials, lunch", "Full access, lunch, after-party", "All-access, 1:1 mentoring, exclusive swag, front-row seating"])
+
+registerSection = Card([registerHeading, regForm], "sunk", "column", "m")
+registerHeading = Heading("Register Now", "h2")
+regForm = Form("conference-register", regButtons, [nameField, emailField])
+nameField = FormControl("Full name", nameInput, "As it appears on your ID")
+nameInput = Input("name", "Jane Smith")
+emailField = FormControl("Email address", emailInput, "Your confirmation will be sent here")
+emailInput = Input("email", "jane@company.com", "email")
+regButtons = Buttons([registerBtn, saveBtn])
+registerBtn = Button("Register", null, "primary")
+saveBtn = Button("Save for later", null, "tertiary")
+
+followUps = FollowUpBlock([fu1, fu2, fu3])
+fu1 = FollowUpItem("Show me the Day 2 agenda")
+fu2 = FollowUpItem("What's the hotel block for attendees?")
+fu3 = FollowUpItem("Can I get a refund if I can't attend?")

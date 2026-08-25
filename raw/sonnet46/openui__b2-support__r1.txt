@@ -1,0 +1,48 @@
+root = Card([header, kpiRow, filterButtons, ticketsSection, newTicketDialog], "clear", "column", "l")
+
+header = CardHeader("Support Morning View", "Tuesday, 10 June 2025 — Good morning, Alex")
+
+kpiRow = Card([openTicketsCard, avgResponseCard], "sunk", "row", "m", "stretch")
+
+openTicketsCard = Card([openLabel, openValue, openSub], "card", "column", "xs", "center")
+openLabel = TextContent("Open Tickets", "small")
+openValue = TextContent("47", "large-heavy")
+openSub = Badge("12 new since yesterday", "secondary")
+
+avgResponseCard = Card([avgLabel, avgValue, avgSub], "card", "column", "xs", "center")
+avgLabel = TextContent("Avg First-Response Time", "small")
+avgValue = TextContent("1h 24m", "large-heavy")
+avgSub = Badge("↓ 8 min vs last week", "outline")
+
+filterButtons = Buttons([allBtn, highBtn], "row")
+allBtn = Button("All Priorities", null, "secondary")
+highBtn = Button("High Priority Only", null, "primary")
+
+ticketsSection = Card([ticketsHeading, ticketsList], "card", "column", "s")
+ticketsHeading = Heading("5 Most Recent Tickets", "h3")
+ticketsList = Table([colId, colTitle, colRequester, colPriority, colStatus, colAge])
+
+colId = Col("Ticket ID", ["#10482", "#10481", "#10480", "#10479", "#10478"])
+colTitle = Col("Subject", ["Login loop after SSO update", "Billing charge not matching invoice", "API rate limit unexpectedly low", "Export to CSV fails silently", "Widget not loading on mobile"])
+colRequester = Col("Requester", ["maria@acme.com", "john@globex.io", "dev@techcorp.com", "sara@widgets.co", "liam@shopfast.net"])
+colPriority = Col("Priority", ["🔴 High", "🔴 High", "🟡 Medium", "🟡 Medium", "🟢 Low"])
+colStatus = Col("Status", ["Open", "Open", "Open", "Open", "Open"])
+colAge = Col("Age", ["14 min", "38 min", "1h 02m", "2h 15m", "3h 47m"])
+
+newTicketDialog = DialogBlock("+ New Ticket", "Open a New Support Ticket", "Fill in the details below to create a ticket.", [newTicketForm], "default")
+
+newTicketForm = Form("new-ticket", newTicketButtons, [subjectField, requesterField, priorityField, descField])
+subjectField = FormControl("Subject", subjectInput, "Brief description of the issue")
+subjectInput = Input("subject", "e.g. Login not working", "text")
+requesterField = FormControl("Requester Email", requesterInput)
+requesterInput = Input("requester_email", "user@company.com", "email")
+priorityField = FormControl("Priority", prioritySelect)
+prioritySelect = Select("priority", [priHigh, priMed, priLow], "Select priority")
+priHigh = SelectItem("high", "🔴 High")
+priMed = SelectItem("medium", "🟡 Medium")
+priLow = SelectItem("low", "🟢 Low")
+descField = FormControl("Description", descInput, "Include steps to reproduce if applicable")
+descInput = TextArea("description", "Describe the issue in detail...", 4)
+newTicketButtons = Buttons([submitTicket, cancelTicket])
+submitTicket = Button("Create Ticket", null, "primary")
+cancelTicket = Button("Cancel", null, "tertiary")

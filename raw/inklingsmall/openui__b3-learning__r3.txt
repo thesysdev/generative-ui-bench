@@ -1,0 +1,50 @@
+root = Card([header, statsRow, cohortFilter, atRiskSection, enrollmentSection, engagementSection, messageSection], "card", "column", "l")
+
+header = CardHeader("Training Platform Analytics", "Weekly cohort overview")
+
+statsRow = Card([activeCard, completionCard, quizCard], "clear", "row", "m")
+
+activeCard = Card([activeLabel, activeValue], "sunk")
+activeLabel = TextContent("Active learners this week", "small")
+activeValue = TextContent("1,247", "large-heavy")
+
+completionCard = Card([completionLabel, completionProgress], "sunk")
+completionLabel = TextContent("Course completion rate", "small")
+completionProgress = Progress(78, "78% complete")
+
+quizCard = Card([quizLabel, quizValue], "sunk")
+quizLabel = TextContent("Average quiz score", "small")
+quizValue = TextContent("84.3%", "large-heavy")
+
+cohortFilter = Card([cohortHeading, cohortSelect], "clear", "column", "s")
+cohortHeading = Heading("Narrow to one cohort", "h3")
+cohortSelect = FormControl("Cohort", cohortInput)
+cohortInput = Select("cohort", [cohortA, cohortB, cohortC], "Choose cohort")
+cohortA = SelectItem("Engineering Q3", "Engineering Q3")
+cohortB = SelectItem("Sales Q3", "Sales Q3")
+cohortC = SelectItem("Marketing Q3", "Marketing Q3")
+
+atRiskSection = Card([atRiskHeading, atRiskList], "clear", "column", "m")
+atRiskHeading = Heading("Learners at risk of dropping out", "h3")
+atRiskList = ListBlock([atRisk1, atRisk2, atRisk3])
+atRisk1 = ListItem("Jordan Reeves", "No logins in 5 days", ["https://picsum.photos/seed/jr/100/100"])
+atRisk2 = ListItem("Avery Chen", "Quiz score dropped 30%", ["https://picsum.photos/seed/ac/100/100"])
+atRisk3 = ListItem("Sam Patel", "Incomplete module 4", ["https://picsum.photos/seed/sp/100/100"])
+
+enrollmentSection = Card([enrollHeading, enrollChart], "clear", "column", "m")
+enrollHeading = Heading("Courses ranked by enrollment", "h3")
+enrollChart = HorizontalBarChart(["Leadership", "Data Skills", "Compliance", "Product", "Safety"], [enrollSeries], "grouped", "Enrolled", "Courses")
+enrollSeries = Series("Enrolled", [420, 385, 310, 275, 190])
+
+engagementSection = Card([engHeading, engChart], "clear", "column", "m")
+engHeading = Heading("Engagement across the past eight weeks", "h3")
+engChart = LineChart(["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], [engSeries], "linear", "Week", "Active hours")
+engSeries = Series("Active hours", [340, 410, 390, 520, 480, 610, 580, 720])
+
+messageSection = Card([msgHeading, msgForm], "clear", "column", "m")
+msgHeading = Heading("Message a cohort", "h3")
+msgForm = Form("cohort-message", msgButtons, [msgField])
+msgField = FormControl("Message", msgTextArea)
+msgTextArea = TextArea("message", "Type a message to the selected cohort...", 3)
+msgButtons = Buttons([sendBtn])
+sendBtn = Button("Send message", null, "primary")

@@ -1,0 +1,57 @@
+```openui-lang
+root = Card([studioHeader, draftsSection, publishedSection, topPieceSection, readershipChart, categoryFilter, schedulingForm, commentsAlert, newDraftButton], "card")
+
+studioHeader = CardHeader("Content Studio", "Manage your editorial workflow")
+
+draftsSection = Card([draftsHeader, draftsTable], "sunk")
+draftsHeader = Heading("Drafts", "h3")
+draftsTable = Table([draftStatusCol, draftTitleCol, draftCategoryCol, draftActionsCol])
+draftStatusCol = Col("Status", ["Draft", "In Review", "Needs Edits", "Approved"], "string")
+draftTitleCol = Col("Title", ["The Future of AI in Journalism", "2024 Sports Preview", "Behind the Scenes: Our New Studio", "Local History: 1980s Revival"])
+draftCategoryCol = Col("Category", ["Tech", "Sports", "Culture", "Local"])
+draftActionsCol = Col("Actions", ["Edit", "Request Review", "Schedule", "Publish"])
+
+publishedSection = Card([publishedHeader, publishedPieces], "sunk")
+publishedHeader = Heading("Published This Week", "h3")
+publishedPieces = ListBlock([publishedItem1, publishedItem2, publishedItem3], "image")
+publishedItem1 = ListItem("The Future of AI in Journalism", "Tech", ["https://picsum.photos/seed/ai/300/200"], "View Article")
+publishedItem2 = ListItem("2024 Sports Preview", "Sports", ["https://picsum.photos/seed/sports/300/200"], "View Article")
+publishedItem3 = ListItem("Behind the Scenes: Our New Studio", "Culture", ["https://picsum.photos/seed/culture/300/200"], "View Article")
+
+topPieceSection = Card([topPieceHeader, topPieceCard], "sunk")
+topPieceHeader = Heading("Most-Read This Month", "h3")
+topPieceCard = Card([topPieceImage, topPieceTitle, topPieceStats])
+topPieceImage = Image("Featured article image", "https://picsum.photos/seed/top/800/400")
+topPieceTitle = Heading("Local History: 1980s Revival", "h4")
+topPieceStats = Card([readsText, sharesText], "sunk")
+readsText = TextContent("12,450 reads", "small")
+sharesText = TextContent("42 shares", "small")
+
+readershipChart = Card([chartHeader, readershipLineChart], "sunk")
+chartHeader = Heading("Readership Over Past 30 Days", "h3")
+readershipLineChart = LineChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [readershipSeries], "natural", "Day", "Readers")
+readershipSeries = Series("Readers", [1500, 2100, 1800, 2500, 3200, 4100, 3800])
+
+categoryFilter = Card([filterHeader, categorySelect], "sunk")
+filterHeader = Heading("Filter by Category", "h3")
+categorySelect = Select("category_filter", [categoryOption1, categoryOption2, categoryOption3, categoryOption4, categoryOption5], "All Categories")
+categoryOption1 = SelectItem("all", "All Categories")
+categoryOption2 = SelectItem("tech", "Technology")
+categoryOption3 = SelectItem("sports", "Sports")
+categoryOption4 = SelectItem("culture", "Culture")
+categoryOption5 = SelectItem("local", "Local")
+
+schedulingForm = Card([scheduleHeader, scheduleForm], "sunk")
+scheduleHeader = Heading("Schedule a Piece", "h3")
+scheduleForm = Form("schedule_piece", scheduleButtons, [scheduleTitleField, scheduleDateField])
+scheduleTitleField = FormControl("Title", scheduleTitleInput)
+scheduleTitleInput = Input("title", "Enter article title")
+scheduleDateField = FormControl("Publish Date", scheduleDatePicker)
+scheduleDatePicker = DatePicker("publish_date", "single", null, "2024-05-15")
+scheduleButtons = Buttons([scheduleSubmitBtn])
+scheduleSubmitBtn = Button("Schedule Piece", null, "primary")
+
+commentsAlert = Alert("Comments Awaiting Reply", "You have 8 unanswered comments", "info")
+
+newDraftButton = Button("Start New Draft", null, "primary")
+```

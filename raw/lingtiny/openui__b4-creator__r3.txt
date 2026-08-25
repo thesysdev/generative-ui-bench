@@ -1,0 +1,150 @@
+root = Card([
+  header,
+  kpiRow,
+  engagementSection,
+  bestPostsSection,
+  audienceSection,
+  scheduleSection,
+  bestHourSection,
+  commentsSection,
+  earningsSection,
+  collaborationsSection,
+  schedulePostSection,
+  platformFilter,
+], "clear")
+
+header = CardHeader("Cross-Platform Studio", "Creator dashboard")
+
+kpis = Table([
+  Col("Metric", ["Followers", "Engagement Rate", "Earnings", "Comments"]),
+  Col("Value", [24800, "4.7%", "$1,240", 36]),
+])
+
+kpiRow = Card([kpis, followGrowth, engagementRate])
+followGrowth = Card([
+  Heading("Follower Growth (Past 30 Days)", "h4"),
+  BarChart(["W1", "W2", "W3", "W4"], [
+    Series("Growth", [1200, 1800, 2100, 2480]),
+  ])
+])
+engagementRate = Card([
+  Heading("Engagement Rate", "h4"),
+  SingleStackedBarChart(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [
+    Series("Engagement", [3.2, 4.1, 3.8, 4.5, 5.2, 2.9, 3.1]),
+  ])
+])
+
+bestPostsSection = Card([
+  Heading("Best Posts This Month", "h4"),
+  Table([
+    Col("Post", ["Reach", "Comments", "Shares"]),
+    Col("Value", ["How to Build a Studio", 12400, 890]),
+    Col("Value", ["Studio Setup Tips", 11200, 720]),
+    Col("Value", ["Content Strategy Guide", 9800, 650]),
+    Col("Value", ["Cross-Platform Tips", 8100, 510]),
+  ])
+])
+
+audienceSection = Card([
+  Heading("Audience Split by Platform", "h4"),
+  HorizontalBarChart(["Platform", "Percentage"], [
+    Series("Platform", ["Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"]),
+  ])
+])
+
+scheduleSection = Card([
+  Heading("Posts Scheduled This Week", "h4"),
+  Table([
+    Col("Post", ["Platform", "Time", "Status"]),
+    Col("Value", ["How to Build a Studio", "Instagram", "10:00 AM", "Scheduled"]),
+    Col("Value", ["Studio Setup Tips", "TikTok", "2:30 PM", "Scheduled"]),
+    Col("Value", ["Content Strategy Guide", "YouTube", "6:00 PM", "Scheduled"]),
+    Col("Value", ["Cross-Platform Tips", "Twitter", "8:00 AM", "Scheduled"]),
+  ])
+])
+
+bestHourSection = Card([
+  Heading("Best Hour to Post", "h4"),
+  SingleStackedBarChart(["Hour", "Reach"], [
+    Series("Best Hour", ["8:00 AM", "12:00 PM", "5:00 PM", "9:00 PM"]),
+  ])
+])
+
+commentsSection = Card([
+  Heading("Comments Waiting for Reply", "h4"),
+  Table([
+    Col("Comment", ["Author", "Post", "Time"]),
+    Col("Value", ["Alex", "How to Build a Studio", "Today 10:30 AM"]),
+    Col("Value", ["Jordan", "Studio Setup Tips", "Yesterday 4:15 PM"]),
+    Col("Value", ["Sam", "Content Strategy Guide", "Today 11:00 AM"]),
+    Col("Value", ["Morgan", "Cross-Platform Tips", "Yesterday 9:00 PM"]),
+  ])
+])
+
+earningsSection = Card([
+  Heading("Earnings This Month", "h4"),
+  BarChart(["Week", "Earnings"], [
+    Series("Earnings", [1200, 1800, 3100, 1440]),
+  ])
+])
+
+collaborationsSection = Card([
+  Heading("Pending Collaboration Requests", "h4"),
+  ListBlock([
+    ListItem("Brand partnership with EcoWear", "Discuss co-branded content"),
+    ListItem("Podcast collaboration with TechTalk", "Interview on studio workflow"),
+    ListItem("Sponsored post for FoodBlog", "Recipe content series"),
+  ])
+])
+
+schedulePostSection = Card([
+  Heading("Schedule a Post", "h4"),
+  Form("schedule-post-form", [
+    FormControl("Caption", captionInput, "Describe your post content"),
+    FormControl("Time", timeSelect, "Choose a posting time"),
+    FormControl("Platform", platformSelect, "Select target platform"),
+  ]),
+  Buttons([submitPostBtn, clearPostBtn])
+])
+
+captionInput = Input("caption", "Enter your caption here...", "text")
+timeSelect = Select("time", [
+  SelectItem("8:00 AM", "8:00 AM"),
+  SelectItem("12:00 PM", "12:00 PM"),
+  SelectItem("5:00 PM", "5:00 PM"),
+], "Choose a time")
+platformSelect = Select("platform", [
+  SelectItem("Instagram", "Instagram"),
+  SelectItem("TikTok", "TikTok"),
+  SelectItem("YouTube", "YouTube"),
+  SelectItem("Twitter", "Twitter"),
+  SelectItem("LinkedIn", "LinkedIn"),
+], "Select platform")
+submitPostBtn = Button("Schedule Post", null, "primary")
+clearPostBtn = Button("Clear", null, "tertiary")
+
+platformFilter = Card([
+  Heading("Platform Filter", "h4"),
+  HorizontalBarChart(["Platform", "Posts"], [
+    Series("Platform", ["Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"]),
+  ])
+])
+
+// This is the platform narrow-down section, embedded as a sub-component
+// It's a separate Card that can be toggled or shown/hidden based on the filter
+// but for simplicity, we'll include it as a small filterable section
+// The filter is a visual indicator that can be used to filter the main content
+platformFilter = Card([
+  Heading("Platform Filter", "h4"),
+  HorizontalBarChart(["Platform", "Posts"], [
+    Series("Platform", ["Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"]),
+  ])
+])
+
+// Add a small filter indicator
+platformFilter = Card([
+  Heading("Platform Filter", "h4"),
+  HorizontalBarChart(["Platform", "Posts"], [
+    Series("Platform", ["Instagram", "TikTok", "YouTube", "Twitter", "LinkedIn"]),
+  ])
+])

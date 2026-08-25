@@ -1,0 +1,197 @@
+Let me build a comprehensive trading desk morning workspace. I need to cover all 17 items:
+
+1. Portfolio value
+2. Profit and loss today
+3. Positions with ticker, size, entry and current price
+4. Exposure by sector
+5. Value at risk
+6. Today's biggest gainers and losers
+7. Instruments being watched with price
+8. Working orders
+9. Margin in use
+10. Market headlines with sentiment
+11. Economic releases this week
+12. Each strategy's return this year
+13. Drawdown over the past year
+14. Risk limits close to breach
+15. A way to rebalance
+16. A way to place an order with ticker, side and quantity
+17. A way to change the timeframe
+
+Let me plan the layout:
+- Top: CardHeader with timeframe selector
+- Row 1: Portfolio value, P&L, VaR, Margin (key metrics)
+- Row 2: Positions table
+- Row 3: Exposure by sector (pie chart) + Strategy returns (bar chart)
+- Row 4: Gainers/Losers + Watchlist
+- Row 5: Working orders + Risk limits
+- Row 6: Market headlines + Economic releases
+- Row 7: Drawdown chart
+- Row 8: Rebalance button + Place order form
+
+Let me structure this carefully with all 17 items covered.
+
+I need to be very careful with the openui-lang syntax - positional arguments only, no colons, every variable must be referenced.
+
+Let me build this step by step:
+
+```
+root = Card([header, timeframeSelector, metricsRow, positionsSection, exposureRow, gainersLosersRow, ordersRiskRow, headlinesEconRow, drawdownSection, rebalanceSection, orderForm])
+```
+
+Let me be careful with all the components and make sure every variable is referenced.
+
+For the timeframe selector, I can use a DialogBlock or Buttons.
+
+Let me think about the layout more carefully to make it fit well.
+
+Actually, let me reconsider the structure. I'll use Cards within Cards for grouping.
+
+Let me write this out fully now.
+root = Card([header, timeframeRow, metricsRow, positionsSection, exposureRow, gainersLosersRow, watchlistSection, ordersRiskRow, headlinesEconRow, drawdownSection, strategyReturnsSection, rebalanceSection, orderFormSection])
+
+header = CardHeader("Trading Desk — Morning Workspace", "Market open at 9:30 AM EST")
+
+timeframeBtn = Buttons([dailyBtn, weeklyBtn, monthlyBtn, yearlyBtn])
+dailyBtn = Button("Daily", null, "primary")
+weeklyBtn = Button("Weekly", null, "secondary")
+monthlyBtn = Button("Monthly", null, "secondary")
+yearlyBtn = Button("Yearly", null, "secondary")
+
+timeframeRow = Card([timeframeLabel, timeframeBtn], "clear", "row", "s", "start", "between")
+timeframeLabel = TextContent("Timeframe:", "small-heavy")
+
+metricsRow = Card([portfolioCard, pnlCard, varCard, marginCard], "clear", "row", "s")
+portfolioCard = Card([portfolioLabel, portfolioValue, portfolioChange], "card", "column", "none")
+portfolioLabel = TextContent("Portfolio Value", "small")
+portfolioValue = TextContent("$12,847,320", "large-heavy")
+portfolioChange = Badge("+0.82%", "outline")
+
+pnlCard = Card([pnlLabel, pnlValue, pnlBadge], "card", "column", "none")
+pnlLabel = TextContent("Today's P&L", "small")
+pnlValue = TextContent("+$104,280", "large-heavy")
+pnlBadge = Badge("Green Day", "outline")
+
+varCard = Card([varLabel, varValue, varPct], "card", "column", "none")
+varLabel = TextContent("Value at Risk (95%)", "small")
+varValue = TextContent("-$218,400", "large-heavy")
+varPct = TextContent("1.69% of NAV", "small")
+
+marginCard = Card([marginLabel, marginValue, marginBar], "card", "column", "none")
+marginLabel = TextContent("Margin in Use", "small")
+marginValue = TextContent("$3,210,000 / $5,000,000", "large-heavy")
+marginBar = Progress(64.2, "64.2% utilized")
+
+positionsSection = Card([positionsHeader, positionsTable], "sunk", "column", "s")
+positionsHeader = Heading("Open Positions", "h2")
+positionsTable = Table([posTicker, posSize, posEntry, posCurrent, posPnl])
+posTicker = Col("Ticker", ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "META", "GOOGL", "JPM"])
+posSize = Col("Size", ["2,500", "1,800", "3,200", "900", "1,500", "2,100", "1,200", "1,000"])
+posEntry = Col("Entry", ["$178.50", "$392.10", "$725.30", "$172.80", "$152.40", "$418.60", "$141.25", "$186.40"])
+posCurrent = Col("Current", ["$182.30", "$408.50", "$805.10", "$168.20", "$158.90", "$442.30", "$145.80", "$192.10"])
+posPnl = Col("P&L", ["+$9,500", "+$29,520", "+$255,360", "-$4,140", "+$9,750", "+$49,770", "+$5,460", "+$5,700"])
+
+exposureRow = Card([exposureCard, sectorChartCard], "clear", "row", "s")
+exposureCard = Card([exposureHeader, exposureTable], "card", "column", "s")
+exposureHeader = Heading("Exposure by Sector", "h2")
+exposureTable = Table([sectorName, sectorWeight, sectorValue])
+sectorName = Col("Sector", ["Technology", "Financials", "Consumer", "Healthcare", "Energy", "Cash"])
+sectorWeight = Col("Weight", ["42.3%", "18.7%", "14.2%", "11.8%", "6.1%", "6.9%"])
+sectorValue = Col("Value", ["$5,434,416", "$2,402,449", "$1,824,319", "$1,515,984", "$783,686", "$886,456"])
+
+sectorChartCard = Card([sectorChart], "card", "column", "s")
+sectorChart = PieChart(["Technology", "Financials", "Consumer", "Healthcare", "Energy", "Cash"], [42.3, 18.7, 14.2, 11.8, 6.1, 6.9], "donut")
+
+gainersLosersRow = Card([gainersCard, losersCard], "clear", "row", "s")
+gainersCard = Card([gainersHeader, gainersTable], "card", "column", "s")
+gainersHeader = Heading("Today's Gainers", "h3")
+gainersTable = Table([gainerTicker, gainerPct, gainerPrice])
+gainerTicker = Col("Ticker", ["NVDA", "META", "MSFT"])
+gainerPct = Col("Change", ["+11.00%", "+5.66%", "+4.18%"])
+gainerPrice = Col("Price", ["$805.10", "$442.30", "$408.50"])
+
+losersCard = Card([losersHeader, losersTable], "card", "column", "s")
+losersHeader = Heading("Today's Losers", "h3")
+losersTable = Table([loserTicker, loserPct, loserPrice])
+loserTicker = Col("Ticker", ["TSLA", "JPM", "XOM"])
+loserPct = Col("Change", ["-2.66%", "-1.82%", "-3.40%"])
+loserPrice = Col("Price", ["$168.20", "$192.10", "$102.30"])
+
+watchlistSection = Card([watchlistHeader, watchlistTable], "sunk", "column", "s")
+watchlistHeader = Heading("Watchlist", "h2")
+watchlistTable = Table([watchTicker, watchPrice, watchChange, watchVol])
+watchTicker = Col("Ticker", ["BRK.B", "V", "UNH", "HD", "PG", "MA", "DIS"])
+watchPrice = Col("Price", ["$432.10", "$289.40", "$528.60", "$372.80", "$165.20", "$478.90", "$112.40"])
+watchChange = Col("Change", ["+0.45%", "+1.20%", "-0.80%", "+0.30%", "+0.15%", "+1.50%", "-1.10%"])
+watchVol = Col("Volume", ["3.2M", "5.8M", "2.1M", "4.5M", "6.3M", "3.7M", "8.2M"])
+
+ordersRiskRow = Card([ordersCard, riskCard], "clear", "row", "s")
+ordersCard = Card([ordersHeader, ordersTable], "card", "column", "s")
+ordersHeader = Heading("Working Orders", "h2")
+ordersTable = Table([orderTicker, orderSide, orderQty, orderType, orderPrice, orderStatus])
+orderTicker = Col("Ticker", ["AAPL", "NVDA", "TSLA"])
+orderSide = Col("Side", ["BUY", "SELL", "BUY"])
+orderQty = Col("Qty", ["500", "200", "300"])
+orderType = Col("Type", ["Limit", "Limit", "Stop"])
+orderPrice = Col("Price", ["$180.00", "$810.00", "$175.00"])
+orderStatus = Col("Status", ["Pending", "Pending", "Active"])
+
+riskCard = Card([riskHeader, riskAlert1, riskAlert2], "card", "column", "s")
+riskHeader = Heading("Risk Alerts", "h2")
+riskAlert1 = Callout("warning", "Single-Name Concentration", "NVDA position at 19.9% of NAV — approaching 20% hard limit")
+riskAlert2 = Callout("warning", "Sector Concentration", "Technology sector at 42.3% — within 45% limit but trending higher")
+
+headlinesEconRow = Card([headlinesCard, econCard], "clear", "row", "s")
+headlinesCard = Card([headlinesHeader, headlinesList], "card", "column", "s")
+headlinesHeader = Heading("Market Headlines", "h2")
+headlinesList = ListBlock([headline1, headline2, headline3, headline4, headline5], "image")
+headline1 = ListItem("Fed Signals Rate Cut in September", "Sentiment: Positive — Markets rally on dovish pivot", null, null)
+headline2 = ListItem("NVDA Q3 Revenue Beats by $2B", "Sentiment: Bullish — AI demand accelerates", null, null)
+headline3 = ListItem("China Manufacturing PMI Contracts", "Sentiment: Negative — Supply chain concerns grow", null, null)
+headline4 = ListItem("Treasury Yields Drop to 4.15%", "Sentiment: Positive — Bond market eases", null, null)
+headline5 = ListItem("Oil Prices Surge on OPEC+ Cuts", "Sentiment: Mixed — Energy stocks up, airlines down", null, null)
+
+econCard = Card([econHeader, econTable], "card", "column", "s")
+econHeader = Heading("Economic Releases This Week", "h2")
+econTable = Table([econEvent, econDate, econForecast, econActual])
+econEvent = Col("Event", ["FOMC Rate Decision", "CPI m/m", "Retail Sales m/m", "Initial Jobless Claims", "ISM Manufacturing"])
+econDate = Col("Date", ["Tue 14:00", "Wed 08:30", "Thu 08:30", "Fri 08:30", "Fri 10:00"])
+econForecast = Col("Forecast", ["5.25-5.50%", "+0.3%", "+0.4%", "220K", "49.2"])
+econActual = Col("Actual", ["—", "—", "—", "—", "—"])
+
+drawdownSection = Card([drawdownHeader, drawdownChart], "sunk", "column", "s")
+drawdownHeader = Heading("Drawdown (Past 12 Months)", "h2")
+drawdownChart = AreaChart(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], [ddSeries], "natural", "Month", "Drawdown %")
+ddSeries = Series("Drawdown", [0, -1.2, -3.5, -2.1, -0.8, -4.2, -6.8, -3.4, -1.1, -2.5, -0.5, 0])
+
+strategyReturnsSection = Card([strategyHeader, strategyChart], "sunk", "column", "s")
+strategyHeader = Heading("Strategy Returns YTD", "h2")
+strategyChart = BarChart(["Momentum", "Mean Reversion", "Market Neutral", "Global Macro", "Quant Alpha"], [momSeries, mrSeries, mnSeries, gmSeries, qaSeries], "grouped", "Strategy", "Return %")
+momSeries = Series("Return", [12.4, -3.2, 8.1, 15.7, 6.3])
+mrSeries = Series("Benchmark", [10.0, 10.0, 10.0, 10.0, 10.0])
+mnSeries = Series("Return", [8.1, -3.2, 8.1, 15.7, 6.3])
+gmSeries = Series("Return", [15.7, -3.2, 8.1, 15.7, 6.3])
+qaSeries = Series("Return", [6.3, -3.2, 8.1, 15.7, 6.3])
+
+rebalanceSection = Card([rebalanceHeader, rebalanceRow], "sunk", "column", "s")
+rebalanceHeader = Heading("Portfolio Rebalancing", "h2")
+rebalanceRow = Card([rebalanceInfo, rebalanceBtn], "clear", "row", "m", "start", "between")
+rebalanceInfo = TextContent("Last rebalanced: 3 days ago. Current drift from target allocation: 2.1%. Recommended: rebalance Technology and increase Cash allocation.", "default")
+rebalanceBtn = Button("Rebalance Portfolio", null, "primary")
+
+orderFormSection = Card([orderHeader, orderForm], "sunk", "column", "s")
+orderHeader = Heading("Place New Order", "h2")
+orderForm = Form("new-order", orderButtons, [orderTickerField, orderSideField, orderQtyField, orderPriceField])
+orderTickerField = FormControl("Ticker", orderTickerInput, "e.g. AAPL")
+orderTickerInput = Input("ticker", "AAPL")
+orderSideField = FormControl("Side", orderSideSelect)
+orderSideSelect = Select("side", [buyItem, sellItem], "Select side")
+buyItem = SelectItem("BUY", "Buy")
+sellItem = SelectItem("SELL", "Sell")
+orderQtyField = FormControl("Quantity", orderQtyInput)
+orderQtyInput = Input("quantity", "100", "number")
+orderPriceField = FormControl("Limit Price (optional)", orderPriceInput)
+orderPriceInput = Input("price", "180.00", "number")
+orderButtons = Buttons([submitOrderBtn, cancelOrderBtn])
+submitOrderBtn = Button("Submit Order", null, "primary")
+cancelOrderBtn = Button("Cancel", null, "tertiary")

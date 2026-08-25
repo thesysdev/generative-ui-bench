@@ -1,0 +1,117 @@
+```openui
+root = Card([
+    portfolioHeader,
+    activeProjectsSection,
+    overdueMilestonesSection,
+    budgetSection,
+    utilizationSection,
+    risksSection,
+    upcomingDeadlinesSection,
+    deliveryPaceSection,
+    blockedWorkSection,
+    healthSummary,
+    quarterChangeButton,
+    requestPeopleButton,
+    exportReviewButton,
+    archiveProjectButton
+])
+
+portfolioHeader = CardHeader("Project Portfolio Review", "Overview of current projects and metrics")
+
+activeProjectsSection = Card([
+    activeProjectsHeading,
+    activeProjectsTable
+], "sunk")
+activeProjectsHeading = Heading("Active Projects", "h3")
+activeProjectsTable = Table([projectNameCol, ownerCol, deadlineCol, healthCol])
+projectNameCol = Col("Project Name", ["Project A", "Project B", "Project C"])
+ownerCol = Col("Owner", ["Alice", "Bob", "Charlie"])
+deadlineCol = Col("Deadline", ["2023-11-15", "2023-12-01", "2023-11-30"])
+healthCol = Col("Health", ["Good", "Fair", "Critical"])
+
+overdueMilestonesSection = Card([
+    overdueMilestonesHeading,
+    overdueMilestonesList
+], "sunk")
+overdueMilestonesHeading = Heading("Overdue Milestones", "h3")
+overdueMilestonesList = ListBlock([
+    ListItem("Milestone 1", "Project A", null, "Overdue by 3 days"),
+    ListItem("Milestone 2", "Project B", null, "Overdue by 1 week")
+], "number")
+
+budgetSection = Card([
+    budgetHeading,
+    budgetTable
+], "sunk")
+budgetHeading = Heading("Budget", "h3")
+budgetTable = Table([projectBudgetCol, spentCol, allocationCol])
+projectBudgetCol = Col("Project", ["Project A", "Project B", "Project C"])
+spentCol = Col("Spent", ["$50,000", "$30,000", "$10,000"])
+allocationCol = Col("Allocation", ["$100,000", "$80,000", "$50,000"])
+
+utilizationSection = Card([
+    utilizationHeading,
+    utilizationChart
+], "sunk")
+utilizationHeading = Heading("Team Utilization", "h3")
+utilizationChart = BarChart(["Team A", "Team B", "Team C"], [utilizationSeries])
+utilizationSeries = Series("Utilization", [80, 70, 90])
+
+risksSection = Card([
+    risksHeading,
+    risksTable
+], "sunk")
+risksHeading = Heading("Risks", "h3")
+risksTable = Table([riskCol, severityCol])
+riskCol = Col("Risk", ["Risk A", "Risk B", "Risk C"])
+severityCol = Col("Severity", ["High", "Medium", "Low"])
+
+upcomingDeadlinesSection = Card([
+    upcomingDeadlinesHeading,
+    upcomingDeadlinesChart
+], "sunk")
+upcomingDeadlinesHeading = Heading("Upcoming Deadlines", "h3")
+upcomingDeadlinesChart = LineChart(["Week 1", "Week 2"], [deadlinesSeries], "linear", "Week", "Projects")
+deadlinesSeries = Series("Deadlines", [2, 5])
+
+deliveryPaceSection = Card([
+    deliveryPaceHeading,
+    deliveryPaceChart
+], "sunk")
+deliveryPaceHeading = Heading("Delivery Pace", "h3")
+deliveryPaceChart = AreaChart(["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4", "Sprint 5", "Sprint 6"], [paceSeries])
+paceSeries = Series("Deliveries", [5, 6, 7, 8, 7, 9])
+
+blockedWorkSection = Card([
+    blockedWorkHeading,
+    blockedWorkList
+], "sunk")
+blockedWorkHeading = Heading("Blocked Work Items", "h3")
+blockedWorkList = ListBlock([
+    ListItem("Blocked Item 1", "Project A", null, "Waiting for design"),
+    ListItem("Blocked Item 2", "Project B", null, "Awaiting approval")
+], "number")
+
+healthSummary = Callout("info", "Overall Portfolio Health", "Currently stable with some critical projects")
+
+quarterChangeButton = Button("Change Quarter")
+requestPeopleButton = Button("Request More People")
+exportReviewButton = Button("Export Review")
+archiveProjectButton = Button("Archive Project", ["archive-action"])
+
+formButtons = Buttons([
+    requestPeopleButton,
+    exportReviewButton,
+    archiveProjectButton
+])
+
+form = Form("portfolio-actions", formButtons, [
+    quarterChangeField
+])
+quarterChangeField = FormControl("Quarter", quarterSelect)
+quarterSelect = Select("quarter", [q1, q2, q3, q4], "Select a quarter", null, "medium")
+q1 = SelectItem("Q1", "Q1 2023")
+q2 = SelectItem("Q2", "Q2 2023")
+q3 = SelectItem("Q3", "Q3 2023")
+q4 = SelectItem("Q4", "Q4 2023")
+```
