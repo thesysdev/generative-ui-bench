@@ -38,6 +38,37 @@ model with one command.
   out. A coverage floor requires at least as many components as the brief has
   numbered requirements.
 
+## The html control arm
+
+`html` is a fourth format, off the headline board on purpose. It has no catalog
+and no SDK: models write plain HTML, and the verdict comes from parse5 (the
+HTML5 reference parser jsdom ships) plus the same shared completeness layer,
+with a tag-balance scan on top because the spec parser recovers from unclosed
+and stray tags without reporting anything.
+
+```bash
+BENCH_MODEL=gpt-5.6-luna BENCH_LABEL=mylabel BENCH_PROVIDER=openai \
+OPENAI_API_KEY=... node run.ts html          # BENCH_HTML_STYLE=tailwind for the styled condition
+node score.ts mylabel
+```
+
+Read it as a floor, not as a competitor: HTML has no closed component
+vocabulary, so there is almost nothing for a model to get wrong, and completion
+saturates. A 5-brief probe (`BENCH_ONLY=b1-invoice,b2-sales,b3-crm,b4-bank,b5-exec`)
+shows what the arm does and does not measure:
+
+| Model | openui | json-render | html |
+|---|---:|---:|---:|
+| gpt-5.6-luna, 4 reps | — | — | 40/40 complete (plain and tailwind) |
+| gpt-5-nano, 2 reps | 2/10 | 0/10 | 10/10 |
+
+What the arm does measure is length: on those briefs the same model's mean
+output was 876 tokens of OpenUI Lang, 1,413 as plain HTML (1.6x) and 2,796 as
+Tailwind-styled HTML (3.2x). Semantic fidelity to the brief — whether the
+screen a browser paints is the screen that was asked for — is not scored for
+any format here, and unlike the other three, HTML has no renderer contract
+that would make it scoreable.
+
 ## Results
 
 The headline board (six models, one seat per company, all three formats) is
@@ -112,6 +143,7 @@ is one folder under `protocols/` exposing a system prompt and an
 | `briefs/` | The 46 briefs as data and the band design. |
 | `catalog/public-catalog.json` | The shared 70-component catalog. |
 | `protocols/` | One folder per format: catalog, prompt, validator, each built on its own SDK. |
+| `protocols/html/` | The control arm: no catalog, verdict from the HTML5 reference parser. |
 | `run.ts` | Generation runner. |
 | `score.ts` | Offline scorer, no API keys needed. |
 | `tools/` | Catalog check, token counts, cost estimates, blank-screen floor. |

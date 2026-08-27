@@ -15,6 +15,7 @@
 //   BENCH_TIMEOUT_MS  per-request timeout (default 240000)
 //   BENCH_TEMP        temperature (default 0.7; anthropic runs its model default)
 //   BENCH_ONLY        comma-separated brief names (probe runs)
+//   BENCH_HTML_STYLE  html arm styling condition: plain (default) | tailwind
 //   BENCH_REASONING_EFFORT  reasoning override; "none" keeps the family default
 //   BENCH_PROVIDER_ORDER    OpenRouter provider routing, e.g. baseten,fireworks
 //
@@ -31,6 +32,7 @@ import {
   systemPrompt as jrSystemPrompt,
   userPrompt as jrUserPrompt,
 } from "./protocols/jsonrender/prompt.ts";
+import { systemPrompt as htmlSystemPrompt } from "./protocols/html/prompt.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -56,6 +58,12 @@ const FORMATS: Record<string, Format> = {
   a2ui: {
     dir: LABEL,
     system: () => readFileSync(join(__dirname, "protocols/a2ui/system-prompt.txt"), "utf8"),
+    user: (brief) => brief.prompt,
+  },
+  // Control arm: no catalog, no SDK. BENCH_HTML_STYLE picks plain or tailwind.
+  html: {
+    dir: LABEL,
+    system: () => htmlSystemPrompt(),
     user: (brief) => brief.prompt,
   },
 };

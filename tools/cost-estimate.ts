@@ -11,6 +11,7 @@ import { get_encoding } from "tiktoken";
 import { SCENARIOS } from "../briefs/briefs.ts";
 import { systemPrompt as openuiPrompt } from "../protocols/openui/prompt.ts";
 import { systemPrompt as jrPrompt } from "../protocols/jsonrender/prompt.ts";
+import { systemPrompt as htmlPrompt } from "../protocols/html/prompt.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const enc = get_encoding("o200k_base");
@@ -22,6 +23,7 @@ const SYS: Record<string, number> = {
   openui: tok(openuiPrompt()),
   jsonrender: tok(jrPrompt()),
   a2ui: tok(readFileSync(join(ROOT, "protocols/a2ui/system-prompt.txt"), "utf8")),
+  html: tok(htmlPrompt()),
 };
 
 // USD per token (provider list prices).
@@ -49,7 +51,7 @@ let grand = 0;
 for (const model of Object.keys(PRICE)) {
   let modelTotal = 0;
   const parts: string[] = [];
-  for (const fmt of ["openui", "jsonrender", "a2ui"]) {
+  for (const fmt of ["openui", "jsonrender", "a2ui", "html"]) {
     const dir = join(ROOT, "raw", model);
     const files = readdirSync(dir).filter((f) => f.startsWith(`${fmt}__`));
     if (!files.length) continue;

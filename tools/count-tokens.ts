@@ -9,6 +9,7 @@ import { get_encoding } from "tiktoken";
 
 import { systemPrompt as openuiPrompt } from "../protocols/openui/prompt.ts";
 import { systemPrompt as jrPrompt } from "../protocols/jsonrender/prompt.ts";
+import { systemPrompt as htmlPrompt } from "../protocols/html/prompt.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const enc = get_encoding("o200k_base");
@@ -19,12 +20,14 @@ const a2uiPrompt = readFileSync(join(ROOT, "protocols/a2ui/system-prompt.txt"), 
 console.log(`prompt openui: ${tok(openuiPrompt())} tokens`);
 console.log(`prompt jsonrender: ${tok(jrPrompt())} tokens`);
 console.log(`prompt a2ui: ${tok(a2uiPrompt)} tokens`);
+console.log(`prompt html (plain): ${tok(htmlPrompt("plain"))} tokens`);
+console.log(`prompt html (tailwind): ${tok(htmlPrompt("tailwind"))} tokens`);
 
 const MODELS = process.argv.slice(2).length
   ? process.argv.slice(2)
   : ["sol", "opus48", "kimi", "gemini", "qwen", "muse"];
 
-for (const fmt of ["openui", "jsonrender", "a2ui"]) {
+for (const fmt of ["openui", "jsonrender", "a2ui", "html"]) {
   let sum = 0;
   let n = 0;
   for (const m of MODELS) {
@@ -37,6 +40,6 @@ for (const fmt of ["openui", "jsonrender", "a2ui"]) {
       n++;
     }
   }
-  console.log(`output ${fmt}: mean ${Math.round(sum / n)} tokens over ${n} runs`);
+  if (n) console.log(`output ${fmt}: mean ${Math.round(sum / n)} tokens over ${n} runs`);
 }
 enc.free();

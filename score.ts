@@ -13,8 +13,9 @@ import { SCENARIOS } from "./briefs/briefs.ts";
 import { evaluate as evalOpenui } from "./protocols/openui/validator.ts";
 import { evaluate as evalJr } from "./protocols/jsonrender/validator.ts";
 import { evalA2ui, type BenchError } from "./protocols/a2ui/validator.ts";
+import { evaluate as evalHtml } from "./protocols/html/validator.ts";
 
-export type Fmt = "openui" | "a2ui" | "jsonrender";
+export type Fmt = "openui" | "a2ui" | "jsonrender" | "html";
 type EvalResult = {
   renderable: boolean;
   complete: boolean;
@@ -47,7 +48,7 @@ let a2uiReady = true;
 // Row order in the results files: openui, a2ui, jsonrender, each sorted by
 // filename. Keep stable so rescoring committed raws reproduces the committed
 // results byte for byte.
-const FMT_RANK: Record<Fmt, number> = { openui: 0, a2ui: 1, jsonrender: 2 };
+const FMT_RANK: Record<Fmt, number> = { openui: 0, a2ui: 1, jsonrender: 2, html: 3 };
 
 // Scores one label from its raws. Recorded output-token counts survive
 // rescoring; they come from the generation-time API usage fields, which raws
@@ -69,7 +70,7 @@ export function scoreLabel(label: string): { rows: ResultRow[]; a2uiComplete: bo
     existsSync(truncPath) ? JSON.parse(readFileSync(truncPath, "utf8")) : [],
   );
   const files = readdirSync(dir)
-    .map((f) => ({ f, m: f.match(/^(openui|jsonrender|a2ui)__(.+)__r(\d+)\.txt$/) }))
+    .map((f) => ({ f, m: f.match(/^(openui|jsonrender|a2ui|html)__(.+)__r(\d+)\.txt$/) }))
     .filter((x): x is { f: string; m: RegExpMatchArray } => x.m !== null)
     .sort((a, b) => FMT_RANK[a.m[1] as Fmt] - FMT_RANK[b.m[1] as Fmt] || a.f.localeCompare(b.f));
   for (const { f, m } of files) {
@@ -89,7 +90,9 @@ export function scoreLabel(label: string): { rows: ResultRow[]; a2uiComplete: bo
           ? evalOpenui(text, { truncated: truncated.has(id), reqs })
           : fmt === "jsonrender"
             ? evalJr(text, { reqs })
-            : evalA2ui(path, { reqs });
+            : fmt === "html"
+              ? evalHtml(text, { truncated: truncated.has(id), reqs })
+              : evalA2ui(path, { reqs });
     } catch (e) {
       if (fmt === "a2ui") {
         a2uiReady = false;
